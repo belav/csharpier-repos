@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Web;
@@ -19,7 +19,7 @@ using ApplicationPreStartMethods.Tests;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("ApplicationPreStartMethods")]
-[assembly: AssemblyCopyright ("Copyright © Novell, Inc 2010")]
+[assembly: AssemblyCopyright ("Copyright � Novell, Inc 2010")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

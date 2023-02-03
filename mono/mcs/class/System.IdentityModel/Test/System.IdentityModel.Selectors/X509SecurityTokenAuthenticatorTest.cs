@@ -2,7 +2,7 @@
 // X509SecurityTokenAuthenticatorTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -43,45 +43,45 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class X509SecurityTokenAuthenticatorTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorValidatorNull ()
-		{
-			new Authenticator (null);
-		}
+    [TestFixture]
+    public class X509SecurityTokenAuthenticatorTest
+    {
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorValidatorNull ()
+        {
+            new Authenticator (null);
+        }
 
-		[Test]
-		public void Validation ()
-		{
-			X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.cer"));
-			Authenticator a = new Authenticator (
-				X509CertificateValidator.None);
-			PolicyCollection pl = a.ValidateToken (new X509SecurityToken (cert));
-			Assert.AreEqual (1, pl.Count, "#1");
-			IAuthorizationPolicy p = pl [0];
-			Assert.AreEqual (ClaimSet.System, p.Issuer, "#2");
-			TestEvaluationContext ec = new TestEvaluationContext ();
-			object o = null;
-			Assert.IsTrue (p.Evaluate (ec, ref o), "#3");
-			// mhm, should this really be converted to UTC?
-			Assert.AreEqual (cert.NotAfter.ToUniversalTime (), ec.ExpirationTime, "#4");
-			IList<IIdentity> identities = ec.Properties ["Identities"] as IList<IIdentity>;
-			Assert.IsNotNull (identities, "#5");
-			Assert.AreEqual (1, identities.Count, "#6");
-			IIdentity ident = identities [0];
-			Assert.AreEqual (true, ident.IsAuthenticated, "#6-2");
-			Assert.AreEqual ("X509", ident.AuthenticationType, "#6-3");
-			//Assert.AreEqual (cert.SubjectName.Name + "; " + cert.Thumbprint, ident.Name, "#6-4");
-			Assert.AreEqual (1, ec.ClaimSets.Count, "#7");
+        [Test]
+        public void Validation ()
+        {
+            X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.cer"));
+            Authenticator a = new Authenticator (
+                X509CertificateValidator.None);
+            PolicyCollection pl = a.ValidateToken (new X509SecurityToken (cert));
+            Assert.AreEqual (1, pl.Count, "#1");
+            IAuthorizationPolicy p = pl [0];
+            Assert.AreEqual (ClaimSet.System, p.Issuer, "#2");
+            TestEvaluationContext ec = new TestEvaluationContext ();
+            object o = null;
+            Assert.IsTrue (p.Evaluate (ec, ref o), "#3");
+            // mhm, should this really be converted to UTC?
+            Assert.AreEqual (cert.NotAfter.ToUniversalTime (), ec.ExpirationTime, "#4");
+            IList<IIdentity> identities = ec.Properties ["Identities"] as IList<IIdentity>;
+            Assert.IsNotNull (identities, "#5");
+            Assert.AreEqual (1, identities.Count, "#6");
+            IIdentity ident = identities [0];
+            Assert.AreEqual (true, ident.IsAuthenticated, "#6-2");
+            Assert.AreEqual ("X509", ident.AuthenticationType, "#6-3");
+            //Assert.AreEqual (cert.SubjectName.Name + "; " + cert.Thumbprint, ident.Name, "#6-4");
+            Assert.AreEqual (1, ec.ClaimSets.Count, "#7");
 
-			Assert.IsTrue (p.Evaluate (ec, ref o), "#8");
-			identities = ec.Properties ["Identities"] as IList<IIdentity>;
-			Assert.AreEqual (2, identities.Count, "#9");
-			Assert.AreEqual (2, ec.ClaimSets.Count, "#10");
-		}
-	}
+            Assert.IsTrue (p.Evaluate (ec, ref o), "#8");
+            identities = ec.Properties ["Identities"] as IList<IIdentity>;
+            Assert.AreEqual (2, identities.Count, "#9");
+            Assert.AreEqual (2, ec.ClaimSets.Count, "#10");
+        }
+    }
 }
 #endif

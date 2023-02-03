@@ -2,7 +2,7 @@
 // Line: 9
 
 class A {
-	protected int f { get { return 1; } }
+    protected int f { get { return 1; } }
 }
 
 class B : A {

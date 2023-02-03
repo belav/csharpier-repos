@@ -5,9 +5,9 @@ delegate int TestDelegateA (bool b);
 
 public class MainClass
 {
-	static TestDelegateA Method (bool b)
-	{
-		return Method;
-	}
+    static TestDelegateA Method (bool b)
+    {
+        return Method;
+    }
 }
 

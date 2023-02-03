@@ -29,16 +29,16 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class XamlDuplicateMemberExceptionTest
-	{
-		[Test]
-		public void ConstructorNullArg ()
-		{
-			// allowed.
-			var ex = new XamlDuplicateMemberException ((XamlMember) null, (XamlType) null);
-			Assert.IsNull (ex.DuplicateMember, "#1");
-			Assert.IsNull (ex.ParentType, "#2");
-		}
-	}
+    [TestFixture]
+    public class XamlDuplicateMemberExceptionTest
+    {
+        [Test]
+        public void ConstructorNullArg ()
+        {
+            // allowed.
+            var ex = new XamlDuplicateMemberException ((XamlMember) null, (XamlType) null);
+            Assert.IsNull (ex.DuplicateMember, "#1");
+            Assert.IsNull (ex.ParentType, "#2");
+        }
+    }
 }

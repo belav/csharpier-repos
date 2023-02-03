@@ -4,7 +4,7 @@
 // Authors:
 //      Michael Barker (mike@middlesoft.co.uk)
 //
-//	(C) Ximian, Inc.  http://www.ximian.com
+//    (C) Ximian, Inc.  http://www.ximian.com
 //
 
 //
@@ -31,11 +31,11 @@ using System;
 
 namespace Mono.Messaging 
 {
-	[Serializable]
-	public enum MessageQueueTransactionType 
-	{
-		Automatic = 1,
-		None = 0,
-		Single = 3
-	}
+    [Serializable]
+    public enum MessageQueueTransactionType 
+    {
+        Automatic = 1,
+        None = 0,
+        Single = 3
+    }
 }

@@ -31,50 +31,50 @@
 
 namespace Mono.Cecil.Metadata {
 
-	internal sealed class ClassLayoutTable : IMetadataTable {
+    internal sealed class ClassLayoutTable : IMetadataTable {
 
-		public const int RId = 0x0f;
+        public const int RId = 0x0f;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public ClassLayoutRow this [int index] {
-			get { return m_rows [index] as ClassLayoutRow; }
-			set { m_rows [index] = value; }
-		}
+        public ClassLayoutRow this [int index] {
+            get { return m_rows [index] as ClassLayoutRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal ClassLayoutTable ()
-		{
-		}
+        internal ClassLayoutTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitClassLayoutTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitClassLayoutTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class ClassLayoutRow : IMetadataRow {
+    internal sealed class ClassLayoutRow : IMetadataRow {
 
-		public ushort PackingSize;
-		public uint ClassSize;
-		public uint Parent;
+        public ushort PackingSize;
+        public uint ClassSize;
+        public uint Parent;
 
-		internal ClassLayoutRow ()
-		{
-		}
+        internal ClassLayoutRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitClassLayoutRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitClassLayoutRow (this);
+        }
+    }
 }

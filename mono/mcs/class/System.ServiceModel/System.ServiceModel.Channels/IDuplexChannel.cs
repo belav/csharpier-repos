@@ -29,8 +29,8 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public interface IDuplexChannel : IOutputChannel,
-		IInputChannel, ICommunicationObject
-	{
-	}
+    public interface IDuplexChannel : IOutputChannel,
+        IInputChannel, ICommunicationObject
+    {
+    }
 }

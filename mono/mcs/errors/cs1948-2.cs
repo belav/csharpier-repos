@@ -6,10 +6,10 @@ using System.Linq;
 
 class C
 {
-	public static void Foo <T> ()
-	{
-		var s = "0";
-		var e = from T in "a"
-			select T + s;
-	}
+    public static void Foo <T> ()
+    {
+        var s = "0";
+        var e = from T in "a"
+            select T + s;
+    }
 }

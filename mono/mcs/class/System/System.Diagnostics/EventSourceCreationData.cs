@@ -2,7 +2,7 @@
 // System.Diagnostics.EventSourceCreationData
 //
 // Author:
-//	Gert Driesen <driesen@users.sourceforge.net>
+//    Gert Driesen <driesen@users.sourceforge.net>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,78 +29,78 @@
 
 namespace System.Diagnostics
 {
-	public class EventSourceCreationData
-	{
-		string _source;
-		string _logName;
-		string _machineName;
-		string _messageResourceFile;
-		string _parameterResourceFile;
-		string _categoryResourceFile;
-		int _categoryCount;
+    public class EventSourceCreationData
+    {
+        string _source;
+        string _logName;
+        string _machineName;
+        string _messageResourceFile;
+        string _parameterResourceFile;
+        string _categoryResourceFile;
+        int _categoryCount;
 
-		public EventSourceCreationData (string source, string logName)
-		{
-			_source = source;
-			_logName = logName;
-			_machineName = ".";
-		}
+        public EventSourceCreationData (string source, string logName)
+        {
+            _source = source;
+            _logName = logName;
+            _machineName = ".";
+        }
 
-		internal EventSourceCreationData (string source, string logName, string machineName)
-		{
-			_source = source;
-			if (logName == null || logName.Length == 0) {
-				_logName = "Application";
-			} else {
-				_logName = logName;
-			}
-			_machineName = machineName;
-		}
+        internal EventSourceCreationData (string source, string logName, string machineName)
+        {
+            _source = source;
+            if (logName == null || logName.Length == 0) {
+                _logName = "Application";
+            } else {
+                _logName = logName;
+            }
+            _machineName = machineName;
+        }
 
-		public int CategoryCount
-		{
-			get { return _categoryCount; }
-			set {
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ("value");
-				_categoryCount = value;
-			}
-		}
+        public int CategoryCount
+        {
+            get { return _categoryCount; }
+            set {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException ("value");
+                _categoryCount = value;
+            }
+        }
 
-		public string CategoryResourceFile
-		{
-			get { return _categoryResourceFile; }
-			set { this._categoryResourceFile = value; }
-		}
+        public string CategoryResourceFile
+        {
+            get { return _categoryResourceFile; }
+            set { this._categoryResourceFile = value; }
+        }
 
-		public string LogName
-		{
-			get { return _logName; }
-			set { this._logName = value; }
-		}
+        public string LogName
+        {
+            get { return _logName; }
+            set { this._logName = value; }
+        }
 
-		public string MachineName
-		{
-			get { return _machineName; }
-			set { _machineName = value; }
-		}
+        public string MachineName
+        {
+            get { return _machineName; }
+            set { _machineName = value; }
+        }
 
-		public string MessageResourceFile
-		{
-			get { return _messageResourceFile; }
-			set { _messageResourceFile = value; }
-		}
+        public string MessageResourceFile
+        {
+            get { return _messageResourceFile; }
+            set { _messageResourceFile = value; }
+        }
 
-		public string ParameterResourceFile
-		{
-			get { return _parameterResourceFile; }
-			set { _parameterResourceFile = value; }
-		}
+        public string ParameterResourceFile
+        {
+            get { return _parameterResourceFile; }
+            set { _parameterResourceFile = value; }
+        }
 
-		public string Source
-		{
-			get { return _source; }
-			set { _source = value; }
-		}
-	}
+        public string Source
+        {
+            get { return _source; }
+            set { _source = value; }
+        }
+    }
 }

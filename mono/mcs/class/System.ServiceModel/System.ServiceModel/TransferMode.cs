@@ -28,10 +28,10 @@ using System;
 
 namespace System.ServiceModel
 {
-	public enum TransferMode {
-		Buffered,
-		Streamed,
-		StreamedRequest,
-		StreamedResponse
-	}
+    public enum TransferMode {
+        Buffered,
+        Streamed,
+        StreamedRequest,
+        StreamedResponse
+    }
 }

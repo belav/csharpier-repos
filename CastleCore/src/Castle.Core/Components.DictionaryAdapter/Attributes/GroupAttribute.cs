@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,35 +14,35 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Assigns a property to a group.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-	public class GroupAttribute : Attribute
-	{
-		/// <summary>
-		/// Constructs a group assignment.
-		/// </summary>
-		/// <param name="group">The group name.</param>
-		public GroupAttribute(object group)
-		{
-			Group = new [] { group };
-		}
+    /// <summary>
+    /// Assigns a property to a group.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+    public class GroupAttribute : Attribute
+    {
+        /// <summary>
+        /// Constructs a group assignment.
+        /// </summary>
+        /// <param name="group">The group name.</param>
+        public GroupAttribute(object group)
+        {
+            Group = new [] { group };
+        }
 
-		/// <summary>
-		/// Constructs a group assignment.
-		/// </summary>
-		/// <param name="group">The group name.</param>
-		public GroupAttribute(params object[] group)
-		{
-			Group = group;
-		}
+        /// <summary>
+        /// Constructs a group assignment.
+        /// </summary>
+        /// <param name="group">The group name.</param>
+        public GroupAttribute(params object[] group)
+        {
+            Group = group;
+        }
 
-		/// <summary>
-		/// Gets the group the property is assigned to.
-		/// </summary>
-		public object[] Group { get; private set; }
-	}
+        /// <summary>
+        /// Gets the group the property is assigned to.
+        /// </summary>
+        public object[] Group { get; private set; }
+    }
 }

@@ -3,25 +3,25 @@
 
 using System;
 class X {
-	static void Main ()
-	{
+    static void Main ()
+    {
 
-		bar (out P.x);
-		Console.WriteLine ("Got: " + P.x);
-	}
+        bar (out P.x);
+        Console.WriteLine ("Got: " + P.x);
+    }
 
-	static void bar (out int x) { x = 10; }
+    static void bar (out int x) { x = 10; }
 
-	static G P {
-	 get {
-		return g;
-	 }
-	}
+    static G P {
+     get {
+        return g;
+     }
+    }
 
-	static G g = new G ();
+    static G g = new G ();
 
-	struct G {
-		public int x;
-	}
+    struct G {
+        public int x;
+    }
 }
-		
+        

@@ -7,13 +7,13 @@ delegate void Delegate ();
 
 interface IBlah
 {
-	event Delegate Foo;
+    event Delegate Foo;
 }
 
 class Test : IBlah {
-	event Delegate IBlah.Foo;
+    event Delegate IBlah.Foo;
 
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

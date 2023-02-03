@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -380,7 +380,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 // If more than two documents changed during a single update, perform a bulk synchronization on the
                 // project to avoid large numbers of small synchronization calls during document updates.
-                // 🔗 https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1365014
+                // ?? https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1365014
                 if (newMap.Count > 2)
                 {
                     using var pooledObject = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DataKey.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -35,85 +35,85 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class DataKeyArray : ICollection, IEnumerable, IStateManager
-	{
-		IList keys;
-		bool trackViewState;
+    public sealed class DataKeyArray : ICollection, IEnumerable, IStateManager
+    {
+        IList keys;
+        bool trackViewState;
 
-		internal DataKeyArray (IList keys)
-		{
-			this.keys = keys;
-		}
-		
-		public DataKeyArray (ArrayList keys)
-		{
-			this.keys = keys;
-		}
-		
-		public int Count {
-			get { return keys.Count; }
-		}
+        internal DataKeyArray (IList keys)
+        {
+            this.keys = keys;
+        }
+        
+        public DataKeyArray (ArrayList keys)
+        {
+            this.keys = keys;
+        }
+        
+        public int Count {
+            get { return keys.Count; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
+        public bool IsReadOnly {
+            get { return false; }
+        }
 
-		public bool IsSynchronized {
-			get { return false; }
-		}
+        public bool IsSynchronized {
+            get { return false; }
+        }
 
-		public DataKey this [int index] {
-			get { return (DataKey) keys [index]; }
-		}
+        public DataKey this [int index] {
+            get { return (DataKey) keys [index]; }
+        }
 
-		public object SyncRoot {
-			get { return this; }
-		}
+        public object SyncRoot {
+            get { return this; }
+        }
 
-		public void CopyTo (DataKey[] array, int index)
-		{
-			foreach (DataKey current in this)
-				array [index++] = current;
-		}
+        public void CopyTo (DataKey[] array, int index)
+        {
+            foreach (DataKey current in this)
+                array [index++] = current;
+        }
 
-		void ICollection.CopyTo(Array array, int index)
-		{
-			foreach(object current in this)
-				array.SetValue(current, index++);
-		}
+        void ICollection.CopyTo(Array array, int index)
+        {
+            foreach(object current in this)
+                array.SetValue(current, index++);
+        }
 
-		public IEnumerator GetEnumerator()
-		{
-			return keys.GetEnumerator();
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return keys.GetEnumerator();
+        }
 
-		void IStateManager.LoadViewState (object savedState)
-		{
-			if (savedState == null) return;
-			object[] data = (object[]) savedState;
-			for (int n=0; n<data.Length && n<keys.Count; n++)
-				((IStateManager)keys[n]).LoadViewState (data [n]);
-		}
-		
-		object IStateManager.SaveViewState ()
-		{
-			if (keys.Count == 0) return null;
-			object[] data = new object [keys.Count];
-			for (int n=0; n<keys.Count; n++)
-				data [n] = ((IStateManager)keys[n]).SaveViewState ();
-			return data;
-		}
-		
-		void IStateManager.TrackViewState ()
-		{
-			trackViewState = true;
-			foreach (IStateManager k in keys)
-				k.TrackViewState ();
-		}
-		
-		bool IStateManager.IsTrackingViewState {
-			get { return trackViewState; }
-		}
-	}
+        void IStateManager.LoadViewState (object savedState)
+        {
+            if (savedState == null) return;
+            object[] data = (object[]) savedState;
+            for (int n=0; n<data.Length && n<keys.Count; n++)
+                ((IStateManager)keys[n]).LoadViewState (data [n]);
+        }
+        
+        object IStateManager.SaveViewState ()
+        {
+            if (keys.Count == 0) return null;
+            object[] data = new object [keys.Count];
+            for (int n=0; n<keys.Count; n++)
+                data [n] = ((IStateManager)keys[n]).SaveViewState ();
+            return data;
+        }
+        
+        void IStateManager.TrackViewState ()
+        {
+            trackViewState = true;
+            foreach (IStateManager k in keys)
+                k.TrackViewState ();
+        }
+        
+        bool IStateManager.IsTrackingViewState {
+            get { return trackViewState; }
+        }
+    }
 }
 

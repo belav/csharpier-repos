@@ -2,7 +2,7 @@
 // System.Web.Configuration.HttpModulesSection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,66 +36,66 @@ using System.Web.Security;
 
 namespace System.Web.Configuration
 {
-	public sealed class HttpModulesSection: ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty modulesProp;
+    public sealed class HttpModulesSection: ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty modulesProp;
 
-		static HttpModulesSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			modulesProp = new ConfigurationProperty ("", typeof (HttpModuleActionCollection), null,
-								 null, PropertyHelper.DefaultValidator,
-								 ConfigurationPropertyOptions.IsDefaultCollection);
-			properties.Add (modulesProp);
-		}
+        static HttpModulesSection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            modulesProp = new ConfigurationProperty ("", typeof (HttpModuleActionCollection), null,
+                                 null, PropertyHelper.DefaultValidator,
+                                 ConfigurationPropertyOptions.IsDefaultCollection);
+            properties.Add (modulesProp);
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public HttpModuleActionCollection Modules {
-			get {
-				return (HttpModuleActionCollection) base [modulesProp];
-			}
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public HttpModuleActionCollection Modules {
+            get {
+                return (HttpModuleActionCollection) base [modulesProp];
+            }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get {
-				return properties;
-			}
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get {
+                return properties;
+            }
+        }
 
-		/* stolen from the 1.0 S.W.Config ModulesConfiguration.cs */
-		internal HttpModuleCollection LoadModules (HttpApplication app)
-		{
-			HttpModuleCollection coll = new HttpModuleCollection ();
-			Type type;
-			
-			foreach (HttpModuleAction item in Modules){
-				type = HttpApplication.LoadType (item.Type);
-				
-				if (type == null) {
-					/* XXX should we throw here? */
-					continue;
-				}
-				IHttpModule module = (IHttpModule) Activator.CreateInstance (type,
-											     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-											     null, null, null);
-				module.Init (app);
-				coll.AddModule (item.Name, module);
-			}
+        /* stolen from the 1.0 S.W.Config ModulesConfiguration.cs */
+        internal HttpModuleCollection LoadModules (HttpApplication app)
+        {
+            HttpModuleCollection coll = new HttpModuleCollection ();
+            Type type;
+            
+            foreach (HttpModuleAction item in Modules){
+                type = HttpApplication.LoadType (item.Type);
+                
+                if (type == null) {
+                    /* XXX should we throw here? */
+                    continue;
+                }
+                IHttpModule module = (IHttpModule) Activator.CreateInstance (type,
+                                                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                                                 null, null, null);
+                module.Init (app);
+                coll.AddModule (item.Name, module);
+            }
 
-			/* XXX the 1.x config stuff does this
-			 * indirectly..  I'm not sure we want to do it
-			 * here, but this keeps things working in much
-			 * the same fashion in 2.0-land. */
-			{
-				IHttpModule module = new DefaultAuthenticationModule ();
-				module.Init (app);
-				coll.AddModule ("DefaultAuthentication", module);
-			}
+            /* XXX the 1.x config stuff does this
+             * indirectly..  I'm not sure we want to do it
+             * here, but this keeps things working in much
+             * the same fashion in 2.0-land. */
+            {
+                IHttpModule module = new DefaultAuthenticationModule ();
+                module.Init (app);
+                coll.AddModule ("DefaultAuthentication", module);
+            }
 
-			return coll;
-		}
+            return coll;
+        }
 
-	}
+    }
 }
 

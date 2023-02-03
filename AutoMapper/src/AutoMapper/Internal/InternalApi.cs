@@ -1,4 +1,4 @@
-﻿using AutoMapper.Configuration.Conventions;
+using AutoMapper.Configuration.Conventions;
 using AutoMapper.Features;
 using AutoMapper.Internal.Mappers;
 using AutoMapper.QueryableExtensions.Impl;

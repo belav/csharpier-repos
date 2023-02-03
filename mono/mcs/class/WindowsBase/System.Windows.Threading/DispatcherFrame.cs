@@ -21,7 +21,7 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Miguel de Icaza (miguel@novell.com)
+//    Miguel de Icaza (miguel@novell.com)
 
 using System;
 using System.Collections;
@@ -31,44 +31,44 @@ using System.Threading;
 
 namespace System.Windows.Threading {
 
-	public class DispatcherFrame : DispatcherObject  {
-		DispatcherFrame parent_frame;
-		
-		internal bool exit_on_request;
-		bool cont;
-		internal Dispatcher dispatcher;
-		
-		public DispatcherFrame ()
-		{
-			exit_on_request = true;
-			cont = true;
-		}
+    public class DispatcherFrame : DispatcherObject  {
+        DispatcherFrame parent_frame;
+        
+        internal bool exit_on_request;
+        bool cont;
+        internal Dispatcher dispatcher;
+        
+        public DispatcherFrame ()
+        {
+            exit_on_request = true;
+            cont = true;
+        }
 
-		public DispatcherFrame (bool exitWhenRequested)
-		{
-			exit_on_request = exitWhenRequested;
-			cont = true;
-		}
+        public DispatcherFrame (bool exitWhenRequested)
+        {
+            exit_on_request = exitWhenRequested;
+            cont = true;
+        }
 
-		public bool Continue {
-			get {
-				return cont;
-			}
+        public bool Continue {
+            get {
+                return cont;
+            }
 
-			[SecurityCritical]
-			set {
-				cont = value;
-			}
-		}
+            [SecurityCritical]
+            set {
+                cont = value;
+            }
+        }
 
-		internal DispatcherFrame ParentFrame {
-			get {
-				return parent_frame;
-			}
+        internal DispatcherFrame ParentFrame {
+            get {
+                return parent_frame;
+            }
 
-			set {
-				parent_frame = value;
-			}
-		}
-	}
+            set {
+                parent_frame = value;
+            }
+        }
+    }
 }

@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.PingCompletedEventArgs
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
 //
@@ -30,18 +30,18 @@ using System;
 using System.ComponentModel;
 
 namespace System.Net.NetworkInformation {
-	public class PingCompletedEventArgs : AsyncCompletedEventArgs {
-		PingReply reply;
+    public class PingCompletedEventArgs : AsyncCompletedEventArgs {
+        PingReply reply;
 
-		internal PingCompletedEventArgs (Exception ex, bool cancelled, object userState, PingReply reply)
-			: base (ex, cancelled, userState)
-		{
-			this.reply = reply;
-		}
+        internal PingCompletedEventArgs (Exception ex, bool cancelled, object userState, PingReply reply)
+            : base (ex, cancelled, userState)
+        {
+            this.reply = reply;
+        }
 
-		public PingReply Reply {
-			get { return reply; }
-		}
-	}
+        public PingReply Reply {
+            get { return reply; }
+        }
+    }
 }
 

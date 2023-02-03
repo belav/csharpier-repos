@@ -20,22 +20,22 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-	[FlagsAttribute()]
-	public enum DataGridViewCellStyleScopes {
-		None = 0,
-		Cell = 1,
-		Column = 2,
-		Row = 4,
-		DataGridView = 8,
-		ColumnHeaders = 16,
-		RowHeaders = 32,
-		Rows = 64,
-		AlternatingRows = 128
-	}
+    [FlagsAttribute()]
+    public enum DataGridViewCellStyleScopes {
+        None = 0,
+        Cell = 1,
+        Column = 2,
+        Row = 4,
+        DataGridView = 8,
+        ColumnHeaders = 16,
+        RowHeaders = 32,
+        Rows = 64,
+        AlternatingRows = 128
+    }
 
 }

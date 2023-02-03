@@ -3,7 +3,7 @@
 
 class UnsafeClass {
         UnsafeClass () 
-	{
-	    unsafe {}
-	}
+    {
+        unsafe {}
+    }
 }

@@ -2,7 +2,7 @@
 // SecurityNegotiationException.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,29 +31,29 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Security
 {
-	[Serializable]
-	public class SecurityNegotiationException : CommunicationException
-	{
-		public SecurityNegotiationException ()
-			: this ("Failed to process security negotiation.")
-		{
-		}
+    [Serializable]
+    public class SecurityNegotiationException : CommunicationException
+    {
+        public SecurityNegotiationException ()
+            : this ("Failed to process security negotiation.")
+        {
+        }
 
-		public SecurityNegotiationException (string message)
-			: base (message)
-		{
-		}
+        public SecurityNegotiationException (string message)
+            : base (message)
+        {
+        }
 
-		public SecurityNegotiationException (string message,
-			Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public SecurityNegotiationException (string message,
+            Exception innerException)
+            : base (message, innerException)
+        {
+        }
 
-		protected SecurityNegotiationException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected SecurityNegotiationException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
+    }
 }

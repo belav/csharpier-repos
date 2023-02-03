@@ -44,12 +44,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible (false)]
 
 [assembly: AssemblyVersion (
-	//
-	// DO NOT MODIFY THE STRING BELOWS WITOUT UPDATING cecil.pc.in in mono/data
-	//
-	"0.6.9.0"
-	//
-	// DO NOT MODIFY THE STRING ABOVE WITHOUT UPDATING cecil.pc.in in mono/data
+    //
+    // DO NOT MODIFY THE STRING BELOWS WITOUT UPDATING cecil.pc.in in mono/data
+    //
+    "0.6.9.0"
+    //
+    // DO NOT MODIFY THE STRING ABOVE WITHOUT UPDATING cecil.pc.in in mono/data
 )]
 
 #if KEYFILE

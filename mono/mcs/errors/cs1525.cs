@@ -2,8 +2,8 @@
 // Line: 8
 
 class X {
-	X ()
-	{
-	label1:
-	}
+    X ()
+    {
+    label1:
+    }
 }

@@ -3,5 +3,5 @@
 
 class Program
 {
-	const object y = this;
+    const object y = this;
 }

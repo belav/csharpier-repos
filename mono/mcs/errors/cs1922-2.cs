@@ -6,12 +6,12 @@ using System.Xml.Serialization;
 
 namespace test
 {
-	public class Test
-	{
-		static void Main ()
-		{
-			XmlSerializer xs = new XmlSerializer (typeof (string), new Type () { typeof (bool) });
-		}
-	}
+    public class Test
+    {
+        static void Main ()
+        {
+            XmlSerializer xs = new XmlSerializer (typeof (string), new Type () { typeof (bool) });
+        }
+    }
 }
 

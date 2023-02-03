@@ -7,15 +7,15 @@ using System;
 class X
 {
 
-	public static void Main ()
-	{
-		goto X;
-	A:
-		bool b = false;
-		if (b) {
-			goto A;
-		}
-	X:
-		return;
-	}
+    public static void Main ()
+    {
+        goto X;
+    A:
+        bool b = false;
+        if (b) {
+            goto A;
+        }
+    X:
+        return;
+    }
 }

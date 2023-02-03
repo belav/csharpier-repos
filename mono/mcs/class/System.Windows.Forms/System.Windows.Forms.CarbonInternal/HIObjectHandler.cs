@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Geoff Norton  <gnorton@novell.com>
+//    Geoff Norton  <gnorton@novell.com>
 //
 //
 
@@ -28,30 +28,30 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms.CarbonInternal {
-	internal class HIObjectHandler : EventHandlerBase, IEventHandler {
-		internal const uint kEventHIObjectConstruct = 1;
-		internal const uint kEventHIObjectInitialize = 2;
-		internal const uint kEventHIObjectDestruct = 3;
+    internal class HIObjectHandler : EventHandlerBase, IEventHandler {
+        internal const uint kEventHIObjectConstruct = 1;
+        internal const uint kEventHIObjectInitialize = 2;
+        internal const uint kEventHIObjectDestruct = 3;
 
-		internal HIObjectHandler (XplatUICarbon driver) : base (driver) {}
+        internal HIObjectHandler (XplatUICarbon driver) : base (driver) {}
 
-		public bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg) {
-			switch (kind) {
-				case kEventHIObjectConstruct:
-					IntPtr v = IntPtr.Zero;
-					GetEventParameter (eventref, (uint)1751740265, (uint)1751740258, IntPtr.Zero, 4, IntPtr.Zero, ref v);
-					return false;
-				case kEventHIObjectInitialize:
-					CallNextEventHandler (callref, eventref);
-					return false;
-				case kEventHIObjectDestruct:
-					return false;
-			}
-			return false;
-		}
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int CallNextEventHandler (IntPtr callref, IntPtr eventref);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int GetEventParameter (IntPtr eventref, uint name, uint type, IntPtr outtype, uint size, IntPtr outsize, ref IntPtr data);
-	}
+        public bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg) {
+            switch (kind) {
+                case kEventHIObjectConstruct:
+                    IntPtr v = IntPtr.Zero;
+                    GetEventParameter (eventref, (uint)1751740265, (uint)1751740258, IntPtr.Zero, 4, IntPtr.Zero, ref v);
+                    return false;
+                case kEventHIObjectInitialize:
+                    CallNextEventHandler (callref, eventref);
+                    return false;
+                case kEventHIObjectDestruct:
+                    return false;
+            }
+            return false;
+        }
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int CallNextEventHandler (IntPtr callref, IntPtr eventref);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int GetEventParameter (IntPtr eventref, uint name, uint type, IntPtr outtype, uint size, IntPtr outsize, ref IntPtr data);
+    }
 }

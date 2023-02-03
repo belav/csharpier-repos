@@ -30,14 +30,14 @@ using System;
 
 namespace System.Web
 {
-	[Flags]
-	enum ExceptionPageTemplateType
-	{
-		Standard = 0x0001,
-		CustomErrorDefault = 0x0002,
-		Htmlized = 0x0004,
-		SourceError = 0x0008,
-		CompilerOutput = 0x0010,
-		Any = 0xFFFF
-	}
+    [Flags]
+    enum ExceptionPageTemplateType
+    {
+        Standard = 0x0001,
+        CustomErrorDefault = 0x0002,
+        Htmlized = 0x0004,
+        SourceError = 0x0008,
+        CompilerOutput = 0x0010,
+        Any = 0xFFFF
+    }
 }

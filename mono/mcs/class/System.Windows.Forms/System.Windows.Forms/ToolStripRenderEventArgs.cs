@@ -23,62 +23,62 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	public class ToolStripRenderEventArgs : EventArgs
-	{
-		private Rectangle affected_bounds;
-		private Color back_color;
-		private Rectangle connected_area;
-		private Graphics graphics;
-		private ToolStrip tool_strip;
+    public class ToolStripRenderEventArgs : EventArgs
+    {
+        private Rectangle affected_bounds;
+        private Color back_color;
+        private Rectangle connected_area;
+        private Graphics graphics;
+        private ToolStrip tool_strip;
 
-		#region Public Constructors
-		public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip)
-			: this (g, toolStrip, new Rectangle (0, 0, 100, 25), SystemColors.Control)
-		{
-		}
-		
-		public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle affectedBounds, Color backColor)
-		{
-			this.graphics = g;
-			this.tool_strip = toolStrip;
-			this.affected_bounds = affectedBounds;
-			this.back_color = backColor;
-		}
-		#endregion
-		
-		#region Public Properties
-		public Rectangle AffectedBounds {
-			get { return this.affected_bounds; }
-		}
+        #region Public Constructors
+        public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip)
+            : this (g, toolStrip, new Rectangle (0, 0, 100, 25), SystemColors.Control)
+        {
+        }
+        
+        public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle affectedBounds, Color backColor)
+        {
+            this.graphics = g;
+            this.tool_strip = toolStrip;
+            this.affected_bounds = affectedBounds;
+            this.back_color = backColor;
+        }
+        #endregion
+        
+        #region Public Properties
+        public Rectangle AffectedBounds {
+            get { return this.affected_bounds; }
+        }
 
-		public Color BackColor {
-			get { return this.back_color; }
-		}
+        public Color BackColor {
+            get { return this.back_color; }
+        }
 
-		public Rectangle ConnectedArea {
-			get { return this.connected_area; }
-		}
+        public Rectangle ConnectedArea {
+            get { return this.connected_area; }
+        }
 
-		public Graphics Graphics {
-			get { return this.graphics; }
-		}
+        public Graphics Graphics {
+            get { return this.graphics; }
+        }
 
-		public ToolStrip ToolStrip {
-			get { return this.tool_strip; }
-		}
-		#endregion
+        public ToolStrip ToolStrip {
+            get { return this.tool_strip; }
+        }
+        #endregion
 
-		#region Internal Properties
-		internal Rectangle InternalConnectedArea {
-			set { this.connected_area = value; }
-		}
-		#endregion
-	}
+        #region Internal Properties
+        internal Rectangle InternalConnectedArea {
+            set { this.connected_area = value; }
+        }
+        #endregion
+    }
 }

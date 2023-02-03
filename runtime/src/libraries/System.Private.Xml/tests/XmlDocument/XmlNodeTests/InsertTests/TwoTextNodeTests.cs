@@ -65,7 +65,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Whitespace_CDATA()
         {
-            var xml = @" <WC> 	<![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></WC>";
+            var xml = @" <WC>     <![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]></WC>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)
@@ -75,7 +75,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void CDATA_Text()
         {
-            var xml = @"<CT><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]>text</CT>";
+            var xml = @"<CT><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]>text</CT>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)

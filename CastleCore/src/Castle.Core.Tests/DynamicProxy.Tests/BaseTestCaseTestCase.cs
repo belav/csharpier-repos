@@ -14,102 +14,102 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.IO;
-	using System.Reflection;
-	using System.Reflection.Emit;
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Reflection.Emit;
 
-	using Castle.Core.Tests;
+    using Castle.Core.Tests;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class BaseTestCaseTestCase : BasePEVerifyTestCase
-	{
-		public override void TearDown()
-		{
-			ResetGeneratorAndBuilder(); // we call TearDown ourselves in these test cases
-			base.TearDown();
-		}
+    [TestFixture]
+    public class BaseTestCaseTestCase : BasePEVerifyTestCase
+    {
+        public override void TearDown()
+        {
+            ResetGeneratorAndBuilder(); // we call TearDown ourselves in these test cases
+            base.TearDown();
+        }
 
-		[Test]
-		public void TearDown_DoesNotSaveAnything_IfNoProxyGenerated()
-		{
-			string path = ModuleScope.DEFAULT_FILE_NAME;
-			if (File.Exists(path))
-			{
-				File.Delete(path);
-			}
+        [Test]
+        public void TearDown_DoesNotSaveAnything_IfNoProxyGenerated()
+        {
+            string path = ModuleScope.DEFAULT_FILE_NAME;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
-			base.TearDown();
+            base.TearDown();
 
-			Assert.IsFalse(File.Exists(path));
-		}
+            Assert.IsFalse(File.Exists(path));
+        }
 
-		[Test]
-		public void TearDown_SavesAssembly_IfProxyGenerated()
-		{
-			string path = ModuleScope.DEFAULT_FILE_NAME;
-			if (File.Exists(path))
-			{
-				File.Delete(path);
-			}
+        [Test]
+        public void TearDown_SavesAssembly_IfProxyGenerated()
+        {
+            string path = ModuleScope.DEFAULT_FILE_NAME;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
-			generator.CreateClassProxy(typeof(object), new StandardInterceptor());
+            generator.CreateClassProxy(typeof(object), new StandardInterceptor());
 
-			base.TearDown();
-			Assert.AreEqual(IsVerificationPossible, File.Exists(path));
-		}
+            base.TearDown();
+            Assert.AreEqual(IsVerificationPossible, File.Exists(path));
+        }
 
-		private void FindVerificationErrors()
-		{
-			ModuleBuilder moduleBuilder = generator.ProxyBuilder.ModuleScope.ObtainDynamicModule(true);
-			TypeBuilder invalidType = moduleBuilder.DefineType("InvalidType");
-			MethodBuilder invalidMethod = invalidType.DefineMethod("InvalidMethod", MethodAttributes.Public);
-			invalidMethod.GetILGenerator().Emit(OpCodes.Ldnull); // missing RET statement
+        private void FindVerificationErrors()
+        {
+            ModuleBuilder moduleBuilder = generator.ProxyBuilder.ModuleScope.ObtainDynamicModule(true);
+            TypeBuilder invalidType = moduleBuilder.DefineType("InvalidType");
+            MethodBuilder invalidMethod = invalidType.DefineMethod("InvalidMethod", MethodAttributes.Public);
+            invalidMethod.GetILGenerator().Emit(OpCodes.Ldnull); // missing RET statement
 
-			invalidType.CreateTypeInfo();
+            invalidType.CreateTypeInfo();
 
-			if (!IsVerificationDisabled)
-			{
-				Console.WriteLine("This next test case is expected to yield a verification error.");
-			}
+            if (!IsVerificationDisabled)
+            {
+                Console.WriteLine("This next test case is expected to yield a verification error.");
+            }
 
-			base.TearDown();
-		}
+            base.TearDown();
+        }
 
-		[Test]
-		public void TearDown_FindsVerificationErrors()
-		{
-			if (!IsVerificationPossible) Assert.Ignore();
+        [Test]
+        public void TearDown_FindsVerificationErrors()
+        {
+            if (!IsVerificationPossible) Assert.Ignore();
 
-			var ex = Assert.Throws<AssertionException>(() => FindVerificationErrors());
-			StringAssert.Contains("PeVerify reported error(s)", ex.Message);
-			StringAssert.Contains("fall through end of the method without returning", ex.Message);
-		}
+            var ex = Assert.Throws<AssertionException>(() => FindVerificationErrors());
+            StringAssert.Contains("PeVerify reported error(s)", ex.Message);
+            StringAssert.Contains("fall through end of the method without returning", ex.Message);
+        }
 
-		[Test]
-		public void DisableVerification_DisablesVerificationForTestCase()
-		{
-			DisableVerification();
+        [Test]
+        public void DisableVerification_DisablesVerificationForTestCase()
+        {
+            DisableVerification();
 
-			FindVerificationErrors();
-		}
+            FindVerificationErrors();
+        }
 
-		[Test]
-		public void DisableVerification_ResetInNextTestCase1()
-		{
-			Assert.IsFalse(IsVerificationDisabled);
-			DisableVerification();
-			Assert.IsTrue(IsVerificationDisabled);
-		}
+        [Test]
+        public void DisableVerification_ResetInNextTestCase1()
+        {
+            Assert.IsFalse(IsVerificationDisabled);
+            DisableVerification();
+            Assert.IsTrue(IsVerificationDisabled);
+        }
 
-		[Test]
-		public void DisableVerification_ResetInNextTestCase2()
-		{
-			Assert.IsFalse(IsVerificationDisabled);
-			DisableVerification();
-			Assert.IsTrue(IsVerificationDisabled);
-		}
-	}
+        [Test]
+        public void DisableVerification_ResetInNextTestCase2()
+        {
+            Assert.IsFalse(IsVerificationDisabled);
+            DisableVerification();
+            Assert.IsTrue(IsVerificationDisabled);
+        }
+    }
 }

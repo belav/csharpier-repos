@@ -1,4 +1,4 @@
-﻿namespace System.Workflow.ComponentModel.Serialization
+namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
     using System.Xml;

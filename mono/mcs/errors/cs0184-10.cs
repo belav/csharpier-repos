@@ -4,10 +4,10 @@
 
 class X
 {
-	public void Foo<T> () where T : class
-	{
-		T t = default (T);
-		if (t is int) {
-		}
-	}
+    public void Foo<T> () where T : class
+    {
+        T t = default (T);
+        if (t is int) {
+        }
+    }
 }

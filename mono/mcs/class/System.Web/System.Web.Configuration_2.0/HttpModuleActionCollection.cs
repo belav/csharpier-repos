@@ -2,7 +2,7 @@
 // System.Web.Configuration.HttpModuleActionCollection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,73 +34,73 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (HttpModuleAction), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class HttpModuleActionCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (HttpModuleAction), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class HttpModuleActionCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static HttpModuleActionCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static HttpModuleActionCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public HttpModuleActionCollection ()
-		{
-		}
-			
-		public void Add (HttpModuleAction httpModule)
-		{
-			BaseAdd (httpModule);
-		}
+        public HttpModuleActionCollection ()
+        {
+        }
+            
+        public void Add (HttpModuleAction httpModule)
+        {
+            BaseAdd (httpModule);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear ()
+        {
+            BaseClear ();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new HttpModuleAction ();
-		}
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new HttpModuleAction ();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((HttpModuleAction)element).Name;
-		}
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            return ((HttpModuleAction)element).Name;
+        }
 
-		public int IndexOf (HttpModuleAction action)
-		{
-			return BaseIndexOf (action);
-		}
+        public int IndexOf (HttpModuleAction action)
+        {
+            return BaseIndexOf (action);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Remove (string name)
+        {
+            BaseRemove (name);
+        }
 
-		public void Remove (HttpModuleAction action)
-		{
-			BaseRemove (action.Name);
-		}
+        public void Remove (HttpModuleAction action)
+        {
+            BaseRemove (action.Name);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt (int index)
+        {
+            BaseRemoveAt (index);
+        }
 
-		protected override bool IsElementRemovable (ConfigurationElement element)
-		{
-			return base.IsElementRemovable (element);
-		}
+        protected override bool IsElementRemovable (ConfigurationElement element)
+        {
+            return base.IsElementRemovable (element);
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		public HttpModuleAction this[int index] {
-			get { return (HttpModuleAction)BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
-	}
+        public HttpModuleAction this[int index] {
+            get { return (HttpModuleAction)BaseGet (index); }
+            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        }
+    }
 }
 

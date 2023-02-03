@@ -4,7 +4,7 @@
 // FIXME: delete these tests?
 // 
 // Author:
-//	Gary Barnett (gary.barnett.mono@gmail.com)
+//    Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -35,139 +35,139 @@ using System.Collections;
 using NUnit.Framework;
 
 namespace MonoTests.System.Resources {
-	[TestFixture]
-	public class ResXDataNodeAliasTests : ResourcesTestHelper {
-		
-		[Test, ExpectedException (typeof (TypeLoadException))]
-		public void CantAccessValueWereOnlyFullNameInResXForEmbedded () // same as validity check in assemblynames tests
-		{
-			ResXDataNode node = GetNodeFromResXReader (convertableResX);
-			Assert.IsNotNull (node, "#A1");
-			object obj = node.GetValue ((AssemblyName []) null);
-		}
+    [TestFixture]
+    public class ResXDataNodeAliasTests : ResourcesTestHelper {
+        
+        [Test, ExpectedException (typeof (TypeLoadException))]
+        public void CantAccessValueWereOnlyFullNameInResXForEmbedded () // same as validity check in assemblynames tests
+        {
+            ResXDataNode node = GetNodeFromResXReader (convertableResX);
+            Assert.IsNotNull (node, "#A1");
+            object obj = node.GetValue ((AssemblyName []) null);
+        }
 
-		[Test, ExpectedException (typeof (TypeLoadException))]
-		public void CantAccessValueWereOnlyFullNameAndAliasInResXForEmbedded ()
-		{
-			ResXDataNode node = GetNodeFromResXReader (convertableResXAlias);
-			Assert.IsNotNull (node, "#A1");
-			object obj = node.GetValue ((AssemblyName []) null);
-		}
+        [Test, ExpectedException (typeof (TypeLoadException))]
+        public void CantAccessValueWereOnlyFullNameAndAliasInResXForEmbedded ()
+        {
+            ResXDataNode node = GetNodeFromResXReader (convertableResXAlias);
+            Assert.IsNotNull (node, "#A1");
+            object obj = node.GetValue ((AssemblyName []) null);
+        }
 
-		[Test]
-		public void CanAccessValueWereOnlyFullNameAndAssemblyInResXForEmbedded ()
-		{
-			ResXDataNode node = GetNodeFromResXReader (convertableResXAssembly);
+        [Test]
+        public void CanAccessValueWereOnlyFullNameAndAssemblyInResXForEmbedded ()
+        {
+            ResXDataNode node = GetNodeFromResXReader (convertableResXAssembly);
 
-			Assert.IsNotNull (node, "#A1");
-			object obj = node.GetValue ((AssemblyName []) null);
-			// this is the qualified name of the assembly found in dir
-			string aName = "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+            Assert.IsNotNull (node, "#A1");
+            object obj = node.GetValue ((AssemblyName []) null);
+            // this is the qualified name of the assembly found in dir
+            string aName = "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 
-			Assert.AreEqual ("DummyAssembly.Convertable, " + aName, obj.GetType ().AssemblyQualifiedName, "#A2");
-		}
+            Assert.AreEqual ("DummyAssembly.Convertable, " + aName, obj.GetType ().AssemblyQualifiedName, "#A2");
+        }
 
-		[Test]
-		public void CanAccessValueWereFullNameAndQualifiedAssemblyInResXForEmbedded ()
-		{
-			ResXDataNode node = GetNodeFromResXReader (convertableResXQualifiedAssemblyName);
-			Assert.IsNotNull (node, "#A1");
+        [Test]
+        public void CanAccessValueWereFullNameAndQualifiedAssemblyInResXForEmbedded ()
+        {
+            ResXDataNode node = GetNodeFromResXReader (convertableResXQualifiedAssemblyName);
+            Assert.IsNotNull (node, "#A1");
 
-			object obj = node.GetValue ((AssemblyName []) null);
-			string aName = "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
-			Assert.AreEqual ("DummyAssembly.Convertable, " + aName, obj.GetType ().AssemblyQualifiedName, "#A2");
-		}
+            object obj = node.GetValue ((AssemblyName []) null);
+            string aName = "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+            Assert.AreEqual ("DummyAssembly.Convertable, " + aName, obj.GetType ().AssemblyQualifiedName, "#A2");
+        }
 
-		static string convertableResX =
+        static string convertableResX =
 @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   
   <resheader name=""resmimetype"">
-	<value>text/microsoft-resx</value>
+    <value>text/microsoft-resx</value>
   </resheader>
   <resheader name=""version"">
-	<value>2.0</value>
+    <value>2.0</value>
   </resheader>
   <resheader name=""reader"">
-	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name=""writer"">
-	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   
   <data name=""test"" type=""DummyAssembly.Convertable"">
-	<value>im a name	im a value</value>
+    <value>im a name    im a value</value>
   </data>
 </root>";
 
 
-		static string convertableResXAssembly =
+        static string convertableResXAssembly =
 @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   
   <resheader name=""resmimetype"">
-	<value>text/microsoft-resx</value>
+    <value>text/microsoft-resx</value>
   </resheader>
   <resheader name=""version"">
-	<value>2.0</value>
+    <value>2.0</value>
   </resheader>
   <resheader name=""reader"">
-	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name=""writer"">
-	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   
   <data name=""test"" type=""DummyAssembly.Convertable, DummyAssembly"">
-	<value>im a name	im a value</value>
+    <value>im a name    im a value</value>
   </data>
 </root>";
 
 
-		static string convertableResXAlias =
+        static string convertableResXAlias =
 @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   
   <resheader name=""resmimetype"">
-	<value>text/microsoft-resx</value>
+    <value>text/microsoft-resx</value>
   </resheader>
   <resheader name=""version"">
-	<value>2.0</value>
+    <value>2.0</value>
   </resheader>
   <resheader name=""reader"">
-	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name=""writer"">
-	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias=""DummyAssembly"" name=""DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"" />
   <data name=""test"" type=""DummyAssembly.Convertable"">
-	<value>im a name	im a value</value>
+    <value>im a name    im a value</value>
   </data>
 </root>";
 
-		static string convertableResXQualifiedAssemblyName =
+        static string convertableResXQualifiedAssemblyName =
 @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   
   <resheader name=""resmimetype"">
-	<value>text/microsoft-resx</value>
+    <value>text/microsoft-resx</value>
   </resheader>
   <resheader name=""version"">
-	<value>2.0</value>
+    <value>2.0</value>
   </resheader>
   <resheader name=""reader"">
-	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name=""writer"">
-	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   
   <data name=""test"" type=""DummyAssembly.Convertable, DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"">
-	<value>im a name	im a value</value>
+    <value>im a name    im a value</value>
   </data>
 </root>";
 
-	}
+    }
 
 }

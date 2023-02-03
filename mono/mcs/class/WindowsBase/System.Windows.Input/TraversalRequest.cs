@@ -20,30 +20,30 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@novell.com)
+//    Chris Toshok (toshok@novell.com)
 //
 
 using System;
 
 namespace System.Windows.Input {
 
-	public class TraversalRequest
-	{
-		bool wrapped;
-		FocusNavigationDirection focusNavigationDirection;
+    public class TraversalRequest
+    {
+        bool wrapped;
+        FocusNavigationDirection focusNavigationDirection;
 
-		public TraversalRequest (FocusNavigationDirection focusNavigationDirection)
-		{
-			this.focusNavigationDirection = focusNavigationDirection;
-		}
+        public TraversalRequest (FocusNavigationDirection focusNavigationDirection)
+        {
+            this.focusNavigationDirection = focusNavigationDirection;
+        }
 
-		public FocusNavigationDirection FocusNavigationDirection {
-			get { return focusNavigationDirection; }
-		}
+        public FocusNavigationDirection FocusNavigationDirection {
+            get { return focusNavigationDirection; }
+        }
 
-		public bool Wrapped {
-			get { return wrapped; }
-			set { wrapped = value; }
-		}
-	}
+        public bool Wrapped {
+            get { return wrapped; }
+            set { wrapped = value; }
+        }
+    }
 }

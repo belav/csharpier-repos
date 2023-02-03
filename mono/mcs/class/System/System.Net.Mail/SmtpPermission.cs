@@ -2,7 +2,7 @@
 // System.Net.Mail.SmtpPermission
 //
 // Authors:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -32,156 +32,156 @@ using System.Security.Permissions;
 
 namespace System.Net.Mail {
 
-	[Serializable]
-	public sealed class SmtpPermission : CodeAccessPermission, IUnrestrictedPermission {
+    [Serializable]
+    public sealed class SmtpPermission : CodeAccessPermission, IUnrestrictedPermission {
 
-		private const int version = 1;
+        private const int version = 1;
 
-		private bool unrestricted;
-		private SmtpAccess access;
-
-
-		public SmtpPermission (bool unrestricted)
-			: base ()
-		{
-			this.unrestricted = unrestricted;
-			access = unrestricted ? SmtpAccess.ConnectToUnrestrictedPort : SmtpAccess.None;
-		}
-
-		public SmtpPermission (PermissionState state)
-			: base ()
-		{
-			unrestricted = (state == PermissionState.Unrestricted);
-			access =  unrestricted ? SmtpAccess.ConnectToUnrestrictedPort : SmtpAccess.None;
-		}
-
-		public SmtpPermission (SmtpAccess access)
-			: base ()
-		{
-			// this ctor can accept invalid enum values
-			this.access = access;
-		}
-		
-
-		public SmtpAccess Access {
-			get { return access; }
-		}
+        private bool unrestricted;
+        private SmtpAccess access;
 
 
-		public void AddPermission (SmtpAccess access)
-		{
-			if (!unrestricted && (access > this.access)) {
-				this.access = access;
-			}
-		}
+        public SmtpPermission (bool unrestricted)
+            : base ()
+        {
+            this.unrestricted = unrestricted;
+            access = unrestricted ? SmtpAccess.ConnectToUnrestrictedPort : SmtpAccess.None;
+        }
 
-		public override IPermission Copy ()
-		{
-			if (unrestricted) {
-				return new SmtpPermission (true);
-			} else {
-				return new SmtpPermission (access);
-			}
-		}
+        public SmtpPermission (PermissionState state)
+            : base ()
+        {
+            unrestricted = (state == PermissionState.Unrestricted);
+            access =  unrestricted ? SmtpAccess.ConnectToUnrestrictedPort : SmtpAccess.None;
+        }
 
-		public override IPermission Intersect (IPermission target)
-		{
-			SmtpPermission sp = Cast (target);
-			if (sp == null)
-				return null;
+        public SmtpPermission (SmtpAccess access)
+            : base ()
+        {
+            // this ctor can accept invalid enum values
+            this.access = access;
+        }
+        
 
-			if (unrestricted && sp.unrestricted)
-				return new SmtpPermission (true);
-			else if (access > sp.access)
-				return new SmtpPermission (sp.access);
-			else
-				return new SmtpPermission (access);
-		}
-		
-		public override bool IsSubsetOf (IPermission target) 
-		{
-			SmtpPermission sp = Cast (target);
-			if (sp == null)
-				return IsEmpty ();
+        public SmtpAccess Access {
+            get { return access; }
+        }
 
-			if (unrestricted) {
-				return sp.unrestricted;
-			} else {
-				return (access <= sp.access);
-			}
-		}
 
-		public bool IsUnrestricted () 
-		{
-			return unrestricted;
-		}
+        public void AddPermission (SmtpAccess access)
+        {
+            if (!unrestricted && (access > this.access)) {
+                this.access = access;
+            }
+        }
 
-		public override SecurityElement ToXml ()
-		{
-			SecurityElement se = PermissionHelper.Element (typeof (SmtpPermission), version);
-			if (unrestricted) {
-				se.AddAttribute ("Unrestricted", "true");
-			} else {
-				switch (access) {
-				case SmtpAccess.ConnectToUnrestrictedPort:
-					se.AddAttribute ("Access", "ConnectToUnrestrictedPort");
-					break;
-				case SmtpAccess.Connect:
-					se.AddAttribute ("Access", "Connect");
-					break;
-				// note: SmtpAccess.None and invalid values aren't serialized to XML
-				}
-			}
-			return se;
-		}
-		
-		public override void FromXml (SecurityElement securityElement)
-		{
-			PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
-		
-			// LAMESPEC: it says to throw an ArgumentNullException in this case				
-			if (securityElement.Tag != "IPermission")
-				throw new ArgumentException ("securityElement");
-				
-			if (PermissionHelper.IsUnrestricted (securityElement))
-				access = SmtpAccess.Connect;
-			else
-				access = SmtpAccess.None;
-		}		
-		
-		public override IPermission Union (IPermission target) 
-		{
-			SmtpPermission sp = Cast (target);
-			if (sp == null)
-				return Copy ();
+        public override IPermission Copy ()
+        {
+            if (unrestricted) {
+                return new SmtpPermission (true);
+            } else {
+                return new SmtpPermission (access);
+            }
+        }
 
-			if (unrestricted || sp.unrestricted)
-				return new SmtpPermission (true);
-			else if (access > sp.access)
-				return new SmtpPermission (access);
-			else
-				return new SmtpPermission (sp.access);
-		}
+        public override IPermission Intersect (IPermission target)
+        {
+            SmtpPermission sp = Cast (target);
+            if (sp == null)
+                return null;
 
-		// Internal helpers methods
+            if (unrestricted && sp.unrestricted)
+                return new SmtpPermission (true);
+            else if (access > sp.access)
+                return new SmtpPermission (sp.access);
+            else
+                return new SmtpPermission (access);
+        }
+        
+        public override bool IsSubsetOf (IPermission target) 
+        {
+            SmtpPermission sp = Cast (target);
+            if (sp == null)
+                return IsEmpty ();
 
-		private bool IsEmpty ()
-		{
-			return (!unrestricted && (access == SmtpAccess.None));
-		}
+            if (unrestricted) {
+                return sp.unrestricted;
+            } else {
+                return (access <= sp.access);
+            }
+        }
 
-		private SmtpPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
+        public bool IsUnrestricted () 
+        {
+            return unrestricted;
+        }
 
-			SmtpPermission sp = (target as SmtpPermission);
-			if (sp == null) {
-				PermissionHelper.ThrowInvalidPermission (target, typeof (SmtpPermission));
-			}
+        public override SecurityElement ToXml ()
+        {
+            SecurityElement se = PermissionHelper.Element (typeof (SmtpPermission), version);
+            if (unrestricted) {
+                se.AddAttribute ("Unrestricted", "true");
+            } else {
+                switch (access) {
+                case SmtpAccess.ConnectToUnrestrictedPort:
+                    se.AddAttribute ("Access", "ConnectToUnrestrictedPort");
+                    break;
+                case SmtpAccess.Connect:
+                    se.AddAttribute ("Access", "Connect");
+                    break;
+                // note: SmtpAccess.None and invalid values aren't serialized to XML
+                }
+            }
+            return se;
+        }
+        
+        public override void FromXml (SecurityElement securityElement)
+        {
+            PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
+        
+            // LAMESPEC: it says to throw an ArgumentNullException in this case                
+            if (securityElement.Tag != "IPermission")
+                throw new ArgumentException ("securityElement");
+                
+            if (PermissionHelper.IsUnrestricted (securityElement))
+                access = SmtpAccess.Connect;
+            else
+                access = SmtpAccess.None;
+        }        
+        
+        public override IPermission Union (IPermission target) 
+        {
+            SmtpPermission sp = Cast (target);
+            if (sp == null)
+                return Copy ();
 
-			return sp;
-		}
-	}
+            if (unrestricted || sp.unrestricted)
+                return new SmtpPermission (true);
+            else if (access > sp.access)
+                return new SmtpPermission (access);
+            else
+                return new SmtpPermission (sp.access);
+        }
+
+        // Internal helpers methods
+
+        private bool IsEmpty ()
+        {
+            return (!unrestricted && (access == SmtpAccess.None));
+        }
+
+        private SmtpPermission Cast (IPermission target)
+        {
+            if (target == null)
+                return null;
+
+            SmtpPermission sp = (target as SmtpPermission);
+            if (sp == null) {
+                PermissionHelper.ThrowInvalidPermission (target, typeof (SmtpPermission));
+            }
+
+            return sp;
+        }
+    }
 }
 

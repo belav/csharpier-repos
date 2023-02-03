@@ -672,7 +672,7 @@ namespace System.Net {
                         PrepareCloseConnectionSocket(ref returnResult);
                         // Hard Close the socket.
                         Close(0);
-                        FreeReadBuffer();	// Do it after close completes to insure buffer not in use
+                        FreeReadBuffer();    // Do it after close completes to insure buffer not in use
                     }
                 }
                 else {
@@ -2744,7 +2744,7 @@ quit:
                 PrepareCloseConnectionSocket(ref result);
                 // Hard Close the socket.
                 Close(0);
-                FreeReadBuffer();	// Do it after close completes to insure buffer not in use
+                FreeReadBuffer();    // Do it after close completes to insure buffer not in use
 #if DEBUG
                 }
                 catch (Exception exception)
@@ -2785,7 +2785,7 @@ quit:
             lock (this)
             {
                 Close(0);
-                FreeReadBuffer();	// Do it after close completes to insure buffer not in use
+                FreeReadBuffer();    // Do it after close completes to insure buffer not in use
             }
 
             GlobalLog.Leave("Connection#" + ValidationHelper.HashString(this) + "::Abort", "isAbortState:" + isAbortState.ToString());
@@ -3073,7 +3073,7 @@ quit:
                 // This will kill the socket
                 // Must be done inside the lock.  (Stream Close() isn't threadsafe.)
                 Close(0);
-                FreeReadBuffer();	// Do it after close completes to insure buffer not in use
+                FreeReadBuffer();    // Do it after close completes to insure buffer not in use
             }
         }
 

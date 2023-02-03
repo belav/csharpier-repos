@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -885,36 +885,36 @@ using F;
         public async Task Korean()
         {
             var initial =
-@"using 하;
-using 파;
-using 타;
-using 카;
-using 차;
-using 자;
-using 아;
-using 사;
-using 바;
-using 마;
-using 라;
-using 다;
-using 나;
-using 가;";
+@"using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;";
 
             var final =
-@"using 가;
-using 나;
-using 다;
-using 라;
-using 마;
-using 바;
-using 사;
-using 아;
-using 자;
-using 차;
-using 카;
-using 타;
-using 파;
-using 하;
+@"using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
+using ?;
 ";
 
             await CheckAsync(initial, final);
@@ -1010,20 +1010,20 @@ using bb;
 using BB;
 using bBb;
 using bbB;
-using あ;
-using ア;
-using ｱ;
-using ああ;
-using あア;
-using あｱ;
-using アあ;
+using ?;
+using ?;
+using ?;
+using ??;
+using ??;
+using ??;
+using ??;
 using cC;
 using Cc;
-using アア;
-using アｱ;
-using ｱあ;
-using ｱア;
-using ｱｱ;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
 using BBb;
 using BbB;
 using bBB;
@@ -1040,34 +1040,34 @@ using CC;";
             if (GlobalizationUtilities.ICUMode())
             {
                 sortedKana =
-@"using あ;
-using ｱ;
-using ああ;
-using あｱ;
-using ｱあ;
-using ｱｱ;
-using あア;
-using ｱア;
-using ア;
-using アあ;
-using アｱ;
-using アア;";
+@"using ?;
+using ?;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ?;
+using ??;
+using ??;
+using ??;";
             }
             else
             {
                 sortedKana =
-@"using ア;
-using ｱ;
-using あ;
-using アア;
-using アｱ;
-using ｱア;
-using ｱｱ;
-using アあ;
-using ｱあ;
-using あア;
-using あｱ;
-using ああ;";
+@"using ?;
+using ?;
+using ?;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;";
             }
 
             var final =
@@ -1107,51 +1107,51 @@ using CC;
         public async Task CaseSensitivity2()
         {
             var initial =
-@"using あ;
-using ア;
-using ｱ;
-using ああ;
-using あア;
-using あｱ;
-using アあ;
-using アア;
-using アｱ;
-using ｱあ;
-using ｱア;
-using ｱｱ;";
+@"using ?;
+using ?;
+using ?;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;";
 
             if (GlobalizationUtilities.ICUMode())
             {
                 await CheckAsync(initial,
-@"using あ;
-using ｱ;
-using ああ;
-using あｱ;
-using ｱあ;
-using ｱｱ;
-using あア;
-using ｱア;
-using ア;
-using アあ;
-using アｱ;
-using アア;
+@"using ?;
+using ?;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ?;
+using ??;
+using ??;
+using ??;
 ");
             }
             else
             {
                 await CheckAsync(initial,
-@"using ア;
-using ｱ;
-using あ;
-using アア;
-using アｱ;
-using ｱア;
-using ｱｱ;
-using アあ;
-using ｱあ;
-using あア;
-using あｱ;
-using ああ;
+@"using ?;
+using ?;
+using ?;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
+using ??;
 ");
             }
         }

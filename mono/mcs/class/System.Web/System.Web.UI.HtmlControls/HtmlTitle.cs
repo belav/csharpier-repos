@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlTitle
 //
 // Authors:
-// 	Lluis Sanchez Gual (lluis@novell.com)
+//     Lluis Sanchez Gual (lluis@novell.com)
 //
 // Copyright (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,45 +31,45 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class HtmlTitle : HtmlControl
-	{
-		string text;
-		
-		protected override void AddParsedSubObject(object obj)
-		{
-			LiteralControl lit = obj as LiteralControl;
-			if (lit != null)
-				text = lit.Text;
-			else
-				base.AddParsedSubObject (obj);
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class HtmlTitle : HtmlControl
+    {
+        string text;
+        
+        protected override void AddParsedSubObject(object obj)
+        {
+            LiteralControl lit = obj as LiteralControl;
+            if (lit != null)
+                text = lit.Text;
+            else
+                base.AddParsedSubObject (obj);
+        }
 
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new ControlCollection (this);
-		}
-		
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[DefaultValue ("")]
-		[PersistenceMode (PersistenceMode.InnerDefaultProperty)]
-		[Localizable (true)]
-		public virtual string Text {
-			get { return text; }
-			set { text = value; }
-		}
-		
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			writer.RenderBeginTag (HtmlTextWriterTag.Title);
-			if (HasControls () || HasRenderMethodDelegate ())
-				RenderChildren (writer);
-			else
-				writer.Write (text);
-			writer.RenderEndTag ();
-		}
-	}
+        protected override ControlCollection CreateControlCollection ()
+        {
+            return new ControlCollection (this);
+        }
+        
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue ("")]
+        [PersistenceMode (PersistenceMode.InnerDefaultProperty)]
+        [Localizable (true)]
+        public virtual string Text {
+            get { return text; }
+            set { text = value; }
+        }
+        
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            writer.RenderBeginTag (HtmlTextWriterTag.Title);
+            if (HasControls () || HasRenderMethodDelegate ())
+                RenderChildren (writer);
+            else
+                writer.Write (text);
+            writer.RenderEndTag ();
+        }
+    }
 }
 

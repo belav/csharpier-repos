@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -8506,12 +8506,12 @@ class C
             string text = @"
 unsafe class Test 
 {
-	static volatile int *px;
+    static volatile int *px;
 }
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
                 // (4,23): warning CS0169: The field 'Test.px' is never used
-                // 	static volatile int *px;
+                //     static volatile int *px;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "px").WithArguments("Test.px"));
         }
 
@@ -8747,10 +8747,10 @@ unsafe class C
 unsafe delegate int D(int* p);
 class C 
 {
-	static void Main()
-	{
-		D d = delegate { return 1;};
-	}
+    static void Main()
+    {
+        D d = delegate { return 1;};
+    }
 }
 ";
             var tree = Parse(sourceCode);

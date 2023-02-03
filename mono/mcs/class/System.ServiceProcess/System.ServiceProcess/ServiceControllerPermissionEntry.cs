@@ -3,7 +3,7 @@
 //
 // Authors:
 //      Duncan Mak (duncan@ximian.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003, Ximian Inc.
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -33,48 +33,48 @@ using System.Security.Permissions;
 
 namespace System.ServiceProcess {
 
-	[Serializable]
-	public class ServiceControllerPermissionEntry {
+    [Serializable]
+    public class ServiceControllerPermissionEntry {
 
-		string machine_name;
-		string service_name;
-		ServiceControllerPermissionAccess permission_access;
-		
-		public ServiceControllerPermissionEntry ()
-		{
-			machine_name = ResourcePermissionBase.Local;
-			service_name = ResourcePermissionBase.Any;
-			permission_access = ServiceControllerPermissionAccess.Browse;
-		}
+        string machine_name;
+        string service_name;
+        ServiceControllerPermissionAccess permission_access;
+        
+        public ServiceControllerPermissionEntry ()
+        {
+            machine_name = ResourcePermissionBase.Local;
+            service_name = ResourcePermissionBase.Any;
+            permission_access = ServiceControllerPermissionAccess.Browse;
+        }
 
-		public ServiceControllerPermissionEntry (ServiceControllerPermissionAccess permissionAccess,
-			string machineName, string serviceName)
-		{
-			ServiceControllerPermission.ValidateMachineName (machineName);
-			ServiceControllerPermission.ValidateServiceName (serviceName);
+        public ServiceControllerPermissionEntry (ServiceControllerPermissionAccess permissionAccess,
+            string machineName, string serviceName)
+        {
+            ServiceControllerPermission.ValidateMachineName (machineName);
+            ServiceControllerPermission.ValidateServiceName (serviceName);
 
-			permission_access = permissionAccess;
-			machine_name = machineName;
-			service_name = serviceName;
-		}
+            permission_access = permissionAccess;
+            machine_name = machineName;
+            service_name = serviceName;
+        }
 
-		public string MachineName {
-			get { return machine_name; }
-		}
+        public string MachineName {
+            get { return machine_name; }
+        }
 
-		public string ServiceName {
-			get { return service_name; }
-		}
+        public string ServiceName {
+            get { return service_name; }
+        }
 
-		public ServiceControllerPermissionAccess PermissionAccess {
-			get { return permission_access; }
-		}
+        public ServiceControllerPermissionAccess PermissionAccess {
+            get { return permission_access; }
+        }
 
-		// look at MSDN library ResourcePermissionBaseEntry sample for the "design"
+        // look at MSDN library ResourcePermissionBaseEntry sample for the "design"
 
-		internal ResourcePermissionBaseEntry GetBaseEntry ()
-		{
-			return new ResourcePermissionBaseEntry ((int) permission_access, new string[] { machine_name, service_name });
-		} 
-	}
+        internal ResourcePermissionBaseEntry GetBaseEntry ()
+        {
+            return new ResourcePermissionBaseEntry ((int) permission_access, new string[] { machine_name, service_name });
+        } 
+    }
 }

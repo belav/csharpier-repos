@@ -2,7 +2,7 @@
 // CardSpaceProofToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -33,31 +33,31 @@ using System.Xml;
 
 namespace Mono.ServiceModel.IdentitySelectors.Win32
 {
-	class CardSpaceProofToken : SecurityToken
-	{
-		DateTime valid_to;
-		ReadOnlyCollection<SecurityKey> keys;
+    class CardSpaceProofToken : SecurityToken
+    {
+        DateTime valid_to;
+        ReadOnlyCollection<SecurityKey> keys;
 
-		public CardSpaceProofToken (DateTime validTo, AsymmetricSecurityKey proofKey)
-		{
-			valid_to = validTo;
-			keys = new ReadOnlyCollection<SecurityKey> (new SecurityKey [] {proofKey});
-		}
+        public CardSpaceProofToken (DateTime validTo, AsymmetricSecurityKey proofKey)
+        {
+            valid_to = validTo;
+            keys = new ReadOnlyCollection<SecurityKey> (new SecurityKey [] {proofKey});
+        }
 
-		public override DateTime ValidFrom {
-			get { return DateTime.MinValue.ToUniversalTime (); }
-		}
+        public override DateTime ValidFrom {
+            get { return DateTime.MinValue.ToUniversalTime (); }
+        }
 
-		public override DateTime ValidTo {
-			get { return valid_to; }
-		}
+        public override DateTime ValidTo {
+            get { return valid_to; }
+        }
 
-		public override string Id {
-			get { throw new NotImplementedException (); }
-		}
+        public override string Id {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { return keys; }
-		}
-	}
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+            get { return keys; }
+        }
+    }
 }

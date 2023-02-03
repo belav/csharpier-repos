@@ -750,8 +750,8 @@ namespace Test
         var generated = CompileToCSharp(@"
 <ComponentWithNullableAction NullableAction=""@NullableAction"" />
 @code {
-	[Parameter]
-	public Action NullableAction { get; set; }
+    [Parameter]
+    public Action NullableAction { get; set; }
 }            
 ");
         AssertDocumentNodeMatchesBaseline(generated.CodeDocument);
@@ -776,7 +776,7 @@ namespace Test
         var generated = CompileToCSharp(@"
 <ComponentWithNullableRenderFragment Header=""@Header"" />
 @code {
-	[Parameter] public RenderFragment Header { get; set; }
+    [Parameter] public RenderFragment Header { get; set; }
 }            
 ");
         AssertDocumentNodeMatchesBaseline(generated.CodeDocument);

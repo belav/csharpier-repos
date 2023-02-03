@@ -1,9 +1,9 @@
 //
 // ResourcePermissionBaseCas.cs -
-//	CAS unit tests for System.Security.Permissions.ResourcePermissionBase
+//    CAS unit tests for System.Security.Permissions.ResourcePermissionBase
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,51 +38,51 @@ using MonoTests.System.Security.Permissions;
 
 namespace MonoCasTests.System.Security.Permissions {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ResourcePermissionBaseCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ResourcePermissionBaseCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			ResourcePermissionBaseTest unit = new ResourcePermissionBaseTest ();
-			unit.Constants ();
-			unit.Constructor_Empty ();
-			unit.Constructor_None ();
-			unit.Constructor_Unrestricted ();
-			unit.PermissionAccessType ();
-			unit.TagNames ();
-			unit.AddPermissionAccess ();
-			unit.AddPermissionAccess_SemiDuplicates ();
-			unit.Clear ();
-			unit.Copy ();
-			unit.FromXml_WrongClass ();
-			unit.FromXml_NoClass ();
-			unit.FromXml_NoVersion ();
-			unit.GetPermissionEntries ();
-			unit.IsSubsetOf_DifferentPermissions ();
-			unit.RemovePermissionAccess ();
-			unit.ToXml ();
-			unit.ToXml_Unrestricted ();
-			unit.Union ();
-			unit.Unrestricted_AddRemove ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            ResourcePermissionBaseTest unit = new ResourcePermissionBaseTest ();
+            unit.Constants ();
+            unit.Constructor_Empty ();
+            unit.Constructor_None ();
+            unit.Constructor_Unrestricted ();
+            unit.PermissionAccessType ();
+            unit.TagNames ();
+            unit.AddPermissionAccess ();
+            unit.AddPermissionAccess_SemiDuplicates ();
+            unit.Clear ();
+            unit.Copy ();
+            unit.FromXml_WrongClass ();
+            unit.FromXml_NoClass ();
+            unit.FromXml_NoVersion ();
+            unit.GetPermissionEntries ();
+            unit.IsSubsetOf_DifferentPermissions ();
+            unit.RemovePermissionAccess ();
+            unit.ToXml ();
+            unit.ToXml_Unrestricted ();
+            unit.Union ();
+            unit.Unrestricted_AddRemove ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (NonAbstractResourcePermissionBase).GetConstructor (new Type [0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (NonAbstractResourcePermissionBase).GetConstructor (new Type [0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

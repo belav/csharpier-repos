@@ -33,44 +33,44 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewUpdateEventArgs : CancelEventArgs
-	{
-		IOrderedDictionary _keys;
-		IOrderedDictionary _newValues;
-		IOrderedDictionary _oldValues;
-		
-		public ListViewUpdateEventArgs (int itemIndex)
-		{
-			ItemIndex = itemIndex;
-		}
-		
-		public int ItemIndex {
-			get;
-			private set;
-		}
-		
-		public IOrderedDictionary Keys {
-			get {
-				if (_keys == null)
-					_keys = new OrderedDictionary ();
-				return _keys;
-			}
-		}
-		
-		public IOrderedDictionary NewValues {
-			get {
-				if (_newValues == null)
-					_newValues = new OrderedDictionary ();
-				return _newValues;
-			}
-		}
-		
-		public IOrderedDictionary OldValues {
-			get {
-				if (_oldValues == null)
-					_oldValues = new OrderedDictionary ();
-				return _oldValues;
-			}
-		}
-	}
+    public class ListViewUpdateEventArgs : CancelEventArgs
+    {
+        IOrderedDictionary _keys;
+        IOrderedDictionary _newValues;
+        IOrderedDictionary _oldValues;
+        
+        public ListViewUpdateEventArgs (int itemIndex)
+        {
+            ItemIndex = itemIndex;
+        }
+        
+        public int ItemIndex {
+            get;
+            private set;
+        }
+        
+        public IOrderedDictionary Keys {
+            get {
+                if (_keys == null)
+                    _keys = new OrderedDictionary ();
+                return _keys;
+            }
+        }
+        
+        public IOrderedDictionary NewValues {
+            get {
+                if (_newValues == null)
+                    _newValues = new OrderedDictionary ();
+                return _newValues;
+            }
+        }
+        
+        public IOrderedDictionary OldValues {
+            get {
+                if (_oldValues == null)
+                    _oldValues = new OrderedDictionary ();
+                return _oldValues;
+            }
+        }
+    }
 }

@@ -20,15 +20,15 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 using System;
 using System.Collections;
 
 namespace Mono.WebBrowser.DOM
-{	
-	public interface IWindowCollection : IList
-	{
-		IWindow this [int index]{ get; set; }
-	}
+{    
+    public interface IWindowCollection : IList
+    {
+        IWindow this [int index]{ get; set; }
+    }
 }

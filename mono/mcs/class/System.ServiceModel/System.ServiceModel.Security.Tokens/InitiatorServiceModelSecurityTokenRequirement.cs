@@ -1,8 +1,8 @@
-﻿//
+//
 // InitiatorServiceModelSecurityTokenRequirement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,35 +32,35 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public sealed class InitiatorServiceModelSecurityTokenRequirement
-		: ServiceModelSecurityTokenRequirement
-	{
-		public InitiatorServiceModelSecurityTokenRequirement ()
-		{
-			Properties [ServiceModelSecurityTokenRequirement.IsInitiatorProperty] = true;
-		}
+    public sealed class InitiatorServiceModelSecurityTokenRequirement
+        : ServiceModelSecurityTokenRequirement
+    {
+        public InitiatorServiceModelSecurityTokenRequirement ()
+        {
+            Properties [ServiceModelSecurityTokenRequirement.IsInitiatorProperty] = true;
+        }
 
-		public EndpointAddress TargetAddress {
-			get {
-				EndpointAddress ret;
-				TryGetProperty<EndpointAddress> (TargetAddressProperty, out ret);
-				return ret;
-			}
-			set { Properties [TargetAddressProperty] = value; }
-		}
+        public EndpointAddress TargetAddress {
+            get {
+                EndpointAddress ret;
+                TryGetProperty<EndpointAddress> (TargetAddressProperty, out ret);
+                return ret;
+            }
+            set { Properties [TargetAddressProperty] = value; }
+        }
 
-		public Uri Via {
-			get {
-				Uri ret;
-				TryGetProperty<Uri> (ViaProperty, out ret);
-				return ret;
-			}
-			set { Properties [ViaProperty] = value; }
-		}
+        public Uri Via {
+            get {
+                Uri ret;
+                TryGetProperty<Uri> (ViaProperty, out ret);
+                return ret;
+            }
+            set { Properties [ViaProperty] = value; }
+        }
 
-		public override string ToString ()
-		{
-			return Dump ();
-		}
-	}
+        public override string ToString ()
+        {
+            return Dump ();
+        }
+    }
 }

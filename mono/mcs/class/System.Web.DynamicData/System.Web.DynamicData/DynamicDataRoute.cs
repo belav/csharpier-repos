@@ -2,7 +2,7 @@
 // DynamicDataRoute.cs
 //
 // Authors:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //      Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
@@ -40,117 +40,117 @@ using System.Web.Routing;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DynamicDataRoute : Route
-	{
-		static readonly object initLock = new object ();
-		bool initDone;
-		
-		public DynamicDataRoute (string url)
-			: base (url, null)
-		{
-			Model = MetaModel.Default;
-			RouteHandler = new DynamicDataRouteHandler ();
-		}
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class DynamicDataRoute : Route
+    {
+        static readonly object initLock = new object ();
+        bool initDone;
+        
+        public DynamicDataRoute (string url)
+            : base (url, null)
+        {
+            Model = MetaModel.Default;
+            RouteHandler = new DynamicDataRouteHandler ();
+        }
 
-		public string Action { get; set; }
+        public string Action { get; set; }
 
-		public MetaModel Model { get; set; }
+        public MetaModel Model { get; set; }
 
-		public new DynamicDataRouteHandler RouteHandler { 
-			get { return base.RouteHandler as DynamicDataRouteHandler; }
-			set { base.RouteHandler = value; }
-		}
+        public new DynamicDataRouteHandler RouteHandler { 
+            get { return base.RouteHandler as DynamicDataRouteHandler; }
+            set { base.RouteHandler = value; }
+        }
 
-		public string Table { get; set; }
+        public string Table { get; set; }
 
-		public string ViewName { get; set; }
+        public string ViewName { get; set; }
 
-		void EnsureInitialized ()
-		{
-			if (initDone)
-				return;
-			
-			// We need to lock since we might be stored in the RouteTable.Routes
-			// collection which might be accessed from many concurrent requests.
-			lock (initLock) {
-				if (initDone)
-					return;
-				
-				initDone = true;
+        void EnsureInitialized ()
+        {
+            if (initDone)
+                return;
+            
+            // We need to lock since we might be stored in the RouteTable.Routes
+            // collection which might be accessed from many concurrent requests.
+            lock (initLock) {
+                if (initDone)
+                    return;
+                
+                initDone = true;
 
-				DynamicDataRouteHandler rh = RouteHandler;
-				if (rh != null)
-					rh.Model = Model;
-				
-				string action = Action, table = Table;
-				if (action == null && table == null)
-					return;
+                DynamicDataRouteHandler rh = RouteHandler;
+                if (rh != null)
+                    rh.Model = Model;
+                
+                string action = Action, table = Table;
+                if (action == null && table == null)
+                    return;
 
-				RouteValueDictionary defaults = Defaults;
-				if (defaults == null)
-					Defaults = defaults = new RouteValueDictionary ();
+                RouteValueDictionary defaults = Defaults;
+                if (defaults == null)
+                    Defaults = defaults = new RouteValueDictionary ();
 
-				if (table != null) {
-					// Force check for table existence
-					MetaModel model = Model ?? MetaModel.Default;
-					if (model != null)
-						Model.GetTable (table);
-					
-					if (defaults.ContainsKey ("Table"))
-						defaults ["Table"] = table;
-					else
-						defaults.Add ("Table", table);
-				}
-				
-				if (action != null) {
-					if (defaults.ContainsKey ("Action"))
-						defaults ["Action"] = action;
-					else
-						defaults.Add ("Action", action);
-				}
-			}
-		}
-		
-		public string GetActionFromRouteData (RouteData routeData)
-		{
-			if (routeData == null)
-				throw new ArgumentNullException ("routeData");
-			return routeData.GetRequiredString ("Action");
-		}
+                if (table != null) {
+                    // Force check for table existence
+                    MetaModel model = Model ?? MetaModel.Default;
+                    if (model != null)
+                        Model.GetTable (table);
+                    
+                    if (defaults.ContainsKey ("Table"))
+                        defaults ["Table"] = table;
+                    else
+                        defaults.Add ("Table", table);
+                }
+                
+                if (action != null) {
+                    if (defaults.ContainsKey ("Action"))
+                        defaults ["Action"] = action;
+                    else
+                        defaults.Add ("Action", action);
+                }
+            }
+        }
+        
+        public string GetActionFromRouteData (RouteData routeData)
+        {
+            if (routeData == null)
+                throw new ArgumentNullException ("routeData");
+            return routeData.GetRequiredString ("Action");
+        }
 
-		public override RouteData GetRouteData (HttpContextBase httpContext)
-		{
-			EnsureInitialized ();
-			RouteData rd = base.GetRouteData (httpContext);
+        public override RouteData GetRouteData (HttpContextBase httpContext)
+        {
+            EnsureInitialized ();
+            RouteData rd = base.GetRouteData (httpContext);
 
-			if (rd == null)
-				return null;
+            if (rd == null)
+                return null;
 
-			MetaModel model = Model ?? MetaModel.Default;
-			MetaTable table;
-			if (model == null || !model.TryGetTable (rd.GetRequiredString ("Table"), out table))
-				return null;
-			
-			return rd;
-		}
+            MetaModel model = Model ?? MetaModel.Default;
+            MetaTable table;
+            if (model == null || !model.TryGetTable (rd.GetRequiredString ("Table"), out table))
+                return null;
+            
+            return rd;
+        }
 
-		public MetaTable GetTableFromRouteData (RouteData routeData)
-		{
-			if (routeData == null)
-				throw new ArgumentNullException ("routeData");
-			var t = routeData.GetRequiredString ("Table");
-			if (Model == null)
-				throw new InvalidOperationException ("MetaModel must be set to the DynamicDataRoute before retrieving MetaTable");
+        public MetaTable GetTableFromRouteData (RouteData routeData)
+        {
+            if (routeData == null)
+                throw new ArgumentNullException ("routeData");
+            var t = routeData.GetRequiredString ("Table");
+            if (Model == null)
+                throw new InvalidOperationException ("MetaModel must be set to the DynamicDataRoute before retrieving MetaTable");
 
-			return Model.GetTable (t);
-		}
+            return Model.GetTable (t);
+        }
 
-		public override VirtualPathData GetVirtualPath (RequestContext requestContext, RouteValueDictionary values)
-		{
-			EnsureInitialized ();
-			return base.GetVirtualPath (requestContext, values);
-		}
-	}
+        public override VirtualPathData GetVirtualPath (RequestContext requestContext, RouteValueDictionary values)
+        {
+            EnsureInitialized ();
+            return base.GetVirtualPath (requestContext, values);
+        }
+    }
 }

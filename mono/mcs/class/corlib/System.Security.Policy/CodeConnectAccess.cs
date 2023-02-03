@@ -2,7 +2,7 @@
 // System.Security.Policy.CodeConnectAccess class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,64 +32,64 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-	[Serializable]
-	[ComVisible (true)]
-	public class CodeConnectAccess {
+    [Serializable]
+    [ComVisible (true)]
+    public class CodeConnectAccess {
 
-		public static readonly string AnyScheme = "*";
-		public static readonly int DefaultPort = -3;
-		public static readonly int OriginPort = -4;
-		public static readonly string OriginScheme = "$origin";
+        public static readonly string AnyScheme = "*";
+        public static readonly int DefaultPort = -3;
+        public static readonly int OriginPort = -4;
+        public static readonly string OriginScheme = "$origin";
 
-		private string _scheme;
-		private int _port;
+        private string _scheme;
+        private int _port;
 
-		[MonoTODO ("(2.0) validations incomplete")]
-		public CodeConnectAccess (string allowScheme, int allowPort)
-		{
-			// LAME but as documented
-			if ((allowScheme == null) || (allowScheme.Length == 0))
-				throw new ArgumentOutOfRangeException ("allowScheme");
-			// TODO : check for invalid characters in scheme
-			if ((allowPort < 0) || (allowPort > 65535)) {
-				throw new ArgumentOutOfRangeException ("allowPort");
-			}
+        [MonoTODO ("(2.0) validations incomplete")]
+        public CodeConnectAccess (string allowScheme, int allowPort)
+        {
+            // LAME but as documented
+            if ((allowScheme == null) || (allowScheme.Length == 0))
+                throw new ArgumentOutOfRangeException ("allowScheme");
+            // TODO : check for invalid characters in scheme
+            if ((allowPort < 0) || (allowPort > 65535)) {
+                throw new ArgumentOutOfRangeException ("allowPort");
+            }
 
-			_scheme = allowScheme;
-			_port = allowPort;
-		}
+            _scheme = allowScheme;
+            _port = allowPort;
+        }
 
-		public int Port {
-			get { return _port; }
-		}
+        public int Port {
+            get { return _port; }
+        }
 
-		public string Scheme {
-			get { return _scheme; }
-		}
+        public string Scheme {
+            get { return _scheme; }
+        }
 
-		public override bool Equals (object o)
-		{
-			CodeConnectAccess cca = (o as CodeConnectAccess);
-			if (cca == null)
-				return false;
-			return ((_scheme == cca._scheme) && (_port == cca._port));
-		}
+        public override bool Equals (object o)
+        {
+            CodeConnectAccess cca = (o as CodeConnectAccess);
+            if (cca == null)
+                return false;
+            return ((_scheme == cca._scheme) && (_port == cca._port));
+        }
 
-		public override int GetHashCode ()
-		{
-			// return same hash code if objects are equals
-			return (_scheme.GetHashCode () ^ _port);
-		}
+        public override int GetHashCode ()
+        {
+            // return same hash code if objects are equals
+            return (_scheme.GetHashCode () ^ _port);
+        }
 
-		public static CodeConnectAccess CreateAnySchemeAccess (int allowPort)
-		{
-			return new CodeConnectAccess (AnyScheme, allowPort);
-		}
+        public static CodeConnectAccess CreateAnySchemeAccess (int allowPort)
+        {
+            return new CodeConnectAccess (AnyScheme, allowPort);
+        }
 
-		public static CodeConnectAccess CreateOriginSchemeAccess (int allowPort)
-		{
-			return new CodeConnectAccess (OriginScheme, allowPort);
-		}
-	}
+        public static CodeConnectAccess CreateOriginSchemeAccess (int allowPort)
+        {
+            return new CodeConnectAccess (OriginScheme, allowPort);
+        }
+    }
 }
 

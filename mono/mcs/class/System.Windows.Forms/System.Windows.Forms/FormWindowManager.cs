@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Rolf Bjarne Kvinge  (RKvinge@novell.com)
+//    Rolf Bjarne Kvinge  (RKvinge@novell.com)
 //
 //
 
@@ -31,57 +31,57 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	internal class FormWindowManager : InternalWindowManager
-	{
-		private bool pending_activation;
-		public FormWindowManager (Form form)  : base (form)
-		{
+    internal class FormWindowManager : InternalWindowManager
+    {
+        private bool pending_activation;
+        public FormWindowManager (Form form)  : base (form)
+        {
 
-			form.MouseCaptureChanged += new EventHandler (HandleCaptureChanged);
-		}
+            form.MouseCaptureChanged += new EventHandler (HandleCaptureChanged);
+        }
 
-		void HandleCaptureChanged (object sender, EventArgs e)
-		{
-			if (pending_activation && !form.Capture) {
-				form.BringToFront ();
-				pending_activation = false;
-			}
-		}
+        void HandleCaptureChanged (object sender, EventArgs e)
+        {
+            if (pending_activation && !form.Capture) {
+                form.BringToFront ();
+                pending_activation = false;
+            }
+        }
 
-		public override void PointToClient (ref int x, ref int y)
-		{
-			XplatUI.ScreenToClient (Form.Parent.Handle, ref x, ref y);
-		}
+        public override void PointToClient (ref int x, ref int y)
+        {
+            XplatUI.ScreenToClient (Form.Parent.Handle, ref x, ref y);
+        }
 
 
-		protected override bool HandleNCLButtonDown (ref Message m)
-		{
-			// MS seems to be doing this on mouse up, but we don't get WM_NCLBUTTONUP when anything is captured
-			// so work around this using MouseCaptureChanged.
-			pending_activation = true;
-			
-			return base.HandleNCLButtonDown (ref m);
-		}
+        protected override bool HandleNCLButtonDown (ref Message m)
+        {
+            // MS seems to be doing this on mouse up, but we don't get WM_NCLBUTTONUP when anything is captured
+            // so work around this using MouseCaptureChanged.
+            pending_activation = true;
+            
+            return base.HandleNCLButtonDown (ref m);
+        }
 
-		protected override void HandleTitleBarDoubleClick (int x, int y)
-		{
-			if (IconRectangleContains (x, y)) {
-				form.Close ();
-			} else if (form.WindowState == FormWindowState.Maximized) {
-				form.WindowState = FormWindowState.Normal;
-			} else {
-				form.WindowState = FormWindowState.Maximized;
-			}
-			base.HandleTitleBarDoubleClick (x, y);
-		}
+        protected override void HandleTitleBarDoubleClick (int x, int y)
+        {
+            if (IconRectangleContains (x, y)) {
+                form.Close ();
+            } else if (form.WindowState == FormWindowState.Maximized) {
+                form.WindowState = FormWindowState.Normal;
+            } else {
+                form.WindowState = FormWindowState.Maximized;
+            }
+            base.HandleTitleBarDoubleClick (x, y);
+        }
 
-		internal override Rectangle MaximizedBounds {
-			get {
-				Rectangle result = base.MaximizedBounds;
-				int bw = ThemeEngine.Current.ManagedWindowBorderWidth (this);
-				result.Inflate (bw, bw);
-				return result;
-			}
-		}
-	}
+        internal override Rectangle MaximizedBounds {
+            get {
+                Rectangle result = base.MaximizedBounds;
+                int bw = ThemeEngine.Current.ManagedWindowBorderWidth (this);
+                result.Inflate (bw, bw);
+                return result;
+            }
+        }
+    }
 }

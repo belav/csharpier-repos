@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -988,25 +988,25 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.InteropServices
 {
-	[AttributeUsage(AttributeTargets.Parameter)]
-	public sealed class DefaultParameterValueAttribute : Attribute
-	{
-		public DefaultParameterValueAttribute()
-		{
-		}
-	}
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public sealed class DefaultParameterValueAttribute : Attribute
+    {
+        public DefaultParameterValueAttribute()
+        {
+        }
+    }
 }
 
 public class C 
 {
-	public static void M([Optional, DefaultParameterValue]int i) 
-	{
-	}
+    public static void M([Optional, DefaultParameterValue]int i) 
+    {
+    }
 
-	public static void Main() 
-	{
-		M();
-	}
+    public static void Main() 
+    {
+        M();
+    }
 }
 ");
             Action<ModuleSymbol> verifier = module =>
@@ -1032,25 +1032,25 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.InteropServices
 {
-	[AttributeUsage(AttributeTargets.Parameter)]
-	public sealed class DefaultParameterValueAttribute : Attribute
-	{
-		public DefaultParameterValueAttribute(object value, object trueValue)
-		{
-		}
-	}
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public sealed class DefaultParameterValueAttribute : Attribute
+    {
+        public DefaultParameterValueAttribute(object value, object trueValue)
+        {
+        }
+    }
 }
 
 public class C 
 {
-	public static void M([Optional, DefaultParameterValue(null, 1)]int i) 
-	{
-	}
+    public static void M([Optional, DefaultParameterValue(null, 1)]int i) 
+    {
+    }
 
-	public static void Main() 
-	{
-		M();
-	}
+    public static void Main() 
+    {
+        M();
+    }
 }
 ");
             Action<ModuleSymbol> verifier = module =>
@@ -1299,16 +1299,16 @@ using System;
 [AttributeUsage(AttributeTargets.Parameter)]
 public sealed class X : Attribute
 {
-	public X(int x, int y, int z, [System.Runtime.InteropServices.Optional]int w)
-	{
-	}
+    public X(int x, int y, int z, [System.Runtime.InteropServices.Optional]int w)
+    {
+    }
 }
 
 public class C 
 {
-	public static void M([X(0, z: 2, y: 1)]int i) 
-	{
-	}
+    public static void M([X(0, z: 2, y: 1)]int i) 
+    {
+    }
 }
 ");
             CompileAndVerify(compilation);
@@ -1325,16 +1325,16 @@ public enum E { A, B, C }
 [AttributeUsage(AttributeTargets.Parameter)]
 public sealed class X : Attribute
 {
-	public X(int x, [System.Runtime.InteropServices.Optional]int y, int z, [System.Runtime.InteropServices.Optional]E w)
-	{
-	}
+    public X(int x, [System.Runtime.InteropServices.Optional]int y, int z, [System.Runtime.InteropServices.Optional]E w)
+    {
+    }
 }
 
 public class C 
 {
-	public static void M([X(x:0, z: 2)]int i) 
-	{
-	}
+    public static void M([X(x:0, z: 2)]int i) 
+    {
+    }
 }
 ");
             CompileAndVerify(compilation);
@@ -3424,21 +3424,21 @@ class C
 {   
    class D
    {
-	  int[] arr = new[] { 1,2,3,4,5,6,7,8,9,0, 1,2,3,4,5,6,7,8,9,0, 1,2,3,4,5,6,7,8,9,0, 1,2,3,4,5,6,7,8,9,0};
-	     
-	  void goo() 
-	  {
-	     int a = 1;
-	     int b = 2;
-	     var q = new { f = 1, g = 2 };
-	     var z = new Action(() => Console.WriteLine(a + arr[b]));
-	  }
-	  
-	  IEnumerable<int> En()
-	  {
-	     yield return 1;
-	     yield return 2;
-	  }
+      int[] arr = new[] { 1,2,3,4,5,6,7,8,9,0, 1,2,3,4,5,6,7,8,9,0, 1,2,3,4,5,6,7,8,9,0, 1,2,3,4,5,6,7,8,9,0};
+         
+      void goo() 
+      {
+         int a = 1;
+         int b = 2;
+         var q = new { f = 1, g = 2 };
+         var z = new Action(() => Console.WriteLine(a + arr[b]));
+      }
+      
+      IEnumerable<int> En()
+      {
+         yield return 1;
+         yield return 2;
+      }
    }
 }
 
@@ -5113,12 +5113,12 @@ using System;
 [AttributeUsage(badAttributeTargets)]
 public class MyAttribute : Attribute
 {
-	public const AttributeTargets badAttributeTargets = Missing;
+    public const AttributeTargets badAttributeTargets = Missing;
 }
 ";
             CreateCompilation(source).VerifyDiagnostics(
                 // (7,54): error CS0103: The name 'Missing' does not exist in the current context
-                // 	public const AttributeTargets badAttributeTargets = Missing;
+                //     public const AttributeTargets badAttributeTargets = Missing;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing").WithArguments("Missing"),
                 // (4,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 // [AttributeUsage(badAttributeTargets)]
@@ -6353,7 +6353,7 @@ public class Program
     public void Main()
     {
         var derived = new Derived();
-		_ = derived.Boo;
+        _ = derived.Boo;
         _ = derived.Goo;
         _ = derived.Hoo;
         _ = derived.Joo;
@@ -6375,7 +6375,7 @@ public class Program
                 //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
                 Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get").WithArguments("Derived.Koo.get", "Base.Koo.get").WithLocation(18, 69),
                 // (26,7): warning CS0612: 'Base.Boo.get' is obsolete
-                // 		_ = derived.Boo;
+                //         _ = derived.Boo;
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "derived.Boo").WithArguments("Base.Boo.get").WithLocation(26, 7),
                 // (28,13): error CS0619: 'Base.Hoo.get' is obsolete: 'Base.Hoo is Obsolete'
                 //         _ = derived.Hoo;

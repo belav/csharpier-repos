@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Miguel de Icaza (miguel@novell.com)
+//    Miguel de Icaza (miguel@novell.com)
 //
 using System;
 using System.Collections;
@@ -30,53 +30,53 @@ using System.Threading;
 
 namespace System.Windows.Threading {
 
-	public sealed class DispatcherHooks {
-		Dispatcher owner;
+    public sealed class DispatcherHooks {
+        Dispatcher owner;
 
-		internal DispatcherHooks (Dispatcher owner)
-		{
-			this.owner = owner;
-		}
-		
-		public event EventHandler DispatcherInactive;
-		public event DispatcherHookEventHandler OperationAborted;
-		public event DispatcherHookEventHandler OperationCompleted;
-		public event DispatcherHookEventHandler OperationPosted;
-		public event DispatcherHookEventHandler OperationPriorityChanged;
+        internal DispatcherHooks (Dispatcher owner)
+        {
+            this.owner = owner;
+        }
+        
+        public event EventHandler DispatcherInactive;
+        public event DispatcherHookEventHandler OperationAborted;
+        public event DispatcherHookEventHandler OperationCompleted;
+        public event DispatcherHookEventHandler OperationPosted;
+        public event DispatcherHookEventHandler OperationPriorityChanged;
 
-		internal void EmitOperationPosted (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler posted = OperationPosted;
-			if (posted != null)
-				posted (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationPosted (DispatcherOperation op)
+        {
+            DispatcherHookEventHandler posted = OperationPosted;
+            if (posted != null)
+                posted (owner, new DispatcherHookEventArgs (op));
+        }
 
-		internal void EmitOperationCompleted (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler completed = OperationCompleted;
-			if (completed != null)
-				completed (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationCompleted (DispatcherOperation op)
+        {
+            DispatcherHookEventHandler completed = OperationCompleted;
+            if (completed != null)
+                completed (owner, new DispatcherHookEventArgs (op));
+        }
 
-		internal void EmitOperationAborted (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler aborted = OperationAborted;
-			if (aborted != null)
-				aborted (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationAborted (DispatcherOperation op)
+        {
+            DispatcherHookEventHandler aborted = OperationAborted;
+            if (aborted != null)
+                aborted (owner, new DispatcherHookEventArgs (op));
+        }
 
-		internal void EmitOperationPriorityChanged (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler prio = OperationPriorityChanged;
-			if (prio != null)
-				prio (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationPriorityChanged (DispatcherOperation op)
+        {
+            DispatcherHookEventHandler prio = OperationPriorityChanged;
+            if (prio != null)
+                prio (owner, new DispatcherHookEventArgs (op));
+        }
 
-		internal void EmitInactive ()
-		{
-			EventHandler inactive = DispatcherInactive;
-			if (inactive != null)
-				inactive (owner, EventArgs.Empty);
-		}
-	}
+        internal void EmitInactive ()
+        {
+            EventHandler inactive = DispatcherInactive;
+            if (inactive != null)
+                inactive (owner, EventArgs.Empty);
+        }
+    }
 }

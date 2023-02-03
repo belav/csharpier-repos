@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,17 +29,17 @@
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	enum TokenClass {
-		None		= -1,
-		Unknown		= 0,
-		Group		= 1,
-		Text		= 2,
-		Control		= 3,
-		EOF		= 4,
-		MaxClass	= 5
-	}
+    enum TokenClass {
+        None        = -1,
+        Unknown        = 0,
+        Group        = 1,
+        Text        = 2,
+        Control        = 3,
+        EOF        = 4,
+        MaxClass    = 5
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -587,8 +587,8 @@ class C
     {
         dynamic d = null;
         var ptr = new IntPtr(&d);
-		dynamic a = *d;
-		dynamic b = d->x;
+        dynamic a = *d;
+        dynamic b = d->x;
     }
 }
 ";
@@ -634,17 +634,17 @@ using System.Threading.Tasks;
 
 class C
 {
-	static dynamic d;
+    static dynamic d;
 
-	static async void M() 
-	{
-		var x = await await d; //-typeExpression: dynamic
+    static async void M() 
+    {
+        var x = await await d; //-typeExpression: dynamic
                                //-fieldAccess: dynamic
                                //-awaitableValuePlaceholder: dynamic
                                //-awaitExpression: dynamic
                                //-awaitableValuePlaceholder: dynamic
                                //-awaitExpression: dynamic
-	}
+    }
 }";
 
             TestTypes(source);
@@ -1831,17 +1831,17 @@ class C
             string source = @"
 public class C
 {
-	public static void F<T>(string s, params T[] args) where T : C {} 
+    public static void F<T>(string s, params T[] args) where T : C {} 
 
-	public static void Main()
-	{
-		dynamic d = 1;
-		F<int>(d, 1, 2);
-	}
+    public static void Main()
+    {
+        dynamic d = 1;
+        F<int>(d, 1, 2);
+    }
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
                 // (9,3): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'C.F<T>(string, params T[])'. There is no boxing conversion from 'int' to 'C'.
-                // 		F<int>(d, 1, 2);
+                //         F<int>(d, 1, 2);
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "F<int>").WithArguments("C.F<T>(string, params T[])", "C", "T", "int").WithLocation(9, 3));
         }
 
@@ -1851,13 +1851,13 @@ public class C
             string source = @"
 public class C
 {
-	public static void F<T>(string s, params T[] args) where T : C {} 
+    public static void F<T>(string s, params T[] args) where T : C {} 
 
-	public static void Main()
-	{
-		dynamic d = 1;
-		F(d, 1, 2);
-	}
+    public static void Main()
+    {
+        dynamic d = 1;
+        F(d, 1, 2);
+    }
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics();
         }
@@ -2124,9 +2124,9 @@ enum F { A, B }
 
 public unsafe class C
 {
-	static dynamic d = null;
-	static int* ptr = null;
-	static C c = new C();
+    static dynamic d = null;
+    static int* ptr = null;
+    static C c = new C();
 
     static void M()
     {
@@ -2158,18 +2158,18 @@ enum F { A, B }
 
 public unsafe class C
 {
-	F fi;
-	event Action ei;
-	
-	static dynamic d1 = null;
-	static dynamic d2 = null;
-	static F f;
-	static event Action e;
-	static Action a = null;
-	static int i = 0;	
-	static int* ptr = null;
-	
-	static C c = new C();
+    F fi;
+    event Action ei;
+    
+    static dynamic d1 = null;
+    static dynamic d2 = null;
+    static F f;
+    static event Action e;
+    static Action a = null;
+    static int i = 0;    
+    static int* ptr = null;
+    
+    static C c = new C();
 
     static void M()
     {
@@ -2219,18 +2219,18 @@ enum F { A, B }
 
 public unsafe class C
 {
-	F fi;
-	event Action ei;
-	
-	static dynamic d1 = null;
-	static dynamic d2 = null;
-	static F f;
-	static event Action e;
-	static Action a = null;
-	static int i = 0;	
-	static int* ptr = null;
-	
-	static C c = new C();
+    F fi;
+    event Action ei;
+    
+    static dynamic d1 = null;
+    static dynamic d2 = null;
+    static F f;
+    static event Action e;
+    static Action a = null;
+    static int i = 0;    
+    static int* ptr = null;
+    
+    static C c = new C();
 
     static void M()
     {
@@ -2290,9 +2290,9 @@ public unsafe class C
     static F f;
     static event Action e;
     static Action a = null;
-    static int i = 0;	
+    static int i = 0;    
     static int* ptr = null;
-	
+    
     static C c = new C();
     
     static void M()
@@ -2510,7 +2510,7 @@ class C
 {
     static void M()
     {
-		var x = /*<bind>*/ new dynamic
+        var x = /*<bind>*/ new dynamic
         {
             a = 1,
             b = 
@@ -2563,7 +2563,7 @@ IInvalidOperation (OperationKind.Invalid, Type: dynamic, IsInvalid) (Syntax: 'ne
                 //                 c = f()
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "f").WithArguments("f").WithLocation(11, 21),
                 // file.cs(6,26): error CS8382: Invalid object creation
-                // 		var x = /*<bind>*/ new dynamic
+                //         var x = /*<bind>*/ new dynamic
                 Diagnostic(ErrorCode.ERR_InvalidObjectCreation, "dynamic").WithLocation(6, 26)
             };
 
@@ -2717,21 +2717,21 @@ class C : List<int>
     }
 
     static void M()
-    {	
-		var z = new C()         //-typeExpression: C
-		{
-			{ d },              //-objectOrCollectionValuePlaceholder: C
+    {    
+        var z = new C()         //-typeExpression: C
+        {
+            { d },              //-objectOrCollectionValuePlaceholder: C
                                 //-objectOrCollectionValuePlaceholder: C
                                 //-fieldAccess: dynamic
                                 //-dynamicCollectionElementInitializer: dynamic
 
-			{ d, d, d },        //-objectOrCollectionValuePlaceholder: C
+            { d, d, d },        //-objectOrCollectionValuePlaceholder: C
                                 //-fieldAccess: dynamic
                                 //-fieldAccess: dynamic
                                 //-fieldAccess: dynamic
                                 //-dynamicCollectionElementInitializer: dynamic
 
-		};                      //-collectionInitializerExpression: C
+        };                      //-collectionInitializerExpression: C
                                 //-objectCreationExpression: C
     }
 } 
@@ -2765,11 +2765,11 @@ class C : List<int>
     }
 
     static void Main()
-    {	
+    {    
         Expression<Func<C>> e0 = () => new C { P = d };
         Expression<Func<C>> e1 = () => new C { D = 1 };  // ok
         Expression<Func<C>> e2 = () => new C { D = { X = { Y = 1 }, Z = 1 } };
-		Expression<Func<C>> e3 = () => new C() { { d }, { d, d, d } };
+        Expression<Func<C>> e3 = () => new C() { { d }, { d, d, d } };
         Expression<Func<dynamic, dynamic>> e4 = x => x.goo();
         Expression<Func<dynamic, dynamic>> e5 = x => x[1];
         Expression<Func<dynamic, dynamic>> e6 = x => x.y.z;
@@ -2815,10 +2815,10 @@ class C : List<int>
                 //         Expression<Func<C>> e2 = () => new C { D = { X = { Y = 1 }, Z = 1 } };
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, "Z").WithLocation(27, 69),
                 // (28,44): error CS1963: An expression tree may not contain a dynamic operation
-                // 		Expression<Func<C>> e3 = () => new C() { { d }, { d, d, d } };
+                //         Expression<Func<C>> e3 = () => new C() { { d }, { d, d, d } };
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, "{ d }").WithLocation(28, 44),
                 // (28,51): error CS1963: An expression tree may not contain a dynamic operation
-                // 		Expression<Func<C>> e3 = () => new C() { { d }, { d, d, d } };
+                //         Expression<Func<C>> e3 = () => new C() { { d }, { d, d, d } };
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, "{ d, d, d }").WithLocation(28, 51),
                 // (29,54): error CS1963: An expression tree may not contain a dynamic operation
                 //         Expression<Func<dynamic, dynamic>> e4 = x => x.goo();
@@ -3009,8 +3009,8 @@ using System;
 
 public class Q<T>
 {
-	public Q<T> Where(Func<T,bool> predicate) { throw null; }
-	public dynamic Select<U>(Func<T,U> selector) { throw null; }
+    public Q<T> Where(Func<T,bool> predicate) { throw null; }
+    public dynamic Select<U>(Func<T,U> selector) { throw null; }
 }
 
 class C
@@ -3034,8 +3034,8 @@ using System;
 
 public class Q<T>
 {
-	public Q<T> Where(Func<T,bool> predicate) { throw null; }
-	public Q<U> Select<U>(dynamic selector) { throw null; }
+    public Q<T> Where(Func<T,bool> predicate) { throw null; }
+    public Q<U> Select<U>(dynamic selector) { throw null; }
 }
 
 class C
@@ -3060,8 +3060,8 @@ using System;
 
 public class Q<T>
 {
-	public dynamic Where(Func<T,bool> predicate) { throw null; }
-	public Q<U> Select<U>(Func<T,U> selector) { throw null; }
+    public dynamic Where(Func<T,bool> predicate) { throw null; }
+    public Q<U> Select<U>(Func<T,U> selector) { throw null; }
 }
 
 class C
@@ -3085,8 +3085,8 @@ using System;
 
 public class Q<T>
 {
-	public dynamic Where(Func<T,bool> predicate) { throw null; }
-	public Q<U> Select<U>(Func<T,U> selector) { throw null; }
+    public dynamic Where(Func<T,bool> predicate) { throw null; }
+    public Q<U> Select<U>(Func<T,U> selector) { throw null; }
 }
 
 class C

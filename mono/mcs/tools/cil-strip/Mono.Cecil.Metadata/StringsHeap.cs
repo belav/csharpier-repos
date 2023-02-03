@@ -28,52 +28,52 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using System.Collections;
-	using System.Text;
+    using System.Collections;
+    using System.Text;
 
-	internal class StringsHeap : MetadataHeap {
+    internal class StringsHeap : MetadataHeap {
 
-		IDictionary m_strings;
+        IDictionary m_strings;
 
-		public string this [uint index] {
-			get {
-				string str = m_strings [index] as string;
-				if (str == null) {
-					str = ReadStringAt (index);
-					m_strings [index] = str;
-				}
-				return str;
-			}
-			set { m_strings [index] = value; }
-		}
+        public string this [uint index] {
+            get {
+                string str = m_strings [index] as string;
+                if (str == null) {
+                    str = ReadStringAt (index);
+                    m_strings [index] = str;
+                }
+                return str;
+            }
+            set { m_strings [index] = value; }
+        }
 
-		internal StringsHeap (MetadataStream stream) : base (stream, MetadataStream.Strings)
-		{
-			m_strings = new Hashtable ();
-		}
+        internal StringsHeap (MetadataStream stream) : base (stream, MetadataStream.Strings)
+        {
+            m_strings = new Hashtable ();
+        }
 
-		string ReadStringAt (uint index)
-		{
-			byte [] data = this.Data;
-			int heap_length = data.Length;
+        string ReadStringAt (uint index)
+        {
+            byte [] data = this.Data;
+            int heap_length = data.Length;
 
-			if (index > heap_length - 1)
-				return string.Empty;
+            if (index > heap_length - 1)
+                return string.Empty;
 
-			int length = 0;
-			for (int i = (int) index; i < heap_length; i++) {
-				if (data [i] == 0)
-					break;
+            int length = 0;
+            for (int i = (int) index; i < heap_length; i++) {
+                if (data [i] == 0)
+                    break;
 
-				length++;
-			}
+                length++;
+            }
 
-			return Encoding.UTF8.GetString (data, (int) index, length);
-		}
+            return Encoding.UTF8.GetString (data, (int) index, length);
+        }
 
-		public override void Accept (IMetadataVisitor visitor)
-		{
-			visitor.VisitStringsHeap (this);
-		}
-	}
+        public override void Accept (IMetadataVisitor visitor)
+        {
+            visitor.VisitStringsHeap (this);
+        }
+    }
 }

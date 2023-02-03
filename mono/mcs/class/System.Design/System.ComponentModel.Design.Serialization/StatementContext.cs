@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.Serialization.StatementContext
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact@i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact@i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -33,21 +33,21 @@ using System.CodeDom;
 
 namespace System.ComponentModel.Design.Serialization
 {
-	public sealed class StatementContext
-	{
+    public sealed class StatementContext
+    {
 
-		ObjectStatementCollection _statements;
+        ObjectStatementCollection _statements;
 
-		public StatementContext ()
-		{
-		}
+        public StatementContext ()
+        {
+        }
 
-		public ObjectStatementCollection StatementCollection {
-			get { 
-				if (_statements == null)
-					_statements = new ObjectStatementCollection ();
-				return _statements;
-			}
-		}
-	}
+        public ObjectStatementCollection StatementCollection {
+            get { 
+                if (_statements == null)
+                    _statements = new ObjectStatementCollection ();
+                return _statements;
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.Compilation.BuildManagerHostUnloadEventHandler
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,7 +31,7 @@
 
 
 namespace System.Web.Compilation {
-	public delegate void BuildManagerHostUnloadEventHandler(object sender, BuildManagerHostUnloadEventArgs e);
+    public delegate void BuildManagerHostUnloadEventHandler(object sender, BuildManagerHostUnloadEventArgs e);
 }
 
 

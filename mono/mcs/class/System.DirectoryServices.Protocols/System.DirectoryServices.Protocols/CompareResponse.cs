@@ -32,10 +32,10 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class CompareResponse : DirectoryResponse
-	{
-		internal CompareResponse ()
-		{
-		}
-	}
+    public class CompareResponse : DirectoryResponse
+    {
+        internal CompareResponse ()
+        {
+        }
+    }
 }

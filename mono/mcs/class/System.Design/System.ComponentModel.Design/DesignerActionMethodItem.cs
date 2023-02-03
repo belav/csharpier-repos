@@ -32,80 +32,80 @@ using System.Collections;
 
 namespace System.ComponentModel.Design
 {
-	public class DesignerActionMethodItem : DesignerActionItem
-	{
-		string member_name;
-		bool designer_verb;
-		IComponent related_component;
-		DesignerActionList action_list;
-		
-		public DesignerActionMethodItem (DesignerActionList actionList, string memberName, string displayName)
-			: this (actionList, memberName, displayName, null, false)
-		{
-		}
-		
-		public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
-						 string displayName, bool includeAsDesignerVerb)
-			: this (actionList, memberName, displayName, null, includeAsDesignerVerb)
-		{
-		}
-		
-		public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
-						 string displayName, string category)
-			: this (actionList, memberName, displayName, category, false)
-		{
-		}
-		
-		public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
-						 string displayName, string category, bool includeAsDesignerVerb)
-			: this (actionList, memberName, displayName, category, null, includeAsDesignerVerb)
-		{
-		}
-		
-		public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
-						 string displayName, string category, string description)
-			: this (actionList, memberName, displayName, category, description, false)
-		{
-		}
-		
-		public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
-						 string displayName, string category, string description,
-						 bool includeAsDesignerVerb)
-			: base (displayName, category, description)
-		{
-			this.action_list = actionList;
-			this.member_name = memberName;
-			this.designer_verb = includeAsDesignerVerb;
-		}
-		
-		public virtual bool IncludeAsDesignerVerb {
-			get {
-				return designer_verb;
-			}
-		}
-		
-		public virtual string MemberName {
-			get {
-				return member_name;
-			}
-		}
-		
-		public IComponent RelatedComponent {
-			get {
-				return related_component;
-			}
-			
-			set {
-				related_component = value;
-			}
-		}
+    public class DesignerActionMethodItem : DesignerActionItem
+    {
+        string member_name;
+        bool designer_verb;
+        IComponent related_component;
+        DesignerActionList action_list;
+        
+        public DesignerActionMethodItem (DesignerActionList actionList, string memberName, string displayName)
+            : this (actionList, memberName, displayName, null, false)
+        {
+        }
+        
+        public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
+                         string displayName, bool includeAsDesignerVerb)
+            : this (actionList, memberName, displayName, null, includeAsDesignerVerb)
+        {
+        }
+        
+        public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
+                         string displayName, string category)
+            : this (actionList, memberName, displayName, category, false)
+        {
+        }
+        
+        public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
+                         string displayName, string category, bool includeAsDesignerVerb)
+            : this (actionList, memberName, displayName, category, null, includeAsDesignerVerb)
+        {
+        }
+        
+        public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
+                         string displayName, string category, string description)
+            : this (actionList, memberName, displayName, category, description, false)
+        {
+        }
+        
+        public DesignerActionMethodItem (DesignerActionList actionList, string memberName,
+                         string displayName, string category, string description,
+                         bool includeAsDesignerVerb)
+            : base (displayName, category, description)
+        {
+            this.action_list = actionList;
+            this.member_name = memberName;
+            this.designer_verb = includeAsDesignerVerb;
+        }
+        
+        public virtual bool IncludeAsDesignerVerb {
+            get {
+                return designer_verb;
+            }
+        }
+        
+        public virtual string MemberName {
+            get {
+                return member_name;
+            }
+        }
+        
+        public IComponent RelatedComponent {
+            get {
+                return related_component;
+            }
+            
+            set {
+                related_component = value;
+            }
+        }
 
-		//
-		// I have no clue *where* this would look at to invoke the command
-		//
-		public virtual void Invoke ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        //
+        // I have no clue *where* this would look at to invoke the command
+        //
+        public virtual void Invoke ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

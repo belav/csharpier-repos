@@ -36,155 +36,155 @@ using System.Threading;
 using System.Web.Services;
 
 namespace System.Web.Services.Protocols {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public abstract class WebClientProtocol : Component {
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public abstract class WebClientProtocol : Component {
 
-		#region Fields
+        #region Fields
 
-		string connectionGroupName;
-		ICredentials credentials;
-		bool preAuthenticate;
-		Encoding requestEncoding;
-		int timeout;
+        string connectionGroupName;
+        ICredentials credentials;
+        bool preAuthenticate;
+        Encoding requestEncoding;
+        int timeout;
 
-		//
-		// Used by SoapHttpClientProtocol, use this to avoid creating a new Uri on each invocation.
-		//
-		internal Uri uri;
-			
-		//
-		// Points to the current request, so we can call Abort() on it
-		//
-		WebRequest current_request;
-		
-		static HybridDictionary cache;
-		#endregion
+        //
+        // Used by SoapHttpClientProtocol, use this to avoid creating a new Uri on each invocation.
+        //
+        internal Uri uri;
+            
+        //
+        // Points to the current request, so we can call Abort() on it
+        //
+        WebRequest current_request;
+        
+        static HybridDictionary cache;
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		static WebClientProtocol ()
-		{
-			cache = new HybridDictionary ();
-		}
+        static WebClientProtocol ()
+        {
+            cache = new HybridDictionary ();
+        }
 
-		protected WebClientProtocol () 
-		{
-			connectionGroupName = String.Empty;
-			credentials = null;
-			preAuthenticate = false;
-			requestEncoding = null;
-			timeout = 100000;
-		}
-		
-		#endregion // Constructors
+        protected WebClientProtocol () 
+        {
+            connectionGroupName = String.Empty;
+            credentials = null;
+            preAuthenticate = false;
+            requestEncoding = null;
+            timeout = 100000;
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[DefaultValue ("")]
-		public string ConnectionGroupName {
-			get { return connectionGroupName; }
-			set { connectionGroupName = value; }
-		}
+        [DefaultValue ("")]
+        public string ConnectionGroupName {
+            get { return connectionGroupName; }
+            set { connectionGroupName = value; }
+        }
 
-		public ICredentials Credentials {
-			get { return credentials; }
-			set { credentials = value; }
-		}
+        public ICredentials Credentials {
+            get { return credentials; }
+            set { credentials = value; }
+        }
 
-		[DefaultValue (false)]
-		[WebServicesDescription ("Enables pre authentication of the request.")]
-		public bool PreAuthenticate {
-			get { return preAuthenticate; }
-			set { preAuthenticate = value; }
-		}
+        [DefaultValue (false)]
+        [WebServicesDescription ("Enables pre authentication of the request.")]
+        public bool PreAuthenticate {
+            get { return preAuthenticate; }
+            set { preAuthenticate = value; }
+        }
 
-		[DefaultValue (null)]
-		[RecommendedAsConfigurable (true)]
-		[WebServicesDescription ("The encoding to use for requests.")]
-		public Encoding RequestEncoding {
-			get { return requestEncoding; }
-			set { requestEncoding = value; }
-		}
+        [DefaultValue (null)]
+        [RecommendedAsConfigurable (true)]
+        [WebServicesDescription ("The encoding to use for requests.")]
+        public Encoding RequestEncoding {
+            get { return requestEncoding; }
+            set { requestEncoding = value; }
+        }
 
-		[DefaultValue (100000)]
-		[RecommendedAsConfigurable (true)]
-		[WebServicesDescription ("Sets the timeout in milliseconds to be used for synchronous calls.  The default of -1 means infinite.")]
-		public int Timeout {
-			get { return timeout; }
-			set { timeout = value; }
-		}
+        [DefaultValue (100000)]
+        [RecommendedAsConfigurable (true)]
+        [WebServicesDescription ("Sets the timeout in milliseconds to be used for synchronous calls.  The default of -1 means infinite.")]
+        public int Timeout {
+            get { return timeout; }
+            set { timeout = value; }
+        }
 
-		[DefaultValue ("")]
-		[RecommendedAsConfigurable (true)]
-		[WebServicesDescription ("The base URL to the server to use for requests.")]
-		public string Url {
-			get { return uri == null ? String.Empty : uri.AbsoluteUri; }
-			set { uri = new Uri (value); }
-		}
-		public bool UseDefaultCredentials {
-			get { return CredentialCache.DefaultCredentials == Credentials; }
-			set { Credentials = value ? CredentialCache.DefaultCredentials : null; }
-		}
+        [DefaultValue ("")]
+        [RecommendedAsConfigurable (true)]
+        [WebServicesDescription ("The base URL to the server to use for requests.")]
+        public string Url {
+            get { return uri == null ? String.Empty : uri.AbsoluteUri; }
+            set { uri = new Uri (value); }
+        }
+        public bool UseDefaultCredentials {
+            get { return CredentialCache.DefaultCredentials == Credentials; }
+            set { Credentials = value ? CredentialCache.DefaultCredentials : null; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public virtual void Abort ()
-		{
-			WebRequest request = current_request;
-			current_request = null;
-			if (request != null) 
-				request.Abort ();
-		}
+        public virtual void Abort ()
+        {
+            WebRequest request = current_request;
+            current_request = null;
+            if (request != null) 
+                request.Abort ();
+        }
 
-		protected static void AddToCache (Type type, object value)
-		{
-			cache [type] = value;
-		}
+        protected static void AddToCache (Type type, object value)
+        {
+            cache [type] = value;
+        }
 
-		protected static object GetFromCache (Type type)
-		{
-			return cache [type];
-		}
+        protected static object GetFromCache (Type type)
+        {
+            return cache [type];
+        }
 
-		protected virtual WebRequest GetWebRequest (Uri uri)
-		{
-			if (uri == null)
-				throw new InvalidOperationException ("uri is null");
+        protected virtual WebRequest GetWebRequest (Uri uri)
+        {
+            if (uri == null)
+                throw new InvalidOperationException ("uri is null");
 
-			WebRequest request = WebRequest.Create (uri);
-			request.Timeout = timeout;
-			request.PreAuthenticate = preAuthenticate;
-			request.ConnectionGroupName = connectionGroupName;
+            WebRequest request = WebRequest.Create (uri);
+            request.Timeout = timeout;
+            request.PreAuthenticate = preAuthenticate;
+            request.ConnectionGroupName = connectionGroupName;
 
-			if (credentials != null)
-				request.Credentials = credentials;
+            if (credentials != null)
+                request.Credentials = credentials;
 
-			current_request = request;
-			return request;
-		}
+            current_request = request;
+            return request;
+        }
 
-		protected virtual WebResponse GetWebResponse (WebRequest request)
-		{
-			WebResponse response = null;
-			try {
-				request.Timeout = timeout;
-				response = request.GetResponse ();
-			} catch (WebException e) {
-				response = e.Response;
-				if (response == null)
-					throw;
-			}
+        protected virtual WebResponse GetWebResponse (WebRequest request)
+        {
+            WebResponse response = null;
+            try {
+                request.Timeout = timeout;
+                response = request.GetResponse ();
+            } catch (WebException e) {
+                response = e.Response;
+                if (response == null)
+                    throw;
+            }
 
-			return response;
-		}
+            return response;
+        }
 
-		protected virtual WebResponse GetWebResponse (WebRequest request, IAsyncResult result)
-		{
-			return request.EndGetResponse (result);
-		}
+        protected virtual WebResponse GetWebResponse (WebRequest request, IAsyncResult result)
+        {
+            return request.EndGetResponse (result);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

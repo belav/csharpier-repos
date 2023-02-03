@@ -101,7 +101,7 @@ namespace DefaultNamespace
 
         public void BuildGraph()
         {
-            // Build Nodes	
+            // Build Nodes    
             TestLibrary.Logging.WriteLine("Building Vertices...");
             for (int i = 0; i < Nodes; i++)
             {
@@ -195,7 +195,7 @@ namespace DefaultNamespace
                         next = root.Adjacent[i];
 
                             }
-                }	
+                }    
 
         }*/
 

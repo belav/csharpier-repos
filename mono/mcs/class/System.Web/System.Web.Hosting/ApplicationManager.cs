@@ -2,7 +2,7 @@
 // System.Web.Hosting.ApplicationManager
 // 
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 //
 // Copyright (C) 2006-2010 Novell, Inc (http://www.novell.com)
@@ -34,221 +34,221 @@ using System.Security.Policy;
 using System.Threading;
 
 namespace System.Web.Hosting {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class ApplicationManager : MarshalByRefObject {
-		static ApplicationManager instance = new ApplicationManager ();
-		int users;
-		Dictionary <string, BareApplicationHost> id_to_host;
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class ApplicationManager : MarshalByRefObject {
+        static ApplicationManager instance = new ApplicationManager ();
+        int users;
+        Dictionary <string, BareApplicationHost> id_to_host;
 
-		ApplicationManager ()
-		{
-			id_to_host = new Dictionary<string, BareApplicationHost> ();
-		}
+        ApplicationManager ()
+        {
+            id_to_host = new Dictionary<string, BareApplicationHost> ();
+        }
 
-		public void Close ()
-		{
-			if (Interlocked.Decrement (ref users) == 0)
-				ShutdownAll ();
-		}
+        public void Close ()
+        {
+            if (Interlocked.Decrement (ref users) == 0)
+                ShutdownAll ();
+        }
 
-		[MonoTODO ("Need to take advantage of the configuration mapping capabilities of IApplicationHost")]
-		[SecurityPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
-		public IRegisteredObject CreateObject (IApplicationHost appHost, Type type)
-		{
-			if (appHost == null)
-				throw new ArgumentNullException ("appHost");
-			if (type == null)
-				throw new ArgumentNullException ("type");
+        [MonoTODO ("Need to take advantage of the configuration mapping capabilities of IApplicationHost")]
+        [SecurityPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
+        public IRegisteredObject CreateObject (IApplicationHost appHost, Type type)
+        {
+            if (appHost == null)
+                throw new ArgumentNullException ("appHost");
+            if (type == null)
+                throw new ArgumentNullException ("type");
 
-			return CreateObject (appHost.GetSiteID (),
-					     type,
-					     appHost.GetVirtualPath (),
-					     appHost.GetPhysicalPath (),
-					     true,
-					     true);
-		}
-		
-		public IRegisteredObject CreateObject (string appId, Type type, string virtualPath,
-							string physicalPath, bool failIfExists)
-		{
-			return CreateObject (appId, type, virtualPath, physicalPath, failIfExists, true);
-		}
+            return CreateObject (appHost.GetSiteID (),
+                         type,
+                         appHost.GetVirtualPath (),
+                         appHost.GetPhysicalPath (),
+                         true,
+                         true);
+        }
+        
+        public IRegisteredObject CreateObject (string appId, Type type, string virtualPath,
+                            string physicalPath, bool failIfExists)
+        {
+            return CreateObject (appId, type, virtualPath, physicalPath, failIfExists, true);
+        }
 
-		public IRegisteredObject CreateObject (string appId, Type type, string virtualPath,
-							string physicalPath, bool failIfExists, bool throwOnError)
-		{
-			if (appId == null)
-				throw new ArgumentNullException ("appId");
+        public IRegisteredObject CreateObject (string appId, Type type, string virtualPath,
+                            string physicalPath, bool failIfExists, bool throwOnError)
+        {
+            if (appId == null)
+                throw new ArgumentNullException ("appId");
 
-			if (!VirtualPathUtility.IsAbsolute (virtualPath))
-				throw new ArgumentException ("Relative path no allowed.", "virtualPath");
+            if (!VirtualPathUtility.IsAbsolute (virtualPath))
+                throw new ArgumentException ("Relative path no allowed.", "virtualPath");
 
-			if (String.IsNullOrEmpty (physicalPath))
-				throw new ArgumentException ("Cannot be null or empty", "physicalPath");
+            if (String.IsNullOrEmpty (physicalPath))
+                throw new ArgumentException ("Cannot be null or empty", "physicalPath");
 
-			// 'type' is not checked. If it's null, we'll throw a NullReferenceException
-			if (!typeof (IRegisteredObject).IsAssignableFrom (type))
-				throw new ArgumentException (String.Concat ("Type '", type.Name, "' does not implement IRegisteredObject."), "type");
+            // 'type' is not checked. If it's null, we'll throw a NullReferenceException
+            if (!typeof (IRegisteredObject).IsAssignableFrom (type))
+                throw new ArgumentException (String.Concat ("Type '", type.Name, "' does not implement IRegisteredObject."), "type");
 
-			//
-			// ArgumentException is thrown for the physical path from the internal object created
-			// in the new application domain.
-			BareApplicationHost host = null;
-			if (id_to_host.ContainsKey (appId))
-				host = id_to_host [appId];
+            //
+            // ArgumentException is thrown for the physical path from the internal object created
+            // in the new application domain.
+            BareApplicationHost host = null;
+            if (id_to_host.ContainsKey (appId))
+                host = id_to_host [appId];
 
-			IRegisteredObject ireg = null;
-			if (host != null) {
-				ireg = CheckIfExists (host, type, failIfExists);
-				if (ireg != null)
-					return ireg;
-			}
+            IRegisteredObject ireg = null;
+            if (host != null) {
+                ireg = CheckIfExists (host, type, failIfExists);
+                if (ireg != null)
+                    return ireg;
+            }
 
-			try {
-				if (host == null)
-					host = CreateHost (appId, virtualPath, physicalPath);
-				ireg = host.CreateInstance (type);
-			} catch (Exception) {
-				if (throwOnError)
-					throw;
-			}
+            try {
+                if (host == null)
+                    host = CreateHost (appId, virtualPath, physicalPath);
+                ireg = host.CreateInstance (type);
+            } catch (Exception) {
+                if (throwOnError)
+                    throw;
+            }
 
-			if (ireg != null && host.GetObject (type) == null) // If not registered from ctor...
-				host.RegisterObject (ireg, true);
+            if (ireg != null && host.GetObject (type) == null) // If not registered from ctor...
+                host.RegisterObject (ireg, true);
 
-			return ireg;
-		}
+            return ireg;
+        }
 
-		// Used from ClientBuildManager
-		internal BareApplicationHost CreateHostWithCheck (string appId, string vpath, string ppath)
-		{
-			if (id_to_host.ContainsKey (appId))
-				throw new InvalidOperationException ("Already have a host with the same appId");
+        // Used from ClientBuildManager
+        internal BareApplicationHost CreateHostWithCheck (string appId, string vpath, string ppath)
+        {
+            if (id_to_host.ContainsKey (appId))
+                throw new InvalidOperationException ("Already have a host with the same appId");
 
-			return CreateHost (appId, vpath, ppath);
-		}
+            return CreateHost (appId, vpath, ppath);
+        }
 
-		BareApplicationHost CreateHost (string appId, string vpath, string ppath)
-		{
-			BareApplicationHost host;
-			host = (BareApplicationHost) ApplicationHost.CreateApplicationHost (typeof (BareApplicationHost), vpath, ppath);
-			host.Manager = this;
-			host.AppID = appId;
-			id_to_host [appId] = host;
-			return host;
-		}
+        BareApplicationHost CreateHost (string appId, string vpath, string ppath)
+        {
+            BareApplicationHost host;
+            host = (BareApplicationHost) ApplicationHost.CreateApplicationHost (typeof (BareApplicationHost), vpath, ppath);
+            host.Manager = this;
+            host.AppID = appId;
+            id_to_host [appId] = host;
+            return host;
+        }
 
-		internal void RemoveHost (string appId)
-		{
-			id_to_host.Remove (appId);
-		}
+        internal void RemoveHost (string appId)
+        {
+            id_to_host.Remove (appId);
+        }
 
-		IRegisteredObject CheckIfExists (BareApplicationHost host, Type type, bool failIfExists)
-		{
-			IRegisteredObject ireg = host.GetObject (type);
-			if (ireg == null)
-				return null;
+        IRegisteredObject CheckIfExists (BareApplicationHost host, Type type, bool failIfExists)
+        {
+            IRegisteredObject ireg = host.GetObject (type);
+            if (ireg == null)
+                return null;
 
-			if (failIfExists)
-				throw new InvalidOperationException (String.Concat ("Well known object of type '", type.Name, "' already exists in this domain."));
+            if (failIfExists)
+                throw new InvalidOperationException (String.Concat ("Well known object of type '", type.Name, "' already exists in this domain."));
 
-			return ireg;
-		}
+            return ireg;
+        }
 
-		public static ApplicationManager GetApplicationManager ()
-		{
-			return instance;
-		}
+        public static ApplicationManager GetApplicationManager ()
+        {
+            return instance;
+        }
 
-		public IRegisteredObject GetObject (string appId, Type type)
-		{
-			if (appId == null)
-				throw new ArgumentNullException ("appId");
+        public IRegisteredObject GetObject (string appId, Type type)
+        {
+            if (appId == null)
+                throw new ArgumentNullException ("appId");
 
-			if (type == null)
-				throw new ArgumentNullException ("type");
+            if (type == null)
+                throw new ArgumentNullException ("type");
 
-			BareApplicationHost host = null;
-			if (!id_to_host.ContainsKey (appId))
-				return null;
+            BareApplicationHost host = null;
+            if (!id_to_host.ContainsKey (appId))
+                return null;
 
-			host = id_to_host [appId];
-			return host.GetObject (type);
-		}
+            host = id_to_host [appId];
+            return host.GetObject (type);
+        }
 
-		public ApplicationInfo [] GetRunningApplications ()
-		{
-			ICollection<string> coll = id_to_host.Keys;
-			string [] keys = new string [coll.Count];
-			coll.CopyTo (keys, 0);
-			ApplicationInfo [] result = new ApplicationInfo [coll.Count];
-			int i = 0;
-			foreach (string str in keys) {
-				BareApplicationHost host = id_to_host [str];
-				result [i++] = new ApplicationInfo (str, host.PhysicalPath, host.VirtualPath);
-			}
+        public ApplicationInfo [] GetRunningApplications ()
+        {
+            ICollection<string> coll = id_to_host.Keys;
+            string [] keys = new string [coll.Count];
+            coll.CopyTo (keys, 0);
+            ApplicationInfo [] result = new ApplicationInfo [coll.Count];
+            int i = 0;
+            foreach (string str in keys) {
+                BareApplicationHost host = id_to_host [str];
+                result [i++] = new ApplicationInfo (str, host.PhysicalPath, host.VirtualPath);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return null;
-		}
+        public override object InitializeLifetimeService ()
+        {
+            return null;
+        }
 
-		public bool IsIdle ()
-		{
-			throw new NotImplementedException ();
-		}
+        public bool IsIdle ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void Open ()
-		{
-			Interlocked.Increment (ref users);
-		}
+        public void Open ()
+        {
+            Interlocked.Increment (ref users);
+        }
 
-		public void ShutdownAll ()
-		{
-			ICollection<string> coll = id_to_host.Keys;
-			string [] keys = new string [coll.Count];
-			coll.CopyTo (keys, 0);
-			foreach (string str in keys) {
-				BareApplicationHost host = id_to_host [str];
-				host.Shutdown ();
-			}
+        public void ShutdownAll ()
+        {
+            ICollection<string> coll = id_to_host.Keys;
+            string [] keys = new string [coll.Count];
+            coll.CopyTo (keys, 0);
+            foreach (string str in keys) {
+                BareApplicationHost host = id_to_host [str];
+                host.Shutdown ();
+            }
 
-			id_to_host.Clear ();
-		}
+            id_to_host.Clear ();
+        }
 
-		public void ShutdownApplication (string appId)
-		{
-			if (appId == null)
-				throw new ArgumentNullException ("appId");
+        public void ShutdownApplication (string appId)
+        {
+            if (appId == null)
+                throw new ArgumentNullException ("appId");
 
-			BareApplicationHost host = id_to_host [appId];
-			if (host == null)
-				return;
+            BareApplicationHost host = id_to_host [appId];
+            if (host == null)
+                return;
 
-			host.Shutdown ();
-		}
+            host.Shutdown ();
+        }
 
-		public void StopObject (string appId, Type type)
-		{
-			if (appId == null)
-				throw new ArgumentNullException ("appId");
+        public void StopObject (string appId, Type type)
+        {
+            if (appId == null)
+                throw new ArgumentNullException ("appId");
 
-			if (type == null)
-				throw new ArgumentNullException ("type");
+            if (type == null)
+                throw new ArgumentNullException ("type");
 
-			if (!id_to_host.ContainsKey (appId))
-				return;
+            if (!id_to_host.ContainsKey (appId))
+                return;
 
-			BareApplicationHost host = id_to_host [appId];
-			if (host == null)
-				return;
+            BareApplicationHost host = id_to_host [appId];
+            if (host == null)
+                return;
 
-			host.StopObject (type);
-		}
-	}
+            host.StopObject (type);
+        }
+    }
 }
 
 

@@ -4,22 +4,22 @@ using System;
 
 class X
 {
-	private static Y y;
+    private static Y y;
 
-	public static void Main ()
-	{
-		y = new Y ();
+    public static void Main ()
+    {
+        y = new Y ();
 
-		object o = y.Foo.Hello;
-	}
+        object o = y.Foo.Hello;
+    }
 }
 
 class Y
 {
-	public enum Foo { Hello, World };
+    public enum Foo { Hello, World };
 
-	public void Test (Foo foo)
-	{
-		Console.WriteLine (foo);
-	}
+    public void Test (Foo foo)
+    {
+        Console.WriteLine (foo);
+    }
 }

@@ -32,98 +32,98 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleConnection_Open : GHTBase
-	{
-		OracleConnection con = null;
-		string ConString = "";
+    [TestFixture]
+    public class OracleConnection_Open : GHTBase
+    {
+        OracleConnection con = null;
+        string ConString = "";
 
-		[SetUp]
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-				ConString = MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString;
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+                ConString = MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString;
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-		[TearDown]
-		public void TearDown()
-		{
-			if (con != null)
-			{
-				con.Close();
-			}
-		}
+        [TearDown]
+        public void TearDown()
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
 
-		public static void Main()
-		{
-			OracleConnection_Open tc = new OracleConnection_Open();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleOpenConnection");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+        public static void Main()
+        {
+            OracleConnection_Open tc = new OracleConnection_Open();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleOpenConnection");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
       
-			BeginCase("Open Connection ");
-			try
-			{
-				con = new OracleConnection(ConString);
-				con.Open();
-				Compare(con.State , ConnectionState.Open);
-			}
-			catch (Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				if (con != null) con.Close();
-				EndCase(exp);
-				exp = null;
-			}
+            BeginCase("Open Connection ");
+            try
+            {
+                con = new OracleConnection(ConString);
+                con.Open();
+                Compare(con.State , ConnectionState.Open);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                if (con != null) con.Close();
+                EndCase(exp);
+                exp = null;
+            }
 
-			BeginCase("Open Connection - garbage value");
-			try
-			{
-				con = new OracleConnection("xxx");
-				con.Open();
-			}
-			catch (ArgumentException ex)
-			{
-				ExpectedExceptionCaught(ex); 
-			}
-			catch 
-			{
-				ExpectedExceptionNotCaught("System.ArgumentException");
-			}
-			finally
-			{
-				if (con != null) con.Close();
-				EndCase(exp);
-				exp = null;
-			}
-		}
-	}
+            BeginCase("Open Connection - garbage value");
+            try
+            {
+                con = new OracleConnection("xxx");
+                con.Open();
+            }
+            catch (ArgumentException ex)
+            {
+                ExpectedExceptionCaught(ex); 
+            }
+            catch 
+            {
+                ExpectedExceptionNotCaught("System.ArgumentException");
+            }
+            finally
+            {
+                if (con != null) con.Close();
+                EndCase(exp);
+                exp = null;
+            }
+        }
+    }
 }

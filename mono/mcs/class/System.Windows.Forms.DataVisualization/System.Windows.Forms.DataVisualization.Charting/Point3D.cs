@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -29,40 +29,40 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class Point3D
-	{
-		#region Constructors
-		public Point3D ()
-		{
-		}
+    public class Point3D
+    {
+        #region Constructors
+        public Point3D ()
+        {
+        }
 
-		public Point3D (float x, float y, float z)
-		{
-			X = x;
-			Y = y;
-			Z = z;
-		}
-		#endregion
+        public Point3D (float x, float y, float z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+        #endregion
 
-		#region Public Properties
-		[Bindable (false)]
-		[DefaultValue ("0f, 0f")]
-		public PointF PointF {
-			get { return new PointF (X, Y); }
-			set { X = value.X; Y = value.Y; }
-		}
+        #region Public Properties
+        [Bindable (false)]
+        [DefaultValue ("0f, 0f")]
+        public PointF PointF {
+            get { return new PointF (X, Y); }
+            set { X = value.X; Y = value.Y; }
+        }
 
-		[Bindable (false)]
-		[DefaultValue (0f)]
-		public float X { get; set; }
+        [Bindable (false)]
+        [DefaultValue (0f)]
+        public float X { get; set; }
 
-		[Bindable (false)]
-		[DefaultValue (0f)]
-		public float Y { get; set; }
+        [Bindable (false)]
+        [DefaultValue (0f)]
+        public float Y { get; set; }
 
-		[Bindable (false)]
-		[DefaultValue (0f)]
-		public float Z { get; set; }
-		#endregion
-	}
+        [Bindable (false)]
+        [DefaultValue (0f)]
+        public float Z { get; set; }
+        #endregion
+    }
 }

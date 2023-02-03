@@ -35,348 +35,348 @@ using NUnit.Framework;
 using System.Linq;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-	[TestFixture]
-	public class CompletionTest {
-		[Test]
-		public void WithElementsStillLingering ()
-		{
-			var block = new BufferBlock<int> ();
-			Assert.IsTrue (block.Post (42));
-			block.Complete ();
-
-			Assert.IsFalse (block.Completion.Wait (100));
-			Assert.IsFalse (block.Completion.IsCompleted);
-			Assert.AreEqual (TaskStatus.WaitingForActivation, block.Completion.Status);
-
-			Assert.AreEqual (42, block.Receive ());
-
-			Assert.IsTrue (block.Completion.Wait (1000));
-			Assert.IsTrue (block.Completion.IsCompleted);
-			Assert.AreEqual (TaskStatus.RanToCompletion, block.Completion.Status);
-		}
-
-		[Test]
-		public void WithElementsStillLingeringButFaulted ()
-		{
-			var block = new BufferBlock<int> ();
-			Assert.IsTrue (block.Post (42));
-			((IDataflowBlock)block).Fault (new Exception ());
-
-			AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
-			Assert.IsTrue (block.Completion.IsCompleted);
-			Assert.AreEqual (TaskStatus.Faulted, block.Completion.Status);
-			Assert.IsFalse (block.Post (43));
-		}
-
-		[Test]
-		public void WithElementsStillLingeringButCancelled ()
-		{
-			var tokenSource = new CancellationTokenSource ();
-			var block = new BufferBlock<int> (
-				new DataflowBlockOptions { CancellationToken = tokenSource.Token });
-			Assert.IsTrue (block.Post (42));
-			tokenSource.Cancel ();
-
-			var ae = AssertEx.Throws<AggregateException> (
-				() => block.Completion.Wait (1000));
-			Assert.AreEqual (1, ae.InnerExceptions.Count);
-			Assert.AreEqual (typeof(TaskCanceledException), ae.InnerException.GetType ());
-
-			Assert.IsTrue (block.Completion.IsCompleted);
-			Assert.AreEqual (TaskStatus.Canceled, block.Completion.Status);
-			Assert.IsFalse (block.Post (43));
-		}
-
-		static IEnumerable<Tuple<IDataflowBlock, ITargetBlock<T>>>
-			GetJoinBlocksWithTargets<T> ()
-		{
-			Func<IDataflowBlock, ITargetBlock<T>, Tuple<IDataflowBlock, ITargetBlock<T>>>
-				createTuple = Tuple.Create;
-
-			var joinBlock = new JoinBlock<T, T> ();
-			yield return createTuple (joinBlock, joinBlock.Target1);
-			var joinBlock3 = new JoinBlock<T, T, T> ();
-			yield return createTuple (joinBlock3, joinBlock3.Target1);
-			var batchedJoinBlock = new BatchedJoinBlock<T, T> (2);
-			yield return createTuple (batchedJoinBlock, batchedJoinBlock.Target1);
-			var batchedJoinBlock3 = new BatchedJoinBlock<T, T, T> (2);
-			yield return createTuple (batchedJoinBlock3, batchedJoinBlock3.Target1);
-		}
-
-		[Test]
-		public void JoinTargetCompletitionTest ()
-		{
-			foreach (var tuple in GetJoinBlocksWithTargets<int> ()) {
-				AssertEx.Throws<NotSupportedException> (
-					() => { var x = tuple.Item2.Completion; });
-				Assert.IsTrue (tuple.Item2.Post (1));
-				tuple.Item2.Complete ();
-				Assert.IsFalse (tuple.Item2.Post (2));
-			}
-
-			foreach (var tuple in GetJoinBlocksWithTargets<int> ()) {
-				Assert.IsTrue (tuple.Item2.Post (1));
-				tuple.Item1.Complete ();
-				Assert.IsFalse (tuple.Item2.Post (2));
-			}
-		}
-
-		[Test]
-		public void MultipleFaultsTest ()
-		{
-			IDataflowBlock block = new BufferBlock<int> ();
-
-			block.Fault (new Exception ("1"));
-			// second exception should be ignored
-			block.Fault (new Exception ("2"));
-
-			Thread.Sleep (100);
-
-			Assert.IsTrue (block.Completion.IsFaulted);
-			var exception = block.Completion.Exception;
-			Assert.IsNotNull (exception);
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual ("1", exception.InnerException.Message);
-		}
+    [TestFixture]
+    public class CompletionTest {
+        [Test]
+        public void WithElementsStillLingering ()
+        {
+            var block = new BufferBlock<int> ();
+            Assert.IsTrue (block.Post (42));
+            block.Complete ();
+
+            Assert.IsFalse (block.Completion.Wait (100));
+            Assert.IsFalse (block.Completion.IsCompleted);
+            Assert.AreEqual (TaskStatus.WaitingForActivation, block.Completion.Status);
+
+            Assert.AreEqual (42, block.Receive ());
+
+            Assert.IsTrue (block.Completion.Wait (1000));
+            Assert.IsTrue (block.Completion.IsCompleted);
+            Assert.AreEqual (TaskStatus.RanToCompletion, block.Completion.Status);
+        }
+
+        [Test]
+        public void WithElementsStillLingeringButFaulted ()
+        {
+            var block = new BufferBlock<int> ();
+            Assert.IsTrue (block.Post (42));
+            ((IDataflowBlock)block).Fault (new Exception ());
+
+            AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            Assert.IsTrue (block.Completion.IsCompleted);
+            Assert.AreEqual (TaskStatus.Faulted, block.Completion.Status);
+            Assert.IsFalse (block.Post (43));
+        }
+
+        [Test]
+        public void WithElementsStillLingeringButCancelled ()
+        {
+            var tokenSource = new CancellationTokenSource ();
+            var block = new BufferBlock<int> (
+                new DataflowBlockOptions { CancellationToken = tokenSource.Token });
+            Assert.IsTrue (block.Post (42));
+            tokenSource.Cancel ();
+
+            var ae = AssertEx.Throws<AggregateException> (
+                () => block.Completion.Wait (1000));
+            Assert.AreEqual (1, ae.InnerExceptions.Count);
+            Assert.AreEqual (typeof(TaskCanceledException), ae.InnerException.GetType ());
+
+            Assert.IsTrue (block.Completion.IsCompleted);
+            Assert.AreEqual (TaskStatus.Canceled, block.Completion.Status);
+            Assert.IsFalse (block.Post (43));
+        }
+
+        static IEnumerable<Tuple<IDataflowBlock, ITargetBlock<T>>>
+            GetJoinBlocksWithTargets<T> ()
+        {
+            Func<IDataflowBlock, ITargetBlock<T>, Tuple<IDataflowBlock, ITargetBlock<T>>>
+                createTuple = Tuple.Create;
+
+            var joinBlock = new JoinBlock<T, T> ();
+            yield return createTuple (joinBlock, joinBlock.Target1);
+            var joinBlock3 = new JoinBlock<T, T, T> ();
+            yield return createTuple (joinBlock3, joinBlock3.Target1);
+            var batchedJoinBlock = new BatchedJoinBlock<T, T> (2);
+            yield return createTuple (batchedJoinBlock, batchedJoinBlock.Target1);
+            var batchedJoinBlock3 = new BatchedJoinBlock<T, T, T> (2);
+            yield return createTuple (batchedJoinBlock3, batchedJoinBlock3.Target1);
+        }
+
+        [Test]
+        public void JoinTargetCompletitionTest ()
+        {
+            foreach (var tuple in GetJoinBlocksWithTargets<int> ()) {
+                AssertEx.Throws<NotSupportedException> (
+                    () => { var x = tuple.Item2.Completion; });
+                Assert.IsTrue (tuple.Item2.Post (1));
+                tuple.Item2.Complete ();
+                Assert.IsFalse (tuple.Item2.Post (2));
+            }
+
+            foreach (var tuple in GetJoinBlocksWithTargets<int> ()) {
+                Assert.IsTrue (tuple.Item2.Post (1));
+                tuple.Item1.Complete ();
+                Assert.IsFalse (tuple.Item2.Post (2));
+            }
+        }
+
+        [Test]
+        public void MultipleFaultsTest ()
+        {
+            IDataflowBlock block = new BufferBlock<int> ();
+
+            block.Fault (new Exception ("1"));
+            // second exception should be ignored
+            block.Fault (new Exception ("2"));
+
+            Thread.Sleep (100);
+
+            Assert.IsTrue (block.Completion.IsFaulted);
+            var exception = block.Completion.Exception;
+            Assert.IsNotNull (exception);
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual ("1", exception.InnerException.Message);
+        }
 
-		[Test]
-		public void MultipleFaultsWhileExecutingTest ()
-		{
-			var evt = new ManualResetEventSlim ();
+        [Test]
+        public void MultipleFaultsWhileExecutingTest ()
+        {
+            var evt = new ManualResetEventSlim ();
 
-			var actionBlock = new ActionBlock<int> (_ => evt.Wait ());
-			IDataflowBlock dataflowBlock = actionBlock;
+            var actionBlock = new ActionBlock<int> (_ => evt.Wait ());
+            IDataflowBlock dataflowBlock = actionBlock;
 
-			actionBlock.Post (1);
-			Thread.Sleep (100);
-
-			dataflowBlock.Fault (new Exception ("1"));
-			// second exception should still be ignored
-			dataflowBlock.Fault (new Exception ("2"));
-
-			Thread.Sleep (100);
+            actionBlock.Post (1);
+            Thread.Sleep (100);
+
+            dataflowBlock.Fault (new Exception ("1"));
+            // second exception should still be ignored
+            dataflowBlock.Fault (new Exception ("2"));
+
+            Thread.Sleep (100);
 
-			Assert.IsFalse (actionBlock.Completion.IsCompleted);
+            Assert.IsFalse (actionBlock.Completion.IsCompleted);
 
-			evt.Set ();
+            evt.Set ();
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			Assert.IsTrue (actionBlock.Completion.IsFaulted);
-			var exception = actionBlock.Completion.Exception;
-			Assert.IsNotNull (exception);
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual ("1", exception.InnerException.Message);
-		}
+            Assert.IsTrue (actionBlock.Completion.IsFaulted);
+            var exception = actionBlock.Completion.Exception;
+            Assert.IsNotNull (exception);
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual ("1", exception.InnerException.Message);
+        }
 
-		[Test]
-		public void MultipleExceptionsTest ()
-		{
-			// use barrier to make sure both threads have time to start
-			var barrier = new Barrier (2);
+        [Test]
+        public void MultipleExceptionsTest ()
+        {
+            // use barrier to make sure both threads have time to start
+            var barrier = new Barrier (2);
 
-			var block = new ActionBlock<int> (
-				_ =>
-				{
-					barrier.SignalAndWait ();
-					throw new Exception ();
-				},
-				// strictly speaking, the actions are not guaranteed to run in parallel,
-				// but there is no way to test this otherwise
-				new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = -1 });
+            var block = new ActionBlock<int> (
+                _ =>
+                {
+                    barrier.SignalAndWait ();
+                    throw new Exception ();
+                },
+                // strictly speaking, the actions are not guaranteed to run in parallel,
+                // but there is no way to test this otherwise
+                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = -1 });
 
-			block.Post (1);
-			block.Post (2);
+            block.Post (1);
+            block.Post (2);
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (2, exception.InnerExceptions.Count);
-		}
+            Assert.AreEqual (2, exception.InnerExceptions.Count);
+        }
 
-		[Test]
-		public void ExceptionAndFaultTest ()
-		{
-			var block = new ActionBlock<int> (
-				_ => { throw new Exception ("action"); },
-				new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = -1 });
+        [Test]
+        public void ExceptionAndFaultTest ()
+        {
+            var block = new ActionBlock<int> (
+                _ => { throw new Exception ("action"); },
+                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = -1 });
 
-			block.Post (1);
+            block.Post (1);
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			((IDataflowBlock)block).Fault (new Exception ("fault"));
+            ((IDataflowBlock)block).Fault (new Exception ("fault"));
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual ("action", exception.InnerException.Message);
-		}
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual ("action", exception.InnerException.Message);
+        }
 
-		[Test]
-		public void FaultAndExceptionTest ()
-		{
-			var evt = new ManualResetEventSlim ();
-			var block = new ActionBlock<int> (
-				_ =>
-				{
-					evt.Wait ();
-					throw new Exception ("action");
-				},
-				new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = -1 });
+        [Test]
+        public void FaultAndExceptionTest ()
+        {
+            var evt = new ManualResetEventSlim ();
+            var block = new ActionBlock<int> (
+                _ =>
+                {
+                    evt.Wait ();
+                    throw new Exception ("action");
+                },
+                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = -1 });
 
-			block.Post (1);
+            block.Post (1);
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			((IDataflowBlock)block).Fault (new Exception ("fault1"));
-			((IDataflowBlock)block).Fault (new Exception ("fault2"));
+            ((IDataflowBlock)block).Fault (new Exception ("fault1"));
+            ((IDataflowBlock)block).Fault (new Exception ("fault2"));
 
-			evt.Set ();
+            evt.Set ();
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (100));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (100));
 
-			Assert.AreEqual (2, exception.InnerExceptions.Count);
-			CollectionAssert.AreEqual (new[] { "fault1", "action" },
-				exception.InnerExceptions.Select (e => e.Message).ToArray ());
-		}
+            Assert.AreEqual (2, exception.InnerExceptions.Count);
+            CollectionAssert.AreEqual (new[] { "fault1", "action" },
+                exception.InnerExceptions.Select (e => e.Message).ToArray ());
+        }
 
-		[Test]
-		public void ExceptionAndCancelTest ()
-		{
-			var tokenSource = new CancellationTokenSource ();
-			var block = new ActionBlock<int> (
-				_ => { throw new Exception ("action"); },
-				new ExecutionDataflowBlockOptions
-				{ MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
+        [Test]
+        public void ExceptionAndCancelTest ()
+        {
+            var tokenSource = new CancellationTokenSource ();
+            var block = new ActionBlock<int> (
+                _ => { throw new Exception ("action"); },
+                new ExecutionDataflowBlockOptions
+                { MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
 
-			block.Post (1);
+            block.Post (1);
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			tokenSource.Cancel ();
+            tokenSource.Cancel ();
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual ("action", exception.InnerException.Message);
-		}
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual ("action", exception.InnerException.Message);
+        }
 
-		[Test]
-		public void CancelAndExceptionTest ()
-		{
-			var tokenSource = new CancellationTokenSource ();
-			var evt = new ManualResetEventSlim ();
+        [Test]
+        public void CancelAndExceptionTest ()
+        {
+            var tokenSource = new CancellationTokenSource ();
+            var evt = new ManualResetEventSlim ();
 
-			var block = new ActionBlock<int> (
-				_ =>
-				{
-					evt.Wait ();
-					throw new Exception ("action");
-				},
-				new ExecutionDataflowBlockOptions
-				{ MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
+            var block = new ActionBlock<int> (
+                _ =>
+                {
+                    evt.Wait ();
+                    throw new Exception ("action");
+                },
+                new ExecutionDataflowBlockOptions
+                { MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
 
-			block.Post (1);
+            block.Post (1);
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			tokenSource.Cancel ();
+            tokenSource.Cancel ();
 
-			evt.Set ();
+            evt.Set ();
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual ("action", exception.InnerException.Message);
-		}
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual ("action", exception.InnerException.Message);
+        }
 
-		[Test]
-		public void CancelAndFaultTest ()
-		{
-			var tokenSource = new CancellationTokenSource ();
-			var block = new BufferBlock<int> (
-				new DataflowBlockOptions { CancellationToken = tokenSource.Token });
+        [Test]
+        public void CancelAndFaultTest ()
+        {
+            var tokenSource = new CancellationTokenSource ();
+            var block = new BufferBlock<int> (
+                new DataflowBlockOptions { CancellationToken = tokenSource.Token });
 
-			tokenSource.Cancel ();
+            tokenSource.Cancel ();
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			((IDataflowBlock)block).Fault (new Exception ("fault"));
+            ((IDataflowBlock)block).Fault (new Exception ("fault"));
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual (typeof(TaskCanceledException),
-				exception.InnerException.GetType ());
-		}
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual (typeof(TaskCanceledException),
+                exception.InnerException.GetType ());
+        }
 
-		[Test]
-		public void CancelAndFaultWhileExecutingTest ()
-		{
-			var tokenSource = new CancellationTokenSource ();
-			var evt = new ManualResetEventSlim ();
-			var block = new ActionBlock<int> (
-				_ => evt.Wait (),
-				new ExecutionDataflowBlockOptions
-				{ MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
+        [Test]
+        public void CancelAndFaultWhileExecutingTest ()
+        {
+            var tokenSource = new CancellationTokenSource ();
+            var evt = new ManualResetEventSlim ();
+            var block = new ActionBlock<int> (
+                _ => evt.Wait (),
+                new ExecutionDataflowBlockOptions
+                { MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
 
-			block.Post (1);
+            block.Post (1);
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			tokenSource.Cancel ();
+            tokenSource.Cancel ();
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			((IDataflowBlock)block).Fault (new Exception ("fault"));
+            ((IDataflowBlock)block).Fault (new Exception ("fault"));
 
-			evt.Set ();
+            evt.Set ();
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual (typeof(TaskCanceledException),
-				exception.InnerException.GetType ());
-		}
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual (typeof(TaskCanceledException),
+                exception.InnerException.GetType ());
+        }
 
-		[Test]
-		public void FaultAndCancelWhileExecutingTest ()
-		{
-			var tokenSource = new CancellationTokenSource ();
-			var evt = new ManualResetEventSlim ();
-			var block = new ActionBlock<int> (
-				_ => evt.Wait (),
-				new ExecutionDataflowBlockOptions
-				{ MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
+        [Test]
+        public void FaultAndCancelWhileExecutingTest ()
+        {
+            var tokenSource = new CancellationTokenSource ();
+            var evt = new ManualResetEventSlim ();
+            var block = new ActionBlock<int> (
+                _ => evt.Wait (),
+                new ExecutionDataflowBlockOptions
+                { MaxDegreeOfParallelism = -1, CancellationToken = tokenSource.Token });
 
-			block.Post (1);
+            block.Post (1);
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			((IDataflowBlock)block).Fault (new Exception ("fault"));
+            ((IDataflowBlock)block).Fault (new Exception ("fault"));
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			tokenSource.Cancel ();
+            tokenSource.Cancel ();
 
-			evt.Set ();
+            evt.Set ();
 
-			Thread.Sleep (100);
+            Thread.Sleep (100);
 
-			var exception =
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+            var exception =
+                AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
 
-			Assert.AreEqual (1, exception.InnerExceptions.Count);
-			Assert.AreEqual ("fault", exception.InnerException.Message);
-		}
-	}
+            Assert.AreEqual (1, exception.InnerExceptions.Count);
+            Assert.AreEqual ("fault", exception.InnerException.Message);
+        }
+    }
 }

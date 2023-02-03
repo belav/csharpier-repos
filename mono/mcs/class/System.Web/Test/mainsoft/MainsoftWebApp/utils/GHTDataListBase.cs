@@ -41,198 +41,198 @@ using System.Data;
 namespace GHTTests
 {
 
-	/// <summary>
-	/// Summary description for GHTDataListBase.
-	/// </summary>
-	public class GHTDataListBase:GHTBaseWeb
-	{
-		BaseDataList mActiveDataList;
-		public GHTDataListBase():base()
-		{
-				
-		}
-		#region Tests
-		protected static DataTable GHTGetSampleDataSource()
-		{
-			DataTable SampleDT;
+    /// <summary>
+    /// Summary description for GHTDataListBase.
+    /// </summary>
+    public class GHTDataListBase:GHTBaseWeb
+    {
+        BaseDataList mActiveDataList;
+        public GHTDataListBase():base()
+        {
+                
+        }
+        #region Tests
+        protected static DataTable GHTGetSampleDataSource()
+        {
+            DataTable SampleDT;
 
-			SampleDT = new DataTable("Sample");
-			DataColumn col = new DataColumn("colA",typeof(System.String));
-			SampleDT.Columns.Add (col);
-			col = new DataColumn("colB",typeof(System.Int32));
-			SampleDT.Columns.Add (col);
-			col = new DataColumn("colC",typeof(System.DateTime));
-			SampleDT.Columns.Add (col);
-			SampleDT.Rows.Add(new object[]{"row 1",11111,"01/01/2003"});
-			SampleDT.Rows.Add(new object[]{"row 22222",2,"02/02/2004"});
-			//					SampleDT.Rows.Add(new object[]{"row 1",1});
-			//					SampleDT.Rows.Add(new object[]{"row 2",2});
+            SampleDT = new DataTable("Sample");
+            DataColumn col = new DataColumn("colA",typeof(System.String));
+            SampleDT.Columns.Add (col);
+            col = new DataColumn("colB",typeof(System.Int32));
+            SampleDT.Columns.Add (col);
+            col = new DataColumn("colC",typeof(System.DateTime));
+            SampleDT.Columns.Add (col);
+            SampleDT.Rows.Add(new object[]{"row 1",11111,"01/01/2003"});
+            SampleDT.Rows.Add(new object[]{"row 22222",2,"02/02/2004"});
+            //                    SampleDT.Rows.Add(new object[]{"row 1",1});
+            //                    SampleDT.Rows.Add(new object[]{"row 2",2});
 
-			//				}
-			return SampleDT;
-		}
-		protected static DataSet GHTGetSampleDataSourceDS()
-		{
+            //                }
+            return SampleDT;
+        }
+        protected static DataSet GHTGetSampleDataSourceDS()
+        {
 
-			DataSet SampleDS = new DataSet("SampleDS");
-			SampleDS.Tables.Add( GHTGetSampleDataSource());
-			return SampleDS;
+            DataSet SampleDS = new DataSet("SampleDS");
+            SampleDS.Tables.Add( GHTGetSampleDataSource());
+            return SampleDS;
 
-		}
-		protected static string[] GHTGetSampleDataSourceArray()
-		{
-			return new string[]{"A","B","C"};
+        }
+        protected static string[] GHTGetSampleDataSourceArray()
+        {
+            return new string[]{"A","B","C"};
 
-		}
-		protected static Hashtable GHTGetSampleDataSourceCol()
-		{
-			Hashtable col = new Hashtable();
-			col.Add ("Key A","Value A");
-			col.Add ("Key B","Value B");
-			col.Add ("Key C","Value C");
-			return col;	
-		}
-		#endregion
-		protected void GHTBuildUnboundSampleDataList(BaseDataList ctl)
-		{
-			DataList lst = (DataList)ctl;
-			lst.ItemTemplate = new MyItemTemplate();
-		}			  
-		protected void GHTBuildSampleDataList(BaseDataList ctl)
-		{
-			DataList lst = (DataList)ctl;
-			lst.ItemTemplate = new MyItemTemplate();
-			lst.DataSource = GHTGetSampleDataSource();
-			lst.DataBind();
-		}			  
-		protected void GHTBuildUnboundSampleDataGrid(BaseDataList ctl)
-		{
-			DataGrid grid = (DataGrid)ctl;
-			BoundColumn col = new BoundColumn();
-			col.DataField = "colA";
-			grid.Columns.Add(col);
-			col = new BoundColumn();
-			col.DataField = "colB";
-			grid.Columns.Add(col);
-			col = new BoundColumn();
-			col.DataField = "colC";
-			grid.Columns.Add(col);
-			grid.AutoGenerateColumns =false;
+        }
+        protected static Hashtable GHTGetSampleDataSourceCol()
+        {
+            Hashtable col = new Hashtable();
+            col.Add ("Key A","Value A");
+            col.Add ("Key B","Value B");
+            col.Add ("Key C","Value C");
+            return col;    
+        }
+        #endregion
+        protected void GHTBuildUnboundSampleDataList(BaseDataList ctl)
+        {
+            DataList lst = (DataList)ctl;
+            lst.ItemTemplate = new MyItemTemplate();
+        }              
+        protected void GHTBuildSampleDataList(BaseDataList ctl)
+        {
+            DataList lst = (DataList)ctl;
+            lst.ItemTemplate = new MyItemTemplate();
+            lst.DataSource = GHTGetSampleDataSource();
+            lst.DataBind();
+        }              
+        protected void GHTBuildUnboundSampleDataGrid(BaseDataList ctl)
+        {
+            DataGrid grid = (DataGrid)ctl;
+            BoundColumn col = new BoundColumn();
+            col.DataField = "colA";
+            grid.Columns.Add(col);
+            col = new BoundColumn();
+            col.DataField = "colB";
+            grid.Columns.Add(col);
+            col = new BoundColumn();
+            col.DataField = "colC";
+            grid.Columns.Add(col);
+            grid.AutoGenerateColumns =false;
 
-		}
-		protected void GHTBuildSampleDataGrid(BaseDataList ctl)
-		{
-			DataGrid grid = (DataGrid)ctl;
-			BoundColumn col = new BoundColumn();
-			col.DataField = "colA";
-			grid.Columns.Add(col);
+        }
+        protected void GHTBuildSampleDataGrid(BaseDataList ctl)
+        {
+            DataGrid grid = (DataGrid)ctl;
+            BoundColumn col = new BoundColumn();
+            col.DataField = "colA";
+            grid.Columns.Add(col);
 
-			col = new BoundColumn();
-			col.DataField = "colB";
-			grid.Columns.Add(col);
+            col = new BoundColumn();
+            col.DataField = "colB";
+            grid.Columns.Add(col);
 
-			col = new BoundColumn();
-			col.DataField = "colC";
-			grid.Columns.Add(col);
+            col = new BoundColumn();
+            col.DataField = "colC";
+            grid.Columns.Add(col);
 
-			grid.AutoGenerateColumns =false;
-			col = new BoundColumn();
-			grid.DataSource = GHTGetSampleDataSource();
-			grid.DataBind();
+            grid.AutoGenerateColumns =false;
+            col = new BoundColumn();
+            grid.DataSource = GHTGetSampleDataSource();
+            grid.DataBind();
 
-		}
-		private class MyItemTemplate : ITemplate
-		{
+        }
+        private class MyItemTemplate : ITemplate
+        {
 
-			public void InstantiateIn(Control container ) 
-			{
-				TextBox ctl1 = new  TextBox();
-				ctl1.ID = "MyTextBox1";
-				ctl1.DataBinding +=new EventHandler(BindColA);
-				container.Controls.Add(ctl1);
-				TextBox ctl2 = new  TextBox();
-				ctl2.ID = "MyTextBox2";
-				ctl2.DataBinding +=new EventHandler(BindColB);
-				container.Controls.Add(ctl2);
-			}
-			private void BindColA(Object sender ,EventArgs e )
-			{
-				TextBox ctl = (TextBox)sender;
-				DataListItem DLI = (DataListItem)ctl.NamingContainer;
-				DataRowView drv = (DataRowView)DLI.DataItem;
-				ctl.Text = drv["colA"].ToString();
-			}
-			private void BindColB(Object sender ,EventArgs e )
-			{
-				TextBox ctl = (TextBox)sender;
-				DataListItem DLI = (DataListItem)ctl.NamingContainer;
-				DataRowView drv = (DataRowView)DLI.DataItem;
-				ctl.Text = drv["colB"].ToString();
-			}
-		}
-		private class DataSourceClass
-		{
-			private string mcolA;
-			private string mcolB;
-			private string mcolC;
-			public DataSourceClass(string colA, string colB, string colC)
-			{
-				mcolA = colA;
-				mcolB = colB;
-				mcolC = colC;
-			}
-			internal string colA
-			{
-				get {return mcolA;}
-			}
-			internal string colB
-			{
-				get {return mcolB;}
-			}
-			internal string colC
-			{
-				get {return mcolC;}
-			}
-		}
+            public void InstantiateIn(Control container ) 
+            {
+                TextBox ctl1 = new  TextBox();
+                ctl1.ID = "MyTextBox1";
+                ctl1.DataBinding +=new EventHandler(BindColA);
+                container.Controls.Add(ctl1);
+                TextBox ctl2 = new  TextBox();
+                ctl2.ID = "MyTextBox2";
+                ctl2.DataBinding +=new EventHandler(BindColB);
+                container.Controls.Add(ctl2);
+            }
+            private void BindColA(Object sender ,EventArgs e )
+            {
+                TextBox ctl = (TextBox)sender;
+                DataListItem DLI = (DataListItem)ctl.NamingContainer;
+                DataRowView drv = (DataRowView)DLI.DataItem;
+                ctl.Text = drv["colA"].ToString();
+            }
+            private void BindColB(Object sender ,EventArgs e )
+            {
+                TextBox ctl = (TextBox)sender;
+                DataListItem DLI = (DataListItem)ctl.NamingContainer;
+                DataRowView drv = (DataRowView)DLI.DataItem;
+                ctl.Text = drv["colB"].ToString();
+            }
+        }
+        private class DataSourceClass
+        {
+            private string mcolA;
+            private string mcolB;
+            private string mcolC;
+            public DataSourceClass(string colA, string colB, string colC)
+            {
+                mcolA = colA;
+                mcolB = colB;
+                mcolC = colC;
+            }
+            internal string colA
+            {
+                get {return mcolA;}
+            }
+            internal string colB
+            {
+                get {return mcolB;}
+            }
+            internal string colC
+            {
+                get {return mcolC;}
+            }
+        }
 
-		#region Private Methods
-		// helper utility to create a new sub test
-		private void GHTDataListSubTestBegin(Type ctrlType, string description)
-		{
-			mActiveDataList = (BaseDataList)GHTElementClone(ctrlType);
-			GHTSubTestBegin(description);
-			GHTActiveSubTest.Controls.Add(mActiveDataList);
-		}
-		#endregion
-	}
-	public class GHTDataListSampleClass
-	{
-		public string colA;
-		public int colB;
-		public DateTime colC;
-		public GHTDataListSampleClass(string lcolA, int lcolB, DateTime lcolC)
-		{
-			colA = lcolA;
-			colB = lcolB;
-			colC = lcolC;
-		}
-		//			public string colA
-		//			{
-		//				get{return mcolA;}
-		//				set {mcolA = value;}
-		//			}
-		//			public int colB
-		//			{
-		//				get{return mcolB;}
-		//				set {mcolB = value;}
-		//			}
-		//			public DateTime colC
-		//			{
-		//				get{return mcolC;}
-		//				set {mcolC = value;}
-		//			}
+        #region Private Methods
+        // helper utility to create a new sub test
+        private void GHTDataListSubTestBegin(Type ctrlType, string description)
+        {
+            mActiveDataList = (BaseDataList)GHTElementClone(ctrlType);
+            GHTSubTestBegin(description);
+            GHTActiveSubTest.Controls.Add(mActiveDataList);
+        }
+        #endregion
+    }
+    public class GHTDataListSampleClass
+    {
+        public string colA;
+        public int colB;
+        public DateTime colC;
+        public GHTDataListSampleClass(string lcolA, int lcolB, DateTime lcolC)
+        {
+            colA = lcolA;
+            colB = lcolB;
+            colC = lcolC;
+        }
+        //            public string colA
+        //            {
+        //                get{return mcolA;}
+        //                set {mcolA = value;}
+        //            }
+        //            public int colB
+        //            {
+        //                get{return mcolB;}
+        //                set {mcolB = value;}
+        //            }
+        //            public DateTime colC
+        //            {
+        //                get{return mcolC;}
+        //                set {mcolC = value;}
+        //            }
 
 
 
-	}
+    }
 }

@@ -1,9 +1,9 @@
 //
 // DeploymentSectionTest.cs 
-//	- unit tests for System.Web.Configuration.DeploymentSection
+//    - unit tests for System.Web.Configuration.DeploymentSection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,16 +38,16 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class DeploymentSectionTest  {
+    [TestFixture]
+    public class DeploymentSectionTest  {
 
-		[Test]
-		public void Defaults ()
-		{
-			DeploymentSection d = new DeploymentSection ();
+        [Test]
+        public void Defaults ()
+        {
+            DeploymentSection d = new DeploymentSection ();
 
-			Assert.IsFalse (d.Retail, "A1");
-		}
-	}
+            Assert.IsFalse (d.Retail, "A1");
+        }
+    }
 }
 

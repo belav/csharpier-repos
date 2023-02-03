@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,14 +27,14 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[Flags]
-	public enum AreaAlignmentStyles
-	{
-		None = 0,
-		Position = 1,
-		PlotPosition = 2,
-		AxesView = 4,
-		Cursor = 8,
-		All = 15
-	}
+    [Flags]
+    public enum AreaAlignmentStyles
+    {
+        None = 0,
+        Position = 1,
+        PlotPosition = 2,
+        AxesView = 4,
+        Cursor = 8,
+        All = 15
+    }
 }

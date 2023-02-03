@@ -1,8 +1,8 @@
-﻿//
+//
 // AllowedAudienceUriElementCollection.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -33,24 +33,24 @@ using System.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (AllowedAudienceUriElement), CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public sealed class AllowedAudienceUriElementCollection : ServiceModelConfigurationElementCollection<AllowedAudienceUriElement>
-	{
-		public AllowedAudienceUriElementCollection () {
-		}
+    [ConfigurationCollection (typeof (AllowedAudienceUriElement), CollectionType = ConfigurationElementCollectionType.BasicMap)]
+    public sealed class AllowedAudienceUriElementCollection : ServiceModelConfigurationElementCollection<AllowedAudienceUriElement>
+    {
+        public AllowedAudienceUriElementCollection () {
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get {
-				return base.ThrowOnDuplicate;
-			}
-		}
+        protected override bool ThrowOnDuplicate {
+            get {
+                return base.ThrowOnDuplicate;
+            }
+        }
 
-		protected override System.Configuration.ConfigurationElement CreateNewElement () {
-			return new AllowedAudienceUriElement ();
-		}
+        protected override System.Configuration.ConfigurationElement CreateNewElement () {
+            return new AllowedAudienceUriElement ();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((AllowedAudienceUriElement) element).AllowedAudienceUri;
-		}
-	}
+        protected override object GetElementKey (ConfigurationElement element) {
+            return ((AllowedAudienceUriElement) element).AllowedAudienceUri;
+        }
+    }
 }

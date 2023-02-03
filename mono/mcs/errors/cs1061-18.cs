@@ -3,8 +3,8 @@
 
 static class C
 {
-	static void Main ()
-	{
-		int c = 0.__0;
-	}
+    static void Main ()
+    {
+        int c = 0.__0;
+    }
 }

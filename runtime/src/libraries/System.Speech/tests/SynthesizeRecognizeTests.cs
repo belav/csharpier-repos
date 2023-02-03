@@ -213,12 +213,12 @@ namespace SampleSynthesisTests
 
                 string ssml = @"
 <speak version='1.0' xml:lang='en-US' xmlns='https://www.w3.org/2001/10/synthesis'>
-	<s>His name is Mike <phoneme alphabet='ups' ph='@#$#@$'>Zhou </phoneme></s>
+    <s>His name is Mike <phoneme alphabet='ups' ph='@#$#@$'>Zhou </phoneme></s>
 </speak>";
                 Assert.Throws<FormatException>(() => synth.SpeakSsml(ssml));
                 ssml = @"
 <speak version='1.0' xml:lang='en-US' xmlns='https://www.w3.org/2001/10/synthesis'>
-	<s>His name is Mike <phoneme alphabet='@#$@#$' ph='JH'>Zhou </phoneme></s>
+    <s>His name is Mike <phoneme alphabet='@#$@#$' ph='JH'>Zhou </phoneme></s>
 </speak>";
                 Assert.Throws<FormatException>(() => synth.SpeakSsml(ssml));
             }
@@ -272,10 +272,10 @@ namespace SampleSynthesisTests
             string temp = GetTestFilePath();
             string content = @"
 <lexicon alphabet='x-microsoft-ups' version='1.0' xml:lang='en-US' xmlns='http://www.w3.org/2005/01/pronunciation-lexicon'>
-	<lexeme>
-		<grapheme>blue </grapheme>
-		<phoneme>B L I P </phoneme>
-	</lexeme>";
+    <lexeme>
+        <grapheme>blue </grapheme>
+        <phoneme>B L I P </phoneme>
+    </lexeme>";
             File.WriteAllText(temp, content);
 
             using (var synth = new SpeechSynthesizer())

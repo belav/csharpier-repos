@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,20 +27,20 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ChartColorPalette
-	{
-		None = 0,
-		Bright = 1,
-		Grayscale = 2,
-		Excel = 3,
-		Light = 4,
-		Pastel = 5,
-		EarthTones = 6,
-		SemiTransparent = 7,
-		Berry = 8,
-		Chocolate = 9,
-		Fire = 10,
-		SeaGreen = 11,
-		BrightPastel = 12
-	}
+    public enum ChartColorPalette
+    {
+        None = 0,
+        Bright = 1,
+        Grayscale = 2,
+        Excel = 3,
+        Light = 4,
+        Pastel = 5,
+        EarthTones = 6,
+        SemiTransparent = 7,
+        Berry = 8,
+        Chocolate = 9,
+        Fire = 10,
+        SeaGreen = 11,
+        BrightPastel = 12
+    }
 }

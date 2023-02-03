@@ -23,7 +23,7 @@
 // Copyright (C) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 
@@ -31,9 +31,9 @@
 
 namespace System.Windows.Forms
 {
-	public enum ToolBarTextAlign
-	{
-		Underneath = 0,
-		Right = 1
-	}
+    public enum ToolBarTextAlign
+    {
+        Underneath = 0,
+        Right = 1
+    }
 }

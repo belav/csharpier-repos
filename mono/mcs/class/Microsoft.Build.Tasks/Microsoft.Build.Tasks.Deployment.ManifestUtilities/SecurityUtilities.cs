@@ -34,60 +34,60 @@ using System.Xml;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public static class SecurityUtilities {
-	
-		[MonoTODO]
-		public static PermissionSet ComputeZonePermissionSet (string targetZone,
-								      PermissionSet includedPermissionSet,
-								      string[] excludedPermissions)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static PermissionSet IdentityListToPermissionSet (string[] ids)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static string[] PermissionSetToIdentityList (PermissionSet permissionSet)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static void SignFile (string certThumbprint,
-					     Uri timestampUrl,
-					     string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static void SignFile (X509Certificate2 cert,
-					     Uri timestampUrl,
-					     string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static void SignFile (string certPath,
-					     SecureString certPassword,
-					     Uri timestampUrl,
-					     string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static PermissionSet XmlToPermissionSet (XmlElement element)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    
+    [ComVisible (false)]
+    public static class SecurityUtilities {
+    
+        [MonoTODO]
+        public static PermissionSet ComputeZonePermissionSet (string targetZone,
+                                      PermissionSet includedPermissionSet,
+                                      string[] excludedPermissions)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static PermissionSet IdentityListToPermissionSet (string[] ids)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static string[] PermissionSetToIdentityList (PermissionSet permissionSet)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static void SignFile (string certThumbprint,
+                         Uri timestampUrl,
+                         string path)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static void SignFile (X509Certificate2 cert,
+                         Uri timestampUrl,
+                         string path)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static void SignFile (string certPath,
+                         SecureString certPassword,
+                         Uri timestampUrl,
+                         string path)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static PermissionSet XmlToPermissionSet (XmlElement element)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

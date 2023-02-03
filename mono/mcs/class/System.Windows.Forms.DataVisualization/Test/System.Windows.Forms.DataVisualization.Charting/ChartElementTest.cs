@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -29,38 +29,38 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {
-	[TestFixture]
-	public class ChartElementTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			ChartElement ce = new MyChartElement ();
+    [TestFixture]
+    public class ChartElementTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            ChartElement ce = new MyChartElement ();
 
-			Assert.AreEqual (null, ce.Tag, "A1");
-		}
+            Assert.AreEqual (null, ce.Tag, "A1");
+        }
 
-		[Test]
-		public void TagProperty ()
-		{
-			ChartElement ce = new MyChartElement ();
+        [Test]
+        public void TagProperty ()
+        {
+            ChartElement ce = new MyChartElement ();
 
-			Assert.AreEqual (null, ce.Tag, "A1");
+            Assert.AreEqual (null, ce.Tag, "A1");
 
-			ce.Tag = "hi";
-			Assert.AreEqual ("hi", ce.Tag, "A2");
-		}
+            ce.Tag = "hi";
+            Assert.AreEqual ("hi", ce.Tag, "A2");
+        }
 
-		[Test]
-		public void ToStringMethod ()
-		{
-			ChartElement ce = new MyChartElement ();
+        [Test]
+        public void ToStringMethod ()
+        {
+            ChartElement ce = new MyChartElement ();
 
-			Assert.AreEqual ("MyChartElement", ce.ToString (), "A1");
-		}
+            Assert.AreEqual ("MyChartElement", ce.ToString (), "A1");
+        }
 
-		private class MyChartElement : ChartElement
-		{
-		}
-	}
+        private class MyChartElement : ChartElement
+        {
+        }
+    }
 }

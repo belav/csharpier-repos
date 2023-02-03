@@ -16,34 +16,34 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.IO;
-	using NUnit.Framework;
+    using System;
+    using System.IO;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class PersistentProxyBuilderTestCase
-	{
-		[Test]
-		public void PersistentProxyBuilder_NullIfNothingSaved()
-		{
-			PersistentProxyBuilder builder = new PersistentProxyBuilder();
-			string path = builder.SaveAssembly();
-			Assert.IsNull(path);
-		}
+    [TestFixture]
+    public class PersistentProxyBuilderTestCase
+    {
+        [Test]
+        public void PersistentProxyBuilder_NullIfNothingSaved()
+        {
+            PersistentProxyBuilder builder = new PersistentProxyBuilder();
+            string path = builder.SaveAssembly();
+            Assert.IsNull(path);
+        }
 
-		[Test]
-		[Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
-		public void PersistentProxyBuilder_SavesSignedFile()
-		{
-			PersistentProxyBuilder builder = new PersistentProxyBuilder();
-			builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, ProxyGenerationOptions.Default);
-			string path = builder.SaveAssembly();
-			Assert.IsNotNull(path);
-			Assert.IsNotEmpty(path);
-			Assert.IsTrue(Path.IsPathRooted(path));
-			Assert.IsTrue(path.EndsWith(ModuleScope.DEFAULT_FILE_NAME));
-		}
-	}
+        [Test]
+        [Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
+        public void PersistentProxyBuilder_SavesSignedFile()
+        {
+            PersistentProxyBuilder builder = new PersistentProxyBuilder();
+            builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, ProxyGenerationOptions.Default);
+            string path = builder.SaveAssembly();
+            Assert.IsNotNull(path);
+            Assert.IsNotEmpty(path);
+            Assert.IsTrue(Path.IsPathRooted(path));
+            Assert.IsTrue(path.EndsWith(ModuleScope.DEFAULT_FILE_NAME));
+        }
+    }
 }
 
 #endif

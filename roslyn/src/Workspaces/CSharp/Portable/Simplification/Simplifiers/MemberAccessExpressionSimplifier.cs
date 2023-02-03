@@ -1,4 +1,4 @@
-Ôªø// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -55,14 +55,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             }
 
             // To resolve cast_expression ambiguities, the following rule exists: A sequence of one or more tokens
-            // (¬ß6.4) enclosed in parentheses is considered the start of a cast_expression only if at least one of the
+            // (ß6.4) enclosed in parentheses is considered the start of a cast_expression only if at least one of the
             // following are true:
 
             // The sequence of tokens is correct grammar for a type, but not for an expression.
             //
             // The sequence of tokens is correct grammar for a type, and the token immediately following the closing
-            // parentheses is the token ‚Äú~‚Äù, the token ‚Äú!‚Äù, the token ‚Äú(‚Äù, an identifier(¬ß6.4.3), a literal(¬ß6.4.5), or
-            // any keyword(¬ß6.4.4) except as and is.
+            // parentheses is the token ì~î, the token ì!î, the token ì(î, an identifier(ß6.4.3), a literal(ß6.4.5), or
+            // any keyword(ß6.4.4) except as and is.
 
             // Note: the first cannot be true here.  Because we started with a MemberAccessExpression that we are
             // replacing with it's 'name' portion, this will always be valid as an expression.  So what matters is the

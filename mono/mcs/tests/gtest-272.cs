@@ -11,13 +11,13 @@ public static class X
         }
 
         static void Response<T> (Handler<T> handler)
-	{ }
+    { }
 
-	static void Test<T> (T t)
-	{ }
+    static void Test<T> (T t)
+    { }
 
-	public static void Main ()
-	{
-		Foo<long> (Test);
-	}
+    public static void Main ()
+    {
+        Foo<long> (Test);
+    }
 } 

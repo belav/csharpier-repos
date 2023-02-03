@@ -14,16 +14,16 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public interface IMarkerInterface
-	{
-	}
+    public interface IMarkerInterface
+    {
+    }
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ClassWithMarkerInterface
-	{
-	}
+    public class ClassWithMarkerInterface
+    {
+    }
 }

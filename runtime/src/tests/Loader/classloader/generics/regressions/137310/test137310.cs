@@ -19,51 +19,51 @@ public class D : IB {}
 class Test_test137310
 {
 
-	public static void LoadC()
-	{
-		A<C> c = new C();		
-	}
+    public static void LoadC()
+    {
+        A<C> c = new C();        
+    }
 
-	public static void LoadD()
-	{
-		IA<D> d = new D();		
-	}
+    public static void LoadD()
+    {
+        IA<D> d = new D();        
+    }
 
-	public static int Main()
-    	{
-    		bool pass = true;
-    		try
-    		{
-    			LoadC();
-    		}
-		catch (Exception e)
-		{
-			Console.WriteLine("FAIL to load C: Caught unexpected exception: " + e);
-			pass = false;
-		}
+    public static int Main()
+        {
+            bool pass = true;
+            try
+            {
+                LoadC();
+            }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL to load C: Caught unexpected exception: " + e);
+            pass = false;
+        }
 
-	    	try
-    		{
-    			LoadD();
-    		}
-		catch (Exception e)
-		{
-			Console.WriteLine("FAIL to load D: Caught unexpected exception: " + e);
-			pass = false;
-		}
+            try
+            {
+                LoadD();
+            }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL to load D: Caught unexpected exception: " + e);
+            pass = false;
+        }
 
 
-        	if (pass)
-        	{
-        		Console.WriteLine("PASS");
-			return 100;
-        	}
-		else
-		{
-			Console.WriteLine("FAIL");
-			return 101;
-		}
-				
+            if (pass)
+            {
+                Console.WriteLine("PASS");
+            return 100;
+            }
+        else
+        {
+            Console.WriteLine("FAIL");
+            return 101;
+        }
+                
 
     }
 

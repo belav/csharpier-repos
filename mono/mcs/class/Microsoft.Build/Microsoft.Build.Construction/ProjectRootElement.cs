@@ -533,7 +533,7 @@ namespace Microsoft.Build.Construction
                                 var item = CreateItemGroupElement ();
                                 AppendChild (item);
                                 return item;
-			case "ImportGroup":
+            case "ImportGroup":
                                 return AddImportGroup ();
                         case "Import":
                                 return AddImport (null);

@@ -8,8 +8,8 @@ public ref struct S
 
 class Test<T>
 {
-	public static void Foo ()
-	{
-		Test<S> local;
-	}
+    public static void Foo ()
+    {
+        Test<S> local;
+    }
 }

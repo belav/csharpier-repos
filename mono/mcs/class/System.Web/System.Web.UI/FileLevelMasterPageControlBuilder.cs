@@ -30,8 +30,8 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI
 {
-	public class FileLevelMasterPageControlBuilder : FileLevelPageControlBuilder
-	{
-		
-	}
+    public class FileLevelMasterPageControlBuilder : FileLevelPageControlBuilder
+    {
+        
+    }
 }

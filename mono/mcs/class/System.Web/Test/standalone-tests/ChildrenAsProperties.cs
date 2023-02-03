@@ -37,27 +37,27 @@ using NUnit.Framework;
 
 namespace StandAloneTests.ChildrenAsProperties
 {
-	[TestCase ("ChildrenAsProperties", "PagesSection.ChildrenAsProperties")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "ChildrenAsProperties"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("ChildrenAsProperties", "PagesSection.ChildrenAsProperties")]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "ChildrenAsProperties"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>12345snap test snap</div>\n<div>123454444</div>\n";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
+            return true;
+        }
+        
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div>12345snap test snap</div>\n<div>123454444</div>\n";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 }

@@ -32,11 +32,11 @@
 using Orig = System.Web.Util.UrlUtils;
 
 namespace SystemWebTestShim {
-	public class UrlUtils {
-		public static string Canonic (string path)
-		{
-			return Orig.Canonic (path);
-		}
-	}
+    public class UrlUtils {
+        public static string Canonic (string path)
+        {
+            return Orig.Canonic (path);
+        }
+    }
 }
 

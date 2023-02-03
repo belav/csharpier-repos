@@ -31,11 +31,11 @@ using System;
 
 namespace System.Web.UI
 {
-	public enum RegisteredScriptType
-	{
-		ClientScriptInclude = 0,
-		ClientScriptBlock = 1,
-		ClientStartupScript = 2,
-		OnSubmitStatement = 3,
-	}
+    public enum RegisteredScriptType
+    {
+        ClientScriptInclude = 0,
+        ClientScriptBlock = 1,
+        ClientStartupScript = 2,
+        OnSubmitStatement = 3,
+    }
 }

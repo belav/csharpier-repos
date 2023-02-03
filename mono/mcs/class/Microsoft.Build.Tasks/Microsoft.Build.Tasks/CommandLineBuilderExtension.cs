@@ -29,11 +29,11 @@
 using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Tasks {
-	public class CommandLineBuilderExtension : CommandLineBuilder {
-		
-		public CommandLineBuilderExtension ()
-		{
-		}
-	}
+    public class CommandLineBuilderExtension : CommandLineBuilder {
+        
+        public CommandLineBuilderExtension ()
+        {
+        }
+    }
 }
 

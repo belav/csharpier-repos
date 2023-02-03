@@ -34,28 +34,28 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.Remoting {
 
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class RemotingTimeoutException : RemotingException
-	{
-		public RemotingTimeoutException ()
-			: base ()
-		{
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class RemotingTimeoutException : RemotingException
+    {
+        public RemotingTimeoutException ()
+            : base ()
+        {
+        }
 
-		public RemotingTimeoutException (string message)
-			: base (message)
-		{
-		}
+        public RemotingTimeoutException (string message)
+            : base (message)
+        {
+        }
 
-		public RemotingTimeoutException (string message, Exception InnerException)
-			: base (message, InnerException)
-		{
-		}
+        public RemotingTimeoutException (string message, Exception InnerException)
+            : base (message, InnerException)
+        {
+        }
 
-		internal RemotingTimeoutException (SerializationInfo info, StreamingContext context) 
-			: base(info, context)
-		{
-		}
-	}
+        internal RemotingTimeoutException (SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]

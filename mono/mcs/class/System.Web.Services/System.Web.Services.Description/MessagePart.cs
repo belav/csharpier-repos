@@ -34,75 +34,75 @@ using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description 
 {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class MessagePart :
-		NamedItem
-	{
+    [XmlFormatExtensionPoint ("Extensions")]
+    public sealed class MessagePart :
+        NamedItem
+    {
 
-		#region Fields
+        #region Fields
 
-		XmlQualifiedName element;
-		Message message;
-		XmlQualifiedName type;
-		ServiceDescriptionFormatExtensionCollection extensions;
+        XmlQualifiedName element;
+        Message message;
+        XmlQualifiedName type;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public MessagePart ()
-		{
-			element = XmlQualifiedName.Empty;
-			message = null;
-			type = XmlQualifiedName.Empty;
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public MessagePart ()
+        {
+            element = XmlQualifiedName.Empty;
+            message = null;
+            type = XmlQualifiedName.Empty;
+            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[XmlAttribute ("element")]
-		public XmlQualifiedName Element {
-			get { return element; }
-			set { element = value; }
-		}
-		
-//		[XmlIgnore]
-		public Message Message {
-			get { return message; }
-		}
-	
+        [XmlAttribute ("element")]
+        public XmlQualifiedName Element {
+            get { return element; }
+            set { element = value; }
+        }
+        
+//        [XmlIgnore]
+        public Message Message {
+            get { return message; }
+        }
+    
 
-		[XmlAttribute ("type")]
-		public XmlQualifiedName Type {
-			get { return type; }
-			set { type = value; }
-		}
-		
-		internal bool DefinedByType {
-			get { return type != null && type != XmlQualifiedName.Empty; }
-		}
+        [XmlAttribute ("type")]
+        public XmlQualifiedName Type {
+            get { return type; }
+            set { type = value; }
+        }
+        
+        internal bool DefinedByType {
+            get { return type != null && type != XmlQualifiedName.Empty; }
+        }
 
-		internal bool DefinedByElement {
-			get { return element != null && element != XmlQualifiedName.Empty; }
-		}
+        internal bool DefinedByElement {
+            get { return element != null && element != XmlQualifiedName.Empty; }
+        }
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions {
+            get { return extensions; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		internal void SetParent (Message message)
-		{
-			this.message = message; 
-		}
+        internal void SetParent (Message message)
+        {
+            this.message = message; 
+        }
 
-		#endregion // Methods
+        #endregion // Methods
 
-	}
+    }
 }

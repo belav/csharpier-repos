@@ -2,8 +2,8 @@
 // System.Runtime.Remoting.Services.TrackingServices.cs
 //
 // Author:
-// 	Jaime Anguiano Olarra (jaime@gnome.org)
-//	Patrik Torstensson
+//     Jaime Anguiano Olarra (jaime@gnome.org)
+//    Patrik Torstensson
 //
 // (C) 2002, Jaime Anguiano Olarra
 //
@@ -37,91 +37,91 @@ using System.Runtime.Remoting;
 using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Services {
-	[ComVisible (true)]
-	public class TrackingServices {
-		static ArrayList _handlers = new ArrayList();
+    [ComVisible (true)]
+    public class TrackingServices {
+        static ArrayList _handlers = new ArrayList();
 
-		public TrackingServices () {
-		}
+        public TrackingServices () {
+        }
 
-		public static void RegisterTrackingHandler (ITrackingHandler handler) {
-			if (null == handler)
-				throw new ArgumentNullException("handler");
+        public static void RegisterTrackingHandler (ITrackingHandler handler) {
+            if (null == handler)
+                throw new ArgumentNullException("handler");
 
-			lock (_handlers.SyncRoot) {
-				if (-1 != _handlers.IndexOf(handler))
-					throw new RemotingException("handler already registered");
+            lock (_handlers.SyncRoot) {
+                if (-1 != _handlers.IndexOf(handler))
+                    throw new RemotingException("handler already registered");
 
-				_handlers.Add(handler);
-			}
-		}
+                _handlers.Add(handler);
+            }
+        }
 
-		public static void UnregisterTrackingHandler (ITrackingHandler handler) {
-			if (null == handler)
-				throw new ArgumentNullException("handler");
+        public static void UnregisterTrackingHandler (ITrackingHandler handler) {
+            if (null == handler)
+                throw new ArgumentNullException("handler");
 
-			lock (_handlers.SyncRoot) {
-				int idx = _handlers.IndexOf(handler);
-				if (idx == -1)
-					throw new RemotingException("handler is not registered");
+            lock (_handlers.SyncRoot) {
+                int idx = _handlers.IndexOf(handler);
+                if (idx == -1)
+                    throw new RemotingException("handler is not registered");
 
-				_handlers.RemoveAt(idx);
-			}
-		}
+                _handlers.RemoveAt(idx);
+            }
+        }
     
-		public static ITrackingHandler[] RegisteredHandlers {
-			get {
-				lock (_handlers.SyncRoot) {
-					if (_handlers.Count == 0)
-						return new ITrackingHandler[0];
+        public static ITrackingHandler[] RegisteredHandlers {
+            get {
+                lock (_handlers.SyncRoot) {
+                    if (_handlers.Count == 0)
+                        return new ITrackingHandler[0];
 
 
-					return (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
-				}
-			}
-		}
+                    return (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
+                }
+            }
+        }
 
-		internal static void NotifyMarshaledObject(Object obj, ObjRef or)
-		{
-			ITrackingHandler[] handlers;
-			
-			lock (_handlers.SyncRoot) {
-				if (_handlers.Count == 0) return;
-				handlers = (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
-			}
-			
-			for(int i = 0; i < handlers.Length; i++) {
-				handlers[i].MarshaledObject (obj, or);
-			}
-		}
+        internal static void NotifyMarshaledObject(Object obj, ObjRef or)
+        {
+            ITrackingHandler[] handlers;
+            
+            lock (_handlers.SyncRoot) {
+                if (_handlers.Count == 0) return;
+                handlers = (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
+            }
+            
+            for(int i = 0; i < handlers.Length; i++) {
+                handlers[i].MarshaledObject (obj, or);
+            }
+        }
     
-		internal static void NotifyUnmarshaledObject(Object obj, ObjRef or)
-		{
-			ITrackingHandler[] handlers;
-			
-			lock (_handlers.SyncRoot) {
-				if (_handlers.Count == 0) return;
-				handlers = (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
-			}
-			
-			for(int i = 0; i < handlers.Length; i++) {
-				handlers[i].UnmarshaledObject (obj, or);
-			}
-		}
+        internal static void NotifyUnmarshaledObject(Object obj, ObjRef or)
+        {
+            ITrackingHandler[] handlers;
+            
+            lock (_handlers.SyncRoot) {
+                if (_handlers.Count == 0) return;
+                handlers = (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
+            }
+            
+            for(int i = 0; i < handlers.Length; i++) {
+                handlers[i].UnmarshaledObject (obj, or);
+            }
+        }
 
-		internal static void NotifyDisconnectedObject(Object obj)
-		{
-			ITrackingHandler[] handlers;
-			
-			lock (_handlers.SyncRoot) {
-				if (_handlers.Count == 0) return;
-				handlers = (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
-			}
-			
-			for(int i = 0; i < handlers.Length; i++) {
-				handlers[i].DisconnectedObject (obj);
-			}
-		}
-	}
+        internal static void NotifyDisconnectedObject(Object obj)
+        {
+            ITrackingHandler[] handlers;
+            
+            lock (_handlers.SyncRoot) {
+                if (_handlers.Count == 0) return;
+                handlers = (ITrackingHandler[]) _handlers.ToArray (typeof(ITrackingHandler));
+            }
+            
+            for(int i = 0; i < handlers.Length; i++) {
+                handlers[i].DisconnectedObject (obj);
+            }
+        }
+    }
 }
 

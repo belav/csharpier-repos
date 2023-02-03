@@ -2,7 +2,7 @@
 // ServiceModelSectionGroupTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -44,50 +44,50 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class ServiceModelSectionGroupTest
-	{
-		ServiceModelSectionGroup GetConfig (string file)
-		{
-			// FIXME: this should work.
-			//ConfigurationType c = ConfigurationManager.OpenExeConfiguration (file);
-			//return ServiceModelSectionGroup.GetSectionGroup (c);
+    [TestFixture]
+    public class ServiceModelSectionGroupTest
+    {
+        ServiceModelSectionGroup GetConfig (string file)
+        {
+            // FIXME: this should work.
+            //ConfigurationType c = ConfigurationManager.OpenExeConfiguration (file);
+            //return ServiceModelSectionGroup.GetSectionGroup (c);
 
-			return (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (file).GetSectionGroup ("system.serviceModel");
-		}
+            return (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (file).GetSectionGroup ("system.serviceModel");
+        }
 
-		[Test]
-		public void GetSectionGroup ()
-		{
-			ServiceModelSectionGroup g = GetConfig (TestResourceHelper.GetFullPathOfResource ("Test/config/test1"));
-			Assert.IsNotNull (g.Bindings, "bindings");
-			Assert.IsNotNull (g.Client, "client");
-			Assert.IsNotNull (g.Services, "services");
-			Assert.IsNotNull (g.Client.Endpoints, "client/endpoint*");
-		}
+        [Test]
+        public void GetSectionGroup ()
+        {
+            ServiceModelSectionGroup g = GetConfig (TestResourceHelper.GetFullPathOfResource ("Test/config/test1"));
+            Assert.IsNotNull (g.Bindings, "bindings");
+            Assert.IsNotNull (g.Client, "client");
+            Assert.IsNotNull (g.Services, "services");
+            Assert.IsNotNull (g.Client.Endpoints, "client/endpoint*");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		[Ignore ("fails under .NET; I never bothered to fix the test")]
-		public void BindingCollections () {
-			ServiceModelSectionGroup g = GetConfig (TestResourceHelper.GetFullPathOfResource ("Test/config/test1.config"));
-			List<BindingCollectionElement> coll = g.Bindings.BindingCollections;
-			Assert.AreEqual (20, coll.Count, "Count");
-		}
+        [Test]
+        [Category ("NotWorking")]
+        [Ignore ("fails under .NET; I never bothered to fix the test")]
+        public void BindingCollections () {
+            ServiceModelSectionGroup g = GetConfig (TestResourceHelper.GetFullPathOfResource ("Test/config/test1.config"));
+            List<BindingCollectionElement> coll = g.Bindings.BindingCollections;
+            Assert.AreEqual (20, coll.Count, "Count");
+        }
 
-		[Test]
-		public void Endpoints ()
-		{
-			ServiceModelSectionGroup g = GetConfig (TestResourceHelper.GetFullPathOfResource ("Test/config/test1"));
-			ChannelEndpointElementCollection col = g.Client.Endpoints;
-			Assert.AreEqual (1, col.Count, "initial count");
-			ChannelEndpointElement e = col [0];
-			Assert.AreEqual (String.Empty, e.Name, "0.Name");
-			Assert.AreEqual ("IFoo", e.Contract, "0.Contract");
-			Assert.AreEqual ("basicHttpBinding", e.Binding, "0.Binding");
-			col.Add (new ChannelEndpointElement ());
-			Assert.AreEqual (2, col.Count, "after Add()");
-		}
-	}
+        [Test]
+        public void Endpoints ()
+        {
+            ServiceModelSectionGroup g = GetConfig (TestResourceHelper.GetFullPathOfResource ("Test/config/test1"));
+            ChannelEndpointElementCollection col = g.Client.Endpoints;
+            Assert.AreEqual (1, col.Count, "initial count");
+            ChannelEndpointElement e = col [0];
+            Assert.AreEqual (String.Empty, e.Name, "0.Name");
+            Assert.AreEqual ("IFoo", e.Contract, "0.Contract");
+            Assert.AreEqual ("basicHttpBinding", e.Binding, "0.Binding");
+            col.Add (new ChannelEndpointElement ());
+            Assert.AreEqual (2, col.Count, "after Add()");
+        }
+    }
 }
 #endif

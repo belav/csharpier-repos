@@ -1,8 +1,8 @@
 //
 //
-//	Mono.Cairo drawing samples using GTK# as drawing surface
-//	Autor: Jordi Mas <jordi@ximian.com>. Based on work from Owen Taylor
-//	       Hisham Mardam Bey <hisham@hisham.cc>
+//    Mono.Cairo drawing samples using GTK# as drawing surface
+//    Autor: Jordi Mas <jordi@ximian.com>. Based on work from Owen Taylor
+//           Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -33,72 +33,72 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Cairo;
 using Gtk;
-	
+    
 public class GtkCairo
 {
-	static DrawingArea a;
-	
-	static void Main ()
-	{		
-		Application.Init ();
-		Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
+    static DrawingArea a;
+    
+    static void Main ()
+    {        
+        Application.Init ();
+        Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
 
-		a = new CairoGraphic ();	
-		
-		Box box = new HBox (true, 0);
-		box.Add (a);
-		w.Add (box);
-		w.Resize (500,500);		
-		w.ShowAll ();		
-		
-		Application.Run ();
-	}
+        a = new CairoGraphic ();    
+        
+        Box box = new HBox (true, 0);
+        box.Add (a);
+        w.Add (box);
+        w.Resize (500,500);        
+        w.ShowAll ();        
+        
+        Application.Run ();
+    }
 
 
 }
 
 public class CairoGraphic : DrawingArea 
 {   
-	static void draw (Cairo.Context gr, int width, int height)
-	{
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
-		
-		gr.MoveTo ( new PointD (0.5, 0.1) );
-		gr.LineTo ( new PointD (0.9, 0.9) );
-		gr.RelLineTo ( new Distance (-0.4, 0.0) );
-		gr.CurveTo ( new PointD (0.2, 0.9),
-			     new PointD ( 0.2, 0.5),
-			     new PointD (0.5, 0.5)
-			     );
-		gr.ClosePath ();
-		
-		gr.MoveTo ( new PointD (0.25, 0.1) );
-		gr.RelLineTo ( new Distance (0.2, 0.2) );
-		gr.RelLineTo ( new Distance ( -0.2, 0.2) );
-		gr.RelLineTo ( new Distance (-0.2, -0.2) );
-		gr.ClosePath ();	       
-		
-		gr.Color = new Color (0, 0, 1, 1);
-		gr.FillPreserve ();
-		gr.Color = new Color ( 0, 0, 0, 1);
-		gr.Stroke ();
-	}
+    static void draw (Cairo.Context gr, int width, int height)
+    {
+        gr.Scale (width, height);
+        gr.LineWidth = 0.04;
+        
+        gr.MoveTo ( new PointD (0.5, 0.1) );
+        gr.LineTo ( new PointD (0.9, 0.9) );
+        gr.RelLineTo ( new Distance (-0.4, 0.0) );
+        gr.CurveTo ( new PointD (0.2, 0.9),
+                 new PointD ( 0.2, 0.5),
+                 new PointD (0.5, 0.5)
+                 );
+        gr.ClosePath ();
+        
+        gr.MoveTo ( new PointD (0.25, 0.1) );
+        gr.RelLineTo ( new Distance (0.2, 0.2) );
+        gr.RelLineTo ( new Distance ( -0.2, 0.2) );
+        gr.RelLineTo ( new Distance (-0.2, -0.2) );
+        gr.ClosePath ();           
+        
+        gr.Color = new Color (0, 0, 1, 1);
+        gr.FillPreserve ();
+        gr.Color = new Color ( 0, 0, 0, 1);
+        gr.Stroke ();
+    }
    
 
-	protected override bool OnExposeEvent (Gdk.EventExpose args)
-	{
-		Gdk.Window win = args.Window;
-		//Gdk.Rectangle area = args.Area;
-		
-		Cairo.Context g = Gdk.Context.CreateDrawable (win);
-		
-		int x, y, w, h, d;
-		win.GetGeometry(out x, out y, out w, out h, out d);
-		
-		draw (g, w, h);
-		return true;
-	}
+    protected override bool OnExposeEvent (Gdk.EventExpose args)
+    {
+        Gdk.Window win = args.Window;
+        //Gdk.Rectangle area = args.Area;
+        
+        Cairo.Context g = Gdk.Context.CreateDrawable (win);
+        
+        int x, y, w, h, d;
+        win.GetGeometry(out x, out y, out w, out h, out d);
+        
+        draw (g, w, h);
+        return true;
+    }
 
 }
 

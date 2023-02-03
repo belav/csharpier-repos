@@ -4,8 +4,8 @@
 
 public class MainClass
 {
-	public static bool Main() 
-	{
-	    return false;
-	}
+    public static bool Main() 
+    {
+        return false;
+    }
 }

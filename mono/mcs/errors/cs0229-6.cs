@@ -6,23 +6,23 @@ using static B;
 
 class A
 {
-	public class N
-	{
-		public static void Foo ()
-		{
-		}
-	}
+    public class N
+    {
+        public static void Foo ()
+        {
+        }
+    }
 }
 
 class B
 {
-	public static int N;
+    public static int N;
 }
 
 class Test
 {
-	public static void Main ()
-	{
-		N.Foo ();
-	}
+    public static void Main ()
+    {
+        N.Foo ();
+    }
 }

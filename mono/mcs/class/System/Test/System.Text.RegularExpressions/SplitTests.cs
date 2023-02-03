@@ -2,7 +2,7 @@
 // MatchTest.cs - Unit tests for System.Text.RegularExpressions.Match
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,41 +33,41 @@ using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Text.RegularExpressions
 {
-	[TestFixture]
-	public class SpliTest {
+    [TestFixture]
+    public class SpliTest {
 
-	static void TestSplit (string pattern, string text, params string[] res) {
-		var r = new Regex (pattern);
-		var a = r.Split (text);
-		if (a.Length != res.Length) {
-			Assert.AreEqual (res.Length, a.Length, "length");
-		}
+    static void TestSplit (string pattern, string text, params string[] res) {
+        var r = new Regex (pattern);
+        var a = r.Split (text);
+        if (a.Length != res.Length) {
+            Assert.AreEqual (res.Length, a.Length, "length");
+        }
 
-		for (int i = 0; i < res.Length; ++i) {
-			if (!a [i].Equals (res [i])) {
-				Assert.AreEqual (res [i], a [i], "idx_" + i);
-			}
-		}
-	}
+        for (int i = 0; i < res.Length; ++i) {
+            if (!a [i].Equals (res [i])) {
+                Assert.AreEqual (res [i], a [i], "idx_" + i);
+            }
+        }
+    }
 
-	[Test]
-	public void NoGroups () { TestSplit ("el", "hello", "h", "lo"); }
+    [Test]
+    public void NoGroups () { TestSplit ("el", "hello", "h", "lo"); }
 
-	[Test]
-	public void SingleGroup () { TestSplit ( "(el)", "hello", "h", "el", "lo"); }
+    [Test]
+    public void SingleGroup () { TestSplit ( "(el)", "hello", "h", "el", "lo"); }
 
- 	[Test]
-	public void TwoGroups () { TestSplit ("(el)|(xx)", "hello", "h", "el", "lo"); }
+     [Test]
+    public void TwoGroups () { TestSplit ("(el)|(xx)", "hello", "h", "el", "lo"); }
 
-	[Test]
-	public void TwoGroupsInverted () { TestSplit ("(cc)|(el)", "hello", "h", "el", "lo"); }
+    [Test]
+    public void TwoGroupsInverted () { TestSplit ("(cc)|(el)", "hello", "h", "el", "lo"); }
 
-	[Test]
-	public void TwoValidGroups () { TestSplit ("(el)|(lo)", "hello", "h", "el", "", "lo", ""); }
+    [Test]
+    public void TwoValidGroups () { TestSplit ("(el)|(lo)", "hello", "h", "el", "", "lo", ""); }
 
- 	[Test]
-	public void ThreGroups () { TestSplit ("(el)|(xx)|(yy)", "hello", "h", "el", "lo"); }
+     [Test]
+    public void ThreGroups () { TestSplit ("(el)|(xx)|(yy)", "hello", "h", "el", "lo"); }
 
-	}
+    }
 }
 

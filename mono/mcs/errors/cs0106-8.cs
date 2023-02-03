@@ -3,5 +3,5 @@
 
 interface S
 {
-	public void Foo ();
+    public void Foo ();
 }

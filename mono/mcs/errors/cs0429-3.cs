@@ -4,8 +4,8 @@
 
 class Main
 {
-	public void Method (int i)
-	{
-		var x = true ? 1 : i;
-	}
+    public void Method (int i)
+    {
+        var x = true ? 1 : i;
+    }
 }

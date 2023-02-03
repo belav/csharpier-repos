@@ -33,18 +33,18 @@ using System.Security.Permissions;
 
 namespace System.Web.Query.Dynamic
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public abstract class DynamicClass
-	{
-		protected DynamicClass ()
-		{
-		}
-		
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public abstract class DynamicClass
+    {
+        protected DynamicClass ()
+        {
+        }
+        
+        public override string ToString ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

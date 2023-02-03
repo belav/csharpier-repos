@@ -4,8 +4,8 @@
 
 class X
 {
-	int Test ()
-	{
-		_ = 2;
-	}
+    int Test ()
+    {
+        _ = 2;
+    }
 }

@@ -18,7 +18,7 @@ namespace Mono.ILASM {
                 private BaseTypeRef type;
                 private string name;
 
-		private bool is_resolved;
+        private bool is_resolved;
                 private PEAPI.FieldRef peapi_field;
 
                 public ExternFieldRef (ExternTypeRef owner, BaseTypeRef type, string name)
@@ -26,8 +26,8 @@ namespace Mono.ILASM {
                         this.owner = owner;
                         this.type = type;
                         this.name = name;
-			
-			is_resolved = false;
+            
+            is_resolved = false;
                 }
 
                 public PEAPI.Field PeapiField {
@@ -36,8 +36,8 @@ namespace Mono.ILASM {
 
                 public void Resolve (CodeGen code_gen)
                 {
-			if (is_resolved)
-				return;
+            if (is_resolved)
+                return;
 
                         owner.Resolve (code_gen);
 
@@ -52,7 +52,7 @@ namespace Mono.ILASM {
                                 peapi_field = owner_ref.AddField (name, type.PeapiType);
                         }
 
-			is_resolved = true;
+            is_resolved = true;
                 }
         }
 

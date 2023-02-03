@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -130,10 +130,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             vr[reverseOffset + reverseK - 1] = highA;
 
             var maxD = Math.Ceiling((double)(m + n) / 2);
-            for (var d = 0; d <= maxD; d++) // For D ← 0 to ceil((M + N)/2) Do
+            for (var d = 0; d <= maxD; d++) // For D ? 0 to ceil((M + N)/2) Do
             {
                 // Run the algorithm in forward direction.
-                for (var k = forwardK - d; k <= forwardK + d; k += 2) // For k ← −D to D in steps of 2 Do
+                for (var k = forwardK - d; k <= forwardK + d; k += 2) // For k ? -D to D in steps of 2 Do
                 {
                     // Find the end of the furthest reaching forward D-path in diagonal k.
                     int x;
@@ -163,9 +163,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     {
                         // Can't have overlap here.
                     }
-                    else if (k > reverseK - d && k < reverseK + d) // If ∆ is odd and k ∈ [∆ − (D − 1) , ∆ + (D − 1)] Then
+                    else if (k > reverseK - d && k < reverseK + d) // If ? is odd and k ? [? - (D - 1) , ? + (D - 1)] Then
                     {
-                        if (vr[reverseOffset + k] <= vf[forwardOffset + k]) // If the path overlaps the furthest reaching reverse (D − 1)-path in diagonal k Then
+                        if (vr[reverseOffset + k] <= vf[forwardOffset + k]) // If the path overlaps the furthest reaching reverse (D - 1)-path in diagonal k Then
                         {
                             // The last snake of the forward path is the middle snake.
                             x = vf[forwardOffset + k];
@@ -176,9 +176,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 }
 
                 // Run the algorithm in reverse direction.
-                for (var k = reverseK - d; k <= reverseK + d; k += 2) // For k ← −D to D in steps of 2 Do
+                for (var k = reverseK - d; k <= reverseK + d; k += 2) // For k ? -D to D in steps of 2 Do
                 {
-                    // Find the end of the furthest reaching reverse D-path in diagonal k+∆.
+                    // Find the end of the furthest reaching reverse D-path in diagonal k+?.
                     int x;
                     if (k == reverseK + d ||
                         (k != reverseK - d && vr[reverseOffset + k - 1] < vr[reverseOffset + k + 1] - 1))
@@ -206,9 +206,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     {
                         // Can't have overlap here.
                     }
-                    else if (k >= forwardK - d && k <= forwardK + d) // If ∆ is even and k + ∆ ∈ [−D, D] Then
+                    else if (k >= forwardK - d && k <= forwardK + d) // If ? is even and k + ? ? [-D, D] Then
                     {
-                        if (vr[reverseOffset + k] <= vf[forwardOffset + k]) // If the path overlaps the furthest reaching forward D-path in diagonal k+∆ Then
+                        if (vr[reverseOffset + k] <= vf[forwardOffset + k]) // If the path overlaps the furthest reaching forward D-path in diagonal k+? Then
                         {
                             // The last snake of the reverse path is the middle snake.
                             x = vf[forwardOffset + k];

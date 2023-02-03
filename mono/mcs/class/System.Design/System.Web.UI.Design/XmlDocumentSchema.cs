@@ -2,7 +2,7 @@
 // System.Web.UI.Design.XmlDocumentSchema
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,20 +35,20 @@ using System.Xml;
 
 namespace System.Web.UI.Design
 {
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public sealed class XmlDocumentSchema : IDataSourceSchema
-	{
-		[MonoTODO]
-		public XmlDocumentSchema (XmlDocument xmlDocument, string xPath)
-		{
-			throw new NotImplementedException ();
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public sealed class XmlDocumentSchema : IDataSourceSchema
+    {
+        [MonoTODO]
+        public XmlDocumentSchema (XmlDocument xmlDocument, string xPath)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public IDataSourceViewSchema [] GetViews ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public IDataSourceViewSchema [] GetViews ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

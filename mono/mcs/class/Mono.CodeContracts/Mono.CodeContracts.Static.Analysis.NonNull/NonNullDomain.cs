@@ -2,7 +2,7 @@
 // Domain.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,27 +32,27 @@ using System.IO;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.NonNull {
-	struct NonNullDomain<V> where V : IEquatable<V> {
-		public static readonly NonNullDomain<V> BottomValue = new NonNullDomain<V> (SetDomain<V>.BottomValue, SetDomain<V>.BottomValue);
+    struct NonNullDomain<V> where V : IEquatable<V> {
+        public static readonly NonNullDomain<V> BottomValue = new NonNullDomain<V> (SetDomain<V>.BottomValue, SetDomain<V>.BottomValue);
 
-		public SetDomain<V> NonNulls;
-		public SetDomain<V> Nulls;
+        public SetDomain<V> NonNulls;
+        public SetDomain<V> Nulls;
 
-		public NonNullDomain(SetDomain<V> nonNulls, SetDomain<V> nulls)
-		{
-			this.NonNulls = nonNulls;
-			this.Nulls = nulls;
-		}
+        public NonNullDomain(SetDomain<V> nonNulls, SetDomain<V> nulls)
+        {
+            this.NonNulls = nonNulls;
+            this.Nulls = nulls;
+        }
 
-		public bool IsNonNull(V v)
-		{
-			return this.NonNulls.Contains (v);
-		}
+        public bool IsNonNull(V v)
+        {
+            return this.NonNulls.Contains (v);
+        }
 
-		public bool IsNull(V v)
-		{
-			return this.Nulls.Contains (v);
-		}
+        public bool IsNull(V v)
+        {
+            return this.Nulls.Contains (v);
+        }
 
         public override string ToString()
         {
@@ -70,5 +70,5 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull {
 
             return sw.ToString ();
         }
-	}
+    }
 }

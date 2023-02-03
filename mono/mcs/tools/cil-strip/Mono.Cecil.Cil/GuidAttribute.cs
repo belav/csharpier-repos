@@ -28,64 +28,64 @@
 
 namespace Mono.Cecil.Cil {
 
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	[AttributeUsage (AttributeTargets.Field)]
-	internal sealed class GuidAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Field)]
+    internal sealed class GuidAttribute : Attribute {
 
-		private Guid m_guid;
+        private Guid m_guid;
 
-		public Guid Guid {
-			get { return m_guid; }
-		}
+        public Guid Guid {
+            get { return m_guid; }
+        }
 
-		GuidAttribute ()
-		{
-			m_guid = new Guid ();
-		}
+        GuidAttribute ()
+        {
+            m_guid = new Guid ();
+        }
 
-		public GuidAttribute (
-			uint a,
-			ushort b,
-			ushort c,
-			byte d,
-			byte e,
-			byte f,
-			byte g,
-			byte h,
-			byte i,
-			byte j,
-			byte k)
-		{
-			m_guid = new Guid ((int) a, (short) b, (short) c, d, e, f, g, h, i, j, k);
-		}
+        public GuidAttribute (
+            uint a,
+            ushort b,
+            ushort c,
+            byte d,
+            byte e,
+            byte f,
+            byte g,
+            byte h,
+            byte i,
+            byte j,
+            byte k)
+        {
+            m_guid = new Guid ((int) a, (short) b, (short) c, d, e, f, g, h, i, j, k);
+        }
 
-		public static int GetValueFromGuid (Guid id, Type enumeration)
-		{
-			foreach (FieldInfo fi in enumeration.GetFields (BindingFlags.Static | BindingFlags.Public))
-				if (id == GetGuidAttribute (fi).Guid)
-					return (int) fi.GetValue (null);
+        public static int GetValueFromGuid (Guid id, Type enumeration)
+        {
+            foreach (FieldInfo fi in enumeration.GetFields (BindingFlags.Static | BindingFlags.Public))
+                if (id == GetGuidAttribute (fi).Guid)
+                    return (int) fi.GetValue (null);
 
-			return -1;
-		}
+            return -1;
+        }
 
-		public static Guid GetGuidFromValue (int value, Type enumeration)
-		{
-			foreach (FieldInfo fi in enumeration.GetFields (BindingFlags.Static | BindingFlags.Public))
-				if (value == (int) fi.GetValue (null))
-					return GetGuidAttribute (fi).Guid;
+        public static Guid GetGuidFromValue (int value, Type enumeration)
+        {
+            foreach (FieldInfo fi in enumeration.GetFields (BindingFlags.Static | BindingFlags.Public))
+                if (value == (int) fi.GetValue (null))
+                    return GetGuidAttribute (fi).Guid;
 
-			return new Guid ();
-		}
+            return new Guid ();
+        }
 
-		static GuidAttribute GetGuidAttribute (FieldInfo fi)
-		{
-			GuidAttribute [] attributes = fi.GetCustomAttributes (typeof (GuidAttribute), false) as GuidAttribute [];
-			if (attributes == null || attributes.Length != 1)
-				return new GuidAttribute ();
+        static GuidAttribute GetGuidAttribute (FieldInfo fi)
+        {
+            GuidAttribute [] attributes = fi.GetCustomAttributes (typeof (GuidAttribute), false) as GuidAttribute [];
+            if (attributes == null || attributes.Length != 1)
+                return new GuidAttribute ();
 
-			return attributes [0];
-		}
-	}
+            return attributes [0];
+        }
+    }
 }

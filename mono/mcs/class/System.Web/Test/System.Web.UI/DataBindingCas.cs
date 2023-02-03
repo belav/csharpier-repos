@@ -2,7 +2,7 @@
 // DataBindingCas.cs - CAS unit tests for System.Web.UI.DataBinding
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,36 +37,36 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataBindingCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataBindingCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataBinding db = new DataBinding ("property", typeof (string), String.Empty);
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            DataBinding db = new DataBinding ("property", typeof (string), String.Empty);
 
-			db.Expression = "expression";
-			Assert.AreEqual ("expression", db.Expression, "Expression");
-			Assert.AreEqual ("property", db.PropertyName, "PropertyName");
-			Assert.AreEqual (typeof (string), db.PropertyType, "PropertyType");
+            db.Expression = "expression";
+            Assert.AreEqual ("expression", db.Expression, "Expression");
+            Assert.AreEqual ("property", db.PropertyName, "PropertyName");
+            Assert.AreEqual (typeof (string), db.PropertyType, "PropertyType");
 
-			Assert.IsTrue (db.Equals (db), "Equals");
-			Assert.IsTrue (db.GetHashCode () != 0, "GetHashCode"); // likely
-		}
+            Assert.IsTrue (db.Equals (db), "Equals");
+            Assert.IsTrue (db.GetHashCode () != 0, "GetHashCode"); // likely
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[3] { typeof (string), typeof (Type), typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(String,Type,String)");
-			return ci.Invoke (new object[3] { String.Empty, typeof (string), String.Empty });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[3] { typeof (string), typeof (Type), typeof (string) });
+            Assert.IsNotNull (ci, ".ctor(String,Type,String)");
+            return ci.Invoke (new object[3] { String.Empty, typeof (string), String.Empty });
+        }
 
-		public override Type Type {
-			get { return typeof (DataBinding); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataBinding); }
+        }
+    }
 }

@@ -23,50 +23,50 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public class PowerStatus
-	{
-		private BatteryChargeStatus battery_charge_status;
-		private int battery_full_lifetime;
-		private float battery_life_percent;
-		private int battery_life_remaining;
-		private PowerLineStatus power_line_status;
+    public class PowerStatus
+    {
+        private BatteryChargeStatus battery_charge_status;
+        private int battery_full_lifetime;
+        private float battery_life_percent;
+        private int battery_life_remaining;
+        private PowerLineStatus power_line_status;
 
-		#region Internal Constructor
-		internal PowerStatus (BatteryChargeStatus batteryChargeStatus, int batteryFullLifetime, float batteryLifePercent, int batteryLifeRemaining, PowerLineStatus powerLineStatus)
-		{
-			this.battery_charge_status = batteryChargeStatus;
-			this.battery_full_lifetime = batteryFullLifetime;
-			this.battery_life_percent = batteryLifePercent;
-			this.battery_life_remaining = batteryLifeRemaining;
-			this.power_line_status = powerLineStatus;
-		}
-		#endregion
-		
-		#region Public Properties
-		public BatteryChargeStatus BatteryChargeStatus {
-			get { return battery_charge_status; }
-		}
-		
-		public int BatteryFullLifetime {
-			get { return battery_full_lifetime; }
-		}
-		
-		public float BatteryLifePercent {
-			get { return battery_life_percent; }
-		}
-		
-		public int BatteryLifeRemaining {
-			get { return battery_life_remaining; }
-		}
-		
-		public PowerLineStatus PowerLineStatus {
-			get { return power_line_status; }
-		}
-		#endregion
-	}
+        #region Internal Constructor
+        internal PowerStatus (BatteryChargeStatus batteryChargeStatus, int batteryFullLifetime, float batteryLifePercent, int batteryLifeRemaining, PowerLineStatus powerLineStatus)
+        {
+            this.battery_charge_status = batteryChargeStatus;
+            this.battery_full_lifetime = batteryFullLifetime;
+            this.battery_life_percent = batteryLifePercent;
+            this.battery_life_remaining = batteryLifeRemaining;
+            this.power_line_status = powerLineStatus;
+        }
+        #endregion
+        
+        #region Public Properties
+        public BatteryChargeStatus BatteryChargeStatus {
+            get { return battery_charge_status; }
+        }
+        
+        public int BatteryFullLifetime {
+            get { return battery_full_lifetime; }
+        }
+        
+        public float BatteryLifePercent {
+            get { return battery_life_percent; }
+        }
+        
+        public int BatteryLifeRemaining {
+            get { return battery_life_remaining; }
+        }
+        
+        public PowerLineStatus PowerLineStatus {
+            get { return power_line_status; }
+        }
+        #endregion
+    }
 }

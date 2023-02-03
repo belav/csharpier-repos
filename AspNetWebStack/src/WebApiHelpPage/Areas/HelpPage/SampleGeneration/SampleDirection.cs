@@ -1,4 +1,4 @@
-﻿namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
+namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

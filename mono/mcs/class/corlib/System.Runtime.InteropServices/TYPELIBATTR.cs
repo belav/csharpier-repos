@@ -30,16 +30,16 @@
 
 namespace System.Runtime.InteropServices
 {
-	[Obsolete]
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-	public struct TYPELIBATTR
-	{
-		public Guid guid;
-		public int lcid;
-		public SYSKIND syskind;
-		public short wMajorVerNum;
-		public short wMinorVerNum;
-		public LIBFLAGS wLibFlags;
-	}
+    [Obsolete]
+    [Serializable]
+    [StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    public struct TYPELIBATTR
+    {
+        public Guid guid;
+        public int lcid;
+        public SYSKIND syskind;
+        public short wMajorVerNum;
+        public short wMinorVerNum;
+        public LIBFLAGS wLibFlags;
+    }
 }

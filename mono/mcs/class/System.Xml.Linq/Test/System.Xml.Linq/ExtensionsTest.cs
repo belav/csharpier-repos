@@ -34,26 +34,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml.Linq
 {
-	[TestFixture]
-	public class ExtensionsTest
-	{
-		[Test]
-		public void Remove ()
-		{
-			XDocument doc = XDocument.Parse ("<root><foo/><bar/><baz/></root>");
-			doc.Root.Nodes ().Remove<XNode> ();
-			Assert.IsNull (doc.Root.FirstNode, "#1");
-		}
+    [TestFixture]
+    public class ExtensionsTest
+    {
+        [Test]
+        public void Remove ()
+        {
+            XDocument doc = XDocument.Parse ("<root><foo/><bar/><baz/></root>");
+            doc.Root.Nodes ().Remove<XNode> ();
+            Assert.IsNull (doc.Root.FirstNode, "#1");
+        }
 
-		[Test]
-		public void InDocumentOrder ()
-		{
-			XElement el = XDocument.Parse ("<root><foo><f1/><f2/></foo><bar/></root>").Root;
-			XElement c = el.FirstNode as XElement;
-			int n = 0;
-			string [] names = {"foo", "f1", "f2", "bar"};
-			foreach (XElement e2 in new XNode [] {el.LastNode, c.LastNode, c.FirstNode, c}.InDocumentOrder ())
-				Assert.AreEqual (names [n], e2.Name.LocalName, "#" + n++);
-		}
-	}
+        [Test]
+        public void InDocumentOrder ()
+        {
+            XElement el = XDocument.Parse ("<root><foo><f1/><f2/></foo><bar/></root>").Root;
+            XElement c = el.FirstNode as XElement;
+            int n = 0;
+            string [] names = {"foo", "f1", "f2", "bar"};
+            foreach (XElement e2 in new XNode [] {el.LastNode, c.LastNode, c.FirstNode, c}.InDocumentOrder ())
+                Assert.AreEqual (names [n], e2.Name.LocalName, "#" + n++);
+        }
+    }
 }

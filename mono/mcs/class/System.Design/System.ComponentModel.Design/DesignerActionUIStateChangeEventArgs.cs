@@ -33,23 +33,23 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	public class DesignerActionUIStateChangeEventArgs : EventArgs
-	{
-		object related_object;
-		DesignerActionUIStateChangeType change_type;
+    public class DesignerActionUIStateChangeEventArgs : EventArgs
+    {
+        object related_object;
+        DesignerActionUIStateChangeType change_type;
 
-		public DesignerActionUIStateChangeEventArgs (object relatedObject, DesignerActionUIStateChangeType changeType)
-		{
-			this.related_object = relatedObject;
-			this.change_type = changeType;
-		}
+        public DesignerActionUIStateChangeEventArgs (object relatedObject, DesignerActionUIStateChangeType changeType)
+        {
+            this.related_object = relatedObject;
+            this.change_type = changeType;
+        }
 
-		public DesignerActionUIStateChangeType ChangeType {
-			get { return change_type; }
-		}
+        public DesignerActionUIStateChangeType ChangeType {
+            get { return change_type; }
+        }
 
-		public Object RelatedObject {
-			get { return related_object; }
-		}
-	}
+        public Object RelatedObject {
+            get { return related_object; }
+        }
+    }
 }

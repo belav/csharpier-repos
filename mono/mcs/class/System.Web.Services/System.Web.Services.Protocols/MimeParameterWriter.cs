@@ -35,44 +35,44 @@ using System.Text;
 using System.Web.Services;
 
 namespace System.Web.Services.Protocols {
-	public abstract class MimeParameterWriter : MimeFormatter {
+    public abstract class MimeParameterWriter : MimeFormatter {
 
-		#region Constructors
+        #region Constructors
 
-		protected MimeParameterWriter () 
-		{
-		}
-		
-		#endregion // Constructors
+        protected MimeParameterWriter () 
+        {
+        }
+        
+        #endregion // Constructors
 
-		#region Properties 
+        #region Properties 
 
-		public virtual Encoding RequestEncoding {
-			get { return null; }
-			set { ; }
-		}
+        public virtual Encoding RequestEncoding {
+            get { return null; }
+            set { ; }
+        }
 
-		public virtual bool UsesWriteRequest {
-			get { return false; }
-		}
+        public virtual bool UsesWriteRequest {
+            get { return false; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public virtual string GetRequestUrl (string url, object[] parameters)
-		{
-			return url;
-		}
+        public virtual string GetRequestUrl (string url, object[] parameters)
+        {
+            return url;
+        }
 
-		public virtual void InitializeRequest (WebRequest request, object[] values)
-		{
-		}
+        public virtual void InitializeRequest (WebRequest request, object[] values)
+        {
+        }
 
-		public virtual void WriteRequest (Stream requestStream, object[] values)
-		{
-		}
+        public virtual void WriteRequest (Stream requestStream, object[] values)
+        {
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

@@ -2,7 +2,7 @@
 // CustomBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -56,59 +56,59 @@ using SysConfig = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class CustomBindingCollectionElement
-		 : BindingCollectionElement
-	{
+    public sealed class CustomBindingCollectionElement
+         : BindingCollectionElement
+    {
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public CustomBindingElementCollection Bindings {
-			get { return (CustomBindingElementCollection) this [String.Empty]; }
-		}
+        [ConfigurationProperty ("",
+             Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true)]
+        public CustomBindingElementCollection Bindings {
+            get { return (CustomBindingElementCollection) this [String.Empty]; }
+        }
 
-		public override ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings {
-			get {
-				List<IBindingConfigurationElement> list = new List<IBindingConfigurationElement> ();
-				CustomBindingElementCollection bindings = Bindings;
-				for (int i = 0; i < bindings.Count; i++)
-					list.Add (bindings [i]);
-				return new ReadOnlyCollection<IBindingConfigurationElement> (list);
-			}
-		}
+        public override ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings {
+            get {
+                List<IBindingConfigurationElement> list = new List<IBindingConfigurationElement> ();
+                CustomBindingElementCollection bindings = Bindings;
+                for (int i = 0; i < bindings.Count; i++)
+                    list.Add (bindings [i]);
+                return new ReadOnlyCollection<IBindingConfigurationElement> (list);
+            }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		public override Type BindingType {
-			get { return typeof (CustomBinding); }
-		}
+        public override Type BindingType {
+            get { return typeof (CustomBinding); }
+        }
 
 
-		public override bool ContainsKey (string name)
-		{
-			return Bindings.ContainsKey (name);
-		}
+        public override bool ContainsKey (string name)
+        {
+            return Bindings.ContainsKey (name);
+        }
 
-		protected internal override Binding GetDefault ()
-		{
-			return new CustomBinding ();
-		}
+        protected internal override Binding GetDefault ()
+        {
+            return new CustomBinding ();
+        }
 
-		protected internal override bool TryAdd (string name, Binding binding, SysConfig config)
-		{
-			if (!binding.GetType ().Equals (typeof (CustomBinding)))
-				return false;
-			
-			var element = new CustomBindingElement ();
-			element.Name = name;
-			element.InitializeFrom (binding);
-			Bindings.Add (element);
-			return true;
-		}
-	}
+        protected internal override bool TryAdd (string name, Binding binding, SysConfig config)
+        {
+            if (!binding.GetType ().Equals (typeof (CustomBinding)))
+                return false;
+            
+            var element = new CustomBindingElement ();
+            element.Name = name;
+            element.InitializeFrom (binding);
+            Bindings.Add (element);
+            return true;
+        }
+    }
 
 }

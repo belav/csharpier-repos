@@ -614,12 +614,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -691,7 +691,7 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1</result>";
+        1.Test1</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -763,12 +763,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam7(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test7
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test7
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -805,12 +805,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam8(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -846,12 +846,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam10(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.My Custom Object has a value of 10
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.My Custom Object has a value of 10
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             MyObject m = new MyObject(10, _output);
@@ -903,12 +903,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam12(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -957,12 +957,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam13(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.Test2
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.Test2
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -1011,12 +1011,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam14(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.Test2
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.Test2
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -1088,12 +1088,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam16(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.Test1
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.Test1
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -1157,16 +1157,16 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam17(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test  
-		2.Test
+        1.Test  
+        2.Test
 
-		3.Test	
-		4.Test
+        3.Test    
+        4.Test
 
-		5.Test	
+        5.Test    
   
-	
-		6.No Value Specified</result>";
+    
+        6.No Value Specified</result>";
 
             int i = 1;
             int errCount = 0;
@@ -1234,12 +1234,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam18(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.Test2
-		3.Test3
-		4.Test4
-		5.Test5
-		6.Test6</result>";
+        1.Test1
+        2.Test2
+        3.Test3
+        4.Test4
+        5.Test5
+        6.Test6</result>";
 
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -1278,12 +1278,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam19(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.Test1
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.Test1
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -1330,12 +1330,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddParam20(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj1=""urn:http://www.w3.org/1999/XSL/Transform"" xmlns:myObj2=""urn:tmp"" xmlns:myObj3=""urn:my-object"" xmlns:myObj4=""urn:MY-OBJECT"">
-		1.Test1
-		2.Test2
-		3.Test3
-		4.Test4
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.Test2
+        3.Test3
+        4.Test4
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -2183,9 +2183,9 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2247,9 +2247,9 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""http://www.miocrosoft.com/this/is/a/very/long/namespace/uri/to/do/the/api/testing/for/xslt/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             m_xsltArg = new XsltArgumentList();
             MyObject obj = new MyObject(4, _output);
@@ -2283,12 +2283,12 @@ namespace System.Xml.XslTransformApiTests
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 
-		String  Argument: System.String
-		Int32   Argument: System.Int32
-		Boolean Argument: System.Boolean
-		Boolean Argument: System.Boolean
-		Double  Argument: System.Double
-		String  Argument: System.String</result>";
+        String  Argument: System.String
+        Int32   Argument: System.Int32
+        Boolean Argument: System.Boolean
+        Boolean Argument: System.Boolean
+        Double  Argument: System.Double
+        String  Argument: System.String</result>";
 
             m_xsltArg = new XsltArgumentList();
             string obj = "0.00";
@@ -2407,9 +2407,9 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject8(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2472,8 +2472,8 @@ namespace System.Xml.XslTransformApiTests
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
-		Test1
-		Test2: 0</result>";
+        Test1
+        Test2: 0</result>";
 
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2505,9 +2505,9 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject11(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -2603,9 +2603,9 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject14(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             MyObject obj = new MyObject(14, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2724,8 +2724,8 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject17(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		Here:End
-		</result>";
+        Here:End
+        </result>";
 
             MyObject obj = new MyObject(17, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2757,7 +2757,7 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject18(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		Recursive Function Returning the factorial of five:120</result>";
+        Recursive Function Returning the factorial of five:120</result>";
 
             MyObject obj = new MyObject(18, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2789,9 +2789,9 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject19(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		Overloaded Double: Int Overload
-		Overloaded Int: Int Overload
-		Overloaded String: String Overload</result>";
+        Overloaded Double: Int Overload
+        Overloaded Int: Int Overload
+        Overloaded String: String Overload</result>";
 
             MyObject obj = new MyObject(19, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2823,16 +2823,16 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject20(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		DoNothing Function Test Pass
-		Constructor Function
-		Return Int  Function Test Pass
-		Return String Function Test Pass
-		ReturnInt  Function Test Pass
-		Taking in args  Test Pass
-		Public Function Test Pass
-		Protected Function
-		Private Function
-		Default Function</result>";
+        DoNothing Function Test Pass
+        Constructor Function
+        Return Int  Function Test Pass
+        Return String Function Test Pass
+        ReturnInt  Function Test Pass
+        Taking in args  Test Pass
+        Public Function Test Pass
+        Protected Function
+        Private Function
+        Default Function</result>";
 
             MyObject obj = new MyObject(20, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2865,10 +2865,10 @@ namespace System.Xml.XslTransformApiTests
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
-		String  Argument: Received a string with value: Hello
-		Double  Argument: Received a double with value 3.14
-		Boolean Argument: Statement is True
-		Boolean True Argument: Statement is False</result>";
+        String  Argument: Received a string with value: Hello
+        Double  Argument: Received a double with value 3.14
+        Boolean Argument: Statement is True
+        Boolean True Argument: Statement is False</result>";
 
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2900,13 +2900,13 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject22(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		Get A String:Hello world
-		Get A Double:22.41276
-		Get A True Boolean:true
-		Get A False Boolean:false
-		Get An Int:10
-		Get Other with ToString() Support:My Custom Object has a value of 22
-		Call function with no return type:</result>";
+        Get A String:Hello world
+        Get A Double:22.41276
+        Get A True Boolean:true
+        Get A False Boolean:false
+        Get An Int:10
+        Get Other with ToString() Support:My Custom Object has a value of 22
+        Call function with no return type:</result>";
 
             MyObject obj = new MyObject(22, _output);
             m_xsltArg = new XsltArgumentList();
@@ -3021,14 +3021,14 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject27(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		A:27
-		B:23
-		C:23
-		D:23
-		E:37
-		F:Hello 
-		G:Hello World 
-		E:-13</result>";
+        A:27
+        B:23
+        C:23
+        D:23
+        E:37
+        F:Hello 
+        G:Hello World 
+        E:-13</result>";
 
             MyObject obj = new MyObject(27, _output);
             m_xsltArg = new XsltArgumentList();
@@ -3061,12 +3061,12 @@ namespace System.Xml.XslTransformApiTests
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
-		Aiming with Gun: &gt;"" $tmp &gt;;'	 
+        Aiming with Gun: &gt;"" $tmp &gt;;'     
 &amp;
-		Aiming with Missile: &lt;xsl:variable name=""tmp""/&gt;
-		Aiming with Nuclear: &lt;/xsl:stylesheet&gt;
-		Wow...survived all killer ammo.
-	</result>";
+        Aiming with Missile: &lt;xsl:variable name=""tmp""/&gt;
+        Aiming with Nuclear: &lt;/xsl:stylesheet&gt;
+        Wow...survived all killer ammo.
+    </result>";
 
             MyObject obj = new MyObject(28, _output);
             m_xsltArg = new XsltArgumentList();
@@ -3144,12 +3144,12 @@ namespace System.Xml.XslTransformApiTests
         public void AddExtObject32(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected1 = @"<?xml version=""1.0"" encoding=""utf-8""?><out xmlns:id=""id"" xmlns:cap=""capitalizer"">
-			ID: first
-			Capitalized ID: FIRST</out>";
+            ID: first
+            Capitalized ID: FIRST</out>";
 
             string expected2 = @"<?xml version=""1.0"" encoding=""utf-8""?><out xmlns:id=""id"" xmlns:cap=""capitalizer"">
-			ID: second
-			Capitalized ID: SECOND</out>";
+            ID: second
+            Capitalized ID: SECOND</out>";
 
             if (LoadXSL("Bug78587.xsl", inputType, readerType) == 1)
             {
@@ -3203,12 +3203,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3262,12 +3262,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.RemoveParam(szEmpty, szEmpty);
@@ -3290,12 +3290,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.RemoveParam(szSimple, szEmpty);
@@ -3318,12 +3318,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam5(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.RemoveParam(szInvalid, szEmpty);
@@ -3346,7 +3346,7 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam6(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified</result>";
+        1.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3386,12 +3386,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam8(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3416,12 +3416,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam9(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3446,12 +3446,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam10(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3476,12 +3476,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam11(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             double d1 = double.PositiveInfinity;
             double d2 = double.NegativeInfinity;
@@ -3690,12 +3690,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam12(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3723,12 +3723,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam13(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test
-		2.Test
-		3.Test
-		4.Test
-		5.Test
-		6.No Value Specified</result>";
+        1.Test
+        2.Test
+        3.Test
+        4.Test
+        5.Test
+        6.No Value Specified</result>";
 
             int i = 1;
             m_xsltArg = new XsltArgumentList();
@@ -3779,12 +3779,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveParam14(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -3884,12 +3884,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveExtObj3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
@@ -3917,9 +3917,9 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveExtObj4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             MyObject obj = new MyObject(4, _output);
             m_xsltArg = new XsltArgumentList();
@@ -3972,12 +3972,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveExtObj6(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             MyObject obj = new MyObject(6, _output);
             m_xsltArg = new XsltArgumentList();
@@ -4018,9 +4018,9 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveExtObj7(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-		1.Test1
-		2.Test2
-		3.Test3</result>";
+        1.Test1
+        2.Test2
+        3.Test3</result>";
 
             MyObject obj = new MyObject(7, _output);
             m_xsltArg = new XsltArgumentList();
@@ -4089,12 +4089,12 @@ namespace System.Xml.XslTransformApiTests
         public void RemoveExtObj9(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
@@ -4131,12 +4131,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -4165,12 +4165,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -4190,12 +4190,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -4256,12 +4256,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear5(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -4308,12 +4308,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear6(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 
@@ -4343,12 +4343,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear7(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.Test1
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.Test1
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
             XsltArgumentList m_2 = new XsltArgumentList();
@@ -4375,12 +4375,12 @@ namespace System.Xml.XslTransformApiTests
         public void Clear8(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-		1.No Value Specified
-		2.No Value Specified
-		3.No Value Specified
-		4.No Value Specified
-		5.No Value Specified
-		6.No Value Specified</result>";
+        1.No Value Specified
+        2.No Value Specified
+        3.No Value Specified
+        4.No Value Specified
+        5.No Value Specified
+        6.No Value Specified</result>";
 
             m_xsltArg = new XsltArgumentList();
 

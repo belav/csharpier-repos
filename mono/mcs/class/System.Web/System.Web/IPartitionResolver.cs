@@ -2,7 +2,7 @@
 // IPartitionResolver.cs
 //
 // Author:
-//	Daniel Nauck  <dna(at)mono-project(dot)de>
+//    Daniel Nauck  <dna(at)mono-project(dot)de>
 //
 // Copyright (C) 2007 Daniel Nauck
 //
@@ -31,9 +31,9 @@ using System.Security.Permissions;
 
 namespace System.Web
 {
-	public interface IPartitionResolver
-	{
-		void Initialize ();
-		string ResolvePartition (object key);
-	}
+    public interface IPartitionResolver
+    {
+        void Initialize ();
+        string ResolvePartition (object key);
+    }
 }

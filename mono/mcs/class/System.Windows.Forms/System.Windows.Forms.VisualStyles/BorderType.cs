@@ -23,15 +23,15 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum BorderType
-	{
-		Rectangle = 0,
-		RoundedRectangle = 1,
-		Ellipse = 2
-	}
+    public enum BorderType
+    {
+        Rectangle = 0,
+        RoundedRectangle = 1,
+        Ellipse = 2
+    }
 }

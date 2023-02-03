@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing

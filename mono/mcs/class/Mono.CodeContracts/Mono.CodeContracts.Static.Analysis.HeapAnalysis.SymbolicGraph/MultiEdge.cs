@@ -2,7 +2,7 @@
 // MultiEdge.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,43 +29,43 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-	struct MultiEdge<TFunc, TAbstractDomain> : IEquatable<MultiEdge<TFunc, TAbstractDomain>> 
-		where TFunc : IEquatable<TFunc>, IConstantInfo 
-		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
-		
-		public readonly int Arity;
-		public readonly int Index;
-		public readonly TFunc Function;
+    struct MultiEdge<TFunc, TAbstractDomain> : IEquatable<MultiEdge<TFunc, TAbstractDomain>> 
+        where TFunc : IEquatable<TFunc>, IConstantInfo 
+        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+        
+        public readonly int Arity;
+        public readonly int Index;
+        public readonly TFunc Function;
 
-		public MultiEdge (TFunc function, int index, int arity)
-		{
-			this.Function = function;
-			this.Index = index;
-			this.Arity = arity;
-		}
+        public MultiEdge (TFunc function, int index, int arity)
+        {
+            this.Function = function;
+            this.Index = index;
+            this.Arity = arity;
+        }
 
-		#region Implementation of IEquatable<MultiEdge>
-		public bool Equals (MultiEdge<TFunc, TAbstractDomain> other)
-		{
-			return (this.Index == other.Index && this.Arity == other.Arity && this.Function.Equals (other.Function));
-		}
-		#endregion
+        #region Implementation of IEquatable<MultiEdge>
+        public bool Equals (MultiEdge<TFunc, TAbstractDomain> other)
+        {
+            return (this.Index == other.Index && this.Arity == other.Arity && this.Function.Equals (other.Function));
+        }
+        #endregion
 
-		public override bool Equals (object obj)
-		{
-			if (obj is MultiEdge<TFunc, TAbstractDomain>)
-				return Equals ((MultiEdge<TFunc, TAbstractDomain>) obj);
-			return false;
-		}
+        public override bool Equals (object obj)
+        {
+            if (obj is MultiEdge<TFunc, TAbstractDomain>)
+                return Equals ((MultiEdge<TFunc, TAbstractDomain>) obj);
+            return false;
+        }
 
-		public override int GetHashCode ()
-		{
-			return this.Arity*13 + this.Index;
-		}
+        public override int GetHashCode ()
+        {
+            return this.Arity*13 + this.Index;
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("[{0}:{1}]", this.Function, this.Index);
-		}
-	}
+        public override string ToString ()
+        {
+            return String.Format ("[{0}:{1}]", this.Function, this.Index);
+        }
+    }
 }

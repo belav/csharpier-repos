@@ -14,42 +14,42 @@
 
 namespace Castle.DynamicProxy.Tests.Mixins
 {
-	using System;
+    using System;
 
-	public interface IFirst
-	{
-		void DoFirst();
-	}
+    public interface IFirst
+    {
+        void DoFirst();
+    }
 
-	public interface ISecond : IFirst
-	{
-		void DoSecond();
-	}
+    public interface ISecond : IFirst
+    {
+        void DoSecond();
+    }
 
-	public interface IThird : ISecond
-	{
-		void DoThird();
-	}
+    public interface IThird : ISecond
+    {
+        void DoThird();
+    }
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ComplexMixin : IThird
-	{
-		public ComplexMixin()
-		{
-		}
+    public class ComplexMixin : IThird
+    {
+        public ComplexMixin()
+        {
+        }
 
-		public void DoThird()
-		{
-		}
+        public void DoThird()
+        {
+        }
 
-		public void DoSecond()
-		{
-		}
+        public void DoSecond()
+        {
+        }
 
-		public void DoFirst()
-		{
-		}
-	}
+        public void DoFirst()
+        {
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // EventWaitHandleTest.cs - NUnit Test Cases for EventWaitHandle
 //
 // Author:
-//	Sebastien Pouliot (sebastien@ximian.com)
+//    Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -34,28 +34,28 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Threading {
 
-	[TestFixture]
-	public class EventWaitHandleTest {
+    [TestFixture]
+    public class EventWaitHandleTest {
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void EventWaitHandle_InvalidEventResetMode ()
-		{
-			new EventWaitHandle (true, (EventResetMode) Int32.MinValue);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void EventWaitHandle_InvalidEventResetMode ()
+        {
+            new EventWaitHandle (true, (EventResetMode) Int32.MinValue);
+        }
 
-		[Test]
-		public void Disposed_Set ()
-		{
-			var ewh = new EventWaitHandle (false, EventResetMode.ManualReset);
-			ewh.Dispose();
-			try {
-				ewh.Set();
-				Assert.Fail ();
-			} catch (ObjectDisposedException) {
-			}
-		}
-	}
+        [Test]
+        public void Disposed_Set ()
+        {
+            var ewh = new EventWaitHandle (false, EventResetMode.ManualReset);
+            ewh.Dispose();
+            try {
+                ewh.Set();
+                Assert.Fail ();
+            } catch (ObjectDisposedException) {
+            }
+        }
+    }
 }
 
 

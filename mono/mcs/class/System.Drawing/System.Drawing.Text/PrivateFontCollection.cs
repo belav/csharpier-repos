@@ -3,8 +3,8 @@
 //
 // (C) 2002 Ximian, Inc.  http://www.ximian.com
 // Author: Everaldo Canuto everaldo.canuto@bol.com.br
-//		Sanjay Gupta (gsanjay@novell.com)
-//		Peter Dennis Bartok (pbartok@novell.com)
+//        Sanjay Gupta (gsanjay@novell.com)
+//        Peter Dennis Bartok (pbartok@novell.com)
 //
 //
 // Copyright (C) 2004 - 2006 Novell, Inc (http://www.novell.com)
@@ -34,53 +34,53 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Text {
 
-	public sealed class PrivateFontCollection : FontCollection {
+    public sealed class PrivateFontCollection : FontCollection {
 
-		// constructors
+        // constructors
 
-		public PrivateFontCollection ()
-		{
-			Status status = GDIPlus.GdipNewPrivateFontCollection (out _nativeFontCollection);
-			GDIPlus.CheckStatus (status);
-		}
-		
-		// methods
-		public void AddFontFile (string filename) 
-		{
-			if (filename == null)
-				throw new ArgumentNullException ("filename");
+        public PrivateFontCollection ()
+        {
+            Status status = GDIPlus.GdipNewPrivateFontCollection (out _nativeFontCollection);
+            GDIPlus.CheckStatus (status);
+        }
+        
+        // methods
+        public void AddFontFile (string filename) 
+        {
+            if (filename == null)
+                throw new ArgumentNullException ("filename");
 
-			// this ensure the filename is valid (or throw the correct exception)
-			string fname = Path.GetFullPath (filename);
+            // this ensure the filename is valid (or throw the correct exception)
+            string fname = Path.GetFullPath (filename);
 
-			if (!File.Exists (fname))
-				throw new FileNotFoundException ();
+            if (!File.Exists (fname))
+                throw new FileNotFoundException ();
 
-			// note: MS throw the same exception FileNotFoundException if the file exists but isn't a valid font file
-			Status status = GDIPlus.GdipPrivateAddFontFile (_nativeFontCollection, fname);
-			GDIPlus.CheckStatus (status);			
-		}
+            // note: MS throw the same exception FileNotFoundException if the file exists but isn't a valid font file
+            Status status = GDIPlus.GdipPrivateAddFontFile (_nativeFontCollection, fname);
+            GDIPlus.CheckStatus (status);            
+        }
 
-		public void AddMemoryFont (IntPtr memory, int length) 
-		{
-			// note: MS throw FileNotFoundException if something is bad with the data (except for a null pointer)
-			Status status = GDIPlus.GdipPrivateAddMemoryFont (_nativeFontCollection, memory, length);
-			GDIPlus.CheckStatus (status);						
-		}
-		
-		// methods	
-		protected override void Dispose (bool disposing)
-		{
-			if (_nativeFontCollection!=IntPtr.Zero) {
-				GDIPlus.GdipDeletePrivateFontCollection (ref _nativeFontCollection);							
+        public void AddMemoryFont (IntPtr memory, int length) 
+        {
+            // note: MS throw FileNotFoundException if something is bad with the data (except for a null pointer)
+            Status status = GDIPlus.GdipPrivateAddMemoryFont (_nativeFontCollection, memory, length);
+            GDIPlus.CheckStatus (status);                        
+        }
+        
+        // methods    
+        protected override void Dispose (bool disposing)
+        {
+            if (_nativeFontCollection!=IntPtr.Zero) {
+                GDIPlus.GdipDeletePrivateFontCollection (ref _nativeFontCollection);                            
 
-				// This must be zeroed out, otherwise our base will also call
-				// the GDI+ delete method on unix platforms. We're keeping the
-				// base.Dispose() call in case other cleanup ever gets added there
-				_nativeFontCollection = IntPtr.Zero;
-			}
-			
-			base.Dispose (disposing);
-		}		
-	}
+                // This must be zeroed out, otherwise our base will also call
+                // the GDI+ delete method on unix platforms. We're keeping the
+                // base.Dispose() call in case other cleanup ever gets added there
+                _nativeFontCollection = IntPtr.Zero;
+            }
+            
+            base.Dispose (disposing);
+        }        
+    }
 }

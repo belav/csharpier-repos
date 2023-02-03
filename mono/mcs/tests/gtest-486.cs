@@ -48,7 +48,7 @@ class P {
     }
 
     public static void Main()
-	{
+    {
     }
 
 }

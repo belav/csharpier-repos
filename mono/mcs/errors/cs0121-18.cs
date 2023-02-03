@@ -8,19 +8,19 @@ interface IIn<in T>
 class Test
 {
 
-	static void Foo (IIn<string> f)
-	{
-	}
+    static void Foo (IIn<string> f)
+    {
+    }
 
-	static void Foo (IIn<Test> f)
-	{
-	}
+    static void Foo (IIn<Test> f)
+    {
+    }
 
-	public static int Main ()
-	{
-		IIn<object> test = null;
-		Foo (test);
+    public static int Main ()
+    {
+        IIn<object> test = null;
+        Foo (test);
 
-		return 0;
-	}
+        return 0;
+    }
 }

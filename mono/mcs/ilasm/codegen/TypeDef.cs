@@ -93,7 +93,7 @@ namespace Mono.ILASM {
                                 this.attr |= PEAPI.TypeAttr.Abstract;
                 }
 
-				public bool NoAutoInherit { get; set; }
+                public bool NoAutoInherit { get; set; }
 
                 public string Name {
                         get { return name; }
@@ -103,9 +103,9 @@ namespace Mono.ILASM {
                         get { return MakeFullName (); }
                 }
 
-		public string NestedFullName {
-			get { return (outer == null ? FullName : (outer.NestedFullName + "/" + FullName)); }
-		}
+        public string NestedFullName {
+            get { return (outer == null ? FullName : (outer.NestedFullName + "/" + FullName)); }
+        }
 
                 public TypeDef OuterType {
                         get { return outer; }
@@ -323,14 +323,14 @@ namespace Mono.ILASM {
                         }
 
                         if (outer != null) {
-				PEAPI.TypeAttr vis = attr & PEAPI.TypeAttr.VisibilityMask;
+                PEAPI.TypeAttr vis = attr & PEAPI.TypeAttr.VisibilityMask;
 
-				if (vis == PEAPI.TypeAttr.Private || vis == PEAPI.TypeAttr.Public) {
-					/* Nested class, but attr not set accordingly. */
-					Report.Warning (location, String.Format ("Nested class '{0}' has non-nested visibility, set to such.", NestedFullName));
-					attr = attr ^ vis;
-					attr |= (vis == PEAPI.TypeAttr.Public ? PEAPI.TypeAttr.NestedPublic : PEAPI.TypeAttr.NestedPrivate);
-				}		
+                if (vis == PEAPI.TypeAttr.Private || vis == PEAPI.TypeAttr.Public) {
+                    /* Nested class, but attr not set accordingly. */
+                    Report.Warning (location, String.Format ("Nested class '{0}' has non-nested visibility, set to such.", NestedFullName));
+                    attr = attr ^ vis;
+                    attr |= (vis == PEAPI.TypeAttr.Public ? PEAPI.TypeAttr.NestedPublic : PEAPI.TypeAttr.NestedPrivate);
+                }        
                         }
                         
                         if (parent != null) {
@@ -446,14 +446,14 @@ namespace Mono.ILASM {
                                         customattr.AddTo (code_gen, classdef);
                                         if (customattr.IsSuppressUnmanaged (code_gen))
                                                 classdef.AddAttribute (PEAPI.TypeAttr.HasSecurity);
-				}
+                }
                         }
                         
                         /// Add declarative security to this class
                         if (decl_sec != null) {
                                 decl_sec.AddTo (code_gen, classdef);
                                 classdef.AddAttribute (PEAPI.TypeAttr.HasSecurity);
-			}	
+            }    
 
                         if (override_list != null) {
                                 foreach (DictionaryEntry entry in override_list) {

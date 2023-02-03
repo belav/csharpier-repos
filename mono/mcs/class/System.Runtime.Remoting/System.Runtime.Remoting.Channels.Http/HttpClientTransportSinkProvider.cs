@@ -1,4 +1,4 @@
-﻿//
+//
 // HttpClientTransportSinkProvider.cs
 // 
 // Author:
@@ -35,22 +35,22 @@ using System.Runtime.Remoting.Messaging;
 namespace System.Runtime.Remoting.Channels.Http
 {
 
-	class HttpClientTransportSinkProvider : IClientChannelSinkProvider
-	{
-		public HttpClientTransportSinkProvider ()
-		{
-		}
+    class HttpClientTransportSinkProvider : IClientChannelSinkProvider
+    {
+        public HttpClientTransportSinkProvider ()
+        {
+        }
 
-		// empty impl, because always last in chain
-		public IClientChannelSinkProvider Next
-		{
-			get { return null; }
-			set { }
-		}
+        // empty impl, because always last in chain
+        public IClientChannelSinkProvider Next
+        {
+            get { return null; }
+            set { }
+        }
 
-		public IClientChannelSink CreateSink (IChannelSender channel, string url, object remoteChannelData)
-		{
-			return new HttpClientTransportSink ((HttpClientChannel)channel, url);
-		}
-	}
+        public IClientChannelSink CreateSink (IChannelSender channel, string url, object remoteChannelData)
+        {
+            return new HttpClientTransportSink ((HttpClientChannel)channel, url);
+        }
+    }
 }

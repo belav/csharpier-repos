@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -731,7 +731,7 @@ ExitDecodeTypeName:
             // A list accumulating information about namespaces immediately contained within this namespace.
             // For each pair:
             //   Key - contains simple name of a child namespace.
-            //   Value – contains a sequence similar to the one passed to this function, but
+            //   Value � contains a sequence similar to the one passed to this function, but
             //           calculated for the child namespace. 
             var nestedNamespaces = new List<KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>>();
             bool possiblyHavePairsWithDuplicateKey = false;

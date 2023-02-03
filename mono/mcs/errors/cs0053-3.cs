@@ -3,15 +3,15 @@
 
 namespace MonoTests.System.ComponentModel
 {
-	public class PropertyDescriptorTests
-	{
-		class MissingConverterType_test
-		{
-			class NestedClass { }
+    public class PropertyDescriptorTests
+    {
+        class MissingConverterType_test
+        {
+            class NestedClass { }
 
-			public NestedClass Prop {
-				get { return null; }
-			}
-		}
-	}
+            public NestedClass Prop {
+                get { return null; }
+            }
+        }
+    }
 }

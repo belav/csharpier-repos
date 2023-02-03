@@ -2,7 +2,7 @@
 // StyleCas.cs - CAS unit tests for System.Web.UI.WebControls.Style
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,36 +37,36 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StyleCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StyleCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			StyleTest unit = new StyleTest ();
-			unit.Style_Defaults ();
-			unit.Style_State ();
-			unit.Style_Merge ();
-			unit.Style_Copy ();
-			unit.StyleFonts ();
-			unit.CopyFrom_Null ();
-			unit.CopyFrom_Self ();
-			unit.CopyFrom_Empty ();
-			unit.CopyFrom ();
-			unit.CopyFrom_IsEmpty ();
-			unit.Constructor_StateBag_Null ();
-			unit.Empty ();
-			unit.FontInfo_Empty ();
-			unit.Render ();
-			unit.Style_CssClass ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            StyleTest unit = new StyleTest ();
+            unit.Style_Defaults ();
+            unit.Style_State ();
+            unit.Style_Merge ();
+            unit.Style_Copy ();
+            unit.StyleFonts ();
+            unit.CopyFrom_Null ();
+            unit.CopyFrom_Self ();
+            unit.CopyFrom_Empty ();
+            unit.CopyFrom ();
+            unit.CopyFrom_IsEmpty ();
+            unit.Constructor_StateBag_Null ();
+            unit.Empty ();
+            unit.FontInfo_Empty ();
+            unit.Render ();
+            unit.Style_CssClass ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (Style); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (Style); }
+        }
+    }
 }

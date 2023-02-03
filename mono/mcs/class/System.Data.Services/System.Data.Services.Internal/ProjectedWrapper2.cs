@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ProjectedWrapper2.cs
 //  
 // Author:
@@ -32,25 +32,25 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Internal
 {
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public sealed class ProjectedWrapper2 : ProjectedWrapper
-	{
-		public object ProjectedProperty0 {
-			get; set;
-		}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    public sealed class ProjectedWrapper2 : ProjectedWrapper
+    {
+        public object ProjectedProperty0 {
+            get; set;
+        }
 
-		public object ProjectedProperty1 {
-			get; set;
-		}
+        public object ProjectedProperty1 {
+            get; set;
+        }
 
-		protected override object InternalGetProjectedPropertyValue (int propertyIndex)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override object InternalGetProjectedPropertyValue (int propertyIndex)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ProjectedWrapper2 ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public ProjectedWrapper2 ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

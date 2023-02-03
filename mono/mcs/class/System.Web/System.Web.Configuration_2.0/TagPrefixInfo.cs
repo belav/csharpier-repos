@@ -2,7 +2,7 @@
 // System.Web.Configuration.TagPrefixInfo
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,111 +37,111 @@ using System.Xml;
 
 namespace System.Web.Configuration
 {
-	public sealed class TagPrefixInfo : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty tagPrefixProp;
-		static ConfigurationProperty namespaceProp;
-		static ConfigurationProperty assemblyProp;
-		static ConfigurationProperty tagNameProp;
-		static ConfigurationProperty sourceProp;
+    public sealed class TagPrefixInfo : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty tagPrefixProp;
+        static ConfigurationProperty namespaceProp;
+        static ConfigurationProperty assemblyProp;
+        static ConfigurationProperty tagNameProp;
+        static ConfigurationProperty sourceProp;
 
-		static ConfigurationElementProperty elementProperty;
+        static ConfigurationElementProperty elementProperty;
 
-		static TagPrefixInfo ()
-		{
-			tagPrefixProp = new ConfigurationProperty ("tagPrefix", typeof (string), "/",
-								   TypeDescriptor.GetConverter (typeof (string)),
-								   PropertyHelper.NonEmptyStringValidator,
-								   ConfigurationPropertyOptions.IsRequired);
-			namespaceProp = new ConfigurationProperty ("namespace", typeof (string));
-			assemblyProp = new ConfigurationProperty ("assembly", typeof (string));
-			tagNameProp = new ConfigurationProperty ("tagName", typeof (string));
-			sourceProp = new ConfigurationProperty ("src", typeof (string));
+        static TagPrefixInfo ()
+        {
+            tagPrefixProp = new ConfigurationProperty ("tagPrefix", typeof (string), "/",
+                                   TypeDescriptor.GetConverter (typeof (string)),
+                                   PropertyHelper.NonEmptyStringValidator,
+                                   ConfigurationPropertyOptions.IsRequired);
+            namespaceProp = new ConfigurationProperty ("namespace", typeof (string));
+            assemblyProp = new ConfigurationProperty ("assembly", typeof (string));
+            tagNameProp = new ConfigurationProperty ("tagName", typeof (string));
+            sourceProp = new ConfigurationProperty ("src", typeof (string));
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (tagPrefixProp);
-			properties.Add (namespaceProp);
-			properties.Add (assemblyProp);
-			properties.Add (tagNameProp);
-			properties.Add (sourceProp);
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (tagPrefixProp);
+            properties.Add (namespaceProp);
+            properties.Add (assemblyProp);
+            properties.Add (tagNameProp);
+            properties.Add (sourceProp);
 
-			elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (TagPrefixInfo), ValidateElement));
-		}
+            elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (TagPrefixInfo), ValidateElement));
+        }
 
-		internal TagPrefixInfo ()
-		{
-		}
+        internal TagPrefixInfo ()
+        {
+        }
 
-		public TagPrefixInfo (string tagPrefix, string nameSpace, string assembly, string tagName, string source)
-		{
-			this.TagPrefix = tagPrefix;
-			this.Namespace = nameSpace;
-			this.Assembly = assembly;
-			this.TagName = tagName;
-			this.Source = source;
-		}
+        public TagPrefixInfo (string tagPrefix, string nameSpace, string assembly, string tagName, string source)
+        {
+            this.TagPrefix = tagPrefix;
+            this.Namespace = nameSpace;
+            this.Assembly = assembly;
+            this.TagName = tagName;
+            this.Source = source;
+        }
 
-		static void ValidateElement (object o)
-		{
-			/* XXX do some sort of element validation here? */
-		}
+        static void ValidateElement (object o)
+        {
+            /* XXX do some sort of element validation here? */
+        }
 
-		protected internal override ConfigurationElementProperty ElementProperty {
-			get { return elementProperty; }
-		}
+        protected internal override ConfigurationElementProperty ElementProperty {
+            get { return elementProperty; }
+        }
 
-		public override bool Equals (object prefix)
-		{
-			TagPrefixInfo info = prefix as TagPrefixInfo;
-			if (info == null)
-				return false;
+        public override bool Equals (object prefix)
+        {
+            TagPrefixInfo info = prefix as TagPrefixInfo;
+            if (info == null)
+                return false;
 
-			return (Namespace == info.Namespace
-				&& Source == info.Source
-				&& TagName == info.TagName
-				&& TagPrefix == info.TagPrefix);
-		}
+            return (Namespace == info.Namespace
+                && Source == info.Source
+                && TagName == info.TagName
+                && TagPrefix == info.TagPrefix);
+        }
 
-		public override int GetHashCode ()
-		{
-			return Namespace.GetHashCode() + Source.GetHashCode() + TagName.GetHashCode() + TagPrefix.GetHashCode();
-		}
+        public override int GetHashCode ()
+        {
+            return Namespace.GetHashCode() + Source.GetHashCode() + TagName.GetHashCode() + TagPrefix.GetHashCode();
+        }
 
-		[ConfigurationProperty ("assembly")]
-		public string Assembly {
-			get { return (string) base[assemblyProp]; }
-			set { base[assemblyProp] = value; }
-		}
+        [ConfigurationProperty ("assembly")]
+        public string Assembly {
+            get { return (string) base[assemblyProp]; }
+            set { base[assemblyProp] = value; }
+        }
 
-		[ConfigurationProperty ("namespace")]
-		public string Namespace {
-			get { return (string) base[namespaceProp]; }
-			set { base[namespaceProp] = value; }
-		}
+        [ConfigurationProperty ("namespace")]
+        public string Namespace {
+            get { return (string) base[namespaceProp]; }
+            set { base[namespaceProp] = value; }
+        }
 
-		[ConfigurationProperty ("src")]
-		public string Source {
-			get { return (string) base[sourceProp]; }
-			set { base[sourceProp] = value; }
-		}
+        [ConfigurationProperty ("src")]
+        public string Source {
+            get { return (string) base[sourceProp]; }
+            set { base[sourceProp] = value; }
+        }
 
-		[ConfigurationProperty ("tagName")]
-		public string TagName {
-			get { return (string) base[tagNameProp]; }
-			set { base[tagNameProp] = value; }
-		}
+        [ConfigurationProperty ("tagName")]
+        public string TagName {
+            get { return (string) base[tagNameProp]; }
+            set { base[tagNameProp] = value; }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("tagPrefix", DefaultValue = "/", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string TagPrefix {
-			get { return (string) base[tagPrefixProp]; }
-			set { base[tagPrefixProp] = value; }
-		}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("tagPrefix", DefaultValue = "/", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string TagPrefix {
+            get { return (string) base[tagPrefixProp]; }
+            set { base[tagPrefixProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

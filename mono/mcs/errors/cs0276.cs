@@ -4,10 +4,10 @@
 
  class Error0276 
  {
-	 protected internal string Message {
-		 internal set {
-		 }
-	 }
+     protected internal string Message {
+         internal set {
+         }
+     }
 
  }
 

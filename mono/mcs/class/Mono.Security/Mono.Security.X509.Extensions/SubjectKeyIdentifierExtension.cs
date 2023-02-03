@@ -2,7 +2,7 @@
 // SubjectKeyIdentifierExtension.cs: Handles X.509 SubjectKeyIdentifier extensions.
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2004 Novell (http://www.novell.com)
 //
@@ -37,82 +37,82 @@ using Mono.Security.X509;
 
 namespace Mono.Security.X509.Extensions {
 
-	/*
-	 * id-ce-subjectKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 14 }
-	 * 
-	 * SubjectKeyIdentifier ::= KeyIdentifier
-	 * 
-	 * KeyIdentifier ::= OCTET STRING
-	 */
+    /*
+     * id-ce-subjectKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 14 }
+     * 
+     * SubjectKeyIdentifier ::= KeyIdentifier
+     * 
+     * KeyIdentifier ::= OCTET STRING
+     */
 
 #if INSIDE_CORLIB || INSIDE_SYSTEM
-	internal
+    internal
 #else
-	public 
+    public 
 #endif
-	class SubjectKeyIdentifierExtension : X509Extension {
+    class SubjectKeyIdentifierExtension : X509Extension {
 
-		private byte[] ski;
+        private byte[] ski;
 
-		public SubjectKeyIdentifierExtension () : base () 
-		{
-			extnOid = "2.5.29.14";
-		}
+        public SubjectKeyIdentifierExtension () : base () 
+        {
+            extnOid = "2.5.29.14";
+        }
 
-		public SubjectKeyIdentifierExtension (ASN1 asn1) : base (asn1)
-		{
-		}
+        public SubjectKeyIdentifierExtension (ASN1 asn1) : base (asn1)
+        {
+        }
 
-		public SubjectKeyIdentifierExtension (X509Extension extension) : base (extension)
-		{
-		}
+        public SubjectKeyIdentifierExtension (X509Extension extension) : base (extension)
+        {
+        }
 
-		protected override void Decode () 
-		{
-			ASN1 sequence = new ASN1 (extnValue.Value);
-			if (sequence.Tag != 0x04)
-				throw new ArgumentException ("Invalid SubjectKeyIdentifier extension");
-			ski = sequence.Value;
-		}
+        protected override void Decode () 
+        {
+            ASN1 sequence = new ASN1 (extnValue.Value);
+            if (sequence.Tag != 0x04)
+                throw new ArgumentException ("Invalid SubjectKeyIdentifier extension");
+            ski = sequence.Value;
+        }
 
-		protected override void Encode ()
-		{
-			if (ski == null) {
-				throw new InvalidOperationException ("Invalid SubjectKeyIdentifier extension");
-			}
+        protected override void Encode ()
+        {
+            if (ski == null) {
+                throw new InvalidOperationException ("Invalid SubjectKeyIdentifier extension");
+            }
 
-			var seq = new ASN1 (0x04, ski);
-			extnValue = new ASN1 (0x04);
-			extnValue.Add (seq);
-		}
+            var seq = new ASN1 (0x04, ski);
+            extnValue = new ASN1 (0x04);
+            extnValue.Add (seq);
+        }
 
-		public override string Name {
-			get { return "Subject Key Identifier"; }
-		}
+        public override string Name {
+            get { return "Subject Key Identifier"; }
+        }
 
-		public byte[] Identifier {
-			get { 
-				if (ski == null)
-					return null;
-				return (byte[]) ski.Clone (); 
-			}
-			set { ski = value; }
-		}
+        public byte[] Identifier {
+            get { 
+                if (ski == null)
+                    return null;
+                return (byte[]) ski.Clone (); 
+            }
+            set { ski = value; }
+        }
 
-		public override string ToString () 
-		{
-			if (ski == null)
-				return null;
+        public override string ToString () 
+        {
+            if (ski == null)
+                return null;
 
-			StringBuilder sb = new StringBuilder ();
-			int x = 0;
-			while (x < ski.Length) {
-				sb.Append (ski [x].ToString ("X2", CultureInfo.InvariantCulture));
-				if (x % 2 == 1)
-					sb.Append (" ");
-				x++;
-			}
-			return sb.ToString ();
-		}
-	}
+            StringBuilder sb = new StringBuilder ();
+            int x = 0;
+            while (x < ski.Length) {
+                sb.Append (ski [x].ToString ("X2", CultureInfo.InvariantCulture));
+                if (x % 2 == 1)
+                    sb.Append (" ");
+                x++;
+            }
+            return sb.ToString ();
+        }
+    }
 }

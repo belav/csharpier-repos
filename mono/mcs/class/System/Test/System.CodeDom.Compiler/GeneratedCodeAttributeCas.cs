@@ -1,9 +1,9 @@
 //
 // GeneratedCodeAttributeCas.cs 
-//	- CAS unit tests for System.CodeDom.Compiler.GeneratedCodeAttribute
+//    - CAS unit tests for System.CodeDom.Compiler.GeneratedCodeAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,35 +38,35 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class GeneratedCodeAttributeCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class GeneratedCodeAttributeCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", "1.2");
-			Assert.AreEqual ("Mono", gca.Tool, "Tool");
-			Assert.AreEqual ("1.2", gca.Version, "Version");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", "1.2");
+            Assert.AreEqual ("Mono", gca.Tool, "Tool");
+            Assert.AreEqual ("1.2", gca.Version, "Version");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[2] { typeof (string), typeof (string) };
-			ConstructorInfo ci = typeof (GeneratedCodeAttribute).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(string,string)");
-			Assert.IsNotNull (ci.Invoke (new object[2] { "Mono", "1.2" }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[2] { typeof (string), typeof (string) };
+            ConstructorInfo ci = typeof (GeneratedCodeAttribute).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(string,string)");
+            Assert.IsNotNull (ci.Invoke (new object[2] { "Mono", "1.2" }), "invoke");
+        }
+    }
 }
 

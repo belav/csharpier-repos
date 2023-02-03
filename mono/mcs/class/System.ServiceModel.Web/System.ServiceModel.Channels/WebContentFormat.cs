@@ -2,7 +2,7 @@
 // WebContentFormat.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -27,11 +27,11 @@
 //
 namespace System.ServiceModel.Channels
 {
-	public enum WebContentFormat
-	{
-		Default,
-		Xml,
-		Json,
-		Raw,
-	}
+    public enum WebContentFormat
+    {
+        Default,
+        Xml,
+        Json,
+        Raw,
+    }
 }

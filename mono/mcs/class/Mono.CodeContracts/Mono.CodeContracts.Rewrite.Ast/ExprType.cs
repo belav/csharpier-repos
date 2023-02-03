@@ -2,7 +2,7 @@
 // ExprType.cs
 //
 // Authors:
-//	Chris Bacon (chrisbacon76@gmail.com)
+//    Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,24 +32,24 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-	enum ExprType {
+    enum ExprType {
 
-		Unknown,
+        Unknown,
 
-		Block,
+        Block,
 
-		Nop,
-		LoadArg,
-		LoadConstant,
-		CompareLessThan,
-		CompareGreaterThan,
-		CompareEqual,
-		Call,
-		Return,
-		Box,
-		Conv,
-		Add,
-		Sub,
+        Nop,
+        LoadArg,
+        LoadConstant,
+        CompareLessThan,
+        CompareGreaterThan,
+        CompareEqual,
+        Call,
+        Return,
+        Box,
+        Conv,
+        Add,
+        Sub,
 
-	}
+    }
 }

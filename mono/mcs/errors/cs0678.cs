@@ -2,7 +2,7 @@
 // Line: 5
 
 class X {
-	readonly volatile int j;
+    readonly volatile int j;
 
-	static void Main () {}
+    static void Main () {}
 }

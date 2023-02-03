@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System.Reflection;
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]

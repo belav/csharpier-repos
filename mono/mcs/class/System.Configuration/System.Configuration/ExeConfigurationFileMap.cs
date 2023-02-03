@@ -28,43 +28,43 @@
 
 namespace System.Configuration
 {
-	public sealed class ExeConfigurationFileMap: ConfigurationFileMap
-	{
-		string exeConfigFilename;
-		string localUserConfigFilename;
-		string roamingUserConfigFilename;
-		
-		public ExeConfigurationFileMap ()
-		{
-			exeConfigFilename = "";
-			localUserConfigFilename = "";
-			roamingUserConfigFilename = "";
-		}
-		
-		public string ExeConfigFilename {
-			get { return exeConfigFilename; }
-			set { exeConfigFilename = value; }
-		}
-		
-		public string LocalUserConfigFilename {
-			get { return localUserConfigFilename; }
-			set { localUserConfigFilename = value; }
-		}
-		
-		public string RoamingUserConfigFilename {
-			get { return roamingUserConfigFilename; }
-			set { roamingUserConfigFilename = value; }
-		}
-		
-		public override object Clone ()
-		{
-			ExeConfigurationFileMap map = new ExeConfigurationFileMap ();
-			map.exeConfigFilename = exeConfigFilename;
-			map.localUserConfigFilename = localUserConfigFilename;
-			map.roamingUserConfigFilename = roamingUserConfigFilename;
-			map.MachineConfigFilename = MachineConfigFilename;
-			return map;
-		}
-	}
+    public sealed class ExeConfigurationFileMap: ConfigurationFileMap
+    {
+        string exeConfigFilename;
+        string localUserConfigFilename;
+        string roamingUserConfigFilename;
+        
+        public ExeConfigurationFileMap ()
+        {
+            exeConfigFilename = "";
+            localUserConfigFilename = "";
+            roamingUserConfigFilename = "";
+        }
+        
+        public string ExeConfigFilename {
+            get { return exeConfigFilename; }
+            set { exeConfigFilename = value; }
+        }
+        
+        public string LocalUserConfigFilename {
+            get { return localUserConfigFilename; }
+            set { localUserConfigFilename = value; }
+        }
+        
+        public string RoamingUserConfigFilename {
+            get { return roamingUserConfigFilename; }
+            set { roamingUserConfigFilename = value; }
+        }
+        
+        public override object Clone ()
+        {
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap ();
+            map.exeConfigFilename = exeConfigFilename;
+            map.localUserConfigFilename = localUserConfigFilename;
+            map.roamingUserConfigFilename = roamingUserConfigFilename;
+            map.MachineConfigFilename = MachineConfigFilename;
+            return map;
+        }
+    }
 }
 

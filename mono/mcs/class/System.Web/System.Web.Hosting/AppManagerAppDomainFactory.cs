@@ -2,7 +2,7 @@
 // System.Web.Hosting.AppManagerAppDomainFactory
 // 
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
@@ -29,22 +29,22 @@
 using System;
 
 namespace System.Web.Hosting {
-	public sealed class AppManagerAppDomainFactory : IAppManagerAppDomainFactory {
-		public AppManagerAppDomainFactory ()
-		{
-		}
+    public sealed class AppManagerAppDomainFactory : IAppManagerAppDomainFactory {
+        public AppManagerAppDomainFactory ()
+        {
+        }
 
-		[MonoTODO ("Not implemented")]
-		public object Create (string appId, string appPath)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO ("Not implemented")]
+        public object Create (string appId, string appPath)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void Stop ()
-		{
-			// Stop all the stuff that we Create'd here
-		}
-	}
+        public void Stop ()
+        {
+            // Stop all the stuff that we Create'd here
+        }
+    }
 }
 
 

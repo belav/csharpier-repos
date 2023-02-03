@@ -1,9 +1,9 @@
 //
 // CodeVariableDeclarationStatementTest.cs
-//	- Unit tests for System.CodeDom.CodeVariableDeclarationStatement
+//    - Unit tests for System.CodeDom.CodeVariableDeclarationStatement
 //
 // Author:
-//	Gert Driesen  <drieseng@users.sourceforge.net>
+//    Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,211 +34,211 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeVariableDeclarationStatementTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ();
-			Assert.IsNull (cvds.InitExpression, "#1");
-			Assert.IsNotNull (cvds.Name, "#2");
-			Assert.AreEqual (string.Empty, cvds.Name, "#3");
-			Assert.IsNotNull (cvds.Type, "#4");
-			Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#5");
+    [TestFixture]
+    public class CodeVariableDeclarationStatementTest
+    {
+        [Test]
+        public void Constructor0 ()
+        {
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ();
+            Assert.IsNull (cvds.InitExpression, "#1");
+            Assert.IsNotNull (cvds.Name, "#2");
+            Assert.AreEqual (string.Empty, cvds.Name, "#3");
+            Assert.IsNotNull (cvds.Type, "#4");
+            Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#5");
 
-			string name = "mono";
-			cvds.Name = name;
-			Assert.AreSame (name, cvds.Name, "#6");
+            string name = "mono";
+            cvds.Name = name;
+            Assert.AreSame (name, cvds.Name, "#6");
 
-			cvds.Name = null;
-			Assert.IsNotNull (cvds.Name, "#7");
-			Assert.AreEqual (string.Empty, cvds.Name, "#8");
+            cvds.Name = null;
+            Assert.IsNotNull (cvds.Name, "#7");
+            Assert.AreEqual (string.Empty, cvds.Name, "#8");
 
-			CodeExpression expression = new CodeExpression ();
-			cvds.InitExpression = expression;
-			Assert.AreSame (expression, cvds.InitExpression, "#9");
+            CodeExpression expression = new CodeExpression ();
+            cvds.InitExpression = expression;
+            Assert.AreSame (expression, cvds.InitExpression, "#9");
 
-			CodeTypeReference type = new CodeTypeReference ("mono");
-			cvds.Type = type;
-			Assert.AreSame (type, cvds.Type, "#10");
+            CodeTypeReference type = new CodeTypeReference ("mono");
+            cvds.Type = type;
+            Assert.AreSame (type, cvds.Type, "#10");
 
-			cvds.Type = null;
-			Assert.IsNotNull (cvds.Type, "#11");
-			Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#12");
+            cvds.Type = null;
+            Assert.IsNotNull (cvds.Type, "#11");
+            Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#12");
 
-			Assert.IsNotNull (cvds.StartDirectives, "#13");
-			Assert.AreEqual (0, cvds.StartDirectives.Count, "#14");
+            Assert.IsNotNull (cvds.StartDirectives, "#13");
+            Assert.AreEqual (0, cvds.StartDirectives.Count, "#14");
 
-			Assert.IsNotNull (cvds.EndDirectives, "#15");
-			Assert.AreEqual (0, cvds.EndDirectives.Count, "#16");
+            Assert.IsNotNull (cvds.EndDirectives, "#15");
+            Assert.AreEqual (0, cvds.EndDirectives.Count, "#16");
 
-			Assert.IsNull (cvds.LinePragma, "#17");
+            Assert.IsNull (cvds.LinePragma, "#17");
 
-			CodeLinePragma clp = new CodeLinePragma ("mono", 10);
-			cvds.LinePragma = clp;
-			Assert.IsNotNull (cvds.LinePragma, "#18");
-			Assert.AreSame (clp, cvds.LinePragma, "#19");
+            CodeLinePragma clp = new CodeLinePragma ("mono", 10);
+            cvds.LinePragma = clp;
+            Assert.IsNotNull (cvds.LinePragma, "#18");
+            Assert.AreSame (clp, cvds.LinePragma, "#19");
 
-			cvds.LinePragma = null;
-			Assert.IsNull (cvds.LinePragma, "#20");
-		}
+            cvds.LinePragma = null;
+            Assert.IsNull (cvds.LinePragma, "#20");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			CodeTypeReference type = new CodeTypeReference ("mono");
-			string name = "mono";
+        [Test]
+        public void Constructor1 ()
+        {
+            CodeTypeReference type = new CodeTypeReference ("mono");
+            string name = "mono";
 
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				type, name);
-			Assert.IsNull (cvds.InitExpression, "#1");
-			Assert.IsNotNull (cvds.Name, "#2");
-			Assert.AreSame (name, cvds.Name, "#3");
-			Assert.IsNotNull (cvds.Type, "#4");
-			Assert.AreSame (type, cvds.Type, "#5");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                type, name);
+            Assert.IsNull (cvds.InitExpression, "#1");
+            Assert.IsNotNull (cvds.Name, "#2");
+            Assert.AreSame (name, cvds.Name, "#3");
+            Assert.IsNotNull (cvds.Type, "#4");
+            Assert.AreSame (type, cvds.Type, "#5");
 
-			cvds = new CodeVariableDeclarationStatement ((CodeTypeReference) null,
-				(string) null);
-			Assert.IsNotNull (cvds.Name, "#6");
-			Assert.AreEqual (string.Empty, cvds.Name, "#7");
-			Assert.IsNotNull (cvds.Type, "#8");
-			Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#9");
-		}
+            cvds = new CodeVariableDeclarationStatement ((CodeTypeReference) null,
+                (string) null);
+            Assert.IsNotNull (cvds.Name, "#6");
+            Assert.AreEqual (string.Empty, cvds.Name, "#7");
+            Assert.IsNotNull (cvds.Type, "#8");
+            Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#9");
+        }
 
-		[Test]
-		public void Constructor2 ()
-		{
-			string baseType = "monotype";
-			string name = "mono";
+        [Test]
+        public void Constructor2 ()
+        {
+            string baseType = "monotype";
+            string name = "mono";
 
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				baseType, name);
-			Assert.IsNull (cvds.InitExpression, "#1");
-			Assert.IsNotNull (cvds.Name, "#2");
-			Assert.AreSame (name, cvds.Name, "#3");
-			Assert.IsNotNull (cvds.Type, "#4");
-			Assert.AreSame (baseType, cvds.Type.BaseType, "#5");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                baseType, name);
+            Assert.IsNull (cvds.InitExpression, "#1");
+            Assert.IsNotNull (cvds.Name, "#2");
+            Assert.AreSame (name, cvds.Name, "#3");
+            Assert.IsNotNull (cvds.Type, "#4");
+            Assert.AreSame (baseType, cvds.Type.BaseType, "#5");
 
-			cvds = new CodeVariableDeclarationStatement ((string) null, 
-				(string) null);
-			Assert.IsNotNull (cvds.Name, "#6");
-			Assert.AreEqual (string.Empty, cvds.Name, "#7");
-			Assert.IsNotNull (cvds.Type, "#8");
-			Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#9");
-		}
+            cvds = new CodeVariableDeclarationStatement ((string) null, 
+                (string) null);
+            Assert.IsNotNull (cvds.Name, "#6");
+            Assert.AreEqual (string.Empty, cvds.Name, "#7");
+            Assert.IsNotNull (cvds.Type, "#8");
+            Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#9");
+        }
 
-		[Test]
-		public void Constructor3 ()
-		{
-			Type baseType = typeof (int);
-			string name = "mono";
+        [Test]
+        public void Constructor3 ()
+        {
+            Type baseType = typeof (int);
+            string name = "mono";
 
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				baseType, name);
-			Assert.IsNull (cvds.InitExpression, "#1");
-			Assert.IsNotNull (cvds.Name, "#2");
-			Assert.AreSame (name, cvds.Name, "#3");
-			Assert.IsNotNull (cvds.Type, "#4");
-			Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#5");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                baseType, name);
+            Assert.IsNull (cvds.InitExpression, "#1");
+            Assert.IsNotNull (cvds.Name, "#2");
+            Assert.AreSame (name, cvds.Name, "#3");
+            Assert.IsNotNull (cvds.Type, "#4");
+            Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#5");
 
-			cvds = new CodeVariableDeclarationStatement (baseType, 
-				(string) null);
-			Assert.IsNotNull (cvds.Name, "#6");
-			Assert.AreEqual (string.Empty, cvds.Name, "#7");
-			Assert.IsNotNull (cvds.Type, "#8");
-			Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#9");
-		}
+            cvds = new CodeVariableDeclarationStatement (baseType, 
+                (string) null);
+            Assert.IsNotNull (cvds.Name, "#6");
+            Assert.AreEqual (string.Empty, cvds.Name, "#7");
+            Assert.IsNotNull (cvds.Type, "#8");
+            Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#9");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor3_NullType ()
-		{
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				(Type) null, "mono");
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Constructor3_NullType ()
+        {
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                (Type) null, "mono");
+        }
 
-		[Test]
-		public void Constructor4 ()
-		{
-			CodeTypeReference type = new CodeTypeReference ("mono");
-			string name = "mono";
-			CodeExpression expression = new CodeExpression ();
+        [Test]
+        public void Constructor4 ()
+        {
+            CodeTypeReference type = new CodeTypeReference ("mono");
+            string name = "mono";
+            CodeExpression expression = new CodeExpression ();
 
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				type, name, expression);
-			Assert.IsNotNull (cvds.InitExpression, "#1");
-			Assert.AreSame (expression, cvds.InitExpression, "#2");
-			Assert.IsNotNull (cvds.Name, "#3");
-			Assert.AreSame (name, cvds.Name, "#4");
-			Assert.IsNotNull (cvds.Type, "#5");
-			Assert.AreSame (type, cvds.Type, "#6");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                type, name, expression);
+            Assert.IsNotNull (cvds.InitExpression, "#1");
+            Assert.AreSame (expression, cvds.InitExpression, "#2");
+            Assert.IsNotNull (cvds.Name, "#3");
+            Assert.AreSame (name, cvds.Name, "#4");
+            Assert.IsNotNull (cvds.Type, "#5");
+            Assert.AreSame (type, cvds.Type, "#6");
 
-			cvds = new CodeVariableDeclarationStatement ((CodeTypeReference) null, 
-				(string) null, (CodeExpression) null);
-			Assert.IsNull (cvds.InitExpression, "#7");
-			Assert.IsNotNull (cvds.Name, "#8");
-			Assert.AreEqual (string.Empty, cvds.Name, "#9");
-			Assert.IsNotNull (cvds.Type, "#10");
-			Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#11");
-		}
+            cvds = new CodeVariableDeclarationStatement ((CodeTypeReference) null, 
+                (string) null, (CodeExpression) null);
+            Assert.IsNull (cvds.InitExpression, "#7");
+            Assert.IsNotNull (cvds.Name, "#8");
+            Assert.AreEqual (string.Empty, cvds.Name, "#9");
+            Assert.IsNotNull (cvds.Type, "#10");
+            Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#11");
+        }
 
-		[Test]
-		public void Constructor5 ()
-		{
-			string baseType = "monotype";
-			string name = "mono";
-			CodeExpression expression = new CodeExpression ();
+        [Test]
+        public void Constructor5 ()
+        {
+            string baseType = "monotype";
+            string name = "mono";
+            CodeExpression expression = new CodeExpression ();
 
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				baseType, name, expression);
-			Assert.IsNotNull (cvds.InitExpression, "#1");
-			Assert.AreSame (expression, cvds.InitExpression, "#2");
-			Assert.IsNotNull (cvds.Name, "#3");
-			Assert.AreSame (name, cvds.Name, "#4");
-			Assert.IsNotNull (cvds.Type, "#5");
-			Assert.AreEqual (baseType, cvds.Type.BaseType, "#6");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                baseType, name, expression);
+            Assert.IsNotNull (cvds.InitExpression, "#1");
+            Assert.AreSame (expression, cvds.InitExpression, "#2");
+            Assert.IsNotNull (cvds.Name, "#3");
+            Assert.AreSame (name, cvds.Name, "#4");
+            Assert.IsNotNull (cvds.Type, "#5");
+            Assert.AreEqual (baseType, cvds.Type.BaseType, "#6");
 
-			cvds = new CodeVariableDeclarationStatement ((string) null, 
-				(string) null, (CodeExpression) null);
-			Assert.IsNull (cvds.InitExpression, "#7");
-			Assert.IsNotNull (cvds.Name, "#8");
-			Assert.AreEqual (string.Empty, cvds.Name, "#9");
-			Assert.IsNotNull (cvds.Type, "#10");
-			Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#11");
-		}
+            cvds = new CodeVariableDeclarationStatement ((string) null, 
+                (string) null, (CodeExpression) null);
+            Assert.IsNull (cvds.InitExpression, "#7");
+            Assert.IsNotNull (cvds.Name, "#8");
+            Assert.AreEqual (string.Empty, cvds.Name, "#9");
+            Assert.IsNotNull (cvds.Type, "#10");
+            Assert.AreEqual (typeof (void).FullName, cvds.Type.BaseType, "#11");
+        }
 
-		[Test]
-		public void Constructor6 ()
-		{
-			Type baseType = typeof (int);
-			string name = "mono";
-			CodeExpression expression = new CodeExpression ();
+        [Test]
+        public void Constructor6 ()
+        {
+            Type baseType = typeof (int);
+            string name = "mono";
+            CodeExpression expression = new CodeExpression ();
 
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				baseType, name, expression);
-			Assert.IsNotNull (cvds.InitExpression, "#1");
-			Assert.AreSame (expression, cvds.InitExpression, "#2");
-			Assert.IsNotNull (cvds.Name, "#3");
-			Assert.AreSame (name, cvds.Name, "#4");
-			Assert.IsNotNull (cvds.Type, "#5");
-			Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#6");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                baseType, name, expression);
+            Assert.IsNotNull (cvds.InitExpression, "#1");
+            Assert.AreSame (expression, cvds.InitExpression, "#2");
+            Assert.IsNotNull (cvds.Name, "#3");
+            Assert.AreSame (name, cvds.Name, "#4");
+            Assert.IsNotNull (cvds.Type, "#5");
+            Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#6");
 
-			cvds = new CodeVariableDeclarationStatement (baseType, 
-				(string) null, (CodeExpression) null);
-			Assert.IsNull (cvds.InitExpression, "#7");
-			Assert.IsNotNull (cvds.Name, "#8");
-			Assert.AreEqual (string.Empty, cvds.Name, "#9");
-			Assert.IsNotNull (cvds.Type, "#10");
-			Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#11");
-		}
+            cvds = new CodeVariableDeclarationStatement (baseType, 
+                (string) null, (CodeExpression) null);
+            Assert.IsNull (cvds.InitExpression, "#7");
+            Assert.IsNotNull (cvds.Name, "#8");
+            Assert.AreEqual (string.Empty, cvds.Name, "#9");
+            Assert.IsNotNull (cvds.Type, "#10");
+            Assert.AreEqual (baseType.FullName, cvds.Type.BaseType, "#11");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor6_NullType ()
-		{
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
-				(Type) null, "mono", new CodeExpression ());
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Constructor6_NullType ()
+        {
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (
+                (Type) null, "mono", new CodeExpression ());
+        }
+    }
 }

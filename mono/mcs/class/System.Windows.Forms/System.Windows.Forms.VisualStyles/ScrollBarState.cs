@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum ScrollBarState
-	{
-		Normal = 1,
-		Hot = 2,
-		Pressed = 3,
-		Disabled = 4
-	}
+    public enum ScrollBarState
+    {
+        Normal = 1,
+        Hot = 2,
+        Pressed = 3,
+        Disabled = 4
+    }
 }

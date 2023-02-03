@@ -2,7 +2,7 @@
 // IMergeInfo.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,22 +32,22 @@ using System.Collections.Generic;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-	interface IMergeInfo {
-		bool Changed { get; }
-		IEnumerable<Tuple<SymValue, SymValue, SymValue>> MergeTriples { get; }
-		IImmutableMap<SymValue, Sequence<SymValue>> ForwardG1Map { get; }
-		IImmutableMap<SymValue, Sequence<SymValue>> ForwardG2Map { get; }
+    interface IMergeInfo {
+        bool Changed { get; }
+        IEnumerable<Tuple<SymValue, SymValue, SymValue>> MergeTriples { get; }
+        IImmutableMap<SymValue, Sequence<SymValue>> ForwardG1Map { get; }
+        IImmutableMap<SymValue, Sequence<SymValue>> ForwardG2Map { get; }
 
-		bool IsResultGraph<TFunc, TAbstractDomain> (SymGraph<TFunc, TAbstractDomain> graph)
-			where TFunc : IEquatable<TFunc>, IConstantInfo
-			where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain>;
+        bool IsResultGraph<TFunc, TAbstractDomain> (SymGraph<TFunc, TAbstractDomain> graph)
+            where TFunc : IEquatable<TFunc>, IConstantInfo
+            where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain>;
 
-		bool IsGraph1<TFunc, TAbstractDomain> (SymGraph<TFunc, TAbstractDomain> graph)
-			where TFunc : IEquatable<TFunc>, IConstantInfo
-			where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain>;
+        bool IsGraph1<TFunc, TAbstractDomain> (SymGraph<TFunc, TAbstractDomain> graph)
+            where TFunc : IEquatable<TFunc>, IConstantInfo
+            where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain>;
 
-		bool IsGraph2<TFunc, TAbstractDomain> (SymGraph<TFunc, TAbstractDomain> graph)
-			where TFunc : IEquatable<TFunc>, IConstantInfo
-			where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain>;
-	}
+        bool IsGraph2<TFunc, TAbstractDomain> (SymGraph<TFunc, TAbstractDomain> graph)
+            where TFunc : IEquatable<TFunc>, IConstantInfo
+            where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain>;
+    }
 }

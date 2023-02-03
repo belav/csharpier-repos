@@ -3,14 +3,14 @@
 
 namespace N
 {
-	public class C
-	{
-	}
+    public class C
+    {
+    }
 }
 
 namespace N
 {
-	public class C
-	{
-	}
+    public class C
+    {
+    }
 }

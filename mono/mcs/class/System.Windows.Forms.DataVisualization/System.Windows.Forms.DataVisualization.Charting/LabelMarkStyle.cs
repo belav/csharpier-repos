@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,11 +27,11 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum LabelMarkStyle
-	{
-		None = 0,
-		SideMark = 1,
-		LineSideMark = 2,
-		Box = 3
-	}
+    public enum LabelMarkStyle
+    {
+        None = 0,
+        SideMark = 1,
+        LineSideMark = 2,
+        Box = 3
+    }
 }

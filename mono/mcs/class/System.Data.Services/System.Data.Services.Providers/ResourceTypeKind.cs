@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ResourceTypeKind.cs
 //  
 // Author:
@@ -29,10 +29,10 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services.Providers
 {
-	public enum ResourceTypeKind
-	{
-		EntityType = 0,
-		ComplexType = 1,
-		Primitive = 2
-	}
+    public enum ResourceTypeKind
+    {
+        EntityType = 0,
+        ComplexType = 1,
+        Primitive = 2
+    }
 }

@@ -2,7 +2,7 @@
 // SecurityKey.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,56 +33,56 @@ using System.Security.Cryptography.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	enum AlgorithmSupportType
-	{
-		Symmetric,
-		Asymmetric,
-		Unsupported,
-	}
+    enum AlgorithmSupportType
+    {
+        Symmetric,
+        Asymmetric,
+        Unsupported,
+    }
 
-	public abstract class SecurityKey
-	{
-		internal static AlgorithmSupportType GetAlgorithmSupportType (string algorithm)
-		{
-			switch (algorithm) {
-			case SecurityAlgorithms.HmacSha1Signature:
-			case SecurityAlgorithms.Psha1KeyDerivation:
-			case SecurityAlgorithms.Aes128Encryption:
-			case SecurityAlgorithms.Aes128KeyWrap:
-			case SecurityAlgorithms.Aes192Encryption:
-			case SecurityAlgorithms.Aes192KeyWrap:
-			case SecurityAlgorithms.Aes256Encryption:
-			case SecurityAlgorithms.Aes256KeyWrap:
-			case SecurityAlgorithms.TripleDesEncryption:
-			case SecurityAlgorithms.TripleDesKeyWrap:
-			case SecurityAlgorithms.DesEncryption:
-				return AlgorithmSupportType.Symmetric;
-			case SecurityAlgorithms.DsaSha1Signature:
-			case SecurityAlgorithms.RsaV15KeyWrap:
-			case SecurityAlgorithms.RsaOaepKeyWrap:
-			case SecurityAlgorithms.RsaSha1Signature:
-			case SecurityAlgorithms.RsaSha256Signature:
-				return AlgorithmSupportType.Asymmetric;
-			default:
-				return AlgorithmSupportType.Unsupported;
-			}
-		}
+    public abstract class SecurityKey
+    {
+        internal static AlgorithmSupportType GetAlgorithmSupportType (string algorithm)
+        {
+            switch (algorithm) {
+            case SecurityAlgorithms.HmacSha1Signature:
+            case SecurityAlgorithms.Psha1KeyDerivation:
+            case SecurityAlgorithms.Aes128Encryption:
+            case SecurityAlgorithms.Aes128KeyWrap:
+            case SecurityAlgorithms.Aes192Encryption:
+            case SecurityAlgorithms.Aes192KeyWrap:
+            case SecurityAlgorithms.Aes256Encryption:
+            case SecurityAlgorithms.Aes256KeyWrap:
+            case SecurityAlgorithms.TripleDesEncryption:
+            case SecurityAlgorithms.TripleDesKeyWrap:
+            case SecurityAlgorithms.DesEncryption:
+                return AlgorithmSupportType.Symmetric;
+            case SecurityAlgorithms.DsaSha1Signature:
+            case SecurityAlgorithms.RsaV15KeyWrap:
+            case SecurityAlgorithms.RsaOaepKeyWrap:
+            case SecurityAlgorithms.RsaSha1Signature:
+            case SecurityAlgorithms.RsaSha256Signature:
+                return AlgorithmSupportType.Asymmetric;
+            default:
+                return AlgorithmSupportType.Unsupported;
+            }
+        }
 
-		[MonoTODO]
-		protected SecurityKey ()
-		{
-		}
+        [MonoTODO]
+        protected SecurityKey ()
+        {
+        }
 
-		public abstract int KeySize { get; }
+        public abstract int KeySize { get; }
 
-		public abstract byte [] DecryptKey (string algorithm, byte [] keyData);
+        public abstract byte [] DecryptKey (string algorithm, byte [] keyData);
 
-		public abstract byte [] EncryptKey (string algorithm, byte [] keyData);
+        public abstract byte [] EncryptKey (string algorithm, byte [] keyData);
 
-		public abstract bool IsAsymmetricAlgorithm (string algorithm);
+        public abstract bool IsAsymmetricAlgorithm (string algorithm);
 
-		public abstract bool IsSupportedAlgorithm (string algorithm);
+        public abstract bool IsSupportedAlgorithm (string algorithm);
 
-		public abstract bool IsSymmetricAlgorithm (string algorithm);
-	}
+        public abstract bool IsSymmetricAlgorithm (string algorithm);
+    }
 }

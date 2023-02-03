@@ -33,51 +33,51 @@
 using System.Collections;
 
 namespace System.Web.Services.Discovery {
-	public sealed class DiscoveryClientResultCollection : CollectionBase {
+    public sealed class DiscoveryClientResultCollection : CollectionBase {
 
-		#region Constructors
+        #region Constructors
 
-		public DiscoveryClientResultCollection () 
-			: base ()
-		{
-		}
-		
-		#endregion // Constructors
+        public DiscoveryClientResultCollection () 
+            : base ()
+        {
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public DiscoveryClientResult this [int i] {
-			get { 
-				if (i < 0 || i >= Count)
-					throw new ArgumentOutOfRangeException (); 
-				return (DiscoveryClientResult) InnerList [i]; 
-			}	
-			set { 
-				if (i < 0 || i >= Count)
-					throw new ArgumentOutOfRangeException (); 
-				InnerList [i] = value; 
-			}
-		}				
-		
-		#endregion // Properties
+        public DiscoveryClientResult this [int i] {
+            get { 
+                if (i < 0 || i >= Count)
+                    throw new ArgumentOutOfRangeException (); 
+                return (DiscoveryClientResult) InnerList [i]; 
+            }    
+            set { 
+                if (i < 0 || i >= Count)
+                    throw new ArgumentOutOfRangeException (); 
+                InnerList [i] = value; 
+            }
+        }                
+        
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public int Add (DiscoveryClientResult value)
-		{
-			return InnerList.Add (value);
-		}
+        public int Add (DiscoveryClientResult value)
+        {
+            return InnerList.Add (value);
+        }
 
-		public bool Contains (DiscoveryClientResult value)
-		{
-			return InnerList.Contains (value);
-		}
-		
-		public void Remove (DiscoveryClientResult value)
-		{
-			InnerList.Remove (value);
-		}
+        public bool Contains (DiscoveryClientResult value)
+        {
+            return InnerList.Contains (value);
+        }
+        
+        public void Remove (DiscoveryClientResult value)
+        {
+            InnerList.Remove (value);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

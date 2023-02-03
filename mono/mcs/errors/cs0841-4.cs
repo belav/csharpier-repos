@@ -4,9 +4,9 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var v = ++v;
-	}
+    static void Main ()
+    {
+        var v = ++v;
+    }
 }
 

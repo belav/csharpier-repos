@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum StartFromZero
-	{
-		Auto = 0,
-		Yes = 1,
-		No = 2
-	}
+    public enum StartFromZero
+    {
+        Auto = 0,
+        Yes = 1,
+        No = 2
+    }
 }

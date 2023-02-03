@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ResourceExpressionEditor
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,22 +33,22 @@ using System;
 
 namespace System.Web.UI.Design {
 
-	public class ResourceExpressionEditor : ExpressionEditor
-	{
-		public ResourceExpressionEditor ()
-		{
-		}
+    public class ResourceExpressionEditor : ExpressionEditor
+    {
+        public ResourceExpressionEditor ()
+        {
+        }
 
-		public override object EvaluateExpression (string expression, object parseTimeData, Type propertyType, IServiceProvider serviceProvider)
-		{
-			throw new NotImplementedException ();
-		}
+        public override object EvaluateExpression (string expression, object parseTimeData, Type propertyType, IServiceProvider serviceProvider)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override ExpressionEditorSheet GetExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override ExpressionEditorSheet GetExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 

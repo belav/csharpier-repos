@@ -24,9 +24,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.ServiceModel {
-	public enum NetHttpMessageEncoding {
-		Binary,
-		Text,
-		Mtom
-	}
+    public enum NetHttpMessageEncoding {
+        Binary,
+        Text,
+        Mtom
+    }
 }

@@ -20,30 +20,30 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewAutoSizeColumnModeEventArgs : EventArgs {
+    public class DataGridViewAutoSizeColumnModeEventArgs : EventArgs {
 
-		private DataGridViewColumn dataGridViewColumn;
-		private DataGridViewAutoSizeColumnMode previousMode;
+        private DataGridViewColumn dataGridViewColumn;
+        private DataGridViewAutoSizeColumnMode previousMode;
 
-		public DataGridViewAutoSizeColumnModeEventArgs (DataGridViewColumn dataGridViewColumn, DataGridViewAutoSizeColumnMode previousMode) {
-			this.dataGridViewColumn = dataGridViewColumn;
-			this.previousMode = previousMode;
-		}
+        public DataGridViewAutoSizeColumnModeEventArgs (DataGridViewColumn dataGridViewColumn, DataGridViewAutoSizeColumnMode previousMode) {
+            this.dataGridViewColumn = dataGridViewColumn;
+            this.previousMode = previousMode;
+        }
 
-		public DataGridViewColumn Column {
-			get { return dataGridViewColumn; }
-		}
+        public DataGridViewColumn Column {
+            get { return dataGridViewColumn; }
+        }
 
-		public DataGridViewAutoSizeColumnMode PreviousMode {
-			get { return previousMode; }
-		}
+        public DataGridViewAutoSizeColumnMode PreviousMode {
+            get { return previousMode; }
+        }
 
-	}
+    }
 
 }

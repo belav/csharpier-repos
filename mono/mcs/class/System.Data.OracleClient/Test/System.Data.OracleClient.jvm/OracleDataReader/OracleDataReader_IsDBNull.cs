@@ -32,45 +32,45 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	class TestId13296 : ADONetTesterClass 
-	{
-		public static void Main()
-		{
-			TestId13296 tc = new TestId13296();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataReader_IsDBNull");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    class TestId13296 : ADONetTesterClass 
+    {
+        public static void Main()
+        {
+            TestId13296 tc = new TestId13296();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataReader_IsDBNull");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
 
-			base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 
-			OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			con.Open();
-			OracleCommand cmd = new OracleCommand("Select EmployeeID,City From Employees where EmployeeID = 100  ", con);
-			OracleDataReader rdr = cmd.ExecuteReader();
-			rdr.Read();
+            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            con.Open();
+            OracleCommand cmd = new OracleCommand("Select EmployeeID,City From Employees where EmployeeID = 100  ", con);
+            OracleDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
 
-			try
-			{
-				BeginCase("IsDBNull value");
-				Compare(rdr.IsDBNull(1),true );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("IsDBNull value");
+                Compare(rdr.IsDBNull(1),true );
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			if (con.State == ConnectionState.Open) con.Close();
-		}
-	}
+            if (con.State == ConnectionState.Open) con.Close();
+        }
+    }
 }

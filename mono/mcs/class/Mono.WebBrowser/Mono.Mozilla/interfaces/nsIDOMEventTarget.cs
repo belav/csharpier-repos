@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,40 +32,40 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("1c773b30-d1cf-11d2-bd95-00805f8ae3f4")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMEventTarget {
+    [Guid ("1c773b30-d1cf-11d2-bd95-00805f8ae3f4")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMEventTarget {
 
 #region nsIDOMEventTarget
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int addEventListener (
-				   /*DOMString*/ HandleRef type,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMEventListener listener,
-				   bool useCapture);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int addEventListener (
+                   /*DOMString*/ HandleRef type,
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMEventListener listener,
+                   bool useCapture);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int removeEventListener (
-				   /*DOMString*/ HandleRef type,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMEventListener listener,
-				   bool useCapture);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int removeEventListener (
+                   /*DOMString*/ HandleRef type,
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMEventListener listener,
+                   bool useCapture);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int dispatchEvent (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMEvent evt, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int dispatchEvent (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMEvent evt, out bool ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMEventTarget {
-		public static nsIDOMEventTarget GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMEventTarget obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMEventTarget).GUID, obj);
-			return o as nsIDOMEventTarget;
-		}
-	}
+    internal class nsDOMEventTarget {
+        public static nsIDOMEventTarget GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMEventTarget obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMEventTarget).GUID, obj);
+            return o as nsIDOMEventTarget;
+        }
+    }
 }

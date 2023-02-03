@@ -7,21 +7,21 @@ public class SomeProperty
 
 public abstract class SomeAbstract : ISomeProp
 {
-	public abstract SomeProperty SomeProperty { get; }
+    public abstract SomeProperty SomeProperty { get; }
 }
 
 interface ISomeProp
 {
-	SomeProperty SomeProperty { get; }
+    SomeProperty SomeProperty { get; }
 }
 
 public class Foo : SomeAbstract
 {
-	SomeProperty ISomeProp.SomeProperty { get { return null; } }
+    SomeProperty ISomeProp.SomeProperty { get { return null; } }
 
-	public override SomeProperty SomeProperty { get { return null; } }
+    public override SomeProperty SomeProperty { get { return null; } }
 
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

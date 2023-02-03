@@ -2,7 +2,7 @@
 // TypeDescriptionProviderTest.cs
 //
 // Author:
-//	Carlos Alberto Cortez (calberto.cortez@gmail.com)
+//    Carlos Alberto Cortez (calberto.cortez@gmail.com)
 //
 // Copyright (C) 2010 Novell, Inc (http://www.novell.com)
 //
@@ -34,42 +34,42 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel
 {
-	[TestFixture]
-	public class TypeDescriptionProviderTest
-	{
-		[Test]
-		public void IsSupportedType ()
-		{
-			CustomDescriptionProvider provider = new CustomDescriptionProvider ();
-			Assert.IsTrue (provider.IsSupportedType (typeof (string)), "#A1");
-			Assert.IsTrue (provider.IsSupportedType (typeof (object)), "#A2");
-			Assert.IsTrue (provider.IsSupportedType (typeof (CustomDescriptionProvider)), "#A3");
-		}
+    [TestFixture]
+    public class TypeDescriptionProviderTest
+    {
+        [Test]
+        public void IsSupportedType ()
+        {
+            CustomDescriptionProvider provider = new CustomDescriptionProvider ();
+            Assert.IsTrue (provider.IsSupportedType (typeof (string)), "#A1");
+            Assert.IsTrue (provider.IsSupportedType (typeof (object)), "#A2");
+            Assert.IsTrue (provider.IsSupportedType (typeof (CustomDescriptionProvider)), "#A3");
+        }
 
-		[Test]
-		public void GetRuntimeType ()
-		{
-			CustomDescriptionProvider provider = new CustomDescriptionProvider ();
-			Assert.AreEqual (typeof (CustomDescriptionProvider), provider.GetRuntimeType (typeof (CustomDescriptionProvider)), "#A0");
-			Assert.AreEqual (typeof (object), provider.GetRuntimeType (typeof (object)), "#A1");
-		}
+        [Test]
+        public void GetRuntimeType ()
+        {
+            CustomDescriptionProvider provider = new CustomDescriptionProvider ();
+            Assert.AreEqual (typeof (CustomDescriptionProvider), provider.GetRuntimeType (typeof (CustomDescriptionProvider)), "#A0");
+            Assert.AreEqual (typeof (object), provider.GetRuntimeType (typeof (object)), "#A1");
+        }
 
-		[Test]
-		public void GetExtenderProviders ()
-		{
-			CustomDescriptionProvider provider = new CustomDescriptionProvider ();
-			IExtenderProvider [] providers = provider.GetExtenderProviders (typeof (object));
-			Assert.IsNotNull (providers, "#A0");
-			Assert.AreEqual (0, providers.Length, "#A1");
-		}
+        [Test]
+        public void GetExtenderProviders ()
+        {
+            CustomDescriptionProvider provider = new CustomDescriptionProvider ();
+            IExtenderProvider [] providers = provider.GetExtenderProviders (typeof (object));
+            Assert.IsNotNull (providers, "#A0");
+            Assert.AreEqual (0, providers.Length, "#A1");
+        }
 
-		class CustomDescriptionProvider : TypeDescriptionProvider
-		{
-			public new IExtenderProvider [] GetExtenderProviders (object instance)
-			{
-				return base.GetExtenderProviders (instance);
-			}
-		}
-	}
+        class CustomDescriptionProvider : TypeDescriptionProvider
+        {
+            public new IExtenderProvider [] GetExtenderProviders (object instance)
+            {
+                return base.GetExtenderProviders (instance);
+            }
+        }
+    }
 }
 

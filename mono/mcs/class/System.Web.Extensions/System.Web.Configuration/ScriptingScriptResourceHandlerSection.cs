@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptingScriptResourceHandlerSection.cs
 //
 // Author:
@@ -34,27 +34,27 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingScriptResourceHandlerSection : ConfigurationSection
-	{
-		[ConfigurationPropertyAttribute ("enableCaching", DefaultValue = true)]
-		public bool EnableCaching {
-			get {
-				return (bool) this ["enableCaching"];
-			}
-			set {
-				this ["enableCaching"] = value;
-			}
-		}
+    public sealed class ScriptingScriptResourceHandlerSection : ConfigurationSection
+    {
+        [ConfigurationPropertyAttribute ("enableCaching", DefaultValue = true)]
+        public bool EnableCaching {
+            get {
+                return (bool) this ["enableCaching"];
+            }
+            set {
+                this ["enableCaching"] = value;
+            }
+        }
 
-		[ConfigurationPropertyAttribute ("enableCompression", DefaultValue = true)]
-		public bool EnableCompression {
-			get {
-				return (bool) this ["enableCompression"];
-			}
-			set {
-				this ["enableCompression"] = value;
-			}
-		}
-	}
+        [ConfigurationPropertyAttribute ("enableCompression", DefaultValue = true)]
+        public bool EnableCompression {
+            get {
+                return (bool) this ["enableCompression"];
+            }
+            set {
+                this ["enableCompression"] = value;
+            }
+        }
+    }
 }
 

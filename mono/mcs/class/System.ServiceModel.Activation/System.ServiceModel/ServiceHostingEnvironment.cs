@@ -2,7 +2,7 @@
 // ServiceHostingEnvironment.cs
 //
 // Author:
-//	Ankit Jain  <jankit@novell.com>
+//    Ankit Jain  <jankit@novell.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,13 +28,13 @@
 
 namespace System.ServiceModel {
  
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblySystemServiceModel_3_0)]
-	public static class ServiceHostingEnvironment
-	{
-		public static bool AspNetCompatibilityEnabled { get; internal set; }
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblySystemServiceModel_3_0)]
+    public static class ServiceHostingEnvironment
+    {
+        public static bool AspNetCompatibilityEnabled { get; internal set; }
  
-		public static void EnsureServiceAvailable (string virtualPath)
-		{
-		}
-	}
+        public static void EnsureServiceAvailable (string virtualPath)
+        {
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // PrivacyNoticeElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,56 +54,56 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public class PrivacyNoticeElement
-		 : BindingElementExtensionElement
-	{
-		ConfigurationPropertyCollection _properties;
+    public class PrivacyNoticeElement
+         : BindingElementExtensionElement
+    {
+        ConfigurationPropertyCollection _properties;
 
-		public PrivacyNoticeElement () {
-		}
-
-
-		// Properties
-
-		public override Type BindingElementType {
-			get { return typeof(PrivacyNoticeBindingElement); }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					_properties.Add (new ConfigurationProperty ("url", typeof (Uri), null, new UriTypeConverter (), null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("version", typeof (int), "0", null, new IntegerValidator (0, int.MaxValue, false), ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
-
-		[ConfigurationProperty ("url",
-			 Options = ConfigurationPropertyOptions.None)]
-		public Uri Url {
-			get { return (Uri) base ["url"]; }
-			set { base ["url"] = value; }
-		}
-
-		[IntegerValidator (MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("version",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "0")]
-		public int Version {
-			get { return (int) base ["version"]; }
-			set { base ["version"] = value; }
-		}
+        public PrivacyNoticeElement () {
+        }
 
 
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
+        // Properties
 
-	}
+        public override Type BindingElementType {
+            get { return typeof(PrivacyNoticeBindingElement); }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get {
+                if (_properties == null) {
+                    _properties = new ConfigurationPropertyCollection ();
+                    _properties.Add (new ConfigurationProperty ("url", typeof (Uri), null, new UriTypeConverter (), null, ConfigurationPropertyOptions.None));
+                    _properties.Add (new ConfigurationProperty ("version", typeof (int), "0", null, new IntegerValidator (0, int.MaxValue, false), ConfigurationPropertyOptions.None));
+                }
+                return _properties;
+            }
+        }
+
+        [ConfigurationProperty ("url",
+             Options = ConfigurationPropertyOptions.None)]
+        public Uri Url {
+            get { return (Uri) base ["url"]; }
+            set { base ["url"] = value; }
+        }
+
+        [IntegerValidator (MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        [ConfigurationProperty ("version",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "0")]
+        public int Version {
+            get { return (int) base ["version"]; }
+            set { base ["version"] = value; }
+        }
+
+
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement () {
+            throw new NotImplementedException ();
+        }
+
+    }
 
 }

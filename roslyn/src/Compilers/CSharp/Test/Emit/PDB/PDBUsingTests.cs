@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -973,7 +973,7 @@ using Y = B::N;
 
 public class C
 {
-	public static void Main() 
+    public static void Main() 
     {
         System.Console.WriteLine(new D()); 
         System.Console.WriteLine(new E()); 
@@ -1041,7 +1041,7 @@ extern alias B;
 
 public class C
 {
-	public static void Main() 
+    public static void Main() 
     {
         System.Console.WriteLine(new N.D()); 
         System.Console.WriteLine(new A::N.D()); 

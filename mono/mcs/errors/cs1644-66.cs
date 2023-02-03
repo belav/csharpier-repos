@@ -6,12 +6,12 @@ using System;
 
 class C
 {
-	public event EventHandler Event
-	{
-		add => Ignore ();
-	}
+    public event EventHandler Event
+    {
+        add => Ignore ();
+    }
 
-	static void Ignore ()
-	{
-	}
+    static void Ignore ()
+    {
+    }
 }

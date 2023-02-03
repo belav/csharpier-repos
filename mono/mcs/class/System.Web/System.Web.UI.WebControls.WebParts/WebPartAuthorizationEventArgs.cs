@@ -31,44 +31,44 @@
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	public class WebPartAuthorizationEventArgs : EventArgs
-	{
-		bool authorized;
-		Type type;
-		string path;
-		string authorizationFilter;
-		bool isShared;
+    public class WebPartAuthorizationEventArgs : EventArgs
+    {
+        bool authorized;
+        Type type;
+        string path;
+        string authorizationFilter;
+        bool isShared;
 
-		public WebPartAuthorizationEventArgs (Type type,
-						      string path,
-						      string authorizationFilter,
-						      bool isShared)
-		{
-			this.type = type;
-			this.path = path;
-			this.authorizationFilter = authorizationFilter;
-			this.isShared = isShared;
-		}
+        public WebPartAuthorizationEventArgs (Type type,
+                              string path,
+                              string authorizationFilter,
+                              bool isShared)
+        {
+            this.type = type;
+            this.path = path;
+            this.authorizationFilter = authorizationFilter;
+            this.isShared = isShared;
+        }
 
-		public Type Type {
-			get { return type; }
-		}
+        public Type Type {
+            get { return type; }
+        }
 
-		public string Path {
-			get { return path; }
-		}
+        public string Path {
+            get { return path; }
+        }
 
-		public string AuthorizationFilter {
-			get { return authorizationFilter; }
-		}
+        public string AuthorizationFilter {
+            get { return authorizationFilter; }
+        }
 
-		public bool IsShared {
-			get { return isShared; }
-		}
+        public bool IsShared {
+            get { return isShared; }
+        }
 
-		public bool IsAuthorized {
-			get { return authorized; }
-			set { authorized = value; }
-		}
-	}
+        public bool IsAuthorized {
+            get { return authorized; }
+            set { authorized = value; }
+        }
+    }
 }

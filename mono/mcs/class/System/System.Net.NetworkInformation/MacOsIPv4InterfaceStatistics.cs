@@ -2,9 +2,9 @@
 // System.Net.NetworkInformation.IPv4InterfaceStatistics
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
-//	Miguel de Icaza (miguel@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
+//    Miguel de Icaza (miguel@ximian.com)
 //
 // Copyright (c) 2006-2008 Novell, Inc. (http://www.novell.com)
 //
@@ -28,62 +28,62 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net.NetworkInformation {
-	// dummy class
-	class MacOsIPv4InterfaceStatistics : IPv4InterfaceStatistics
-	{
-		//MacOsNetworkInterface macos;
+    // dummy class
+    class MacOsIPv4InterfaceStatistics : IPv4InterfaceStatistics
+    {
+        //MacOsNetworkInterface macos;
 
-		public MacOsIPv4InterfaceStatistics (MacOsNetworkInterface parent)
-		{
-			//macos = parent;
-		}
+        public MacOsIPv4InterfaceStatistics (MacOsNetworkInterface parent)
+        {
+            //macos = parent;
+        }
 
-		public override long BytesReceived {
-			get { return 0; }
-		}
+        public override long BytesReceived {
+            get { return 0; }
+        }
 
-		public override long BytesSent {
-			get { return 0; }
-		}
+        public override long BytesSent {
+            get { return 0; }
+        }
 
-		public override long IncomingPacketsDiscarded {
-			get { return 0; }
-		}
+        public override long IncomingPacketsDiscarded {
+            get { return 0; }
+        }
 
-		public override long IncomingPacketsWithErrors {
-			get { return 0; }
-		}
+        public override long IncomingPacketsWithErrors {
+            get { return 0; }
+        }
 
-		public override long IncomingUnknownProtocolPackets {
-			get { return 0; }
-		}
+        public override long IncomingUnknownProtocolPackets {
+            get { return 0; }
+        }
 
-		public override long NonUnicastPacketsReceived {
-			get { return 0; }
-		}
+        public override long NonUnicastPacketsReceived {
+            get { return 0; }
+        }
 
-		public override long NonUnicastPacketsSent {
-			get { return 0; }
-		}
+        public override long NonUnicastPacketsSent {
+            get { return 0; }
+        }
 
-		public override long OutgoingPacketsDiscarded {
-			get { return 0; }
-		}
+        public override long OutgoingPacketsDiscarded {
+            get { return 0; }
+        }
 
-		public override long OutgoingPacketsWithErrors {
-			get { return 0; }
-		}
+        public override long OutgoingPacketsWithErrors {
+            get { return 0; }
+        }
 
-		public override long OutputQueueLength {
-			get { return 0; }
-		}
+        public override long OutputQueueLength {
+            get { return 0; }
+        }
 
-		public override long UnicastPacketsReceived {
-			get { return 0; }
-		}
+        public override long UnicastPacketsReceived {
+            get { return 0; }
+        }
 
-		public override long UnicastPacketsSent {
-			get { return 0; }
-		}
-	}
+        public override long UnicastPacketsSent {
+            get { return 0; }
+        }
+    }
 }

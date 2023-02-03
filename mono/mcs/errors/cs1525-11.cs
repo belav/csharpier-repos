@@ -3,8 +3,8 @@
 
 public class Test
 {
-	public static void Main ()
-	{
+    public static void Main ()
+    {
                 object[] x = new object[] { 0, out i};
-	}
+    }
 }

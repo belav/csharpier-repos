@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Alan McGovern (amcgovern@novell.com)
+//    Alan McGovern (amcgovern@novell.com)
 //
 
 
@@ -30,7 +30,7 @@ using System.IO.Packaging;
 using System.Collections.Generic;
 
 namespace MonoTests.System.IO.Packaging {
-	
+    
     public class FakePackage : Package {
         Dictionary<Uri, PackagePart> Parts { get; set; }
         public List<Uri> CreatedParts { get; private set; }

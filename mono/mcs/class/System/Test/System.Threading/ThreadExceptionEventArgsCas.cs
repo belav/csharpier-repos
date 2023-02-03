@@ -1,9 +1,9 @@
 //
 // ThreadExceptionEventArgsCas.cs 
-//	- CAS unit tests for System.Threading.ThreadExceptionEventArgs
+//    - CAS unit tests for System.Threading.ThreadExceptionEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,33 +37,33 @@ using System.Threading;
 
 namespace MonoCasTests.System.Threading {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ThreadExceptionEventArgsCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ThreadExceptionEventArgsCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			ThreadExceptionEventArgs teea = new ThreadExceptionEventArgs (null);
-			Assert.IsNull (teea.Exception, "Exception");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            ThreadExceptionEventArgs teea = new ThreadExceptionEventArgs (null);
+            Assert.IsNull (teea.Exception, "Exception");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (Exception) };
-			ConstructorInfo ci = typeof (ThreadExceptionEventArgs).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(Exception)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { null }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[1] { typeof (Exception) };
+            ConstructorInfo ci = typeof (ThreadExceptionEventArgs).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(Exception)");
+            Assert.IsNotNull (ci.Invoke (new object[1] { null }), "invoke");
+        }
+    }
 }

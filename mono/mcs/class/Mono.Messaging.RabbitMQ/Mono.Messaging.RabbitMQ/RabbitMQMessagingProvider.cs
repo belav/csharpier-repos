@@ -2,7 +2,7 @@
 // Mono.Messaging.RabbitMQ
 //
 // Authors:
-//	  Michael Barker (mike@middlesoft.co.uk)
+//      Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -40,111 +40,111 @@ using RabbitMQ.Client;
 
 namespace Mono.Messaging.RabbitMQ {
 
-	public class RabbitMQMessagingProvider : IMessagingProvider {
-		
-		private int txCounter = 0;
-		private readonly Guid localId;
-		private readonly MessagingContextPool contextPool;
-		
-		public RabbitMQMessagingProvider ()
-		{
-			localId = Guid.NewGuid ();
-			contextPool = new MessagingContextPool (new MessageFactory (this),
-													CreateConnection);
-		}
-		
-		public IMessage CreateMessage ()
-		{
-			return new MessageBase ();
-		}
-		
-		public IMessageQueueTransaction CreateMessageQueueTransaction ()
-		{
-			Interlocked.Increment (ref txCounter);
-			string txId = localId.ToString () + "_" + txCounter.ToString ();
-			
-			return new RabbitMQMessageQueueTransaction (txId, contextPool);
-		}
-		
-		public IMessagingContext CreateContext (string host)
-		{
-			return contextPool.GetContext (host);
-		}
-		
-		private IConnection CreateConnection (string host)
-		{
-			ConnectionFactory cf = new ConnectionFactory ();
-			cf.Address = host;
-			return cf.CreateConnection ();
-		}
-		
-		public void DeleteQueue (QueueReference qRef)
-		{
-			RabbitMQMessageQueue.Delete (qRef);
-		}
-		
-		private readonly IDictionary queues = new Hashtable ();
-		private readonly ReaderWriterLock qLock = new ReaderWriterLock ();
-		private const int TIMEOUT = 15000;
-		
-		public IMessageQueue[] GetPublicQueues ()
-		{
-			IMessageQueue[] qs;
-			qLock.AcquireReaderLock (TIMEOUT);
-			try {
-				ICollection qCollection = queues.Values;
-				qs = new IMessageQueue[qCollection.Count];
-				qCollection.CopyTo (qs, 0);
-				return qs;
-			} finally {
-				qLock.ReleaseReaderLock ();
-			}
-		}
-		
-		public bool Exists (QueueReference qRef)
-		{
-			qLock.AcquireReaderLock (TIMEOUT);
-			try {
-				return queues.Contains (qRef);
-			} finally {
-				qLock.ReleaseReaderLock ();
-			}
-		}
-		
-		public IMessageQueue CreateMessageQueue (QueueReference qRef,
-		                                         bool transactional)
-		{
-			qLock.AcquireWriterLock (TIMEOUT);
-			try {
-				IMessageQueue mq = new RabbitMQMessageQueue (this, qRef, transactional);
-				queues[qRef] = mq;
-				return mq;
-			} finally {
-				qLock.ReleaseWriterLock ();
-			}
-		}
+    public class RabbitMQMessagingProvider : IMessagingProvider {
+        
+        private int txCounter = 0;
+        private readonly Guid localId;
+        private readonly MessagingContextPool contextPool;
+        
+        public RabbitMQMessagingProvider ()
+        {
+            localId = Guid.NewGuid ();
+            contextPool = new MessagingContextPool (new MessageFactory (this),
+                                                    CreateConnection);
+        }
+        
+        public IMessage CreateMessage ()
+        {
+            return new MessageBase ();
+        }
+        
+        public IMessageQueueTransaction CreateMessageQueueTransaction ()
+        {
+            Interlocked.Increment (ref txCounter);
+            string txId = localId.ToString () + "_" + txCounter.ToString ();
+            
+            return new RabbitMQMessageQueueTransaction (txId, contextPool);
+        }
+        
+        public IMessagingContext CreateContext (string host)
+        {
+            return contextPool.GetContext (host);
+        }
+        
+        private IConnection CreateConnection (string host)
+        {
+            ConnectionFactory cf = new ConnectionFactory ();
+            cf.Address = host;
+            return cf.CreateConnection ();
+        }
+        
+        public void DeleteQueue (QueueReference qRef)
+        {
+            RabbitMQMessageQueue.Delete (qRef);
+        }
+        
+        private readonly IDictionary queues = new Hashtable ();
+        private readonly ReaderWriterLock qLock = new ReaderWriterLock ();
+        private const int TIMEOUT = 15000;
+        
+        public IMessageQueue[] GetPublicQueues ()
+        {
+            IMessageQueue[] qs;
+            qLock.AcquireReaderLock (TIMEOUT);
+            try {
+                ICollection qCollection = queues.Values;
+                qs = new IMessageQueue[qCollection.Count];
+                qCollection.CopyTo (qs, 0);
+                return qs;
+            } finally {
+                qLock.ReleaseReaderLock ();
+            }
+        }
+        
+        public bool Exists (QueueReference qRef)
+        {
+            qLock.AcquireReaderLock (TIMEOUT);
+            try {
+                return queues.Contains (qRef);
+            } finally {
+                qLock.ReleaseReaderLock ();
+            }
+        }
+        
+        public IMessageQueue CreateMessageQueue (QueueReference qRef,
+                                                 bool transactional)
+        {
+            qLock.AcquireWriterLock (TIMEOUT);
+            try {
+                IMessageQueue mq = new RabbitMQMessageQueue (this, qRef, transactional);
+                queues[qRef] = mq;
+                return mq;
+            } finally {
+                qLock.ReleaseWriterLock ();
+            }
+        }
 
-		public IMessageQueue GetMessageQueue (QueueReference qRef)
-		{
-			qLock.AcquireReaderLock (TIMEOUT);
-			try {
-				if (queues.Contains (qRef))
-					return (IMessageQueue) queues[qRef];
-				else {
-					LockCookie lc = qLock.UpgradeToWriterLock (TIMEOUT);
-					try {
-						IMessageQueue mq = new RabbitMQMessageQueue (this, qRef, false);
-						queues[qRef] = mq;
-						return mq;
-					} finally {
-						qLock.DowngradeFromWriterLock (ref lc);
-					}
-				}
-			} finally {
-				qLock.ReleaseReaderLock ();
-			}
-		}
-		
+        public IMessageQueue GetMessageQueue (QueueReference qRef)
+        {
+            qLock.AcquireReaderLock (TIMEOUT);
+            try {
+                if (queues.Contains (qRef))
+                    return (IMessageQueue) queues[qRef];
+                else {
+                    LockCookie lc = qLock.UpgradeToWriterLock (TIMEOUT);
+                    try {
+                        IMessageQueue mq = new RabbitMQMessageQueue (this, qRef, false);
+                        queues[qRef] = mq;
+                        return mq;
+                    } finally {
+                        qLock.DowngradeFromWriterLock (ref lc);
+                    }
+                }
+            } finally {
+                qLock.ReleaseReaderLock ();
+            }
+        }
+        
 
-	}
+    }
 }

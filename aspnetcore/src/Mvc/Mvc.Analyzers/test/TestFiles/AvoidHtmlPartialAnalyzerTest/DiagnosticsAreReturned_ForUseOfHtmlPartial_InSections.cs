@@ -1,4 +1,4 @@
-﻿namespace AspNetCore
+namespace AspNetCore
 {
     using System;
     using System.Collections.Generic;

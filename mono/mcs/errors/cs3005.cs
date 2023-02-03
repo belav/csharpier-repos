@@ -6,12 +6,12 @@ using System;
 [assembly: CLSCompliant (true)]
 
 public class ErrorCS3005 {
-	public int FOO = 0;
-	public int foo = 1;
+    public int FOO = 0;
+    public int foo = 1;
 
-	public static void Main ( ) {
-		ErrorCS3005 error = new ErrorCS3005 ();
-		Console.WriteLine ("This should make the compiler to complain ERROR CS3005, number: {0}", error.foo);
-	}
+    public static void Main ( ) {
+        ErrorCS3005 error = new ErrorCS3005 ();
+        Console.WriteLine ("This should make the compiler to complain ERROR CS3005, number: {0}", error.foo);
+    }
 }
 

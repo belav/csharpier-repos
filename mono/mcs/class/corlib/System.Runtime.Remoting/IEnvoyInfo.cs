@@ -33,9 +33,9 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IEnvoyInfo
-	{
-		IMessageSink EnvoySinks { get; set; }
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IEnvoyInfo
+    {
+        IMessageSink EnvoySinks { get; set; }
+    }
 }

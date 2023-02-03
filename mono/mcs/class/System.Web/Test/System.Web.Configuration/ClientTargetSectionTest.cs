@@ -1,9 +1,9 @@
 //
 // ClientTargetSectionTest.cs 
-//	- unit tests for System.Web.Configuration.ClientTargetSection
+//    - unit tests for System.Web.Configuration.ClientTargetSection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,17 +38,17 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class ClientTargetSectionTest  {
+    [TestFixture]
+    public class ClientTargetSectionTest  {
 
-		[Test]
-		public void Defaults ()
-		{
-			ClientTargetSection c = new ClientTargetSection ();
+        [Test]
+        public void Defaults ()
+        {
+            ClientTargetSection c = new ClientTargetSection ();
 
-			Assert.IsNotNull (c.ClientTargets, "A1");
-			Assert.AreEqual (typeof (ClientTargetCollection), c.ClientTargets.GetType(), "A2");
-		}
-	}
+            Assert.IsNotNull (c.ClientTargets, "A1");
+            Assert.AreEqual (typeof (ClientTargetCollection), c.ClientTargets.GetType(), "A2");
+        }
+    }
 }
 

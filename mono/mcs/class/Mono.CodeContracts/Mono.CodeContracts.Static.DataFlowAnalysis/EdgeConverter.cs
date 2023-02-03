@@ -2,7 +2,7 @@
 // EdgeConverter.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,5 +27,5 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-	delegate AbstractState EdgeConverter<Label, AbstractState, EdgeData> (Label from, Label to, bool isJoinPoint, EdgeData data, AbstractState newState);
+    delegate AbstractState EdgeConverter<Label, AbstractState, EdgeData> (Label from, Label to, bool isJoinPoint, EdgeData data, AbstractState newState);
 }

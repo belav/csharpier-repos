@@ -5,21 +5,21 @@ using System;
 
 public class my
 {
-	public static int Main()
-	{
-		try
-		{
-		    Type t = typeof(test<>);
-		}
-		catch (Exception e)
-		{
-		    Console.WriteLine("FAIL: {0}", e.Message);
-		    return 99;
-		}
+    public static int Main()
+    {
+        try
+        {
+            Type t = typeof(test<>);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL: {0}", e.Message);
+            return 99;
+        }
         
-		Console.WriteLine("PASS");
-		return 100;
-	}
+        Console.WriteLine("PASS");
+        return 100;
+    }
 
 }
 

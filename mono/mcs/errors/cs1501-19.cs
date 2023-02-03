@@ -3,10 +3,10 @@
 
 class A<T> where T : CB, IA
 {
-	void Foo (T t)
-	{
-		t.Call ();
-	}
+    void Foo (T t)
+    {
+        t.Call ();
+    }
 }
 
 class CB : CA
@@ -15,12 +15,12 @@ class CB : CA
 
 class CA
 {
-	public void Call (int arg)
-	{
-	}
+    public void Call (int arg)
+    {
+    }
 }
 
 interface IA
 {
-	void Call (bool arg, int arg2);
+    void Call (bool arg, int arg2);
 }

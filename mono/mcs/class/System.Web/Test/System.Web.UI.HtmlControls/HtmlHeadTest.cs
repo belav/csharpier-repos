@@ -35,22 +35,22 @@ using MonoTests.stand_alone.WebHarness;
 namespace MonoTests.System.Web.UI.HtmlControls
 {
         [TestFixture]
-	public class HtmlHeadTest
-	{
-		[TestFixtureSetUp]
-		public void SetUp ()
-		{
-			WebTest.CopyResource (this.GetType (), "HtmlTitleCodeRender_Bug662918.aspx", "HtmlTitleCodeRender_Bug662918.aspx");
-		}
-		
-		[Test (Description="Bug #662918")]
-		public void HtmlTitleCodeRender_Bug662918 ()
-		{
-			string origHtml = "<head><title>\r\n\tTitle text\r\n</title></head>";
-			string pageHtml = new WebTest ("HtmlTitleCodeRender_Bug662918.aspx").Run ();
-			string renderedHtml = HtmlDiff.GetControlFromPageHtml (pageHtml);
+    public class HtmlHeadTest
+    {
+        [TestFixtureSetUp]
+        public void SetUp ()
+        {
+            WebTest.CopyResource (this.GetType (), "HtmlTitleCodeRender_Bug662918.aspx", "HtmlTitleCodeRender_Bug662918.aspx");
+        }
+        
+        [Test (Description="Bug #662918")]
+        public void HtmlTitleCodeRender_Bug662918 ()
+        {
+            string origHtml = "<head><title>\r\n\tTitle text\r\n</title></head>";
+            string pageHtml = new WebTest ("HtmlTitleCodeRender_Bug662918.aspx").Run ();
+            string renderedHtml = HtmlDiff.GetControlFromPageHtml (pageHtml);
 
-			HtmlDiff.AssertAreEqual (origHtml, renderedHtml, "#A1");
-		}
-	}
+            HtmlDiff.AssertAreEqual (origHtml, renderedHtml, "#A1");
+        }
+    }
 }

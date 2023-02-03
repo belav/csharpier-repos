@@ -2,7 +2,7 @@
 // SecurityStateTest.cs - NUnit Test Cases for SecurityState
 //
 // Author:
-//	Sebastien Pouliot (sebastien@ximian.com)
+//    Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -34,25 +34,25 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Security {
 
-	[TestFixture]
-	public class SecurityStateTest {
+    [TestFixture]
+    public class SecurityStateTest {
 
-		class ContreteSecurityState : SecurityState {
-			public override void EnsureState ()
-			{
-				throw new NotImplementedException ();
-			}
-		}
+        class ContreteSecurityState : SecurityState {
+            public override void EnsureState ()
+            {
+                throw new NotImplementedException ();
+            }
+        }
 
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-		[Test]
-		public void Defaults ()
-		{
-			ContreteSecurityState ss = new ContreteSecurityState ();
-			Assert.IsFalse (ss.IsStateAvailable (), "IsStateAvailable");
-		}
+        [Test]
+        public void Defaults ()
+        {
+            ContreteSecurityState ss = new ContreteSecurityState ();
+            Assert.IsFalse (ss.IsStateAvailable (), "IsStateAvailable");
+        }
 #endif // MONO_FEATURE_MULTIPLE_APPDOMAINS
-	}
+    }
 }
 
 

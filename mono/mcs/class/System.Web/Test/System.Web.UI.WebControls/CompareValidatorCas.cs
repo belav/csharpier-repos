@@ -1,9 +1,9 @@
 //
 // CompareValidatorCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.CompareValidator
+//    - CAS unit tests for System.Web.UI.WebControls.CompareValidator
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,62 +40,62 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CompareValidatorCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CompareValidatorCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CompareValidatorTest unit = new CompareValidatorTest ();
-			unit.CompareValidator_ViewState ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            CompareValidatorTest unit = new CompareValidatorTest ();
+            unit.CompareValidator_ViewState ();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (TargetInvocationException))]
-		public void ValueToCompareTest_Deny_Minimal ()
-		{
-			CompareValidatorTest unit = new CompareValidatorTest ();
-			unit.CompareValidator_ValueToCompareTest ();
-			// note: this is a failing security check on reflection,
-			// the SecurityException is the InnerException of the 
-			// TargetInvocationException
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException (typeof (TargetInvocationException))]
+        public void ValueToCompareTest_Deny_Minimal ()
+        {
+            CompareValidatorTest unit = new CompareValidatorTest ();
+            unit.CompareValidator_ValueToCompareTest ();
+            // note: this is a failing security check on reflection,
+            // the SecurityException is the InnerException of the 
+            // TargetInvocationException
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void ValueToCompareTest_PermitOnly_Minimal ()
-		{
-			CompareValidatorTest unit = new CompareValidatorTest ();
-			unit.CompareValidator_ValueToCompareTest ();
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+        public void ValueToCompareTest_PermitOnly_Minimal ()
+        {
+            CompareValidatorTest unit = new CompareValidatorTest ();
+            unit.CompareValidator_ValueToCompareTest ();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (TargetInvocationException))]
-		public void ControlToCompareTest_Deny_Minimal ()
-		{
-			CompareValidatorTest unit = new CompareValidatorTest ();
-			unit.CompareValidator_ControlToCompareTest ();
-			// note: this is a failing security check on reflection,
-			// the SecurityException is the InnerException of the 
-			// TargetInvocationException
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException (typeof (TargetInvocationException))]
+        public void ControlToCompareTest_Deny_Minimal ()
+        {
+            CompareValidatorTest unit = new CompareValidatorTest ();
+            unit.CompareValidator_ControlToCompareTest ();
+            // note: this is a failing security check on reflection,
+            // the SecurityException is the InnerException of the 
+            // TargetInvocationException
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void ControlToCompareTest_PermitOnly_Minimal ()
-		{
-			CompareValidatorTest unit = new CompareValidatorTest ();
-			unit.CompareValidator_ControlToCompareTest ();
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+        public void ControlToCompareTest_PermitOnly_Minimal ()
+        {
+            CompareValidatorTest unit = new CompareValidatorTest ();
+            unit.CompareValidator_ControlToCompareTest ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (CompareValidator); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (CompareValidator); }
+        }
+    }
 }

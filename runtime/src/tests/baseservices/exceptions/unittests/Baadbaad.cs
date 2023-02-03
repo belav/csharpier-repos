@@ -44,51 +44,51 @@ public class TestSet
 
 public class BaadbaadTest
 {
-	Trace _trace;
-	public int Run()
-	{
-		_trace = new Trace("BaadbaadTest", "1234");
-		try
-		{
-			DoStuff();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e);
-			_trace.Write("4");
-		}
-		return _trace.Match();
-	}
-	void DoStuff()
-	{
-		try
-		{
-			try
-			{
-				try
-				{
-					throw new Exception();
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine(e);
-					_trace.Write("1");
-					throw;
-				}
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				_trace.Write("2");
-				throw;
-			}
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e);
-			_trace.Write("3");
-			throw;
-		}
-	}
+    Trace _trace;
+    public int Run()
+    {
+        _trace = new Trace("BaadbaadTest", "1234");
+        try
+        {
+            DoStuff();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("4");
+        }
+        return _trace.Match();
+    }
+    void DoStuff()
+    {
+        try
+        {
+            try
+            {
+                try
+                {
+                    throw new Exception();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    _trace.Write("1");
+                    throw;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                _trace.Write("2");
+                throw;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _trace.Write("3");
+            throw;
+        }
+    }
 }
 

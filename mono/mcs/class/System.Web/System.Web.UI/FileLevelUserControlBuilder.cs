@@ -32,10 +32,10 @@ using System.Web.UI;
 
 namespace System.Web.UI
 {
-	public class FileLevelUserControlBuilder : RootBuilder
-	{
-		public FileLevelUserControlBuilder ()
-		{
-		}
-	}
+    public class FileLevelUserControlBuilder : RootBuilder
+    {
+        public FileLevelUserControlBuilder ()
+        {
+        }
+    }
 }

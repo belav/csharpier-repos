@@ -2,7 +2,7 @@
 // SecurityKeyIdentifierTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -34,31 +34,31 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-	[TestFixture]
-	public class SecurityKeyIdentifierTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FindEmpty ()
-		{
-			new SecurityKeyIdentifier ().Find<X509ThumbprintKeyIdentifierClause> ();
-		}
+    [TestFixture]
+    public class SecurityKeyIdentifierTest
+    {
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void FindEmpty ()
+        {
+            new SecurityKeyIdentifier ().Find<X509ThumbprintKeyIdentifierClause> ();
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CreateKeyEmpty ()
-		{
-			new SecurityKeyIdentifier ().Find<X509ThumbprintKeyIdentifierClause> ();
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void CreateKeyEmpty ()
+        {
+            new SecurityKeyIdentifier ().Find<X509ThumbprintKeyIdentifierClause> ();
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void ReadOnlyAdd ()
-		{
-			SecurityKeyIdentifier ki = new SecurityKeyIdentifier ();
-			ki.MakeReadOnly ();
-			ki.Add (new LocalIdKeyIdentifierClause ("foo"));
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (InvalidOperationException))]
+        public void ReadOnlyAdd ()
+        {
+            SecurityKeyIdentifier ki = new SecurityKeyIdentifier ();
+            ki.MakeReadOnly ();
+            ki.Add (new LocalIdKeyIdentifierClause ("foo"));
+        }
+    }
 }
 #endif

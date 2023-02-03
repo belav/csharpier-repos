@@ -3,13 +3,13 @@
 
 public class Programa
 {
-	static void Jajaja (out int mengano)
-	{
-		mengano = 3;
-	}
+    static void Jajaja (out int mengano)
+    {
+        mengano = 3;
+    }
 
-	static void Run (out int mengano)
-	{
-		Jajaja (mengano);
-	}
+    static void Run (out int mengano)
+    {
+        Jajaja (mengano);
+    }
 }

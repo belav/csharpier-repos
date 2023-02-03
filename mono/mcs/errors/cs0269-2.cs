@@ -3,9 +3,9 @@
 
 public class A
 {
-	void Test(out A a)
-	{
-		a.ToString ();
-		a = null;
-	}
+    void Test(out A a)
+    {
+        a.ToString ();
+        a = null;
+    }
 }

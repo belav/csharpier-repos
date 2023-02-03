@@ -31,71 +31,71 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-	/// <summary>
-	///  Represents the Token returned by the metadata to represent a Property.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public readonly struct PropertyToken : IEquatable<PropertyToken> {
+    /// <summary>
+    ///  Represents the Token returned by the metadata to represent a Property.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public readonly struct PropertyToken : IEquatable<PropertyToken> {
 
-		internal readonly int tokValue;
+        internal readonly int tokValue;
 
-		public static readonly PropertyToken Empty = new PropertyToken ();
+        public static readonly PropertyToken Empty = new PropertyToken ();
 
-		internal PropertyToken (int val)
-		{
-			tokValue = val;
-		}
+        internal PropertyToken (int val)
+        {
+            tokValue = val;
+        }
 
-		/// <summary>
-		/// </summary>
-		public override bool Equals (object obj)
-		{
-			bool res = obj is PropertyToken;
+        /// <summary>
+        /// </summary>
+        public override bool Equals (object obj)
+        {
+            bool res = obj is PropertyToken;
 
-			if (res) {
-				PropertyToken that = (PropertyToken) obj;
-				res = (this.tokValue == that.tokValue);
-			}
+            if (res) {
+                PropertyToken that = (PropertyToken) obj;
+                res = (this.tokValue == that.tokValue);
+            }
 
-			return res;
-		}
+            return res;
+        }
 
-		public bool Equals (PropertyToken obj)
-		{
-			return (this.tokValue == obj.tokValue);
-		}
+        public bool Equals (PropertyToken obj)
+        {
+            return (this.tokValue == obj.tokValue);
+        }
 
-		public static bool operator == (PropertyToken a, PropertyToken b)
-		{
-			return Equals (a, b);
-		}
+        public static bool operator == (PropertyToken a, PropertyToken b)
+        {
+            return Equals (a, b);
+        }
 
-		public static bool operator != (PropertyToken a, PropertyToken b)
-		{
-			return !Equals (a, b);
-		}
+        public static bool operator != (PropertyToken a, PropertyToken b)
+        {
+            return !Equals (a, b);
+        }
 
-		/// <summary>
-		///  Tests whether the given object is an instance of
-		///  PropertyToken and has the same token value.
-		/// </summary>
-		public override int GetHashCode ()
-		{
-			return tokValue;
-		}
+        /// <summary>
+        ///  Tests whether the given object is an instance of
+        ///  PropertyToken and has the same token value.
+        /// </summary>
+        public override int GetHashCode ()
+        {
+            return tokValue;
+        }
 
 
-		/// <summary>
-		///  Returns the metadata token for this Property.
-		/// </summary>
-		public int Token {
-			get {
-				return tokValue;
-			}
-		}
+        /// <summary>
+        ///  Returns the metadata token for this Property.
+        /// </summary>
+        public int Token {
+            get {
+                return tokValue;
+            }
+        }
 
-	}
+    }
 
 }
 

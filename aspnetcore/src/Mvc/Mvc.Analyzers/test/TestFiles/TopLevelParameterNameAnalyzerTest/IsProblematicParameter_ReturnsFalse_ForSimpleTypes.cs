@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles
 {

@@ -2,7 +2,7 @@
 // ConfigUtil.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006,2010 Novell, Inc.  http://www.novell.com
 //
@@ -42,26 +42,26 @@ using System.Xml;
 
 namespace System.Security.Authentication.ExtendedProtection.Configuration
 {
-	internal static class ConfigUtil
-	{
-		// ugh, we cannot use extension methods yet.
-		internal static T GetCustomAttribute<T> (MemberInfo m, bool inherit)
-		{
-			var atts = m.GetCustomAttributes (typeof (T), false);
-			return atts.Length > 0 ? (T) atts [0] : default (T);
-		}
+    internal static class ConfigUtil
+    {
+        // ugh, we cannot use extension methods yet.
+        internal static T GetCustomAttribute<T> (MemberInfo m, bool inherit)
+        {
+            var atts = m.GetCustomAttributes (typeof (T), false);
+            return atts.Length > 0 ? (T) atts [0] : default (T);
+        }
 
-		internal static ConfigurationProperty BuildProperty (Type t, string name)
-		{
-			var mi = t.GetProperty (name);
+        internal static ConfigurationProperty BuildProperty (Type t, string name)
+        {
+            var mi = t.GetProperty (name);
 
-			var a = GetCustomAttribute<ConfigurationPropertyAttribute> (mi, false);
-			var tca = GetCustomAttribute<TypeConverterAttribute> (mi, false);
-			var va = GetCustomAttribute<ConfigurationValidatorAttribute> (mi, false);
+            var a = GetCustomAttribute<ConfigurationPropertyAttribute> (mi, false);
+            var tca = GetCustomAttribute<TypeConverterAttribute> (mi, false);
+            var va = GetCustomAttribute<ConfigurationValidatorAttribute> (mi, false);
 
-			return new ConfigurationProperty (a.Name, mi.PropertyType, a.DefaultValue, tca != null ? (TypeConverter) Activator.CreateInstance (Type.GetType (tca.ConverterTypeName)) : null, va != null ? va.ValidatorInstance : null, a.Options);
-		}
-	}
+            return new ConfigurationProperty (a.Name, mi.PropertyType, a.DefaultValue, tca != null ? (TypeConverter) Activator.CreateInstance (Type.GetType (tca.ConverterTypeName)) : null, va != null ? va.ValidatorInstance : null, a.Options);
+        }
+    }
 }
 
 #endif

@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Drawing;
@@ -34,351 +34,351 @@ using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
 {
-	[ListBindable (false)]
-	[Editor ("System.Windows.Forms.Design.ToolStripCollectionEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
-	public class ToolStripItemCollection : ArrangedElementCollection, IList, ICollection, IEnumerable
-	{
-		private ToolStrip owner;
-		private bool internal_created;
-		
-		#region Public Constructor
-		public ToolStripItemCollection (ToolStrip owner, ToolStripItem[] value) : base ()
-		{
-			if (owner == null)
-				throw new ArgumentNullException ("owner");
+    [ListBindable (false)]
+    [Editor ("System.Windows.Forms.Design.ToolStripCollectionEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
+    public class ToolStripItemCollection : ArrangedElementCollection, IList, ICollection, IEnumerable
+    {
+        private ToolStrip owner;
+        private bool internal_created;
+        
+        #region Public Constructor
+        public ToolStripItemCollection (ToolStrip owner, ToolStripItem[] value) : base ()
+        {
+            if (owner == null)
+                throw new ArgumentNullException ("owner");
 
-			if (value == null)
-				throw new ArgumentNullException ("toolStripItems");
+            if (value == null)
+                throw new ArgumentNullException ("toolStripItems");
 
-			this.owner = owner;
+            this.owner = owner;
 
-			foreach (ToolStripItem tsi in value)
-				this.AddNoOwnerOrLayout (tsi);
-		}
+            foreach (ToolStripItem tsi in value)
+                this.AddNoOwnerOrLayout (tsi);
+        }
 
-		internal ToolStripItemCollection (ToolStrip owner, ToolStripItem[] value, bool internalcreated) : base ()
-		{
-			if (owner == null)
-				throw new ArgumentNullException ("owner");
+        internal ToolStripItemCollection (ToolStrip owner, ToolStripItem[] value, bool internalcreated) : base ()
+        {
+            if (owner == null)
+                throw new ArgumentNullException ("owner");
 
-			this.internal_created = internalcreated;
-			this.owner = owner;
-			
-			if (value != null)
-				foreach (ToolStripItem tsi in value)
-					this.AddNoOwnerOrLayout (tsi);
-		}
-		#endregion
+            this.internal_created = internalcreated;
+            this.owner = owner;
+            
+            if (value != null)
+                foreach (ToolStripItem tsi in value)
+                    this.AddNoOwnerOrLayout (tsi);
+        }
+        #endregion
 
-		#region Public Properties
-		public override bool IsReadOnly { get { return base.IsReadOnly; } }
-		
-		public new virtual ToolStripItem this[int index] { get { return (ToolStripItem)base[index]; } }
-		
-		public virtual ToolStripItem this[string key] {
-			get {
-				foreach (ToolStripItem tsi in this)
-					if (tsi.Name == key)
-						return tsi;
+        #region Public Properties
+        public override bool IsReadOnly { get { return base.IsReadOnly; } }
+        
+        public new virtual ToolStripItem this[int index] { get { return (ToolStripItem)base[index]; } }
+        
+        public virtual ToolStripItem this[string key] {
+            get {
+                foreach (ToolStripItem tsi in this)
+                    if (tsi.Name == key)
+                        return tsi;
 
-				return null;
-			}
-		}
-		#endregion
+                return null;
+            }
+        }
+        #endregion
 
-		#region Public Methods
-		public ToolStripItem Add (Image image)
-		{
-			ToolStripItem tsb = owner.CreateDefaultItem (string.Empty, image, null);
-			this.Add (tsb);
-			return tsb;
-		}
+        #region Public Methods
+        public ToolStripItem Add (Image image)
+        {
+            ToolStripItem tsb = owner.CreateDefaultItem (string.Empty, image, null);
+            this.Add (tsb);
+            return tsb;
+        }
 
-		public ToolStripItem Add (string text)
-		{
-			ToolStripItem tsb = owner.CreateDefaultItem (text, null, null);
-			this.Add (tsb);
-			return tsb;
-		}
+        public ToolStripItem Add (string text)
+        {
+            ToolStripItem tsb = owner.CreateDefaultItem (text, null, null);
+            this.Add (tsb);
+            return tsb;
+        }
 
-		public int Add (ToolStripItem value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
-			
-			if (Contains (value))
-				return IndexOf (value);
+        public int Add (ToolStripItem value)
+        {
+            if (value == null)
+                throw new ArgumentNullException ("value");
+            
+            if (Contains (value))
+                return IndexOf (value);
 
-			value.InternalOwner = owner;
-				
-			if (value is ToolStripMenuItem && (value as ToolStripMenuItem).ShortcutKeys != Keys.None)
-				ToolStripManager.AddToolStripMenuItem ((ToolStripMenuItem)value);
-				
-			int index = base.Add (value);
-			
-			if (this.internal_created)
-				owner.OnItemAdded (new ToolStripItemEventArgs (value));
-				
-			return index;
-		}
+            value.InternalOwner = owner;
+                
+            if (value is ToolStripMenuItem && (value as ToolStripMenuItem).ShortcutKeys != Keys.None)
+                ToolStripManager.AddToolStripMenuItem ((ToolStripMenuItem)value);
+                
+            int index = base.Add (value);
+            
+            if (this.internal_created)
+                owner.OnItemAdded (new ToolStripItemEventArgs (value));
+                
+            return index;
+        }
 
-		public ToolStripItem Add (string text, Image image)
-		{
-			ToolStripItem tsb = owner.CreateDefaultItem (text, image, null);
-			this.Add (tsb);
-			return tsb;
-		}
+        public ToolStripItem Add (string text, Image image)
+        {
+            ToolStripItem tsb = owner.CreateDefaultItem (text, image, null);
+            this.Add (tsb);
+            return tsb;
+        }
 
-		public ToolStripItem Add (string text, Image image, EventHandler onClick)
-		{
-			ToolStripItem tsb = owner.CreateDefaultItem (text, image, onClick);
-			this.Add (tsb);
-			return tsb;
-		}
+        public ToolStripItem Add (string text, Image image, EventHandler onClick)
+        {
+            ToolStripItem tsb = owner.CreateDefaultItem (text, image, onClick);
+            this.Add (tsb);
+            return tsb;
+        }
 
-		public void AddRange (ToolStripItem[] toolStripItems)
-		{
-			if (toolStripItems == null)
-				throw new ArgumentNullException ("toolStripItems");
-			if (this.IsReadOnly)
-				throw new NotSupportedException ("This collection is read-only");
+        public void AddRange (ToolStripItem[] toolStripItems)
+        {
+            if (toolStripItems == null)
+                throw new ArgumentNullException ("toolStripItems");
+            if (this.IsReadOnly)
+                throw new NotSupportedException ("This collection is read-only");
 
-			this.owner.SuspendLayout ();
+            this.owner.SuspendLayout ();
 
-			foreach (ToolStripItem tsi in toolStripItems)
-				this.Add (tsi);
+            foreach (ToolStripItem tsi in toolStripItems)
+                this.Add (tsi);
 
-			this.owner.ResumeLayout ();
-		}
+            this.owner.ResumeLayout ();
+        }
 
-		public void AddRange (ToolStripItemCollection toolStripItems)
-		{
-			if (toolStripItems == null)
-				throw new ArgumentNullException ("toolStripItems");
-			if (this.IsReadOnly)
-				throw new NotSupportedException ("This collection is read-only");
+        public void AddRange (ToolStripItemCollection toolStripItems)
+        {
+            if (toolStripItems == null)
+                throw new ArgumentNullException ("toolStripItems");
+            if (this.IsReadOnly)
+                throw new NotSupportedException ("This collection is read-only");
 
-			this.owner.SuspendLayout ();
+            this.owner.SuspendLayout ();
 
-			foreach (ToolStripItem tsi in toolStripItems)
-				this.Add (tsi);
+            foreach (ToolStripItem tsi in toolStripItems)
+                this.Add (tsi);
 
-			this.owner.ResumeLayout ();
-		}
+            this.owner.ResumeLayout ();
+        }
 
-		public new virtual void Clear ()
-		{
-			if (this.IsReadOnly)
-				throw new NotSupportedException ("This collection is read-only");
+        public new virtual void Clear ()
+        {
+            if (this.IsReadOnly)
+                throw new NotSupportedException ("This collection is read-only");
 
-			if (internal_created)
-				foreach (ToolStripItem item in this) {
-					item.InternalOwner = null;
-					item.Parent = null;
-				}
+            if (internal_created)
+                foreach (ToolStripItem item in this) {
+                    item.InternalOwner = null;
+                    item.Parent = null;
+                }
 
-			base.Clear ();
-			owner.PerformLayout ();
-		}
+            base.Clear ();
+            owner.PerformLayout ();
+        }
 
-		// Don't modify Owner or Parent - used by internal collection instances.
-		internal void ClearInternal ()
-		{
-			base.Clear ();
-			owner.PerformLayout ();
-		}
+        // Don't modify Owner or Parent - used by internal collection instances.
+        internal void ClearInternal ()
+        {
+            base.Clear ();
+            owner.PerformLayout ();
+        }
 
-		public bool Contains (ToolStripItem value)
-		{
-			return base.Contains (value);
-		}
+        public bool Contains (ToolStripItem value)
+        {
+            return base.Contains (value);
+        }
 
-		public virtual bool ContainsKey (string key)
-		{
-			return this[key] != null;
-		}
+        public virtual bool ContainsKey (string key)
+        {
+            return this[key] != null;
+        }
 
-		public void CopyTo (ToolStripItem[] array, int index)
-		{
-			base.CopyTo (array, index);
-		}
+        public void CopyTo (ToolStripItem[] array, int index)
+        {
+            base.CopyTo (array, index);
+        }
 
-		[MonoTODO ("searchAllChildren parameter isn't used")]
-		public ToolStripItem[] Find (string key, bool searchAllChildren)
-		{
-			if (key == null || key.Length == 0)
-				throw new ArgumentNullException ("key");
+        [MonoTODO ("searchAllChildren parameter isn't used")]
+        public ToolStripItem[] Find (string key, bool searchAllChildren)
+        {
+            if (key == null || key.Length == 0)
+                throw new ArgumentNullException ("key");
 
-			List<ToolStripItem> list = new List<ToolStripItem> ();
+            List<ToolStripItem> list = new List<ToolStripItem> ();
 
-			foreach (ToolStripItem tsi in this) {
-				if (String.Compare (tsi.Name, key, true) == 0) {
-					list.Add (tsi);
+            foreach (ToolStripItem tsi in this) {
+                if (String.Compare (tsi.Name, key, true) == 0) {
+                    list.Add (tsi);
 
-					if (searchAllChildren) {
-						// TODO: tsi does not have an items property yet..
-					}
-				}
-			}
+                    if (searchAllChildren) {
+                        // TODO: tsi does not have an items property yet..
+                    }
+                }
+            }
 
-			return list.ToArray ();
-		}
+            return list.ToArray ();
+        }
 
-		public int IndexOf (ToolStripItem value)
-		{
-			return base.IndexOf (value);
-		}
+        public int IndexOf (ToolStripItem value)
+        {
+            return base.IndexOf (value);
+        }
 
-		public virtual int IndexOfKey (string key)
-		{
-			ToolStripItem tsi = this[key];
+        public virtual int IndexOfKey (string key)
+        {
+            ToolStripItem tsi = this[key];
 
-			if (tsi == null)
-				return -1;
+            if (tsi == null)
+                return -1;
 
-			return this.IndexOf (tsi);
-		}
+            return this.IndexOf (tsi);
+        }
 
-		public void Insert (int index, ToolStripItem value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
+        public void Insert (int index, ToolStripItem value)
+        {
+            if (value == null)
+                throw new ArgumentNullException ("value");
 
-			if (value is ToolStripMenuItem && (value as ToolStripMenuItem).ShortcutKeys != Keys.None)
-				ToolStripManager.AddToolStripMenuItem ((ToolStripMenuItem)value);
+            if (value is ToolStripMenuItem && (value as ToolStripMenuItem).ShortcutKeys != Keys.None)
+                ToolStripManager.AddToolStripMenuItem ((ToolStripMenuItem)value);
 
-			if (value.Owner != null)
-				value.Owner.Items.Remove (value);
-				
-			base.Insert (index, value);
-			
-			if (internal_created) {
-				value.InternalOwner = owner;
-				owner.OnItemAdded (new ToolStripItemEventArgs (value));
-			}
-			
-			if (owner.Created)
-				owner.PerformLayout ();
-		}
+            if (value.Owner != null)
+                value.Owner.Items.Remove (value);
+                
+            base.Insert (index, value);
+            
+            if (internal_created) {
+                value.InternalOwner = owner;
+                owner.OnItemAdded (new ToolStripItemEventArgs (value));
+            }
+            
+            if (owner.Created)
+                owner.PerformLayout ();
+        }
 
-		public void Remove (ToolStripItem value)
-		{
-			if (this.IsReadOnly)
-				throw new NotSupportedException ("This collection is read-only");
+        public void Remove (ToolStripItem value)
+        {
+            if (this.IsReadOnly)
+                throw new NotSupportedException ("This collection is read-only");
 
-			base.Remove (value);
-			
-			if (value != null && internal_created) {
-				value.InternalOwner = null;
-				value.Parent = null;
-			}
-			
-			if (internal_created)
-				owner.OnItemRemoved (new ToolStripItemEventArgs (value));
-			
-			if (owner.Created)	
-				owner.PerformLayout ();
-		}
+            base.Remove (value);
+            
+            if (value != null && internal_created) {
+                value.InternalOwner = null;
+                value.Parent = null;
+            }
+            
+            if (internal_created)
+                owner.OnItemRemoved (new ToolStripItemEventArgs (value));
+            
+            if (owner.Created)    
+                owner.PerformLayout ();
+        }
 
-		public void RemoveAt (int index)
-		{
-			if (this.IsReadOnly)
-				throw new NotSupportedException ("This collection is read-only");
+        public void RemoveAt (int index)
+        {
+            if (this.IsReadOnly)
+                throw new NotSupportedException ("This collection is read-only");
 
-			ToolStripItem tsi = (ToolStripItem)base[index];
-			this.Remove (tsi);
-		}
+            ToolStripItem tsi = (ToolStripItem)base[index];
+            this.Remove (tsi);
+        }
 
-		public virtual void RemoveByKey (string key)
-		{
-			if (this.IsReadOnly)
-				throw new NotSupportedException ("This collection is read-only");
+        public virtual void RemoveByKey (string key)
+        {
+            if (this.IsReadOnly)
+                throw new NotSupportedException ("This collection is read-only");
 
-			ToolStripItem tsi = this[key];
+            ToolStripItem tsi = this[key];
 
-			if (tsi != null)
-				this.Remove (tsi);
+            if (tsi != null)
+                this.Remove (tsi);
 
-			return;
-		}
-		#endregion
+            return;
+        }
+        #endregion
 
-		#region Internal Methods
-		// When we create DisplayedItems, we don't want to modify the item's
-		// parent or trigger a layout.
-		internal int AddNoOwnerOrLayout (ToolStripItem value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
+        #region Internal Methods
+        // When we create DisplayedItems, we don't want to modify the item's
+        // parent or trigger a layout.
+        internal int AddNoOwnerOrLayout (ToolStripItem value)
+        {
+            if (value == null)
+                throw new ArgumentNullException ("value");
 
-			int index = base.Add (value);
-			return index;
-		}
+            int index = base.Add (value);
+            return index;
+        }
 
-		internal void InsertNoOwnerOrLayout (int index, ToolStripItem value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
+        internal void InsertNoOwnerOrLayout (int index, ToolStripItem value)
+        {
+            if (value == null)
+                throw new ArgumentNullException ("value");
 
-			if (index > Count)
-				base.Add (value);
-			else
-				base.Insert (index, value);
-		}
+            if (index > Count)
+                base.Add (value);
+            else
+                base.Insert (index, value);
+        }
 
-		internal void RemoveNoOwnerOrLayout (ToolStripItem value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
+        internal void RemoveNoOwnerOrLayout (ToolStripItem value)
+        {
+            if (value == null)
+                throw new ArgumentNullException ("value");
 
-			base.Remove (value);
-		}
-		#endregion
-		
-		#region IList Members
-		int IList.Add (object value)
-		{
-			return this.Add ((ToolStripItem)value);
-		}
+            base.Remove (value);
+        }
+        #endregion
+        
+        #region IList Members
+        int IList.Add (object value)
+        {
+            return this.Add ((ToolStripItem)value);
+        }
 
-		void IList.Clear ()
-		{
-			this.Clear ();
-		}
+        void IList.Clear ()
+        {
+            this.Clear ();
+        }
 
-		bool IList.Contains (object value)
-		{
-			return this.Contains ((ToolStripItem)value);
-		}
+        bool IList.Contains (object value)
+        {
+            return this.Contains ((ToolStripItem)value);
+        }
 
-		int IList.IndexOf (object value)
-		{
-			return this.IndexOf ((ToolStripItem)value);
-		}
+        int IList.IndexOf (object value)
+        {
+            return this.IndexOf ((ToolStripItem)value);
+        }
 
-		void IList.Insert (int index, object value)
-		{
-			this.Insert (index, (ToolStripItem)value);
-		}
+        void IList.Insert (int index, object value)
+        {
+            this.Insert (index, (ToolStripItem)value);
+        }
 
-		bool IList.IsFixedSize {
-			get { return this.IsFixedSize; }
-		}
+        bool IList.IsFixedSize {
+            get { return this.IsFixedSize; }
+        }
 
-		void IList.Remove (object value)
-		{
-			this.Remove ((ToolStripItem)value); ;
-		}
+        void IList.Remove (object value)
+        {
+            this.Remove ((ToolStripItem)value); ;
+        }
 
-		void IList.RemoveAt (int index)
-		{
-			this.RemoveAt (index);
-		}
+        void IList.RemoveAt (int index)
+        {
+            this.RemoveAt (index);
+        }
 
-		object IList.this[int index] {
-			get { return this[index]; }
-			set { throw new NotSupportedException (); }
-		}
-		#endregion
-	}
+        object IList.this[int index] {
+            get { return this[index]; }
+            set { throw new NotSupportedException (); }
+        }
+        #endregion
+    }
 }

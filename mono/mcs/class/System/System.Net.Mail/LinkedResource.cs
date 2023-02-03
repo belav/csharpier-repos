@@ -2,7 +2,7 @@
 // System.Net.Mail.LinkedResource.cs
 //
 // Author:
-//	John Luke (john.luke@gmail.com)
+//    John Luke (john.luke@gmail.com)
 //
 // Copyright (C) John Luke, 2005
 //
@@ -34,96 +34,96 @@ using System.Net.Mime;
 using System.Text;
 
 namespace System.Net.Mail {
-	public class LinkedResource : AttachmentBase
-	{
-		#region Fields
-		
-		Uri contentLink;
+    public class LinkedResource : AttachmentBase
+    {
+        #region Fields
+        
+        Uri contentLink;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public LinkedResource (string fileName) : base (fileName)
-		{
-			if (fileName == null)
-				throw new ArgumentNullException ();
-		}
-		
-		public LinkedResource (string fileName, ContentType contentType) : base (fileName, contentType)
-		{
-			if (fileName == null)
-				throw new ArgumentNullException ();
-		}
-		
-		public LinkedResource (string fileName, string mediaType) : base (fileName, mediaType)
-		{
-			if (fileName == null)
-				throw new ArgumentNullException ();
-		}
+        public LinkedResource (string fileName) : base (fileName)
+        {
+            if (fileName == null)
+                throw new ArgumentNullException ();
+        }
+        
+        public LinkedResource (string fileName, ContentType contentType) : base (fileName, contentType)
+        {
+            if (fileName == null)
+                throw new ArgumentNullException ();
+        }
+        
+        public LinkedResource (string fileName, string mediaType) : base (fileName, mediaType)
+        {
+            if (fileName == null)
+                throw new ArgumentNullException ();
+        }
 
-		public LinkedResource (Stream contentStream) : base (contentStream)
-		{
-			if (contentStream == null)
-				throw new ArgumentNullException ();
-		}
-		
-		public LinkedResource (Stream contentStream, ContentType contentType) : base (contentStream, contentType)
-		{
-			if (contentStream == null)
-				throw new ArgumentNullException ();
-		}
-		
-		public LinkedResource (Stream contentStream, string mediaType) : base (contentStream, mediaType)
-		{
-			if (contentStream == null)
-				throw new ArgumentNullException ();
-		}
+        public LinkedResource (Stream contentStream) : base (contentStream)
+        {
+            if (contentStream == null)
+                throw new ArgumentNullException ();
+        }
+        
+        public LinkedResource (Stream contentStream, ContentType contentType) : base (contentStream, contentType)
+        {
+            if (contentStream == null)
+                throw new ArgumentNullException ();
+        }
+        
+        public LinkedResource (Stream contentStream, string mediaType) : base (contentStream, mediaType)
+        {
+            if (contentStream == null)
+                throw new ArgumentNullException ();
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public Uri ContentLink {
-			get { return contentLink; }
-			set { contentLink = value; }
-		}
+        public Uri ContentLink {
+            get { return contentLink; }
+            set { contentLink = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public static LinkedResource CreateLinkedResourceFromString (string content)
-		{
-			if (content == null)
-				throw new ArgumentNullException ();
-			MemoryStream ms = new MemoryStream (Encoding.Default.GetBytes (content));
-			LinkedResource lr = new LinkedResource (ms);
-			lr.TransferEncoding = TransferEncoding.QuotedPrintable;
-			return lr;
-		}
-		
-		public static LinkedResource CreateLinkedResourceFromString (string content, ContentType contentType)
-		{
-			if (content == null)
-				throw new ArgumentNullException ();
-			MemoryStream ms = new MemoryStream (Encoding.Default.GetBytes (content));
-			LinkedResource lr = new LinkedResource (ms, contentType);
-			lr.TransferEncoding = TransferEncoding.QuotedPrintable;
-			return lr;
-		}
-		
-		public static LinkedResource CreateLinkedResourceFromString (string content, Encoding contentEncoding, string mediaType)
-		{
-			if (content == null)
-				throw new ArgumentNullException ();
-			MemoryStream ms = new MemoryStream (contentEncoding.GetBytes (content));
-			LinkedResource lr = new LinkedResource (ms, mediaType);
-			lr.TransferEncoding = TransferEncoding.QuotedPrintable;
-			return lr;
-		}
+        public static LinkedResource CreateLinkedResourceFromString (string content)
+        {
+            if (content == null)
+                throw new ArgumentNullException ();
+            MemoryStream ms = new MemoryStream (Encoding.Default.GetBytes (content));
+            LinkedResource lr = new LinkedResource (ms);
+            lr.TransferEncoding = TransferEncoding.QuotedPrintable;
+            return lr;
+        }
+        
+        public static LinkedResource CreateLinkedResourceFromString (string content, ContentType contentType)
+        {
+            if (content == null)
+                throw new ArgumentNullException ();
+            MemoryStream ms = new MemoryStream (Encoding.Default.GetBytes (content));
+            LinkedResource lr = new LinkedResource (ms, contentType);
+            lr.TransferEncoding = TransferEncoding.QuotedPrintable;
+            return lr;
+        }
+        
+        public static LinkedResource CreateLinkedResourceFromString (string content, Encoding contentEncoding, string mediaType)
+        {
+            if (content == null)
+                throw new ArgumentNullException ();
+            MemoryStream ms = new MemoryStream (contentEncoding.GetBytes (content));
+            LinkedResource lr = new LinkedResource (ms, mediaType);
+            lr.TransferEncoding = TransferEncoding.QuotedPrintable;
+            return lr;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 

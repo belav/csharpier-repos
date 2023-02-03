@@ -14,7 +14,7 @@ namespace HFATest
 #endif
 
 #if NATIVE_IJW
-	public const string dllType = "native_ijw";
+    public const string dllType = "native_ijw";
 #else
         public const string dllType = "native_cpp";
 #endif

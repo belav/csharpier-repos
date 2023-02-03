@@ -31,28 +31,28 @@ using System.Text;
 
 namespace System.ServiceModel.Channels
 {
-	internal class MtomMessageEncoderFactory : MessageEncoderFactory
-	{
-		MtomMessageEncodingBindingElement owner;
-		MtomMessageEncoder encoder;
+    internal class MtomMessageEncoderFactory : MessageEncoderFactory
+    {
+        MtomMessageEncodingBindingElement owner;
+        MtomMessageEncoder encoder;
 
-		public MtomMessageEncoderFactory (
-			MtomMessageEncodingBindingElement owner)
-		{
-			this.owner = owner;
-			encoder = new MtomMessageEncoder (this);
-		}
+        public MtomMessageEncoderFactory (
+            MtomMessageEncodingBindingElement owner)
+        {
+            this.owner = owner;
+            encoder = new MtomMessageEncoder (this);
+        }
 
-		public MtomMessageEncodingBindingElement Owner {
-			get { return owner; }
-		}
+        public MtomMessageEncodingBindingElement Owner {
+            get { return owner; }
+        }
 
-		public override MessageEncoder Encoder {
-			get { return encoder; }
-		}
+        public override MessageEncoder Encoder {
+            get { return encoder; }
+        }
 
-		public override MessageVersion MessageVersion {
-			get { return owner.MessageVersion; }
-		}
-	}
+        public override MessageVersion MessageVersion {
+            get { return owner.MessageVersion; }
+        }
+    }
 }

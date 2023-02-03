@@ -2,7 +2,7 @@
 // System.StringComparison enumeration
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,15 +30,15 @@ using System.Runtime.InteropServices;
 
 namespace System {
 
-	[ComVisible (true)]
-	[Serializable]
-	public enum StringComparison {
+    [ComVisible (true)]
+    [Serializable]
+    public enum StringComparison {
 
-		CurrentCulture,
-		CurrentCultureIgnoreCase,
-		InvariantCulture,
-		InvariantCultureIgnoreCase,
-		Ordinal,
-		OrdinalIgnoreCase
-	}
+        CurrentCulture,
+        CurrentCultureIgnoreCase,
+        InvariantCulture,
+        InvariantCultureIgnoreCase,
+        Ordinal,
+        OrdinalIgnoreCase
+    }
 }

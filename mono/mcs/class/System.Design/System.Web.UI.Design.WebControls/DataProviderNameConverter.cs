@@ -34,32 +34,32 @@ using System.Data;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class DataProviderNameConverter : StringConverter
-	{
-		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			DataTable table = DbProviderFactories.GetFactoryClasses();
-			if (table == null)
-				return new StandardValuesCollection (new string[0]);
+    public class DataProviderNameConverter : StringConverter
+    {
+        public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        {
+            DataTable table = DbProviderFactories.GetFactoryClasses();
+            if (table == null)
+                return new StandardValuesCollection (new string[0]);
 
-			string[] names = new string[table.Rows.Count];
-			int i = 0;
-			foreach (DataRow row in table.Rows) {
-				names[i++] = (string)row ["Name"];
-			}
+            string[] names = new string[table.Rows.Count];
+            int i = 0;
+            foreach (DataRow row in table.Rows) {
+                names[i++] = (string)row ["Name"];
+            }
 
-			return new StandardValuesCollection (names);
-		}
+            return new StandardValuesCollection (names);
+        }
 
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			return true;
-		}
+        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			return false;
-		}
-	}
+        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        {
+            return false;
+        }
+    }
 }
 

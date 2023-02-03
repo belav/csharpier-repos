@@ -31,67 +31,67 @@ using System.Xml.Linq;
 
 namespace Mono.ApiTools {
 
-	class AssemblyComparer : Comparer {
+    class AssemblyComparer : Comparer {
 
-		XDocument source;
-		XDocument target;
-		NamespaceComparer comparer;
+        XDocument source;
+        XDocument target;
+        NamespaceComparer comparer;
 
-		public AssemblyComparer (string sourceFile, string targetFile, State state)
-			: this (XDocument.Load(sourceFile), XDocument.Load(targetFile), state)
-		{
-		}
+        public AssemblyComparer (string sourceFile, string targetFile, State state)
+            : this (XDocument.Load(sourceFile), XDocument.Load(targetFile), state)
+        {
+        }
 
-		public AssemblyComparer (Stream sourceFile, Stream targetFile, State state)
-			: this (XDocument.Load(sourceFile), XDocument.Load(targetFile), state)
-		{
-		}
+        public AssemblyComparer (Stream sourceFile, Stream targetFile, State state)
+            : this (XDocument.Load(sourceFile), XDocument.Load(targetFile), state)
+        {
+        }
 
-		public AssemblyComparer (XDocument sourceFile, XDocument targetFile, State state)
-			: base (state)
-		{
-			source = sourceFile;
-			target = targetFile;
-			comparer =  new NamespaceComparer (state);
-		}
+        public AssemblyComparer (XDocument sourceFile, XDocument targetFile, State state)
+            : base (state)
+        {
+            source = sourceFile;
+            target = targetFile;
+            comparer =  new NamespaceComparer (state);
+        }
 
-		public string SourceAssembly { get; private set; }
-		public string TargetAssembly { get; private set; }
+        public string SourceAssembly { get; private set; }
+        public string TargetAssembly { get; private set; }
 
-		public void Compare ()
-		{
-			Compare (source.Element ("assemblies").Elements ("assembly"), 
-			         target.Element ("assemblies").Elements ("assembly"));
-		}
+        public void Compare ()
+        {
+            Compare (source.Element ("assemblies").Elements ("assembly"), 
+                     target.Element ("assemblies").Elements ("assembly"));
+        }
 
-		public override void SetContext (XElement current)
-		{
-			State.Assembly = current.GetAttribute ("name");
-		}
+        public override void SetContext (XElement current)
+        {
+            State.Assembly = current.GetAttribute ("name");
+        }
 
-		public override void Added (XElement target, bool wasParentAdded)
-		{
-			// one assembly per xml file
-		}
+        public override void Added (XElement target, bool wasParentAdded)
+        {
+            // one assembly per xml file
+        }
 
-		public override void Modified (XElement source, XElement target, ApiChanges diff)
-		{
-			SourceAssembly = source.GetAttribute ("name");
-			TargetAssembly = target.GetAttribute ("name");
+        public override void Modified (XElement source, XElement target, ApiChanges diff)
+        {
+            SourceAssembly = source.GetAttribute ("name");
+            TargetAssembly = target.GetAttribute ("name");
 
-			var sb = source.GetAttribute ("version");
-			var tb = target.GetAttribute ("version");
-			if (sb != tb) {
-				Output.WriteLine ("<h4>Assembly Version Changed: {0} vs {1}</h4>", tb, sb);
-			}
+            var sb = source.GetAttribute ("version");
+            var tb = target.GetAttribute ("version");
+            if (sb != tb) {
+                Output.WriteLine ("<h4>Assembly Version Changed: {0} vs {1}</h4>", tb, sb);
+            }
 
-			// ? custom attributes ?
-			comparer.Compare (source, target);
-		}
+            // ? custom attributes ?
+            comparer.Compare (source, target);
+        }
 
-		public override void Removed (XElement source)
-		{
-			// one assembly per xml file
-		}
-	}
+        public override void Removed (XElement source)
+        {
+            // one assembly per xml file
+        }
+    }
 }

@@ -29,25 +29,25 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlXmlWriterSettings : XamlWriterSettings
-	{
-		public XamlXmlWriterSettings ()
-		{
-		}
+    public class XamlXmlWriterSettings : XamlWriterSettings
+    {
+        public XamlXmlWriterSettings ()
+        {
+        }
 
-		XamlXmlWriterSettings (XamlXmlWriterSettings other)
-			: base (other)
-		{
-			AssumeValidInput = other.AssumeValidInput;
-			CloseOutput = other.CloseOutput;
-		}
+        XamlXmlWriterSettings (XamlXmlWriterSettings other)
+            : base (other)
+        {
+            AssumeValidInput = other.AssumeValidInput;
+            CloseOutput = other.CloseOutput;
+        }
 
-		public bool AssumeValidInput { get; set; }
-		public bool CloseOutput { get; set; }
+        public bool AssumeValidInput { get; set; }
+        public bool CloseOutput { get; set; }
 
-		public XamlXmlWriterSettings Copy ()
-		{
-			return new XamlXmlWriterSettings (this);
-		}
-	}
+        public XamlXmlWriterSettings Copy ()
+        {
+            return new XamlXmlWriterSettings (this);
+        }
+    }
 }

@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	void A ()
-	{
-		5 = 4;
-	}
+    void A ()
+    {
+        5 = 4;
+    }
 }

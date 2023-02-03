@@ -2,7 +2,7 @@
 // MessagePropertyAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,19 +29,19 @@ using System;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
-		Inherited = false)]
-	public sealed class MessagePropertyAttribute : Attribute
-	{
-		string name;
+    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
+        Inherited = false)]
+    public sealed class MessagePropertyAttribute : Attribute
+    {
+        string name;
 
-		public MessagePropertyAttribute ()
-		{
-		}
+        public MessagePropertyAttribute ()
+        {
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-	}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
+    }
 }

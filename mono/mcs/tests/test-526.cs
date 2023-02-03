@@ -2,12 +2,12 @@ using System;
 
 interface IList 
 {
-	int Count ();
+    int Count ();
 }
 
 interface ICounter 
 {
-	int Count { set; }
+    int Count { set; }
 }
 
 interface IListCounter: IList, ICounter
@@ -16,17 +16,17 @@ interface IListCounter: IList, ICounter
 
 interface IA
 {
-	int Value ();
+    int Value ();
 }
 
 interface IB : IA
 {
-	new int Value { get; }
+    new int Value { get; }
 }
 
 interface IC : IB
 {
-	new int Value { get; }
+    new int Value { get; }
 }
 
 interface IBB : IList, ICounter
@@ -49,28 +49,28 @@ interface IM2 : IM1
 
 class Test
 {
-	public static void Main ()
-	{
-	}
-	
-	static void Foo (IListCounter t)
-	{
-		t.Count ();
-	}
-	
-	void Foo2 (IC b)
-	{
-		int i = b.Value;
-	}
-	
-	void Foo3 (ICC c)
-	{
-		c.Count ();
-	}
+    public static void Main ()
+    {
+    }
     
-	void Foo4 (IM2 im2)
-	{
-		im2.Add (2);
-	}
+    static void Foo (IListCounter t)
+    {
+        t.Count ();
+    }
+    
+    void Foo2 (IC b)
+    {
+        int i = b.Value;
+    }
+    
+    void Foo3 (ICC c)
+    {
+        c.Count ();
+    }
+    
+    void Foo4 (IM2 im2)
+    {
+        im2.Add (2);
+    }
 
 }

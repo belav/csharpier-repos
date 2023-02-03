@@ -20,86 +20,86 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 using System.Drawing;
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewElement {
+    public class DataGridViewElement {
 
-		private DataGridView dataGridView;
-		private DataGridViewElementStates state;
+        private DataGridView dataGridView;
+        private DataGridViewElementStates state;
 
-		public DataGridViewElement () {
-			dataGridView = null;
-		}
+        public DataGridViewElement () {
+            dataGridView = null;
+        }
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public DataGridView DataGridView {
-			get { return dataGridView; }
-		}
+        [Browsable (false)]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public DataGridView DataGridView {
+            get { return dataGridView; }
+        }
 
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public virtual DataGridViewElementStates State {
-			get { return state; }
-		}
+        [Browsable (false)]
+        [EditorBrowsable (EditorBrowsableState.Advanced)]
+        public virtual DataGridViewElementStates State {
+            get { return state; }
+        }
 
-		protected virtual void OnDataGridViewChanged ()
-		{
-		}
+        protected virtual void OnDataGridViewChanged ()
+        {
+        }
 
-		protected void RaiseCellClick (DataGridViewCellEventArgs e) {
-			if (dataGridView != null) {
-				dataGridView.InternalOnCellClick(e);
-			}
-		}
+        protected void RaiseCellClick (DataGridViewCellEventArgs e) {
+            if (dataGridView != null) {
+                dataGridView.InternalOnCellClick(e);
+            }
+        }
 
-		protected void RaiseCellContentClick (DataGridViewCellEventArgs e) {
-			if (dataGridView != null) {
-				dataGridView.InternalOnCellContentClick(e);
-			}
-		}
+        protected void RaiseCellContentClick (DataGridViewCellEventArgs e) {
+            if (dataGridView != null) {
+                dataGridView.InternalOnCellContentClick(e);
+            }
+        }
 
-		protected void RaiseCellContentDoubleClick (DataGridViewCellEventArgs e) {
-			if (dataGridView != null) {
-				dataGridView.InternalOnCellContentDoubleClick(e);
-			}
-		}
+        protected void RaiseCellContentDoubleClick (DataGridViewCellEventArgs e) {
+            if (dataGridView != null) {
+                dataGridView.InternalOnCellContentDoubleClick(e);
+            }
+        }
 
-		protected void RaiseCellValueChanged (DataGridViewCellEventArgs e) {
-			if (dataGridView != null) {
-				dataGridView.InternalOnCellValueChanged(e);
-			}
-		}
+        protected void RaiseCellValueChanged (DataGridViewCellEventArgs e) {
+            if (dataGridView != null) {
+                dataGridView.InternalOnCellValueChanged(e);
+            }
+        }
 
-		protected void RaiseDataError (DataGridViewDataErrorEventArgs e) {
-			if (dataGridView != null) {
-				dataGridView.InternalOnDataError(e);
-			}
-		}
+        protected void RaiseDataError (DataGridViewDataErrorEventArgs e) {
+            if (dataGridView != null) {
+                dataGridView.InternalOnDataError(e);
+            }
+        }
 
-		protected void RaiseMouseWheel (MouseEventArgs e) {
-			if (dataGridView != null) {
-				dataGridView.InternalOnMouseWheel(e);
-			}
-		}
+        protected void RaiseMouseWheel (MouseEventArgs e) {
+            if (dataGridView != null) {
+                dataGridView.InternalOnMouseWheel(e);
+            }
+        }
 
-		internal virtual void SetDataGridView (DataGridView dataGridView) {
-			if (dataGridView != this.DataGridView) {
-				this.dataGridView = dataGridView;
-				OnDataGridViewChanged();
-			}
-		}
+        internal virtual void SetDataGridView (DataGridView dataGridView) {
+            if (dataGridView != this.DataGridView) {
+                this.dataGridView = dataGridView;
+                OnDataGridViewChanged();
+            }
+        }
 
-		internal virtual void SetState (DataGridViewElementStates state) {
-			this.state = state;
-		}
+        internal virtual void SetState (DataGridViewElementStates state) {
+            this.state = state;
+        }
 
-	}
+    }
 
 }
 

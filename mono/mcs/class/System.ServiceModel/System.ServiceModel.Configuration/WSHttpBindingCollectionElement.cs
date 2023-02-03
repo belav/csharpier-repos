@@ -2,7 +2,7 @@
 // WSHttpBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class WSHttpBindingCollectionElement
-		 : StandardBindingCollectionElement<WSHttpBinding, WSHttpBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public partial class WSHttpBindingCollectionElement
+         : StandardBindingCollectionElement<WSHttpBinding, WSHttpBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static WSHttpBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static WSHttpBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public WSHttpBindingCollectionElement ()
-		{
-		}
-
-
-		// Properties
+        public WSHttpBindingCollectionElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

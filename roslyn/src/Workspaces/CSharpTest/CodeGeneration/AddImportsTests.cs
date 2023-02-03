@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -900,10 +900,10 @@ namespace A
 
 namespace B
 {
-	class O
-	{
-    	public class C1 {}
-	}
+    class O
+    {
+        public class C1 {}
+    }
 }
 
 class C
@@ -1041,10 +1041,10 @@ namespace A
 namespace B
 {
     class C3 {}
-	class O
-	{
-    	public class C1<T> {}
-	}
+    class O
+    {
+        public class C1<T> {}
+    }
 }
 
 class C
@@ -1062,16 +1062,16 @@ using System.Collections.Generic;
 
 namespace A
 {
-	class C1 { }
-	class C2 { }
+    class C1 { }
+    class C2 { }
 }
 
 namespace B
 {
-	class C1
-	{
-		public static C1 P { get; }
-	}
+    class C1
+    {
+        public static C1 P { get; }
+    }
 }
 
 #nullable enable
@@ -1079,10 +1079,10 @@ namespace B
 
 class C
 {
-	/// <summary>
-	/// <see cref=""C1""/>
-	/// </summary>
-	C1 M(C1 c1, A.C2 c2)
+    /// <summary>
+    /// <see cref=""C1""/>
+    /// </summary>
+    C1 M(C1 c1, A.C2 c2)
 
     {
         C1 result = (C1)c1 ?? new C1() ?? C1.P ?? new C1[0] { }[0] ?? new List<C1>()[0] ?? (C1?)null;

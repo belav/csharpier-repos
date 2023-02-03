@@ -8,43 +8,43 @@ using System.Threading.Tasks;
 
 static class S
 {
-	public static A GetAwaiter (this X x)
-	{
-		return new A ();
-	}
+    public static A GetAwaiter (this X x)
+    {
+        return new A ();
+    }
 }
 
 class X
 {
-	public X Foo ()
-	{
-		return this;
-	}
+    public X Foo ()
+    {
+        return this;
+    }
 }
 
 class A : INotifyCompletion
 {
-	bool IsCompleted
-	{
-		get
-		{
-			return true;
-		}
-	}
+    bool IsCompleted
+    {
+        get
+        {
+            return true;
+        }
+    }
 
-	public void OnCompleted (Action a)
-	{
-	}
+    public void OnCompleted (Action a)
+    {
+    }
 
-	int GetResult ()
-	{
-		return 3;
-	}
+    int GetResult ()
+    {
+        return 3;
+    }
 
-	static async Task Test3 ()
-	{
-		X x = new X ();
-		x.Foo ();
-		await x.Foo ();
-	}
+    static async Task Test3 ()
+    {
+        X x = new X ();
+        x.Foo ();
+        await x.Foo ();
+    }
 }

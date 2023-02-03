@@ -5,6 +5,6 @@ class C
 {
     public void Main ()
     {
-		this = null;
+        this = null;
     }
 }

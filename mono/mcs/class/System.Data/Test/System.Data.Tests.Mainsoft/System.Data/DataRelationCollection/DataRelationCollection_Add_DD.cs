@@ -37,84 +37,84 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelationCollection_Add_DD : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataRelationCollection_Add_DD tc = new DataRelationCollection_Add_DD();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRelationCollection_Add_DD");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    [Test] public void Main()
+    {
+        DataRelationCollection_Add_DD tc = new DataRelationCollection_Add_DD();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataRelationCollection_Add_DD");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	/// <summary>
-	/// All the test are in the overload Add(dataRelation)
-	/// </summary>
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataRelationCollection_Add_DD");
-			DataRelationCollection_Add_DD1(); 
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
+    /// <summary>
+    /// All the test are in the overload Add(dataRelation)
+    /// </summary>
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataRelationCollection_Add_DD");
+            DataRelationCollection_Add_DD1(); 
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
 
-	private void DataRelationCollection_Add_DD1()
-	{
-		DataSet ds = getDataSet();
-		ds.Relations.Add(ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
+    private void DataRelationCollection_Add_DD1()
+    {
+        DataSet ds = getDataSet();
+        ds.Relations.Add(ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
 
-		Compare(ds.Relations.Count,1);
-		
-		Compare(ds.Tables[0].ChildRelations.Count,1); //When adding a relation,it's also added on the tables
-		Compare(ds.Tables[1].ParentRelations.Count,1);
+        Compare(ds.Relations.Count,1);
+        
+        Compare(ds.Tables[0].ChildRelations.Count,1); //When adding a relation,it's also added on the tables
+        Compare(ds.Tables[1].ParentRelations.Count,1);
 
-		Compare(ds.Tables[0].Constraints[0].GetType(),typeof(UniqueConstraint));
-		Compare(ds.Tables[1].Constraints[0].GetType(),typeof(ForeignKeyConstraint)); 
-		
-	}
+        Compare(ds.Tables[0].Constraints[0].GetType(),typeof(UniqueConstraint));
+        Compare(ds.Tables[1].Constraints[0].GetType(),typeof(ForeignKeyConstraint)); 
+        
+    }
 
-	private DataSet getDataSet()
-	{
-		DataSet ds = new DataSet();
-		DataTable dt1 = DataProvider.CreateParentDataTable();
-		DataTable dt2 = DataProvider.CreateChildDataTable();
+    private DataSet getDataSet()
+    {
+        DataSet ds = new DataSet();
+        DataTable dt1 = DataProvider.CreateParentDataTable();
+        DataTable dt2 = DataProvider.CreateChildDataTable();
 
-		ds.Tables.Add(dt1);
-		ds.Tables.Add(dt2);
-		return ds;
-	}
+        ds.Tables.Add(dt1);
+        ds.Tables.Add(dt2);
+        return ds;
+    }
 }
 }

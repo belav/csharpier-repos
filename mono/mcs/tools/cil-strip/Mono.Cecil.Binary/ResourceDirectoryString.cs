@@ -28,18 +28,18 @@
 
 namespace Mono.Cecil.Binary {
 
-	internal class ResourceDirectoryString : ResourceNode {
+    internal class ResourceDirectoryString : ResourceNode {
 
-		public string String;
+        public string String;
 
-		public ResourceDirectoryString (string str)
-		{
-			this.String = str;
-		}
+        public ResourceDirectoryString (string str)
+        {
+            this.String = str;
+        }
 
-		public ResourceDirectoryString (string str, int offset) : base (offset)
-		{
-			this.String = str;
-		}
-	}
+        public ResourceDirectoryString (string str, int offset) : base (offset)
+        {
+            this.String = str;
+        }
+    }
 }

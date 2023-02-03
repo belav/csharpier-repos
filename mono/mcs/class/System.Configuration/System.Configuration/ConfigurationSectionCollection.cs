@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationSectionCollection.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
+//    Duncan Mak (duncan@ximian.com)
 //  Lluis Sanchez Gual (lluis@novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -34,110 +34,110 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration
 {
-	[Serializable]
-	public sealed class ConfigurationSectionCollection : NameObjectCollectionBase
-	{
-		SectionGroupInfo group;
-		Configuration config;
-		static readonly object lockObject = new object();
-		 
-		internal ConfigurationSectionCollection (Configuration config, SectionGroupInfo group)
-			: base (StringComparer.Ordinal)
-		{
-			this.config = config;
-			this.group = group;
-		}
-		
-		public override NameObjectCollectionBase.KeysCollection Keys
-		{
-			get { return group.Sections.Keys; }
-		}
-		
-		public override int Count 
-		{
-			get { return group.Sections.Count; }
-		}
-	
-		public ConfigurationSection this [string name]
-		{
-			get {
-				ConfigurationSection sec = BaseGet (name) as ConfigurationSection;
-				if (sec == null) {
-					SectionInfo secData = group.Sections [name] as SectionInfo;
-					if (secData == null) return null;
-					sec = config.GetSectionInstance (secData, true);
-					if (sec == null) return null;
-					lock(lockObject) {
-						BaseSet (name, sec);
-					}
-				}
-				return sec;
-			}
-		}
-	
-		public ConfigurationSection this [int index]
-		{
-			get { return this [GetKey (index)]; }
-		}
-		
-		public void Add (string name, ConfigurationSection section)
-		{
-			config.CreateSection (group, name, section);
-		}
-		
-		public void Clear ()
-		{
-			if (group.Sections != null) {
-				foreach (ConfigInfo data in group.Sections)
-					config.RemoveConfigInfo (data);
-			}
-		}
-		
-		public void CopyTo (ConfigurationSection [] array, int index)
-		{
-			for (int n=0; n<group.Sections.Count; n++)
-				array [n + index] = this [n];
-		}
-		
-		public ConfigurationSection Get (int index)
-		{
-			return this [index];
-		}
-		
-		public ConfigurationSection Get (string name)
-		{
-			return this [name];
-		}
-		
-		public override IEnumerator GetEnumerator()
-		{
-			foreach (string key in group.Sections.AllKeys)
-				yield return this [key];
-		}
-		
-		public string GetKey (int index)
-		{
-			return group.Sections.GetKey (index);
-		}
-		
-		public void Remove (string name)
-		{
-			SectionInfo secData = group.Sections [name] as SectionInfo;
-			if (secData != null)
-				config.RemoveConfigInfo (secData);
-		}
-		
-		public void RemoveAt (int index)
-		{
-			SectionInfo secData = group.Sections [index] as SectionInfo;
-			config.RemoveConfigInfo (secData);
-		}
+    [Serializable]
+    public sealed class ConfigurationSectionCollection : NameObjectCollectionBase
+    {
+        SectionGroupInfo group;
+        Configuration config;
+        static readonly object lockObject = new object();
+         
+        internal ConfigurationSectionCollection (Configuration config, SectionGroupInfo group)
+            : base (StringComparer.Ordinal)
+        {
+            this.config = config;
+            this.group = group;
+        }
+        
+        public override NameObjectCollectionBase.KeysCollection Keys
+        {
+            get { return group.Sections.Keys; }
+        }
+        
+        public override int Count 
+        {
+            get { return group.Sections.Count; }
+        }
+    
+        public ConfigurationSection this [string name]
+        {
+            get {
+                ConfigurationSection sec = BaseGet (name) as ConfigurationSection;
+                if (sec == null) {
+                    SectionInfo secData = group.Sections [name] as SectionInfo;
+                    if (secData == null) return null;
+                    sec = config.GetSectionInstance (secData, true);
+                    if (sec == null) return null;
+                    lock(lockObject) {
+                        BaseSet (name, sec);
+                    }
+                }
+                return sec;
+            }
+        }
+    
+        public ConfigurationSection this [int index]
+        {
+            get { return this [GetKey (index)]; }
+        }
+        
+        public void Add (string name, ConfigurationSection section)
+        {
+            config.CreateSection (group, name, section);
+        }
+        
+        public void Clear ()
+        {
+            if (group.Sections != null) {
+                foreach (ConfigInfo data in group.Sections)
+                    config.RemoveConfigInfo (data);
+            }
+        }
+        
+        public void CopyTo (ConfigurationSection [] array, int index)
+        {
+            for (int n=0; n<group.Sections.Count; n++)
+                array [n + index] = this [n];
+        }
+        
+        public ConfigurationSection Get (int index)
+        {
+            return this [index];
+        }
+        
+        public ConfigurationSection Get (string name)
+        {
+            return this [name];
+        }
+        
+        public override IEnumerator GetEnumerator()
+        {
+            foreach (string key in group.Sections.AllKeys)
+                yield return this [key];
+        }
+        
+        public string GetKey (int index)
+        {
+            return group.Sections.GetKey (index);
+        }
+        
+        public void Remove (string name)
+        {
+            SectionInfo secData = group.Sections [name] as SectionInfo;
+            if (secData != null)
+                config.RemoveConfigInfo (secData);
+        }
+        
+        public void RemoveAt (int index)
+        {
+            SectionInfo secData = group.Sections [index] as SectionInfo;
+            config.RemoveConfigInfo (secData);
+        }
 
-		[MonoTODO]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

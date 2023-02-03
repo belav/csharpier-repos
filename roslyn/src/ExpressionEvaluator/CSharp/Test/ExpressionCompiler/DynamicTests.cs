@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -587,13 +587,13 @@ class Generic<T>
             var source =
 @"class C
 {
-	static void M()
-	{
+    static void M()
+    {
         const dynamic a123456789012345678901234567890123456789012345678901234567890123 = null; // 64 chars
         const dynamic b = null;
         dynamic c123456789012345678901234567890123456789012345678901234567890123 = null; // 64 chars
         dynamic d = null;
-	}
+    }
 
     static dynamic ForceDynamicAttribute() 
     {

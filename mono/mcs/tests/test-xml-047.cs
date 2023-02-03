@@ -7,6 +7,6 @@ using System;
 /// </summary>
 public class EntryPoint
 {
-	static void Main () {
-	}
+    static void Main () {
+    }
 }

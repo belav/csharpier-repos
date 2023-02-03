@@ -5,6 +5,6 @@ class C
 {
     static void Main ()
     {
-		System.Action<>.Combine ();
-	}
+        System.Action<>.Combine ();
+    }
 }

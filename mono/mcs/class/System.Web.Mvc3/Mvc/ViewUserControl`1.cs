@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System.Diagnostics.CodeAnalysis;
 
     public class ViewUserControl<TModel> : ViewUserControl {

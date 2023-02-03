@@ -32,29 +32,29 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-	[Serializable]
-	public class MessageFilterException : CommunicationException
-	{
-		Collection<MessageFilter> filters;
+    [Serializable]
+    public class MessageFilterException : CommunicationException
+    {
+        Collection<MessageFilter> filters;
 
-		public MessageFilterException () : this ("MessageFilter node quota exceeded.") {}
-		public MessageFilterException (string message) : base (message) {}
-		public MessageFilterException (string message, Exception innerException) : base (message, innerException) {}		
-		protected MessageFilterException (SerializationInfo info, StreamingContext context)
-			: base (info, context) {}
+        public MessageFilterException () : this ("MessageFilter node quota exceeded.") {}
+        public MessageFilterException (string message) : base (message) {}
+        public MessageFilterException (string message, Exception innerException) : base (message, innerException) {}        
+        protected MessageFilterException (SerializationInfo info, StreamingContext context)
+            : base (info, context) {}
 
-		public MessageFilterException (string message, Collection<MessageFilter> filters)
-			: base (message)
-		{
-			this.filters = filters;
-		}
+        public MessageFilterException (string message, Collection<MessageFilter> filters)
+            : base (message)
+        {
+            this.filters = filters;
+        }
 
-		public MessageFilterException (string message, Exception innerException, Collection<MessageFilter> filters)
-			: base (message, innerException)
-		{
-			this.filters = filters;
-		}
-		
-		public Collection<MessageFilter> Filters { get { return filters; } }
-	}
+        public MessageFilterException (string message, Exception innerException, Collection<MessageFilter> filters)
+            : base (message, innerException)
+        {
+            this.filters = filters;
+        }
+        
+        public Collection<MessageFilter> Filters { get { return filters; } }
+    }
 }

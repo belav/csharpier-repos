@@ -32,70 +32,70 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleDataReader_GetBoolean : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OracleDataReader_GetBoolean tc = new OracleDataReader_GetBoolean();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataReader_GetBoolean");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    public class OracleDataReader_GetBoolean : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OracleDataReader_GetBoolean tc = new OracleDataReader_GetBoolean();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataReader_GetBoolean");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
-		
-			OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
+        
+            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 #if !JAVA
-			// PostgreSQL ODBC treats Type BOOL as String, so we don't run it on .NET
-			if ((ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL))
-			{
-				return; 
-			}
+            // PostgreSQL ODBC treats Type BOOL as String, so we don't run it on .NET
+            if ((ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL))
+            {
+                return; 
+            }
 #endif
 
-			//Do not test with oracle or DB2, because boolean does not exist in their types.
-			if ( (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) || (ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2) )
-			{
-				return; 
-			}
+            //Do not test with oracle or DB2, because boolean does not exist in their types.
+            if ( (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) || (ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2) )
+            {
+                return; 
+            }
 
-			con.Open();
-			string fieldName = "t_bit";
-			if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL)
-			{
-				fieldName ="t_bool";
-			}
-			
-			OracleCommand cmd = new OracleCommand("Select " + fieldName + " From TYPES_SIMPLE Where id = '0'",con);
-			OracleDataReader rdr = cmd.ExecuteReader();
-			rdr.Read();
+            con.Open();
+            string fieldName = "t_bit";
+            if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL)
+            {
+                fieldName ="t_bool";
+            }
+            
+            OracleCommand cmd = new OracleCommand("Select " + fieldName + " From TYPES_SIMPLE Where id = '0'",con);
+            OracleDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
 
-			try
-			{
-				BeginCase("GetBoolean true");
-				Boolean blnValue;
-				Compare(rdr.IsDBNull(0), false);
-				Compare("System.Boolean", rdr.GetValue(0).GetType().FullName);
-				blnValue = rdr.GetBoolean(0);
-				Compare(blnValue, true);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("GetBoolean true");
+                Boolean blnValue;
+                Compare(rdr.IsDBNull(0), false);
+                Compare("System.Boolean", rdr.GetValue(0).GetType().FullName);
+                blnValue = rdr.GetBoolean(0);
+                Compare(blnValue, true);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			rdr.Close();
+            rdr.Close();
               
-			
-			if (con.State == ConnectionState.Open) con.Close();
+            
+            if (con.State == ConnectionState.Open) con.Close();
 
-		}
-	}
+        }
+    }
 }

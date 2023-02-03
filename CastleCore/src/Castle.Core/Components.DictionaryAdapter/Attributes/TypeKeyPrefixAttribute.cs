@@ -14,17 +14,17 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Assigns a prefix to the keyed properties using the interface name.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = true)]
-	public class TypeKeyPrefixAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
-	{
-		string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
-		{
-			return string.Format("{0}#{1}", property.Property.DeclaringType.FullName, key);
-		}
-	}
+    /// <summary>
+    /// Assigns a prefix to the keyed properties using the interface name.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = true)]
+    public class TypeKeyPrefixAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
+    {
+        string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
+        {
+            return string.Format("{0}#{1}", property.Property.DeclaringType.FullName, key);
+        }
+    }
 }

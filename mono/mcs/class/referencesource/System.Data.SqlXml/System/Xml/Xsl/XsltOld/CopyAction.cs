@@ -106,7 +106,7 @@ namespace System.Xml.Xsl.XsltOld {
 
                 default:
                     Debug.Fail("Invalid CopyAction execution state");
-			        break;
+                    break;
                 }
 
                 break;

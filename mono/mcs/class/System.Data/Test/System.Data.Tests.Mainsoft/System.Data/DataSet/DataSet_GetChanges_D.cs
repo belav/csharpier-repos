@@ -39,124 +39,124 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_GetChanges_D : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataSet_GetChanges_D tc = new DataSet_GetChanges_D();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataSet_GetChanges_D");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataSet_GetChanges_D tc = new DataSet_GetChanges_D();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataSet_GetChanges_D");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-	
-		DataSet ds = new DataSet();
-		object[] arrAdded,arrDeleted,arrModified,arrUnchanged;
-		//object[] arrDetached;
-		
-		DataRow dr;
-		ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+    public void run()
+    {
+        Exception exp = null;
+    
+        DataSet ds = new DataSet();
+        object[] arrAdded,arrDeleted,arrModified,arrUnchanged;
+        //object[] arrDetached;
+        
+        DataRow dr;
+        ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
 
-		try
-		{
-			BeginCase("GetChanges 1");
-			Compare(ds.GetChanges(),null );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("GetChanges 1");
+            Compare(ds.GetChanges(),null );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		//make some changes
+        //make some changes
 
 // can't check detached
-//		dr = ds.Tables[0].Rows[0];
-//		arrDetached = dr.ItemArray;
-//		dr.Delete();
-//		ds.Tables[0].AcceptChanges();
+//        dr = ds.Tables[0].Rows[0];
+//        arrDetached = dr.ItemArray;
+//        dr.Delete();
+//        ds.Tables[0].AcceptChanges();
 
         dr= ds.Tables[0].Rows[1];
-		arrDeleted  = dr.ItemArray;
-		dr.Delete();
+        arrDeleted  = dr.ItemArray;
+        dr.Delete();
         
-		dr = ds.Tables[0].Rows[2];
-		dr[1] = "NewValue";
-		arrModified = dr.ItemArray;
+        dr = ds.Tables[0].Rows[2];
+        dr[1] = "NewValue";
+        arrModified = dr.ItemArray;
 
-		dr = ds.Tables[0].Select("","",DataViewRowState.Unchanged)[0];
-		arrUnchanged = dr.ItemArray;
+        dr = ds.Tables[0].Select("","",DataViewRowState.Unchanged)[0];
+        arrUnchanged = dr.ItemArray;
 
-		dr = ds.Tables[0].NewRow();
-		dr[0] = 1;
-		ds.Tables[0].Rows.Add(dr);
-		arrAdded = dr.ItemArray;
-	
-		try
-		{
-			BeginCase("GetChanges Added");
-			Compare(ds.GetChanges(DataRowState.Added).Tables[0].Rows[0].ItemArray ,arrAdded);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        dr = ds.Tables[0].NewRow();
+        dr[0] = 1;
+        ds.Tables[0].Rows.Add(dr);
+        arrAdded = dr.ItemArray;
+    
+        try
+        {
+            BeginCase("GetChanges Added");
+            Compare(ds.GetChanges(DataRowState.Added).Tables[0].Rows[0].ItemArray ,arrAdded);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
         
         try
-		{
-			BeginCase("GetChanges Deleted");
-			dr = ds.GetChanges(DataRowState.Deleted).Tables[0].Rows[0];
-			object[] tmp = new object[] {dr[0,DataRowVersion.Original],dr[1,DataRowVersion.Original],dr[2,DataRowVersion.Original],dr[3,DataRowVersion.Original],dr[4,DataRowVersion.Original],dr[5,DataRowVersion.Original]};
-			Compare(tmp,arrDeleted);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        {
+            BeginCase("GetChanges Deleted");
+            dr = ds.GetChanges(DataRowState.Deleted).Tables[0].Rows[0];
+            object[] tmp = new object[] {dr[0,DataRowVersion.Original],dr[1,DataRowVersion.Original],dr[2,DataRowVersion.Original],dr[3,DataRowVersion.Original],dr[4,DataRowVersion.Original],dr[5,DataRowVersion.Original]};
+            Compare(tmp,arrDeleted);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-//	can't check it	
-//		try
-//		{
-//			BeginCase("GetChanges Detached");
-//			dr = ds.GetChanges(DataRowState.Detached).Tables[0].Rows[0];
-//			object[] tmp = new object[] {dr[0,DataRowVersion.Original],dr[1,DataRowVersion.Original],dr[2,DataRowVersion.Original]};
-//			Compare(tmp,arrDetached);
-//		}
-//		catch(Exception ex)	{exp = ex;}
-//		finally	{EndCase(exp); exp = null;}
-		
-		try
-		{
-			BeginCase("GetChanges Modified");
-			Compare(ds.GetChanges(DataRowState.Modified).Tables[0].Rows[0].ItemArray ,arrModified);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+//    can't check it    
+//        try
+//        {
+//            BeginCase("GetChanges Detached");
+//            dr = ds.GetChanges(DataRowState.Detached).Tables[0].Rows[0];
+//            object[] tmp = new object[] {dr[0,DataRowVersion.Original],dr[1,DataRowVersion.Original],dr[2,DataRowVersion.Original]};
+//            Compare(tmp,arrDetached);
+//        }
+//        catch(Exception ex)    {exp = ex;}
+//        finally    {EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("GetChanges Modified");
+            Compare(ds.GetChanges(DataRowState.Modified).Tables[0].Rows[0].ItemArray ,arrModified);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("GetChanges Unchanged");
-			Compare(ds.GetChanges(DataRowState.Unchanged).Tables[0].Rows[0].ItemArray ,arrUnchanged);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            BeginCase("GetChanges Unchanged");
+            Compare(ds.GetChanges(DataRowState.Unchanged).Tables[0].Rows[0].ItemArray ,arrUnchanged);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
 }
 }

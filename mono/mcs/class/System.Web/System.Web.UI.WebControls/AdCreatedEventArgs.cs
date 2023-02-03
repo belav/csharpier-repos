@@ -24,7 +24,7 @@
 // System.Web.UI.WebControls.AdCreatedEventArgs.cs
 //
 // Author:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 //
 
 using System.Collections;
@@ -32,46 +32,46 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class AdCreatedEventArgs : EventArgs
-	{
-		IDictionary properties;
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class AdCreatedEventArgs : EventArgs
+    {
+        IDictionary properties;
 
-		string alt_text;
-		string img_url;
-		string nav_url;
+        string alt_text;
+        string img_url;
+        string nav_url;
 
-		public AdCreatedEventArgs (IDictionary adProperties)
-		{
-			properties = adProperties;
+        public AdCreatedEventArgs (IDictionary adProperties)
+        {
+            properties = adProperties;
 
-			if (properties != null) {
-				alt_text = (string) properties ["AlternateText"];
-				img_url = (string) properties ["ImageUrl"];
-				nav_url = (string) properties ["NavigateUrl"];
-			}
-		}
+            if (properties != null) {
+                alt_text = (string) properties ["AlternateText"];
+                img_url = (string) properties ["ImageUrl"];
+                nav_url = (string) properties ["NavigateUrl"];
+            }
+        }
 
-		public IDictionary AdProperties {
-			get { return properties; }
-		}
+        public IDictionary AdProperties {
+            get { return properties; }
+        }
 
-		public string AlternateText {
-			get { return alt_text; }
-			set { alt_text = value; }
-		}
+        public string AlternateText {
+            get { return alt_text; }
+            set { alt_text = value; }
+        }
 
-		public string ImageUrl {
-			get { return img_url; }
-			set { img_url = value; }
-		}
+        public string ImageUrl {
+            get { return img_url; }
+            set { img_url = value; }
+        }
 
-		public string NavigateUrl {
-			get { return nav_url; }
-			set { nav_url = value; }
-		}
-	}
+        public string NavigateUrl {
+            get { return nav_url; }
+            set { nav_url = value; }
+        }
+    }
 }
 

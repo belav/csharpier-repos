@@ -6,8 +6,8 @@ public delegate R Fun<A1,R>(A1 x);
 class MyTest {
   public static void Main(String[] args) {
     foreach (Object d in Map<int,int,String,Object>
-	                    (delegate (int x) { return x.ToString(); }, 
-			     FromTo(10,20)))
+                        (delegate (int x) { return x.ToString(); }, 
+                 FromTo(10,20)))
       Console.WriteLine(d);
   }
 

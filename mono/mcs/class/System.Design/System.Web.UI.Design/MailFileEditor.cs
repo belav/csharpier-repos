@@ -2,7 +2,7 @@
 // System.Web.UI.Design.MailFileEditor
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -34,22 +34,22 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design
 {
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class MailFileEditor : UrlEditor
-	{
-		public MailFileEditor ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class MailFileEditor : UrlEditor
+    {
+        public MailFileEditor ()
+        {
+        }
 
-		[MonoTODO]
-		protected override string Caption {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        protected override string Caption {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		protected override string Filter {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        protected override string Filter {
+            get { throw new NotImplementedException (); }
+        }
+    }
 }
 

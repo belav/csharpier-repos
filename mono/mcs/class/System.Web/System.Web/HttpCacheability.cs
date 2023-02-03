@@ -30,13 +30,13 @@
 
 namespace System.Web
 {
-	public enum HttpCacheability
-	{
-		NoCache = 0x1,
-		Private,
-		Server,
-		Public,
-		ServerAndPrivate,
-		ServerAndNoCache = 0x3
-	}
+    public enum HttpCacheability
+    {
+        NoCache = 0x1,
+        Private,
+        Server,
+        Public,
+        ServerAndPrivate,
+        ServerAndNoCache = 0x3
+    }
 }

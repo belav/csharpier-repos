@@ -1,4 +1,4 @@
-﻿
+
 namespace System.ComponentModel.DataAnnotations {
     /// <summary>
     /// Enumeration of logical data types that may appear in <see cref="DataTypeAttribute"/>

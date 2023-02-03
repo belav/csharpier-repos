@@ -14,34 +14,34 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	using System;
+    using System;
 
-	public class GenInterfaceWithGenArray<T> : IGenInterfaceWithGenArray<T>
-		where T : struct
-	{
-		private T[] innerItems;
+    public class GenInterfaceWithGenArray<T> : IGenInterfaceWithGenArray<T>
+        where T : struct
+    {
+        private T[] innerItems;
 
-		public GenInterfaceWithGenArray()
-		{
-			innerItems = new T[] {new T(), new T(), new T()};
-		}
+        public GenInterfaceWithGenArray()
+        {
+            innerItems = new T[] {new T(), new T(), new T()};
+        }
 
-		public void CopyTo(T[] items)
-		{
-			Array.Copy(innerItems, items, Math.Min(items.Length, innerItems.Length));
-		}
+        public void CopyTo(T[] items)
+        {
+            Array.Copy(innerItems, items, Math.Min(items.Length, innerItems.Length));
+        }
 
-		public T[] CreateItems()
-		{
-			return innerItems;
-		}
-	}
+        public T[] CreateItems()
+        {
+            return innerItems;
+        }
+    }
 
-	public interface IGenInterfaceWithGenArray<T>
-		where T : struct
-	{
-		void CopyTo(T[] items);
+    public interface IGenInterfaceWithGenArray<T>
+        where T : struct
+    {
+        void CopyTo(T[] items);
 
-		T[] CreateItems();
-	}
+        T[] CreateItems();
+    }
 }

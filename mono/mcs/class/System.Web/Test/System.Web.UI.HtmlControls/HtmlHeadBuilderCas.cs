@@ -1,9 +1,9 @@
 //
 // HtmlHeadBuilderCas.cs 
-//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlHeadBuilder
+//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlHeadBuilder
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,13 +35,13 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlHeadBuilderCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlHeadBuilderCas : AspNetHostingMinimal {
 
-		public override Type Type {
-			get { return typeof (HtmlHeadBuilder); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlHeadBuilder); }
+        }
+    }
 }
 

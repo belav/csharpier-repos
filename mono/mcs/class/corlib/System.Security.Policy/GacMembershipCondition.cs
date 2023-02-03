@@ -2,7 +2,7 @@
 // System.Security.Policy.GacMembershipCondition.cs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,75 +32,75 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class GacMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
+    [Serializable]
+    [ComVisible (true)]
+    public sealed class GacMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
 
-		private readonly int version = 1;
+        private readonly int version = 1;
 
-		public GacMembershipCondition ()
-		{
-		}
+        public GacMembershipCondition ()
+        {
+        }
 
-		public bool Check (Evidence evidence)
-		{
-			if (evidence == null)
-				return false;
+        public bool Check (Evidence evidence)
+        {
+            if (evidence == null)
+                return false;
 
-			// true only if Gac is in host-supplied evidences
-			IEnumerator e = evidence.GetHostEnumerator ();
-			while (e.MoveNext ()) {
-				if (e.Current is GacInstalled)
-					return true;
-			}
-			return false;
-		}
+            // true only if Gac is in host-supplied evidences
+            IEnumerator e = evidence.GetHostEnumerator ();
+            while (e.MoveNext ()) {
+                if (e.Current is GacInstalled)
+                    return true;
+            }
+            return false;
+        }
 
-		public IMembershipCondition Copy ()
-		{
-			return new GacMembershipCondition ();
-		}
+        public IMembershipCondition Copy ()
+        {
+            return new GacMembershipCondition ();
+        }
 
-		public override bool Equals (object o)
-		{
-			if (o == null)
-				return false;
-			return (o is GacMembershipCondition);
-		}
+        public override bool Equals (object o)
+        {
+            if (o == null)
+                return false;
+            return (o is GacMembershipCondition);
+        }
 
-		public void FromXml (SecurityElement e)
-		{
-			FromXml (e, null);
-		}
+        public void FromXml (SecurityElement e)
+        {
+            FromXml (e, null);
+        }
 
                 public void FromXml (SecurityElement e, PolicyLevel level)
                 {
-			MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-			// PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-		}
+            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
+            // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
+        }
 
-		public override int GetHashCode ()
-		{
-			return 0; // always the same
-		}
+        public override int GetHashCode ()
+        {
+            return 0; // always the same
+        }
 
-		// LAMESPEC: "Gac" is documented - but Fx 2.0 beta 1 returns "GAC"
-		public override string ToString ()
-		{
-			return "GAC";
-		}
+        // LAMESPEC: "Gac" is documented - but Fx 2.0 beta 1 returns "GAC"
+        public override string ToString ()
+        {
+            return "GAC";
+        }
 
-		public SecurityElement ToXml ()
-		{
-			return ToXml (null);
-		}
+        public SecurityElement ToXml ()
+        {
+            return ToXml (null);
+        }
 
-		public SecurityElement ToXml (PolicyLevel level)
-		{
-			// PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-			SecurityElement se = MembershipConditionHelper.Element (typeof (GacMembershipCondition), version);
-			// nothing to add
-			return se;
-		}
-	}
+        public SecurityElement ToXml (PolicyLevel level)
+        {
+            // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
+            SecurityElement se = MembershipConditionHelper.Element (typeof (GacMembershipCondition), version);
+            // nothing to add
+            return se;
+        }
+    }
 }

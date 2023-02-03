@@ -4,5 +4,5 @@
 
 class A
 {
-	string[] array = new [] { "Foo", "Bar", "Baz" };
+    string[] array = new [] { "Foo", "Bar", "Baz" };
 }

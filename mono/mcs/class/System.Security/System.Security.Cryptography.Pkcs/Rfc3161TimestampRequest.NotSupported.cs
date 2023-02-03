@@ -69,7 +69,7 @@ namespace System.Security.Cryptography.Pkcs {
         /// <param name="extensions">RFC3161 extensions to present with the request.</param>
         /// <returns>An <see cref="T:System.Security.Cryptography.Pkcs.Rfc3161TimestampRequest" /> representing the chosen values.</returns>
         public static Rfc3161TimestampRequest CreateFromHash (ReadOnlyMemory<byte> hash, Oid hashAlgorithmId, Oid requestedPolicyId = null, ReadOnlyMemory<byte>? nonce = default(ReadOnlyMemory<byte>?), bool requestSignerCertificates = false, X509ExtensionCollection extensions = null) {
-            throw new PlatformNotSupportedException ();		
+            throw new PlatformNotSupportedException ();        
         }
 
         /// <param name="signerInfo" />

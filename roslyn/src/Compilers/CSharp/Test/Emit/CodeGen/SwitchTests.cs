@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -181,7 +181,7 @@ public class Test
         switch (value) {
         case 2:
             ret = 1;
-            break;		
+            break;        
         }
 
         Console.Write(ret);
@@ -2845,7 +2845,7 @@ class Test
 {
     public static bool M(string test)
     {
-        string	value = """";
+        string    value = """";
 
         if (test != null && test.IndexOf(""C#"") != -1)
             test = test.Remove(0, 2);
@@ -3054,7 +3054,7 @@ class Test
 {
     public static bool Switcheroo(string test)
     {
-        string	value = """";
+        string    value = """";
 
         if (test.IndexOf(""C#"") != -1)
             test = test.Remove(0, 2);
@@ -3751,7 +3751,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }		
+    }        
 }
 ";
             CompileAndVerify(text, expectedOutput: "Pass");
@@ -3801,7 +3801,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }		
+    }        
 }
 ";
             CompileAndVerify(text, expectedOutput: "Pass");
@@ -3843,7 +3843,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }		
+    }        
 }
 ";
             CompileAndVerify(text, expectedOutput: "Pass");
@@ -3885,7 +3885,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 0;
         }
-    }		
+    }        
 }
 ";
             CompileAndVerify(text, expectedOutput: "Pass");
@@ -7214,7 +7214,7 @@ public class Test
 
             compVerifier.VerifyDiagnostics(
             // (14,8): warning CS0162: Unreachable code detected
-            // 			    ret = 1;
+            //                 ret = 1;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "ret"));
 
             compVerifier.VerifyIL("Test.Main", @"

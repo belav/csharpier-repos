@@ -2,15 +2,15 @@
 // Line: 13
 
 public struct S<TKey> {
-	internal TKey key;
+    internal TKey key;
 
-	public TKey Key {
-		get { return key; }
-		private set { key = value; }
-	}
-		
-	public S (TKey key)
-	{
-		Key = key;
-	}
+    public TKey Key {
+        get { return key; }
+        private set { key = value; }
+    }
+        
+    public S (TKey key)
+    {
+        Key = key;
+    }
 }

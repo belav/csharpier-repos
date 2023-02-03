@@ -1,4 +1,4 @@
-﻿namespace System.Web.UI.WebControls.Expressions {
+namespace System.Web.UI.WebControls.Expressions {
     using System.Web.UI.WebControls;
     using System.Security.Permissions;    
 

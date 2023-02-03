@@ -1,4 +1,4 @@
-﻿//
+//
 // HandleExceptionArgs.cs
 //
 // Author:
@@ -27,25 +27,25 @@
 //
 
 namespace System.Data.Services {
-	public class HandleExceptionArgs {
-		public Exception Exception {
-			get; set;
-		}
+    public class HandleExceptionArgs {
+        public Exception Exception {
+            get; set;
+        }
 
-		public string ResponseContentType {
-			get; private set;
-		}
+        public string ResponseContentType {
+            get; private set;
+        }
 
-		public int ResponseStatusCode {
-			get; private set;
-		}
+        public int ResponseStatusCode {
+            get; private set;
+        }
 
-		public bool ResponseWritten {
-			get; private set;
-		}
+        public bool ResponseWritten {
+            get; private set;
+        }
 
-		public bool UseVerboseErrors {
-			get; set;
-		}
-	}
+        public bool UseVerboseErrors {
+            get; set;
+        }
+    }
 }

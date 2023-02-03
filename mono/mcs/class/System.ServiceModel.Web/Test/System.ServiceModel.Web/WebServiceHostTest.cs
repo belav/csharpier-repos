@@ -1,8 +1,8 @@
-﻿//
+//
 // WebServiceHostTest.cs
 //
 // Author:
-//	Igor Zelmanovich  <igorz@mainsoft.com>
+//    Igor Zelmanovich  <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc (http://www.mainsoft.com)
 //
@@ -41,134 +41,134 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Web
 {
-	[TestFixture]
-	public class WebServiceHostTest
-	{
-		[Test]
-		[Category("NotWorking")]
-		public void ServiceDebugBehaviorTest () {
+    [TestFixture]
+    public class WebServiceHostTest
+    {
+        [Test]
+        [Category("NotWorking")]
+        public void ServiceDebugBehaviorTest () {
 
-			var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
-			ServiceEndpoint webHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new WebHttpBinding (), "WebHttpBinding");
+            var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
+            ServiceEndpoint webHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new WebHttpBinding (), "WebHttpBinding");
 
-			Assert.AreEqual (true, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpHelpPageEnabled, "HttpHelpPageEnabled #1");
-			Assert.AreEqual (true, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpsHelpPageEnabled, "HttpsHelpPageEnabled #1");
+            Assert.AreEqual (true, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpHelpPageEnabled, "HttpHelpPageEnabled #1");
+            Assert.AreEqual (true, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpsHelpPageEnabled, "HttpsHelpPageEnabled #1");
 
-			host.Open ();
+            host.Open ();
 
-			Assert.AreEqual (false, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpHelpPageEnabled, "HttpHelpPageEnabled #2");
-			Assert.AreEqual (false, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpsHelpPageEnabled, "HttpsHelpPageEnabled #2");
+            Assert.AreEqual (false, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpHelpPageEnabled, "HttpHelpPageEnabled #2");
+            Assert.AreEqual (false, host.Description.Behaviors.Find<ServiceDebugBehavior> ().HttpsHelpPageEnabled, "HttpsHelpPageEnabled #2");
 
-			host.Close ();
-		}
+            host.Close ();
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void WebHttpBehaviorTest1 () {
+        [Test]
+        [Category ("NotWorking")]
+        public void WebHttpBehaviorTest1 () {
 
-			var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
-			ServiceEndpoint webHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new WebHttpBinding (), "WebHttpBinding");
-			ServiceEndpoint basicHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new BasicHttpBinding (), "BasicHttpBinding");
+            var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
+            ServiceEndpoint webHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new WebHttpBinding (), "WebHttpBinding");
+            ServiceEndpoint basicHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new BasicHttpBinding (), "BasicHttpBinding");
 
-			Assert.AreEqual (0, webHttp.Behaviors.Count, "webHttp.Behaviors.Count #1");
-			Assert.AreEqual (0, basicHttp.Behaviors.Count, "basicHttp.Behaviors.Count #1");
+            Assert.AreEqual (0, webHttp.Behaviors.Count, "webHttp.Behaviors.Count #1");
+            Assert.AreEqual (0, basicHttp.Behaviors.Count, "basicHttp.Behaviors.Count #1");
 
-			host.Open ();
+            host.Open ();
 
-			Assert.AreEqual (1, webHttp.Behaviors.Count, "webHttp.Behaviors.Count #2");
-			Assert.AreEqual (typeof (WebHttpBehavior), webHttp.Behaviors [0].GetType (), "behavior type");
-			Assert.AreEqual (0, basicHttp.Behaviors.Count, "basicHttp.Behaviors.Count #2");
+            Assert.AreEqual (1, webHttp.Behaviors.Count, "webHttp.Behaviors.Count #2");
+            Assert.AreEqual (typeof (WebHttpBehavior), webHttp.Behaviors [0].GetType (), "behavior type");
+            Assert.AreEqual (0, basicHttp.Behaviors.Count, "basicHttp.Behaviors.Count #2");
 
-			host.Close ();
-		}
+            host.Close ();
+        }
 
-		[Test]
-		[Category("NotWorking")]
-		public void WebHttpBehaviorTest2 () {
+        [Test]
+        [Category("NotWorking")]
+        public void WebHttpBehaviorTest2 () {
 
-			var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
-			ServiceEndpoint webHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new WebHttpBinding (), "WebHttpBinding");
-			MyWebHttpBehavior behavior = new MyWebHttpBehavior ();
-			behavior.ApplyDispatchBehaviorBegin += delegate {
-				Assert.AreEqual (typeof (EndpointAddressMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].AddressFilter.GetType (), "AddressFilter.GetType #1");
-				Assert.AreEqual (typeof (ActionMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].ContractFilter.GetType (), "ContractFilter.GetType #1");
-			};
-			behavior.ApplyDispatchBehaviorEnd += delegate {
-				Assert.AreEqual (typeof (PrefixEndpointAddressMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].AddressFilter.GetType (), "AddressFilter.GetType #2");
-				Assert.AreEqual (typeof (MatchAllMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].ContractFilter.GetType (), "ContractFilter.GetType #2");
-			};
-			webHttp.Behaviors.Add (behavior);
+            var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
+            ServiceEndpoint webHttp = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.Web.WebServiceHostTest+MyService", new WebHttpBinding (), "WebHttpBinding");
+            MyWebHttpBehavior behavior = new MyWebHttpBehavior ();
+            behavior.ApplyDispatchBehaviorBegin += delegate {
+                Assert.AreEqual (typeof (EndpointAddressMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].AddressFilter.GetType (), "AddressFilter.GetType #1");
+                Assert.AreEqual (typeof (ActionMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].ContractFilter.GetType (), "ContractFilter.GetType #1");
+            };
+            behavior.ApplyDispatchBehaviorEnd += delegate {
+                Assert.AreEqual (typeof (PrefixEndpointAddressMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].AddressFilter.GetType (), "AddressFilter.GetType #2");
+                Assert.AreEqual (typeof (MatchAllMessageFilter), ((ChannelDispatcher) host.ChannelDispatchers [0]).Endpoints [0].ContractFilter.GetType (), "ContractFilter.GetType #2");
+            };
+            webHttp.Behaviors.Add (behavior);
 
-			host.Open ();
-			host.Close ();
-		}
+            host.Open ();
+            host.Close ();
+        }
 
-		[Test]
-		public void ServiceBaseUriTest () {
+        [Test]
+        public void ServiceBaseUriTest () {
 
-			var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
-			Assert.AreEqual (0, host.Description.Endpoints.Count, "no endpoints yet");
-			host.Open ();
-			Assert.AreEqual (1, host.Description.Endpoints.Count, "default endpoint after open");
-			host.Close ();
-		}
+            var host = new WebServiceHost (typeof (MyService), new Uri ("http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString()));
+            Assert.AreEqual (0, host.Description.Endpoints.Count, "no endpoints yet");
+            host.Open ();
+            Assert.AreEqual (1, host.Description.Endpoints.Count, "default endpoint after open");
+            host.Close ();
+        }
 
-		class MyWebHttpBehavior : WebHttpBehavior
-		{
-			public event EventHandler ApplyDispatchBehaviorBegin;
-			public event EventHandler ApplyDispatchBehaviorEnd;
+        class MyWebHttpBehavior : WebHttpBehavior
+        {
+            public event EventHandler ApplyDispatchBehaviorBegin;
+            public event EventHandler ApplyDispatchBehaviorEnd;
 
-			public override void ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) {
-				if (ApplyDispatchBehaviorBegin != null)
-					ApplyDispatchBehaviorBegin (this, EventArgs.Empty);
-				base.ApplyDispatchBehavior (endpoint, endpointDispatcher);
-				if (ApplyDispatchBehaviorEnd != null)
-					ApplyDispatchBehaviorEnd (this, EventArgs.Empty);
-			}
-		}
+            public override void ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) {
+                if (ApplyDispatchBehaviorBegin != null)
+                    ApplyDispatchBehaviorBegin (this, EventArgs.Empty);
+                base.ApplyDispatchBehavior (endpoint, endpointDispatcher);
+                if (ApplyDispatchBehaviorEnd != null)
+                    ApplyDispatchBehaviorEnd (this, EventArgs.Empty);
+            }
+        }
 
-		[ServiceContract]
-		public class MyService
-		{
-			[OperationContract]
-			[WebGet (RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-			public string Greet (string input) {
-				return "huh? " + input;
-			}
-		}
+        [ServiceContract]
+        public class MyService
+        {
+            [OperationContract]
+            [WebGet (RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+            public string Greet (string input) {
+                return "huh? " + input;
+            }
+        }
 
-		[Test]
-		public void Connect ()
-		{
-			var url = "http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString();
-			var host = new WebServiceHost (typeof (DemoService), new Uri
-						       (url));
-			try {
-				host.Open ();
-				var wc = new WebClient();
-				wc.DownloadString(url + "/testData");
-				Console.WriteLine();
-			} finally {
-				host.Close();
-			}
-		}
-		
-		[ServiceContract]
-		interface IDemoService {
-			[OperationContract]
-			[WebInvoke(UriTemplate = "/{testData}",
-				   Method = "GET",
-				   RequestFormat = WebMessageFormat.Json,
-				   ResponseFormat = WebMessageFormat.Json)]
-			void UpdateAttribute(string testData);
-		}
+        [Test]
+        public void Connect ()
+        {
+            var url = "http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString();
+            var host = new WebServiceHost (typeof (DemoService), new Uri
+                               (url));
+            try {
+                host.Open ();
+                var wc = new WebClient();
+                wc.DownloadString(url + "/testData");
+                Console.WriteLine();
+            } finally {
+                host.Close();
+            }
+        }
+        
+        [ServiceContract]
+        interface IDemoService {
+            [OperationContract]
+            [WebInvoke(UriTemplate = "/{testData}",
+                   Method = "GET",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json)]
+            void UpdateAttribute(string testData);
+        }
 
-		public class DemoService : IDemoService {
-			public void UpdateAttribute(string testData)
-			{
-				Console.WriteLine ("got it: "+testData);
-			}
-		}
-	}
+        public class DemoService : IDemoService {
+            public void UpdateAttribute(string testData)
+            {
+                Console.WriteLine ("got it: "+testData);
+            }
+        }
+    }
 }
 #endif

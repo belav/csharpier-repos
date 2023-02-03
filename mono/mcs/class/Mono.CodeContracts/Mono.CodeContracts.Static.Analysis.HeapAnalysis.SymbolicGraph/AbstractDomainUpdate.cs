@@ -2,7 +2,7 @@
 // AbstractDomainUpdate.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,59 +29,59 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-	class AbstractDomainUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain>
-		where TFunc : IEquatable<TFunc>, IConstantInfo
-		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
-		private readonly SymValue sv;
+    class AbstractDomainUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain>
+        where TFunc : IEquatable<TFunc>, IConstantInfo
+        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+        private readonly SymValue sv;
 
-		public AbstractDomainUpdate (SymValue sv)
-		{
-			this.sv = sv;
-		}
+        public AbstractDomainUpdate (SymValue sv)
+        {
+            this.sv = sv;
+        }
 
-		#region Overrides of Update
-		public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
-		{
-			if (!merge.IsCommon (this.sv))
-				return;
+        #region Overrides of Update
+        public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
+        {
+            if (!merge.IsCommon (this.sv))
+                return;
 
-			TAbstractDomain val1 = merge.Graph1 [this.sv];
-			TAbstractDomain val2 = merge.Graph2 [this.sv];
-			bool weaker;
-			TAbstractDomain join = val1.Join (val2, merge.Widen, out weaker);
+            TAbstractDomain val1 = merge.Graph1 [this.sv];
+            TAbstractDomain val2 = merge.Graph2 [this.sv];
+            bool weaker;
+            TAbstractDomain join = val1.Join (val2, merge.Widen, out weaker);
 
-			TAbstractDomain wasInResult = merge.Result [this.sv];
-			if (weaker) {
-				if (DebugOptions.Debug)
-				{
-					Console.WriteLine ("----SymGraph changed during AbstractDomainUpdate of {3} " +
-					                   "due to weaker abstractValue join (val1 = {0}, val2 = {1}, wasInResult = {2}",
-					                   val1, val2, wasInResult, this.sv);
-				}
-				merge.Changed = true;
-			}
+            TAbstractDomain wasInResult = merge.Result [this.sv];
+            if (weaker) {
+                if (DebugOptions.Debug)
+                {
+                    Console.WriteLine ("----SymGraph changed during AbstractDomainUpdate of {3} " +
+                                       "due to weaker abstractValue join (val1 = {0}, val2 = {1}, wasInResult = {2}",
+                                       val1, val2, wasInResult, this.sv);
+                }
+                merge.Changed = true;
+            }
 
-			if (join.Equals (wasInResult))
-				return;
+            if (join.Equals (wasInResult))
+                return;
 
-			merge.Result [this.sv] = join;
-		}
+            merge.Result [this.sv] = join;
+        }
 
-		public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
-		{
-			if (!merge.IsCommon (this.sv))
-				return;
+        public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
+        {
+            if (!merge.IsCommon (this.sv))
+                return;
 
-			TAbstractDomain val1 = merge.Graph1 [this.sv];
+            TAbstractDomain val1 = merge.Graph1 [this.sv];
 
-			if (val1.IsTop)
-				merge.Result [this.sv] = val1;
-			else {
-				TAbstractDomain val2 = merge.Graph2 [this.sv];
-				if (val2.IsTop)
-					merge.Result [this.sv] = val2;
-			}
-		}
-		#endregion
-	}
+            if (val1.IsTop)
+                merge.Result [this.sv] = val1;
+            else {
+                TAbstractDomain val2 = merge.Graph2 [this.sv];
+                if (val2.IsTop)
+                    merge.Result [this.sv] = val2;
+            }
+        }
+        #endregion
+    }
 }

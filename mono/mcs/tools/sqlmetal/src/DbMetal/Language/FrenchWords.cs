@@ -1,4 +1,4 @@
-ï»¿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -65,7 +65,7 @@ namespace DbMetal.Language
         /// <returns></returns>
         protected override string GetStandard(string word)
         {
-            return word.Replace("Å“", "oe").Replace("Ã¦", "ae");
+            return word.Replace("œ", "oe").Replace("æ", "ae");
         }
 
         protected override SingularPlural[] SingularsPlurals

@@ -36,7 +36,7 @@ namespace MS.Internal.Xml.XPath {
             if (context == null) {
                 throw XPathException.Create(Res.Xp_NoContext);
             }
-			if (this.xsltContext != context) {
+            if (this.xsltContext != context) {
                 xsltContext = context;
                 foreach (Query argument in args) {
                     argument.SetXsltContext(context);
@@ -54,9 +54,9 @@ namespace MS.Internal.Xml.XPath {
         }
 
         public override object Evaluate(XPathNodeIterator nodeIterator) {
-			if (xsltContext == null) {
-				throw XPathException.Create(Res.Xp_NoContext);
-			}
+            if (xsltContext == null) {
+                throw XPathException.Create(Res.Xp_NoContext);
+            }
 
             // calculate arguments:
             object[] argVals = new object[args.Count];
@@ -89,10 +89,10 @@ namespace MS.Internal.Xml.XPath {
 
         public override XPathResultType StaticType { get {
             XPathResultType result = function != null ? function.ReturnType : XPathResultType.Any;
-			if (result == XPathResultType.Error) {
-				// In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
-				result = XPathResultType.Any;
-			}
+            if (result == XPathResultType.Error) {
+                // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
+                result = XPathResultType.Any;
+            }
             return result;
         } }
 

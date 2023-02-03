@@ -144,7 +144,7 @@ namespace Microsoft.SqlServer.Server {
         CreateEventNotification = EMDEventType.x_eet_Create_Event_Notification,
         DropEventNotification = EMDEventType.x_eet_Drop_Event_Notification,
         CreateType = EMDEventType.x_eet_Create_Type,
-        //	Alter_Type = EMDEventType.x_eet_Alter_Type,
+        //    Alter_Type = EMDEventType.x_eet_Alter_Type,
         DropType = EMDEventType.x_eet_Drop_Type,
         CreateAssembly = EMDEventType.x_eet_Create_Assembly,
         AlterAssembly = EMDEventType.x_eet_Alter_Assembly,

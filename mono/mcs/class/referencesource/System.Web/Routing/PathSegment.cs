@@ -1,4 +1,4 @@
-﻿namespace System.Web.Routing {
+namespace System.Web.Routing {
 
     // Represents a segment of a URL such as a separator or content
     internal abstract class PathSegment {

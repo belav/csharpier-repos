@@ -22,7 +22,7 @@ namespace Mono.ILASM {
                 PEAPI.ClassRef GetType (string full_name, bool is_valuetype);
                 string FullName { get; }
         }
-	
+    
         public abstract class ExternRef : ICustomAttrTarget, IScope {
 
                 protected string name;
@@ -41,9 +41,9 @@ namespace Mono.ILASM {
                         class_table = new Hashtable ();
                 }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name {
+            get { return name; }
+        }
 
                 public virtual string FullName {
                         get { return name; }
@@ -66,7 +66,7 @@ namespace Mono.ILASM {
                                 first = full_name.Substring (0, slash);
                                 rest = full_name.Substring (slash + 1);
                         }
-				
+                
                         ExternTypeRef type_ref = typeref_table [first] as ExternTypeRef;
                         
                         if (type_ref != null) {
@@ -365,7 +365,7 @@ namespace Mono.ILASM {
                             foreach (var entry in class_table)
                                 entry.Resolve (code_gen, this);
 
-                        is_resolved = true;	
+                        is_resolved = true;    
                 }
 
                 public ExternTypeRef GetTypeRef (string asmb_name, string full_name, bool is_valuetype)

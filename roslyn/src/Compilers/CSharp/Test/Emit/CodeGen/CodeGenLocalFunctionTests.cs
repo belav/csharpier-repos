@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -5675,45 +5675,45 @@ class C
 
             verifier.VerifyTypeIL("C", @"
     .class private auto ansi beforefieldinit C
-    	extends [mscorlib]System.Object
+        extends [mscorlib]System.Object
     {
-    	// Methods
-    	.method public hidebysig 
-    		instance void M () cil managed 
-    	{
-    		// Method begins at RVA 0x205a
-    		// Code size 3 (0x3)
-    		.maxstack 8
-    		IL_0000: nop
-    		IL_0001: nop
-    		IL_0002: ret
-    	} // end of method C::M
-    	.method public hidebysig specialname rtspecialname 
-    		instance void .ctor () cil managed 
-    	{
-    		// Method begins at RVA 0x205e
-    		// Code size 8 (0x8)
-    		.maxstack 8
-    		IL_0000: ldarg.0
-    		IL_0001: call instance void [mscorlib]System.Object::.ctor()
-    		IL_0006: nop
-    		IL_0007: ret
-    	} // end of method C::.ctor
-    	.method assembly hidebysig static 
-    		void '<M>g__local1|0_0' () cil managed 
-    	{
-    		.custom instance void [mscorlib]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-    			01 00 00 00
-    		)
-    		.custom instance void A::.ctor(int32) = (
-    			01 00 2a 00 00 00 00 00
-    		)
-    		// Method begins at RVA 0x2067
-    		// Code size 2 (0x2)
-    		.maxstack 8
-    		IL_0000: nop
-    		IL_0001: ret
-    	} // end of method C::'<M>g__local1|0_0'
+        // Methods
+        .method public hidebysig 
+            instance void M () cil managed 
+        {
+            // Method begins at RVA 0x205a
+            // Code size 3 (0x3)
+            .maxstack 8
+            IL_0000: nop
+            IL_0001: nop
+            IL_0002: ret
+        } // end of method C::M
+        .method public hidebysig specialname rtspecialname 
+            instance void .ctor () cil managed 
+        {
+            // Method begins at RVA 0x205e
+            // Code size 8 (0x8)
+            .maxstack 8
+            IL_0000: ldarg.0
+            IL_0001: call instance void [mscorlib]System.Object::.ctor()
+            IL_0006: nop
+            IL_0007: ret
+        } // end of method C::.ctor
+        .method assembly hidebysig static 
+            void '<M>g__local1|0_0' () cil managed 
+        {
+            .custom instance void [mscorlib]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                01 00 00 00
+            )
+            .custom instance void A::.ctor(int32) = (
+                01 00 2a 00 00 00 00 00
+            )
+            // Method begins at RVA 0x2067
+            // Code size 2 (0x2)
+            .maxstack 8
+            IL_0000: nop
+            IL_0001: ret
+        } // end of method C::'<M>g__local1|0_0'
     } // end of class C");
         }
 
@@ -6186,7 +6186,7 @@ public class Program
 
         static void Local1<T>()
         {
-            System.Console.Write(Local2(Local3()));	
+            System.Console.Write(Local2(Local3()));    
             static string Local2(dynamic n) => n.ToString();
         }
 
@@ -6211,7 +6211,7 @@ public class Program
 
         static void Local1<T>()
         {
-            System.Console.Write(Local2(Local3<object>()));	
+            System.Console.Write(Local2(Local3<object>()));    
             static string Local2(dynamic n) => n.ToString();
         }
 
@@ -6236,7 +6236,7 @@ public class Program
 
         static void Local1<T>()
         {
-            System.Console.Write(Local2<object>(Local3<object>()));	
+            System.Console.Write(Local2<object>(Local3<object>()));    
             static string Local2<U>(dynamic n) => n.ToString();
         }
 
@@ -6261,7 +6261,7 @@ public class Program
 
         static void Local1<T>()
         {
-            System.Console.Write(Local1<object>(Local3<object>()));	
+            System.Console.Write(Local1<object>(Local3<object>()));    
             static string Local1<U>(dynamic n) => n.ToString();
         }
 
@@ -6286,7 +6286,7 @@ public class Program
 
         static void Local1<T>()
         {
-            System.Console.Write(Local2<object>(Local3<object>()));	
+            System.Console.Write(Local2<object>(Local3<object>()));    
             static string Local2<U>(dynamic n) => n.ToString();
         }
 

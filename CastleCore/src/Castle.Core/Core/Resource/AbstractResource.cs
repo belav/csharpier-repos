@@ -14,33 +14,33 @@
 
 namespace Castle.Core.Resource
 {
-	using System;
-	using System.IO;
-	using System.Text;
+    using System;
+    using System.IO;
+    using System.Text;
 
-	public abstract class AbstractResource : IResource
-	{
-		protected static readonly string DefaultBasePath = AppDomain.CurrentDomain.BaseDirectory;
+    public abstract class AbstractResource : IResource
+    {
+        protected static readonly string DefaultBasePath = AppDomain.CurrentDomain.BaseDirectory;
 
-		public virtual string FileBasePath
-		{
-			get { return DefaultBasePath; }
-		}
+        public virtual string FileBasePath
+        {
+            get { return DefaultBasePath; }
+        }
 
-		public abstract TextReader GetStreamReader();
+        public abstract TextReader GetStreamReader();
 
-		public abstract TextReader GetStreamReader(Encoding encoding);
+        public abstract TextReader GetStreamReader(Encoding encoding);
 
-		public abstract IResource CreateRelative(string relativePath);
+        public abstract IResource CreateRelative(string relativePath);
 
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected virtual void Dispose(bool disposing)
-		{
-		}
-	}
+        protected virtual void Dispose(bool disposing)
+        {
+        }
+    }
 }

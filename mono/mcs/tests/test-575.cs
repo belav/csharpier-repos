@@ -7,9 +7,9 @@ using System.IO;
 
 class Program
 {
-	public static void Main (string [] args)
-	{
-		using (StringWriter stringWriter = new StringWriter ()) {
-		}
-	}
+    public static void Main (string [] args)
+    {
+        using (StringWriter stringWriter = new StringWriter ()) {
+        }
+    }
 }

@@ -23,38 +23,38 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public class ListViewItemSelectionChangedEventArgs : EventArgs
-	{
-		private bool is_selected;
-		private ListViewItem item;
-		private int item_index;
+    public class ListViewItemSelectionChangedEventArgs : EventArgs
+    {
+        private bool is_selected;
+        private ListViewItem item;
+        private int item_index;
 
-		#region Public Constructors
-		public ListViewItemSelectionChangedEventArgs (ListViewItem item, int itemIndex, bool isSelected) : base ()
-		{
-			this.item = item;
-			this.item_index = itemIndex;
-			this.is_selected = isSelected;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public ListViewItemSelectionChangedEventArgs (ListViewItem item, int itemIndex, bool isSelected) : base ()
+        {
+            this.item = item;
+            this.item_index = itemIndex;
+            this.is_selected = isSelected;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public ListViewItem Item {
-			get { return this.item; }
-		}
-		
-		public bool IsSelected {
-			get { return this.is_selected; }
-		}
-		
-		public int ItemIndex {
-			get { return this.item_index; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public ListViewItem Item {
+            get { return this.item; }
+        }
+        
+        public bool IsSelected {
+            get { return this.is_selected; }
+        }
+        
+        public int ItemIndex {
+            get { return this.item_index; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

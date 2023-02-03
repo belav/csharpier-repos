@@ -37,10 +37,10 @@ namespace MS.Internal.Xml.XPath {
 
         public override bool MoveNext() {
             XPathNavigator n = query.Advance();
-	        if( n != null ) {
+            if( n != null ) {
                 position++;
                 if (!nav.MoveTo(n)) {
-		            nav = n.Clone();
+                    nav = n.Clone();
                 }
                 return true;
             }

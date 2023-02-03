@@ -2,7 +2,7 @@
 // System.Web.Compilation.Location
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -30,75 +30,75 @@
 
 namespace System.Web.Compilation
 {
-	class Location : ILocation
-	{
-		int beginLine, endLine, beginColumn, endColumn;
-		string fileName, plainText;
-		ILocation location;
-		
-		public Location (ILocation location)
-		{
-			Init (location);
-		}
+    class Location : ILocation
+    {
+        int beginLine, endLine, beginColumn, endColumn;
+        string fileName, plainText;
+        ILocation location;
+        
+        public Location (ILocation location)
+        {
+            Init (location);
+        }
 
-		public void Init (ILocation location)
-		{
-			if (location == null) {
-				beginLine = 0;
-				endLine = 0;
-				beginColumn = 0;
-				endColumn = 0;
-				fileName = null;
-				plainText = null;
-			} else {
-				beginLine = location.BeginLine;
-				endLine = location.EndLine;
-				beginColumn = location.BeginColumn;
-				endColumn = location.EndColumn;
-				fileName = location.Filename;
-				plainText = location.PlainText;
-			}
-			this.location = location;
-		}
+        public void Init (ILocation location)
+        {
+            if (location == null) {
+                beginLine = 0;
+                endLine = 0;
+                beginColumn = 0;
+                endColumn = 0;
+                fileName = null;
+                plainText = null;
+            } else {
+                beginLine = location.BeginLine;
+                endLine = location.EndLine;
+                beginColumn = location.BeginColumn;
+                endColumn = location.EndColumn;
+                fileName = location.Filename;
+                plainText = location.PlainText;
+            }
+            this.location = location;
+        }
 
-		public string Filename {
-			get { return fileName; }
-			set { fileName = value; }
-		}
+        public string Filename {
+            get { return fileName; }
+            set { fileName = value; }
+        }
 
-		public int BeginLine {
-			get { return beginLine; }
-			set { beginLine = value; }
-		}
+        public int BeginLine {
+            get { return beginLine; }
+            set { beginLine = value; }
+        }
 
-		public int EndLine {
-			get { return endLine; }
-			set { endLine = value; }
-		}
+        public int EndLine {
+            get { return endLine; }
+            set { endLine = value; }
+        }
 
-		public int BeginColumn {
-			get { return beginColumn; }
-			set { beginColumn = value; }
-		}
+        public int BeginColumn {
+            get { return beginColumn; }
+            set { beginColumn = value; }
+        }
 
-		public int EndColumn {
-			get { return endColumn; }
-			set { endColumn = value; }
-		}
+        public int EndColumn {
+            get { return endColumn; }
+            set { endColumn = value; }
+        }
 
-		public string PlainText {
-			get { return plainText; }
-			set { plainText = value; }
-		}
+        public string PlainText {
+            get { return plainText; }
+            set { plainText = value; }
+        }
 
-		public string FileText {
-			get {
-				if (location != null)
-					return location.FileText;
+        public string FileText {
+            get {
+                if (location != null)
+                    return location.FileText;
 
-				return null;
-			}
-		}
-	}
+                return null;
+            }
+        }
+    }
 }
 

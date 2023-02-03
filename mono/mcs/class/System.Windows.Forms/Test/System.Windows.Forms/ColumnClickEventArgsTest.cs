@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Chris Toshok <toshok@ximian.com>
+//    Chris Toshok <toshok@ximian.com>
 //
 //
 
@@ -35,19 +35,19 @@ using System.Data;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class ColumnClickEventArgsTest : TestHelper
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			ColumnClickEventArgs ce;
+    [TestFixture]
+    public class ColumnClickEventArgsTest : TestHelper
+    {
+        [Test]
+        public void CtorTest ()
+        {
+            ColumnClickEventArgs ce;
 
-			ce = new ColumnClickEventArgs (0);
-			Assert.AreEqual (0, ce.Column, "1");
+            ce = new ColumnClickEventArgs (0);
+            Assert.AreEqual (0, ce.Column, "1");
 
-			ce = new ColumnClickEventArgs (-1);
-			Assert.AreEqual (-1, ce.Column, "2");
-		}
-	}
+            ce = new ColumnClickEventArgs (-1);
+            Assert.AreEqual (-1, ce.Column, "2");
+        }
+    }
 }

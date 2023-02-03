@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
 {

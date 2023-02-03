@@ -2,7 +2,7 @@
 // System.Web.Security.ActiveDirectoryConnectionProtection enum
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,10 +29,10 @@
 
 namespace System.Web.Security {
 
-	public enum ActiveDirectoryConnectionProtection {
-		None,
-		Ssl,
-		SignAndSeal
-	}
+    public enum ActiveDirectoryConnectionProtection {
+        None,
+        Ssl,
+        SignAndSeal
+    }
 }
 

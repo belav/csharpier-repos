@@ -1,22 +1,22 @@
-﻿using Mono.Linker.Tests.Cases.Expectations.Assertions;
+using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Statics
 {
-	public class UnusedStaticFieldInitializer
-	{
-		public static void Main ()
-		{
-			C.Foo ();
-		}
+    public class UnusedStaticFieldInitializer
+    {
+        public static void Main ()
+        {
+            C.Foo ();
+        }
 
-		static class C
-		{
-			public static object o = new object ();
+        static class C
+        {
+            public static object o = new object ();
 
-			[Kept]
-			public static void Foo ()
-			{
-			}
-		}
-	}
+            [Kept]
+            public static void Foo ()
+            {
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿//
+//
 // DynamicDataSourceOperation.cs
 //
 // Author:
@@ -33,12 +33,12 @@ using System.Text;
 
 namespace System.Web.DynamicData
 {
-	public enum DynamicDataSourceOperation
-	{
-		Delete,
-		Insert,
-		Select,
-		Update,
-		ContextCreate
-	}
+    public enum DynamicDataSourceOperation
+    {
+        Delete,
+        Insert,
+        Select,
+        Update,
+        ContextCreate
+    }
 }

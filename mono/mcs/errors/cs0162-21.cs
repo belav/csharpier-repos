@@ -13,7 +13,7 @@ class X
         return;
     }
 
-	static void Main () 
-	{
-	}
+    static void Main () 
+    {
+    }
 }

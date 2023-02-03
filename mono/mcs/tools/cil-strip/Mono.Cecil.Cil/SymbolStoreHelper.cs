@@ -28,68 +28,68 @@
 
 namespace Mono.Cecil.Cil {
 
-	using System;
-	using SR = System.Reflection;
+    using System;
+    using SR = System.Reflection;
 
-	sealed class SymbolStoreHelper {
+    sealed class SymbolStoreHelper {
 
-		static ISymbolStoreFactory s_factory;
+        static ISymbolStoreFactory s_factory;
 
-		SymbolStoreHelper ()
-		{
-		}
+        SymbolStoreHelper ()
+        {
+        }
 
-		public static ISymbolReader GetReader (ModuleDefinition module)
-		{
-			InitFactory ();
+        public static ISymbolReader GetReader (ModuleDefinition module)
+        {
+            InitFactory ();
 
-			return s_factory.CreateReader (module, module.Image.FileInformation.FullName);
-		}
+            return s_factory.CreateReader (module, module.Image.FileInformation.FullName);
+        }
 
-		public static ISymbolWriter GetWriter (ModuleDefinition module, string assemblyFileName)
-		{
-			InitFactory ();
+        public static ISymbolWriter GetWriter (ModuleDefinition module, string assemblyFileName)
+        {
+            InitFactory ();
 
-			return s_factory.CreateWriter (module, assemblyFileName);
-		}
+            return s_factory.CreateWriter (module, assemblyFileName);
+        }
 
-		static void InitFactory ()
-		{
-			if (s_factory != null)
-				return;
+        static void InitFactory ()
+        {
+            if (s_factory != null)
+                return;
 
-			string assembly_name;
-			string type_name = GetSymbolSupportType (out assembly_name);
+            string assembly_name;
+            string type_name = GetSymbolSupportType (out assembly_name);
 
-			Type factoryType = Type.GetType (type_name + ", " + assembly_name, false);
-			if (factoryType == null) {
-				try {
-					SR.Assembly assembly = SR.Assembly.LoadWithPartialName (assembly_name);
-					factoryType = assembly.GetType (type_name);
-				} catch {}
-			}
+            Type factoryType = Type.GetType (type_name + ", " + assembly_name, false);
+            if (factoryType == null) {
+                try {
+                    SR.Assembly assembly = SR.Assembly.LoadWithPartialName (assembly_name);
+                    factoryType = assembly.GetType (type_name);
+                } catch {}
+            }
 
-			if (factoryType == null)
-				throw new NotSupportedException ();
+            if (factoryType == null)
+                throw new NotSupportedException ();
 
-			s_factory = (ISymbolStoreFactory) Activator.CreateInstance (factoryType);
-		}
+            s_factory = (ISymbolStoreFactory) Activator.CreateInstance (factoryType);
+        }
 
-		static string GetSymbolSupportType (out string assembly)
-		{
-			string kind = GetSymbolKind ();
-			assembly = "Mono.Cecil." + kind;
-			return string.Format (assembly + "." + kind + "Factory");
-		}
+        static string GetSymbolSupportType (out string assembly)
+        {
+            string kind = GetSymbolKind ();
+            assembly = "Mono.Cecil." + kind;
+            return string.Format (assembly + "." + kind + "Factory");
+        }
 
-		static string GetSymbolKind ()
-		{
-			return OnMono () ? "Mdb" : "Pdb";
-		}
+        static string GetSymbolKind ()
+        {
+            return OnMono () ? "Mdb" : "Pdb";
+        }
 
-		static bool OnMono ()
-		{
-			return Type.GetType ("Mono.Runtime") != null;
-		}
-	}
+        static bool OnMono ()
+        {
+            return Type.GetType ("Mono.Runtime") != null;
+        }
+    }
 }

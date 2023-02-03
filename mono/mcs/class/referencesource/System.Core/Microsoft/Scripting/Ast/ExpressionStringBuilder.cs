@@ -1,4 +1,4 @@
-﻿/* ****************************************************************************
+/* ****************************************************************************
  *
  * Copyright (c) Microsoft Corporation. 
  *
@@ -249,11 +249,11 @@ namespace System.Linq.Expressions {
                         break;
                     case ExpressionType.Assign: op = "="; break;
                     case ExpressionType.Equal:
-						op = "==";
+                        op = "==";
 #if SILVERLIGHT
                         if (Expression.SilverlightQuirks) op = "=";
 #endif
-						break;
+                        break;
                     case ExpressionType.NotEqual: op = "!="; break;
                     case ExpressionType.GreaterThan: op = ">"; break;
                     case ExpressionType.LessThan: op = "<"; break;

@@ -1,9 +1,9 @@
 //
 // DataGridItemCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.DataGridItem
+//    - CAS unit tests for System.Web.UI.WebControls.DataGridItem
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,31 +40,31 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataGridItemCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataGridItemCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataGridItemTest unit = new DataGridItemTest ();
-			unit.Defaults ();
-			unit.Methods ();
-			unit.ValidEnum ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            DataGridItemTest unit = new DataGridItemTest ();
+            unit.Defaults ();
+            unit.Methods ();
+            unit.ValidEnum ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[3] { typeof (int), typeof (int), typeof (ListItemType) });
-			Assert.IsNotNull (ci, ".ctor(int,int,ListItemType)");
-			return ci.Invoke (new object[3] { 0, 0, ListItemType.Item });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[3] { typeof (int), typeof (int), typeof (ListItemType) });
+            Assert.IsNotNull (ci, ".ctor(int,int,ListItemType)");
+            return ci.Invoke (new object[3] { 0, 0, ListItemType.Item });
+        }
 
-		public override Type Type {
-			get { return typeof (DataGridItem); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataGridItem); }
+        }
+    }
 }

@@ -96,7 +96,7 @@ namespace System.IO.Compression.Tests
 
         /// <summary>
         /// This test checks whether or not ZipFile.ExtractToDirectory() is capable of handling filenames
-		/// which contain invalid path characters in Windows.
+        /// which contain invalid path characters in Windows.
         ///  Archive:  InvalidWindowsFileNameChars.zip
         ///  Test/
         ///  Test/normalText.txt

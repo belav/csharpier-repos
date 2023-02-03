@@ -1,9 +1,9 @@
 //
 // StateRuntimeCas.cs 
-//	- CAS unit tests for System.Web.SessionState.StateRuntime
+//    - CAS unit tests for System.Web.SessionState.StateRuntime
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,172 +38,172 @@ using System.Web.SessionState;
 
 namespace MonoCasTests.System.Web.SessionState {
 
-	// note: the execution order (not user controlable) is very important 
-	// for the tests to execute properly. However the tests are protected 
-	// not to report errors if the order isn't repected.
+    // note: the execution order (not user controlable) is very important 
+    // for the tests to execute properly. However the tests are protected 
+    // not to report errors if the order isn't repected.
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StateRuntimeCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StateRuntimeCas : AspNetHostingMinimal {
 
-		private StateRuntime runtime;
+        private StateRuntime runtime;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			try {
-				// ensure that the static ctor has been called
-				runtime = new StateRuntime ();
-			}
-			catch {
-			}
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            try {
+                // ensure that the static ctor has been called
+                runtime = new StateRuntime ();
+            }
+            catch {
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_UnmanagedCode ()
-		{
-			try {
-				new StateRuntime ();
-			}
-			catch (TypeInitializationException) {
-				Assert.Ignore ("fails on MS");
-			}
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Constructor_Deny_UnmanagedCode ()
+        {
+            try {
+                new StateRuntime ();
+            }
+            catch (TypeInitializationException) {
+                Assert.Ignore ("fails on MS");
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_Minimal ()
-		{
-			try {
-				new StateRuntime ();
-			}
-			catch (TypeInitializationException) {
-				Assert.Ignore ("fails on MS");
-			}
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Constructor_Deny_Minimal ()
+        {
+            try {
+                new StateRuntime ();
+            }
+            catch (TypeInitializationException) {
+                Assert.Ignore ("fails on MS");
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Constructor_PermitOnly_UnmanagedCodeMinimal ()
-		{
-			try {
-				new StateRuntime ();
-			}
-			catch (TypeInitializationException) {
-				Assert.Ignore ("fails on MS");
-			}
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Constructor_PermitOnly_UnmanagedCodeMinimal ()
+        {
+            try {
+                new StateRuntime ();
+            }
+            catch (TypeInitializationException) {
+                Assert.Ignore ("fails on MS");
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
-		public void ProcessRequest9_PermitOnly_Medium ()
-		{
-			if (runtime == null)
-				Assert.Ignore ("impossible to instantiate under MS");
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
+        public void ProcessRequest9_PermitOnly_Medium ()
+        {
+            if (runtime == null)
+                Assert.Ignore ("impossible to instantiate under MS");
 
-			try {
-				runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, IntPtr.Zero);
-			}
-			catch (NullReferenceException) {
-				// ms 1.x
-			}
-			catch (DllNotFoundException) {
-				// ms 2.0
-			}
-			catch (NotImplementedException)	{
-				// mono
-			}
-		}
+            try {
+                runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, IntPtr.Zero);
+            }
+            catch (NullReferenceException) {
+                // ms 1.x
+            }
+            catch (DllNotFoundException) {
+                // ms 2.0
+            }
+            catch (NotImplementedException)    {
+                // mono
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ProcessRequest9_Deny_Medium ()
-		{
-			if (runtime == null)
-				Assert.Ignore ("impossible to instantiate under MS");
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
+        [ExpectedException (typeof (SecurityException))]
+        public void ProcessRequest9_Deny_Medium ()
+        {
+            if (runtime == null)
+                Assert.Ignore ("impossible to instantiate under MS");
 
-			runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, IntPtr.Zero);
-		}
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
-		public void ProcessRequest10_PermitOnly_Medium ()
-		{
-			if (runtime == null)
-				Assert.Ignore ("impossible to instantiate under MS");
+            runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, IntPtr.Zero);
+        }
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
+        public void ProcessRequest10_PermitOnly_Medium ()
+        {
+            if (runtime == null)
+                Assert.Ignore ("impossible to instantiate under MS");
 
-			try {
-				runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, 0, IntPtr.Zero);
-			}
-			catch (DllNotFoundException) {
-				// ms
-			}
-			catch (NotImplementedException)	{
-				// mono
-			}
-		}
+            try {
+                runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, 0, IntPtr.Zero);
+            }
+            catch (DllNotFoundException) {
+                // ms
+            }
+            catch (NotImplementedException)    {
+                // mono
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ProcessRequest10_Deny_Medium ()
-		{
-			if (runtime == null)
-				Assert.Ignore ("impossible to instantiate under MS");
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
+        [ExpectedException (typeof (SecurityException))]
+        public void ProcessRequest10_Deny_Medium ()
+        {
+            if (runtime == null)
+                Assert.Ignore ("impossible to instantiate under MS");
 
-			runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, 0, IntPtr.Zero);
-		}
+            runtime.ProcessRequest (IntPtr.Zero, 0, null, 0, 0, 0, 0, 0, 0, IntPtr.Zero);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[Category ("NotDotNet")] // freeze
-		public void StopProcessing_PermitOnly_UnmanagedCode ()
-		{
-			if (runtime == null)
-				Assert.Ignore ("impossible to instantiate under MS");
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [Category ("NotDotNet")] // freeze
+        public void StopProcessing_PermitOnly_UnmanagedCode ()
+        {
+            if (runtime == null)
+                Assert.Ignore ("impossible to instantiate under MS");
 
-			try {
-				runtime.StopProcessing ();
-			}
-			catch (SecurityException se) {
-				Console.WriteLine (se);
-			}
-			catch (NotImplementedException)	{
-				// mono
-			}
-		}
+            try {
+                runtime.StopProcessing ();
+            }
+            catch (SecurityException se) {
+                Console.WriteLine (se);
+            }
+            catch (NotImplementedException)    {
+                // mono
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void StopProcessing_Deny_UnmanagedCode ()
-		{
-			if (runtime == null)
-				Assert.Ignore ("may not be possible to instantiate under MS (run-order)");
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void StopProcessing_Deny_UnmanagedCode ()
+        {
+            if (runtime == null)
+                Assert.Ignore ("may not be possible to instantiate under MS (run-order)");
 
-			runtime.StopProcessing ();
-		}
+            runtime.StopProcessing ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			try {
-				return base.CreateControl (action, level);
-			}
-			catch (TypeInitializationException) {
-				// ctor can't be called more than once (else it throws TIE)
-				return String.Empty;
-			}
-		}
+        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            try {
+                return base.CreateControl (action, level);
+            }
+            catch (TypeInitializationException) {
+                // ctor can't be called more than once (else it throws TIE)
+                return String.Empty;
+            }
+        }
 
-		public override Type Type {
-			get { return typeof (StateRuntime); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (StateRuntime); }
+        }
+    }
 }

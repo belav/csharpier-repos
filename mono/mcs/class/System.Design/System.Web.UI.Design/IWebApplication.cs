@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IWebApplication
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -34,14 +34,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Web.UI.Design {
 
-	[Guid ("cff39fa8-5607-4b6d-86f3-cc80b3cfe2dd")] 
-	public interface IWebApplication : IServiceProvider {
+    [Guid ("cff39fa8-5607-4b6d-86f3-cc80b3cfe2dd")] 
+    public interface IWebApplication : IServiceProvider {
 
-		IProjectItem GetProjectItemFromUrl (string appRelativeUrl);
-		System.Configuration.Configuration OpenWebConfiguration (bool isReadOnly);
+        IProjectItem GetProjectItemFromUrl (string appRelativeUrl);
+        System.Configuration.Configuration OpenWebConfiguration (bool isReadOnly);
 
-		IProjectItem RootProjectItem { get; }
-	}
+        IProjectItem RootProjectItem { get; }
+    }
 
 }
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public interface IStringLists
-	{
-		[StringList]
-		IList<string> Names { get; }
+    public interface IStringLists
+    {
+        [StringList]
+        IList<string> Names { get; }
 
-		[StringList]
-		IList<int> Ages { get; set; }
-	}
+        [StringList]
+        IList<int> Ages { get; set; }
+    }
 }

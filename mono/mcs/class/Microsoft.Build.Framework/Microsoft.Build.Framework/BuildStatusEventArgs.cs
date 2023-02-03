@@ -30,37 +30,37 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-	[Serializable]
-	public abstract class BuildStatusEventArgs
-			: LazyFormattedBuildEventArgs {
-	
-		protected BuildStatusEventArgs ()
-		{
-		}
+    [Serializable]
+    public abstract class BuildStatusEventArgs
+            : LazyFormattedBuildEventArgs {
+    
+        protected BuildStatusEventArgs ()
+        {
+        }
 
-		protected BuildStatusEventArgs (string message,
-						string helpKeyword,
-						string senderName)
-			: base (message, helpKeyword, senderName)
-		{
-		}
+        protected BuildStatusEventArgs (string message,
+                        string helpKeyword,
+                        string senderName)
+            : base (message, helpKeyword, senderName)
+        {
+        }
 
-		protected BuildStatusEventArgs (string message,
-						string helpKeyword,
-						string senderName,
-						DateTime eventTimestamp)
-			: base (message, helpKeyword, senderName, eventTimestamp)
-		{
-		}
+        protected BuildStatusEventArgs (string message,
+                        string helpKeyword,
+                        string senderName,
+                        DateTime eventTimestamp)
+            : base (message, helpKeyword, senderName, eventTimestamp)
+        {
+        }
 
-		protected BuildStatusEventArgs (string message,
-						string helpKeyword,
-						string senderName,
-						DateTime eventTimestamp,
-						params object [] messageArgs)
-			: base (message, helpKeyword, senderName, eventTimestamp, messageArgs)
-		{
-		}
-	}
+        protected BuildStatusEventArgs (string message,
+                        string helpKeyword,
+                        string senderName,
+                        DateTime eventTimestamp,
+                        params object [] messageArgs)
+            : base (message, helpKeyword, senderName, eventTimestamp, messageArgs)
+        {
+        }
+    }
 }
 

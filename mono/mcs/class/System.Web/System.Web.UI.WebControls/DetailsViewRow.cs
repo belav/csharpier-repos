@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DetailsViewRow.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -35,50 +35,50 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DetailsViewRow: TableRow
-	{
-		int rowIndex;
-		DataControlRowState rowState;
-		DataControlRowType rowType;
-		DataControlField containingField;
-		
-		public DetailsViewRow (int rowIndex, DataControlRowType rowType, DataControlRowState rowState)
-		{
-			this.rowIndex = rowIndex;
-			this.rowType = rowType;
-			this.rowState = rowState;
-		}
-		
-		public virtual int RowIndex {
-			get { return rowIndex; }
-		}
-		
-		public virtual DataControlRowState RowState {
-			get { return rowState; }
-		}
-		
-		public virtual DataControlRowType RowType {
-			get { return rowType; }
-		}
-		
-		internal DataControlField ContainingField {
-			get { return containingField; }
-			set { containingField = value; }
-		}
+    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class DetailsViewRow: TableRow
+    {
+        int rowIndex;
+        DataControlRowState rowState;
+        DataControlRowType rowType;
+        DataControlField containingField;
+        
+        public DetailsViewRow (int rowIndex, DataControlRowType rowType, DataControlRowState rowState)
+        {
+            this.rowIndex = rowIndex;
+            this.rowType = rowType;
+            this.rowState = rowState;
+        }
+        
+        public virtual int RowIndex {
+            get { return rowIndex; }
+        }
+        
+        public virtual DataControlRowState RowState {
+            get { return rowState; }
+        }
+        
+        public virtual DataControlRowType RowType {
+            get { return rowType; }
+        }
+        
+        internal DataControlField ContainingField {
+            get { return containingField; }
+            set { containingField = value; }
+        }
 
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			if (base.OnBubbleEvent (source, e)) return true;
-			
-			if (e is CommandEventArgs) {
-				DetailsViewCommandEventArgs args = new DetailsViewCommandEventArgs (source, (CommandEventArgs)e);
-				RaiseBubbleEvent (source, args);
-				return true;
-			}
-			return false;
-		}
-	}
+        protected override bool OnBubbleEvent (object source, EventArgs e)
+        {
+            if (base.OnBubbleEvent (source, e)) return true;
+            
+            if (e is CommandEventArgs) {
+                DetailsViewCommandEventArgs args = new DetailsViewCommandEventArgs (source, (CommandEventArgs)e);
+                RaiseBubbleEvent (source, args);
+                return true;
+            }
+            return false;
+        }
+    }
 }
 

@@ -9,8 +9,8 @@ public class server2
 {
   public int trivial()
   {
-	Console.WriteLine ("server2.trivial");
-	Console.WriteLine ("strongly named");
-	return 2;
+    Console.WriteLine ("server2.trivial");
+    Console.WriteLine ("strongly named");
+    return 2;
   }
 }

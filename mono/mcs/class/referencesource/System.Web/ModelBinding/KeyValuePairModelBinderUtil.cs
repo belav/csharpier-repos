@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
 
     internal static class KeyValuePairModelBinderUtil {
 

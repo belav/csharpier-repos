@@ -39,68 +39,68 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_GetColumnError_S : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataRow_GetColumnError_S tc = new DataRow_GetColumnError_S();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRow_GetColumnError_S");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataRow_GetColumnError_S tc = new DataRow_GetColumnError_S();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataRow_GetColumnError_S");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
+    public void run()
+    {
+        Exception exp = null;
 
-		string sColErr = "Error!";
-		DataTable dt = new DataTable("myTable"); 
-		DataColumn dc = new DataColumn("Column1"); 
-		dt.Columns.Add(dc);
-		DataRow dr = dt.NewRow();
+        string sColErr = "Error!";
+        DataTable dt = new DataTable("myTable"); 
+        DataColumn dc = new DataColumn("Column1"); 
+        dt.Columns.Add(dc);
+        DataRow dr = dt.NewRow();
 
-		
-		try
-		{
-			BeginCase("GetColumnError 1");
-			Compare( dr.GetColumnError("Column1") , String.Empty );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("GetColumnError 1");
+            Compare( dr.GetColumnError("Column1") , String.Empty );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		dr.SetColumnError("Column1",sColErr );
+        dr.SetColumnError("Column1",sColErr );
 
-		try
-		{
-			BeginCase("GetColumnError 2");
-			Compare( dr.GetColumnError("Column1") , sColErr );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-			
-		
-		
-	}
+        try
+        {
+            BeginCase("GetColumnError 2");
+            Compare( dr.GetColumnError("Column1") , sColErr );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+            
+        
+        
+    }
 }
 }

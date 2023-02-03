@@ -11,7 +11,7 @@ public interface IB : IA
 
 public interface IG<out U>
 {
-	U Method ();
+    U Method ();
 }
 
 public interface IDerived : IG<IA>
@@ -20,10 +20,10 @@ public interface IDerived : IG<IA>
 
 public abstract class CA<T> : IG<T>
 {
-	public T Method ()
-	{
-		return default (T);
-	}
+    public T Method ()
+    {
+        return default (T);
+    }
 }
 
 public class CB : CA<IB>, IG<IA>

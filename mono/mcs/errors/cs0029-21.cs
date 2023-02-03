@@ -7,10 +7,10 @@ public delegate void EventHandler (int i, int j);
 
 public class Button {
 
-	public event EventHandler Click;
+    public event EventHandler Click;
 
-	public void Connect<T> () where T : class
-	{
-		Click += default (T);
-	}
+    public void Connect<T> () where T : class
+    {
+        Click += default (T);
+    }
 }

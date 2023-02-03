@@ -2,7 +2,7 @@
 // System.Web.Profile.SettingsAllowAnonymousAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,27 +30,27 @@ using System;
 
 namespace System.Web.Profile
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class SettingsAllowAnonymousAttribute : Attribute
-	{
-		public SettingsAllowAnonymousAttribute (bool allow)
-		{
-			this.allow = allow;
-		}
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class SettingsAllowAnonymousAttribute : Attribute
+    {
+        public SettingsAllowAnonymousAttribute (bool allow)
+        {
+            this.allow = allow;
+        }
 
-		[MonoTODO ("Not implemented")]
-		public override bool IsDefaultAttribute ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO ("Not implemented")]
+        public override bool IsDefaultAttribute ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public bool Allow {
-			get {
-				return allow;
-			}
-		}
+        public bool Allow {
+            get {
+                return allow;
+            }
+        }
 
-		bool allow;
-	}
+        bool allow;
+    }
 }
 

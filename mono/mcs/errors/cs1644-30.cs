@@ -4,8 +4,8 @@
 
 class A
 {
-	void Foo ()
-	{
-		var v = new { X = "Bar" };
-	}
+    void Foo ()
+    {
+        var v = new { X = "Bar" };
+    }
 }

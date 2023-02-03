@@ -2,7 +2,7 @@
 // ServiceCredentialsElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -56,144 +56,144 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public class ServiceCredentialsElement : BehaviorExtensionElement
-	{
-		public ServiceCredentialsElement () {
-		}
+    public class ServiceCredentialsElement : BehaviorExtensionElement
+    {
+        public ServiceCredentialsElement () {
+        }
 
 
-		// Properties
+        // Properties
 
-		public override Type BehaviorType {
-			get { return typeof (ServiceCredentials); }
-		}
+        public override Type BehaviorType {
+            get { return typeof (ServiceCredentials); }
+        }
 
-		[ConfigurationProperty ("clientCertificate",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509InitiatorCertificateServiceElement ClientCertificate {
-			get { return (X509InitiatorCertificateServiceElement) base ["clientCertificate"]; }
-		}
+        [ConfigurationProperty ("clientCertificate",
+             Options = ConfigurationPropertyOptions.None)]
+        public X509InitiatorCertificateServiceElement ClientCertificate {
+            get { return (X509InitiatorCertificateServiceElement) base ["clientCertificate"]; }
+        }
 
-		[ConfigurationProperty ("issuedTokenAuthentication",
-			 Options = ConfigurationPropertyOptions.None)]
-		public IssuedTokenServiceElement IssuedTokenAuthentication {
-			get { return (IssuedTokenServiceElement) base ["issuedTokenAuthentication"]; }
-		}
+        [ConfigurationProperty ("issuedTokenAuthentication",
+             Options = ConfigurationPropertyOptions.None)]
+        public IssuedTokenServiceElement IssuedTokenAuthentication {
+            get { return (IssuedTokenServiceElement) base ["issuedTokenAuthentication"]; }
+        }
 
-		[ConfigurationProperty ("peer",
-			 Options = ConfigurationPropertyOptions.None)]
-		public PeerCredentialElement Peer {
-			get { return (PeerCredentialElement) base ["peer"]; }
-		}
+        [ConfigurationProperty ("peer",
+             Options = ConfigurationPropertyOptions.None)]
+        public PeerCredentialElement Peer {
+            get { return (PeerCredentialElement) base ["peer"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("secureConversationAuthentication",
-			 Options = ConfigurationPropertyOptions.None)]
-		public SecureConversationServiceElement SecureConversationAuthentication {
-			get { return (SecureConversationServiceElement) base ["secureConversationAuthentication"]; }
-		}
+        [ConfigurationProperty ("secureConversationAuthentication",
+             Options = ConfigurationPropertyOptions.None)]
+        public SecureConversationServiceElement SecureConversationAuthentication {
+            get { return (SecureConversationServiceElement) base ["secureConversationAuthentication"]; }
+        }
 
-		[ConfigurationProperty ("serviceCertificate",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509RecipientCertificateServiceElement ServiceCertificate {
-			get { return (X509RecipientCertificateServiceElement) base ["serviceCertificate"]; }
-		}
+        [ConfigurationProperty ("serviceCertificate",
+             Options = ConfigurationPropertyOptions.None)]
+        public X509RecipientCertificateServiceElement ServiceCertificate {
+            get { return (X509RecipientCertificateServiceElement) base ["serviceCertificate"]; }
+        }
 
-		[StringValidator (MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("type",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		public string Type {
-			get { return (string) base ["type"]; }
-			set { base ["type"] = value; }
-		}
+        [StringValidator (MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("type",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "")]
+        public string Type {
+            get { return (string) base ["type"]; }
+            set { base ["type"] = value; }
+        }
 
-		[ConfigurationProperty ("userNameAuthentication",
-			 Options = ConfigurationPropertyOptions.None)]
-		public UserNameServiceElement UserNameAuthentication {
-			get { return (UserNameServiceElement) base ["userNameAuthentication"]; }
-		}
+        [ConfigurationProperty ("userNameAuthentication",
+             Options = ConfigurationPropertyOptions.None)]
+        public UserNameServiceElement UserNameAuthentication {
+            get { return (UserNameServiceElement) base ["userNameAuthentication"]; }
+        }
 
-		[ConfigurationProperty ("windowsAuthentication",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WindowsServiceElement WindowsAuthentication {
-			get { return (WindowsServiceElement) base ["windowsAuthentication"]; }
-		}
+        [ConfigurationProperty ("windowsAuthentication",
+             Options = ConfigurationPropertyOptions.None)]
+        public WindowsServiceElement WindowsAuthentication {
+            get { return (WindowsServiceElement) base ["windowsAuthentication"]; }
+        }
 
-		protected internal override object CreateBehavior ()
-		{
-			var sb = new ServiceCredentials ();
-			ApplyConfiguration (sb);
-			return sb;
-		}
+        protected internal override object CreateBehavior ()
+        {
+            var sb = new ServiceCredentials ();
+            ApplyConfiguration (sb);
+            return sb;
+        }
 
-		protected internal void ApplyConfiguration (ServiceCredentials behavior)
-		{
-			// IssuedToken
-			foreach (AllowedAudienceUriElement ae in IssuedTokenAuthentication.AllowedAudienceUris)
-				behavior.IssuedTokenAuthentication.AllowedAudienceUris.Add (ae.AllowedAudienceUri);
-			behavior.IssuedTokenAuthentication.AllowUntrustedRsaIssuers = IssuedTokenAuthentication.AllowUntrustedRsaIssuers;
-			behavior.IssuedTokenAuthentication.AudienceUriMode = IssuedTokenAuthentication.AudienceUriMode;
+        protected internal void ApplyConfiguration (ServiceCredentials behavior)
+        {
+            // IssuedToken
+            foreach (AllowedAudienceUriElement ae in IssuedTokenAuthentication.AllowedAudienceUris)
+                behavior.IssuedTokenAuthentication.AllowedAudienceUris.Add (ae.AllowedAudienceUri);
+            behavior.IssuedTokenAuthentication.AllowUntrustedRsaIssuers = IssuedTokenAuthentication.AllowUntrustedRsaIssuers;
+            behavior.IssuedTokenAuthentication.AudienceUriMode = IssuedTokenAuthentication.AudienceUriMode;
 
-			if (!String.IsNullOrEmpty (IssuedTokenAuthentication.CustomCertificateValidatorType))
-			behavior.IssuedTokenAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (IssuedTokenAuthentication.CustomCertificateValidatorType);
-			behavior.IssuedTokenAuthentication.CertificateValidationMode = IssuedTokenAuthentication.CertificateValidationMode;
-			behavior.IssuedTokenAuthentication.RevocationMode = IssuedTokenAuthentication.RevocationMode;
-			behavior.IssuedTokenAuthentication.TrustedStoreLocation = IssuedTokenAuthentication.TrustedStoreLocation;
-			foreach (X509CertificateTrustedIssuerElement ce in IssuedTokenAuthentication.KnownCertificates)
-				behavior.IssuedTokenAuthentication.KnownCertificates.Add (GetCertificate (ce.StoreLocation, ce.StoreName, ce.X509FindType, ce.FindValue));
+            if (!String.IsNullOrEmpty (IssuedTokenAuthentication.CustomCertificateValidatorType))
+            behavior.IssuedTokenAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (IssuedTokenAuthentication.CustomCertificateValidatorType);
+            behavior.IssuedTokenAuthentication.CertificateValidationMode = IssuedTokenAuthentication.CertificateValidationMode;
+            behavior.IssuedTokenAuthentication.RevocationMode = IssuedTokenAuthentication.RevocationMode;
+            behavior.IssuedTokenAuthentication.TrustedStoreLocation = IssuedTokenAuthentication.TrustedStoreLocation;
+            foreach (X509CertificateTrustedIssuerElement ce in IssuedTokenAuthentication.KnownCertificates)
+                behavior.IssuedTokenAuthentication.KnownCertificates.Add (GetCertificate (ce.StoreLocation, ce.StoreName, ce.X509FindType, ce.FindValue));
 
-			behavior.IssuedTokenAuthentication.SamlSerializer = (SamlSerializer) CreateInstance (IssuedTokenAuthentication.SamlSerializerType);
+            behavior.IssuedTokenAuthentication.SamlSerializer = (SamlSerializer) CreateInstance (IssuedTokenAuthentication.SamlSerializerType);
 
 
-			// Peer
-			if (!String.IsNullOrEmpty (Peer.Certificate.FindValue))
-				behavior.Peer.SetCertificate (Peer.Certificate.StoreLocation, Peer.Certificate.StoreName, Peer.Certificate.X509FindType, Peer.Certificate.FindValue);
-			// sb.Peer.MeshPassword = /* cannot fill it here */
-			behavior.Peer.MessageSenderAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (Peer.MessageSenderAuthentication.CustomCertificateValidatorType);
-			behavior.Peer.MessageSenderAuthentication.CertificateValidationMode = Peer.MessageSenderAuthentication.CertificateValidationMode;
-			behavior.Peer.MessageSenderAuthentication.RevocationMode = Peer.MessageSenderAuthentication.RevocationMode;
-			behavior.Peer.MessageSenderAuthentication.TrustedStoreLocation = Peer.MessageSenderAuthentication.TrustedStoreLocation;
-			behavior.Peer.PeerAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (Peer.PeerAuthentication.CustomCertificateValidatorType);
-			behavior.Peer.PeerAuthentication.CertificateValidationMode = Peer.PeerAuthentication.CertificateValidationMode;
-			behavior.Peer.PeerAuthentication.RevocationMode = Peer.PeerAuthentication.RevocationMode;
-			behavior.Peer.PeerAuthentication.TrustedStoreLocation = Peer.PeerAuthentication.TrustedStoreLocation;
+            // Peer
+            if (!String.IsNullOrEmpty (Peer.Certificate.FindValue))
+                behavior.Peer.SetCertificate (Peer.Certificate.StoreLocation, Peer.Certificate.StoreName, Peer.Certificate.X509FindType, Peer.Certificate.FindValue);
+            // sb.Peer.MeshPassword = /* cannot fill it here */
+            behavior.Peer.MessageSenderAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (Peer.MessageSenderAuthentication.CustomCertificateValidatorType);
+            behavior.Peer.MessageSenderAuthentication.CertificateValidationMode = Peer.MessageSenderAuthentication.CertificateValidationMode;
+            behavior.Peer.MessageSenderAuthentication.RevocationMode = Peer.MessageSenderAuthentication.RevocationMode;
+            behavior.Peer.MessageSenderAuthentication.TrustedStoreLocation = Peer.MessageSenderAuthentication.TrustedStoreLocation;
+            behavior.Peer.PeerAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (Peer.PeerAuthentication.CustomCertificateValidatorType);
+            behavior.Peer.PeerAuthentication.CertificateValidationMode = Peer.PeerAuthentication.CertificateValidationMode;
+            behavior.Peer.PeerAuthentication.RevocationMode = Peer.PeerAuthentication.RevocationMode;
+            behavior.Peer.PeerAuthentication.TrustedStoreLocation = Peer.PeerAuthentication.TrustedStoreLocation;
 
-			// WSSC
-			behavior.SecureConversationAuthentication.SecurityStateEncoder = (SecurityStateEncoder) CreateInstance (SecureConversationAuthentication.SecurityStateEncoderType);
+            // WSSC
+            behavior.SecureConversationAuthentication.SecurityStateEncoder = (SecurityStateEncoder) CreateInstance (SecureConversationAuthentication.SecurityStateEncoderType);
 
-			// X509
-			if (!String.IsNullOrEmpty (ServiceCertificate.FindValue))
-				behavior.ServiceCertificate.SetCertificate (ServiceCertificate.StoreLocation, ServiceCertificate.StoreName, ServiceCertificate.X509FindType, ServiceCertificate.FindValue);
+            // X509
+            if (!String.IsNullOrEmpty (ServiceCertificate.FindValue))
+                behavior.ServiceCertificate.SetCertificate (ServiceCertificate.StoreLocation, ServiceCertificate.StoreName, ServiceCertificate.X509FindType, ServiceCertificate.FindValue);
 
-			// UserNamePassword
-			behavior.UserNameAuthentication.CachedLogonTokenLifetime = UserNameAuthentication.CachedLogonTokenLifetime;
-			behavior.UserNameAuthentication.CacheLogonTokens = UserNameAuthentication.CacheLogonTokens;
-			behavior.UserNameAuthentication.CustomUserNamePasswordValidator = (UserNamePasswordValidator) CreateInstance (UserNameAuthentication.CustomUserNamePasswordValidatorType);
-			behavior.UserNameAuthentication.IncludeWindowsGroups = UserNameAuthentication.IncludeWindowsGroups;
-			behavior.UserNameAuthentication.MaxCachedLogonTokens = UserNameAuthentication.MaxCachedLogonTokens;
-			behavior.UserNameAuthentication.MembershipProvider = (MembershipProvider) CreateInstance (UserNameAuthentication.MembershipProviderName);
-			behavior.UserNameAuthentication.UserNamePasswordValidationMode = UserNameAuthentication.UserNamePasswordValidationMode;
+            // UserNamePassword
+            behavior.UserNameAuthentication.CachedLogonTokenLifetime = UserNameAuthentication.CachedLogonTokenLifetime;
+            behavior.UserNameAuthentication.CacheLogonTokens = UserNameAuthentication.CacheLogonTokens;
+            behavior.UserNameAuthentication.CustomUserNamePasswordValidator = (UserNamePasswordValidator) CreateInstance (UserNameAuthentication.CustomUserNamePasswordValidatorType);
+            behavior.UserNameAuthentication.IncludeWindowsGroups = UserNameAuthentication.IncludeWindowsGroups;
+            behavior.UserNameAuthentication.MaxCachedLogonTokens = UserNameAuthentication.MaxCachedLogonTokens;
+            behavior.UserNameAuthentication.MembershipProvider = (MembershipProvider) CreateInstance (UserNameAuthentication.MembershipProviderName);
+            behavior.UserNameAuthentication.UserNamePasswordValidationMode = UserNameAuthentication.UserNamePasswordValidationMode;
 
-			// Windows
-			behavior.WindowsAuthentication.AllowAnonymousLogons = WindowsAuthentication.AllowAnonymousLogons;
-			behavior.WindowsAuthentication.IncludeWindowsGroups = WindowsAuthentication.IncludeWindowsGroups;
-		}
+            // Windows
+            behavior.WindowsAuthentication.AllowAnonymousLogons = WindowsAuthentication.AllowAnonymousLogons;
+            behavior.WindowsAuthentication.IncludeWindowsGroups = WindowsAuthentication.IncludeWindowsGroups;
+        }
 
-		X509Certificate2 GetCertificate (StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
-		{
-			return ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
-		}
+        X509Certificate2 GetCertificate (StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
+        {
+            return ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+        }
 
-		object CreateInstance (string typeName)
-		{
-			return String.IsNullOrEmpty (typeName) ? null : Activator.CreateInstance (System.Type.GetType (typeName, true));
-		}
-	}
+        object CreateInstance (string typeName)
+        {
+            return String.IsNullOrEmpty (typeName) ? null : Activator.CreateInstance (System.Type.GetType (typeName, true));
+        }
+    }
 
 }

@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum MenuGlyph {
-		Arrow     = 0,
-		Min       = 0,
-		Checkmark = 1,
-		Bullet    = 2,
-		Max       = 2
-	}
+    public enum MenuGlyph {
+        Arrow     = 0,
+        Min       = 0,
+        Checkmark = 1,
+        Bullet    = 2,
+        Max       = 2
+    }
 }

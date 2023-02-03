@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3378,7 +3378,7 @@ class Program
             var source =
 @"class Preserve
 {
-	public static int Y;
+    public static int Y;
 }
 
 class Z<T> : Preserve
@@ -3387,15 +3387,15 @@ class Z<T> : Preserve
 
 static class M
 {
-	public static void Main()
-	{
-		int k = [|Z<float>.Y|];
-	}
+    public static void Main()
+    {
+        int k = [|Z<float>.Y|];
+    }
 }";
             await TestInRegularAndScriptAsync(source,
 @"class Preserve
 {
-	public static int Y;
+    public static int Y;
 }
 
 class Z<T> : Preserve
@@ -3404,10 +3404,10 @@ class Z<T> : Preserve
 
 static class M
 {
-	public static void Main()
-	{
-		int k = Preserve.Y;
-	}
+    public static void Main()
+    {
+        int k = Preserve.Y;
+    }
 }");
         }
 
@@ -3417,10 +3417,10 @@ static class M
             var source =
 @"class Preserve
 {
-	public class X
-	{
-		public static int Y;
-	}
+    public class X
+    {
+        public static int Y;
+    }
 }
 
 class Z<T> : Preserve
@@ -3429,18 +3429,18 @@ class Z<T> : Preserve
 
 class M
 {
-	public static void Main()
-	{
-		int k = [|Z<float>.X|].Y;
-	}
+    public static void Main()
+    {
+        int k = [|Z<float>.X|].Y;
+    }
 }";
             await TestInRegularAndScriptAsync(source,
 @"class Preserve
 {
-	public class X
-	{
-		public static int Y;
-	}
+    public class X
+    {
+        public static int Y;
+    }
 }
 
 class Z<T> : Preserve
@@ -3449,10 +3449,10 @@ class Z<T> : Preserve
 
 class M
 {
-	public static void Main()
-	{
-		int k = Preserve.X.Y;
-	}
+    public static void Main()
+    {
+        int k = Preserve.X.Y;
+    }
 }");
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.Linq.Mapping;
 using System.Diagnostics;

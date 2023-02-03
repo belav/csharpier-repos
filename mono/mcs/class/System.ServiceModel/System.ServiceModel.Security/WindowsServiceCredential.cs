@@ -2,7 +2,7 @@
 // WindowsServiceCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,27 +31,27 @@ using System.Security.Principal;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class WindowsServiceCredential
-	{
-		internal WindowsServiceCredential ()
-		{
-		}
+    public sealed class WindowsServiceCredential
+    {
+        internal WindowsServiceCredential ()
+        {
+        }
 
-		bool allow_anon, inc_win_groups;
+        bool allow_anon, inc_win_groups;
 
-		internal WindowsServiceCredential Clone ()
-		{
-			return (WindowsServiceCredential) MemberwiseClone ();
-		}
+        internal WindowsServiceCredential Clone ()
+        {
+            return (WindowsServiceCredential) MemberwiseClone ();
+        }
 
-		public bool AllowAnonymousLogons {
-			get { return allow_anon; }
-			set { allow_anon = value; }
-		}
+        public bool AllowAnonymousLogons {
+            get { return allow_anon; }
+            set { allow_anon = value; }
+        }
 
-		public bool IncludeWindowsGroups {
-			get { return inc_win_groups; }
-			set { inc_win_groups = value; }
-		}
-	}
+        public bool IncludeWindowsGroups {
+            get { return inc_win_groups; }
+            set { inc_win_groups = value; }
+        }
+    }
 }

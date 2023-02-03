@@ -2,8 +2,8 @@ class MainClass
 {
         class Gen<T>
         {
-		public void Test ()
-		{ }
+        public void Test ()
+        { }
         }
 
         class Der : Gen<int>
@@ -12,9 +12,9 @@ class MainClass
 
         public static void Main ()
         {
-		object o = new Der ();
+        object o = new Der ();
                 Gen<int> b = (Gen<int>) o;
-		b.Test ();
+        b.Test ();
         }
 }
 

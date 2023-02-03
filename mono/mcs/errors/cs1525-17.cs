@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	public static void Main ()
-	{
-		int myarray:;
-	}
+    public static void Main ()
+    {
+        int myarray:;
+    }
 }

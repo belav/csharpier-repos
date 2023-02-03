@@ -7,5 +7,5 @@ interface I {
 }
 
 class B : I, A1 {
-	static void Main () {}
+    static void Main () {}
 }

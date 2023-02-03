@@ -1474,7 +1474,7 @@ typedef struct _SCHANNEL_CRED
 #endif // !FEATURE_PAL
 
 #if false
-	[StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct SecurityBufferStruct {
         public int          count;
         public BufferType   type;
@@ -1493,7 +1493,7 @@ typedef struct _SCHANNEL_CRED
         public SecurityBuffer(byte[] data, int offset, int size, BufferType tokentype) {
             GlobalLog.Assert(offset >= 0 && offset <= (data == null ? 0 : data.Length), "SecurityBuffer::.ctor", "'offset' out of range.  [" + offset + "]");
             GlobalLog.Assert(size >= 0 && size <= (data == null ? 0 : data.Length - offset), "SecurityBuffer::.ctor", "'size' out of range.  [" + size + "]");
-			
+            
             this.offset = data == null || offset < 0 ? 0 : Math.Min(offset, data.Length);
             this.size   = data == null || size < 0 ? 0 : Math.Min(size, data.Length - this.offset);
             this.type   = tokentype;

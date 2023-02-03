@@ -2,9 +2,9 @@
 // System.Diagnostics.PerformanceCounterPermissionAccess.cs
 //
 // Authors:
-//	Jonathan Pryor (jonpryor@vt.edu)
-//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Jonathan Pryor (jonpryor@vt.edu)
+//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002
 // (C) 2003 Andreas Nahr
@@ -32,16 +32,16 @@
 
 namespace System.Diagnostics {
 
-	[Flags]
-	public enum PerformanceCounterPermissionAccess {
-		None=0x00,
-		[Obsolete ()]
-		Browse=1,
-		Read=1,
-		Write=2,
-		[Obsolete ()]
-		Instrument=3,
-		Administer=7,
-	}
+    [Flags]
+    public enum PerformanceCounterPermissionAccess {
+        None=0x00,
+        [Obsolete ()]
+        Browse=1,
+        Read=1,
+        Write=2,
+        [Obsolete ()]
+        Instrument=3,
+        Administer=7,
+    }
 }
 

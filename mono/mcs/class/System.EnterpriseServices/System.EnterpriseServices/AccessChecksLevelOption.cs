@@ -29,9 +29,9 @@
 //
 
 namespace System.EnterpriseServices {
-	[Serializable]
-	public enum AccessChecksLevelOption {
-		Application,
-		ApplicationComponent
-	}
+    [Serializable]
+    public enum AccessChecksLevelOption {
+        Application,
+        ApplicationComponent
+    }
 }

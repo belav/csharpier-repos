@@ -3,10 +3,10 @@
 
 class X {
 
-	public extern abstract int extern_method ();
-	
-	public static void Main ()
-		{
-		}
+    public extern abstract int extern_method ();
+    
+    public static void Main ()
+        {
+        }
 }
       

@@ -29,9 +29,9 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public interface IClientMessageFormatter
-	{
-		object DeserializeReply (Message message, object [] parameters);
-		Message SerializeRequest (MessageVersion messageVersion, object [] parameters);
-	}
+    public interface IClientMessageFormatter
+    {
+        object DeserializeReply (Message message, object [] parameters);
+        Message SerializeRequest (MessageVersion messageVersion, object [] parameters);
+    }
 }

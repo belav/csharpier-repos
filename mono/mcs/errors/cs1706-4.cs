@@ -7,7 +7,7 @@ delegate int TestDelegate();
 
 class MyAttr : Attribute
 {
-	public MyAttr (TestDelegate d) { }
+    public MyAttr (TestDelegate d) { }
 }
 
 [MyAttr (() => 1)]

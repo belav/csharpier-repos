@@ -6,15 +6,15 @@
 // of being nested.  Buggy.
 //
 class Outer {
-	class Inner : InnerBase {
-	}
+    class Inner : InnerBase {
+    }
 }
 
 abstract class InnerBase {
 }
 
 class MainClass {
-	public static int Main () {
-		return 0;
-	}
+    public static int Main () {
+        return 0;
+    }
 }

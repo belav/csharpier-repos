@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,13 +29,13 @@
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	enum StyleType {
-		Paragraph	= 0,
-		Character	= 1,
-		Section		= 2
-	}
+    enum StyleType {
+        Paragraph    = 0,
+        Character    = 1,
+        Section        = 2
+    }
 }

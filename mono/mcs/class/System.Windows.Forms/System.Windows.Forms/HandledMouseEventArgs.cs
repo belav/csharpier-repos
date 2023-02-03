@@ -20,29 +20,29 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class HandledMouseEventArgs : MouseEventArgs {
+    public class HandledMouseEventArgs : MouseEventArgs {
 
-		private bool handled;
+        private bool handled;
 
-		public HandledMouseEventArgs (MouseButtons button, int clicks, int x, int y, int delta) : base (button, clicks, x, y, delta) {
-			handled = false;
-		}
+        public HandledMouseEventArgs (MouseButtons button, int clicks, int x, int y, int delta) : base (button, clicks, x, y, delta) {
+            handled = false;
+        }
 
-		public HandledMouseEventArgs( MouseButtons button, int clicks, int x, int y, int delta, bool defaultHandledValue) : base (button, clicks, x, y, delta) {
-			this.handled = defaultHandledValue;
-		}
+        public HandledMouseEventArgs( MouseButtons button, int clicks, int x, int y, int delta, bool defaultHandledValue) : base (button, clicks, x, y, delta) {
+            this.handled = defaultHandledValue;
+        }
 
-		public bool Handled {
-			get { return handled; }
-			set { handled = value; }
-		}
+        public bool Handled {
+            get { return handled; }
+            set { handled = value; }
+        }
 
-	}
+    }
 
 }

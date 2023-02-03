@@ -32,9 +32,9 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public enum DsmlResponseOrder
-	{
-		Sequential,
-		Unordered
-	}
+    public enum DsmlResponseOrder
+    {
+        Sequential,
+        Unordered
+    }
 }

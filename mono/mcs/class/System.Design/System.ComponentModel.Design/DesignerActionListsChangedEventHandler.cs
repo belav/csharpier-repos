@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.DesignerActionListsChangedEventHandler.cs
 //
 // Author:
-//	  Atsushi Enomoto (atsushi@ximian.com)
+//      Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 
@@ -34,6 +34,6 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public delegate void DesignerActionListsChangedEventHandler (object sender, DesignerActionListsChangedEventArgs e);
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public delegate void DesignerActionListsChangedEventHandler (object sender, DesignerActionListsChangedEventArgs e);
 }

@@ -1,9 +1,9 @@
 //
 // ClientBuildManagerParameterTest.cs 
-//	- unit tests for System.Web.Compilation.ClientBuildManagerParameter
+//    - unit tests for System.Web.Compilation.ClientBuildManagerParameter
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -38,19 +38,19 @@ using System.Web.UI;
 
 namespace MonoTests.System.Web.Compilation {
 
-	[TestFixture]
-	public class ClientBuildManagerParameterTest  {
+    [TestFixture]
+    public class ClientBuildManagerParameterTest  {
 
-		[Test]
-		public void Defaults ()
-		{
-			ClientBuildManagerParameter p = new ClientBuildManagerParameter ();
+        [Test]
+        public void Defaults ()
+        {
+            ClientBuildManagerParameter p = new ClientBuildManagerParameter ();
 
-			Assert.AreEqual (PrecompilationFlags.Default, p.PrecompilationFlags, "A1");
-			Assert.IsNull (p.StrongNameKeyContainer, "A2");
-			Assert.IsNull (p.StrongNameKeyFile, "A3");
-		}
-	}
+            Assert.AreEqual (PrecompilationFlags.Default, p.PrecompilationFlags, "A1");
+            Assert.IsNull (p.StrongNameKeyContainer, "A2");
+            Assert.IsNull (p.StrongNameKeyFile, "A3");
+        }
+    }
 
 }
 

@@ -38,75 +38,75 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataColumnCollection_IndexOf_S : GHTBase
 {
-	[Test]
-	[Category ("NotWorking")] 
-	public void Main()
-	{
-		DataColumnCollection_IndexOf_S tc = new DataColumnCollection_IndexOf_S();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumnCollection_IndexOf_S");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    [Test]
+    [Category ("NotWorking")] 
+    public void Main()
+    {
+        DataColumnCollection_IndexOf_S tc = new DataColumnCollection_IndexOf_S();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumnCollection_IndexOf_S");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataColumnCollection_IndexOf_S");
-			DataColumnCollection_IndexOf_S1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataColumnCollection_IndexOf_S");
+            DataColumnCollection_IndexOf_S1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
 
-	private void DataColumnCollection_IndexOf_S1()
-	{
-		DataTable dt = DataProvider.CreateParentDataTable();
-		
-		for (int i=0;i<dt.Columns.Count;i++)
-		{
-			Compare(dt.Columns.IndexOf(dt.Columns[i].ColumnName),i);
+    private void DataColumnCollection_IndexOf_S1()
+    {
+        DataTable dt = DataProvider.CreateParentDataTable();
+        
+        for (int i=0;i<dt.Columns.Count;i++)
+        {
+            Compare(dt.Columns.IndexOf(dt.Columns[i].ColumnName),i);
 
-		}
+        }
 
-		DataColumn col = new DataColumn();
+        DataColumn col = new DataColumn();
 
-		Compare(dt.Columns.IndexOf("temp1"),-1);
+        Compare(dt.Columns.IndexOf("temp1"),-1);
 
-		Compare(dt.Columns.IndexOf((string)null),-1);
-	}
+        Compare(dt.Columns.IndexOf((string)null),-1);
+    }
 
 }
 }

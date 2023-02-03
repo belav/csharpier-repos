@@ -5,10 +5,10 @@ class X {
 }
 
 class Y {
-	void yy (X b)
-	{
-		
-		foreach (object a in b)
-			;
-	}
+    void yy (X b)
+    {
+        
+        foreach (object a in b)
+            ;
+    }
 }

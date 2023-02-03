@@ -2,7 +2,7 @@
 // System.Configuration.GenericEnumConverter.cs
 //
 // Authors:
-// 	Chris Toshok (toshok@ximian.com)
+//     Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,29 +31,29 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public sealed class GenericEnumConverter: ConfigurationConverterBase
-	{
-		Type typeEnum;
+    public sealed class GenericEnumConverter: ConfigurationConverterBase
+    {
+        Type typeEnum;
 
-		public GenericEnumConverter (Type typeEnum)
-		{
-			if (typeEnum == null)
-				throw new ArgumentNullException ("typeEnum");
-			this.typeEnum = typeEnum;
-		}
+        public GenericEnumConverter (Type typeEnum)
+        {
+            if (typeEnum == null)
+                throw new ArgumentNullException ("typeEnum");
+            this.typeEnum = typeEnum;
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			if (data == null)
-				throw new ArgumentException ();
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            if (data == null)
+                throw new ArgumentException ();
 
-			return Enum.Parse (typeEnum, (string)data);
-		}
+            return Enum.Parse (typeEnum, (string)data);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			return value.ToString();
-		}
-	}
+        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        {
+            return value.ToString();
+        }
+    }
 }
 

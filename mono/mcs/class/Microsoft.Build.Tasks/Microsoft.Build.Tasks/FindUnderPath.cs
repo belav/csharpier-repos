@@ -32,94 +32,94 @@ using System.IO;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-	public class FindUnderPath : TaskExtension {
-	
-		ITaskItem[]	files;
-		ITaskItem[]	inPath;
-		ITaskItem[]	outOfPath;
-		ITaskItem	path;
-		
-		public FindUnderPath ()
-		{
-		}
+    public class FindUnderPath : TaskExtension {
+    
+        ITaskItem[]    files;
+        ITaskItem[]    inPath;
+        ITaskItem[]    outOfPath;
+        ITaskItem    path;
+        
+        public FindUnderPath ()
+        {
+        }
 
-		public override bool Execute ()
-		{
-			if (files == null || files.Length == 0)
-				return true;
+        public override bool Execute ()
+        {
+            if (files == null || files.Length == 0)
+                return true;
 
-			List <ITaskItem> temporaryInPath = new List <ITaskItem> ();
-			List <ITaskItem> temporaryOutOfPath = new List <ITaskItem> ();
-			
-			foreach (ITaskItem file in files) {
-				try {
-					string fullPath = path.GetMetadata ("FullPath");;
-					string fileFullPath = file.GetMetadata ("FullPath");
-					if (System.IO.Path.GetDirectoryName (fullPath) != null) {
-						string fullPath1 = fullPath + System.IO.Path.DirectorySeparatorChar;
-						string fullPath2 = fullPath + System.IO.Path.AltDirectorySeparatorChar;
-						if (fileFullPath.StartsWith (fullPath1) || fileFullPath.StartsWith (fullPath2))
-							temporaryInPath.Add (file);
-						else
-							temporaryOutOfPath.Add (file);
-					} else if (System.IO.Path.GetDirectoryName (fullPath) == String.Empty) {
-						throw new Exception ("Path contains no directory information.");
-					} else {
-						if (fileFullPath.StartsWith (fullPath))
-							temporaryInPath.Add (file);
-						else
-							temporaryOutOfPath.Add (file);
-					}
-				}
-				catch (Exception ex) {
-					Log.LogErrorFromException (ex);
-				}
-			}
-			
-			inPath = temporaryInPath.ToArray ();
-			outOfPath = temporaryOutOfPath.ToArray ();
+            List <ITaskItem> temporaryInPath = new List <ITaskItem> ();
+            List <ITaskItem> temporaryOutOfPath = new List <ITaskItem> ();
+            
+            foreach (ITaskItem file in files) {
+                try {
+                    string fullPath = path.GetMetadata ("FullPath");;
+                    string fileFullPath = file.GetMetadata ("FullPath");
+                    if (System.IO.Path.GetDirectoryName (fullPath) != null) {
+                        string fullPath1 = fullPath + System.IO.Path.DirectorySeparatorChar;
+                        string fullPath2 = fullPath + System.IO.Path.AltDirectorySeparatorChar;
+                        if (fileFullPath.StartsWith (fullPath1) || fileFullPath.StartsWith (fullPath2))
+                            temporaryInPath.Add (file);
+                        else
+                            temporaryOutOfPath.Add (file);
+                    } else if (System.IO.Path.GetDirectoryName (fullPath) == String.Empty) {
+                        throw new Exception ("Path contains no directory information.");
+                    } else {
+                        if (fileFullPath.StartsWith (fullPath))
+                            temporaryInPath.Add (file);
+                        else
+                            temporaryOutOfPath.Add (file);
+                    }
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException (ex);
+                }
+            }
+            
+            inPath = temporaryInPath.ToArray ();
+            outOfPath = temporaryOutOfPath.ToArray ();
 
-			return true;
-		}
+            return true;
+        }
 
-		public ITaskItem[] Files {
-			get {
-				return files;
-			}
-			set {
-				files = value;
-			}
-		}
+        public ITaskItem[] Files {
+            get {
+                return files;
+            }
+            set {
+                files = value;
+            }
+        }
 
-		[Output]
-		public ITaskItem[] InPath {
-			get {
-				return inPath;
-			}
-			set {
-				inPath = value;
-			}
-		}
+        [Output]
+        public ITaskItem[] InPath {
+            get {
+                return inPath;
+            }
+            set {
+                inPath = value;
+            }
+        }
 
-		[Output]
-		public ITaskItem[] OutOfPath {
-			get {
-				return outOfPath;
-			}
-			set {
-				outOfPath = value;
-			}
-		}
+        [Output]
+        public ITaskItem[] OutOfPath {
+            get {
+                return outOfPath;
+            }
+            set {
+                outOfPath = value;
+            }
+        }
 
-		[Required]
-		public ITaskItem Path {
-			get {
-				return path;
-			}
-			set {
-				path = value;
-			}
-		}
-	}
+        [Required]
+        public ITaskItem Path {
+            get {
+                return path;
+            }
+            set {
+                path = value;
+            }
+        }
+    }
 }
 

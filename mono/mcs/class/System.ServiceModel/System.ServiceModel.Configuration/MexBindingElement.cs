@@ -2,7 +2,7 @@
 // MexBindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,25 +54,25 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract partial class MexBindingElement<TStandardBinding>
-		 : StandardBindingElement,  IBindingConfigurationElement
-		where TStandardBinding : Binding
-	{
+    public abstract partial class MexBindingElement<TStandardBinding>
+         : StandardBindingElement,  IBindingConfigurationElement
+        where TStandardBinding : Binding
+    {
 
-		protected MexBindingElement (string name)
-			: base (name) {
-		}
+        protected MexBindingElement (string name)
+            : base (name) {
+        }
 
 
-		// Properties
+        // Properties
 
-		protected override Type BindingElementType {
-			get { return typeof (TStandardBinding); }
-		}
+        protected override Type BindingElementType {
+            get { return typeof (TStandardBinding); }
+        }
 
-		protected override void OnApplyConfiguration (Binding binding) {
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void OnApplyConfiguration (Binding binding) {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

@@ -2,9 +2,9 @@
 // System.Net.NetworkInformation.IPv4InterfaceStatistics
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
-//	Miguel de Icaza (miguel@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
+//    Miguel de Icaza (miguel@ximian.com)
 //
 // Copyright (c) 2006-2008 Novell, Inc. (http://www.novell.com)
 //
@@ -28,97 +28,97 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net.NetworkInformation {
-	class LinuxIPv4InterfaceStatistics : IPv4InterfaceStatistics
-	{
-		LinuxNetworkInterface linux;
+    class LinuxIPv4InterfaceStatistics : IPv4InterfaceStatistics
+    {
+        LinuxNetworkInterface linux;
 
-		public LinuxIPv4InterfaceStatistics (LinuxNetworkInterface parent)
-		{
-			linux = parent;
-		}
+        public LinuxIPv4InterfaceStatistics (LinuxNetworkInterface parent)
+        {
+            linux = parent;
+        }
 
-		long Read (string file)
-		{
-			try {
-				return long.Parse (LinuxNetworkInterface.ReadLine (linux.IfacePath + file));
-			} catch {
-				return 0;
-			}
-		}
+        long Read (string file)
+        {
+            try {
+                return long.Parse (LinuxNetworkInterface.ReadLine (linux.IfacePath + file));
+            } catch {
+                return 0;
+            }
+        }
 
-		public override long BytesReceived {
-			get {
-				return Read ("statistics/rx_bytes");
-			}
-		}
+        public override long BytesReceived {
+            get {
+                return Read ("statistics/rx_bytes");
+            }
+        }
 
-		public override long BytesSent {
-			get {
-				return Read ("statistics/tx_bytes");
-			}
-		}
+        public override long BytesSent {
+            get {
+                return Read ("statistics/tx_bytes");
+            }
+        }
 
-		public override long IncomingPacketsDiscarded {
-			get {
-				return Read ("statistics/rx_dropped");
-			}
-		}
+        public override long IncomingPacketsDiscarded {
+            get {
+                return Read ("statistics/rx_dropped");
+            }
+        }
 
-		public override long IncomingPacketsWithErrors {
-			get {
-				return Read ("statistics/rx_errors");
-			}
-		}
+        public override long IncomingPacketsWithErrors {
+            get {
+                return Read ("statistics/rx_errors");
+            }
+        }
 
-		public override long IncomingUnknownProtocolPackets {
-			get {
-				// TODO
-				return 0;
-			}
-		}
+        public override long IncomingUnknownProtocolPackets {
+            get {
+                // TODO
+                return 0;
+            }
+        }
 
-		public override long NonUnicastPacketsReceived {
-			get {
-				// We cant distinguish these
-				return Read ("statistics/multicast");
-			}
-		}
+        public override long NonUnicastPacketsReceived {
+            get {
+                // We cant distinguish these
+                return Read ("statistics/multicast");
+            }
+        }
 
-		public override long NonUnicastPacketsSent {
-			get {
-				// We cant distinguish these
-				return Read ("statistics/multicast");
-			}
-		}
+        public override long NonUnicastPacketsSent {
+            get {
+                // We cant distinguish these
+                return Read ("statistics/multicast");
+            }
+        }
 
-		public override long OutgoingPacketsDiscarded {
-			get {
-				return Read ("statistics/tx_dropped");
-			}
-		}
+        public override long OutgoingPacketsDiscarded {
+            get {
+                return Read ("statistics/tx_dropped");
+            }
+        }
 
-		public override long OutgoingPacketsWithErrors {
-			get {
-				return Read ("statistics/tx_errors");
-			}
-		}
+        public override long OutgoingPacketsWithErrors {
+            get {
+                return Read ("statistics/tx_errors");
+            }
+        }
 
-		public override long OutputQueueLength {
-			get {
-				return 1024;
-			}
-		}
+        public override long OutputQueueLength {
+            get {
+                return 1024;
+            }
+        }
 
-		public override long UnicastPacketsReceived {
-			get {
-				return Read ("statistics/rx_packets");
-			}
-		}
+        public override long UnicastPacketsReceived {
+            get {
+                return Read ("statistics/rx_packets");
+            }
+        }
 
-		public override long UnicastPacketsSent {
-			get {
-				return Read ("statistics/tx_packets");
-			}
-		}
-	}
+        public override long UnicastPacketsSent {
+            get {
+                return Read ("statistics/tx_packets");
+            }
+        }
+    }
 }

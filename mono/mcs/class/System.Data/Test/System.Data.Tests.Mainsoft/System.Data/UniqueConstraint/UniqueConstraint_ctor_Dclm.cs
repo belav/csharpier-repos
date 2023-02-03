@@ -39,155 +39,155 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class UniqueConstraint_ctor_Dclm : GHTBase
 {
-	[Test] public void Main()
-	{
-		UniqueConstraint_ctor_Dclm tc = new UniqueConstraint_ctor_Dclm();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("UniqueConstraint_ctor_Dclm");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        UniqueConstraint_ctor_Dclm tc = new UniqueConstraint_ctor_Dclm();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("UniqueConstraint_ctor_Dclm");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-		Exception tmpEx = new Exception();
-
-		DataSet ds = new DataSet();
-		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-		ds.Tables.Add(dtParent);
-		ds.EnforceConstraints = true;
-
-		UniqueConstraint uc = null;
-
-		try
-		{
-			BeginCase("DataColumn.Unique - without constraint");
-			Compare(dtParent.Columns[0].Unique ,false);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		uc = new UniqueConstraint(dtParent.Columns[0]);
-
-		try
-		{
-			BeginCase("Ctor");
-			Compare(uc == null ,false );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("DataColumn.Unique - with constraint");
-			Compare(dtParent.Columns[0].Unique ,false);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("Ctor - add exisiting column");
-			dtParent.Rows.Add(new object[] {99,"str1","str2"});
-			dtParent.Constraints.Add(uc);
-			try 
-			{
-				dtParent.Rows.Add(new object[] {99,"str1","str2"});
-			}
-			catch (Exception e)
-			{
-				tmpEx = e;
-			}
-			Compare(tmpEx.GetType().FullName ,typeof(System.Data.ConstraintException).FullName );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		tmpEx = new Exception();
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable(); 
-		uc = new UniqueConstraint(dtChild.Columns[1]);
-		
-		//Column[1] is not unique, will throw exception
-		try
-		{
-			BeginCase("ArgumentException ");
-			try
-			{
-				dtChild.Constraints.Add(uc);        
-			}
-			catch (ArgumentException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ArgumentException).FullName);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+    public void run()
+    {
+        Exception exp = null;
+        Exception tmpEx = new Exception();
+
+        DataSet ds = new DataSet();
+        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+        ds.Tables.Add(dtParent);
+        ds.EnforceConstraints = true;
+
+        UniqueConstraint uc = null;
+
+        try
+        {
+            BeginCase("DataColumn.Unique - without constraint");
+            Compare(dtParent.Columns[0].Unique ,false);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        uc = new UniqueConstraint(dtParent.Columns[0]);
+
+        try
+        {
+            BeginCase("Ctor");
+            Compare(uc == null ,false );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("DataColumn.Unique - with constraint");
+            Compare(dtParent.Columns[0].Unique ,false);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("Ctor - add exisiting column");
+            dtParent.Rows.Add(new object[] {99,"str1","str2"});
+            dtParent.Constraints.Add(uc);
+            try 
+            {
+                dtParent.Rows.Add(new object[] {99,"str1","str2"});
+            }
+            catch (Exception e)
+            {
+                tmpEx = e;
+            }
+            Compare(tmpEx.GetType().FullName ,typeof(System.Data.ConstraintException).FullName );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        tmpEx = new Exception();
 
 
-		//reset the table
-		dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+        DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable(); 
+        uc = new UniqueConstraint(dtChild.Columns[1]);
+        
+        //Column[1] is not unique, will throw exception
+        try
+        {
+            BeginCase("ArgumentException ");
+            try
+            {
+                dtChild.Constraints.Add(uc);        
+            }
+            catch (ArgumentException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ArgumentException).FullName);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("DataColumn.Unique = true, will add UniqueConstraint");
-			dtParent.Columns[0].Unique = true;
-			Compare(dtParent.Constraints.Count ,1);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+
+        //reset the table
+        dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+
+        try
+        {
+            BeginCase("DataColumn.Unique = true, will add UniqueConstraint");
+            dtParent.Columns[0].Unique = true;
+            Compare(dtParent.Constraints.Count ,1);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
 
-		try
-		{
-			BeginCase("Check the created UniqueConstraint");
-			dtParent.Columns[0].Unique = true;
-			Compare(dtParent.Constraints[0].GetType().FullName ,typeof(UniqueConstraint).FullName);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		try
-		{
-			BeginCase("add UniqueConstarint that don't belong to the table");
-			try 
-			{
-				dtParent.Constraints.Add(uc);
-			}
-			catch (Exception e)
-			{
-				tmpEx = e;
-			}
-			Compare(tmpEx.GetType().FullName ,typeof(ArgumentException).FullName );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		tmpEx = new Exception();
+        try
+        {
+            BeginCase("Check the created UniqueConstraint");
+            dtParent.Columns[0].Unique = true;
+            Compare(dtParent.Constraints[0].GetType().FullName ,typeof(UniqueConstraint).FullName);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("add UniqueConstarint that don't belong to the table");
+            try 
+            {
+                dtParent.Constraints.Add(uc);
+            }
+            catch (Exception e)
+            {
+                tmpEx = e;
+            }
+            Compare(tmpEx.GetType().FullName ,typeof(ArgumentException).FullName );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        tmpEx = new Exception();
 
-	}
+    }
 }
 }

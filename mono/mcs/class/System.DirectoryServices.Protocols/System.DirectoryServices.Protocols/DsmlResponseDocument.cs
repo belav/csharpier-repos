@@ -34,116 +34,116 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-	[MonoTODO]
-	public class DsmlResponseDocument : DsmlDocument, ICollection, IEnumerable
-	{
-		ArrayList list = new ArrayList ();
+    [MonoTODO]
+    public class DsmlResponseDocument : DsmlDocument, ICollection, IEnumerable
+    {
+        ArrayList list = new ArrayList ();
 
-		public DsmlDocumentProcessing DocumentProcessing { get; set; }
-		public DsmlErrorProcessing ErrorProcessing { get; set; }
+        public DsmlDocumentProcessing DocumentProcessing { get; set; }
+        public DsmlErrorProcessing ErrorProcessing { get; set; }
 
-		[MonoTODO]
-		public override XmlDocument ToXml ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override XmlDocument ToXml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public bool IsErrorResponse { get; private set; }
-		[MonoTODO]
-		public bool IsOperationError { get; private set; }
-		[MonoTODO]
-		public string RequestId { get; private set; }
+        [MonoTODO]
+        public bool IsErrorResponse { get; private set; }
+        [MonoTODO]
+        public bool IsOperationError { get; private set; }
+        [MonoTODO]
+        public string RequestId { get; private set; }
 
-		public int Count {
-			get { return list.Count; }
-		}
+        public int Count {
+            get { return list.Count; }
+        }
 
-		protected bool IsFixedSize {
-			get { return list.IsFixedSize; }
-		}
+        protected bool IsFixedSize {
+            get { return list.IsFixedSize; }
+        }
 
-		protected bool IsReadOnly {
-			get { return list.IsReadOnly; }
-		}
+        protected bool IsReadOnly {
+            get { return list.IsReadOnly; }
+        }
 
-		protected bool IsSynchronized {
-			get { return list.IsSynchronized; }
-		}
+        protected bool IsSynchronized {
+            get { return list.IsSynchronized; }
+        }
 
-		public DirectoryResponse this [int index] {
-			get { return (DirectoryResponse) list [index]; }
-			set { list [index] = value; }
-		}
+        public DirectoryResponse this [int index] {
+            get { return (DirectoryResponse) list [index]; }
+            set { list [index] = value; }
+        }
 
-		public string ResponseId { get; set; }
+        public string ResponseId { get; set; }
 
-		public DsmlResponseOrder ResponseOrder { get; set; }
+        public DsmlResponseOrder ResponseOrder { get; set; }
 
-		protected object SyncRoot {
-			get { return list.SyncRoot; }
-		}
+        protected object SyncRoot {
+            get { return list.SyncRoot; }
+        }
 
-		int ICollection.Count {
-			get { return Count; }
-		}
+        int ICollection.Count {
+            get { return Count; }
+        }
 
-		bool ICollection.IsSynchronized {
-			get { return IsSynchronized; }
-		}
+        bool ICollection.IsSynchronized {
+            get { return IsSynchronized; }
+        }
 
-		object ICollection.SyncRoot {
-			get { return SyncRoot; }
-		}
+        object ICollection.SyncRoot {
+            get { return SyncRoot; }
+        }
 
-		public int Add (DirectoryResponse request)
-		{
-			return list.Add (request);
-		}
+        public int Add (DirectoryResponse request)
+        {
+            return list.Add (request);
+        }
 
-		public void Clear ()
-		{
-			list.Clear ();
-		}
+        public void Clear ()
+        {
+            list.Clear ();
+        }
 
-		public bool Contains (DirectoryResponse value)
-		{
-			return list.Contains (value);
-		}
+        public bool Contains (DirectoryResponse value)
+        {
+            return list.Contains (value);
+        }
 
-		public void CopyTo (DirectoryResponse [] value, int i)
-		{
-			list.CopyTo (value, i);
-		}
+        public void CopyTo (DirectoryResponse [] value, int i)
+        {
+            list.CopyTo (value, i);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            return list.GetEnumerator ();
+        }
 
-		public int IndexOf (DirectoryResponse value)
-		{
-			return list.IndexOf (value);
-		}
+        public int IndexOf (DirectoryResponse value)
+        {
+            return list.IndexOf (value);
+        }
 
-		public void Insert (int index, DirectoryResponse value)
-		{
-			list.Insert (index, value);
-		}
+        public void Insert (int index, DirectoryResponse value)
+        {
+            list.Insert (index, value);
+        }
 
-		public void Remove (DirectoryResponse value)
-		{
-			list.Remove (value);
-		}
+        public void Remove (DirectoryResponse value)
+        {
+            list.Remove (value);
+        }
 
-		public void RemoveAt (int index)
-		{
-			list.RemoveAt (index);
-		}
+        public void RemoveAt (int index)
+        {
+            list.RemoveAt (index);
+        }
 
-		void ICollection.CopyTo (Array value, int i)
-		{
-			CopyTo ((DirectoryResponse []) value, i);
-		}
-	}
+        void ICollection.CopyTo (Array value, int i)
+        {
+            CopyTo ((DirectoryResponse []) value, i);
+        }
+    }
 }

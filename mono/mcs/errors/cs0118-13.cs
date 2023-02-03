@@ -3,11 +3,11 @@
 
 namespace M.N
 {
-	public class Foo
-	{
-		public Foo (object value)
-		{
-			N = value;
-		}
-	}
+    public class Foo
+    {
+        public Foo (object value)
+        {
+            N = value;
+        }
+    }
 }

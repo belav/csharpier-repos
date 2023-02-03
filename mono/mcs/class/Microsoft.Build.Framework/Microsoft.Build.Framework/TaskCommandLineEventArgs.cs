@@ -29,32 +29,32 @@
 using System;
 
 namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class TaskCommandLineEventArgs : BuildMessageEventArgs {
-	
-		string	commandLine;
-		string	taskName;
-	
-		protected TaskCommandLineEventArgs ()
-		{
-		}
-		
-		public TaskCommandLineEventArgs (string commandLine,
-						 string taskName,
-						 MessageImportance importance)
-			: base (commandLine, null, null, importance)
-		{
-			this.taskName = taskName;
-			this.commandLine = commandLine;
-		}
-		
-		public string CommandLine {
-			get { return commandLine; }
-		}
-		
-		public string TaskName {
-			get { return taskName; }
-		}
-	}
+    [Serializable]
+    public class TaskCommandLineEventArgs : BuildMessageEventArgs {
+    
+        string    commandLine;
+        string    taskName;
+    
+        protected TaskCommandLineEventArgs ()
+        {
+        }
+        
+        public TaskCommandLineEventArgs (string commandLine,
+                         string taskName,
+                         MessageImportance importance)
+            : base (commandLine, null, null, importance)
+        {
+            this.taskName = taskName;
+            this.commandLine = commandLine;
+        }
+        
+        public string CommandLine {
+            get { return commandLine; }
+        }
+        
+        public string TaskName {
+            get { return taskName; }
+        }
+    }
 }
 

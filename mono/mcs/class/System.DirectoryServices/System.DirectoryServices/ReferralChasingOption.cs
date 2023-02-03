@@ -32,32 +32,32 @@
 
 namespace System.DirectoryServices
 {
-	
-	/// <summary>
-	/// Specifies if and how referral chasing is pursued.
-	/// </summary>
-	/// <remarks>
-	/// When a server determines that other servers hold relevant information, 
-	/// in part or as a whole, it may refer the client to another server to 
-	/// obtain the result. Referral chasing is the action taken by a client 
-	/// to contact the referenced server to continue the directory search.	
-	/// 
-	/// Use the constants of this enumeration to set up search preferences for 
-	/// referral chasing. The action amounts to assigning the appropriate 
-	/// fields of DirectorySearcher to elements of the ReferralChasingOption 
-	/// enumeration.
-	/// 
-	/// The  Lightweight Directory Access Protocol (Ldap) provider supports 
-	/// external referrals for paged searches, but does not support 
-	/// subordinate referrals during paging.
-	/// </remarks>
-	[Serializable]
-	public enum ReferralChasingOption
-	{
-		All = 96,
-		External = 64,
-		None = 0,
-		Subordinate = 32
-	}
+    
+    /// <summary>
+    /// Specifies if and how referral chasing is pursued.
+    /// </summary>
+    /// <remarks>
+    /// When a server determines that other servers hold relevant information, 
+    /// in part or as a whole, it may refer the client to another server to 
+    /// obtain the result. Referral chasing is the action taken by a client 
+    /// to contact the referenced server to continue the directory search.    
+    /// 
+    /// Use the constants of this enumeration to set up search preferences for 
+    /// referral chasing. The action amounts to assigning the appropriate 
+    /// fields of DirectorySearcher to elements of the ReferralChasingOption 
+    /// enumeration.
+    /// 
+    /// The  Lightweight Directory Access Protocol (Ldap) provider supports 
+    /// external referrals for paged searches, but does not support 
+    /// subordinate referrals during paging.
+    /// </remarks>
+    [Serializable]
+    public enum ReferralChasingOption
+    {
+        All = 96,
+        External = 64,
+        None = 0,
+        Subordinate = 32
+    }
 }
 

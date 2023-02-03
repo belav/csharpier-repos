@@ -2131,13 +2131,13 @@ namespace C5
         }
 
         // Completed a run; prevNode is the last node of that run
-        prevNode.next = null;	// Finish the run
-        runTail.prev = node;	// Link it into the chain of runs
+        prevNode.next = null;    // Finish the run
+        runTail.prev = node;    // Link it into the chain of runs
         runTail = node;
         if (c.Compare(endsentinel.prev.item, prevNode.item) <= 0)
-          endsentinel.prev = prevNode;	// Update last pointer to point to largest
+          endsentinel.prev = prevNode;    // Update last pointer to point to largest
 
-        prevNode = node;		// Start a new run
+        prevNode = node;        // Start a new run
       }
 
       // Repeatedly merge runs two and two, until only one run remains
@@ -2201,7 +2201,7 @@ namespace C5
     {
       //assert run1 != null && run2 != null;
       Node prev;
-      bool prev1;	// is prev from run1?
+      bool prev1;    // is prev from run1?
 
       if (c.Compare(run1.item, run2.item) <= 0)
       {

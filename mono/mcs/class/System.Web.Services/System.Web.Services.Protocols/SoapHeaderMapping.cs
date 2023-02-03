@@ -32,85 +32,85 @@ using System.Reflection;
 
 namespace System.Web.Services.Protocols
 {
-	public
-	sealed class SoapHeaderMapping // It used to be HeaderInfo class until Mono 1.2
-	{
-		MemberInfo member;
-		Type header_type;
-		bool is_unknown_header;
-		SoapHeaderDirection direction;
+    public
+    sealed class SoapHeaderMapping // It used to be HeaderInfo class until Mono 1.2
+    {
+        MemberInfo member;
+        Type header_type;
+        bool is_unknown_header;
+        SoapHeaderDirection direction;
 
-		internal SoapHeaderMapping (MemberInfo member, SoapHeaderAttribute attributeInfo)
-		{
-			this.member = member;
-			direction = attributeInfo.Direction;
-			if (member is PropertyInfo)
-				header_type = ((PropertyInfo) member).PropertyType;
-			else
-				header_type = ((FieldInfo) member).FieldType;
-			
-			if (HeaderType == typeof(SoapHeader) || HeaderType == typeof(SoapUnknownHeader) ||
-				HeaderType == typeof(SoapHeader[]) || HeaderType == typeof(SoapUnknownHeader[]))
-			{
-				is_unknown_header = true;
-			}
-			else if (!typeof(SoapHeader).IsAssignableFrom (HeaderType))
-				throw new InvalidOperationException (string.Format ("Header members type must be a SoapHeader subclass"));
-		}
-		
-		internal object GetHeaderValue (object ob)
-		{
-			if (member is PropertyInfo)
-				return ((PropertyInfo) member).GetValue (ob, null);
-			else
-				return ((FieldInfo) member).GetValue (ob);
-		}
+        internal SoapHeaderMapping (MemberInfo member, SoapHeaderAttribute attributeInfo)
+        {
+            this.member = member;
+            direction = attributeInfo.Direction;
+            if (member is PropertyInfo)
+                header_type = ((PropertyInfo) member).PropertyType;
+            else
+                header_type = ((FieldInfo) member).FieldType;
+            
+            if (HeaderType == typeof(SoapHeader) || HeaderType == typeof(SoapUnknownHeader) ||
+                HeaderType == typeof(SoapHeader[]) || HeaderType == typeof(SoapUnknownHeader[]))
+            {
+                is_unknown_header = true;
+            }
+            else if (!typeof(SoapHeader).IsAssignableFrom (HeaderType))
+                throw new InvalidOperationException (string.Format ("Header members type must be a SoapHeader subclass"));
+        }
+        
+        internal object GetHeaderValue (object ob)
+        {
+            if (member is PropertyInfo)
+                return ((PropertyInfo) member).GetValue (ob, null);
+            else
+                return ((FieldInfo) member).GetValue (ob);
+        }
 
-		internal void SetHeaderValue (object ob, SoapHeader header)
-		{
-			object value = header;
-			if (Custom && HeaderType.IsArray)
-			{
-				SoapUnknownHeader uheader = header as SoapUnknownHeader;
-				SoapUnknownHeader[] array = (SoapUnknownHeader[]) GetHeaderValue (ob);
-				if (array == null || array.Length == 0) {
-					value = new SoapUnknownHeader[] { uheader };
-				}
-				else {
-					SoapUnknownHeader[] newArray = new SoapUnknownHeader [array.Length+1];
-					Array.Copy (array, newArray, array.Length);
-					newArray [array.Length] = uheader;
-					value = newArray;
-				}
-			}
-			
-			if (member is PropertyInfo)
-				((PropertyInfo) member).SetValue (ob, value, null);
-			else
-				((FieldInfo) member).SetValue (ob, value);
-		}
-		
-		public SoapHeaderDirection Direction
-		{
-			get { return direction; }
-		}
+        internal void SetHeaderValue (object ob, SoapHeader header)
+        {
+            object value = header;
+            if (Custom && HeaderType.IsArray)
+            {
+                SoapUnknownHeader uheader = header as SoapUnknownHeader;
+                SoapUnknownHeader[] array = (SoapUnknownHeader[]) GetHeaderValue (ob);
+                if (array == null || array.Length == 0) {
+                    value = new SoapUnknownHeader[] { uheader };
+                }
+                else {
+                    SoapUnknownHeader[] newArray = new SoapUnknownHeader [array.Length+1];
+                    Array.Copy (array, newArray, array.Length);
+                    newArray [array.Length] = uheader;
+                    value = newArray;
+                }
+            }
+            
+            if (member is PropertyInfo)
+                ((PropertyInfo) member).SetValue (ob, value, null);
+            else
+                ((FieldInfo) member).SetValue (ob, value);
+        }
+        
+        public SoapHeaderDirection Direction
+        {
+            get { return direction; }
+        }
 
-		public MemberInfo MemberInfo {
-			get { return member; }
-		}
+        public MemberInfo MemberInfo {
+            get { return member; }
+        }
 
-		public Type HeaderType {
-			get { return header_type; }
-		}
+        public Type HeaderType {
+            get { return header_type; }
+        }
 
-		public bool Custom {
-			get { return is_unknown_header; }
-		}
+        public bool Custom {
+            get { return is_unknown_header; }
+        }
 
-		[MonoTODO]
-		public bool Repeats {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public bool Repeats {
+            get { throw new NotImplementedException (); }
+        }
+    }
 
 }

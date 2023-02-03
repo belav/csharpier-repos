@@ -3,11 +3,11 @@
 
 class X  {
 
-	~Y ()
-	{
-	}
+    ~Y ()
+    {
+    }
 
-	static void Main ()
-	{
-	}
+    static void Main ()
+    {
+    }
 }

@@ -4,8 +4,8 @@
 
 class A
 {
-	public static void Main ()
-	{
-		int n\U00000065xt = 0;
-	}
+    public static void Main ()
+    {
+        int n\U00000065xt = 0;
+    }
 }

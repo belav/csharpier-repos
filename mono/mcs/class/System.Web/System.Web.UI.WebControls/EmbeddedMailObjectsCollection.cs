@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.EmbeddedMailObjectsCollection.cs
 //
 // Authors:
-//	Igor Zelmanovich (igorz@mainsoft.com)
+//    Igor Zelmanovich (igorz@mainsoft.com)
 //
 // (C) 2006 Mainsoft, Inc (http://www.mainsoft.com)
 //
@@ -34,49 +34,49 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-	[Editor ("System.Web.UI.Design.EmbeddedMailObjectCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-	public sealed class EmbeddedMailObjectsCollection : CollectionBase
-	{
-		[MonoTODO("Not implemented")]
-		public EmbeddedMailObject this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+    [Editor ("System.Web.UI.Design.EmbeddedMailObjectCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
+    public sealed class EmbeddedMailObjectsCollection : CollectionBase
+    {
+        [MonoTODO("Not implemented")]
+        public EmbeddedMailObject this [int index] {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO("Not implemented")]
-		public int Add (EmbeddedMailObject value) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        public int Add (EmbeddedMailObject value) {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO("Not implemented")]
-		public bool Contains (EmbeddedMailObject value) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        public bool Contains (EmbeddedMailObject value) {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO("Not implemented")]
-		public void CopyTo (EmbeddedMailObject [] array, int index) {
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO("Not implemented")]
-		public int IndexOf (EmbeddedMailObject value) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        public void CopyTo (EmbeddedMailObject [] array, int index) {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO("Not implemented")]
+        public int IndexOf (EmbeddedMailObject value) {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO("Not implemented")]
-		public void Insert (int index, EmbeddedMailObject value) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        public void Insert (int index, EmbeddedMailObject value) {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO("Not implemented")]
-		protected override void OnValidate (object value) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        protected override void OnValidate (object value) {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO("Not implemented")]
-		public void Remove (EmbeddedMailObject value) {
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO("Not implemented")]
+        public void Remove (EmbeddedMailObject value) {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

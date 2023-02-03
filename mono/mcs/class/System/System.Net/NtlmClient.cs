@@ -2,8 +2,8 @@
 // System.Net.NtlmClient
 //
 // Authors:
-//	Sebastien Pouliot (spouliot@motus.com)
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Sebastien Pouliot (spouliot@motus.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Motus Technologies. All rights reserved.
 // (c) 2003 Novell, Inc. (http://www.novell.com)
@@ -35,39 +35,39 @@ using System.Reflection;
 
 namespace System.Net
 {
-	class NtlmClient : IAuthenticationModule
-	{
-		IAuthenticationModule authObject;
+    class NtlmClient : IAuthenticationModule
+    {
+        IAuthenticationModule authObject;
 
-		public NtlmClient ()
-		{
+        public NtlmClient ()
+        {
 #if SECURITY_DEP
-			authObject = new Mono.Http.NtlmClient ();
+            authObject = new Mono.Http.NtlmClient ();
 #else
-			authObject = null;
+            authObject = null;
 #endif
-		}
-	
-		public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
-		{
-			if (authObject == null)
-				return null;
+        }
+    
+        public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
+        {
+            if (authObject == null)
+                return null;
 
-			return authObject.Authenticate (challenge, webRequest, credentials);
-		}
+            return authObject.Authenticate (challenge, webRequest, credentials);
+        }
 
-		public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials) 
-		{
-			return null;
-		}
-	
-		public string AuthenticationType { 
-			get { return "NTLM"; }
-		}
-	
-		public bool CanPreAuthenticate { 
-			get { return false; }
-		}
-	}
+        public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials) 
+        {
+            return null;
+        }
+    
+        public string AuthenticationType { 
+            get { return "NTLM"; }
+        }
+    
+        public bool CanPreAuthenticate { 
+            get { return false; }
+        }
+    }
 }
 

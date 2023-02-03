@@ -32,72 +32,72 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class StaticPartialCachingControl : BasePartialCachingControl
-	{
-		BuildMethod buildMethod;
-//		string sqlDependency;
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class StaticPartialCachingControl : BasePartialCachingControl
+    {
+        BuildMethod buildMethod;
+//        string sqlDependency;
 
-		public StaticPartialCachingControl (string ctrlID, string guid, int duration,
-				string varyByParams, string varyByControls, string varyByCustom,
-				BuildMethod buildMethod)
-		{
-			CtrlID = ctrlID;
-			Guid = guid;
-			Duration = duration;
-			VaryByParams = varyByParams;
-			VaryByControls = varyByControls;
-			VaryByCustom = varyByCustom;
-			
-			this.buildMethod = buildMethod;
-		}
+        public StaticPartialCachingControl (string ctrlID, string guid, int duration,
+                string varyByParams, string varyByControls, string varyByCustom,
+                BuildMethod buildMethod)
+        {
+            CtrlID = ctrlID;
+            Guid = guid;
+            Duration = duration;
+            VaryByParams = varyByParams;
+            VaryByControls = varyByControls;
+            VaryByCustom = varyByCustom;
+            
+            this.buildMethod = buildMethod;
+        }
 
-		public StaticPartialCachingControl (string ctrlID, string guid, int duration, string varyByParams,
-						    string varyByControls, string varyByCustom, string sqlDependency,
-						    BuildMethod buildMethod)
-			: this (ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom, buildMethod)
-		{
-//			this.sqlDependency = sqlDependency;
-		}
-		public StaticPartialCachingControl (string ctrlID, string guid, int duration, string varyByParams,
-						    string varyByControls, string varyByCustom, string sqlDependency,
-						    BuildMethod buildMethod, string providerName)
-			: this (ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom, sqlDependency, buildMethod)
-		{
-			ProviderName = providerName;
-		}
-		[MonoTODO("Consider sqlDependency parameter")]
-		public static void BuildCachedControl (Control parent, string ctrlID, string guid,
-						       int duration, string varyByParams, string varyByControls, string varyByCustom,
-						       string sqlDependency, BuildMethod buildMethod)
-		{
-			StaticPartialCachingControl NewControl = new StaticPartialCachingControl (ctrlID, guid, duration,
-												  varyByParams, varyByControls, varyByCustom,
-												  sqlDependency, buildMethod);
-			if (parent != null)
-				parent.Controls.Add (NewControl);
-		}
+        public StaticPartialCachingControl (string ctrlID, string guid, int duration, string varyByParams,
+                            string varyByControls, string varyByCustom, string sqlDependency,
+                            BuildMethod buildMethod)
+            : this (ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom, buildMethod)
+        {
+//            this.sqlDependency = sqlDependency;
+        }
+        public StaticPartialCachingControl (string ctrlID, string guid, int duration, string varyByParams,
+                            string varyByControls, string varyByCustom, string sqlDependency,
+                            BuildMethod buildMethod, string providerName)
+            : this (ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom, sqlDependency, buildMethod)
+        {
+            ProviderName = providerName;
+        }
+        [MonoTODO("Consider sqlDependency parameter")]
+        public static void BuildCachedControl (Control parent, string ctrlID, string guid,
+                               int duration, string varyByParams, string varyByControls, string varyByCustom,
+                               string sqlDependency, BuildMethod buildMethod)
+        {
+            StaticPartialCachingControl NewControl = new StaticPartialCachingControl (ctrlID, guid, duration,
+                                                  varyByParams, varyByControls, varyByCustom,
+                                                  sqlDependency, buildMethod);
+            if (parent != null)
+                parent.Controls.Add (NewControl);
+        }
 
-		public static void BuildCachedControl (Control parent, string ctrlID, string guid, int duration,
-						       string varyByParams, string varyByControls, string varyByCustom,
-						       BuildMethod buildMethod)
-		{
-			BuildCachedControl (parent, ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom, null, buildMethod);
-		}
-		public static void BuildCachedControl (Control parent, string ctrlID, string guid, int duration,
-						       string varyByParams, string varyByControls, string varyByCustom,
-						       string sqlDependency, BuildMethod buildMethod, string providerName)
-		{
-			var ctl = new StaticPartialCachingControl (ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom,
-								   sqlDependency, buildMethod, providerName);
-			if (parent != null)
-				parent.Controls.Add (ctl);
-		}
-		internal override Control CreateControl()
-		{
-		       return buildMethod ();
-		}
-	}
+        public static void BuildCachedControl (Control parent, string ctrlID, string guid, int duration,
+                               string varyByParams, string varyByControls, string varyByCustom,
+                               BuildMethod buildMethod)
+        {
+            BuildCachedControl (parent, ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom, null, buildMethod);
+        }
+        public static void BuildCachedControl (Control parent, string ctrlID, string guid, int duration,
+                               string varyByParams, string varyByControls, string varyByCustom,
+                               string sqlDependency, BuildMethod buildMethod, string providerName)
+        {
+            var ctl = new StaticPartialCachingControl (ctrlID, guid, duration, varyByParams, varyByControls, varyByCustom,
+                                   sqlDependency, buildMethod, providerName);
+            if (parent != null)
+                parent.Controls.Add (ctl);
+        }
+        internal override Control CreateControl()
+        {
+               return buildMethod ();
+        }
+    }
 }

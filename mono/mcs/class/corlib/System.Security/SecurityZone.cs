@@ -31,14 +31,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Security {
 
-	[Serializable]
-	[ComVisible (true)]
-	public enum SecurityZone {
-		MyComputer = 0x0,
-		Intranet,
-		Trusted,
-		Internet,
-		Untrusted,
-		NoZone = -1,
-	}
+    [Serializable]
+    [ComVisible (true)]
+    public enum SecurityZone {
+        MyComputer = 0x0,
+        Intranet,
+        Trusted,
+        Internet,
+        Untrusted,
+        NoZone = -1,
+    }
 }

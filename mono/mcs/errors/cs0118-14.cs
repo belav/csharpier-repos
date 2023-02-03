@@ -7,8 +7,8 @@ class A
 
 class B
 {
-	public B ()
-	{
-		A = 2;
-	}
+    public B ()
+    {
+        A = 2;
+    }
 }

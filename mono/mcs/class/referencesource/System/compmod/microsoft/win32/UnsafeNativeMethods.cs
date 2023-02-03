@@ -18,7 +18,7 @@ namespace Microsoft.Win32 {
     using System.Text;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
-    using System.Configuration;	
+    using System.Configuration;    
 
     [HostProtectionAttribute(MayLeakOnAbort = true)]
     [System.Security.SuppressUnmanagedCodeSecurity]

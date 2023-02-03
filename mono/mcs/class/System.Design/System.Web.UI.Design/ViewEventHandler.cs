@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ViewEventHandler
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,6 +38,6 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	public delegate void ViewEventHandler (object sender, ViewEventArgs e);
+    public delegate void ViewEventHandler (object sender, ViewEventArgs e);
 }
 

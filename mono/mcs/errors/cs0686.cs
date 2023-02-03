@@ -10,6 +10,6 @@ class C: I
 {
     public int Method
     {
-	get { return -1; }
+    get { return -1; }
     }
 }

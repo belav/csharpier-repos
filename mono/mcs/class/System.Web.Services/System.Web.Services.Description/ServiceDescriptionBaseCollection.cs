@@ -32,70 +32,70 @@ using System.Collections;
 using System.Web.Services;
 
 namespace System.Web.Services.Description {
-	public abstract class ServiceDescriptionBaseCollection : CollectionBase {
-		
-		#region Fields
+    public abstract class ServiceDescriptionBaseCollection : CollectionBase {
+        
+        #region Fields
 
-		Hashtable table = new Hashtable ();
-		object parent;
+        Hashtable table = new Hashtable ();
+        object parent;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		internal ServiceDescriptionBaseCollection (object parent)
-		{
-			this.parent = parent;
-		}
+        internal ServiceDescriptionBaseCollection (object parent)
+        {
+            this.parent = parent;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		protected virtual IDictionary Table {
-			get { return table; }
-		}
+        protected virtual IDictionary Table {
+            get { return table; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		protected virtual string GetKey (object value) 
-		{
-			return null; 
-		}
+        protected virtual string GetKey (object value) 
+        {
+            return null; 
+        }
 
-		protected override void OnClear ()
-		{
-			Table.Clear ();
-		}
+        protected override void OnClear ()
+        {
+            Table.Clear ();
+        }
 
-		protected override void OnInsertComplete (int index, object value)
-		{
-			if (GetKey (value) != null)
-				Table [GetKey (value)] = value;
-			SetParent (value, parent);
-		}
+        protected override void OnInsertComplete (int index, object value)
+        {
+            if (GetKey (value) != null)
+                Table [GetKey (value)] = value;
+            SetParent (value, parent);
+        }
 
-		protected override void OnRemove (int index, object value)
-		{
-			if (GetKey (value) != null)
-				Table.Remove (GetKey (value));
-		}
+        protected override void OnRemove (int index, object value)
+        {
+            if (GetKey (value) != null)
+                Table.Remove (GetKey (value));
+        }
 
-		protected override void OnSet (int index, object oldValue, object newValue)
-		{
-			if (GetKey (oldValue) != null) 
-				Table.Remove (GetKey (oldValue));
-			if (GetKey (newValue) != null)
-				Table [GetKey (newValue)] = newValue;
-			SetParent (newValue, parent);
-		}
+        protected override void OnSet (int index, object oldValue, object newValue)
+        {
+            if (GetKey (oldValue) != null) 
+                Table.Remove (GetKey (oldValue));
+            if (GetKey (newValue) != null)
+                Table [GetKey (newValue)] = newValue;
+            SetParent (newValue, parent);
+        }
 
-		protected virtual void SetParent (object value, object parent)
-		{
-		}
-			
-		#endregion // Methods
-	}
+        protected virtual void SetParent (object value, object parent)
+        {
+        }
+            
+        #endregion // Methods
+    }
 }

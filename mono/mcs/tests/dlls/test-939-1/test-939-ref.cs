@@ -6,5 +6,5 @@ public class A : Common
 
 public class B
 {
-	
+    
 }

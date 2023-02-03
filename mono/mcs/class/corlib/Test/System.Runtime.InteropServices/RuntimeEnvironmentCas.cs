@@ -2,7 +2,7 @@
 // RuntimeEnvironmentCas.cs - CAS Unit Tests for RuntimeEnvironment
 //
 // Author:
-//	Sebastien Pouliot (sebastien@ximian.com)
+//    Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,78 +36,78 @@ using NUnit.Framework;
 
 namespace MonoCasTests.System.Runtime.InteropServices {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class RuntimeEnvironmentCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class RuntimeEnvironmentCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager isn't enabled");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager isn't enabled");
+        }
 
-		// Partial Trust Tests - i.e. call "normal" unit with reduced privileges
+        // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_DenyUnrestricted_Success ()
-		{
-			Assembly corlib = typeof (int).Assembly;
-			Assert.IsTrue (RuntimeEnvironment.FromGlobalAccessCache (corlib), "corlib");
-			Assembly corlib_test = Assembly.GetExecutingAssembly ();
-			Assert.IsFalse (RuntimeEnvironment.FromGlobalAccessCache (corlib_test), "corlib_test");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted_Success ()
+        {
+            Assembly corlib = typeof (int).Assembly;
+            Assert.IsTrue (RuntimeEnvironment.FromGlobalAccessCache (corlib), "corlib");
+            Assembly corlib_test = Assembly.GetExecutingAssembly ();
+            Assert.IsFalse (RuntimeEnvironment.FromGlobalAccessCache (corlib_test), "corlib_test");
+        }
 
-		// test Demand by denying the caller of the required privileges
-		// (note: is should only be PathDiscovery but that's not easy to test)
+        // test Demand by denying the caller of the required privileges
+        // (note: is should only be PathDiscovery but that's not easy to test)
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_GetRuntimeDirectory ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetRuntimeDirectory ());
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Deny_GetRuntimeDirectory ()
+        {
+            Assert.IsNotNull (RuntimeEnvironment.GetRuntimeDirectory ());
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_SystemConfigurationFile ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.SystemConfigurationFile);
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Deny_SystemConfigurationFile ()
+        {
+            Assert.IsNotNull (RuntimeEnvironment.SystemConfigurationFile);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_GetSystemVersion ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion ());
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Deny_GetSystemVersion ()
+        {
+            Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion ());
+        }
 
-		// test Demand by permiting only the required privileges
-		// (note: is should only be PathDiscovery but that's not easy to test)
+        // test Demand by permiting only the required privileges
+        // (note: is should only be PathDiscovery but that's not easy to test)
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PermitOnly_GetRuntimeDirectory ()
-		{
-			RuntimeEnvironment.GetRuntimeDirectory ();
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PermitOnly_GetRuntimeDirectory ()
+        {
+            RuntimeEnvironment.GetRuntimeDirectory ();
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PermitOnly_SystemConfigurationFile ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.SystemConfigurationFile);
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PermitOnly_SystemConfigurationFile ()
+        {
+            Assert.IsNotNull (RuntimeEnvironment.SystemConfigurationFile);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void PermitOnly_GetSystemVersion ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion ());
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void PermitOnly_GetSystemVersion ()
+        {
+            Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion ());
+        }
+    }
 }

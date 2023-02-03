@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -91,14 +91,14 @@ namespace ILCompiler.Logging
             if (MemberDefinition != null && other.MemberDefinition != null)
             {
                 TypeDefinition thisTypeDef = (MemberDefinition as TypeDefinition) ?? MemberDefinition.DeclaringType;
-				TypeDefinition otherTypeDef = (other.MemberDefinition as TypeDefinition) ?? other.MemberDefinition.DeclaringType;
-				int result = (thisTypeDef?.Module?.Assembly?.Name?.Name, thisTypeDef?.Name, MemberDefinition?.Name).CompareTo
-					((otherTypeDef?.Module?.Assembly?.Name?.Name, otherTypeDef?.Name, other.MemberDefinition?.Name));
-				if (result != 0)
-					return result;
-				if (ILOffset != null && other.ILOffset != null)
-					return ILOffset.Value.CompareTo (other.ILOffset);
-				return ILOffset == null ? (other.ILOffset == null ? 0 : 1) : -1;
+                TypeDefinition otherTypeDef = (other.MemberDefinition as TypeDefinition) ?? other.MemberDefinition.DeclaringType;
+                int result = (thisTypeDef?.Module?.Assembly?.Name?.Name, thisTypeDef?.Name, MemberDefinition?.Name).CompareTo
+                    ((otherTypeDef?.Module?.Assembly?.Name?.Name, otherTypeDef?.Name, other.MemberDefinition?.Name));
+                if (result != 0)
+                    return result;
+                if (ILOffset != null && other.ILOffset != null)
+                    return ILOffset.Value.CompareTo (other.ILOffset);
+                return ILOffset == null ? (other.ILOffset == null ? 0 : 1) : -1;
             }
             else if (MemberDefinition == null && other.MemberDefinition == null)
             {

@@ -6,18 +6,18 @@ using System;
 
 struct S : IDisposable
 {
-	public void Dispose ()
-	{
-	}
+    public void Dispose ()
+    {
+    }
 }
 
 class X {
 
-	unsafe static void Main ()
-	{
-		using (S m = new S ()){
-			S* mm = &m;
-		}
-	}
+    unsafe static void Main ()
+    {
+        using (S m = new S ()){
+            S* mm = &m;
+        }
+    }
 }
-	
+    

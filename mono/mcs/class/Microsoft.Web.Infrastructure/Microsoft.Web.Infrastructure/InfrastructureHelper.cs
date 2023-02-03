@@ -1,4 +1,4 @@
-﻿// 
+// 
 // InfrastructureHelper.cs
 //  
 // Author:
@@ -31,19 +31,19 @@ using System.Security;
 
 namespace Microsoft.Web.Infrastructure
 {
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public static class InfrastructureHelper
-	{
-		[SecuritySafeCritical]
-		public static void UnloadAppDomain ()
-		{
-			throw new NotImplementedException ();
-		}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    public static class InfrastructureHelper
+    {
+        [SecuritySafeCritical]
+        public static void UnloadAppDomain ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[SecuritySafeCritical]
-		public static bool IsCodeDomDefinedExtension (string extension)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [SecuritySafeCritical]
+        public static bool IsCodeDomDefinedExtension (string extension)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

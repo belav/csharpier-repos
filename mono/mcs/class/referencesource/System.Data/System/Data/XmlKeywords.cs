@@ -30,7 +30,7 @@ namespace System.Data {
         //internal const string DESCENDENT            = "descendent";
 
 
-	
+    
 
         internal const string MSD                   = "msdata";
         internal const string MSDNS                 = "urn:schemas-microsoft-com:xml-msdata";
@@ -187,8 +187,8 @@ namespace System.Data {
         internal const string PROHIBITED      = "prohibited";
         internal const string POSITIVEINFINITY = "INF";
         internal const string NEGATIVEINFINITY = "-INF";
-    	internal const string QUALIFIED       = "qualified";
-    	internal const string UNQUALIFIED       = "unqualified";
+        internal const string QUALIFIED       = "qualified";
+        internal const string UNQUALIFIED       = "unqualified";
 
 
             // Keywords that are not atomized, just strings

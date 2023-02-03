@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	public class ChangeProxyTargetInterceptor : IInterceptor
-	{
-		private readonly object target;
+    public class ChangeProxyTargetInterceptor : IInterceptor
+    {
+        private readonly object target;
 
-		public ChangeProxyTargetInterceptor(object target)
-		{
-			this.target = target;
-		}
+        public ChangeProxyTargetInterceptor(object target)
+        {
+            this.target = target;
+        }
 
-		public void Intercept(IInvocation invocation)
-		{
-			var targetAccessor = invocation.Proxy as IProxyTargetAccessor;
-			Assert.IsNotNull(targetAccessor);
-			targetAccessor.DynProxySetTarget(target);
-			invocation.Proceed();
-		}
-	}
+        public void Intercept(IInvocation invocation)
+        {
+            var targetAccessor = invocation.Proxy as IProxyTargetAccessor;
+            Assert.IsNotNull(targetAccessor);
+            targetAccessor.DynProxySetTarget(target);
+            invocation.Proceed();
+        }
+    }
 }

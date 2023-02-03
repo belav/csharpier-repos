@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -210,7 +210,7 @@ public class C { }
         {
             var source = @"
 /// <summary>
-///	Tabbed
+///    Tabbed
 /// </summary>
 public class C { }
 ";
@@ -592,36 +592,36 @@ public class C { }
             var source = @"
 class A
 {
-	/**
-			* <summary>
-			*	/** 
-			*	
-			*	
-			* </summary>
-			*/
-	public void foo1(){}
+    /**
+            * <summary>
+            *    /** 
+            *    
+            *    
+            * </summary>
+            */
+    public void foo1(){}
 
-	/**
-	* ///
-	*		///
-	* /**
-	*/
-	public void foo2(){}
+    /**
+    * ///
+    *        ///
+    * /**
+    */
+    public void foo2(){}
 
-	/**
-	/// <summary>
-	///
-	/// </summary>
-	*/
-	public void foo3(){}
+    /**
+    /// <summary>
+    ///
+    /// </summary>
+    */
+    public void foo3(){}
 
-	// Test: // should not be xml comment
-	/**
-	// <summary>
-	// 
-	// </summary>
-	*/
-	public void foo4(){}
+    // Test: // should not be xml comment
+    /**
+    // <summary>
+    // 
+    // </summary>
+    */
+    public void foo4(){}
 }
 ";
             var comp = CreateCompilationUtil(source);
@@ -635,25 +635,25 @@ class A
     <members>
         <member name=""M:A.foo1"">
              <summary>
-            	/** 
-            	
-            	
+                /** 
+                
+                
              </summary>
         </member>
         <member name=""M:A.foo2"">
              ///
-            		///
+                    ///
              /**
         </member>
         <member name=""M:A.foo3"">
-            	/// <summary>
-            	///
-            	/// </summary>
+                /// <summary>
+                ///
+                /// </summary>
         </member>
         <member name=""M:A.foo4"">
-            	// <summary>
-            	// 
-            	// </summary>
+                // <summary>
+                // 
+                // </summary>
         </member>
     </members>
 </doc>

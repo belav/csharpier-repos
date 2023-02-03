@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationSaveEventArgs.cs
 //
 // Authors:
-//	Marek Habersack (mhabersack@novell.com)
+//    Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -31,21 +31,21 @@ using System;
 
 namespace System.Configuration 
 {
-	class ConfigurationSaveEventArgs : EventArgs
-	{
-		public string StreamPath { get; private set; }
-		public bool Start { get; private set; }
-		public object Context { get; private set; }
-		public bool Failed { get; private set; }
-		public Exception Exception { get; private set; }
-		
-		public ConfigurationSaveEventArgs (string streamPath, bool start, Exception ex, object context)
-		{
-			this.StreamPath = streamPath;
-			this.Start = start;
-			this.Failed = ex != null;
-			this.Exception = ex;
-			this.Context = context;
-		}
-	}
+    class ConfigurationSaveEventArgs : EventArgs
+    {
+        public string StreamPath { get; private set; }
+        public bool Start { get; private set; }
+        public object Context { get; private set; }
+        public bool Failed { get; private set; }
+        public Exception Exception { get; private set; }
+        
+        public ConfigurationSaveEventArgs (string streamPath, bool start, Exception ex, object context)
+        {
+            this.StreamPath = streamPath;
+            this.Start = start;
+            this.Failed = ex != null;
+            this.Exception = ex;
+            this.Context = context;
+        }
+    }
 }

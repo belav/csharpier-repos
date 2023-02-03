@@ -2,7 +2,7 @@
 // CodeContractDecoder.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,57 +30,57 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.AST.Visitors;
 
 namespace Mono.CodeContracts.Static.Providers {
-	class CodeContractDecoder : IContractProvider {
-		public static readonly CodeContractDecoder Instance = new CodeContractDecoder ();
+    class CodeContractDecoder : IContractProvider {
+        public static readonly CodeContractDecoder Instance = new CodeContractDecoder ();
 
-		#region IContractProvider Members
-		public bool VerifyMethod (Method method, bool analyzeNonUserCode)
-		{
-			//todo: implement this
-			return true;
-		}
+        #region IContractProvider Members
+        public bool VerifyMethod (Method method, bool analyzeNonUserCode)
+        {
+            //todo: implement this
+            return true;
+        }
 
-		public bool HasRequires (Method method)
-		{
-			method = GetMethodWithContractFor (method);
-			if (method.MethodContract == null)
-				return false;
+        public bool HasRequires (Method method)
+        {
+            method = GetMethodWithContractFor (method);
+            if (method.MethodContract == null)
+                return false;
 
-			return method.MethodContract.RequiresCount > 0;
-		}
+            return method.MethodContract.RequiresCount > 0;
+        }
 
-		public Result AccessRequires<Data, Result> (Method method,
-		                                            ICodeConsumer<Data, Result> consumer, Data data)
-		{
-			method = GetMethodWithContractFor (method);
-			return consumer.Accept (CodeProviderImpl.Instance, new CodeProviderImpl.PC (method.MethodContract, 0), data);
-		}
+        public Result AccessRequires<Data, Result> (Method method,
+                                                    ICodeConsumer<Data, Result> consumer, Data data)
+        {
+            method = GetMethodWithContractFor (method);
+            return consumer.Accept (CodeProviderImpl.Instance, new CodeProviderImpl.PC (method.MethodContract, 0), data);
+        }
 
-		public bool HasEnsures (Method method)
-		{
-			method = GetMethodWithContractFor (method);
-			if (method.MethodContract == null)
-				return false;
+        public bool HasEnsures (Method method)
+        {
+            method = GetMethodWithContractFor (method);
+            if (method.MethodContract == null)
+                return false;
 
-			return method.MethodContract.EnsuresCount > 0;
-		}
+            return method.MethodContract.EnsuresCount > 0;
+        }
 
-		public Result AccessEnsures<Data, Result> (Method method, ICodeConsumer<Data, Result> consumer, Data data)
-		{
-			method = GetMethodWithContractFor (method);
-			return consumer.Accept (CodeProviderImpl.Instance, new CodeProviderImpl.PC (method.MethodContract, method.MethodContract.RequiresCount + 2), data);
-		}
+        public Result AccessEnsures<Data, Result> (Method method, ICodeConsumer<Data, Result> consumer, Data data)
+        {
+            method = GetMethodWithContractFor (method);
+            return consumer.Accept (CodeProviderImpl.Instance, new CodeProviderImpl.PC (method.MethodContract, method.MethodContract.RequiresCount + 2), data);
+        }
 
-		public bool CanInheritContracts (Method method)
-		{
-			return false;
-		}
-		#endregion
+        public bool CanInheritContracts (Method method)
+        {
+            return false;
+        }
+        #endregion
 
-		private Method GetMethodWithContractFor (Method method)
-		{
-			//todo: implement this
-			return method;
-		}
-	}
+        private Method GetMethodWithContractFor (Method method)
+        {
+            //todo: implement this
+            return method;
+        }
+    }
 }

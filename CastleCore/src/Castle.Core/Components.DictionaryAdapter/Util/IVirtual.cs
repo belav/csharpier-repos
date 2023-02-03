@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	public interface IVirtual
-	{
-		bool IsReal { get; }
+    public interface IVirtual
+    {
+        bool IsReal { get; }
 
-		void Realize();
+        void Realize();
 
-		event EventHandler Realized;
-	}
+        event EventHandler Realized;
+    }
 
-	public interface IVirtual<T> : IVirtual
-	{
-		new T Realize();
+    public interface IVirtual<T> : IVirtual
+    {
+        new T Realize();
 
-		void AddSite(IVirtualSite<T> site);
+        void AddSite(IVirtualSite<T> site);
 
-		void RemoveSite(IVirtualSite<T> site);
-	}
+        void RemoveSite(IVirtualSite<T> site);
+    }
 }

@@ -4,9 +4,9 @@
 
 class C
 {
-	void M ()
-	{
-		dynamic d = new object ();
-		d.M (arg: 1, "");
-	}
+    void M ()
+    {
+        dynamic d = new object ();
+        d.M (arg: 1, "");
+    }
 }

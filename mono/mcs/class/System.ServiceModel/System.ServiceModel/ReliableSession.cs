@@ -2,7 +2,7 @@
 // ReliableSession.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,22 +33,22 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel
 {
-	public class ReliableSession
-	{
-		public ReliableSession ()
-		{
-		}
+    public class ReliableSession
+    {
+        public ReliableSession ()
+        {
+        }
 
-		public ReliableSession (ReliableSessionBindingElement reliableSessionBindingElement)
-		{
-			if (reliableSessionBindingElement == null)
-				throw new ArgumentNullException ("reliableSessionBindingElement");
-			InactivityTimeout = reliableSessionBindingElement.InactivityTimeout;
-			Ordered = reliableSessionBindingElement.Ordered;
-		}
+        public ReliableSession (ReliableSessionBindingElement reliableSessionBindingElement)
+        {
+            if (reliableSessionBindingElement == null)
+                throw new ArgumentNullException ("reliableSessionBindingElement");
+            InactivityTimeout = reliableSessionBindingElement.InactivityTimeout;
+            Ordered = reliableSessionBindingElement.Ordered;
+        }
 
-		public TimeSpan InactivityTimeout { get; set; }
+        public TimeSpan InactivityTimeout { get; set; }
 
-		public bool Ordered { get; set; }
-	}
+        public bool Ordered { get; set; }
+    }
 }

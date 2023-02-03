@@ -1,4 +1,4 @@
-﻿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -33,24 +33,24 @@ namespace DbLinq.Data.Linq.Mapping
 {
     internal abstract class AttributedAbstractMetaDataMember : MetaDataMember
     {
-		protected AttributedAbstractMetaDataMember(MemberInfo member, MetaType declaringType, DataAttribute attribute)
-		{
-			memberInfo = member;
-			memberAccessor = LambdaMetaAccessor.Create(member, declaringType.Type);
-			this.declaringType = declaringType;
-			
-			if(attribute.Storage != null)
-			{
-				storageMember = member.DeclaringType.GetSingleMember(attribute.Storage);
-				if (storageMember != null)
-					storageAccessor = LambdaMetaAccessor.Create(storageMember, declaringType.Type);
-			}
-		}
+        protected AttributedAbstractMetaDataMember(MemberInfo member, MetaType declaringType, DataAttribute attribute)
+        {
+            memberInfo = member;
+            memberAccessor = LambdaMetaAccessor.Create(member, declaringType.Type);
+            this.declaringType = declaringType;
+            
+            if(attribute.Storage != null)
+            {
+                storageMember = member.DeclaringType.GetSingleMember(attribute.Storage);
+                if (storageMember != null)
+                    storageAccessor = LambdaMetaAccessor.Create(storageMember, declaringType.Type);
+            }
+        }
 
         protected MemberInfo memberInfo;
         protected MetaType declaringType;
-		protected MetaAccessor memberAccessor;
-		protected MetaAccessor storageAccessor;
+        protected MetaAccessor memberAccessor;
+        protected MetaAccessor storageAccessor;
 
         public override MetaType DeclaringType
         {

@@ -3,9 +3,9 @@
 
 class test {
 
-	// To fix add a return type
-	
-	public static Main (string[] args)
-	{
-	}
+    // To fix add a return type
+    
+    public static Main (string[] args)
+    {
+    }
 }

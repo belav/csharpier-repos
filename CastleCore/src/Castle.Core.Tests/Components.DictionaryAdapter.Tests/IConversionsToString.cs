@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System.ComponentModel;
+    using System.ComponentModel;
 
-	[StringValues]
-	public interface IConversionsToString : IConversions
-	{
-		[TypeConverter(typeof(PhoneConverter))]
-		Phone Phone { get; set; }
-	}
+    [StringValues]
+    public interface IConversionsToString : IConversions
+    {
+        [TypeConverter(typeof(PhoneConverter))]
+        Phone Phone { get; set; }
+    }
 }

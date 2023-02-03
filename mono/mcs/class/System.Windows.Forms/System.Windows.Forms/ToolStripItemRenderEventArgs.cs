@@ -23,36 +23,36 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	public class ToolStripItemRenderEventArgs : EventArgs
-	{
-		private Graphics graphics;
-		private ToolStripItem item;
+    public class ToolStripItemRenderEventArgs : EventArgs
+    {
+        private Graphics graphics;
+        private ToolStripItem item;
 
-		public ToolStripItemRenderEventArgs (Graphics g, ToolStripItem item) : base ()
-		{
-			this.graphics = g;
-			this.item = item;
-		}
-		
-		#region Public Properties
-		public Graphics Graphics {
-			get { return this.graphics; }
-		}
+        public ToolStripItemRenderEventArgs (Graphics g, ToolStripItem item) : base ()
+        {
+            this.graphics = g;
+            this.item = item;
+        }
+        
+        #region Public Properties
+        public Graphics Graphics {
+            get { return this.graphics; }
+        }
 
-		public ToolStripItem Item {
-			get { return this.item; }
-		}
+        public ToolStripItem Item {
+            get { return this.item; }
+        }
 
-		public ToolStrip ToolStrip {
-			get { return this.item.Owner; }
-		}
-		#endregion
-	}
+        public ToolStrip ToolStrip {
+            get { return this.item.Owner; }
+        }
+        #endregion
+    }
 }

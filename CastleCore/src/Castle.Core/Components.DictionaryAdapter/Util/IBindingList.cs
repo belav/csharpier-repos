@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,29 +14,29 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using SysPropertyDescriptor = System.ComponentModel.PropertyDescriptor;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using SysPropertyDescriptor = System.ComponentModel.PropertyDescriptor;
 
-	public interface IBindingList<T> : IList<T>, IBindingListSource, ICancelAddNew, IRaiseItemChangedEvents
-	{
-		bool AllowNew                      { get; }
-		bool AllowEdit                     { get; }
-		bool AllowRemove                   { get; }
-		bool SupportsChangeNotification    { get; }
-		bool SupportsSearching             { get; }
-		bool SupportsSorting               { get; }
-		bool IsSorted                      { get; }
-		SysPropertyDescriptor SortProperty { get; }
-		ListSortDirection SortDirection    { get; }
+    public interface IBindingList<T> : IList<T>, IBindingListSource, ICancelAddNew, IRaiseItemChangedEvents
+    {
+        bool AllowNew                      { get; }
+        bool AllowEdit                     { get; }
+        bool AllowRemove                   { get; }
+        bool SupportsChangeNotification    { get; }
+        bool SupportsSearching             { get; }
+        bool SupportsSorting               { get; }
+        bool IsSorted                      { get; }
+        SysPropertyDescriptor SortProperty { get; }
+        ListSortDirection SortDirection    { get; }
 
-		event ListChangedEventHandler ListChanged;
+        event ListChangedEventHandler ListChanged;
 
-		T    AddNew     ();
-		int  Find       (SysPropertyDescriptor property, object key);
-		void AddIndex   (SysPropertyDescriptor property);
-		void RemoveIndex(SysPropertyDescriptor property);
-		void ApplySort  (SysPropertyDescriptor property, ListSortDirection direction);
-		void RemoveSort ();
-	}
+        T    AddNew     ();
+        int  Find       (SysPropertyDescriptor property, object key);
+        void AddIndex   (SysPropertyDescriptor property);
+        void RemoveIndex(SysPropertyDescriptor property);
+        void ApplySort  (SysPropertyDescriptor property, ListSortDirection direction);
+        void RemoveSort ();
+    }
 }

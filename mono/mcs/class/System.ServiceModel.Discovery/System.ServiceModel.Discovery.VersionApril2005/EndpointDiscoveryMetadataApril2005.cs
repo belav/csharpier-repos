@@ -35,56 +35,56 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class EndpointDiscoveryMetadataApril2005 : IXmlSerializable
-	{
-		public static EndpointDiscoveryMetadataApril2005 FromEndpointDiscoveryMetadata (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
-		{
-			return new EndpointDiscoveryMetadataApril2005 (endpointDiscoveryMetadata);
-		}
+    [XmlSchemaProvider ("GetSchema")]
+    public class EndpointDiscoveryMetadataApril2005 : IXmlSerializable
+    {
+        public static EndpointDiscoveryMetadataApril2005 FromEndpointDiscoveryMetadata (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+        {
+            return new EndpointDiscoveryMetadataApril2005 (endpointDiscoveryMetadata);
+        }
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			EndpointAddress10.GetSchema (schemaSet);
-			schemaSet.Add (schema);
-			return new XmlQualifiedName ("ProbeMatchType", version.Namespace);
-		}
+        public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
+        {
+            EndpointAddress10.GetSchema (schemaSet);
+            schemaSet.Add (schema);
+            return new XmlQualifiedName ("ProbeMatchType", version.Namespace);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscoveryApril2005;
-		static readonly XmlSchema schema = EndpointDiscoveryMetadata.BuildSchema (version);
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscoveryApril2005;
+        static readonly XmlSchema schema = EndpointDiscoveryMetadata.BuildSchema (version);
 
-		// for deserialization use
-		EndpointDiscoveryMetadataApril2005 ()
-		{
-		}
+        // for deserialization use
+        EndpointDiscoveryMetadataApril2005 ()
+        {
+        }
 
-		internal EndpointDiscoveryMetadataApril2005 (EndpointDiscoveryMetadata source)
-		{
-			this.source = source;
-		}
-		
-		EndpointDiscoveryMetadata source;
+        internal EndpointDiscoveryMetadataApril2005 (EndpointDiscoveryMetadata source)
+        {
+            this.source = source;
+        }
+        
+        EndpointDiscoveryMetadata source;
 
-		public XmlSchema GetSchema ()
-		{
-			return null;
-		}
+        public XmlSchema GetSchema ()
+        {
+            return null;
+        }
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = EndpointDiscoveryMetadata.ReadXml (reader, version);
-		}
+        public void ReadXml (XmlReader reader)
+        {
+            source = EndpointDiscoveryMetadata.ReadXml (reader, version);
+        }
 
-		public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method first before calling this method");
-			return source;
-		}
+        public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata ()
+        {
+            if (source == null)
+                throw new InvalidOperationException ("Call ReadXml method first before calling this method");
+            return source;
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer, version);
-		}
-	}
+        public void WriteXml (XmlWriter writer)
+        {
+            source.WriteXml (writer, version);
+        }
+    }
 }

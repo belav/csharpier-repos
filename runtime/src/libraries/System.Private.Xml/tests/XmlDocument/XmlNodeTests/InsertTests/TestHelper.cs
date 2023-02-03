@@ -22,7 +22,7 @@ namespace System.Xml.XmlDocumentTests
             switch (nodeType)
             {
                 case XmlNodeType.CDATA:
-                    return doc.CreateCDataSection(@"&lt; &amp; <tag> < ! > & </tag> 	 ");
+                    return doc.CreateCDataSection(@"&lt; &amp; <tag> < ! > & </tag>      ");
                 case XmlNodeType.Comment:
                     return doc.CreateComment(@"comment");
                 case XmlNodeType.Element:
@@ -30,9 +30,9 @@ namespace System.Xml.XmlDocumentTests
                 case XmlNodeType.Text:
                     return doc.CreateTextNode("text");
                 case XmlNodeType.Whitespace:
-                    return doc.CreateWhitespace(@"	  ");
+                    return doc.CreateWhitespace(@"      ");
                 case XmlNodeType.SignificantWhitespace:
-                    return doc.CreateSignificantWhitespace("	");
+                    return doc.CreateSignificantWhitespace("    ");
                 default:
                     throw new ArgumentException("Wrong XmlNodeType: '" + nodeType + "'");
             }

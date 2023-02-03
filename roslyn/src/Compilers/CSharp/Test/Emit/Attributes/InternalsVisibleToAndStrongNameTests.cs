@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -924,19 +924,19 @@ public class PublicClass
 
 public class Test
 {
-	static void Main ()
-	{
-		PublicClass.InternalMethod();
+    static void Main ()
+    {
+        PublicClass.InternalMethod();
         PublicClass.ProtectedMethod();
         PublicClass.PrivateMethod();
         PublicClass.InternalProtectedMethod();
         PublicClass.PrivateProtectedMethod();
-	}
+    }
 }";
             var other = CreateCompilation(cs0281, references: new[] { friendClass.EmitToImageReference() }, assemblyName: "cs0281", options: TestOptions.SigningReleaseDll, parseOptions: parseOptions);
             other.VerifyDiagnostics(
                     // (7,15): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
-                    // 		PublicClass.InternalMethod();
+                    //         PublicClass.InternalMethod();
                     Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "InternalMethod").WithArguments("Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "").WithLocation(7, 15),
                     // (8,21): error CS0122: 'PublicClass.ProtectedMethod()' is inaccessible due to its protection level
                     //         PublicClass.ProtectedMethod();
@@ -972,16 +972,16 @@ internal class FriendClass
 
 public class Test
 {
-	static void Main ()
-	{
-		FriendClass.MyMethod ();
-	}
+    static void Main ()
+    {
+        FriendClass.MyMethod ();
+    }
 }";
             var other = CreateCompilation(cs0281, references: new[] { friendClass.EmitToImageReference() }, assemblyName: "cs0281", options: TestOptions.SigningReleaseDll, parseOptions: parseOptions);
 
             // (7, 3): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('')
             // does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
-            // 		FriendClass.MyMethod ();
+            //         FriendClass.MyMethod ();
             other.VerifyDiagnostics(
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "FriendClass").WithArguments("Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "").WithLocation(7, 3)
             );

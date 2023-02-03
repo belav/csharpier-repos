@@ -20,12 +20,12 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	John BouAntoun	jba-mono@optusnet.com.au
+//    John BouAntoun    jba-mono@optusnet.com.au
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	// event handler for when a daterange event is fired (datechanged or dateselected)
-	public delegate void DateRangeEventHandler(object sender, DateRangeEventArgs e);
+    // event handler for when a daterange event is fired (datechanged or dateselected)
+    public delegate void DateRangeEventHandler(object sender, DateRangeEventArgs e);
 }

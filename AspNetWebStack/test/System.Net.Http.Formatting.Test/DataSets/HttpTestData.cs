@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -299,15 +299,15 @@ namespace System.Net.Http.Formatting.DataSets
             {
                 return new TheoryDataSet<string, string, bool>
                 {
-                    { "This is a test 激光這兩個字是甚麼意思 string written using utf-8", "utf-8", true },
-                    { "This is a test 激光這兩個字是甚麼意思 string written using utf-16", "utf-16", true },
-                    { "This is a test 激光這兩個字是甚麼意思 string written using utf-32", "utf-32", false },
+                    { "This is a test ??????????? string written using utf-8", "utf-8", true },
+                    { "This is a test ??????????? string written using utf-16", "utf-16", true },
+                    { "This is a test ??????????? string written using utf-32", "utf-32", false },
 #if !NETCOREAPP // shift_jis and iso-2022-kr are not supported when running on .NET Core 2.1.
-                    { "This is a test 激光這兩個字是甚麼意思 string written using shift_jis", "shift_jis", false },
+                    { "This is a test ??????????? string written using shift_jis", "shift_jis", false },
 #endif
-                    { "This is a test æøå string written using iso-8859-1", "iso-8859-1", false },
+                    { "This is a test ��� string written using iso-8859-1", "iso-8859-1", false },
 #if !NETCOREAPP
-                    { "This is a test 레이저 단어 뜻 string written using iso-2022-kr", "iso-2022-kr", false },
+                    { "This is a test ??? ?? ? string written using iso-2022-kr", "iso-2022-kr", false },
 #endif
                 };
             }
@@ -611,7 +611,7 @@ namespace System.Net.Http.Formatting.DataSets
             {
                 return new RefTypeTestData<string>(() => new List<string>()
                 {
-                    "文",
+                    "?",
                     "A",
                     "a",
                     "b",

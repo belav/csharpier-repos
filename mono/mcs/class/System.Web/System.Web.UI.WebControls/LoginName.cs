@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.LoginName class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,81 +32,81 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[Bindable (false)]
-	[DefaultProperty ("FormatString")]
-	[Designer ("System.Web.UI.Design.WebControls.LoginNameDesigner," + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public class LoginName : WebControl 
-	{
-		public LoginName ()
-		{
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [Bindable (false)]
+    [DefaultProperty ("FormatString")]
+    [Designer ("System.Web.UI.Design.WebControls.LoginNameDesigner," + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    public class LoginName : WebControl 
+    {
+        public LoginName ()
+        {
+        }
 
-		[DefaultValue ("{0}")]
-		[Localizable (true)]
-		public virtual string FormatString {
-			get {
-				object o = ViewState ["FormatString"];
-				return (o == null) ? "{0}" : (string)o;
-			}
-			set {
-				if (value == null)
-					ViewState.Remove ("FormatString");
-				else
-					ViewState ["FormatString"] = value;
-			}
-		}
-		public override bool SupportsDisabledAttribute {
-			get { return RenderingCompatibilityLessThan40; }
-		}
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			if (!Anonymous) {
-				RenderBeginTag (writer);
-				RenderContents (writer);
-				RenderEndTag (writer);
-			}
-		}
+        [DefaultValue ("{0}")]
+        [Localizable (true)]
+        public virtual string FormatString {
+            get {
+                object o = ViewState ["FormatString"];
+                return (o == null) ? "{0}" : (string)o;
+            }
+            set {
+                if (value == null)
+                    ViewState.Remove ("FormatString");
+                else
+                    ViewState ["FormatString"] = value;
+            }
+        }
+        public override bool SupportsDisabledAttribute {
+            get { return RenderingCompatibilityLessThan40; }
+        }
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            if (!Anonymous) {
+                RenderBeginTag (writer);
+                RenderContents (writer);
+                RenderEndTag (writer);
+            }
+        }
 
-		public override void RenderBeginTag (HtmlTextWriter writer)
-		{
-			if (!Anonymous)
-				base.RenderBeginTag (writer);
-		}
+        public override void RenderBeginTag (HtmlTextWriter writer)
+        {
+            if (!Anonymous)
+                base.RenderBeginTag (writer);
+        }
 
-		protected internal override void RenderContents (HtmlTextWriter writer)
-		{
-			if (!Anonymous) {
-				string format = (string) ViewState ["FormatString"];
-				if ((format == null) || (format.Length == 0))
-					writer.Write (User);
-				else
-					writer.Write (format, User);
-			}
-		}
+        protected internal override void RenderContents (HtmlTextWriter writer)
+        {
+            if (!Anonymous) {
+                string format = (string) ViewState ["FormatString"];
+                if ((format == null) || (format.Length == 0))
+                    writer.Write (User);
+                else
+                    writer.Write (format, User);
+            }
+        }
 
-		public override void RenderEndTag (HtmlTextWriter writer)
-		{
-			if (!Anonymous)
-				base.RenderEndTag (writer);
-		}
+        public override void RenderEndTag (HtmlTextWriter writer)
+        {
+            if (!Anonymous)
+                base.RenderEndTag (writer);
+        }
 
-		// private stuff
+        // private stuff
 
-		bool Anonymous {
-			get { return (User.Length == 0); }
-		}
+        bool Anonymous {
+            get { return (User.Length == 0); }
+        }
 
-		string User {
-			get {
-				if ((Page == null) || (Page.User == null))
-					return String.Empty;
-				return Page.User.Identity.Name;
-			}
-		}
-	}
+        string User {
+            get {
+                if ((Page == null) || (Page.User == null))
+                    return String.Empty;
+                return Page.User.Identity.Name;
+            }
+        }
+    }
 }
 

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Geoff Norton (gnorton@novell.com)
+//    Geoff Norton (gnorton@novell.com)
 //
 //
 
@@ -30,77 +30,77 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace System.Windows.Forms.CarbonInternal {
-	internal class Pasteboard {
-		private static IntPtr primary_pbref;
-		private static IntPtr app_pbref;
+    internal class Pasteboard {
+        private static IntPtr primary_pbref;
+        private static IntPtr app_pbref;
 
-		private static IntPtr internal_format;
+        private static IntPtr internal_format;
 
-		static Pasteboard () {
-			PasteboardCreate (XplatUICarbon.__CFStringMakeConstantString("com.apple.pasteboard.clipboard"), ref primary_pbref);
-			PasteboardCreate (IntPtr.Zero, ref app_pbref);
-			internal_format = XplatUICarbon.__CFStringMakeConstantString ("com.novell.mono.mwf.pasteboard");
-		}
+        static Pasteboard () {
+            PasteboardCreate (XplatUICarbon.__CFStringMakeConstantString("com.apple.pasteboard.clipboard"), ref primary_pbref);
+            PasteboardCreate (IntPtr.Zero, ref app_pbref);
+            internal_format = XplatUICarbon.__CFStringMakeConstantString ("com.novell.mono.mwf.pasteboard");
+        }
 
-		internal static object Retrieve (IntPtr pbref, int key) {
-			UInt32 count = 0;
+        internal static object Retrieve (IntPtr pbref, int key) {
+            UInt32 count = 0;
 
-			key = (int)internal_format;
+            key = (int)internal_format;
 
-			PasteboardGetItemCount (pbref, ref count);
-			for (int i = 1; i <= count; i++) {
-				UInt32 itemid = 0;
+            PasteboardGetItemCount (pbref, ref count);
+            for (int i = 1; i <= count; i++) {
+                UInt32 itemid = 0;
 
-				PasteboardGetItemIdentifier (pbref, (UInt32)i, ref itemid);
-				//FIXME: We should get all the flavors and enumerate but we're cheating for now
-				if (itemid == 0xFACE) {
-					IntPtr pbdata = IntPtr.Zero;
+                PasteboardGetItemIdentifier (pbref, (UInt32)i, ref itemid);
+                //FIXME: We should get all the flavors and enumerate but we're cheating for now
+                if (itemid == 0xFACE) {
+                    IntPtr pbdata = IntPtr.Zero;
 
-					PasteboardCopyItemFlavorData (pbref, (UInt32)0xFACE, (UInt32)key, ref pbdata);
-					if (pbdata != IntPtr.Zero) {
-						GCHandle handle = (GCHandle) Marshal.ReadIntPtr (CFDataGetBytePtr (pbdata));
-						
-						return handle.Target;
-					}
-				}
-			}
-			return null;
-		}
+                    PasteboardCopyItemFlavorData (pbref, (UInt32)0xFACE, (UInt32)key, ref pbdata);
+                    if (pbdata != IntPtr.Zero) {
+                        GCHandle handle = (GCHandle) Marshal.ReadIntPtr (CFDataGetBytePtr (pbdata));
+                        
+                        return handle.Target;
+                    }
+                }
+            }
+            return null;
+        }
 
-		internal static void Store (IntPtr pbref, object data, int key) {
-			IntPtr gcdata = (IntPtr) GCHandle.Alloc (data);
-			IntPtr pbdata = CFDataCreate (IntPtr.Zero, ref gcdata, Marshal.SizeOf (typeof (IntPtr)));
+        internal static void Store (IntPtr pbref, object data, int key) {
+            IntPtr gcdata = (IntPtr) GCHandle.Alloc (data);
+            IntPtr pbdata = CFDataCreate (IntPtr.Zero, ref gcdata, Marshal.SizeOf (typeof (IntPtr)));
 
-			key = (int)internal_format;
+            key = (int)internal_format;
 
-			PasteboardClear (pbref);
-			PasteboardPutItemFlavor (pbref, (UInt32)0xFACE, (UInt32)key, pbdata, 0);
-		}
+            PasteboardClear (pbref);
+            PasteboardPutItemFlavor (pbref, (UInt32)0xFACE, (UInt32)key, pbdata, 0);
+        }
 
-		internal static IntPtr Primary {
-			get { return primary_pbref; }
-		}
-		
-		internal static IntPtr Application {
-			get { return app_pbref; }
-		}
+        internal static IntPtr Primary {
+            get { return primary_pbref; }
+        }
+        
+        internal static IntPtr Application {
+            get { return app_pbref; }
+        }
 
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern IntPtr CFDataCreate (IntPtr allocator, ref IntPtr buf, Int32 length);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern IntPtr CFDataGetBytePtr (IntPtr data);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern IntPtr CFDataCreate (IntPtr allocator, ref IntPtr buf, Int32 length);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern IntPtr CFDataGetBytePtr (IntPtr data);
 
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int PasteboardClear (IntPtr pbref);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int PasteboardCreate (IntPtr str, ref IntPtr pbref);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int PasteboardCopyItemFlavorData (IntPtr pbref, UInt32 itemid, UInt32 key, ref IntPtr data);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int PasteboardGetItemCount (IntPtr pbref, ref UInt32 count);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int PasteboardGetItemIdentifier (IntPtr pbref, UInt32 itemindex, ref UInt32 itemid);
-		[DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-		static extern int PasteboardPutItemFlavor (IntPtr pbref, UInt32 itemid, UInt32 key, IntPtr data, UInt32 flags);
-	}
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int PasteboardClear (IntPtr pbref);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int PasteboardCreate (IntPtr str, ref IntPtr pbref);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int PasteboardCopyItemFlavorData (IntPtr pbref, UInt32 itemid, UInt32 key, ref IntPtr data);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int PasteboardGetItemCount (IntPtr pbref, ref UInt32 count);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int PasteboardGetItemIdentifier (IntPtr pbref, UInt32 itemindex, ref UInt32 itemid);
+        [DllImport ("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
+        static extern int PasteboardPutItemFlavor (IntPtr pbref, UInt32 itemid, UInt32 key, IntPtr data, UInt32 flags);
+    }
 }

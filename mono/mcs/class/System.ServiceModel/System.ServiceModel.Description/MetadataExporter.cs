@@ -2,7 +2,7 @@
 // MetadataExporter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -37,67 +37,67 @@ using WSBinding = System.Web.Services.Description.Binding;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public abstract class MetadataExporter
-	{
-		Collection<MetadataConversionError> errors = new Collection<MetadataConversionError> ();
+    [MonoTODO]
+    public abstract class MetadataExporter
+    {
+        Collection<MetadataConversionError> errors = new Collection<MetadataConversionError> ();
 
-		internal MetadataExporter ()
-		{
-		}
+        internal MetadataExporter ()
+        {
+        }
 
-		public Collection<MetadataConversionError> Errors {
-			get { return errors; }
-		}
+        public Collection<MetadataConversionError> Errors {
+            get { return errors; }
+        }
 
-		public Dictionary<Object,Object> State {
-			get { throw new NotImplementedException (); }
-		}
+        public Dictionary<Object,Object> State {
+            get { throw new NotImplementedException (); }
+        }
 
-		public abstract void ExportContract (ContractDescription contract);
+        public abstract void ExportContract (ContractDescription contract);
 
-		public abstract void ExportEndpoint (ServiceEndpoint endpoint);
+        public abstract void ExportEndpoint (ServiceEndpoint endpoint);
 
-		public abstract MetadataSet GetGeneratedMetadata ();
+        public abstract MetadataSet GetGeneratedMetadata ();
 
-		protected internal PolicyConversionContext ExportPolicy (
-			ServiceEndpoint endpoint)
-		{
-			throw new NotImplementedException ();
-		}
+        protected internal PolicyConversionContext ExportPolicy (
+            ServiceEndpoint endpoint)
+        {
+            throw new NotImplementedException ();
+        }
 
-		internal MetadataConversionError AddError (string message, params object[] args)
-		{
-			var error = new MetadataConversionError (string.Format (message, args));
-			Errors.Add (error);
-			return error;
-		}
-		
-		internal MetadataConversionError AddWarning (string message, params object[] args)
-		{
-			var error = new MetadataConversionError (string.Format (message, args), true);
-			Errors.Add (error);
-			return error;
-		}
-		
-		internal class MetadataExportException : Exception
-		{
-			public MetadataConversionError Error {
-				get;
-				private set;
-			}
-			
-			public MetadataExportException (MetadataConversionError error)
-				: base (error.Message)
-			{
-				this.Error = error;
-			}
-			
-			public MetadataExportException (MetadataConversionError error, Exception inner)
-				: base (error.Message, inner)
-			{
-				this.Error = error;
-			}
-		}
-	}
+        internal MetadataConversionError AddError (string message, params object[] args)
+        {
+            var error = new MetadataConversionError (string.Format (message, args));
+            Errors.Add (error);
+            return error;
+        }
+        
+        internal MetadataConversionError AddWarning (string message, params object[] args)
+        {
+            var error = new MetadataConversionError (string.Format (message, args), true);
+            Errors.Add (error);
+            return error;
+        }
+        
+        internal class MetadataExportException : Exception
+        {
+            public MetadataConversionError Error {
+                get;
+                private set;
+            }
+            
+            public MetadataExportException (MetadataConversionError error)
+                : base (error.Message)
+            {
+                this.Error = error;
+            }
+            
+            public MetadataExportException (MetadataConversionError error, Exception inner)
+                : base (error.Message, inner)
+            {
+                this.Error = error;
+            }
+        }
+    }
 }

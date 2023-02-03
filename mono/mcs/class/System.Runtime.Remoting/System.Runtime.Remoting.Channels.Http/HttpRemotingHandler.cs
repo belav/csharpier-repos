@@ -36,85 +36,85 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels.Http 
 {
-	public class HttpRemotingHandler : IHttpHandler 
-	{
-		HttpServerTransportSink transportSink;
-		
-		public HttpRemotingHandler ()
-		{
-		}
+    public class HttpRemotingHandler : IHttpHandler 
+    {
+        HttpServerTransportSink transportSink;
+        
+        public HttpRemotingHandler ()
+        {
+        }
 
-		[MonoTODO]
-		public HttpRemotingHandler (Type type, object srvID)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public HttpRemotingHandler (Type type, object srvID)
+        {
+            throw new NotImplementedException ();
+        }
 
-		internal HttpRemotingHandler (HttpServerTransportSink sink)
-		{
-			transportSink = sink;
-		}
+        internal HttpRemotingHandler (HttpServerTransportSink sink)
+        {
+            transportSink = sink;
+        }
 
-		public bool IsReusable {
-			get { return true; }
-		}
+        public bool IsReusable {
+            get { return true; }
+        }
 
-		public void ProcessRequest (HttpContext context)
-		{
-			HttpRequest request = context.Request;
-			HttpResponse response = context.Response;
-			
-			// Create transport headers for the request
-			TransportHeaders theaders = new TransportHeaders();
+        public void ProcessRequest (HttpContext context)
+        {
+            HttpRequest request = context.Request;
+            HttpResponse response = context.Response;
+            
+            // Create transport headers for the request
+            TransportHeaders theaders = new TransportHeaders();
 
-			string objectUri = request.RawUrl;
-			objectUri = objectUri.Substring (request.ApplicationPath.Length);	// application path is not part of the uri
-			if (request.ApplicationPath.Length > 0 && 
-			   (objectUri.StartsWith("/") || objectUri.StartsWith(@"\")) )
-			{
-				objectUri = objectUri.Substring(1);
-			}
+            string objectUri = request.RawUrl;
+            objectUri = objectUri.Substring (request.ApplicationPath.Length);    // application path is not part of the uri
+            if (request.ApplicationPath.Length > 0 && 
+               (objectUri.StartsWith("/") || objectUri.StartsWith(@"\")) )
+            {
+                objectUri = objectUri.Substring(1);
+            }
 
-			theaders ["__RequestUri"] = objectUri;
-			theaders ["Content-Type"] = request.ContentType;
-			theaders ["__RequestVerb"]= request.HttpMethod;
-			theaders ["__HttpVersion"] = request.Headers ["http-version"];
-			theaders ["User-Agent"] = request.UserAgent;
-			theaders ["Host"] = request.Headers ["host"];
+            theaders ["__RequestUri"] = objectUri;
+            theaders ["Content-Type"] = request.ContentType;
+            theaders ["__RequestVerb"]= request.HttpMethod;
+            theaders ["__HttpVersion"] = request.Headers ["http-version"];
+            theaders ["User-Agent"] = request.UserAgent;
+            theaders ["Host"] = request.Headers ["host"];
 
-			ITransportHeaders responseHeaders;
-			Stream responseStream;
-			
-			// Dispatch the request	
-			ServerProcessing proc = transportSink.SynchronousDispatch 
-				(theaders, request.InputStream, out responseHeaders, out responseStream);
-			
-			if (proc == ServerProcessing.Async) {
-				throw new NotSupportedException ("HttpRemotingHandler does not support async processing in " +
-					"the synchronous HTTP pipeline" );
-			}
+            ITransportHeaders responseHeaders;
+            Stream responseStream;
+            
+            // Dispatch the request    
+            ServerProcessing proc = transportSink.SynchronousDispatch 
+                (theaders, request.InputStream, out responseHeaders, out responseStream);
+            
+            if (proc == ServerProcessing.Async) {
+                throw new NotSupportedException ("HttpRemotingHandler does not support async processing in " +
+                    "the synchronous HTTP pipeline" );
+            }
 
-			// Write the response
-			if (responseHeaders != null && responseHeaders["__HttpStatusCode"] != null) 
-			{
-				// The formatter can set the status code
-				response.StatusCode = int.Parse ((string) responseHeaders["__HttpStatusCode"]);
-				response.StatusDescription = (string) responseHeaders["__HttpReasonPhrase"];
-			}
-			
-			if (responseHeaders != null)
-			{
-				foreach (DictionaryEntry entry in responseHeaders)
-				{
-					string key = entry.Key.ToString();
-					if (key != CommonTransportKeys.HttpStatusCode && key != CommonTransportKeys.HttpReasonPhrase)
-						response.AppendHeader(key, entry.Value.ToString());
-				}
-			}
-			
-			if (responseStream != null) {
-				HttpClientTransportSink.CopyStream (responseStream, response.OutputStream, 1024);
-			}
-		}
-	}	
+            // Write the response
+            if (responseHeaders != null && responseHeaders["__HttpStatusCode"] != null) 
+            {
+                // The formatter can set the status code
+                response.StatusCode = int.Parse ((string) responseHeaders["__HttpStatusCode"]);
+                response.StatusDescription = (string) responseHeaders["__HttpReasonPhrase"];
+            }
+            
+            if (responseHeaders != null)
+            {
+                foreach (DictionaryEntry entry in responseHeaders)
+                {
+                    string key = entry.Key.ToString();
+                    if (key != CommonTransportKeys.HttpStatusCode && key != CommonTransportKeys.HttpReasonPhrase)
+                        response.AppendHeader(key, entry.Value.ToString());
+                }
+            }
+            
+            if (responseStream != null) {
+                HttpClientTransportSink.CopyStream (responseStream, response.OutputStream, 1024);
+            }
+        }
+    }    
 }

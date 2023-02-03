@@ -61,7 +61,7 @@ public class SharedExceptions
             {
                 Console.WriteLine("Actual Exception Stack Trace:");
                 Console.WriteLine(e.StackTrace);
-                Console.WriteLine();				
+                Console.WriteLine();                
                 Console.WriteLine("Expected Stack Trace:");
                 Console.WriteLine(currStack.ToString());
                 retVal = 50;

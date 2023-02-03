@@ -5,19 +5,19 @@
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
 //=================================================================
-//  File:		DataFormula.cs
+//  File:        DataFormula.cs
 //
-//  Namespace:	DataVisualization.Charting
+//  Namespace:    DataVisualization.Charting
 //
-//	Classes:	DataFormula
+//    Classes:    DataFormula
 //
-//  Purpose:	DataFormula class provides properties and methods, 
-//				which prepare series data for technical analyses 
-//				and time series and forecasting formulas and prepare 
-//				output data to be displayed as a chart.
+//  Purpose:    DataFormula class provides properties and methods, 
+//                which prepare series data for technical analyses 
+//                and time series and forecasting formulas and prepare 
+//                output data to be displayed as a chart.
 //
-//	Reviewed:	GS - August 6, 2002
-//				AG - August 7, 2002
+//    Reviewed:    GS - August 6, 2002
+//                AG - August 7, 2002
 //              AG - Microsoft 15, 2007
 //
 //===================================================================
@@ -252,7 +252,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// and prepare output data to be displayed as a chart.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
         [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
     public class DataFormula
@@ -961,15 +961,15 @@ namespace System.Web.UI.DataVisualization.Charting
 
 
         /*
-		/// <summary>
-		/// This method will compare a input matrix with empty data 
-		/// points and output matrix without empty data points and 
-		/// add empty data points to output matrix according to 
-		/// input matrix empty data point positions.
-		/// </summary>
-		/// <param name="input">Matrix With input data</param>
-		/// <param name="inputWithoutEmpty">Matrix without empty data points</param>
-		/// <param name="output">New Matrix with inserted data points</param>
+        /// <summary>
+        /// This method will compare a input matrix with empty data 
+        /// points and output matrix without empty data points and 
+        /// add empty data points to output matrix according to 
+        /// input matrix empty data point positions.
+        /// </summary>
+        /// <param name="input">Matrix With input data</param>
+        /// <param name="inputWithoutEmpty">Matrix without empty data points</param>
+        /// <param name="output">New Matrix with inserted data points</param>
          */
         //private void InsertEmptyDataPoints( double [][] input, double [][] inputWithoutEmpty, out double [][] output )
         //{

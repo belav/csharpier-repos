@@ -14,45 +14,45 @@
 
 namespace Castle.DynamicProxy.Tests.GenClasses
 {
-	using System;
+    using System;
 
-	public class GenClassWithExplicitImpl : IChangeTracking
-	{
-		bool IChangeTracking.IsChanged
-		{
-			get { return IsChanged; }
-		}
+    public class GenClassWithExplicitImpl : IChangeTracking
+    {
+        bool IChangeTracking.IsChanged
+        {
+            get { return IsChanged; }
+        }
 
-		protected virtual bool IsChanged
-		{
-			get { return false; }
-		}
+        protected virtual bool IsChanged
+        {
+            get { return false; }
+        }
 
-		void IChangeTracking.AcceptChanges()
-		{
-		}
+        void IChangeTracking.AcceptChanges()
+        {
+        }
 
-		protected virtual void AcceptChanges()
-		{
-		}
-	}
+        protected virtual void AcceptChanges()
+        {
+        }
+    }
 
-	public class GenClassWithExplicitImpl<T> : GenClassWithExplicitImpl
-		where T : IComparable
-	{
-		protected override bool IsChanged
-		{
-			get { return true; }
-		}
+    public class GenClassWithExplicitImpl<T> : GenClassWithExplicitImpl
+        where T : IComparable
+    {
+        protected override bool IsChanged
+        {
+            get { return true; }
+        }
 
-		protected override void AcceptChanges()
-		{
-		}
-	}
+        protected override void AcceptChanges()
+        {
+        }
+    }
 
-	public interface IChangeTracking{
-		bool IsChanged { get; }
+    public interface IChangeTracking{
+        bool IsChanged { get; }
 
-		void AcceptChanges();
-	}
+        void AcceptChanges();
+    }
 }

@@ -2,7 +2,7 @@
 // I18N.MidEast.EncodingTest.cs
 //
 // Author:
-//	Alexander Köplinger (alexander.koeplinger@xamarin.com)
+//    Alexander Köplinger (alexander.koeplinger@xamarin.com)
 //
 // Copyright (C) 2017 Xamarin, Inc.
 //
@@ -36,18 +36,18 @@ using MonoTests.I18N;
 
 namespace MonoTests.I18N.MidEast
 {
-	[TestFixture]
-	public class EncodingTest : EncodingTestBase
-	{
-		static CodePageTestInfo[] codepageTestInfos = new CodePageTestInfo[]
-		{
-			new CodePageTestInfo { CodePage = 1254,  IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
-			new CodePageTestInfo { CodePage = 1255,  IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
-			new CodePageTestInfo { CodePage = 1256,  IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
-			new CodePageTestInfo { CodePage = 28596, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 65, A0Char = '\u00a0', A8Char = '\uf7ce' },
-			new CodePageTestInfo { CodePage = 28598, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
-			new CodePageTestInfo { CodePage = 28599, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
-			new CodePageTestInfo { CodePage = 38598, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' }
-		};
-	}
+    [TestFixture]
+    public class EncodingTest : EncodingTestBase
+    {
+        static CodePageTestInfo[] codepageTestInfos = new CodePageTestInfo[]
+        {
+            new CodePageTestInfo { CodePage = 1254,  IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
+            new CodePageTestInfo { CodePage = 1255,  IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
+            new CodePageTestInfo { CodePage = 1256,  IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
+            new CodePageTestInfo { CodePage = 28596, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 65, A0Char = '\u00a0', A8Char = '\uf7ce' },
+            new CodePageTestInfo { CodePage = 28598, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
+            new CodePageTestInfo { CodePage = 28599, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
+            new CodePageTestInfo { CodePage = 38598, IsBrowserDisplay = true, IsBrowserSave = true, IsMailNewsDisplay = true, IsMailNewsSave = true, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' }
+        };
+    }
 }

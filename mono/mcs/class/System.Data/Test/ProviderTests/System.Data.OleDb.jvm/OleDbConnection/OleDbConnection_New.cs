@@ -35,62 +35,62 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbConnection_New : GHTBase
 {
-	public static void Main()
-	{
-		OleDbConnection_New tc = new OleDbConnection_New();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OleDbConnection_New");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OleDbConnection_New tc = new OleDbConnection_New();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OleDbConnection_New");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
-		OleDbConnection con = null;
-		try
-		{
-			BeginCase("OleDbConnection ctor");
-			con = new OleDbConnection();
-			Compare(con != null ,true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
+        OleDbConnection con = null;
+        try
+        {
+            BeginCase("OleDbConnection ctor");
+            con = new OleDbConnection();
+            Compare(con != null ,true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("OleDbConnection ctor connection string");
-			con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			Compare(con != null ,true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("OleDbConnection ctor connection string");
+            con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            Compare(con != null ,true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("OleDbConnection check connection string");
-			Compare(con.ConnectionString  ,MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString  );
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("OleDbConnection check connection string");
+            Compare(con.ConnectionString  ,MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString  );
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-	}
+    }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

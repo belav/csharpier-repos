@@ -31,23 +31,23 @@ using System;
 
 namespace System.Messaging 
 {
-	public class MessageQueueAccessControlEntry: AccessControlEntry 
-	{
-		[MonoTODO]
-		public MessageQueueAccessControlEntry(Trustee trustee, MessageQueueAccessRights rights)
-		{
-		}
-		
-		[MonoTODO]
-		public MessageQueueAccessControlEntry(Trustee trustee, MessageQueueAccessRights rights, AccessControlEntryType entryType)
-		{
-		}
-		
-		public MessageQueueAccessRights MessageQueueAccessRights {
-			[MonoTODO]
-			get {throw new NotImplementedException();}
-			[MonoTODO]
-			set {throw new NotImplementedException();}
-		}
-	}
+    public class MessageQueueAccessControlEntry: AccessControlEntry 
+    {
+        [MonoTODO]
+        public MessageQueueAccessControlEntry(Trustee trustee, MessageQueueAccessRights rights)
+        {
+        }
+        
+        [MonoTODO]
+        public MessageQueueAccessControlEntry(Trustee trustee, MessageQueueAccessRights rights, AccessControlEntryType entryType)
+        {
+        }
+        
+        public MessageQueueAccessRights MessageQueueAccessRights {
+            [MonoTODO]
+            get {throw new NotImplementedException();}
+            [MonoTODO]
+            set {throw new NotImplementedException();}
+        }
+    }
 }

@@ -4,34 +4,34 @@
 //
 // 
 namespace N1
-{	
-	public enum A
-	{
-		A_1, A_2, A_3
-	}
+{    
+    public enum A
+    {
+        A_1, A_2, A_3
+    }
 
-	public interface B
-	{
-		N1.A myProp 
-		{
-			get;
-			set;   // <-- This always worked.
-		}
-	}
+    public interface B
+    {
+        N1.A myProp 
+        {
+            get;
+            set;   // <-- This always worked.
+        }
+    }
 
-	public interface C
-	{
-		A myProp
-		{
-			get;
-			set;  // <-- This used to fail.
-		}
-	}
+    public interface C
+    {
+        A myProp
+        {
+            get;
+            set;  // <-- This used to fail.
+        }
+    }
 
-	public class Blah {
-		public static int Main  ()
-		{
-			return 0;
-		}
-	}
+    public class Blah {
+        public static int Main  ()
+        {
+            return 0;
+        }
+    }
 }

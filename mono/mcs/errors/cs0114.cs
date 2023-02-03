@@ -3,9 +3,9 @@
 // Compiler options: -warnaserror -warn:2
 
 public abstract class X {
-	public abstract void XX ();
+    public abstract void XX ();
 }
 
 class Y : X {
-	void XX () {}
+    void XX () {}
 }

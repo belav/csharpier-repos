@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.QueryStringParameter
 //
 // Authors:
-//	Ben Maurer (bmaurer@users.sourceforge.net)
+//    Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -36,64 +36,64 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls {
 
-	[DefaultPropertyAttribute ("QueryStringField")]
-	public class QueryStringParameter : Parameter {
+    [DefaultPropertyAttribute ("QueryStringField")]
+    public class QueryStringParameter : Parameter {
 
-		public QueryStringParameter () : base ()
-		{
-		}
+        public QueryStringParameter () : base ()
+        {
+        }
 
-		protected QueryStringParameter (QueryStringParameter original) : base (original)
-		{
-			this.QueryStringField = original.QueryStringField;
-			
-		}
-		
-		public QueryStringParameter (string name, string queryStringField) : base (name)
-		{
-			QueryStringField = queryStringField;
-		}
-		
-		public QueryStringParameter (string name, TypeCode type, string queryStringField) : base (name, type)
-		{
-			QueryStringField = queryStringField;
-		}
+        protected QueryStringParameter (QueryStringParameter original) : base (original)
+        {
+            this.QueryStringField = original.QueryStringField;
+            
+        }
+        
+        public QueryStringParameter (string name, string queryStringField) : base (name)
+        {
+            QueryStringField = queryStringField;
+        }
+        
+        public QueryStringParameter (string name, TypeCode type, string queryStringField) : base (name, type)
+        {
+            QueryStringField = queryStringField;
+        }
 
-		public QueryStringParameter (string name, DbType dbType, string queryStringField) : base (name, dbType)
-		{
-			QueryStringField = queryStringField;
-		}
-		
-		protected override Parameter Clone ()
-		{
-			return new QueryStringParameter (this);
-		}
-		protected internal
-		override object Evaluate (HttpContext context, Control control)
-		{
-			if (context == null || context.Request == null)
-				return null;
-			
-			return context.Request.QueryString [QueryStringField];
-		}
-		
-		[DefaultValueAttribute ("")]
-		public string QueryStringField {
-			get {
-				string s = ViewState ["QueryStringField"] as string;
-				if (s != null)
-					return s;
-				
-				return "";
-			}
-			set {
-				if (QueryStringField != value) {
-					ViewState ["QueryStringField"] = value;
-					OnParameterChanged ();
-				}
-			}
-		}
-	}
+        public QueryStringParameter (string name, DbType dbType, string queryStringField) : base (name, dbType)
+        {
+            QueryStringField = queryStringField;
+        }
+        
+        protected override Parameter Clone ()
+        {
+            return new QueryStringParameter (this);
+        }
+        protected internal
+        override object Evaluate (HttpContext context, Control control)
+        {
+            if (context == null || context.Request == null)
+                return null;
+            
+            return context.Request.QueryString [QueryStringField];
+        }
+        
+        [DefaultValueAttribute ("")]
+        public string QueryStringField {
+            get {
+                string s = ViewState ["QueryStringField"] as string;
+                if (s != null)
+                    return s;
+                
+                return "";
+            }
+            set {
+                if (QueryStringField != value) {
+                    ViewState ["QueryStringField"] = value;
+                    OnParameterChanged ();
+                }
+            }
+        }
+    }
 }
 
 

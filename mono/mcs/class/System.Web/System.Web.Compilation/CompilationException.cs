@@ -2,7 +2,7 @@
 // System.Web.Compilation.CompilationException
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002,2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -39,144 +39,144 @@ using System.Web;
 
 namespace System.Web.Compilation
 {
-	[Serializable]
-	internal class CompilationException : HtmlizedException
-	{
-		string filename;
-		CompilerErrorCollection errors;
-		CompilerResults results;
-		string fileText;
-		string errmsg;
-		int [] errorLines;
+    [Serializable]
+    internal class CompilationException : HtmlizedException
+    {
+        string filename;
+        CompilerErrorCollection errors;
+        CompilerResults results;
+        string fileText;
+        string errmsg;
+        int [] errorLines;
 
-		CompilationException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
+        CompilationException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
                 {
-			filename = info.GetString ("filename");
-			errors = info.GetValue ("errors", typeof (CompilerErrorCollection)) as CompilerErrorCollection;
-			results = info.GetValue ("results", typeof (CompilerResults)) as CompilerResults;
-			fileText = info.GetString ("fileText");
-			errmsg = info.GetString ("errmsg");
-			errorLines = info.GetValue ("errorLines", typeof (int[])) as int[];
+            filename = info.GetString ("filename");
+            errors = info.GetValue ("errors", typeof (CompilerErrorCollection)) as CompilerErrorCollection;
+            results = info.GetValue ("results", typeof (CompilerResults)) as CompilerResults;
+            fileText = info.GetString ("fileText");
+            errmsg = info.GetString ("errmsg");
+            errorLines = info.GetValue ("errorLines", typeof (int[])) as int[];
                 }
-		
-		public CompilationException (string filename, CompilerErrorCollection errors, string fileText)
-		{
-			this.filename = filename;
-			this.errors = errors;
-			this.fileText = fileText;
-		}
+        
+        public CompilationException (string filename, CompilerErrorCollection errors, string fileText)
+        {
+            this.filename = filename;
+            this.errors = errors;
+            this.fileText = fileText;
+        }
 
-		public CompilationException (string filename, CompilerResults results, string fileText)
-			: this (filename, results != null ? results.Errors : null, fileText)
-		{
-			this.results = results;
-		}
+        public CompilationException (string filename, CompilerResults results, string fileText)
+            : this (filename, results != null ? results.Errors : null, fileText)
+        {
+            this.results = results;
+        }
 
-		[SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
-		{
-			base.GetObjectData (info, ctx);
-			info.AddValue ("filename", filename);
-			info.AddValue ("errors", errors);
-			info.AddValue ("results", results);
-			info.AddValue ("fileText", fileText);
-			info.AddValue ("errmsg", errmsg);
-			info.AddValue ("errorLines", errorLines);
-		}
+        [SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
+        {
+            base.GetObjectData (info, ctx);
+            info.AddValue ("filename", filename);
+            info.AddValue ("errors", errors);
+            info.AddValue ("results", results);
+            info.AddValue ("fileText", fileText);
+            info.AddValue ("errmsg", errmsg);
+            info.AddValue ("errorLines", errorLines);
+        }
 
-		public override string Message {
-			get { return ErrorMessage; }
-		}
-		
-		public override string SourceFile {
-			get {
-				if (errors == null || errors.Count == 0)
-					return filename;
+        public override string Message {
+            get { return ErrorMessage; }
+        }
+        
+        public override string SourceFile {
+            get {
+                if (errors == null || errors.Count == 0)
+                    return filename;
 
-				return errors [0].FileName;
-			}
-		}
-		
-		public override string FileName {
-			get { return filename; }
-		}
-		
-		public override string Title {
-			get { return "Compilation Error"; }
-		}
+                return errors [0].FileName;
+            }
+        }
+        
+        public override string FileName {
+            get { return filename; }
+        }
+        
+        public override string Title {
+            get { return "Compilation Error"; }
+        }
 
-		public override string Description {
-			get {
-				return "Error compiling a resource required to service this request. " +
-				       "Review your source file and modify it to fix this error.";
-			}
-		}
+        public override string Description {
+            get {
+                return "Error compiling a resource required to service this request. " +
+                       "Review your source file and modify it to fix this error.";
+            }
+        }
 
-		public override string ErrorMessage {
-			get {
-				if (errmsg == null && errors != null) {
-					CompilerError firstError = null;
-					
-					foreach (CompilerError err in errors) {
-						if (err.IsWarning)
-							continue;
-						firstError = err;
-						break;
-					};
+        public override string ErrorMessage {
+            get {
+                if (errmsg == null && errors != null) {
+                    CompilerError firstError = null;
+                    
+                    foreach (CompilerError err in errors) {
+                        if (err.IsWarning)
+                            continue;
+                        firstError = err;
+                        break;
+                    };
 
-					if (firstError != null) {
-						errmsg = firstError.ToString ();
-						int idx = errmsg.IndexOf (" : error ");
-						if (idx > -1)
-							errmsg = errmsg.Substring (idx + 9);
-					} else
-						errmsg = String.Empty;
-				}
+                    if (firstError != null) {
+                        errmsg = firstError.ToString ();
+                        int idx = errmsg.IndexOf (" : error ");
+                        if (idx > -1)
+                            errmsg = errmsg.Substring (idx + 9);
+                    } else
+                        errmsg = String.Empty;
+                }
 
-				return errmsg;
-			}
-		}
+                return errmsg;
+            }
+        }
 
-		public override string FileText {
-			get { return fileText; }
-		}
+        public override string FileText {
+            get { return fileText; }
+        }
 
-		public override int [] ErrorLines {
-			get {
-				if (errorLines == null && errors != null) {
-					ArrayList list = new ArrayList ();
-					foreach (CompilerError err in errors) {
-						if (err.IsWarning)
-							continue;
-						
-						if (err.Line != 0 && !list.Contains (err.Line))
-							list.Add (err.Line);
-					}
-					errorLines = (int []) list.ToArray (typeof (int));
-					Array.Sort (errorLines);
-				}
+        public override int [] ErrorLines {
+            get {
+                if (errorLines == null && errors != null) {
+                    ArrayList list = new ArrayList ();
+                    foreach (CompilerError err in errors) {
+                        if (err.IsWarning)
+                            continue;
+                        
+                        if (err.Line != 0 && !list.Contains (err.Line))
+                            list.Add (err.Line);
+                    }
+                    errorLines = (int []) list.ToArray (typeof (int));
+                    Array.Sort (errorLines);
+                }
 
-				return errorLines;
-			}
-		}
+                return errorLines;
+            }
+        }
 
-		public override bool ErrorLinesPaired {
-			get { return false; }
-		}
+        public override bool ErrorLinesPaired {
+            get { return false; }
+        }
 
-		public StringCollection CompilerOutput {
-			get {
-				if (results == null)
-					return null;
+        public StringCollection CompilerOutput {
+            get {
+                if (results == null)
+                    return null;
 
-				return results.Output;
-			}
-		}
+                return results.Output;
+            }
+        }
 
-		public CompilerResults Results {
-			get { return results; }
-		}
-	}
+        public CompilerResults Results {
+            get { return results; }
+        }
+    }
 }
 

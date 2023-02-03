@@ -2,7 +2,7 @@
 // System.IO.IsolatedStorage.IsolatedStorageSecurityOptions
 //
 // Author: 
-// 	Carlos Alberto Cortez <calberto.cortez@gmail.com>
+//     Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc (http://www.novell.com)
 //
@@ -28,10 +28,10 @@
 
 namespace System.IO.IsolatedStorage
 {
-	public enum IsolatedStorageSecurityOptions
-	{
-		IncreaseQuotaForApplication = 4
-	}
+    public enum IsolatedStorageSecurityOptions
+    {
+        IncreaseQuotaForApplication = 4
+    }
 }
 
 

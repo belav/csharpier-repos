@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationElementProperty.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,20 +28,20 @@
 
 namespace System.Configuration 
 {
-	public sealed class ConfigurationElementProperty
-	{
-		public ConfigurationElementProperty (ConfigurationValidatorBase validator)
-		{
-			this.validator = validator;
-		}
+    public sealed class ConfigurationElementProperty
+    {
+        public ConfigurationElementProperty (ConfigurationValidatorBase validator)
+        {
+            this.validator = validator;
+        }
 
-		public ConfigurationValidatorBase Validator {
-			get {
-				return validator;
-			}
-		}
+        public ConfigurationValidatorBase Validator {
+            get {
+                return validator;
+            }
+        }
 
-		ConfigurationValidatorBase validator;
-	}
+        ConfigurationValidatorBase validator;
+    }
 }
 

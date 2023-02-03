@@ -34,11 +34,11 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Contexts {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IDynamicMessageSink {
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IDynamicMessageSink {
 
-		void ProcessMessageFinish (IMessage replyMsg, bool bCliSide, bool bAsync);
+        void ProcessMessageFinish (IMessage replyMsg, bool bCliSide, bool bAsync);
 
-		void ProcessMessageStart  (IMessage reqMsg, bool bCliSide, bool bAsync);
-	}
+        void ProcessMessageStart  (IMessage reqMsg, bool bCliSide, bool bAsync);
+    }
 }

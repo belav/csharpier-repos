@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,50 +14,50 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	public class DynamicDictionaryTests
-	{
-		[Test]
-		public void Can_add_to_dictionary_via_dynamic_object()
-		{
-			var dictionary = new Dictionary<string, object>();
-			dynamic adapter = new DynamicDictionary(dictionary);
-			adapter.Name = "stefan mucha";
+    public class DynamicDictionaryTests
+    {
+        [Test]
+        public void Can_add_to_dictionary_via_dynamic_object()
+        {
+            var dictionary = new Dictionary<string, object>();
+            dynamic adapter = new DynamicDictionary(dictionary);
+            adapter.Name = "stefan mucha";
 
-			Assert.AreEqual("stefan mucha", dictionary["Name"]);
-		}
+            Assert.AreEqual("stefan mucha", dictionary["Name"]);
+        }
 
-		[Test]
-		public void Can_override_value_from_dictionary_via_dynamic_object()
-		{
-			var dictionary = new Dictionary<string, object>();
-			dynamic adapter = new DynamicDictionary(dictionary);
-			dictionary["Name"] = "adam mickiewicz";
-			adapter.Name = "stefan mucha";
+        [Test]
+        public void Can_override_value_from_dictionary_via_dynamic_object()
+        {
+            var dictionary = new Dictionary<string, object>();
+            dynamic adapter = new DynamicDictionary(dictionary);
+            dictionary["Name"] = "adam mickiewicz";
+            adapter.Name = "stefan mucha";
 
-			Assert.AreEqual("stefan mucha", adapter.Name);
-		}
+            Assert.AreEqual("stefan mucha", adapter.Name);
+        }
 
-		[Test]
-		public void Can_read_from_dictionary_via_dynamic_object()
-		{
-			var dictionary = new Dictionary<string, object>();
-			dynamic adapter = new DynamicDictionary(dictionary);
-			dictionary["Name"] = "stefan mucha";
+        [Test]
+        public void Can_read_from_dictionary_via_dynamic_object()
+        {
+            var dictionary = new Dictionary<string, object>();
+            dynamic adapter = new DynamicDictionary(dictionary);
+            dictionary["Name"] = "stefan mucha";
 
-			Assert.AreEqual("stefan mucha", adapter.Name);
-		}
+            Assert.AreEqual("stefan mucha", adapter.Name);
+        }
 
-		[Test]
-		public void Can_read_non_existing_value_from_dictionary_via_dynamic_object()
-		{
-			var dictionary = new Dictionary<string, object>();
-			dynamic adapter = new DynamicDictionary(dictionary);
+        [Test]
+        public void Can_read_non_existing_value_from_dictionary_via_dynamic_object()
+        {
+            var dictionary = new Dictionary<string, object>();
+            dynamic adapter = new DynamicDictionary(dictionary);
 
-			Assert.IsNull(adapter.Name);
-		}
-	}
+            Assert.IsNull(adapter.Name);
+        }
+    }
 }

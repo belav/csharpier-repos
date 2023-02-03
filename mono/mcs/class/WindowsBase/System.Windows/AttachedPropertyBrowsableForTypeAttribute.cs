@@ -20,40 +20,40 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows {
 
-	[AttributeUsage (AttributeTargets.Method, AllowMultiple = true)]
-	public sealed class AttachedPropertyBrowsableForTypeAttribute : AttachedPropertyBrowsableAttribute
-	{
-		Type targetType;
+    [AttributeUsage (AttributeTargets.Method, AllowMultiple = true)]
+    public sealed class AttachedPropertyBrowsableForTypeAttribute : AttachedPropertyBrowsableAttribute
+    {
+        Type targetType;
 
-		public AttachedPropertyBrowsableForTypeAttribute (Type targetType)
-		{
-			this.targetType = targetType;
-		}
+        public AttachedPropertyBrowsableForTypeAttribute (Type targetType)
+        {
+            this.targetType = targetType;
+        }
 
-		public Type TargetType {
-			get { return targetType; }
-		}
+        public Type TargetType {
+            get { return targetType; }
+        }
 
-		public override object TypeId {
-			get { throw new NotImplementedException (); }
-		}
+        public override object TypeId {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override bool Equals (object obj)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Equals (object obj)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override int GetHashCode ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override int GetHashCode ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

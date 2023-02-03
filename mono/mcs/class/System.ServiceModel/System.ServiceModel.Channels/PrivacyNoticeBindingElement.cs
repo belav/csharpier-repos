@@ -30,38 +30,38 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class PrivacyNoticeBindingElement : BindingElement, IPolicyExportExtension
-	{
-		public PrivacyNoticeBindingElement ()
-		{
-			// FIXME: apply configuration
-		}
+    public sealed class PrivacyNoticeBindingElement : BindingElement, IPolicyExportExtension
+    {
+        public PrivacyNoticeBindingElement ()
+        {
+            // FIXME: apply configuration
+        }
 
-		public PrivacyNoticeBindingElement (PrivacyNoticeBindingElement elementToBeCloned)
-		{
-			var e = elementToBeCloned;
-			Url = e.Url;
-			Version = e.Version;
-		}
+        public PrivacyNoticeBindingElement (PrivacyNoticeBindingElement elementToBeCloned)
+        {
+            var e = elementToBeCloned;
+            Url = e.Url;
+            Version = e.Version;
+        }
 
-		[MonoTODO]
-		public Uri Url { get; set; }
-		[MonoTODO]
-		public int Version { get; set; }
+        [MonoTODO]
+        public Uri Url { get; set; }
+        [MonoTODO]
+        public int Version { get; set; }
 
-		public override BindingElement Clone ()
-		{
-			return new PrivacyNoticeBindingElement (this);
-		}
+        public override BindingElement Clone ()
+        {
+            return new PrivacyNoticeBindingElement (this);
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			return context.GetInnerProperty<T> ();
-		}
+        public override T GetProperty<T> (BindingContext context)
+        {
+            return context.GetInnerProperty<T> ();
+        }
 
-		void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

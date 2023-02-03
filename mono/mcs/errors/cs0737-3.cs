@@ -5,7 +5,7 @@ using System;
 
 interface I
 {
-	int Foo { get; set; }
+    int Foo { get; set; }
 }
 
 public class MySubClass : MyTest, I
@@ -14,9 +14,9 @@ public class MySubClass : MyTest, I
 
 public class MyTest
 {
-	public int Foo
-	{
-		get { return 1; }
-		protected set { }
-	}
+    public int Foo
+    {
+        get { return 1; }
+        protected set { }
+    }
 }

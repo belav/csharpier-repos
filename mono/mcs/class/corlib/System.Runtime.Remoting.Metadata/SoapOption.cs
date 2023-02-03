@@ -36,38 +36,38 @@
 namespace System.Runtime.Remoting.Metadata {
 
 
-	/// <summary>
-	/// </summary>
-	[Flags]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	[System.Serializable]
+    /// <summary>
+    /// </summary>
+    [Flags]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Serializable]
 
-	public enum SoapOption {
+    public enum SoapOption {
 
-		/// <summary>
-		/// </summary>
-		None = 0,
+        /// <summary>
+        /// </summary>
+        None = 0,
 
-		/// <summary>
-		/// </summary>
-		AlwaysIncludeTypes = 1,
+        /// <summary>
+        /// </summary>
+        AlwaysIncludeTypes = 1,
 
-		/// <summary>
-		/// </summary>
-		XsdString = 2,
+        /// <summary>
+        /// </summary>
+        XsdString = 2,
 
-		/// <summary>
-		/// </summary>
-		EmbedAll = 4,
+        /// <summary>
+        /// </summary>
+        EmbedAll = 4,
 
-		/// <summary>
-		/// </summary>
-		Option1 = 8,
+        /// <summary>
+        /// </summary>
+        Option1 = 8,
 
-		/// <summary>
-		/// </summary>
-		Option2 = 16,
+        /// <summary>
+        /// </summary>
+        Option2 = 16,
 
-	} // SoapOption
+    } // SoapOption
 
 } // System.Runtime.Remoting.Metadata

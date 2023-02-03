@@ -2,7 +2,7 @@
 // I18N.Rare.Test.cs
 //
 // Author:
-//	Alexander Köplinger (alexander.koeplinger@xamarin.com)
+//    Alexander Köplinger (alexander.koeplinger@xamarin.com)
 //
 // Copyright (C) 2018 Microsoft
 //
@@ -35,42 +35,42 @@ using MonoTests.Helpers;
 
 namespace MonoTests.I18N.Rare
 {
-	[TestFixture]
-	public class TestRare
-	{
-		private global::I18N.Common.Manager Manager = global::I18N.Common.Manager.PrimaryManager;
+    [TestFixture]
+    public class TestRare
+    {
+        private global::I18N.Common.Manager Manager = global::I18N.Common.Manager.PrimaryManager;
 
-		// ASCII compatible Rare codepages
-		int[] cps = { 708, 852, 855, 857, 858, 862, 864, 866, 869 };
+        // ASCII compatible Rare codepages
+        int[] cps = { 708, 852, 855, 857, 858, 862, 864, 866, 869 };
 
-		void AssertDecode (string utf8file, string decfile, int codepage)
-		{
-			string decoded = null;
-			byte [] encoded = null;
-			using (StreamReader sr = new StreamReader (utf8file,
-				Encoding.UTF8)) {
-				decoded = sr.ReadToEnd ();
-			}
-			using (FileStream fs = File.OpenRead (decfile)) {
-				encoded = new byte [fs.Length];
-				fs.Read (encoded, 0, (int) fs.Length);
-			}
-			Encoding enc = Manager.GetEncoding (codepage);
-			char [] actual;
+        void AssertDecode (string utf8file, string decfile, int codepage)
+        {
+            string decoded = null;
+            byte [] encoded = null;
+            using (StreamReader sr = new StreamReader (utf8file,
+                Encoding.UTF8)) {
+                decoded = sr.ReadToEnd ();
+            }
+            using (FileStream fs = File.OpenRead (decfile)) {
+                encoded = new byte [fs.Length];
+                fs.Read (encoded, 0, (int) fs.Length);
+            }
+            Encoding enc = Manager.GetEncoding (codepage);
+            char [] actual;
 
-			Assert.AreEqual (decoded.Length,
-				enc.GetCharCount (encoded, 0, encoded.Length),
-				"GetCharCount(byte[], 0, len)");
-			actual = enc.GetChars (encoded, 0, encoded.Length);
-			Assert.AreEqual (decoded.ToCharArray (), actual,
-				"GetChars(byte[], 0, len)");
-		}
+            Assert.AreEqual (decoded.Length,
+                enc.GetCharCount (encoded, 0, encoded.Length),
+                "GetCharCount(byte[], 0, len)");
+            actual = enc.GetChars (encoded, 0, encoded.Length);
+            Assert.AreEqual (decoded.ToCharArray (), actual,
+                "GetChars(byte[], 0, len)");
+        }
 
-		[Test]
-		[TestCaseSource (nameof (cps))]
-		public void Ascii_Test_All(int cp)
-		{
-			AssertDecode(TestResourceHelper.GetFullPathOfResource ("Test/texts/ascii-test.txt"), TestResourceHelper.GetFullPathOfResource ("Test/texts/ascii-test.txt"), cp);
-		}
-	}
+        [Test]
+        [TestCaseSource (nameof (cps))]
+        public void Ascii_Test_All(int cp)
+        {
+            AssertDecode(TestResourceHelper.GetFullPathOfResource ("Test/texts/ascii-test.txt"), TestResourceHelper.GetFullPathOfResource ("Test/texts/ascii-test.txt"), cp);
+        }
+    }
 }

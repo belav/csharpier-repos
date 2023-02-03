@@ -31,8 +31,8 @@ using System;
 
 namespace System.Data.Linq.SqlClient
 {
-	[MonoTODO]
-	public sealed class Sql2000Provider : SqlProvider
-	{
-	}
+    [MonoTODO]
+    public sealed class Sql2000Provider : SqlProvider
+    {
+    }
 }

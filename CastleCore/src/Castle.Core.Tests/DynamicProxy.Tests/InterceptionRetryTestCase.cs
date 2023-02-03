@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,35 +14,35 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using Castle.DynamicProxy.Tests.Interceptors;
-	using Castle.DynamicProxy.Tests.Interfaces;
+    using Castle.DynamicProxy.Tests.Interceptors;
+    using Castle.DynamicProxy.Tests.Interfaces;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class InterceptionRetryTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void Interceptor_can_proceed_multiple_times()
-		{
-			var interceptor = new ProceedNTimesInterceptor(3);
-			var target = new Simple();
-			var proxy = generator.CreateInterfaceProxyWithTarget<ISimple>(target, interceptor);
+    [TestFixture]
+    public class InterceptionRetryTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void Interceptor_can_proceed_multiple_times()
+        {
+            var interceptor = new ProceedNTimesInterceptor(3);
+            var target = new Simple();
+            var proxy = generator.CreateInterfaceProxyWithTarget<ISimple>(target, interceptor);
 
-			proxy.Method();
+            proxy.Method();
 
-			Assert.AreEqual(3, target.Count);
-		}
+            Assert.AreEqual(3, target.Count);
+        }
 
-		[Test]
-		public void Interceptor_can_proceed_multiple_times_after_exception_from_within()
-		{
-			var interceptor = new ProceedNTimesInterceptor(5);
-			var throwing = new ThrowingInterceptor();
-			var target = new Simple();
-			var proxy = generator.CreateInterfaceProxyWithTarget<ISimple>(target, interceptor, throwing);
+        [Test]
+        public void Interceptor_can_proceed_multiple_times_after_exception_from_within()
+        {
+            var interceptor = new ProceedNTimesInterceptor(5);
+            var throwing = new ThrowingInterceptor();
+            var target = new Simple();
+            var proxy = generator.CreateInterfaceProxyWithTarget<ISimple>(target, interceptor, throwing);
 
-			proxy.Method();
-		}
-	}
+            proxy.Method();
+        }
+    }
 }

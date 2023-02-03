@@ -2,18 +2,18 @@
 // Line: 11
 
 interface r {
-	A.B aaa ();
+    A.B aaa ();
 }
 
 class A {
-	enum B {
-		D
-	}
+    enum B {
+        D
+    }
 }
 
 class B {
-	static void Main ()
-	{
-		A.B x = A.B.D;
-	}
+    static void Main ()
+    {
+        A.B x = A.B.D;
+    }
 }

@@ -1,6 +1,6 @@
-ï»¿//-------------------------------------------------------------
-// <copyright company=â€™Microsoft Corporationâ€™>
-//   Copyright Â© Microsoft Corporation. All Rights Reserved.
+//-------------------------------------------------------------
+// <copyright company=’Microsoft Corporation’>
+//   Copyright © Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant, victark
@@ -41,14 +41,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>
-        /// 	<c>true</c> if is the name us unique; otherwise, <c>false</c>.
+        ///     <c>true</c> if is the name us unique; otherwise, <c>false</c>.
         /// </returns>
         bool IsUniqueName(string name);
         /// <summary>
         /// Gets or sets a value indicating whether this instance is in edit mode by collecrtion editor.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance the colection is editing; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance the colection is editing; otherwise, <c>false</c>.
         /// </value>
         bool IsColectionEditing { get; set; }
         /// <summary>

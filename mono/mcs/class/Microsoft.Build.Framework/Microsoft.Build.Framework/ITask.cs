@@ -31,19 +31,19 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-	public interface ITask
-	{
-		bool Execute ();
+    public interface ITask
+    {
+        bool Execute ();
 
-		IBuildEngine BuildEngine {
-			get;
-			set;
-		}
+        IBuildEngine BuildEngine {
+            get;
+            set;
+        }
 
-		ITaskHost HostObject {
-			get;
-			set;
-		}
-	}
+        ITaskHost HostObject {
+            get;
+            set;
+        }
+    }
 }
 

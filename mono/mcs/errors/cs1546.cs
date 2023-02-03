@@ -4,8 +4,8 @@
 
 using Test;
 
-class C {		
-	public C (ITopic it) {
-		string i = it.Title (2, 3);
-	}
+class C {        
+    public C (ITopic it) {
+        string i = it.Title (2, 3);
+    }
 }

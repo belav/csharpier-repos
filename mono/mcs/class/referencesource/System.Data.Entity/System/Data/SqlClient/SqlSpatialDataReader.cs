@@ -43,7 +43,7 @@ namespace System.Data.SqlClient
         public override DbGeometry GetGeometry(int ordinal)
         {
             EnsureGeometryColumn(ordinal);
- 	        SqlBytes geomBytes = this.reader.GetSqlBytes(ordinal);
+             SqlBytes geomBytes = this.reader.GetSqlBytes(ordinal);
             object providerValue = sqlGeometryFromBinaryReader.Value(new BinaryReader(geomBytes.Stream));
             return SqlSpatialServices.Instance.GeometryFromProviderValue(providerValue);
         }

@@ -28,48 +28,48 @@
 
 namespace Mono.Cecil.Cil {
 
-	internal abstract class VariableReference : ICodeVisitable {
+    internal abstract class VariableReference : ICodeVisitable {
 
-		string m_name;
-		int m_index;
-		TypeReference m_variableType;
+        string m_name;
+        int m_index;
+        TypeReference m_variableType;
 
-		public string Name {
-			get { return m_name; }
-			set { m_name = value; }
-		}
+        public string Name {
+            get { return m_name; }
+            set { m_name = value; }
+        }
 
-		public int Index {
-			get { return m_index; }
-			set { m_index = value; }
-		}
+        public int Index {
+            get { return m_index; }
+            set { m_index = value; }
+        }
 
-		public TypeReference VariableType {
-			get { return m_variableType; }
-			set { m_variableType = value; }
-		}
+        public TypeReference VariableType {
+            get { return m_variableType; }
+            set { m_variableType = value; }
+        }
 
-		public VariableReference (TypeReference variableType)
-		{
-			m_variableType = variableType;
-		}
+        public VariableReference (TypeReference variableType)
+        {
+            m_variableType = variableType;
+        }
 
-		public VariableReference (string name, int index, TypeReference variableType) : this (variableType)
-		{
-			m_name = name;
-			m_index = index;
-		}
+        public VariableReference (string name, int index, TypeReference variableType) : this (variableType)
+        {
+            m_name = name;
+            m_index = index;
+        }
 
-		public abstract VariableDefinition Resolve ();
+        public abstract VariableDefinition Resolve ();
 
-		public override string ToString ()
-		{
-			if (m_name != null && m_name.Length > 0)
-				return m_name;
+        public override string ToString ()
+        {
+            if (m_name != null && m_name.Length > 0)
+                return m_name;
 
-			return string.Concat ("V_", m_index);
-		}
+            return string.Concat ("V_", m_index);
+        }
 
-		public abstract void Accept (ICodeVisitor visitor);
-	}
+        public abstract void Accept (ICodeVisitor visitor);
+    }
 }

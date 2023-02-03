@@ -1,9 +1,9 @@
 //
 // CryptographicAttributeObjectCollectionTest.cs - NUnit tests for 
-//	System.Security.Cryptography.CryptographicAttributeObjectCollection
+//    System.Security.Cryptography.CryptographicAttributeObjectCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,190 +36,190 @@ using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography {
 
-	[TestFixture]
-	public class CryptographicAttributeObjectCollectionTest {
+    [TestFixture]
+    public class CryptographicAttributeObjectCollectionTest {
 
-		static string defaultOid = "1.2.840.113549.1.7.1";
+        static string defaultOid = "1.2.840.113549.1.7.1";
 
-		private void CommonStuff (CryptographicAttributeObjectCollection coll)
-		{
-			Assert.IsFalse (coll.IsSynchronized, "IsSynchronized");
-			Assert.AreSame (coll, coll.SyncRoot, "SyncRoot");
-			Assert.IsNotNull (coll.GetEnumerator (), "GetEnumerator");
+        private void CommonStuff (CryptographicAttributeObjectCollection coll)
+        {
+            Assert.IsFalse (coll.IsSynchronized, "IsSynchronized");
+            Assert.AreSame (coll, coll.SyncRoot, "SyncRoot");
+            Assert.IsNotNull (coll.GetEnumerator (), "GetEnumerator");
 
-			int i = coll.Count;
-			Oid o1 = new Oid ("1.2.840.113549.1.7.3");
-			AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x05, 0x00 });
-			Assert.AreEqual (i, coll.Add (aed), "Add(AsnEncodedData)");
-			Assert.IsTrue ((coll[i++] is CryptographicAttributeObject), "converted");
+            int i = coll.Count;
+            Oid o1 = new Oid ("1.2.840.113549.1.7.3");
+            AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x05, 0x00 });
+            Assert.AreEqual (i, coll.Add (aed), "Add(AsnEncodedData)");
+            Assert.IsTrue ((coll[i++] is CryptographicAttributeObject), "converted");
 
-			Oid o2 = new Oid ("1.2.840.113549.1.7.2");
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o2);
-			Assert.AreEqual (i, coll.Add (cao), "Add(CryptographicAttributeObject)");
+            Oid o2 = new Oid ("1.2.840.113549.1.7.2");
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o2);
+            Assert.AreEqual (i, coll.Add (cao), "Add(CryptographicAttributeObject)");
 
-			CryptographicAttributeObject[] array = new CryptographicAttributeObject [coll.Count];
-			coll.CopyTo (array, 0);
+            CryptographicAttributeObject[] array = new CryptographicAttributeObject [coll.Count];
+            coll.CopyTo (array, 0);
 
-			Array a = (Array) new object [coll.Count];
-			ICollection c = (ICollection) coll;
-			c.CopyTo (a, 0);
+            Array a = (Array) new object [coll.Count];
+            ICollection c = (ICollection) coll;
+            c.CopyTo (a, 0);
 
-			IEnumerable e = (IEnumerable) coll;
-			Assert.IsNotNull (e.GetEnumerator (), "GetEnumerator");
+            IEnumerable e = (IEnumerable) coll;
+            Assert.IsNotNull (e.GetEnumerator (), "GetEnumerator");
 
-			coll.Remove (cao);
-			Assert.AreEqual (i, coll.Count, "Remove(CryptographicAttributeObject)");
-		}
+            coll.Remove (cao);
+            Assert.AreEqual (i, coll.Count, "Remove(CryptographicAttributeObject)");
+        }
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection ();
-			Assert.AreEqual (0, coll.Count, "Count");
-			CommonStuff (coll);
-		}
+        [Test]
+        public void Constructor_Empty ()
+        {
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection ();
+            Assert.AreEqual (0, coll.Count, "Count");
+            CommonStuff (coll);
+        }
 
-		[Test]
-		public void Constructor_CryptographicAttributeObject () 
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
-			Assert.AreEqual (1, coll.Count, "Count");
-			Assert.AreSame (cao, coll[0], "this[int]");
-			CommonStuff (coll);
-		}
+        [Test]
+        public void Constructor_CryptographicAttributeObject () 
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
+            Assert.AreEqual (1, coll.Count, "Count");
+            Assert.AreSame (cao, coll[0], "this[int]");
+            CommonStuff (coll);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Add_AsnEncodedData_Null ()
-		{
-			AsnEncodedData aed = null;
-			new CryptographicAttributeObjectCollection ().Add (aed);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Add_AsnEncodedData_Null ()
+        {
+            AsnEncodedData aed = null;
+            new CryptographicAttributeObjectCollection ().Add (aed);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Add_CryptographicAttributeObject_Null ()
-		{
-			CryptographicAttributeObject cao = null;
-			new CryptographicAttributeObjectCollection ().Add (cao);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Add_CryptographicAttributeObject_Null ()
+        {
+            CryptographicAttributeObject cao = null;
+            new CryptographicAttributeObjectCollection ().Add (cao);
+        }
 
-		[Test]
-		public void Add_MultipleSameOid ()
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
+        [Test]
+        public void Add_MultipleSameOid ()
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
 
-			int i = 0;
-			while (i < 10) {
-				Assert.AreEqual (1, coll.Count, String.Format ("Count-{0}", i));
-				Assert.AreEqual (i * 2, coll[0].Values.Count, String.Format ("Values.Count-{0}", i++));
+            int i = 0;
+            while (i < 10) {
+                Assert.AreEqual (1, coll.Count, String.Format ("Count-{0}", i));
+                Assert.AreEqual (i * 2, coll[0].Values.Count, String.Format ("Values.Count-{0}", i++));
 
-				Oid o1 = new Oid (defaultOid);
-				AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte)i });
-				coll.Add (aed);
+                Oid o1 = new Oid (defaultOid);
+                AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte)i });
+                coll.Add (aed);
 
-				aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) i });
-				coll.Add (aed);
+                aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) i });
+                coll.Add (aed);
 
-				Oid o2 = new Oid (defaultOid);
-				coll.Add (new CryptographicAttributeObject (o2));
-			}
-		}
+                Oid o2 = new Oid (defaultOid);
+                coll.Add (new CryptographicAttributeObject (o2));
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CopyTo_Null ()
-		{
-			new CryptographicAttributeObjectCollection ().CopyTo (null, 0);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void CopyTo_Null ()
+        {
+            new CryptographicAttributeObjectCollection ().CopyTo (null, 0);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ICollection_CopyTo_Null ()
-		{
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection ();
-			ICollection c = (coll as ICollection);
-			c.CopyTo (null, 0);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ICollection_CopyTo_Null ()
+        {
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection ();
+            ICollection c = (coll as ICollection);
+            c.CopyTo (null, 0);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Remove_Null ()
-		{
-			new CryptographicAttributeObjectCollection ().Remove (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Remove_Null ()
+        {
+            new CryptographicAttributeObjectCollection ().Remove (null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Remove_Null_WithNullItem ()
-		{
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (null);
-			Assert.AreEqual (1, coll.Count, "Count");
-			Assert.IsNull (coll[0], "this[int]");
-			coll.Remove (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Remove_Null_WithNullItem ()
+        {
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (null);
+            Assert.AreEqual (1, coll.Count, "Count");
+            Assert.IsNull (coll[0], "this[int]");
+            coll.Remove (null);
+        }
 
-		[Test]
-		public void Remove_MultipleSameOid_First ()
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
+        [Test]
+        public void Remove_MultipleSameOid_First ()
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
 
-			Oid o1 = new Oid (defaultOid);
-			AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
-			coll.Add (aed);
+            Oid o1 = new Oid (defaultOid);
+            AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
+            coll.Add (aed);
 
-			aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
-			coll.Add (aed);
+            aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
+            coll.Add (aed);
 
-			Oid o2 = new Oid (defaultOid);
-			coll.Add (new CryptographicAttributeObject (o2));
+            Oid o2 = new Oid (defaultOid);
+            coll.Add (new CryptographicAttributeObject (o2));
 
-			Assert.AreEqual (1, coll.Count, "before Remove");
-			coll.Remove (cao);
-			Assert.AreEqual (0, coll.Count, "after Remove");
-		}
+            Assert.AreEqual (1, coll.Count, "before Remove");
+            coll.Remove (cao);
+            Assert.AreEqual (0, coll.Count, "after Remove");
+        }
 
-		[Test]
-		public void Remove_MultipleSameOid_Last ()
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
+        [Test]
+        public void Remove_MultipleSameOid_Last ()
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
 
-			Oid o1 = new Oid (defaultOid);
-			AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
-			coll.Add (aed);
+            Oid o1 = new Oid (defaultOid);
+            AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
+            coll.Add (aed);
 
-			aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
-			coll.Add (aed);
+            aed = new AsnEncodedData (o1, new byte[] { 0x04, (byte) 0 });
+            coll.Add (aed);
 
-			Oid o2 = new Oid (defaultOid);
-			CryptographicAttributeObject last = new CryptographicAttributeObject (o2);
-			coll.Add (last);
+            Oid o2 = new Oid (defaultOid);
+            CryptographicAttributeObject last = new CryptographicAttributeObject (o2);
+            coll.Add (last);
 
-			Assert.AreEqual (1, coll.Count, "before Remove");
-			coll.Remove (last);
-			Assert.AreEqual (1, coll.Count, "after Remove");
-		}
+            Assert.AreEqual (1, coll.Count, "before Remove");
+            coll.Remove (last);
+            Assert.AreEqual (1, coll.Count, "after Remove");
+        }
 
-		[Test]
-		public void Remove_WithDifferentInstance ()
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
-			CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
+        [Test]
+        public void Remove_WithDifferentInstance ()
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
+            CryptographicAttributeObjectCollection coll = new CryptographicAttributeObjectCollection (cao);
 
-			Assert.AreEqual (1, coll.Count, "before Remove");
-			cao = new CryptographicAttributeObject (o);
-			coll.Remove (cao);
-			Assert.AreEqual (1, coll.Count, "after Remove");
-		}
-	}
+            Assert.AreEqual (1, coll.Count, "before Remove");
+            cao = new CryptographicAttributeObject (o);
+            coll.Remove (cao);
+            Assert.AreEqual (1, coll.Count, "after Remove");
+        }
+    }
 }
 

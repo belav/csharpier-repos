@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using AutoMapper.Internal;
 namespace AutoMapper.QueryableExtensions.Impl
 {

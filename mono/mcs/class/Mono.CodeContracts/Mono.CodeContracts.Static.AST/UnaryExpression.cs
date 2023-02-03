@@ -2,7 +2,7 @@
 // UnaryExpression.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,29 +27,29 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class UnaryExpression : Expression {
-		public UnaryExpression (NodeType nodeType)
-			: base (nodeType)
-		{
-		}
+    class UnaryExpression : Expression {
+        public UnaryExpression (NodeType nodeType)
+            : base (nodeType)
+        {
+        }
 
-		public UnaryExpression (NodeType nodeType, Expression operand)
-			: base (nodeType)
-		{
-			Operand = operand;
-		}
+        public UnaryExpression (NodeType nodeType, Expression operand)
+            : base (nodeType)
+        {
+            Operand = operand;
+        }
 
-		public UnaryExpression (NodeType nodeType, Expression operand, TypeNode type)
-			: base (nodeType, type)
-		{
-			Operand = operand;
-		}
+        public UnaryExpression (NodeType nodeType, Expression operand, TypeNode type)
+            : base (nodeType, type)
+        {
+            Operand = operand;
+        }
 
-		public Expression Operand { get; set; }
+        public Expression Operand { get; set; }
 
-		public override string ToString ()
-		{
-			return string.Format ("Unary({0}: {1})", NodeType, Operand);
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Format ("Unary({0}: {1})", NodeType, Operand);
+        }
+    }
 }

@@ -31,42 +31,42 @@
 using System;
 
 namespace System.Web.SessionState {
-	[Serializable]
-	internal class StateServerItem {
-		public byte [] CollectionData;
-		public byte [] StaticObjectsData;
-		DateTime last_access;
-		public int Timeout;
-		public Int32 LockId;
-		public bool Locked;
-		public DateTime LockedTime;
-		public SessionStateActions Action;
+    [Serializable]
+    internal class StateServerItem {
+        public byte [] CollectionData;
+        public byte [] StaticObjectsData;
+        DateTime last_access;
+        public int Timeout;
+        public Int32 LockId;
+        public bool Locked;
+        public DateTime LockedTime;
+        public SessionStateActions Action;
 
-		public StateServerItem (int timeout) : this (null, null, timeout)
-		{
-		}
-		
-		public StateServerItem (byte [] collection_data, byte [] sobjs_data, int timeout)
-		{
-			this.CollectionData = collection_data;
-			this.StaticObjectsData = sobjs_data;
-			this.Timeout = timeout;
-			this.last_access = DateTime.UtcNow;
-			this.Locked = false;
-			this.LockId = Int32.MinValue;
-			this.LockedTime = DateTime.MinValue;
-			this.Action = SessionStateActions.None;
-		}
-		
-		public void Touch ()
-		{
-			last_access = DateTime.UtcNow;
-		}
+        public StateServerItem (int timeout) : this (null, null, timeout)
+        {
+        }
+        
+        public StateServerItem (byte [] collection_data, byte [] sobjs_data, int timeout)
+        {
+            this.CollectionData = collection_data;
+            this.StaticObjectsData = sobjs_data;
+            this.Timeout = timeout;
+            this.last_access = DateTime.UtcNow;
+            this.Locked = false;
+            this.LockId = Int32.MinValue;
+            this.LockedTime = DateTime.MinValue;
+            this.Action = SessionStateActions.None;
+        }
+        
+        public void Touch ()
+        {
+            last_access = DateTime.UtcNow;
+        }
 
-		public bool IsAbandoned () {
-			if (last_access.AddMinutes (Timeout) < DateTime.UtcNow)
-				return true;
-			return false;
-		}
-	}
+        public bool IsAbandoned () {
+            if (last_access.AddMinutes (Timeout) < DateTime.UtcNow)
+                return true;
+            return false;
+        }
+    }
 }

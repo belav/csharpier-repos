@@ -246,7 +246,7 @@ namespace System.Xml.Xsl {
                     fs.Close();
                 }
             }
-	    }
+        }
 
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]

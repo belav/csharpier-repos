@@ -2,7 +2,7 @@
 // System.Web.UI.Design.SkinIDTypeConverter
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -34,49 +34,49 @@ using System.Globalization;
 
 namespace System.Web.UI.Design
 {
-	public class SkinIDTypeConverter : TypeConverter
-	{
-		[MonoTODO]
-		public SkinIDTypeConverter ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class SkinIDTypeConverter : TypeConverter
+    {
+        [MonoTODO]
+        public SkinIDTypeConverter ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool CanConvertTo (ITypeDescriptorContext context, Type destType)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanConvertTo (ITypeDescriptorContext context, Type destType)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

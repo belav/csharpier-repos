@@ -3,5 +3,5 @@
 
 class A<T> where T : X
 {
-	public class X {}
+    public class X {}
 }

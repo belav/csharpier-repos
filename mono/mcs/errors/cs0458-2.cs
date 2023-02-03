@@ -4,9 +4,9 @@
 
 public class MainClass
 {
-	public static void Main()
-	{
-		object d = (int?)null as int?;
-	}
+    public static void Main()
+    {
+        object d = (int?)null as int?;
+    }
 }
 

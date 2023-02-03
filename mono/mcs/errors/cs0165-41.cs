@@ -5,11 +5,11 @@ using System;
 
 class Program
 {
-	public static void Main ()
-	{
-		int a;
-		string s = "";
+    public static void Main ()
+    {
+        int a;
+        string s = "";
 
-		var res = (s == "" && (a = 4) > 3) ? 1 : a;
-	}
+        var res = (s == "" && (a = 4) > 3) ? 1 : a;
+    }
 }

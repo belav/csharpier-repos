@@ -71,8 +71,8 @@ class Test_ConstrainedMethods
 
     static int Main()
     {
-		int numFailures = 0;
-		
+        int numFailures = 0;
+        
         Conversion1<string, MyStruct> c1 = new Conversion1<string, MyStruct>();
         Conversion2<MyStruct> c2 = new Conversion2<MyStruct>();
 
@@ -80,7 +80,7 @@ class Test_ConstrainedMethods
         string res2 = Caller2<string, MyStruct>("mystring");
         Console.WriteLine(res1);
         Console.WriteLine(res2);
-		if(res1 != "string" && res2 != "GEN-string") numFailures++;
+        if(res1 != "string" && res2 != "GEN-string") numFailures++;
 
 
 
@@ -88,7 +88,7 @@ class Test_ConstrainedMethods
         res2 = Caller4<MyStruct>();
         Console.WriteLine(res1);
         Console.WriteLine(res2);
-		if(res1 != "string" && res2 != "GEN-string") numFailures++;
+        if(res1 != "string" && res2 != "GEN-string") numFailures++;
 
 
 
@@ -96,15 +96,15 @@ class Test_ConstrainedMethods
         res2 = c1.Caller2("mystring");
         Console.WriteLine(res1);
         Console.WriteLine(res2);
-		if(res1 != "string" && res2 != "GEN-string") numFailures++;
+        if(res1 != "string" && res2 != "GEN-string") numFailures++;
 
         
         res1 = c2.Caller1();
         res2 = c2.Caller2();
         Console.WriteLine(res1);
         Console.WriteLine(res2);
-		if(res1 != "string" && res2 != "GEN-string") numFailures++;
+        if(res1 != "string" && res2 != "GEN-string") numFailures++;
 
-		return ((numFailures == 0)?(100):(-1));
+        return ((numFailures == 0)?(100):(-1));
     }
 }

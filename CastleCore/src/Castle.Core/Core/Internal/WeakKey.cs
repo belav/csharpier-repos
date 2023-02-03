@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,32 +14,32 @@
 
 namespace Castle.Core.Internal
 {
-	using System;
+    using System;
 
-	internal sealed class WeakKey : WeakReference
-	{
-		private readonly int hashCode;
+    internal sealed class WeakKey : WeakReference
+    {
+        private readonly int hashCode;
 
-		public WeakKey(object target, int hashCode)
-			: base(target)
-		{
-			this.hashCode = hashCode;
-		}
+        public WeakKey(object target, int hashCode)
+            : base(target)
+        {
+            this.hashCode = hashCode;
+        }
 
-		public override object Target
-		{
-			get { return base.Target; }
-			set { throw new NotSupportedException("Dictionary keys are read-only."); }
-		}
+        public override object Target
+        {
+            get { return base.Target; }
+            set { throw new NotSupportedException("Dictionary keys are read-only."); }
+        }
 
-		public override int GetHashCode()
-		{
-			return hashCode;
-		}
+        public override int GetHashCode()
+        {
+            return hashCode;
+        }
 
-		public override bool Equals(object other)
-		{
-			return WeakKeyComparer<object>.Default.Equals(this, other);
-		}
-	}
+        public override bool Equals(object other)
+        {
+            return WeakKeyComparer<object>.Default.Equals(this, other);
+        }
+    }
 }

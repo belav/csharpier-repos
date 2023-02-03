@@ -2,7 +2,7 @@
 // System.Management.ManagementOptions
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -32,36 +32,36 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-	[TypeConverter (typeof (ExpandableObjectConverter))]
-	public abstract class ManagementOptions : ICloneable
-	{
-		public static readonly TimeSpan InfiniteTimeout = TimeSpan.MaxValue;
-		ManagementNamedValueCollection context;
-		TimeSpan timeout;
+    [TypeConverter (typeof (ExpandableObjectConverter))]
+    public abstract class ManagementOptions : ICloneable
+    {
+        public static readonly TimeSpan InfiniteTimeout = TimeSpan.MaxValue;
+        ManagementNamedValueCollection context;
+        TimeSpan timeout;
 
-		internal ManagementOptions ()
-			: this (null, InfiniteTimeout)
-		{
-		}
+        internal ManagementOptions ()
+            : this (null, InfiniteTimeout)
+        {
+        }
 
-		internal ManagementOptions (ManagementNamedValueCollection context, TimeSpan timeout)
-		{
-			this.context = context;
-			this.timeout = timeout;
-		}
+        internal ManagementOptions (ManagementNamedValueCollection context, TimeSpan timeout)
+        {
+            this.context = context;
+            this.timeout = timeout;
+        }
 
-		[MonoTODO]
-		public abstract object Clone ();
+        [MonoTODO]
+        public abstract object Clone ();
 
-		public ManagementNamedValueCollection Context {
-			get { return context; }
-			set { context = value; }
-		}
+        public ManagementNamedValueCollection Context {
+            get { return context; }
+            set { context = value; }
+        }
 
-		public TimeSpan Timeout {
-			get { return timeout; }
-			set { timeout = value; }
-		}
-	}
+        public TimeSpan Timeout {
+            get { return timeout; }
+            set { timeout = value; }
+        }
+    }
 }
 

@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum DataSourceUpdateMode
-	{
-		OnValidation = 0,
-		OnPropertyChanged = 1,
-		Never = 2
-	}
+    public enum DataSourceUpdateMode
+    {
+        OnValidation = 0,
+        OnPropertyChanged = 1,
+        Never = 2
+    }
 }

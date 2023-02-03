@@ -85,7 +85,7 @@ namespace System.Diagnostics {
         /// <internalonly/>
         void ICollection.CopyTo(Array array, int index) {
             EventLogEntry[] entries = log.GetAllEntries();
-            Array.Copy(entries, 0, array, index, entries.Length);			       				
+            Array.Copy(entries, 0, array, index, entries.Length);                                   
         }                     
     
         /// <devdoc>

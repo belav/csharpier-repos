@@ -4891,7 +4891,7 @@ namespace System {
                         if (slashCount > 1) {
                             continue;
                         }
-			*/
+            */
                     }
                     else {
                         if (slashCount > 1) {
@@ -4905,7 +4905,7 @@ namespace System {
                                     (destLength - (i + slashCount)) << 1);
                                 destLength -= (slashCount - 1);
                             }
-			    */
+                */
                             // else preserve repeated slashes
                             lastSlash = (ushort)(i + 1);
                         }
@@ -5002,7 +5002,7 @@ namespace System {
             if ((ushort)destLength > start && syntax.InFact(UriSyntaxFlags.CanonicalizeAsFilePath))
             {
                 if (slashCount > 1) {
-		    /*
+            /*
                     Buffer.BlockCopy(dest, lastSlash << 1, dest, start << 1, (destLength - lastSlash) << 1);
                     destLength -= (slashCount - 1);
                     */

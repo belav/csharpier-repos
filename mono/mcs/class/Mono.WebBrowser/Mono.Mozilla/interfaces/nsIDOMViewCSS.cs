@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,33 +32,33 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("0b9341f3-95d4-4fa4-adcd-e119e0db2889")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMViewCSS : nsIDOMAbstractView {
+    [Guid ("0b9341f3-95d4-4fa4-adcd-e119e0db2889")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMViewCSS : nsIDOMAbstractView {
 #region nsIDOMAbstractView
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentView ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentView ret);
 
 #endregion
 
 #region nsIDOMViewCSS
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getComputedStyle (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMElement elt,
-				   /*DOMString*/ HandleRef pseudoElt,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSStyleDeclaration ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getComputedStyle (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMElement elt,
+                   /*DOMString*/ HandleRef pseudoElt,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSStyleDeclaration ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMViewCSS {
-		public static nsIDOMViewCSS GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMViewCSS obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMViewCSS).GUID, obj);
-			return o as nsIDOMViewCSS;
-		}
-	}
+    internal class nsDOMViewCSS {
+        public static nsIDOMViewCSS GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMViewCSS obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMViewCSS).GUID, obj);
+            return o as nsIDOMViewCSS;
+        }
+    }
 }

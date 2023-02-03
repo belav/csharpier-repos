@@ -23,15 +23,15 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum VerticalAlignment
-	{
-		Top = 0,
-		Center = 1,
-		Bottom = 2
-	}
+    public enum VerticalAlignment
+    {
+        Top = 0,
+        Center = 1,
+        Bottom = 2
+    }
 }

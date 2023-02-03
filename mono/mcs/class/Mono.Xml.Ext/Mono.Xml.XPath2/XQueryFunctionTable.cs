@@ -2,7 +2,7 @@
 // XQueryFunctionTable.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -38,27 +38,27 @@ using System.Xml.Xsl;
 
 namespace Mono.Xml.XPath2
 {
-	public class XQueryFunctionTable : DictionaryBase
-	{
-		public XQueryFunctionTable ()
-		{
-		}
+    public class XQueryFunctionTable : DictionaryBase
+    {
+        public XQueryFunctionTable ()
+        {
+        }
 
-		public XQueryFunction this [XmlQualifiedName name] {
-			get { return Dictionary [name] as XQueryFunction; }
-		}
+        public XQueryFunction this [XmlQualifiedName name] {
+            get { return Dictionary [name] as XQueryFunction; }
+        }
 
-		internal void Add (XQueryFunction func)
-		{
-			Dictionary.Add (func.Name, func);
-		}
+        internal void Add (XQueryFunction func)
+        {
+            Dictionary.Add (func.Name, func);
+        }
 
-		public ICollection Keys {
-			get { return Dictionary.Keys; }
-		}
+        public ICollection Keys {
+            get { return Dictionary.Keys; }
+        }
 
-		public ICollection Values {
-			get { return Dictionary.Values; }
-		}
-	}
+        public ICollection Values {
+            get { return Dictionary.Values; }
+        }
+    }
 }

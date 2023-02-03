@@ -1,9 +1,9 @@
 //
 // DataBindingHandlerAttributeCas.cs 
-//	- CAS unit tests for System.Web.UI.DataBindingHandlerAttribute
+//    - CAS unit tests for System.Web.UI.DataBindingHandlerAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,46 +38,46 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataBindingHandlerAttributeCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataBindingHandlerAttributeCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor_Deny_Unrestricted ()
-		{
-			DataBindingHandlerAttribute a = new DataBindingHandlerAttribute ();
-			Assert.AreEqual (String.Empty, a.HandlerTypeName, "HandlerTypeName");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor_Deny_Unrestricted ()
+        {
+            DataBindingHandlerAttribute a = new DataBindingHandlerAttribute ();
+            Assert.AreEqual (String.Empty, a.HandlerTypeName, "HandlerTypeName");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void CtorString_Deny_Unrestricted ()
-		{
-			DataBindingHandlerAttribute a = new DataBindingHandlerAttribute ("mono");
-			Assert.AreEqual ("mono", a.HandlerTypeName, "HandlerTypeName");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void CtorString_Deny_Unrestricted ()
+        {
+            DataBindingHandlerAttribute a = new DataBindingHandlerAttribute ("mono");
+            Assert.AreEqual ("mono", a.HandlerTypeName, "HandlerTypeName");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void CtorType_Deny_Unrestricted ()
-		{
-			DataBindingHandlerAttribute a = new DataBindingHandlerAttribute (GetType ());
-			Assert.IsTrue (a.HandlerTypeName.StartsWith ("MonoCasTests.System.Web.UI.DataBindingHandlerAttributeCas"), "HandlerTypeName");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void CtorType_Deny_Unrestricted ()
+        {
+            DataBindingHandlerAttribute a = new DataBindingHandlerAttribute (GetType ());
+            Assert.IsTrue (a.HandlerTypeName.StartsWith ("MonoCasTests.System.Web.UI.DataBindingHandlerAttributeCas"), "HandlerTypeName");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Default_Deny_Unrestricted ()
-		{
-			DataBindingHandlerAttribute a = DataBindingHandlerAttribute.Default;
-			Assert.AreEqual (String.Empty, a.HandlerTypeName, "HandlerTypeName");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Default_Deny_Unrestricted ()
+        {
+            DataBindingHandlerAttribute a = DataBindingHandlerAttribute.Default;
+            Assert.AreEqual (String.Empty, a.HandlerTypeName, "HandlerTypeName");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (DataBindingHandlerAttribute); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataBindingHandlerAttribute); }
+        }
+    }
 }

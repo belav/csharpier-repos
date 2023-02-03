@@ -21,16 +21,39 @@ public class EventDefinition<TParam> : EventDefinitionBase
     /// <param name="loggingOptions">Logging options.</param>
     /// <param name="eventId">The <see cref="EventId" />.</param>
     /// <param name="level">The <see cref="LogLevel" /> at which the event will be logged.</param>
-    /// <param name="logActionFunc">Function to create a cached delegate for logging the event.</param>
+    /// <param// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+namespace Microsoft.EntityFrameworkCore.Diagnostics;
+
+/// <summary>
+///     Defines metadata for an event with three parameters and a cached delegate to log the
+///     event with reduced allocations.
+/// </summary>
+/// <remarks>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     for more information and examples.
+/// </remarks>
+public class EventDefinition<TParam1, TParam2> : EventDefinitionBase
+{
+    private readonly Action<ILogger, TParam1, TParam2, Exception?> _logAction;
+
+    /// <summary>
+    ///     Creates an event definition instance.
+    /// </summary>
+    /// <param name="loggingOptions">Logging options.</param>
+    /// <param name="eventId">The <see cref="EventId" />.</param>
+    /// <param name="level">The <see cref="LogLevel" /> at which the event will be logged.</param>
     /// <param name="eventIdCode">
     ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" />.
     /// </param>
+    /// <param name="logActionFunc">Function to create a cached delegate for logging the event.</param>
     public EventDefinition(
         ILoggingOptions loggingOptions,
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        Func<LogLevel, Action<ILogger, TParam, Exception?>> logActionFunc)
+        Func<LogLevel, Action<ILogger, TParam1, TParam2, Exception?>> logActionFunc)
         : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
@@ -40,13 +63,15 @@ public class EventDefinition<TParam> : EventDefinitionBase
     ///     Generates the message that would be logged without logging it.
     ///     Typically used for throwing an exception in warning-as-error cases.
     /// </summary>
-    /// <param name="arg">The message argument.</param>
+    /// <param name="arg1">The first message argument.</param>
+    /// <param name="arg2">The second message argument.</param>
     /// <returns>The message string.</returns>
     public virtual string GenerateMessage(
-        TParam arg)
+        TParam1 arg1,
+        TParam2 arg2)
     {
         var extractor = new MessageExtractingLogger();
-        _logAction(extractor, arg, null);
+        _logAction(extractor, arg1, arg2, null);
         return extractor.Message;
     }
 
@@ -55,19 +80,21 @@ public class EventDefinition<TParam> : EventDefinitionBase
     /// </summary>
     /// <typeparam name="TLoggerCategory">The <see cref="DbLoggerCategory" />.</typeparam>
     /// <param name="logger">The logger to which the event should be logged.</param>
-    /// <param name="arg">Message argument.</param>
+    /// <param name="arg1">The first message argument.</param>
+    /// <param name="arg2">The second message argument.</param>
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
-        TParam arg)
+        TParam1 arg1,
+        TParam2 arg2)
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)
         {
             case WarningBehavior.Log:
-                _logAction(logger.Logger, arg, null);
+                _logAction(logger.Logger, arg1, arg2, null);
                 break;
             case WarningBehavior.Throw:
-                throw WarningAsError(GenerateMessage(arg));
+                throw WarningAsError(GenerateMessage(arg1, arg2));
         }
     }
 }

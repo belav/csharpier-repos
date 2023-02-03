@@ -1,7 +1,7 @@
-﻿namespace Mono.Linker.Tests.Cases.Reflection.Dependencies
+namespace Mono.Linker.Tests.Cases.Reflection.Dependencies
 {
-	public abstract class AssemblyImportedViaReflectionWithDerivedType_Base
-	{
-		public abstract string Method ();
-	}
+    public abstract class AssemblyImportedViaReflectionWithDerivedType_Base
+    {
+        public abstract string Method ();
+    }
 }

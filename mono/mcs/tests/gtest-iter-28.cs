@@ -3,26 +3,26 @@ using System.Collections.Generic;
 
 class A
 {
-	public IEnumerable<string> Test (B b)
-	{
-		string s = "s";
+    public IEnumerable<string> Test (B b)
+    {
+        string s = "s";
 
-		yield return "a";
-		{
-			string stringValue = "two";
+        yield return "a";
+        {
+            string stringValue = "two";
 
-			Console.WriteLine (b.ToString ());
-			{
-				Action a = () => {
-					Console.WriteLine (s + c.GetType () + stringValue);
-				};
+            Console.WriteLine (b.ToString ());
+            {
+                Action a = () => {
+                    Console.WriteLine (s + c.GetType () + stringValue);
+                };
 
-				a ();
-			}
-		}
-	}
+                a ();
+            }
+        }
+    }
 
-	C c = new C ();
+    C c = new C ();
 }
 
 class B

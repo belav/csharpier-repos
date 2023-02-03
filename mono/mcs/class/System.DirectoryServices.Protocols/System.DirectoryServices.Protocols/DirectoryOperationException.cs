@@ -34,54 +34,54 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	[MonoTODO]
-	public class DirectoryOperationException : DirectoryException, ISerializable
-	{
-		public DirectoryOperationException ()
-			: this ("directory operation error")
-		{
-		}
+    [Serializable]
+    [MonoTODO]
+    public class DirectoryOperationException : DirectoryException, ISerializable
+    {
+        public DirectoryOperationException ()
+            : this ("directory operation error")
+        {
+        }
 
-		public DirectoryOperationException (string message)
-			: base (message)
-		{
-		}
+        public DirectoryOperationException (string message)
+            : base (message)
+        {
+        }
 
-		public DirectoryOperationException (DirectoryResponse response, string message)
-			: this (message)
-		{
-		}
+        public DirectoryOperationException (DirectoryResponse response, string message)
+            : this (message)
+        {
+        }
 
-		public DirectoryOperationException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public DirectoryOperationException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		public DirectoryOperationException (DirectoryResponse response, string message, Exception inner)
-			: this (message, inner)
-		{
-			Response = response;
-		}
+        public DirectoryOperationException (DirectoryResponse response, string message, Exception inner)
+            : this (message, inner)
+        {
+            Response = response;
+        }
 
-		public DirectoryOperationException (DirectoryResponse response)
-			: this ()
-		{
-		}
+        public DirectoryOperationException (DirectoryResponse response)
+            : this ()
+        {
+        }
 
-		protected DirectoryOperationException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			Response = (DirectoryResponse) info.GetValue ("Response", typeof (DirectoryResponse));
-		}
+        protected DirectoryOperationException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+            Response = (DirectoryResponse) info.GetValue ("Response", typeof (DirectoryResponse));
+        }
 
-		public DirectoryResponse Response { get; private set; }
+        public DirectoryResponse Response { get; private set; }
 
-		[SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			base.GetObjectData (serializationInfo, streamingContext);
-			serializationInfo.AddValue ("Response", Response, typeof (DirectoryResponse));
-		}
-	}
+        [SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        {
+            base.GetObjectData (serializationInfo, streamingContext);
+            serializationInfo.AddValue ("Response", Response, typeof (DirectoryResponse));
+        }
+    }
 }

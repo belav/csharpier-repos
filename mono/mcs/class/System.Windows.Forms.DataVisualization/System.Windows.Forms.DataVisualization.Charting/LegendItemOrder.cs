@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum LegendItemOrder
-	{
-		Auto = 0,
-		SameAsSeriesOrder = 1,
-		ReversedSeriesOrder = 2
-	}
+    public enum LegendItemOrder
+    {
+        Auto = 0,
+        SameAsSeriesOrder = 1,
+        ReversedSeriesOrder = 2
+    }
 }

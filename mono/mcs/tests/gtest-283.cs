@@ -14,9 +14,9 @@ struct TestPoint
 {
         public static void Serialize(IFoo h)
         {
-		Point  point1 = new Point (0, 1);
+        Point  point1 = new Point (0, 1);
                 Point? point2 = new Point (1, 2);
-		h.Foo (ref point1);
+        h.Foo (ref point1);
                 h.Foo (ref point2);
         }
         public static void Main(){}

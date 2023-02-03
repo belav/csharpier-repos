@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 class C
 {
-	static Task Method ()
-	{
-		return Task.FromResult (1);
-	}
-	
-	static async Task<int> TestAsync ()
-	{
-		Method ();
-		return await Task.FromResult (2);
-	}
+    static Task Method ()
+    {
+        return Task.FromResult (1);
+    }
+    
+    static async Task<int> TestAsync ()
+    {
+        Method ();
+        return await Task.FromResult (2);
+    }
 }

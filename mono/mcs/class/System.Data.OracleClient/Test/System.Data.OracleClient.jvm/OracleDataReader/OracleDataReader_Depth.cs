@@ -36,61 +36,61 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataReader_Depth : GHTBase
 {
-	public static void Main()
-	{
-		OracleDataReader_Depth tc = new OracleDataReader_Depth();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OracleDataReader_Depth");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OracleDataReader_Depth tc = new OracleDataReader_Depth();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OracleDataReader_Depth");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
 
-		OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		con.Open();
-		OracleCommand cmd = new OracleCommand("Select * From Customers", con);
-		OracleDataReader rdr = cmd.ExecuteReader();
+        OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        con.Open();
+        OracleCommand cmd = new OracleCommand("Select * From Customers", con);
+        OracleDataReader rdr = cmd.ExecuteReader();
 
-		try
-		{
-			BeginCase("Before execute");
-			Compare(rdr.Depth , 0);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-
-
-		try
-		{
-			BeginCase("After execute");
-			rdr.Read();
-			Compare(rdr.Depth , 0);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-
-		if (con.State == ConnectionState.Open) con.Close();
-
-	}
+        try
+        {
+            BeginCase("Before execute");
+            Compare(rdr.Depth , 0);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
 
-	//public TestClass():base(true){}
+        try
+        {
+            BeginCase("After execute");
+            rdr.Read();
+            Compare(rdr.Depth , 0);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+        if (con.State == ConnectionState.Open) con.Close();
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    }
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+    //public TestClass():base(true){}
+
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 

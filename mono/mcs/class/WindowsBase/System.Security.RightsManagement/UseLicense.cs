@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,44 +29,44 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-	[SecurityCritical (SecurityCriticalScope.Everything)]
-	public class UseLicense
-	{
-		public UseLicense (string useLicense)
-		{
-			throw new NotImplementedException ();
-		}
+    [SecurityCritical (SecurityCriticalScope.Everything)]
+    public class UseLicense
+    {
+        public UseLicense (string useLicense)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public IDictionary<string, string> ApplicationData {
-			get { throw new NotImplementedException (); }
-		}
+        public IDictionary<string, string> ApplicationData {
+            get { throw new NotImplementedException (); }
+        }
 
-		public Guid ContentId {
-			get { throw new NotImplementedException (); }
-		}
+        public Guid ContentId {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ContentUser Owner {
-			get { throw new NotImplementedException (); }
-		}
+        public ContentUser Owner {
+            get { throw new NotImplementedException (); }
+        }
 
-		public CryptoProvider Bind (SecureEnvironment secureEnvironment)
-		{
-			throw new NotImplementedException ();
-		}
+        public CryptoProvider Bind (SecureEnvironment secureEnvironment)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool Equals (object x)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Equals (object x)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override int GetHashCode ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override int GetHashCode ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string ToString ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

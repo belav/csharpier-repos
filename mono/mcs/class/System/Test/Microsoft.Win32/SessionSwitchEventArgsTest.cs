@@ -1,9 +1,9 @@
 //
 // SessionSwitchEventArgsTest.cs 
-//	- Unit tests for Microsoft.Win32.SessionSwitchEventArgs
+//    - Unit tests for Microsoft.Win32.SessionSwitchEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,27 +35,27 @@ using Microsoft.Win32;
 
 namespace MonoTests.Microsoft.Win32 {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class SessionSwitchEventArgsTest {
+    [TestFixture]
+    [Category ("CAS")]
+    public class SessionSwitchEventArgsTest {
 
-		[Test]
-		public void Constructor ()
-		{
-			foreach (SessionSwitchReason ssr in Enum.GetValues (typeof (SessionSwitchReason))) {
-				SessionSwitchEventArgs ssea = new SessionSwitchEventArgs (ssr);
-				Assert.AreEqual (ssr, ssea.Reason, ssr.ToString ());
-			}
-		}
+        [Test]
+        public void Constructor ()
+        {
+            foreach (SessionSwitchReason ssr in Enum.GetValues (typeof (SessionSwitchReason))) {
+                SessionSwitchEventArgs ssea = new SessionSwitchEventArgs (ssr);
+                Assert.AreEqual (ssr, ssea.Reason, ssr.ToString ());
+            }
+        }
 
-		[Test]
-		public void OutOfRange ()
-		{
-			SessionSwitchReason ssr = (SessionSwitchReason) Int32.MinValue;
-			SessionSwitchEventArgs ssea = new SessionSwitchEventArgs (ssr);
-			Assert.AreEqual (ssr, ssea.Reason, "Int32.MinValue");
-			// no validation is done on the enum value used
-		}
-	}
+        [Test]
+        public void OutOfRange ()
+        {
+            SessionSwitchReason ssr = (SessionSwitchReason) Int32.MinValue;
+            SessionSwitchEventArgs ssea = new SessionSwitchEventArgs (ssr);
+            Assert.AreEqual (ssr, ssea.Reason, "Int32.MinValue");
+            // no validation is done on the enum value used
+        }
+    }
 }
 

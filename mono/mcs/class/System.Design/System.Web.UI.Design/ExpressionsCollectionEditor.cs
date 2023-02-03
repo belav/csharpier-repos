@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ExpressionsCollectionEditor
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -37,25 +37,25 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design {
 
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class ExpressionsCollectionEditor : UITypeEditor
-	{
-		public ExpressionsCollectionEditor ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class ExpressionsCollectionEditor : UITypeEditor
+    {
+        public ExpressionsCollectionEditor ()
+        {
+        }
 
-		[MonoTODO]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 

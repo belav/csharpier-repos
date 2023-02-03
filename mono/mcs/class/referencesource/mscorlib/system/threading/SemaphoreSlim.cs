@@ -1,4 +1,4 @@
-﻿// ==++==
+// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 // 
@@ -351,7 +351,7 @@ namespace System.Threading
             {
                 // Perf: first spin wait for the count to be positive, but only up to the first planned yield.
                 //       This additional amount of spinwaiting in addition
-                //       to Monitor.Enter()’s spinwaiting has shown measurable perf gains in test scenarios.
+                //       to Monitor.Enter()�s spinwaiting has shown measurable perf gains in test scenarios.
                 //
                 SpinWait spin = new SpinWait();
                 while (m_currentCount == 0 && !spin.NextSpinWillYield)

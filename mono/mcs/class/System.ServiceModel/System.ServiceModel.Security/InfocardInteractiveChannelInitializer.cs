@@ -32,39 +32,39 @@ using System.ServiceModel.Dispatcher;
 namespace System.ServiceModel.Security
 {
 
-	[MonoTODO]
-	public class InfocardInteractiveChannelInitializer
-		: IInteractiveChannelInitializer
-	{
-		[MonoTODO]
-		public InfocardInteractiveChannelInitializer (
-			ClientCredentials credentials,
-			Binding binding)
-		{
-			this.binding = binding;
-			this.credentials = credentials;
-		}
+    [MonoTODO]
+    public class InfocardInteractiveChannelInitializer
+        : IInteractiveChannelInitializer
+    {
+        [MonoTODO]
+        public InfocardInteractiveChannelInitializer (
+            ClientCredentials credentials,
+            Binding binding)
+        {
+            this.binding = binding;
+            this.credentials = credentials;
+        }
 
-		Binding binding;
-		ClientCredentials credentials;
+        Binding binding;
+        ClientCredentials credentials;
 
-		public Binding Binding {
-			get { return binding; }
-		}
+        public Binding Binding {
+            get { return binding; }
+        }
 
-		[MonoTODO]
-		public IAsyncResult BeginDisplayInitializationUI (
-			IClientChannel channel,
-			AsyncCallback callback,
-			object state)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public IAsyncResult BeginDisplayInitializationUI (
+            IClientChannel channel,
+            AsyncCallback callback,
+            object state)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void EndDisplayInitializationUI (IAsyncResult result)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void EndDisplayInitializationUI (IAsyncResult result)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

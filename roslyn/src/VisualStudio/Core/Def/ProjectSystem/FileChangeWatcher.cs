@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -44,7 +44,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             _fileChangeService = fileChangeService;
 
-            // 📝 Empirical testing during high activity (e.g. solution close) showed strong batching performance even
+            // ?? Empirical testing during high activity (e.g. solution close) showed strong batching performance even
             // though the batching delay is 0.
             _taskQueue = new AsyncBatchingWorkQueue<WatcherOperation>(
                 TimeSpan.Zero,
@@ -121,7 +121,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// unsubscribe to all cookies in the collection.
             /// </summary>
             /// <remarks>
-            /// ⚠ Do not change this to another collection like <c>ImmutableList&lt;uint&gt;</c>. This collection
+            /// ? Do not change this to another collection like <c>ImmutableList&lt;uint&gt;</c>. This collection
             /// references an instance held by the <see cref="Context"/> class, and the values are lazily read when
             /// <see cref="TryCombineWith"/> is called.
             /// </remarks>

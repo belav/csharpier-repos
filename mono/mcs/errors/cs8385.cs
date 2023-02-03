@@ -4,9 +4,9 @@
 
 unsafe struct S
 {
-	public void Test ()
-	{
-		fixed (S* i = null) {
-		}
-	}
+    public void Test ()
+    {
+        fixed (S* i = null) {
+        }
+    }
 }

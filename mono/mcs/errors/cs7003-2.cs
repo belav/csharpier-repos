@@ -7,5 +7,5 @@ class G<T>
 
 class C
 {
-	G<> field;
+    G<> field;
 }

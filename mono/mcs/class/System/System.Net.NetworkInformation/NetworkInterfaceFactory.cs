@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.NetworkInterface
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //      Miguel de Icaza (miguel@novell.com)
 //      Eric Butler (eric@extremeboredom.net)
 //      Marek Habersack (mhabersack@novell.com)
@@ -32,21 +32,21 @@
 //
 namespace System.Net.NetworkInformation {
 
-	internal static class NetworkInterfaceFactoryPal
-	{
-		public static NetworkInterfaceFactory Create ()
-		{
-			var instance = UnixNetworkInterfaceFactoryPal.Create ();
+    internal static class NetworkInterfaceFactoryPal
+    {
+        public static NetworkInterfaceFactory Create ()
+        {
+            var instance = UnixNetworkInterfaceFactoryPal.Create ();
 
 #if WIN_PLATFORM
-			if (instance == null)
-				instance = Win32NetworkInterfaceFactoryPal.Create ();
+            if (instance == null)
+                instance = Win32NetworkInterfaceFactoryPal.Create ();
 #endif
 
-			if (instance == null)
-				throw new NotImplementedException ();
+            if (instance == null)
+                throw new NotImplementedException ();
 
-			return instance;
-		}
-	}
+            return instance;
+        }
+    }
 }

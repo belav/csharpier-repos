@@ -31,37 +31,37 @@ using System.Web.UI;
 
 namespace MonoTests.System.Web.UI {
 
-	[TestFixture]
-	public class DataBindingHandlerAttributeTest
-	{
-		DataBindingHandlerAttribute attr;
-		DataBindingHandlerAttribute empty;
-		Type t = typeof (object);
+    [TestFixture]
+    public class DataBindingHandlerAttributeTest
+    {
+        DataBindingHandlerAttribute attr;
+        DataBindingHandlerAttribute empty;
+        Type t = typeof (object);
 
-		[SetUp]
-		public void SetUp ()
-		{
-			attr = new DataBindingHandlerAttribute (t);
-			empty = DataBindingHandlerAttribute.Default;
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            attr = new DataBindingHandlerAttribute (t);
+            empty = DataBindingHandlerAttribute.Default;
+        }
 
-		[Test]
-		public void TestHandlerTypeName ()
-		{
-			Assert.AreEqual (attr.HandlerTypeName, t.AssemblyQualifiedName, "#01");
-		}
+        [Test]
+        public void TestHandlerTypeName ()
+        {
+            Assert.AreEqual (attr.HandlerTypeName, t.AssemblyQualifiedName, "#01");
+        }
 
-		[Test]
-		public void TestDefaultHandlerTypeName ()
-		{
-			Assert.AreEqual (String.Empty, empty.HandlerTypeName, "#01");
-		}
+        [Test]
+        public void TestDefaultHandlerTypeName ()
+        {
+            Assert.AreEqual (String.Empty, empty.HandlerTypeName, "#01");
+        }
 
-		[Test]
-		public void TestDefaultConstructor ()
-		{
-			DataBindingHandlerAttribute at = new DataBindingHandlerAttribute ();
-			Assert.AreEqual (String.Empty, at.HandlerTypeName, "#01");
-		}
-	}
+        [Test]
+        public void TestDefaultConstructor ()
+        {
+            DataBindingHandlerAttribute at = new DataBindingHandlerAttribute ();
+            Assert.AreEqual (String.Empty, at.HandlerTypeName, "#01");
+        }
+    }
 }

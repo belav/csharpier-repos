@@ -3,5 +3,5 @@
 // Compiler options: -reference:CS0619-43-lib.dll
 
 class A {
-	public decimal C = Error.C;
+    public decimal C = Error.C;
 }

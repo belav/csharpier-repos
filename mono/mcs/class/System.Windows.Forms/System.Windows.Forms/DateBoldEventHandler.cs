@@ -20,12 +20,12 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public delegate void DateBoldEventHandler (object sender, DateBoldEventArgs e);
+    public delegate void DateBoldEventHandler (object sender, DateBoldEventArgs e);
 }

@@ -2,7 +2,7 @@
 // System.Drawing.Text.PrivateFontCollection CAS unit tests
 //
 // Authors:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -37,60 +37,60 @@ using NUnit.Framework;
 
 namespace MonoCasTests.System.Drawing.Text {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PrivateFontCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PrivateFontCollectionCas {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor ()
-		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			Assert.IsNotNull (pfc.Families);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor ()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection ();
+            Assert.IsNotNull (pfc.Families);
+        }
 
-		// TODO - tests for AddFontFile
+        // TODO - tests for AddFontFile
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		public void AddMemoryFont_Deny_UnmanagedCode () 
-		{
-			Assert.Throws<SecurityException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        public void AddMemoryFont_Deny_UnmanagedCode () 
+        {
+            Assert.Throws<SecurityException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void AddMemoryFont_PermitOnly_UnmanagedCode ()
-		{
-			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void AddMemoryFont_PermitOnly_UnmanagedCode ()
+        {
+            Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
+        }
 
-		// yes, that fails with FileNotFoundException ;-)
+        // yes, that fails with FileNotFoundException ;-)
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void AddMemoryFont_NegativeLength ()
-		{
-			IntPtr ptr = Marshal.AllocHGlobal (1024);
-			try {
-				Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, -1024));
-			}
-			finally {
-				Marshal.FreeHGlobal (ptr);
-			}
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void AddMemoryFont_NegativeLength ()
+        {
+            IntPtr ptr = Marshal.AllocHGlobal (1024);
+            try {
+                Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, -1024));
+            }
+            finally {
+                Marshal.FreeHGlobal (ptr);
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void AddMemoryFont_InvalidData ()
-		{
-			IntPtr ptr = Marshal.AllocHGlobal (1024);
-			try {
-				Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, 1024));
-			}
-			finally {
-				Marshal.FreeHGlobal (ptr);
-			}
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void AddMemoryFont_InvalidData ()
+        {
+            IntPtr ptr = Marshal.AllocHGlobal (1024);
+            try {
+                Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, 1024));
+            }
+            finally {
+                Marshal.FreeHGlobal (ptr);
+            }
+        }
+    }
 }

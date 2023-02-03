@@ -2,7 +2,7 @@
 // WS2007HttpBinding.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,28 +32,28 @@ using System.Text;
 
 namespace System.ServiceModel
 {
-	[MonoTODO]
-	public class WS2007HttpBinding : WSHttpBinding
-	{
-		public WS2007HttpBinding ()
-			: base ()
-		{
-		}
+    [MonoTODO]
+    public class WS2007HttpBinding : WSHttpBinding
+    {
+        public WS2007HttpBinding ()
+            : base ()
+        {
+        }
 
-		public WS2007HttpBinding (SecurityMode securityMode)
-			: base (securityMode)
-		{
-		}
+        public WS2007HttpBinding (SecurityMode securityMode)
+            : base (securityMode)
+        {
+        }
 
-		public WS2007HttpBinding (SecurityMode securityMode, bool reliableSessionEnabled)
-			: base (securityMode, reliableSessionEnabled)
-		{
-		}
+        public WS2007HttpBinding (SecurityMode securityMode, bool reliableSessionEnabled)
+            : base (securityMode, reliableSessionEnabled)
+        {
+        }
 
-		[MonoTODO]
-		public WS2007HttpBinding (string configName)
-			: base (configName)
-		{
-		}
-	}
+        [MonoTODO]
+        public WS2007HttpBinding (string configName)
+            : base (configName)
+        {
+        }
+    }
 }

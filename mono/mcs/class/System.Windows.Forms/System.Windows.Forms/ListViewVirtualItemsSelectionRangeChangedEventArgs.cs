@@ -23,38 +23,38 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public class ListViewVirtualItemsSelectionRangeChangedEventArgs : EventArgs
-	{
-		private bool is_selected;
-		private int end_index;
-		private int start_index;
+    public class ListViewVirtualItemsSelectionRangeChangedEventArgs : EventArgs
+    {
+        private bool is_selected;
+        private int end_index;
+        private int start_index;
 
-		#region Public Constructors
-		public ListViewVirtualItemsSelectionRangeChangedEventArgs (int startIndex, int endIndex, bool isSelected) : base ()
-		{
-			this.start_index = startIndex;
-			this.end_index = endIndex;
-			this.is_selected = isSelected;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public ListViewVirtualItemsSelectionRangeChangedEventArgs (int startIndex, int endIndex, bool isSelected) : base ()
+        {
+            this.start_index = startIndex;
+            this.end_index = endIndex;
+            this.is_selected = isSelected;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public int StartIndex {
-			get { return this.start_index; }
-		}
+        #region Public Instance Properties
+        public int StartIndex {
+            get { return this.start_index; }
+        }
 
-		public bool IsSelected {
-			get { return this.is_selected; }
-		}
+        public bool IsSelected {
+            get { return this.is_selected; }
+        }
 
-		public int EndIndex {
-			get { return this.end_index; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        public int EndIndex {
+            get { return this.end_index; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

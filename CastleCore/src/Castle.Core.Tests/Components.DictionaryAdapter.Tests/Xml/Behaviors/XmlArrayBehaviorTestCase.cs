@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
-	using System.Xml.Serialization;
-	using Castle.Components.DictionaryAdapter.Tests;
-	using NUnit.Framework;
+    using System.Xml.Serialization;
+    using Castle.Components.DictionaryAdapter.Tests;
+    using NUnit.Framework;
 
-	public class XmlArrayBehaviorTestCase
-	{
+    public class XmlArrayBehaviorTestCase
+    {
         [TestFixture]
         public class ArrayBehavior : XmlAdapterTestCase
         {
@@ -40,12 +40,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IRoot>("<Root> <X> <A X='1'/> <B X='2'/> </X> </Root>");
 
-				var array = foo.Items;
-				Assert.AreEqual(2, array.Length);
-				Assert.IsInstanceOf<IDerived1>(array[0]);
-				Assert.AreEqual(1, ((IDerived1)array[0]).X);
-				Assert.IsInstanceOf<IDerived2>(array[1]);
-				Assert.AreEqual("2", ((IDerived2)array[1]).X);
+                var array = foo.Items;
+                Assert.AreEqual(2, array.Length);
+                Assert.IsInstanceOf<IDerived1>(array[0]);
+                Assert.AreEqual(1, ((IDerived1)array[0]).X);
+                Assert.IsInstanceOf<IDerived2>(array[1]);
+                Assert.AreEqual("2", ((IDerived2)array[1]).X);
             }
 
             [Test]
@@ -54,21 +54,21 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 var xml = Xml("<Root/>");
                 var foo = Create<IRoot>(xml);
 
-				foo.Items = new IBase[]
-				{
-					Create<IDerived1>("<Derived1 X='1'/>"),
-					Create<IDerived2>("<Derived2 X='2'/>")
-				};
+                foo.Items = new IBase[]
+                {
+                    Create<IDerived1>("<Derived1 X='1'/>"),
+                    Create<IDerived2>("<Derived2 X='2'/>")
+                };
 
-				CustomAssert.AreXmlEquivalent("<Root> <X> <A><X>1</X></A> <B><X>2</X></B> </X> </Root>", xml);
+                CustomAssert.AreXmlEquivalent("<Root> <X> <A><X>1</X></A> <B><X>2</X></B> </X> </Root>", xml);
 
-				var array = foo.Items;
-				Assert.AreEqual(2, array.Length);
-				Assert.IsInstanceOf<IDerived1>(array[0]);
-				Assert.AreEqual(1, ((IDerived1)array[0]).X);
-				Assert.IsInstanceOf<IDerived2>(array[1]);
-				Assert.AreEqual("2", ((IDerived2)array[1]).X);
+                var array = foo.Items;
+                Assert.AreEqual(2, array.Length);
+                Assert.IsInstanceOf<IDerived1>(array[0]);
+                Assert.AreEqual(1, ((IDerived1)array[0]).X);
+                Assert.IsInstanceOf<IDerived2>(array[1]);
+                Assert.AreEqual("2", ((IDerived2)array[1]).X);
             }
         }
-	}
+    }
 }

@@ -2,6 +2,6 @@
 // Line: 5
 
 class Foo : Baz {
-	public class Bar {}
+    public class Bar {}
 }
 class Baz : Foo.Bar {}

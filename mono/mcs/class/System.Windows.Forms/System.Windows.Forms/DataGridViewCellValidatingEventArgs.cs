@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -28,31 +28,31 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewCellValidatingEventArgs : CancelEventArgs {
+    public class DataGridViewCellValidatingEventArgs : CancelEventArgs {
 
-		private int columnIndex;
-		private object formattedValue;
-		private int rowIndex;
+        private int columnIndex;
+        private object formattedValue;
+        private int rowIndex;
 
-		internal DataGridViewCellValidatingEventArgs (int columnIndex, int rowIndex, object formattedValue)
-		{
-			this.columnIndex = columnIndex;
-			this.rowIndex = rowIndex;
-			this.formattedValue = formattedValue;
-		}
+        internal DataGridViewCellValidatingEventArgs (int columnIndex, int rowIndex, object formattedValue)
+        {
+            this.columnIndex = columnIndex;
+            this.rowIndex = rowIndex;
+            this.formattedValue = formattedValue;
+        }
 
-		public int ColumnIndex {
-			get { return columnIndex; }
-		}
+        public int ColumnIndex {
+            get { return columnIndex; }
+        }
 
-		public object FormattedValue {
-			get { return formattedValue; }
-		}
+        public object FormattedValue {
+            get { return formattedValue; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-	}
+    }
 
 }

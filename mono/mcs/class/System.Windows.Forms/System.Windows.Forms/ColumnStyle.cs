@@ -28,42 +28,42 @@
 //
 namespace System.Windows.Forms 
 {
-	public class ColumnStyle : TableLayoutStyle 
-	{
-		float width;
-		
-		public ColumnStyle ()
-		{
-			this.width = 0;
-		}
+    public class ColumnStyle : TableLayoutStyle 
+    {
+        float width;
+        
+        public ColumnStyle ()
+        {
+            this.width = 0;
+        }
 
-		public ColumnStyle (SizeType sizeType) 
-		{
-			this.width = 0;
-			base.SizeType = sizeType;
-		}
+        public ColumnStyle (SizeType sizeType) 
+        {
+            this.width = 0;
+            base.SizeType = sizeType;
+        }
 
-		public ColumnStyle (SizeType sizeType, float width)
-		{
-			if (width < 0)
-				throw new ArgumentOutOfRangeException ("height");
+        public ColumnStyle (SizeType sizeType, float width)
+        {
+            if (width < 0)
+                throw new ArgumentOutOfRangeException ("height");
 
-			base.SizeType = sizeType;
-			this.width = width;
-		}
+            base.SizeType = sizeType;
+            this.width = width;
+        }
 
-		public float Width {
-			get { return this.width; }
-			set { 
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ();
-				
-				if (width != value) {
-					width = value; 
-					if (Owner != null)
-						Owner.PerformLayout (Owner, "Style");
-				}
-			}
-		}
-	}
+        public float Width {
+            get { return this.width; }
+            set { 
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException ();
+                
+                if (width != value) {
+                    width = value; 
+                    if (Owner != null)
+                        Owner.PerformLayout (Owner, "Style");
+                }
+            }
+        }
+    }
 }

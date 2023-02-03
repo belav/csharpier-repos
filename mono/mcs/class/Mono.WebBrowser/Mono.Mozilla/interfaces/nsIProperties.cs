@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,48 +32,48 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("78650582-4e93-4b60-8e85-26ebd3eb14ca")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIProperties {
+    [Guid ("78650582-4e93-4b60-8e85-26ebd3eb14ca")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIProperties {
 
 #region nsIProperties
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int get ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-				[MarshalAs (UnmanagedType.LPStruct) ]  Guid iid,
-				out IntPtr result);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int get ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+                [MarshalAs (UnmanagedType.LPStruct) ]  Guid iid,
+                out IntPtr result);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int set ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-				[MarshalAs (UnmanagedType.Interface) ]  IntPtr value);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int set ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+                [MarshalAs (UnmanagedType.Interface) ]  IntPtr value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int has ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-				out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int has ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+                out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int undefine ([MarshalAs (UnmanagedType.LPStr) ]  string prop);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int undefine ([MarshalAs (UnmanagedType.LPStr) ]  string prop);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getKeys (out UInt32 count,
-				[MarshalAs (UnmanagedType.LPStr) ] out string[] keys);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getKeys (out UInt32 count,
+                [MarshalAs (UnmanagedType.LPStr) ] out string[] keys);
 
 #endregion
-	}
+    }
 
 
-	internal class nsProperties {
-		public static nsIProperties GetProxy (Mono.WebBrowser.IWebBrowser control, nsIProperties obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIProperties).GUID, obj);
-			return o as nsIProperties;
-		}
-	}
+    internal class nsProperties {
+        public static nsIProperties GetProxy (Mono.WebBrowser.IWebBrowser control, nsIProperties obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIProperties).GUID, obj);
+            return o as nsIProperties;
+        }
+    }
 }
 #if example
 
@@ -82,49 +82,49 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class Properties : nsIProperties {
+    internal class Properties : nsIProperties {
 
 #region nsIProperties
-		int nsIProperties.get ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-				[MarshalAs (UnmanagedType.LPStruct) ]  Guid iid,
-				out IntPtr result)
-		{
-			return ;
-		}
+        int nsIProperties.get ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+                [MarshalAs (UnmanagedType.LPStruct) ]  Guid iid,
+                out IntPtr result)
+        {
+            return ;
+        }
 
 
 
-		int nsIProperties.set ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-				[MarshalAs (UnmanagedType.Interface) ]  IntPtr value)
-		{
-			return ;
-		}
+        int nsIProperties.set ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+                [MarshalAs (UnmanagedType.Interface) ]  IntPtr value)
+        {
+            return ;
+        }
 
 
 
-		int nsIProperties.has ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-				out bool ret)
-		{
-			return ;
-		}
+        int nsIProperties.has ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+                out bool ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIProperties.undefine ([MarshalAs (UnmanagedType.LPStr) ]  string prop)
-		{
-			return ;
-		}
+        int nsIProperties.undefine ([MarshalAs (UnmanagedType.LPStr) ]  string prop)
+        {
+            return ;
+        }
 
 
 
-		int nsIProperties.getKeys (out UInt32 count,
-				[MarshalAs (UnmanagedType.LPStr) ] out string[] keys)
-		{
-			return ;
-		}
+        int nsIProperties.getKeys (out UInt32 count,
+                [MarshalAs (UnmanagedType.LPStr) ] out string[] keys)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

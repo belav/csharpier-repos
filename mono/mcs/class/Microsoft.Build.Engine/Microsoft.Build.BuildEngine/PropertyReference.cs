@@ -34,65 +34,65 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.BuildEngine {
-	class PropertyReference : IReference {
-		
-		readonly string	name;
+    class PropertyReference : IReference {
+        
+        readonly string    name;
 
-		public PropertyReference (string name)
-		{
-			this.name = name;
-		}
-	
-		// when evaluating items: expand: true
-		// all other times, expand: true
-		// so, always true, ignore @options
-		public string ConvertToString (Project project, ExpressionOptions options)
-		{
-			if (project == null)
-				throw new ArgumentNullException ("project");
-			
-			BuildProperty bp = project.EvaluatedProperties [name];
-			if (bp == null)
-				return String.Empty;
+        public PropertyReference (string name)
+        {
+            this.name = name;
+        }
+    
+        // when evaluating items: expand: true
+        // all other times, expand: true
+        // so, always true, ignore @options
+        public string ConvertToString (Project project, ExpressionOptions options)
+        {
+            if (project == null)
+                throw new ArgumentNullException ("project");
+            
+            BuildProperty bp = project.EvaluatedProperties [name];
+            if (bp == null)
+                return String.Empty;
 
-			if (options == ExpressionOptions.DoNotExpandItemRefs)
-				return bp.FinalValue;
+            if (options == ExpressionOptions.DoNotExpandItemRefs)
+                return bp.FinalValue;
 
-			return bp.ConvertToString (project, ExpressionOptions.ExpandItemRefs);
-		}
+            return bp.ConvertToString (project, ExpressionOptions.ExpandItemRefs);
+        }
 
-		// when evaluating items: expand: true
-		// all other times, expand: true
-		// so, always true, ignore @options
-		public ITaskItem[] ConvertToITaskItemArray (Project project, ExpressionOptions options)
-		{
-			BuildProperty bp = project.EvaluatedProperties [name];
-			if (bp == null)
-				return null;
+        // when evaluating items: expand: true
+        // all other times, expand: true
+        // so, always true, ignore @options
+        public ITaskItem[] ConvertToITaskItemArray (Project project, ExpressionOptions options)
+        {
+            BuildProperty bp = project.EvaluatedProperties [name];
+            if (bp == null)
+                return null;
 
-			if (options == ExpressionOptions.DoNotExpandItemRefs) {
-				List<ITaskItem> list = new List<ITaskItem> ();
-				foreach (string s in bp.FinalValue.Split (new char[] {';'}, StringSplitOptions.RemoveEmptyEntries))
-					list.Add (new TaskItem (s));
-				return list.ToArray ();
-			}
+            if (options == ExpressionOptions.DoNotExpandItemRefs) {
+                List<ITaskItem> list = new List<ITaskItem> ();
+                foreach (string s in bp.FinalValue.Split (new char[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+                    list.Add (new TaskItem (s));
+                return list.ToArray ();
+            }
 
-			return bp.ConvertToITaskItemArray (project, ExpressionOptions.ExpandItemRefs);
-		}
-		
-		public string Name {
-			get { return name; }
-		}
+            return bp.ConvertToITaskItemArray (project, ExpressionOptions.ExpandItemRefs);
+        }
+        
+        public string Name {
+            get { return name; }
+        }
 
-		public string GetValue (Project project)
-		{
-			BuildProperty bp = project.EvaluatedProperties [name];
-			return bp == null ? String.Empty : bp.Value;
-		}
+        public string GetValue (Project project)
+        {
+            BuildProperty bp = project.EvaluatedProperties [name];
+            return bp == null ? String.Empty : bp.Value;
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("$({0})", name);
-		}
-	}
+        public override string ToString ()
+        {
+            return String.Format ("$({0})", name);
+        }
+    }
 }

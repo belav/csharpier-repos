@@ -2,7 +2,7 @@
 // ProjectChangedEventArgs.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@xamarin.com>
+//    Atsushi Enomoto <atsushi@xamarin.com>
 //
 // Copyright (C) 2013 Xamarin Inc.
 //
@@ -31,12 +31,12 @@ using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {
-	public class ProjectChangedEventArgs : EventArgs
-	{
-		internal ProjectChangedEventArgs (Project project)
-		{
-			Project = project;
-		}
-		public Project Project { get; private set; }
-	}
+    public class ProjectChangedEventArgs : EventArgs
+    {
+        internal ProjectChangedEventArgs (Project project)
+        {
+            Project = project;
+        }
+        public Project Project { get; private set; }
+    }
 }

@@ -3,8 +3,8 @@
 // Compiler options: -unsafe
 
 class T {
-	static unsafe int Main ()
-	{
-		int *a = default(T);
-	}
+    static unsafe int Main ()
+    {
+        int *a = default(T);
+    }
 }

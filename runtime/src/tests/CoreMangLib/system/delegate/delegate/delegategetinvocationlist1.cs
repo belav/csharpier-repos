@@ -88,9 +88,9 @@ namespace DelegateTest
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
-		booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
-		booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
-		booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
+        booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
+        booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
+        booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
@@ -128,9 +128,9 @@ namespace DelegateTest
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
-		booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
-		booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
-		booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
+        booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
+        booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
+        booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += null;
@@ -170,9 +170,9 @@ namespace DelegateTest
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
-		booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
-		booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
-		booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
+        booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
+        booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
+        booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bStartWork_Bool;

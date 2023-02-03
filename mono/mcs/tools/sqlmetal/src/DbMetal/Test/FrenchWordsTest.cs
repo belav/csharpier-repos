@@ -1,4 +1,4 @@
-ï»¿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -87,8 +87,8 @@ namespace DbLinqTest
         [Test]
         public void PluralizeTest_Oeuf()
         {
-            var actual = frenchWords.Pluralize("Å“uf");
-            Assert.AreEqual("Å“ufs", actual);
+            var actual = frenchWords.Pluralize("œuf");
+            Assert.AreEqual("œufs", actual);
         }
 
         [Test]

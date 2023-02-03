@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum FillType
-	{
-		Solid = 0,
-		VerticalGradient = 1,
-		HorizontalGradient = 2,
-		RadialGradient = 3,
-		TileImage = 4
-	}
+    public enum FillType
+    {
+        Solid = 0,
+        VerticalGradient = 1,
+        HorizontalGradient = 2,
+        RadialGradient = 3,
+        TileImage = 4
+    }
 }

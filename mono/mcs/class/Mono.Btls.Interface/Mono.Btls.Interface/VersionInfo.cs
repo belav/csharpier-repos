@@ -1,4 +1,4 @@
-﻿//
+//
 // VersionInfo.cs
 //
 // Author:
@@ -26,9 +26,9 @@
 using System;
 namespace Mono.Btls.Interface
 {
-	public static class VersionInfo
-	{
-		public const string Version = "1.0.0";
-	}
+    public static class VersionInfo
+    {
+        public const string Version = "1.0.0";
+    }
 }
 

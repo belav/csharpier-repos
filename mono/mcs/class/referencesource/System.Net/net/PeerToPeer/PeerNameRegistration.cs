@@ -628,10 +628,10 @@ namespace System.Net.PeerToPeer
             //-------------------------------------------------
             //No registration happened previously - throw
             //-------------------------------------------------
-			if(m_RegistrationHandle.IsInvalid || m_RegistrationHandle.IsClosed)
-			{
-				throw new InvalidOperationException(SR.GetString(SR.Pnrp_NoRegistrationFound));
-			}
+            if(m_RegistrationHandle.IsInvalid || m_RegistrationHandle.IsClosed)
+            {
+                throw new InvalidOperationException(SR.GetString(SR.Pnrp_NoRegistrationFound));
+            }
 
             //-------------------------------------------------
             //Demand for the Unrestricted Pnrp Permission
@@ -640,10 +640,10 @@ namespace System.Net.PeerToPeer
 
             m_RegistrationHandle.Dispose();
 
-			m_PeerNameRecord = new PeerNameRecord();
+            m_PeerNameRecord = new PeerNameRecord();
 
             m_RegisteredPeerName = null;
-			
+            
             m_IsRegistered = false;
         }
 

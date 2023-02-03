@@ -1,8 +1,8 @@
-﻿//
+//
 // BasicHttpMessageSecurity.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).
@@ -33,26 +33,26 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-	[MonoTODO]
-	public sealed class BasicHttpMessageSecurity
-	{
-		internal BasicHttpMessageSecurity ()
-		{
-		}
-		
+    [MonoTODO]
+    public sealed class BasicHttpMessageSecurity
+    {
+        internal BasicHttpMessageSecurity ()
+        {
+        }
+        
 #if !MOBILE
-		SecurityAlgorithmSuite alg = SecurityAlgorithmSuite.Default;
+        SecurityAlgorithmSuite alg = SecurityAlgorithmSuite.Default;
 
-		public SecurityAlgorithmSuite AlgorithmSuite {
-			get { return alg; }
-			set { alg = value; }
-		}
+        public SecurityAlgorithmSuite AlgorithmSuite {
+            get { return alg; }
+            set { alg = value; }
+        }
 #endif
-		BasicHttpMessageCredentialType ctype;
+        BasicHttpMessageCredentialType ctype;
 
-		public BasicHttpMessageCredentialType ClientCredentialType {
-			get { return ctype; }
-			set { ctype = value; }
-		}
-	}
+        public BasicHttpMessageCredentialType ClientCredentialType {
+            get { return ctype; }
+            set { ctype = value; }
+        }
+    }
 }

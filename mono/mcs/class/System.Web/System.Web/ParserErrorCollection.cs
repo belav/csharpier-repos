@@ -2,7 +2,7 @@
 // System.Web.ParserErrorCollection.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2009 Novell, Inc (http://www.novell.com)
 //
@@ -33,63 +33,63 @@ using System.Runtime.Serialization;
 
 namespace System.Web
 {
-	[Serializable]
-	public sealed class ParserErrorCollection: CollectionBase
-	{
-		public ParserErrorCollection ()
-		{
-		}
+    [Serializable]
+    public sealed class ParserErrorCollection: CollectionBase
+    {
+        public ParserErrorCollection ()
+        {
+        }
 
-		public ParserErrorCollection (ParserError[] value)
-		{
-			InnerList.AddRange (value);
-		}
-		
-		public ParserError this [int index]
-		{
-			get { return (ParserError) InnerList [index]; }
-			set { InnerList[index] = value; }
-		}
-		
-		public int Add (ParserError value)
-		{
-			return List.Add (value);
-		}
-		
-		public void AddRange (ParserErrorCollection value)
-		{
-			InnerList.AddRange (value);
-		}
-		
-		public void AddRange (ParserError[] value)
-		{
-			InnerList.AddRange (value);
-		}
-		
-		public bool Contains (ParserError value)
-		{
-			return InnerList.Contains (value);
-		}
-		
-		public void CopyTo (ParserError[] array, int index)
-		{
-			List.CopyTo (array, index);
-		}
-		
-		public int IndexOf (ParserError value)
-		{
-			return InnerList.IndexOf (value);
-		}
-		
-		public void Insert (int index, ParserError value)
-		{
-			InnerList.Insert (index, value);
-		}
-		
-		public void Remove (ParserError value)
-		{
-			InnerList.Remove (value);
-		}
-	}
+        public ParserErrorCollection (ParserError[] value)
+        {
+            InnerList.AddRange (value);
+        }
+        
+        public ParserError this [int index]
+        {
+            get { return (ParserError) InnerList [index]; }
+            set { InnerList[index] = value; }
+        }
+        
+        public int Add (ParserError value)
+        {
+            return List.Add (value);
+        }
+        
+        public void AddRange (ParserErrorCollection value)
+        {
+            InnerList.AddRange (value);
+        }
+        
+        public void AddRange (ParserError[] value)
+        {
+            InnerList.AddRange (value);
+        }
+        
+        public bool Contains (ParserError value)
+        {
+            return InnerList.Contains (value);
+        }
+        
+        public void CopyTo (ParserError[] array, int index)
+        {
+            List.CopyTo (array, index);
+        }
+        
+        public int IndexOf (ParserError value)
+        {
+            return InnerList.IndexOf (value);
+        }
+        
+        public void Insert (int index, ParserError value)
+        {
+            InnerList.Insert (index, value);
+        }
+        
+        public void Remove (ParserError value)
+        {
+            InnerList.Remove (value);
+        }
+    }
 }
 

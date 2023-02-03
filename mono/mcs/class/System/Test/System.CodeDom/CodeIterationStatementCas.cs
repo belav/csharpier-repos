@@ -1,9 +1,9 @@
 //
 // CodeIterationStatementCas.cs
-//	- CAS unit tests for System.CodeDom.CodeIterationStatement
+//    - CAS unit tests for System.CodeDom.CodeIterationStatement
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,56 +37,56 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeIterationStatementCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeIterationStatementCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeIterationStatement cis = new CodeIterationStatement ();
-			Assert.IsNull (cis.IncrementStatement, "IncrementStatement");
-			cis.IncrementStatement = new CodeStatement ();
-			Assert.IsNull (cis.InitStatement, "InitStatement");
-			cis.InitStatement = new CodeStatement ();
-			Assert.AreEqual (0, cis.Statements.Count, "Statements");
-			Assert.IsNull (cis.TestExpression, "TestExpression");
-			cis.TestExpression = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeIterationStatement cis = new CodeIterationStatement ();
+            Assert.IsNull (cis.IncrementStatement, "IncrementStatement");
+            cis.IncrementStatement = new CodeStatement ();
+            Assert.IsNull (cis.InitStatement, "InitStatement");
+            cis.InitStatement = new CodeStatement ();
+            Assert.AreEqual (0, cis.Statements.Count, "Statements");
+            Assert.IsNull (cis.TestExpression, "TestExpression");
+            cis.TestExpression = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeStatement init = new CodeStatement ();
-			CodeExpression test = new CodeExpression ();
-			CodeStatement increment = new CodeStatement ();
-			CodeStatement[] statements = new CodeStatement[2] { init, increment };
-			CodeIterationStatement cis = new CodeIterationStatement (init, test, increment, statements);
-			Assert.AreSame (increment, cis.IncrementStatement, "IncrementStatement");
-			cis.IncrementStatement = new CodeStatement ();
-			Assert.AreSame (init, cis.InitStatement, "InitStatement");
-			cis.InitStatement = new CodeStatement ();
-			Assert.AreEqual (2, cis.Statements.Count, "Statements");
-			Assert.AreSame (test, cis.TestExpression, "TestExpression");
-			cis.TestExpression = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeStatement init = new CodeStatement ();
+            CodeExpression test = new CodeExpression ();
+            CodeStatement increment = new CodeStatement ();
+            CodeStatement[] statements = new CodeStatement[2] { init, increment };
+            CodeIterationStatement cis = new CodeIterationStatement (init, test, increment, statements);
+            Assert.AreSame (increment, cis.IncrementStatement, "IncrementStatement");
+            cis.IncrementStatement = new CodeStatement ();
+            Assert.AreSame (init, cis.InitStatement, "InitStatement");
+            cis.InitStatement = new CodeStatement ();
+            Assert.AreEqual (2, cis.Statements.Count, "Statements");
+            Assert.AreSame (test, cis.TestExpression, "TestExpression");
+            cis.TestExpression = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeIterationStatement).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeIterationStatement).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

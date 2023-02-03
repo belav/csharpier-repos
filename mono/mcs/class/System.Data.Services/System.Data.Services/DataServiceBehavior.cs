@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DataServiceBehavior.cs
 //  
 // Author:
@@ -32,22 +32,22 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services
 {
-	public sealed class DataServiceBehavior
-	{
-		public bool InvokeInterceptorsOnLinkDelete {
-			get; set;
-		}
+    public sealed class DataServiceBehavior
+    {
+        public bool InvokeInterceptorsOnLinkDelete {
+            get; set;
+        }
 
-		public bool AcceptCountRequests {
-			get; set;
-		}
+        public bool AcceptCountRequests {
+            get; set;
+        }
 
-		public bool AcceptProjectionRequests {
-			get; set;
-		}
+        public bool AcceptProjectionRequests {
+            get; set;
+        }
 
-		public DataServiceProtocolVersion MaxProtocolVersion {
-			get; set;
-		}
-	}
+        public DataServiceProtocolVersion MaxProtocolVersion {
+            get; set;
+        }
+    }
 }

@@ -18,7 +18,7 @@ delegate void Both5<in U, out V> (Both<V, int> b);
 
 class C
 {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

@@ -4,17 +4,17 @@
 using System;
 
 class ErrorCS0054 {
-	public ErrorCS0054 () {}
+    public ErrorCS0054 () {}
 }
 
 public class Foo {
-	ErrorCS0054[] errors;
+    ErrorCS0054[] errors;
 
-	public ErrorCS0054 this[int i] {
-		get { return new ErrorCS0054 (); }
-	}
+    public ErrorCS0054 this[int i] {
+        get { return new ErrorCS0054 (); }
+    }
 
-	public static void Main () {
-	}
+    public static void Main () {
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,16 +16,16 @@
 
 namespace Castle.DynamicProxy.Tests.Serialization
 {
-	using System;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Runtime.Serialization;
 
-	[Serializable]
-	public class SerializableExplicitImpl : ISerializable
-	{
-		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-		}
-	}
+    [Serializable]
+    public class SerializableExplicitImpl : ISerializable
+    {
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
+    }
 }
 
 #endif

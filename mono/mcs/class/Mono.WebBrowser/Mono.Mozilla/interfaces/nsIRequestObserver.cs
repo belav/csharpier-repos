@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,34 +32,34 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("fd91e2e0-1481-11d3-9333-00104ba0fd40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIRequestObserver {
+    [Guid ("fd91e2e0-1481-11d3-9333-00104ba0fd40")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIRequestObserver {
 
 #region nsIRequestObserver
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onStartRequest (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onStartRequest (
+                [MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
+                   IntPtr aContext);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onStopRequest (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext,
-				   int aStatusCode);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onStopRequest (
+                [MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
+                   IntPtr aContext,
+                   int aStatusCode);
 
 #endregion
-	}
+    }
 
 
-	internal class nsRequestObserver {
-		public static nsIRequestObserver GetProxy (Mono.WebBrowser.IWebBrowser control, nsIRequestObserver obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIRequestObserver).GUID, obj);
-			return o as nsIRequestObserver;
-		}
-	}
+    internal class nsRequestObserver {
+        public static nsIRequestObserver GetProxy (Mono.WebBrowser.IWebBrowser control, nsIRequestObserver obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIRequestObserver).GUID, obj);
+            return o as nsIRequestObserver;
+        }
+    }
 }

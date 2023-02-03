@@ -36,19 +36,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.DynamicData
 {
-	[TestFixture]
-	public class ContextConfigurationTests
-	{
-		[Test]
-		public void DefaultValues()
-		{
-			var ctx = new ContextConfiguration();
-			var func = ctx.MetadataProviderFactory;
+    [TestFixture]
+    public class ContextConfigurationTests
+    {
+        [Test]
+        public void DefaultValues()
+        {
+            var ctx = new ContextConfiguration();
+            var func = ctx.MetadataProviderFactory;
 
-			Assert.IsTrue(func != null, "#A1");
-			Assert.AreEqual(typeof (Func <Type, TypeDescriptionProvider>), func.GetType (), "#A2");
-			Assert.AreEqual(false, ctx.ScaffoldAllTables, "#A3");
-			Assert.AreEqual(typeof(AssociatedMetadataTypeTypeDescriptionProvider), func(typeof(string)).GetType (), "#A4");
-		}
-	}
+            Assert.IsTrue(func != null, "#A1");
+            Assert.AreEqual(typeof (Func <Type, TypeDescriptionProvider>), func.GetType (), "#A2");
+            Assert.AreEqual(false, ctx.ScaffoldAllTables, "#A3");
+            Assert.AreEqual(typeof(AssociatedMetadataTypeTypeDescriptionProvider), func(typeof(string)).GetType (), "#A4");
+        }
+    }
 }

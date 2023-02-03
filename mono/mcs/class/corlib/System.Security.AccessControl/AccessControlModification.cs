@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AccessControlModification enum
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,13 +27,13 @@
 //
 
 namespace System.Security.AccessControl {
-	public enum AccessControlModification {
-		Add = 0,
-		Set = 1,
-		Reset = 2,
-		Remove = 3,
-		RemoveAll = 4,
-		RemoveSpecific = 5,
-	}
+    public enum AccessControlModification {
+        Add = 0,
+        Set = 1,
+        Reset = 2,
+        Remove = 3,
+        RemoveAll = 4,
+        RemoveSpecific = 5,
+    }
 }
 

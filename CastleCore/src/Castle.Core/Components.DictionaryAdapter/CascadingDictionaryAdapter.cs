@@ -14,43 +14,43 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System.Collections;
+    using System.Collections;
 
-	public class CascadingDictionaryAdapter : AbstractDictionaryAdapter
-	{
-		private readonly IDictionary primary;
-		private readonly IDictionary secondary;
+    public class CascadingDictionaryAdapter : AbstractDictionaryAdapter
+    {
+        private readonly IDictionary primary;
+        private readonly IDictionary secondary;
 
-		public CascadingDictionaryAdapter(IDictionary primary, IDictionary secondary)
-		{
-			this.primary = primary;
-			this.secondary = secondary;
-		}
+        public CascadingDictionaryAdapter(IDictionary primary, IDictionary secondary)
+        {
+            this.primary = primary;
+            this.secondary = secondary;
+        }
 
-		public IDictionary Primary
-		{
-			get { return primary; }
-		}
+        public IDictionary Primary
+        {
+            get { return primary; }
+        }
 
-		public IDictionary Secondary
-		{
-			get { return secondary; }
-		}
+        public IDictionary Secondary
+        {
+            get { return secondary; }
+        }
 
-		public override bool IsReadOnly
-		{
-			get { return primary.IsReadOnly; }
-		}
+        public override bool IsReadOnly
+        {
+            get { return primary.IsReadOnly; }
+        }
 
-		public override bool Contains(object key)
-		{
-			return primary.Contains(key) || secondary.Contains(key);
-		}
+        public override bool Contains(object key)
+        {
+            return primary.Contains(key) || secondary.Contains(key);
+        }
 
-		public override object this[object key]
-		{
-			get { return primary[key] ?? secondary[key]; }
-			set { primary[key] = value; }
-		}
-	}
+        public override object this[object key]
+        {
+            get { return primary[key] ?? secondary[key]; }
+            set { primary[key] = value; }
+        }
+    }
 }

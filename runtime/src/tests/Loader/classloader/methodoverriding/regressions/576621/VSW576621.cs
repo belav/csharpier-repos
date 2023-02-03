@@ -12,20 +12,20 @@ public class Test_VSW576621
    public static int Main()
    {
   
-      	C2 obj2 = new C2();
+          C2 obj2 = new C2();
 
-      	if ( obj2.M3() == 5)
-      	{
-	      	// correct method was invoked
-	      	Console.WriteLine("PASS");
-		return 100;
-      	}
-	else
-	{
-	      	Console.WriteLine("FAIL");
-		return 101;
-	}
-	
+          if ( obj2.M3() == 5)
+          {
+              // correct method was invoked
+              Console.WriteLine("PASS");
+        return 100;
+          }
+    else
+    {
+              Console.WriteLine("FAIL");
+        return 101;
+    }
+    
       
    }
 }

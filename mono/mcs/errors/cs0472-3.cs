@@ -4,9 +4,9 @@
 
 public class X
 {
-	public static void Compute (int x)
-	{
-		if (true && x != null)
-			return;
-	}
+    public static void Compute (int x)
+    {
+        if (true && x != null)
+            return;
+    }
 }

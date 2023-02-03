@@ -2,7 +2,7 @@
 // System.Web.UI.Design.HierarchicalDataSourceConverter
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -36,19 +36,19 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design {
 
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class HierarchicalDataSourceConverter : DataSourceConverter
-	{
-		public HierarchicalDataSourceConverter ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class HierarchicalDataSourceConverter : DataSourceConverter
+    {
+        public HierarchicalDataSourceConverter ()
+        {
+        }
 
-		[MonoTODO]
-		protected override bool IsValidDataSource (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override bool IsValidDataSource (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 

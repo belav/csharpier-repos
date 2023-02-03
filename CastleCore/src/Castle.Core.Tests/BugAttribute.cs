@@ -14,16 +14,16 @@
 
 namespace Castle
 {
-	using System;
+    using System;
 
-	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
-	public class BugAttribute : Attribute
-	{
-		public BugAttribute(string bugId)
-		{
-			BugId = bugId;
-		}
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+    public class BugAttribute : Attribute
+    {
+        public BugAttribute(string bugId)
+        {
+            BugId = bugId;
+        }
 
-		public string BugId { get; set; }
-	}
+        public string BugId { get; set; }
+    }
 }

@@ -8,6 +8,6 @@ using System;
 public delegate void Handler ();
 
 class Test {
-	extern event Handler OnFoo;
+    extern event Handler OnFoo;
 }
 

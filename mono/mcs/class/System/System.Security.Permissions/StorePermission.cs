@@ -2,7 +2,7 @@
 // System.Security.Permissions.StorePermission class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,145 +29,145 @@
 using System.Globalization;
 
 namespace System.Security.Permissions {
-	
-	[Serializable]
-	public sealed class StorePermission : CodeAccessPermission, IUnrestrictedPermission {
+    
+    [Serializable]
+    public sealed class StorePermission : CodeAccessPermission, IUnrestrictedPermission {
 
-		private const int version = 1;
+        private const int version = 1;
 
-		private StorePermissionFlags _flags;
-
-
-		public StorePermission (PermissionState state)
-		{
-			if (PermissionHelper.CheckPermissionState (state, true) == PermissionState.Unrestricted)
-				_flags = StorePermissionFlags.AllFlags;
-			else
-				_flags = StorePermissionFlags.NoFlags;
-		}
-
-		public StorePermission (StorePermissionFlags flag) 
-		{
-			// reuse validation by the Flags property
-			Flags = flag;
-		}
+        private StorePermissionFlags _flags;
 
 
-		public StorePermissionFlags Flags {
-			get { return _flags; }
-			set {
-				if ((value != 0) && (value & StorePermissionFlags.AllFlags) == 0) {
-					string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
-					throw new ArgumentException (msg, "StorePermissionFlags");
-				}
-				_flags = value;
-			}
-		}
+        public StorePermission (PermissionState state)
+        {
+            if (PermissionHelper.CheckPermissionState (state, true) == PermissionState.Unrestricted)
+                _flags = StorePermissionFlags.AllFlags;
+            else
+                _flags = StorePermissionFlags.NoFlags;
+        }
 
-		public bool IsUnrestricted () 
-		{
-			return (_flags == StorePermissionFlags.AllFlags);
-		}
+        public StorePermission (StorePermissionFlags flag) 
+        {
+            // reuse validation by the Flags property
+            Flags = flag;
+        }
 
-		public override IPermission Copy () 
-		{
-			// buggy behaviour - affects other operations that use Copy
-			// reported as FDBK40928
-			if (_flags == StorePermissionFlags.NoFlags)
-				return null;
 
-			return new StorePermission (_flags);
-		}
+        public StorePermissionFlags Flags {
+            get { return _flags; }
+            set {
+                if ((value != 0) && (value & StorePermissionFlags.AllFlags) == 0) {
+                    string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
+                    throw new ArgumentException (msg, "StorePermissionFlags");
+                }
+                _flags = value;
+            }
+        }
 
-		public override IPermission Intersect (IPermission target) 
-		{
-			StorePermission dp = Cast (target);
-			if (dp == null)
-				return null;
+        public bool IsUnrestricted () 
+        {
+            return (_flags == StorePermissionFlags.AllFlags);
+        }
 
-			if (this.IsUnrestricted () && dp.IsUnrestricted ())
-				return new StorePermission (PermissionState.Unrestricted);
-			if (this.IsUnrestricted ())
-				return dp.Copy ();
-			if (dp.IsUnrestricted ())
-				return this.Copy ();
+        public override IPermission Copy () 
+        {
+            // buggy behaviour - affects other operations that use Copy
+            // reported as FDBK40928
+            if (_flags == StorePermissionFlags.NoFlags)
+                return null;
 
-			StorePermissionFlags spf = _flags & dp._flags;
-			if (spf == StorePermissionFlags.NoFlags)
-				return null;
+            return new StorePermission (_flags);
+        }
 
-			return new StorePermission (spf);
-		}
+        public override IPermission Intersect (IPermission target) 
+        {
+            StorePermission dp = Cast (target);
+            if (dp == null)
+                return null;
 
-		public override IPermission Union (IPermission target) 
-		{
-			StorePermission dp = Cast (target);
-			if (dp == null)
-				return this.Copy (); // will return null for NoFlags
+            if (this.IsUnrestricted () && dp.IsUnrestricted ())
+                return new StorePermission (PermissionState.Unrestricted);
+            if (this.IsUnrestricted ())
+                return dp.Copy ();
+            if (dp.IsUnrestricted ())
+                return this.Copy ();
 
-			if (this.IsUnrestricted () || dp.IsUnrestricted ())
-				return new StorePermission (PermissionState.Unrestricted);
-			
-			StorePermissionFlags spf = _flags | dp._flags;
-			if (spf == StorePermissionFlags.NoFlags)
-				return null;
+            StorePermissionFlags spf = _flags & dp._flags;
+            if (spf == StorePermissionFlags.NoFlags)
+                return null;
 
-			return new StorePermission (spf);
-		}
+            return new StorePermission (spf);
+        }
 
-		public override bool IsSubsetOf (IPermission target) 
-		{
-			StorePermission dp = Cast (target);
-			if (dp == null) 
-				return (_flags == StorePermissionFlags.NoFlags);
+        public override IPermission Union (IPermission target) 
+        {
+            StorePermission dp = Cast (target);
+            if (dp == null)
+                return this.Copy (); // will return null for NoFlags
 
-			if (dp.IsUnrestricted ())
-				return true;
-			if (this.IsUnrestricted ())
-				return false;
+            if (this.IsUnrestricted () || dp.IsUnrestricted ())
+                return new StorePermission (PermissionState.Unrestricted);
+            
+            StorePermissionFlags spf = _flags | dp._flags;
+            if (spf == StorePermissionFlags.NoFlags)
+                return null;
 
-			return ((_flags & ~dp._flags) == 0);
-		}
+            return new StorePermission (spf);
+        }
 
-		public override void FromXml (SecurityElement securityElement) 
-		{
-			// General validation in CodeAccessPermission
-			PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+        public override bool IsSubsetOf (IPermission target) 
+        {
+            StorePermission dp = Cast (target);
+            if (dp == null) 
+                return (_flags == StorePermissionFlags.NoFlags);
 
-			string s = securityElement.Attribute ("Flags");
-			if (s == null)
-				_flags = StorePermissionFlags.NoFlags;
-			else
-				_flags = (StorePermissionFlags) Enum.Parse (typeof (StorePermissionFlags), s);
-		}
+            if (dp.IsUnrestricted ())
+                return true;
+            if (this.IsUnrestricted ())
+                return false;
 
-		public override SecurityElement ToXml () 
-		{
-			SecurityElement e = PermissionHelper.Element (typeof (StorePermission), version);
-			if (this.IsUnrestricted ()) {
-				e.AddAttribute ("Unrestricted", Boolean.TrueString);
-			} else {
-				e.AddAttribute ("Flags", _flags.ToString ());
-			}
-			return e;
-		}
+            return ((_flags & ~dp._flags) == 0);
+        }
 
-		// helpers
+        public override void FromXml (SecurityElement securityElement) 
+        {
+            // General validation in CodeAccessPermission
+            PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
+            // Note: we do not (yet) care about the return value 
+            // as we only accept version 1 (min/max values)
 
-		private StorePermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
+            string s = securityElement.Attribute ("Flags");
+            if (s == null)
+                _flags = StorePermissionFlags.NoFlags;
+            else
+                _flags = (StorePermissionFlags) Enum.Parse (typeof (StorePermissionFlags), s);
+        }
 
-			StorePermission dp = (target as StorePermission);
-			if (dp == null) {
-				PermissionHelper.ThrowInvalidPermission (target, typeof (StorePermission));
-			}
+        public override SecurityElement ToXml () 
+        {
+            SecurityElement e = PermissionHelper.Element (typeof (StorePermission), version);
+            if (this.IsUnrestricted ()) {
+                e.AddAttribute ("Unrestricted", Boolean.TrueString);
+            } else {
+                e.AddAttribute ("Flags", _flags.ToString ());
+            }
+            return e;
+        }
 
-			return dp;
-		}
-	}
+        // helpers
+
+        private StorePermission Cast (IPermission target)
+        {
+            if (target == null)
+                return null;
+
+            StorePermission dp = (target as StorePermission);
+            if (dp == null) {
+                PermissionHelper.ThrowInvalidPermission (target, typeof (StorePermission));
+            }
+
+            return dp;
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests.Projection;
+namespace AutoMapper.UnitTests.Projection;
 public class ProjectEnumTest
 {
     private MapperConfiguration _config;

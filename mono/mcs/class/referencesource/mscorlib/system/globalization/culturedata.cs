@@ -201,137 +201,137 @@ namespace System.Globalization
                 if (s_RegionNames == null)
                 {
                     var regionNames = new Dictionary<string, string> {
-			{ "029", "en-029" },
-			{ "AE",  "ar-AE" },
-			{ "AF",  "prs-AF" },
-			{ "AL",  "sq-AL" },
-			{ "AM",  "hy-AM" },
-			{ "AR",  "es-AR" },
-			{ "AT",  "de-AT" },
-			{ "AU",  "en-AU" },
-			{ "AZ",  "az-Cyrl-AZ" },
-			{ "BA",  "bs-Latn-BA" },
-			{ "BD",  "bn-BD" },
-			{ "BE",  "nl-BE" },
-			{ "BG",  "bg-BG" },
-			{ "BH",  "ar-BH" },
-			{ "BN",  "ms-BN" },
-			{ "BO",  "es-BO" },
-			{ "BR",  "pt-BR" },
-			{ "BY",  "be-BY" },
-			{ "BZ",  "en-BZ" },
-			{ "CA",  "en-CA" },
-			{ "CH",  "it-CH" },
-			{ "CL",  "es-CL" },
-			{ "CN",  "zh-CN" },
-			{ "CO",  "es-CO" },
-			{ "CR",  "es-CR" },
-			{ "CS",  "sr-Cyrl-CS" },
-			{ "CZ",  "cs-CZ" },
-			{ "DE",  "de-DE" },
-			{ "DK",  "da-DK" },
-			{ "DO",  "es-DO" },
-			{ "DZ",  "ar-DZ" },
-			{ "EC",  "es-EC" },
-			{ "EE",  "et-EE" },
-			{ "EG",  "ar-EG" },
-			{ "ES",  "es-ES" },
-			{ "ET",  "am-ET" },
-			{ "FI",  "fi-FI" },
-			{ "FO",  "fo-FO" },
-			{ "FR",  "fr-FR" },
-			{ "GB",  "en-GB" },
-			{ "GE",  "ka-GE" },
-			{ "GL",  "kl-GL" },
-			{ "GR",  "el-GR" },
-			{ "GT",  "es-GT" },
-			{ "HK",  "zh-HK" },
-			{ "HN",  "es-HN" },
-			{ "HR",  "hr-HR" },
-			{ "HU",  "hu-HU" },
-			{ "ID",  "id-ID" },
-			{ "IE",  "en-IE" },
-			{ "IL",  "he-IL" },
-			{ "IN",  "hi-IN" },
-			{ "IQ",  "ar-IQ" },
-			{ "IR",  "fa-IR" },
-			{ "IS",  "is-IS" },
-			{ "IT",  "it-IT" },
-			{ "IV",  "" },
-			{ "JM",  "en-JM" },
-			{ "JO",  "ar-JO" },
-			{ "JP",  "ja-JP" },
-			{ "KE",  "sw-KE" },
-			{ "KG",  "ky-KG" },
-			{ "KH",  "km-KH" },
-			{ "KR",  "ko-KR" },
-			{ "KW",  "ar-KW" },
-			{ "KZ",  "kk-KZ" },
-			{ "LA",  "lo-LA" },
-			{ "LB",  "ar-LB" },
-			{ "LI",  "de-LI" },
-			{ "LK",  "si-LK" },
-			{ "LT",  "lt-LT" },
-			{ "LU",  "lb-LU" },
-			{ "LV",  "lv-LV" },
-			{ "LY",  "ar-LY" },
-			{ "MA",  "ar-MA" },
-			{ "MC",  "fr-MC" },
-			{ "ME",  "sr-Latn-ME" },
-			{ "MK",  "mk-MK" },
-			{ "MN",  "mn-MN" },
-			{ "MO",  "zh-MO" },
-			{ "MT",  "mt-MT" },
-			{ "MV",  "dv-MV" },
-			{ "MX",  "es-MX" },
-			{ "MY",  "ms-MY" },
-			{ "NG",  "ig-NG" },
-			{ "NI",  "es-NI" },
-			{ "NL",  "nl-NL" },
-			{ "NO",  "nn-NO" },
-			{ "NP",  "ne-NP" },
-			{ "NZ",  "en-NZ" },
-			{ "OM",  "ar-OM" },
-			{ "PA",  "es-PA" },
-			{ "PE",  "es-PE" },
-			{ "PH",  "en-PH" },
-			{ "PK",  "ur-PK" },
-			{ "PL",  "pl-PL" },
-			{ "PR",  "es-PR" },
-			{ "PT",  "pt-PT" },
-			{ "PY",  "es-PY" },
-			{ "QA",  "ar-QA" },
-			{ "RO",  "ro-RO" },
-			{ "RS",  "sr-Latn-RS" },
-			{ "RU",  "ru-RU" },
-			{ "RW",  "rw-RW" },
-			{ "SA",  "ar-SA" },
-			{ "SE",  "sv-SE" },
-			{ "SG",  "zh-SG" },
-			{ "SI",  "sl-SI" },
-			{ "SK",  "sk-SK" },
-			{ "SN",  "wo-SN" },
-			{ "SV",  "es-SV" },
-			{ "SY",  "ar-SY" },
-			{ "TH",  "th-TH" },
-			{ "TJ",  "tg-Cyrl-TJ" },
-			{ "TM",  "tk-TM" },
-			{ "TN",  "ar-TN" },
-			{ "TR",  "tr-TR" },
-			{ "TT",  "en-TT" },
-			{ "TW",  "zh-TW" },
-			{ "UA",  "uk-UA" },
-			{ "US",  "en-US" },
-			{ "UY",  "es-UY" },
-			{ "UZ",  "uz-Cyrl-UZ" },
-			{ "VE",  "es-VE" },
-			{ "VN",  "vi-VN" },
-			{ "YE",  "ar-YE" },
-			{ "ZA",  "af-ZA" },
-			{ "ZW",  "en-ZW" }
-		    };
-		    s_RegionNames = regionNames;
-		}
+            { "029", "en-029" },
+            { "AE",  "ar-AE" },
+            { "AF",  "prs-AF" },
+            { "AL",  "sq-AL" },
+            { "AM",  "hy-AM" },
+            { "AR",  "es-AR" },
+            { "AT",  "de-AT" },
+            { "AU",  "en-AU" },
+            { "AZ",  "az-Cyrl-AZ" },
+            { "BA",  "bs-Latn-BA" },
+            { "BD",  "bn-BD" },
+            { "BE",  "nl-BE" },
+            { "BG",  "bg-BG" },
+            { "BH",  "ar-BH" },
+            { "BN",  "ms-BN" },
+            { "BO",  "es-BO" },
+            { "BR",  "pt-BR" },
+            { "BY",  "be-BY" },
+            { "BZ",  "en-BZ" },
+            { "CA",  "en-CA" },
+            { "CH",  "it-CH" },
+            { "CL",  "es-CL" },
+            { "CN",  "zh-CN" },
+            { "CO",  "es-CO" },
+            { "CR",  "es-CR" },
+            { "CS",  "sr-Cyrl-CS" },
+            { "CZ",  "cs-CZ" },
+            { "DE",  "de-DE" },
+            { "DK",  "da-DK" },
+            { "DO",  "es-DO" },
+            { "DZ",  "ar-DZ" },
+            { "EC",  "es-EC" },
+            { "EE",  "et-EE" },
+            { "EG",  "ar-EG" },
+            { "ES",  "es-ES" },
+            { "ET",  "am-ET" },
+            { "FI",  "fi-FI" },
+            { "FO",  "fo-FO" },
+            { "FR",  "fr-FR" },
+            { "GB",  "en-GB" },
+            { "GE",  "ka-GE" },
+            { "GL",  "kl-GL" },
+            { "GR",  "el-GR" },
+            { "GT",  "es-GT" },
+            { "HK",  "zh-HK" },
+            { "HN",  "es-HN" },
+            { "HR",  "hr-HR" },
+            { "HU",  "hu-HU" },
+            { "ID",  "id-ID" },
+            { "IE",  "en-IE" },
+            { "IL",  "he-IL" },
+            { "IN",  "hi-IN" },
+            { "IQ",  "ar-IQ" },
+            { "IR",  "fa-IR" },
+            { "IS",  "is-IS" },
+            { "IT",  "it-IT" },
+            { "IV",  "" },
+            { "JM",  "en-JM" },
+            { "JO",  "ar-JO" },
+            { "JP",  "ja-JP" },
+            { "KE",  "sw-KE" },
+            { "KG",  "ky-KG" },
+            { "KH",  "km-KH" },
+            { "KR",  "ko-KR" },
+            { "KW",  "ar-KW" },
+            { "KZ",  "kk-KZ" },
+            { "LA",  "lo-LA" },
+            { "LB",  "ar-LB" },
+            { "LI",  "de-LI" },
+            { "LK",  "si-LK" },
+            { "LT",  "lt-LT" },
+            { "LU",  "lb-LU" },
+            { "LV",  "lv-LV" },
+            { "LY",  "ar-LY" },
+            { "MA",  "ar-MA" },
+            { "MC",  "fr-MC" },
+            { "ME",  "sr-Latn-ME" },
+            { "MK",  "mk-MK" },
+            { "MN",  "mn-MN" },
+            { "MO",  "zh-MO" },
+            { "MT",  "mt-MT" },
+            { "MV",  "dv-MV" },
+            { "MX",  "es-MX" },
+            { "MY",  "ms-MY" },
+            { "NG",  "ig-NG" },
+            { "NI",  "es-NI" },
+            { "NL",  "nl-NL" },
+            { "NO",  "nn-NO" },
+            { "NP",  "ne-NP" },
+            { "NZ",  "en-NZ" },
+            { "OM",  "ar-OM" },
+            { "PA",  "es-PA" },
+            { "PE",  "es-PE" },
+            { "PH",  "en-PH" },
+            { "PK",  "ur-PK" },
+            { "PL",  "pl-PL" },
+            { "PR",  "es-PR" },
+            { "PT",  "pt-PT" },
+            { "PY",  "es-PY" },
+            { "QA",  "ar-QA" },
+            { "RO",  "ro-RO" },
+            { "RS",  "sr-Latn-RS" },
+            { "RU",  "ru-RU" },
+            { "RW",  "rw-RW" },
+            { "SA",  "ar-SA" },
+            { "SE",  "sv-SE" },
+            { "SG",  "zh-SG" },
+            { "SI",  "sl-SI" },
+            { "SK",  "sk-SK" },
+            { "SN",  "wo-SN" },
+            { "SV",  "es-SV" },
+            { "SY",  "ar-SY" },
+            { "TH",  "th-TH" },
+            { "TJ",  "tg-Cyrl-TJ" },
+            { "TM",  "tk-TM" },
+            { "TN",  "ar-TN" },
+            { "TR",  "tr-TR" },
+            { "TT",  "en-TT" },
+            { "TW",  "zh-TW" },
+            { "UA",  "uk-UA" },
+            { "US",  "en-US" },
+            { "UY",  "es-UY" },
+            { "UZ",  "uz-Cyrl-UZ" },
+            { "VE",  "es-VE" },
+            { "VN",  "vi-VN" },
+            { "YE",  "ar-YE" },
+            { "ZA",  "af-ZA" },
+            { "ZW",  "en-ZW" }
+            };
+            s_RegionNames = regionNames;
+        }
                 return s_RegionNames;
             }
         }
@@ -350,133 +350,133 @@ namespace System.Globalization
             {
                 if (s_Invariant == null)
                 {
-		    // Make a new culturedata
-		    CultureData invariant = new CultureData();
+            // Make a new culturedata
+            CultureData invariant = new CultureData();
 
 #if !FEATURE_CORECLR
-		    // Call the native code to get the value of bWin32Installed.
-		    // For versions <= Vista, we set this to false for compatibility with v2.
-		    // For Windows 7, the flag is true.
-		    invariant.bUseOverrides = false;
-		    invariant.sRealName = "";
+            // Call the native code to get the value of bWin32Installed.
+            // For versions <= Vista, we set this to false for compatibility with v2.
+            // For Windows 7, the flag is true.
+            invariant.bUseOverrides = false;
+            invariant.sRealName = "";
 
-		    // Ask the native code to fill it out for us, we only need the field IsWin32Installed
-		    nativeInitCultureData(invariant);
+            // Ask the native code to fill it out for us, we only need the field IsWin32Installed
+            nativeInitCultureData(invariant);
 #endif
 
-		    // Basics
-		    // Note that we override the resources since this IS NOT supposed to change (by definition)
-		    invariant.bUseOverrides = false;
-		    invariant.sRealName = "";                     // Name you passed in (ie: en-US, en, or de-DE_phoneb)
-		    invariant.sWindowsName = "";                     // Name OS thinks the object is (ie: de-DE_phoneb, or en-US (even if en was passed in))
+            // Basics
+            // Note that we override the resources since this IS NOT supposed to change (by definition)
+            invariant.bUseOverrides = false;
+            invariant.sRealName = "";                     // Name you passed in (ie: en-US, en, or de-DE_phoneb)
+            invariant.sWindowsName = "";                     // Name OS thinks the object is (ie: de-DE_phoneb, or en-US (even if en was passed in))
 
-		    // Identity
-		    invariant.sName = "";                     // locale name (ie: en-us)
-		    invariant.sParent = "";                     // Parent name (which may be a custom locale/culture)
-		    invariant.bNeutral = false;                   // Flags for the culture (ie: neutral or not right now)
+            // Identity
+            invariant.sName = "";                     // locale name (ie: en-us)
+            invariant.sParent = "";                     // Parent name (which may be a custom locale/culture)
+            invariant.bNeutral = false;                   // Flags for the culture (ie: neutral or not right now)
 #if !FEATURE_CORECLR
-		    // Don't set invariant.bWin32Installed, we used nativeInitCultureData for that.
-		    invariant.bFramework = true;
+            // Don't set invariant.bWin32Installed, we used nativeInitCultureData for that.
+            invariant.bFramework = true;
 #endif
 
-		    invariant.sEnglishDisplayName = "Invariant Language (Invariant Country)"; // English pretty name for this locale
-		    invariant.sNativeDisplayName = "Invariant Language (Invariant Country)";  // Native pretty name for this locale
-		    invariant.sSpecificCulture = "";                     // The culture name to be used in CultureInfo.CreateSpecificCulture()
+            invariant.sEnglishDisplayName = "Invariant Language (Invariant Country)"; // English pretty name for this locale
+            invariant.sNativeDisplayName = "Invariant Language (Invariant Country)";  // Native pretty name for this locale
+            invariant.sSpecificCulture = "";                     // The culture name to be used in CultureInfo.CreateSpecificCulture()
 
-		    // Language
-		    invariant.sISO639Language = "iv";                   // ISO 639 Language Name
-		    invariant.sLocalizedLanguage = "Invariant Language";   // Display name for this Language
-		    invariant.sEnglishLanguage = "Invariant Language";   // English name for this language
-		    invariant.sNativeLanguage = "Invariant Language";   // Native name of this language
+            // Language
+            invariant.sISO639Language = "iv";                   // ISO 639 Language Name
+            invariant.sLocalizedLanguage = "Invariant Language";   // Display name for this Language
+            invariant.sEnglishLanguage = "Invariant Language";   // English name for this language
+            invariant.sNativeLanguage = "Invariant Language";   // Native name of this language
 
-		    // Region
-		    invariant.sRegionName = "IV";                   // (RegionInfo)
-		    // Unused for now:
-		    //            invariant.iCountry              =1;                      // ---- code (RegionInfo)
-		    invariant.iGeoId = 244;                    // GeoId (Windows Only)
-		    invariant.sEnglishCountry = "Invariant Country";    // english country name (RegionInfo)
-		    invariant.sNativeCountry = "Invariant Country";    // native country name (Windows Only)
-		    invariant.sISO3166CountryName = "IV";                   // (RegionInfo), ie: US
+            // Region
+            invariant.sRegionName = "IV";                   // (RegionInfo)
+            // Unused for now:
+            //            invariant.iCountry              =1;                      // ---- code (RegionInfo)
+            invariant.iGeoId = 244;                    // GeoId (Windows Only)
+            invariant.sEnglishCountry = "Invariant Country";    // english country name (RegionInfo)
+            invariant.sNativeCountry = "Invariant Country";    // native country name (Windows Only)
+            invariant.sISO3166CountryName = "IV";                   // (RegionInfo), ie: US
 
-		    // Numbers
-		    invariant.sPositiveSign = "+";                    // positive sign
-		    invariant.sNegativeSign = "-";                    // negative sign
-		    invariant.saNativeDigits = new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // native characters for digits 0-9
-		    invariant.iDigitSubstitution = 1;                      // Digit substitution 0=context, 1=none/arabic, 2=Native/national (2 seems to be unused) (Windows Only)
-		    invariant.iLeadingZeros = 1;                      // leading zeros 0=no leading zeros, 1=leading zeros
-		    invariant.iDigits = 2;                      // number of fractional digits
-		    invariant.iNegativeNumber = 1;                      // negative number format
-		    invariant.waGrouping = new int[] { 3 };          // grouping of digits
-		    invariant.sDecimalSeparator = ".";                    // decimal separator
-		    invariant.sThousandSeparator = ",";                    // thousands separator
-		    invariant.sNaN = "NaN";                  // Not a Number
-		    invariant.sPositiveInfinity = "Infinity";             // + Infinity
-		    invariant.sNegativeInfinity = "-Infinity";            // - Infinity
+            // Numbers
+            invariant.sPositiveSign = "+";                    // positive sign
+            invariant.sNegativeSign = "-";                    // negative sign
+            invariant.saNativeDigits = new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // native characters for digits 0-9
+            invariant.iDigitSubstitution = 1;                      // Digit substitution 0=context, 1=none/arabic, 2=Native/national (2 seems to be unused) (Windows Only)
+            invariant.iLeadingZeros = 1;                      // leading zeros 0=no leading zeros, 1=leading zeros
+            invariant.iDigits = 2;                      // number of fractional digits
+            invariant.iNegativeNumber = 1;                      // negative number format
+            invariant.waGrouping = new int[] { 3 };          // grouping of digits
+            invariant.sDecimalSeparator = ".";                    // decimal separator
+            invariant.sThousandSeparator = ",";                    // thousands separator
+            invariant.sNaN = "NaN";                  // Not a Number
+            invariant.sPositiveInfinity = "Infinity";             // + Infinity
+            invariant.sNegativeInfinity = "-Infinity";            // - Infinity
 
-		    // Percent
-		    invariant.iNegativePercent = 0;                      // Negative Percent (0-3)
-		    invariant.iPositivePercent = 0;                      // Positive Percent (0-11)
-		    invariant.sPercent = "%";                    // Percent (%) symbol
-		    invariant.sPerMille = "\x2030";               // PerMille(‰) symbol
+            // Percent
+            invariant.iNegativePercent = 0;                      // Negative Percent (0-3)
+            invariant.iPositivePercent = 0;                      // Positive Percent (0-11)
+            invariant.sPercent = "%";                    // Percent (%) symbol
+            invariant.sPerMille = "\x2030";               // PerMille(‰) symbol
 
-		    // Currency
-		    invariant.sCurrency = "\x00a4";                // local monetary symbol "¤: for international monetary symbol
-		    invariant.sIntlMonetarySymbol = "XDR";                  // international monetary symbol (RegionInfo)
-		    invariant.sEnglishCurrency = "International Monetary Fund"; // English name for this currency (Windows Only)
-		    invariant.sNativeCurrency = "International Monetary Fund"; // Native name for this currency (Windows Only)
-		    invariant.iCurrencyDigits = 2;                      // # local monetary fractional digits
-		    invariant.iCurrency = 0;                      // positive currency format
-		    invariant.iNegativeCurrency = 0;                      // negative currency format
-		    invariant.waMonetaryGrouping = new int[] { 3 };          // monetary grouping of digits
-		    invariant.sMonetaryDecimal = ".";                    // monetary decimal separator
-		    invariant.sMonetaryThousand = ",";                    // monetary thousands separator
+            // Currency
+            invariant.sCurrency = "\x00a4";                // local monetary symbol "¤: for international monetary symbol
+            invariant.sIntlMonetarySymbol = "XDR";                  // international monetary symbol (RegionInfo)
+            invariant.sEnglishCurrency = "International Monetary Fund"; // English name for this currency (Windows Only)
+            invariant.sNativeCurrency = "International Monetary Fund"; // Native name for this currency (Windows Only)
+            invariant.iCurrencyDigits = 2;                      // # local monetary fractional digits
+            invariant.iCurrency = 0;                      // positive currency format
+            invariant.iNegativeCurrency = 0;                      // negative currency format
+            invariant.waMonetaryGrouping = new int[] { 3 };          // monetary grouping of digits
+            invariant.sMonetaryDecimal = ".";                    // monetary decimal separator
+            invariant.sMonetaryThousand = ",";                    // monetary thousands separator
 
-		    // Misc
-		    invariant.iMeasure = 0;                      // system of measurement 0=metric, 1=US (RegionInfo)
-		    invariant.sListSeparator = ",";                    // list separator
-		    // Unused for now:
-		    //            invariant.iPaperSize            =9;                      // default paper size (RegionInfo)
-		    //            invariant.waFontSignature       ="\x0002\x0000\x0000\x0000\x0000\x0000\x0000\x8000\x0001\x0000\x0000\x8000\x0001\x0000\x0000\x8000"; // Font signature (16 WORDS) (Windows Only)
+            // Misc
+            invariant.iMeasure = 0;                      // system of measurement 0=metric, 1=US (RegionInfo)
+            invariant.sListSeparator = ",";                    // list separator
+            // Unused for now:
+            //            invariant.iPaperSize            =9;                      // default paper size (RegionInfo)
+            //            invariant.waFontSignature       ="\x0002\x0000\x0000\x0000\x0000\x0000\x0000\x8000\x0001\x0000\x0000\x8000\x0001\x0000\x0000\x8000"; // Font signature (16 WORDS) (Windows Only)
 
-		    // Time
-		    invariant.sAM1159 = "AM";                   // AM designator
-		    invariant.sPM2359 = "PM";                   // PM designator
-		    invariant.saLongTimes = new String[] { "HH:mm:ss" };                             // time format
-		    invariant.saShortTimes = new String[] { "HH:mm", "hh:mm tt", "H:mm", "h:mm tt" }; // short time format
-		    invariant.saDurationFormats = new String[] { "HH:mm:ss" };                             // time duration format
+            // Time
+            invariant.sAM1159 = "AM";                   // AM designator
+            invariant.sPM2359 = "PM";                   // PM designator
+            invariant.saLongTimes = new String[] { "HH:mm:ss" };                             // time format
+            invariant.saShortTimes = new String[] { "HH:mm", "hh:mm tt", "H:mm", "h:mm tt" }; // short time format
+            invariant.saDurationFormats = new String[] { "HH:mm:ss" };                             // time duration format
 
-		    // Calendar specific data
-		    invariant.iFirstDayOfWeek = 0;                      // first day of week
-		    invariant.iFirstWeekOfYear = 0;                      // first week of year
-		    invariant.waCalendars = new int[] { (int)CalendarId.GREGORIAN };       // all available calendar type(s).  The first one is the default calendar
+            // Calendar specific data
+            invariant.iFirstDayOfWeek = 0;                      // first day of week
+            invariant.iFirstWeekOfYear = 0;                      // first week of year
+            invariant.waCalendars = new int[] { (int)CalendarId.GREGORIAN };       // all available calendar type(s).  The first one is the default calendar
 
-		    // Store for specific data about each calendar
-		    invariant.calendars = new CalendarData[CalendarData.MAX_CALENDARS];
-		    invariant.calendars[0] = CalendarData.Invariant;
+            // Store for specific data about each calendar
+            invariant.calendars = new CalendarData[CalendarData.MAX_CALENDARS];
+            invariant.calendars[0] = CalendarData.Invariant;
 
-		    // Text information
-		    invariant.iReadingLayout = 0;                      // Reading Layout = RTL
+            // Text information
+            invariant.iReadingLayout = 0;                      // Reading Layout = RTL
 
-		    invariant.sTextInfo = "";                     // Text info name to use for custom
-		    invariant.sCompareInfo = "";                     // Compare info name (including sorting key) to use if custom
-		    invariant.sScripts = "Latn;";                // Typical Scripts for this locale (latn,cyrl, etc)
+            invariant.sTextInfo = "";                     // Text info name to use for custom
+            invariant.sCompareInfo = "";                     // Compare info name (including sorting key) to use if custom
+            invariant.sScripts = "Latn;";                // Typical Scripts for this locale (latn,cyrl, etc)
 
-		    // These are desktop only, not coreclr
-	#if !FEATURE_CORECLR
-		    invariant.iLanguage = 0x007f;                 // locale ID (0409) - NO sort information
-		    invariant.iDefaultAnsiCodePage = 1252;                   // default ansi code page ID (ACP)
-		    invariant.iDefaultOemCodePage = 437;                    // default oem code page ID (OCP or OEM)
-		    invariant.iDefaultMacCodePage = 10000;                  // default macintosh code page
-		    invariant.iDefaultEbcdicCodePage = 037;                    // default EBCDIC code page
-		    invariant.sAbbrevLang = "IVL";                  // abbreviated language name (Windows Language Name)
-		    invariant.sAbbrevCountry = "IVC";                  // abbreviated country name (RegionInfo) (Windows Region Name)
-		    invariant.sISO639Language2 = "ivl";                  // 3 char ISO 639 lang name 2
-		    invariant.sISO3166CountryName2 = "ivc";                  // 3 char ISO 3166 country name 2 2(RegionInfo)
-		    invariant.iInputLanguageHandle = 0x007f;                 // input language handle
-		    invariant.sConsoleFallbackName = "";                     // The culture name for the console fallback UI culture
-		    invariant.sKeyboardsToInstall = "0409:00000409";        // Keyboard installation string.
-	#endif
-		    // Remember it
+            // These are desktop only, not coreclr
+    #if !FEATURE_CORECLR
+            invariant.iLanguage = 0x007f;                 // locale ID (0409) - NO sort information
+            invariant.iDefaultAnsiCodePage = 1252;                   // default ansi code page ID (ACP)
+            invariant.iDefaultOemCodePage = 437;                    // default oem code page ID (OCP or OEM)
+            invariant.iDefaultMacCodePage = 10000;                  // default macintosh code page
+            invariant.iDefaultEbcdicCodePage = 037;                    // default EBCDIC code page
+            invariant.sAbbrevLang = "IVL";                  // abbreviated language name (Windows Language Name)
+            invariant.sAbbrevCountry = "IVC";                  // abbreviated country name (RegionInfo) (Windows Region Name)
+            invariant.sISO639Language2 = "ivl";                  // 3 char ISO 639 lang name 2
+            invariant.sISO3166CountryName2 = "ivc";                  // 3 char ISO 3166 country name 2 2(RegionInfo)
+            invariant.iInputLanguageHandle = 0x007f;                 // input language handle
+            invariant.sConsoleFallbackName = "";                     // The culture name for the console fallback UI culture
+            invariant.sKeyboardsToInstall = "0409:00000409";        // Keyboard installation string.
+    #endif
+            // Remember it
                     s_Invariant = invariant;
                 }
                 return s_Invariant;

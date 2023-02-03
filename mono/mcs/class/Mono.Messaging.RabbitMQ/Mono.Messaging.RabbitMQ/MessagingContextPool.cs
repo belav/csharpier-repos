@@ -2,7 +2,7 @@
 // Mono.Messaging.RabbitMQ
 //
 // Authors:
-//	  Michael Barker (mike@middlesoft.co.uk)
+//      Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -40,35 +40,35 @@ using RabbitMQ.Client;
 
 namespace Mono.Messaging.RabbitMQ {
 
-	public class MessagingContextPool
-	{
-		private readonly CreateConnectionDelegate createConnectionDelegate;
-		private readonly ConcurrentLinkedQueue<MessagingContext> pool = 
-			new ConcurrentLinkedQueue<MessagingContext>();
-		private readonly MessageFactory messageFactory;
-		
-		public MessagingContextPool (MessageFactory messageFactory, 
-									 CreateConnectionDelegate createConnectionDelegate)
-		{
-			this.messageFactory = messageFactory;
-			this.createConnectionDelegate = createConnectionDelegate;
-		}
-		
-		public MessagingContext GetContext (string host)
-		{
-			MessagingContext context = pool.Dequeue ();
-			if (context == null) {
-				context = new MessagingContext (messageFactory, host, createConnectionDelegate);
-				context.Pool = this;
-			}
-			context.Host = host;
-			
-			return context;
-		}
-		
-		public void ReturnContext (MessagingContext context)
-		{
-			pool.Enqueue (context);
-		}
-	}
+    public class MessagingContextPool
+    {
+        private readonly CreateConnectionDelegate createConnectionDelegate;
+        private readonly ConcurrentLinkedQueue<MessagingContext> pool = 
+            new ConcurrentLinkedQueue<MessagingContext>();
+        private readonly MessageFactory messageFactory;
+        
+        public MessagingContextPool (MessageFactory messageFactory, 
+                                     CreateConnectionDelegate createConnectionDelegate)
+        {
+            this.messageFactory = messageFactory;
+            this.createConnectionDelegate = createConnectionDelegate;
+        }
+        
+        public MessagingContext GetContext (string host)
+        {
+            MessagingContext context = pool.Dequeue ();
+            if (context == null) {
+                context = new MessagingContext (messageFactory, host, createConnectionDelegate);
+                context.Pool = this;
+            }
+            context.Host = host;
+            
+            return context;
+        }
+        
+        public void ReturnContext (MessagingContext context)
+        {
+            pool.Enqueue (context);
+        }
+    }
 }

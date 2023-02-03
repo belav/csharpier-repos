@@ -2,7 +2,7 @@
 // TableNameAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -38,15 +38,15 @@ using System.Web.Caching;
 
 namespace System.Web.DynamicData
 {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class TableNameAttribute : Attribute
-	{
-		public TableNameAttribute (string name)
-		{
-			Name = name;
-		}
+    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class TableNameAttribute : Attribute
+    {
+        public TableNameAttribute (string name)
+        {
+            Name = name;
+        }
 
-		public string Name { get; private set; }
-	}
+        public string Name { get; private set; }
+    }
 }

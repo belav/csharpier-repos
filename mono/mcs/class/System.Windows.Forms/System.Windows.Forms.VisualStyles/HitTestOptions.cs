@@ -23,23 +23,23 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	[Flags]
-	public enum HitTestOptions
-	{
-		BackgroundSegment = 0,
-		FixedBorder = 2,
-		Caption = 4,
-		ResizingBorderLeft = 16,
-		ResizingBorderTop = 32,
-		ResizingBorderRight = 64,
-		ResizingBorderBottom = 128,
-		ResizingBorder = 240,
-		SizingTemplate = 256,
-		SystemSizingMargins = 512
-	}
+    [Flags]
+    public enum HitTestOptions
+    {
+        BackgroundSegment = 0,
+        FixedBorder = 2,
+        Caption = 4,
+        ResizingBorderLeft = 16,
+        ResizingBorderTop = 32,
+        ResizingBorderRight = 64,
+        ResizingBorderBottom = 128,
+        ResizingBorder = 240,
+        SizingTemplate = 256,
+        SystemSizingMargins = 512
+    }
 }

@@ -3,14 +3,14 @@
 
 class C
 {
-	public static void Foo<T> (ref T t1, ref T t2)
-	{
-	}
-	
-	public static void Main ()
-	{
-		string s = "a";
-		object o = null;
-		Foo (ref s, ref o);
-	}
+    public static void Foo<T> (ref T t1, ref T t2)
+    {
+    }
+    
+    public static void Main ()
+    {
+        string s = "a";
+        object o = null;
+        Foo (ref s, ref o);
+    }
 }

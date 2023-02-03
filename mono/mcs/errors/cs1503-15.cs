@@ -7,14 +7,14 @@ interface IFoo<in T>
 
 class C
 {
-	public static void Foo<T> (IFoo<T> e1, IFoo<T> e2)
-	{
-	}
-	
-	public static void Main ()
-	{
-		IFoo<int> a = null;
-		IFoo<object> b = null;
-		Foo (a, b);
-	}
+    public static void Foo<T> (IFoo<T> e1, IFoo<T> e2)
+    {
+    }
+    
+    public static void Main ()
+    {
+        IFoo<int> a = null;
+        IFoo<object> b = null;
+        Foo (a, b);
+    }
 }

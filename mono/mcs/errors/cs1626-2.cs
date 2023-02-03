@@ -7,13 +7,13 @@ class C: IEnumerable
 {
    public IEnumerator GetEnumerator ()
    {
-	   try {
-	       try {
-		   yield return this;
-	       }
-	       finally {}
-	   }
-	   catch (System.Exception) {
-	   }
+       try {
+           try {
+           yield return this;
+           }
+           finally {}
+       }
+       catch (System.Exception) {
+       }
    }
 }

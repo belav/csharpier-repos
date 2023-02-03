@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataTableBase
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,35 +34,35 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-	public abstract class DesignerDataTableBase
-	{
-		string name, owner;
+    public abstract class DesignerDataTableBase
+    {
+        string name, owner;
 
-		protected DesignerDataTableBase (string name)
-			: this (name, null)
-		{
-		}
+        protected DesignerDataTableBase (string name)
+            : this (name, null)
+        {
+        }
 
-		protected DesignerDataTableBase (string name, string owner)
-		{
-			this.name = name;
-			this.owner = owner;
-		}
+        protected DesignerDataTableBase (string name, string owner)
+        {
+            this.name = name;
+            this.owner = owner;
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name {
+            get { return name; }
+        }
 
-		public string Owner {
-			get { return owner; }
-		}
+        public string Owner {
+            get { return owner; }
+        }
 
-		[MonoTODO]
-		public ICollection Columns {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ICollection Columns {
+            get { throw new NotImplementedException (); }
+        }
 
-		protected abstract ICollection CreateColumns ();
-	}
+        protected abstract ICollection CreateColumns ();
+    }
 }
 

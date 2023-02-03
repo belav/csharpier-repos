@@ -1,4 +1,4 @@
-﻿//
+//
 // BuildManagerTest.cs
 //
 // Author:
@@ -37,26 +37,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Compilation
 {
-	[TestFixture]
-	[Serializable]
-	public class BuildManagerTest
-	{
-		[Test]
-		[Ignore ("Pending investigation if it is indeed the correct test.")]
-		public void GetGlobalAsaxType ()
-		{
-			Assert.Throws<InvalidOperationException> (() => {
-				BuildManager.GetGlobalAsaxType ();
-			}, "#A1");
-		}
+    [TestFixture]
+    [Serializable]
+    public class BuildManagerTest
+    {
+        [Test]
+        [Ignore ("Pending investigation if it is indeed the correct test.")]
+        public void GetGlobalAsaxType ()
+        {
+            Assert.Throws<InvalidOperationException> (() => {
+                BuildManager.GetGlobalAsaxType ();
+            }, "#A1");
+        }
 
-		[Test]
-		public void TargetFramework ()
-		{
-			Assert.AreEqual (".NETFramework,Version=v4.0", BuildManager.TargetFramework.FullName, "#A1-1");
-			Assert.AreEqual (".NETFramework", BuildManager.TargetFramework.Identifier, "#A1-2");
-			Assert.AreEqual ("", BuildManager.TargetFramework.Profile, "#A1-3");
-			Assert.AreEqual (new Version (4, 0), BuildManager.TargetFramework.Version, "#A1-4");
-		}
-	}
+        [Test]
+        public void TargetFramework ()
+        {
+            Assert.AreEqual (".NETFramework,Version=v4.0", BuildManager.TargetFramework.FullName, "#A1-1");
+            Assert.AreEqual (".NETFramework", BuildManager.TargetFramework.Identifier, "#A1-2");
+            Assert.AreEqual ("", BuildManager.TargetFramework.Profile, "#A1-3");
+            Assert.AreEqual (new Version (4, 0), BuildManager.TargetFramework.Version, "#A1-4");
+        }
+    }
 }

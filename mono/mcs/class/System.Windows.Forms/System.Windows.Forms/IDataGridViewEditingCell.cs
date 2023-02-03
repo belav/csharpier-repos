@@ -20,22 +20,22 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public interface IDataGridViewEditingCell {
+    public interface IDataGridViewEditingCell {
 
-		object EditingCellFormattedValue { get; set; }
+        object EditingCellFormattedValue { get; set; }
 
-		bool EditingCellValueChanged { get; set; }
+        bool EditingCellValueChanged { get; set; }
 
-		object GetEditingCellFormattedValue (DataGridViewDataErrorContexts context);
+        object GetEditingCellFormattedValue (DataGridViewDataErrorContexts context);
 
-		void PrepareEditingCellForEdit (bool selectAll);
+        void PrepareEditingCellForEdit (bool selectAll);
 
-	}
+    }
 
 }

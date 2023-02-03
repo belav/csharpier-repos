@@ -3,15 +3,15 @@
 
 struct S
 {
-	public int x;
-	
-	S (dynamic d)
-	{
-		Foo (d);
-		x = 44;
-	}
+    public int x;
+    
+    S (dynamic d)
+    {
+        Foo (d);
+        x = 44;
+    }
 
-	void Foo (int a)
-	{
-	}
+    void Foo (int a)
+    {
+    }
 }

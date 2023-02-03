@@ -25,11 +25,11 @@ using System.Collections.Generic;
 
 namespace System.Windows.Markup
 {
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-	public interface INameScope
-	{
-		object FindName (string name);
-		void RegisterName (string name, object scopedElement);
-		void UnregisterName (string name);
-	}
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+    public interface INameScope
+    {
+        object FindName (string name);
+        void RegisterName (string name, object scopedElement);
+        void UnregisterName (string name);
+    }
 }

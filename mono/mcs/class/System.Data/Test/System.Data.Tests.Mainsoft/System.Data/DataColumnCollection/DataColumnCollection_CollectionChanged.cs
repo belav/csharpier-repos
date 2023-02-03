@@ -37,74 +37,74 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumnCollection_CollectionChanged : GHTBase
 {
-	private int counter=0;
+    private int counter=0;
 
-	[Test] public void Main()
-	{
-		DataColumnCollection_CollectionChanged tc = new DataColumnCollection_CollectionChanged();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumnCollection_CollectionChanged");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    [Test] public void Main()
+    {
+        DataColumnCollection_CollectionChanged tc = new DataColumnCollection_CollectionChanged();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumnCollection_CollectionChanged");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataColumnCollection_CollectionChanged");
-			DataColumnCollection_CollectionChanged1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataColumnCollection_CollectionChanged");
+            DataColumnCollection_CollectionChanged1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
 
-	private void DataColumnCollection_CollectionChanged1()
-	{
-		DataTable dt = DataProvider.CreateParentDataTable();
-		dt.Columns.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Columns_CollectionChanged);
-		dt.Columns.Add("tempCol");
-		System.Threading.Thread.Sleep(500);
-		dt.Columns.Remove("tempCol");
-		System.Threading.Thread.Sleep(500);
-		Compare(counter,2);
-	}
+    private void DataColumnCollection_CollectionChanged1()
+    {
+        DataTable dt = DataProvider.CreateParentDataTable();
+        dt.Columns.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Columns_CollectionChanged);
+        dt.Columns.Add("tempCol");
+        System.Threading.Thread.Sleep(500);
+        dt.Columns.Remove("tempCol");
+        System.Threading.Thread.Sleep(500);
+        Compare(counter,2);
+    }
 
-	private void Columns_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
-	{
-		counter++;
+    private void Columns_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+    {
+        counter++;
 
-	}
+    }
 }
 }

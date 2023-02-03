@@ -39,62 +39,62 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_extendedProperties : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataTable_extendedProperties tc = new DataTable_extendedProperties();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTable_ExtendedProperties");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataTable_extendedProperties tc = new DataTable_extendedProperties();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTable_ExtendedProperties");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataTable dtParent;
-		PropertyCollection pc;
-		dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+    public void run()
+    {
+        Exception exp = null;
+        DataTable dtParent;
+        PropertyCollection pc;
+        dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
 
-		pc = dtParent.ExtendedProperties ;
+        pc = dtParent.ExtendedProperties ;
         
-		try
-		{
-			base.BeginCase("Checking ExtendedProperties default ");
-			base.Compare(pc != null,true);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
+        try
+        {
+            base.BeginCase("Checking ExtendedProperties default ");
+            base.Compare(pc != null,true);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
 
-		try
-		{
-			base.BeginCase("Checking ExtendedProperties count ");
-			base.Compare(pc.Count ,0);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            base.BeginCase("Checking ExtendedProperties count ");
+            base.Compare(pc.Count ,0);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
 }
 }

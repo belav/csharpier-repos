@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DataSourceDescriptor
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,53 +34,53 @@ using System.Collections;
 
 namespace System.ComponentModel.Design.Data
 {
-	public class DataSourceDescriptorCollection : CollectionBase
-	{
-		public DataSourceDescriptorCollection ()
-		{
-		}
+    public class DataSourceDescriptorCollection : CollectionBase
+    {
+        public DataSourceDescriptorCollection ()
+        {
+        }
 
-		[MonoTODO]
-		public DataSourceDescriptor this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public DataSourceDescriptor this [int index] {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public int Add (DataSourceDescriptor value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public int Add (DataSourceDescriptor value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public bool Contains (DataSourceDescriptor value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool Contains (DataSourceDescriptor value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void CopyTo (DataSourceDescriptor [] array, int index)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void CopyTo (DataSourceDescriptor [] array, int index)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public int IndexOf (DataSourceDescriptor value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public int IndexOf (DataSourceDescriptor value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Insert (int index, DataSourceDescriptor value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Insert (int index, DataSourceDescriptor value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Remove (DataSourceDescriptor value)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void Remove (DataSourceDescriptor value)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

@@ -20,17 +20,17 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows {
 
-	public abstract class AttachedPropertyBrowsableAttribute : Attribute
-	{
-		protected AttachedPropertyBrowsableAttribute ()
-		{
-		}
-	}
+    public abstract class AttachedPropertyBrowsableAttribute : Attribute
+    {
+        protected AttachedPropertyBrowsableAttribute ()
+        {
+        }
+    }
 }

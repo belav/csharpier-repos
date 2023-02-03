@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -31,118 +31,118 @@ using Mono.WebBrowser.DOM;
 
 namespace Mono.Mozilla.DOM
 {
-	internal class NamedNodeMap : NodeList, INamedNodeMap
-	{
-		protected new nsIDOMNamedNodeMap unmanagedNodes;
+    internal class NamedNodeMap : NodeList, INamedNodeMap
+    {
+        protected new nsIDOMNamedNodeMap unmanagedNodes;
 
-		public NamedNodeMap (WebBrowser control, nsIDOMNamedNodeMap nodeMap)
-			: base (control, true)
-		{
-			if (control.platform != control.enginePlatform)
-				unmanagedNodes = nsDOMNamedNodeMap.GetProxy (control, nodeMap);
-			else
-				unmanagedNodes = nodeMap;
-		}
-		
-		internal override void Load ()
-		{
-			Clear ();
-			uint count;
-			unmanagedNodes.getLength (out count);
-			nodeCount = (int) count;
-			nodes = new Node[count];
-			for (int i = 0; i < count; i++) {
-				nsIDOMNode node;
-				unmanagedNodes.item ((uint) i, out node);
-				nodes[i] = new Attribute (control, node as nsIDOMAttr);
-			}
-		}
+        public NamedNodeMap (WebBrowser control, nsIDOMNamedNodeMap nodeMap)
+            : base (control, true)
+        {
+            if (control.platform != control.enginePlatform)
+                unmanagedNodes = nsDOMNamedNodeMap.GetProxy (control, nodeMap);
+            else
+                unmanagedNodes = nodeMap;
+        }
+        
+        internal override void Load ()
+        {
+            Clear ();
+            uint count;
+            unmanagedNodes.getLength (out count);
+            nodeCount = (int) count;
+            nodes = new Node[count];
+            for (int i = 0; i < count; i++) {
+                nsIDOMNode node;
+                unmanagedNodes.item ((uint) i, out node);
+                nodes[i] = new Attribute (control, node as nsIDOMAttr);
+            }
+        }
 
-		public override int Count {
-			get {
-				if (unmanagedNodes != null && nodes == null)
-					Load ();
-				return nodeCount; 
-			}
-		}
+        public override int Count {
+            get {
+                if (unmanagedNodes != null && nodes == null)
+                    Load ();
+                return nodeCount; 
+            }
+        }
 
-		#region IList members
-		public new INode this[int index]
-		{
-			get
-			{
-				if (index < 0 || index >= Count)
-					throw new ArgumentOutOfRangeException ("index");
-				return nodes[index] as INode;
-			}
-			set { }
-		}
+        #region IList members
+        public new INode this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Count)
+                    throw new ArgumentOutOfRangeException ("index");
+                return nodes[index] as INode;
+            }
+            set { }
+        }
 
-		public INode this [string name]
-		{
-			get {
-				Base.StringSet (storage, name);
-				nsIDOMNode ret;
-				unmanagedNodes.getNamedItem (storage, out ret);
-				for (int i = 0; i < Count; i++) {
-					if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ()))
-						return nodes[i];
-				}
-				return null;
-			}
-			set {
-			}
-		}
-		
-		public INode RemoveNamedItem (string name) {
-			Base.StringSet (storage, name);
-			nsIDOMNode ret;
-			unmanagedNodes.removeNamedItem (storage, out ret);
-			for (int i = 0; i < Count; i++) {
-				if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ())) {
-					INode node = nodes[i];
-					this.Remove (nodes[i]);
-					return node;
-				}
-			}
-			return null;			
-		}
-		
-		public INode this[string namespaceURI, string localName] {
-			get {
-				Base.StringSet (storage, namespaceURI);
-				UniString str = new Mono.Mozilla.UniString(localName);
-				nsIDOMNode ret;
-				unmanagedNodes.getNamedItemNS (storage, str.Handle, out ret);
-				for (int i = 0; i < Count; i++) {
-					if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ()))
-						return nodes[i];
-				}
-				return null;
-			}
-			set {
-			}
-		}
-		
-		public INode RemoveNamedItemNS(string namespaceURI, string localName) {
-			Base.StringSet (storage, namespaceURI);
-			nsIDOMNode ret;
-			UniString str = new Mono.Mozilla.UniString(localName);
-			unmanagedNodes.removeNamedItemNS (storage, str.Handle, out ret);
-			for (int i = 0; i < Count; i++) {
-				if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ())) {
-					INode node = nodes[i];
-					this.Remove (nodes[i]);
-					return node;
-				}
-			}
-			return null;			
-		}
-		
-		#endregion
-		
-		public override int GetHashCode () {
-			return this.unmanagedNodes.GetHashCode ();
-		}		
-	}
+        public INode this [string name]
+        {
+            get {
+                Base.StringSet (storage, name);
+                nsIDOMNode ret;
+                unmanagedNodes.getNamedItem (storage, out ret);
+                for (int i = 0; i < Count; i++) {
+                    if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ()))
+                        return nodes[i];
+                }
+                return null;
+            }
+            set {
+            }
+        }
+        
+        public INode RemoveNamedItem (string name) {
+            Base.StringSet (storage, name);
+            nsIDOMNode ret;
+            unmanagedNodes.removeNamedItem (storage, out ret);
+            for (int i = 0; i < Count; i++) {
+                if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ())) {
+                    INode node = nodes[i];
+                    this.Remove (nodes[i]);
+                    return node;
+                }
+            }
+            return null;            
+        }
+        
+        public INode this[string namespaceURI, string localName] {
+            get {
+                Base.StringSet (storage, namespaceURI);
+                UniString str = new Mono.Mozilla.UniString(localName);
+                nsIDOMNode ret;
+                unmanagedNodes.getNamedItemNS (storage, str.Handle, out ret);
+                for (int i = 0; i < Count; i++) {
+                    if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ()))
+                        return nodes[i];
+                }
+                return null;
+            }
+            set {
+            }
+        }
+        
+        public INode RemoveNamedItemNS(string namespaceURI, string localName) {
+            Base.StringSet (storage, namespaceURI);
+            nsIDOMNode ret;
+            UniString str = new Mono.Mozilla.UniString(localName);
+            unmanagedNodes.removeNamedItemNS (storage, str.Handle, out ret);
+            for (int i = 0; i < Count; i++) {
+                if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ())) {
+                    INode node = nodes[i];
+                    this.Remove (nodes[i]);
+                    return node;
+                }
+            }
+            return null;            
+        }
+        
+        #endregion
+        
+        public override int GetHashCode () {
+            return this.unmanagedNodes.GetHashCode ();
+        }        
+    }
 }

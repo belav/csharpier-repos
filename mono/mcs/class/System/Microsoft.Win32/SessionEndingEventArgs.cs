@@ -31,25 +31,25 @@ using System.Security.Permissions;
 
 namespace Microsoft.Win32 {
 
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-	public class SessionEndingEventArgs : System.EventArgs {
+    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+    [PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
+    public class SessionEndingEventArgs : System.EventArgs {
 
-		SessionEndReasons myreason;
-		bool mycancel;
+        SessionEndReasons myreason;
+        bool mycancel;
 
-		public SessionEndingEventArgs (SessionEndReasons reason)
-		{
-			this.myreason = reason;
-		}
-	
-		public SessionEndReasons Reason {
-			get { return myreason; }
-		}
-	
-		public bool Cancel {
-			get { return mycancel; }
-			set { mycancel = value; }
-		}
-	}
+        public SessionEndingEventArgs (SessionEndReasons reason)
+        {
+            this.myreason = reason;
+        }
+    
+        public SessionEndReasons Reason {
+            get { return myreason; }
+        }
+    
+        public bool Cancel {
+            get { return mycancel; }
+            set { mycancel = value; }
+        }
+    }
 }

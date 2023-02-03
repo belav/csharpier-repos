@@ -7,5 +7,5 @@ interface A<T>
 
 interface B<in T>
 {
-	A<A<T>> A { get; }
+    A<A<T>> A { get; }
 }

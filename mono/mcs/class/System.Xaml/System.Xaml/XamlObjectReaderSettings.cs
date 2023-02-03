@@ -29,9 +29,9 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlObjectReaderSettings : XamlReaderSettings
-	{
-		public bool RequireExplicitContentVisibility { get; set; }
-	}
+    public class XamlObjectReaderSettings : XamlReaderSettings
+    {
+        public bool RequireExplicitContentVisibility { get; set; }
+    }
 }
 

@@ -3,7 +3,7 @@
 //                     it does nothing but has same public API
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2015 Xamarin Inc (http://www.xamarin.com)
 //
@@ -36,59 +36,59 @@ using System.Threading;
 
 namespace System.Security {
 
-	public sealed class SecurityContext : IDisposable
-	{
-		private SecurityContext ()
-		{
-		}
+    public sealed class SecurityContext : IDisposable
+    {
+        private SecurityContext ()
+        {
+        }
 
-		public SecurityContext CreateCopy ()
-		{
-			return this;
-		}
+        public SecurityContext CreateCopy ()
+        {
+            return this;
+        }
 
-		static public SecurityContext Capture ()
-		{
-			return new SecurityContext ();
-		}
-		
-		public void Dispose ()
-		{
-		}
+        static public SecurityContext Capture ()
+        {
+            return new SecurityContext ();
+        }
+        
+        public void Dispose ()
+        {
+        }
 
-		static public bool IsFlowSuppressed ()
-		{
-			return false;
-		} 
+        static public bool IsFlowSuppressed ()
+        {
+            return false;
+        } 
 
-		static public bool IsWindowsIdentityFlowSuppressed ()
-		{
-			return false;
-		}
+        static public bool IsWindowsIdentityFlowSuppressed ()
+        {
+            return false;
+        }
 
-		static public void RestoreFlow ()
-		{
-		}
+        static public void RestoreFlow ()
+        {
+        }
 
-		// if you got the context then you can use it
-		[SecurityPermission (SecurityAction.Assert, ControlPrincipal = true)]
-		[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-		static public void Run (SecurityContext securityContext, ContextCallback callback, object state)
-		{
-			callback (state);
-		}
+        // if you got the context then you can use it
+        [SecurityPermission (SecurityAction.Assert, ControlPrincipal = true)]
+        [SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
+        static public void Run (SecurityContext securityContext, ContextCallback callback, object state)
+        {
+            callback (state);
+        }
 
-		[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-		static public AsyncFlowControl SuppressFlow ()
-		{
-			throw new NotSupportedException ();
-		}
+        [SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
+        static public AsyncFlowControl SuppressFlow ()
+        {
+            throw new NotSupportedException ();
+        }
 
-		static public AsyncFlowControl SuppressFlowWindowsIdentity ()
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        static public AsyncFlowControl SuppressFlowWindowsIdentity ()
+        {
+            throw new NotSupportedException ();
+        }
+    }
 }
 
 #endif

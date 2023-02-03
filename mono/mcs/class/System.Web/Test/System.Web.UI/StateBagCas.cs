@@ -2,7 +2,7 @@
 // StateBagCas.cs - CAS unit tests for System.Web.UI.StateBag
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,65 +36,65 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StateBagCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StateBagCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			StateBag bag = new StateBag (true);
-			Assert.IsNotNull (bag.Add ("key", "value"), "Add");
-			Assert.AreEqual (1, bag.Count, "Count");
-			Assert.IsNotNull (bag.GetEnumerator (), "GetEnumerator");
-			bag.SetItemDirty ("key", true);
-			Assert.IsTrue (bag.IsItemDirty ("key"), "IsItemDirty");
-			bag.Remove ("key");
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            StateBag bag = new StateBag (true);
+            Assert.IsNotNull (bag.Add ("key", "value"), "Add");
+            Assert.AreEqual (1, bag.Count, "Count");
+            Assert.IsNotNull (bag.GetEnumerator (), "GetEnumerator");
+            bag.SetItemDirty ("key", true);
+            Assert.IsTrue (bag.IsItemDirty ("key"), "IsItemDirty");
+            bag.Remove ("key");
 
-			bag.Clear ();
-			bag["key"] = "value";
-			Assert.IsNotNull (bag["key"], "this[string]");
-			Assert.IsNotNull (bag.Keys, "Keys");
-			Assert.IsNotNull (bag.Values, "Values");
-			bag.SetDirty (true);
-		}
+            bag.Clear ();
+            bag["key"] = "value";
+            Assert.IsNotNull (bag["key"], "this[string]");
+            Assert.IsNotNull (bag.Keys, "Keys");
+            Assert.IsNotNull (bag.Values, "Values");
+            bag.SetDirty (true);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void IStateManager_Deny_Unrestricted ()
-		{
-			IStateManager sm = new StateBag ();
-			Assert.IsFalse (sm.IsTrackingViewState, "IsTrackingViewState");
-			object state = sm.SaveViewState ();
-			sm.LoadViewState (state);
-			sm.TrackViewState ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void IStateManager_Deny_Unrestricted ()
+        {
+            IStateManager sm = new StateBag ();
+            Assert.IsFalse (sm.IsTrackingViewState, "IsTrackingViewState");
+            object state = sm.SaveViewState ();
+            sm.LoadViewState (state);
+            sm.TrackViewState ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void IDictionary_Deny_Unrestricted ()
-		{
-			IDictionary d = new StateBag ();
-			d.Add ("key", "value");
-			Assert.IsTrue (d.Contains ("key"), "Contains");
-			Assert.AreEqual (1, d.Count, "Count");
-			d.Remove ("key");
-			d["key"] = "value";
-			Assert.AreEqual ("value", d["key"], "this[string]");
-			d.Clear ();
-			Assert.IsFalse (d.IsFixedSize, "IsFixedSize");
-			Assert.IsFalse (d.IsReadOnly, "IsReadOnly");
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void IDictionary_Deny_Unrestricted ()
+        {
+            IDictionary d = new StateBag ();
+            d.Add ("key", "value");
+            Assert.IsTrue (d.Contains ("key"), "Contains");
+            Assert.AreEqual (1, d.Count, "Count");
+            d.Remove ("key");
+            d["key"] = "value";
+            Assert.AreEqual ("value", d["key"], "this[string]");
+            d.Clear ();
+            Assert.IsFalse (d.IsFixedSize, "IsFixedSize");
+            Assert.IsFalse (d.IsReadOnly, "IsReadOnly");
 
-			ICollection c = (d as ICollection);
-			Assert.IsFalse (c.IsSynchronized, "IsSynchronized");
-			Assert.IsNotNull (c.SyncRoot, "SyncRoot");
-		}
+            ICollection c = (d as ICollection);
+            Assert.IsFalse (c.IsSynchronized, "IsSynchronized");
+            Assert.IsNotNull (c.SyncRoot, "SyncRoot");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (StateBag); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (StateBag); }
+        }
+    }
 }

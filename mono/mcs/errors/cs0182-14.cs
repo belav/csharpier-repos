@@ -4,6 +4,6 @@
 using System.Runtime.InteropServices;
 
 class X {
-	[DllImport ("1" + 9)]
-	extern static void Blah ();
+    [DllImport ("1" + 9)]
+    extern static void Blah ();
 }

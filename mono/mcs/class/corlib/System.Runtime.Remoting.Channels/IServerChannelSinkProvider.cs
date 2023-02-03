@@ -31,13 +31,13 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IServerChannelSinkProvider
-	{
-		IServerChannelSinkProvider Next { get;  set; }
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IServerChannelSinkProvider
+    {
+        IServerChannelSinkProvider Next { get;  set; }
 
-		IServerChannelSink CreateSink (IChannelReceiver channel);
+        IServerChannelSink CreateSink (IChannelReceiver channel);
 
-		void GetChannelData (IChannelDataStore channelData);
-	}
+        void GetChannelData (IChannelDataStore channelData);
+    }
 }

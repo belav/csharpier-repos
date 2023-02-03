@@ -31,98 +31,98 @@ using System;
 
 namespace Microsoft.Build.BuildEngine {
 
-	internal class Token {
-	
-		string		tokenValue;
-		TokenType	tokenType;
-	
-		public Token (string tokenValue, TokenType tokenType, int position)
-		{
-			this.tokenValue = tokenValue;
-			this.tokenType = tokenType;
-			this.Position = position + 1;
-		}
-		
-		public string Value {
-			get { return tokenValue; }
-		}
-		
-		public TokenType Type {
-			get { return tokenType; }
-		}
+    internal class Token {
+    
+        string        tokenValue;
+        TokenType    tokenType;
+    
+        public Token (string tokenValue, TokenType tokenType, int position)
+        {
+            this.tokenValue = tokenValue;
+            this.tokenType = tokenType;
+            this.Position = position + 1;
+        }
+        
+        public string Value {
+            get { return tokenValue; }
+        }
+        
+        public TokenType Type {
+            get { return tokenType; }
+        }
 
-		// this is 1-based
-		public int Position {
-			get; private set;
-		}
+        // this is 1-based
+        public int Position {
+            get; private set;
+        }
 
-		public static string TypeAsString (TokenType tokenType)
-		{
-			switch (tokenType) {
-				case TokenType.Item:return "@";
-				case TokenType.Property:return "$";
-				case TokenType.Metadata:return "%";
-				case TokenType.Transform:return "->";
-				case TokenType.Less:return "<";
-				case TokenType.Greater:return ">";
-				case TokenType.LessOrEqual:return "<=";
-				case TokenType.GreaterOrEqual:return ">=";
-				case TokenType.Equal:return "=";
-				case TokenType.NotEqual:return "!=";
-				case TokenType.LeftParen:return "(";
-				case TokenType.RightParen:return ")";
-				case TokenType.Dot:return ".";
-				case TokenType.Comma:return ",";
-				case TokenType.Not:return "!";
-				case TokenType.And:return "and";
-				case TokenType.Or:return "or";
-				case TokenType.Apostrophe:return "'";
-				default: return tokenType.ToString ();
-			}
-		}
+        public static string TypeAsString (TokenType tokenType)
+        {
+            switch (tokenType) {
+                case TokenType.Item:return "@";
+                case TokenType.Property:return "$";
+                case TokenType.Metadata:return "%";
+                case TokenType.Transform:return "->";
+                case TokenType.Less:return "<";
+                case TokenType.Greater:return ">";
+                case TokenType.LessOrEqual:return "<=";
+                case TokenType.GreaterOrEqual:return ">=";
+                case TokenType.Equal:return "=";
+                case TokenType.NotEqual:return "!=";
+                case TokenType.LeftParen:return "(";
+                case TokenType.RightParen:return ")";
+                case TokenType.Dot:return ".";
+                case TokenType.Comma:return ",";
+                case TokenType.Not:return "!";
+                case TokenType.And:return "and";
+                case TokenType.Or:return "or";
+                case TokenType.Apostrophe:return "'";
+                default: return tokenType.ToString ();
+            }
+        }
 
-		public override string ToString ()
-		{
-			if (tokenType == TokenType.EOF || tokenType == TokenType.BOF)
-				return String.Format ("{0} at character position {1}", tokenType.ToString (), Position);
+        public override string ToString ()
+        {
+            if (tokenType == TokenType.EOF || tokenType == TokenType.BOF)
+                return String.Format ("{0} at character position {1}", tokenType.ToString (), Position);
 
-			return String.Format ("\"{0}\" at character position {1}", tokenValue, Position);
-		}
-	}
-	
-	internal enum TokenType {
-		EOF,
-		BOF,
-		Number,
-		String,
-		//Keyword,
-		Punct,
-		WhiteSpace,
-		Item,
-		Property,
-		Metadata,
-		FunctionName,
-		Transform,
-//		LiteralSubExpression,
+            return String.Format ("\"{0}\" at character position {1}", tokenValue, Position);
+        }
+    }
+    
+    internal enum TokenType {
+        EOF,
+        BOF,
+        Number,
+        String,
+        //Keyword,
+        Punct,
+        WhiteSpace,
+        Item,
+        Property,
+        Metadata,
+        FunctionName,
+        Transform,
+//        LiteralSubExpression,
 
-		FirstPunct,
+        FirstPunct,
 
-		Less,
-		Greater,
-		LessOrEqual,
-		GreaterOrEqual,
-		Equal,
-		NotEqual,
-		LeftParen,
-		RightParen,
-		Dot,
-		Comma,
-		Not,
-		And,
-		Or,
-		Apostrophe,
-		
-		LastPunct,
-		Invalid,
-	}
+        Less,
+        Greater,
+        LessOrEqual,
+        GreaterOrEqual,
+        Equal,
+        NotEqual,
+        LeftParen,
+        RightParen,
+        Dot,
+        Comma,
+        Not,
+        And,
+        Or,
+        Apostrophe,
+        
+        LastPunct,
+        Invalid,
+    }
 }

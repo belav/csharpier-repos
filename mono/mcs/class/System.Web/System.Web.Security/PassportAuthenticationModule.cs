@@ -2,7 +2,7 @@
 // System.Web.Security.PassportAuthenticationModule
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -32,34 +32,34 @@ using System.Security.Permissions;
 
 namespace System.Web.Security
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[Obsolete ("This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
-	public sealed class PassportAuthenticationModule : IHttpModule
-	{
-		static readonly object authenticateEvent = new object ();
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [Obsolete ("This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
+    public sealed class PassportAuthenticationModule : IHttpModule
+    {
+        static readonly object authenticateEvent = new object ();
 
-		EventHandlerList events = new EventHandlerList ();
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public PassportAuthenticationModule ()
-		{
-		}
+        EventHandlerList events = new EventHandlerList ();
+        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+        public PassportAuthenticationModule ()
+        {
+        }
 
-		public event PassportAuthenticationEventHandler Authenticate {
-			add { events.AddHandler (authenticateEvent, value); }
-			remove { events.RemoveHandler (authenticateEvent, value); }
-		}
+        public event PassportAuthenticationEventHandler Authenticate {
+            add { events.AddHandler (authenticateEvent, value); }
+            remove { events.RemoveHandler (authenticateEvent, value); }
+        }
 
-		public void Dispose ()
-		{
-			events.Dispose ();
-		}
+        public void Dispose ()
+        {
+            events.Dispose ();
+        }
 
-		[MonoTODO("Will we ever implement this? :-)")]
-		public void Init (HttpApplication app)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO("Will we ever implement this? :-)")]
+        public void Init (HttpApplication app)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

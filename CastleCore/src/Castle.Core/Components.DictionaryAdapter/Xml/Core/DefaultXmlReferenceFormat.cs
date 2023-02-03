@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,52 +14,52 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Globalization;
+    using System;
+    using System.Globalization;
 
-	public sealed class DefaultXmlReferenceFormat : IXmlReferenceFormat
-	{
-		public static readonly DefaultXmlReferenceFormat
-			Instance = new DefaultXmlReferenceFormat();
+    public sealed class DefaultXmlReferenceFormat : IXmlReferenceFormat
+    {
+        public static readonly DefaultXmlReferenceFormat
+            Instance = new DefaultXmlReferenceFormat();
 
-		private DefaultXmlReferenceFormat() { }
+        private DefaultXmlReferenceFormat() { }
 
-		public bool TryGetIdentity(IXmlNode node, out int id)
-		{
-			var text = node.GetAttribute(XRef.Id);
-			return int.TryParse(text, IntegerStyle, Culture, out id);
-		}
+        public bool TryGetIdentity(IXmlNode node, out int id)
+        {
+            var text = node.GetAttribute(XRef.Id);
+            return int.TryParse(text, IntegerStyle, Culture, out id);
+        }
 
-		public bool TryGetReference(IXmlNode node, out int id)
-		{
-			var text = node.GetAttribute(XRef.Ref);
-			return int.TryParse(text, IntegerStyle, Culture, out id);
-		}
+        public bool TryGetReference(IXmlNode node, out int id)
+        {
+            var text = node.GetAttribute(XRef.Ref);
+            return int.TryParse(text, IntegerStyle, Culture, out id);
+        }
 
-		public void SetIdentity(IXmlNode node, int id)
-		{
-			node.SetAttribute(XRef.Id, id.ToString(Culture));
-		}
+        public void SetIdentity(IXmlNode node, int id)
+        {
+            node.SetAttribute(XRef.Id, id.ToString(Culture));
+        }
 
-		public void SetReference(IXmlNode node, int id)
-		{
-			node.SetAttribute(XRef.Ref, id.ToString(Culture));
-		}
+        public void SetReference(IXmlNode node, int id)
+        {
+            node.SetAttribute(XRef.Ref, id.ToString(Culture));
+        }
 
-		public void ClearIdentity(IXmlNode node)
-		{
-			node.SetAttribute(XRef.Id, null);
-		}
+        public void ClearIdentity(IXmlNode node)
+        {
+            node.SetAttribute(XRef.Id, null);
+        }
 
-		public void ClearReference(IXmlNode node)
-		{
-			node.SetAttribute(XRef.Ref, null);
-		}
+        public void ClearReference(IXmlNode node)
+        {
+            node.SetAttribute(XRef.Ref, null);
+        }
 
-		private const NumberStyles
-			IntegerStyle = NumberStyles.Integer;
+        private const NumberStyles
+            IntegerStyle = NumberStyles.Integer;
 
-		private static readonly IFormatProvider
-			Culture = CultureInfo.InvariantCulture;
-	}
+        private static readonly IFormatProvider
+            Culture = CultureInfo.InvariantCulture;
+    }
 }

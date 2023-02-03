@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.BehaviorService
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,120 +34,120 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public sealed class BehaviorService : IDisposable
-	{
-		internal BehaviorService ()
-		{
-		}
+    public sealed class BehaviorService : IDisposable
+    {
+        internal BehaviorService ()
+        {
+        }
 
-		public event BehaviorDragDropEventHandler BeginDrag;
-		public event BehaviorDragDropEventHandler EndDrag;
-		public event EventHandler Synchronize;
+        public event BehaviorDragDropEventHandler BeginDrag;
+        public event BehaviorDragDropEventHandler EndDrag;
+        public event EventHandler Synchronize;
 
-		[MonoTODO]
-		public BehaviorServiceAdornerCollection Adorners {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public BehaviorServiceAdornerCollection Adorners {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public Graphics AdornerWindowGraphics {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public Graphics AdornerWindowGraphics {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public Behavior CurrentBehavior {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public Behavior CurrentBehavior {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public Point AdornerWindowPointToScreen (Point p)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Point AdornerWindowPointToScreen (Point p)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Point AdornerWindowToScreen ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Point AdornerWindowToScreen ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Rectangle ControlRectInAdornerWindow (Control c)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Rectangle ControlRectInAdornerWindow (Control c)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Point ControlToAdornerWindow (Control c)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Point ControlToAdornerWindow (Control c)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Dispose ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Behavior GetNextBehavior (Behavior behavior)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Behavior GetNextBehavior (Behavior behavior)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Invalidate ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Invalidate (Rectangle rect)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate (Rectangle rect)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Invalidate (Region r)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate (Region r)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Point MapAdornerWindowPoint (IntPtr handle, Point pt)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Point MapAdornerWindowPoint (IntPtr handle, Point pt)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Behavior PopBehavior (Behavior behavior)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Behavior PopBehavior (Behavior behavior)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void PushBehavior (Behavior behavior)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void PushBehavior (Behavior behavior)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void PushCaptureBehavior (Behavior behavior)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void PushCaptureBehavior (Behavior behavior)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Point ScreenToAdornerWindow (Point p)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Point ScreenToAdornerWindow (Point p)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void SyncSelection ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void SyncSelection ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

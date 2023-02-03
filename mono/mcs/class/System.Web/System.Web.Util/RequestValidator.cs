@@ -32,93 +32,93 @@ using System.Web.Configuration;
 
 namespace System.Web.Util
 {
-	public class RequestValidator
-	{
-		static RequestValidator current;
-		static Lazy <RequestValidator> lazyLoader;
+    public class RequestValidator
+    {
+        static RequestValidator current;
+        static Lazy <RequestValidator> lazyLoader;
 
-		// The stack trace from .NET shows it uses Lazy <T>:
-		//
-		//  Server stack trace: 
-		//    at System.Web.Configuration.ConfigUtil.GetType(String typeName, String propertyName, ConfigurationElement configElement, XmlNode node, Boolean checkAptcaBit, Boolean ignoreCase)
-		//    at System.Web.Util.RequestValidator.GetCustomValidatorFromConfig()
-		//    at System.Lazy`1.CreateValue()
-		//
-		public static RequestValidator Current {
-			get {
-				if (current == null)
-					current = lazyLoader.Value;
-				
-				return current;
-			}
-			
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("value");
-				
-				current = value;
-			}
-		}
+        // The stack trace from .NET shows it uses Lazy <T>:
+        //
+        //  Server stack trace: 
+        //    at System.Web.Configuration.ConfigUtil.GetType(String typeName, String propertyName, ConfigurationElement configElement, XmlNode node, Boolean checkAptcaBit, Boolean ignoreCase)
+        //    at System.Web.Util.RequestValidator.GetCustomValidatorFromConfig()
+        //    at System.Lazy`1.CreateValue()
+        //
+        public static RequestValidator Current {
+            get {
+                if (current == null)
+                    current = lazyLoader.Value;
+                
+                return current;
+            }
+            
+            set {
+                if (value == null)
+                    throw new ArgumentNullException ("value");
+                
+                current = value;
+            }
+        }
 
-		static RequestValidator ()
-		{
-			lazyLoader = new Lazy <RequestValidator> (new Func <RequestValidator> (LoadConfiguredValidator));
-		}
-		
-		public RequestValidator ()
-		{
-		}
+        static RequestValidator ()
+        {
+            lazyLoader = new Lazy <RequestValidator> (new Func <RequestValidator> (LoadConfiguredValidator));
+        }
+        
+        public RequestValidator ()
+        {
+        }
 
-		protected internal virtual bool IsValidRequestString (HttpContext context, string value, RequestValidationSource requestValidationSource,
-								      string collectionKey, out int validationFailureIndex)
-		{
-			validationFailureIndex = 0;
+        protected internal virtual bool IsValidRequestString (HttpContext context, string value, RequestValidationSource requestValidationSource,
+                                      string collectionKey, out int validationFailureIndex)
+        {
+            validationFailureIndex = 0;
 
-			return !HttpRequest.IsInvalidString (value, out validationFailureIndex);
-		}
+            return !HttpRequest.IsInvalidString (value, out validationFailureIndex);
+        }
 
-		static void ParseTypeName (string spec, out string typeName, out string assemblyName)
-		{
-			try {
-				if (String.IsNullOrEmpty (spec)) {
-					typeName = null;
-					assemblyName = null;
-					return;
-				}
+        static void ParseTypeName (string spec, out string typeName, out string assemblyName)
+        {
+            try {
+                if (String.IsNullOrEmpty (spec)) {
+                    typeName = null;
+                    assemblyName = null;
+                    return;
+                }
 
-				int comma = spec.IndexOf (',');
-				if (comma == -1) {
-					typeName = spec;
-					assemblyName = null;
-					return;
-				}
+                int comma = spec.IndexOf (',');
+                if (comma == -1) {
+                    typeName = spec;
+                    assemblyName = null;
+                    return;
+                }
 
-				typeName = spec.Substring (0, comma).Trim ();
-				assemblyName = spec.Substring (comma + 1).Trim ();
-			} catch {
-				typeName = spec;
-				assemblyName = null;
-			}
-		}
-		
-		static RequestValidator LoadConfiguredValidator ()
-		{
-			HttpRuntimeSection runtimeConfig = HttpRuntime.Section;
-			Type validatorType = null;
-			string typeSpec = runtimeConfig.RequestValidationType;
-			
-			try {
-				validatorType = HttpApplication.LoadType <RequestValidator> (typeSpec, true);
-			} catch (TypeLoadException ex) {
-				string typeName, assemblyName;
+                typeName = spec.Substring (0, comma).Trim ();
+                assemblyName = spec.Substring (comma + 1).Trim ();
+            } catch {
+                typeName = spec;
+                assemblyName = null;
+            }
+        }
+        
+        static RequestValidator LoadConfiguredValidator ()
+        {
+            HttpRuntimeSection runtimeConfig = HttpRuntime.Section;
+            Type validatorType = null;
+            string typeSpec = runtimeConfig.RequestValidationType;
+            
+            try {
+                validatorType = HttpApplication.LoadType <RequestValidator> (typeSpec, true);
+            } catch (TypeLoadException ex) {
+                string typeName, assemblyName;
 
-				ParseTypeName (typeSpec, out typeName, out assemblyName);
-				throw new ConfigurationErrorsException (
-					String.Format ("Could not load type '{0}' from assembly '{1}'.", typeName, assemblyName),
-					ex);
-			}
-			
-			return (RequestValidator) Activator.CreateInstance (validatorType);
-		}
-	}
+                ParseTypeName (typeSpec, out typeName, out assemblyName);
+                throw new ConfigurationErrorsException (
+                    String.Format ("Could not load type '{0}' from assembly '{1}'.", typeName, assemblyName),
+                    ex);
+            }
+            
+            return (RequestValidator) Activator.CreateInstance (validatorType);
+        }
+    }
 }

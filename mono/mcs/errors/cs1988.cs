@@ -3,7 +3,7 @@
 
 class C
 {
-	public async void Test (ref int arg)
-	{
-	}
+    public async void Test (ref int arg)
+    {
+    }
 }

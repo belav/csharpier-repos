@@ -1,4 +1,4 @@
-﻿namespace System.CommandLine.Suggest
+namespace System.CommandLine.Suggest
 {
     public class Registration
     {

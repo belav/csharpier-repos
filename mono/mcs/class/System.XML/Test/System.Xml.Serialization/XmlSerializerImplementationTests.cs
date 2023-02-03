@@ -2,7 +2,7 @@
 // XmlSerializerImplementation.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.
 //
@@ -36,85 +36,85 @@ using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {
-	[TestFixture]
-	public class XmlSerializerImplementationTests
-	{
-		class MyImplementation : XmlSerializerImplementation
-		{
-		}
+    [TestFixture]
+    public class XmlSerializerImplementationTests
+    {
+        class MyImplementation : XmlSerializerImplementation
+        {
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void DefaultReder ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsNull (impl.Reader, "#1");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void DefaultReder ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsNull (impl.Reader, "#1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void DefaultRederMethods ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsNull (impl.ReadMethods, "#2");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void DefaultRederMethods ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsNull (impl.ReadMethods, "#2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void DefaultWriter ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsNull (impl.Writer, "#3");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void DefaultWriter ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsNull (impl.Writer, "#3");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void DefaultWriteMethods ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsNull (impl.WriteMethods, "#4");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void DefaultWriteMethods ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsNull (impl.WriteMethods, "#4");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void DefaultTypedSerializers ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsNull (impl.TypedSerializers, "#5");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void DefaultTypedSerializers ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsNull (impl.TypedSerializers, "#5");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void CanSerialize ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsTrue (impl.CanSerialize (typeof (int)), "#1");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void CanSerialize ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsTrue (impl.CanSerialize (typeof (int)), "#1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void GetSerializer ()
-		{
-			MyImplementation impl = new MyImplementation ();
-			Assert.IsNull (impl.GetSerializer (typeof (int)), "#1");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void GetSerializer ()
+        {
+            MyImplementation impl = new MyImplementation ();
+            Assert.IsNull (impl.GetSerializer (typeof (int)), "#1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void GetSerializer2 ()
-		{
-			MyImplementation2 impl = new MyImplementation2 ();
-			impl.TypedSerializers [typeof (int)] = new XmlSerializer (typeof (int));
-			XmlSerializer ser = impl.GetSerializer (typeof (int));
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void GetSerializer2 ()
+        {
+            MyImplementation2 impl = new MyImplementation2 ();
+            impl.TypedSerializers [typeof (int)] = new XmlSerializer (typeof (int));
+            XmlSerializer ser = impl.GetSerializer (typeof (int));
+        }
 
-		class MyImplementation2 : XmlSerializerImplementation
-		{
-			Hashtable serializers = new Hashtable ();
+        class MyImplementation2 : XmlSerializerImplementation
+        {
+            Hashtable serializers = new Hashtable ();
 
-			public override Hashtable TypedSerializers {
-				get { return serializers; }
-			}
-		}
-	}
+            public override Hashtable TypedSerializers {
+                get { return serializers; }
+            }
+        }
+    }
 }

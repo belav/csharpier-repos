@@ -3,7 +3,7 @@
 //
 // 
 // Author:
-//	Miguel de Icaza (miguel@novell.com)
+//    Miguel de Icaza (miguel@novell.com)
 //
 
 //
@@ -35,78 +35,78 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class DesignTimeParseData {
-		EventHandler db_handler;
-		string text;
-	        IDesignerHost host;
-		string durl;
-		string filter;
-		bool theme;
-		ICollection collection;
-		
-		public DesignTimeParseData (IDesignerHost designerHost, string parseText)
-		{
-			host = designerHost;
-			text = parseText;
-		}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class DesignTimeParseData {
+        EventHandler db_handler;
+        string text;
+            IDesignerHost host;
+        string durl;
+        string filter;
+        bool theme;
+        ICollection collection;
+        
+        public DesignTimeParseData (IDesignerHost designerHost, string parseText)
+        {
+            host = designerHost;
+            text = parseText;
+        }
 
-		public DesignTimeParseData (IDesignerHost designerHost, string parseText, string filter)
-			: this (designerHost, parseText)
-		{
-			this.filter = filter;
-		}
+        public DesignTimeParseData (IDesignerHost designerHost, string parseText, string filter)
+            : this (designerHost, parseText)
+        {
+            this.filter = filter;
+        }
 
-		internal void SetCollection (ICollection collection)
-		{
-			this.collection = collection;
-		}
+        internal void SetCollection (ICollection collection)
+        {
+            this.collection = collection;
+        }
 
-		public EventHandler DataBindingHandler {
-			get {
-				return db_handler;
-			}
+        public EventHandler DataBindingHandler {
+            get {
+                return db_handler;
+            }
 
-			set {
-				db_handler = value;
-			}
-		}
+            set {
+                db_handler = value;
+            }
+        }
 
-		public IDesignerHost DesignerHost {
-			get {
-				return host;
-			}
-		}
+        public IDesignerHost DesignerHost {
+            get {
+                return host;
+            }
+        }
 
-		public string DocumentUrl {
-			get {
-				return durl;
-			}
+        public string DocumentUrl {
+            get {
+                return durl;
+            }
 
-			set {
-				durl = value;
-			}
-		}
+            set {
+                durl = value;
+            }
+        }
 
-		public string ParseText {
-			get {
-				return text;
-			}
-		}
+        public string ParseText {
+            get {
+                return text;
+            }
+        }
 
-		public string Filter {
-			get { return filter; }
-		}
+        public string Filter {
+            get { return filter; }
+        }
 
-		public bool ShouldApplyTheme {
-			get { return theme; }
-			set { theme = value; }
-		}
+        public bool ShouldApplyTheme {
+            get { return theme; }
+            set { theme = value; }
+        }
 
-		// FIXME: there's probably a way to set this somewhere...
-		public ICollection UserControlRegisterEntries {
-			get { return collection; }
-		}
-	}
+        // FIXME: there's probably a way to set this somewhere...
+        public ICollection UserControlRegisterEntries {
+            get { return collection; }
+        }
+    }
 }

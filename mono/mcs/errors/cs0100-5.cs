@@ -3,7 +3,7 @@
 
 abstract class C
 {
-	public abstract int this [object obj, object obj] {
-		set;
-	}
+    public abstract int this [object obj, object obj] {
+        set;
+    }
 }

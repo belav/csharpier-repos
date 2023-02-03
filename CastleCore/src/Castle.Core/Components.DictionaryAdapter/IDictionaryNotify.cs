@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,24 +14,24 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
-	using System.ComponentModel;
+    using System;
+    using System.ComponentModel;
 
-	/// <summary>
-	/// Contract for managing Dictionary adapter notifications.
-	/// </summary>
-	public interface IDictionaryNotify :
-		INotifyPropertyChanging,
-		INotifyPropertyChanged
-	{
-		bool CanNotify { get; }
+    /// <summary>
+    /// Contract for managing Dictionary adapter notifications.
+    /// </summary>
+    public interface IDictionaryNotify :
+        INotifyPropertyChanging,
+        INotifyPropertyChanged
+    {
+        bool CanNotify { get; }
 
-		bool ShouldNotify { get; }
+        bool ShouldNotify { get; }
 
-		IDisposable SuppressNotificationsBlock();
+        IDisposable SuppressNotificationsBlock();
 
-		void SuppressNotifications();
+        void SuppressNotifications();
 
-		void ResumeNotifications();
-	}
+        void ResumeNotifications();
+    }
 }

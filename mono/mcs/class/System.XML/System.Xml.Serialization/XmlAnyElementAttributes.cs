@@ -33,71 +33,71 @@ using System.Collections.Generic;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlAnyElementAttributes.
-	/// </summary>
+    /// <summary>
+    /// Summary description for XmlAnyElementAttributes.
+    /// </summary>
 
-	public class XmlAnyElementAttributes : CollectionBase {
+    public class XmlAnyElementAttributes : CollectionBase {
 
-		public XmlAnyElementAttribute this[int index] 
-		{
-			get 
-			{
-				return (XmlAnyElementAttribute)List[index];
-			}
-			set 
-			{
-				List[index] = value;
-			}	
-		}
+        public XmlAnyElementAttribute this[int index] 
+        {
+            get 
+            {
+                return (XmlAnyElementAttribute)List[index];
+            }
+            set 
+            {
+                List[index] = value;
+            }    
+        }
 
-		public int Add(XmlAnyElementAttribute attribute)
-		{
-			return (List as IList).Add (attribute);
-		}
+        public int Add(XmlAnyElementAttribute attribute)
+        {
+            return (List as IList).Add (attribute);
+        }
 
-		public bool Contains(XmlAnyElementAttribute attribute)
-		{
-			return List.Contains(attribute);	
-		}
+        public bool Contains(XmlAnyElementAttribute attribute)
+        {
+            return List.Contains(attribute);    
+        }
 
-		public int IndexOf(XmlAnyElementAttribute attribute)
-		{
-			return List.IndexOf(attribute);
-		}
+        public int IndexOf(XmlAnyElementAttribute attribute)
+        {
+            return List.IndexOf(attribute);
+        }
 
-		public void Insert(int index, XmlAnyElementAttribute attribute)
-		{
-			List.Insert(index, attribute);
-		}
+        public void Insert(int index, XmlAnyElementAttribute attribute)
+        {
+            List.Insert(index, attribute);
+        }
 
-		public void Remove(XmlAnyElementAttribute attribute)
-		{
-			List.Remove(attribute);
-		}
+        public void Remove(XmlAnyElementAttribute attribute)
+        {
+            List.Remove(attribute);
+        }
 
-		public void CopyTo(XmlAnyElementAttribute[] array,int index)
-		{
-			List.CopyTo(array, index);
-		}
-		
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			if (Count == 0) return;
-			
-			sb.Append ("XAEAS ");
-			for (int n=0; n<Count; n++)
-				this[n].AddKeyHash (sb);
-			sb.Append ('|');
-		}
+        public void CopyTo(XmlAnyElementAttribute[] array,int index)
+        {
+            List.CopyTo(array, index);
+        }
+        
+        internal void AddKeyHash (System.Text.StringBuilder sb)
+        {
+            if (Count == 0) return;
+            
+            sb.Append ("XAEAS ");
+            for (int n=0; n<Count; n++)
+                this[n].AddKeyHash (sb);
+            sb.Append ('|');
+        }
 
-		internal int Order {
-			get {
-				foreach (XmlAnyElementAttribute e in this)
-					if (e.Order >= 0)
-						return e.Order;
-				return -1;
-			}
-		}
-	}
+        internal int Order {
+            get {
+                foreach (XmlAnyElementAttribute e in this)
+                    if (e.Order >= 0)
+                        return e.Order;
+                return -1;
+            }
+        }
+    }
 }

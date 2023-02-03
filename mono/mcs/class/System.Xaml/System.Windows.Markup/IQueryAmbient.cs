@@ -28,8 +28,8 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	public interface IQueryAmbient
-	{
-		bool IsAmbientPropertyAvailable (string propertyName);
-	}
+    public interface IQueryAmbient
+    {
+        bool IsAmbientPropertyAvailable (string propertyName);
+    }
 }

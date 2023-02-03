@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,18 +29,18 @@
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	struct KeyStruct {
-		public KeyStruct(Major major, Minor minor, string symbol) {
-			Major = major;
-			Minor = minor;
-			Symbol = symbol;
-		}
-		public Major	Major;
-		public Minor	Minor;
-		public string	Symbol;
-	}
+    struct KeyStruct {
+        public KeyStruct(Major major, Minor minor, string symbol) {
+            Major = major;
+            Minor = minor;
+            Symbol = symbol;
+        }
+        public Major    Major;
+        public Minor    Minor;
+        public string    Symbol;
+    }
 }

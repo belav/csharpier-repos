@@ -39,236 +39,236 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ConstraintException_Generate : GHTBase
 {
-	[Test] public void Main()
-	{
-		ConstraintException_Generate tc = new ConstraintException_Generate();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("ConstraintException");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        ConstraintException_Generate tc = new ConstraintException_Generate();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("ConstraintException");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-		Exception tmpEx = new Exception(); 
-
-		DataTable dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
-		DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable(); 
-
-		DataSet ds = new DataSet();
-		ds.Tables.Add(dtChild);
-		ds.Tables.Add(dtParent);
-		
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		//------ check UniqueConstraint ---------
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		//create unique constraint
-		UniqueConstraint uc; 
-		
-		//Column type = int
-		uc = new UniqueConstraint(dtParent.Columns[0]); 
-		dtParent.Constraints.Add(uc);
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = int");
-			try
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-		//Column type = DateTime
-		dtParent.Constraints.Clear();
-		uc = new UniqueConstraint(dtParent.Columns["ParentDateTime"]); 
-		dtParent.Constraints.Add(uc);
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = DateTime");
-			try
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    public void run()
+    {
+        Exception exp = null;
+        Exception tmpEx = new Exception(); 
 
-		//Column type = double
-		dtParent.Constraints.Clear();
-		uc = new UniqueConstraint(dtParent.Columns["ParentDouble"]); 
-		dtParent.Constraints.Add(uc);
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = double");
-			try
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        DataTable dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+        DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable(); 
 
-		//Column type = string
-		dtParent.Constraints.Clear();
-		uc = new UniqueConstraint(dtParent.Columns["String1"]); 
-		dtParent.Constraints.Add(uc);
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = String");
-			try
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		//Column type = string, ds.CaseSensitive = false;
-		ds.CaseSensitive = false;
-
-		dtParent.Constraints.Clear();
-		uc = new UniqueConstraint(dtParent.Columns["String1"]); 
-		dtParent.Constraints.Add(uc);
-		DataRow dr = dtParent.NewRow();
-		dr.ItemArray = dtParent.Rows[0].ItemArray ;
-		dr["String1"] = dr["String1"].ToString().ToUpper();
-
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = String, CaseSensitive = false;");
-			try
-			{
-				dtParent.Rows.Add(dr);
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		//Column type = string, ds.CaseSensitive = true;
-		ds.CaseSensitive = true;
-
-		dtParent.Constraints.Clear();
-		uc = new UniqueConstraint(dtParent.Columns["String1"]); 
-		dtParent.Constraints.Add(uc);
-
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = String, CaseSensitive = true;");
-			try
-			{
-				dtParent.Rows.Add(dr);
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(Exception).FullName ); //no exception will raise
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		//Column type = string, ds.CaseSensitive = false;
-
-		try
-		{
-			BeginCase("UniqueConstraint Exception - Column type = String, Enable CaseSensitive = true;");
-			try
-			{
-				ds.CaseSensitive = false;
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName ); //no exception will raise
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}		
+        DataSet ds = new DataSet();
+        ds.Tables.Add(dtChild);
+        ds.Tables.Add(dtParent);
+        
 
 
-		dtChild.Constraints.Add(new UniqueConstraint(new DataColumn[] {dtChild.Columns[0],dtChild.Columns[1]}));
-		ds.EnforceConstraints = false;
-		dtChild.Rows.Add(dtChild.Rows[0].ItemArray);
+        //------ check UniqueConstraint ---------
 
-		try
-		{
-			BeginCase("UniqueConstraint Exception - ds.EnforceConstraints ");
-			try
-			{
-				ds.EnforceConstraints = true;
-			}
-			catch (ConstraintException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        //create unique constraint
+        UniqueConstraint uc; 
+        
+        //Column type = int
+        uc = new UniqueConstraint(dtParent.Columns[0]); 
+        dtParent.Constraints.Add(uc);
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = int");
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-	}
+        //Column type = DateTime
+        dtParent.Constraints.Clear();
+        uc = new UniqueConstraint(dtParent.Columns["ParentDateTime"]); 
+        dtParent.Constraints.Add(uc);
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = DateTime");
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        //Column type = double
+        dtParent.Constraints.Clear();
+        uc = new UniqueConstraint(dtParent.Columns["ParentDouble"]); 
+        dtParent.Constraints.Add(uc);
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = double");
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        //Column type = string
+        dtParent.Constraints.Clear();
+        uc = new UniqueConstraint(dtParent.Columns["String1"]); 
+        dtParent.Constraints.Add(uc);
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = String");
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        //Column type = string, ds.CaseSensitive = false;
+        ds.CaseSensitive = false;
+
+        dtParent.Constraints.Clear();
+        uc = new UniqueConstraint(dtParent.Columns["String1"]); 
+        dtParent.Constraints.Add(uc);
+        DataRow dr = dtParent.NewRow();
+        dr.ItemArray = dtParent.Rows[0].ItemArray ;
+        dr["String1"] = dr["String1"].ToString().ToUpper();
+
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = String, CaseSensitive = false;");
+            try
+            {
+                dtParent.Rows.Add(dr);
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        //Column type = string, ds.CaseSensitive = true;
+        ds.CaseSensitive = true;
+
+        dtParent.Constraints.Clear();
+        uc = new UniqueConstraint(dtParent.Columns["String1"]); 
+        dtParent.Constraints.Add(uc);
+
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = String, CaseSensitive = true;");
+            try
+            {
+                dtParent.Rows.Add(dr);
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(Exception).FullName ); //no exception will raise
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        //Column type = string, ds.CaseSensitive = false;
+
+        try
+        {
+            BeginCase("UniqueConstraint Exception - Column type = String, Enable CaseSensitive = true;");
+            try
+            {
+                ds.CaseSensitive = false;
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName ); //no exception will raise
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}        
+
+
+        dtChild.Constraints.Add(new UniqueConstraint(new DataColumn[] {dtChild.Columns[0],dtChild.Columns[1]}));
+        ds.EnforceConstraints = false;
+        dtChild.Rows.Add(dtChild.Rows[0].ItemArray);
+
+        try
+        {
+            BeginCase("UniqueConstraint Exception - ds.EnforceConstraints ");
+            try
+            {
+                ds.EnforceConstraints = true;
+            }
+            catch (ConstraintException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType().FullName ,typeof(ConstraintException).FullName );
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
+
+    }
 
 }

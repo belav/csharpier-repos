@@ -33,30 +33,30 @@ using System;
 //NOTE: Complete! Aparently just a redifiniton of CancleEventArgs specific to Printing.
 namespace System.Drawing.Printing
 {
-	/// <summary>
-	/// Summary description for PrintEventArgs.
-	/// </summary>
-	public class PrintEventArgs : System.ComponentModel.CancelEventArgs
-	{
-		private GraphicsPrinter graphics_context;
-		private PrintAction action;
-		
-		public PrintEventArgs()
-		{
-		}
+    /// <summary>
+    /// Summary description for PrintEventArgs.
+    /// </summary>
+    public class PrintEventArgs : System.ComponentModel.CancelEventArgs
+    {
+        private GraphicsPrinter graphics_context;
+        private PrintAction action;
+        
+        public PrintEventArgs()
+        {
+        }
 
-		internal PrintEventArgs (PrintAction action)
-		{
-			this.action = action;
-		}
+        internal PrintEventArgs (PrintAction action)
+        {
+            this.action = action;
+        }
 
-		public PrintAction PrintAction {
-			get { return action; }
-		}
+        public PrintAction PrintAction {
+            get { return action; }
+        }
 
-		internal GraphicsPrinter GraphicsContext {
-			get { return graphics_context; }
-			set { graphics_context = value; }
-		}
-	}
+        internal GraphicsPrinter GraphicsContext {
+            get { return graphics_context; }
+            set { graphics_context = value; }
+        }
+    }
 }

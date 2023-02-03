@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlInputSubmit.cs
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,28 +31,28 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEventAttribute ("ServerClick")]
-	[SupportsEventValidation]
-	public class HtmlInputSubmit : HtmlInputButton, IPostBackEventHandler
-	{
-		public HtmlInputSubmit ()
-			: base ("submit")
-		{
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [DefaultEventAttribute ("ServerClick")]
+    [SupportsEventValidation]
+    public class HtmlInputSubmit : HtmlInputButton, IPostBackEventHandler
+    {
+        public HtmlInputSubmit ()
+            : base ("submit")
+        {
+        }
 
-		public HtmlInputSubmit (string type)
-			: base (type)
-		{
-		}
-		
-		void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
-		{
-			base.RaisePostBackEvent (eventArgument);
-		}
-	}
+        public HtmlInputSubmit (string type)
+            : base (type)
+        {
+        }
+        
+        void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
+        {
+            base.RaisePostBackEvent (eventArgument);
+        }
+    }
 }
 

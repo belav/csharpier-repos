@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,35 +14,35 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
 
-	[MultiLevelEdit]
-	public interface IPerson : IDictionaryAdapter, IEditableObject, IDictionaryNotify, IDataErrorInfo
-	{
-		[RemoveIf(null)]
-		string Name { get; set; }
+    [MultiLevelEdit]
+    public interface IPerson : IDictionaryAdapter, IEditableObject, IDictionaryNotify, IDataErrorInfo
+    {
+        [RemoveIf(null)]
+        string Name { get; set; }
 
-		int Age { get; set; }
+        int Age { get; set; }
 
-		DateTime DOB { get; set; }
+        DateTime DOB { get; set; }
 
-		IList<IPerson> Friends { get; set; }
+        IList<IPerson> Friends { get; set; }
 
-		[KeySubstitution("_", " ")]
-		string First_Name { get; set; }
+        [KeySubstitution("_", " ")]
+        string First_Name { get; set; }
 
-		[Component]
-		IAddress HomeAddress { get; set; }
+        [Component]
+        IAddress HomeAddress { get; set; }
 
-		[Component(NoPrefix = true)]
-		IAddress WorkAddress { get; set; }
+        [Component(NoPrefix = true)]
+        IAddress WorkAddress { get; set; }
 
-		[Component(Prefix = "Billing_")]
-		IAddress BillingAddress { get; set; }
+        [Component(Prefix = "Billing_")]
+        IAddress BillingAddress { get; set; }
 
-		[Key(new [] { "Meta", "Id" })]
-		Guid Id { get; }
-	}
+        [Key(new [] { "Meta", "Id" })]
+        Guid Id { get; }
+    }
 }

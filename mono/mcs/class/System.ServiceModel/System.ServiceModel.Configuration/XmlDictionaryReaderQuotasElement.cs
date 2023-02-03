@@ -2,7 +2,7 @@
 // XmlDictionaryReaderQuotasElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,175 +54,175 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed partial class XmlDictionaryReaderQuotasElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty max_array_length;
-		static ConfigurationProperty max_bytes_per_read;
-		static ConfigurationProperty max_depth;
-		static ConfigurationProperty max_name_table_char_count;
-		static ConfigurationProperty max_string_content_length;
+    public sealed partial class XmlDictionaryReaderQuotasElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty max_array_length;
+        static ConfigurationProperty max_bytes_per_read;
+        static ConfigurationProperty max_depth;
+        static ConfigurationProperty max_name_table_char_count;
+        static ConfigurationProperty max_string_content_length;
 
-		static XmlDictionaryReaderQuotasElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			max_array_length = new ConfigurationProperty ("maxArrayLength",
-				typeof (int), "0", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+        static XmlDictionaryReaderQuotasElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            max_array_length = new ConfigurationProperty ("maxArrayLength",
+                typeof (int), "0", null/* FIXME: get converter for int*/, null,
+                ConfigurationPropertyOptions.None);
 
-			max_bytes_per_read = new ConfigurationProperty ("maxBytesPerRead",
-				typeof (int), "0", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+            max_bytes_per_read = new ConfigurationProperty ("maxBytesPerRead",
+                typeof (int), "0", null/* FIXME: get converter for int*/, null,
+                ConfigurationPropertyOptions.None);
 
-			max_depth = new ConfigurationProperty ("maxDepth",
-				typeof (int), "0", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+            max_depth = new ConfigurationProperty ("maxDepth",
+                typeof (int), "0", null/* FIXME: get converter for int*/, null,
+                ConfigurationPropertyOptions.None);
 
-			max_name_table_char_count = new ConfigurationProperty ("maxNameTableCharCount",
-				typeof (int), "0", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+            max_name_table_char_count = new ConfigurationProperty ("maxNameTableCharCount",
+                typeof (int), "0", null/* FIXME: get converter for int*/, null,
+                ConfigurationPropertyOptions.None);
 
-			max_string_content_length = new ConfigurationProperty ("maxStringContentLength",
-				typeof (int), "0", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+            max_string_content_length = new ConfigurationProperty ("maxStringContentLength",
+                typeof (int), "0", null/* FIXME: get converter for int*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (max_array_length);
-			properties.Add (max_bytes_per_read);
-			properties.Add (max_depth);
-			properties.Add (max_name_table_char_count);
-			properties.Add (max_string_content_length);
-		}
+            properties.Add (max_array_length);
+            properties.Add (max_bytes_per_read);
+            properties.Add (max_depth);
+            properties.Add (max_name_table_char_count);
+            properties.Add (max_string_content_length);
+        }
 
-		public XmlDictionaryReaderQuotasElement ()
-		{
-		}
+        public XmlDictionaryReaderQuotasElement ()
+        {
+        }
 
 
-		// Properties
+        // Properties
 
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxArrayLength",
-			 DefaultValue = "0",
-			 Options = ConfigurationPropertyOptions.None)]
-		public int MaxArrayLength {
-			get { return (int) base [max_array_length]; }
-			set { base [max_array_length] = value; }
-		}
+        [IntegerValidator ( MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        [ConfigurationProperty ("maxArrayLength",
+             DefaultValue = "0",
+             Options = ConfigurationPropertyOptions.None)]
+        public int MaxArrayLength {
+            get { return (int) base [max_array_length]; }
+            set { base [max_array_length] = value; }
+        }
 
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxBytesPerRead",
-			 DefaultValue = "0",
-			 Options = ConfigurationPropertyOptions.None)]
-		public int MaxBytesPerRead {
-			get { return (int) base [max_bytes_per_read]; }
-			set { base [max_bytes_per_read] = value; }
-		}
+        [IntegerValidator ( MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        [ConfigurationProperty ("maxBytesPerRead",
+             DefaultValue = "0",
+             Options = ConfigurationPropertyOptions.None)]
+        public int MaxBytesPerRead {
+            get { return (int) base [max_bytes_per_read]; }
+            set { base [max_bytes_per_read] = value; }
+        }
 
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxDepth",
-			 DefaultValue = "0",
-			 Options = ConfigurationPropertyOptions.None)]
-		public int MaxDepth {
-			get { return (int) base [max_depth]; }
-			set { base [max_depth] = value; }
-		}
+        [IntegerValidator ( MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        [ConfigurationProperty ("maxDepth",
+             DefaultValue = "0",
+             Options = ConfigurationPropertyOptions.None)]
+        public int MaxDepth {
+            get { return (int) base [max_depth]; }
+            set { base [max_depth] = value; }
+        }
 
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxNameTableCharCount",
-			 DefaultValue = "0",
-			 Options = ConfigurationPropertyOptions.None)]
-		public int MaxNameTableCharCount {
-			get { return (int) base [max_name_table_char_count]; }
-			set { base [max_name_table_char_count] = value; }
-		}
+        [IntegerValidator ( MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        [ConfigurationProperty ("maxNameTableCharCount",
+             DefaultValue = "0",
+             Options = ConfigurationPropertyOptions.None)]
+        public int MaxNameTableCharCount {
+            get { return (int) base [max_name_table_char_count]; }
+            set { base [max_name_table_char_count] = value; }
+        }
 
-		[ConfigurationProperty ("maxStringContentLength",
-			 DefaultValue = "0",
-			 Options = ConfigurationPropertyOptions.None)]
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		public int MaxStringContentLength {
-			get { return (int) base [max_string_content_length]; }
-			set { base [max_string_content_length] = value; }
-		}
+        [ConfigurationProperty ("maxStringContentLength",
+             DefaultValue = "0",
+             Options = ConfigurationPropertyOptions.None)]
+        [IntegerValidator ( MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        public int MaxStringContentLength {
+            get { return (int) base [max_string_content_length]; }
+            set { base [max_string_content_length] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		internal XmlDictionaryReaderQuotas Create ()
-		{
-			var q =  new XmlDictionaryReaderQuotas ();
-			ApplyConfiguration (q);
-			return q;
-		}
-		
-		internal void ApplyConfiguration (XmlDictionaryReaderQuotas q)
-		{
-			if (MaxArrayLength > 0)
-				q.MaxArrayLength = MaxArrayLength;
-			if (MaxBytesPerRead > 0)
-				q.MaxBytesPerRead = MaxBytesPerRead;
-			if (MaxDepth > 0)
-				q.MaxDepth = MaxDepth;
-			if (MaxNameTableCharCount > 0)
-				q.MaxNameTableCharCount = MaxNameTableCharCount;
-			if (MaxStringContentLength > 0)
-				q.MaxStringContentLength = MaxStringContentLength;
-		}
+        internal XmlDictionaryReaderQuotas Create ()
+        {
+            var q =  new XmlDictionaryReaderQuotas ();
+            ApplyConfiguration (q);
+            return q;
+        }
+        
+        internal void ApplyConfiguration (XmlDictionaryReaderQuotas q)
+        {
+            if (MaxArrayLength > 0)
+                q.MaxArrayLength = MaxArrayLength;
+            if (MaxBytesPerRead > 0)
+                q.MaxBytesPerRead = MaxBytesPerRead;
+            if (MaxDepth > 0)
+                q.MaxDepth = MaxDepth;
+            if (MaxNameTableCharCount > 0)
+                q.MaxNameTableCharCount = MaxNameTableCharCount;
+            if (MaxStringContentLength > 0)
+                q.MaxStringContentLength = MaxStringContentLength;
+        }
 
-		internal void ApplyConfiguration (XmlDictionaryReaderQuotasElement q)
-		{
-			if (MaxArrayLength > 0)
-				q.MaxArrayLength = MaxArrayLength;
-			if (MaxBytesPerRead > 0)
-				q.MaxBytesPerRead = MaxBytesPerRead;
-			if (MaxDepth > 0)
-				q.MaxDepth = MaxDepth;
-			if (MaxNameTableCharCount > 0)
-				q.MaxNameTableCharCount = MaxNameTableCharCount;
-			if (MaxStringContentLength > 0)
-				q.MaxStringContentLength = MaxStringContentLength;
-		}
+        internal void ApplyConfiguration (XmlDictionaryReaderQuotasElement q)
+        {
+            if (MaxArrayLength > 0)
+                q.MaxArrayLength = MaxArrayLength;
+            if (MaxBytesPerRead > 0)
+                q.MaxBytesPerRead = MaxBytesPerRead;
+            if (MaxDepth > 0)
+                q.MaxDepth = MaxDepth;
+            if (MaxNameTableCharCount > 0)
+                q.MaxNameTableCharCount = MaxNameTableCharCount;
+            if (MaxStringContentLength > 0)
+                q.MaxStringContentLength = MaxStringContentLength;
+        }
 
-		internal void InitializeFrom (XmlDictionaryReaderQuotas q)
-		{
-			if (q.MaxArrayLength > 0)
-				MaxArrayLength = q.MaxArrayLength;
-			if (q.MaxBytesPerRead > 0)
-				MaxBytesPerRead = q.MaxBytesPerRead;
-			if (q.MaxDepth > 0)
-				MaxDepth = q.MaxDepth;
-			if (q.MaxNameTableCharCount > 0)
-				MaxNameTableCharCount = q.MaxNameTableCharCount;
-			if (q.MaxStringContentLength > 0)
-				MaxStringContentLength = q.MaxStringContentLength;
-		}
+        internal void InitializeFrom (XmlDictionaryReaderQuotas q)
+        {
+            if (q.MaxArrayLength > 0)
+                MaxArrayLength = q.MaxArrayLength;
+            if (q.MaxBytesPerRead > 0)
+                MaxBytesPerRead = q.MaxBytesPerRead;
+            if (q.MaxDepth > 0)
+                MaxDepth = q.MaxDepth;
+            if (q.MaxNameTableCharCount > 0)
+                MaxNameTableCharCount = q.MaxNameTableCharCount;
+            if (q.MaxStringContentLength > 0)
+                MaxStringContentLength = q.MaxStringContentLength;
+        }
 
-		internal void CopyFrom (XmlDictionaryReaderQuotasElement q)
-		{
-			if (q.MaxArrayLength > 0)
-				MaxArrayLength = q.MaxArrayLength;
-			if (q.MaxBytesPerRead > 0)
-				MaxBytesPerRead = q.MaxBytesPerRead;
-			if (q.MaxDepth > 0)
-				MaxDepth = q.MaxDepth;
-			if (q.MaxNameTableCharCount > 0)
-				MaxNameTableCharCount = q.MaxNameTableCharCount;
-			if (q.MaxStringContentLength > 0)
-				MaxStringContentLength = q.MaxStringContentLength;
-		}
-	}
+        internal void CopyFrom (XmlDictionaryReaderQuotasElement q)
+        {
+            if (q.MaxArrayLength > 0)
+                MaxArrayLength = q.MaxArrayLength;
+            if (q.MaxBytesPerRead > 0)
+                MaxBytesPerRead = q.MaxBytesPerRead;
+            if (q.MaxDepth > 0)
+                MaxDepth = q.MaxDepth;
+            if (q.MaxNameTableCharCount > 0)
+                MaxNameTableCharCount = q.MaxNameTableCharCount;
+            if (q.MaxStringContentLength > 0)
+                MaxStringContentLength = q.MaxStringContentLength;
+        }
+    }
 
 }

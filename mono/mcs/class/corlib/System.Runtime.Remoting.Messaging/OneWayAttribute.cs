@@ -33,12 +33,12 @@ using System;
 
 namespace System.Runtime.Remoting.Messaging {
 
-	[AttributeUsage (AttributeTargets.Method)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class OneWayAttribute : Attribute
-	{
-		public OneWayAttribute ()
-		{
-		}
-	}
+    [AttributeUsage (AttributeTargets.Method)]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class OneWayAttribute : Attribute
+    {
+        public OneWayAttribute ()
+        {
+        }
+    }
 }

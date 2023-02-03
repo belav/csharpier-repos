@@ -5,10 +5,10 @@ using System;
 
 namespace x
 {
-	class a
-	{
-		bool B { set {} }
-		
-		void Test (B b) {}
-	}
+    class a
+    {
+        bool B { set {} }
+        
+        void Test (B b) {}
+    }
 }

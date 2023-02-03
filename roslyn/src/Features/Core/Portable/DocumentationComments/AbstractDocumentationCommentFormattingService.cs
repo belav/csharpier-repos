@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -248,7 +248,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                     switch (_listStack[i].type)
                     {
                         case DocumentationCommentListType.Bullet:
-                            Builder.Add(new TaggedText(TextTags.ContainerStart, "â€¢ "));
+                            Builder.Add(new TaggedText(TextTags.ContainerStart, "• "));
                             break;
 
                         case DocumentationCommentListType.Number:
@@ -442,7 +442,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             if (name == DocumentationCommentXmlNames.TermElementName)
             {
                 state.AppendSingleSpace();
-                state.AppendString("â€“");
+                state.AppendString("–");
             }
         }
 

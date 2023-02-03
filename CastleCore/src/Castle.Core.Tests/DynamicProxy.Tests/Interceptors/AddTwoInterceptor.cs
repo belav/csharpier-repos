@@ -14,23 +14,23 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class AddTwoInterceptor : IInterceptor
-	{
-		#region IInterceptor Members
+    public class AddTwoInterceptor : IInterceptor
+    {
+        #region IInterceptor Members
 
-		public void Intercept(IInvocation invocation)
-		{
-			invocation.Proceed();
-			var ret = (int) invocation.ReturnValue;
-			ret += 2;
-			invocation.ReturnValue = ret;
-		}
+        public void Intercept(IInvocation invocation)
+        {
+            invocation.Proceed();
+            var ret = (int) invocation.ReturnValue;
+            ret += 2;
+            invocation.ReturnValue = ret;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

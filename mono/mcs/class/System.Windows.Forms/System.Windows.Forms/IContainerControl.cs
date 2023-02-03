@@ -20,20 +20,20 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public interface IContainerControl {
-		#region Public Instance Properties
-		Control ActiveControl {get; set;}
-		#endregion	// Public Instance Properties
+    public interface IContainerControl {
+        #region Public Instance Properties
+        Control ActiveControl {get; set;}
+        #endregion    // Public Instance Properties
 
-		#region Public Instance Methods
-		bool ActivateControl(Control active);
-		#endregion	// Public Instance Methods
-	}
+        #region Public Instance Methods
+        bool ActivateControl(Control active);
+        #endregion    // Public Instance Methods
+    }
 }

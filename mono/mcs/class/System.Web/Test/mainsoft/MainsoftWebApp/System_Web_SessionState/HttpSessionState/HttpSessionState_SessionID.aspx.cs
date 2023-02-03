@@ -36,51 +36,51 @@ using System.Web.UI.HtmlControls;
 namespace GHTTests.System_Web_dll.System_Web_SessionState
 {public class HttpSessionState_SessionID
     : GHTBaseWeb {
-	 #region Web Form Designer generated code
-	 override protected void OnInit(EventArgs e) {
-		 //
-		 // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-		 //
-		 InitializeComponent();
-		 base.OnInit(e);
-	 }
-		
-	 /// <summary>
-	 /// Required method for Designer support - do not modify
-	 /// the contents of this method with the code editor.
-	 /// </summary>
-	 private void InitializeComponent() {    
-		 this.Load += new System.EventHandler(this.Page_Load);
-	 }
-	 #endregion
+     #region Web Form Designer generated code
+     override protected void OnInit(EventArgs e) {
+         //
+         // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+         //
+         InitializeComponent();
+         base.OnInit(e);
+     }
+        
+     /// <summary>
+     /// Required method for Designer support - do not modify
+     /// the contents of this method with the code editor.
+     /// </summary>
+     private void InitializeComponent() {    
+         this.Load += new System.EventHandler(this.Page_Load);
+     }
+     #endregion
 
-	 private void Page_Load(object sender, EventArgs e)
-	 {
-		 HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
-		 this.GHTTestBegin(form1);
-		 this.GHTSubTestBegin("GHTSubTest1");
-		 try
-		 {
-			 this.GHTSubTestAddResult(this.Session.SessionID.GetType().ToString());
-			 if (this.Session.SessionID.Length > 0)
-			 {
-				 this.GHTSubTestAddResult("length is > 0");
-			 }
-			 else
-			 {
-				 this.GHTSubTestAddResult("length is =< 0");
-			 }
-		 }
-		 catch (Exception exception2)
-		 {
-			 // ProjectData.SetProjectError(exception2);
-			 Exception exception1 = exception2;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception1);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTSubTestEnd();
-		 this.GHTTestEnd();
-	 }
+     private void Page_Load(object sender, EventArgs e)
+     {
+         HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
+         this.GHTTestBegin(form1);
+         this.GHTSubTestBegin("GHTSubTest1");
+         try
+         {
+             this.GHTSubTestAddResult(this.Session.SessionID.GetType().ToString());
+             if (this.Session.SessionID.Length > 0)
+             {
+                 this.GHTSubTestAddResult("length is > 0");
+             }
+             else
+             {
+                 this.GHTSubTestAddResult("length is =< 0");
+             }
+         }
+         catch (Exception exception2)
+         {
+             // ProjectData.SetProjectError(exception2);
+             Exception exception1 = exception2;
+             this.GHTSubTestUnexpectedExceptionCaught(exception1);
+             // ProjectData.ClearProjectError();
+         }
+         this.GHTSubTestEnd();
+         this.GHTTestEnd();
+     }
  
  }
 }

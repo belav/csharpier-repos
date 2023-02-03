@@ -29,7 +29,7 @@
 //
 namespace Microsoft.Win32 {
 
-	/// <summary>
-	/// </summary>
+    /// <summary>
+    /// </summary>
 public delegate void UserPreferenceChangingEventHandler(   object sender,   UserPreferenceChangingEventArgs e);
 }

@@ -2,7 +2,7 @@
 // System.Runtime.InteropServices._Exception interface
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,35 +31,35 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.InteropServices {
 
-	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
-	[Guid ("b36b5c63-42ef-38bc-a07e-0b34c98f164a")]
-	[CLSCompliant (false)]
-	[ComVisible (true)]
-	public interface _Exception {
+    [InterfaceType (ComInterfaceType.InterfaceIsDual)]
+    [Guid ("b36b5c63-42ef-38bc-a07e-0b34c98f164a")]
+    [CLSCompliant (false)]
+    [ComVisible (true)]
+    public interface _Exception {
 
-		string HelpLink { get; set; }
+        string HelpLink { get; set; }
 
-		Exception InnerException { get; }
+        Exception InnerException { get; }
 
-		string Message { get; }
+        string Message { get; }
 
-		string Source { get; set; }
+        string Source { get; set; }
 
-		string StackTrace { get; }
+        string StackTrace { get; }
 
-		MethodBase TargetSite { get; }
+        MethodBase TargetSite { get; }
 
 
-		bool Equals (object obj);
+        bool Equals (object obj);
 
-		Exception GetBaseException ();
+        Exception GetBaseException ();
 
-		int GetHashCode ();
+        int GetHashCode ();
 
-		void GetObjectData (SerializationInfo info, StreamingContext context);
+        void GetObjectData (SerializationInfo info, StreamingContext context);
 
-		Type GetType ();
+        Type GetType ();
 
-		string ToString ();
-	}
+        string ToString ();
+    }
 }

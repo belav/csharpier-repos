@@ -6,14 +6,14 @@ using System.Linq.Expressions;
 
 class X
 {
-	void Test ()
-	{
-		Expression<Func<bool>> e = () => TryGetValue (out _);
-	}
+    void Test ()
+    {
+        Expression<Func<bool>> e = () => TryGetValue (out _);
+    }
 
-	bool TryGetValue (out int arg)
-	{
-		arg = 3;
-		return true;
-	}
+    bool TryGetValue (out int arg)
+    {
+        arg = 3;
+        return true;
+    }
 }

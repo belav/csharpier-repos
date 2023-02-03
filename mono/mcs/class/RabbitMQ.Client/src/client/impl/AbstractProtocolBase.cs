@@ -100,9 +100,9 @@ namespace RabbitMQ.Client.Impl {
             }
         }
 
-	    public override string ToString() {
-	        return Version.ToString();
-	    }
+        public override string ToString() {
+            return Version.ToString();
+        }
 
         public override bool Equals(object obj) {
             return (GetType() == obj.GetType());

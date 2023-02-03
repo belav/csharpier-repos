@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 {
                     case Architecture.X86:
                     case Architecture.X64:
-                        // 😱 Overwrite the compiled method to just return.
+                        // ?? Overwrite the compiled method to just return.
                         // Note that the same sequence works for x86 and x64.
 
                         // ret

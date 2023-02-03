@@ -3,7 +3,7 @@
 
 class C
 {
-	public static void Foo<T>() where T : struct, new ()
-	{
-	}
+    public static void Foo<T>() where T : struct, new ()
+    {
+    }
 }

@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil {
 
-	internal interface IMemberDefinition : IMemberReference, ICustomAttributeProvider {
+    internal interface IMemberDefinition : IMemberReference, ICustomAttributeProvider {
 
-		new TypeDefinition DeclaringType { get; set; }
-		bool IsSpecialName { get; set; }
-		bool IsRuntimeSpecialName { get; set; }
-	}
+        new TypeDefinition DeclaringType { get; set; }
+        bool IsSpecialName { get; set; }
+        bool IsRuntimeSpecialName { get; set; }
+    }
 }

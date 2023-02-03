@@ -2,7 +2,7 @@
 // RsaSecurityToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,63 +33,63 @@ using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {
-	public class RsaSecurityToken : SecurityToken
-	{
-		public RsaSecurityToken (RSA rsa)
-			: this (rsa, new UniqueId ().ToString ())
-		{
-		}
+    public class RsaSecurityToken : SecurityToken
+    {
+        public RsaSecurityToken (RSA rsa)
+            : this (rsa, new UniqueId ().ToString ())
+        {
+        }
 
-		public RsaSecurityToken (RSA rsa, string id)
-		{
-			if (rsa == null)
-				throw new ArgumentNullException ("rsa");
-			this.rsa = rsa;
-			this.id = id;
-		}
+        public RsaSecurityToken (RSA rsa, string id)
+        {
+            if (rsa == null)
+                throw new ArgumentNullException ("rsa");
+            this.rsa = rsa;
+            this.id = id;
+        }
 
-		RSA rsa;
-		string id;
-		DateTime valid_from = DateTime.Now.ToUniversalTime ();
+        RSA rsa;
+        string id;
+        DateTime valid_from = DateTime.Now.ToUniversalTime ();
 
-		public override DateTime ValidFrom {
-			get { return valid_from; }
-		}
+        public override DateTime ValidFrom {
+            get { return valid_from; }
+        }
 
-		public override DateTime ValidTo {
-			get { return DateTime.MaxValue.AddDays (-1); }
-		}
+        public override DateTime ValidTo {
+            get { return DateTime.MaxValue.AddDays (-1); }
+        }
 
-		public override string Id {
-			get { return id; }
-		}
+        public override string Id {
+            get { return id; }
+        }
 
-		public RSA Rsa {
-			get { return rsa; }
-		}
+        public RSA Rsa {
+            get { return rsa; }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override bool CanCreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanCreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override T CreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override T CreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override bool MatchesKeyIdentifierClause (
+            SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

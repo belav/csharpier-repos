@@ -10,8 +10,8 @@ namespace Avalon.Secure
 
         static public void FooMethod(object sender, EventArgs e)
         {
-		bar.BarEvent -= new EventHandler(Foo.FooMethod);
-		bar.OnBarEvent();
+        bar.BarEvent -= new EventHandler(Foo.FooMethod);
+        bar.OnBarEvent();
         }
 
 
@@ -26,17 +26,17 @@ namespace Avalon.Secure
 
     public class Bar
     {
-	public Bar(){}
+    public Bar(){}
 
-	public event EventHandler BarEvent;
+    public event EventHandler BarEvent;
 
-	public void OnBarEvent()
-	{
-		if (BarEvent != null)
-			BarEvent(this, EventArgs.Empty);
-	}
+    public void OnBarEvent()
+    {
+        if (BarEvent != null)
+            BarEvent(this, EventArgs.Empty);
+    }
 
-	
+    
     }
 
     

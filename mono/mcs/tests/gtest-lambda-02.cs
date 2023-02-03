@@ -8,20 +8,20 @@ delegate string funcs (string s);
 delegate int funci (int i);
 
 class X {
-	static void Foo (funci fi)
-	{
-		int res = fi (10);
-		Console.WriteLine (res);
-	}
-	
-	static void Foo (funcs fs)
-	{
-		string res = fs ("hello");
-		Console.WriteLine (res);
-	}
+    static void Foo (funci fi)
+    {
+        int res = fi (10);
+        Console.WriteLine (res);
+    }
+    
+    static void Foo (funcs fs)
+    {
+        string res = fs ("hello");
+        Console.WriteLine (res);
+    }
 
-	public static void Main ()
-	{
-		Foo (x => x + "dingus");
-	}
+    public static void Main ()
+    {
+        Foo (x => x + "dingus");
+    }
 }

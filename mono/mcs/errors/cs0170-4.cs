@@ -5,15 +5,15 @@ using System;
 
 public struct S
 {
-	public Action a;
+    public Action a;
 }
 
 
 public class Test
 {
-	static void Main ()
-	{
-		S s;
-		s.a += delegate { };
-	}
+    static void Main ()
+    {
+        S s;
+        s.a += delegate { };
+    }
 }

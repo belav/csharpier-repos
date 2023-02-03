@@ -39,97 +39,97 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DeletedRowInaccessibleException_Generate : GHTBase
 {
-	[Test] public void Main()
-	{
-		DeletedRowInaccessibleException_Generate tc = new DeletedRowInaccessibleException_Generate();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DeletedRowInaccessible");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DeletedRowInaccessibleException_Generate tc = new DeletedRowInaccessibleException_Generate();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DeletedRowInaccessible");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataTable dtParent;
-		dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
-		Exception tmpEx = new Exception();
+    public void run()
+    {
+        Exception exp = null;
+        DataTable dtParent;
+        dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+        Exception tmpEx = new Exception();
 
-		DataRow dr = dtParent.Rows[0];
-		dr.Delete();
-		
-		try
-		{
-			BeginCase("DeletedRowInaccessible Exception (BeginEdit)");
-			try
-			{
-				dr.BeginEdit();
-			}
-			catch (DeletedRowInaccessibleException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType(),typeof(DeletedRowInaccessibleException));
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        DataRow dr = dtParent.Rows[0];
+        dr.Delete();
+        
+        try
+        {
+            BeginCase("DeletedRowInaccessible Exception (BeginEdit)");
+            try
+            {
+                dr.BeginEdit();
+            }
+            catch (DeletedRowInaccessibleException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType(),typeof(DeletedRowInaccessibleException));
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("DeletedRowInaccessible Exception (Item)");
-			try
-			{
-				string s = dr[0].ToString();
-			}
-			catch (DeletedRowInaccessibleException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType(),typeof(DeletedRowInaccessibleException));
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("DeletedRowInaccessible Exception (Item)");
+            try
+            {
+                string s = dr[0].ToString();
+            }
+            catch (DeletedRowInaccessibleException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType(),typeof(DeletedRowInaccessibleException));
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("DeletedRowInaccessible Exception (ItemArray)");
-			try
-			{
-				object[] o = dr.ItemArray;
-			}
-			catch (DeletedRowInaccessibleException ex)
-			{
-				tmpEx = ex;
-			}
-			base.Compare(tmpEx.GetType(),typeof(DeletedRowInaccessibleException));
-			tmpEx = new Exception();
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            BeginCase("DeletedRowInaccessible Exception (ItemArray)");
+            try
+            {
+                object[] o = dr.ItemArray;
+            }
+            catch (DeletedRowInaccessibleException ex)
+            {
+                tmpEx = ex;
+            }
+            base.Compare(tmpEx.GetType(),typeof(DeletedRowInaccessibleException));
+            tmpEx = new Exception();
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
 }
 }

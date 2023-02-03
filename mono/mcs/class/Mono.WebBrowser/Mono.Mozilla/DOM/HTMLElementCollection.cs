@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -30,49 +30,49 @@ using Mono.WebBrowser.DOM;
 
 namespace Mono.Mozilla.DOM
 {
-	internal class HTMLElementCollection : NodeList, IElementCollection
-	{
-		public HTMLElementCollection (WebBrowser control, nsIDOMNodeList nodeList) : base (control, nodeList)
-		{
-		}
-		
-		
-		public HTMLElementCollection (WebBrowser control) : base (control)
-		{
-		}
-		
-		internal override void Load ()
-		{
-			Clear ();
-			uint count;
-			unmanagedNodes.getLength (out count);
-			Node[] tmpnodes = new Node[count];
-			for (int i = 0; i < count;i++) {
-				nsIDOMNode node;
-				unmanagedNodes.item ((uint)i, out node);
-				ushort type;
-				node.getNodeType (out type);
-				if (type == (ushort)NodeType.Element)
-					tmpnodes[nodeCount++] = new HTMLElement (control, (nsIDOMHTMLElement)node);
-			}
-			nodes = new Node[nodeCount];
-			Array.Copy (tmpnodes, nodes, nodeCount);
-		}
-		
-		#region IList members
-		public new IElement this [int index] {
-			get {
-				if (index < 0 || index >= nodeCount)
-					throw new ArgumentOutOfRangeException ("index");
-				return nodes [index] as IElement;
-			}
-			set {
-				if (index < 0 || index >= nodeCount)
-					throw new ArgumentOutOfRangeException ("index");
-				nodes [index] = value as INode;
-			}
-		}
-		
-		#endregion
-	}
+    internal class HTMLElementCollection : NodeList, IElementCollection
+    {
+        public HTMLElementCollection (WebBrowser control, nsIDOMNodeList nodeList) : base (control, nodeList)
+        {
+        }
+        
+        
+        public HTMLElementCollection (WebBrowser control) : base (control)
+        {
+        }
+        
+        internal override void Load ()
+        {
+            Clear ();
+            uint count;
+            unmanagedNodes.getLength (out count);
+            Node[] tmpnodes = new Node[count];
+            for (int i = 0; i < count;i++) {
+                nsIDOMNode node;
+                unmanagedNodes.item ((uint)i, out node);
+                ushort type;
+                node.getNodeType (out type);
+                if (type == (ushort)NodeType.Element)
+                    tmpnodes[nodeCount++] = new HTMLElement (control, (nsIDOMHTMLElement)node);
+            }
+            nodes = new Node[nodeCount];
+            Array.Copy (tmpnodes, nodes, nodeCount);
+        }
+        
+        #region IList members
+        public new IElement this [int index] {
+            get {
+                if (index < 0 || index >= nodeCount)
+                    throw new ArgumentOutOfRangeException ("index");
+                return nodes [index] as IElement;
+            }
+            set {
+                if (index < 0 || index >= nodeCount)
+                    throw new ArgumentOutOfRangeException ("index");
+                nodes [index] = value as INode;
+            }
+        }
+        
+        #endregion
+    }
 }

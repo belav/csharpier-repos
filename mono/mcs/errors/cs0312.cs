@@ -7,12 +7,12 @@ struct S
 
 class C<U>
 {
-	static void Foo<T> (T value) where T : U
-	{
-	}
+    static void Foo<T> (T value) where T : U
+    {
+    }
 
-	static void Test (S? s)
-	{
-		C<S>.Foo (s);
-	}
+    static void Test (S? s)
+    {
+        C<S>.Foo (s);
+    }
 }

@@ -3,5 +3,5 @@
 
 public static class B
 {
-	protected class E {}
+    protected class E {}
 }

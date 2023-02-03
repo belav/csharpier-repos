@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -162,7 +162,7 @@ namespace Roslyn.Test.Utilities
         public static ImmutableArray<MetadataReference> StandardAndVBRuntimeReferences => StandardReferences.Add(StandardVisualBasicReference);
 
         /*
-         * ⚠ Dev note ⚠: properties in TestBase are backed by Lazy<T>. Avoid changes to the following properties
+         * ? Dev note ?: properties in TestBase are backed by Lazy<T>. Avoid changes to the following properties
          * which would force the initialization of these properties in the static constructor, since the stack traces
          * for a TypeLoadException are missing important information for resolving problems if/when they occur.
          * https://github.com/dotnet/roslyn/issues/25961

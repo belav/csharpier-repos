@@ -7,14 +7,14 @@ class Symbol
 
 class X
 {
-	Symbol top;
+    Symbol top;
 
-	internal int Enter (Symbol key, object value)
-	{
-		if (key != null) {
-			top = key;
-		}
-		object top = null;
-		return top.Count;
-	}
+    internal int Enter (Symbol key, object value)
+    {
+        if (key != null) {
+            top = key;
+        }
+        object top = null;
+        return top.Count;
+    }
 }

@@ -33,28 +33,28 @@ using System.Runtime.Serialization;
 
 namespace System.Security {
 
-	[Serializable]
-	[ComVisible (true)]
-	public class VerificationException : SystemException {
-	
-		// Constructors
-		public VerificationException ()
-		{
-		}
+    [Serializable]
+    [ComVisible (true)]
+    public class VerificationException : SystemException {
+    
+        // Constructors
+        public VerificationException ()
+        {
+        }
 
-		public VerificationException (string message) 
-			: base (message)
-		{
-		}
+        public VerificationException (string message) 
+            : base (message)
+        {
+        }
 
-		protected VerificationException (SerializationInfo info, StreamingContext context) 
-			: base (info, context)
-		{
-		}
+        protected VerificationException (SerializationInfo info, StreamingContext context) 
+            : base (info, context)
+        {
+        }
 
-		public VerificationException (string message, Exception innerException) 
-			: base (message, innerException)
-		{
-		}
-	}
+        public VerificationException (string message, Exception innerException) 
+            : base (message, innerException)
+        {
+        }
+    }
 }

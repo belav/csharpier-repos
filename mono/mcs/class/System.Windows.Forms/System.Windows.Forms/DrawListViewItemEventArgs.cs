@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Alan McGovern (alan.mcgovern@gmail.com)
+//    Alan McGovern (alan.mcgovern@gmail.com)
 //
 
 
@@ -91,23 +91,23 @@ namespace System.Windows.Forms
 
         public void DrawBackground ()
         {
-		graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (item.BackColor), bounds);
+        graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (item.BackColor), bounds);
         }
 
         public void DrawFocusRectangle ()
         {
-		if ((state & ListViewItemStates.Focused) != 0)
-			ThemeEngine.Current.CPDrawFocusRectangle (graphics, bounds, item.ListView.ForeColor, item.ListView.BackColor);
+        if ((state & ListViewItemStates.Focused) != 0)
+            ThemeEngine.Current.CPDrawFocusRectangle (graphics, bounds, item.ListView.ForeColor, item.ListView.BackColor);
         }
 
         public void DrawText ()
         {
-		DrawText (TextFormatFlags.Default);
+        DrawText (TextFormatFlags.Default);
         }
 
         public void DrawText (TextFormatFlags flags)
         {
-		TextRenderer.DrawText (graphics, item.Text, item.Font, bounds, item.ForeColor, flags);
+        TextRenderer.DrawText (graphics, item.Text, item.Font, bounds, item.ForeColor, flags);
         }
 
         #endregion Public Methods

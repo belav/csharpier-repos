@@ -1,4 +1,4 @@
-﻿using AutoMapper.Internal.Mappers;
+using AutoMapper.Internal.Mappers;
 
 namespace AutoMapper.UnitTests.Mappers;
 

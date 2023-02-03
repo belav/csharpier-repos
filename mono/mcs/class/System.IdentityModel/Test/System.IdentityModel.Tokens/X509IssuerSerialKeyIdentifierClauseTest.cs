@@ -2,7 +2,7 @@
 // X509IssuerSerialKeyIdentifierClauseTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -38,22 +38,22 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class X509IssuerSerialKeyIdentifierClauseTest
-	{
-		static readonly X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.pfx"), "mono");
-		static readonly X509Certificate2 cert2 = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test2.pfx"), "mono");
+    [TestFixture]
+    public class X509IssuerSerialKeyIdentifierClauseTest
+    {
+        static readonly X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.pfx"), "mono");
+        static readonly X509Certificate2 cert2 = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test2.pfx"), "mono");
         static readonly X509Certificate2 cert3 = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test_neg_serial.cer"));
 
-		[Test]
-		public void Properties ()
-		{
-			X509IssuerSerialKeyIdentifierClause ic =
-				new X509IssuerSerialKeyIdentifierClause (cert);
-			Assert.AreEqual ("CN=Mono Test Root Agency", ic.IssuerName, "#1");
-			Assert.AreEqual ("22491767666218099257720700881460366085", ic.IssuerSerialNumber, "#2");
-			Assert.AreEqual (null, ic.ClauseType, "#3");
-		}
+        [Test]
+        public void Properties ()
+        {
+            X509IssuerSerialKeyIdentifierClause ic =
+                new X509IssuerSerialKeyIdentifierClause (cert);
+            Assert.AreEqual ("CN=Mono Test Root Agency", ic.IssuerName, "#1");
+            Assert.AreEqual ("22491767666218099257720700881460366085", ic.IssuerSerialNumber, "#2");
+            Assert.AreEqual (null, ic.ClauseType, "#3");
+        }
 
         [Test]
         public void NegativeSerialNumber ()
@@ -63,6 +63,6 @@ namespace MonoTests.System.IdentityModel.Selectors
             Assert.AreEqual ("-168428216848510272180165529369113665228", clause.IssuerSerialNumber, "#2");
             Assert.AreEqual (null, clause.ClauseType, "#3");
         }
-	}
+    }
 }
 #endif

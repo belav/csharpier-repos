@@ -5,21 +5,21 @@ using System;
 
 namespace A
 {
-	class XAttribute : Attribute { }
+    class XAttribute : Attribute { }
 }
 
 namespace B
 {
-	class XAttribute : Attribute { }
+    class XAttribute : Attribute { }
 }
 
 namespace C
 {
-	using A;
-	using B;
+    using A;
+    using B;
 
-	[X]
-	class Test 
-	{
-	}
+    [X]
+    class Test 
+    {
+    }
 }

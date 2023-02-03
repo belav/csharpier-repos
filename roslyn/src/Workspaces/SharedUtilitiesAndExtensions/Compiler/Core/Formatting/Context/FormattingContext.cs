@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -411,10 +411,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             // the same change in indentation. Note that we anchor to the first token on a line to account for common
             // cases like the following code, where the `{` token is anchored to the `(` token of `()`:
             //
-            //                ↓ this space can be removed, which moves `(` one character to the left
+            //                ? this space can be removed, which moves `(` one character to the left
             // var x = Method( () =>
             // {
-            // ↑ this `{` anchors to `var` instead of `(`, which prevents it from moving when `(` is moved
+            // ? this `{` anchors to `var` instead of `(`, which prevents it from moving when `(` is moved
             // });
             //
             // The calculation of true anchor token (which is always the first token on a line) is delayed to account

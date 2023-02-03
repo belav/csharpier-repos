@@ -1,4 +1,4 @@
-﻿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -118,7 +118,7 @@ namespace TestNamespaceWriter
         /// </summary>
         /// <param name="codeText">The code text.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified code text is test; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified code text is test; otherwise, <c>false</c>.
         /// </returns>
         private static bool IsTest(string codeText)
         {

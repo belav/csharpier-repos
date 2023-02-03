@@ -14,16 +14,16 @@
 
 namespace Castle.DynamicProxy.Tests.GenClasses
 {
-	public class GenClassWithGenReturn<T, Z> where T : new() where Z : new()
-	{
-		public virtual T DoSomethingT()
-		{
-			return new T();
-		}
+    public class GenClassWithGenReturn<T, Z> where T : new() where Z : new()
+    {
+        public virtual T DoSomethingT()
+        {
+            return new T();
+        }
 
-		public virtual Z DoSomethingZ()
-		{
-			return new Z();
-		}
-	}
+        public virtual Z DoSomethingZ()
+        {
+            return new Z();
+        }
+    }
 }

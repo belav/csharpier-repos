@@ -31,12 +31,12 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public enum ServerProcessing
-	{
-		Complete = 0,
-		OneWay = 1,
-		Async = 2,
-	}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public enum ServerProcessing
+    {
+        Complete = 0,
+        OneWay = 1,
+        Async = 2,
+    }
 }

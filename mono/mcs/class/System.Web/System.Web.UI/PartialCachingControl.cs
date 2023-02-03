@@ -33,34 +33,34 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class PartialCachingControl : BasePartialCachingControl
-	{
-		Type type;
-		object [] parameters;
-		Control control;
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class PartialCachingControl : BasePartialCachingControl
+    {
+        Type type;
+        object [] parameters;
+        Control control;
 
-		internal PartialCachingControl (Type type, object[] parameters)
-		{
-			this.type = type;
-			this.parameters = parameters;
-		}
+        internal PartialCachingControl (Type type, object[] parameters)
+        {
+            this.type = type;
+            this.parameters = parameters;
+        }
 
-		internal override Control CreateControl ()
-		{
-			control = (Control) Activator.CreateInstance (type, parameters);
-			if (control is UserControl)
-				((UserControl) control).InitializeAsUserControl (Page);
+        internal override Control CreateControl ()
+        {
+            control = (Control) Activator.CreateInstance (type, parameters);
+            if (control is UserControl)
+                ((UserControl) control).InitializeAsUserControl (Page);
 
-			return control;
-		}
+            return control;
+        }
 
-		public Control CachedControl {
-			get { return control; } 
-		}
-	}
+        public Control CachedControl {
+            get { return control; } 
+        }
+    }
 }
 
 

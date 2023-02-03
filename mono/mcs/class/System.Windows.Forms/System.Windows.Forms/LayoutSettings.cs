@@ -30,11 +30,11 @@ using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms {
 
-	public abstract class LayoutSettings {
-		public virtual LayoutEngine LayoutEngine {
-			get {
-				return null;
-			}
-		}
-	}
+    public abstract class LayoutSettings {
+        public virtual LayoutEngine LayoutEngine {
+            get {
+                return null;
+            }
+        }
+    }
 }

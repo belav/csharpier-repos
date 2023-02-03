@@ -14,34 +14,34 @@
 
 namespace Castle.DynamicProxy.Tests.BugsReported
 {
-	using System;
+    using System;
 
-	public interface ICamera
-	{
-		int Id { get; }
-		string Name { get; set; }
-		string IPNumber { get; set; }
-	}
+    public interface ICamera
+    {
+        int Id { get; }
+        string Name { get; set; }
+        string IPNumber { get; set; }
+    }
 
-	public interface ICameraServiceBase
-	{
-		ICamera Add(string name, string ipNumber);
-	}
+    public interface ICameraServiceBase
+    {
+        ICamera Add(string name, string ipNumber);
+    }
 
-	public interface ICameraService : ICameraServiceBase
-	{
-		void Record(ICamera cam);
-	}
+    public interface ICameraService : ICameraServiceBase
+    {
+        void Record(ICamera cam);
+    }
 
-	public class CameraService : ICameraService
-	{
-		public ICamera Add(string name, string ipNumber)
-		{
-			return null;
-		}
+    public class CameraService : ICameraService
+    {
+        public ICamera Add(string name, string ipNumber)
+        {
+            return null;
+        }
 
-		public void Record(ICamera cam)
-		{
-		}
-	}
+        public void Record(ICamera cam)
+        {
+        }
+    }
 }

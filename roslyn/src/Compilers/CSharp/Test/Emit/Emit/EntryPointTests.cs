@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -515,7 +515,7 @@ public class A
   {
     class C 
     {
-     	public static void Main() { System.Console.WriteLine(1); }
+         public static void Main() { System.Console.WriteLine(1); }
     }
   }
   
@@ -523,8 +523,8 @@ public class A
   {
     class C 
     {
-	   public static void Main() { System.Console.WriteLine(2); }
-	}
+       public static void Main() { System.Console.WriteLine(2); }
+    }
   }
 }";
             CompileAndVerify(source, options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C"), expectedOutput: "1");
@@ -540,14 +540,14 @@ public class A
   {
     class C 
     {
-	   public static void Main() { System.Console.WriteLine(2); }
-	}
+       public static void Main() { System.Console.WriteLine(2); }
+    }
   }
   public class B
   {
     class C 
     {
-     	public static void Main() { System.Console.WriteLine(1); }
+         public static void Main() { System.Console.WriteLine(1); }
     }
   }
 }";
@@ -564,7 +564,7 @@ public class A
   {
     class C 
     {
-     	public static void Main() { System.Console.WriteLine(1); }
+         public static void Main() { System.Console.WriteLine(1); }
     }
   }
   
@@ -572,8 +572,8 @@ public class A
   {
     class C 
     {
-	   public static void Main() { System.Console.WriteLine(2); }
-	}
+       public static void Main() { System.Console.WriteLine(2); }
+    }
   }
 }";
             // Dev10 reports CS1555: Could not find 'A.B.C' specified for Main method

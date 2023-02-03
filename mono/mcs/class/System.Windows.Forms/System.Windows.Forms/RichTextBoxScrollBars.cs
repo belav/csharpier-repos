@@ -20,20 +20,20 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	<pbartok@novell.com>
+//    Peter Bartok    <pbartok@novell.com>
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum RichTextBoxScrollBars {
-		None		= 0,
-		Horizontal	= 1,
-		Vertical	= 2,
-		Both		= 3,
-		ForcedHorizontal= 17,
-		ForcedVertical	= 18,
-		ForcedBoth	= 19
-	}
+    public enum RichTextBoxScrollBars {
+        None        = 0,
+        Horizontal    = 1,
+        Vertical    = 2,
+        Both        = 3,
+        ForcedHorizontal= 17,
+        ForcedVertical    = 18,
+        ForcedBoth    = 19
+    }
 }

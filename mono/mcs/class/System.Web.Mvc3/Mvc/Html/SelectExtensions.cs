@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc.Html {
+namespace System.Web.Mvc.Html {
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;

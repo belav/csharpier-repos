@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -220,9 +220,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             Assert.Equal("\"\\uffff\"", FormatValue(s, useHexadecimal: true));
 
             string multiByte = "\ud83c\udfc8"; // unicode surrogates properly paired representing a printable Unicode codepoint
-            Assert.Equal(string.Format(format, "🏈"), FormatValue(multiByte));
-            Assert.Equal(string.Format(format, "🏈"), FormatValue(multiByte, useHexadecimal: true));
-            Assert.Equal("🏈", multiByte);
+            Assert.Equal(string.Format(format, "??"), FormatValue(multiByte));
+            Assert.Equal(string.Format(format, "??"), FormatValue(multiByte, useHexadecimal: true));
+            Assert.Equal("??", multiByte);
 
             multiByte = "\udbff\udfff"; // unicode surrogates representing an unprintable Unicode codepoint
             Assert.Equal(string.Format(format, "\\U0010ffff"), FormatValue(multiByte));

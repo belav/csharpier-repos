@@ -62,10 +62,10 @@ namespace MonoTests.Mono.Messaging.RabbitMQ
             Stream ms = new MemoryStream ();
             mock1.ExpectAndReturn ("get_BodyStream", ms);
             mock1.ExpectAndReturn ("get_BodyStream", ms);
-			mock1.Expect ("set_BodyType", 768);
+            mock1.Expect ("set_BodyType", 768);
             
             mock2.ExpectAndReturn ("get_BodyStream", ms);
-            mock2.ExpectAndReturn ("get_BodyStream", ms);			
+            mock2.ExpectAndReturn ("get_BodyStream", ms);            
             
             Message m = TestUtils.CreateMessage (msg1);
             m.Formatter = new BinaryMessageFormatter ();
@@ -78,8 +78,8 @@ namespace MonoTests.Mono.Messaging.RabbitMQ
             m2.Formatter = new BinaryMessageFormatter ();
             
             Assert.AreEqual(s, m2.Formatter.Read (m2), "The string did not serialise/deserialise properly");
-			mock1.Verify ();
-			mock2.Verify ();
+            mock1.Verify ();
+            mock2.Verify ();
         }
         
         [Test]
@@ -111,8 +111,8 @@ namespace MonoTests.Mono.Messaging.RabbitMQ
             Assert.AreEqual(t0.Iii, t1.Iii, "The string did not serialise/deserialise properly");
             Assert.AreEqual(t0.Sss, t1.Sss, "The string did not serialise/deserialise properly");
             Assert.AreEqual(t0.Ttt, t1.Ttt, "The string did not serialise/deserialise properly");
-			mock1.Verify ();
-			mock2.Verify ();
+            mock1.Verify ();
+            mock2.Verify ();
         }
     }
 }

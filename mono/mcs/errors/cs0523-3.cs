@@ -3,5 +3,5 @@
 
 struct S<T>
 {
-	static S<T[]> s;
+    static S<T[]> s;
 }

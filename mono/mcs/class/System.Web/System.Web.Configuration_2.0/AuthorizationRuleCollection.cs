@@ -2,7 +2,7 @@
 // System.Web.Configuration.AuthorizationRuleCollection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,92 +34,92 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	[ConfigurationCollection (typeof (AuthorizationRule), AddItemName="allow,deny", CollectionType = ConfigurationElementCollectionType.BasicMapAlternate)]
-	public sealed class AuthorizationRuleCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (AuthorizationRule), AddItemName="allow,deny", CollectionType = ConfigurationElementCollectionType.BasicMapAlternate)]
+    public sealed class AuthorizationRuleCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static AuthorizationRuleCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static AuthorizationRuleCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public void Add (AuthorizationRule rule)
-		{
-			BaseAdd (rule, false);
-		}
+        public void Add (AuthorizationRule rule)
+        {
+            BaseAdd (rule, false);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear ()
+        {
+            BaseClear ();
+        }
 
-		protected override ConfigurationElement CreateNewElement (string elementName)
-		{
-			return new AuthorizationRule (elementName == "allow" ? AuthorizationRuleAction.Allow : AuthorizationRuleAction.Deny);
-		}
+        protected override ConfigurationElement CreateNewElement (string elementName)
+        {
+            return new AuthorizationRule (elementName == "allow" ? AuthorizationRuleAction.Allow : AuthorizationRuleAction.Deny);
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new AuthorizationRule (AuthorizationRuleAction.Allow);
-		}
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new AuthorizationRule (AuthorizationRuleAction.Allow);
+        }
 
-		public AuthorizationRule Get (int index)
-		{
-			return (AuthorizationRule) BaseGet (index);
-		}
+        public AuthorizationRule Get (int index)
+        {
+            return (AuthorizationRule) BaseGet (index);
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			AuthorizationRule rule = (AuthorizationRule)element;
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            AuthorizationRule rule = (AuthorizationRule)element;
 
-			return rule.Action.ToString();
-		}
+            return rule.Action.ToString();
+        }
 
-		public int IndexOf (AuthorizationRule rule)
-		{
-			return BaseIndexOf (rule);
-		}
+        public int IndexOf (AuthorizationRule rule)
+        {
+            return BaseIndexOf (rule);
+        }
 
-		protected override bool IsElementName (string elementname)
-		{
-			return (elementname == "allow" || elementname == "deny");
-		}
+        protected override bool IsElementName (string elementname)
+        {
+            return (elementname == "allow" || elementname == "deny");
+        }
 
-		public void Remove (AuthorizationRule rule)
-		{
-			BaseRemove (rule.Action.ToString());
-		}
+        public void Remove (AuthorizationRule rule)
+        {
+            BaseRemove (rule.Action.ToString());
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt (int index)
+        {
+            BaseRemoveAt (index);
+        }
 
-		public void Set (int index, AuthorizationRule rule)
-		{
-			if (BaseGet(index) != null)
-				BaseRemoveAt(index);
-			BaseAdd(index, rule);
-		}
+        public void Set (int index, AuthorizationRule rule)
+        {
+            if (BaseGet(index) != null)
+                BaseRemoveAt(index);
+            BaseAdd(index, rule);
+        }
 
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.BasicMapAlternate; }
-		}
+        public override ConfigurationElementCollectionType CollectionType {
+            get { return ConfigurationElementCollectionType.BasicMapAlternate; }
+        }
 
-		protected override string ElementName {
-			get { return String.Empty; }
-		}
+        protected override string ElementName {
+            get { return String.Empty; }
+        }
 
-		public AuthorizationRule this [int index] {
-			get { return Get (index); }
-			set { Set (index, value); }
-		}
+        public AuthorizationRule this [int index] {
+            get { return Get (index); }
+            set { Set (index, value); }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 
 }
 

@@ -1,8 +1,8 @@
-﻿//
+//
 // WS2007HttpBindingCollectionElement.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,8 +32,8 @@ using System.Text;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public class WS2007HttpBindingCollectionElement : StandardBindingCollectionElement<WS2007HttpBinding, WS2007HttpBindingElement>
-	{
-	}
+    [MonoTODO]
+    public class WS2007HttpBindingCollectionElement : StandardBindingCollectionElement<WS2007HttpBinding, WS2007HttpBindingElement>
+    {
+    }
 }

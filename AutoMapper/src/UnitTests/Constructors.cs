@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests.Constructors;
+namespace AutoMapper.UnitTests.Constructors;
 
 public class RecordConstructorValidation : AutoMapperSpecBase
 {

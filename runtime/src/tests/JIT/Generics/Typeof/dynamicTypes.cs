@@ -4,13 +4,13 @@
 
 /* The following are the checks being made, where x is a user defined type as described below. The test does all of this pretty much as a grid cross section, so there are redundant cast cases also covered here.
 
-1.	if(y.GetType() == typeof(x)) do something;
-2.	if(y is x) do something;
-3.	x z = y as x;
+1.    if(y.GetType() == typeof(x)) do something;
+2.    if(y is x) do something;
+3.    x z = y as x;
                 if(z != null) do something;
-4.	if(y.GetType() == typeof(x)) static cast y as x;
-5.	if(y is x) static cast y as x;
-6.	x z = y as x;
+4.    if(y.GetType() == typeof(x)) static cast y as x;
+5.    if(y is x) static cast y as x;
+6.    x z = y as x;
                 if(z != null) static cast y as x;
 
 where x can take the following values (whenever applicable):
@@ -65,7 +65,7 @@ class X<T>
                 case X<T>:
                         x_count*= 11;
                         break;
-			    case X<X<T>>:
+                case X<X<T>>:
                         x_count*= 13;
                         break;
                 }

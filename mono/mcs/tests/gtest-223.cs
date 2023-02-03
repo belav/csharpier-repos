@@ -14,8 +14,8 @@ public class Test
         {
                 MethodInfo mi = typeof (Test).GetMethod ("Hoge");
                 foreach (Type t in mi.GetGenericArguments ())
-			if ((t.GenericParameterAttributes & GenericParameterAttributes.ReferenceTypeConstraint) == 0)
-				throw new Exception ();
+            if ((t.GenericParameterAttributes & GenericParameterAttributes.ReferenceTypeConstraint) == 0)
+                throw new Exception ();
         }
 }
 

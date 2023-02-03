@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
     using System.ComponentModel;
 
     // Returns a binder that can perform conversions using a .NET TypeConverter.

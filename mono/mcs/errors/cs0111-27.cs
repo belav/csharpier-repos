@@ -3,11 +3,11 @@
 
 class C
 {
-	void Method (dynamic d)
-	{
-	}
+    void Method (dynamic d)
+    {
+    }
 
-	void Method (object d)
-	{
-	}
+    void Method (object d)
+    {
+    }
 }

@@ -5,23 +5,23 @@ using System;
 
 class MainClass : BaseClass
 {
-	public MainClass (string a, Action callback)
-		: base (a, () => Callback ())
-	{
-	}
+    public MainClass (string a, Action callback)
+        : base (a, () => Callback ())
+    {
+    }
 
-	private void Callback ()
-	{
-	}
+    private void Callback ()
+    {
+    }
 }
 
 public class BaseClass
 {
-	public BaseClass (string a, int b)
-	{
-	}
+    public BaseClass (string a, int b)
+    {
+    }
 
-	public BaseClass (string a, Action callback)
-	{
-	}
+    public BaseClass (string a, Action callback)
+    {
+    }
 }

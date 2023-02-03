@@ -31,26 +31,26 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public abstract class BaseDataListComponentEditor : WindowsFormsComponentEditor
-	{
-		int initial_page;
+    public abstract class BaseDataListComponentEditor : WindowsFormsComponentEditor
+    {
+        int initial_page;
 
-		public BaseDataListComponentEditor (int initialPage)
-		{
-			this.initial_page = initialPage;
-		}
+        public BaseDataListComponentEditor (int initialPage)
+        {
+            this.initial_page = initialPage;
+        }
 
-		public override bool EditComponent (
-			ITypeDescriptorContext context,
-			object obj,
-			IWin32Window parent)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool EditComponent (
+            ITypeDescriptorContext context,
+            object obj,
+            IWin32Window parent)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override int GetInitialComponentEditorPageIndex ()
-		{
-			return initial_page;
-		}
-	}
+        protected override int GetInitialComponentEditorPageIndex ()
+        {
+            return initial_page;
+        }
+    }
 }

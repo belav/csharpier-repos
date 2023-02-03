@@ -30,11 +30,11 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class PermissiveModifyControl : DirectoryControl
-	{
-		public PermissiveModifyControl ()
-			: base (null, null, false, false)
-		{
-		}
-	}
+    public class PermissiveModifyControl : DirectoryControl
+    {
+        public PermissiveModifyControl ()
+            : base (null, null, false, false)
+        {
+        }
+    }
 }

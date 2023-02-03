@@ -20,36 +20,36 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 using System.Collections.Generic;
 
 namespace System.IO.Packaging {
-	public sealed class PackageRelationshipSelector {
-		public PackageRelationshipSelector (Uri sourceUri, PackageRelationshipSelectorType selectorType, string selectionCriteria)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class PackageRelationshipSelector {
+        public PackageRelationshipSelector (Uri sourceUri, PackageRelationshipSelectorType selectorType, string selectionCriteria)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public string SelectionCriteria {
-			get { throw new NotImplementedException (); }
-		}
+        public string SelectionCriteria {
+            get { throw new NotImplementedException (); }
+        }
 
-		public PackageRelationshipSelectorType SelectorType {
-			get { throw new NotImplementedException (); }
-		}
+        public PackageRelationshipSelectorType SelectorType {
+            get { throw new NotImplementedException (); }
+        }
 
-		public Uri SourceUri {
-			get { throw new NotImplementedException (); }
-		}
+        public Uri SourceUri {
+            get { throw new NotImplementedException (); }
+        }
 
-		public List<PackageRelationship> Select(Package package)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public List<PackageRelationship> Select(Package package)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 

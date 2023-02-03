@@ -3,10 +3,10 @@
 class A {
         public static void Main ()
         {
-		decimal tryDec;
-		tryDec = 1234.2345M;
+        decimal tryDec;
+        tryDec = 1234.2345M;
 
-		object a = tryDec as string;
+        object a = tryDec as string;
         }
 }
 

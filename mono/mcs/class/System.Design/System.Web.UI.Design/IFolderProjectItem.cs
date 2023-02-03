@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IFolderProjectItem
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -33,11 +33,11 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-	public interface IFolderProjectItem
-	{
-		ICollection Children { get; }
-		IDocumentProjectItem AddDocument (string name, byte [] content);
-		IFolderProjectItem AddFolder (string name);
-	}
+    public interface IFolderProjectItem
+    {
+        ICollection Children { get; }
+        IDocumentProjectItem AddDocument (string name, byte [] content);
+        IFolderProjectItem AddFolder (string name);
+    }
 }
 

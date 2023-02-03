@@ -2,8 +2,8 @@
 // System.Web.HttpCookie.cs 
 //
 // Author:
-//	Chris Toshok (toshok@novell.com)
-//	Katharina Bogad (bogad@cs.tum.edu)
+//    Chris Toshok (toshok@novell.com)
+//    Katharina Bogad (bogad@cs.tum.edu)
 //
 
 //
@@ -36,262 +36,262 @@ using System.Web.Configuration;
 
 namespace System.Web
 {
-	[Flags]
-	internal enum CookieFlags : byte {
-		Secure = 1,
-			HttpOnly = 2
-			}
-	
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HttpCookie {
+    [Flags]
+    internal enum CookieFlags : byte {
+        Secure = 1,
+            HttpOnly = 2
+            }
+    
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HttpCookie {
 
-		string path = "/";
-		string domain;
-		DateTime expires = DateTime.MinValue;
-		string name;
-		CookieFlags flags = 0;
-		NameValueCollection values;
+        string path = "/";
+        string domain;
+        DateTime expires = DateTime.MinValue;
+        string name;
+        CookieFlags flags = 0;
+        NameValueCollection values;
 
-		[Obsolete]
-		internal HttpCookie (string name, string value, string path, DateTime expires)
-		{
-			this.name = name;
-			this.values = new CookieNVC();
-			this.Value = value;
-			this.path = path;
-			this.expires = expires;
-		}
+        [Obsolete]
+        internal HttpCookie (string name, string value, string path, DateTime expires)
+        {
+            this.name = name;
+            this.values = new CookieNVC();
+            this.Value = value;
+            this.path = path;
+            this.expires = expires;
+        }
 
-		public HttpCookie (string name)
-		{
-			this.name = name;
-			values = new CookieNVC();
-			Value = "";
+        public HttpCookie (string name)
+        {
+            this.name = name;
+            values = new CookieNVC();
+            Value = "";
 
-			HttpCookiesSection cookieConfig = (HttpCookiesSection) WebConfigurationManager.GetSection ("system.web/httpCookies");
+            HttpCookiesSection cookieConfig = (HttpCookiesSection) WebConfigurationManager.GetSection ("system.web/httpCookies");
 
-			if(!string.IsNullOrWhiteSpace(cookieConfig.Domain))
-				domain = cookieConfig.Domain;
+            if(!string.IsNullOrWhiteSpace(cookieConfig.Domain))
+                domain = cookieConfig.Domain;
 
-			if(cookieConfig.HttpOnlyCookies)
-				flags |= CookieFlags.HttpOnly;
+            if(cookieConfig.HttpOnlyCookies)
+                flags |= CookieFlags.HttpOnly;
 
-			if(cookieConfig.RequireSSL)
-				flags |= CookieFlags.Secure;
-		}
+            if(cookieConfig.RequireSSL)
+                flags |= CookieFlags.Secure;
+        }
 
-		public HttpCookie (string name, string value)
-		: this (name)
-		{
-			Value = value;
-		}
+        public HttpCookie (string name, string value)
+        : this (name)
+        {
+            Value = value;
+        }
 
-		internal string GetCookieHeaderValue ()
-		{
-			StringBuilder builder = new StringBuilder ();
+        internal string GetCookieHeaderValue ()
+        {
+            StringBuilder builder = new StringBuilder ();
 
-			builder.Append (name);
-			builder.Append ("=");
-			builder.Append (Value);
+            builder.Append (name);
+            builder.Append ("=");
+            builder.Append (Value);
 
-			if (domain != null) {
-				builder.Append ("; domain=");
-				builder.Append (domain);
-			}
-	       
-			if (path != null) {
-				builder.Append ("; path=");
-				builder.Append (path);
-			}
+            if (domain != null) {
+                builder.Append ("; domain=");
+                builder.Append (domain);
+            }
+           
+            if (path != null) {
+                builder.Append ("; path=");
+                builder.Append (path);
+            }
 
-			if (expires != DateTime.MinValue) {
-				builder.Append ("; expires=");
-				builder.Append (expires.ToUniversalTime().ToString("r"));
-			}
+            if (expires != DateTime.MinValue) {
+                builder.Append ("; expires=");
+                builder.Append (expires.ToUniversalTime().ToString("r"));
+            }
 
-			if ((flags & CookieFlags.Secure) != 0) {
-				builder.Append ("; secure");
-			}
+            if ((flags & CookieFlags.Secure) != 0) {
+                builder.Append ("; secure");
+            }
 
-			if ((flags & CookieFlags.HttpOnly) != 0){
-				builder.Append ("; HttpOnly");
-			}
+            if ((flags & CookieFlags.HttpOnly) != 0){
+                builder.Append ("; HttpOnly");
+            }
 
-			return builder.ToString ();
-		}
+            return builder.ToString ();
+        }
 
-		public string Domain {
-			get {
-				return domain;
-			}
-			set {
-				domain = value;
-			}
-		}
+        public string Domain {
+            get {
+                return domain;
+            }
+            set {
+                domain = value;
+            }
+        }
 
-		public DateTime Expires {
-			get {
-				return expires;
-			}
-			set {
-				expires = value;
-			}
-		}
+        public DateTime Expires {
+            get {
+                return expires;
+            }
+            set {
+                expires = value;
+            }
+        }
 
-		public bool HasKeys {
-			get {
-				return values.HasKeys();
-			}
-		}
+        public bool HasKeys {
+            get {
+                return values.HasKeys();
+            }
+        }
 
 
-		public string this [ string key ] {
-			get {
-				return values [ key ];
-			}
-			set {
-				values [ key ] = value;
-			}
-		}
+        public string this [ string key ] {
+            get {
+                return values [ key ];
+            }
+            set {
+                values [ key ] = value;
+            }
+        }
 
-		public string Name {
-			get {
-				return name;
-			}
-			set {
-				name = value;
-			}
-		}
+        public string Name {
+            get {
+                return name;
+            }
+            set {
+                name = value;
+            }
+        }
 
-		public string Path {
-			get {
-				return path;
-			}
-			set {
-				path = value;
-			}
-		}
+        public string Path {
+            get {
+                return path;
+            }
+            set {
+                path = value;
+            }
+        }
 
-		public bool Secure {
-			get {
-				return (flags & CookieFlags.Secure) == CookieFlags.Secure;
-			}
-			set {
-				if (value)
-					flags |= CookieFlags.Secure;
-				else
-					flags &= ~CookieFlags.Secure;
-			}
-		}
+        public bool Secure {
+            get {
+                return (flags & CookieFlags.Secure) == CookieFlags.Secure;
+            }
+            set {
+                if (value)
+                    flags |= CookieFlags.Secure;
+                else
+                    flags &= ~CookieFlags.Secure;
+            }
+        }
 
-		public string Value {
-			get {
-				return HttpUtility.UrlDecode(values.ToString ());
-			}
-			set {
-				values.Clear ();
-				
-				if (value != null && value != "") {
-					string [] components = value.Split ('&');
-					foreach (string kv in components){
-						int pos = kv.IndexOf ('=');
-						if (pos == -1){
-							values.Add (null, kv);
-						} else {
-							string key = kv.Substring (0, pos);
-							string val = kv.Substring (pos+1);
-							
-							values.Add (key, val);
-						}
-					}
-				}
-			}
-		}
+        public string Value {
+            get {
+                return HttpUtility.UrlDecode(values.ToString ());
+            }
+            set {
+                values.Clear ();
+                
+                if (value != null && value != "") {
+                    string [] components = value.Split ('&');
+                    foreach (string kv in components){
+                        int pos = kv.IndexOf ('=');
+                        if (pos == -1){
+                            values.Add (null, kv);
+                        } else {
+                            string key = kv.Substring (0, pos);
+                            string val = kv.Substring (pos+1);
+                            
+                            values.Add (key, val);
+                        }
+                    }
+                }
+            }
+        }
 
-		public NameValueCollection Values {
-			get {
-				return values;
-			}
-		}
+        public NameValueCollection Values {
+            get {
+                return values;
+            }
+        }
 
-		public bool HttpOnly {
-			get {
-				return (flags & CookieFlags.HttpOnly) == CookieFlags.HttpOnly;
-			}
+        public bool HttpOnly {
+            get {
+                return (flags & CookieFlags.HttpOnly) == CookieFlags.HttpOnly;
+            }
 
-			set {
-				if (value)
-					flags |= CookieFlags.HttpOnly;
-				else
-					flags &= ~CookieFlags.HttpOnly;
-			}
-		}
+            set {
+                if (value)
+                    flags |= CookieFlags.HttpOnly;
+                else
+                    flags &= ~CookieFlags.HttpOnly;
+            }
+        }
 
-		/*
-		 * simple utility class that just overrides ToString
-		 * to get the desired behavior for
-		 * HttpCookie.Values
-		 */
-		[Serializable]
-		sealed class CookieNVC : NameValueCollection
-		{
-			public CookieNVC ()
-				: base (StringComparer.OrdinalIgnoreCase)
-			{
-			}
+        /*
+         * simple utility class that just overrides ToString
+         * to get the desired behavior for
+         * HttpCookie.Values
+         */
+        [Serializable]
+        sealed class CookieNVC : NameValueCollection
+        {
+            public CookieNVC ()
+                : base (StringComparer.OrdinalIgnoreCase)
+            {
+            }
 
-			public override string ToString ()
-			{
-				StringBuilder builder = new StringBuilder ("");
+            public override string ToString ()
+            {
+                StringBuilder builder = new StringBuilder ("");
 
-				bool first_key = true;
-				foreach (string key in Keys) {
-					if (!first_key)
-						builder.Append ("&");
+                bool first_key = true;
+                foreach (string key in Keys) {
+                    if (!first_key)
+                        builder.Append ("&");
 
                                        string[] vals = GetValues (key);
                                        if(vals == null)
                                                vals = new string[1] {String.Empty};
 
-				       bool first_val = true;
+                       bool first_val = true;
                                        foreach (string v in vals) {
-					       if (!first_val)
-						       builder.Append ("&");
-					       
-					       if (key != null && key.Length > 0) {
+                           if (!first_val)
+                               builder.Append ("&");
+                           
+                           if (key != null && key.Length > 0) {
                                                        builder.Append (HttpUtility.UrlEncode(key));
-						       builder.Append ("=");
-					       }
+                               builder.Append ("=");
+                           }
                                                if(v != null && v.Length > 0)
                                                        builder.Append (HttpUtility.UrlEncode(v));
-					       
-					       first_val = false;
-					}
-					first_key = false;
-				}
+                           
+                           first_val = false;
+                    }
+                    first_key = false;
+                }
 
-				return builder.ToString();
-			}
+                return builder.ToString();
+            }
 
-			/* MS's implementation has the interesting quirk that if you do:
-			 * cookie.Values[null] = "foo"
-			 * it clears out the rest of the values.
-			 */
-			public override void Set (string name, string value)
-			{
-				if (this.IsReadOnly)
-					throw new NotSupportedException ("Collection is read-only");
+            /* MS's implementation has the interesting quirk that if you do:
+             * cookie.Values[null] = "foo"
+             * it clears out the rest of the values.
+             */
+            public override void Set (string name, string value)
+            {
+                if (this.IsReadOnly)
+                    throw new NotSupportedException ("Collection is read-only");
 
-				if (name == null) {
-					Clear();
-					name = string.Empty;
-				}
-//				if (value == null)
-//					value = string.Empty;
+                if (name == null) {
+                    Clear();
+                    name = string.Empty;
+                }
+//                if (value == null)
+//                    value = string.Empty;
 
-				base.Set (name, value);
-			}
-		}
-	}
+                base.Set (name, value);
+            }
+        }
+    }
 }

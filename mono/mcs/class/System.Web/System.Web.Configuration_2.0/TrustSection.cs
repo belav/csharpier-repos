@@ -2,7 +2,7 @@
 // System.Web.Configuration.TrustSection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,52 +35,52 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public sealed class TrustSection : ConfigurationSection
-	{
-		static ConfigurationProperty levelProp;
-		static ConfigurationProperty originUrlProp;
-		static ConfigurationProperty processRequestInApplicationTrustProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class TrustSection : ConfigurationSection
+    {
+        static ConfigurationProperty levelProp;
+        static ConfigurationProperty originUrlProp;
+        static ConfigurationProperty processRequestInApplicationTrustProp;
+        static ConfigurationPropertyCollection properties;
 
-		static TrustSection ()
-		{
-			levelProp = new ConfigurationProperty ("level", typeof (string), "Full",
-							       TypeDescriptor.GetConverter (typeof (string)),
-							       PropertyHelper.NonEmptyStringValidator,
-							       ConfigurationPropertyOptions.IsRequired);
-			originUrlProp = new ConfigurationProperty ("originUrl", typeof (string), "");
-			processRequestInApplicationTrustProp = new ConfigurationProperty ("processRequestInApplicationTrust", typeof (bool), true);
-			properties = new ConfigurationPropertyCollection ();
+        static TrustSection ()
+        {
+            levelProp = new ConfigurationProperty ("level", typeof (string), "Full",
+                                   TypeDescriptor.GetConverter (typeof (string)),
+                                   PropertyHelper.NonEmptyStringValidator,
+                                   ConfigurationPropertyOptions.IsRequired);
+            originUrlProp = new ConfigurationProperty ("originUrl", typeof (string), "");
+            processRequestInApplicationTrustProp = new ConfigurationProperty ("processRequestInApplicationTrust", typeof (bool), true);
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (levelProp);
-			properties.Add (originUrlProp);
-			properties.Add (processRequestInApplicationTrustProp);
-		}
+            properties.Add (levelProp);
+            properties.Add (originUrlProp);
+            properties.Add (processRequestInApplicationTrustProp);
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("level", DefaultValue = "Full", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Level {
-			get { return (string) base [levelProp];}
-			set { base[levelProp] = value; }
-		}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("level", DefaultValue = "Full", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string Level {
+            get { return (string) base [levelProp];}
+            set { base[levelProp] = value; }
+        }
 
-		[ConfigurationProperty ("originUrl", DefaultValue = "")]
-		public string OriginUrl {
-			get { return (string) base [originUrlProp];}
-			set { base[originUrlProp] = value; }
-		}
+        [ConfigurationProperty ("originUrl", DefaultValue = "")]
+        public string OriginUrl {
+            get { return (string) base [originUrlProp];}
+            set { base[originUrlProp] = value; }
+        }
 
-		[ConfigurationProperty ("processRequestInApplicationTrust", DefaultValue = "True")]
-		public bool ProcessRequestInApplicationTrust {
-			get { return (bool) base [processRequestInApplicationTrustProp];}
-			set { base[processRequestInApplicationTrustProp] = value; }
-		}
+        [ConfigurationProperty ("processRequestInApplicationTrust", DefaultValue = "True")]
+        public bool ProcessRequestInApplicationTrust {
+            get { return (bool) base [processRequestInApplicationTrustProp];}
+            set { base[processRequestInApplicationTrustProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-	}
+    }
 
 }
 

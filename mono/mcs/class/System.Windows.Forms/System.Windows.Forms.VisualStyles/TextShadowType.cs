@@ -23,15 +23,15 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum TextShadowType
-	{
-		None = 0,
-		Single = 1,
-		Continuous = 2
-	}
+    public enum TextShadowType
+    {
+        None = 0,
+        Single = 1,
+        Continuous = 2
+    }
 }

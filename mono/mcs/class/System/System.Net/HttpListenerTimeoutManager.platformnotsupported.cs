@@ -2,7 +2,7 @@
 // HttpListenerTimeoutManager.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2015 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,55 +28,55 @@
 
 namespace System.Net
 {
-	public class HttpListenerTimeoutManager
-	{
-		internal const string EXCEPTION_MESSAGE = "System.Net.HttpListenerTimeoutManager is not supported on the current platform.";
+    public class HttpListenerTimeoutManager
+    {
+        internal const string EXCEPTION_MESSAGE = "System.Net.HttpListenerTimeoutManager is not supported on the current platform.";
 
-		public HttpListenerTimeoutManager ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public HttpListenerTimeoutManager ()
+        {
+            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+        }
 
-		[MonoTODO]
-		public TimeSpan EntityBody
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [MonoTODO]
+        public TimeSpan EntityBody
+        {
+            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        }
 
-		[MonoTODO]
-		public TimeSpan DrainEntityBody
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [MonoTODO]
+        public TimeSpan DrainEntityBody
+        {
+            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        }
 
-		[MonoTODO]
-		public TimeSpan RequestQueue
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [MonoTODO]
+        public TimeSpan RequestQueue
+        {
+            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        }
 
-		[MonoTODO]
-		public TimeSpan IdleConnection
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [MonoTODO]
+        public TimeSpan IdleConnection
+        {
+            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        }
 
-		[MonoTODO]
-		public TimeSpan HeaderWait
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [MonoTODO]
+        public TimeSpan HeaderWait
+        {
+            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        }
 
-		[MonoTODO]
-		public long MinSendBytesPerSecond
-		{
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
-	}
+        [MonoTODO]
+        public long MinSendBytesPerSecond
+        {
+            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        }
+    }
 }

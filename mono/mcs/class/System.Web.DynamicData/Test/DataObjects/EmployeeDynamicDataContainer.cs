@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +47,7 @@ namespace MonoTests.DataObjects
 
         public override IEnumerable Select (DataSourceSelectArguments args, string where, ParameterCollection whereParams)
         {
-		throw new NotImplementedException ();
+        throw new NotImplementedException ();
         }
 
         public override List<DynamicDataTable> GetTables ()

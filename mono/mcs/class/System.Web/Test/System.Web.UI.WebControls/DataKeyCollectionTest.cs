@@ -1,9 +1,9 @@
 //
 // DataKeyCollectionTest.cs
-//	- Unit tests for System.Web.UI.WebControls.DataKeyCollection
+//    - Unit tests for System.Web.UI.WebControls.DataKeyCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,40 +37,40 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	public class DataKeyCollectionTest {
+    [TestFixture]
+    public class DataKeyCollectionTest {
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void Constructor_Null ()
-		{
-			DataKeyCollection dkc = new DataKeyCollection (null);
-			Assert.IsNotNull (dkc, "ctor");
-			Assert.IsFalse (dkc.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dkc.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (dkc, dkc.SyncRoot), "SyncRoot");
-			// unusable
-			Assert.AreEqual (0, dkc.Count, "NRE");
-		}
+        [Test]
+        [ExpectedException (typeof (NullReferenceException))]
+        public void Constructor_Null ()
+        {
+            DataKeyCollection dkc = new DataKeyCollection (null);
+            Assert.IsNotNull (dkc, "ctor");
+            Assert.IsFalse (dkc.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse (dkc.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue (Object.ReferenceEquals (dkc, dkc.SyncRoot), "SyncRoot");
+            // unusable
+            Assert.AreEqual (0, dkc.Count, "NRE");
+        }
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			ArrayList al = new ArrayList ();
-			DataKeyCollection dkc = new DataKeyCollection (al);
-			Assert.AreEqual (0, dkc.Count, "Count0");
-			Assert.IsFalse (dkc.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dkc.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (dkc, dkc.SyncRoot), "SyncRoot");
+        [Test]
+        public void Constructor_Empty ()
+        {
+            ArrayList al = new ArrayList ();
+            DataKeyCollection dkc = new DataKeyCollection (al);
+            Assert.AreEqual (0, dkc.Count, "Count0");
+            Assert.IsFalse (dkc.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse (dkc.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue (Object.ReferenceEquals (dkc, dkc.SyncRoot), "SyncRoot");
 
-			al.Add (String.Empty);
-			Assert.AreEqual (1, dkc.Count, "Count++");
-			// note: no add/insert/remove/...
-			Assert.AreEqual (String.Empty, dkc[0], "[0]");
+            al.Add (String.Empty);
+            Assert.AreEqual (1, dkc.Count, "Count++");
+            // note: no add/insert/remove/...
+            Assert.AreEqual (String.Empty, dkc[0], "[0]");
 
-			al.Clear ();
-			Assert.AreEqual (0, dkc.Count, "Count--");
-			// we can add/remove from the original ArrayList
-		}
-	}
+            al.Clear ();
+            Assert.AreEqual (0, dkc.Count, "Count--");
+            // we can add/remove from the original ArrayList
+        }
+    }
 }

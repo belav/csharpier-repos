@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.GlyphSelectionType
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,11 +31,11 @@
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public enum GlyphSelectionType
-	{
-		NotSelected,
-		Selected,
-		SelectedPrimary
-	}
+    public enum GlyphSelectionType
+    {
+        NotSelected,
+        Selected,
+        SelectedPrimary
+    }
 }
 

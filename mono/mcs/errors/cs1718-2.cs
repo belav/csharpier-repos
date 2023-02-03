@@ -4,11 +4,11 @@
 
 class A
 {
-	delegate void D ();
-	D d = null;
-	
-	public A ()
-	{
-		bool b = d == d;
-	}
+    delegate void D ();
+    D d = null;
+    
+    public A ()
+    {
+        bool b = d == d;
+    }
 }

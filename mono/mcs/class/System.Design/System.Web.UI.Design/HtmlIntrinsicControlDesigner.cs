@@ -30,10 +30,10 @@
 
 namespace System.Web.UI.Design
 {
-	public class HtmlIntrinsicControlDesigner : HtmlControlDesigner
-	{
-		public HtmlIntrinsicControlDesigner ()
-		{
-		}
-	}
+    public class HtmlIntrinsicControlDesigner : HtmlControlDesigner
+    {
+        public HtmlIntrinsicControlDesigner ()
+        {
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.IntegrationTests;
+namespace AutoMapper.IntegrationTests;
 public class IEnumerableMemberProjections : IntegrationTest<IEnumerableMemberProjections.DatabaseInitializer>
 {
     public class Customer

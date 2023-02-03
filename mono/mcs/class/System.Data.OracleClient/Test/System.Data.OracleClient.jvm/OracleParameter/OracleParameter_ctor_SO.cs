@@ -35,61 +35,61 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleParameter_ctor_SO : GHTBase
 {
-	public static void Main()
-	{
-		OracleParameter_ctor_SO tc = new OracleParameter_ctor_SO();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OracleParameter_ctor_SO");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OracleParameter_ctor_SO tc = new OracleParameter_ctor_SO();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OracleParameter_ctor_SO");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
 
-		OracleParameter param = new OracleParameter("myParam",10);
+        OracleParameter param = new OracleParameter("myParam",10);
 
-		try
-		{
-			BeginCase("ctor");
-			Compare(param != null, true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("ctor");
+            Compare(param != null, true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("name");
-			Compare(param.ParameterName ,"myParam");
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("name");
+            Compare(param.ParameterName ,"myParam");
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("value");
-			Compare(param.Value, 10);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            BeginCase("value");
+            Compare(param.Value, 10);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
+    }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

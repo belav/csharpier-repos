@@ -2,7 +2,7 @@
 // System.Nullable.cs
 //
 // Martin Baulig (martin@ximian.com)
-// Marek Safar	 (marek.safar@gmail.com)
+// Marek Safar     (marek.safar@gmail.com)
 //
 // (C) 2004 Novell, Inc.
 //
@@ -38,40 +38,40 @@ using System.Diagnostics;
 
 namespace System
 {
-	public partial struct Nullable<T> where T: struct
-	{
-		//
-		// These are called by the JIT
-		//
+    public partial struct Nullable<T> where T: struct
+    {
+        //
+        // These are called by the JIT
+        //
 #pragma warning disable 169
-		//
-		// JIT implementation of box valuetype System.Nullable`1<T>
-		//
-		static object Box (T? o)
-		{
-			if (!o.hasValue)
-				return null;
-				
-			return o.value;
-		}
-		
-		static T? Unbox (object o)
-		{
-			if (o == null)
-				return null;
-			return (T) o;
-		}
+        //
+        // JIT implementation of box valuetype System.Nullable`1<T>
+        //
+        static object Box (T? o)
+        {
+            if (!o.hasValue)
+                return null;
+                
+            return o.value;
+        }
+        
+        static T? Unbox (object o)
+        {
+            if (o == null)
+                return null;
+            return (T) o;
+        }
 
-		static T? UnboxExact (object o)
-		{
-			if (o == null)
-				return null;
-			if (o.GetType() != typeof (T))
-				throw new InvalidCastException();
+        static T? UnboxExact (object o)
+        {
+            if (o == null)
+                return null;
+            if (o.GetType() != typeof (T))
+                throw new InvalidCastException();
 
-			return (T) o;
-		}
+            return (T) o;
+        }
 
 #pragma warning restore 169
-	}
+    }
 }

@@ -30,29 +30,29 @@ using System;
 
 namespace System.Web
 {
-	sealed class ExceptionPageTemplateFragmentValue
-	{
-		Func <string, string> valueProvider;
-		string value;
-		string name;
-		
-		public string Value {
-			get {
-				if (valueProvider != null)
-					return valueProvider (name);
-				return value;
-			}
-		}
-		
-		public ExceptionPageTemplateFragmentValue (string name, Func <string, string> valueProvider)
-		{
-			this.valueProvider = valueProvider;
-		}
+    sealed class ExceptionPageTemplateFragmentValue
+    {
+        Func <string, string> valueProvider;
+        string value;
+        string name;
+        
+        public string Value {
+            get {
+                if (valueProvider != null)
+                    return valueProvider (name);
+                return value;
+            }
+        }
+        
+        public ExceptionPageTemplateFragmentValue (string name, Func <string, string> valueProvider)
+        {
+            this.valueProvider = valueProvider;
+        }
 
-		public ExceptionPageTemplateFragmentValue (string name, string value)
-		{
-			this.name = name;
-			this.value = value;
-		}
-	}
+        public ExceptionPageTemplateFragmentValue (string name, string value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+    }
 }

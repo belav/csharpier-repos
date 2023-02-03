@@ -9,6 +9,6 @@ namespace TopNS
 /// invalid comment on using directive inside namespace.
 using System.Xml;
 
-	enum Foo {
-	}
+    enum Foo {
+    }
 }

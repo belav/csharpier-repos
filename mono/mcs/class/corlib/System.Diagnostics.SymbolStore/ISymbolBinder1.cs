@@ -2,7 +2,7 @@
 // System.Diagnostics.SymbolStore.ISymbolBinder1
 //
 // Author:
-//	Dick Porter (dick@ximian.com)
+//    Dick Porter (dick@ximian.com)
 //
 
 //
@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.SymbolStore
 {
-	[ComVisible (true)]
-	public interface ISymbolBinder1 {
-		ISymbolReader GetReader (IntPtr importer, string filename, string searchPath);
-	}
+    [ComVisible (true)]
+    public interface ISymbolBinder1 {
+        ISymbolReader GetReader (IntPtr importer, string filename, string searchPath);
+    }
 }

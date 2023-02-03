@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -30,25 +30,25 @@ using System;
 using System.ComponentModel.Design;
 
 namespace System.Windows.Forms.ComponentModel.Com2Interop {
-	public class Com2Variant {
-		public Com2Variant() {
-			throw new NotImplementedException();
-		}
-	}
+    public class Com2Variant {
+        public Com2Variant() {
+            throw new NotImplementedException();
+        }
+    }
 
-	public interface ICom2PropertyPageDisplayService {
-		void ShowPropertyPage(string title, object component, int dispid, Guid pageGuid, IntPtr parentHandle);
-	}
+    public interface ICom2PropertyPageDisplayService {
+        void ShowPropertyPage(string title, object component, int dispid, Guid pageGuid, IntPtr parentHandle);
+    }
 
-	public interface IComPropertyBrowser {
-		bool InPropertySet {
-			get ;
-		}
-		void DropDownDone();
-		bool EnsurePendingChangesCommitted();
-		void HandleF4();
-		void LoadState(Microsoft.Win32.RegistryKey key);
-		void SaveState(Microsoft.Win32.RegistryKey key);
-		event ComponentRenameEventHandler ComComponentNameChanged;
-	}
+    public interface IComPropertyBrowser {
+        bool InPropertySet {
+            get ;
+        }
+        void DropDownDone();
+        bool EnsurePendingChangesCommitted();
+        void HandleF4();
+        void LoadState(Microsoft.Win32.RegistryKey key);
+        void SaveState(Microsoft.Win32.RegistryKey key);
+        event ComponentRenameEventHandler ComComponentNameChanged;
+    }
 }

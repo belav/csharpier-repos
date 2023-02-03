@@ -26,8 +26,8 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public interface INamespacePrefixLookup
-	{
-		string LookupPrefix (string ns);
-	}
+    public interface INamespacePrefixLookup
+    {
+        string LookupPrefix (string ns);
+    }
 }

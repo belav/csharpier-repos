@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,31 +29,31 @@
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
-	public class ListBindingConverter : TypeConverter {
-		#region Public Constructors
-		public ListBindingConverter() {
-		}
-		#endregion	// Public Constructors
+    public class ListBindingConverter : TypeConverter {
+        #region Public Constructors
+        public ListBindingConverter() {
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Methods
-		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
-			if (destinationType == typeof(string)) {
-				return true;
-			}
-			return base.CanConvertTo (context, destinationType);
-		}
+        #region Public Instance Methods
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
+            if (destinationType == typeof(string)) {
+                return true;
+            }
+            return base.CanConvertTo (context, destinationType);
+        }
 
-		public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
+        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+            return base.ConvertTo (context, culture, value, destinationType);
+        }
 
-		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues) {
-			return new Binding((string)propertyValues["PropertyName"], (object)propertyValues["DataSource"], (string)propertyValues["DataMember"]);
-		}
+        public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues) {
+            return new Binding((string)propertyValues["PropertyName"], (object)propertyValues["DataSource"], (string)propertyValues["DataMember"]);
+        }
 
-		public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
-			return true;
-		}
-		#endregion	// Public Instance Methods
-	}
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
+            return true;
+        }
+        #endregion    // Public Instance Methods
+    }
 }

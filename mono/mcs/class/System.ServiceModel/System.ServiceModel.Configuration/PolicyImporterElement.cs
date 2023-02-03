@@ -2,7 +2,7 @@
 // PolicyImporterElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,50 +54,50 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class PolicyImporterElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty type;
+    public sealed class PolicyImporterElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty type;
 
-		static PolicyImporterElement () {
-			properties = new ConfigurationPropertyCollection ();
-			type = new ConfigurationProperty ("type",
-				typeof (string), null, new StringConverter (), new StringValidator (1),
-				ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        static PolicyImporterElement () {
+            properties = new ConfigurationPropertyCollection ();
+            type = new ConfigurationProperty ("type",
+                typeof (string), null, new StringConverter (), new StringValidator (1),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
 
-			properties.Add (type);
-		}
+            properties.Add (type);
+        }
 
-		public PolicyImporterElement () {
-		}
+        public PolicyImporterElement () {
+        }
 
-		public PolicyImporterElement (string type) {
-			Type = type;
-		}
+        public PolicyImporterElement (string type) {
+            Type = type;
+        }
 
-		public PolicyImporterElement (Type type) {
-			Type = type.AssemblyQualifiedName;
-		}
+        public PolicyImporterElement (Type type) {
+            Type = type.AssemblyQualifiedName;
+        }
 
-		// Properties
+        // Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("type",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator (MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Type {
-			get { return (string) base [type]; }
-			set { base [type] = value; }
-		}
-	}
+        [ConfigurationProperty ("type",
+             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true)]
+        [StringValidator (MinLength = 1,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        public string Type {
+            get { return (string) base [type]; }
+            set { base [type] = value; }
+        }
+    }
 
 }

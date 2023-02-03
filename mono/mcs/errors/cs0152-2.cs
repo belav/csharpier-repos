@@ -5,19 +5,19 @@ using System;
 
 enum E
 {
-	Foo = 2
+    Foo = 2
 }
 
 class X
 {
-	void Foo (E e)
-	{
-		switch (e)
-		{
-			case E.Foo:
-				break;
-			case E.Foo:
-				break;
-		}
-	}
+    void Foo (E e)
+    {
+        switch (e)
+        {
+            case E.Foo:
+                break;
+            case E.Foo:
+                break;
+        }
+    }
 }

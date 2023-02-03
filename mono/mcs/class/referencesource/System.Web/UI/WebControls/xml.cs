@@ -449,7 +449,7 @@ namespace System.Web.UI.WebControls {
 #pragma warning disable 0618    // To avoid deprecation warning
                     _transform = (XslTransform)xform;
 #pragma warning restore 0618
-		}
+        }
             }
         }
 

@@ -14,52 +14,52 @@
 
 namespace Castle.Core.Resource.Tests
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class AssemblyResourceFactoryTestCase
-	{
-		[SetUp]
-		public void SetUp()
-		{
-			resFactory = new AssemblyResourceFactory();
-		}
+    [TestFixture]
+    public class AssemblyResourceFactoryTestCase
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            resFactory = new AssemblyResourceFactory();
+        }
 
-		private AssemblyResourceFactory resFactory;
-		private static readonly string AssemblyName = typeof(AssemblyResourceFactoryTestCase).Assembly.FullName;
-		private const string ResPath = "Resources";
+        private AssemblyResourceFactory resFactory;
+        private static readonly string AssemblyName = typeof(AssemblyResourceFactoryTestCase).Assembly.FullName;
+        private const string ResPath = "Resources";
 
-		[Test]
-		public void Accept()
-		{
-			Assert.IsTrue(resFactory.Accept(new CustomUri("assembly://something/")));
-			Assert.IsFalse(resFactory.Accept(new CustomUri("file://something")));
-			Assert.IsFalse(resFactory.Accept(new CustomUri("http://www.castleproject.org")));
-		}
+        [Test]
+        public void Accept()
+        {
+            Assert.IsTrue(resFactory.Accept(new CustomUri("assembly://something/")));
+            Assert.IsFalse(resFactory.Accept(new CustomUri("file://something")));
+            Assert.IsFalse(resFactory.Accept(new CustomUri("http://www.castleproject.org")));
+        }
 
-		[Test]
-		public void CanHandleBundleResource()
-		{
-			IResource resource =
-				new AssemblyBundleResource(
-					new CustomUri("assembly://" + AssemblyName + "/Castle.Core.Tests.Resource.MoreRes.TestRes/content1")
-				);
+        [Test]
+        public void CanHandleBundleResource()
+        {
+            IResource resource =
+                new AssemblyBundleResource(
+                    new CustomUri("assembly://" + AssemblyName + "/Castle.Core.Tests.Resource.MoreRes.TestRes/content1")
+                );
 
-			Assert.IsNotNull(resource);
-			var line = resource.GetStreamReader().ReadLine();
-			Assert.AreEqual("Content content", line);
-		}
+            Assert.IsNotNull(resource);
+            var line = resource.GetStreamReader().ReadLine();
+            Assert.AreEqual("Content content", line);
+        }
 
-		[Test]
-		public void CreateWithAbsolutePath()
-		{
-			var resource = resFactory.Create(new CustomUri("assembly://" + AssemblyName + "/Castle.Core.Tests.Resource.file1.txt"));
-			Assert.IsNotNull(resource);
-			var line = resource.GetStreamReader().ReadLine();
-			Assert.AreEqual("Something", line);
-		}
-	}
+        [Test]
+        public void CreateWithAbsolutePath()
+        {
+            var resource = resFactory.Create(new CustomUri("assembly://" + AssemblyName + "/Castle.Core.Tests.Resource.file1.txt"));
+            Assert.IsNotNull(resource);
+            var line = resource.GetStreamReader().ReadLine();
+            Assert.AreEqual("Something", line);
+        }
+    }
 }

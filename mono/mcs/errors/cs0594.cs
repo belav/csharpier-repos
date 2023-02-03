@@ -2,7 +2,7 @@
 // Line: 6
 
 class X {
-	public static void Main() {
-		decimal d = 12311111111111111111111111111111111111111111111111m;
-	}
+    public static void Main() {
+        decimal d = 12311111111111111111111111111111111111111111111111m;
+    }
 }

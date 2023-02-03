@@ -31,9 +31,9 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IClientFormatterSinkProvider :  IClientChannelSinkProvider
-	{
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IClientFormatterSinkProvider :  IClientChannelSinkProvider
+    {
 
-	}
+    }
 }

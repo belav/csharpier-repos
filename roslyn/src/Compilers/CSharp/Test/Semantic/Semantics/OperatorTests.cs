@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4784,7 +4784,7 @@ public class C
         Dynamic_b_constant_not_null_a_nullable();
         Dynamic_b_not_null_a();
         Dynamic_b_not_null_a_nullable(10);
-	    return 0;
+        return 0;
     }
 
     public static D Dynamic_b_constant_null_a()
@@ -5470,8 +5470,8 @@ class Program
         public void TestAsOperatorWithTypeParameter()
         {
             // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7), 
-            // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5) conversion exists
+            // SPEC:    - An identity (?6.1.1), implicit nullable (?6.1.4), implicit reference (?6.1.6), boxing (?6.1.7), 
+            // SPEC:        explicit nullable (?6.2.3), explicit reference (?6.2.4), or unboxing (?6.2.5) conversion exists
             // SPEC:        from E to T.
             // SPEC:    - The type of E or T is an open type.
             // SPEC:    - E is the null literal.
@@ -5812,8 +5812,8 @@ class Outer<T>
         public void TestAsOperator_SpecErrorCase()
         {
             // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7), 
-            // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5) conversion exists
+            // SPEC:    - An identity (?6.1.1), implicit nullable (?6.1.4), implicit reference (?6.1.6), boxing (?6.1.7), 
+            // SPEC:        explicit nullable (?6.2.3), explicit reference (?6.2.4), or unboxing (?6.2.5) conversion exists
             // SPEC:        from E to T.
             // SPEC:    - The type of E or T is an open type.
             // SPEC:    - E is the null literal.
@@ -6480,25 +6480,25 @@ public class Test
 @"
 public class Gen<T>
 {
-	public T t;
+    public T t;
 
-	public Gen(T t)
-	{
-		this.t = t;
-	}
-	
-	public static Gen<T> operator + (Gen<T> x, T y)
-	{
-		return new Gen<T>(y);
-	}
+    public Gen(T t)
+    {
+        this.t = t;
+    }
+    
+    public static Gen<T> operator + (Gen<T> x, T y)
+    {
+        return new Gen<T>(y);
+    }
 }
 
 public class ConstrainedTestContext<T,U> where T : Gen<U>
 {
-	public static Gen<U> ExecuteOpAddition(T x, U y)
-	{
-		return x + y;
-	}
+    public static Gen<U> ExecuteOpAddition(T x, U y)
+    {
+        return x + y;
+    }
 }
 ";
 
@@ -6538,7 +6538,7 @@ class C
     public static int Main()
     {
         const X x = default(X);
-	    return (int)x;
+        return (int)x;
     }
 }
 ";
@@ -6696,117 +6696,117 @@ class Derived4 : Base4
             string source = @"
 class op_Increment
 {
-	public static op_Increment operator ++ (op_Increment c) { return null; }
+    public static op_Increment operator ++ (op_Increment c) { return null; }
 }
 class op_Decrement
 {
-	public static op_Decrement operator -- (op_Decrement c) { return null; }
+    public static op_Decrement operator -- (op_Decrement c) { return null; }
 }
 class op_UnaryPlus
 {
-	public static int operator + (op_UnaryPlus c) { return 0; }
+    public static int operator + (op_UnaryPlus c) { return 0; }
 }
 class op_UnaryNegation
 {
-	public static int operator - (op_UnaryNegation c) { return 0; }
+    public static int operator - (op_UnaryNegation c) { return 0; }
 }
 class op_OnesComplement
 {
-	public static int operator ~ (op_OnesComplement c) { return 0; }
+    public static int operator ~ (op_OnesComplement c) { return 0; }
 }
 class op_Addition
 {
-	public static int operator + (op_Addition c, int i) { return 0; }
+    public static int operator + (op_Addition c, int i) { return 0; }
 }
 class op_Subtraction
 {
-	public static int operator - (op_Subtraction c, int i) { return 0; }
+    public static int operator - (op_Subtraction c, int i) { return 0; }
 }
 class op_Multiply
 {
-	public static int operator * (op_Multiply c, int i) { return 0; }
+    public static int operator * (op_Multiply c, int i) { return 0; }
 }
 class op_Division
 {
-	public static int operator / (op_Division c, int i) { return 0; }
+    public static int operator / (op_Division c, int i) { return 0; }
 }
 class op_Modulus
 {
-	public static int operator % (op_Modulus c, int i) { return 0; }
+    public static int operator % (op_Modulus c, int i) { return 0; }
 }
 class op_ExclusiveOr
 {
-	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
+    public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
 }
 class op_BitwiseAnd
 {
-	public static int operator & (op_BitwiseAnd c, int i) { return 0; }
+    public static int operator & (op_BitwiseAnd c, int i) { return 0; }
 }
 class op_BitwiseOr
 {
-	public static int operator | (op_BitwiseOr c, int i) { return 0; }
+    public static int operator | (op_BitwiseOr c, int i) { return 0; }
 }
 class op_LeftShift
 {
-	public static long operator <<  (op_LeftShift c, int i) { return 0; }
+    public static long operator <<  (op_LeftShift c, int i) { return 0; }
 }
 class op_RightShift
 {
-	public static long operator >>  (op_RightShift c, int i) { return 0; }
+    public static long operator >>  (op_RightShift c, int i) { return 0; }
 }
 class op_UnsignedRightShift
 {
-	public static long operator >>>  (op_UnsignedRightShift c, int i) { return 0; }
+    public static long operator >>>  (op_UnsignedRightShift c, int i) { return 0; }
 }
 ";
             CreateCompilation(source).VerifyDiagnostics(
                 // (4,38): error CS0542: 'op_Increment': member names cannot be the same as their enclosing type
-                // 	public static op_Increment operator ++ (op_Increment c) { return null; }
+                //     public static op_Increment operator ++ (op_Increment c) { return null; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "++").WithArguments("op_Increment"),
                 // (8,38): error CS0542: 'op_Decrement': member names cannot be the same as their enclosing type
-                // 	public static op_Decrement operator -- (op_Decrement c) { return null; }
+                //     public static op_Decrement operator -- (op_Decrement c) { return null; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "--").WithArguments("op_Decrement"),
                 // (12,29): error CS0542: 'op_UnaryPlus': member names cannot be the same as their enclosing type
-                // 	public static int operator + (op_UnaryPlus c) { return 0; }
+                //     public static int operator + (op_UnaryPlus c) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+").WithArguments("op_UnaryPlus"),
                 // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing type
-                // 	public static int operator - (op_UnaryNegation c) { return 0; }
+                //     public static int operator - (op_UnaryNegation c) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-").WithArguments("op_UnaryNegation"),
                 // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing type
-                // 	public static int operator ~ (op_OnesComplement c) { return 0; }
+                //     public static int operator ~ (op_OnesComplement c) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "~").WithArguments("op_OnesComplement"),
                 // (24,29): error CS0542: 'op_Addition': member names cannot be the same as their enclosing type
-                // 	public static int operator + (op_Addition c, int i) { return 0; }
+                //     public static int operator + (op_Addition c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+").WithArguments("op_Addition"),
                 // (28,29): error CS0542: 'op_Subtraction': member names cannot be the same as their enclosing type
-                // 	public static int operator - (op_Subtraction c, int i) { return 0; }
+                //     public static int operator - (op_Subtraction c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-").WithArguments("op_Subtraction"),
                 // (32,29): error CS0542: 'op_Multiply': member names cannot be the same as their enclosing type
-                // 	public static int operator * (op_Multiply c, int i) { return 0; }
+                //     public static int operator * (op_Multiply c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "*").WithArguments("op_Multiply"),
                 // (36,29): error CS0542: 'op_Division': member names cannot be the same as their enclosing type
-                // 	public static int operator / (op_Division c, int i) { return 0; }
+                //     public static int operator / (op_Division c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "/").WithArguments("op_Division"),
                 // (40,29): error CS0542: 'op_Modulus': member names cannot be the same as their enclosing type
-                // 	public static int operator % (op_Modulus c, int i) { return 0; }
+                //     public static int operator % (op_Modulus c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%").WithArguments("op_Modulus"),
                 // (44,29): error CS0542: 'op_ExclusiveOr': member names cannot be the same as their enclosing type
-                // 	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
+                //     public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "^").WithArguments("op_ExclusiveOr"),
                 // (48,29): error CS0542: 'op_BitwiseAnd': member names cannot be the same as their enclosing type
-                // 	public static int operator & (op_BitwiseAnd c, int i) { return 0; }
+                //     public static int operator & (op_BitwiseAnd c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "&").WithArguments("op_BitwiseAnd"),
                 // (52,29): error CS0542: 'op_BitwiseOr': member names cannot be the same as their enclosing type
-                // 	public static int operator | (op_BitwiseOr c, int i) { return 0; }
+                //     public static int operator | (op_BitwiseOr c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "|").WithArguments("op_BitwiseOr"),
                 // (56,30): error CS0542: 'op_LeftShift': member names cannot be the same as their enclosing type
-                // 	public static long operator <<  (op_LeftShift c, int i) { return 0; }
+                //     public static long operator <<  (op_LeftShift c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "<<").WithArguments("op_LeftShift"),
                 // (60,30): error CS0542: 'op_RightShift': member names cannot be the same as their enclosing type
-                // 	public static long operator >>  (op_RightShift c, int i) { return 0; }
+                //     public static long operator >>  (op_RightShift c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>").WithArguments("op_RightShift"),
                 // (64,30): error CS0542: 'op_UnsignedRightShift': member names cannot be the same as their enclosing type
-                // 	public static long operator >>>  (op_UnsignedRightShift c, int i) { return 0; }
+                //     public static long operator >>>  (op_UnsignedRightShift c, int i) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>>").WithArguments("op_UnsignedRightShift").WithLocation(64, 30)
                 );
         }

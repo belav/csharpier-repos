@@ -28,14 +28,14 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public abstract class CodeItem
-	{
-		public abstract void Generate (ILGenerator gen);
-		public abstract void PrintCode (CodeWriter cp);
-	}
+    public abstract class CodeItem
+    {
+        public abstract void Generate (ILGenerator gen);
+        public abstract void PrintCode (CodeWriter cp);
+    }
 
-	public abstract class CodeStatement: CodeItem
-	{
-	}
+    public abstract class CodeStatement: CodeItem
+    {
+    }
 }
 #endif

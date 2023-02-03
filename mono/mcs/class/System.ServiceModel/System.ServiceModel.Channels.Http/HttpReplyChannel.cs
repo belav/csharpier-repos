@@ -2,7 +2,7 @@
 // HttpReplyChannel.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -39,218 +39,218 @@ using System.Threading;
 
 namespace System.ServiceModel.Channels.Http
 {
-	internal class HttpReplyChannel : InternalReplyChannelBase
-	{
-		HttpChannelListener<IReplyChannel> source;
-		RequestContext reqctx;
-		SecurityTokenAuthenticator security_token_authenticator;
-		SecurityTokenResolver security_token_resolver;
+    internal class HttpReplyChannel : InternalReplyChannelBase
+    {
+        HttpChannelListener<IReplyChannel> source;
+        RequestContext reqctx;
+        SecurityTokenAuthenticator security_token_authenticator;
+        SecurityTokenResolver security_token_resolver;
 
-		public HttpReplyChannel (HttpChannelListener<IReplyChannel> listener)
-			: base (listener)
-		{
-			this.source = listener;
+        public HttpReplyChannel (HttpChannelListener<IReplyChannel> listener)
+            : base (listener)
+        {
+            this.source = listener;
 
-			if (listener.SecurityTokenManager != null) {
-				var str = new SecurityTokenRequirement () { TokenType = SecurityTokenTypes.UserName };
-				security_token_authenticator = listener.SecurityTokenManager.CreateSecurityTokenAuthenticator (str, out security_token_resolver);
-			}
-		}
+            if (listener.SecurityTokenManager != null) {
+                var str = new SecurityTokenRequirement () { TokenType = SecurityTokenTypes.UserName };
+                security_token_authenticator = listener.SecurityTokenManager.CreateSecurityTokenAuthenticator (str, out security_token_resolver);
+            }
+        }
 
-		internal HttpChannelListener<IReplyChannel> Source {
-			get { return source; }
-		}
+        internal HttpChannelListener<IReplyChannel> Source {
+            get { return source; }
+        }
 
-		public MessageEncoder Encoder {
-			get { return source.MessageEncoder; }
-		}
+        public MessageEncoder Encoder {
+            get { return source.MessageEncoder; }
+        }
 
-		internal MessageVersion MessageVersion {
-			get { return source.MessageEncoder.MessageVersion; }
-		}
+        internal MessageVersion MessageVersion {
+            get { return source.MessageEncoder.MessageVersion; }
+        }
 
-		public override RequestContext ReceiveRequest (TimeSpan timeout)
-		{
-			RequestContext ctx;
-			if (!TryReceiveRequest (timeout, out ctx))
-				throw new TimeoutException ();
-			return ctx;
-		}
+        public override RequestContext ReceiveRequest (TimeSpan timeout)
+        {
+            RequestContext ctx;
+            if (!TryReceiveRequest (timeout, out ctx))
+                throw new TimeoutException ();
+            return ctx;
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-		}
+        protected override void OnOpen (TimeSpan timeout)
+        {
+        }
 
-		protected override void OnAbort ()
-		{
-			AbortConnections (TimeSpan.Zero);
-			base.OnAbort (); // FIXME: remove it. The base is wrong. But it is somehow required to not block some tests.
-		}
+        protected override void OnAbort ()
+        {
+            AbortConnections (TimeSpan.Zero);
+            base.OnAbort (); // FIXME: remove it. The base is wrong. But it is somehow required to not block some tests.
+        }
 
-		public override bool CancelAsync (TimeSpan timeout)
-		{
-			AbortConnections (timeout);
-			// FIXME: this wait is sort of hack (because it should not be required), but without it some tests are blocked.
-			// This hack even had better be moved to base.CancelAsync().
-//			if (CurrentAsyncResult != null)
-//				CurrentAsyncResult.AsyncWaitHandle.WaitOne (TimeSpan.FromMilliseconds (300));
-			return base.CancelAsync (timeout);
-		}
+        public override bool CancelAsync (TimeSpan timeout)
+        {
+            AbortConnections (timeout);
+            // FIXME: this wait is sort of hack (because it should not be required), but without it some tests are blocked.
+            // This hack even had better be moved to base.CancelAsync().
+//            if (CurrentAsyncResult != null)
+//                CurrentAsyncResult.AsyncWaitHandle.WaitOne (TimeSpan.FromMilliseconds (300));
+            return base.CancelAsync (timeout);
+        }
 
-		void AbortConnections (TimeSpan timeout)
-		{
-			if (reqctx != null)
-				reqctx.Close (timeout);
-		}
+        void AbortConnections (TimeSpan timeout)
+        {
+            if (reqctx != null)
+                reqctx.Close (timeout);
+        }
 
-		bool close_started;
-		object close_lock = new object ();
+        bool close_started;
+        object close_lock = new object ();
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			lock (close_lock) {
-				if (close_started)
-					return;
-				close_started = true;
-			}
-			DateTime start = DateTime.UtcNow;
+        protected override void OnClose (TimeSpan timeout)
+        {
+            lock (close_lock) {
+                if (close_started)
+                    return;
+                close_started = true;
+            }
+            DateTime start = DateTime.UtcNow;
 
-			// FIXME: consider timeout
-			AbortConnections (timeout - (DateTime.UtcNow - start));
+            // FIXME: consider timeout
+            AbortConnections (timeout - (DateTime.UtcNow - start));
 
-			base.OnClose (timeout - (DateTime.UtcNow - start));
-		}
+            base.OnClose (timeout - (DateTime.UtcNow - start));
+        }
 
-		protected string GetHeaderItem (string raw)
-		{
-			if (raw == null || raw.Length == 0)
-				return raw;
-			switch (raw [0]) {
-			case '\'':
-			case '"':
-				if (raw [raw.Length - 1] == raw [0])
-					return raw.Substring (1, raw.Length - 2);
-				// FIXME: is it simply an error?
-				break;
-			}
-			return raw;
-		}
+        protected string GetHeaderItem (string raw)
+        {
+            if (raw == null || raw.Length == 0)
+                return raw;
+            switch (raw [0]) {
+            case '\'':
+            case '"':
+                if (raw [raw.Length - 1] == raw [0])
+                    return raw.Substring (1, raw.Length - 2);
+                // FIXME: is it simply an error?
+                break;
+            }
+            return raw;
+        }
 
-		protected HttpRequestMessageProperty CreateRequestProperty (HttpContextInfo ctxi)
-		{
-			var query = ctxi.Request.Url.Query;
-			var prop = new HttpRequestMessageProperty ();
-			prop.Method = ctxi.Request.HttpMethod;
-			prop.QueryString = query.StartsWith ("?") ? query.Substring (1) : query;
-			// FIXME: prop.SuppressEntityBody
-			prop.Headers.Add (ctxi.Request.Headers);
-			return prop;
-		}
+        protected HttpRequestMessageProperty CreateRequestProperty (HttpContextInfo ctxi)
+        {
+            var query = ctxi.Request.Url.Query;
+            var prop = new HttpRequestMessageProperty ();
+            prop.Method = ctxi.Request.HttpMethod;
+            prop.QueryString = query.StartsWith ("?") ? query.Substring (1) : query;
+            // FIXME: prop.SuppressEntityBody
+            prop.Headers.Add (ctxi.Request.Headers);
+            return prop;
+        }
 
-		public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
-		{
-			context = null;
-			HttpContextInfo ctxi;
-			if (!source.ListenerManager.TryDequeueRequest (source.ChannelDispatcher, timeout, out ctxi))
-				return false;
-			if (ctxi == null)
-				return true; // returning true, yet context is null. This happens at closing phase.
+        public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
+        {
+            context = null;
+            HttpContextInfo ctxi;
+            if (!source.ListenerManager.TryDequeueRequest (source.ChannelDispatcher, timeout, out ctxi))
+                return false;
+            if (ctxi == null)
+                return true; // returning true, yet context is null. This happens at closing phase.
 
-			if (source.Source.AuthenticationScheme != AuthenticationSchemes.Anonymous) {
-				if (security_token_authenticator != null)
-					// FIXME: use return value?
-					try {
-						security_token_authenticator.ValidateToken (new UserNameSecurityToken (ctxi.User, ctxi.Password));
-					} catch (Exception) {
-						ctxi.ReturnUnauthorized ();
-					}
-				else {
-					ctxi.ReturnUnauthorized ();
-				}
-			}
+            if (source.Source.AuthenticationScheme != AuthenticationSchemes.Anonymous) {
+                if (security_token_authenticator != null)
+                    // FIXME: use return value?
+                    try {
+                        security_token_authenticator.ValidateToken (new UserNameSecurityToken (ctxi.User, ctxi.Password));
+                    } catch (Exception) {
+                        ctxi.ReturnUnauthorized ();
+                    }
+                else {
+                    ctxi.ReturnUnauthorized ();
+                }
+            }
 
-			Message msg = null;
+            Message msg = null;
 
-			if (ctxi.Request.HttpMethod == "POST" || ctxi.Request.HttpMethod == "PUT" || ctxi.Request.HttpMethod == "PATCH")
-				msg = CreatePostMessage (ctxi);
-			else if (ctxi.Request.HttpMethod == "GET" || ctxi.Request.HttpMethod == "DELETE" || ctxi.Request.HttpMethod == "OPTIONS")
-				msg = Message.CreateMessage (MessageVersion.None, null); // HTTP GET-based request
+            if (ctxi.Request.HttpMethod == "POST" || ctxi.Request.HttpMethod == "PUT" || ctxi.Request.HttpMethod == "PATCH")
+                msg = CreatePostMessage (ctxi);
+            else if (ctxi.Request.HttpMethod == "GET" || ctxi.Request.HttpMethod == "DELETE" || ctxi.Request.HttpMethod == "OPTIONS")
+                msg = Message.CreateMessage (MessageVersion.None, null); // HTTP GET-based request
 
-			if (msg == null)
-				return false;
+            if (msg == null)
+                return false;
 
-			if (msg.Headers.To == null)
-				msg.Headers.To = ctxi.Request.Url;
-			msg.Properties.Add ("Via", LocalAddress.Uri);
-			msg.Properties.Add (HttpRequestMessageProperty.Name, CreateRequestProperty (ctxi));
+            if (msg.Headers.To == null)
+                msg.Headers.To = ctxi.Request.Url;
+            msg.Properties.Add ("Via", LocalAddress.Uri);
+            msg.Properties.Add (HttpRequestMessageProperty.Name, CreateRequestProperty (ctxi));
 
-			Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref msg, source.Source.MaxReceivedMessageSize);
+            Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref msg, source.Source.MaxReceivedMessageSize);
 
-			context = new HttpRequestContext (this, ctxi, msg);
-			reqctx = context;
-			return true;
-		}
+            context = new HttpRequestContext (this, ctxi, msg);
+            reqctx = context;
+            return true;
+        }
 
-		protected Message CreatePostMessage (HttpContextInfo ctxi)
-		{
-			if (ctxi.Response.StatusCode != 200) { // it's already invalid.
-				ctxi.Close ();
-				return null;
-			}
+        protected Message CreatePostMessage (HttpContextInfo ctxi)
+        {
+            if (ctxi.Response.StatusCode != 200) { // it's already invalid.
+                ctxi.Close ();
+                return null;
+            }
 
-			if (ctxi.Request.ContentType == null || !Encoder.IsContentTypeSupported (ctxi.Request.ContentType)) {
-				ctxi.Response.StatusCode = (int) HttpStatusCode.UnsupportedMediaType;
-				ctxi.Response.StatusDescription = String.Format (
-						"Expected content-type '{0}' but got '{1}'", Encoder.ContentType, ctxi.Request.ContentType);
-				ctxi.Close ();
+            if (ctxi.Request.ContentType == null || !Encoder.IsContentTypeSupported (ctxi.Request.ContentType)) {
+                ctxi.Response.StatusCode = (int) HttpStatusCode.UnsupportedMediaType;
+                ctxi.Response.StatusDescription = String.Format (
+                        "Expected content-type '{0}' but got '{1}'", Encoder.ContentType, ctxi.Request.ContentType);
+                ctxi.Close ();
 
-				return null;
-			}
+                return null;
+            }
 
-			// FIXME: supply maxSizeOfHeaders.
-			int maxSizeOfHeaders = 0x10000;
+            // FIXME: supply maxSizeOfHeaders.
+            int maxSizeOfHeaders = 0x10000;
 
 #if false // FIXME: enable it, once duplex callback test gets passed.
-			Stream stream = ctxi.Request.InputStream;
-			if (source.Source.TransferMode == TransferMode.Buffered) {
-				if (ctxi.Request.ContentLength64 <= 0)
-					throw new ArgumentException ("This HTTP channel is configured to use buffered mode, and thus expects Content-Length sent to the listener");
-				long size = 0;
-				var ms = new MemoryStream ();
-				var buf = new byte [0x1000];
-				while (size < ctxi.Request.ContentLength64) {
-					if ((size += stream.Read (buf, 0, 0x1000)) > source.Source.MaxBufferSize)
-						throw new QuotaExceededException ("Message quota exceeded");
-					ms.Write (buf, 0, (int) (size - ms.Length));
-				}
-				ms.Position = 0;
-				stream = ms;
-			}
+            Stream stream = ctxi.Request.InputStream;
+            if (source.Source.TransferMode == TransferMode.Buffered) {
+                if (ctxi.Request.ContentLength64 <= 0)
+                    throw new ArgumentException ("This HTTP channel is configured to use buffered mode, and thus expects Content-Length sent to the listener");
+                long size = 0;
+                var ms = new MemoryStream ();
+                var buf = new byte [0x1000];
+                while (size < ctxi.Request.ContentLength64) {
+                    if ((size += stream.Read (buf, 0, 0x1000)) > source.Source.MaxBufferSize)
+                        throw new QuotaExceededException ("Message quota exceeded");
+                    ms.Write (buf, 0, (int) (size - ms.Length));
+                }
+                ms.Position = 0;
+                stream = ms;
+            }
 
-			var msg = Encoder.ReadMessage (
-				stream, maxSizeOfHeaders, ctxi.Request.ContentType);
+            var msg = Encoder.ReadMessage (
+                stream, maxSizeOfHeaders, ctxi.Request.ContentType);
 #else
-			var msg = Encoder.ReadMessage (
-				ctxi.Request.InputStream, maxSizeOfHeaders, ctxi.Request.ContentType);
+            var msg = Encoder.ReadMessage (
+                ctxi.Request.InputStream, maxSizeOfHeaders, ctxi.Request.ContentType);
 #endif
 
-			if (MessageVersion.Envelope.Equals (EnvelopeVersion.Soap11) ||
-			    MessageVersion.Addressing.Equals (AddressingVersion.None)) {
-				string action = GetHeaderItem (ctxi.Request.Headers ["SOAPAction"]);
-				if (action != null) {
-					if (action.Length > 2 && action [0] == '"' && action [action.Length] == '"')
-						action = action.Substring (1, action.Length - 2);
-					msg.Headers.Action = action;
-				}
-			}
-			msg.Properties.Add (RemoteEndpointMessageProperty.Name, new RemoteEndpointMessageProperty (ctxi.Request.ClientIPAddress, ctxi.Request.ClientPort));
+            if (MessageVersion.Envelope.Equals (EnvelopeVersion.Soap11) ||
+                MessageVersion.Addressing.Equals (AddressingVersion.None)) {
+                string action = GetHeaderItem (ctxi.Request.Headers ["SOAPAction"]);
+                if (action != null) {
+                    if (action.Length > 2 && action [0] == '"' && action [action.Length] == '"')
+                        action = action.Substring (1, action.Length - 2);
+                    msg.Headers.Action = action;
+                }
+            }
+            msg.Properties.Add (RemoteEndpointMessageProperty.Name, new RemoteEndpointMessageProperty (ctxi.Request.ClientIPAddress, ctxi.Request.ClientPort));
 
-			return msg;
-		}
+            return msg;
+        }
 
-		public override bool WaitForRequest (TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override bool WaitForRequest (TimeSpan timeout)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

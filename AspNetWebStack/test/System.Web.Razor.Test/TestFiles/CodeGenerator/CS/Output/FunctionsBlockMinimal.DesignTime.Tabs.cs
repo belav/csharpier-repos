@@ -14,9 +14,9 @@ using System;
 public class FunctionsBlockMinimal {
 #line hidden
 #line 1 "FunctionsBlockMinimal.cshtml"
-			   
+               
 string foo(string input) {
-	return input + "!";
+    return input + "!";
 }
 
 #line default

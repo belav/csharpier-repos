@@ -3,10 +3,10 @@
 
 class A<T> where T : CB, IA
 {
-	void Foo (T t)
-	{
-		t.Prop = "3";
-	}
+    void Foo (T t)
+    {
+        t.Prop = "3";
+    }
 }
 
 class CB : CA
@@ -15,10 +15,10 @@ class CB : CA
 
 class CA
 {
-	public int Prop { get; set; }
+    public int Prop { get; set; }
 }
 
 interface IA
 {
-	string Prop { get; set; }
+    string Prop { get; set; }
 }

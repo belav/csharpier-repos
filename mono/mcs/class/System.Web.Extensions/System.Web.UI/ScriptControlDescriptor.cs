@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptControlDescriptor.cs
 //
 // Author:
@@ -33,34 +33,34 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public class ScriptControlDescriptor : ScriptComponentDescriptor
-	{
-		public ScriptControlDescriptor (string type, string elementID)
-			: base (type) {
-			if (String.IsNullOrEmpty (elementID))
-				throw new ArgumentException ("Value cannot be null or empty.", "elementID");
-			ElementIDInternal = elementID;
-		}
+    public class ScriptControlDescriptor : ScriptComponentDescriptor
+    {
+        public ScriptControlDescriptor (string type, string elementID)
+            : base (type) {
+            if (String.IsNullOrEmpty (elementID))
+                throw new ArgumentException ("Value cannot be null or empty.", "elementID");
+            ElementIDInternal = elementID;
+        }
 
-		public override string ClientID {
-			get {
-				return ElementID;
-			}
-		}
+        public override string ClientID {
+            get {
+                return ElementID;
+            }
+        }
 
-		public string ElementID {
-			get {
-				return ElementIDInternal;
-			}
-		}
+        public string ElementID {
+            get {
+                return ElementIDInternal;
+            }
+        }
 
-		public override string ID {
-			get {
-				return base.ID;
-			}
-			set {
-				throw new InvalidOperationException ("The 'ID' property on ScriptControlDescriptor is not settable. The client ID of a script control is always equal to its element ID.");
-			}
-		}
-	}
+        public override string ID {
+            get {
+                return base.ID;
+            }
+            set {
+                throw new InvalidOperationException ("The 'ID' property on ScriptControlDescriptor is not settable. The client ID of a script control is always equal to its element ID.");
+            }
+        }
+    }
 }

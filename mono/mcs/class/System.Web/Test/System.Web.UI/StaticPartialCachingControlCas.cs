@@ -1,9 +1,9 @@
 //
 // StaticPartialCachingControlCas.cs 
-//	- CAS unit tests for System.Web.UI.StaticPartialCachingControl
+//    - CAS unit tests for System.Web.UI.StaticPartialCachingControl
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,38 +37,38 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StaticPartialCachingControlCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StaticPartialCachingControlCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new StaticPartialCachingControl (null, null, 0, null, null, null, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            new StaticPartialCachingControl (null, null, 0, null, null, null, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void BuildCachedControl_Deny_Unrestricted ()
-		{
-			Control parent = new Control ();
-			StaticPartialCachingControl.BuildCachedControl (parent, null, null, 0, null, null, null, null);
-			Assert.AreEqual (1, parent.Controls.Count, "Count");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void BuildCachedControl_Deny_Unrestricted ()
+        {
+            Control parent = new Control ();
+            StaticPartialCachingControl.BuildCachedControl (parent, null, null, 0, null, null, null, null);
+            Assert.AreEqual (1, parent.Controls.Count, "Count");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[7] { typeof (string), typeof (string),
-				typeof (int), typeof (string), typeof (string), typeof (string), typeof (BuildMethod) });
-			Assert.IsNotNull (ci, ".ctor(2xstring,int,3xstring,BuildMethod)");
-			return ci.Invoke (new object[7] { null, null, null, null, null, null, null });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[7] { typeof (string), typeof (string),
+                typeof (int), typeof (string), typeof (string), typeof (string), typeof (BuildMethod) });
+            Assert.IsNotNull (ci, ".ctor(2xstring,int,3xstring,BuildMethod)");
+            return ci.Invoke (new object[7] { null, null, null, null, null, null, null });
+        }
 
-		public override Type Type {
-			get { return typeof (StaticPartialCachingControl); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (StaticPartialCachingControl); }
+        }
+    }
 }

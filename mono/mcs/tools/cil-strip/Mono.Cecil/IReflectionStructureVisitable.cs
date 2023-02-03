@@ -28,9 +28,9 @@
 
 namespace Mono.Cecil {
 
-	internal interface IReflectionStructureVisitable {
+    internal interface IReflectionStructureVisitable {
 
-		void Accept (IReflectionStructureVisitor visitor);
-	}
+        void Accept (IReflectionStructureVisitor visitor);
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -26,26 +26,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             _compilation = CreateCompilationWithMscorlib40AndDocumentationComments(@"
 namespace Acme
 {
-	struct ValueType
-	{
+    struct ValueType
+    {
         /// <summary>Summary for total fields.</summary>
-		private int total1, total2;
-	}
-	class Widget: IProcess
-	{
-		public class NestedClass
-		{
-			private int value;
-		}
-		private string message;
-		private static Color defaultColor;
-		private const double PI = 3.14159;
-		protected readonly double monthlyAverage;
-		private long[] array1;
-		private Widget[,] array2;
-		private unsafe int *pCount;
-		private unsafe float **ppValues;
-	}
+        private int total1, total2;
+    }
+    class Widget: IProcess
+    {
+        public class NestedClass
+        {
+            private int value;
+        }
+        private string message;
+        private static Color defaultColor;
+        private const double PI = 3.14159;
+        protected readonly double monthlyAverage;
+        private long[] array1;
+        private Widget[,] array2;
+        private unsafe int *pCount;
+        private unsafe float **ppValues;
+    }
 
     enum E
     {

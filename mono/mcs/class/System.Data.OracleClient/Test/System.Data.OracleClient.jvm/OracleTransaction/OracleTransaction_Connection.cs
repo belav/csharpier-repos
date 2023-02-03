@@ -32,60 +32,60 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleTransaction_Connection : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OracleTransaction_Connection tc = new OracleTransaction_Connection();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleTransaction_Connection");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    public class OracleTransaction_Connection : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OracleTransaction_Connection tc = new OracleTransaction_Connection();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleTransaction_Connection");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			con.Open();
-			OracleTransaction txn = con.BeginTransaction();
+            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            con.Open();
+            OracleTransaction txn = con.BeginTransaction();
 
-			try
-			{
-				BeginCase("check connection");
-				Compare(txn.Connection,con);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("check connection");
+                Compare(txn.Connection,con);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			//check exception - using a command with the same connection as the transaction
-			OracleCommand cmd = new OracleCommand("Select * from Employees",con);
+            //check exception - using a command with the same connection as the transaction
+            OracleCommand cmd = new OracleCommand("Select * from Employees",con);
 
-			//Execute requires the command to have a transaction object when the connection assigned to the command is in a pending local transaction.  
-			//The Transaction property of the command has not been initialized.
-			try
-			{
-				BeginCase("Command that uses the transaction connection - exception");
-				try
-				{
-					cmd.ExecuteNonQuery();
-				}
-				catch (Exception ex){exp=ex;}
-				Compare(exp.GetType().FullName ,typeof(InvalidOperationException).FullName);
-				exp = null;
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+            //Execute requires the command to have a transaction object when the connection assigned to the command is in a pending local transaction.  
+            //The Transaction property of the command has not been initialized.
+            try
+            {
+                BeginCase("Command that uses the transaction connection - exception");
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex){exp=ex;}
+                Compare(exp.GetType().FullName ,typeof(InvalidOperationException).FullName);
+                exp = null;
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
 
-			if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open) con.Close();
 
-		}
-	}
+        }
+    }
 }

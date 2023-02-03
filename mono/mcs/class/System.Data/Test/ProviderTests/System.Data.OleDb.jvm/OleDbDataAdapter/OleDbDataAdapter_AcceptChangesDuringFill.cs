@@ -33,48 +33,48 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbDataAdapter_AcceptChangesDuringFill : ADONetTesterClass 
-	{
-		public static void Main()
-		{
-			OleDbDataAdapter_AcceptChangesDuringFill tc = new OleDbDataAdapter_AcceptChangesDuringFill();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbDataAdapter_AcceptChangesDuringFill");
-				tc.run();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
+    [TestFixture]
+    public class OleDbDataAdapter_AcceptChangesDuringFill : ADONetTesterClass 
+    {
+        public static void Main()
+        {
+            OleDbDataAdapter_AcceptChangesDuringFill tc = new OleDbDataAdapter_AcceptChangesDuringFill();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbDataAdapter_AcceptChangesDuringFill");
+                tc.run();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
 
-		}
-
-
-		//public TestClass():base(true){}
-
-		//Activate this constructor to log Failures to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+        }
 
 
-		//Activate this constructor to log All to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+        //public TestClass():base(true){}
 
-		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-		[Test]
-		public void run()
-		{
-			OleDbDataAdapter oleDBda = new OleDbDataAdapter();
-			oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
 
-			DataAdapter_AcceptChangesDuringFill((DbDataAdapter)oleDBda);
-		}
-	}
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+        [Test]
+        public void run()
+        {
+            OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+            oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
+
+            DataAdapter_AcceptChangesDuringFill((DbDataAdapter)oleDBda);
+        }
+    }
 }

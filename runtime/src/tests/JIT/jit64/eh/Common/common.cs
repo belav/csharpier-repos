@@ -136,8 +136,8 @@ namespace TestUtil
             // For now we disable the ability of stop recoding, so that we still recoed until the program exits.
             // This issue came up with finally being called twice. The first time we stop recoding and from this
             // point on we loose all output.
-            //			System.Console.SetOut(this.stdOut);
-            //			System.Console.SetError(this.stdError);
+            //            System.Console.SetOut(this.stdOut);
+            //            System.Console.SetError(this.stdError);
         }
 
         // Returns true if both expected output and expected error are
@@ -220,8 +220,8 @@ namespace TestUtil
             string diff = this.Diff();
             if (String.Empty.Equals(diff))
             {
-                //				this.stdOut.WriteLine();
-                //				this.stdOut.WriteLine("PASSED");
+                //                this.stdOut.WriteLine();
+                //                this.stdOut.WriteLine("PASSED");
                 retCode = SUCC_RET_CODE;
             }
             else

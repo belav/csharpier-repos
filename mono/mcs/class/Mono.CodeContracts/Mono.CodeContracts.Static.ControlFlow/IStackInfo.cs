@@ -2,7 +2,7 @@
 // IStackInfo.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,7 +27,7 @@
 // 
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-	interface IStackInfo {
-		bool IsCallOnThis (APC pc);
-	}
+    interface IStackInfo {
+        bool IsCallOnThis (APC pc);
+    }
 }

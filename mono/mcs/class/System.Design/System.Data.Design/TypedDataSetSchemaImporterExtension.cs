@@ -2,7 +2,7 @@
 // TypedDataSetSchemaImporterExtension.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -40,35 +40,35 @@ using System.Xml.Serialization.Advanced;
 
 namespace System.Data.Design
 {
-	public class TypedDataSetSchemaImporterExtension : SchemaImporterExtension
-	{
-		public TypedDataSetSchemaImporterExtension ()
-			: this (TypedDataSetGenerator.GenerateOption.None)
-		{
-		}
+    public class TypedDataSetSchemaImporterExtension : SchemaImporterExtension
+    {
+        public TypedDataSetSchemaImporterExtension ()
+            : this (TypedDataSetGenerator.GenerateOption.None)
+        {
+        }
 
-		protected TypedDataSetSchemaImporterExtension (TypedDataSetGenerator.GenerateOption dataSetGenerateOptions)
-		{
-		}
+        protected TypedDataSetSchemaImporterExtension (TypedDataSetGenerator.GenerateOption dataSetGenerateOptions)
+        {
+        }
 
-		[MonoTODO]
-		public override string ImportSchemaType (XmlSchemaType type, XmlSchemaObject context, XmlSchemas schemas, XmlSchemaImporter importer, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeGenerationOptions options, CodeDomProvider codeProvider)
-		{
-			if (type == null)
-				return null;
+        [MonoTODO]
+        public override string ImportSchemaType (XmlSchemaType type, XmlSchemaObject context, XmlSchemas schemas, XmlSchemaImporter importer, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeGenerationOptions options, CodeDomProvider codeProvider)
+        {
+            if (type == null)
+                return null;
 
-			var xe = context as XmlSchemaElement;
-			if (xe == null)
-				return null;
+            var xe = context as XmlSchemaElement;
+            if (xe == null)
+                return null;
 
-			return null;
-		}
+            return null;
+        }
 
-		[MonoTODO]
-		public override string ImportSchemaType (string name, string namespaceName, XmlSchemaObject context, XmlSchemas schemas, XmlSchemaImporter importer, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeGenerationOptions options, CodeDomProvider codeProvider)
-		{
-			return null;
-		}
-	}
+        [MonoTODO]
+        public override string ImportSchemaType (string name, string namespaceName, XmlSchemaObject context, XmlSchemas schemas, XmlSchemaImporter importer, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeGenerationOptions options, CodeDomProvider codeProvider)
+        {
+            return null;
+        }
+    }
 }
 

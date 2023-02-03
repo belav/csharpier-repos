@@ -27,71 +27,71 @@ using System.Runtime.CompilerServices;
 
 namespace Mono.Tasklets {
 
-	// we may want to not expose this class at all in the API
-	// and just provide a higher-level API
-	public class Continuation : IDisposable
-	{
-		IntPtr cont;
+    // we may want to not expose this class at all in the API
+    // and just provide a higher-level API
+    public class Continuation : IDisposable
+    {
+        IntPtr cont;
 
-		public Continuation ()
-		{
-			cont = alloc ();
-		}
+        public Continuation ()
+        {
+            cont = alloc ();
+        }
 
-		~Continuation ()
-		{
-			Dispose ();
-		}
+        ~Continuation ()
+        {
+            Dispose ();
+        }
 
-		public void Dispose ()
-		{
-			if (cont != IntPtr.Zero){
-				free (cont);
-				cont = IntPtr.Zero;
-				GC.SuppressFinalize (this);
-			}
-		}
+        public void Dispose ()
+        {
+            if (cont != IntPtr.Zero){
+                free (cont);
+                cont = IntPtr.Zero;
+                GC.SuppressFinalize (this);
+            }
+        }
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern static IntPtr alloc ();
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        extern static IntPtr alloc ();
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern static void free (IntPtr cont);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        extern static void free (IntPtr cont);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern static Exception mark (IntPtr cont);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        extern static Exception mark (IntPtr cont);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern static int store (IntPtr cont, int state, out Exception exception);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        extern static int store (IntPtr cont, int state, out Exception exception);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern static Exception restore (IntPtr cont, int state);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        extern static Exception restore (IntPtr cont, int state);
 
-		[MethodImplAttribute (MethodImplOptions.NoInlining)]
-		public void Mark ()
-		{
-			Exception e = mark (cont);
-			if (e != null)
-				throw e;
-		}
+        [MethodImplAttribute (MethodImplOptions.NoInlining)]
+        public void Mark ()
+        {
+            Exception e = mark (cont);
+            if (e != null)
+                throw e;
+        }
 
-		public int Store (int state)
-		{
-			int rstate;
-			Exception e;
-			rstate = store (cont, state, out e);
-			if (e != null)
-				throw e;
-			return rstate;
-		}
+        public int Store (int state)
+        {
+            int rstate;
+            Exception e;
+            rstate = store (cont, state, out e);
+            if (e != null)
+                throw e;
+            return rstate;
+        }
 
-		public void Restore (int state)
-		{
-			Exception e = restore (cont, state);
-			if (e != null)
-				throw e;
-		}
-	}
+        public void Restore (int state)
+        {
+            Exception e = restore (cont, state);
+            if (e != null)
+                throw e;
+        }
+    }
 
 }
 

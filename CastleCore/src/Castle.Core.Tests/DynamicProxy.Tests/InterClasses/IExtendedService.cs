@@ -14,8 +14,8 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	public interface IExtendedService : IService
-	{
-		void DoSomething();
-	}
+    public interface IExtendedService : IService
+    {
+        void DoSomething();
+    }
 }

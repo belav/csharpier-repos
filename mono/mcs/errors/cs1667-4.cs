@@ -11,6 +11,6 @@ class Class1
             [CLSCompliant(false)]
             add {}
             remove {}
-	}
+    }
 }
 

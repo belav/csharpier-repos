@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,26 +27,26 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class AnnotationPathPointCollection : ChartElementCollection<AnnotationPathPoint>
-	{
-		#region Constructors
-		//public AnnotationPathPointCollection (PolylineAnnotation annotation)
-		//{
-		//}
-		#endregion
+    public class AnnotationPathPointCollection : ChartElementCollection<AnnotationPathPoint>
+    {
+        #region Constructors
+        //public AnnotationPathPointCollection (PolylineAnnotation annotation)
+        //{
+        //}
+        #endregion
 
-		#region Public Methods
-		public override void Invalidate ()
-		{
-			base.Invalidate ();
-		}
-		#endregion
+        #region Public Methods
+        public override void Invalidate ()
+        {
+            base.Invalidate ();
+        }
+        #endregion
 
-		#region Protected Methods
-		protected override void Dispose (bool disposing)
-		{
-			base.Dispose (disposing);
-		}
-		#endregion
-	}
+        #region Protected Methods
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
+        }
+        #endregion
+    }
 }

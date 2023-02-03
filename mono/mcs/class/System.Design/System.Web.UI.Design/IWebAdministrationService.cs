@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IWebAdministrationService
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -33,9 +33,9 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-	public interface IWebAdministrationService
-	{
-		void Start (IDictionary arguments);
-	}
+    public interface IWebAdministrationService
+    {
+        void Start (IDictionary arguments);
+    }
 }
 

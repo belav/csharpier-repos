@@ -29,8 +29,8 @@
 //
 
 namespace System.Web.Services.Protocols {
-	public enum SoapServiceRoutingStyle {
-		SoapAction = 0x0,
-		RequestElement = 0x1
-	}
+    public enum SoapServiceRoutingStyle {
+        SoapAction = 0x0,
+        RequestElement = 0x1
+    }
 }

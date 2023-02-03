@@ -2,7 +2,7 @@
 // IsolatedStorageFilePermissionAttributeTest.cs - NUnit Test Cases for IsolatedStorageFilePermissionAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -34,117 +34,117 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions {
 
-	[TestFixture]
-	public class IsolatedStorageFilePermissionAttributeTest {
+    [TestFixture]
+    public class IsolatedStorageFilePermissionAttributeTest {
 
-		[Test]
-		public void Default () 
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			Assert.AreEqual (IsolatedStorageContainment.None, a.UsageAllowed, "UsageAllowed");
-			Assert.AreEqual (0, a.UserQuota, "UserQuota");
-			Assert.AreEqual (a.ToString (), a.TypeId.ToString (), "TypeId");
-			Assert.IsFalse (a.Unrestricted, "Unrestricted");
+        [Test]
+        public void Default () 
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            Assert.AreEqual (IsolatedStorageContainment.None, a.UsageAllowed, "UsageAllowed");
+            Assert.AreEqual (0, a.UserQuota, "UserQuota");
+            Assert.AreEqual (a.ToString (), a.TypeId.ToString (), "TypeId");
+            Assert.IsFalse (a.Unrestricted, "Unrestricted");
 
-			IsolatedStorageFilePermission perm = (IsolatedStorageFilePermission) a.CreatePermission ();
-			Assert.AreEqual (IsolatedStorageContainment.None, perm.UsageAllowed, "CreatePermission-UsageAllowed");
-			Assert.AreEqual (0, perm.UserQuota, "CreatePermission-UserQuota");
-		}
+            IsolatedStorageFilePermission perm = (IsolatedStorageFilePermission) a.CreatePermission ();
+            Assert.AreEqual (IsolatedStorageContainment.None, perm.UsageAllowed, "CreatePermission-UsageAllowed");
+            Assert.AreEqual (0, perm.UserQuota, "CreatePermission-UserQuota");
+        }
 
-		[Test]
-		public void Action ()
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			Assert.AreEqual (SecurityAction.Assert, a.Action, "Action=Assert");
-			a.Action = SecurityAction.Demand;
-			Assert.AreEqual (SecurityAction.Demand, a.Action, "Action=Demand");
-			a.Action = SecurityAction.Deny;
-			Assert.AreEqual (SecurityAction.Deny, a.Action, "Action=Deny");
-			a.Action = SecurityAction.InheritanceDemand;
-			Assert.AreEqual (SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
-			a.Action = SecurityAction.LinkDemand;
-			Assert.AreEqual (SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
-			a.Action = SecurityAction.PermitOnly;
-			Assert.AreEqual (SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
-			a.Action = SecurityAction.RequestMinimum;
-			Assert.AreEqual (SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
-			a.Action = SecurityAction.RequestOptional;
-			Assert.AreEqual (SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
-			a.Action = SecurityAction.RequestRefuse;
-			Assert.AreEqual (SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
-		}
+        [Test]
+        public void Action ()
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            Assert.AreEqual (SecurityAction.Assert, a.Action, "Action=Assert");
+            a.Action = SecurityAction.Demand;
+            Assert.AreEqual (SecurityAction.Demand, a.Action, "Action=Demand");
+            a.Action = SecurityAction.Deny;
+            Assert.AreEqual (SecurityAction.Deny, a.Action, "Action=Deny");
+            a.Action = SecurityAction.InheritanceDemand;
+            Assert.AreEqual (SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
+            a.Action = SecurityAction.LinkDemand;
+            Assert.AreEqual (SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
+            a.Action = SecurityAction.PermitOnly;
+            Assert.AreEqual (SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
+            a.Action = SecurityAction.RequestMinimum;
+            Assert.AreEqual (SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
+            a.Action = SecurityAction.RequestOptional;
+            Assert.AreEqual (SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
+            a.Action = SecurityAction.RequestRefuse;
+            Assert.AreEqual (SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
+        }
 
-		[Test]
-		public void Action_Invalid ()
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute ((SecurityAction)Int32.MinValue);
-			// no validation in attribute
-		}
+        [Test]
+        public void Action_Invalid ()
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute ((SecurityAction)Int32.MinValue);
+            // no validation in attribute
+        }
 
-		[Test]
-		public void UsageAllowed () 
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			Assert.AreEqual (IsolatedStorageContainment.None, a.UsageAllowed, "UsageAllowed=None");
-			a.UsageAllowed = IsolatedStorageContainment.AdministerIsolatedStorageByUser;
-			Assert.AreEqual (IsolatedStorageContainment.AdministerIsolatedStorageByUser, a.UsageAllowed, "UsageAllowed=AdministerIsolatedStorageByUser");
-			a.UsageAllowed = IsolatedStorageContainment.AssemblyIsolationByRoamingUser;
-			Assert.AreEqual (IsolatedStorageContainment.AssemblyIsolationByRoamingUser, a.UsageAllowed, "UsageAllowed=AssemblyIsolationByRoamingUser");
-			a.UsageAllowed = IsolatedStorageContainment.AssemblyIsolationByUser;
-			Assert.AreEqual (IsolatedStorageContainment.AssemblyIsolationByUser, a.UsageAllowed, "UsageAllowed=AssemblyIsolationByUser");
-			a.UsageAllowed = IsolatedStorageContainment.DomainIsolationByRoamingUser;
-			Assert.AreEqual (IsolatedStorageContainment.DomainIsolationByRoamingUser, a.UsageAllowed, "UsageAllowed=DomainIsolationByRoamingUser");
-			a.UsageAllowed = IsolatedStorageContainment.DomainIsolationByUser;
-			Assert.AreEqual (IsolatedStorageContainment.DomainIsolationByUser, a.UsageAllowed, "UsageAllowed=DomainIsolationByUser");
-			a.UsageAllowed = IsolatedStorageContainment.UnrestrictedIsolatedStorage;
-			Assert.AreEqual (IsolatedStorageContainment.UnrestrictedIsolatedStorage, a.UsageAllowed, "UsageAllowed=UnrestrictedIsolatedStorage");
-		}
+        [Test]
+        public void UsageAllowed () 
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            Assert.AreEqual (IsolatedStorageContainment.None, a.UsageAllowed, "UsageAllowed=None");
+            a.UsageAllowed = IsolatedStorageContainment.AdministerIsolatedStorageByUser;
+            Assert.AreEqual (IsolatedStorageContainment.AdministerIsolatedStorageByUser, a.UsageAllowed, "UsageAllowed=AdministerIsolatedStorageByUser");
+            a.UsageAllowed = IsolatedStorageContainment.AssemblyIsolationByRoamingUser;
+            Assert.AreEqual (IsolatedStorageContainment.AssemblyIsolationByRoamingUser, a.UsageAllowed, "UsageAllowed=AssemblyIsolationByRoamingUser");
+            a.UsageAllowed = IsolatedStorageContainment.AssemblyIsolationByUser;
+            Assert.AreEqual (IsolatedStorageContainment.AssemblyIsolationByUser, a.UsageAllowed, "UsageAllowed=AssemblyIsolationByUser");
+            a.UsageAllowed = IsolatedStorageContainment.DomainIsolationByRoamingUser;
+            Assert.AreEqual (IsolatedStorageContainment.DomainIsolationByRoamingUser, a.UsageAllowed, "UsageAllowed=DomainIsolationByRoamingUser");
+            a.UsageAllowed = IsolatedStorageContainment.DomainIsolationByUser;
+            Assert.AreEqual (IsolatedStorageContainment.DomainIsolationByUser, a.UsageAllowed, "UsageAllowed=DomainIsolationByUser");
+            a.UsageAllowed = IsolatedStorageContainment.UnrestrictedIsolatedStorage;
+            Assert.AreEqual (IsolatedStorageContainment.UnrestrictedIsolatedStorage, a.UsageAllowed, "UsageAllowed=UnrestrictedIsolatedStorage");
+        }
 
-		[Test]
-		public void UsageAllowed_Invalid ()
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			a.UsageAllowed = (IsolatedStorageContainment)Int32.MinValue;
-			// no validation in attribute
-		}
+        [Test]
+        public void UsageAllowed_Invalid ()
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            a.UsageAllowed = (IsolatedStorageContainment)Int32.MinValue;
+            // no validation in attribute
+        }
 
-		[Test]
-		public void UserQuota () 
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			Assert.AreEqual (0, a.UserQuota, "UserQuota=default");
-			a.UserQuota = Int64.MinValue;
-			Assert.AreEqual (Int64.MinValue, a.UserQuota, "UserQuota=MinValue");
-			a.UserQuota = Int64.MaxValue;
-			Assert.AreEqual (Int64.MaxValue, a.UserQuota, "UserQuota=MaxValue");
-		}
+        [Test]
+        public void UserQuota () 
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            Assert.AreEqual (0, a.UserQuota, "UserQuota=default");
+            a.UserQuota = Int64.MinValue;
+            Assert.AreEqual (Int64.MinValue, a.UserQuota, "UserQuota=MinValue");
+            a.UserQuota = Int64.MaxValue;
+            Assert.AreEqual (Int64.MaxValue, a.UserQuota, "UserQuota=MaxValue");
+        }
 
-		[Test]
-		public void Unrestricted () 
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			a.Unrestricted = true;
+        [Test]
+        public void Unrestricted () 
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            a.Unrestricted = true;
 
-			IsolatedStorageFilePermission perm = (IsolatedStorageFilePermission) a.CreatePermission ();
-			Assert.IsTrue (perm.IsUnrestricted (), "CreatePermission.IsUnrestricted");
-			Assert.AreEqual (IsolatedStorageContainment.UnrestrictedIsolatedStorage, perm.UsageAllowed, "CreatePermission.UsageAllowed");
-			Assert.AreEqual (Int64.MaxValue, perm.UserQuota, "CreatePermission.UserQuota");
-		}
+            IsolatedStorageFilePermission perm = (IsolatedStorageFilePermission) a.CreatePermission ();
+            Assert.IsTrue (perm.IsUnrestricted (), "CreatePermission.IsUnrestricted");
+            Assert.AreEqual (IsolatedStorageContainment.UnrestrictedIsolatedStorage, perm.UsageAllowed, "CreatePermission.UsageAllowed");
+            Assert.AreEqual (Int64.MaxValue, perm.UserQuota, "CreatePermission.UserQuota");
+        }
 
-		[Test]
-		public void Attributes ()
-		{
-			IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
-			Type t = typeof (IsolatedStorageFilePermissionAttribute);
-			Assert.IsTrue (t.IsSerializable, "IsSerializable");
+        [Test]
+        public void Attributes ()
+        {
+            IsolatedStorageFilePermissionAttribute a = new IsolatedStorageFilePermissionAttribute (SecurityAction.Assert);
+            Type t = typeof (IsolatedStorageFilePermissionAttribute);
+            Assert.IsTrue (t.IsSerializable, "IsSerializable");
 
-			object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage");
-			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsTrue (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsFalse (aua.Inherited, "Inherited");
-			AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method);
-			Assert.AreEqual (at, aua.ValidOn, "ValidOn");
-		}
-	}
+            object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
+            Assert.AreEqual (1, attrs.Length, "AttributeUsage");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
+            Assert.IsTrue (aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse (aua.Inherited, "Inherited");
+            AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method);
+            Assert.AreEqual (at, aua.ValidOn, "ValidOn");
+        }
+    }
 }

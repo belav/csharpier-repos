@@ -2,7 +2,7 @@
 // BindingElementTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -37,54 +37,54 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	[TestFixture]
-	public class MessagePropertiesTest
-	{
-		[Test]
-		public void CopyProperties ()
-		{
-			var mp = new MessageProperties ();
-			var obj = new object ();
-			var obj2 = new object ();
-			mp.Add ("FooProperty", obj);
-			var mp2 = new MessageProperties ();
-			mp2.Add ("BarProperty", obj2);
-			mp.CopyProperties (mp2);
-			Assert.AreEqual (obj, mp ["FooProperty"], "#1");
-			Assert.AreEqual (obj2, mp ["BarProperty"], "#2");
-		}
+    [TestFixture]
+    public class MessagePropertiesTest
+    {
+        [Test]
+        public void CopyProperties ()
+        {
+            var mp = new MessageProperties ();
+            var obj = new object ();
+            var obj2 = new object ();
+            mp.Add ("FooProperty", obj);
+            var mp2 = new MessageProperties ();
+            mp2.Add ("BarProperty", obj2);
+            mp.CopyProperties (mp2);
+            Assert.AreEqual (obj, mp ["FooProperty"], "#1");
+            Assert.AreEqual (obj2, mp ["BarProperty"], "#2");
+        }
 
-		[Test]
-		public void AllowOutputBatching ()
-		{
-			var mp = new MessageProperties ();
-			Assert.IsFalse (mp.AllowOutputBatching, "#0");
-			mp.AllowOutputBatching = true;
-			Assert.AreEqual (1, mp.Count, "#1");
-			foreach (KeyValuePair<string,object> p in mp)
-				Assert.AreEqual ("AllowOutputBatching", p.Key, "#2");
-		}
+        [Test]
+        public void AllowOutputBatching ()
+        {
+            var mp = new MessageProperties ();
+            Assert.IsFalse (mp.AllowOutputBatching, "#0");
+            mp.AllowOutputBatching = true;
+            Assert.AreEqual (1, mp.Count, "#1");
+            foreach (KeyValuePair<string,object> p in mp)
+                Assert.AreEqual ("AllowOutputBatching", p.Key, "#2");
+        }
 
-		[Test]
-		public void Encoder ()
-		{
-			var mp = new MessageProperties ();
-			Assert.IsNull (mp.Via, "#0");
-			mp.Encoder = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
-			Assert.AreEqual (1, mp.Count, "#1");
-			foreach (KeyValuePair<string,object> p in mp)
-				Assert.AreEqual ("Encoder", p.Key, "#2");
-		}
+        [Test]
+        public void Encoder ()
+        {
+            var mp = new MessageProperties ();
+            Assert.IsNull (mp.Via, "#0");
+            mp.Encoder = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
+            Assert.AreEqual (1, mp.Count, "#1");
+            foreach (KeyValuePair<string,object> p in mp)
+                Assert.AreEqual ("Encoder", p.Key, "#2");
+        }
 
-		[Test]
-		public void Via ()
-		{
-			var mp = new MessageProperties ();
-			Assert.IsNull (mp.Via, "#0");
-			mp.Via = new Uri ("urn:foo");
-			Assert.AreEqual (1, mp.Count, "#1");
-			foreach (KeyValuePair<string,object> p in mp)
-				Assert.AreEqual ("Via", p.Key, "#2");
-		}
-	}
+        [Test]
+        public void Via ()
+        {
+            var mp = new MessageProperties ();
+            Assert.IsNull (mp.Via, "#0");
+            mp.Via = new Uri ("urn:foo");
+            Assert.AreEqual (1, mp.Count, "#1");
+            foreach (KeyValuePair<string,object> p in mp)
+                Assert.AreEqual ("Via", p.Key, "#2");
+        }
+    }
 }

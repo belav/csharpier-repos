@@ -2,7 +2,7 @@
 // System.Web.Security.UrlAuthorizationModule
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002,2003 Ximian, Inc (http://www.ximian.com)
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
@@ -34,64 +34,64 @@ using System.Security.Principal;
 
 namespace System.Web.Security
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class UrlAuthorizationModule : IHttpModule
-	{
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public UrlAuthorizationModule ()
-		{
-		}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class UrlAuthorizationModule : IHttpModule
+    {
+        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+        public UrlAuthorizationModule ()
+        {
+        }
 
-		public void Dispose ()
-		{
-		}
+        public void Dispose ()
+        {
+        }
 
-		public void Init (HttpApplication app)
-		{
-			app.AuthorizeRequest += new EventHandler (OnAuthorizeRequest);
-		}
+        public void Init (HttpApplication app)
+        {
+            app.AuthorizeRequest += new EventHandler (OnAuthorizeRequest);
+        }
 
-		void OnAuthorizeRequest (object sender, EventArgs args)
-		{
-			HttpApplication app = (HttpApplication) sender;
-			HttpContext context = app.Context;
-			if (context == null || context.SkipAuthorization)
-				return;
+        void OnAuthorizeRequest (object sender, EventArgs args)
+        {
+            HttpApplication app = (HttpApplication) sender;
+            HttpContext context = app.Context;
+            if (context == null || context.SkipAuthorization)
+                return;
 
-			HttpRequest req = context.Request;
-			AuthorizationSection config = (AuthorizationSection) WebConfigurationManager.GetSection ("system.web/authorization", req.Path, context);
-			if (!config.IsValidUser (context.User, req.HttpMethod)) {
-				HttpException e = new HttpException (401, "Unauthorized");
-				HttpResponse response = context.Response;
-				
-				response.StatusCode = 401;
-				response.Write (e.GetHtmlErrorMessage ());
-				app.CompleteRequest ();
-			}
-		}
+            HttpRequest req = context.Request;
+            AuthorizationSection config = (AuthorizationSection) WebConfigurationManager.GetSection ("system.web/authorization", req.Path, context);
+            if (!config.IsValidUser (context.User, req.HttpMethod)) {
+                HttpException e = new HttpException (401, "Unauthorized");
+                HttpResponse response = context.Response;
+                
+                response.StatusCode = 401;
+                response.Write (e.GetHtmlErrorMessage ());
+                app.CompleteRequest ();
+            }
+        }
 
-		public static bool CheckUrlAccessForPrincipal (string virtualPath, IPrincipal user, string verb)
-		{
-			AuthorizationSection config = (AuthorizationSection) WebConfigurationManager.GetSection ("system.web/authorization", virtualPath);
+        public static bool CheckUrlAccessForPrincipal (string virtualPath, IPrincipal user, string verb)
+        {
+            AuthorizationSection config = (AuthorizationSection) WebConfigurationManager.GetSection ("system.web/authorization", virtualPath);
 
-			return config == null ? true : config.IsValidUser (user, verb);
-		}
+            return config == null ? true : config.IsValidUser (user, verb);
+        }
 
-		internal static void ReportUrlAuthorizationFailure(HttpContext context, object webEventSource) {
-			// Deny access
-			context.Response.StatusCode = 401;
-			context.Response.Write (new HttpException(401, "Unauthorized").GetHtmlErrorMessage ());
+        internal static void ReportUrlAuthorizationFailure(HttpContext context, object webEventSource) {
+            // Deny access
+            context.Response.StatusCode = 401;
+            context.Response.Write (new HttpException(401, "Unauthorized").GetHtmlErrorMessage ());
 
 #if false // Sys.Web.Mng not implemented on mono.
-			if (context.User != null && context.User.Identity.IsAuthenticated) {
-				// We don't raise failure audit event for anonymous user
-				WebBaseEvent.RaiseSystemEvent(webEventSource, WebEventCodes.AuditUrlAuthorizationFailure);
-			}
+            if (context.User != null && context.User.Identity.IsAuthenticated) {
+                // We don't raise failure audit event for anonymous user
+                WebBaseEvent.RaiseSystemEvent(webEventSource, WebEventCodes.AuditUrlAuthorizationFailure);
+            }
 #endif
-			context.ApplicationInstance.CompleteRequest();
-		}
+            context.ApplicationInstance.CompleteRequest();
+        }
 
-	}
+    }
 }
 

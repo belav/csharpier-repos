@@ -2,7 +2,7 @@
 // System.Web.UI.BaseTemplateParser
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2006-2010 Novell, Inc (http://www.novell.com)
 //
@@ -34,52 +34,52 @@ using System.Web.Configuration;
 
 namespace System.Web.UI
 {
-	public abstract class BaseTemplateParser : TemplateParser
-	{		
-		protected BaseTemplateParser ()
-		{
-			
-		}
+    public abstract class BaseTemplateParser : TemplateParser
+    {        
+        protected BaseTemplateParser ()
+        {
+            
+        }
 
-		protected Type GetReferencedType (string virtualPath)
-		{
-			if (String.IsNullOrEmpty (virtualPath))
-				throw new ArgumentNullException ("virtualPath");
-			
-			var pageParserFilter = PageParserFilter;
-			if (pageParserFilter != null) {
-				var cfg = WebConfigurationManager.GetSection ("system.web/compilation") as CompilationSection;
-				if (cfg == null)
-					throw new HttpException ("Internal error. Missing configuration section.");
+        protected Type GetReferencedType (string virtualPath)
+        {
+            if (String.IsNullOrEmpty (virtualPath))
+                throw new ArgumentNullException ("virtualPath");
+            
+            var pageParserFilter = PageParserFilter;
+            if (pageParserFilter != null) {
+                var cfg = WebConfigurationManager.GetSection ("system.web/compilation") as CompilationSection;
+                if (cfg == null)
+                    throw new HttpException ("Internal error. Missing configuration section.");
 
-				string extension = VirtualPathUtility.GetExtension (virtualPath);
-				Type btype = cfg.BuildProviders.GetProviderTypeForExtension (extension);
-				VirtualReferenceType reftype;
+                string extension = VirtualPathUtility.GetExtension (virtualPath);
+                Type btype = cfg.BuildProviders.GetProviderTypeForExtension (extension);
+                VirtualReferenceType reftype;
 
-				if (btype == null)
-					reftype = VirtualReferenceType.Other;
-				else if (btype == typeof (PageBuildProvider))
-					reftype = VirtualReferenceType.Page;
-				else if (btype == typeof (UserControlBuildProvider))
-					reftype = VirtualReferenceType.UserControl;
-				else if (btype == typeof (MasterPageBuildProvider))
-					reftype = VirtualReferenceType.Master;
-				else
-					reftype = VirtualReferenceType.SourceFile;
-				
-				if (!pageParserFilter.AllowVirtualReference (virtualPath, reftype))
-					throw new HttpException ("The parser does not permit a virtual reference to the UserControl.");
-			}
+                if (btype == null)
+                    reftype = VirtualReferenceType.Other;
+                else if (btype == typeof (PageBuildProvider))
+                    reftype = VirtualReferenceType.Page;
+                else if (btype == typeof (UserControlBuildProvider))
+                    reftype = VirtualReferenceType.UserControl;
+                else if (btype == typeof (MasterPageBuildProvider))
+                    reftype = VirtualReferenceType.Master;
+                else
+                    reftype = VirtualReferenceType.SourceFile;
+                
+                if (!pageParserFilter.AllowVirtualReference (virtualPath, reftype))
+                    throw new HttpException ("The parser does not permit a virtual reference to the UserControl.");
+            }
 
-			virtualPath = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths (VirtualPath.Absolute, virtualPath);
-			return BuildManager.GetCompiledType (virtualPath);
-		}
+            virtualPath = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths (VirtualPath.Absolute, virtualPath);
+            return BuildManager.GetCompiledType (virtualPath);
+        }
 
-		[MonoTODO ("We don't do anything here with the no-compile controls.")]
-		protected internal Type GetUserControlType (string virtualPath)
-		{
-			// Documented as a wrapper for the call below, but what does it do?
-			return GetReferencedType (virtualPath);
-		}
-	}
+        [MonoTODO ("We don't do anything here with the no-compile controls.")]
+        protected internal Type GetUserControlType (string virtualPath)
+        {
+            // Documented as a wrapper for the call below, but what does it do?
+            return GetReferencedType (virtualPath);
+        }
+    }
 }

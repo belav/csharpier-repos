@@ -46,8 +46,8 @@ namespace CseTest
             int a = return_int(false, -27);
             int v;
 #if LOOP
-			 for (int j = 0; j < 6; j++) {
-				 for (int i = 0; i < 5; i++) {
+             for (int j = 0; j < 6; j++) {
+                 for (int i = 0; i < 5; i++) {
 #endif
             v = ((a + b) + c);
             if (v != -61)
@@ -78,16 +78,16 @@ namespace CseTest
             }
 #if LOOP
 #if KILL1
-				 c = return_int(false, -40);
+                 c = return_int(false, -40);
 #endif
-					 }
+                     }
 #if KILL2
-				 a = return_int(false, -27);
+                 a = return_int(false, -27);
 #endif
-				 }
+                 }
 #endif
 #if TRY 
-					 try {
+                     try {
 #endif
             v = (b + a);
             if (v != -21)
@@ -168,7 +168,7 @@ namespace CseTest
 
             c = return_int(false, -71);
 #if LOOP
-			for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++) {
 #endif
             v = (a + c);
             if (v != -98)
@@ -178,10 +178,10 @@ namespace CseTest
             }
 #if LOOP
 
-			}
+            }
 #endif
 #if TRY
-					 } finally {
+                     } finally {
 #endif
             v = (c + (a + b));
             if (v != -92)
@@ -197,7 +197,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY 
-					 }
+                     }
 #endif
             Console.WriteLine(ret);
             return ret;

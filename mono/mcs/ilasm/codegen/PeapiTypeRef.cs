@@ -223,7 +223,7 @@ namespace Mono.ILASM {
                 public void MakeCustomModified (CodeGen code_gen, PEAPI.CustomModifier modifier,
                                 BaseTypeRef klass)
                 {
-			PEAPI.Type type;
+            PEAPI.Type type;
 
                         use_type_spec = true;
                         

@@ -281,7 +281,7 @@ namespace Mono.Remoting.Channels.Unix
 
         public void ProcessMessages()
         {
-			byte[] buffer = new byte[256];
+            byte[] buffer = new byte[256];
             _stream = new BufferedStream (new NetworkStream (_client));
 
             try
@@ -293,14 +293,14 @@ namespace Mono.Remoting.Channels.Unix
 
                     switch (type)
                     {
-						case MessageStatus.MethodMessage:
-							_sink.InternalProcessMessage (this, _stream);
-							break;
+                        case MessageStatus.MethodMessage:
+                            _sink.InternalProcessMessage (this, _stream);
+                            break;
 
-						case MessageStatus.Unknown:
-						case MessageStatus.CancelSignal:
-							end = true;
-							break;
+                        case MessageStatus.Unknown:
+                        case MessageStatus.CancelSignal:
+                            end = true;
+                            break;
                     }
                 }
             }
@@ -310,12 +310,12 @@ namespace Mono.Remoting.Channels.Unix
             }
             finally
             {
-				try {
-	                _serverChannel.ReleaseConnection (Thread.CurrentThread);
-	                _stream.Close();
-					_client.Close ();
-				} catch {
-				}
+                try {
+                    _serverChannel.ReleaseConnection (Thread.CurrentThread);
+                    _stream.Close();
+                    _client.Close ();
+                } catch {
+                }
             }
         }
         

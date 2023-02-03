@@ -2,7 +2,7 @@
 // IAggregateVisitor.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.AST.Visitors {
-	interface IAggregateVisitor<Label, Data, Result> : IILVisitor<Label, Dummy, Dummy, Data, Result> {
-		Result Aggregate (Label pc, Label aggregateStart, bool canBeTargetOfBranch, Data data);
-	}
+    interface IAggregateVisitor<Label, Data, Result> : IILVisitor<Label, Dummy, Dummy, Data, Result> {
+        Result Aggregate (Label pc, Label aggregateStart, bool canBeTargetOfBranch, Data data);
+    }
 }

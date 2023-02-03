@@ -23,7 +23,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 using System;
 using System.Collections.Generic;
@@ -34,19 +34,19 @@ using System.Windows.Forms;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class InputLanguageTest : TestHelper
-	{
-		[Test]
-		public void Test ()
-		{
-			InputLanguage.CurrentInputLanguage = InputLanguage.DefaultInputLanguage;
-		}
+    [TestFixture]
+    public class InputLanguageTest : TestHelper
+    {
+        [Test]
+        public void Test ()
+        {
+            InputLanguage.CurrentInputLanguage = InputLanguage.DefaultInputLanguage;
+        }
 
-		[Test]
-		public void InstalledInputLanguages_HasAtLeastOneLanguage ()
-		{
-			Assert.IsTrue (InputLanguage.InstalledInputLanguages.Count > 0);
-		}
-	}
+        [Test]
+        public void InstalledInputLanguages_HasAtLeastOneLanguage ()
+        {
+            Assert.IsTrue (InputLanguage.InstalledInputLanguages.Count > 0);
+        }
+    }
 }

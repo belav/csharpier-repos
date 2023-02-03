@@ -3,11 +3,11 @@
 
 class Test
 {
-	static void Main ()
-	{
-		try {
-		} catch (Etp e) {
-		} catch {
-		}
-	}
+    static void Main ()
+    {
+        try {
+        } catch (Etp e) {
+        } catch {
+        }
+    }
 }

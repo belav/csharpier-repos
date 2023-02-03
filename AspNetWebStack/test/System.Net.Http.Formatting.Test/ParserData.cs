@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -51,10 +51,10 @@ namespace System.Net.Http
                     "\0",
                     "HTTP\01.1",
                     "HTTP/4294967295.4294967295",
-                    "æææøøøååå",
-                    "HTTP/æææøøøååå",
-                    "いくつかのテキスト",
-                    "HTTP/いくつかのテキスト",
+                    "���������",
+                    "HTTP/���������",
+                    "?????????",
+                    "HTTP/?????????",
                 };
             }
         }
@@ -71,8 +71,8 @@ namespace System.Net.Http
                     "\0",
                     "G\0T",
                     "GET\n",
-                    "æææøøøååå",
-                    "いくつかのテキスト",
+                    "���������",
+                    "?????????",
                 };
             }
         }
@@ -102,8 +102,8 @@ namespace System.Net.Http
                     "\0",
                     "\t",
                     "reason\n",
-                    "æææøøøååå",
-                    "いくつかのテキスト",
+                    "���������",
+                    "?????????",
                 };
             }
         }
@@ -119,8 +119,8 @@ namespace System.Net.Http
                     "p a t h",
                     "path ",
                     " path ",
-                    "æææø ø øååå",
-                    "いくつか の テキスト"
+                    "���� � ����",
+                    "???? ? ????"
                 };
             }
         }
@@ -139,8 +139,8 @@ namespace System.Net.Http
                     "2000",
                     Int32.MinValue.ToString(),
                     Int32.MaxValue.ToString(),
-                    "æææøøøååå",
-                    "いくつかのテキスト"
+                    "���������",
+                    "?????????"
                 };
             }
         }

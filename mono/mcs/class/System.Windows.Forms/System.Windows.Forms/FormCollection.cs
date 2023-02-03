@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 using System;
 using System.Collections;
@@ -31,43 +31,43 @@ using System.Text;
 
 namespace System.Windows.Forms
 {
-	public class FormCollection : ReadOnlyCollectionBase
-	{
-		public FormCollection () : base ()
-		{
-		}
-		
-		#region Public Properties
-		public virtual Form this[int index] {
-			get { 
-				return (Form)base.InnerList[index];
-			}
-		}
+    public class FormCollection : ReadOnlyCollectionBase
+    {
+        public FormCollection () : base ()
+        {
+        }
+        
+        #region Public Properties
+        public virtual Form this[int index] {
+            get { 
+                return (Form)base.InnerList[index];
+            }
+        }
 
-		public virtual Form this[string name] {
-			get {
-				foreach (Form f in base.InnerList)
-					if (f.Name == name)
-						return f;
-							
-				return null;
-			}
-		}
-		#endregion
-		
-		#region Internal Add/Remove Methods
-		internal void Add (Form form)
-		{
-			if (base.InnerList.Contains (form))
-				return;
-			
-			base.InnerList.Add (form);
-		}
-		
-		internal void Remove (Form form)
-		{
-			base.InnerList.Remove (form);
-		}
-		#endregion
-	}
+        public virtual Form this[string name] {
+            get {
+                foreach (Form f in base.InnerList)
+                    if (f.Name == name)
+                        return f;
+                            
+                return null;
+            }
+        }
+        #endregion
+        
+        #region Internal Add/Remove Methods
+        internal void Add (Form form)
+        {
+            if (base.InnerList.Contains (form))
+                return;
+            
+            base.InnerList.Add (form);
+        }
+        
+        internal void Remove (Form form)
+        {
+            base.InnerList.Remove (form);
+        }
+        #endregion
+    }
 }

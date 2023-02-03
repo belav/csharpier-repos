@@ -32,31 +32,31 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class WebConfigurationFileMap: ConfigurationFileMap
-	{
-		VirtualDirectoryMappingCollection virtualDirectories;
-		
-		public WebConfigurationFileMap ()
-		{
-			virtualDirectories = new VirtualDirectoryMappingCollection ();
-		}
-		
-		public VirtualDirectoryMappingCollection VirtualDirectories {
-			get { return virtualDirectories; }
-		}
-		
-		public override object Clone ()
-		{
-			WebConfigurationFileMap map = new WebConfigurationFileMap ();
-			map.MachineConfigFilename = MachineConfigFilename;
-			
-			map.virtualDirectories = new VirtualDirectoryMappingCollection ();
-			foreach (VirtualDirectoryMapping vmap in virtualDirectories) {
-				VirtualDirectoryMapping nvmap = new VirtualDirectoryMapping (vmap.PhysicalDirectory, vmap.IsAppRoot, vmap.ConfigFileBaseName);
-				map.virtualDirectories.Add (vmap.VirtualDirectory, nvmap);
-			}
-			
-			return map;
-		}
-	}
+    public sealed class WebConfigurationFileMap: ConfigurationFileMap
+    {
+        VirtualDirectoryMappingCollection virtualDirectories;
+        
+        public WebConfigurationFileMap ()
+        {
+            virtualDirectories = new VirtualDirectoryMappingCollection ();
+        }
+        
+        public VirtualDirectoryMappingCollection VirtualDirectories {
+            get { return virtualDirectories; }
+        }
+        
+        public override object Clone ()
+        {
+            WebConfigurationFileMap map = new WebConfigurationFileMap ();
+            map.MachineConfigFilename = MachineConfigFilename;
+            
+            map.virtualDirectories = new VirtualDirectoryMappingCollection ();
+            foreach (VirtualDirectoryMapping vmap in virtualDirectories) {
+                VirtualDirectoryMapping nvmap = new VirtualDirectoryMapping (vmap.PhysicalDirectory, vmap.IsAppRoot, vmap.ConfigFileBaseName);
+                map.virtualDirectories.Add (vmap.VirtualDirectory, nvmap);
+            }
+            
+            return map;
+        }
+    }
 }

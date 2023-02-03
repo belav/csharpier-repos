@@ -53,7 +53,7 @@ public class RecursiveRethrow
         catch (Exception e)
         {
             Console.WriteLine(e);
-			_trace.Write(e.Message);
+            _trace.Write(e.Message);
         }
 
         return _trace.Match();

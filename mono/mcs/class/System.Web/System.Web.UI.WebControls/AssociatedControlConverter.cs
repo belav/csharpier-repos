@@ -31,19 +31,19 @@ using System;
 
 namespace System.Web.UI.WebControls
 {
-	public class AssociatedControlConverter : ControlIDConverter
-	{
-		public AssociatedControlConverter () : base ()
-		{ }
+    public class AssociatedControlConverter : ControlIDConverter
+    {
+        public AssociatedControlConverter () : base ()
+        { }
 
-		protected override bool FilterControl (Control control)
-		{
-			if (control is WebControl)
-				return true;
+        protected override bool FilterControl (Control control)
+        {
+            if (control is WebControl)
+                return true;
 
-			return false;
-		}		
-	}
+            return false;
+        }        
+    }
 }
 
 

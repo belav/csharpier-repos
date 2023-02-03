@@ -1,9 +1,9 @@
 //
 // CodeCastExpressionCas.cs
-//	- CAS unit tests for System.CodeDom.CodeCastExpression
+//    - CAS unit tests for System.CodeDom.CodeCastExpression
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,48 +37,48 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeCastExpressionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeCastExpressionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeCastExpression cce = new CodeCastExpression ();
-			Assert.IsNull (cce.Expression, "Expression");
-			cce.Expression = new CodeExpression ();
-			Assert.AreEqual ("System.Void", cce.TargetType.BaseType, "TargetType.BaseType");
-			cce.TargetType = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeCastExpression cce = new CodeCastExpression ();
+            Assert.IsNull (cce.Expression, "Expression");
+            cce.Expression = new CodeExpression ();
+            Assert.AreEqual ("System.Void", cce.TargetType.BaseType, "TargetType.BaseType");
+            cce.TargetType = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeTypeReference target = new CodeTypeReference ("System.Int32");
-			CodeExpression expression = new CodeExpression ();
-			CodeCastExpression cce = new CodeCastExpression (target, expression);
-			Assert.AreSame (expression, cce.Expression, "Expression");
-			cce.Expression = new CodeExpression ();
-			Assert.AreEqual ("System.Int32", cce.TargetType.BaseType, "TargetType.BaseType");
-			cce.TargetType = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeTypeReference target = new CodeTypeReference ("System.Int32");
+            CodeExpression expression = new CodeExpression ();
+            CodeCastExpression cce = new CodeCastExpression (target, expression);
+            Assert.AreSame (expression, cce.Expression, "Expression");
+            cce.Expression = new CodeExpression ();
+            Assert.AreEqual ("System.Int32", cce.TargetType.BaseType, "TargetType.BaseType");
+            cce.TargetType = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeCastExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeCastExpression).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

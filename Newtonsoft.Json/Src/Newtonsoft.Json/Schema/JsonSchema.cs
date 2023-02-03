@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -156,7 +156,7 @@ namespace Newtonsoft.Json.Schema
         /// Gets or sets a value indicating whether items in an array are validated using the <see cref="JsonSchema"/> instance at their array position from <see cref="JsonSchema.Items"/>.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if items are validated using their array position; otherwise, <c>false</c>.
+        ///     <c>true</c> if items are validated using their array position; otherwise, <c>false</c>.
         /// </value>
         public bool PositionalItemsValidation { get; set; }
 
@@ -170,7 +170,7 @@ namespace Newtonsoft.Json.Schema
         /// Gets or sets a value indicating whether additional items are allowed.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if additional items are allowed; otherwise, <c>false</c>.
+        ///     <c>true</c> if additional items are allowed; otherwise, <c>false</c>.
         /// </value>
         public bool AllowAdditionalItems { get; set; }
 
@@ -201,7 +201,7 @@ namespace Newtonsoft.Json.Schema
         /// Gets or sets a value indicating whether additional properties are allowed.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if additional properties are allowed; otherwise, <c>false</c>.
+        ///     <c>true</c> if additional properties are allowed; otherwise, <c>false</c>.
         /// </value>
         public bool AllowAdditionalProperties { get; set; }
 

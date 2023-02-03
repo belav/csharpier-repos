@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
             CancellationToken cancellationToken);
 
         /// <summary>
-        /// Updates the project’s references by removing or marking references as
+        /// Updates the project�s references by removing or marking references as
         /// TreatAsUsed in the project file.
         /// </summary>
         /// <returns>True, if the reference was updated.</returns>

@@ -32,56 +32,56 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	public class TemplateGroup
-	{
-		[MonoNotSupported ("")]
-		public TemplateGroup (string groupName)
-		{
-			throw new NotImplementedException ();
-		}
+    public class TemplateGroup
+    {
+        [MonoNotSupported ("")]
+        public TemplateGroup (string groupName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public TemplateGroup (string groupName, Style groupStyle)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoNotSupported ("")]
-		public string GroupName {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported ("")]
+        public TemplateGroup (string groupName, Style groupStyle)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoNotSupported ("")]
+        public string GroupName {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		public Style GroupStyle {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported ("")]
+        public Style GroupStyle {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		public bool IsEmpty {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported ("")]
+        public bool IsEmpty {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		public TemplateDefinition[] Templates {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported ("")]
+        public TemplateDefinition[] Templates {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		public void AddTemplateDefinition (TemplateDefinition templateDefinition)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoNotSupported ("")]
+        public void AddTemplateDefinition (TemplateDefinition templateDefinition)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

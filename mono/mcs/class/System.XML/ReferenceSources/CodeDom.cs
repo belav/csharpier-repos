@@ -5,21 +5,21 @@ using System.Globalization;
 
 namespace Microsoft.CSharp
 {
-	internal class CodeDomProvider
-	{
-		public string CreateEscapedIdentifier (string name)
-		{
+    internal class CodeDomProvider
+    {
+        public string CreateEscapedIdentifier (string name)
+        {
             // Any identifier started with two consecutive underscores are 
             // reserved by CSharp.
             if (IsKeyword(name) || IsPrefixTwoUnderscore(name)) {
                 return "@" + name;
             }
-            return name;			
-		}
+            return name;            
+        }
 
-		static bool IsKeyword(string value) {
-			return false;
-		} 
+        static bool IsKeyword(string value) {
+            return false;
+        } 
 
         static bool IsPrefixTwoUnderscore(string value) {
             if( value.Length < 3) {
@@ -28,15 +28,15 @@ namespace Microsoft.CSharp
             else {
                 return ((value[0] == '_') && (value[1] == '_') && (value[2] != '_'));
             }
-        }		
-	}
+        }        
+    }
 
-	internal class CSharpCodeProvider : CodeDomProvider
-	{
-	}
+    internal class CSharpCodeProvider : CodeDomProvider
+    {
+    }
 
-	class CodeGenerator
-	{
+    class CodeGenerator
+    {
         public static bool IsValidLanguageIndependentIdentifier(string value)
         {
             return IsValidTypeNameOrIdentifier(value, false);
@@ -108,7 +108,7 @@ namespace Microsoft.CSharp
             }
             return false;
         }        
-	}
+    }
 }
 
 #endif

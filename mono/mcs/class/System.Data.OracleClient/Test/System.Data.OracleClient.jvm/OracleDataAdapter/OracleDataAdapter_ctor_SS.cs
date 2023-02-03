@@ -37,51 +37,51 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataAdapter_ctor_SS : GHTBase
 {
-	public static void Main()
-	{
-		OracleDataAdapter_ctor_SS tc = new OracleDataAdapter_ctor_SS();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OracleDataAdapter_ctor_SS");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    public static void Main()
+    {
+        OracleDataAdapter_ctor_SS tc = new OracleDataAdapter_ctor_SS();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OracleDataAdapter_ctor_SS");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
-		OracleDataAdapter oleDBda = new OracleDataAdapter("Select * from Customers",
-								MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		try
-		{
-			BeginCase("Ctor");
-			Compare(oleDBda != null,true );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-	}
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
+        OracleDataAdapter oleDBda = new OracleDataAdapter("Select * from Customers",
+                                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        try
+        {
+            BeginCase("Ctor");
+            Compare(oleDBda != null,true );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+    }
 }
 }

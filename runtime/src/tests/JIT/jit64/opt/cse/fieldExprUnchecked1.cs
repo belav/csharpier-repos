@@ -46,15 +46,15 @@ namespace CseTest
             v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = v9 = v10 = v11 = v12 = v13 = v14 = v15 = v16 = v17 = v18 = v19 = v20 = v21 = v22 = v23 = v24 = 0;
 
 #if LOOP         
-			
-			do {
+            
+            do {
 #endif
 #if TRY
-				try {
+                try {
 #endif
 #if LOOP  
-					do {
-						for (int i = 0; i < 10; i++) {
+                    do {
+                        for (int i = 0; i < 10; i++) {
 #endif
 
             int stage = 0;
@@ -421,16 +421,16 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP                  
-			s.d = return_int(false, 56);
-						}
-					} while (v24 == 0);
+            s.d = return_int(false, 56);
+                        }
+                    } while (v24 == 0);
 #endif
 #if TRY
-				} finally {
-				}
+                } finally {
+                }
 #endif
 #if LOOP                  
-			} while (ret== 1000);
+            } while (ret== 1000);
 #endif
 
 

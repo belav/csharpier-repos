@@ -33,23 +33,23 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class DeleteRequest : DirectoryRequest
-	{
-		public DeleteRequest ()
-		{
-		}
+    public class DeleteRequest : DirectoryRequest
+    {
+        public DeleteRequest ()
+        {
+        }
 
-		public DeleteRequest (string distinguishedName)
-		{
-			DistinguishedName = distinguishedName;
-		}
+        public DeleteRequest (string distinguishedName)
+        {
+            DistinguishedName = distinguishedName;
+        }
 
-		public string DistinguishedName { get; set; }
+        public string DistinguishedName { get; set; }
 
-		[MonoTODO]
-		protected override XmlElement ToXmlNode (XmlDocument doc)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override XmlElement ToXmlNode (XmlDocument doc)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

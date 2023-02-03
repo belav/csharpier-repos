@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.IntegrationTests.CustomMapFrom;
+namespace AutoMapper.IntegrationTests.CustomMapFrom;
 
 public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseInitializer>
 {

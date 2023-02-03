@@ -40,114 +40,114 @@ using System.Web.UI;
 
 namespace System.Web.Compilation
 {
-	abstract class SimpleBuildProvider : GenericBuildProvider <SimpleWebHandlerParser>
-	{
-		bool _parsed;
-		bool _needLoadFromBin;
-		
-		protected override SimpleWebHandlerParser Parse ()
-		{
-			SimpleWebHandlerParser parser = Parser;
-			
-			if (_parsed)
-				return parser;
-			
-			_parsed = true;
-			return parser;
-		}
+    abstract class SimpleBuildProvider : GenericBuildProvider <SimpleWebHandlerParser>
+    {
+        bool _parsed;
+        bool _needLoadFromBin;
+        
+        protected override SimpleWebHandlerParser Parse ()
+        {
+            SimpleWebHandlerParser parser = Parser;
+            
+            if (_parsed)
+                return parser;
+            
+            _parsed = true;
+            return parser;
+        }
 
-		protected override void GenerateCode (AssemblyBuilder assemblyBuilder, SimpleWebHandlerParser parser, BaseCompiler compiler)
-		{
-			if (assemblyBuilder == null || parser == null)
-				return;
-			
-			string programCode = parser.Program.Trim ();
-			if (String.IsNullOrEmpty (programCode)) {
-				_needLoadFromBin = true;
-				return;
-			}
-			
-			_needLoadFromBin = false;
-			using (TextWriter writer = assemblyBuilder.CreateCodeFile (this))
-				writer.WriteLine (programCode);
-		}
+        protected override void GenerateCode (AssemblyBuilder assemblyBuilder, SimpleWebHandlerParser parser, BaseCompiler compiler)
+        {
+            if (assemblyBuilder == null || parser == null)
+                return;
+            
+            string programCode = parser.Program.Trim ();
+            if (String.IsNullOrEmpty (programCode)) {
+                _needLoadFromBin = true;
+                return;
+            }
+            
+            _needLoadFromBin = false;
+            using (TextWriter writer = assemblyBuilder.CreateCodeFile (this))
+                writer.WriteLine (programCode);
+        }
 
-		protected override Type LoadTypeFromBin (BaseCompiler compiler, SimpleWebHandlerParser parser)
-		{
-			return parser.GetTypeFromBin (parser.ClassName);
-		}
-		
-		protected override string GetClassType (BaseCompiler compiler, SimpleWebHandlerParser parser)
-		{
-			if (parser != null)
-				return parser.ClassName;
+        protected override Type LoadTypeFromBin (BaseCompiler compiler, SimpleWebHandlerParser parser)
+        {
+            return parser.GetTypeFromBin (parser.ClassName);
+        }
+        
+        protected override string GetClassType (BaseCompiler compiler, SimpleWebHandlerParser parser)
+        {
+            if (parser != null)
+                return parser.ClassName;
 
-			return null;
-		}
-		
-		protected override ICollection GetParserDependencies (SimpleWebHandlerParser parser)
-		{
-			if (parser != null)
-				return parser.Dependencies;
+            return null;
+        }
+        
+        protected override ICollection GetParserDependencies (SimpleWebHandlerParser parser)
+        {
+            if (parser != null)
+                return parser.Dependencies;
 
-			return null;
-		}
-		
-		protected override string GetParserLanguage (SimpleWebHandlerParser parser)
-		{
-			if (parser != null)
-				return parser.Language;
+            return null;
+        }
+        
+        protected override string GetParserLanguage (SimpleWebHandlerParser parser)
+        {
+            if (parser != null)
+                return parser.Language;
 
-			return null;
-		}
-		
-		protected override string GetCodeBehindSource (SimpleWebHandlerParser parser)
-		{
-			return null;
-		}
-		
-		protected override AspGenerator CreateAspGenerator (SimpleWebHandlerParser parser)
-		{
-			return null;
-		}
+            return null;
+        }
+        
+        protected override string GetCodeBehindSource (SimpleWebHandlerParser parser)
+        {
+            return null;
+        }
+        
+        protected override AspGenerator CreateAspGenerator (SimpleWebHandlerParser parser)
+        {
+            return null;
+        }
 
-		protected override BaseCompiler CreateCompiler (SimpleWebHandlerParser parser)
-		{
-			return new WebServiceCompiler (parser);
-		}
+        protected override BaseCompiler CreateCompiler (SimpleWebHandlerParser parser)
+        {
+            return new WebServiceCompiler (parser);
+        }
 
-		protected override List <string> GetReferencedAssemblies (SimpleWebHandlerParser parser)
-		{
-			if (parser == null)
-				return null;
-			
-			ArrayList al = parser.Assemblies;
-			if (al == null || al.Count == 0)
-				return null;
+        protected override List <string> GetReferencedAssemblies (SimpleWebHandlerParser parser)
+        {
+            if (parser == null)
+                return null;
+            
+            ArrayList al = parser.Assemblies;
+            if (al == null || al.Count == 0)
+                return null;
 
-			List <string> ret = new List <string> ();
-			string loc;
-			
-			foreach (object o in al) {
-				loc = o as string;
-				if (loc == null)
-					continue;
+            List <string> ret = new List <string> ();
+            string loc;
+            
+            foreach (object o in al) {
+                loc = o as string;
+                if (loc == null)
+                    continue;
 
-				if (ret.Contains (loc))
-					continue;
+                if (ret.Contains (loc))
+                    continue;
 
-				ret.Add (loc);
-			}
+                ret.Add (loc);
+            }
 
-			return ret;
-		}
-		
-		protected override bool NeedsConstructType {
-			get { return false; }
-		}
+            return ret;
+        }
+        
+        protected override bool NeedsConstructType {
+            get { return false; }
+        }
 
-		protected override bool NeedsLoadFromBin {
-			get { return _needLoadFromBin; }
-		}
-	}
+        protected override bool NeedsLoadFromBin {
+            get { return _needLoadFromBin; }
+        }
+    }
 }

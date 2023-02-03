@@ -1,4 +1,4 @@
-﻿namespace Microsoft.AspNetCore.Mvc.Analyzers
+namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
     [Controller]
     public class HasAttribute_ReturnsTrueIfBaseTypeHasAttributeBase { }

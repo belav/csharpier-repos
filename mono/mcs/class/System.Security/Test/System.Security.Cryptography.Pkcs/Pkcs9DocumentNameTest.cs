@@ -2,7 +2,7 @@
 // Pkcs9DocumentNameTest.cs - NUnit tests for Pkcs9DocumentName
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -37,78 +37,78 @@ using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs {
 
-	[TestFixture]
-	public class Pkcs9DocumentNameTest {
+    [TestFixture]
+    public class Pkcs9DocumentNameTest {
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			Pkcs9DocumentName dn = new Pkcs9DocumentName ();
-			Assert.IsNull (dn.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual ("1.3.6.1.4.1.311.88.2.1", dn.Oid.Value, "Oid.Value");
-			Assert.IsNull (dn.RawData, "RawData");
-			Assert.AreEqual (String.Empty, dn.Format (true), "Format(true)");
-			Assert.AreEqual (String.Empty, dn.Format (false), "Format(false)");
-		}
+        [Test]
+        public void Constructor_Empty ()
+        {
+            Pkcs9DocumentName dn = new Pkcs9DocumentName ();
+            Assert.IsNull (dn.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual ("1.3.6.1.4.1.311.88.2.1", dn.Oid.Value, "Oid.Value");
+            Assert.IsNull (dn.RawData, "RawData");
+            Assert.AreEqual (String.Empty, dn.Format (true), "Format(true)");
+            Assert.AreEqual (String.Empty, dn.Format (false), "Format(false)");
+        }
 
-		[Test]
-		// FIXME: throws a NullReferenceException in beta 1 - still true in Dec CTP
-		[Category ("NotDotNet")] // MS throws [ExpectedException (typeof (NullReferenceException))]
-		public void Constructor_Empty_MessageDigest ()
-		{
-			Pkcs9DocumentName dn = new Pkcs9DocumentName ();
-			Assert.IsNull (dn.DocumentName, "DocumentName");
-		}
+        [Test]
+        // FIXME: throws a NullReferenceException in beta 1 - still true in Dec CTP
+        [Category ("NotDotNet")] // MS throws [ExpectedException (typeof (NullReferenceException))]
+        public void Constructor_Empty_MessageDigest ()
+        {
+            Pkcs9DocumentName dn = new Pkcs9DocumentName ();
+            Assert.IsNull (dn.DocumentName, "DocumentName");
+        }
 
-		[Test]
-		public void Constructor_String () 
-		{
-			Pkcs9DocumentName dn = new Pkcs9DocumentName ("mono");
-			Assert.IsNull (dn.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual ("1.3.6.1.4.1.311.88.2.1", dn.Oid.Value, "Oid.Value");
-			Assert.AreEqual ("mono", dn.DocumentName, "DocumentName");
-			Assert.AreEqual (12, dn.RawData.Length, "RawData.Length");
-			Assert.AreEqual ("04-0A-6D-00-6F-00-6E-00-6F-00-00-00", BitConverter.ToString (dn.RawData), "RawData");
-			Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (true), "Format(true)");
-			Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (false), "Format(false)");
-		}
+        [Test]
+        public void Constructor_String () 
+        {
+            Pkcs9DocumentName dn = new Pkcs9DocumentName ("mono");
+            Assert.IsNull (dn.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual ("1.3.6.1.4.1.311.88.2.1", dn.Oid.Value, "Oid.Value");
+            Assert.AreEqual ("mono", dn.DocumentName, "DocumentName");
+            Assert.AreEqual (12, dn.RawData.Length, "RawData.Length");
+            Assert.AreEqual ("04-0A-6D-00-6F-00-6E-00-6F-00-00-00", BitConverter.ToString (dn.RawData), "RawData");
+            Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (true), "Format(true)");
+            Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (false), "Format(false)");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor_StringNull ()
-		{
-			string name = null;
-			Pkcs9DocumentName dn = new Pkcs9DocumentName (name);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Constructor_StringNull ()
+        {
+            string name = null;
+            Pkcs9DocumentName dn = new Pkcs9DocumentName (name);
+        }
 
-		[Test]
-		public void Constructor_Array ()
-		{
-			byte[] name = { 0x04, 0x0A, 0x6D, 0x00, 0x6F, 0x00, 0x6E, 0x00, 0x6F, 0x00, 0x00, 0x00 };
-			Pkcs9DocumentName dn = new Pkcs9DocumentName (name);
-			Assert.AreEqual ("1.3.6.1.4.1.311.88.2.1", dn.Oid.Value, "Oid.Value");
-			Assert.IsNull (dn.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual ("mono", dn.DocumentName, "DocumentName");
-			Assert.AreEqual (12, dn.RawData.Length, "RawData.Length");
-			Assert.AreEqual ("04-0A-6D-00-6F-00-6E-00-6F-00-00-00", BitConverter.ToString (dn.RawData), "RawData");
-			Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (true), "Format(true)");
-			Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (false), "Format(false)");
-		}
+        [Test]
+        public void Constructor_Array ()
+        {
+            byte[] name = { 0x04, 0x0A, 0x6D, 0x00, 0x6F, 0x00, 0x6E, 0x00, 0x6F, 0x00, 0x00, 0x00 };
+            Pkcs9DocumentName dn = new Pkcs9DocumentName (name);
+            Assert.AreEqual ("1.3.6.1.4.1.311.88.2.1", dn.Oid.Value, "Oid.Value");
+            Assert.IsNull (dn.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual ("mono", dn.DocumentName, "DocumentName");
+            Assert.AreEqual (12, dn.RawData.Length, "RawData.Length");
+            Assert.AreEqual ("04-0A-6D-00-6F-00-6E-00-6F-00-00-00", BitConverter.ToString (dn.RawData), "RawData");
+            Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (true), "Format(true)");
+            Assert.AreEqual ("04 0a 6d 00 6f 00 6e 00 6f 00 00 00", dn.Format (false), "Format(false)");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor_ArrayNull ()
-		{
-			byte[] name = null;
-			Pkcs9DocumentName dn = new Pkcs9DocumentName (name);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Constructor_ArrayNull ()
+        {
+            byte[] name = null;
+            Pkcs9DocumentName dn = new Pkcs9DocumentName (name);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CopyFrom_Null ()
-		{
-			new Pkcs9DocumentName ().CopyFrom (null);
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void CopyFrom_Null ()
+        {
+            new Pkcs9DocumentName ().CopyFrom (null);
+        }
+    }
 }
 

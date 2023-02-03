@@ -31,7 +31,7 @@ namespace MS.Internal.Xml.XPath {
                 throw XPathException.Create(Res.Xp_ExprExpected, string.Empty);
             }
             this.xpathExpr = xpathExpr;
-			NextChar();
+            NextChar();
             NextLex();
         }
 
@@ -42,11 +42,11 @@ namespace MS.Internal.Xml.XPath {
         private bool NextChar() {
             Debug.Assert(0 <= xpathExprIndex && xpathExprIndex <= xpathExpr.Length);
             if (xpathExprIndex < xpathExpr.Length) {
-				currentChar = xpathExpr[xpathExprIndex ++]; 
-				return true;
-			}
-			else  {
-				currentChar = '\0';
+                currentChar = xpathExpr[xpathExprIndex ++]; 
+                return true;
+            }
+            else  {
+                currentChar = '\0';
                 return false;
             }
         }
@@ -198,7 +198,7 @@ namespace MS.Internal.Xml.XPath {
                         else {                          // "foo:*", "foo:bar" or "foo: "
                             this.prefix = this.name;
                             if (this.CurerntChar == '*') {
-	                            NextChar();
+                                NextChar();
                                 this.name = "*";
                             }
                             else if (xmlCharType.IsStartNCNameSingleChar(this.CurerntChar) 
@@ -234,7 +234,7 @@ namespace MS.Internal.Xml.XPath {
                 else {
                     throw XPathException.Create(Res.Xp_InvalidToken, SourceText);
                 }
-		        break;
+                break;
             }
             return true;
         }
@@ -242,41 +242,41 @@ namespace MS.Internal.Xml.XPath {
         private double ScanNumber() {
             Debug.Assert(this.CurerntChar == '.' || XmlCharType.IsDigit(this.CurerntChar));
             int start = xpathExprIndex - 1;
-			int len = 0;
-			while (XmlCharType.IsDigit(this.CurerntChar)) {
-				NextChar(); len ++;
-			}
-            if (this.CurerntChar == '.') {
-				NextChar(); len ++;
-				while (XmlCharType.IsDigit(this.CurerntChar)) {
-					NextChar(); len ++;
-				}
+            int len = 0;
+            while (XmlCharType.IsDigit(this.CurerntChar)) {
+                NextChar(); len ++;
             }
-			return XmlConvert.ToXPathDouble(this.xpathExpr.Substring(start, len));
+            if (this.CurerntChar == '.') {
+                NextChar(); len ++;
+                while (XmlCharType.IsDigit(this.CurerntChar)) {
+                    NextChar(); len ++;
+                }
+            }
+            return XmlConvert.ToXPathDouble(this.xpathExpr.Substring(start, len));
         }
 
         private double ScanFraction() {
             Debug.Assert(XmlCharType.IsDigit(this.CurerntChar));
             int start = xpathExprIndex - 2;
             Debug.Assert(0 <= start && this.xpathExpr[start] == '.');
-			int len = 1; // '.'
-			while (XmlCharType.IsDigit(this.CurerntChar)) {
-				NextChar(); len ++;
-			}
-			return XmlConvert.ToXPathDouble(this.xpathExpr.Substring(start, len));
+            int len = 1; // '.'
+            while (XmlCharType.IsDigit(this.CurerntChar)) {
+                NextChar(); len ++;
+            }
+            return XmlConvert.ToXPathDouble(this.xpathExpr.Substring(start, len));
         }
 
         private string ScanString() {
             char endChar = this.CurerntChar;
             NextChar();
             int start = xpathExprIndex - 1;
-			int len = 0;
+            int len = 0;
             while(this.CurerntChar != endChar) {
-				if (! NextChar()) {
-	                throw XPathException.Create(Res.Xp_UnclosedString);
-				}
-				len ++;
-			}
+                if (! NextChar()) {
+                    throw XPathException.Create(Res.Xp_UnclosedString);
+                }
+                len ++;
+            }
             Debug.Assert(this.CurerntChar == endChar);
             NextChar();
             return this.xpathExpr.Substring(start, len);
@@ -289,11 +289,11 @@ namespace MS.Internal.Xml.XPath {
 #endif
                 );
             int start = xpathExprIndex - 1;
-			int len = 0;
+            int len = 0;
 
             for (;;) {
                 if (xmlCharType.IsNCNameSingleChar(this.CurerntChar)) {
-				    NextChar(); 
+                    NextChar(); 
                     len ++;
                 }
 #if XML10_FIFTH_EDITION
@@ -306,7 +306,7 @@ namespace MS.Internal.Xml.XPath {
                 else {
                     break;
                 }
-			}
+            }
             return this.xpathExpr.Substring(start, len);
         }
 

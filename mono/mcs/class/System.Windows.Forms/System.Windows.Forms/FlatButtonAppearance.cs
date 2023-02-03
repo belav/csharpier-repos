@@ -34,132 +34,132 @@ using System.Globalization;
 
 namespace System.Windows.Forms
 {
-	[TypeConverter (typeof (FlatButtonAppearanceConverter))]
-	public class FlatButtonAppearance
-	{
-		private Color borderColor = Color.Empty;
-		private int borderSize = 1;
-		private Color checkedBackColor = Color.Empty;
-		private Color mouseDownBackColor = Color.Empty;
-		private Color mouseOverBackColor = Color.Empty;
-		private ButtonBase owner = null;
+    [TypeConverter (typeof (FlatButtonAppearanceConverter))]
+    public class FlatButtonAppearance
+    {
+        private Color borderColor = Color.Empty;
+        private int borderSize = 1;
+        private Color checkedBackColor = Color.Empty;
+        private Color mouseDownBackColor = Color.Empty;
+        private Color mouseOverBackColor = Color.Empty;
+        private ButtonBase owner = null;
 
-		internal FlatButtonAppearance (ButtonBase owner)
-		{
-			this.owner = owner;
-		}
+        internal FlatButtonAppearance (ButtonBase owner)
+        {
+            this.owner = owner;
+        }
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public Color BorderColor
-		{
-			get { return borderColor; }
-			set {
-				if(borderColor == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public Color BorderColor
+        {
+            get { return borderColor; }
+            set {
+                if(borderColor == value)
+                    return;
 
-				if (value == Color.Transparent)
-					throw new NotSupportedException ("Cannot have a Transparent border.");
-					
-				borderColor = value;
-				
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+                if (value == Color.Transparent)
+                    throw new NotSupportedException ("Cannot have a Transparent border.");
+                    
+                borderColor = value;
+                
+                if(owner != null)
+                    owner.Invalidate ();
+            }
+        }
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(1)]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public int BorderSize
-		{
-			get { return borderSize; }
-			set {
-				if(borderSize == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(1)]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public int BorderSize
+        {
+            get { return borderSize; }
+            set {
+                if(borderSize == value)
+                    return;
 
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ("value", string.Format ("'{0}' is not a valid value for 'BorderSize'. 'BorderSize' must be greater or equal than {1}.", value, 0));
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException ("value", string.Format ("'{0}' is not a valid value for 'BorderSize'. 'BorderSize' must be greater or equal than {1}.", value, 0));
 
-				borderSize = value;
+                borderSize = value;
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+                if(owner != null)
+                    owner.Invalidate ();
+            }
+        }
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public Color CheckedBackColor 
-		{
-			get { return checkedBackColor; }
-			set {
-				if(checkedBackColor == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public Color CheckedBackColor 
+        {
+            get { return checkedBackColor; }
+            set {
+                if(checkedBackColor == value)
+                    return;
 
-				checkedBackColor = value;
+                checkedBackColor = value;
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+                if(owner != null)
+                    owner.Invalidate ();
+            }
+        }
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[Browsable(true)]
-		[NotifyParentProperty(true)]
-		public Color MouseDownBackColor
-		{
-			get { return mouseDownBackColor; }
-			set {
-				if(mouseDownBackColor == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        public Color MouseDownBackColor
+        {
+            get { return mouseDownBackColor; }
+            set {
+                if(mouseDownBackColor == value)
+                    return;
 
-				mouseDownBackColor = value;
+                mouseDownBackColor = value;
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
+                if(owner != null)
+                    owner.Invalidate ();
+            }
+        }
 
-		[EditorBrowsable(EditorBrowsableState.Always)]
-		[DefaultValue(typeof(Color), "")]
-		[NotifyParentProperty(true)]
-		[Browsable(true)]
-		public Color MouseOverBackColor
-		{
-			get { return mouseOverBackColor; }
-			set {
-				if(mouseOverBackColor == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DefaultValue(typeof(Color), "")]
+        [NotifyParentProperty(true)]
+        [Browsable(true)]
+        public Color MouseOverBackColor
+        {
+            get { return mouseOverBackColor; }
+            set {
+                if(mouseOverBackColor == value)
+                    return;
 
-				mouseOverBackColor = value;
+                mouseOverBackColor = value;
 
-				if(owner != null)
-					owner.Invalidate ();
-			}
-		}
-	}
-	
-	internal class FlatButtonAppearanceConverter : ExpandableObjectConverter
-	{
-		public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
-		{
-			if (destinationType == typeof (string))
-			    return String.Empty;
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
+                if(owner != null)
+                    owner.Invalidate ();
+            }
+        }
+    }
+    
+    internal class FlatButtonAppearanceConverter : ExpandableObjectConverter
+    {
+        public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof (string))
+                return String.Empty;
+            return base.ConvertTo (context, culture, value, destinationType);
+        }
 
-		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-		{
-			if (destinationType == typeof (string))
-				return true;
-			return base.CanConvertTo (context, destinationType);
-		}
-	}
+        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof (string))
+                return true;
+            return base.CanConvertTo (context, destinationType);
+        }
+    }
 }

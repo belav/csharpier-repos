@@ -40,125 +40,125 @@ using NUnit.Framework;
 
 namespace StandAloneTests.OutputCacheProvider
 {
-	[TestCase ("OutputCacheProvider 01", "OutputCacheProvider - custom provider test")]
-	public sealed class OutputCacheProvider_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get {
-				return Path.Combine (
-					Consts.BasePhysicalDir,
-					Path.Combine ("OutputCacheProvider", "OutputCacheProviderTest_01")
-				);
-			}
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("OutputCacheProvider 01", "OutputCacheProvider - custom provider test")]
+    public sealed class OutputCacheProvider_01 : ITestCase
+    {
+        public string PhysicalPath {
+            get {
+                return Path.Combine (
+                    Consts.BasePhysicalDir,
+                    Path.Combine ("OutputCacheProvider", "OutputCacheProviderTest_01")
+                );
+            }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-			
-			return true;
-		}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
+            
+            return true;
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<pre id=""output"">Default provider name: TestInMemoryProvider
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"<pre id=""output"">Default provider name: TestInMemoryProvider
 Null context: TestInMemoryProvider
 Default context: TestInMemoryProvider
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+            
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 
-	[TestCase ("OutputCacheProvider 02", "OutputCacheProvider - missing provider test")]
-	public sealed class OutputCacheProvider_02 : ITestCase
-	{
-		public string PhysicalPath {
-			get {
-				return Path.Combine (
-					Consts.BasePhysicalDir,
-					Path.Combine ("OutputCacheProvider", "OutputCacheProviderTest_02")
-				);
-			}
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("OutputCacheProvider 02", "OutputCacheProvider - missing provider test")]
+    public sealed class OutputCacheProvider_02 : ITestCase
+    {
+        public string PhysicalPath {
+            get {
+                return Path.Combine (
+                    Consts.BasePhysicalDir,
+                    Path.Combine ("OutputCacheProvider", "OutputCacheProviderTest_02")
+                );
+            }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-			
-			return true;
-		}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
+            
+            return true;
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			Assert.IsTrue (Helpers.HasException (result, typeof (ConfigurationErrorsException)), "#A1");
-		}
-	}
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            Assert.IsTrue (Helpers.HasException (result, typeof (ConfigurationErrorsException)), "#A1");
+        }
+    }
 
-	[TestCase ("OutputCacheProvider 03", "OutputCacheProvider - per request provider test")]
-	public sealed class OutputCacheProvider_03 : ITestCase
-	{
-		public string PhysicalPath {
-			get {
-				return Path.Combine (
-					Consts.BasePhysicalDir,
-					Path.Combine ("OutputCacheProvider", "OutputCacheProviderTest_03")
-				);
-			}
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("OutputCacheProvider 03", "OutputCacheProvider - per request provider test")]
+    public sealed class OutputCacheProvider_03 : ITestCase
+    {
+        public string PhysicalPath {
+            get {
+                return Path.Combine (
+                    Consts.BasePhysicalDir,
+                    Path.Combine ("OutputCacheProvider", "OutputCacheProviderTest_03")
+                );
+            }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?ocp=InMemory", Default_InMemory_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?ocp=AnotherInMemory", Default_AnotherInMemory_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?ocp=invalid", Default_Invalid_Aspx));
-			
-			return true;
-		}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
+            runItems.Add (new TestRunItem ("/Default.aspx?ocp=InMemory", Default_InMemory_Aspx));
+            runItems.Add (new TestRunItem ("/Default.aspx?ocp=AnotherInMemory", Default_AnotherInMemory_Aspx));
+            runItems.Add (new TestRunItem ("/Default.aspx?ocp=invalid", Default_Invalid_Aspx));
+            
+            return true;
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<pre id=""output"">Default provider name: AspNetInternalProvider
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"<pre id=""output"">Default provider name: AspNetInternalProvider
 Default context: AspNetInternalProvider
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
+            
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
 
-		void Default_InMemory_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<pre id=""output"">Default provider name: AspNetInternalProvider
+        void Default_InMemory_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"<pre id=""output"">Default provider name: AspNetInternalProvider
 Default context: TestInMemoryProvider
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
+            
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
 
-		void Default_AnotherInMemory_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<pre id=""output"">Default provider name: AspNetInternalProvider
+        void Default_AnotherInMemory_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"<pre id=""output"">Default provider name: AspNetInternalProvider
 Default context: TestAnotherInMemoryProvider
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
+            
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
 
-		void Default_Invalid_Aspx (string result, TestRunItem runItem)
-		{
-			Assert.IsTrue (Helpers.HasException (result, typeof (ProviderException)), "#A1");
-		}
-	}
+        void Default_Invalid_Aspx (string result, TestRunItem runItem)
+        {
+            Assert.IsTrue (Helpers.HasException (result, typeof (ProviderException)), "#A1");
+        }
+    }
 }

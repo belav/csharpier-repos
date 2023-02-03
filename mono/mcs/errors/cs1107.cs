@@ -3,7 +3,7 @@
 
 static class S
 {
-	static void Foo (ref ref ulong u)
-	{
-	}
+    static void Foo (ref ref ulong u)
+    {
+    }
 }

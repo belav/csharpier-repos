@@ -22,14 +22,14 @@ class test
 
 class reflect
 {
-	public static void Main (string [] args)
-	{
-		Hashtable ht = new Hashtable ();
-		Assembly asm = Assembly.GetAssembly (typeof (test));
-		foreach (Type t in asm.GetTypes ()) {
-			ht.Clear ();
-			foreach (FieldInfo fi in t.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
-				ht.Add (fi.Name, fi);
-		}
-	}
+    public static void Main (string [] args)
+    {
+        Hashtable ht = new Hashtable ();
+        Assembly asm = Assembly.GetAssembly (typeof (test));
+        foreach (Type t in asm.GetTypes ()) {
+            ht.Clear ();
+            foreach (FieldInfo fi in t.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                ht.Add (fi.Name, fi);
+        }
+    }
 }

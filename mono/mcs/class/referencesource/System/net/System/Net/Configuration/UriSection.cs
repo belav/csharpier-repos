@@ -96,7 +96,7 @@ namespace System.Configuration
                 {
                     schemeSetting = new SchemeSettingInternal(element.Name, element.GenericUriParserOptions);
                     this.schemeSettings.Add(schemeSetting.Name, schemeSetting);
-    	        }
+                }
             }
         }
 

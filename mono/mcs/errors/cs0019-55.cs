@@ -3,26 +3,26 @@
 
 class A
 {
-	public static bool operator == (A a, int b)
-	{
-		return false;
-	}
-	
-	public static bool operator != (A a, int b)
-	{
-		return false;
-	}
+    public static bool operator == (A a, int b)
+    {
+        return false;
+    }
+    
+    public static bool operator != (A a, int b)
+    {
+        return false;
+    }
 }
 
 class C
 {
-	public static void Main ()
-	{
-		A a = new A ();
-		object b = a == Id;
-	}
-	
-	static int? Id {
-		get { return 1; }
-	}
+    public static void Main ()
+    {
+        A a = new A ();
+        object b = a == Id;
+    }
+    
+    static int? Id {
+        get { return 1; }
+    }
 }

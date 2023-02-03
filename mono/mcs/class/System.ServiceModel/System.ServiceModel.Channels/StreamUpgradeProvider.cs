@@ -31,34 +31,34 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class StreamUpgradeProvider : CommunicationObject
-	{
-		protected StreamUpgradeProvider ()
-			: this (DefaultCommunicationTimeouts.Instance)
-		{
-		}
+    public abstract class StreamUpgradeProvider : CommunicationObject
+    {
+        protected StreamUpgradeProvider ()
+            : this (DefaultCommunicationTimeouts.Instance)
+        {
+        }
 
-		protected StreamUpgradeProvider (IDefaultCommunicationTimeouts timeouts)
-		{
-			if (timeouts == null)
-				throw new ArgumentNullException ("timeouts");
-			default_open_timeout = timeouts.OpenTimeout;
-			default_close_timeout = timeouts.CloseTimeout;
-		}
+        protected StreamUpgradeProvider (IDefaultCommunicationTimeouts timeouts)
+        {
+            if (timeouts == null)
+                throw new ArgumentNullException ("timeouts");
+            default_open_timeout = timeouts.OpenTimeout;
+            default_close_timeout = timeouts.CloseTimeout;
+        }
 
-		TimeSpan default_open_timeout, default_close_timeout;
+        TimeSpan default_open_timeout, default_close_timeout;
 
-		protected internal override TimeSpan DefaultCloseTimeout {
-			get { return default_close_timeout; }
-		}
+        protected internal override TimeSpan DefaultCloseTimeout {
+            get { return default_close_timeout; }
+        }
 
-		protected internal override TimeSpan DefaultOpenTimeout {
-			get { return default_open_timeout; }
-		}
+        protected internal override TimeSpan DefaultOpenTimeout {
+            get { return default_open_timeout; }
+        }
 
-		public abstract StreamUpgradeAcceptor CreateUpgradeAcceptor ();
+        public abstract StreamUpgradeAcceptor CreateUpgradeAcceptor ();
 
-		public abstract StreamUpgradeInitiator CreateUpgradeInitiator (
-			EndpointAddress remoteAddress, Uri via);
-	}
+        public abstract StreamUpgradeInitiator CreateUpgradeInitiator (
+            EndpointAddress remoteAddress, Uri via);
+    }
 }

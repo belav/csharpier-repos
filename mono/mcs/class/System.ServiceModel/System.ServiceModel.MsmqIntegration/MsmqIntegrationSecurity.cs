@@ -31,18 +31,18 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.MsmqIntegration
 {
-	public sealed class MsmqIntegrationSecurity
-	{
-		MsmqIntegrationSecurityMode mode;
-		MsmqTransportSecurity transport = new MsmqTransportSecurity ();
+    public sealed class MsmqIntegrationSecurity
+    {
+        MsmqIntegrationSecurityMode mode;
+        MsmqTransportSecurity transport = new MsmqTransportSecurity ();
 
-		public MsmqIntegrationSecurityMode Mode {
-			get { return mode; }
-			set { mode = value; }
-		}
+        public MsmqIntegrationSecurityMode Mode {
+            get { return mode; }
+            set { mode = value; }
+        }
 
-		public MsmqTransportSecurity Transport {
-			get { return transport; }
-		}
-	}
+        public MsmqTransportSecurity Transport {
+            get { return transport; }
+        }
+    }
 }

@@ -32,7 +32,7 @@ public struct WrapBar {
     [FieldOffset(1)]    public int i; //partial overlap
 [FieldOffset(4)]    public Bar o; 
 }
-	
+    
 [ StructLayout( LayoutKind.Explicit )] public struct MyUnion1 {
     [ FieldOffset( 0 )] public int i;
     [ FieldOffset( 0 )] public WrapBar o;

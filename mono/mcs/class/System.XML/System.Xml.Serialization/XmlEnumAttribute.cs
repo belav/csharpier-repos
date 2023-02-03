@@ -32,33 +32,33 @@ using System;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlEnumAttribute.
-	/// </summary>\
-	[AttributeUsage(AttributeTargets.Field)]
-	public class XmlEnumAttribute : Attribute
-	{
-		private string name;
+    /// <summary>
+    /// Summary description for XmlEnumAttribute.
+    /// </summary>\
+    [AttributeUsage(AttributeTargets.Field)]
+    public class XmlEnumAttribute : Attribute
+    {
+        private string name;
 
-		public XmlEnumAttribute ()
-		{
-		}
+        public XmlEnumAttribute ()
+        {
+        }
 
-		public XmlEnumAttribute (string name) 
-		{
-			this.name = name;
-		}
+        public XmlEnumAttribute (string name) 
+        {
+            this.name = name;
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
 
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("XENA ");
-			KeyHelper.AddField (sb, 1, name);
-			sb.Append ('|');
-		}
-	}
+        internal void AddKeyHash (System.Text.StringBuilder sb)
+        {
+            sb.Append ("XENA ");
+            KeyHelper.AddField (sb, 1, name);
+            sb.Append ('|');
+        }
+    }
 }

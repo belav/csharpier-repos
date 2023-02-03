@@ -2,7 +2,7 @@
 // System.Runtime.InteropServices.ComTypes.ADVF.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -32,15 +32,15 @@ using System;
 
 namespace System.Runtime.InteropServices.ComTypes
 {
-	[FlagsAttribute]
-	public enum ADVF
-	{
-		ADVF_NODATA = 1,
-		ADVF_PRIMEFIRST = 2,
-		ADVF_ONLYONCE = 4,
-		ADVFCACHE_NOHANDLER = 8,
-		ADVFCACHE_FORCEBUILTIN = 16,
-		ADVFCACHE_ONSAVE = 32,
-		ADVF_DATAONSTOP = 64,
-	}
+    [FlagsAttribute]
+    public enum ADVF
+    {
+        ADVF_NODATA = 1,
+        ADVF_PRIMEFIRST = 2,
+        ADVF_ONLYONCE = 4,
+        ADVFCACHE_NOHANDLER = 8,
+        ADVFCACHE_FORCEBUILTIN = 16,
+        ADVFCACHE_ONSAVE = 32,
+        ADVF_DATAONSTOP = 64,
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DataControlFieldCell.cs
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //  Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc. (http://www.novell.com)
@@ -32,22 +32,22 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public class DataControlFieldCell : TableCell
-	{
-		DataControlField containerField;
-		
-		public DataControlFieldCell (DataControlField containingField) : this (HtmlTextWriterTag.Td, containingField)
-		{		
-		}
-		
-		protected DataControlFieldCell (HtmlTextWriterTag tagKey, DataControlField containingField) : base (tagKey)
-		{
-			this.containerField = containingField;
-		}
+    public class DataControlFieldCell : TableCell
+    {
+        DataControlField containerField;
+        
+        public DataControlFieldCell (DataControlField containingField) : this (HtmlTextWriterTag.Td, containingField)
+        {        
+        }
+        
+        protected DataControlFieldCell (HtmlTextWriterTag tagKey, DataControlField containingField) : base (tagKey)
+        {
+            this.containerField = containingField;
+        }
 
-		public DataControlField ContainingField {
-			get { return containerField; }
-		}
-	}
+        public DataControlField ContainingField {
+            get { return containerField; }
+        }
+    }
 }
 

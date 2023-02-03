@@ -35,72 +35,72 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-	public class HtmlTextArea_Name
-		: GHTBaseWeb 
-	{
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected GHTWebControls.GHTSubTest GHTSubTest3;
-		protected GHTWebControls.GHTSubTest GHTSubTest4;
-		protected GHTWebControls.GHTSubTest GHTSubTest5;
-		protected GHTWebControls.GHTSubTest GHTSubTest6;
-		protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA1;
-		protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA2;
-		protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA3;
-		protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA4;
-		protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA5;
-		protected System.Web.UI.HtmlControls.HtmlTextArea Textarea6;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class HtmlTextArea_Name
+        : GHTBaseWeb 
+    {
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected GHTWebControls.GHTSubTest GHTSubTest3;
+        protected GHTWebControls.GHTSubTest GHTSubTest4;
+        protected GHTWebControls.GHTSubTest GHTSubTest5;
+        protected GHTWebControls.GHTSubTest GHTSubTest6;
+        protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA1;
+        protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA2;
+        protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA3;
+        protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA4;
+        protected System.Web.UI.HtmlControls.HtmlTextArea TEXTAREA5;
+        protected System.Web.UI.HtmlControls.HtmlTextArea Textarea6;
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e) 
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+        
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() 
+        {    
+            this.Load += new System.EventHandler(this.Page_Load);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        private void Page_Load(object sender, System.EventArgs e) 
+        {
+            //Put user code to initialize the page here
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTActiveSubTest = GHTSubTest5;
-			try 
-			{
-				TEXTAREA5.Name = "nameOfTextArea";
-				GHTSubTestAddResult(TEXTAREA5.Name);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest5;
+            try 
+            {
+                TEXTAREA5.Name = "nameOfTextArea";
+                GHTSubTestAddResult(TEXTAREA5.Name);
+            }
+            catch (Exception ex) 
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest6;
-			try 
-			{
-				Textarea6.Name = "123";
-				GHTSubTestAddResult(Textarea6.Name);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest6;
+            try 
+            {
+                Textarea6.Name = "123";
+                GHTSubTestAddResult(Textarea6.Name);
+            }
+            catch (Exception ex) 
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
-	}
+            GHTTestEnd();
+        }
+    }
 }

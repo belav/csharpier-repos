@@ -1,8 +1,8 @@
-﻿//
+//
 // LocalClientSecuritySettingsTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -39,28 +39,28 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class LocalClientSecuritySettingsTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			LocalClientSecuritySettings lc = new LocalClientSecuritySettings ();
-			Assert.IsNotNull (lc, "#1");
-			Assert.AreEqual (true, lc.CacheCookies, "#2");
-			Assert.AreEqual (60, lc.CookieRenewalThresholdPercentage, "#3");
-			Assert.AreEqual (true, lc.DetectReplays, "#4");
-			Assert.AreEqual (TimeSpan.FromMinutes (5), lc.MaxClockSkew, "#5");
-			Assert.AreEqual (TimeSpan.MaxValue, lc.MaxCookieCachingTime, "#6");
-			Assert.AreEqual (true, lc.ReconnectTransportOnFailure, "#7");
-			Assert.AreEqual (900000, lc.ReplayCacheSize, "#8");
-			Assert.AreEqual (TimeSpan.FromMinutes (5), lc.ReplayWindow, "#9");
-			Assert.AreEqual (TimeSpan.FromHours (10), lc.SessionKeyRenewalInterval, "#10");
-			Assert.AreEqual (TimeSpan.FromMinutes (5), lc.SessionKeyRolloverInterval, "#11");
-			Assert.AreEqual (TimeSpan.FromMinutes (5), lc.TimestampValidityDuration, "#12");
-			// FIXME: IdentityVerifier
-			Assert.IsNotNull (lc.IdentityVerifier, "#13");
-		}
-	}
+    [TestFixture]
+    public class LocalClientSecuritySettingsTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            LocalClientSecuritySettings lc = new LocalClientSecuritySettings ();
+            Assert.IsNotNull (lc, "#1");
+            Assert.AreEqual (true, lc.CacheCookies, "#2");
+            Assert.AreEqual (60, lc.CookieRenewalThresholdPercentage, "#3");
+            Assert.AreEqual (true, lc.DetectReplays, "#4");
+            Assert.AreEqual (TimeSpan.FromMinutes (5), lc.MaxClockSkew, "#5");
+            Assert.AreEqual (TimeSpan.MaxValue, lc.MaxCookieCachingTime, "#6");
+            Assert.AreEqual (true, lc.ReconnectTransportOnFailure, "#7");
+            Assert.AreEqual (900000, lc.ReplayCacheSize, "#8");
+            Assert.AreEqual (TimeSpan.FromMinutes (5), lc.ReplayWindow, "#9");
+            Assert.AreEqual (TimeSpan.FromHours (10), lc.SessionKeyRenewalInterval, "#10");
+            Assert.AreEqual (TimeSpan.FromMinutes (5), lc.SessionKeyRolloverInterval, "#11");
+            Assert.AreEqual (TimeSpan.FromMinutes (5), lc.TimestampValidityDuration, "#12");
+            // FIXME: IdentityVerifier
+            Assert.IsNotNull (lc.IdentityVerifier, "#13");
+        }
+    }
 }
 #endif

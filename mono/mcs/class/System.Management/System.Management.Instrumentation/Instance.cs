@@ -30,19 +30,19 @@
 
 namespace System.Management.Instrumentation
 {
-	[InstrumentationClass (InstrumentationType.Instance)]
-	public abstract class Instance : IInstance {
-		bool published;
+    [InstrumentationClass (InstrumentationType.Instance)]
+    public abstract class Instance : IInstance {
+        bool published;
 
-		[MonoTODO]
-		protected Instance ()
-		{
-		}
+        [MonoTODO]
+        protected Instance ()
+        {
+        }
 
-		[IgnoreMember]
-		public bool Published {
-			get { return published; }
-			set { published = value; }
-		}
-	}
+        [IgnoreMember]
+        public bool Published {
+            get { return published; }
+            set { published = value; }
+        }
+    }
 }

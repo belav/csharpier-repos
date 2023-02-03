@@ -2,20 +2,20 @@
 // Line: 19
 
 struct foo {
-	public int x;
+    public int x;
 }
 
 class bar {
-	public foo this [int x] {
-		get { return new foo (); }
-		set { }
-	}
+    public foo this [int x] {
+        get { return new foo (); }
+        set { }
+    }
 }
 
 class main {
-	static void Main ()
-	{
-		bar b = new bar ();
-		b [0].x = 5;
-	}
+    static void Main ()
+    {
+        bar b = new bar ();
+        b [0].x = 5;
+    }
 }

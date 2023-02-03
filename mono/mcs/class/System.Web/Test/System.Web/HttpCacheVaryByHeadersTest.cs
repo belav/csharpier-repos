@@ -2,7 +2,7 @@
 // System.Web.HttpCacheVaryByHeadersTest.cs - Unit tests for System.Web.HttpCacheByHeaders
 //
 // Author:
-//	Chris Toshok  <toshok@novell.com>
+//    Chris Toshok  <toshok@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,39 +33,39 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web {
 
-	[TestFixture]
-	public class HttpCacheVaryByHeadersTest {
+    [TestFixture]
+    public class HttpCacheVaryByHeadersTest {
 
-		[Test]
-		public void Properties ()
-		{
-			HttpResponse response = new HttpResponse (Console.Out);
-			HttpCacheVaryByHeaders hdrs = response.Cache.VaryByHeaders;
+        [Test]
+        public void Properties ()
+        {
+            HttpResponse response = new HttpResponse (Console.Out);
+            HttpCacheVaryByHeaders hdrs = response.Cache.VaryByHeaders;
 
-			/* first test all the getters/setters for the builtin fields */
-			hdrs.AcceptTypes = true;
-			hdrs.UserAgent = true;
-			hdrs.UserCharSet = true;
-			hdrs.UserLanguage = true;
-			hdrs["custom-field"] = true;
+            /* first test all the getters/setters for the builtin fields */
+            hdrs.AcceptTypes = true;
+            hdrs.UserAgent = true;
+            hdrs.UserCharSet = true;
+            hdrs.UserLanguage = true;
+            hdrs["custom-field"] = true;
 
-			Assert.IsTrue (hdrs.AcceptTypes, "hdrs.AcceptTypes == true");
-			Assert.IsTrue (hdrs.UserAgent, "hdrs.UserAgent == true");
-			Assert.IsTrue (hdrs.UserCharSet, "hdrs.UserCharSet == true");
-			Assert.IsTrue (hdrs.UserLanguage, "hdrs.UserLanguage == true");
-			Assert.IsTrue (hdrs["custom-field"], "hdrs['custom-field'] == true");
+            Assert.IsTrue (hdrs.AcceptTypes, "hdrs.AcceptTypes == true");
+            Assert.IsTrue (hdrs.UserAgent, "hdrs.UserAgent == true");
+            Assert.IsTrue (hdrs.UserCharSet, "hdrs.UserCharSet == true");
+            Assert.IsTrue (hdrs.UserLanguage, "hdrs.UserLanguage == true");
+            Assert.IsTrue (hdrs["custom-field"], "hdrs['custom-field'] == true");
 
-			/* test case sensitivity */
-			Assert.IsTrue (hdrs["Custom-Field"], "hdrs['Custom-Field'] == true");
+            /* test case sensitivity */
+            Assert.IsTrue (hdrs["Custom-Field"], "hdrs['Custom-Field'] == true");
 
-			hdrs.VaryByUnspecifiedParameters();
+            hdrs.VaryByUnspecifiedParameters();
 
-			/* now verify that they're all false */
-			Assert.IsFalse (hdrs.AcceptTypes, "hdrs.AcceptTypes == false");
-			Assert.IsFalse (hdrs.UserAgent, "hdrs.UserAgent == false");
-			Assert.IsFalse (hdrs.UserCharSet, "hdrs.UserCharSet == false");
-			Assert.IsFalse (hdrs.UserLanguage, "hdrs.UserLanguage == false");
-			Assert.IsFalse (hdrs["custom-field"], "hdrs['custom-field'] == false");
-		}
-	}
+            /* now verify that they're all false */
+            Assert.IsFalse (hdrs.AcceptTypes, "hdrs.AcceptTypes == false");
+            Assert.IsFalse (hdrs.UserAgent, "hdrs.UserAgent == false");
+            Assert.IsFalse (hdrs.UserCharSet, "hdrs.UserCharSet == false");
+            Assert.IsFalse (hdrs.UserLanguage, "hdrs.UserLanguage == false");
+            Assert.IsFalse (hdrs["custom-field"], "hdrs['custom-field'] == false");
+        }
+    }
 }

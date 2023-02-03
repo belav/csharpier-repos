@@ -28,44 +28,44 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class AttachablePropertyServicesTest
-	{
-		[Test]
-		public void NullArgument ()
-		{
-			// null is not rejected
-			AttachablePropertyServices.GetAttachedPropertyCount (null);
-			AttachablePropertyServices.CopyPropertiesTo (null, null, 0);
-		}
+    [TestFixture]
+    public class AttachablePropertyServicesTest
+    {
+        [Test]
+        public void NullArgument ()
+        {
+            // null is not rejected
+            AttachablePropertyServices.GetAttachedPropertyCount (null);
+            AttachablePropertyServices.CopyPropertiesTo (null, null, 0);
+        }
 
-		[Test]
-		public void NonStoreArgument ()
-		{
-			// non-store object either.
-			AttachablePropertyServices.GetAttachedPropertyCount (new object ());
-		}
+        [Test]
+        public void NonStoreArgument ()
+        {
+            // non-store object either.
+            AttachablePropertyServices.GetAttachedPropertyCount (new object ());
+        }
 
-		[Test]
-		public void NonStoreGetSet ()
-		{
-			var a = new object ();
-			AttachablePropertyServices.SetProperty (a, Attachable.FooIdentifier, "x");
-			string v;
-			Assert.IsTrue (AttachablePropertyServices.TryGetProperty<string> (a, Attachable.FooIdentifier, out v), "#1");
-			Assert.AreEqual ("x", v, "#2");
-		}
+        [Test]
+        public void NonStoreGetSet ()
+        {
+            var a = new object ();
+            AttachablePropertyServices.SetProperty (a, Attachable.FooIdentifier, "x");
+            string v;
+            Assert.IsTrue (AttachablePropertyServices.TryGetProperty<string> (a, Attachable.FooIdentifier, out v), "#1");
+            Assert.AreEqual ("x", v, "#2");
+        }
 
-		[Test]
-		public void StoreGetSet ()
-		{
-			var a = new AttachedWrapper2 ();
-			AttachedWrapper2.SetFoo (a, "x");
-			string v;
-			Assert.IsFalse (AttachablePropertyServices.TryGetProperty<string> (a, AttachedWrapper2.FooIdentifier, out v), "#1");
-			Assert.AreEqual ("x", AttachedWrapper2.GetFoo (a), "#2");
+        [Test]
+        public void StoreGetSet ()
+        {
+            var a = new AttachedWrapper2 ();
+            AttachedWrapper2.SetFoo (a, "x");
+            string v;
+            Assert.IsFalse (AttachablePropertyServices.TryGetProperty<string> (a, AttachedWrapper2.FooIdentifier, out v), "#1");
+            Assert.AreEqual ("x", AttachedWrapper2.GetFoo (a), "#2");
 
-			Assert.AreEqual (1, AttachedWrapper2.PropertyCount, "#3");
-		}
-	}
+            Assert.AreEqual (1, AttachedWrapper2.PropertyCount, "#3");
+        }
+    }
 }

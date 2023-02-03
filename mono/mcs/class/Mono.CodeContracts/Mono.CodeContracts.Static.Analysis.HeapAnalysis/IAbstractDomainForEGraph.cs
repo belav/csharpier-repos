@@ -2,7 +2,7 @@
 // IAbstractDomainForEGraph.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -28,8 +28,8 @@
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-	interface IAbstractDomainForEGraph<TADomain> : IAbstractDomain<TADomain> {
-		bool HasAllBottomFields { get; }
-		TADomain ForManifestedField ();
-	}
+    interface IAbstractDomainForEGraph<TADomain> : IAbstractDomain<TADomain> {
+        bool HasAllBottomFields { get; }
+        TADomain ForManifestedField ();
+    }
 }

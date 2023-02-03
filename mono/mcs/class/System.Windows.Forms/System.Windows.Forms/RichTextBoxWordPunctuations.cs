@@ -20,17 +20,17 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	<pbartok@novell.com>
+//    Peter Bartok    <pbartok@novell.com>
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum RichTextBoxWordPunctuations {
-		Level1	= 128,
-		Level2	= 256,
-		Custom	= 512,
-		All	= 896
-	}
+    public enum RichTextBoxWordPunctuations {
+        Level1    = 128,
+        Level2    = 256,
+        Custom    = 512,
+        All    = 896
+    }
 }

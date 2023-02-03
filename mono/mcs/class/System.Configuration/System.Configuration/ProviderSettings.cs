@@ -2,7 +2,7 @@
 // System.Configuration.ProviderSettings.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
+//    Duncan Mak (duncan@ximian.com)
 //      Lluis Sanchez Gual (lluis@novell.com)
 //      Chris Toshok (toshok@ximian.com)
 //
@@ -34,90 +34,90 @@ using System.Collections.Specialized;
 
 namespace System.Configuration
 {
-	public sealed class ProviderSettings: ConfigurationElement
-	{
-		ConfigNameValueCollection parameters;
+    public sealed class ProviderSettings: ConfigurationElement
+    {
+        ConfigNameValueCollection parameters;
 
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty typeProp;
-		static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
 
-		static ProviderSettings ()
-		{
-			nameProp = new ConfigurationProperty ("name", typeof (string), null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			typeProp = new ConfigurationProperty ("type", typeof (string), null, ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
+        static ProviderSettings ()
+        {
+            nameProp = new ConfigurationProperty ("name", typeof (string), null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            typeProp = new ConfigurationProperty ("type", typeof (string), null, ConfigurationPropertyOptions.IsRequired);
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (nameProp);
-			properties.Add (typeProp);
-		}
+            properties.Add (nameProp);
+            properties.Add (typeProp);
+        }
 
-		public ProviderSettings ()
-		{
-		}
-		
-		public ProviderSettings (string name, string type)
-		{
-			Name = name;
-			Type = type;
-		}
-		
-		protected override bool OnDeserializeUnrecognizedAttribute (string name, string value)
-		{
-			if (parameters == null)
-				parameters = new ConfigNameValueCollection ();
-			parameters [name] = value;
-			parameters.ResetModified ();
-			return true;
-		}
+        public ProviderSettings ()
+        {
+        }
+        
+        public ProviderSettings (string name, string type)
+        {
+            Name = name;
+            Type = type;
+        }
+        
+        protected override bool OnDeserializeUnrecognizedAttribute (string name, string value)
+        {
+            if (parameters == null)
+                parameters = new ConfigNameValueCollection ();
+            parameters [name] = value;
+            parameters.ResetModified ();
+            return true;
+        }
 
-		protected internal override bool IsModified ()
-		{
-			return (parameters != null && parameters.IsModified) || base.IsModified ();
-		}
+        protected internal override bool IsModified ()
+        {
+            return (parameters != null && parameters.IsModified) || base.IsModified ();
+        }
 
-		protected internal override void Reset (ConfigurationElement parentElement)
-		{
-			base.Reset (parentElement);
+        protected internal override void Reset (ConfigurationElement parentElement)
+        {
+            base.Reset (parentElement);
 
-			ProviderSettings sec = parentElement as ProviderSettings;
-			if (sec != null && sec.parameters != null)
-				parameters = new ConfigNameValueCollection (sec.parameters);
-			else
-				parameters = null;
-		}
+            ProviderSettings sec = parentElement as ProviderSettings;
+            if (sec != null && sec.parameters != null)
+                parameters = new ConfigNameValueCollection (sec.parameters);
+            else
+                parameters = null;
+        }
 
-		[MonoTODO]
-		protected internal override void Unmerge (
-				ConfigurationElement sourceElement, ConfigurationElement parentElement,
-				ConfigurationSaveMode saveMode)
-		{
-			base.Unmerge (sourceElement, parentElement, saveMode);
-		}
-		
-		[ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) this [nameProp]; }
-			set { this [nameProp] = value; }
-		}
-		
-		[ConfigurationProperty ("type", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Type {
-			get { return (string) this [typeProp]; }
-			set { this [typeProp] = value; }
-		}
+        [MonoTODO]
+        protected internal override void Unmerge (
+                ConfigurationElement sourceElement, ConfigurationElement parentElement,
+                ConfigurationSaveMode saveMode)
+        {
+            base.Unmerge (sourceElement, parentElement, saveMode);
+        }
+        
+        [ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        public string Name {
+            get { return (string) this [nameProp]; }
+            set { this [nameProp] = value; }
+        }
+        
+        [ConfigurationProperty ("type", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string Type {
+            get { return (string) this [typeProp]; }
+            set { this [typeProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-		
-		public NameValueCollection Parameters {
-			get {
-				if (parameters == null)
-					parameters = new ConfigNameValueCollection ();
-				return parameters;
-			}
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+        
+        public NameValueCollection Parameters {
+            get {
+                if (parameters == null)
+                    parameters = new ConfigNameValueCollection ();
+                return parameters;
+            }
+        }
+    }
 }
 

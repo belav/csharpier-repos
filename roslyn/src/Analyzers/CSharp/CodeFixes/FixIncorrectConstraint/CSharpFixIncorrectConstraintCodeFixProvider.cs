@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.FixIncorrectConstraint), Shared]
     internal class CSharpFixIncorrectConstraintCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
-        private const string CS9010 = nameof(CS9010); // Keyword 'enum' cannot be used as a constraint.Did you mean 'struct, System.Enum'?	Net6 C:\github\repo_find_refs\Net6\Class1.cs 1	Active
-        private const string CS9011 = nameof(CS9011); // 'delegate' cannot be used as a constraint.Did you mean 'System.Delegate'?	Net6 C:\github\repo_find_refs\Net6\Class1.cs 1	Active
+        private const string CS9010 = nameof(CS9010); // Keyword 'enum' cannot be used as a constraint.Did you mean 'struct, System.Enum'?    Net6 C:\github\repo_find_refs\Net6\Class1.cs 1    Active
+        private const string CS9011 = nameof(CS9011); // 'delegate' cannot be used as a constraint.Did you mean 'System.Delegate'?    Net6 C:\github\repo_find_refs\Net6\Class1.cs 1    Active
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

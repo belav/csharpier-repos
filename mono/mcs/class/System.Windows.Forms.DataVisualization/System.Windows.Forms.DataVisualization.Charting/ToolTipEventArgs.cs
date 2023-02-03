@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
@@ -29,21 +29,21 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class ToolTipEventArgs : EventArgs
-	{
-		#region Constructors
-		public ToolTipEventArgs (int x, int y, string text, HitTestResult result)
-		{
-			X = x;
-			Y = y;
-			Text = text;
-			HitTestResult = result;
-		}
-		#endregion
+    public class ToolTipEventArgs : EventArgs
+    {
+        #region Constructors
+        public ToolTipEventArgs (int x, int y, string text, HitTestResult result)
+        {
+            X = x;
+            Y = y;
+            Text = text;
+            HitTestResult = result;
+        }
+        #endregion
 
-		public HitTestResult HitTestResult { get; private set;}
-		public string Text { get; set; }
-		public int X { get; private set; }
-		public int Y { get; private set;}
-	}
+        public HitTestResult HitTestResult { get; private set;}
+        public string Text { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set;}
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System;
 
     // This attribute can be applied to a model property to specify that the particular property to

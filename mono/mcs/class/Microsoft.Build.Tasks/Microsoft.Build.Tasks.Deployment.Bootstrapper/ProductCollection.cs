@@ -34,44 +34,44 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("EFFA164B-3E87-4195-88DB-8AC004DDFE2A")]
-	[ComVisible (true)]
-	public class ProductCollection : IProductCollection, IEnumerable {
+    [ClassInterface (ClassInterfaceType.None)]
+    [Guid ("EFFA164B-3E87-4195-88DB-8AC004DDFE2A")]
+    [ComVisible (true)]
+    public class ProductCollection : IProductCollection, IEnumerable {
 
-		List <Product> list;
+        List <Product> list;
 
-		ProductCollection ()
-		{
-			list = new List <Product> ();
-		}
-		
-		[MonoTODO]
-		public int Count {
-			get { return list.Count; }
-		}
-		
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-		
-		[MonoTODO]
-		public Product Item (int index)
-		{
-			return list [index];
-		}
-		
-		[MonoTODO]
-		public Product Product (string productCode)
-		{
-			int idx = list.FindIndex (delegate (Product p) {
-				return p.ProductCode == productCode;
-			});
+        ProductCollection ()
+        {
+            list = new List <Product> ();
+        }
+        
+        [MonoTODO]
+        public int Count {
+            get { return list.Count; }
+        }
+        
+        [MonoTODO]
+        public IEnumerator GetEnumerator ()
+        {
+            return list.GetEnumerator ();
+        }
+        
+        [MonoTODO]
+        public Product Item (int index)
+        {
+            return list [index];
+        }
+        
+        [MonoTODO]
+        public Product Product (string productCode)
+        {
+            int idx = list.FindIndex (delegate (Product p) {
+                return p.ProductCode == productCode;
+            });
 
-			return (idx == -1) ? null : list [idx];
-		}
-	}
+            return (idx == -1) ? null : list [idx];
+        }
+    }
 }
 

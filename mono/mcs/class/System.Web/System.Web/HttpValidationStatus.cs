@@ -31,7 +31,7 @@
 namespace System.Web
 {
         public enum HttpValidationStatus
-	{
+    {
                 Invalid = 0x1,
                 IgnoreThisRequest,
                 Valid

@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.FormView.cs 
 //
 // Author:
-//	Merav Sudri (meravs@mainsoft.com)
+//    Merav Sudri (meravs@mainsoft.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -41,132 +41,132 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	public class SessionParameterPoker : SessionParameter
-	{
-		public SessionParameterPoker()
-		{
-			TrackViewState();
-		}
+    public class SessionParameterPoker : SessionParameter
+    {
+        public SessionParameterPoker()
+        {
+            TrackViewState();
+        }
 
-		public SessionParameterPoker(SessionParameter param)
-			: base(param)
-		{
-		}
+        public SessionParameterPoker(SessionParameter param)
+            : base(param)
+        {
+        }
 
-		public SessionParameterPoker(string name, string sessionField)
-			: base(name, sessionField)
-		{
-		}
-		public SessionParameterPoker(string name, TypeCode type, string sessionField)
-			: base(name, type, sessionField)
-		{
-		}
+        public SessionParameterPoker(string name, string sessionField)
+            : base(name, sessionField)
+        {
+        }
+        public SessionParameterPoker(string name, TypeCode type, string sessionField)
+            : base(name, type, sessionField)
+        {
+        }
 
-		public object DoEvaluate(HttpContext context, Control control)
-		{
-			return base.Evaluate(context, control);
-		}
+        public object DoEvaluate(HttpContext context, Control control)
+        {
+            return base.Evaluate(context, control);
+        }
 
-		public Parameter DoClone()
-		{
-			return base.Clone();
-		}
+        public Parameter DoClone()
+        {
+            return base.Clone();
+        }
 
-		public object SaveState()
-		{
-			return SaveViewState();
-		}
-		public void LoadState(object o)
-		{
-			LoadViewState(o);
-		}
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
+        public void LoadState(object o)
+        {
+            LoadViewState(o);
+        }
 
-		public StateBag StateBag
-		{
-			get { return base.ViewState; }
-		}
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-	}
+    }
 
-	[TestFixture]
-	public class SessionParameterTest
-	{
-		[Test]
-		public void SessionParameter_DefaultProperties()
-		{
-			SessionParameterPoker sessionParam1 = new SessionParameterPoker();
-			Assert.AreEqual("", sessionParam1.SessionField, "DefaultSessionField");
-			SessionParameterPoker sessionParam2 = new SessionParameterPoker("Name", "id");
-			Assert.AreEqual("Name", sessionParam2.Name, "OverloadConstructorName1");
-			Assert.AreEqual("id", sessionParam2.SessionField, "OverloadConstructorSessionField1");
-			SessionParameterPoker sessionParam3 = new SessionParameterPoker("Name", TypeCode.Int64, "id");
-			Assert.AreEqual("Name", sessionParam3.Name, "OverloadConstructorName2");
-			Assert.AreEqual("id", sessionParam3.SessionField, "OverloadConstructorsessionField2");
-			Assert.AreEqual(TypeCode.Int64, sessionParam3.Type, "OverloadConstructorType2");
-			SessionParameterPoker sessionParam4 = new SessionParameterPoker(sessionParam3);
-			Assert.AreEqual("Name", sessionParam4.Name, "OverloadConstructorName3");
-			Assert.AreEqual("id", sessionParam4.SessionField, "OverloadConstructorSessionField3");
-			Assert.AreEqual(TypeCode.Int64, sessionParam4.Type, "OverloadConstructorType3");
+    [TestFixture]
+    public class SessionParameterTest
+    {
+        [Test]
+        public void SessionParameter_DefaultProperties()
+        {
+            SessionParameterPoker sessionParam1 = new SessionParameterPoker();
+            Assert.AreEqual("", sessionParam1.SessionField, "DefaultSessionField");
+            SessionParameterPoker sessionParam2 = new SessionParameterPoker("Name", "id");
+            Assert.AreEqual("Name", sessionParam2.Name, "OverloadConstructorName1");
+            Assert.AreEqual("id", sessionParam2.SessionField, "OverloadConstructorSessionField1");
+            SessionParameterPoker sessionParam3 = new SessionParameterPoker("Name", TypeCode.Int64, "id");
+            Assert.AreEqual("Name", sessionParam3.Name, "OverloadConstructorName2");
+            Assert.AreEqual("id", sessionParam3.SessionField, "OverloadConstructorsessionField2");
+            Assert.AreEqual(TypeCode.Int64, sessionParam3.Type, "OverloadConstructorType2");
+            SessionParameterPoker sessionParam4 = new SessionParameterPoker(sessionParam3);
+            Assert.AreEqual("Name", sessionParam4.Name, "OverloadConstructorName3");
+            Assert.AreEqual("id", sessionParam4.SessionField, "OverloadConstructorSessionField3");
+            Assert.AreEqual(TypeCode.Int64, sessionParam4.Type, "OverloadConstructorType3");
 
 
-		}
+        }
 
-		[Test]
-		public void SessionParameter_AssignToDefaultProperties()
-		{
-			SessionParameterPoker sessionParam = new SessionParameterPoker();
-			sessionParam.SessionField = "Test";
-			Assert.AreEqual("Test", sessionParam.SessionField, "AssignToSessionField");
+        [Test]
+        public void SessionParameter_AssignToDefaultProperties()
+        {
+            SessionParameterPoker sessionParam = new SessionParameterPoker();
+            sessionParam.SessionField = "Test";
+            Assert.AreEqual("Test", sessionParam.SessionField, "AssignToSessionField");
 
-		}
+        }
 
-		//Protected Methods
+        //Protected Methods
 
-		[Test]
-		public void SessionParameter_Clone()
-		{
-	                 SessionParameterPoker sessionParam = new SessionParameterPoker("EmployeeName", TypeCode.String, "Name");
-			 SessionParameter clonedParam = (SessionParameter)sessionParam.DoClone();
-			 Assert.AreEqual("EmployeeName", clonedParam.Name, "SessionParameterCloneName");
-			 Assert.AreEqual(TypeCode.String, clonedParam.Type, "SessionParameterCloneType");
-			
-		}
+        [Test]
+        public void SessionParameter_Clone()
+        {
+                     SessionParameterPoker sessionParam = new SessionParameterPoker("EmployeeName", TypeCode.String, "Name");
+             SessionParameter clonedParam = (SessionParameter)sessionParam.DoClone();
+             Assert.AreEqual("EmployeeName", clonedParam.Name, "SessionParameterCloneName");
+             Assert.AreEqual(TypeCode.String, clonedParam.Type, "SessionParameterCloneType");
+            
+        }
 
-		[Test]
-		[Category("NunitWeb")]
-		[Category("NotWorking")]
-		public void SessionParameter_Evaluate()
-		{
-			SessionParameterPoker sessionParam = new SessionParameterPoker("employee",TypeCode.String ,"id") ;
-			Button b = new Button();
-			string value = (string)sessionParam.DoEvaluate(null, b);
-			Assert.AreEqual(null, value, "EvaluateSessionWhenNullContext");
-			WebTest t = new WebTest();
-			PageDelegates pd = new PageDelegates();
-			pd.Init = InitSesssion;
-			pd.Load = EvaluateSession;
-			t.Invoker = new PageInvoker(pd);
-			string html = t.Run();
-			WebTest.Unload(); 
-			
+        [Test]
+        [Category("NunitWeb")]
+        [Category("NotWorking")]
+        public void SessionParameter_Evaluate()
+        {
+            SessionParameterPoker sessionParam = new SessionParameterPoker("employee",TypeCode.String ,"id") ;
+            Button b = new Button();
+            string value = (string)sessionParam.DoEvaluate(null, b);
+            Assert.AreEqual(null, value, "EvaluateSessionWhenNullContext");
+            WebTest t = new WebTest();
+            PageDelegates pd = new PageDelegates();
+            pd.Init = InitSesssion;
+            pd.Load = EvaluateSession;
+            t.Invoker = new PageInvoker(pd);
+            string html = t.Run();
+            WebTest.Unload(); 
+            
 
-		}
+        }
 
-		public static void InitSesssion(Page p)
-		{
-			p.Session["key"] = "Key1"; 
-		}
+        public static void InitSesssion(Page p)
+        {
+            p.Session["key"] = "Key1"; 
+        }
 
-		public static void EvaluateSession(Page p)
-		{
-			SessionParameterPoker sessionParam = new SessionParameterPoker();
-			sessionParam.SessionField = "key";
-			sessionParam.Type = TypeCode.String;
-			TextBox tb = new TextBox();
-			p.Controls.Add(tb); 
-			string value = (string)sessionParam.DoEvaluate(HttpContext.Current, tb);
-			Assert.AreEqual("Key1", value, "EvaluateSessionParameter");
-		}
+        public static void EvaluateSession(Page p)
+        {
+            SessionParameterPoker sessionParam = new SessionParameterPoker();
+            sessionParam.SessionField = "key";
+            sessionParam.Type = TypeCode.String;
+            TextBox tb = new TextBox();
+            p.Controls.Add(tb); 
+            string value = (string)sessionParam.DoEvaluate(HttpContext.Current, tb);
+            Assert.AreEqual("Key1", value, "EvaluateSessionParameter");
+        }
 
-	}
+    }
 }

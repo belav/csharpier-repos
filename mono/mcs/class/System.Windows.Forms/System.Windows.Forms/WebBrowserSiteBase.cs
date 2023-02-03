@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita	<avidigal@novell.com>
+//    Andreia Gaita    <avidigal@novell.com>
 
 
 using System;
@@ -32,22 +32,22 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms
 {
-	[MonoTODO ("Needs Implementation")]
+    [MonoTODO ("Needs Implementation")]
     [ComVisible(true)]
-	public class WebBrowserSiteBase : IDisposable
-	{
-		internal WebBrowserSiteBase ()
-		{
-		}
-		
-		#region Methods
-		public void Dispose ()
-		{
-		}
+    public class WebBrowserSiteBase : IDisposable
+    {
+        internal WebBrowserSiteBase ()
+        {
+        }
+        
+        #region Methods
+        public void Dispose ()
+        {
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-		}
-		#endregion
-	}
+        protected virtual void Dispose (bool disposing)
+        {
+        }
+        #endregion
+    }
 }

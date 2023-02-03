@@ -4,8 +4,8 @@
 
 class Test
 {
-	public static void Main ()
-	{
-		object o = typeof (B.N);
-	}
+    public static void Main ()
+    {
+        object o = typeof (B.N);
+    }
 }

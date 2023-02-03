@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -32,18 +32,18 @@ using System.Collections;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public class BehaviorDragDropEventArgs : EventArgs
-	{
-		ICollection components;
+    public class BehaviorDragDropEventArgs : EventArgs
+    {
+        ICollection components;
 
-		public BehaviorDragDropEventArgs (ICollection dragComponents)
-		{
-			this.components = dragComponents;
-		}
+        public BehaviorDragDropEventArgs (ICollection dragComponents)
+        {
+            this.components = dragComponents;
+        }
 
-		public ICollection DragComponents {
-			get { return components; }
-		}
-	}
+        public ICollection DragComponents {
+            get { return components; }
+        }
+    }
 }
 

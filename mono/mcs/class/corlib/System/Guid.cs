@@ -2,10 +2,10 @@
 // System.Guid.cs
 //
 // Authors:
-//	Duco Fijma (duco@lorentz.xs4all.nl)
-//	Sebastien Pouliot (sebastien@ximian.com)
-//	Jb Evain (jbevain@novell.com)
-//	Marek Safar (marek.safar@gmail.com)
+//    Duco Fijma (duco@lorentz.xs4all.nl)
+//    Sebastien Pouliot (sebastien@ximian.com)
+//    Jb Evain (jbevain@novell.com)
+//    Marek Safar (marek.safar@gmail.com)
 //
 // (C) 2002 Duco Fijma
 // Copyright (C) 2004-2010 Novell, Inc (http://www.novell.com)
@@ -36,25 +36,25 @@ using System.Security.Cryptography;
 
 namespace System
 {
-	partial struct Guid
-	{
-		// used in ModuleBuilder so mcs doesn't need to invoke 
-		// CryptoConfig for simple assemblies.
-		internal static unsafe byte[] FastNewGuidArray ()
-		{
-			byte[] guid = new byte [16];
-			fixed (byte *ptr = guid) {
-				Interop.GetRandomBytes(ptr, 16);
-			}
+    partial struct Guid
+    {
+        // used in ModuleBuilder so mcs doesn't need to invoke 
+        // CryptoConfig for simple assemblies.
+        internal static unsafe byte[] FastNewGuidArray ()
+        {
+            byte[] guid = new byte [16];
+            fixed (byte *ptr = guid) {
+                Interop.GetRandomBytes(ptr, 16);
+            }
 
-			// Mask in Variant 1-0 in Bit[7..6]
-			guid [8] = (byte) ((guid [8] & 0x3f) | 0x80);
-			// Mask in Version 4 (random based Guid) in Bits[15..13]
-			guid [7] = (byte) ((guid [7] & 0x0f) | 0x40);
+            // Mask in Variant 1-0 in Bit[7..6]
+            guid [8] = (byte) ((guid [8] & 0x3f) | 0x80);
+            // Mask in Version 4 (random based Guid) in Bits[15..13]
+            guid [7] = (byte) ((guid [7] & 0x0f) | 0x40);
 
-			return guid;
-		}
-	}
+            return guid;
+        }
+    }
 }
 
 #endif

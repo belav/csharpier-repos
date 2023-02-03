@@ -32,52 +32,52 @@ using System;
 using System.Runtime.Serialization;
 
 namespace System.EnterpriseServices {
-	[Serializable]
-	public sealed class RegistrationException : SystemException {
+    [Serializable]
+    public sealed class RegistrationException : SystemException {
 
-		#region Fields
+        #region Fields
 #pragma warning disable 649
-		RegistrationErrorInfo[] errorInfo;
+        RegistrationErrorInfo[] errorInfo;
 #pragma warning restore 649
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		[MonoTODO]
-		public RegistrationException (string msg)
-			: base (msg)
-		{
-		}
+        [MonoTODO]
+        public RegistrationException (string msg)
+            : base (msg)
+        {
+        }
 
-		public RegistrationException ()
-			: this ("Registration error")
-		{
-		}
+        public RegistrationException ()
+            : this ("Registration error")
+        {
+        }
 
-		public RegistrationException (string msg, Exception inner)
-			: base (msg, inner)
-		{
-		}
+        public RegistrationException (string msg, Exception inner)
+            : base (msg, inner)
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
-			
-		public RegistrationErrorInfo[] ErrorInfo {
-			get { return errorInfo; }
-		}
+        #region Properties
+            
+        public RegistrationErrorInfo[] ErrorInfo {
+            get { return errorInfo; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

@@ -32,19 +32,19 @@ using System;
 
 namespace System.Web.UI {
 
-	[AttributeUsage (AttributeTargets.Property)]
-	internal sealed class HtmlControlPersistableAttribute : Attribute
-	{
-		bool persist;
-		
-		public HtmlControlPersistableAttribute (bool persist)
-		{
-			this.persist = persist;
-		}
+    [AttributeUsage (AttributeTargets.Property)]
+    internal sealed class HtmlControlPersistableAttribute : Attribute
+    {
+        bool persist;
+        
+        public HtmlControlPersistableAttribute (bool persist)
+        {
+            this.persist = persist;
+        }
 
-		public bool Persist {
-			get { return persist; }
-		}
-	}
+        public bool Persist {
+            get { return persist; }
+        }
+    }
 }
-	
+    

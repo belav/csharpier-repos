@@ -2,7 +2,7 @@
 // TransactionFlowBindingElementImporter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,29 +36,29 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class TransactionFlowBindingElementImporter
-		: IPolicyImportExtension
-	{
-		[MonoTODO]
-		public XmlElement GetAssertion (XmlDocument doc,
-			TransactionFlowOption option,
-			string prefix, string name, string ns)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class TransactionFlowBindingElementImporter
+        : IPolicyImportExtension
+    {
+        [MonoTODO]
+        public XmlElement GetAssertion (XmlDocument doc,
+            TransactionFlowOption option,
+            string prefix, string name, string ns)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void ExportPolicy (MetadataExporter exporter,
-			PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void ExportPolicy (MetadataExporter exporter,
+            PolicyConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		void IPolicyImportExtension.ImportPolicy (MetadataImporter importer,
-			PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        void IPolicyImportExtension.ImportPolicy (MetadataImporter importer,
+            PolicyConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

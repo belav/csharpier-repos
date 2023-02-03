@@ -2,8 +2,8 @@
 // Line: 5
 
 class X {
-	public static X operator < (ref X a, int b)
-	{
-		return null;
-	}
+    public static X operator < (ref X a, int b)
+    {
+        return null;
+    }
 }

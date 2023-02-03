@@ -33,35 +33,35 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class DetailsViewDeleteEventArgs : CancelEventArgs
-	{
-		int rowIndex;
-		IOrderedDictionary keys;
-		IOrderedDictionary values;
-		
-		public DetailsViewDeleteEventArgs (int rowIndex)
-		{
-			this.rowIndex = rowIndex;
-		}
-		
-		internal DetailsViewDeleteEventArgs (int index, IOrderedDictionary keys, IOrderedDictionary values)
-		{
-			this.rowIndex = index;
-			this.keys = keys;
-			this.values = values;
-		}
-		
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+    public class DetailsViewDeleteEventArgs : CancelEventArgs
+    {
+        int rowIndex;
+        IOrderedDictionary keys;
+        IOrderedDictionary values;
+        
+        public DetailsViewDeleteEventArgs (int rowIndex)
+        {
+            this.rowIndex = rowIndex;
+        }
+        
+        internal DetailsViewDeleteEventArgs (int index, IOrderedDictionary keys, IOrderedDictionary values)
+        {
+            this.rowIndex = index;
+            this.keys = keys;
+            this.values = values;
+        }
+        
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-		public IOrderedDictionary Keys {
-			get { return keys; }
-		}
+        public IOrderedDictionary Keys {
+            get { return keys; }
+        }
 
-		public IOrderedDictionary Values {
-			get { return values; }
-		}
-	}
+        public IOrderedDictionary Values {
+            get { return values; }
+        }
+    }
 }
 

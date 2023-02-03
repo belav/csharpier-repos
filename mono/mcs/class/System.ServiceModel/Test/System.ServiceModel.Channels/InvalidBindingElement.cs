@@ -2,7 +2,7 @@
 // InvalidBindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -41,22 +41,22 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	public class InvalidBindingElement : BindingElement
-	{
-		public override BindingElement Clone ()
-		{
-			throw new NotSupportedException ();
-		}
+    public class InvalidBindingElement : BindingElement
+    {
+        public override BindingElement Clone ()
+        {
+            throw new NotSupportedException ();
+        }
 
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			throw new NotSupportedException ();
-		}
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
+            BindingContext context)
+        {
+            throw new NotSupportedException ();
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			return null;
-		}
-	}
+        public override T GetProperty<T> (BindingContext context)
+        {
+            return null;
+        }
+    }
 }

@@ -23,27 +23,27 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration.nBrowser
 {
-	using System;
-	using System.Runtime.Serialization;
-	internal class Exception : System.Exception
-	{
-		public Exception()
-			: base()
-		{
-		}
-		public Exception(string errorMessage)
-			: base(errorMessage)
-		{
-		}
-		public Exception(string message, Exception innerException)
-			: base(message, innerException)
-		{
-			// Add any type-specific logic for inner exceptions.
-		}
-		protected Exception(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{
-			// Implement type-specific serialization constructor logic.
-		}
-	}
+    using System;
+    using System.Runtime.Serialization;
+    internal class Exception : System.Exception
+    {
+        public Exception()
+            : base()
+        {
+        }
+        public Exception(string errorMessage)
+            : base(errorMessage)
+        {
+        }
+        public Exception(string message, Exception innerException)
+            : base(message, innerException)
+        {
+            // Add any type-specific logic for inner exceptions.
+        }
+        protected Exception(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            // Implement type-specific serialization constructor logic.
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
 // AssemblyCollectionTest.cs 
-//	- unit tests for System.Web.Configuration.AssemblyCollection
+//    - unit tests for System.Web.Configuration.AssemblyCollection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,34 +38,34 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class AssemblyCollectionTest  {
+    [TestFixture]
+    public class AssemblyCollectionTest  {
 
-		[Test]
-		public void DuplicateKey ()
-		{
-			AssemblyCollection c = new AssemblyCollection ();
-			c.Add (new AssemblyInfo ("System.Web.dll"));
-			c.Add (new AssemblyInfo ("System.Web.dll"));
-		}
+        [Test]
+        public void DuplicateKey ()
+        {
+            AssemblyCollection c = new AssemblyCollection ();
+            c.Add (new AssemblyInfo ("System.Web.dll"));
+            c.Add (new AssemblyInfo ("System.Web.dll"));
+        }
 
-		[Test]
-		public void GetByName ()
-		{
-			AssemblyCollection c = new AssemblyCollection ();
-			AssemblyInfo a = new AssemblyInfo ("System.Web.dll");
-			c.Add (a);
-			Assert.AreEqual (a, c["System.Web.dll"]);
-		}
+        [Test]
+        public void GetByName ()
+        {
+            AssemblyCollection c = new AssemblyCollection ();
+            AssemblyInfo a = new AssemblyInfo ("System.Web.dll");
+            c.Add (a);
+            Assert.AreEqual (a, c["System.Web.dll"]);
+        }
 
-		[Test]
-		public void GetByNameFailure ()
-		{
-			AssemblyCollection c = new AssemblyCollection ();
-			AssemblyInfo a = new AssemblyInfo ("System.Web.dll");
-			c.Add (a);
-			Assert.IsNull (c["System.Net.dll"]);
-		}
-	}
+        [Test]
+        public void GetByNameFailure ()
+        {
+            AssemblyCollection c = new AssemblyCollection ();
+            AssemblyInfo a = new AssemblyInfo ("System.Web.dll");
+            c.Add (a);
+            Assert.IsNull (c["System.Net.dll"]);
+        }
+    }
 }
 

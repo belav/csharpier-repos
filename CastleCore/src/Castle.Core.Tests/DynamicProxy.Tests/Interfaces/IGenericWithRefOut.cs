@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,27 +14,27 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	using System;
+    using System;
 
-	public interface IGenericWithRefOut
-	{
-		void Do<T>(out T i);
-		void Did<T>(ref T i);
-	}
+    public interface IGenericWithRefOut
+    {
+        void Do<T>(out T i);
+        void Did<T>(ref T i);
+    }
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class GenericWithRefOut : IGenericWithRefOut
-	{
-		public void Do<T>(out T i)
-		{
-			i = default(T);
-		}
+    public class GenericWithRefOut : IGenericWithRefOut
+    {
+        public void Do<T>(out T i)
+        {
+            i = default(T);
+        }
 
-		public void Did<T>(ref T i)
-		{
-			i = default(T);
-		}
-	}
+        public void Did<T>(ref T i)
+        {
+            i = default(T);
+        }
+    }
 }

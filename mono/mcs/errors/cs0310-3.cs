@@ -2,21 +2,21 @@
 // Line: 18
 
 public class Foo<T>
-	where T : new ()
+    where T : new ()
 {
 }
 
 abstract class A
 {
-	public A ()
-	{ }
+    public A ()
+    { }
 }
 
 class X
 {
-	Foo<A> foo;
+    Foo<A> foo;
 
-	static void Main ()
-	{
-	}
+    static void Main ()
+    {
+    }
 }

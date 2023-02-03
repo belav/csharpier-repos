@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
@@ -28,14 +28,14 @@
 
 namespace System.Windows.Forms {
 
-	[Flags]
-	public enum UICues {
-		None		= 0x00000000,
-		ShowFocus	= 0x00000001,
-		ShowKeyboard	= 0x00000002,
-		Shown		= 0x00000003,
-		ChangeFocus	= 0x00000004,
-		ChangeKeyboard	= 0x00000008,
-		Changed		= 0x0000000C
-	}
+    [Flags]
+    public enum UICues {
+        None        = 0x00000000,
+        ShowFocus    = 0x00000001,
+        ShowKeyboard    = 0x00000002,
+        Shown        = 0x00000003,
+        ChangeFocus    = 0x00000004,
+        ChangeKeyboard    = 0x00000008,
+        Changed        = 0x0000000C
+    }
 }

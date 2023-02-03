@@ -20,8 +20,8 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
-//	Brian O'Keefe (zer0keefie@gmail.com)
+//    Chris Toshok (toshok@ximian.com)
+//    Brian O'Keefe (zer0keefie@gmail.com)
 //
 
 

@@ -2,8 +2,8 @@
 // System.Security.AccessControl.CryptoKeyAuditRule implementation
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,25 +31,25 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public sealed class CryptoKeyAuditRule : AuditRule
-	{
-		public CryptoKeyAuditRule (IdentityReference identity,
-					   CryptoKeyRights cryptoKeyRights,
-					   AuditFlags flags)
-			: base (identity, (int)cryptoKeyRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
-		{
-		}
-		
-		public CryptoKeyAuditRule (string identity,
-					   CryptoKeyRights cryptoKeyRights,
-					   AuditFlags flags)
-			: this (new NTAccount (identity), cryptoKeyRights, flags)
-		{
-		}
-		
-		public CryptoKeyRights CryptoKeyRights {
-			get { return (CryptoKeyRights)AccessMask; }
-		}
-	}
+    public sealed class CryptoKeyAuditRule : AuditRule
+    {
+        public CryptoKeyAuditRule (IdentityReference identity,
+                       CryptoKeyRights cryptoKeyRights,
+                       AuditFlags flags)
+            : base (identity, (int)cryptoKeyRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
+        {
+        }
+        
+        public CryptoKeyAuditRule (string identity,
+                       CryptoKeyRights cryptoKeyRights,
+                       AuditFlags flags)
+            : this (new NTAccount (identity), cryptoKeyRights, flags)
+        {
+        }
+        
+        public CryptoKeyRights CryptoKeyRights {
+            get { return (CryptoKeyRights)AccessMask; }
+        }
+    }
 }
 

@@ -5,20 +5,20 @@
 //
 
 class X {
-	delegate void T ();
-	static event T Click;
+    delegate void T ();
+    static event T Click;
 
-	static void Method ()
-	{
-	}
+    static void Method ()
+    {
+    }
 
-	public static void Main ()
-	{
-		T t;
+    public static void Main ()
+    {
+        T t;
 
-		// Method group assignment
-		t = Method;
+        // Method group assignment
+        t = Method;
 
-		Click += Method;
-	}
+        Click += Method;
+    }
 }

@@ -37,78 +37,78 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataTableCollection_CollectionChanging : GHTBase
 {
-	private int counter=0;
-	public static void Main()
-	{
-		DataTableCollection_CollectionChanging tc = new DataTableCollection_CollectionChanging();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTableCollection_CollectionChanging");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    private int counter=0;
+    public static void Main()
+    {
+        DataTableCollection_CollectionChanging tc = new DataTableCollection_CollectionChanging();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTableCollection_CollectionChanging");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataTableCollection_CollectionChanging");
-			DataTableCollection_CollectionChanging1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
-	[Test]
-	public void DataTableCollection_CollectionChanging1()
-	{
-		DataSet ds = new DataSet();
-		ds.Tables.CollectionChanging+=new System.ComponentModel.CollectionChangeEventHandler(Tables_CollectionChanging);
-		ds.Tables.Add();
-		ds.Tables.Add();
-		System.Threading.Thread.Sleep(500);
-		Compare(counter,2);
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataTableCollection_CollectionChanging");
+            DataTableCollection_CollectionChanging1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
+    [Test]
+    public void DataTableCollection_CollectionChanging1()
+    {
+        DataSet ds = new DataSet();
+        ds.Tables.CollectionChanging+=new System.ComponentModel.CollectionChangeEventHandler(Tables_CollectionChanging);
+        ds.Tables.Add();
+        ds.Tables.Add();
+        System.Threading.Thread.Sleep(500);
+        Compare(counter,2);
 
-		ds.Tables.Remove(ds.Tables[0]);
-		ds.Tables.Remove(ds.Tables[0]);
-		System.Threading.Thread.Sleep(500);
-		Compare(counter,4);
+        ds.Tables.Remove(ds.Tables[0]);
+        ds.Tables.Remove(ds.Tables[0]);
+        System.Threading.Thread.Sleep(500);
+        Compare(counter,4);
 
-	}
+    }
 
-	private void Tables_CollectionChanging(object sender, System.ComponentModel.CollectionChangeEventArgs e)
-	{
-		counter++;
-		
-	}
+    private void Tables_CollectionChanging(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+    {
+        counter++;
+        
+    }
 }
 }

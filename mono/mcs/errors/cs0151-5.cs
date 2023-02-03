@@ -3,17 +3,17 @@
 
 struct X 
 {
-	public static implicit operator int? (X x)
-	{
-		return 1;
-	}
+    public static implicit operator int? (X x)
+    {
+        return 1;
+    }
 
-	static void Main ()
-	{
-		X? x = null;
-		switch (x) {
-		default:
-			break;
-		}
-	}
+    static void Main ()
+    {
+        X? x = null;
+        switch (x) {
+        default:
+            break;
+        }
+    }
 }

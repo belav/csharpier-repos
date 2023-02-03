@@ -14,81 +14,81 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Identifies a property should be represented as a nested component.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public class ComponentAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder,
-									  IDictionaryPropertyGetter, IDictionaryPropertySetter
-	{
-		/// <summary>
-		/// Applies no prefix.
-		/// </summary>
-		public bool NoPrefix
-		{
-			get { return Prefix == ""; }
-			set
-			{
-				if (value)
-				{
-					Prefix = "";
-				}
-			}
-		}
+    /// <summary>
+    /// Identifies a property should be represented as a nested component.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class ComponentAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder,
+                                      IDictionaryPropertyGetter, IDictionaryPropertySetter
+    {
+        /// <summary>
+        /// Applies no prefix.
+        /// </summary>
+        public bool NoPrefix
+        {
+            get { return Prefix == ""; }
+            set
+            {
+                if (value)
+                {
+                    Prefix = "";
+                }
+            }
+        }
 
-		/// <summary>
-		/// Gets or sets the prefix.
-		/// </summary>
-		/// <value>The prefix.</value>
-		public string Prefix { get; set; }
+        /// <summary>
+        /// Gets or sets the prefix.
+        /// </summary>
+        /// <value>The prefix.</value>
+        public string Prefix { get; set; }
 
-		#region IDictionaryKeyBuilder Members
+        #region IDictionaryKeyBuilder Members
 
-		string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key,
-		                                    PropertyDescriptor property)
-		{
-			return Prefix ?? key + "_";
-		}
+        string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key,
+                                            PropertyDescriptor property)
+        {
+            return Prefix ?? key + "_";
+        }
 
-		#endregion
+        #endregion
 
-		#region IDictionaryPropertyGetter
+        #region IDictionaryPropertyGetter
 
-		object IDictionaryPropertyGetter.GetPropertyValue(IDictionaryAdapter dictionaryAdapter,
-			string key, object storedValue, PropertyDescriptor property, bool ifExists)
-		{
-			if (storedValue == null)
-			{
-				var component = dictionaryAdapter.This.ExtendedProperties[property.PropertyName];
+        object IDictionaryPropertyGetter.GetPropertyValue(IDictionaryAdapter dictionaryAdapter,
+            string key, object storedValue, PropertyDescriptor property, bool ifExists)
+        {
+            if (storedValue == null)
+            {
+                var component = dictionaryAdapter.This.ExtendedProperties[property.PropertyName];
 
-				if (component == null)
-				{
-					var descriptor = new PropertyDescriptor(property.Property, null);
-					descriptor.AddBehavior(new KeyPrefixAttribute(key));
-					component = dictionaryAdapter.This.Factory.GetAdapter(
-						property.Property.PropertyType, dictionaryAdapter.This.Dictionary, descriptor);
-					dictionaryAdapter.This.ExtendedProperties[property.PropertyName] = component;
-				}
+                if (component == null)
+                {
+                    var descriptor = new PropertyDescriptor(property.Property, null);
+                    descriptor.AddBehavior(new KeyPrefixAttribute(key));
+                    component = dictionaryAdapter.This.Factory.GetAdapter(
+                        property.Property.PropertyType, dictionaryAdapter.This.Dictionary, descriptor);
+                    dictionaryAdapter.This.ExtendedProperties[property.PropertyName] = component;
+                }
 
-				return component;
-			}
+                return component;
+            }
 
-			return storedValue;
-		}
+            return storedValue;
+        }
 
-		#endregion
+        #endregion
 
-		#region IDictionaryPropertySetter Members
+        #region IDictionaryPropertySetter Members
 
-		public bool SetPropertyValue(IDictionaryAdapter dictionaryAdapter,
-			string key, ref object value, PropertyDescriptor property)
-		{
-			dictionaryAdapter.This.ExtendedProperties.Remove(property.PropertyName);
-			return false;
-		}
+        public bool SetPropertyValue(IDictionaryAdapter dictionaryAdapter,
+            string key, ref object value, PropertyDescriptor property)
+        {
+            dictionaryAdapter.This.ExtendedProperties.Remove(property.PropertyName);
+            return false;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

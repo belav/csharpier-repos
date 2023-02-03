@@ -2,7 +2,7 @@
 // NativeInfocardHandleType.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -28,11 +28,11 @@
 
 namespace Mono.ServiceModel.IdentitySelectors.Win32
 {
-	enum NativeInfocardHandleType
-	{
-		Asymmetric = 1,
-		Symmetric,
-		Transform,
-		Hash
-	}
+    enum NativeInfocardHandleType
+    {
+        Asymmetric = 1,
+        Symmetric,
+        Transform,
+        Hash
+    }
 }

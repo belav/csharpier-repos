@@ -36,81 +36,81 @@ namespace MonoTests.System.Data.OracleClient
 [Category ("NotWorking")]
 public class OracleParameter_ctor_SOtypeI : GHTBase
 {
-	public static void Main()
-	{
-		OracleParameter_ctor_SOtypeI tc = new OracleParameter_ctor_SOtypeI();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OracleParameter_ctor_SOtypeI");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OracleParameter_ctor_SOtypeI tc = new OracleParameter_ctor_SOtypeI();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OracleParameter_ctor_SOtypeI");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
-		OracleParameter param = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
+        OracleParameter param = null;
 
-		foreach (OracleType dbtype in Enum.GetValues(typeof(OracleType)))
-		{
+        foreach (OracleType dbtype in Enum.GetValues(typeof(OracleType)))
+        {
 
-			param = new OracleParameter("myParam",dbtype,5);
+            param = new OracleParameter("myParam",dbtype,5);
 
-			try
-			{
-				BeginCase("ctor " + dbtype.ToString());
-				Compare(param != null, true);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("ctor " + dbtype.ToString());
+                Compare(param != null, true);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("name " + dbtype.ToString());
-				Compare(param.ParameterName ,"myParam");
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("name " + dbtype.ToString());
+                Compare(param.ParameterName ,"myParam");
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("size " + dbtype.ToString());
-				Compare(param.Size ,5);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
-		}
+            try
+            {
+                BeginCase("size " + dbtype.ToString());
+                Compare(param.Size ,5);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
+        }
 
-		try
-		{
-			BeginCase("ctor - illegal size ");
-			try
-			{
-				param = new OracleParameter("myParam",OracleType.Int32 ,-5);
-			}
-			catch (Exception ex) {exp = ex;}
-			Compare(exp.GetType().FullName , typeof(ArgumentException).FullName );
-			exp=null;
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("ctor - illegal size ");
+            try
+            {
+                param = new OracleParameter("myParam",OracleType.Int32 ,-5);
+            }
+            catch (Exception ex) {exp = ex;}
+            Compare(exp.GetType().FullName , typeof(ArgumentException).FullName );
+            exp=null;
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-	}
+    }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

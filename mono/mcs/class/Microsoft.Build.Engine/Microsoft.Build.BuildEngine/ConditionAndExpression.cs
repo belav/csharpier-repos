@@ -29,60 +29,60 @@ using System;
 using System.Xml;
 
 namespace Microsoft.Build.BuildEngine {
-	internal sealed class ConditionAndExpression : ConditionExpression {
-	
-		readonly ConditionExpression left;
-		readonly ConditionExpression right;
-		
-		public ConditionAndExpression (ConditionExpression left, ConditionExpression right)
-		{
-			this.left = left;
-			this.right = right;
-		}
-		
-		public ConditionExpression Left {
-			get { return left; }
-		}
-		
-		public ConditionExpression Right {
-			get { return right; }
-		}
-	
-		public override  bool BoolEvaluate (Project context)
-		{
-			if (!left.BoolEvaluate (context))
-				return false;
-			if (!right.BoolEvaluate (context))
-				return false;
-			return true;
-		}
-		
-		
-		public override float NumberEvaluate (Project context)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		public override string StringEvaluate (Project context)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		public override bool CanEvaluateToBool (Project context)
-		{
-			// Short-circuiting, check only left expr, right
-			// would be required only if left == true
-			return left.CanEvaluateToBool (context);
-		}
-		
-		public override bool CanEvaluateToNumber (Project context)
-		{
-			return false;
-		}
-		
-		public override bool CanEvaluateToString (Project context)
-		{
-			return false;
-		}
-	}
+    internal sealed class ConditionAndExpression : ConditionExpression {
+    
+        readonly ConditionExpression left;
+        readonly ConditionExpression right;
+        
+        public ConditionAndExpression (ConditionExpression left, ConditionExpression right)
+        {
+            this.left = left;
+            this.right = right;
+        }
+        
+        public ConditionExpression Left {
+            get { return left; }
+        }
+        
+        public ConditionExpression Right {
+            get { return right; }
+        }
+    
+        public override  bool BoolEvaluate (Project context)
+        {
+            if (!left.BoolEvaluate (context))
+                return false;
+            if (!right.BoolEvaluate (context))
+                return false;
+            return true;
+        }
+        
+        
+        public override float NumberEvaluate (Project context)
+        {
+            throw new NotSupportedException ();
+        }
+        
+        public override string StringEvaluate (Project context)
+        {
+            throw new NotSupportedException ();
+        }
+        
+        public override bool CanEvaluateToBool (Project context)
+        {
+            // Short-circuiting, check only left expr, right
+            // would be required only if left == true
+            return left.CanEvaluateToBool (context);
+        }
+        
+        public override bool CanEvaluateToNumber (Project context)
+        {
+            return false;
+        }
+        
+        public override bool CanEvaluateToString (Project context)
+        {
+            return false;
+        }
+    }
 }

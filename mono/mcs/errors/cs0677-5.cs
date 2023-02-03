@@ -7,5 +7,5 @@ enum E : long
 
 class X
 {
-	volatile E e;
+    volatile E e;
 }

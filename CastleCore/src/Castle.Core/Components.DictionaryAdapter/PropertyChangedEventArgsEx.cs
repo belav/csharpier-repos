@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,28 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System.ComponentModel;
+    using System.ComponentModel;
 
-	public class PropertyChangedEventArgsEx : PropertyChangedEventArgs
-	{
-		private readonly object oldValue;
-		private readonly object newValue;
+    public class PropertyChangedEventArgsEx : PropertyChangedEventArgs
+    {
+        private readonly object oldValue;
+        private readonly object newValue;
 
-		public PropertyChangedEventArgsEx(string propertyName, object oldValue, object newValue)
-			: base(propertyName)
-		{
-			this.oldValue = oldValue;
-			this.newValue = newValue;
-		}
+        public PropertyChangedEventArgsEx(string propertyName, object oldValue, object newValue)
+            : base(propertyName)
+        {
+            this.oldValue = oldValue;
+            this.newValue = newValue;
+        }
 
-		public object OldValue
-		{
-			get { return oldValue; }
-		}
+        public object OldValue
+        {
+            get { return oldValue; }
+        }
 
-		public object NewValue
-		{
-			get { return newValue; }
-		}
-	}
+        public object NewValue
+        {
+            get { return newValue; }
+        }
+    }
 }

@@ -3,15 +3,15 @@
 
 public class Foo<T>
 {
-	public T Create ()
-	{
-		return new T ();
-	}
+    public T Create ()
+    {
+        return new T ();
+    }
 }
 
 class X
 {
-	static void Main ()
-	{
-	}
+    static void Main ()
+    {
+    }
 }

@@ -34,63 +34,63 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks
 {
-	public class UpdateManifest : Task
-	{
-		[MonoTODO]
-		public UpdateManifest ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class UpdateManifest : Task
+    {
+        [MonoTODO]
+        public UpdateManifest ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		[Required]
-		public ITaskItem ApplicationManifest {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        [Required]
+        public ITaskItem ApplicationManifest {
+            get {
+                throw new NotImplementedException ();
+            }
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO]
-		[Required]
-		public string ApplicationPath {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        [Required]
+        public string ApplicationPath {
+            get {
+                throw new NotImplementedException ();
+            }
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO]
-		[Required]
-		public ITaskItem InputManifest {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        [Required]
+        public ITaskItem InputManifest {
+            get {
+                throw new NotImplementedException ();
+            }
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO]
-		[Output]
-		public ITaskItem OutputManifest {
+        [MonoTODO]
+        [Output]
+        public ITaskItem OutputManifest {
                         get {
-				throw new NotImplementedException ();
-			}
+                throw new NotImplementedException ();
+            }
                         set {
                                 throw new NotImplementedException ();
                         }
                 }
 
-		[MonoTODO]
-		public override bool Execute ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override bool Execute ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

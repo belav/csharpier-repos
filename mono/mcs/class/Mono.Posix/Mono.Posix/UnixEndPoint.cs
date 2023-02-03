@@ -2,7 +2,7 @@
 // Mono.Posix.UnixEndPoint: EndPoint derived class for AF_UNIX family sockets.
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -34,85 +34,85 @@ using System.Text;
 
 namespace Mono.Posix
 {
-	[Serializable]
-	[Obsolete ("Use Mono.Unix.UnixEndPoint")]
-	public class UnixEndPoint : EndPoint
-	{
-		string filename;
-		
-		public UnixEndPoint (string filename)
-		{
-			if (filename == null)
-				throw new ArgumentNullException ("filename");
+    [Serializable]
+    [Obsolete ("Use Mono.Unix.UnixEndPoint")]
+    public class UnixEndPoint : EndPoint
+    {
+        string filename;
+        
+        public UnixEndPoint (string filename)
+        {
+            if (filename == null)
+                throw new ArgumentNullException ("filename");
 
-			if (filename == "")
-				throw new ArgumentException ("Cannot be empty.", "filename");
-			this.filename = filename;
-		}
-		
-		public string Filename {
-			get {
-				return(filename);
-			}
-			set {
-				filename=value;
-			}
-		}
+            if (filename == "")
+                throw new ArgumentException ("Cannot be empty.", "filename");
+            this.filename = filename;
+        }
+        
+        public string Filename {
+            get {
+                return(filename);
+            }
+            set {
+                filename=value;
+            }
+        }
 
-		public override AddressFamily AddressFamily {
-			get { return AddressFamily.Unix; }
-		}
+        public override AddressFamily AddressFamily {
+            get { return AddressFamily.Unix; }
+        }
 
-		public override EndPoint Create (SocketAddress socketAddress)
-		{
-			/*
-			 * Should also check this
-			 *
-			int addr = (int) AddressFamily.Unix;
-			if (socketAddress [0] != (addr & 0xFF))
-				throw new ArgumentException ("socketAddress is not a unix socket address.");
+        public override EndPoint Create (SocketAddress socketAddress)
+        {
+            /*
+             * Should also check this
+             *
+            int addr = (int) AddressFamily.Unix;
+            if (socketAddress [0] != (addr & 0xFF))
+                throw new ArgumentException ("socketAddress is not a unix socket address.");
 
-			if (socketAddress [1] != ((addr & 0xFF00) >> 8))
-				throw new ArgumentException ("socketAddress is not a unix socket address.");
-			 */
+            if (socketAddress [1] != ((addr & 0xFF00) >> 8))
+                throw new ArgumentException ("socketAddress is not a unix socket address.");
+             */
 
-			byte [] bytes = new byte [socketAddress.Size - 2];
-			for (int i = 0; i < bytes.Length; i++) {
-				bytes [i] = socketAddress [i + 2];
-			}
+            byte [] bytes = new byte [socketAddress.Size - 2];
+            for (int i = 0; i < bytes.Length; i++) {
+                bytes [i] = socketAddress [i + 2];
+            }
 
-			string name = Encoding.Default.GetString (bytes);
-			return new UnixEndPoint (name);
-		}
+            string name = Encoding.Default.GetString (bytes);
+            return new UnixEndPoint (name);
+        }
 
-		public override SocketAddress Serialize ()
-		{
-			byte [] bytes = Encoding.Default.GetBytes (filename);
-			SocketAddress sa = new SocketAddress (AddressFamily, bytes.Length + 2);
-			// sa [0] -> family low byte, sa [1] -> family high byte
-			for (int i = 0; i < bytes.Length; i++)
-				sa [i + 2] = bytes [i];
+        public override SocketAddress Serialize ()
+        {
+            byte [] bytes = Encoding.Default.GetBytes (filename);
+            SocketAddress sa = new SocketAddress (AddressFamily, bytes.Length + 2);
+            // sa [0] -> family low byte, sa [1] -> family high byte
+            for (int i = 0; i < bytes.Length; i++)
+                sa [i + 2] = bytes [i];
 
-			return sa;
-		}
+            return sa;
+        }
 
-		public override string ToString() {
-			return(filename);
-		}
+        public override string ToString() {
+            return(filename);
+        }
 
-		public override int GetHashCode ()
-		{
-			return filename.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            return filename.GetHashCode ();
+        }
 
-		public override bool Equals (object o)
-		{
-			UnixEndPoint other = o as UnixEndPoint;
-			if (other == null)
-				return false;
+        public override bool Equals (object o)
+        {
+            UnixEndPoint other = o as UnixEndPoint;
+            if (other == null)
+                return false;
 
-			return (other.filename == filename);
-		}
-	}
+            return (other.filename == filename);
+        }
+    }
 }
 

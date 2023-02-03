@@ -35,37 +35,37 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DataPagerFieldItem : Control, INamingContainer, INonBindingContainer
-	{
-		public DataPagerFieldItem (DataPagerField field, DataPager pager)
-		{
-			Pager = pager;
-			PagerField = field;
-		}
+    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class DataPagerFieldItem : Control, INamingContainer, INonBindingContainer
+    {
+        public DataPagerFieldItem (DataPagerField field, DataPager pager)
+        {
+            Pager = pager;
+            PagerField = field;
+        }
 
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			CommandEventArgs args = e as CommandEventArgs;
+        protected override bool OnBubbleEvent (object source, EventArgs e)
+        {
+            CommandEventArgs args = e as CommandEventArgs;
 
-			if (args != null) {
-				RaiseBubbleEvent (this, new DataPagerFieldCommandEventArgs (this, source, args));
-				return true;
-			}
+            if (args != null) {
+                RaiseBubbleEvent (this, new DataPagerFieldCommandEventArgs (this, source, args));
+                return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public DataPager Pager {
-			get;
-			private set;
-		}
+        public DataPager Pager {
+            get;
+            private set;
+        }
 
-		public DataPagerField PagerField {
-			get;
-			private set;
-		}
+        public DataPagerField PagerField {
+            get;
+            private set;
+        }
 
-	}
+    }
 }

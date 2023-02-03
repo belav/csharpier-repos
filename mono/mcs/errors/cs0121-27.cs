@@ -6,15 +6,15 @@ using static G<string>;
 
 class G<T>
 {
-	public static void Foo ()
-	{
-	}
+    public static void Foo ()
+    {
+    }
 }
 
 class Test
 {
-	public static void Main ()
-	{
-		Foo ();
-	}
+    public static void Main ()
+    {
+        Foo ();
+    }
 }

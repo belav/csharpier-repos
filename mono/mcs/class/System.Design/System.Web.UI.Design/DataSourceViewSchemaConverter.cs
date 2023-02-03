@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DataSourceViewSchemaConverter
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -36,48 +36,48 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design {
 
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class DataSourceViewSchemaConverter : TypeConverter
-	{
-		public DataSourceViewSchemaConverter ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class DataSourceViewSchemaConverter : TypeConverter
+    {
+        public DataSourceViewSchemaConverter ()
+        {
+        }
 
-		[MonoTODO]
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context, Type typeFilter)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context, Type typeFilter)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

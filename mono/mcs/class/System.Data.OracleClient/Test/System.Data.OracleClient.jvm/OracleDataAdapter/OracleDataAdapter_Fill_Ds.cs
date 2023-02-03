@@ -33,58 +33,58 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleDataAdapter_Fill_Ds : ADONetTesterClass
-	{
-		[SetUp]
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+    [TestFixture]
+    public class OracleDataAdapter_Fill_Ds : ADONetTesterClass
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-		[TearDown]
-		public void TearDown()
-		{
-		}
+        [TearDown]
+        public void TearDown()
+        {
+        }
 
-		public static void Main()
-		{
-			OracleDataAdapter_Fill_Ds tc = new OracleDataAdapter_Fill_Ds();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataAdapter_Fill_Ds");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+        public static void Main()
+        {
+            OracleDataAdapter_Fill_Ds tc = new OracleDataAdapter_Fill_Ds();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataAdapter_Fill_Ds");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		[Test]
+        [Test]
 #if JAVA
-		[Category("NotWorking")]
+        [Category("NotWorking")]
 #endif
-		public void run()
-		{
-			OracleDataAdapter oleDBda = new OracleDataAdapter();
-			oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
-	
-			base.DbDataAdapter_Fill_Ds((DbDataAdapter)oleDBda);
+        public void run()
+        {
+            OracleDataAdapter oleDBda = new OracleDataAdapter();
+            oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
+    
+            base.DbDataAdapter_Fill_Ds((DbDataAdapter)oleDBda);
 
-		}
-	}
+        }
+    }
 }

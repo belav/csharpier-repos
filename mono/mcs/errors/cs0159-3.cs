@@ -2,13 +2,13 @@
 // Line: 1
 
 class y {
-	static void Main ()
-	{
-		string x = null;
+    static void Main ()
+    {
+        string x = null;
 
-		switch (x){
-			case "": goto case null;
-		}
-	}
+        switch (x){
+            case "": goto case null;
+        }
+    }
 }
-		
+        

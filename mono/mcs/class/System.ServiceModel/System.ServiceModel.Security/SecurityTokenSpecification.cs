@@ -2,7 +2,7 @@
 // SecurityTokenSpecification.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,24 +33,24 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Security
 {
-	public class SecurityTokenSpecification
-	{
-		SecurityToken token;
-		ReadOnlyCollection<IAuthorizationPolicy> policies;
+    public class SecurityTokenSpecification
+    {
+        SecurityToken token;
+        ReadOnlyCollection<IAuthorizationPolicy> policies;
 
-		public SecurityTokenSpecification (SecurityToken token,
-			ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies)
-		{
-			this.token = token;
-			this.policies = tokenPolicies;
-		}
+        public SecurityTokenSpecification (SecurityToken token,
+            ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies)
+        {
+            this.token = token;
+            this.policies = tokenPolicies;
+        }
 
-		public SecurityToken SecurityToken {
-			get { return token; }
-		}
+        public SecurityToken SecurityToken {
+            get { return token; }
+        }
 
-		public ReadOnlyCollection<IAuthorizationPolicy> SecurityTokenPolicies {
-			get { return policies; }
-		}
-	}
+        public ReadOnlyCollection<IAuthorizationPolicy> SecurityTokenPolicies {
+            get { return policies; }
+        }
+    }
 }

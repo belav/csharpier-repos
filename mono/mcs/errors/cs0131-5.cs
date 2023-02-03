@@ -4,14 +4,14 @@
 
 unsafe struct MyStruct
 {
-	public fixed char Name[32];
+    public fixed char Name[32];
 }
 
 unsafe class MainClass
 {
-	public static void Main ()
-	{
-		var str = new MyStruct();
-		str.Name = null;
-	}
+    public static void Main ()
+    {
+        var str = new MyStruct();
+        str.Name = null;
+    }
 }

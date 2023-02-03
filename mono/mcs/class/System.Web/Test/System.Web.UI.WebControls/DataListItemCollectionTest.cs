@@ -1,9 +1,9 @@
 //
 // DataListItemCollectionTest.cs
-//	- Unit tests for System.Web.UI.WebControls.DataListItemCollection
+//    - Unit tests for System.Web.UI.WebControls.DataListItemCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,55 +37,55 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	public class DataListItemCollectionTest {
+    [TestFixture]
+    public class DataListItemCollectionTest {
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void Constructor_Null ()
-		{
-			DataListItemCollection dlic = new DataListItemCollection (null);
-			Assert.IsNotNull (dlic, "ctor");
-			Assert.IsFalse (dlic.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dlic.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (dlic, dlic.SyncRoot), "SyncRoot");
-			// unusable
-			Assert.AreEqual (0, dlic.Count, "NRE");
-		}
+        [Test]
+        [ExpectedException (typeof (NullReferenceException))]
+        public void Constructor_Null ()
+        {
+            DataListItemCollection dlic = new DataListItemCollection (null);
+            Assert.IsNotNull (dlic, "ctor");
+            Assert.IsFalse (dlic.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse (dlic.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue (Object.ReferenceEquals (dlic, dlic.SyncRoot), "SyncRoot");
+            // unusable
+            Assert.AreEqual (0, dlic.Count, "NRE");
+        }
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			ArrayList al = new ArrayList ();
-			DataListItemCollection dlic = new DataListItemCollection (al);
-			Assert.AreEqual (0, dlic.Count, "Count0");
-			Assert.IsFalse (dlic.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dlic.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (dlic, dlic.SyncRoot), "SyncRoot");
+        [Test]
+        public void Constructor_Empty ()
+        {
+            ArrayList al = new ArrayList ();
+            DataListItemCollection dlic = new DataListItemCollection (al);
+            Assert.AreEqual (0, dlic.Count, "Count0");
+            Assert.IsFalse (dlic.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse (dlic.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue (Object.ReferenceEquals (dlic, dlic.SyncRoot), "SyncRoot");
 
-			al.Add (new DataListItem (0, ListItemType.Item));
-			Assert.AreEqual (1, dlic.Count, "Count++");
-			// note: no add/insert/remove/...
-			Assert.IsNotNull (dlic[0], "[0]");
+            al.Add (new DataListItem (0, ListItemType.Item));
+            Assert.AreEqual (1, dlic.Count, "Count++");
+            // note: no add/insert/remove/...
+            Assert.IsNotNull (dlic[0], "[0]");
 
-			al.Clear ();
-			Assert.AreEqual (0, dlic.Count, "Count--");
-			// we can add/remove from the original ArrayList
-		}
+            al.Clear ();
+            Assert.AreEqual (0, dlic.Count, "Count--");
+            // we can add/remove from the original ArrayList
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidCastException))]
-		public void Constructor_WrongType ()
-		{
-			ArrayList al = new ArrayList ();
-			al.Add (String.Empty);
-			// DataListItemCollection only deals with DataListItem so...
+        [Test]
+        [ExpectedException (typeof (InvalidCastException))]
+        public void Constructor_WrongType ()
+        {
+            ArrayList al = new ArrayList ();
+            al.Add (String.Empty);
+            // DataListItemCollection only deals with DataListItem so...
 
-			DataListItemCollection dlic = new DataListItemCollection (al);
-			Assert.AreEqual (1, dlic.Count, "Count0");
+            DataListItemCollection dlic = new DataListItemCollection (al);
+            Assert.AreEqual (1, dlic.Count, "Count0");
 
-			// ... it chokes when accessing the string
-			Assert.AreEqual (String.Empty, dlic[0], "[0]");
-		}
-	}
+            // ... it chokes when accessing the string
+            Assert.AreEqual (String.Empty, dlic[0], "[0]");
+        }
+    }
 }

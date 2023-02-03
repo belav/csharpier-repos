@@ -34,24 +34,24 @@ using System.Drawing.Design;
 
 namespace System.Messaging.Design
 {
-	public class QueuePathEditor : UITypeEditor
-	{
-		[MonoTODO]
-		public QueuePathEditor ()
-		{
-		}
+    public class QueuePathEditor : UITypeEditor
+    {
+        [MonoTODO]
+        public QueuePathEditor ()
+        {
+        }
 
-		[MonoTODO]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 #endif

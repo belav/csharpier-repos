@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,29 +32,29 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("DB242E01-E4D9-11d2-9DDE-000064657374")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIObserver {
+    [Guid ("DB242E01-E4D9-11d2-9DDE-000064657374")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIObserver {
 
 #region nsIObserver
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int observe ([MarshalAs (UnmanagedType.Interface) ]  IntPtr aSubject,
-				[MarshalAs (UnmanagedType.LPStr) ]  string aTopic,
-				[MarshalAs(UnmanagedType.LPWStr) ]  string aData);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int observe ([MarshalAs (UnmanagedType.Interface) ]  IntPtr aSubject,
+                [MarshalAs (UnmanagedType.LPStr) ]  string aTopic,
+                [MarshalAs(UnmanagedType.LPWStr) ]  string aData);
 
 #endregion
-	}
+    }
 
 
-	internal class nsObserver {
-		public static nsIObserver GetProxy (Mono.WebBrowser.IWebBrowser control, nsIObserver obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIObserver).GUID, obj);
-			return o as nsIObserver;
-		}
-	}
+    internal class nsObserver {
+        public static nsIObserver GetProxy (Mono.WebBrowser.IWebBrowser control, nsIObserver obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIObserver).GUID, obj);
+            return o as nsIObserver;
+        }
+    }
 }
 #if example
 
@@ -63,18 +63,18 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class Observer : nsIObserver {
+    internal class Observer : nsIObserver {
 
 #region nsIObserver
-		int nsIObserver.observe ([MarshalAs (UnmanagedType.Interface) ]  IntPtr aSubject,
-				[MarshalAs (UnmanagedType.LPStr) ]  string aTopic,
-				[MarshalAs(UnmanagedType.LPWStr) ]  string aData)
-		{
-			return ;
-		}
+        int nsIObserver.observe ([MarshalAs (UnmanagedType.Interface) ]  IntPtr aSubject,
+                [MarshalAs (UnmanagedType.LPStr) ]  string aTopic,
+                [MarshalAs(UnmanagedType.LPWStr) ]  string aData)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

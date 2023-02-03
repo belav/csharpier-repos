@@ -32,22 +32,22 @@ using System.ComponentModel;
 
 namespace System.Web.Query.Dynamic
 {
-	public class ParseException : Exception
-	{
-		public ParseException (string message, int position)
-			: base (message)
-		{
-			Position = position;
-		}
-		
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public int Position {
-			get;
-			private set;
-		}
-	}
+    public class ParseException : Exception
+    {
+        public ParseException (string message, int position)
+            : base (message)
+        {
+            Position = position;
+        }
+        
+        public override string ToString ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public int Position {
+            get;
+            private set;
+        }
+    }
 }

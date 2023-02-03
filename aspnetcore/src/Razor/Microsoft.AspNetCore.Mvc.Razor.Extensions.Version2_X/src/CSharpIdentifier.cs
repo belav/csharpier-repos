@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -26,7 +26,7 @@ internal static class CSharpIdentifier
         return SanitizeClassName(path);
     }
 
-    // CSharp Spec §2.4.2
+    // CSharp Spec �2.4.2
     private static bool IsIdentifierStart(char character)
     {
         return char.IsLetter(character) ||

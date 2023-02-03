@@ -2,7 +2,7 @@
 // System.Web.UI.ControlCachePolicy
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //      Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -31,116 +31,116 @@ using System.Web.Caching;
 
 namespace System.Web.UI
 {
-	public sealed class ControlCachePolicy
-	{
-		BasePartialCachingControl bpcc;
-		bool cached;
-		
-		internal ControlCachePolicy () : this (null)
-		{
-		}
+    public sealed class ControlCachePolicy
+    {
+        BasePartialCachingControl bpcc;
+        bool cached;
+        
+        internal ControlCachePolicy () : this (null)
+        {
+        }
 
-		internal ControlCachePolicy (BasePartialCachingControl bpcc)
-		{
-			this.bpcc = bpcc;
-		}
-		
-		public bool Cached 
-		{
-			get {
-				AssertBasePartialCachingControl ();
-				return cached;
-			}
-			
-			set {
-				AssertBasePartialCachingControl ();
-				cached = value;
-			}
-		}
+        internal ControlCachePolicy (BasePartialCachingControl bpcc)
+        {
+            this.bpcc = bpcc;
+        }
+        
+        public bool Cached 
+        {
+            get {
+                AssertBasePartialCachingControl ();
+                return cached;
+            }
+            
+            set {
+                AssertBasePartialCachingControl ();
+                cached = value;
+            }
+        }
 
-		public CacheDependency Dependency 
-		{
-			get {
-				AssertBasePartialCachingControl ();
-				return bpcc.Dependency;
-			}
-			set {
-				AssertBasePartialCachingControl ();
-				bpcc.Dependency = value;
-			}
-		}
+        public CacheDependency Dependency 
+        {
+            get {
+                AssertBasePartialCachingControl ();
+                return bpcc.Dependency;
+            }
+            set {
+                AssertBasePartialCachingControl ();
+                bpcc.Dependency = value;
+            }
+        }
 
-		public TimeSpan Duration 
-		{
-			get {
-				AssertBasePartialCachingControl ();
-				return TimeSpan.FromMinutes (bpcc.Duration);
-			}
-			set {
-				AssertBasePartialCachingControl ();
-				bpcc.Duration = value.Minutes;
-			}
-		}
-		public string ProviderName {
-			get {
-				AssertBasePartialCachingControl ();
-				return bpcc.ProviderName;
-			}
-			
-			set {
-				AssertBasePartialCachingControl ();
-				bpcc.ProviderName = value;
-			}
-		}
-		public bool SupportsCaching 
-		{
-			get {
-				return bpcc != null;
-			}
-		}
+        public TimeSpan Duration 
+        {
+            get {
+                AssertBasePartialCachingControl ();
+                return TimeSpan.FromMinutes (bpcc.Duration);
+            }
+            set {
+                AssertBasePartialCachingControl ();
+                bpcc.Duration = value.Minutes;
+            }
+        }
+        public string ProviderName {
+            get {
+                AssertBasePartialCachingControl ();
+                return bpcc.ProviderName;
+            }
+            
+            set {
+                AssertBasePartialCachingControl ();
+                bpcc.ProviderName = value;
+            }
+        }
+        public bool SupportsCaching 
+        {
+            get {
+                return bpcc != null;
+            }
+        }
 
-		public string VaryByControl 
-		{
-			get {
-				AssertBasePartialCachingControl ();
-				return bpcc.VaryByControls;
-			}
-			set {
-				AssertBasePartialCachingControl ();
-				bpcc.VaryByControls = value;
-			}
-		}
+        public string VaryByControl 
+        {
+            get {
+                AssertBasePartialCachingControl ();
+                return bpcc.VaryByControls;
+            }
+            set {
+                AssertBasePartialCachingControl ();
+                bpcc.VaryByControls = value;
+            }
+        }
 
-		public HttpCacheVaryByParams VaryByParams {
-			get {
-				AssertBasePartialCachingControl ();
-				throw new NotImplementedException ();
-			}
-		}
+        public HttpCacheVaryByParams VaryByParams {
+            get {
+                AssertBasePartialCachingControl ();
+                throw new NotImplementedException ();
+            }
+        }
 
-		public void SetExpires (DateTime expirationTime)
-		{
-			AssertBasePartialCachingControl ();
-			bpcc.ExpirationTime = expirationTime;
-		}
+        public void SetExpires (DateTime expirationTime)
+        {
+            AssertBasePartialCachingControl ();
+            bpcc.ExpirationTime = expirationTime;
+        }
 
-		public void SetSlidingExpiration (bool useSlidingExpiration)
-		{
-			AssertBasePartialCachingControl ();
-			bpcc.SlidingExpiration = useSlidingExpiration;
-		}
+        public void SetSlidingExpiration (bool useSlidingExpiration)
+        {
+            AssertBasePartialCachingControl ();
+            bpcc.SlidingExpiration = useSlidingExpiration;
+        }
 
-		public void SetVaryByCustom (string varyByCustom)
-		{
-			AssertBasePartialCachingControl ();
-			bpcc.VaryByCustom = varyByCustom;
-		}
+        public void SetVaryByCustom (string varyByCustom)
+        {
+            AssertBasePartialCachingControl ();
+            bpcc.VaryByCustom = varyByCustom;
+        }
 
-		void AssertBasePartialCachingControl ()
-		{
-			if (bpcc == null)
-				throw new HttpException ("The user control is not associated with a 'BasePartialCachingControl' and is not cacheable.");
-		}
-		
-	}
+        void AssertBasePartialCachingControl ()
+        {
+            if (bpcc == null)
+                throw new HttpException ("The user control is not associated with a 'BasePartialCachingControl' and is not cacheable.");
+        }
+        
+    }
 }

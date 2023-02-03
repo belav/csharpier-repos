@@ -2,7 +2,7 @@
 // System.Configuration.IPersistComponentSettings
 //
 // Authors:
-//	Chris Tosok (toshok@ximian.com)
+//    Chris Tosok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,13 +30,13 @@
 
 namespace System.Configuration
 {
-	public interface IPersistComponentSettings
-	{
-		bool SaveSettings { get; set; }
-		string SettingsKey { get; set; }
+    public interface IPersistComponentSettings
+    {
+        bool SaveSettings { get; set; }
+        string SettingsKey { get; set; }
 
-		void LoadComponentSettings ();
-		void ResetComponentSettings ();
-		void SaveComponentSettings ();
-	}
+        void LoadComponentSettings ();
+        void ResetComponentSettings ();
+        void SaveComponentSettings ();
+    }
 }

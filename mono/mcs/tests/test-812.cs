@@ -6,10 +6,10 @@ enum Foo
 
 namespace N
 {
-	class C
-	{
-		public static void Main ()
-		{
-		}
-	};
+    class C
+    {
+        public static void Main ()
+        {
+        }
+    };
 };

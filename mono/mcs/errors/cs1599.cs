@@ -7,6 +7,6 @@ class C
 {
     public TypedReference Method ()
     {
-		return null;
+        return null;
     }
 }

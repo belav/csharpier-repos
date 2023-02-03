@@ -25,51 +25,51 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public class AttachableMemberIdentifier : IEquatable<AttachableMemberIdentifier>
-	{
-		public AttachableMemberIdentifier (Type declaringType, string memberName)
-		{
-			DeclaringType = declaringType;
-			MemberName = memberName;
-		}
-		
-		public Type DeclaringType { get; private set; }
-		public string MemberName { get; private set; }
-		
-		public static bool operator == (AttachableMemberIdentifier left, AttachableMemberIdentifier right)
-		{
-			return IsNull (left) ? IsNull (right) : left.Equals (right);
-		}
+    public class AttachableMemberIdentifier : IEquatable<AttachableMemberIdentifier>
+    {
+        public AttachableMemberIdentifier (Type declaringType, string memberName)
+        {
+            DeclaringType = declaringType;
+            MemberName = memberName;
+        }
+        
+        public Type DeclaringType { get; private set; }
+        public string MemberName { get; private set; }
+        
+        public static bool operator == (AttachableMemberIdentifier left, AttachableMemberIdentifier right)
+        {
+            return IsNull (left) ? IsNull (right) : left.Equals (right);
+        }
 
-		static bool IsNull (AttachableMemberIdentifier a)
-		{
-			return Object.ReferenceEquals (a, null);
-		}
+        static bool IsNull (AttachableMemberIdentifier a)
+        {
+            return Object.ReferenceEquals (a, null);
+        }
 
-		public static bool operator != (AttachableMemberIdentifier left, AttachableMemberIdentifier right)
-		{
-			return IsNull (left) ? !IsNull (right) : IsNull (right) || left.DeclaringType != right.DeclaringType || left.MemberName != right.MemberName;
-		}
-		
-		public bool Equals (AttachableMemberIdentifier other)
-		{
-			return !IsNull (other) && DeclaringType == other.DeclaringType && MemberName == other.MemberName;
-		}
+        public static bool operator != (AttachableMemberIdentifier left, AttachableMemberIdentifier right)
+        {
+            return IsNull (left) ? !IsNull (right) : IsNull (right) || left.DeclaringType != right.DeclaringType || left.MemberName != right.MemberName;
+        }
+        
+        public bool Equals (AttachableMemberIdentifier other)
+        {
+            return !IsNull (other) && DeclaringType == other.DeclaringType && MemberName == other.MemberName;
+        }
 
-		public override bool Equals (object obj)
-		{
-			var a = obj as AttachableMemberIdentifier;
-			return Equals (a);
-		}
+        public override bool Equals (object obj)
+        {
+            var a = obj as AttachableMemberIdentifier;
+            return Equals (a);
+        }
 
-		public override int GetHashCode ()
-		{
-			return (DeclaringType != null ? DeclaringType.GetHashCode () : 0) << 5 + (MemberName != null ? MemberName.GetHashCode () : 0);
-		}
+        public override int GetHashCode ()
+        {
+            return (DeclaringType != null ? DeclaringType.GetHashCode () : 0) << 5 + (MemberName != null ? MemberName.GetHashCode () : 0);
+        }
 
-		public override string ToString ()
-		{
-			return DeclaringType != null ? String.Concat (DeclaringType.FullName, ".", MemberName) : MemberName;
-		}
-	}
+        public override string ToString ()
+        {
+            return DeclaringType != null ? String.Concat (DeclaringType.FullName, ".", MemberName) : MemberName;
+        }
+    }
 }

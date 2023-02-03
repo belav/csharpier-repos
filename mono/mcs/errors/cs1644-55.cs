@@ -4,8 +4,8 @@
 
 class Text
 {
-	static ref long Foo ()
-	{
-		throw new System.NotImplementedException ();
-	}
+    static ref long Foo ()
+    {
+        throw new System.NotImplementedException ();
+    }
 }

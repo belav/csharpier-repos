@@ -34,10 +34,10 @@ struct ComparablePair<T,U> : IComparable<ComparablePair<T,U>>
 // Sorting soccer world champions by country and year
 
 class MyTest {
-	static void Test ()
-	{
-		new ComparablePair<string,int>("Brazil", 2002);
-	}
+    static void Test ()
+    {
+        new ComparablePair<string,int>("Brazil", 2002);
+    }
 
   public static void Main(string[] args) {
     List<ComparablePair<string,int>> lst 

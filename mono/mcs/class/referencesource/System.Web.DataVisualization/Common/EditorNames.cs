@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 #if WINFORMS_CONTROL
-	namespace System.Windows.Forms.DataVisualization.Charting
+    namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
 #endif

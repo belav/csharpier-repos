@@ -2,7 +2,7 @@
 // ServiceDocumentTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -40,35 +40,35 @@ using QName = System.Xml.XmlQualifiedName;
 
 namespace MonoTests.System.ServiceModel.Syndication
 {
-	[TestFixture]
-	public class ServiceDocumentTest
-	{
-		static XmlWriterSettings settings = new XmlWriterSettings () { OmitXmlDeclaration = true};
+    [TestFixture]
+    public class ServiceDocumentTest
+    {
+        static XmlWriterSettings settings = new XmlWriterSettings () { OmitXmlDeclaration = true};
 
-		[Test]
-		public void ConstructorNullWorkspaces ()
-		{
-			new ServiceDocument (null); // null workspaces is allowed
-		}
+        [Test]
+        public void ConstructorNullWorkspaces ()
+        {
+            new ServiceDocument (null); // null workspaces is allowed
+        }
 
-		[Test]
-		public void GetFormatter ()
-		{
-			var v = new ServiceDocument ();
-			var f = v.GetFormatter ();
-			Assert.IsTrue (f is AtomPub10ServiceDocumentFormatter, "#1");
-			Assert.IsTrue (f.Document == v, "#2");
-		}
+        [Test]
+        public void GetFormatter ()
+        {
+            var v = new ServiceDocument ();
+            var f = v.GetFormatter ();
+            Assert.IsTrue (f is AtomPub10ServiceDocumentFormatter, "#1");
+            Assert.IsTrue (f.Document == v, "#2");
+        }
 
-		[Test]
-		public void Save ()
-		{
-			var v = new ServiceDocument ();
-			var sw = new StringWriter ();
-			using (var xw = XmlWriter.Create (sw, settings))
-				v.Save (xw);
-			Assert.AreEqual ("<app:service xmlns:a10=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" />", sw.ToString ());
-		}
-	}
+        [Test]
+        public void Save ()
+        {
+            var v = new ServiceDocument ();
+            var sw = new StringWriter ();
+            using (var xw = XmlWriter.Create (sw, settings))
+                v.Save (xw);
+            Assert.AreEqual ("<app:service xmlns:a10=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" />", sw.ToString ());
+        }
+    }
 }
 #endif

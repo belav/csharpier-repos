@@ -1,9 +1,9 @@
-﻿//
+//
 // AuthorityKeyIdentifierExtensionTest.cs - NUnit Test Cases for 
-//	Mono.Security.X509.Extensions.AuthorityKeyIdentifierExtension
+//    Mono.Security.X509.Extensions.AuthorityKeyIdentifierExtension
 //
 // Authors:
-//	Lex Li  <support@lextm.com>
+//    Lex Li  <support@lextm.com>
 //
 // Copyright (C) 2014 Lex Li
 // 
@@ -29,94 +29,94 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.X509.Extensions
 {
-	[TestFixture]
-	public class AuthorityKeyIdentifierExtensionTest
-	{
-		private void Empty (AuthorityKeyIdentifierExtension aki)
-		{
-			Assert.IsFalse (aki.Critical, "Critical");
-			Assert.AreEqual ("2.5.29.35", aki.Oid, "Oid");
-			Assert.IsNotNull (aki.Name, "Name");
-			Assert.IsFalse (aki.Name == aki.Oid, "Name!=Oid");
-			Assert.AreEqual (new byte[] {
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00
-			}, aki.Identifier, "Identifier");
-		}
+    [TestFixture]
+    public class AuthorityKeyIdentifierExtensionTest
+    {
+        private void Empty (AuthorityKeyIdentifierExtension aki)
+        {
+            Assert.IsFalse (aki.Critical, "Critical");
+            Assert.AreEqual ("2.5.29.35", aki.Oid, "Oid");
+            Assert.IsNotNull (aki.Name, "Name");
+            Assert.IsFalse (aki.Name == aki.Oid, "Name!=Oid");
+            Assert.AreEqual (new byte[] {
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00
+            }, aki.Identifier, "Identifier");
+        }
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension ();
-			aki.Identifier = new byte[] {
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00
-			};
-			Empty (aki);
-		}
+        [Test]
+        public void Constructor_Empty ()
+        {
+            AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension ();
+            aki.Identifier = new byte[] {
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00
+            };
+            Empty (aki);
+        }
 
-		[Test]
-		public void Constructor_Extension ()
-		{
-			AuthorityKeyIdentifierExtension ext = new AuthorityKeyIdentifierExtension ();
-			ext.Identifier = new byte[] {
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00
-			};
-			AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension (ext);
-			Empty (aki);
-		}
+        [Test]
+        public void Constructor_Extension ()
+        {
+            AuthorityKeyIdentifierExtension ext = new AuthorityKeyIdentifierExtension ();
+            ext.Identifier = new byte[] {
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00
+            };
+            AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension (ext);
+            Empty (aki);
+        }
 
-		[Test]
-		public void Constructor_ASN1 ()
-		{
-			AuthorityKeyIdentifierExtension ext = new AuthorityKeyIdentifierExtension ();
-			ext.Identifier = new byte[] {
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00
-			};
-			AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension (ext.ASN1);
-			Empty (aki);
-		}
+        [Test]
+        public void Constructor_ASN1 ()
+        {
+            AuthorityKeyIdentifierExtension ext = new AuthorityKeyIdentifierExtension ();
+            ext.Identifier = new byte[] {
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00
+            };
+            AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension (ext.ASN1);
+            Empty (aki);
+        }
 
-		[Test]
-		public void AuthorityKeyIdentifier_Critical ()
-		{
-			AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension ();
-			aki.Critical = true;
-			aki.Identifier = new byte[] {
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00
-			};
-			Assert.AreEqual ("30-22-06-03-55-1D-23-01-01-FF-04-18-30-16-80-14-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00", BitConverter.ToString (aki.GetBytes ()), "GetBytes");
+        [Test]
+        public void AuthorityKeyIdentifier_Critical ()
+        {
+            AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension ();
+            aki.Critical = true;
+            aki.Identifier = new byte[] {
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00
+            };
+            Assert.AreEqual ("30-22-06-03-55-1D-23-01-01-FF-04-18-30-16-80-14-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00", BitConverter.ToString (aki.GetBytes ()), "GetBytes");
 
-			AuthorityKeyIdentifierExtension aki2 = new AuthorityKeyIdentifierExtension (aki.ASN1);
-			Assert.IsTrue (aki2.Critical, "Critical");
-			Assert.AreEqual (new byte[] {
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00
-			}, aki2.Identifier, "Identifier");
-		}
+            AuthorityKeyIdentifierExtension aki2 = new AuthorityKeyIdentifierExtension (aki.ASN1);
+            Assert.IsTrue (aki2.Critical, "Critical");
+            Assert.AreEqual (new byte[] {
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00
+            }, aki2.Identifier, "Identifier");
+        }
 
-		[Test]
-		[ExpectedException (typeof(InvalidOperationException))]
-		public void EmptyIdentifier ()
-		{
-			AuthorityKeyIdentifierExtension ext = new AuthorityKeyIdentifierExtension ();
-			AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension (ext);
-			Empty (aki);
-		}
-	}
+        [Test]
+        [ExpectedException (typeof(InvalidOperationException))]
+        public void EmptyIdentifier ()
+        {
+            AuthorityKeyIdentifierExtension ext = new AuthorityKeyIdentifierExtension ();
+            AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension (ext);
+            Empty (aki);
+        }
+    }
 }

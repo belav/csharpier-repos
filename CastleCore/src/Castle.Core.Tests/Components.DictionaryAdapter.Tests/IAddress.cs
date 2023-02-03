@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,24 +14,24 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System.ComponentModel;
+    using System.ComponentModel;
 
-	//[PropagateNotifications(false)]
-	public interface IAddress : IEditableObject, INotifyPropertyChanged, IDataErrorInfo
-	{
-		string Line1 { get; set; }
-		string Line2 { get; set; }
-		string City { get; set; }
-		string State { get; set; }
-		string ZipCode { get; set; }
+    //[PropagateNotifications(false)]
+    public interface IAddress : IEditableObject, INotifyPropertyChanged, IDataErrorInfo
+    {
+        string Line1 { get; set; }
+        string Line2 { get; set; }
+        string City { get; set; }
+        string State { get; set; }
+        string ZipCode { get; set; }
 
-		[Component]
-		IPhone Phone { get; }
+        [Component]
+        IPhone Phone { get; }
 
-		[Component(NoPrefix = true)]
-		IPhone Mobile { get; }
+        [Component(NoPrefix = true)]
+        IPhone Mobile { get; }
 
-		[Component(Prefix = "Emr_")]
-		IPhone Emergency { get; }
-	}
+        [Component(Prefix = "Emr_")]
+        IPhone Emergency { get; }
+    }
 }

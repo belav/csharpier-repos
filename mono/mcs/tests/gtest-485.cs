@@ -9,7 +9,7 @@ public interface ITestSub2 : ITestSub1
 
 class C
 {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

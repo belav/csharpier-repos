@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DataSetFieldSchema
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,54 +35,54 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design {
 
-	public sealed class DataSetFieldSchema : IDataSourceFieldSchema
-	{
-		[MonoTODO]
-		public DataSetFieldSchema (DataColumn column)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class DataSetFieldSchema : IDataSourceFieldSchema
+    {
+        [MonoTODO]
+        public DataSetFieldSchema (DataColumn column)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Type DataType {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool Identity {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool IsReadOnly {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool IsUnique {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public int Length {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool Nullable {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public int Precision {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool PrimaryKey {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public int Scale {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public Type DataType {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public bool Identity {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public bool IsReadOnly {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public bool IsUnique {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public int Length {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public string Name {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public bool Nullable {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public int Precision {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public bool PrimaryKey {
+            get { throw new NotImplementedException (); }
+        }
+        [MonoTODO]
+        public int Scale {
+            get { throw new NotImplementedException (); }
+        }
+    }
 }
 

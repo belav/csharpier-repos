@@ -3,5 +3,5 @@
 
 public class C<T>  where T : struct
 {
-	volatile T t;
+    volatile T t;
 }

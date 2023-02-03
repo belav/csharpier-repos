@@ -17,13 +17,13 @@ namespace Mono.ILASM {
                 private PEAPI.Op op;
 
                 public SimpInstr (PEAPI.Op op, Location loc)
-			: base (loc)
+            : base (loc)
                 {
                         this.op = op;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth, 
-					   PEAPI.CILInstructions cil)
+                       PEAPI.CILInstructions cil)
                 {
                         cil.Inst (op);
                 }

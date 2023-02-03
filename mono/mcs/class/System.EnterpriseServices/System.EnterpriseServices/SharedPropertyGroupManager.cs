@@ -33,37 +33,37 @@ using System.Collections;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[ComVisible (false)]
-	public sealed class SharedPropertyGroupManager : IEnumerable {
+    [ComVisible (false)]
+    public sealed class SharedPropertyGroupManager : IEnumerable {
 
-		#region Constructors
+        #region Constructors
 
-		public SharedPropertyGroupManager ()
-		{
-		}
+        public SharedPropertyGroupManager ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		public SharedPropertyGroup CreatePropertyGroup (string name, ref PropertyLockMode dwIsoMode, ref PropertyReleaseMode dwRelMode, out bool fExist)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SharedPropertyGroup CreatePropertyGroup (string name, ref PropertyLockMode dwIsoMode, ref PropertyReleaseMode dwRelMode, out bool fExist)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public IEnumerator GetEnumerator ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public SharedPropertyGroup Group (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SharedPropertyGroup Group (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

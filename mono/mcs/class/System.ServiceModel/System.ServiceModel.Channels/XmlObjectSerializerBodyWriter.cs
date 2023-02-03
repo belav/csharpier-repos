@@ -2,7 +2,7 @@
 // XmlObjectSerializerBodyWriter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,30 +32,30 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO ("Check how isBuffered works.")]
-	internal class XmlObjectSerializerBodyWriter : BodyWriter
-	{
-		object body;
-		XmlObjectSerializer formatter;
+    [MonoTODO ("Check how isBuffered works.")]
+    internal class XmlObjectSerializerBodyWriter : BodyWriter
+    {
+        object body;
+        XmlObjectSerializer formatter;
 
-		public XmlObjectSerializerBodyWriter (
-			object body, XmlObjectSerializer formatter)
-			: base (true)
-		{
-			this.body = body;
-			this.formatter = formatter;
-		}
+        public XmlObjectSerializerBodyWriter (
+            object body, XmlObjectSerializer formatter)
+            : base (true)
+        {
+            this.body = body;
+            this.formatter = formatter;
+        }
 
-		protected override BodyWriter OnCreateBufferedCopy (
-			int maxBufferSize)
-		{
-			return new XmlObjectSerializerBodyWriter (body, formatter);
-		}
+        protected override BodyWriter OnCreateBufferedCopy (
+            int maxBufferSize)
+        {
+            return new XmlObjectSerializerBodyWriter (body, formatter);
+        }
 
-		protected override void OnWriteBodyContents (
-			XmlDictionaryWriter writer)
-		{
-			formatter.WriteObject (writer, body);
-		}
-	}
+        protected override void OnWriteBodyContents (
+            XmlDictionaryWriter writer)
+        {
+            formatter.WriteObject (writer, body);
+        }
+    }
 }

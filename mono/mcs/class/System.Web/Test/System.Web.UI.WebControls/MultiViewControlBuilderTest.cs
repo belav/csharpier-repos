@@ -1,6 +1,6 @@
-﻿//
+//
 // Authors:
-//	Marek Habersack <mhabersack@novell.com>
+//    Marek Habersack <mhabersack@novell.com>
 //
 // (C) 2010 Novell, Inc (http://novell.com)
 //
@@ -32,25 +32,25 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]
-	public class MultiViewControlBuilderTest
-	{
-		[Test (Description="Just check if it throws any exception")]
-		public void AppendSubBuilder ()
-		{
-			var bldr = new MultiViewControlBuilder ();
-			var subbldr = new ControlBuilder ();
+    [TestFixture]
+    public class MultiViewControlBuilderTest
+    {
+        [Test (Description="Just check if it throws any exception")]
+        public void AppendSubBuilder ()
+        {
+            var bldr = new MultiViewControlBuilder ();
+            var subbldr = new ControlBuilder ();
 
-			bldr.AppendSubBuilder (subbldr);
+            bldr.AppendSubBuilder (subbldr);
 
-			subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (TextBox), "TextBox", null, null, 0, "dummy");
-			bldr.AppendSubBuilder (subbldr);
+            subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (TextBox), "TextBox", null, null, 0, "dummy");
+            bldr.AppendSubBuilder (subbldr);
 
-			subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (View), "View", null, null, 0, "dummy");
-			bldr.AppendSubBuilder (subbldr);
+            subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (View), "View", null, null, 0, "dummy");
+            bldr.AppendSubBuilder (subbldr);
 
-			subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (string), "Literal", null, null, 0, "dummy");
-			bldr.AppendSubBuilder (subbldr);
-		}
-	}
+            subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (string), "Literal", null, null, 0, "dummy");
+            bldr.AppendSubBuilder (subbldr);
+        }
+    }
 }

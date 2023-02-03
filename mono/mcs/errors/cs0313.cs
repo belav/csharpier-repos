@@ -7,12 +7,12 @@ interface I
 
 struct S : I
 {
-	static void Foo<T> (T t) where T : I
-	{
-	}
+    static void Foo<T> (T t) where T : I
+    {
+    }
 
-	static void Test (S? s)
-	{
-		Foo (s);
-	}
+    static void Test (S? s)
+    {
+        Foo (s);
+    }
 }

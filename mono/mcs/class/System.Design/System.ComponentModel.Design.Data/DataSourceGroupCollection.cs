@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DataSourceGroupCollection
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,53 +33,53 @@ using System.Collections;
 
 namespace System.ComponentModel.Design.Data
 {
-	public class DataSourceGroupCollection : CollectionBase
-	{
-		public DataSourceGroupCollection ()
-		{
-		}
+    public class DataSourceGroupCollection : CollectionBase
+    {
+        public DataSourceGroupCollection ()
+        {
+        }
 
-		[MonoTODO]
-		public DataSourceGroup this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public DataSourceGroup this [int index] {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public int Add (DataSourceGroup value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public int Add (DataSourceGroup value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public bool Contains (DataSourceGroup value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool Contains (DataSourceGroup value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void CopyTo (DataSourceGroup [] array, int index)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void CopyTo (DataSourceGroup [] array, int index)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public int IndexOf (DataSourceGroup value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public int IndexOf (DataSourceGroup value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Insert (int index, DataSourceGroup value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Insert (int index, DataSourceGroup value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Remove (DataSourceGroup value)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void Remove (DataSourceGroup value)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

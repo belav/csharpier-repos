@@ -2,7 +2,7 @@
 // System.NullConsoleDriver
 //
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2006 Novell, Inc. (http://www.novell.com)
 //
@@ -30,153 +30,153 @@
 using System.Runtime.InteropServices;
 using System.Text;
 namespace System {
-	class NullConsoleDriver : IConsoleDriver
-	{
-		static readonly ConsoleKeyInfo EmptyConsoleKeyInfo = new ConsoleKeyInfo ('\0', 0, false, false, false);
+    class NullConsoleDriver : IConsoleDriver
+    {
+        static readonly ConsoleKeyInfo EmptyConsoleKeyInfo = new ConsoleKeyInfo ('\0', 0, false, false, false);
 
-		public ConsoleColor BackgroundColor {
-			get { return ConsoleColor.Black; }
-			set {
-			}
-		}
+        public ConsoleColor BackgroundColor {
+            get { return ConsoleColor.Black; }
+            set {
+            }
+        }
 
-		public int BufferHeight {
-			get { return 0; }
-			set {}
-		}
+        public int BufferHeight {
+            get { return 0; }
+            set {}
+        }
 
-		public int BufferWidth {
-			get { return 0; }
-			set {}
-		}
+        public int BufferWidth {
+            get { return 0; }
+            set {}
+        }
 
-		public bool CapsLock {
-			get { return false; }
-		}
+        public bool CapsLock {
+            get { return false; }
+        }
 
-		public int CursorLeft {
-			get { return 0; }
-			set {}
-		}
+        public int CursorLeft {
+            get { return 0; }
+            set {}
+        }
 
-		public int CursorSize {
-			get { return 0; }
-			set { }
-		}
+        public int CursorSize {
+            get { return 0; }
+            set { }
+        }
 
-		public int CursorTop {
-			get { return 0; }
-			set {}
-		}
+        public int CursorTop {
+            get { return 0; }
+            set {}
+        }
 
-		public bool CursorVisible {
-			get { return false; }
-			set {}
-		}
+        public bool CursorVisible {
+            get { return false; }
+            set {}
+        }
 
-		public ConsoleColor ForegroundColor {
-			get { return ConsoleColor.Black; }
-			set {}
-		}
+        public ConsoleColor ForegroundColor {
+            get { return ConsoleColor.Black; }
+            set {}
+        }
 
-		public bool KeyAvailable {
-			get { return false; } // FIXME: throw?
-		}
+        public bool KeyAvailable {
+            get { return false; } // FIXME: throw?
+        }
 
-		public bool Initialized {
-			get { return true; }
-		}
+        public bool Initialized {
+            get { return true; }
+        }
 
-		public int LargestWindowHeight {
-			get { return 0; }
-		}
+        public int LargestWindowHeight {
+            get { return 0; }
+        }
 
-		public int LargestWindowWidth {
-			get { return 0; }
-		}
+        public int LargestWindowWidth {
+            get { return 0; }
+        }
 
-		public bool NumberLock {
-			get { return false; }
-		}
+        public bool NumberLock {
+            get { return false; }
+        }
 
-		public string Title {
-			get { return ""; }
-			set {}
-		}
+        public string Title {
+            get { return ""; }
+            set {}
+        }
 
-		public bool TreatControlCAsInput {
-			get { return false; }
-			set {}
-		}
+        public bool TreatControlCAsInput {
+            get { return false; }
+            set {}
+        }
 
-		public int WindowHeight {
-			get { return 0; }
-			set {}
-		}
+        public int WindowHeight {
+            get { return 0; }
+            set {}
+        }
 
-		public int WindowLeft {
-			get { return 0; }
-			set {}
-		}
+        public int WindowLeft {
+            get { return 0; }
+            set {}
+        }
 
-		public int WindowTop {
-			get { return 0; }
-			set {}
-		}
+        public int WindowTop {
+            get { return 0; }
+            set {}
+        }
 
-		public int WindowWidth {
-			get { return 0; }
-			set {}
-		}
+        public int WindowWidth {
+            get { return 0; }
+            set {}
+        }
 
-		public void Beep (int frequency, int duration)
-		{
-		}
+        public void Beep (int frequency, int duration)
+        {
+        }
 
-		public void Clear ()
-		{
-		}
+        public void Clear ()
+        {
+        }
 
-		public void MoveBufferArea (int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight,
-					int targetLeft, int targetTop, Char sourceChar,
-					ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
-		{
-		}
+        public void MoveBufferArea (int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight,
+                    int targetLeft, int targetTop, Char sourceChar,
+                    ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
+        {
+        }
 
-		public void Init ()
-		{
-		}
+        public void Init ()
+        {
+        }
 
-		public string ReadLine ()
-		{
-			return null;
-		}
+        public string ReadLine ()
+        {
+            return null;
+        }
 
-		public ConsoleKeyInfo ReadKey (bool intercept)
-		{
-			return EmptyConsoleKeyInfo;
-		}
+        public ConsoleKeyInfo ReadKey (bool intercept)
+        {
+            return EmptyConsoleKeyInfo;
+        }
 
-		public void ResetColor ()
-		{
-		}
+        public void ResetColor ()
+        {
+        }
 
-		public void SetBufferSize (int width, int height)
-		{
-		}
+        public void SetBufferSize (int width, int height)
+        {
+        }
 
-		public void SetCursorPosition (int left, int top)
-		{
-		}
+        public void SetCursorPosition (int left, int top)
+        {
+        }
 
-		public void SetWindowPosition (int left, int top)
-		{
-		}
+        public void SetWindowPosition (int left, int top)
+        {
+        }
 
-		public void SetWindowSize (int width, int height)
-		{
-		}
-	}
+        public void SetWindowSize (int width, int height)
+        {
+        }
+    }
 }
 #endif
 

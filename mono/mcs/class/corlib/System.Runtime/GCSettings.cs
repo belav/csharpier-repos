@@ -2,7 +2,7 @@
 // System.Runtime.GCSettings.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,26 +30,26 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Runtime
 {
-	public static class GCSettings
-	{
-		[MonoTODO ("Always returns false")]
-		public static bool IsServerGC {
-			get { return false; }
-		}
+    public static class GCSettings
+    {
+        [MonoTODO ("Always returns false")]
+        public static bool IsServerGC {
+            get { return false; }
+        }
 
-		[MonoTODO ("Always returns GCLatencyMode.Interactive and ignores set")]
-		public static GCLatencyMode LatencyMode {
-			[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-			get { return GCLatencyMode.Interactive; }
-			[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-			set { ; }
-		}
+        [MonoTODO ("Always returns GCLatencyMode.Interactive and ignores set")]
+        public static GCLatencyMode LatencyMode {
+            [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+            get { return GCLatencyMode.Interactive; }
+            [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+            set { ; }
+        }
 
-		public static GCLargeObjectHeapCompactionMode LargeObjectHeapCompactionMode {
-			[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-			get;
-			[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-			set;
-		}
-	}
+        public static GCLargeObjectHeapCompactionMode LargeObjectHeapCompactionMode {
+            [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+            get;
+            [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+            set;
+        }
+    }
 }

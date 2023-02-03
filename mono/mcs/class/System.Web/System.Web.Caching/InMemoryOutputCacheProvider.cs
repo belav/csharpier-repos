@@ -32,37 +32,37 @@ using System.Web;
 
 namespace System.Web.Caching
 {
-	sealed class InMemoryOutputCacheProvider : OutputCacheProvider
-	{
-		const string CACHE_PREFIX = "@InMemoryOCP_";
-		public InMemoryOutputCacheProvider ()
-		{}
+    sealed class InMemoryOutputCacheProvider : OutputCacheProvider
+    {
+        const string CACHE_PREFIX = "@InMemoryOCP_";
+        public InMemoryOutputCacheProvider ()
+        {}
 
-		public override object Add (string key, object entry, DateTime utcExpiry)
-		{
-			return HttpRuntime.InternalCache.Add (CACHE_PREFIX + key, entry, null, utcExpiry.ToLocalTime (), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
-		}
+        public override object Add (string key, object entry, DateTime utcExpiry)
+        {
+            return HttpRuntime.InternalCache.Add (CACHE_PREFIX + key, entry, null, utcExpiry.ToLocalTime (), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+        }
 
-		public override object Get (string key)
-		{
-			return HttpRuntime.InternalCache.Get (CACHE_PREFIX + key);
-		}
+        public override object Get (string key)
+        {
+            return HttpRuntime.InternalCache.Get (CACHE_PREFIX + key);
+        }
 
-		public override void Remove (string key)
-		{
-			HttpRuntime.InternalCache.Remove (CACHE_PREFIX + key);
-		}
+        public override void Remove (string key)
+        {
+            HttpRuntime.InternalCache.Remove (CACHE_PREFIX + key);
+        }
 
-		public override void Set (string key, object entry, DateTime utcExpiry)
-		{
-			Cache cache = HttpRuntime.InternalCache;
-			string cacheKey = CACHE_PREFIX + key;
-			object oldObject = cache.Get (cacheKey);
+        public override void Set (string key, object entry, DateTime utcExpiry)
+        {
+            Cache cache = HttpRuntime.InternalCache;
+            string cacheKey = CACHE_PREFIX + key;
+            object oldObject = cache.Get (cacheKey);
 
-			if (oldObject != null)
-				cache.Remove (cacheKey);
-			
-			cache.Add (cacheKey, entry, null, utcExpiry.ToLocalTime (), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
-		}
-	}
+            if (oldObject != null)
+                cache.Remove (cacheKey);
+            
+            cache.Add (cacheKey, entry, null, utcExpiry.ToLocalTime (), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+        }
+    }
 }

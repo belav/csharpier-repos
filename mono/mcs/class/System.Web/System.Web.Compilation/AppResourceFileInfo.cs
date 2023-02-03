@@ -32,21 +32,21 @@ using System.IO;
 
 namespace System.Web.Compilation 
 {
-	class AppResourceFileInfo
-	{
-		public readonly bool Embeddable;
-		public readonly bool Compilable;
-		public readonly FileInfo Info;
-		public readonly AppResourceFileKind Kind;
-		public bool Seen;
-		
-		public AppResourceFileInfo (FileInfo info, AppResourceFileKind kind)
-		{
-			this.Embeddable = (kind == AppResourceFileKind.Resource || kind == AppResourceFileKind.Binary);
-			this.Compilable = (kind == AppResourceFileKind.ResX);
-			this.Info = info;
-			this.Kind = kind;
-			this.Seen = false;
-		}
-	};
+    class AppResourceFileInfo
+    {
+        public readonly bool Embeddable;
+        public readonly bool Compilable;
+        public readonly FileInfo Info;
+        public readonly AppResourceFileKind Kind;
+        public bool Seen;
+        
+        public AppResourceFileInfo (FileInfo info, AppResourceFileKind kind)
+        {
+            this.Embeddable = (kind == AppResourceFileKind.Resource || kind == AppResourceFileKind.Binary);
+            this.Compilable = (kind == AppResourceFileKind.ResX);
+            this.Info = info;
+            this.Kind = kind;
+            this.Seen = false;
+        }
+    };
 };

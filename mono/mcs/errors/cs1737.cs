@@ -3,7 +3,7 @@
 
 class C
 {
-	public static void Test (byte a = 1, int u)
-	{
-	}
+    public static void Test (byte a = 1, int u)
+    {
+    }
 }

@@ -2,7 +2,7 @@
 // TypeCache.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,29 +29,29 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-	struct TypeCache {
-		private readonly string full_name;
-		private TypeNode cache;
-		private bool cache_is_valid;
-		private bool have_type;
+    struct TypeCache {
+        private readonly string full_name;
+        private TypeNode cache;
+        private bool cache_is_valid;
+        private bool have_type;
 
-		public TypeCache (string fullName)
-		{
-			this.cache_is_valid = false;
-			this.have_type = false;
-			this.cache = default(TypeNode);
-			this.full_name = fullName;
-		}
+        public TypeCache (string fullName)
+        {
+            this.cache_is_valid = false;
+            this.have_type = false;
+            this.cache = default(TypeNode);
+            this.full_name = fullName;
+        }
 
-		public bool TryGet (IMetaDataProvider mdProvider, out TypeNode type)
-		{
-			if (!this.cache_is_valid) {
-				this.cache_is_valid = true;
-				this.have_type = mdProvider.TryGetSystemType (this.full_name, out this.cache);
-			}
+        public bool TryGet (IMetaDataProvider mdProvider, out TypeNode type)
+        {
+            if (!this.cache_is_valid) {
+                this.cache_is_valid = true;
+                this.have_type = mdProvider.TryGetSystemType (this.full_name, out this.cache);
+            }
 
-			type = this.cache;
-			return this.have_type;
-		}
-	}
+            type = this.cache;
+            return this.have_type;
+        }
+    }
 }

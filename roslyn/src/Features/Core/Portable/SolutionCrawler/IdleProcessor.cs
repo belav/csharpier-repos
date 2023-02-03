@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -117,7 +117,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // The delay terminated early to accommodate a blocking operation. Make sure to yield so low
                     // priority (on idle) operations get a chance to be triggered.
                     //
-                    // 📝 At the time this was discovered, it was not clear exactly why the yield (previously delay)
+                    // ?? At the time this was discovered, it was not clear exactly why the yield (previously delay)
                     // was needed in order to avoid live-lock scenarios.
                     await Task.Yield().ConfigureAwait(false);
                     return false;

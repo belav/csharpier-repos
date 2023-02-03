@@ -2,5 +2,5 @@
 // Line: 5
 
 class T {
-	char c = '';
+    char c = '';
 }

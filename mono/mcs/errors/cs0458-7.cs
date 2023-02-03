@@ -6,14 +6,14 @@ using System;
 
 enum MyEnum
 {
-	Value_1
+    Value_1
 }
 
 class C
 {
-	public static void Main ()
-	{
-		var d = MyEnum.Value_1;
-		var x = d & null;
-	}
+    public static void Main ()
+    {
+        var d = MyEnum.Value_1;
+        var x = d & null;
+    }
 }

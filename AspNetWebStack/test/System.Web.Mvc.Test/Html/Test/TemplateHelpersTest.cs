@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections;
@@ -1064,7 +1064,7 @@ namespace System.Web.Mvc.Html.Test
                                                                null /* additionalViewData */, ExecuteTemplateSpy);
 
                 // Assert
-                Assert.Equal("Model = 18/11/2009 04:12:08 p. m., ModelType = System.DateTime, RealModelType = System.DateTime, PropertyName = MyProperty, FormattedModelValue = miércoles, 18 de noviembre de 2009 04:12:08 p. m., HtmlFieldPrefix = FieldPrefix.htmlFieldName, TemplateName = templateName, Mode = ReadOnly", result);
+                Assert.Equal("Model = 18/11/2009 04:12:08 p. m., ModelType = System.DateTime, RealModelType = System.DateTime, PropertyName = MyProperty, FormattedModelValue = mi�rcoles, 18 de noviembre de 2009 04:12:08 p. m., HtmlFieldPrefix = FieldPrefix.htmlFieldName, TemplateName = templateName, Mode = ReadOnly", result);
             }
             finally
             {

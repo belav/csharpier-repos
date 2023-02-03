@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using SharedTypes;
@@ -121,8 +121,8 @@ namespace DllImportGenerator.IntegrationTests
             return new()
             {
                 "ABCdef 123$%^",
-                "🍜 !! 🍜 !!",
-                "🌲 木 🔥 火 🌾 土 🛡 金 🌊 水" ,
+                "?? !! ?? !!",
+                "?? ? ?? ? ?? ? ?? ? ?? ?" ,
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit.",
                 string.Empty,
                 null

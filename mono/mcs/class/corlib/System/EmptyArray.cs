@@ -2,7 +2,7 @@
 // EmptyArray.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2012 Xamarin, Inc (http://www.xamarin.com)
 //
@@ -28,8 +28,8 @@
 
 namespace System
 {
-	static class EmptyArray<T>
-	{
-		public static readonly T[] Value = new T [0];
-	}
+    static class EmptyArray<T>
+    {
+        public static readonly T[] Value = new T [0];
+    }
 }

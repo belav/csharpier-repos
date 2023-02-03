@@ -124,20 +124,20 @@ namespace Mono.Remoting.Channels.Unix
         internal static string ParseUnixURL (string url, out string objectURI)
         {
             // format: "unix:///path/to/unix/socket?/path/to/object"
-			
+            
             objectURI = null;
-			
-			if (!url.StartsWith ("unix://")) return null;
-			
-			int i = url.IndexOf ('?');
-			if (i == -1) return url.Substring (7);
-			
-			objectURI = url.Substring (i+1);
-			
+            
+            if (!url.StartsWith ("unix://")) return null;
+            
+            int i = url.IndexOf ('?');
+            if (i == -1) return url.Substring (7);
+            
+            objectURI = url.Substring (i+1);
+            
             if (objectURI.Length == 0)
                 objectURI = null;
-				
-			return url.Substring (7, i - 7);
+                
+            return url.Substring (7, i - 7);
         }
     }
 }

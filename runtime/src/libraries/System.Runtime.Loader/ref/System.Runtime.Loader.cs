@@ -34,8 +34,8 @@ namespace System.Runtime.CompilerServices
                     AllowMultiple=false, Inherited=false)]
     public class MetadataUpdateOriginalTypeAttribute : Attribute
     {
-	public MetadataUpdateOriginalTypeAttribute(Type originalType) { throw null; }
-	public Type OriginalType { get { throw null; } }
+    public MetadataUpdateOriginalTypeAttribute(Type originalType) { throw null; }
+    public Type OriginalType { get { throw null; } }
     }
 }
 namespace System.Runtime.Loader

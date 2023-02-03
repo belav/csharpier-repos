@@ -4,9 +4,9 @@
 
 class C
 {
-	static void Foo()
-	{
-		ulong a = 100;
-		var res = a << null;
-	}
+    static void Foo()
+    {
+        ulong a = 100;
+        var res = a << null;
+    }
 }

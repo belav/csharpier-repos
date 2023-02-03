@@ -3,5 +3,5 @@
 
 interface I
 {
-	async void M ();
+    async void M ();
 }

@@ -32,65 +32,65 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	public class ImageKeyConverter : StringConverter
-	{
-		#region Constructors
-		public ImageKeyConverter () { }
-		#endregion Constructors
+    public class ImageKeyConverter : StringConverter
+    {
+        #region Constructors
+        public ImageKeyConverter () { }
+        #endregion Constructors
 
-		#region Protected Properties
-		protected virtual bool IncludeNoneAsStandardValue {
-			get { return true; }
-		}
-		#endregion Protected Properties
+        #region Protected Properties
+        protected virtual bool IncludeNoneAsStandardValue {
+            get { return true; }
+        }
+        #endregion Protected Properties
 
-		#region Public Methods
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-		{
-			if (sourceType == typeof (string))
-				return true;
+        #region Public Methods
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof (string))
+                return true;
 
-			return false;
-		}
-		
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			if (value != null && value is string)
-				return (string) value;
-			else
-				return base.ConvertFrom (context, culture, value);
-		}
+            return false;
+        }
+        
+        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value != null && value is string)
+                return (string) value;
+            else
+                return base.ConvertFrom (context, culture, value);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
-						  object value, Type destinationType)
-		{
-			if (value == null)
-				return "(none)";
-			else if (destinationType == typeof (string)) {
-				if (value is string && (string) value == string.Empty)
-					return "(none)";
-				else
-					return value.ToString ();
-			}
-			else
-				return base.ConvertTo (context, culture, value, destinationType);
-		}
+        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
+                          object value, Type destinationType)
+        {
+            if (value == null)
+                return "(none)";
+            else if (destinationType == typeof (string)) {
+                if (value is string && (string) value == string.Empty)
+                    return "(none)";
+                else
+                    return value.ToString ();
+            }
+            else
+                return base.ConvertTo (context, culture, value, destinationType);
+        }
 
-		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			string[] stdVal = new string[] { string.Empty };
-			return new TypeConverter.StandardValuesCollection (stdVal);
-		}
+        public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        {
+            string[] stdVal = new string[] { string.Empty };
+            return new TypeConverter.StandardValuesCollection (stdVal);
+        }
 
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			return true;
-		}
+        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			return true;
-		}
-		#endregion Public Methods
-	}
+        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        {
+            return true;
+        }
+        #endregion Public Methods
+    }
 }

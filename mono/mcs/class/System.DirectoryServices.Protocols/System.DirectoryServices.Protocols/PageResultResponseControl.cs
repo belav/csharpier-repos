@@ -30,15 +30,15 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class PageResultResponseControl : DirectoryControl
-	{
-		internal PageResultResponseControl ()
-			: base (null, null, false, false)
-		{
-		}
+    public class PageResultResponseControl : DirectoryControl
+    {
+        internal PageResultResponseControl ()
+            : base (null, null, false, false)
+        {
+        }
 
-		public byte [] Cookie { get; set; }
-		[MonoTODO]
-		public int TotalCount { get; private set; }
-	}
+        public byte [] Cookie { get; set; }
+        [MonoTODO]
+        public int TotalCount { get; private set; }
+    }
 }

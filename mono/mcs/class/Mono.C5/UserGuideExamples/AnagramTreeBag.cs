@@ -26,7 +26,7 @@
 
 using System;
 using System.IO;                        // StreamReader, TextReader
-using System.Text;			// Encoding
+using System.Text;            // Encoding
 using System.Text.RegularExpressions;   // Regex
 using C5;
 using SCG = System.Collections.Generic;
@@ -52,9 +52,9 @@ namespace AnagramTreeBag
       foreach (SCG.IEnumerable<String> anagramClass in classes)
       {
         count++;
-	// foreach (String s in anagramClass)
-	//   Console.Write(s + " ");
-	// Console.WriteLine();
+    // foreach (String s in anagramClass)
+    //   Console.Write(s + " ");
+    // Console.WriteLine();
       }
       Console.WriteLine("{0} non-trivial anagram classes", count);
       Console.WriteLine(t.Check());

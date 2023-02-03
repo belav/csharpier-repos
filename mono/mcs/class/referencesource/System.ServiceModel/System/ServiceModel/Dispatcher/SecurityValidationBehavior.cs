@@ -1073,7 +1073,7 @@ namespace System.ServiceModel.Dispatcher
                     (binding is NetNamedPipeBinding) ||
 #pragma warning disable 0618
                     (binding is NetPeerTcpBinding) ||
-#pragma warning restore 0618	                    
+#pragma warning restore 0618                        
                     (binding is WSDualHttpBinding) ||
                     (binding is WSFederationHttpBinding) ||
                     (binding is WSHttpBinding) ||

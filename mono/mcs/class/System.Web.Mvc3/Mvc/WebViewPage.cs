@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web.Mvc.Resources;

@@ -2,7 +2,7 @@
 // System.Web.UI.ExpressionBinding.cs
 //
 // Authors:
-// 	Sanjay Gupta gsanjay@novell.com)
+//     Sanjay Gupta gsanjay@novell.com)
 //
 // (C) 2004-2010 Novell, Inc. (http://www.novell.com)
 //
@@ -31,64 +31,64 @@
 using System;
 
 namespace System.Web.UI {
-	public sealed class ExpressionBinding
-	{
-		string propertyName;
-		Type propertyType;
-		string expression;
-        	string prefix;
-        	bool generated;
+    public sealed class ExpressionBinding
+    {
+        string propertyName;
+        Type propertyType;
+        string expression;
+            string prefix;
+            bool generated;
 
-        	public ExpressionBinding (string propertyName, Type propertyType, 
-					string expressionPrefix, string expression)
-		{
-			this.propertyName = propertyName;
-			this.propertyType = propertyType;
-            		this.prefix = expressionPrefix;
-			this.expression = expression;            
-            		this.generated = false;
-		}
+            public ExpressionBinding (string propertyName, Type propertyType, 
+                    string expressionPrefix, string expression)
+        {
+            this.propertyName = propertyName;
+            this.propertyType = propertyType;
+                    this.prefix = expressionPrefix;
+            this.expression = expression;            
+                    this.generated = false;
+        }
 
-		public string Expression {
-			get { return expression; }
-			set { expression = value; }
-		}
+        public string Expression {
+            get { return expression; }
+            set { expression = value; }
+        }
 
-        	public string ExpressionPrefix {
-			get { return prefix; }
-			set { prefix = value; }
-		}
+            public string ExpressionPrefix {
+            get { return prefix; }
+            set { prefix = value; }
+        }
         
-        	public bool Generated {
-            		get { return generated; }
-        	}
+            public bool Generated {
+                    get { return generated; }
+            }
 
-		public string PropertyName {
-			get { return propertyName; }
-		}
+        public string PropertyName {
+            get { return propertyName; }
+        }
 
-		public Type PropertyType {
-			get { return propertyType; }
-		}
+        public Type PropertyType {
+            get { return propertyType; }
+        }
 
-		public override bool Equals (object obj)
-		{
-            		if (!(obj is ExpressionBinding))
-                		return false;
+        public override bool Equals (object obj)
+        {
+                    if (!(obj is ExpressionBinding))
+                        return false;
 
-            		ExpressionBinding o = (ExpressionBinding)obj;
-            		return (o.Expression == expression &&
-                		o.ExpressionPrefix == prefix &&
-				o.PropertyName == propertyName &&
-				o.PropertyType == propertyType);
-		}
+                    ExpressionBinding o = (ExpressionBinding)obj;
+                    return (o.Expression == expression &&
+                        o.ExpressionPrefix == prefix &&
+                o.PropertyName == propertyName &&
+                o.PropertyType == propertyType);
+        }
 
-		public override int GetHashCode ()
-		{
-			return propertyName.GetHashCode () +
-			       (propertyType.GetHashCode () << 1) +
-			       (prefix.GetHashCode () << 2) +
-                   		(expression.GetHashCode () << 3);
-		}
-	}
+        public override int GetHashCode ()
+        {
+            return propertyName.GetHashCode () +
+                   (propertyType.GetHashCode () << 1) +
+                   (prefix.GetHashCode () << 2) +
+                           (expression.GetHashCode () << 3);
+        }
+    }
 }

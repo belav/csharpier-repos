@@ -3,10 +3,10 @@
 // Compiler options: -unsafe
 
 unsafe class X {
-	static void Main ()
-	{
-		int a = 0;
-		if (*a == 0)
-			return;
-	}
+    static void Main ()
+    {
+        int a = 0;
+        if (*a == 0)
+            return;
+    }
 }

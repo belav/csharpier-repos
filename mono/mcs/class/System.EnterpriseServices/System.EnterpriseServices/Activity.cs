@@ -31,45 +31,45 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
 
-	[ComVisible(false)]
-	public sealed class Activity {
+    [ComVisible(false)]
+    public sealed class Activity {
 
-		#region Constructors
+        #region Constructors
 
-		[MonoTODO]
-		public Activity (ServiceConfig cfg)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Activity (ServiceConfig cfg)
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		public void AsynchronousCall (IServiceCall serviceCall)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void AsynchronousCall (IServiceCall serviceCall)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void BindToCurrentThread ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void BindToCurrentThread ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void SynchronousCall (IServiceCall serviceCall)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void SynchronousCall (IServiceCall serviceCall)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void UnbindFromThread ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void UnbindFromThread ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

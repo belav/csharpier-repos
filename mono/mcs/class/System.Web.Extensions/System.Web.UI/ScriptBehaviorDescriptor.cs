@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptBehaviorDescriptor.cs
 //
 // Author:
@@ -33,59 +33,59 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public class ScriptBehaviorDescriptor : ScriptComponentDescriptor
-	{
-		string _name;
-		bool _nameSet;
-		
-		public ScriptBehaviorDescriptor (string type, string elementID)
-			: base (type) {
-			if (String.IsNullOrEmpty (elementID))
-				throw new ArgumentException ("Value cannot be null or empty.", "elementID");
-			ElementIDInternal = elementID;
-		}
+    public class ScriptBehaviorDescriptor : ScriptComponentDescriptor
+    {
+        string _name;
+        bool _nameSet;
+        
+        public ScriptBehaviorDescriptor (string type, string elementID)
+            : base (type) {
+            if (String.IsNullOrEmpty (elementID))
+                throw new ArgumentException ("Value cannot be null or empty.", "elementID");
+            ElementIDInternal = elementID;
+        }
 
-		public override string ClientID {
-			get {
-				string clientId = base.ClientID;
-				if (String.IsNullOrEmpty (clientId))
-					return String.Format ("{0}${1}", ElementID, Name);
-				return clientId;
-			}
-		}
+        public override string ClientID {
+            get {
+                string clientId = base.ClientID;
+                if (String.IsNullOrEmpty (clientId))
+                    return String.Format ("{0}${1}", ElementID, Name);
+                return clientId;
+            }
+        }
 
-		public string ElementID {
-			get {
-				return ElementIDInternal;
-			}
-		}
+        public string ElementID {
+            get {
+                return ElementIDInternal;
+            }
+        }
 
-		public string Name {
-			get {
-				if (String.IsNullOrEmpty (_name))
-					_name = GetNameFromType (Type);
-				return _name;
-			}
-			set {
-				_name = value;
-				_nameSet = true;
-			}
-		}
+        public string Name {
+            get {
+                if (String.IsNullOrEmpty (_name))
+                    _name = GetNameFromType (Type);
+                return _name;
+            }
+            set {
+                _name = value;
+                _nameSet = true;
+            }
+        }
 
-		static string GetNameFromType (string Type) {
-			int lastIndex = Type.LastIndexOf ('.') + 1;
-			if (lastIndex > 0 && lastIndex < Type.Length)
-				return Type.Substring (lastIndex);
+        static string GetNameFromType (string Type) {
+            int lastIndex = Type.LastIndexOf ('.') + 1;
+            if (lastIndex > 0 && lastIndex < Type.Length)
+                return Type.Substring (lastIndex);
 
-			return Type;
-		}
+            return Type;
+        }
 
-		protected internal override string GetScript ()
-		{
-			if (_nameSet && !String.IsNullOrEmpty (_name))
-				AddProperty ("name", _name);
-			
-			return base.GetScript ();
-		}
-	}
+        protected internal override string GetScript ()
+        {
+            if (_nameSet && !String.IsNullOrEmpty (_name))
+                AddProperty ("name", _name);
+            
+            return base.GetScript ();
+        }
+    }
 }

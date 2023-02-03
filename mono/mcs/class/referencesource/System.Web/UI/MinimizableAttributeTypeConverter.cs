@@ -9,9 +9,9 @@ namespace System.Web.UI {
     using System.ComponentModel;
     using System.Globalization;
 
-	/// <summary>
-	/// Summary description for MinimizableAttributeTypeConverter.
-	/// </summary>
+    /// <summary>
+    /// Summary description for MinimizableAttributeTypeConverter.
+    /// </summary>
     internal class MinimizableAttributeTypeConverter : BooleanConverter {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
             if (sourceType == typeof(string)) {

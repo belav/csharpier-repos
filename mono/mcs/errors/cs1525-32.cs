@@ -6,7 +6,7 @@ interface IFoo<T>
 }
 
 public class Bar {
-	public void GetItemCommand<IFoo<int>>()
-	{
-	}
+    public void GetItemCommand<IFoo<int>>()
+    {
+    }
 }

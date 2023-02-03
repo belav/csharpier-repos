@@ -5,15 +5,15 @@
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
 //=================================================================
-//  File:		AnnotationConverters.cs
+//  File:        AnnotationConverters.cs
 //
-//  Namespace:	DataVisualization.Charting
+//  Namespace:    DataVisualization.Charting
 //
-//	Classes:	AnchorPointValueConverter, AnnotationAxisValueConverter
+//    Classes:    AnchorPointValueConverter, AnnotationAxisValueConverter
 //
-//  Purpose:	Annotation Converters.
+//  Purpose:    Annotation Converters.
 //
-//	Reviewed:	
+//    Reviewed:    
 //
 //===================================================================
 
@@ -31,11 +31,11 @@ using System.Drawing.Design;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 #if Microsoft_CONTROL
-	using System.Windows.Forms.DataVisualization.Charting;
-	using System.Windows.Forms.DataVisualization.Charting.Data;
-	using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-	using System.Windows.Forms.DataVisualization.Charting.Utilities;
-	using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+    using System.Windows.Forms.DataVisualization.Charting;
+    using System.Windows.Forms.DataVisualization.Charting.Data;
+    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+    using System.Windows.Forms.DataVisualization.Charting.Utilities;
+    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
 using System.Web;
 using System.Web.UI;
@@ -47,28 +47,28 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
 #endregion
 
 #if Microsoft_CONTROL
-	namespace System.Windows.Forms.DataVisualization.Charting
+    namespace System.Windows.Forms.DataVisualization.Charting
 #else
     namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
-	/// Converts anchor data point to string name.
-	/// </summary>
-	internal class AnchorPointValueConverter : TypeConverter
-	{
-		#region Converter methods
+    /// Converts anchor data point to string name.
+    /// </summary>
+    internal class AnchorPointValueConverter : TypeConverter
+    {
+        #region Converter methods
 
-	/// <summary>
-	/// Converts anchor data point to string name.
-	/// </summary>
-	/// <param name="context">Descriptor context.</param>
-	/// <param name="culture">Culture information.</param>
-	/// <param name="value">Value to convert.</param>
-	/// <param name="destinationType">Convertion destination type.</param>
-	/// <returns>Converted object.</returns>
-	public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-	{
+    /// <summary>
+    /// Converts anchor data point to string name.
+    /// </summary>
+    /// <param name="context">Descriptor context.</param>
+    /// <param name="culture">Culture information.</param>
+    /// <param name="value">Value to convert.</param>
+    /// <param name="destinationType">Convertion destination type.</param>
+    /// <returns>Converted object.</returns>
+    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
+    {
         if (destinationType == typeof(string))
         {
             if (value == null)
@@ -87,27 +87,27 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
             }
         }
 
-		// Call base class
-		return base.ConvertTo(context, culture, value, destinationType);
-	}
-		#endregion
-	}
+        // Call base class
+        return base.ConvertTo(context, culture, value, destinationType);
+    }
+        #endregion
+    }
 
-	/// <summary>
-	/// Converts anchor data point to string name.
-	/// </summary>
+    /// <summary>
+    /// Converts anchor data point to string name.
+    /// </summary>
     internal class AnnotationAxisValueConverter : TypeConverter
-	{
-		#region Converter methods
+    {
+        #region Converter methods
 
-		/// <summary>
-		/// Converts axis associated with anootation to string.
-		/// </summary>
-		/// <param name="context">Descriptor context.</param>
-		/// <param name="culture">Culture information.</param>
-		/// <param name="value">Value to convert.</param>
-		/// <param name="destinationType">Convertion destination type.</param>
-		/// <returns>Converted object.</returns>
+        /// <summary>
+        /// Converts axis associated with anootation to string.
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <param name="culture">Culture information.</param>
+        /// <param name="value">Value to convert.</param>
+        /// <param name="destinationType">Convertion destination type.</param>
+        /// <returns>Converted object.</returns>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(string))
@@ -130,7 +130,7 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
             // Call base class
             return base.ConvertTo(context, culture, value, destinationType);
         }
-		#endregion
-	}
+        #endregion
+    }
 }
 

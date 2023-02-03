@@ -2,7 +2,7 @@
 // UntrustedRecipientException.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,28 +30,28 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-	[Serializable]
-	public class UntrustedRecipientException : Exception
-	{
-		public UntrustedRecipientException ()
-			: this ("the InfoCard user cancelled the operation.")
-		{
-		}
+    [Serializable]
+    public class UntrustedRecipientException : Exception
+    {
+        public UntrustedRecipientException ()
+            : this ("the InfoCard user cancelled the operation.")
+        {
+        }
 
-		public UntrustedRecipientException (string message)
-			: this (message, null)
-		{
-		}
+        public UntrustedRecipientException (string message)
+            : this (message, null)
+        {
+        }
 
-		protected UntrustedRecipientException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected UntrustedRecipientException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
 
-		public UntrustedRecipientException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-	}
+        public UntrustedRecipientException (string message, Exception innerException)
+            : base (message, innerException)
+        {
+        }
+    }
 }

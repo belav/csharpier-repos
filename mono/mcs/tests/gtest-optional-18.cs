@@ -4,13 +4,13 @@ using System;
 
 public class C
 {
-	static void Test (decimal amt = 1)
-	{
-	}
+    static void Test (decimal amt = 1)
+    {
+    }
 
-	public static int Main ()
-	{
-		Test ();
-		return 0;
-	}
+    public static int Main ()
+    {
+        Test ();
+        return 0;
+    }
 }

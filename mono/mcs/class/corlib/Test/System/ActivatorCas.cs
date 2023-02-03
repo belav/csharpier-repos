@@ -2,7 +2,7 @@
 // ActivatorCas.cs - CAS unit tests for System.Activator
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,39 +35,39 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ActivatorCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ActivatorCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		// we use reflection to call Activator as the GetObject methods are protected 
-		// by LinkDemand (which will be converted into full demand, i.e. a stack walk)
-		// when reflection is used (i.e. it gets testable).
+        // we use reflection to call Activator as the GetObject methods are protected 
+        // by LinkDemand (which will be converted into full demand, i.e. a stack walk)
+        // when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, RemotingConfiguration = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetObject2 ()
-		{
-			Type[] parameters = new Type [2] { typeof (Type), typeof (string) };
-			MethodInfo mi = typeof (Activator).GetMethod ("GetObject", parameters);
-			Assert.IsNotNull (mi.Invoke (null, new object [2] { typeof (object), String.Empty }), "GetObject");
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, RemotingConfiguration = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void GetObject2 ()
+        {
+            Type[] parameters = new Type [2] { typeof (Type), typeof (string) };
+            MethodInfo mi = typeof (Activator).GetMethod ("GetObject", parameters);
+            Assert.IsNotNull (mi.Invoke (null, new object [2] { typeof (object), String.Empty }), "GetObject");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, RemotingConfiguration = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetObject3 ()
-		{
-			Type[] parameters = new Type [3] { typeof (Type), typeof (string), typeof (object) };
-			MethodInfo mi = typeof (Activator).GetMethod ("GetObject", parameters);
-			Assert.IsNotNull (mi.Invoke (null, new object [3] { typeof (object), String.Empty, null }), "GetObject");
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, RemotingConfiguration = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void GetObject3 ()
+        {
+            Type[] parameters = new Type [3] { typeof (Type), typeof (string), typeof (object) };
+            MethodInfo mi = typeof (Activator).GetMethod ("GetObject", parameters);
+            Assert.IsNotNull (mi.Invoke (null, new object [3] { typeof (object), String.Empty, null }), "GetObject");
+        }
+    }
 }

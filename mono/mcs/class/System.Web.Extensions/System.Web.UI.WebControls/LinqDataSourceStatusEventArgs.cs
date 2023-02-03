@@ -35,33 +35,33 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class LinqDataSourceStatusEventArgs : EventArgs
-	{
-		public LinqDataSourceStatusEventArgs (Exception exception)
-		{
-			Exception = exception;
-		}
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class LinqDataSourceStatusEventArgs : EventArgs
+    {
+        public LinqDataSourceStatusEventArgs (Exception exception)
+        {
+            Exception = exception;
+        }
 
-		public LinqDataSourceStatusEventArgs (object result)
-		{
-			Result = result;
-		}
+        public LinqDataSourceStatusEventArgs (object result)
+        {
+            Result = result;
+        }
 
-		public LinqDataSourceStatusEventArgs (object result, int totalRowCount)
-		{
-			Result = result;
-			// no range check
-			TotalRowCount = totalRowCount;
-		}
+        public LinqDataSourceStatusEventArgs (object result, int totalRowCount)
+        {
+            Result = result;
+            // no range check
+            TotalRowCount = totalRowCount;
+        }
 
-		public Exception Exception { get; private set; }
+        public Exception Exception { get; private set; }
 
-		public bool ExceptionHandled { get; set; }
+        public bool ExceptionHandled { get; set; }
 
-		public object Result { get; private set; }
+        public object Result { get; private set; }
 
-		public int TotalRowCount { get; private set; }
-	}
+        public int TotalRowCount { get; private set; }
+    }
 }

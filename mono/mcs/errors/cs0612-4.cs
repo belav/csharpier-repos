@@ -12,15 +12,15 @@ class O1
 #pragma warning disable 612
 class A
 {
-	public virtual void Foo<T> () where T : O1
-	{
-	}
+    public virtual void Foo<T> () where T : O1
+    {
+    }
 }
 #pragma warning restore 612
 
 class B : A
 {
-	public override void Foo<U> ()
-	{
-	}
+    public override void Foo<U> ()
+    {
+    }
 }

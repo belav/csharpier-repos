@@ -32,48 +32,48 @@ using Mono.Unix;
 
 namespace Mono.Unix.Native {
 
-	class FileNameMarshaler : ICustomMarshaler {
+    class FileNameMarshaler : ICustomMarshaler {
 
-		private static FileNameMarshaler Instance = new FileNameMarshaler ();
+        private static FileNameMarshaler Instance = new FileNameMarshaler ();
 
-		public static ICustomMarshaler GetInstance (string s)
-		{
-			return Instance;
-		}
+        public static ICustomMarshaler GetInstance (string s)
+        {
+            return Instance;
+        }
 
-		public void CleanUpManagedData (object o)
-		{
-		}
+        public void CleanUpManagedData (object o)
+        {
+        }
 
-		public void CleanUpNativeData (IntPtr pNativeData)
-		{
-			// Console.WriteLine ("# FileNameMarshaler.CleanUpManagedData ({0:x})", pNativeData);
-			UnixMarshal.FreeHeap (pNativeData);
-		}
+        public void CleanUpNativeData (IntPtr pNativeData)
+        {
+            // Console.WriteLine ("# FileNameMarshaler.CleanUpManagedData ({0:x})", pNativeData);
+            UnixMarshal.FreeHeap (pNativeData);
+        }
 
-		public int GetNativeDataSize ()
-		{
-			return IntPtr.Size;
-		}
+        public int GetNativeDataSize ()
+        {
+            return IntPtr.Size;
+        }
 
-		public IntPtr MarshalManagedToNative (object obj)
-		{
-			string s = obj as string;
-			if (s == null)
-				return IntPtr.Zero;
-			IntPtr p = UnixMarshal.StringToHeap (s, UnixEncoding.Instance);
-			// Console.WriteLine ("# FileNameMarshaler.MarshalNativeToManaged for `{0}'={1:x}", s, p);
-			return p;
-		}
+        public IntPtr MarshalManagedToNative (object obj)
+        {
+            string s = obj as string;
+            if (s == null)
+                return IntPtr.Zero;
+            IntPtr p = UnixMarshal.StringToHeap (s, UnixEncoding.Instance);
+            // Console.WriteLine ("# FileNameMarshaler.MarshalNativeToManaged for `{0}'={1:x}", s, p);
+            return p;
+        }
 
-		public object MarshalNativeToManaged (IntPtr pNativeData)
-		{
-			string s = UnixMarshal.PtrToString (pNativeData, UnixEncoding.Instance);
-			// Console.WriteLine ("# FileNameMarshaler.MarshalNativeToManaged ({0:x})=`{1}'",
-			// 		pNativeData, s);
-			return s;
-		}
-	}
+        public object MarshalNativeToManaged (IntPtr pNativeData)
+        {
+            string s = UnixMarshal.PtrToString (pNativeData, UnixEncoding.Instance);
+            // Console.WriteLine ("# FileNameMarshaler.MarshalNativeToManaged ({0:x})=`{1}'",
+            //         pNativeData, s);
+            return s;
+        }
+    }
 }
 
 // vim: noexpandtab

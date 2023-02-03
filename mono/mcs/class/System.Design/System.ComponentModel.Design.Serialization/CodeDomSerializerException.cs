@@ -34,47 +34,47 @@ namespace System.ComponentModel.Design.Serialization {
 [Serializable]
 public class CodeDomSerializerException : SystemException
 {
-	private CodeLinePragma linePragma;
+    private CodeLinePragma linePragma;
 
-	public CodeDomSerializerException (Exception ex, CodeLinePragma linePragma)
-		: base (String.Empty, ex) {
+    public CodeDomSerializerException (Exception ex, CodeLinePragma linePragma)
+        : base (String.Empty, ex) {
 
-		this.linePragma = linePragma;
-	}
+        this.linePragma = linePragma;
+    }
 
-	public CodeDomSerializerException (String message, CodeLinePragma linePragma)
-		: base (message) {
+    public CodeDomSerializerException (String message, CodeLinePragma linePragma)
+        : base (message) {
 
-		this.linePragma = linePragma;
-	}
+        this.linePragma = linePragma;
+    }
 
-	[MonoTODO]
-	protected CodeDomSerializerException (SerializationInfo info, StreamingContext context) {
-		throw new NotImplementedException ();
-	}
+    [MonoTODO]
+    protected CodeDomSerializerException (SerializationInfo info, StreamingContext context) {
+        throw new NotImplementedException ();
+    }
 
-	[MonoTODO]
-	public CodeDomSerializerException (string message, IDesignerSerializationManager manager)
-	{
-		throw new NotImplementedException ();
-	}
+    [MonoTODO]
+    public CodeDomSerializerException (string message, IDesignerSerializationManager manager)
+    {
+        throw new NotImplementedException ();
+    }
 
-	[MonoTODO]
-	public CodeDomSerializerException (Exception ex, IDesignerSerializationManager manager)
-	{
-		throw new NotImplementedException ();
-	}
+    [MonoTODO]
+    public CodeDomSerializerException (Exception ex, IDesignerSerializationManager manager)
+    {
+        throw new NotImplementedException ();
+    }
 
-	[MonoTODO]
-	public override void GetObjectData (SerializationInfo info, StreamingContext context)
-	{
-		throw new NotImplementedException();
-	}
+    [MonoTODO]
+    public override void GetObjectData (SerializationInfo info, StreamingContext context)
+    {
+        throw new NotImplementedException();
+    }
 
-	public CodeLinePragma LinePragma {
-		get {
-			return linePragma;
-		}
-	}
+    public CodeLinePragma LinePragma {
+        get {
+            return linePragma;
+        }
+    }
 }
 }

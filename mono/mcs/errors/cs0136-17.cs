@@ -5,9 +5,9 @@ using System.Linq;
 
 class C
 {
-	public static void Main ()
-	{
-		var l = from v in "abcd" select v;
-		int v;
-	}
+    public static void Main ()
+    {
+        var l = from v in "abcd" select v;
+        int v;
+    }
 }

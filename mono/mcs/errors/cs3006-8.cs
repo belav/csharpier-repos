@@ -7,17 +7,17 @@ using System;
 
 public class Base<T>
 {
-	public void Test (int a)
-	{
-	}
-	public void Test (ref int b)
-	{
-	}
+    public void Test (int a)
+    {
+    }
+    public void Test (ref int b)
+    {
+    }
 }
 
 public class CLSClass : Base<int>
 {
-	public void Test ()
-	{
-	}
+    public void Test ()
+    {
+    }
 }

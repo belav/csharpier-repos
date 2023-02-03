@@ -12,18 +12,18 @@ using System.ComponentModel;
 
 namespace System.DirectoryServices {
 
-	[AttributeUsage (AttributeTargets.All)]
-	public class DSDescriptionAttribute : DescriptionAttribute
-	{
+    [AttributeUsage (AttributeTargets.All)]
+    public class DSDescriptionAttribute : DescriptionAttribute
+    {
 
-		public DSDescriptionAttribute (String description)
-			: base (description)
-		{
-		}
+        public DSDescriptionAttribute (String description)
+            : base (description)
+        {
+        }
 
-		public override String Description {
-			get { return base.Description; }
-		}
-	}
+        public override String Description {
+            get { return base.Description; }
+        }
+    }
 }
 

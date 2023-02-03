@@ -36,69 +36,69 @@ using System.Drawing.Imaging;
 
 namespace System.Drawing.Printing
 {
-	public class PreviewPrintController : PrintController
-	{
-		bool useantialias;
-		ArrayList pageInfoList;
+    public class PreviewPrintController : PrintController
+    {
+        bool useantialias;
+        ArrayList pageInfoList;
 
-		public PreviewPrintController()
-		{
-			pageInfoList = new ArrayList ();
-		}
-		public override bool IsPreview { 
-			get { return true; }
-		}
+        public PreviewPrintController()
+        {
+            pageInfoList = new ArrayList ();
+        }
+        public override bool IsPreview { 
+            get { return true; }
+        }
 
-		[MonoTODO]
-		public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
-		{
-		}
+        [MonoTODO]
+        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
+        {
+        }
 
-		[MonoTODO]
-		public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
-		{
-			if (!document.PrinterSettings.IsValid)
-				throw new InvalidPrinterException(document.PrinterSettings);
-		
-			/* maybe we should reuse the images, and clear them? */
-			foreach (PreviewPageInfo pi in pageInfoList)
-				pi.Image.Dispose ();
+        [MonoTODO]
+        public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
+        {
+            if (!document.PrinterSettings.IsValid)
+                throw new InvalidPrinterException(document.PrinterSettings);
+        
+            /* maybe we should reuse the images, and clear them? */
+            foreach (PreviewPageInfo pi in pageInfoList)
+                pi.Image.Dispose ();
 
-			pageInfoList.Clear ();
-		}
+            pageInfoList.Clear ();
+        }
 
-		[MonoTODO]
-		public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
-		{
-		}
+        [MonoTODO]
+        public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
+        {
+        }
 
-		[MonoTODO]
-		public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
-		{
-			Image image = new Bitmap (e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height);
+        [MonoTODO]
+        public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            Image image = new Bitmap (e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height);
 
-			PreviewPageInfo info = new PreviewPageInfo (image, new Size (e.PageSettings.PaperSize.Width,
-										     e.PageSettings.PaperSize.Height));
-			
-			pageInfoList.Add (info);
+            PreviewPageInfo info = new PreviewPageInfo (image, new Size (e.PageSettings.PaperSize.Width,
+                                             e.PageSettings.PaperSize.Height));
+            
+            pageInfoList.Add (info);
 
-			Graphics g = Graphics.FromImage (info.Image);
-			g.FillRectangle (new SolidBrush (Color.White), new Rectangle (new Point (0,0), new Size (image.Width, image.Height)));
+            Graphics g = Graphics.FromImage (info.Image);
+            g.FillRectangle (new SolidBrush (Color.White), new Rectangle (new Point (0,0), new Size (image.Width, image.Height)));
 
-			return g;
-		}
-		
-		public virtual bool UseAntiAlias {
-			get{ return useantialias; }
-			set{ useantialias = value; }
-		}
+            return g;
+        }
+        
+        public virtual bool UseAntiAlias {
+            get{ return useantialias; }
+            set{ useantialias = value; }
+        }
 
-		public PreviewPageInfo [] GetPreviewPageInfo()
-		{
-			PreviewPageInfo [] pi = new PreviewPageInfo[pageInfoList.Count];
-			pageInfoList.CopyTo (pi);
-			return pi;
-		}
+        public PreviewPageInfo [] GetPreviewPageInfo()
+        {
+            PreviewPageInfo [] pi = new PreviewPageInfo[pageInfoList.Count];
+            pageInfoList.CopyTo (pi);
+            return pi;
+        }
 
-	}
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,19 +14,19 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class ClassWithPrivateProtectedConstructor
-	{
-		private protected ClassWithPrivateProtectedConstructor()
-		{
-			_someString = "Something";
-		}
+    public class ClassWithPrivateProtectedConstructor
+    {
+        private protected ClassWithPrivateProtectedConstructor()
+        {
+            _someString = "Something";
+        }
 
-		private string _someString = string.Empty;
+        private string _someString = string.Empty;
 
-		public string SomeString
-		{
-			get { return _someString; }
-			set { _someString = value; }
-		}
-	}
+        public string SomeString
+        {
+            get { return _someString; }
+            set { _someString = value; }
+        }
+    }
 }

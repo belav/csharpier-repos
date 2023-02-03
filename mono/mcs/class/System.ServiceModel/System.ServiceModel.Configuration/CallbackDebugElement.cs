@@ -2,7 +2,7 @@
 // CallbackDebugElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,37 +54,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class CallbackDebugElement
-		 : BehaviorExtensionElement
-	{
+    public sealed class CallbackDebugElement
+         : BehaviorExtensionElement
+    {
 
-		public CallbackDebugElement ()
-		{
-		}
+        public CallbackDebugElement ()
+        {
+        }
 
 
-		// Properties
+        // Properties
 
-		public override Type BehaviorType {
-			get { return typeof (CallbackDebugBehavior); }
-		}
+        public override Type BehaviorType {
+            get { return typeof (CallbackDebugBehavior); }
+        }
 
-		[ConfigurationProperty ("includeExceptionDetailInFaults",
-			DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool IncludeExceptionDetailInFaults {
-			get { return (bool) base ["includeExceptionDetailInFaults"]; }
-			set { base ["includeExceptionDetailInFaults"] = value; }
-		}
+        [ConfigurationProperty ("includeExceptionDetailInFaults",
+            DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool IncludeExceptionDetailInFaults {
+            get { return (bool) base ["includeExceptionDetailInFaults"]; }
+            set { base ["includeExceptionDetailInFaults"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		protected internal override object CreateBehavior () {
-			return new CallbackDebugBehavior (IncludeExceptionDetailInFaults);
-		}
+        protected internal override object CreateBehavior () {
+            return new CallbackDebugBehavior (IncludeExceptionDetailInFaults);
+        }
 
-	}
+    }
 
 }

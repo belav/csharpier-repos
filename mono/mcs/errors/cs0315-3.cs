@@ -3,9 +3,9 @@
 
 class A<T>
 {
-	public static void Test<U> () where U : T
-	{
-	}
+    public static void Test<U> () where U : T
+    {
+    }
 }
 
 class B : A<int?>
@@ -14,8 +14,8 @@ class B : A<int?>
 
 class Program
 {
-	public static void Main ()
-	{
-		B.Test<int> ();
-	}
+    public static void Main ()
+    {
+        B.Test<int> ();
+    }
 }

@@ -56,7 +56,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-			for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
 #endif
             v = (a[1] + (a[0] + a[2]));
             if (v != -71)
@@ -86,11 +86,11 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-			      a[0] = return_int(false,-69);
-			}
+                  a[0] = return_int(false,-69);
+            }
 #endif
 #if TRY
-				try {
+                try {
 #endif
             a[0] = return_int(false, -27);
             v = (a[0] + a[2]);
@@ -128,12 +128,12 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-				} finally {
+                } finally {
 #endif
 
 #if LOOP
-			for (int j = 0; j < 5; j++) {
-				for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 5; j++) {
+                for (int i = 0; i < 10; i++) {
 #endif
             v = (a[1] + a[2]);
 
@@ -166,10 +166,10 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-				a[2] = return_int(false, 15);
-				}
-				a[1] = return_int(false, -17);
-			}
+                a[2] = return_int(false, 15);
+                }
+                a[1] = return_int(false, -17);
+            }
 #endif
             a[2] = return_int(false, -105);
 
@@ -180,7 +180,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-				}
+                }
 #endif
             v = (a[0] + a[1]);
             if (v != -44)

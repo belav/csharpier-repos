@@ -1,6 +1,6 @@
 class X
 {
-	public object MyChildObject;
+    public object MyChildObject;
 }
 
 interface ISomeInterface
@@ -9,9 +9,9 @@ interface ISomeInterface
 
 class MainClass
 {
-	public static void Main ()
-	{
-		X myObject = null;
-		var x = (myObject?.MyChildObject is ISomeInterface);
-	}
+    public static void Main ()
+    {
+        X myObject = null;
+        var x = (myObject?.MyChildObject is ISomeInterface);
+    }
 }

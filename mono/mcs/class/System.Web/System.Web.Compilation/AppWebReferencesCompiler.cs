@@ -2,7 +2,7 @@
 // System.Web.Compilation.AppWebResourcesCompiler
 //
 // Authors:
-//	Marek Habersack <mhabersack@novell.com>
+//    Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://novell.com/)
 //
@@ -39,66 +39,66 @@ using System.Web.Configuration;
 
 namespace System.Web.Compilation
 {
-	internal class AppWebReferencesCompiler
-	{
-		const string ResourcesDirName = "App_WebReferences";
-		
-		public void Compile ()
-		{
-			string refsPath = Path.Combine (HttpRuntime.AppDomainAppPath, ResourcesDirName);
-			if (!Directory.Exists (refsPath))
-				return;
+    internal class AppWebReferencesCompiler
+    {
+        const string ResourcesDirName = "App_WebReferences";
+        
+        public void Compile ()
+        {
+            string refsPath = Path.Combine (HttpRuntime.AppDomainAppPath, ResourcesDirName);
+            if (!Directory.Exists (refsPath))
+                return;
 
-			string[] files = Directory.GetFiles (refsPath, "*.wsdl", SearchOption.AllDirectories);
-			if (files == null || files.Length == 0)
-				return;
+            string[] files = Directory.GetFiles (refsPath, "*.wsdl", SearchOption.AllDirectories);
+            if (files == null || files.Length == 0)
+                return;
 
-			CompilationSection cs = WebConfigurationManager.GetWebApplicationSection ("system.web/compilation") as CompilationSection;
-			if (cs == null)
-				throw new HttpException ("Unable to determine default compilation language.");
+            CompilationSection cs = WebConfigurationManager.GetWebApplicationSection ("system.web/compilation") as CompilationSection;
+            if (cs == null)
+                throw new HttpException ("Unable to determine default compilation language.");
 
-			CompilerType ct = BuildManager.GetDefaultCompilerTypeForLanguage (cs.DefaultLanguage, cs);
-			CodeDomProvider codeDomProvider = null;
-			Exception codeDomException = null;
-			
-			try {
-				codeDomProvider = Activator.CreateInstance (ct.CodeDomProviderType) as CodeDomProvider;
-			} catch (Exception e) {
-				codeDomException = e;
-			}
+            CompilerType ct = BuildManager.GetDefaultCompilerTypeForLanguage (cs.DefaultLanguage, cs);
+            CodeDomProvider codeDomProvider = null;
+            Exception codeDomException = null;
+            
+            try {
+                codeDomProvider = Activator.CreateInstance (ct.CodeDomProviderType) as CodeDomProvider;
+            } catch (Exception e) {
+                codeDomException = e;
+            }
 
-			if (codeDomProvider == null)
-				throw new HttpException ("Unable to instantiate default compilation language provider.", codeDomException);
+            if (codeDomProvider == null)
+                throw new HttpException ("Unable to instantiate default compilation language provider.", codeDomException);
 
-			AssemblyBuilder ab = new AssemblyBuilder (codeDomProvider, "App_WebReferences_");
-			ab.CompilerOptions = ct.CompilerParameters;
-			
-			VirtualPath vp;
-			WsdlBuildProvider wbp;
-			foreach (string file in files) {
-				vp = VirtualPath.PhysicalToVirtual (file);
-				if (vp == null)
-					continue;
-				
-				wbp = new WsdlBuildProvider ();
-				wbp.SetVirtualPath (vp);
-				wbp.GenerateCode (ab);
-			}
+            AssemblyBuilder ab = new AssemblyBuilder (codeDomProvider, "App_WebReferences_");
+            ab.CompilerOptions = ct.CompilerParameters;
+            
+            VirtualPath vp;
+            WsdlBuildProvider wbp;
+            foreach (string file in files) {
+                vp = VirtualPath.PhysicalToVirtual (file);
+                if (vp == null)
+                    continue;
+                
+                wbp = new WsdlBuildProvider ();
+                wbp.SetVirtualPath (vp);
+                wbp.GenerateCode (ab);
+            }
 
-			CompilerResults results;
-			try {
-				results = ab.BuildAssembly ();
-			} catch (CompilationException ex) {
-				throw new HttpException ("Failed to compile web references.", ex);
-			}
+            CompilerResults results;
+            try {
+                results = ab.BuildAssembly ();
+            } catch (CompilationException ex) {
+                throw new HttpException ("Failed to compile web references.", ex);
+            }
 
-			if (results == null)
-				return;
-			
-			Assembly asm = results.CompiledAssembly;
-			BuildManager.TopLevelAssemblies.Add (asm);
-		}
-	}
+            if (results == null)
+                return;
+            
+            Assembly asm = results.CompiledAssembly;
+            BuildManager.TopLevelAssemblies.Add (asm);
+        }
+    }
 }
 #endif
 

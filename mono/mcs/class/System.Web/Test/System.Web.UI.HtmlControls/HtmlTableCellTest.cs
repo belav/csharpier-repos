@@ -1,9 +1,9 @@
 //
 // HtmlTableCellTest.cs
-//	- Unit tests for System.Web.UI.HtmlControls.HtmlTableCell
+//    - Unit tests for System.Web.UI.HtmlControls.HtmlTableCell
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,109 +36,109 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-	public class TestHtmlTableCell : HtmlTableCell {
+    public class TestHtmlTableCell : HtmlTableCell {
 
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+        public string Render ()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
+            base.Render (writer);
+            return writer.InnerWriter.ToString ();
+        }
+    }
 
-	[TestFixture]
-	public class HtmlTableCellTest {
+    [TestFixture]
+    public class HtmlTableCellTest {
 
-		[Test]
-		public void DefaultProperties ()
-		{
-			HtmlTableCell c = new HtmlTableCell ();
-			Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
+        [Test]
+        public void DefaultProperties ()
+        {
+            HtmlTableCell c = new HtmlTableCell ();
+            Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
 
-			Assert.AreEqual (String.Empty, c.Align, "Align");
-			Assert.AreEqual (String.Empty, c.BgColor, "BgColor");
-			Assert.AreEqual (String.Empty, c.BorderColor, "BorderColor");
-			Assert.AreEqual (-1, c.ColSpan, "ColSpan");
-			Assert.AreEqual (String.Empty, c.Height, "Height");
-			Assert.IsFalse (c.NoWrap, "NoWrap");
-			Assert.AreEqual (-1, c.RowSpan, "RowSpan");
-			Assert.AreEqual (String.Empty, c.VAlign, "VAlign");
-			Assert.AreEqual (String.Empty, c.Width, "Width");
+            Assert.AreEqual (String.Empty, c.Align, "Align");
+            Assert.AreEqual (String.Empty, c.BgColor, "BgColor");
+            Assert.AreEqual (String.Empty, c.BorderColor, "BorderColor");
+            Assert.AreEqual (-1, c.ColSpan, "ColSpan");
+            Assert.AreEqual (String.Empty, c.Height, "Height");
+            Assert.IsFalse (c.NoWrap, "NoWrap");
+            Assert.AreEqual (-1, c.RowSpan, "RowSpan");
+            Assert.AreEqual (String.Empty, c.VAlign, "VAlign");
+            Assert.AreEqual (String.Empty, c.Width, "Width");
 
-			Assert.AreEqual ("td", c.TagName, "TagName");
-		}
+            Assert.AreEqual ("td", c.TagName, "TagName");
+        }
 
-		[Test]
-		public void NullProperties ()
-		{
-			HtmlTableCell c = new HtmlTableCell ();
-			c.Align = null;
-			Assert.AreEqual (String.Empty, c.Align, "Align");
-			c.BgColor = null;
-			Assert.AreEqual (String.Empty, c.BgColor, "BgColor");
-			c.BorderColor = null;
-			Assert.AreEqual (String.Empty, c.BorderColor, "BorderColor");
-			c.Height = null;
-			Assert.AreEqual (String.Empty, c.Height, "Height");
-			c.VAlign = null;
-			Assert.AreEqual (String.Empty, c.VAlign, "VAlign");
-			c.Width = null;
-			Assert.AreEqual (String.Empty, c.Width, "Width");
+        [Test]
+        public void NullProperties ()
+        {
+            HtmlTableCell c = new HtmlTableCell ();
+            c.Align = null;
+            Assert.AreEqual (String.Empty, c.Align, "Align");
+            c.BgColor = null;
+            Assert.AreEqual (String.Empty, c.BgColor, "BgColor");
+            c.BorderColor = null;
+            Assert.AreEqual (String.Empty, c.BorderColor, "BorderColor");
+            c.Height = null;
+            Assert.AreEqual (String.Empty, c.Height, "Height");
+            c.VAlign = null;
+            Assert.AreEqual (String.Empty, c.VAlign, "VAlign");
+            c.Width = null;
+            Assert.AreEqual (String.Empty, c.Width, "Width");
 
-			Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
-		}
+            Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
+        }
 
-		[Test]
-		public void EmptyProperties ()
-		{
-			HtmlTableCell c = new HtmlTableCell ();
-			c.ColSpan = -1;
-			Assert.AreEqual (-1, c.ColSpan, "ColSpan");
-			c.RowSpan = -1;
-			Assert.AreEqual (-1, c.RowSpan, "RowSpan");
-			c.NoWrap = false;
-			Assert.IsFalse (c.NoWrap, "NoWrap");
+        [Test]
+        public void EmptyProperties ()
+        {
+            HtmlTableCell c = new HtmlTableCell ();
+            c.ColSpan = -1;
+            Assert.AreEqual (-1, c.ColSpan, "ColSpan");
+            c.RowSpan = -1;
+            Assert.AreEqual (-1, c.RowSpan, "RowSpan");
+            c.NoWrap = false;
+            Assert.IsFalse (c.NoWrap, "NoWrap");
 
-			Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
-		}
+            Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlTableCell c = new HtmlTableCell ();
-			c.Align = "center";
-			Assert.AreEqual ("center", c.Align, "Align");
-			c.ColSpan = 1;
-			Assert.AreEqual (1, c.ColSpan, "Align");
-			c.NoWrap = true;
-			Assert.IsTrue (c.NoWrap, "NoWrap");
-			Assert.AreEqual (3, c.Attributes.Count, "3");
+        [Test]
+        public void CleanProperties ()
+        {
+            HtmlTableCell c = new HtmlTableCell ();
+            c.Align = "center";
+            Assert.AreEqual ("center", c.Align, "Align");
+            c.ColSpan = 1;
+            Assert.AreEqual (1, c.ColSpan, "Align");
+            c.NoWrap = true;
+            Assert.IsTrue (c.NoWrap, "NoWrap");
+            Assert.AreEqual (3, c.Attributes.Count, "3");
 
-			c.Align = null;
-			Assert.AreEqual (String.Empty, c.Align, "-Align");
-			c.ColSpan = -1;
-			Assert.AreEqual (-1, c.ColSpan, "-ColSpan");
-			c.NoWrap = false;
-			Assert.IsFalse (c.NoWrap, "-NoWrap");
-			Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
-		}
+            c.Align = null;
+            Assert.AreEqual (String.Empty, c.Align, "-Align");
+            c.ColSpan = -1;
+            Assert.AreEqual (-1, c.ColSpan, "-ColSpan");
+            c.NoWrap = false;
+            Assert.IsFalse (c.NoWrap, "-NoWrap");
+            Assert.AreEqual (0, c.Attributes.Count, "Attributes.Count");
+        }
 
-		private string AdjustLineEndings (string s)
-		{
-			return s.Replace ("\r\n", Environment.NewLine);
-		}
+        private string AdjustLineEndings (string s)
+        {
+            return s.Replace ("\r\n", Environment.NewLine);
+        }
 
-		[Test]
-		public void Render ()
-		{
-			TestHtmlTableCell c = new TestHtmlTableCell ();
-			c.Align = "*1*";
-			c.BgColor = "*2*";
-			c.BorderColor = "*3*";
-			c.ColSpan = 4;
-			c.Width = "*5*";
+        [Test]
+        public void Render ()
+        {
+            TestHtmlTableCell c = new TestHtmlTableCell ();
+            c.Align = "*1*";
+            c.BgColor = "*2*";
+            c.BorderColor = "*3*";
+            c.ColSpan = 4;
+            c.Width = "*5*";
 
-			Assert.AreEqual (AdjustLineEndings ("<td align=\"*1*\" bgcolor=\"*2*\" bordercolor=\"*3*\" colspan=\"4\" width=\"*5*\"></td>\r\n"), c.Render ());
-		}
-	}
+            Assert.AreEqual (AdjustLineEndings ("<td align=\"*1*\" bgcolor=\"*2*\" bordercolor=\"*3*\" colspan=\"4\" width=\"*5*\"></td>\r\n"), c.Render ());
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Configuration.CallbackValidator.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -29,26 +29,26 @@
 using System;
 
 namespace System.Configuration {
-	public sealed class CallbackValidator : ConfigurationValidatorBase
-	{
-		Type type;
-		ValidatorCallback callback;
+    public sealed class CallbackValidator : ConfigurationValidatorBase
+    {
+        Type type;
+        ValidatorCallback callback;
 
-		public CallbackValidator (Type type, ValidatorCallback callback)
-		{
-			this.type = type;
-			this.callback = callback;
-		}
+        public CallbackValidator (Type type, ValidatorCallback callback)
+        {
+            this.type = type;
+            this.callback = callback;
+        }
 
-		public override bool CanValidate (Type type)
-		{
-			return type == this.type;
-		}
+        public override bool CanValidate (Type type)
+        {
+            return type == this.type;
+        }
 
-		public override void Validate (object value)
-		{
-			callback (value);
-		}
-	}
+        public override void Validate (object value)
+        {
+            callback (value);
+        }
+    }
 }
 

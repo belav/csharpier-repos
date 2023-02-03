@@ -5,10 +5,10 @@ using System;
 
 namespace TestEnum
 {
-	public enum E
-	{
-		A = 0,
-		B = 1.
-		C = 2
-	}
+    public enum E
+    {
+        A = 0,
+        B = 1.
+        C = 2
+    }
 }

@@ -2,7 +2,7 @@
 // PathElementBase.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,14 +30,14 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths {
-	abstract class PathElementBase : PathElement {
-		public readonly SymFunction Func;
+    abstract class PathElementBase : PathElement {
+        public readonly SymFunction Func;
 
-		protected PathElementBase (SymFunction c)
-		{
-			this.Func = c;
-		}
+        protected PathElementBase (SymFunction c)
+        {
+            this.Func = c;
+        }
 
-		public abstract bool TrySetType (TypeNode expectedType, IMetaDataProvider metaDataProvider, out TypeNode type);
-	}
+        public abstract bool TrySetType (TypeNode expectedType, IMetaDataProvider metaDataProvider, out TypeNode type);
+    }
 }

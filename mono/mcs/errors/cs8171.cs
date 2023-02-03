@@ -3,10 +3,10 @@
 
 class Test
 {
-	int field;
+    int field;
 
-	void Foo ()
-	{
-		int l = ref field;
-	}
+    void Foo ()
+    {
+        int l = ref field;
+    }
 }

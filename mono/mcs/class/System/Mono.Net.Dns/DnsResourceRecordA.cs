@@ -2,7 +2,7 @@
 // Mono.Net.Dns.DnsResourceRecordA
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -24,11 +24,11 @@ using System.Net;
 using System.Text;
 
 namespace Mono.Net.Dns {
-	class DnsResourceRecordA : DnsResourceRecordIPAddress {
-		internal DnsResourceRecordA (DnsResourceRecord rr)
-			: base (rr, 4)
-		{
-		}
-	}
+    class DnsResourceRecordA : DnsResourceRecordIPAddress {
+        internal DnsResourceRecordA (DnsResourceRecord rr)
+            : base (rr, 4)
+        {
+        }
+    }
 }
 

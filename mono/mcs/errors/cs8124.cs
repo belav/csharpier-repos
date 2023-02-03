@@ -3,7 +3,7 @@
 
 class X
 {
-	static (int) Foo ()
-	{
-	}
+    static (int) Foo ()
+    {
+    }
 }

@@ -30,15 +30,15 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-	public sealed class UsableDuringInitializationAttribute : Attribute
-	{
-		public UsableDuringInitializationAttribute (bool usable)
-		{
-			Usable = usable;
-		}
-		
-		public bool Usable { get; private set; }
-	}
+    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public sealed class UsableDuringInitializationAttribute : Attribute
+    {
+        public UsableDuringInitializationAttribute (bool usable)
+        {
+            Usable = usable;
+        }
+        
+        public bool Usable { get; private set; }
+    }
 }
 

@@ -30,12 +30,12 @@ using System;
 
 namespace System.Web.Security 
 {
-	public enum MachineKeyProtection
-	{
-		All,
-		Encryption,
-		Validation
-	}
+    public enum MachineKeyProtection
+    {
+        All,
+        Encryption,
+        Validation
+    }
 }
 
-	
+    

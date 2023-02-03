@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,27 +32,27 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("a796816d-7d47-4348-9ab8-c7aeb3216a7d")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsITimerCallback {
+    [Guid ("a796816d-7d47-4348-9ab8-c7aeb3216a7d")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsITimerCallback {
 
 #region nsITimerCallback
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int notify ([MarshalAs (UnmanagedType.Interface) ]  nsITimer timer);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int notify ([MarshalAs (UnmanagedType.Interface) ]  nsITimer timer);
 
 #endregion
-	}
+    }
 
 
-	internal class nsTimerCallback {
-		public static nsITimerCallback GetProxy (Mono.WebBrowser.IWebBrowser control, nsITimerCallback obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsITimerCallback).GUID, obj);
-			return o as nsITimerCallback;
-		}
-	}
+    internal class nsTimerCallback {
+        public static nsITimerCallback GetProxy (Mono.WebBrowser.IWebBrowser control, nsITimerCallback obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsITimerCallback).GUID, obj);
+            return o as nsITimerCallback;
+        }
+    }
 }
 #if example
 
@@ -61,16 +61,16 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class TimerCallback : nsITimerCallback {
+    internal class TimerCallback : nsITimerCallback {
 
 #region nsITimerCallback
-		int nsITimerCallback.notify ([MarshalAs (UnmanagedType.Interface) ]  nsITimer timer)
-		{
-			return ;
-		}
+        int nsITimerCallback.notify ([MarshalAs (UnmanagedType.Interface) ]  nsITimer timer)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -28,5 +28,5 @@
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public delegate void InvalidateEventHandler (object sender, InvalidateEventArgs e);
+    public delegate void InvalidateEventHandler (object sender, InvalidateEventArgs e);
 }

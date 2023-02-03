@@ -32,13 +32,13 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class DsmlDirectoryIdentifier : DirectoryIdentifier
-	{
-		public DsmlDirectoryIdentifier (Uri serverUri)
-		{
-			this.ServerUri = serverUri;
-		}
+    public class DsmlDirectoryIdentifier : DirectoryIdentifier
+    {
+        public DsmlDirectoryIdentifier (Uri serverUri)
+        {
+            this.ServerUri = serverUri;
+        }
 
-		public Uri ServerUri { get; private set; }
-	}
+        public Uri ServerUri { get; private set; }
+    }
 }

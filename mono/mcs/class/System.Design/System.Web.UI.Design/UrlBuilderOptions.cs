@@ -29,9 +29,9 @@
 //
 
 namespace System.Web.UI.Design {
-	[Flags]
-	public enum UrlBuilderOptions {
-		None,
-		NoAbsolute
-	}
+    [Flags]
+    public enum UrlBuilderOptions {
+        None,
+        NoAbsolute
+    }
 }

@@ -30,10 +30,10 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public enum SearchScope
-	{
-		Base,
-		OneLevel,
-		Subtree
-	}
+    public enum SearchScope
+    {
+        Base,
+        OneLevel,
+        Subtree
+    }
 }

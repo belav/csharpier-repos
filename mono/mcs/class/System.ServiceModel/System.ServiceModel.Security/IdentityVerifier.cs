@@ -2,7 +2,7 @@
 // IdentityVerifier.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,43 +31,43 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public abstract class IdentityVerifier
-	{
-		[MonoTODO]
-		public static IdentityVerifier CreateDefault ()
-		{
-			return new DefaultIdentityVerifier ();
-		}
+    [MonoTODO]
+    public abstract class IdentityVerifier
+    {
+        [MonoTODO]
+        public static IdentityVerifier CreateDefault ()
+        {
+            return new DefaultIdentityVerifier ();
+        }
 
-		protected IdentityVerifier ()
-		{
-		}
+        protected IdentityVerifier ()
+        {
+        }
 
-		public abstract bool CheckAccess (EndpointIdentity identity,
-			AuthorizationContext authContext);
+        public abstract bool CheckAccess (EndpointIdentity identity,
+            AuthorizationContext authContext);
 
-		public abstract bool TryGetIdentity (EndpointAddress reference,
-			out EndpointIdentity identity);
+        public abstract bool TryGetIdentity (EndpointAddress reference,
+            out EndpointIdentity identity);
 
-		class DefaultIdentityVerifier : IdentityVerifier
-		{
-			public override bool CheckAccess (
-				EndpointIdentity identity,
-				AuthorizationContext authContext)
-			{
-				// FIXME: implement
-				throw new NotImplementedException ();
-			}
+        class DefaultIdentityVerifier : IdentityVerifier
+        {
+            public override bool CheckAccess (
+                EndpointIdentity identity,
+                AuthorizationContext authContext)
+            {
+                // FIXME: implement
+                throw new NotImplementedException ();
+            }
 
-			public override bool TryGetIdentity (
-				EndpointAddress reference,
-				out EndpointIdentity identity)
-			{
-				// FIXME: implement
-				throw new NotImplementedException ();
-			}
-		}
+            public override bool TryGetIdentity (
+                EndpointAddress reference,
+                out EndpointIdentity identity)
+            {
+                // FIXME: implement
+                throw new NotImplementedException ();
+            }
+        }
 
-	}
+    }
 }

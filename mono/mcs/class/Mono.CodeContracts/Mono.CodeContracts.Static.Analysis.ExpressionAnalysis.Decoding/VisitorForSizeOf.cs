@@ -2,7 +2,7 @@
 // VisitorForSizeOf.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,25 +31,25 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-	class VisitorForSizeOf<V, E> : QueryVisitor<V, E>
-		where V : IEquatable<V>
-		where E : IEquatable<E> {
-		
+    class VisitorForSizeOf<V, E> : QueryVisitor<V, E>
+        where V : IEquatable<V>
+        where E : IEquatable<E> {
+        
         private TypeNode result;
 
-		public static bool IsSizeOf (E expr, out TypeNode type, FullExpressionDecoder<V, E> decoder)
-		{
-			VisitorForSizeOf<V, E> v = decoder.SizeOfVisitor;
-			bool res = Decode (expr, v, decoder);
+        public static bool IsSizeOf (E expr, out TypeNode type, FullExpressionDecoder<V, E> decoder)
+        {
+            VisitorForSizeOf<V, E> v = decoder.SizeOfVisitor;
+            bool res = Decode (expr, v, decoder);
 
-			type = v.result;
-			return res;
-		}
+            type = v.result;
+            return res;
+        }
 
-		public override bool Sizeof (E pc, TypeNode type, V dest, Dummy data)
-		{
-			this.result = type;
-			return true;
-		}
-	}
+        public override bool Sizeof (E pc, TypeNode type, V dest, Dummy data)
+        {
+            this.result = type;
+            return true;
+        }
+    }
 }

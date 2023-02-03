@@ -14,17 +14,17 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Requests support for multi-level editing.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
-	public class MultiLevelEditAttribute : DictionaryBehaviorAttribute, IDictionaryInitializer
-	{
-		public void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
-		{
-			dictionaryAdapter.SupportsMultiLevelEdit = true;
-		}
-	}
+    /// <summary>
+    /// Requests support for multi-level editing.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
+    public class MultiLevelEditAttribute : DictionaryBehaviorAttribute, IDictionaryInitializer
+    {
+        public void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
+        {
+            dictionaryAdapter.SupportsMultiLevelEdit = true;
+        }
+    }
 }

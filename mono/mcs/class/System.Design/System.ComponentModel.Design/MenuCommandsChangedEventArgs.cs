@@ -30,24 +30,24 @@
 
 namespace System.ComponentModel.Design
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class MenuCommandsChangedEventArgs : EventArgs
-	{
-		MenuCommandsChangedType change_type;
-		MenuCommand command;
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class MenuCommandsChangedEventArgs : EventArgs
+    {
+        MenuCommandsChangedType change_type;
+        MenuCommand command;
 
-		public MenuCommandsChangedEventArgs (MenuCommandsChangedType changeType, MenuCommand command)
-		{
-			this.change_type = changeType;
-			this.command = command;
-		}
+        public MenuCommandsChangedEventArgs (MenuCommandsChangedType changeType, MenuCommand command)
+        {
+            this.change_type = changeType;
+            this.command = command;
+        }
 
-		public MenuCommandsChangedType ChangeType {
-			get { return change_type; }
-		}
+        public MenuCommandsChangedType ChangeType {
+            get { return change_type; }
+        }
 
-		public MenuCommand Command {
-			get { return command; }
-		}
-	}
+        public MenuCommand Command {
+            get { return command; }
+        }
+    }
 }

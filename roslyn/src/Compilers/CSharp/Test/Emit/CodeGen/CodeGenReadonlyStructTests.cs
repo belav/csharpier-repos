@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1637,35 +1637,35 @@ public readonly struct S2
 } // end of class System.Runtime.CompilerServices.IsReadOnlyAttribute
 
 .class public sequential ansi sealed beforefieldinit S
-	extends [mscorlib]System.ValueType
+    extends [mscorlib]System.ValueType
 {
-	.pack 0
-	.size 1
-	// Methods
-	.method public hidebysig
-		instance void M1 () cil managed
-	{
-		.custom instance void System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
-			01 00 00 00
-		)
-		// Method begins at RVA 0x2058
-		// Code size 1 (0x1)
-		.maxstack 8
-		IL_0000: ret
-	} // end of method S::M1
+    .pack 0
+    .size 1
+    // Methods
+    .method public hidebysig
+        instance void M1 () cil managed
+    {
+        .custom instance void System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+            01 00 00 00
+        )
+        // Method begins at RVA 0x2058
+        // Code size 1 (0x1)
+        .maxstack 8
+        IL_0000: ret
+    } // end of method S::M1
 
-	// Methods
-	.method public hidebysig static
-		void M2 () cil managed
-	{
-		.custom instance void System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
-			01 00 00 00
-		)
-		// Method begins at RVA 0x2058
-		// Code size 1 (0x1)
-		.maxstack 8
-		IL_0000: ret
-	} // end of method S::M2
+    // Methods
+    .method public hidebysig static
+        void M2 () cil managed
+    {
+        .custom instance void System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+            01 00 00 00
+        )
+        // Method begins at RVA 0x2058
+        // Code size 1 (0x1)
+        .maxstack 8
+        IL_0000: ret
+    } // end of method S::M2
 } // end of class S
 ";
             var ilRef = CompileIL(il);
@@ -2539,7 +2539,7 @@ struct S
     {
         fixed (S* sp = &this)
         {
-			sp->i = 42;
+            sp->i = 42;
         }
     }
 

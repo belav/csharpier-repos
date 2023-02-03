@@ -1,9 +1,9 @@
 //
 // MembershipUserCollectionTest.cs
-//	- Unit tests for System.Web.Security.MembershipUserCollection
+//    - Unit tests for System.Web.Security.MembershipUserCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,118 +36,118 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Security {
 
-	[TestFixture]
-	public class MembershipUserCollectionTest {
+    [TestFixture]
+    public class MembershipUserCollectionTest {
 
-		private MembershipUser GetMember (string name)
-		{
-			return new MembershipUser (Membership.Provider.Name, name, null, String.Empty, String.Empty, String.Empty,
-				true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
-		}
+        private MembershipUser GetMember (string name)
+        {
+            return new MembershipUser (Membership.Provider.Name, name, null, String.Empty, String.Empty, String.Empty,
+                true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
+        }
 
-		[Test]
-		public void Default ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			Assert.IsFalse (muc.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (muc, muc.SyncRoot), "SyncRoot");
-		}
+        [Test]
+        public void Default ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            Assert.IsFalse (muc.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue (Object.ReferenceEquals (muc, muc.SyncRoot), "SyncRoot");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Add_Null ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Add (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Add_Null ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Add (null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void Add_ReadOnly ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.SetReadOnly ();
-			muc.Add (GetMember ("me"));
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void Add_ReadOnly ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.SetReadOnly ();
+            muc.Add (GetMember ("me"));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Add_Twice ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Add (GetMember ("me"));
-			muc.Add (GetMember ("me"));
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void Add_Twice ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Add (GetMember ("me"));
+            muc.Add (GetMember ("me"));
+        }
 
-		[Test]
-		public void Count ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			Assert.AreEqual (0, muc.Count, "0");
-			muc.Add (GetMember ("me"));
-			Assert.AreEqual (1, muc.Count, "1");
-			muc.Add (GetMember ("me too"));
-			Assert.AreEqual (2, muc.Count, "2");
-			muc.SetReadOnly ();
-			Assert.AreEqual (2, muc.Count, "2b");
-		}
+        [Test]
+        public void Count ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            Assert.AreEqual (0, muc.Count, "0");
+            muc.Add (GetMember ("me"));
+            Assert.AreEqual (1, muc.Count, "1");
+            muc.Add (GetMember ("me too"));
+            Assert.AreEqual (2, muc.Count, "2");
+            muc.SetReadOnly ();
+            Assert.AreEqual (2, muc.Count, "2b");
+        }
 
-		[Test]
-		public void GetEnumerator ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			int i = 0;
-			muc.Add (GetMember ("me"));
-			muc.Add (GetMember ("me too"));
-			IEnumerator e = muc.GetEnumerator ();
-			Assert.IsNotNull (e, "GetEnumerator");
-			while (e.MoveNext ()) i++;
-			Assert.AreEqual (2, i, "2");
-		}
+        [Test]
+        public void GetEnumerator ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            int i = 0;
+            muc.Add (GetMember ("me"));
+            muc.Add (GetMember ("me too"));
+            IEnumerator e = muc.GetEnumerator ();
+            Assert.IsNotNull (e, "GetEnumerator");
+            while (e.MoveNext ()) i++;
+            Assert.AreEqual (2, i, "2");
+        }
 
-		[Test]
-		public void Item ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Add (GetMember ("me"));
-			Assert.IsNotNull (muc["me"], "me");
-			Assert.IsNull (muc["me too"], "me too");
-		}
+        [Test]
+        public void Item ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Add (GetMember ("me"));
+            Assert.IsNotNull (muc["me"], "me");
+            Assert.IsNull (muc["me too"], "me too");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Remove_Null ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Remove (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Remove_Null ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Remove (null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void Remove_ReadOnly ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Add (GetMember ("me"));
-			muc.SetReadOnly ();
-			muc.Remove ("me");
-		}
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void Remove_ReadOnly ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Add (GetMember ("me"));
+            muc.SetReadOnly ();
+            muc.Remove ("me");
+        }
 
-		[Test]
-		public void Remove_Unexisting ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Add (GetMember ("me"));
-			muc.Remove ("me too");
-		}
+        [Test]
+        public void Remove_Unexisting ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Add (GetMember ("me"));
+            muc.Remove ("me too");
+        }
 
-		[Test]
-		public void SetReadOnly ()
-		{
-			MembershipUserCollection muc = new MembershipUserCollection ();
-			muc.Add (GetMember ("me"));
-			muc.SetReadOnly ();
-			muc.SetReadOnly ();	// twice
-		}
-	}
+        [Test]
+        public void SetReadOnly ()
+        {
+            MembershipUserCollection muc = new MembershipUserCollection ();
+            muc.Add (GetMember ("me"));
+            muc.SetReadOnly ();
+            muc.SetReadOnly ();    // twice
+        }
+    }
 }
 

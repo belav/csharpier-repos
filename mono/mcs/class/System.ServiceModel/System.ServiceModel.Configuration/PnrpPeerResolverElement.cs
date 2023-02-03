@@ -2,7 +2,7 @@
 // PnrpPeerResolverElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,24 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public class PnrpPeerResolverElement
-		 : BindingElementExtensionElement
-	{
-		public PnrpPeerResolverElement () {
-		}
+    public class PnrpPeerResolverElement
+         : BindingElementExtensionElement
+    {
+        public PnrpPeerResolverElement () {
+        }
 
 
-		// Properties
+        // Properties
 
-		public override Type BindingElementType {
-			get { return typeof (PnrpPeerResolverBindingElement); }
-		}
+        public override Type BindingElementType {
+            get { return typeof (PnrpPeerResolverBindingElement); }
+        }
 
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement () {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 
 }

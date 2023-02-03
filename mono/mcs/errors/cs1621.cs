@@ -10,7 +10,7 @@ class C: IEnumerable
    public IEnumerator GetEnumerator ()
    {
       D d = delegate {
-		yield return this;
-	  };
+        yield return this;
+      };
    }
 }

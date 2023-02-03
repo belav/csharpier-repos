@@ -14,39 +14,39 @@
 
 namespace Castle.DynamicProxy.Tests.GenClasses
 {
-	using System;
+    using System;
 
-	public class GenClassWithGenMethods<T> where T : new()
-	{
-		private object savedParam;
-		private bool invoked;
+    public class GenClassWithGenMethods<T> where T : new()
+    {
+        private object savedParam;
+        private bool invoked;
 
-		public object SavedParam
-		{
-			get { return savedParam; }
-		}
+        public object SavedParam
+        {
+            get { return savedParam; }
+        }
 
-		public bool Invoked
-		{
-			get { return invoked; }
-		}
+        public bool Invoked
+        {
+            get { return invoked; }
+        }
 
-		public virtual T DoSomething<Z>(Z z)
-		{
-			invoked = true;
+        public virtual T DoSomething<Z>(Z z)
+        {
+            invoked = true;
 
-			savedParam = z;
+            savedParam = z;
 
-			return new T();
-		}
+            return new T();
+        }
 
-		public virtual void DoSomethingElse<T2>(TestConverter<int, T2> converter, int value)
-		{
-			invoked = true;
+        public virtual void DoSomethingElse<T2>(TestConverter<int, T2> converter, int value)
+        {
+            invoked = true;
 
-			savedParam = converter(value);
-		}
-	}
+            savedParam = converter(value);
+        }
+    }
 
-	public delegate TOutput TestConverter<TInput, TOutput>(TInput input);
+    public delegate TOutput TestConverter<TInput, TOutput>(TInput input);
 }

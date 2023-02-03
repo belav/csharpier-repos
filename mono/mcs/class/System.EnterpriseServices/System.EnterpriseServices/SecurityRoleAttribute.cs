@@ -32,51 +32,51 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface, AllowMultiple=true)]
-	[ComVisible(false)]
-	public sealed class SecurityRoleAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface, AllowMultiple=true)]
+    [ComVisible(false)]
+    public sealed class SecurityRoleAttribute : Attribute {
 
-		#region Fields
+        #region Fields
 
-		string description;
-		bool everyone;
-		string role;
+        string description;
+        bool everyone;
+        string role;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SecurityRoleAttribute (string role)
-			: this (role, false)
-		{
-		}
+        public SecurityRoleAttribute (string role)
+            : this (role, false)
+        {
+        }
 
-		public SecurityRoleAttribute (string role, bool everyone)
-		{
-			this.description = String.Empty;
-			this.everyone = everyone;
-			this.role = role;
-		}
+        public SecurityRoleAttribute (string role, bool everyone)
+        {
+            this.description = String.Empty;
+            this.everyone = everyone;
+            this.role = role;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public string Description {
-			get { return description; }
-			set { description = value; }
-		}
+        public string Description {
+            get { return description; }
+            set { description = value; }
+        }
 
-		public string Role {
-			get { return role; }
-			set { role = value; }
-		}
+        public string Role {
+            get { return role; }
+            set { role = value; }
+        }
 
-		public bool SetEveryoneAccess {
-			get { return everyone; }
-			set { everyone = value; }
-		}
+        public bool SetEveryoneAccess {
+            get { return everyone; }
+            set { everyone = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

@@ -15,7 +15,7 @@ namespace System.Web.Hosting {
         }
  
 
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.Infrastructure)]	
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
         public override Object InitializeLifetimeService(){
             return null; // never expire lease
         }

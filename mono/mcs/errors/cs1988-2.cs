@@ -5,10 +5,10 @@ using System;
 
 class C
 {
-	delegate void D (ref int i);
-	
-	public static void Main ()
-	{
-		D d = async delegate { };
-	}
+    delegate void D (ref int i);
+    
+    public static void Main ()
+    {
+        D d = async delegate { };
+    }
 }

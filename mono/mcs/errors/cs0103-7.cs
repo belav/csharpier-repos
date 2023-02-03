@@ -4,10 +4,10 @@
 
 class C
 {
-	delegate void WithOutParam (string value);
+    delegate void WithOutParam (string value);
 
-	static void Main() 
-	{
-		WithOutParam o = (s) => Console.WriteLine();
-	}
+    static void Main() 
+    {
+        WithOutParam o = (s) => Console.WriteLine();
+    }
 }

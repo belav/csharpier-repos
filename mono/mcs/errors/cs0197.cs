@@ -4,18 +4,18 @@
 
 using System;
 class T : MarshalByRefObject {
-	int bar;
+    int bar;
 
-	static void Foo (ref int i)
-	{
-	}
+    static void Foo (ref int i)
+    {
+    }
 
-	static void Main()
-	{
-		T t = new T ();
-		t.bar = 12;
-		Foo (ref t.bar);
-	}
+    static void Main()
+    {
+        T t = new T ();
+        t.bar = 12;
+        Foo (ref t.bar);
+    }
 }
 
 

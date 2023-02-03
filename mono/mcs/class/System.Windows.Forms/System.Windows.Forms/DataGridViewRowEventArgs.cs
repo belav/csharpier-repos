@@ -20,24 +20,24 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewRowEventArgs : EventArgs {
+    public class DataGridViewRowEventArgs : EventArgs {
 
-		private DataGridViewRow dataGridViewRow;
+        private DataGridViewRow dataGridViewRow;
 
-		public DataGridViewRowEventArgs (DataGridViewRow dataGridViewRow) {
-			this.dataGridViewRow = dataGridViewRow;
-		}
+        public DataGridViewRowEventArgs (DataGridViewRow dataGridViewRow) {
+            this.dataGridViewRow = dataGridViewRow;
+        }
 
-		public DataGridViewRow Row {
-			get { return dataGridViewRow; }
-		}
+        public DataGridViewRow Row {
+            get { return dataGridViewRow; }
+        }
 
-	}
+    }
 
 }

@@ -3,10 +3,10 @@
 
 class X
 {
-	static readonly int f;
+    static readonly int f;
 
-	static ref int Test ()
-	{
-		return ref f;
-	}
+    static ref int Test ()
+    {
+        return ref f;
+    }
 }

@@ -7,10 +7,10 @@ using System.Linq.Expressions;
 
 class C
 {
-	public static void Main ()
-	{
-		unsafe {
-			Expression<Func<int>> e = () => sizeof (long*);
-		}
-	}
+    public static void Main ()
+    {
+        unsafe {
+            Expression<Func<int>> e = () => sizeof (long*);
+        }
+    }
 }

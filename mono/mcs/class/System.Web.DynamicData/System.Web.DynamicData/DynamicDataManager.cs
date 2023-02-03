@@ -2,7 +2,7 @@
 // DynamicDataManager.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //      Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
@@ -44,164 +44,164 @@ using System.Web.DynamicData.ModelProviders;
 
 namespace System.Web.DynamicData
 {
-	[ToolboxBitmap (typeof(DynamicDataManager), "DynamicDataManager.ico")]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[NonVisualControl]
-	[ParseChildren (true)]
-	[PersistChildren (false)]
-	public class DynamicDataManager : Control
-	{
-		private class AutoFieldGenerator : IAutoFieldGenerator
-		{
-			MetaTable table;
-			
-			public AutoFieldGenerator (MetaTable table)
-			{
-				this.table = table;
-			}
-			
-			public ICollection GenerateFields (Control ctl)
-			{
-				var ret = new List <DynamicField> ();
-				foreach (MetaColumn column in table.Columns) {
-					if (!column.Scaffold)
-						continue;
-					
-					var field = new DynamicField ();
-					field.DataField = column.Name;
-					ret.Add (field);
-				}
-				
-				return ret;
-			}
-		}
+    [ToolboxBitmap (typeof(DynamicDataManager), "DynamicDataManager.ico")]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [NonVisualControl]
+    [ParseChildren (true)]
+    [PersistChildren (false)]
+    public class DynamicDataManager : Control
+    {
+        private class AutoFieldGenerator : IAutoFieldGenerator
+        {
+            MetaTable table;
+            
+            public AutoFieldGenerator (MetaTable table)
+            {
+                this.table = table;
+            }
+            
+            public ICollection GenerateFields (Control ctl)
+            {
+                var ret = new List <DynamicField> ();
+                foreach (MetaColumn column in table.Columns) {
+                    if (!column.Scaffold)
+                        continue;
+                    
+                    var field = new DynamicField ();
+                    field.DataField = column.Name;
+                    ret.Add (field);
+                }
+                
+                return ret;
+            }
+        }
 
-		Dictionary <IDynamicDataSource, bool> knownDataSources;
-		
-		public DynamicDataManager ()
-		{
-		}
+        Dictionary <IDynamicDataSource, bool> knownDataSources;
+        
+        public DynamicDataManager ()
+        {
+        }
 
-		public bool AutoLoadForeignKeys {
-			get;
-			set;
-		}
+        public bool AutoLoadForeignKeys {
+            get;
+            set;
+        }
 
-		[Browsable (false)]
-		public override bool Visible {
-			get { return true; }
+        [Browsable (false)]
+        public override bool Visible {
+            get { return true; }
 
-			// NOTE: it is supposed to throw the exception
-			set { throw new NotImplementedException (); }
-		}
+            // NOTE: it is supposed to throw the exception
+            set { throw new NotImplementedException (); }
+        }
 
-		protected override void OnLoad (EventArgs e)
-		{
-			base.OnLoad (e);
+        protected override void OnLoad (EventArgs e)
+        {
+            base.OnLoad (e);
 
-			// http://forums.asp.net/p/1257004/2339034.aspx
-			// http://forums.asp.net/t/1297860.aspx
-			// http://forums.asp.net/p/1396453/3005197.aspx#3005197
-			if (knownDataSources != null) {
-				foreach (var de in knownDataSources) {
-					IDynamicDataSource dds = de.Key;
-					if (dds == null)
-						continue;
+            // http://forums.asp.net/p/1257004/2339034.aspx
+            // http://forums.asp.net/t/1297860.aspx
+            // http://forums.asp.net/p/1396453/3005197.aspx#3005197
+            if (knownDataSources != null) {
+                foreach (var de in knownDataSources) {
+                    IDynamicDataSource dds = de.Key;
+                    if (dds == null)
+                        continue;
 
-					dds.ExpandDynamicWhereParameters ();
-				}
-			}
-		}
+                    dds.ExpandDynamicWhereParameters ();
+                }
+            }
+        }
 
-		public void RegisterControl (Control control)
-		{
-			RegisterControl (control, false);
-		}
+        public void RegisterControl (Control control)
+        {
+            RegisterControl (control, false);
+        }
 
-		public void RegisterControl (Control control, bool setSelectionFromUrl)
-		{
-			// .NET doesn't check for null here, but since I don't like such code, we
-			// will do the check and throw the same exception as .NET
-			if (control == null)
-				throw new NullReferenceException ();
+        public void RegisterControl (Control control, bool setSelectionFromUrl)
+        {
+            // .NET doesn't check for null here, but since I don't like such code, we
+            // will do the check and throw the same exception as .NET
+            if (control == null)
+                throw new NullReferenceException ();
 
-			if (!ControlIsValid (control))
-				throw new Exception ("Controls of type " + control.GetType () + " are not supported.");
+            if (!ControlIsValid (control))
+                throw new Exception ("Controls of type " + control.GetType () + " are not supported.");
 
-			// http://forums.asp.net/p/1257004/2339034.aspx
-			// http://forums.asp.net/p/1383908/2936065.aspx
-			DataBoundControl dbc = control as DataBoundControl;
-			if (dbc != null) {
-				IDynamicDataSource dds = dbc.DataSourceObject as IDynamicDataSource;
-				if (dds == null)
-					return;
+            // http://forums.asp.net/p/1257004/2339034.aspx
+            // http://forums.asp.net/p/1383908/2936065.aspx
+            DataBoundControl dbc = control as DataBoundControl;
+            if (dbc != null) {
+                IDynamicDataSource dds = dbc.DataSourceObject as IDynamicDataSource;
+                if (dds == null)
+                    return;
 
-				RegisterDataSource (dds);
-				MetaTable table = dds.GetTable ();
-				if (table == null)
-					return;
+                RegisterDataSource (dds);
+                MetaTable table = dds.GetTable ();
+                if (table == null)
+                    return;
 
-				if (String.IsNullOrEmpty (dds.Where))
-					dds.AutoGenerateWhereClause = true;
-				else
-					dds.AutoGenerateWhereClause = false;
+                if (String.IsNullOrEmpty (dds.Where))
+                    dds.AutoGenerateWhereClause = true;
+                else
+                    dds.AutoGenerateWhereClause = false;
 
-				Type contextType = dds.ContextType;
-				if (contextType == null)
-					dds.ContextType = table.DataContextType;
+                Type contextType = dds.ContextType;
+                if (contextType == null)
+                    dds.ContextType = table.DataContextType;
 
-				string entityName = dds.EntitySetName;
-				if (String.IsNullOrEmpty (entityName))
-					dds.EntitySetName = table.DataContextPropertyName;
+                string entityName = dds.EntitySetName;
+                if (String.IsNullOrEmpty (entityName))
+                    dds.EntitySetName = table.DataContextPropertyName;
 
-				if (AutoLoadForeignKeys) {
-					var ldds = dds as LinqDataSource;
-					if (ldds != null)
-						ldds.LoadWithForeignKeys (table.EntityType);
-				}
-				
-				var gv = control as GridView;
-				if (gv != null) {
-					gv.ColumnsGenerator = new AutoFieldGenerator (table);
-					return;
-				}
+                if (AutoLoadForeignKeys) {
+                    var ldds = dds as LinqDataSource;
+                    if (ldds != null)
+                        ldds.LoadWithForeignKeys (table.EntityType);
+                }
+                
+                var gv = control as GridView;
+                if (gv != null) {
+                    gv.ColumnsGenerator = new AutoFieldGenerator (table);
+                    return;
+                }
 
-				var dv = control as DetailsView;
-				if (dv != null) {
-					dv.RowsGenerator = new AutoFieldGenerator (table);
-					return;
-				}
-			}
-		}
+                var dv = control as DetailsView;
+                if (dv != null) {
+                    dv.RowsGenerator = new AutoFieldGenerator (table);
+                    return;
+                }
+            }
+        }
 
-		void RegisterDataSource (IDynamicDataSource dds)
-		{
-			if (knownDataSources == null) {
-				knownDataSources = new Dictionary <IDynamicDataSource, bool> ();
-				knownDataSources.Add (dds, true);
-				return;
-			}
-			
-			if (knownDataSources.ContainsKey (dds))
-				return;
+        void RegisterDataSource (IDynamicDataSource dds)
+        {
+            if (knownDataSources == null) {
+                knownDataSources = new Dictionary <IDynamicDataSource, bool> ();
+                knownDataSources.Add (dds, true);
+                return;
+            }
+            
+            if (knownDataSources.ContainsKey (dds))
+                return;
 
-			knownDataSources.Add (dds, true);
-		}
-		
-		bool ControlIsValid (Control control)
-		{
-			if (control is Repeater) {
-				if (control.NamingContainer == null)
-					throw new HttpException ("The Repeater control '" + control.ID + "' does not have a naming container.");
-				return true;
-			}
-			
-			DataBoundControl dbc = control as DataBoundControl;
-			if (dbc == null)
-				return false;
-			
-			return true;
-		}
-	}
+            knownDataSources.Add (dds, true);
+        }
+        
+        bool ControlIsValid (Control control)
+        {
+            if (control is Repeater) {
+                if (control.NamingContainer == null)
+                    throw new HttpException ("The Repeater control '" + control.ID + "' does not have a naming container.");
+                return true;
+            }
+            
+            DataBoundControl dbc = control as DataBoundControl;
+            if (dbc == null)
+                return false;
+            
+            return true;
+        }
+    }
 }

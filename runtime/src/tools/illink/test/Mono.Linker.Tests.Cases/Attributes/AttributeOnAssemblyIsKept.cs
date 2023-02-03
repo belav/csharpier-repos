@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Mono.Linker.Tests.Cases.Attributes;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
@@ -7,19 +7,19 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Attributes
 {
-	class AttributeOnAssemblyIsKept
-	{
-		static void Main ()
-		{
-		}
+    class AttributeOnAssemblyIsKept
+    {
+        static void Main ()
+        {
+        }
 
-		[KeptBaseType (typeof (System.Attribute))]
-		public class FooAttribute : Attribute
-		{
-			[Kept]
-			public FooAttribute ()
-			{
-			}
-		}
-	}
+        [KeptBaseType (typeof (System.Attribute))]
+        public class FooAttribute : Attribute
+        {
+            [Kept]
+            public FooAttribute ()
+            {
+            }
+        }
+    }
 }

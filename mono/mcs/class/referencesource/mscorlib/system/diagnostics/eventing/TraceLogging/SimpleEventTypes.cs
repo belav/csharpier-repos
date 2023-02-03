@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Interlocked = System.Threading.Interlocked;
 
 #if ES_BUILD_STANDALONE

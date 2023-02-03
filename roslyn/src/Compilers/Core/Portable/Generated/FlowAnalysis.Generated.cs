@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 // < auto-generated />
@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     /// <summary>
     /// Represents result of checking whether the <see cref="Operand" /> is null.
     /// For reference types this checks if the <see cref="Operand" /> is a null reference,
-    /// for nullable types this checks if the <see cref="Operand" /> doesn’t have a value.
+    /// for nullable types this checks if the <see cref="Operand" /> doesn�t have a value.
     /// The node is produced as part of a flow graph during rewrite of <see cref="ICoalesceOperation" />
     /// and <see cref="IConditionalAccessOperation" /> nodes.
     /// </summary>

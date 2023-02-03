@@ -35,54 +35,54 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataReader_GetName_I : GHTBase
 {
-	public static void Main()
-	{
-		OracleDataReader_GetName_I tc = new OracleDataReader_GetName_I();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OracleDataReader_NextResult");
-				tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OracleDataReader_GetName_I tc = new OracleDataReader_GetName_I();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OracleDataReader_NextResult");
+                tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	[Category("NotWorking")]
-	public void run()
-	{
-		Exception exp = null;
-		OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		OracleCommand cmd = new OracleCommand("Customers",  con);
-		cmd.CommandType = CommandType.TableDirect;
+    [Test]
+    [Category("NotWorking")]
+    public void run()
+    {
+        Exception exp = null;
+        OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        OracleCommand cmd = new OracleCommand("Customers",  con);
+        cmd.CommandType = CommandType.TableDirect;
 
-		con.Open();
+        con.Open();
 
-		OracleDataReader rdr = cmd.ExecuteReader();
-		rdr.Read();
+        OracleDataReader rdr = cmd.ExecuteReader();
+        rdr.Read();
 
 
-		try
-		{
-			BeginCase("GetName field 0");
-			string str = rdr.GetName(0);
-			Compare(str.ToUpper(),"CUSTOMERID" );
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("GetName field 0");
+            string str = rdr.GetName(0);
+            Compare(str.ToUpper(),"CUSTOMERID" );
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("GetName last field ");
-			string str = rdr.GetName(rdr.FieldCount -1);
-			Compare(str.ToUpper(),"FAX" );
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("GetName last field ");
+            string str = rdr.GetName(rdr.FieldCount -1);
+            Compare(str.ToUpper(),"FAX" );
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		if (con.State == ConnectionState.Open) con.Close();
-	}
+        if (con.State == ConnectionState.Open) con.Close();
+    }
 }
 
 

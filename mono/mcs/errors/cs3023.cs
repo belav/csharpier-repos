@@ -6,9 +6,9 @@ using System;
 [assembly: CLSCompliant (true)]
 
 public class Class {
-	[return:CLSCompliant(false)]
-	public ulong Test ()
-	{
-	    return 4;
-	}
+    [return:CLSCompliant(false)]
+    public ulong Test ()
+    {
+        return 4;
+    }
 }

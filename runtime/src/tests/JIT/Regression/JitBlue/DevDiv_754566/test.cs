@@ -16,7 +16,7 @@ class Program
         Program p = new Program();
 
         String result = p.Test(42);
-	if (result == "42")
+    if (result == "42")
         {
             Console.WriteLine("=== PASSED ===");
             exitStatus = 100;

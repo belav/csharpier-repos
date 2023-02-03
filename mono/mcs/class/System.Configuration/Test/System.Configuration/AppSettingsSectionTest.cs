@@ -3,7 +3,7 @@
 // for System.Configuration.AppSettingsSection.
 //
 // Author:
-//	Tom Philpot  <tom.philpot@logos.com>
+//    Tom Philpot  <tom.philpot@logos.com>
 //
 // Copyright (C) 2014 Logos Bible Software
 //
@@ -35,41 +35,41 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {
-	using Util;
+    using Util;
 
-	[TestFixture]
-	public class AppSettingsSectionTest
-	{
-		private string originalCurrentDir;
-		private string tempFolder;
+    [TestFixture]
+    public class AppSettingsSectionTest
+    {
+        private string originalCurrentDir;
+        private string tempFolder;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			originalCurrentDir = Directory.GetCurrentDirectory ();
-			tempFolder = Path.Combine (Path.GetTempPath (), this.GetType ().FullName);
-			if (!Directory.Exists (tempFolder))
-				Directory.CreateDirectory (tempFolder);
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            originalCurrentDir = Directory.GetCurrentDirectory ();
+            tempFolder = Path.Combine (Path.GetTempPath (), this.GetType ().FullName);
+            if (!Directory.Exists (tempFolder))
+                Directory.CreateDirectory (tempFolder);
+        }
 
-		[TearDown]
-		public void TearDown ()
-		{
-			Directory.SetCurrentDirectory (originalCurrentDir);
-			if (Directory.Exists (tempFolder))
-				Directory.Delete (tempFolder, true);
-		}
-		
-		[Test]
-		public void TestFile ()
-		{
-			Directory.SetCurrentDirectory (tempFolder);
+        [TearDown]
+        public void TearDown ()
+        {
+            Directory.SetCurrentDirectory (originalCurrentDir);
+            if (Directory.Exists (tempFolder))
+                Directory.Delete (tempFolder, true);
+        }
+        
+        [Test]
+        public void TestFile ()
+        {
+            Directory.SetCurrentDirectory (tempFolder);
 
-			var currentAssembly = TestUtil.ThisApplicationPath;
-			var config = ConfigurationManager.OpenExeConfiguration (currentAssembly);
-			Assert.AreEqual ("System.Configuration-appSettings.config", config.AppSettings.File, "#A01");
-			Assert.AreEqual ("foo", ConfigurationSettings.AppSettings["TestKey1"], "#A02");
-			Assert.AreEqual ("bar", ConfigurationSettings.AppSettings["TestKey2"], "#A03");
-		}
-	}
+            var currentAssembly = TestUtil.ThisApplicationPath;
+            var config = ConfigurationManager.OpenExeConfiguration (currentAssembly);
+            Assert.AreEqual ("System.Configuration-appSettings.config", config.AppSettings.File, "#A01");
+            Assert.AreEqual ("foo", ConfigurationSettings.AppSettings["TestKey1"], "#A02");
+            Assert.AreEqual ("bar", ConfigurationSettings.AppSettings["TestKey2"], "#A03");
+        }
+    }
 }

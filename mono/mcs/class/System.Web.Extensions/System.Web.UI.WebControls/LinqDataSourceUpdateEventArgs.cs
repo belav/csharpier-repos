@@ -36,28 +36,28 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class LinqDataSourceUpdateEventArgs : CancelEventArgs
-	{
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class LinqDataSourceUpdateEventArgs : CancelEventArgs
+    {
 
-		public LinqDataSourceUpdateEventArgs (LinqDataSourceValidationException exception)
-		{
-			Exception = exception;
-		}
+        public LinqDataSourceUpdateEventArgs (LinqDataSourceValidationException exception)
+        {
+            Exception = exception;
+        }
 
-		public LinqDataSourceUpdateEventArgs (object originalObject, object newObject)
-		{
-			OriginalObject = originalObject;
-			NewObject = newObject;
-		}
+        public LinqDataSourceUpdateEventArgs (object originalObject, object newObject)
+        {
+            OriginalObject = originalObject;
+            NewObject = newObject;
+        }
 
-		public LinqDataSourceValidationException Exception { get; private set; }
+        public LinqDataSourceValidationException Exception { get; private set; }
 
-		public bool ExceptionHandled { get; set; }
+        public bool ExceptionHandled { get; set; }
 
-		public object NewObject { get; private set; }
+        public object NewObject { get; private set; }
 
-		public object OriginalObject { get; private set; }
-	}
+        public object OriginalObject { get; private set; }
+    }
 }

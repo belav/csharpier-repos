@@ -32,41 +32,41 @@ using System.Collections;
 
 namespace System.ComponentModel.Design
 {
-	public sealed class DesignerActionPropertyItem : DesignerActionItem
-	{
-		string member_name;
-		IComponent related_component;
-		
-		public DesignerActionPropertyItem (string memberName, string displayName)
-			: this (memberName, displayName, null)
-		{
-		}
-		
-		public DesignerActionPropertyItem (string memberName, string displayName, string category)
-			: this (memberName, displayName, category, null)
-		{
-		}
-		
-		public DesignerActionPropertyItem (string memberName, string displayName, string category, string description)
-			: base (displayName, category, description)
-		{
-			this.member_name = memberName;
-		}
-		
-		public string MemberName {
-			get {
-				return member_name;
-			}
-		}
+    public sealed class DesignerActionPropertyItem : DesignerActionItem
+    {
+        string member_name;
+        IComponent related_component;
+        
+        public DesignerActionPropertyItem (string memberName, string displayName)
+            : this (memberName, displayName, null)
+        {
+        }
+        
+        public DesignerActionPropertyItem (string memberName, string displayName, string category)
+            : this (memberName, displayName, category, null)
+        {
+        }
+        
+        public DesignerActionPropertyItem (string memberName, string displayName, string category, string description)
+            : base (displayName, category, description)
+        {
+            this.member_name = memberName;
+        }
+        
+        public string MemberName {
+            get {
+                return member_name;
+            }
+        }
 
-		public IComponent RelatedComponent {
-			get {
-				return related_component;
-			}
+        public IComponent RelatedComponent {
+            get {
+                return related_component;
+            }
 
-			set {
-				related_component = value;
-			}
-		}
-	}
+            set {
+                related_component = value;
+            }
+        }
+    }
 }

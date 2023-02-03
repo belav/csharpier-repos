@@ -33,40 +33,40 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class Types : DocumentableItem {
+    [XmlFormatExtensionPoint ("Extensions")]
+    public sealed class Types : DocumentableItem {
 
-		#region Fields
+        #region Fields
 
-		ServiceDescriptionFormatExtensionCollection extensions;
-		XmlSchemas schemas;
+        ServiceDescriptionFormatExtensionCollection extensions;
+        XmlSchemas schemas;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-	
-		public Types ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-			schemas = new XmlSchemas ();
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+    
+        public Types ()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+            schemas = new XmlSchemas ();
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[XmlIgnore]
-		public 
-		override
-		ServiceDescriptionFormatExtensionCollection Extensions { 	
-			get { return extensions; }
-		}
+        [XmlIgnore]
+        public 
+        override
+        ServiceDescriptionFormatExtensionCollection Extensions {     
+            get { return extensions; }
+        }
 
-		[XmlElement ("schema", typeof (XmlSchema), Namespace = "http://www.w3.org/2001/XMLSchema")]
-		public XmlSchemas Schemas {
-			get { return schemas; }
-		}
+        [XmlElement ("schema", typeof (XmlSchema), Namespace = "http://www.w3.org/2001/XMLSchema")]
+        public XmlSchemas Schemas {
+            get { return schemas; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

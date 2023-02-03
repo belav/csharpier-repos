@@ -4,8 +4,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		int.TryParse ("0", out var v);
-	}
+    public static void Main ()
+    {
+        int.TryParse ("0", out var v);
+    }
 }

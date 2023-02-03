@@ -29,16 +29,16 @@ using System.Web.UI.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class AdRotatorDesigner : ControlDesigner
-	{
-		public AdRotatorDesigner ()
-			: base ()
-		{
-		}
+    public class AdRotatorDesigner : ControlDesigner
+    {
+        public AdRotatorDesigner ()
+            : base ()
+        {
+        }
 
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

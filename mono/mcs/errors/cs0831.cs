@@ -6,16 +6,16 @@ using System.Linq.Expressions;
 
 class B
 {
-	protected int Core ()
-	{
-		return 4;
-	}
+    protected int Core ()
+    {
+        return 4;
+    }
 }
 
 class C : B
 {
-	public void Test ()
-	{
-		Expression<Func<int>> e = () => base.Core ();
-	}
+    public void Test ()
+    {
+        Expression<Func<int>> e = () => base.Core ();
+    }
 }

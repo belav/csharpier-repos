@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -925,7 +925,7 @@ using System;
 public class MyAttribute : Attribute
 {
     public int P { get; set; }
-	public MyAttribute(bool condition, int other) { }
+    public MyAttribute(bool condition, int other) { }
 }
 
 [MyAttribute(condition: true, 42)]
@@ -963,7 +963,7 @@ using System;
 public class MyAttribute : Attribute
 {
     public int P { get; set; }
-	public MyAttribute(bool condition, int other) { }
+    public MyAttribute(bool condition, int other) { }
 }
 
 [MyAttribute(condition: true, 42)]
@@ -999,7 +999,7 @@ using System;
 public class MyAttribute : Attribute
 {
     public int P { get; set; }
-	public MyAttribute(int a = 1, int b = 2, int c = 3) { }
+    public MyAttribute(int a = 1, int b = 2, int c = 3) { }
 }
 
 [MyAttribute(c:3, 2)]

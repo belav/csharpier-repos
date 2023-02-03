@@ -31,25 +31,25 @@ using System;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewDataItem : ListViewItem, IDataItemContainer
-	{
-		public ListViewDataItem (int dataItemIndex, int displayIndex)
-		{
-			DataItem = null;
-			DataItemIndex = dataItemIndex;
-			DisplayIndex = displayIndex;
-		}
-		
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			CommandEventArgs args = e as CommandEventArgs;
-			if (args != null) {
-				RaiseBubbleEvent (this, new ListViewCommandEventArgs (this, this, args));
-				return true;
-			}
-			
-			return base.OnBubbleEvent (source, e);
-		}
-		
-	}
+    public class ListViewDataItem : ListViewItem, IDataItemContainer
+    {
+        public ListViewDataItem (int dataItemIndex, int displayIndex)
+        {
+            DataItem = null;
+            DataItemIndex = dataItemIndex;
+            DisplayIndex = displayIndex;
+        }
+        
+        protected override bool OnBubbleEvent (object source, EventArgs e)
+        {
+            CommandEventArgs args = e as CommandEventArgs;
+            if (args != null) {
+                RaiseBubbleEvent (this, new ListViewCommandEventArgs (this, this, args));
+                return true;
+            }
+            
+            return base.OnBubbleEvent (source, e);
+        }
+        
+    }
 }

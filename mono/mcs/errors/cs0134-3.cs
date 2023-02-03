@@ -3,5 +3,5 @@
 
 class C
 {
-	const bool [] b = { true };
+    const bool [] b = { true };
 }

@@ -32,9 +32,9 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public enum DsmlErrorProcessing
-	{
-		Resume,
-		Exit
-	}
+    public enum DsmlErrorProcessing
+    {
+        Resume,
+        Exit
+    }
 }

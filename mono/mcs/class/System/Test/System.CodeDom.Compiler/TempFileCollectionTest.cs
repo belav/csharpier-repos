@@ -1,9 +1,9 @@
 //
 // TempFileCollectionTest.cs 
-//	- Unit tests for System.CodeDom.Compiler.TempFileCollection
+//    - Unit tests for System.CodeDom.Compiler.TempFileCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,22 +34,22 @@ using System.CodeDom.Compiler;
 
 namespace MonoTests.System.CodeDom.Compiler {
 
-	[TestFixture]
-	public class TempFileCollectionTest {
+    [TestFixture]
+    public class TempFileCollectionTest {
 
-		[Test]
-		public void Contructor_NullTempDir ()
-		{
-			TempFileCollection tfc = new TempFileCollection (null);
-			Assert.AreEqual (String.Empty, tfc.TempDir, "TempDir");
-		}
+        [Test]
+        public void Contructor_NullTempDir ()
+        {
+            TempFileCollection tfc = new TempFileCollection (null);
+            Assert.AreEqual (String.Empty, tfc.TempDir, "TempDir");
+        }
 
-		[Test]
-		public void TempDir_Stays_Empty ()
-		{
-			TempFileCollection tfc = new TempFileCollection ();
-			Assert.IsNotNull (tfc.BasePath, "BasePath");
-			Assert.AreEqual (String.Empty, tfc.TempDir, "TempDir");
-		}
-	}
+        [Test]
+        public void TempDir_Stays_Empty ()
+        {
+            TempFileCollection tfc = new TempFileCollection ();
+            Assert.IsNotNull (tfc.BasePath, "BasePath");
+            Assert.AreEqual (String.Empty, tfc.TempDir, "TempDir");
+        }
+    }
 }

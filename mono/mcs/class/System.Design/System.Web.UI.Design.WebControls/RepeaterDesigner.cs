@@ -34,90 +34,90 @@ using System.Web.UI.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class RepeaterDesigner : ControlDesigner, IDataSourceProvider
-	{
-		string data_member;
-		string data_source;
+    public class RepeaterDesigner : ControlDesigner, IDataSourceProvider
+    {
+        string data_member;
+        string data_source;
 
-		public RepeaterDesigner ()
-			: base ()
-		{
-		}
+        public RepeaterDesigner ()
+            : base ()
+        {
+        }
 
-		public string DataMember {
-			get { return data_member; }
-			set { data_member = value; }
-		}
+        public string DataMember {
+            get { return data_member; }
+            set { data_member = value; }
+        }
 
-		public string DataSource {
-			get { return data_source; }
-			set { data_source = value; }
-		}
+        public string DataSource {
+            get { return data_source; }
+            set { data_source = value; }
+        }
 
-		protected bool TemplatesExist {
-			get { throw new NotImplementedException (); }
-		}
+        protected bool TemplatesExist {
+            get { throw new NotImplementedException (); }
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override void Dispose (bool disposing)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected IEnumerable GetDesignTimeDataSource (int minimumRows)
-		{
-			throw new NotImplementedException ();
-		}
+        protected IEnumerable GetDesignTimeDataSource (int minimumRows)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected IEnumerable GetDesignTimeDataSource (
-			IEnumerable selectedDataSource,
-			int minimumRows)
-		{
-			throw new NotImplementedException ();
-		}
+        protected IEnumerable GetDesignTimeDataSource (
+            IEnumerable selectedDataSource,
+            int minimumRows)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override string GetEmptyDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		protected override string GetErrorDesignTimeHtml (Exception e)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override string GetEmptyDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        protected override string GetErrorDesignTimeHtml (Exception e)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public virtual IEnumerable GetResolvedSelectedDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public virtual object GetSelectedDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public override void Initialize (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
+        public virtual IEnumerable GetResolvedSelectedDataSource ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public virtual object GetSelectedDataSource ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public override void Initialize (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override void OnComponentChanged (object source, ComponentChangedEventArgs ce)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void OnComponentChanged (object source, ComponentChangedEventArgs ce)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected internal virtual void OnDataSourceChanged ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected internal virtual void OnDataSourceChanged ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void PreFilterProperties (IDictionary properties)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void PreFilterProperties (IDictionary properties)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

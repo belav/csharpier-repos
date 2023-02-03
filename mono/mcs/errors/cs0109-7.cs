@@ -8,8 +8,8 @@ public class Test: ArrayList
 {
     public new string this[string index]
     {
-	set
-	{
-	}
+    set
+    {
+    }
     }
 }

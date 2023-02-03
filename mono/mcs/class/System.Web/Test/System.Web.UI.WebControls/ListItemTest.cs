@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.ListItem.cs 
 //
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,69 +34,69 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]	
-	public class ListItemTest 
-	{
-		[Test]
-		public void Defaults ()
-		{
-			ListItem li = new ListItem ();
-			Assert.AreEqual ("", li.Text, "#01");
-			Assert.AreEqual ("", li.Value, "#02");
-			Assert.AreEqual (false, li.Selected, "#03");
-		}
+    [TestFixture]    
+    public class ListItemTest 
+    {
+        [Test]
+        public void Defaults ()
+        {
+            ListItem li = new ListItem ();
+            Assert.AreEqual ("", li.Text, "#01");
+            Assert.AreEqual ("", li.Value, "#02");
+            Assert.AreEqual (false, li.Selected, "#03");
+        }
 
-		[Test]
-		public void Defaults2 ()
-		{
-			ListItem li = new ListItem ("something");
-			Assert.AreEqual ("something", li.Text, "#01");
-			Assert.AreEqual ("something", li.Value, "#02");
-			Assert.AreEqual (false, li.Selected, "#03");
-		}
+        [Test]
+        public void Defaults2 ()
+        {
+            ListItem li = new ListItem ("something");
+            Assert.AreEqual ("something", li.Text, "#01");
+            Assert.AreEqual ("something", li.Value, "#02");
+            Assert.AreEqual (false, li.Selected, "#03");
+        }
 
-		[Test]
-		public void Defaults3 ()
-		{
-			ListItem li = new ListItem ("something", "else");
-			Assert.AreEqual ("something", li.Text, "#01");
-			Assert.AreEqual ("else", li.Value, "#02");
-			Assert.AreEqual (false, li.Selected, "#03");
-		}
+        [Test]
+        public void Defaults3 ()
+        {
+            ListItem li = new ListItem ("something", "else");
+            Assert.AreEqual ("something", li.Text, "#01");
+            Assert.AreEqual ("else", li.Value, "#02");
+            Assert.AreEqual (false, li.Selected, "#03");
+        }
 
-		[Test]
-		[ExpectedException (typeof (HttpException))]
-		public void AllowedChildren ()
-		{
-			IParserAccessor li = new ListItem ("something", "else");
-			li.AddParsedSubObject ("hola");
-		}
+        [Test]
+        [ExpectedException (typeof (HttpException))]
+        public void AllowedChildren ()
+        {
+            IParserAccessor li = new ListItem ("something", "else");
+            li.AddParsedSubObject ("hola");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void AllowedChildren2 ()
-		{
-			IParserAccessor li = new ListItem ("something", "else");
-			li.AddParsedSubObject (null);
-		}
+        [Test]
+        [ExpectedException (typeof (NullReferenceException))]
+        public void AllowedChildren2 ()
+        {
+            IParserAccessor li = new ListItem ("something", "else");
+            li.AddParsedSubObject (null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (HttpException))]
-		public void AllowedChildren3 ()
-		{
-			IParserAccessor li = new ListItem ("something", "else");
-			li.AddParsedSubObject (new CheckBox ());
-		}
+        [Test]
+        [ExpectedException (typeof (HttpException))]
+        public void AllowedChildren3 ()
+        {
+            IParserAccessor li = new ListItem ("something", "else");
+            li.AddParsedSubObject (new CheckBox ());
+        }
 
-		[Test]
-		public void AllowedChildren4 ()
-		{
-			ListItem li = new ListItem ("something", "else");
-			IParserAccessor parser = (ListItem) li;
-			parser.AddParsedSubObject (new LiteralControl ("Hola"));
-			Assert.AreEqual ("Hola", li.Text, "#01");
-			Assert.AreEqual ("else", li.Value, "#02");
-		}
-	}
+        [Test]
+        public void AllowedChildren4 ()
+        {
+            ListItem li = new ListItem ("something", "else");
+            IParserAccessor parser = (ListItem) li;
+            parser.AddParsedSubObject (new LiteralControl ("Hola"));
+            Assert.AreEqual ("Hola", li.Text, "#01");
+            Assert.AreEqual ("else", li.Value, "#02");
+        }
+    }
 }
 

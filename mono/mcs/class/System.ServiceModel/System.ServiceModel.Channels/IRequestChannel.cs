@@ -29,15 +29,15 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public interface IRequestChannel
-		: IChannel, ICommunicationObject
-	{
-		EndpointAddress RemoteAddress { get; }
-		IAsyncResult BeginRequest (Message message, AsyncCallback callback, object state);
-		IAsyncResult BeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state);
-		Message EndRequest (IAsyncResult result);
-		Message Request (Message message);
-		Message Request (Message message, TimeSpan timeout);
-		Uri Via { get; }
-	}
+    public interface IRequestChannel
+        : IChannel, ICommunicationObject
+    {
+        EndpointAddress RemoteAddress { get; }
+        IAsyncResult BeginRequest (Message message, AsyncCallback callback, object state);
+        IAsyncResult BeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        Message EndRequest (IAsyncResult result);
+        Message Request (Message message);
+        Message Request (Message message, TimeSpan timeout);
+        Uri Via { get; }
+    }
 }

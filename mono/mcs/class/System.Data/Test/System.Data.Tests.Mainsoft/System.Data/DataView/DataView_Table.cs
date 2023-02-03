@@ -39,90 +39,90 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_Table : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataView_Table tc = new DataView_Table();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataView_Table");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataView_Table tc = new DataView_Table();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataView_Table");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-		DataTable dt = new DataTable();
-		DataView dv = new DataView();
-
-		try
-		{
-			BeginCase("DataTable=null");
-			Compare(dv.Table ,null );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("DataException - bind to table with no name");
-			try
-			{
-				dv.Table = dt;
-			}
-			catch (DataException ex)
-			{
-				exp = ex;
-			}
-			Compare(exp.GetType().FullName ,typeof(DataException).FullName);
-			exp=null;
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		dt.TableName = "myTable";
-		try
-		{
-			BeginCase("DataTable!=null");
-			dv.Table = dt;
-			Compare(dv.Table ,dt);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("assign null to DataTable");
-			dv.Table = null; 
-			Compare(dv.Table ,null);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	}
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+    public void run()
+    {
+        Exception exp = null;
+        DataTable dt = new DataTable();
+        DataView dv = new DataView();
+
+        try
+        {
+            BeginCase("DataTable=null");
+            Compare(dv.Table ,null );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("DataException - bind to table with no name");
+            try
+            {
+                dv.Table = dt;
+            }
+            catch (DataException ex)
+            {
+                exp = ex;
+            }
+            Compare(exp.GetType().FullName ,typeof(DataException).FullName);
+            exp=null;
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        dt.TableName = "myTable";
+        try
+        {
+            BeginCase("DataTable!=null");
+            dv.Table = dt;
+            Compare(dv.Table ,dt);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("assign null to DataTable");
+            dv.Table = null; 
+            Compare(dv.Table ,null);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+
+
+    }
 }
 
 

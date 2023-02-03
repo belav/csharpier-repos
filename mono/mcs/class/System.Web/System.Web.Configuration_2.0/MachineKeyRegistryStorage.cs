@@ -2,7 +2,7 @@
 // System.Web.Configuration.MachineKeyRegistryStorage
 //
 // Authors:
-//	Marek Habersack <mhabersack@novell.com>
+//    Marek Habersack <mhabersack@novell.com>
 //
 // (C) 2007 Novell, Inc
 //
@@ -32,116 +32,116 @@ using Microsoft.Win32;
 
 namespace System.Web.Configuration
 {
-	internal class MachineKeyRegistryStorage
-	{
-		public enum KeyType
-		{
-			Validation,
-			Encryption
-		};
+    internal class MachineKeyRegistryStorage
+    {
+        public enum KeyType
+        {
+            Validation,
+            Encryption
+        };
 
-		static string keyEncryption;
-		static string keyValidation;
-		
-		static MachineKeyRegistryStorage ()
-		{
-			string appName = AppDomain.CurrentDomain.SetupInformation.ApplicationName;
-			if (appName == null)
-				return;
-			
-			string hash = appName.GetHashCode ().ToString ("x");
-			keyEncryption = "software\\mono\\asp.net\\" + Environment.Version.ToString () +
-				"\\autogenkeys\\" + hash + "-" + ((int)KeyType.Encryption).ToString ();
-			keyValidation = "software\\mono\\asp.net\\" + Environment.Version.ToString () +
-				"\\autogenkeys\\" + hash + "-" + ((int)KeyType.Validation).ToString ();
-		}
-		
-		public static byte[] Retrieve (KeyType kt)
-		{
-			string key = null;
-			
-			switch (kt) {
-				case KeyType.Validation:
-					key = keyValidation;
-					break;
+        static string keyEncryption;
+        static string keyValidation;
+        
+        static MachineKeyRegistryStorage ()
+        {
+            string appName = AppDomain.CurrentDomain.SetupInformation.ApplicationName;
+            if (appName == null)
+                return;
+            
+            string hash = appName.GetHashCode ().ToString ("x");
+            keyEncryption = "software\\mono\\asp.net\\" + Environment.Version.ToString () +
+                "\\autogenkeys\\" + hash + "-" + ((int)KeyType.Encryption).ToString ();
+            keyValidation = "software\\mono\\asp.net\\" + Environment.Version.ToString () +
+                "\\autogenkeys\\" + hash + "-" + ((int)KeyType.Validation).ToString ();
+        }
+        
+        public static byte[] Retrieve (KeyType kt)
+        {
+            string key = null;
+            
+            switch (kt) {
+                case KeyType.Validation:
+                    key = keyValidation;
+                    break;
 
-				case KeyType.Encryption:
-					key = keyEncryption;
-					break;
+                case KeyType.Encryption:
+                    key = keyEncryption;
+                    break;
 
-				default:
-					throw new ArgumentException ("Unknown key type.");
-			}
+                default:
+                    throw new ArgumentException ("Unknown key type.");
+            }
 
-			if (key == null)
-				return null;
-			
-			object o = null;
+            if (key == null)
+                return null;
+            
+            object o = null;
 
-			try {
-				RegistryKey v = OpenRegistryKey (key, false);
-				o = v.GetValue ("AutoGenKey", null);
-			} catch (Exception) {
-				return null;
-			}
+            try {
+                RegistryKey v = OpenRegistryKey (key, false);
+                o = v.GetValue ("AutoGenKey", null);
+            } catch (Exception) {
+                return null;
+            }
 
-			if (o == null || o.GetType () != typeof (byte[]))
-				return null;
-			return (byte[]) o;
-		}
+            if (o == null || o.GetType () != typeof (byte[]))
+                return null;
+            return (byte[]) o;
+        }
 
-		static RegistryKey OpenRegistryKey (string path, bool write)
-		{
-			RegistryKey ret, tmp;
-			string[] keys = path.Split ('\\');
-			int klen = keys.Length;
+        static RegistryKey OpenRegistryKey (string path, bool write)
+        {
+            RegistryKey ret, tmp;
+            string[] keys = path.Split ('\\');
+            int klen = keys.Length;
 
-			ret = Registry.CurrentUser;
-			for (int i = 0; i < klen; i++) {
-				tmp = ret.OpenSubKey (keys [i], true);
-				if (tmp == null) {
-					if (!write)
-						return null;
-					tmp = ret.CreateSubKey (keys [i]);
-				}
-				ret = tmp;
-			}
+            ret = Registry.CurrentUser;
+            for (int i = 0; i < klen; i++) {
+                tmp = ret.OpenSubKey (keys [i], true);
+                if (tmp == null) {
+                    if (!write)
+                        return null;
+                    tmp = ret.CreateSubKey (keys [i]);
+                }
+                ret = tmp;
+            }
 
-			return ret;
-		}
-		
-		public static void Store (byte[] buf, KeyType kt)
-		{
-			if (buf == null)
-				return;
-			
-			string key = null;
-			switch (kt) {
-				case KeyType.Validation:
-					key = keyValidation;
-					break;
+            return ret;
+        }
+        
+        public static void Store (byte[] buf, KeyType kt)
+        {
+            if (buf == null)
+                return;
+            
+            string key = null;
+            switch (kt) {
+                case KeyType.Validation:
+                    key = keyValidation;
+                    break;
 
-				case KeyType.Encryption:
-					key = keyEncryption;
-					break;
+                case KeyType.Encryption:
+                    key = keyEncryption;
+                    break;
 
-				default:
-					throw new ArgumentException ("Unknown key type.");
-			}
+                default:
+                    throw new ArgumentException ("Unknown key type.");
+            }
 
-			if (key == null)
-				return;
+            if (key == null)
+                return;
 
-			try {
-				using (RegistryKey rk = OpenRegistryKey (key, true)) {
-					rk.SetValue ("AutoGenKey", buf, RegistryValueKind.Binary);
-					rk.SetValue ("AutoGenKeyCreationTime", DateTime.Now.Ticks, RegistryValueKind.QWord);
-					rk.SetValue ("AutoGenKeyFormat", 2, RegistryValueKind.DWord);
-					rk.Flush (); // we want it synchronous
-				}
-			} catch (Exception ex) {
-				Console.Error.WriteLine ("(info) Auto generated encryption keys not saved: {0}", ex);
-			}
-		}
-	}
+            try {
+                using (RegistryKey rk = OpenRegistryKey (key, true)) {
+                    rk.SetValue ("AutoGenKey", buf, RegistryValueKind.Binary);
+                    rk.SetValue ("AutoGenKeyCreationTime", DateTime.Now.Ticks, RegistryValueKind.QWord);
+                    rk.SetValue ("AutoGenKeyFormat", 2, RegistryValueKind.DWord);
+                    rk.Flush (); // we want it synchronous
+                }
+            } catch (Exception ex) {
+                Console.Error.WriteLine ("(info) Auto generated encryption keys not saved: {0}", ex);
+            }
+        }
+    }
 }

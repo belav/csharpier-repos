@@ -1,8 +1,8 @@
-﻿//
+//
 // WS2007FederationHttpBindingElement.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,8 +32,8 @@ using System.Text;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public class WS2007FederationHttpBindingElement : WSFederationHttpBindingElement
-	{
-	}
+    [MonoTODO]
+    public class WS2007FederationHttpBindingElement : WSFederationHttpBindingElement
+    {
+    }
 }

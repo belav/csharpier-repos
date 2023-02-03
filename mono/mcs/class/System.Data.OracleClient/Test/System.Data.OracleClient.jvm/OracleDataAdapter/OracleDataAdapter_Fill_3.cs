@@ -32,108 +32,108 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleDataAdapter_Fill_3: ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OracleDataAdapter_Fill_3 tc = new OracleDataAdapter_Fill_3();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataAdapter_Fill_3");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    public class OracleDataAdapter_Fill_3: ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OracleDataAdapter_Fill_3 tc = new OracleDataAdapter_Fill_3();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataAdapter_Fill_3");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			//in DB2 when trying to fill an empty table - no table is loaded
-			OracleConnection conn = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			OracleDataAdapter oleDBda = new OracleDataAdapter();
-			oleDBda.SelectCommand = new OracleCommand("Select * from GH_EMPTYTABLE",conn);
-			
-			DataSet ds = new DataSet();
-			oleDBda.Fill(ds);
+            //in DB2 when trying to fill an empty table - no table is loaded
+            OracleConnection conn = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OracleDataAdapter oleDBda = new OracleDataAdapter();
+            oleDBda.SelectCommand = new OracleCommand("Select * from GH_EMPTYTABLE",conn);
+            
+            DataSet ds = new DataSet();
+            oleDBda.Fill(ds);
         
-			try
-			{
-				BeginCase("Table count - fill with SP");
-				Compare(ds.Tables.Count ,1 );
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("Table count - fill with SP");
+                Compare(ds.Tables.Count ,1 );
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
 
-			//add for bug #2508 - OLEDBDataAdapter.Fill fills only the 1st result set, reported from an evaluation
-			if (ConnectedDataProvider.GetDbType(oleDBda.SelectCommand.Connection) == DataBaseServer.SQLServer)
-				//multiple commands can not be done with Oracle or DB2
-			{
-
-
-				//get excpected results
-				if (oleDBda.SelectCommand.Connection.State != ConnectionState.Open)
-				{
-					oleDBda.SelectCommand.Connection.Open();
-				}
-				OracleCommand cmd = new OracleCommand("",oleDBda.SelectCommand.Connection);
-				cmd.CommandText = "Select count(*) from Customers";
-				int TblResult0 = (int)cmd.ExecuteScalar();
-				cmd.CommandText = "Select count(*) from Categories";
-				int TblResult1 = (int)cmd.ExecuteScalar();
-				cmd.CommandText = "Select count(*) from Region";
-				int TblResult2 = (int)cmd.ExecuteScalar();
-				if (oleDBda.SelectCommand.Connection.State != ConnectionState.Closed)
-				{
-					oleDBda.SelectCommand.Connection.Close();
-				}
+            //add for bug #2508 - OLEDBDataAdapter.Fill fills only the 1st result set, reported from an evaluation
+            if (ConnectedDataProvider.GetDbType(oleDBda.SelectCommand.Connection) == DataBaseServer.SQLServer)
+                //multiple commands can not be done with Oracle or DB2
+            {
 
 
-				oleDBda.SelectCommand.CommandText = "Select * from Customers; " +
-					"Select * from Categories; " +
-					"Select * from Region";
-				ds = new DataSet();
-				oleDBda.Fill(ds);
+                //get excpected results
+                if (oleDBda.SelectCommand.Connection.State != ConnectionState.Open)
+                {
+                    oleDBda.SelectCommand.Connection.Open();
+                }
+                OracleCommand cmd = new OracleCommand("",oleDBda.SelectCommand.Connection);
+                cmd.CommandText = "Select count(*) from Customers";
+                int TblResult0 = (int)cmd.ExecuteScalar();
+                cmd.CommandText = "Select count(*) from Categories";
+                int TblResult1 = (int)cmd.ExecuteScalar();
+                cmd.CommandText = "Select count(*) from Region";
+                int TblResult2 = (int)cmd.ExecuteScalar();
+                if (oleDBda.SelectCommand.Connection.State != ConnectionState.Closed)
+                {
+                    oleDBda.SelectCommand.Connection.Close();
+                }
 
-				try
-				{
-					BeginCase("Table count - Fill with query");
-					Compare(ds.Tables.Count ,3 );
-				}
-				catch(Exception ex)	{exp = ex;}
-				finally	{EndCase(exp); exp = null;}
 
-				try
-				{
-					BeginCase("Table 0 rows count");
-					Compare(ds.Tables[0].Rows.Count ,TblResult0 );
-				}
-				catch(Exception ex)	{exp = ex;}
-				finally	{EndCase(exp); exp = null;}
+                oleDBda.SelectCommand.CommandText = "Select * from Customers; " +
+                    "Select * from Categories; " +
+                    "Select * from Region";
+                ds = new DataSet();
+                oleDBda.Fill(ds);
 
-				try
-				{
-					BeginCase("Table 1 rows count");
-					Compare(ds.Tables[1].Rows.Count ,TblResult1 );
-				}
-				catch(Exception ex)	{exp = ex;}
-				finally	{EndCase(exp); exp = null;}
+                try
+                {
+                    BeginCase("Table count - Fill with query");
+                    Compare(ds.Tables.Count ,3 );
+                }
+                catch(Exception ex)    {exp = ex;}
+                finally    {EndCase(exp); exp = null;}
 
-				try
-				{
-					BeginCase("Table 2 rows count");
-					Compare(ds.Tables[2].Rows.Count ,TblResult2 );
-				}
-				catch(Exception ex)	{exp = ex;}
-				finally	{EndCase(exp); exp = null;}
+                try
+                {
+                    BeginCase("Table 0 rows count");
+                    Compare(ds.Tables[0].Rows.Count ,TblResult0 );
+                }
+                catch(Exception ex)    {exp = ex;}
+                finally    {EndCase(exp); exp = null;}
 
-			}
+                try
+                {
+                    BeginCase("Table 1 rows count");
+                    Compare(ds.Tables[1].Rows.Count ,TblResult1 );
+                }
+                catch(Exception ex)    {exp = ex;}
+                finally    {EndCase(exp); exp = null;}
+
+                try
+                {
+                    BeginCase("Table 2 rows count");
+                    Compare(ds.Tables[2].Rows.Count ,TblResult2 );
+                }
+                catch(Exception ex)    {exp = ex;}
+                finally    {EndCase(exp); exp = null;}
+
+            }
 
  
-		}
-	}
+        }
+    }
 }

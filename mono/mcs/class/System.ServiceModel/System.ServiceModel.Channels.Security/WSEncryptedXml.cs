@@ -2,7 +2,7 @@
 // WSEncryptedXml.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,36 +31,36 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels.Security
 {
-	// See http://blogs.msdn.com/shawnfa/archive/2004/04/05/108098.aspx :)
-	class WSEncryptedXml : EncryptedXml
-	{
-		public WSEncryptedXml ()
-		{
-		}
+    // See http://blogs.msdn.com/shawnfa/archive/2004/04/05/108098.aspx :)
+    class WSEncryptedXml : EncryptedXml
+    {
+        public WSEncryptedXml ()
+        {
+        }
 
-		public WSEncryptedXml (XmlDocument doc)
-			: base (doc)
-		{
-		}
+        public WSEncryptedXml (XmlDocument doc)
+            : base (doc)
+        {
+        }
 
-		public override XmlElement GetIdElement (XmlDocument doc, string id)
-		{
-			return SearchChildren (doc, id);
-		}
+        public override XmlElement GetIdElement (XmlDocument doc, string id)
+        {
+            return SearchChildren (doc, id);
+        }
 
-		XmlElement SearchChildren (XmlNode node, string id)
-		{
-			for (XmlNode n = node.FirstChild; n != null; n = n.NextSibling) {
-				XmlElement el = n as XmlElement;
-				if (el == null)
-					continue;
-				if (el.GetAttribute ("Id", Constants.WsuNamespace) == id || el.GetAttribute ("Id") == id)
-					return el;
-				XmlElement el2 = SearchChildren (el, id);
-				if (el2 != null)
-					return el2;
-			}
-			return null;
-		}
-	}
+        XmlElement SearchChildren (XmlNode node, string id)
+        {
+            for (XmlNode n = node.FirstChild; n != null; n = n.NextSibling) {
+                XmlElement el = n as XmlElement;
+                if (el == null)
+                    continue;
+                if (el.GetAttribute ("Id", Constants.WsuNamespace) == id || el.GetAttribute ("Id") == id)
+                    return el;
+                XmlElement el2 = SearchChildren (el, id);
+                if (el2 != null)
+                    return el2;
+            }
+            return null;
+        }
+    }
 }

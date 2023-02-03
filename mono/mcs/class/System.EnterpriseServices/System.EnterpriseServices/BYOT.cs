@@ -31,30 +31,30 @@
 using System;
 
 namespace System.EnterpriseServices {
-	public sealed class BYOT
-	{
-		#region Constructors
+    public sealed class BYOT
+    {
+        #region Constructors
 
-		private BYOT ()
-		{
-		}
+        private BYOT ()
+        {
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		public static object CreateWithTipTransaction (string url, Type t)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static object CreateWithTipTransaction (string url, Type t)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static object CreateWithTransaction (object transaction, Type t)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static object CreateWithTransaction (object transaction, Type t)
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

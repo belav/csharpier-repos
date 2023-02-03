@@ -31,55 +31,55 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil;
+    using Mono.Cecil;
 
-	internal sealed class TypeDefTable : IMetadataTable {
+    internal sealed class TypeDefTable : IMetadataTable {
 
-		public const int RId = 0x02;
+        public const int RId = 0x02;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public TypeDefRow this [int index] {
-			get { return m_rows [index] as TypeDefRow; }
-			set { m_rows [index] = value; }
-		}
+        public TypeDefRow this [int index] {
+            get { return m_rows [index] as TypeDefRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal TypeDefTable ()
-		{
-		}
+        internal TypeDefTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitTypeDefTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitTypeDefTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class TypeDefRow : IMetadataRow {
+    internal sealed class TypeDefRow : IMetadataRow {
 
-		public TypeAttributes Flags;
-		public uint Name;
-		public uint Namespace;
-		public MetadataToken Extends;
-		public uint FieldList;
-		public uint MethodList;
+        public TypeAttributes Flags;
+        public uint Name;
+        public uint Namespace;
+        public MetadataToken Extends;
+        public uint FieldList;
+        public uint MethodList;
 
-		internal TypeDefRow ()
-		{
-		}
+        internal TypeDefRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitTypeDefRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitTypeDefRow (this);
+        }
+    }
 }

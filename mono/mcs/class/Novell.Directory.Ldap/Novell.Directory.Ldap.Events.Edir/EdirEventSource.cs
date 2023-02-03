@@ -49,13 +49,13 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       add
       {
-	edir_event += value;
-	ListenerAdded();
+    edir_event += value;
+    ListenerAdded();
       }
       remove
       {
-	edir_event -= value;
-	ListenerRemoved();
+    edir_event -= value;
+    ListenerRemoved();
       }
     }
 
@@ -66,13 +66,13 @@ namespace Novell.Directory.Ldap.Events.Edir
     /// </summary>
     public delegate
     void EdirEventHandler(object source,
-			  EdirEventArgs objEdirEventArgs);
+              EdirEventArgs objEdirEventArgs);
 
     protected override int GetListeners()
     {
       int nListeners = 0;
       if (null != edir_event)
-	nListeners = edir_event.GetInvocationList().Length;
+    nListeners = edir_event.GetInvocationList().Length;
 
       return nListeners;
     }
@@ -84,7 +84,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     public EdirEventSource(EdirEventSpecifier[] specifier, LdapConnection conn)
     {
       if ((null == specifier) || (null == conn))
-	throw new ArgumentException("Null argument specified");
+    throw new ArgumentException("Null argument specified");
 
       mRequestOperation = new MonitorEventRequest(specifier);
       mConnection = conn;
@@ -97,11 +97,11 @@ namespace Novell.Directory.Ldap.Events.Edir
 
       if (ids.Length != 1)
       {
-	throw new LdapException(
-				null,
-				LdapException.LOCAL_ERROR,
-				"Unable to Obtain Message Id"
-				);
+    throw new LdapException(
+                null,
+                LdapException.LOCAL_ERROR,
+                "Unable to Obtain Message Id"
+                );
       }
 
       StartEventPolling(mQueue, mConnection, ids[0]);
@@ -114,23 +114,23 @@ namespace Novell.Directory.Ldap.Events.Edir
     }
 
     protected override bool NotifyEventListeners(LdapMessage sourceMessage,
-			       EventClassifiers aClassification,
-			       int nType)
+                   EventClassifiers aClassification,
+                   int nType)
     {
       bool bListenersNotified = false;
       if (null != edir_event)
       {
-	if (null != sourceMessage)
-	{
-	  if ((sourceMessage.Type == LdapMessage.INTERMEDIATE_RESPONSE) &&
-	      (sourceMessage is EdirEventIntermediateResponse))
-	  {
-	    edir_event(this,
-		       new EdirEventArgs(sourceMessage,
-					 EventClassifiers.CLASSIFICATION_EDIR_EVENT));
-	    bListenersNotified = true;
-	  }
-	}
+    if (null != sourceMessage)
+    {
+      if ((sourceMessage.Type == LdapMessage.INTERMEDIATE_RESPONSE) &&
+          (sourceMessage is EdirEventIntermediateResponse))
+      {
+        edir_event(this,
+               new EdirEventArgs(sourceMessage,
+                     EventClassifiers.CLASSIFICATION_EDIR_EVENT));
+        bListenersNotified = true;
+      }
+    }
       }
 
       return bListenersNotified;

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -46,9 +46,9 @@ namespace DllImportGenerator.IntegrationTests
             yield return new object[] { 'A', 0x41 };
             yield return new object[] { 'E', 0x45 };
             yield return new object[] { 'J', 0x4a };
-            yield return new object[] { 'ß', 0xdf };
-            yield return new object[] { '✅', 0x2705 };
-            yield return new object[] { '鸟', 0x9e1f };
+            yield return new object[] { '�', 0xdf };
+            yield return new object[] { '?', 0x2705 };
+            yield return new object[] { '?', 0x9e1f };
         }
 
         [Theory]

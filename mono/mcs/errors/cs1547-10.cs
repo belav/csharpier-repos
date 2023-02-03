@@ -5,8 +5,8 @@ class Foo<T>
 
 class X
 {
-	static void Main ()
-	{
-		Foo<void> foo;
-	}
+    static void Main ()
+    {
+        Foo<void> foo;
+    }
 }

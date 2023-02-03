@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
@@ -126,7 +126,7 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
             context =>
             {
                 var person = context.Set<Person>().Single();
-                person.Address = new Address { Country = Country.TÃ¼rkiye, City = "Konya", ZipCode = 42100 };
+                person.Address = new Address { Country = Country.Türkiye, City = "Konya", ZipCode = 42100 };
 
                 context.SaveChanges();
             },
@@ -134,10 +134,10 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
             {
                 var person = context.Set<Person>().Single();
 
-                Assert.Equal(Country.TÃ¼rkiye, person.Address!.Country);
+                Assert.Equal(Country.Türkiye, person.Address!.Country);
                 Assert.Equal("Konya", person.Address.City);
                 Assert.Equal(42100, person.Address.ZipCode);
-                Assert.Equal("TÃ¼rkiye", person.Country);
+                Assert.Equal("Türkiye", person.Country);
                 Assert.Equal("42100", person.ZipCode);
             });
 

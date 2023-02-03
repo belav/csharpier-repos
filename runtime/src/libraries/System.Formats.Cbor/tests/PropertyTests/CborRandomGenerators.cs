@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Formats.Cbor.Tests.DataModel;
 using System.Linq;
 using FsCheck;

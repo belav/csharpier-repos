@@ -35,40 +35,40 @@ using System.Xml;
 
 namespace MonoTests.System.Xaml
 {
-	public class DummyValueSerializerContext : IValueSerializerContext
-	{
-		public DummyValueSerializerContext ()
-		{
-		}
+    public class DummyValueSerializerContext : IValueSerializerContext
+    {
+        public DummyValueSerializerContext ()
+        {
+        }
 
-		public object GetService (Type serviceType)
-		{
-			throw new NotImplementedException ();
-		}
-		public IContainer Container {
-			get { throw new NotImplementedException (); }
-		}
-		public object Instance {
-			get { throw new NotImplementedException (); }
-		}
-		public PropertyDescriptor PropertyDescriptor {
-			get { throw new NotImplementedException (); }
-		}
-		public void OnComponentChanged ()
-		{
-			throw new NotImplementedException ();
-		}
-		public bool OnComponentChanging ()
-		{
-			throw new NotImplementedException ();
-		}
-		public ValueSerializer GetValueSerializerFor (PropertyDescriptor descriptor)
-		{
-			throw new NotImplementedException ();
-		}
-		public ValueSerializer GetValueSerializerFor (Type type)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public object GetService (Type serviceType)
+        {
+            throw new NotImplementedException ();
+        }
+        public IContainer Container {
+            get { throw new NotImplementedException (); }
+        }
+        public object Instance {
+            get { throw new NotImplementedException (); }
+        }
+        public PropertyDescriptor PropertyDescriptor {
+            get { throw new NotImplementedException (); }
+        }
+        public void OnComponentChanged ()
+        {
+            throw new NotImplementedException ();
+        }
+        public bool OnComponentChanging ()
+        {
+            throw new NotImplementedException ();
+        }
+        public ValueSerializer GetValueSerializerFor (PropertyDescriptor descriptor)
+        {
+            throw new NotImplementedException ();
+        }
+        public ValueSerializer GetValueSerializerFor (Type type)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

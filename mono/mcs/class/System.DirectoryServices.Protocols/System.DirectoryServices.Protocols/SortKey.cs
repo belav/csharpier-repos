@@ -30,21 +30,21 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class SortKey
-	{
-		public SortKey ()
-		{
-		}
+    public class SortKey
+    {
+        public SortKey ()
+        {
+        }
 
-		public SortKey (string attributeName, string matchingRule, bool reverseOrder)
-		{
-			AttributeName = attributeName;
-			MatchingRule = matchingRule;
-			ReverseOrder = reverseOrder;
-		}
+        public SortKey (string attributeName, string matchingRule, bool reverseOrder)
+        {
+            AttributeName = attributeName;
+            MatchingRule = matchingRule;
+            ReverseOrder = reverseOrder;
+        }
 
-		public string AttributeName { get; set; }
-		public string MatchingRule { get; set; }
-		public bool ReverseOrder { get; set; }
-	}
+        public string AttributeName { get; set; }
+        public string MatchingRule { get; set; }
+        public bool ReverseOrder { get; set; }
+    }
 }

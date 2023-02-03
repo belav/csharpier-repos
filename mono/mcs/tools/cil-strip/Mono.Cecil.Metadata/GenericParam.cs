@@ -31,53 +31,53 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil;
+    using Mono.Cecil;
 
-	internal sealed class GenericParamTable : IMetadataTable {
+    internal sealed class GenericParamTable : IMetadataTable {
 
-		public const int RId = 0x2a;
+        public const int RId = 0x2a;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public GenericParamRow this [int index] {
-			get { return m_rows [index] as GenericParamRow; }
-			set { m_rows [index] = value; }
-		}
+        public GenericParamRow this [int index] {
+            get { return m_rows [index] as GenericParamRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal GenericParamTable ()
-		{
-		}
+        internal GenericParamTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitGenericParamTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitGenericParamTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class GenericParamRow : IMetadataRow {
+    internal sealed class GenericParamRow : IMetadataRow {
 
-		public ushort Number;
-		public GenericParameterAttributes Flags;
-		public MetadataToken Owner;
-		public uint Name;
+        public ushort Number;
+        public GenericParameterAttributes Flags;
+        public MetadataToken Owner;
+        public uint Name;
 
-		internal GenericParamRow ()
-		{
-		}
+        internal GenericParamRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitGenericParamRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitGenericParamRow (this);
+        }
+    }
 }

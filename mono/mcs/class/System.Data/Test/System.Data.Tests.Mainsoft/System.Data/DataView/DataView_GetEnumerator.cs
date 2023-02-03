@@ -39,78 +39,78 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_GetEnumerator : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataView_GetEnumerator tc = new DataView_GetEnumerator();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataView_GetEnumerator");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataView_GetEnumerator tc = new DataView_GetEnumerator();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataView_GetEnumerator");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-				
-		//create the source datatable
-		DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
+    public void run()
+    {
+        Exception exp = null;
+                
+        //create the source datatable
+        DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
 
-		//create the dataview for the table
-		DataView dv = new DataView(dt);
+        //create the dataview for the table
+        DataView dv = new DataView(dt);
 
-		System.Collections.IEnumerator ienm = null;
+        System.Collections.IEnumerator ienm = null;
 
-		try
-		{
-			BeginCase("GetEnumerator != null");
-			ienm = dv.GetEnumerator();
-			Compare(ienm != null, true);
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
+        try
+        {
+            BeginCase("GetEnumerator != null");
+            ienm = dv.GetEnumerator();
+            Compare(ienm != null, true);
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
 
-		int i=0;
-		while (ienm.MoveNext() )
-		{
-			try
-			{
-				BeginCase("Check item" + i.ToString() );
-				Compare((DataRowView)ienm.Current ,dv[i]);
-				i++;
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+        int i=0;
+        while (ienm.MoveNext() )
+        {
+            try
+            {
+                BeginCase("Check item" + i.ToString() );
+                Compare((DataRowView)ienm.Current ,dv[i]);
+                i++;
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-	}
+    }
 }
 }

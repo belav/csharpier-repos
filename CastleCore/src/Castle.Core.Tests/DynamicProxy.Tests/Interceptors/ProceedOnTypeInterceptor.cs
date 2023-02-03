@@ -16,7 +16,7 @@ namespace Castle.DynamicProxy.Tests.Interceptors
 {
     using System;
 
-	public class ProceedOnTypeInterceptor : IInterceptor
+    public class ProceedOnTypeInterceptor : IInterceptor
     {
         private Type type;
 

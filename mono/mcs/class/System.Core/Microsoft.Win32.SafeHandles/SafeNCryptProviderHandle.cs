@@ -2,7 +2,7 @@
 // SafeNCryptProviderHandle.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,15 +28,15 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-	public sealed class SafeNCryptProviderHandle : SafeNCryptHandle
-	{
-		public SafeNCryptProviderHandle ()
-		{
-		}
+    public sealed class SafeNCryptProviderHandle : SafeNCryptHandle
+    {
+        public SafeNCryptProviderHandle ()
+        {
+        }
 
-		protected override bool ReleaseNativeHandle ()
-		{
-			return false;
-		}
-	}
-}	
+        protected override bool ReleaseNativeHandle ()
+        {
+            return false;
+        }
+    }
+}    

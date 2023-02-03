@@ -2,7 +2,7 @@
 // CommonBehaviorsSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,54 +54,54 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class CommonBehaviorsSection
-		 : ConfigurationSection
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty endpoint_behaviors;
-		static ConfigurationProperty service_behaviors;
+    [MonoTODO]
+    public partial class CommonBehaviorsSection
+         : ConfigurationSection
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty endpoint_behaviors;
+        static ConfigurationProperty service_behaviors;
 
-		static CommonBehaviorsSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			endpoint_behaviors = new ConfigurationProperty ("endpointBehaviors",
-				typeof (CommonEndpointBehaviorElement), null, null/* FIXME: get converter for CommonEndpointBehaviorElement*/, null,
-				ConfigurationPropertyOptions.None);
+        static CommonBehaviorsSection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            endpoint_behaviors = new ConfigurationProperty ("endpointBehaviors",
+                typeof (CommonEndpointBehaviorElement), null, null/* FIXME: get converter for CommonEndpointBehaviorElement*/, null,
+                ConfigurationPropertyOptions.None);
 
-			service_behaviors = new ConfigurationProperty ("serviceBehaviors",
-				typeof (CommonServiceBehaviorElement), null, null/* FIXME: get converter for CommonServiceBehaviorElement*/, null,
-				ConfigurationPropertyOptions.None);
+            service_behaviors = new ConfigurationProperty ("serviceBehaviors",
+                typeof (CommonServiceBehaviorElement), null, null/* FIXME: get converter for CommonServiceBehaviorElement*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (endpoint_behaviors);
-			properties.Add (service_behaviors);
-		}
+            properties.Add (endpoint_behaviors);
+            properties.Add (service_behaviors);
+        }
 
-		public CommonBehaviorsSection ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("endpointBehaviors",
-			 Options = ConfigurationPropertyOptions.None)]
-		public CommonEndpointBehaviorElement EndpointBehaviors {
-			get { return (CommonEndpointBehaviorElement) base [endpoint_behaviors]; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("serviceBehaviors",
-			 Options = ConfigurationPropertyOptions.None)]
-		public CommonServiceBehaviorElement ServiceBehaviors {
-			get { return (CommonServiceBehaviorElement) base [service_behaviors]; }
-		}
+        public CommonBehaviorsSection ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("endpointBehaviors",
+             Options = ConfigurationPropertyOptions.None)]
+        public CommonEndpointBehaviorElement EndpointBehaviors {
+            get { return (CommonEndpointBehaviorElement) base [endpoint_behaviors]; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [ConfigurationProperty ("serviceBehaviors",
+             Options = ConfigurationPropertyOptions.None)]
+        public CommonServiceBehaviorElement ServiceBehaviors {
+            get { return (CommonServiceBehaviorElement) base [service_behaviors]; }
+        }
+
+
+    }
 
 }

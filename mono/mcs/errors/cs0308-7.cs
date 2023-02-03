@@ -3,16 +3,16 @@
 
 public class Foo
 {
-	public string Test<T> ()
-	{
-		return null;
-	}
+    public string Test<T> ()
+    {
+        return null;
+    }
 }
 
 public static class Driver
 {
-	static object UseBrokenType ()
-	{
-		return Foo<int> ().Test ();
-	}
+    static object UseBrokenType ()
+    {
+        return Foo<int> ().Test ();
+    }
 }

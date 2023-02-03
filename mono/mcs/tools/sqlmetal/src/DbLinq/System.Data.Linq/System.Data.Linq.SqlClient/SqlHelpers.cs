@@ -31,30 +31,30 @@ using System;
 
 namespace System.Data.Linq.SqlClient
 {
-	public static class SqlHelpers
-	{
-		[MonoTODO]
-		public static string GetStringContainsPattern (string text, char escape)
-		{
-			throw new NotImplementedException ();
-		}
+    public static class SqlHelpers
+    {
+        [MonoTODO]
+        public static string GetStringContainsPattern (string text, char escape)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static string GetStringEndsWithPattern (string text, char escape)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static string GetStringEndsWithPattern (string text, char escape)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static string GetStringStartsWithPattern (string text, char escape)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static string GetStringStartsWithPattern (string text, char escape)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static string TranslateVBLikePattern (string pattern, char escape)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public static string TranslateVBLikePattern (string pattern, char escape)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

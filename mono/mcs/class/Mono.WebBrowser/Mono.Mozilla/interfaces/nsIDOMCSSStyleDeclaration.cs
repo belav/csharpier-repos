@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,69 +32,69 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("a6cf90be-15b3-11d2-932e-00805f8add32")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMCSSStyleDeclaration {
+    [Guid ("a6cf90be-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMCSSStyleDeclaration {
 
 #region nsIDOMCSSStyleDeclaration
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCssText (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCssText (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setCssText ( /*DOMString*/ HandleRef value);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setCssText ( /*DOMString*/ HandleRef value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getPropertyValue (
-				   /*DOMString*/ HandleRef propertyName,  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getPropertyValue (
+                   /*DOMString*/ HandleRef propertyName,  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getPropertyCSSValue (
-				   /*DOMString*/ HandleRef propertyName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSValue ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getPropertyCSSValue (
+                   /*DOMString*/ HandleRef propertyName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSValue ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int removeProperty (
-				   /*DOMString*/ HandleRef propertyName,  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int removeProperty (
+                   /*DOMString*/ HandleRef propertyName,  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getPropertyPriority (
-				   /*DOMString*/ HandleRef propertyName,  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getPropertyPriority (
+                   /*DOMString*/ HandleRef propertyName,  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setProperty (
-				   /*DOMString*/ HandleRef propertyName,
-				   /*DOMString*/ HandleRef value,
-				   /*DOMString*/ HandleRef priority);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setProperty (
+                   /*DOMString*/ HandleRef propertyName,
+                   /*DOMString*/ HandleRef value,
+                   /*DOMString*/ HandleRef priority);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLength ( out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength ( out uint ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int item (
-				   uint index,  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int item (
+                   uint index,  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getParentRule ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getParentRule ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMCSSStyleDeclaration {
-		public static nsIDOMCSSStyleDeclaration GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSStyleDeclaration obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSStyleDeclaration).GUID, obj);
-			return o as nsIDOMCSSStyleDeclaration;
-		}
-	}
+    internal class nsDOMCSSStyleDeclaration {
+        public static nsIDOMCSSStyleDeclaration GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSStyleDeclaration obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSStyleDeclaration).GUID, obj);
+            return o as nsIDOMCSSStyleDeclaration;
+        }
+    }
 }

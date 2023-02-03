@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.ImageListImageEditor.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,42 +36,42 @@ using System.Drawing.Design;
 
 namespace System.Windows.Forms.Design
 {
-	public class ImageListImageEditor : ImageEditor
-	{
-		public ImageListImageEditor ()
-		{
-		}
+    public class ImageListImageEditor : ImageEditor
+    {
+        public ImageListImageEditor ()
+        {
+        }
 
-		[MonoTODO]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected override string GetFileDialogDescription ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override string GetFileDialogDescription ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected override Type [] GetImageExtenders ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override Type [] GetImageExtenders ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool GetPaintValueSupported (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool GetPaintValueSupported (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override void PaintValue (PaintValueEventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override void PaintValue (PaintValueEventArgs e)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 
 #endif

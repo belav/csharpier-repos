@@ -3,9 +3,9 @@
 // Compiler options: -warnaserror -warn:2
 
 class Base {
-	public void F () {}
+    public void F () {}
 }
 
 class Derived : Base {
-	void F () {}
+    void F () {}
 }

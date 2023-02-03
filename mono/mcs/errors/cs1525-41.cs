@@ -3,7 +3,7 @@
 
 class MyClass
 {
-	void a<T> () where T
-	{
-	}
+    void a<T> () where T
+    {
+    }
 }

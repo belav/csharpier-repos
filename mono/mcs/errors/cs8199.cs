@@ -3,8 +3,8 @@
 
 class X
 {
-	public static void Main ()
-	{
-		var (x.a, y) = (1, 'g');
-	}
+    public static void Main ()
+    {
+        var (x.a, y) = (1, 'g');
+    }
 }

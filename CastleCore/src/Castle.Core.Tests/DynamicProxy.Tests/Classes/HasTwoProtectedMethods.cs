@@ -14,16 +14,16 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class HasTwoProtectedMethods
-	{
-		protected virtual int Method1()
-		{
-			return 42;
-		}
+    public class HasTwoProtectedMethods
+    {
+        protected virtual int Method1()
+        {
+            return 42;
+        }
 
-		protected virtual string Method2()
-		{
-			return "42";
-		}
-	}
+        protected virtual string Method2()
+        {
+            return "42";
+        }
+    }
 }

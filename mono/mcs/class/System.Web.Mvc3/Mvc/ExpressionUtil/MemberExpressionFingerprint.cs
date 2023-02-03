@@ -1,4 +1,4 @@
-﻿#pragma warning disable 659 // overrides AddToHashCodeCombiner instead
+#pragma warning disable 659 // overrides AddToHashCodeCombiner instead
 
 namespace System.Web.Mvc.ExpressionUtil {
     using System;

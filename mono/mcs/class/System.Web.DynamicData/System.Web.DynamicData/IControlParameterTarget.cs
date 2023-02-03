@@ -2,7 +2,7 @@
 // IControlParameterTarget.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -38,12 +38,12 @@ using System.Web.Caching;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public interface IControlParameterTarget
-	{
-		MetaColumn FilteredColumn { get; }
-		MetaTable Table { get; }
-		string GetPropertyNameExpression (string columnName);
-	}
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public interface IControlParameterTarget
+    {
+        MetaColumn FilteredColumn { get; }
+        MetaTable Table { get; }
+        string GetPropertyNameExpression (string columnName);
+    }
 }

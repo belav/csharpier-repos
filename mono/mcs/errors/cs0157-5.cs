@@ -2,17 +2,17 @@
 // Line: 12
 
 class T {
-	static void Main ()
-	{
-		while (true) { 
-			try {
-				System.Console.WriteLine ("trying");
-			} finally {
-				try {
-				    break;
-				}
-				catch {}
-			}
-		}
-	}
+    static void Main ()
+    {
+        while (true) { 
+            try {
+                System.Console.WriteLine ("trying");
+            } finally {
+                try {
+                    break;
+                }
+                catch {}
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.Configuration.BufferModesCollection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,54 +34,54 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	[ConfigurationCollection (typeof (BufferModeSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class BufferModesCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (BufferModeSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class BufferModesCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static BufferModesCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static BufferModesCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public void Add (BufferModeSettings bufferModeSettings)
-		{
-			BaseAdd (bufferModeSettings);
-		}
+        public void Add (BufferModeSettings bufferModeSettings)
+        {
+            BaseAdd (bufferModeSettings);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear ()
+        {
+            BaseClear ();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new BufferModeSettings();
-		}
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new BufferModeSettings();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((BufferModeSettings)element).Name;
-		}
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            return ((BufferModeSettings)element).Name;
+        }
 
-		public void Remove (string s)
-		{
-			BaseRemove (s);
-		}
+        public void Remove (string s)
+        {
+            BaseRemove (s);
+        }
 
-		public BufferModeSettings this [int index] {
-			get { return (BufferModeSettings)BaseGet (index); }
-			set {  if (BaseGet(index) != null)  BaseRemoveAt(index);  BaseAdd(index, value); }
-		}
+        public BufferModeSettings this [int index] {
+            get { return (BufferModeSettings)BaseGet (index); }
+            set {  if (BaseGet(index) != null)  BaseRemoveAt(index);  BaseAdd(index, value); }
+        }
 
-		public new BufferModeSettings this [string key] {
-			get { return (BufferModeSettings) BaseGet (key); }
-		}
+        public new BufferModeSettings this [string key] {
+            get { return (BufferModeSettings) BaseGet (key); }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 
 }
 

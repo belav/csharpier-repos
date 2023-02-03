@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.ActiveDesignSurfaceChangedEventArgs
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -33,24 +33,24 @@ using System;
 namespace System.ComponentModel.Design
 {
 
-	public class ActiveDesignSurfaceChangedEventArgs : EventArgs
-	{
+    public class ActiveDesignSurfaceChangedEventArgs : EventArgs
+    {
 
-		private DesignSurface _oldSurface;
-		private DesignSurface _newSurface;
-		
-		public ActiveDesignSurfaceChangedEventArgs (DesignSurface oldSurface, DesignSurface newSurface)
-		{
-			_newSurface = newSurface;
-			_oldSurface = oldSurface;
-		}
+        private DesignSurface _oldSurface;
+        private DesignSurface _newSurface;
+        
+        public ActiveDesignSurfaceChangedEventArgs (DesignSurface oldSurface, DesignSurface newSurface)
+        {
+            _newSurface = newSurface;
+            _oldSurface = oldSurface;
+        }
 
-		public DesignSurface OldSurface {
-			get { return _oldSurface; }
-		}
+        public DesignSurface OldSurface {
+            get { return _oldSurface; }
+        }
 
-		public DesignSurface NewSurface {
-			get { return _newSurface; }
-		}
-	}
+        public DesignSurface NewSurface {
+            get { return _newSurface; }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Security.Cryptography.Pkcs.EnvelopedCms class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -28,24 +28,24 @@
 //
 
 namespace System.Security.Cryptography.Pkcs {
-	public sealed partial class EnvelopedCms {
-		public EnvelopedCms (SubjectIdentifierType recipientIdentifierType, ContentInfo contentInfo) 
-			: this (contentInfo) 
-		{
-			if (recipientIdentifierType == SubjectIdentifierType.SubjectKeyIdentifier)
-				Version = 2;
-		}
+    public sealed partial class EnvelopedCms {
+        public EnvelopedCms (SubjectIdentifierType recipientIdentifierType, ContentInfo contentInfo) 
+            : this (contentInfo) 
+        {
+            if (recipientIdentifierType == SubjectIdentifierType.SubjectKeyIdentifier)
+                Version = 2;
+        }
 
-		public EnvelopedCms (SubjectIdentifierType recipientIdentifierType, ContentInfo contentInfo, AlgorithmIdentifier encryptionAlgorithm)
-			: this (contentInfo, encryptionAlgorithm) 
-		{
-			if (recipientIdentifierType == SubjectIdentifierType.SubjectKeyIdentifier)
-				Version = 2;
-		}
+        public EnvelopedCms (SubjectIdentifierType recipientIdentifierType, ContentInfo contentInfo, AlgorithmIdentifier encryptionAlgorithm)
+            : this (contentInfo, encryptionAlgorithm) 
+        {
+            if (recipientIdentifierType == SubjectIdentifierType.SubjectKeyIdentifier)
+                Version = 2;
+        }
 
-		public void Encrypt () 
-		{
-			Encrypt (new CmsRecipientCollection ());
-		}
-	}
+        public void Encrypt () 
+        {
+            Encrypt (new CmsRecipientCollection ());
+        }
+    }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 class C
 {
-	public void Test ()
-	{
-		Action a = delegate { await Task.FromResult (1); };
-	}
+    public void Test ()
+    {
+        Action a = delegate { await Task.FromResult (1); };
+    }
 }

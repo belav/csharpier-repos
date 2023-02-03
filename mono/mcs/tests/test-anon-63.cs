@@ -11,7 +11,7 @@ class X {
                         A a = delegate {
                                 Console.WriteLine ("arg: {0}", arg);
                                 Console.WriteLine ("args: {0}", args);
-				return arg;
+                return arg;
                         };
                         yield return a ();
                 }
@@ -20,7 +20,7 @@ class X {
         public static int Main ()
         {
                 IEnumerator enumerator = GetIt (new int [] { 4, 8, 9});
-		enumerator.MoveNext ();
+        enumerator.MoveNext ();
                 return 0;
         }
 }

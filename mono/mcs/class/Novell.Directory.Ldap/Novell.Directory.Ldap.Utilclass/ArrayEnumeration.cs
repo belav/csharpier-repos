@@ -33,57 +33,57 @@ using System;
 
 namespace Novell.Directory.Ldap.Utilclass
 {
-	
-	public class ArrayEnumeration : System.Collections.IEnumerator
-	{
-		private System.Object tempAuxObj;
-		public virtual bool MoveNext()
-		{
-			bool result = hasMoreElements();
-			if (result)
-			{
-				tempAuxObj = nextElement();
-			}
-			return result;
-		}
-		public virtual void  Reset()
-		{
-			tempAuxObj = null;
-		}
-		public virtual System.Object Current
-		{
-			get
-			{
-				return tempAuxObj;
-			}
-			
-		}
-		private System.Object[] eArray;
-		private int index = 0;
-		/// <summary> Constructor to create the Enumeration
-		/// 
-		/// </summary>
-		/// <param name="eArray">the array to use for the Enumeration
-		/// </param>
-		public ArrayEnumeration(System.Object[] eArray)
-		{
-			this.eArray = eArray;
-		}
-		
-		public bool hasMoreElements()
-		{
-			if (eArray == null)
-				return false;
-			return (index < eArray.Length);
-		}
-		
-		public System.Object nextElement()
-		{
-			if ((eArray == null) || (index >= eArray.Length))
-			{
-				throw new System.ArgumentOutOfRangeException();
-			}
-			return eArray[index++];
-		}
-	}
+    
+    public class ArrayEnumeration : System.Collections.IEnumerator
+    {
+        private System.Object tempAuxObj;
+        public virtual bool MoveNext()
+        {
+            bool result = hasMoreElements();
+            if (result)
+            {
+                tempAuxObj = nextElement();
+            }
+            return result;
+        }
+        public virtual void  Reset()
+        {
+            tempAuxObj = null;
+        }
+        public virtual System.Object Current
+        {
+            get
+            {
+                return tempAuxObj;
+            }
+            
+        }
+        private System.Object[] eArray;
+        private int index = 0;
+        /// <summary> Constructor to create the Enumeration
+        /// 
+        /// </summary>
+        /// <param name="eArray">the array to use for the Enumeration
+        /// </param>
+        public ArrayEnumeration(System.Object[] eArray)
+        {
+            this.eArray = eArray;
+        }
+        
+        public bool hasMoreElements()
+        {
+            if (eArray == null)
+                return false;
+            return (index < eArray.Length);
+        }
+        
+        public System.Object nextElement()
+        {
+            if ((eArray == null) || (index >= eArray.Length))
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+            return eArray[index++];
+        }
+    }
 }

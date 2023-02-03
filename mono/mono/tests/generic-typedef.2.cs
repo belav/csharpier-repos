@@ -6,20 +6,20 @@ static class Stuff
 {
     public static Type GetOpenType <T> ()
     {
-	return typeof (Gen<>);
+    return typeof (Gen<>);
     }
 
     public static Type GetClosedType <T> ()
     {
-	return typeof (Gen<T>);
+    return typeof (Gen<T>);
     }
 
     static int Main (string[] args)
     {
-	if (GetOpenType<string> () != typeof (Gen<>))
-	    return 1;
-	if (GetClosedType<string> () != typeof (Gen<string>))
-	    return 1;
-	return 0;
+    if (GetOpenType<string> () != typeof (Gen<>))
+        return 1;
+    if (GetClosedType<string> () != typeof (Gen<string>))
+        return 1;
+    return 0;
     }
 }

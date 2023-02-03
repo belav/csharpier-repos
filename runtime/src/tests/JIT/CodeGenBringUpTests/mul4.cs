@@ -24,11 +24,11 @@ class child
     {
         int a = 2;
         int result = mul4(ref a);
-		if (result == 2076)
-			return Pass;
-		else
-			return Fail;
-		
+        if (result == 2076)
+            return Pass;
+        else
+            return Fail;
+        
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)] 

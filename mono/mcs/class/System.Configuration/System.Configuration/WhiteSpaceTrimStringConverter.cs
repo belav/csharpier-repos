@@ -2,7 +2,7 @@
 // System.Configuration.WhiteSpaceTrimStringConverter.cs
 //
 // Authors:
-// 	Chris Toshok (toshok@ximian.com)
+//     Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,23 +31,23 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public sealed class WhiteSpaceTrimStringConverter: ConfigurationConverterBase
-	{
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			return ((string)data).Trim();
-		}
+    public sealed class WhiteSpaceTrimStringConverter: ConfigurationConverterBase
+    {
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            return ((string)data).Trim();
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			if (value == null)
-				return "";
+        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        {
+            if (value == null)
+                return "";
 
-			if (! (value is string))
-				throw new ArgumentException ("value");
+            if (! (value is string))
+                throw new ArgumentException ("value");
 
-			return ((string)value).Trim();
-		}
-	}
+            return ((string)value).Trim();
+        }
+    }
 }
 

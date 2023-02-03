@@ -14,12 +14,12 @@
 
 namespace Castle.DynamicProxy.Tokens
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	internal static class MethodBaseMethods
-	{
-		public static readonly MethodInfo GetMethodFromHandle =
-			typeof(MethodBase).GetMethod("GetMethodFromHandle", new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) });
-	}
+    internal static class MethodBaseMethods
+    {
+        public static readonly MethodInfo GetMethodFromHandle =
+            typeof(MethodBase).GetMethod("GetMethodFromHandle", new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) });
+    }
 }

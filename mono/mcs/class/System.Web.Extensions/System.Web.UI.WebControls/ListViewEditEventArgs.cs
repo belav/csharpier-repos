@@ -32,16 +32,16 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewEditEventArgs : CancelEventArgs
-	{
-		public ListViewEditEventArgs (int newEditIndex)
-		{
-			NewEditIndex = newEditIndex;
-		}
-		
-		public int NewEditIndex {
-			get;
-			private set;
-		}
-	}
+    public class ListViewEditEventArgs : CancelEventArgs
+    {
+        public ListViewEditEventArgs (int newEditIndex)
+        {
+            NewEditIndex = newEditIndex;
+        }
+        
+        public int NewEditIndex {
+            get;
+            private set;
+        }
+    }
 }

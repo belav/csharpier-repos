@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -163,8 +163,8 @@ public class Derived2 : Derived<int>
         public void TestAmbiguousOverridesFromSameClass()
         {
             // Tests:
-            // Through type argument substitution make two base abstract members with same signature (parameters / return types) â€“
-            // override member in derived class â€“ invoke member in derived class using base.VirtualMember
+            // Through type argument substitution make two base abstract members with same signature (parameters / return types) –
+            // override member in derived class – invoke member in derived class using base.VirtualMember
             // Test similar case where conflicting members are split across multiple base types
 
             var source = @"

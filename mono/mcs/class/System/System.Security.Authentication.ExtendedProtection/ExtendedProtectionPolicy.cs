@@ -35,68 +35,68 @@ using System.Security.Permissions;
 
 namespace System.Security.Authentication.ExtendedProtection
 {
-	[MonoTODO]
-	[Serializable]
-	[TypeConverter (typeof (ExtendedProtectionPolicyTypeConverter))]
-	public class ExtendedProtectionPolicy : ISerializable
-	{
-		[MonoTODO ("Not implemented.")]
-		public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement)
-		{
-			// Do not throw NotImplementedException - System.ServiceModel.Channels.HttpTransportBindingElement tests
-			// instantiate this type
-		}
+    [MonoTODO]
+    [Serializable]
+    [TypeConverter (typeof (ExtendedProtectionPolicyTypeConverter))]
+    public class ExtendedProtectionPolicy : ISerializable
+    {
+        [MonoTODO ("Not implemented.")]
+        public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement)
+        {
+            // Do not throw NotImplementedException - System.ServiceModel.Channels.HttpTransportBindingElement tests
+            // instantiate this type
+        }
 
-		public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement, ChannelBinding customChannelBinding)
-		{
-			throw new NotImplementedException ();
-		}
+        public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement, ChannelBinding customChannelBinding)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement, ProtectionScenario protectionScenario, ICollection customServiceNames)
-		{
-			throw new NotImplementedException ();
-		}
+        public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement, ProtectionScenario protectionScenario, ICollection customServiceNames)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement, ProtectionScenario protectionScenario, ServiceNameCollection customServiceNames)
-		{
-			throw new NotImplementedException ();
-		}
+        public ExtendedProtectionPolicy (PolicyEnforcement policyEnforcement, ProtectionScenario protectionScenario, ServiceNameCollection customServiceNames)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected ExtendedProtectionPolicy (SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        protected ExtendedProtectionPolicy (SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ChannelBinding CustomChannelBinding {
-			get { throw new NotImplementedException (); }
-		}
+        public ChannelBinding CustomChannelBinding {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ServiceNameCollection CustomServiceNames {
-			get { throw new NotImplementedException (); }
-		}
+        public ServiceNameCollection CustomServiceNames {
+            get { throw new NotImplementedException (); }
+        }
 
-		public static bool OSSupportsExtendedProtection {
-			get { throw new NotImplementedException (); }
-		}
+        public static bool OSSupportsExtendedProtection {
+            get { throw new NotImplementedException (); }
+        }
 
-		public PolicyEnforcement PolicyEnforcement {
-			get { throw new NotImplementedException (); }
-		}
+        public PolicyEnforcement PolicyEnforcement {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ProtectionScenario ProtectionScenario {
-			get { throw new NotImplementedException (); }
-		}
+        public ProtectionScenario ProtectionScenario {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
+        [MonoTODO]
+        public override string ToString ()
+        {
+            return base.ToString ();
+        }
 
-		[SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
-		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
+        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

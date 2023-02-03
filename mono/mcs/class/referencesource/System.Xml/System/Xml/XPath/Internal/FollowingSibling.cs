@@ -17,7 +17,7 @@ namespace MS.Internal.Xml.XPath {
         StackNav              elementStk;
         List<XPathNavigator>  parentStk;
         XPathNavigator        nextInput;
-		
+        
         public FollSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType type) : base (qyInput, name, prefix, type) {
             this.elementStk = new StackNav();
             this.parentStk  = new List<XPathNavigator>();
@@ -59,7 +59,7 @@ namespace MS.Internal.Xml.XPath {
         }
 
         public override XPathNavigator Advance() {
-        	while (true) {
+            while (true) {
                 if (currentNode == null) {
                     if (nextInput == null) {
                         nextInput = FetchInput(); // This can happen at the begining and at the end 
@@ -84,14 +84,14 @@ namespace MS.Internal.Xml.XPath {
                     }
                 }
 
-				while (currentNode.MoveToNext()) {
-				    if (matches(currentNode)) {
-				        position++;
-    				    return currentNode;
-			        }
-			    }
-		        currentNode = null;
-			}
+                while (currentNode.MoveToNext()) {
+                    if (matches(currentNode)) {
+                        position++;
+                        return currentNode;
+                    }
+                }
+                currentNode = null;
+            }
         } // Advance
                 
         public override XPathNodeIterator Clone() { return new FollSiblingQuery(this); }

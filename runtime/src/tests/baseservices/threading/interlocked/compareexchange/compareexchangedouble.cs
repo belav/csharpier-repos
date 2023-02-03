@@ -33,8 +33,8 @@ namespace CompareExchangeDouble
 
                 if(args[i].ToLower().StartsWith("/addval:"))
                 {
-					CultureInfo myCultureInfo = new CultureInfo("en-US");
-					valueToAdd = Double.Parse(args[i].Substring(8), myCultureInfo);
+                    CultureInfo myCultureInfo = new CultureInfo("en-US");
+                    valueToAdd = Double.Parse(args[i].Substring(8), myCultureInfo);
                     continue;
                 }
             }

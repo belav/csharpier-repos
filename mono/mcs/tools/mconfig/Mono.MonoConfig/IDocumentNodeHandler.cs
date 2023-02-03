@@ -33,9 +33,9 @@ using System.Xml.XPath;
 
 namespace Mono.MonoConfig
 {
-	public interface IDocumentNodeHandler
-	{
-		void ReadConfiguration (XPathNavigator nav);
-		void StoreConfiguration ();
-	}
+    public interface IDocumentNodeHandler
+    {
+        void ReadConfiguration (XPathNavigator nav);
+        void StoreConfiguration ();
+    }
 }

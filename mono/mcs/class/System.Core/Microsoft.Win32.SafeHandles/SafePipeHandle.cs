@@ -2,7 +2,7 @@
 // SafePipeHandle.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -34,21 +34,21 @@ using System.Security.Principal;
 
 namespace Microsoft.Win32.SafeHandles
 {
-	[HostProtection (SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-	public sealed class SafePipeHandle : SafeHandleZeroOrMinusOneIsInvalid
-	{
-		public SafePipeHandle (IntPtr preexistingHandle, bool ownsHandle)
-			: base (ownsHandle)
-		{
-			handle = preexistingHandle;
-		}
+    [HostProtection (SecurityAction.LinkDemand, MayLeakOnAbort = true)]
+    [SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
+    public sealed class SafePipeHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        public SafePipeHandle (IntPtr preexistingHandle, bool ownsHandle)
+            : base (ownsHandle)
+        {
+            handle = preexistingHandle;
+        }
 
-		protected override bool ReleaseHandle ()
-		{
-			MonoIOError error;
-			return MonoIO.Close (handle, out error);
-		}
-	}
+        protected override bool ReleaseHandle ()
+        {
+            MonoIOError error;
+            return MonoIO.Close (handle, out error);
+        }
+    }
 }
 

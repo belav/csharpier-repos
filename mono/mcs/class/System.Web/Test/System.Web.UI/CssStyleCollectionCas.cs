@@ -1,9 +1,9 @@
 //
 // CssStyleCollectionCas.cs 
-//	- CAS unit tests for System.Web.UI.CssStyleCollectionCas
+//    - CAS unit tests for System.Web.UI.CssStyleCollectionCas
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,49 +40,49 @@ using System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CssStyleCollectionCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CssStyleCollectionCas : AspNetHostingMinimal {
 
-		private CssStyleCollection css;
+        private CssStyleCollection css;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			css = new Table ().Style;
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            css = new Table ().Style;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Assert.AreEqual (0, css.Count, "Count");
-			css ["mono"] = "monkey";
-			Assert.AreEqual ("monkey", css["mono"], "this[string]");
-			Assert.IsNotNull (css.Keys, "Keys");
-			css.Add ("monkey", "mono");
-			css.Remove ("monkey");
-			css.Clear ();
-			css[HtmlTextWriterStyle.Top] = "1";
-			Assert.AreEqual ("1", css[HtmlTextWriterStyle.Top], "this[HtmlTextWriterStyle]");
-			Assert.IsNotNull (css.Value, "Value");
-			css.Value = String.Empty;
-			css.Add (HtmlTextWriterStyle.Left, "1");
-			css.Remove (HtmlTextWriterStyle.Left);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            Assert.AreEqual (0, css.Count, "Count");
+            css ["mono"] = "monkey";
+            Assert.AreEqual ("monkey", css["mono"], "this[string]");
+            Assert.IsNotNull (css.Keys, "Keys");
+            css.Add ("monkey", "mono");
+            css.Remove ("monkey");
+            css.Clear ();
+            css[HtmlTextWriterStyle.Top] = "1";
+            Assert.AreEqual ("1", css[HtmlTextWriterStyle.Top], "this[HtmlTextWriterStyle]");
+            Assert.IsNotNull (css.Value, "Value");
+            css.Value = String.Empty;
+            css.Add (HtmlTextWriterStyle.Left, "1");
+            css.Remove (HtmlTextWriterStyle.Left);
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// no public ctor is available but we know the Count property isn't protected
-			MethodInfo mi = this.Type.GetProperty ("Count").GetGetMethod ();
-			Assert.IsNotNull (mi, "Count");
-			return mi.Invoke (css, null);
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // no public ctor is available but we know the Count property isn't protected
+            MethodInfo mi = this.Type.GetProperty ("Count").GetGetMethod ();
+            Assert.IsNotNull (mi, "Count");
+            return mi.Invoke (css, null);
+        }
 
-		public override Type Type {
-			get { return typeof (CssStyleCollection); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (CssStyleCollection); }
+        }
+    }
 }

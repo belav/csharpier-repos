@@ -2,7 +2,7 @@
 // UriTemplate.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -33,25 +33,25 @@ using NUnit.Framework;
 
 namespace MonoTests.System
 {
-	[TestFixture]
-	public class UriTemplateTableTest
-	{
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void MatchSingleNoPair ()
-		{
-			var t = new UriTemplateTable (new Uri ("http://localhost:37564"));
-			// at least one UriTemplate must exist in the table.
-			t.MatchSingle (new Uri ("http://localhost:37564"));
-		}
+    [TestFixture]
+    public class UriTemplateTableTest
+    {
+        [Test]
+        [ExpectedException (typeof (InvalidOperationException))]
+        public void MatchSingleNoPair ()
+        {
+            var t = new UriTemplateTable (new Uri ("http://localhost:37564"));
+            // at least one UriTemplate must exist in the table.
+            t.MatchSingle (new Uri ("http://localhost:37564"));
+        }
 
-		[Test]
-		public void MatchSingle ()
-		{
-			var t = new UriTemplateTable (new Uri ("http://localhost:37564"));
-			t.KeyValuePairs.Add (new KeyValuePair<UriTemplate,object> (new UriTemplate ("/jsdebug"), null));
-			Assert.IsNull (t.MatchSingle (new Uri ("http://localhost:37564/js")), "#1");
-			Assert.IsNotNull (t.MatchSingle (new Uri ("http://localhost:37564/jsdebug")), "#2");
-		}
-	}
+        [Test]
+        public void MatchSingle ()
+        {
+            var t = new UriTemplateTable (new Uri ("http://localhost:37564"));
+            t.KeyValuePairs.Add (new KeyValuePair<UriTemplate,object> (new UriTemplate ("/jsdebug"), null));
+            Assert.IsNull (t.MatchSingle (new Uri ("http://localhost:37564/js")), "#1");
+            Assert.IsNotNull (t.MatchSingle (new Uri ("http://localhost:37564/jsdebug")), "#2");
+        }
+    }
 }

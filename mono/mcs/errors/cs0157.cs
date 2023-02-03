@@ -2,11 +2,11 @@
 // Line: 9
 
 class X {
-	void A ()
-	{
-		try {
-		} finally {
-			return;
-		}
-	}
+    void A ()
+    {
+        try {
+        } finally {
+            return;
+        }
+    }
 }

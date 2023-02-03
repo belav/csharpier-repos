@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 public unsafe class TestClass
 {
-	public struct Foo {
-		public bool C;
-	}
+    public struct Foo {
+        public bool C;
+    }
 
-	Foo *current;
+    Foo *current;
 
-	public IEnumerable<Foo> EnumeratorCurrentEvents ()
-	{
-		yield return *current;
-	}
+    public IEnumerable<Foo> EnumeratorCurrentEvents ()
+    {
+        yield return *current;
+    }
 }

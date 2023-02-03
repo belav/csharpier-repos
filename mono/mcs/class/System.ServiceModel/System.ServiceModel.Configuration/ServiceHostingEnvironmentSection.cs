@@ -2,7 +2,7 @@
 // ServiceHostingEnvironmentSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,74 +54,74 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class ServiceHostingEnvironmentSection
-		 : ConfigurationSection
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty asp_net_compatibility_enabled;
-		static ConfigurationProperty min_free_memory_percentage_to_activate_service;
-		static ConfigurationProperty transport_configuration_types;
+    [MonoTODO]
+    public sealed partial class ServiceHostingEnvironmentSection
+         : ConfigurationSection
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty asp_net_compatibility_enabled;
+        static ConfigurationProperty min_free_memory_percentage_to_activate_service;
+        static ConfigurationProperty transport_configuration_types;
 
-		static ServiceHostingEnvironmentSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			asp_net_compatibility_enabled = new ConfigurationProperty ("aspNetCompatibilityEnabled",
-				typeof (bool), "false", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static ServiceHostingEnvironmentSection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            asp_net_compatibility_enabled = new ConfigurationProperty ("aspNetCompatibilityEnabled",
+                typeof (bool), "false", new BooleanConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			min_free_memory_percentage_to_activate_service = new ConfigurationProperty ("minFreeMemoryPercentageToActivateService",
-				typeof (int), "5", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+            min_free_memory_percentage_to_activate_service = new ConfigurationProperty ("minFreeMemoryPercentageToActivateService",
+                typeof (int), "5", null/* FIXME: get converter for int*/, null,
+                ConfigurationPropertyOptions.None);
 
-			transport_configuration_types = new ConfigurationProperty ("",
-				typeof (TransportConfigurationTypeElementCollection), null, null/* FIXME: get converter for TransportConfigurationTypeElementCollection*/, null,
-				ConfigurationPropertyOptions.IsDefaultCollection);
+            transport_configuration_types = new ConfigurationProperty ("",
+                typeof (TransportConfigurationTypeElementCollection), null, null/* FIXME: get converter for TransportConfigurationTypeElementCollection*/, null,
+                ConfigurationPropertyOptions.IsDefaultCollection);
 
-			properties.Add (asp_net_compatibility_enabled);
-			properties.Add (min_free_memory_percentage_to_activate_service);
-			properties.Add (transport_configuration_types);
-		}
+            properties.Add (asp_net_compatibility_enabled);
+            properties.Add (min_free_memory_percentage_to_activate_service);
+            properties.Add (transport_configuration_types);
+        }
 
-		public ServiceHostingEnvironmentSection ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("aspNetCompatibilityEnabled",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = false)]
-		public bool AspNetCompatibilityEnabled {
-			get { return (bool) base [asp_net_compatibility_enabled]; }
-			set { base [asp_net_compatibility_enabled] = value; }
-		}
-
-		[ConfigurationProperty ("minFreeMemoryPercentageToActivateService",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "5")]
-		[IntegerValidator ( MinValue = 0,
-			 MaxValue = 99,
-			ExcludeRange = false)]
-		public int MinFreeMemoryPercentageToActivateService {
-			get { return (int) base [min_free_memory_percentage_to_activate_service]; }
-			set { base [min_free_memory_percentage_to_activate_service] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public TransportConfigurationTypeElementCollection TransportConfigurationTypes {
-			get { return (TransportConfigurationTypeElementCollection) base [transport_configuration_types]; }
-		}
+        public ServiceHostingEnvironmentSection ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("aspNetCompatibilityEnabled",
+             Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false)]
+        public bool AspNetCompatibilityEnabled {
+            get { return (bool) base [asp_net_compatibility_enabled]; }
+            set { base [asp_net_compatibility_enabled] = value; }
+        }
+
+        [ConfigurationProperty ("minFreeMemoryPercentageToActivateService",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "5")]
+        [IntegerValidator ( MinValue = 0,
+             MaxValue = 99,
+            ExcludeRange = false)]
+        public int MinFreeMemoryPercentageToActivateService {
+            get { return (int) base [min_free_memory_percentage_to_activate_service]; }
+            set { base [min_free_memory_percentage_to_activate_service] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [ConfigurationProperty ("",
+             Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true)]
+        public TransportConfigurationTypeElementCollection TransportConfigurationTypes {
+            get { return (TransportConfigurationTypeElementCollection) base [transport_configuration_types]; }
+        }
+
+
+    }
 
 }

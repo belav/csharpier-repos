@@ -20,21 +20,21 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.ComponentModel {
 
-	[Flags]
-	public enum PropertyFilterOptions {
-		None = 0,
-		Invalid = 1,
-		SetValues = 2,
-		UnsetValues = 4,
-		Valid = 8,
-		All = 15
-	}
+    [Flags]
+    public enum PropertyFilterOptions {
+        None = 0,
+        Invalid = 1,
+        SetValues = 2,
+        UnsetValues = 4,
+        Valid = 8,
+        All = 15
+    }
 }
 

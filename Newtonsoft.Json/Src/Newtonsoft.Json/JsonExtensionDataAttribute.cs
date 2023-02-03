@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Newtonsoft.Json
 {
@@ -13,7 +13,7 @@ namespace Newtonsoft.Json
         /// Gets or sets a value that indicates whether to write extension data when serializing the object.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> to write extension data when serializing the object; otherwise, <c>false</c>. The default is <c>true</c>.
+        ///     <c>true</c> to write extension data when serializing the object; otherwise, <c>false</c>. The default is <c>true</c>.
         /// </value>
         public bool WriteData { get; set; }
 
@@ -21,7 +21,7 @@ namespace Newtonsoft.Json
         /// Gets or sets a value that indicates whether to read extension data when deserializing the object.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> to read extension data when deserializing the object; otherwise, <c>false</c>. The default is <c>true</c>.
+        ///     <c>true</c> to read extension data when deserializing the object; otherwise, <c>false</c>. The default is <c>true</c>.
         /// </value>
         public bool ReadData { get; set; }
 

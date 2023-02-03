@@ -11,36 +11,36 @@ interface IB : IA {
 }
 
 interface IC : IA, IB {
-	void C ();
+    void C ();
 }
 
 interface ID : IC {
 }
 
 class AA : IC {
-	bool a, b, c;
-	public void A () { a = true; }
-	public void B () { b = true; }
-	public void C () { c = true; }
+    bool a, b, c;
+    public void A () { a = true; }
+    public void B () { b = true; }
+    public void C () { c = true; }
 
-	public bool OK {
-		get {
-			return a && b && c;
-		}
-	}
+    public bool OK {
+        get {
+            return a && b && c;
+        }
+    }
 }
 
 class BB : ID{
-	bool a, b, c;
-	public void A () { a = true; System.Console.WriteLine ("A"); }
-	public void B () { b = true; }
-	public void C () { c = true; }
+    bool a, b, c;
+    public void A () { a = true; System.Console.WriteLine ("A"); }
+    public void B () { b = true; }
+    public void C () { c = true; }
 
-	public bool OK {
-		get {
-			return a && b && c;
-		}
-	}
+    public bool OK {
+        get {
+            return a && b && c;
+        }
+    }
 }
 
 class T: IB {
@@ -49,21 +49,21 @@ class T: IB {
 
         public static int Main() {
 
-		BB bb = new BB ();
-		bb.A ();
-		bb.B ();
-		bb.C ();
+        BB bb = new BB ();
+        bb.A ();
+        bb.B ();
+        bb.C ();
 
-		if (!bb.OK)
-			return 1;
+        if (!bb.OK)
+            return 1;
 
-		AA aa = new AA ();
-		aa.A ();
-		aa.B ();
-		aa.C ();
-		if (!aa.OK)
-			return 2;
+        AA aa = new AA ();
+        aa.A ();
+        aa.B ();
+        aa.C ();
+        if (!aa.OK)
+            return 2;
 
-		return 0;
-	}
+        return 0;
+    }
 }

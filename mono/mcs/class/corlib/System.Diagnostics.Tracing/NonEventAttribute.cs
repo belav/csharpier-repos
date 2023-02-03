@@ -2,7 +2,7 @@
 // NonEventAttribute.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
 //
@@ -29,9 +29,9 @@
 
 namespace System.Diagnostics.Tracing
 {
-	[AttributeUsageAttribute (AttributeTargets.Method)]
-	public sealed class NonEventAttribute : Attribute
-	{
-	}
+    [AttributeUsageAttribute (AttributeTargets.Method)]
+    public sealed class NonEventAttribute : Attribute
+    {
+    }
 }
 

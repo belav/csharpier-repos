@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	[AttributeUsage(AttributeTargets.All, Inherited = true)]
-	public class InheritableAttribute : Attribute
-	{
-	}
+    [AttributeUsage(AttributeTargets.All, Inherited = true)]
+    public class InheritableAttribute : Attribute
+    {
+    }
 }

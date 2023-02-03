@@ -4,8 +4,8 @@
 delegate void D (int x);
 
 class X {
-	static void Main ()
-	{
-		D d2 = delegate (ref int x) {};
-	}
+    static void Main ()
+    {
+        D d2 = delegate (ref int x) {};
+    }
 }

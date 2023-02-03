@@ -6,8 +6,8 @@ using System;
 
 class C
 {
-	public int this[int i]
-	{
-		get => i;
-	}
+    public int this[int i]
+    {
+        get => i;
+    }
 }

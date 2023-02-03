@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DataSourceDescriptor
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,16 +36,16 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-	public abstract class DataSourceDescriptor
-	{
-		protected DataSourceDescriptor ()
-		{
-		}
-		
-		public abstract Bitmap Image { get; }
-		public abstract bool IsDesignable { get; }
-		public abstract string Name { get; }
-		public abstract string TypeName { get; }
-	}
+    public abstract class DataSourceDescriptor
+    {
+        protected DataSourceDescriptor ()
+        {
+        }
+        
+        public abstract Bitmap Image { get; }
+        public abstract bool IsDesignable { get; }
+        public abstract string Name { get; }
+        public abstract string TypeName { get; }
+    }
 }
 

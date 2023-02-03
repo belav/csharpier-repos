@@ -26,9 +26,9 @@
 
 namespace System.ServiceModel.Channels
 {
-	public enum CompressionFormat {
-		None,
-		GZip,
-		Deflate
-	}
+    public enum CompressionFormat {
+        None,
+        GZip,
+        Deflate
+    }
 }

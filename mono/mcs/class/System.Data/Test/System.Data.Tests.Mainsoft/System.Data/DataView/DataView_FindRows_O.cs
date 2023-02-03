@@ -39,110 +39,110 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_FindRows_O : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataView_FindRows_O tc = new DataView_FindRows_O();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataView_FindRows_O");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataView_FindRows_O tc = new DataView_FindRows_O();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataView_FindRows_O");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-		
-		DataRowView[] dvArr = null;
-
-		//create the source datatable
-		DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
-
-		//create the dataview for the table
-		DataView dv = new DataView(dt);
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		try
-		{
-			BeginCase("FindRows ,no sort - exception");
-			try
-			{
-				dvArr = dv.FindRows(3);
-			}
-			catch (System.ArgumentException ex)
-			{
-				exp = ex;
-			}
-			Compare(exp.GetType().FullName,typeof(System.ArgumentException).FullName);
-			exp=null;
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		dv.Sort = "String1";
-		try
-		{
-			BeginCase("Find = wrong sort, can not find");
-			dvArr = dv.FindRows(3);
-			Compare(dvArr.Length  ,0);
-			exp=null;
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-		dv.Sort = "ChildId";
+    public void run()
+    {
+        Exception exp = null;
+        
+        DataRowView[] dvArr = null;
 
-		//get expected results
-		DataRow[] drExpected = dt.Select("ChildId=3");
+        //create the source datatable
+        DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
 
-		try
-		{
-			BeginCase("FindRows - check count");
-			dvArr = dv.FindRows(3);
-			Compare(dvArr.Length,drExpected.Length );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        //create the dataview for the table
+        DataView dv = new DataView(dt);
 
-		try
-		{
-			BeginCase("FindRows - check data");
-			
-			//check that result is ok
-			bool Succeed = true;
-			for (int i=0; i<dvArr.Length ; i++)
-			{
-				Succeed = (int)dvArr[i]["ChildId"] == (int)drExpected [i]["ChildId"];
-				if (!Succeed) break;
-			}
-			Compare(Succeed ,true);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
 
-	
-	}
+        try
+        {
+            BeginCase("FindRows ,no sort - exception");
+            try
+            {
+                dvArr = dv.FindRows(3);
+            }
+            catch (System.ArgumentException ex)
+            {
+                exp = ex;
+            }
+            Compare(exp.GetType().FullName,typeof(System.ArgumentException).FullName);
+            exp=null;
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    
+
+        dv.Sort = "String1";
+        try
+        {
+            BeginCase("Find = wrong sort, can not find");
+            dvArr = dv.FindRows(3);
+            Compare(dvArr.Length  ,0);
+            exp=null;
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        dv.Sort = "ChildId";
+
+        //get expected results
+        DataRow[] drExpected = dt.Select("ChildId=3");
+
+        try
+        {
+            BeginCase("FindRows - check count");
+            dvArr = dv.FindRows(3);
+            Compare(dvArr.Length,drExpected.Length );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("FindRows - check data");
+            
+            //check that result is ok
+            bool Succeed = true;
+            for (int i=0; i<dvArr.Length ; i++)
+            {
+                Succeed = (int)dvArr[i]["ChildId"] == (int)drExpected [i]["ChildId"];
+                if (!Succeed) break;
+            }
+            Compare(Succeed ,true);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+    
+    }
 }
 }

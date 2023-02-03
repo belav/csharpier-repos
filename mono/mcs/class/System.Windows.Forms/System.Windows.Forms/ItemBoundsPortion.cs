@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum ItemBoundsPortion
-	{
-		Entire = 0,
-		Icon = 1,
-		Label = 2,
-		ItemOnly = 3
-	}
+    public enum ItemBoundsPortion
+    {
+        Entire = 0,
+        Icon = 1,
+        Label = 2,
+        ItemOnly = 3
+    }
 }

@@ -23,26 +23,26 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public class WebBrowserNavigatedEventArgs : EventArgs
-	{
-		private Uri url;
+    public class WebBrowserNavigatedEventArgs : EventArgs
+    {
+        private Uri url;
 
-		#region Public Constructors
-		public WebBrowserNavigatedEventArgs (Uri url) : base ()
-		{
-			this.url = url;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public WebBrowserNavigatedEventArgs (Uri url) : base ()
+        {
+            this.url = url;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public Uri Url {
-			get { return this.url; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public Uri Url {
+            get { return this.url; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

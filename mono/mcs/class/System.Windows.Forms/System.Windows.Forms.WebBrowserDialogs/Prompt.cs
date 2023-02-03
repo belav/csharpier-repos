@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita	<avidigal@novell.com>
+//    Andreia Gaita    <avidigal@novell.com>
 
 
 using System;
@@ -29,34 +29,34 @@ using System.Text;
 
 namespace System.Windows.Forms.WebBrowserDialogs
 {
-	internal class Prompt : Generic
-	{
-		private string text;
-		public new string Text
-		{
-			get { return text; }
-		}
+    internal class Prompt : Generic
+    {
+        private string text;
+        public new string Text
+        {
+            get { return text; }
+        }
 
-		public Prompt (string title, string message, string text)
-			: base (title)
-		{
-			InitTable (3, 1);
+        public Prompt (string title, string message, string text)
+            : base (title)
+        {
+            InitTable (3, 1);
 
-			AddLabel (0, 0, 0, message, -1, -1);
-			AddText (1, 0, 0, text, -1, -1, new EventHandler (onText));
-			AddButton (2, 0, 0, Locale.GetText ("OK"), -1, -1, true, false, new EventHandler (OkClick));
-		}
+            AddLabel (0, 0, 0, message, -1, -1);
+            AddText (1, 0, 0, text, -1, -1, new EventHandler (onText));
+            AddButton (2, 0, 0, Locale.GetText ("OK"), -1, -1, true, false, new EventHandler (OkClick));
+        }
 
-		private void OkClick (object sender, EventArgs e)
-		{
-			this.DialogResult = DialogResult.OK;
-			this.Close ();
-		}
+        private void OkClick (object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close ();
+        }
 
-		private void onText (object sender, EventArgs e)
-		{
-			TextBox c = sender as TextBox;
-			text = c.Text;
-		}
-	}
+        private void onText (object sender, EventArgs e)
+        {
+            TextBox c = sender as TextBox;
+            text = c.Text;
+        }
+    }
 }

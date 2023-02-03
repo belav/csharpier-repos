@@ -20,14 +20,14 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jonathan Chambers (jonathan.chambers@ansys.com)
+//    Jonathan Chambers (jonathan.chambers@ansys.com)
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms 
 {
-	public delegate void PropertyTabChangedEventHandler(object s, PropertyTabChangedEventArgs e);
+    public delegate void PropertyTabChangedEventHandler(object s, PropertyTabChangedEventArgs e);
 }
 
 

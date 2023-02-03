@@ -27,36 +27,36 @@
 
 namespace System.ServiceModel {
 
-	public interface ICommunicationObject
-	{
-		CommunicationState State { get; }
+    public interface ICommunicationObject
+    {
+        CommunicationState State { get; }
 
-		void Abort ();
+        void Abort ();
 
-		IAsyncResult BeginClose (AsyncCallback callback, object state);
+        IAsyncResult BeginClose (AsyncCallback callback, object state);
 
-		IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state);
 
-		IAsyncResult BeginOpen (AsyncCallback callback, object state);
+        IAsyncResult BeginOpen (AsyncCallback callback, object state);
 
-		IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state);
 
-		void Close ();
+        void Close ();
 
-		void Close (TimeSpan timeout);
+        void Close (TimeSpan timeout);
 
-		void EndClose (IAsyncResult result);
+        void EndClose (IAsyncResult result);
 
-		void EndOpen (IAsyncResult result);
+        void EndOpen (IAsyncResult result);
 
-		void Open ();
+        void Open ();
 
-		void Open (TimeSpan timeout);
+        void Open (TimeSpan timeout);
 
-		event EventHandler Closed;
-		event EventHandler Closing;
-		event EventHandler Faulted;
-		event EventHandler Opened;
-		event EventHandler Opening;
-	}
+        event EventHandler Closed;
+        event EventHandler Closing;
+        event EventHandler Faulted;
+        event EventHandler Opened;
+        event EventHandler Opening;
+    }
 }

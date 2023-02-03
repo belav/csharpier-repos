@@ -51,7 +51,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0001DI()
+    public void core0001DI()
         {
             bool computedValue = false;
             bool expectedValue = true;
@@ -95,7 +95,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0002DI()
+    public void core0002DI()
         {
             bool computedValue = false;
             bool expectedValue = true;
@@ -141,7 +141,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0003DI()
+    public void core0003DI()
         {
             bool computedValue = false;
             bool expectedValue = false;//(true, false);
@@ -187,7 +187,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0004DI()
+    public void core0004DI()
         {
             bool computedValue = false;
             bool expectedValue = false;//(true, false);
@@ -231,7 +231,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0005DI()
+    public void core0005DI()
         {
             bool computedValue = false;
             bool expectedValue = true;

@@ -485,7 +485,7 @@ namespace System.Configuration {
         }
 
         //
-	// Impersonate for Client Config
+    // Impersonate for Client Config
         // Use the process identity
         //
         [SecurityPermissionAttribute(SecurityAction.Assert, Flags=SecurityPermissionFlag.ControlPrincipal | SecurityPermissionFlag.UnmanagedCode)]
@@ -494,7 +494,7 @@ namespace System.Configuration {
             return WindowsIdentity.Impersonate(IntPtr.Zero);
         }
 
-	// context support
+    // context support
         public override object CreateDeprecatedConfigContext(string configPath) {
             return null;
         }

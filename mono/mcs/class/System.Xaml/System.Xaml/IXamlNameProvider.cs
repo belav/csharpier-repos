@@ -25,8 +25,8 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public interface IXamlNameProvider
-	{
-		string GetName (object value);
-	}
+    public interface IXamlNameProvider
+    {
+        string GetName (object value);
+    }
 }

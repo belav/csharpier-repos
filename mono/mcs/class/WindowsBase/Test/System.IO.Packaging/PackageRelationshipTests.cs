@@ -65,7 +65,7 @@ namespace MonoTests.System.IO.Packaging {
 
             Assert.AreEqual (3, package.GetRelationships ().Count (), "#1");
             Assert.AreEqual (2, package.GetRelationshipsByType ("a").Count (), "#2");
-			Assert.AreEqual (0, package.GetRelationshipsByType ("A").Count (), "#3");
+            Assert.AreEqual (0, package.GetRelationshipsByType ("A").Count (), "#3");
         }
 
         [Test]
@@ -156,7 +156,7 @@ namespace MonoTests.System.IO.Packaging {
         {
             AddThreeRelationShips ();
             PackagePart part = package.GetPart (new Uri ("/_rels/.rels", UriKind.Relative));
-			Assert.IsNotNull (package.GetPart (new Uri ("/_RELS/.RELS", UriKind.Relative)), "#0");
+            Assert.IsNotNull (package.GetPart (new Uri ("/_RELS/.RELS", UriKind.Relative)), "#0");
             package.Flush ();
             Assert.IsNotNull (part, "#1");
 

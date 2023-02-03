@@ -1,7 +1,7 @@
 // System.Configuration.Install.AssemblyInstaller.cs
 //
 // Author:
-// 	Gert Driesen (drieseng@users.sourceforge.net)
+//     Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) Novell
 //
@@ -33,100 +33,100 @@ using System.Reflection;
 
 namespace System.Configuration.Install
 {
-	public class AssemblyInstaller : Installer
-	{
-		public AssemblyInstaller ()
-		{
-		}
+    public class AssemblyInstaller : Installer
+    {
+        public AssemblyInstaller ()
+        {
+        }
 
-		public AssemblyInstaller (Assembly assembly, string[] commandLine)
-		{
-			_assembly = assembly;
-			_commandLine = commandLine;
-			_useNewContext = true;
-		}
+        public AssemblyInstaller (Assembly assembly, string[] commandLine)
+        {
+            _assembly = assembly;
+            _commandLine = commandLine;
+            _useNewContext = true;
+        }
 
-		public AssemblyInstaller (string fileName, string[] commandLine)
-		{
-			Path = System.IO.Path.GetFullPath (fileName);
-			_commandLine = commandLine;
-			_useNewContext = true;
-		}
+        public AssemblyInstaller (string fileName, string[] commandLine)
+        {
+            Path = System.IO.Path.GetFullPath (fileName);
+            _commandLine = commandLine;
+            _useNewContext = true;
+        }
 
-		[MonoTODO]
-		public static void CheckIfInstallable (string assemblyName)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static void CheckIfInstallable (string assemblyName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override void Commit (IDictionary savedState)
-		{
-			base.Commit (savedState);
-		}
+        public override void Commit (IDictionary savedState)
+        {
+            base.Commit (savedState);
+        }
 
-		public override void Install (IDictionary savedState)
-		{
-			base.Install (savedState);
-		}
+        public override void Install (IDictionary savedState)
+        {
+            base.Install (savedState);
+        }
 
-		public override void Rollback (IDictionary savedState)
-		{
-			base.Rollback (savedState);
-		}
+        public override void Rollback (IDictionary savedState)
+        {
+            base.Rollback (savedState);
+        }
 
-		public override void Uninstall (IDictionary savedState)
-		{
-			base.Uninstall (savedState);
-		}
+        public override void Uninstall (IDictionary savedState)
+        {
+            base.Uninstall (savedState);
+        }
 
-		public Assembly Assembly {
-			get {
-				return _assembly;
-			}
-			set {
-				_assembly = value;
-			}
-		}
+        public Assembly Assembly {
+            get {
+                return _assembly;
+            }
+            set {
+                _assembly = value;
+            }
+        }
 
-		public string[] CommandLine {
-			get {
-				return _commandLine;
-			}
-			set {
-				_commandLine = value;
-			}
-		}
+        public string[] CommandLine {
+            get {
+                return _commandLine;
+            }
+            set {
+                _commandLine = value;
+            }
+        }
 
-		public override string HelpText {
-			get {
-				return base.HelpText;
-			}
-		}
-		public string Path {
-			get {
-				if (_assembly == null)
-					return null;
-				
-				return _assembly.Location;
-			}
-			set {
-				if (value == null)
-					_assembly = null;
+        public override string HelpText {
+            get {
+                return base.HelpText;
+            }
+        }
+        public string Path {
+            get {
+                if (_assembly == null)
+                    return null;
+                
+                return _assembly.Location;
+            }
+            set {
+                if (value == null)
+                    _assembly = null;
 
-				_assembly = Assembly.LoadFrom (value);
-			}
-		}
-		public bool UseNewContext {
-			get {
-				return _useNewContext;
-			}
-			set {
-				_useNewContext = value;
-			}
-		}
+                _assembly = Assembly.LoadFrom (value);
+            }
+        }
+        public bool UseNewContext {
+            get {
+                return _useNewContext;
+            }
+            set {
+                _useNewContext = value;
+            }
+        }
 
-		private Assembly _assembly;
-		private string[] _commandLine;
-		private bool _useNewContext;
-	}
+        private Assembly _assembly;
+        private string[] _commandLine;
+        private bool _useNewContext;
+    }
 }

@@ -2,7 +2,7 @@
 // System.Net.Mail.SmtpException.cs
 //
 // Author:
-//	Tim Coleman (tim@timcoleman.com)
+//    Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 //
@@ -31,77 +31,77 @@
 using System.Runtime.Serialization;
 
 namespace System.Net.Mail {
-	[Serializable]
-	public class SmtpException : Exception, ISerializable
-	{
-		#region Fields
+    [Serializable]
+    public class SmtpException : Exception, ISerializable
+    {
+        #region Fields
 
-		SmtpStatusCode statusCode;
+        SmtpStatusCode statusCode;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SmtpException ()
-			: this (SmtpStatusCode.GeneralFailure)
-		{
-		}
+        public SmtpException ()
+            : this (SmtpStatusCode.GeneralFailure)
+        {
+        }
 
-		public SmtpException (SmtpStatusCode statusCode)
-			: this (statusCode, "Syntax error, command unrecognized.")
-		{
-		}
+        public SmtpException (SmtpStatusCode statusCode)
+            : this (statusCode, "Syntax error, command unrecognized.")
+        {
+        }
 
-		public SmtpException (string message)
-			: this (SmtpStatusCode.GeneralFailure, message)
-		{
-		}
+        public SmtpException (string message)
+            : this (SmtpStatusCode.GeneralFailure, message)
+        {
+        }
 
-		protected SmtpException (SerializationInfo serializationInfo, StreamingContext streamingContext)
-			: base (serializationInfo, streamingContext)
-		{
-			try {
-				statusCode = (SmtpStatusCode) serializationInfo.GetValue ("Status", typeof (int));
-			} catch (SerializationException) {
-				//For compliance with previously serialized version:
-				statusCode = (SmtpStatusCode) serializationInfo.GetValue ("statusCode", typeof (SmtpStatusCode));
-			}
-		}
+        protected SmtpException (SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base (serializationInfo, streamingContext)
+        {
+            try {
+                statusCode = (SmtpStatusCode) serializationInfo.GetValue ("Status", typeof (int));
+            } catch (SerializationException) {
+                //For compliance with previously serialized version:
+                statusCode = (SmtpStatusCode) serializationInfo.GetValue ("statusCode", typeof (SmtpStatusCode));
+            }
+        }
 
-		public SmtpException (SmtpStatusCode statusCode, string message)
-			: base (message)
-		{
-			this.statusCode = statusCode;
-		}
+        public SmtpException (SmtpStatusCode statusCode, string message)
+            : base (message)
+        {
+            this.statusCode = statusCode;
+        }
 
-		public SmtpException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-			statusCode = SmtpStatusCode.GeneralFailure;
-		}
+        public SmtpException (string message, Exception innerException)
+            : base (message, innerException)
+        {
+            statusCode = SmtpStatusCode.GeneralFailure;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public SmtpStatusCode StatusCode {
-			get { return statusCode; }
-			set { statusCode = value; }
-		}
+        public SmtpStatusCode StatusCode {
+            get { return statusCode; }
+            set { statusCode = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			if (serializationInfo == null)
-				throw new ArgumentNullException ("serializationInfo");
-			base.GetObjectData (serializationInfo, streamingContext);
-			serializationInfo.AddValue ("Status", statusCode, typeof (int));
-		}
-		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			GetObjectData (info, context);
-		}
-	}
+        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        {
+            if (serializationInfo == null)
+                throw new ArgumentNullException ("serializationInfo");
+            base.GetObjectData (serializationInfo, streamingContext);
+            serializationInfo.AddValue ("Status", statusCode, typeof (int));
+        }
+        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
+        {
+            GetObjectData (info, context);
+        }
+    }
 }
 

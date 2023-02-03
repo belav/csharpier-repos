@@ -1397,7 +1397,7 @@ namespace System.Xml.Schema {
                     if (xsiNil != null) {
                         context.IsNill = XmlConvert.ToBoolean(xsiNil);
                         if (context.IsNill && elementDecl.Presence == SchemaDeclBase.Use.Fixed) {
-                            Debug.Assert(elementDecl.DefaultValueTyped != null);				
+                            Debug.Assert(elementDecl.DefaultValueTyped != null);                
                             SendValidationEvent(Res.Sch_XsiNilAndFixed);
                         }
                     }

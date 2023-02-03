@@ -1,9 +1,9 @@
 //
 // CryptographicAttributeObjectEnumeratorTest.cs - NUnit tests for 
-//	System.Security.Cryptography.CryptographicAttributeObjectEnumerator
+//    System.Security.Cryptography.CryptographicAttributeObjectEnumerator
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,79 +36,79 @@ using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography {
 
-	[TestFixture]
-	public class CryptographicAttributeObjectEnumeratorTest {
+    [TestFixture]
+    public class CryptographicAttributeObjectEnumeratorTest {
 
-		static string defaultOid = "1.2.840.113549.1.7.1";
+        static string defaultOid = "1.2.840.113549.1.7.1";
 
-		private CryptographicAttributeObjectCollection coll;
+        private CryptographicAttributeObjectCollection coll;
 
-		private void Count (int count)
-		{
-			Assert.AreEqual (count, coll.Count, "Count");
-			int i = 0;
-			foreach (CryptographicAttributeObject cao in coll) {
-				i++;
-			}
-			Assert.AreEqual (count, i, "foreach");
+        private void Count (int count)
+        {
+            Assert.AreEqual (count, coll.Count, "Count");
+            int i = 0;
+            foreach (CryptographicAttributeObject cao in coll) {
+                i++;
+            }
+            Assert.AreEqual (count, i, "foreach");
 
-			i = 0;
-			CryptographicAttributeObjectEnumerator e = coll.GetEnumerator ();
-			while (e.MoveNext ()) {
-				if (e.Current is CryptographicAttributeObject)
-					i++;
-			}
-			Assert.AreEqual (count, i, "GetEnumerator");
+            i = 0;
+            CryptographicAttributeObjectEnumerator e = coll.GetEnumerator ();
+            while (e.MoveNext ()) {
+                if (e.Current is CryptographicAttributeObject)
+                    i++;
+            }
+            Assert.AreEqual (count, i, "GetEnumerator");
 
-			i = 0;
-			e.Reset ();
-			while (e.MoveNext ()) {
-				if (e.Current is CryptographicAttributeObject)
-					i++;
-			}
-			Assert.AreEqual (count, i, "Reset");
-		}
+            i = 0;
+            e.Reset ();
+            while (e.MoveNext ()) {
+                if (e.Current is CryptographicAttributeObject)
+                    i++;
+            }
+            Assert.AreEqual (count, i, "Reset");
+        }
 
-		[Test]
-		public void Empty ()
-		{
-			coll = new CryptographicAttributeObjectCollection ();
-			Count (0);
-		}
+        [Test]
+        public void Empty ()
+        {
+            coll = new CryptographicAttributeObjectCollection ();
+            Count (0);
+        }
 
-		[Test]
-		public void One_CryptographicAttributeObject () 
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
-			coll = new CryptographicAttributeObjectCollection (cao);
-			Count (1);
-		}
+        [Test]
+        public void One_CryptographicAttributeObject () 
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject cao = new CryptographicAttributeObject (o);
+            coll = new CryptographicAttributeObjectCollection (cao);
+            Count (1);
+        }
 
-		[Test]
-		public void One_AsnEncodedData ()
-		{
-			Oid o = new Oid (defaultOid);
-			AsnEncodedData aed = new AsnEncodedData (o, new byte[] { 0x05, 0x00 });
-			coll = new CryptographicAttributeObjectCollection ();
-			coll.Add (aed);
-			Count (1);
-		}
+        [Test]
+        public void One_AsnEncodedData ()
+        {
+            Oid o = new Oid (defaultOid);
+            AsnEncodedData aed = new AsnEncodedData (o, new byte[] { 0x05, 0x00 });
+            coll = new CryptographicAttributeObjectCollection ();
+            coll.Add (aed);
+            Count (1);
+        }
 
-		[Test]
-		public void Two_Both ()
-		{
-			coll = new CryptographicAttributeObjectCollection ();
+        [Test]
+        public void Two_Both ()
+        {
+            coll = new CryptographicAttributeObjectCollection ();
 
-			Oid o1 = new Oid (defaultOid + ".1");
-			AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x05, 0x00 });
-			coll.Add (aed);
+            Oid o1 = new Oid (defaultOid + ".1");
+            AsnEncodedData aed = new AsnEncodedData (o1, new byte[] { 0x05, 0x00 });
+            coll.Add (aed);
 
-			Oid o2 = new Oid (defaultOid + ".2");
-			coll.Add (new CryptographicAttributeObject (o2));
+            Oid o2 = new Oid (defaultOid + ".2");
+            coll.Add (new CryptographicAttributeObject (o2));
 
-			Count (2);
-		}
-	}
+            Count (2);
+        }
+    }
 }
 

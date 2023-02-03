@@ -111,7 +111,7 @@ namespace System.Runtime.CompilerServices {
             throw new InvalidOperationException();
         }
 
-        static internal int UnsafeEnumCast<T>(T val) where T : struct		// Actually T must be 4 byte (or less) enum
+        static internal int UnsafeEnumCast<T>(T val) where T : struct        // Actually T must be 4 byte (or less) enum
         {
             Contract.Assert(typeof(T).IsEnum 
                               && (Enum.GetUnderlyingType(typeof(T)) == typeof(int) 
@@ -124,14 +124,14 @@ namespace System.Runtime.CompilerServices {
             return UnsafeEnumCastInternal<T>(val);
         }
 
-        static private int UnsafeEnumCastInternal<T>(T val) where T : struct		// Actually T must be 4 (or less) byte enum
+        static private int UnsafeEnumCastInternal<T>(T val) where T : struct        // Actually T must be 4 (or less) byte enum
         {
             // should be return (int) val; but C# does not allow, runtime does this magically
             // See getILIntrinsicImplementation for how this happens.  
             throw new InvalidOperationException();
         }
 
-        static internal long UnsafeEnumCastLong<T>(T val) where T : struct		// Actually T must be 8 byte enum
+        static internal long UnsafeEnumCastLong<T>(T val) where T : struct        // Actually T must be 8 byte enum
         {
             Contract.Assert(typeof(T).IsEnum 
                               && (Enum.GetUnderlyingType(typeof(T)) == typeof(long) 
@@ -140,7 +140,7 @@ namespace System.Runtime.CompilerServices {
             return UnsafeEnumCastLongInternal<T>(val);
         }
 
-        static private long UnsafeEnumCastLongInternal<T>(T val) where T : struct	// Actually T must be 8 byte enum
+        static private long UnsafeEnumCastLongInternal<T>(T val) where T : struct    // Actually T must be 8 byte enum
         {
             // should be return (int) val; but C# does not allow, runtime does this magically
             // See getILIntrinsicImplementation for how this happens.  
@@ -176,14 +176,14 @@ namespace System.Runtime.CompilerServices {
             throw new InvalidOperationException();
         }
 
-        static internal int UnsafeEnumCast<T>(T val) where T : struct		// Actually T must be 4 byte (or less) enum
+        static internal int UnsafeEnumCast<T>(T val) where T : struct        // Actually T must be 4 byte (or less) enum
         {
             // should be return (int) val; but C# does not allow, runtime does this magically
             // See getILIntrinsicImplementation for how this happens.  
             throw new InvalidOperationException();
         }
 
-        static internal long UnsafeEnumCastLong<T>(T val) where T : struct	// Actually T must be 8 byte enum
+        static internal long UnsafeEnumCastLong<T>(T val) where T : struct    // Actually T must be 8 byte enum
         {
             // should be return (long) val; but C# does not allow, runtime does this magically
             // See getILIntrinsicImplementation for how this happens.  

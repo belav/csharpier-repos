@@ -4,8 +4,8 @@
 
 struct C
 {
-	void G ()
-	{
-		object o = (C?[]) this;
-	}
+    void G ()
+    {
+        object o = (C?[]) this;
+    }
 }

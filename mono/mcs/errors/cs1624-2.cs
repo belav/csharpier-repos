@@ -5,16 +5,16 @@ using System.Collections;
 
 class X
 {
-	IEnumerator this [int u]
-	{
-	    get {
-		yield return 1;
-		yield return 2;
-		yield return 3;
-	    }
-	    set
-	    {
-		yield return 3;		
-	    }	    
-	}
+    IEnumerator this [int u]
+    {
+        get {
+        yield return 1;
+        yield return 2;
+        yield return 3;
+        }
+        set
+        {
+        yield return 3;        
+        }        
+    }
 }

@@ -56,8 +56,8 @@ namespace System.Security.Cryptography {
 
         public override byte[] CreateKeyExchange(byte[] rgbData) {
 #if MONO
-			if (rgbData == null)
-				throw new ArgumentNullException ("rgbData");
+            if (rgbData == null)
+                throw new ArgumentNullException ("rgbData");
 #endif
 
             if (_rsaKey == null)

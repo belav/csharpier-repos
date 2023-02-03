@@ -7,11 +7,11 @@ using System.Linq.Expressions;
 
 class C
 {
-	unsafe delegate byte* D (int*[] d);
-	public static void Main ()
-	{
-		unsafe {
-			Expression<D> e6 = (p) => (byte*)p [10];
-		}
-	}
+    unsafe delegate byte* D (int*[] d);
+    public static void Main ()
+    {
+        unsafe {
+            Expression<D> e6 = (p) => (byte*)p [10];
+        }
+    }
 }

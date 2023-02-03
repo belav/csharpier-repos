@@ -2,7 +2,7 @@
 // HostIgnoreList helper
 //
 // Authors:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -33,50 +33,50 @@ using NUnit.Framework;
 
 namespace MonoTests {
 
-	// now misnamed - we check for the DISTRO env variable
-	public class HostIgnoreList {
+    // now misnamed - we check for the DISTRO env variable
+    public class HostIgnoreList {
 
-		private const string IgnoreListName = "nunit-host-ignore-list";
+        private const string IgnoreListName = "nunit-host-ignore-list";
 
-		private static ArrayList ignore_list;
+        private static ArrayList ignore_list;
 
-		static HostIgnoreList ()
-		{
-			string hostname = Environment.GetEnvironmentVariable ("DISTRO");
-			if (hostname == null)
-				return;
+        static HostIgnoreList ()
+        {
+            string hostname = Environment.GetEnvironmentVariable ("DISTRO");
+            if (hostname == null)
+                return;
 
-			if (File.Exists (IgnoreListName)) {
-				using (StreamReader sr = new StreamReader (IgnoreListName)) {
-					string line = sr.ReadLine ();
-					while (line != null) {
-						if (line.StartsWith (hostname)) {
-							IgnoreList.Add (line.Substring (hostname.Length + 1));
-						}
-						line = sr.ReadLine ();
-					}
-				}
-			}
-		}
+            if (File.Exists (IgnoreListName)) {
+                using (StreamReader sr = new StreamReader (IgnoreListName)) {
+                    string line = sr.ReadLine ();
+                    while (line != null) {
+                        if (line.StartsWith (hostname)) {
+                            IgnoreList.Add (line.Substring (hostname.Length + 1));
+                        }
+                        line = sr.ReadLine ();
+                    }
+                }
+            }
+        }
 
-		public static IList IgnoreList {
-			get {
-				if (ignore_list == null)
-					ignore_list = new ArrayList ();
-				return ignore_list;
-			}
-		}
+        public static IList IgnoreList {
+            get {
+                if (ignore_list == null)
+                    ignore_list = new ArrayList ();
+                return ignore_list;
+            }
+        }
 
-		public static void CheckTest (string testname)
-		{
-			if (ignore_list == null)
-				return;
+        public static void CheckTest (string testname)
+        {
+            if (ignore_list == null)
+                return;
 
-			if (IgnoreList.Contains (testname)) {
-				string msg = String.Format ("Test '{0}' was ignored because it's defined in the '{1}' ignore list.", 
-					testname, IgnoreListName);
-				Assert.Ignore (msg);
-			}
-		}
-	}
+            if (IgnoreList.Contains (testname)) {
+                string msg = String.Format ("Test '{0}' was ignored because it's defined in the '{1}' ignore list.", 
+                    testname, IgnoreListName);
+                Assert.Ignore (msg);
+            }
+        }
+    }
 }

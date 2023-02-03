@@ -1,8 +1,8 @@
-﻿//
+//
 // WSHttpSecurity.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -30,35 +30,35 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-	public sealed class WSHttpSecurity
-	{
-		SecurityMode mode;
-		NonDualMessageSecurityOverHttp message;
-		HttpTransportSecurity transport;
+    public sealed class WSHttpSecurity
+    {
+        SecurityMode mode;
+        NonDualMessageSecurityOverHttp message;
+        HttpTransportSecurity transport;
 
-		internal WSHttpSecurity (SecurityMode mode)
-		{
-			this.Mode = mode;
-			message = new NonDualMessageSecurityOverHttp ();
-			transport = new HttpTransportSecurity ();
-		}
+        internal WSHttpSecurity (SecurityMode mode)
+        {
+            this.Mode = mode;
+            message = new NonDualMessageSecurityOverHttp ();
+            transport = new HttpTransportSecurity ();
+        }
 
-		[MonoTODO]
-		public NonDualMessageSecurityOverHttp Message {
-			get { return message; }
-		}
+        [MonoTODO]
+        public NonDualMessageSecurityOverHttp Message {
+            get { return message; }
+        }
 
-		[MonoTODO]
-		public SecurityMode Mode {
-			get { return mode; }
-			set {
-				mode = value;
-			}
-		}
+        [MonoTODO]
+        public SecurityMode Mode {
+            get { return mode; }
+            set {
+                mode = value;
+            }
+        }
 
-		[MonoTODO]
-		public HttpTransportSecurity Transport {
-			get { return transport; }
-		}
-	}
+        [MonoTODO]
+        public HttpTransportSecurity Transport {
+            get { return transport; }
+        }
+    }
 }

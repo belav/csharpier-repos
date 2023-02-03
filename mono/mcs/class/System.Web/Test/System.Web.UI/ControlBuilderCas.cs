@@ -2,7 +2,7 @@
 // ControlBuilderCas.cs - CAS unit tests for System.Web.UI.ControlBuilder
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,41 +36,41 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ControlBuilderCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ControlBuilderCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ControlBuilder cb = new ControlBuilder ();
-			Assert.IsNull (cb.ControlType, "ControlType");
-			Assert.IsFalse (cb.HasAspCode, "HasAspCode");
-			cb.ID = "mono";
-			Assert.AreEqual ("mono", cb.ID, "ID");
-			Assert.AreEqual (typeof (Control), cb.NamingContainerType, "NamingContainerType");
-			Assert.IsNull (cb.TagName, "TagName");
-			Assert.IsTrue (cb.AllowWhitespaceLiterals (), "AllowWhitespaceLiterals");
-			cb.AppendLiteralString ("mono");
-			cb.AppendSubBuilder (cb);
-			cb.CloseControl ();
-			Assert.IsNull (cb.GetChildControlType (null, null), "GetChildControlType");
-			Assert.IsTrue (cb.HasBody (), "HasBody");
-			Assert.IsFalse (cb.HtmlDecodeLiterals (), "HtmlDecodeLiterals");
-			cb.Init (null, cb, typeof (TemplateBuilder), "span", "mono", null);
-			Assert.IsFalse (cb.NeedsTagInnerText (), "NeedsTagInnerText");
-			//cb.OnAppendToParentBuilder (null);
-			cb.SetTagInnerText ("mono");
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ControlBuilder cb = new ControlBuilder ();
+            Assert.IsNull (cb.ControlType, "ControlType");
+            Assert.IsFalse (cb.HasAspCode, "HasAspCode");
+            cb.ID = "mono";
+            Assert.AreEqual ("mono", cb.ID, "ID");
+            Assert.AreEqual (typeof (Control), cb.NamingContainerType, "NamingContainerType");
+            Assert.IsNull (cb.TagName, "TagName");
+            Assert.IsTrue (cb.AllowWhitespaceLiterals (), "AllowWhitespaceLiterals");
+            cb.AppendLiteralString ("mono");
+            cb.AppendSubBuilder (cb);
+            cb.CloseControl ();
+            Assert.IsNull (cb.GetChildControlType (null, null), "GetChildControlType");
+            Assert.IsTrue (cb.HasBody (), "HasBody");
+            Assert.IsFalse (cb.HtmlDecodeLiterals (), "HtmlDecodeLiterals");
+            cb.Init (null, cb, typeof (TemplateBuilder), "span", "mono", null);
+            Assert.IsFalse (cb.NeedsTagInnerText (), "NeedsTagInnerText");
+            //cb.OnAppendToParentBuilder (null);
+            cb.SetTagInnerText ("mono");
 
-			cb = ControlBuilder.CreateBuilderFromType (null, cb, typeof (TemplateBuilder), "span", "mono", null, 0, String.Empty);
-			Assert.IsNotNull (cb, "CreateBuilderFromType");
-		}
+            cb = ControlBuilder.CreateBuilderFromType (null, cb, typeof (TemplateBuilder), "span", "mono", null, 0, String.Empty);
+            Assert.IsNotNull (cb, "CreateBuilderFromType");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (ControlBuilder); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ControlBuilder); }
+        }
+    }
 }

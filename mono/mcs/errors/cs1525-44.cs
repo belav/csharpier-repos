@@ -5,8 +5,8 @@ using System;
 
 class Foo
 {
-	void Bar ()
-	{
-		throw new Exception ("e",
-	}
+    void Bar ()
+    {
+        throw new Exception ("e",
+    }
 }

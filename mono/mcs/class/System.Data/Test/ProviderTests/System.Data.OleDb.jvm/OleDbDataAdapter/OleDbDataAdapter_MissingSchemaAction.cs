@@ -35,46 +35,46 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbDataAdapter_MissingSchemaAction : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OleDbDataAdapter_MissingSchemaAction tc = new OleDbDataAdapter_MissingSchemaAction();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbDataAdapter_MissingSchemaAction");
-				tc.run();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+    [TestFixture]
+    public class OleDbDataAdapter_MissingSchemaAction : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OleDbDataAdapter_MissingSchemaAction tc = new OleDbDataAdapter_MissingSchemaAction();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbDataAdapter_MissingSchemaAction");
+                tc.run();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
 
-		//public TestClass():base(true){}
+        //public TestClass():base(true){}
 
-		//Activate this constructor to log Failures to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		//Activate this constructor to log All to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-		[Test]
-		public void run()
-		{
-			OleDbDataAdapter oleDBda = new OleDbDataAdapter();
-			oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
-			base.DataAdapter_MissingSchemaAction((DbDataAdapter)oleDBda);
-		}
-	}
+        [Test]
+        public void run()
+        {
+            OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+            oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
+            base.DataAdapter_MissingSchemaAction((DbDataAdapter)oleDBda);
+        }
+    }
 }

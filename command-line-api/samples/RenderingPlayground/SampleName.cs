@@ -1,4 +1,4 @@
-﻿namespace RenderingPlayground
+namespace RenderingPlayground
 {
     internal enum SampleName
     {

@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.Serialization.SerializeAbsoluteContext
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -35,29 +35,29 @@ using System.ComponentModel.Design;
 
 namespace System.ComponentModel.Design.Serialization
 {
-	public sealed class SerializeAbsoluteContext
-	{
+    public sealed class SerializeAbsoluteContext
+    {
 
-		private MemberDescriptor _member;
+        private MemberDescriptor _member;
 
-		public SerializeAbsoluteContext ()
-		{
-		}
+        public SerializeAbsoluteContext ()
+        {
+        }
 
-		public SerializeAbsoluteContext (MemberDescriptor member)
-		{
-			_member = member;
-		}
+        public SerializeAbsoluteContext (MemberDescriptor member)
+        {
+            _member = member;
+        }
 
-		// null indicates that the context will be used for all members
-		//
-		public MemberDescriptor Member {
-			get { return _member; }
-		}
+        // null indicates that the context will be used for all members
+        //
+        public MemberDescriptor Member {
+            get { return _member; }
+        }
 
-		public bool ShouldSerialize (MemberDescriptor member)
-		{
-			return member == _member;
-		}
-	}
+        public bool ShouldSerialize (MemberDescriptor member)
+        {
+            return member == _member;
+        }
+    }
 }

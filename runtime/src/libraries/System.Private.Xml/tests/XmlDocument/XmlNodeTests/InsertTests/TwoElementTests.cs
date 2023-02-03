@@ -64,7 +64,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Comment_CDATA()
         {
-            var xml = @"<MC><!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></MC>";
+            var xml = @"<MC><!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]></MC>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)
@@ -74,7 +74,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Comment_SignificantWhitespace()
         {
-            var xml = @"<MS xml:space=""preserve""><!-- comments -->  	</MS>";
+            var xml = @"<MS xml:space=""preserve""><!-- comments -->      </MS>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)
@@ -84,7 +84,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Whitespace_Element()
         {
-            var xml = @"<WE> 	<E/></WE>";
+            var xml = @"<WE>     <E/></WE>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)
@@ -94,7 +94,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void CDATA_Element()
         {
-            var xml = @"<CE><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]><E/></CE>";
+            var xml = @"<CE><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]><E/></CE>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)

@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AccessControlActions enum
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2006 Novell, Inc (http://www.novell.com)
 //
@@ -28,11 +28,11 @@
 
 namespace System.Security.AccessControl {
 
-	[Flags]
-	public enum AccessControlActions {
-		None = 0,
-		View = 1,
-		Change = 2
-	}
+    [Flags]
+    public enum AccessControlActions {
+        None = 0,
+        View = 1,
+        Change = 2
+    }
 }
 

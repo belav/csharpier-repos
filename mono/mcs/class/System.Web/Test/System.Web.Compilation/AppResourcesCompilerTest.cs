@@ -37,23 +37,23 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.Compilation
 {
-	[TestFixture]
-	public class AppResourcesCompilerTest
-	{
-		[TestFixtureSetUp]
-		public void SetUp ()
-		{
-			WebTest.CopyResource (this.GetType (), "GlobalResourcesLocalization.aspx", "GlobalResourcesLocalization.aspx");
-		}
+    [TestFixture]
+    public class AppResourcesCompilerTest
+    {
+        [TestFixtureSetUp]
+        public void SetUp ()
+        {
+            WebTest.CopyResource (this.GetType (), "GlobalResourcesLocalization.aspx", "GlobalResourcesLocalization.aspx");
+        }
 
-		[Test (Description="Bug #548768")]
-		public void GlobalResourcesLocalization ()
-		{
-			string pageHtml = new WebTest ("GlobalResourcesLocalization.aspx").Run ();
+        [Test (Description="Bug #548768")]
+        public void GlobalResourcesLocalization ()
+        {
+            string pageHtml = new WebTest ("GlobalResourcesLocalization.aspx").Run ();
                         string renderedHtml = HtmlDiff.GetControlFromPageHtml (pageHtml);
                         string originalHtml = "<input type=\"submit\" name=\"button1\" value=\"Recharger\" id=\"button1\" />";
                         
                         HtmlDiff.AssertAreEqual (originalHtml, renderedHtml, "#A1");
-		}
-	}
+        }
+    }
 }

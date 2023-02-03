@@ -1,9 +1,9 @@
 //
 // ResourcePermissionBaseEntryTest.cs -
-//	NUnit Test Cases for ResourcePermissionBaseEntry
+//    NUnit Test Cases for ResourcePermissionBaseEntry
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -33,38 +33,38 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions {
 
-	[TestFixture]
-	public class ResourcePermissionBaseEntryTest {
+    [TestFixture]
+    public class ResourcePermissionBaseEntryTest {
 
-		[Test]
-		public void Constructor_Default () 
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry ();
-			Assert.AreEqual (0, rpbe.PermissionAccess, "PermissionAccess");
-			Assert.AreEqual (0, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
-		}
+        [Test]
+        public void Constructor_Default () 
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry ();
+            Assert.AreEqual (0, rpbe.PermissionAccess, "PermissionAccess");
+            Assert.AreEqual (0, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor_Null ()
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (0, null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void Constructor_Null ()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (0, null);
+        }
 
-		[Test]
-		public void Constructor_Negative ()
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (Int32.MinValue, new string [1]);
-			Assert.AreEqual (Int32.MinValue, rpbe.PermissionAccess, "PermissionAccess");
-			Assert.AreEqual (1, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
-		}
+        [Test]
+        public void Constructor_Negative ()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (Int32.MinValue, new string [1]);
+            Assert.AreEqual (Int32.MinValue, rpbe.PermissionAccess, "PermissionAccess");
+            Assert.AreEqual (1, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
+        }
 
-		[Test]
-		public void Constructor_IntString ()
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (Int32.MaxValue, new string [10]);
-			Assert.AreEqual (Int32.MaxValue, rpbe.PermissionAccess, "PermissionAccess");
-			Assert.AreEqual (10, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
-		}
-	}
+        [Test]
+        public void Constructor_IntString ()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (Int32.MaxValue, new string [10]);
+            Assert.AreEqual (Int32.MaxValue, rpbe.PermissionAccess, "PermissionAccess");
+            Assert.AreEqual (10, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
+        }
+    }
 }

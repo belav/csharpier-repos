@@ -27,9 +27,9 @@ internal class Top
 { 
   public static int Main ()
   {
-  	if (typeof (ClassA).GetCustomAttributes (false).Length != 1)
-  		return 1;
-  		
-  	return 0;
+      if (typeof (ClassA).GetCustomAttributes (false).Length != 1)
+          return 1;
+          
+      return 0;
   }
 }

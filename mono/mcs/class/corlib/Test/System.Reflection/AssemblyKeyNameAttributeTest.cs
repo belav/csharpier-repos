@@ -34,79 +34,79 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Reflection {
 
-	/// <summary>
-	/// Summary description for AssemblyKeyNameAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyKeyNameAttributeTest
-	{
+    /// <summary>
+    /// Summary description for AssemblyKeyNameAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyKeyNameAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyKeyNameAttribute attr;
-		
-		public AssemblyKeyNameAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName ();
+        AssemblyKeyNameAttribute attr;
+        
+        public AssemblyKeyNameAttributeTest ()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAsmName.Name = "TestAssembly";
+            dynAsmName.Name = "TestAssembly";
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
+                dynAsmName,AssemblyBuilderAccess.Run
+                );
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyKeyNameAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "MyKey" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyKeyNameAttribute;
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof (AssemblyKeyNameAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor (
+                new Type [] { typeof (string) }
+                );
+            CustomAttributeBuilder attrBuilder =
+                new CustomAttributeBuilder (ctrInfo, new object [1] { "MyKey" });
+            dynAssembly.SetCustomAttribute (attrBuilder);
+            object [] attributes = dynAssembly.GetCustomAttributes (true);
+            attr = attributes [0] as AssemblyKeyNameAttribute;
+        }
 
-		[Test]
-		public void KeyNameTest ()
-		{
-			Assert.AreEqual (
-				attr.KeyName,
-				"MyKey", "#1");
-		}
+        [Test]
+        public void KeyNameTest ()
+        {
+            Assert.AreEqual (
+                attr.KeyName,
+                "MyKey", "#1");
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyKeyNameAttribute), "#1"
-				);
-		}
+        [Test]
+        public void TypeIdTest ()
+        {
+            Assert.AreEqual (
+                attr.TypeId,
+                typeof (AssemblyKeyNameAttribute), "#1"
+                );
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue ()
+        {
+            Assert.AreEqual (
+                attr.Match (attr),
+                true, "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyKeyNameAttribute ("OtherKey")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForFalse ()
+        {
+            Assert.AreEqual (
+                attr.Match (new AssemblyKeyNameAttribute ("OtherKey")),
+                false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyKeyNameAttribute ("some text");
-			Assert.AreEqual ("some text", a.KeyName);
-		}
-	}
+        [Test]
+        public void CtorTest ()
+        {
+            var a = new AssemblyKeyNameAttribute ("some text");
+            Assert.AreEqual ("some text", a.KeyName);
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum LightStyle
-	{
-		None = 0,
-		Simplistic = 1,
-		Realistic = 2
-	}
+    public enum LightStyle
+    {
+        None = 0,
+        Simplistic = 1,
+        Realistic = 2
+    }
 }

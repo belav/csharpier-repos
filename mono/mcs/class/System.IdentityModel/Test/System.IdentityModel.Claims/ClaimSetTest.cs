@@ -2,7 +2,7 @@
 // ClaimSetTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,21 +36,21 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Claims
 {
-	[TestFixture]
-	public class ClaimSetTest
-	{
-		[Test]
-		public void SystemClaimSet ()
-		{
-			Assert.AreEqual (2, ClaimSet.System.Count, "#1");
-			Assert.AreEqual (ClaimSet.System, ClaimSet.System.Issuer, "#2");
-			Assert.IsTrue (ClaimSet.System.ContainsClaim (Claim.System), "#3");
-			foreach (Claim c in ClaimSet.System) {
-				Assert.AreEqual (ClaimTypes.System, c.ClaimType, "#4");
-				if (c.Right != Rights.Identity)
-					Assert.AreEqual (Rights.PossessProperty, c.Right, "#5");
-			}
-		}
-	}
+    [TestFixture]
+    public class ClaimSetTest
+    {
+        [Test]
+        public void SystemClaimSet ()
+        {
+            Assert.AreEqual (2, ClaimSet.System.Count, "#1");
+            Assert.AreEqual (ClaimSet.System, ClaimSet.System.Issuer, "#2");
+            Assert.IsTrue (ClaimSet.System.ContainsClaim (Claim.System), "#3");
+            foreach (Claim c in ClaimSet.System) {
+                Assert.AreEqual (ClaimTypes.System, c.ClaimType, "#4");
+                if (c.Right != Rights.Identity)
+                    Assert.AreEqual (Rights.PossessProperty, c.Right, "#5");
+            }
+        }
+    }
 }
 #endif

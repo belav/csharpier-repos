@@ -2,7 +2,7 @@
 // X509PeerCertificateAuthentication.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,42 +35,42 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public class X509PeerCertificateAuthentication
-	{
-		internal X509PeerCertificateAuthentication ()
-		{
-		}
+    [MonoTODO]
+    public class X509PeerCertificateAuthentication
+    {
+        internal X509PeerCertificateAuthentication ()
+        {
+        }
 
-		X509CertificateValidator validator;
-		X509RevocationMode revocation_mode = X509RevocationMode.Online;
-		StoreLocation store_loc = StoreLocation.CurrentUser;
-		X509CertificateValidationMode validation_mode =
-			X509CertificateValidationMode.PeerOrChainTrust;
+        X509CertificateValidator validator;
+        X509RevocationMode revocation_mode = X509RevocationMode.Online;
+        StoreLocation store_loc = StoreLocation.CurrentUser;
+        X509CertificateValidationMode validation_mode =
+            X509CertificateValidationMode.PeerOrChainTrust;
 
-		internal X509PeerCertificateAuthentication Clone ()
-		{
-			return (X509PeerCertificateAuthentication) MemberwiseClone ();
-		}
+        internal X509PeerCertificateAuthentication Clone ()
+        {
+            return (X509PeerCertificateAuthentication) MemberwiseClone ();
+        }
 
-		public X509CertificateValidator CustomCertificateValidator {
-			get { return validator; }
-			set { validator = value; }
-		}
+        public X509CertificateValidator CustomCertificateValidator {
+            get { return validator; }
+            set { validator = value; }
+        }
 
-		public X509RevocationMode RevocationMode {
-			get { return revocation_mode; }
-			set { revocation_mode = value; }
-		}
+        public X509RevocationMode RevocationMode {
+            get { return revocation_mode; }
+            set { revocation_mode = value; }
+        }
 
-		public StoreLocation TrustedStoreLocation {
-			get { return store_loc; }
-			set { store_loc = value; }
-		}
+        public StoreLocation TrustedStoreLocation {
+            get { return store_loc; }
+            set { store_loc = value; }
+        }
 
-		public X509CertificateValidationMode CertificateValidationMode {
-			get { return validation_mode; }
-			set { validation_mode = value; }
-		}
-	}
+        public X509CertificateValidationMode CertificateValidationMode {
+            get { return validation_mode; }
+            set { validation_mode = value; }
+        }
+    }
 }

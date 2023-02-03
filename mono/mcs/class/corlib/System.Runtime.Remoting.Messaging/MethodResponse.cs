@@ -1,8 +1,8 @@
 //
 // System.Runtime.Remoting.Messaging.MethodResponse.cs
 //
-// Author:	Duncan Mak (duncan@ximian.com)
-//		Patrik Torstensson
+// Author:    Duncan Mak (duncan@ximian.com)
+//        Patrik Torstensson
 //
 // 2002 (C) Copyright, Ximian, Inc.
 //
@@ -39,92 +39,92 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace System.Runtime.Remoting.Messaging {
 
-	[Serializable] [CLSCompliant (false)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class MethodResponse : IMethodReturnMessage, ISerializable, IInternalMessage, ISerializationRootObject
-	{
-		string _methodName;
-		string _uri;
-		string _typeName;
-		MethodBase _methodBase;
+    [Serializable] [CLSCompliant (false)]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class MethodResponse : IMethodReturnMessage, ISerializable, IInternalMessage, ISerializationRootObject
+    {
+        string _methodName;
+        string _uri;
+        string _typeName;
+        MethodBase _methodBase;
 
-		object _returnValue;
-		Exception _exception;
-		Type [] _methodSignature;
-		ArgInfo _inArgInfo;
+        object _returnValue;
+        Exception _exception;
+        Type [] _methodSignature;
+        ArgInfo _inArgInfo;
 
-		object []  _args;
-		object []  _outArgs;
-		IMethodCallMessage _callMsg;
-		LogicalCallContext _callContext;
-		Identity _targetIdentity;
+        object []  _args;
+        object []  _outArgs;
+        IMethodCallMessage _callMsg;
+        LogicalCallContext _callContext;
+        Identity _targetIdentity;
 
-		protected IDictionary ExternalProperties;
-		protected IDictionary InternalProperties;
+        protected IDictionary ExternalProperties;
+        protected IDictionary InternalProperties;
 
-		public MethodResponse (Header[] h1, IMethodCallMessage mcm)
-		{
-			if (mcm != null)
-			{
-				_methodName = mcm.MethodName;
-				_uri = mcm.Uri;
-				_typeName = mcm.TypeName;
-				_methodBase = mcm.MethodBase;
-				_methodSignature = (Type[]) mcm.MethodSignature;
-				_args = mcm.Args;
-			}
+        public MethodResponse (Header[] h1, IMethodCallMessage mcm)
+        {
+            if (mcm != null)
+            {
+                _methodName = mcm.MethodName;
+                _uri = mcm.Uri;
+                _typeName = mcm.TypeName;
+                _methodBase = mcm.MethodBase;
+                _methodSignature = (Type[]) mcm.MethodSignature;
+                _args = mcm.Args;
+            }
 
-			if (h1 != null)
-			{
-				foreach (Header header in h1)
-					InitMethodProperty (header.Name, header.Value);
-			}
-		}
+            if (h1 != null)
+            {
+                foreach (Header header in h1)
+                    InitMethodProperty (header.Name, header.Value);
+            }
+        }
 
-		internal MethodResponse (Exception e, IMethodCallMessage msg) {
-			_callMsg = msg;
+        internal MethodResponse (Exception e, IMethodCallMessage msg) {
+            _callMsg = msg;
 
-			if (null != msg)
-				_uri = msg.Uri;
-			else
-				_uri = String.Empty;
-			
-			_exception = e;
-			_returnValue = null;
-			_outArgs = new object[0];	// .NET does this
-		}
+            if (null != msg)
+                _uri = msg.Uri;
+            else
+                _uri = String.Empty;
+            
+            _exception = e;
+            _returnValue = null;
+            _outArgs = new object[0];    // .NET does this
+        }
 
-		internal MethodResponse (object returnValue, object [] outArgs, LogicalCallContext callCtx, IMethodCallMessage msg) {
-			_callMsg = msg;
+        internal MethodResponse (object returnValue, object [] outArgs, LogicalCallContext callCtx, IMethodCallMessage msg) {
+            _callMsg = msg;
 
-			_uri = msg.Uri;
-			
-			_exception = null;
-			_returnValue = returnValue;
-			_args = outArgs;
-		}
+            _uri = msg.Uri;
+            
+            _exception = null;
+            _returnValue = returnValue;
+            _args = outArgs;
+        }
 
-		internal MethodResponse (IMethodCallMessage msg, CADMethodReturnMessage retmsg) {
-			_callMsg = msg;
+        internal MethodResponse (IMethodCallMessage msg, CADMethodReturnMessage retmsg) {
+            _callMsg = msg;
 
-			_methodBase = msg.MethodBase;
-			//_typeName = msg.TypeName;
-			_uri = msg.Uri;
-			_methodName = msg.MethodName;
-			
-			// Get unmarshalled arguments
-			ArrayList args = retmsg.GetArguments ();
+            _methodBase = msg.MethodBase;
+            //_typeName = msg.TypeName;
+            _uri = msg.Uri;
+            _methodName = msg.MethodName;
+            
+            // Get unmarshalled arguments
+            ArrayList args = retmsg.GetArguments ();
 
-			_exception = retmsg.GetException (args);
-			_returnValue = retmsg.GetReturnValue (args);
-			_args = retmsg.GetArgs (args);
+            _exception = retmsg.GetException (args);
+            _returnValue = retmsg.GetReturnValue (args);
+            _args = retmsg.GetArgs (args);
 
-			_callContext = retmsg.GetLogicalCallContext (args);
-			if (_callContext == null) _callContext = new LogicalCallContext ();
-			
-			if (retmsg.PropertiesCount > 0)
-				CADMessageBase.UnmarshalProperties (Properties, retmsg.PropertiesCount, args);
-		}
+            _callContext = retmsg.GetLogicalCallContext (args);
+            if (_callContext == null) _callContext = new LogicalCallContext ();
+            
+            if (retmsg.PropertiesCount > 0)
+                CADMessageBase.UnmarshalProperties (Properties, retmsg.PropertiesCount, args);
+        }
 #if FEATURE_REMOTING
         internal MethodResponse(IMethodCallMessage msg,
                                 Object handlerObject,
@@ -156,229 +156,229 @@ namespace System.Runtime.Remoting.Messaging {
                 smuggledMrm.PopulateMessageProperties(Properties);
         }
 #endif
-		internal MethodResponse (SerializationInfo info, StreamingContext context) 
-		{
-			foreach (SerializationEntry entry in info)
-				InitMethodProperty (entry.Name, entry.Value);
-		}
+        internal MethodResponse (SerializationInfo info, StreamingContext context) 
+        {
+            foreach (SerializationEntry entry in info)
+                InitMethodProperty (entry.Name, entry.Value);
+        }
 
-		internal void InitMethodProperty (string key, object value) 
-		{
-			switch (key) 
-			{
-				case "__TypeName": _typeName = (string) value; break;
-				case "__MethodName": _methodName = (string) value; break;
-				case "__MethodSignature": _methodSignature = (Type[]) value; break;
-				case "__Uri": _uri = (string) value; break;
-				case "__Return": _returnValue = value; break;
-				case "__OutArgs": _args = (object[]) value; break;
-				case "__fault": _exception = (Exception) value; break;
-				case "__CallContext": _callContext = (LogicalCallContext) value; break;
-				default: Properties [key] = value; break;
-			}
-		}
+        internal void InitMethodProperty (string key, object value) 
+        {
+            switch (key) 
+            {
+                case "__TypeName": _typeName = (string) value; break;
+                case "__MethodName": _methodName = (string) value; break;
+                case "__MethodSignature": _methodSignature = (Type[]) value; break;
+                case "__Uri": _uri = (string) value; break;
+                case "__Return": _returnValue = value; break;
+                case "__OutArgs": _args = (object[]) value; break;
+                case "__fault": _exception = (Exception) value; break;
+                case "__CallContext": _callContext = (LogicalCallContext) value; break;
+                default: Properties [key] = value; break;
+            }
+        }
 
-		public int ArgCount {
-			get { 
-				if (null == _args)
-					return 0;
+        public int ArgCount {
+            get { 
+                if (null == _args)
+                    return 0;
 
-				return _args.Length;
-			}
-		}
+                return _args.Length;
+            }
+        }
 
-		public object[] Args {
-			get { 
-				return _args; 
-			}
-		}
+        public object[] Args {
+            get { 
+                return _args; 
+            }
+        }
 
-		public Exception Exception {
-			get { 
-				return _exception; 
-			}
-		}
-		
-		public bool HasVarArgs {
-			get { 
-				return (MethodBase.CallingConvention | CallingConventions.VarArgs) != 0;
-			}
-		}
-		
-		public LogicalCallContext LogicalCallContext {
-			get {
-				if (_callContext == null)
-					_callContext = new LogicalCallContext ();
-				return _callContext;
-			}
-		}
-		
-		public MethodBase MethodBase {
-			get { 
-				if (null == _methodBase) {
-					if (_callMsg != null)
-						_methodBase = _callMsg.MethodBase;
-					else if (MethodName != null && TypeName != null)
-						_methodBase = RemotingServices.GetMethodBaseFromMethodMessage (this);
-				}
-				return _methodBase;
-			}
-		}
+        public Exception Exception {
+            get { 
+                return _exception; 
+            }
+        }
+        
+        public bool HasVarArgs {
+            get { 
+                return (MethodBase.CallingConvention | CallingConventions.VarArgs) != 0;
+            }
+        }
+        
+        public LogicalCallContext LogicalCallContext {
+            get {
+                if (_callContext == null)
+                    _callContext = new LogicalCallContext ();
+                return _callContext;
+            }
+        }
+        
+        public MethodBase MethodBase {
+            get { 
+                if (null == _methodBase) {
+                    if (_callMsg != null)
+                        _methodBase = _callMsg.MethodBase;
+                    else if (MethodName != null && TypeName != null)
+                        _methodBase = RemotingServices.GetMethodBaseFromMethodMessage (this);
+                }
+                return _methodBase;
+            }
+        }
 
-		public string MethodName {
-			get { 
-				if (null == _methodName && null != _callMsg)
-					_methodName = _callMsg.MethodName;
+        public string MethodName {
+            get { 
+                if (null == _methodName && null != _callMsg)
+                    _methodName = _callMsg.MethodName;
 
-				return _methodName;
-			}
-		}
+                return _methodName;
+            }
+        }
 
-		public object MethodSignature {
-			get { 
-				if (null == _methodSignature && null != _callMsg)
-					_methodSignature = (Type []) _callMsg.MethodSignature;
+        public object MethodSignature {
+            get { 
+                if (null == _methodSignature && null != _callMsg)
+                    _methodSignature = (Type []) _callMsg.MethodSignature;
 
-				return _methodSignature;
-			}
-		}
+                return _methodSignature;
+            }
+        }
 
-		public int OutArgCount {
-			get { 
-				if (_args == null || _args.Length == 0) return 0;
-				if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
-				return _inArgInfo.GetInOutArgCount ();
-			}
-		}
+        public int OutArgCount {
+            get { 
+                if (_args == null || _args.Length == 0) return 0;
+                if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
+                return _inArgInfo.GetInOutArgCount ();
+            }
+        }
 
-		public object[] OutArgs {
-			get { 
-				if (_outArgs == null && _args != null) {
-					if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
-					_outArgs = _inArgInfo.GetInOutArgs (_args);
-				}					
-				return _outArgs;
-			}
-		}
+        public object[] OutArgs {
+            get { 
+                if (_outArgs == null && _args != null) {
+                    if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
+                    _outArgs = _inArgInfo.GetInOutArgs (_args);
+                }                    
+                return _outArgs;
+            }
+        }
 
-		public virtual IDictionary Properties {
-			get { 
-				if (null == ExternalProperties) {
-					MethodReturnDictionary properties = new MethodReturnDictionary (this);
-					ExternalProperties = properties;
-					InternalProperties = properties.GetInternalProperties();
-				}
-				
-				return ExternalProperties;
-			}
-		}
+        public virtual IDictionary Properties {
+            get { 
+                if (null == ExternalProperties) {
+                    MethodReturnDictionary properties = new MethodReturnDictionary (this);
+                    ExternalProperties = properties;
+                    InternalProperties = properties.GetInternalProperties();
+                }
+                
+                return ExternalProperties;
+            }
+        }
 
-		public object ReturnValue {
-			get { 
-				return _returnValue;
-			}
-		}
+        public object ReturnValue {
+            get { 
+                return _returnValue;
+            }
+        }
 
-		public string TypeName {
-			get { 
-				if (null == _typeName && null != _callMsg)
-					_typeName = _callMsg.TypeName;
+        public string TypeName {
+            get { 
+                if (null == _typeName && null != _callMsg)
+                    _typeName = _callMsg.TypeName;
 
-				return _typeName;
-			}
-		}
+                return _typeName;
+            }
+        }
 
-		public string Uri {
-			get { 
-				if (null == _uri && null != _callMsg)
-					_uri = _callMsg.Uri;
-				
-				return _uri;
-			}
+        public string Uri {
+            get { 
+                if (null == _uri && null != _callMsg)
+                    _uri = _callMsg.Uri;
+                
+                return _uri;
+            }
 
-			set { 
-				_uri = value;
-			}
-		}
+            set { 
+                _uri = value;
+            }
+        }
 
-		string IInternalMessage.Uri {
-			get { return Uri; }
-			set { Uri = value; }
-		}
+        string IInternalMessage.Uri {
+            get { return Uri; }
+            set { Uri = value; }
+        }
 
-		public object GetArg (int argNum)
-		{
-			if (null == _args)
-				return null;
+        public object GetArg (int argNum)
+        {
+            if (null == _args)
+                return null;
 
-			return _args [argNum];
-		}
+            return _args [argNum];
+        }
 
-		public string GetArgName (int index)
-		{
-			return MethodBase.GetParameters()[index].Name;
-		}
+        public string GetArgName (int index)
+        {
+            return MethodBase.GetParameters()[index].Name;
+        }
 
-		public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			if (_exception == null)
-			{
-				info.AddValue ("__TypeName", _typeName);
-				info.AddValue ("__MethodName", _methodName);
-				info.AddValue ("__MethodSignature", _methodSignature);
-				info.AddValue ("__Uri", _uri);
-				info.AddValue ("__Return", _returnValue);
-				info.AddValue ("__OutArgs", _args);
-			}
-			else
-				info.AddValue ("__fault", _exception);
+        public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
+        {
+            if (_exception == null)
+            {
+                info.AddValue ("__TypeName", _typeName);
+                info.AddValue ("__MethodName", _methodName);
+                info.AddValue ("__MethodSignature", _methodSignature);
+                info.AddValue ("__Uri", _uri);
+                info.AddValue ("__Return", _returnValue);
+                info.AddValue ("__OutArgs", _args);
+            }
+            else
+                info.AddValue ("__fault", _exception);
 
-			info.AddValue ("__CallContext", _callContext);
+            info.AddValue ("__CallContext", _callContext);
 
-			if (InternalProperties != null) {
-				foreach (DictionaryEntry entry in InternalProperties)
-					info.AddValue ((string) entry.Key, entry.Value);
-			}
-		} 
+            if (InternalProperties != null) {
+                foreach (DictionaryEntry entry in InternalProperties)
+                    info.AddValue ((string) entry.Key, entry.Value);
+            }
+        } 
 
-		public object GetOutArg (int argNum)
-		{
-			if (_args == null) return null;
-			if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
-			return _args[_inArgInfo.GetInOutArgIndex (argNum)];
-		}
+        public object GetOutArg (int argNum)
+        {
+            if (_args == null) return null;
+            if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
+            return _args[_inArgInfo.GetInOutArgIndex (argNum)];
+        }
 
-		public string GetOutArgName (int index)
-		{
-			if (null == _methodBase)
-				return "__method_" + index;
+        public string GetOutArgName (int index)
+        {
+            if (null == _methodBase)
+                return "__method_" + index;
 
-			if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
-			return _inArgInfo.GetInOutArgName(index);
-		}
+            if (_inArgInfo == null) _inArgInfo = new ArgInfo (MethodBase, ArgInfoType.Out);
+            return _inArgInfo.GetInOutArgName(index);
+        }
 
-		[MonoTODO]
-		public virtual object HeaderHandler (Header[] h)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual object HeaderHandler (Header[] h)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void RootSetObjectData (SerializationInfo info, StreamingContext ctx)
-		{
-			throw new NotImplementedException ();
-		} 
+        [MonoTODO]
+        public void RootSetObjectData (SerializationInfo info, StreamingContext ctx)
+        {
+            throw new NotImplementedException ();
+        } 
 
-		Identity IInternalMessage.TargetIdentity
-		{
-			get { return _targetIdentity; }
-			set { _targetIdentity = value; }
-		}
+        Identity IInternalMessage.TargetIdentity
+        {
+            get { return _targetIdentity; }
+            set { _targetIdentity = value; }
+        }
 
-		bool IInternalMessage.HasProperties()
-		{
-			return (ExternalProperties != null) || (InternalProperties != null);
-		}
+        bool IInternalMessage.HasProperties()
+        {
+            return (ExternalProperties != null) || (InternalProperties != null);
+        }
 
-	}
+    }
 }

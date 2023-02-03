@@ -3,7 +3,7 @@
 // for System.Configuration.CallbackValidator.
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,75 +33,75 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class CallbackValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			CallbackValidator v = new CallbackValidator (typeof (int), success);
+    [TestFixture]
+    public class CallbackValidatorTest
+    {
+        [Test]
+        public void CanValidate ()
+        {
+            CallbackValidator v = new CallbackValidator (typeof (int), success);
 
-			Assert.IsFalse (v.CanValidate (typeof (string)));
-			Assert.IsTrue (v.CanValidate (typeof (int)));
-			Assert.IsFalse (v.CanValidate (typeof (object)));
-		}
+            Assert.IsFalse (v.CanValidate (typeof (string)));
+            Assert.IsTrue (v.CanValidate (typeof (int)));
+            Assert.IsFalse (v.CanValidate (typeof (object)));
+        }
 
-		public void NullCallback ()
-		{
-			CallbackValidator v = new CallbackValidator (typeof (int), null);
-		}
+        public void NullCallback ()
+        {
+            CallbackValidator v = new CallbackValidator (typeof (int), null);
+        }
 
-		public void NullType ()
-		{
-			CallbackValidator v = new CallbackValidator (null, success);
-		}
+        public void NullType ()
+        {
+            CallbackValidator v = new CallbackValidator (null, success);
+        }
 
-		bool hit_success;
-		bool hit_failure;
+        bool hit_success;
+        bool hit_failure;
 
-		void success (object o)
-		{
-			hit_success = true;
-		}
+        void success (object o)
+        {
+            hit_success = true;
+        }
 
-		void failure (object o)
-		{
-			hit_failure = true;
-			throw new Exception ();
-		}
+        void failure (object o)
+        {
+            hit_failure = true;
+            throw new Exception ();
+        }
 
-		[Test]
-		public void TestSuccess ()
-		{
-			hit_success = false;
-			CallbackValidator v = new CallbackValidator (typeof (int), success);
-			v.Validate (5);
+        [Test]
+        public void TestSuccess ()
+        {
+            hit_success = false;
+            CallbackValidator v = new CallbackValidator (typeof (int), success);
+            v.Validate (5);
 
-			Assert.IsTrue (hit_success, "A1");
-		}
+            Assert.IsTrue (hit_success, "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (Exception))]
-		public void TestFailure1 ()
-		{
-			CallbackValidator v = new CallbackValidator (typeof (int), failure);
-			v.Validate (5);
-		}
+        [Test]
+        [ExpectedException (typeof (Exception))]
+        public void TestFailure1 ()
+        {
+            CallbackValidator v = new CallbackValidator (typeof (int), failure);
+            v.Validate (5);
+        }
 
-		[Test]
-		public void TestFailure2 ()
-		{
-			hit_failure = false;
-			CallbackValidator v = new CallbackValidator (typeof (int), failure);
-			try {
-				v.Validate (5);
-			}
-			catch { }
-			finally {
-				Assert.IsTrue (hit_failure, "A1");
-			}
-		}
-	}
+        [Test]
+        public void TestFailure2 ()
+        {
+            hit_failure = false;
+            CallbackValidator v = new CallbackValidator (typeof (int), failure);
+            try {
+                v.Validate (5);
+            }
+            catch { }
+            finally {
+                Assert.IsTrue (hit_failure, "A1");
+            }
+        }
+    }
 
 }
 

@@ -31,58 +31,58 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil;
+    using Mono.Cecil;
 
-	internal sealed class AssemblyRefTable : IMetadataTable {
+    internal sealed class AssemblyRefTable : IMetadataTable {
 
-		public const int RId = 0x23;
+        public const int RId = 0x23;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public AssemblyRefRow this [int index] {
-			get { return m_rows [index] as AssemblyRefRow; }
-			set { m_rows [index] = value; }
-		}
+        public AssemblyRefRow this [int index] {
+            get { return m_rows [index] as AssemblyRefRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal AssemblyRefTable ()
-		{
-		}
+        internal AssemblyRefTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitAssemblyRefTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitAssemblyRefTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class AssemblyRefRow : IMetadataRow {
+    internal sealed class AssemblyRefRow : IMetadataRow {
 
-		public ushort MajorVersion;
-		public ushort MinorVersion;
-		public ushort BuildNumber;
-		public ushort RevisionNumber;
-		public AssemblyFlags Flags;
-		public uint PublicKeyOrToken;
-		public uint Name;
-		public uint Culture;
-		public uint HashValue;
+        public ushort MajorVersion;
+        public ushort MinorVersion;
+        public ushort BuildNumber;
+        public ushort RevisionNumber;
+        public AssemblyFlags Flags;
+        public uint PublicKeyOrToken;
+        public uint Name;
+        public uint Culture;
+        public uint HashValue;
 
-		internal AssemblyRefRow ()
-		{
-		}
+        internal AssemblyRefRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitAssemblyRefRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitAssemblyRefRow (this);
+        }
+    }
 }

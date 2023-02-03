@@ -2,7 +2,7 @@
 // System.AppDomainInitializer delegate
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -28,11 +28,11 @@
 
 namespace System {
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-	[System.Runtime.InteropServices.ComVisible (true)]
-	[Serializable]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    [Serializable]
 #else
-	[Obsolete ("AppDomainInitializer is not supported on the current platform.", true)]
+    [Obsolete ("AppDomainInitializer is not supported on the current platform.", true)]
 #endif
-	public delegate void AppDomainInitializer (string[] args);
+    public delegate void AppDomainInitializer (string[] args);
 
 }

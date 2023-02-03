@@ -33,10 +33,10 @@
 
 namespace System
 {
-	public ref struct RuntimeArgumentHandle
-	{
+    public ref struct RuntimeArgumentHandle
+    {
 #pragma warning disable 649
-		internal IntPtr args;
+        internal IntPtr args;
 #pragma warning restore 649
-	}
+    }
 }

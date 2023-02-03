@@ -5,7 +5,7 @@ using System;
 
 public sealed class FooAttribute : Attribute
 {
-	public short Foo { get; private set; }
+    public short Foo { get; private set; }
 }
 
 [Foo (Foo = 1)]

@@ -20,14 +20,14 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok		pbartok@novell.com
+//    Peter Bartok        pbartok@novell.com
 //
 // Partially based on work by:
-//	Aleksey Ryabchuk	ryabchuk@yahoo.com
-//	Alexandre Pigolkine	pigolkine@gmx.de
-//	Dennis Hayes		dennish@raytek.com
-//	Jaak Simm		jaaksimm@firm.ee
-//	John Sohn		jsohn@columbus.rr.com
+//    Aleksey Ryabchuk    ryabchuk@yahoo.com
+//    Alexandre Pigolkine    pigolkine@gmx.de
+//    Dennis Hayes        dennish@raytek.com
+//    Jaak Simm        jaaksimm@firm.ee
+//    John Sohn        jsohn@columbus.rr.com
 //
 
 // COMPLETE 
@@ -36,13 +36,13 @@ using System;
 
 namespace System.Windows.Forms {
 
-	internal class ImplicitVScrollBar : VScrollBar {
+    internal class ImplicitVScrollBar : VScrollBar {
 
-		public ImplicitVScrollBar ()
-		{
-			implicit_control = true;
-			SetStyle (ControlStyles.Selectable, false);
-		}
-	}
+        public ImplicitVScrollBar ()
+        {
+            implicit_control = true;
+            SetStyle (ControlStyles.Selectable, false);
+        }
+    }
 }
 

@@ -2,7 +2,7 @@
 // AssignmentStatement.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,20 +27,20 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class AssignmentStatement : Statement {
-		public AssignmentStatement (Expression source, Expression target)
-			: base (NodeType.AssignmentStatement)
-		{
-			Source = source;
-			Target = target;
-		}
+    class AssignmentStatement : Statement {
+        public AssignmentStatement (Expression source, Expression target)
+            : base (NodeType.AssignmentStatement)
+        {
+            Source = source;
+            Target = target;
+        }
 
-		public Expression Source { get; set; }
-		public Expression Target { get; set; }
+        public Expression Source { get; set; }
+        public Expression Target { get; set; }
 
-		public override string ToString ()
-		{
-			return string.Format ("{0} := {1};", Target, Source);
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Format ("{0} := {1};", Target, Source);
+        }
+    }
 }

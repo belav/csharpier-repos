@@ -35,45 +35,45 @@ using System.Text;
 
 namespace System.Web.Compilation 
 {
-	sealed class BuildManagerCacheItem
-	{
-		public readonly string CompiledCustomString;
-		public readonly Assembly BuiltAssembly;
-		public readonly string VirtualPath;
-		public readonly Type Type;
-		
-		public BuildManagerCacheItem (Assembly assembly, BuildProvider bp, CompilerResults results)
-		{
-			this.BuiltAssembly = assembly;
-			this.CompiledCustomString = bp.GetCustomString (results);
-			this.VirtualPath = bp.VirtualPath;
-			this.Type = bp.GetGeneratedType (results);
-		}
-			
-		public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ("BuildCacheItem [");
-			bool first = true;
-				
-			if (!String.IsNullOrEmpty (CompiledCustomString)) {
-				sb.Append ("compiledCustomString: " + CompiledCustomString);
-				first = false;
-			}
-				
-			if (BuiltAssembly != null) {
-				sb.Append ((first ? String.Empty : "; ") + "assembly: " + BuiltAssembly.ToString ());
-				first = false;
-			}
+    sealed class BuildManagerCacheItem
+    {
+        public readonly string CompiledCustomString;
+        public readonly Assembly BuiltAssembly;
+        public readonly string VirtualPath;
+        public readonly Type Type;
+        
+        public BuildManagerCacheItem (Assembly assembly, BuildProvider bp, CompilerResults results)
+        {
+            this.BuiltAssembly = assembly;
+            this.CompiledCustomString = bp.GetCustomString (results);
+            this.VirtualPath = bp.VirtualPath;
+            this.Type = bp.GetGeneratedType (results);
+        }
+            
+        public override string ToString ()
+        {
+            StringBuilder sb = new StringBuilder ("BuildCacheItem [");
+            bool first = true;
+                
+            if (!String.IsNullOrEmpty (CompiledCustomString)) {
+                sb.Append ("compiledCustomString: " + CompiledCustomString);
+                first = false;
+            }
+                
+            if (BuiltAssembly != null) {
+                sb.Append ((first ? String.Empty : "; ") + "assembly: " + BuiltAssembly.ToString ());
+                first = false;
+            }
 
-			if (!String.IsNullOrEmpty (VirtualPath)) {
-				sb.Append ((first ? String.Empty : "; ") + "virtualPath: " + VirtualPath);
-				first = false;
-			}
+            if (!String.IsNullOrEmpty (VirtualPath)) {
+                sb.Append ((first ? String.Empty : "; ") + "virtualPath: " + VirtualPath);
+                first = false;
+            }
 
-			sb.Append ("]");
-				
-			return sb.ToString ();
-		}
-	}
+            sb.Append ("]");
+                
+            return sb.ToString ();
+        }
+    }
 }
 

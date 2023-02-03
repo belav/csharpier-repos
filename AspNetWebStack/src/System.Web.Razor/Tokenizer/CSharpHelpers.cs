@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Globalization;
@@ -7,7 +7,7 @@ namespace System.Web.Razor.Tokenizer
 {
     public static class CSharpHelpers
     {
-        // CSharp Spec §2.4.2
+        // CSharp Spec �2.4.2
         public static bool IsIdentifierStart(char character)
         {
             return Char.IsLetter(character) ||

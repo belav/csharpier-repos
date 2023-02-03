@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.CompositeDataBoundControl.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -33,38 +33,38 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-	public abstract class CompositeDataBoundControl : DataBoundControl, INamingContainer
-	{
-		protected CompositeDataBoundControl ()
-		{
-		}
+    public abstract class CompositeDataBoundControl : DataBoundControl, INamingContainer
+    {
+        protected CompositeDataBoundControl ()
+        {
+        }
 
-		public override ControlCollection Controls {
-			get {
-				EnsureChildControls();
-				return base.Controls;
-			}
-		}
+        public override ControlCollection Controls {
+            get {
+                EnsureChildControls();
+                return base.Controls;
+            }
+        }
 
-		protected internal override void CreateChildControls ()
-		{
-			Controls.Clear ();
+        protected internal override void CreateChildControls ()
+        {
+            Controls.Clear ();
 
-			object itemCount = ViewState ["_!ItemCount"];
-			if (itemCount != null) {
-				object [] data = new object [(int) itemCount];
-				CreateChildControls (data, false);
-			} else if (RequiresDataBinding)
-				EnsureDataBound ();
-		}
-		
-		protected internal override void PerformDataBinding (IEnumerable data)
-		{
-			base.PerformDataBinding (data);
-			Controls.Clear ();
-			ViewState ["_!ItemCount"] = CreateChildControls (data, true);
-		}
-		
-		protected abstract int CreateChildControls (IEnumerable dataSource, bool dataBinding);
-	}
+            object itemCount = ViewState ["_!ItemCount"];
+            if (itemCount != null) {
+                object [] data = new object [(int) itemCount];
+                CreateChildControls (data, false);
+            } else if (RequiresDataBinding)
+                EnsureDataBound ();
+        }
+        
+        protected internal override void PerformDataBinding (IEnumerable data)
+        {
+            base.PerformDataBinding (data);
+            Controls.Clear ();
+            ViewState ["_!ItemCount"] = CreateChildControls (data, true);
+        }
+        
+        protected abstract int CreateChildControls (IEnumerable dataSource, bool dataBinding);
+    }
 }

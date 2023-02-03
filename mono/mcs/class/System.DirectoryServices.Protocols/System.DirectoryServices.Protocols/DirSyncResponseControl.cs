@@ -32,19 +32,19 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	[MonoTODO]
-	public class DirSyncResponseControl : DirectoryControl
-	{
-		internal DirSyncResponseControl (byte [] cookie, bool moreData, int resultSize)
-			: base (null, null, false, false)
-		{
-			Cookie = cookie;
-			MoreData = moreData;
-			ResultSize = resultSize;
-		}
+    [MonoTODO]
+    public class DirSyncResponseControl : DirectoryControl
+    {
+        internal DirSyncResponseControl (byte [] cookie, bool moreData, int resultSize)
+            : base (null, null, false, false)
+        {
+            Cookie = cookie;
+            MoreData = moreData;
+            ResultSize = resultSize;
+        }
 
-		public byte [] Cookie { get; private set; }
-		public bool MoreData { get; private set; }
-		public int ResultSize { get; private set; }
-	}
+        public byte [] Cookie { get; private set; }
+        public bool MoreData { get; private set; }
+        public int ResultSize { get; private set; }
+    }
 }

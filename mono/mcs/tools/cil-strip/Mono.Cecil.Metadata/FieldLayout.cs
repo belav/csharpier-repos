@@ -31,49 +31,49 @@
 
 namespace Mono.Cecil.Metadata {
 
-	internal sealed class FieldLayoutTable : IMetadataTable {
+    internal sealed class FieldLayoutTable : IMetadataTable {
 
-		public const int RId = 0x10;
+        public const int RId = 0x10;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public FieldLayoutRow this [int index] {
-			get { return m_rows [index] as FieldLayoutRow; }
-			set { m_rows [index] = value; }
-		}
+        public FieldLayoutRow this [int index] {
+            get { return m_rows [index] as FieldLayoutRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal FieldLayoutTable ()
-		{
-		}
+        internal FieldLayoutTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitFieldLayoutTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitFieldLayoutTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class FieldLayoutRow : IMetadataRow {
+    internal sealed class FieldLayoutRow : IMetadataRow {
 
-		public uint Offset;
-		public uint Field;
+        public uint Offset;
+        public uint Field;
 
-		internal FieldLayoutRow ()
-		{
-		}
+        internal FieldLayoutRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitFieldLayoutRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitFieldLayoutRow (this);
+        }
+    }
 }

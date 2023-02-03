@@ -1,4 +1,4 @@
-๏ปฟ// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1177,15 +1177,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if ((object)(uncommon.lazyEnumUnderlyingType) == null
                 && this.TypeKind == TypeKind.Enum)
             {
-                // From ยง8.5.2
+                // From ง8.5.2
                 // An enum is considerably more restricted than a true type, as
                 // follows:
                 // - It shall have exactly one instance field, and the type of that field defines the underlying type of
                 // the enumeration.
-                // - It shall not have any static fields unless they are literal. (see ยง8.6.1.2)
+                // - It shall not have any static fields unless they are literal. (see ง8.6.1.2)
 
                 // The underlying type shall be a built-in integer type. Enums shall derive from System.Enum, hence they are
-                // value types. Like all value types, they shall be sealed (see ยง8.9.9).
+                // value types. Like all value types, they shall be sealed (see ง8.9.9).
 
                 var moduleSymbol = this.ContainingPEModule;
                 var module = moduleSymbol.Module;

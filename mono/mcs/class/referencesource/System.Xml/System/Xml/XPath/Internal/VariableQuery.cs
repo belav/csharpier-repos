@@ -26,9 +26,9 @@ namespace MS.Internal.Xml.XPath {
                 throw XPathException.Create(Res.Xp_NoContext);
             }
 
-			if (this.xsltContext != context) {
+            if (this.xsltContext != context) {
                 xsltContext = context;
-				variable = xsltContext.ResolveVariable(prefix, name);
+                variable = xsltContext.ResolveVariable(prefix, name);
                 // Since null is allowed for ResolveFunction, allow it for ResolveVariable as well
                 if (variable == null) {
                     throw XPathException.Create(Res.Xp_UndefVar, QName);
@@ -37,9 +37,9 @@ namespace MS.Internal.Xml.XPath {
         }
 
         public override object Evaluate(XPathNodeIterator nodeIterator) {
-			if (xsltContext == null) {
-				throw XPathException.Create(Res.Xp_NoContext);
-			}
+            if (xsltContext == null) {
+                throw XPathException.Create(Res.Xp_NoContext);
+            }
 
             return ProcessResult(variable.Evaluate(xsltContext));
         }
@@ -49,10 +49,10 @@ namespace MS.Internal.Xml.XPath {
                 return GetXPathType(Evaluate(null));
             }
             XPathResultType result = variable != null ? variable.VariableType : XPathResultType.Any;
-			if (result == XPathResultType.Error) {
-				// In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
-				result = XPathResultType.Any;
-			}
+            if (result == XPathResultType.Error) {
+                // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
+                result = XPathResultType.Any;
+            }
             return result;
         } }
 

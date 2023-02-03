@@ -2,7 +2,7 @@
 // ExprReturn.cs
 //
 // Authors:
-//	Chris Bacon (chrisbacon76@gmail.com)
+//    Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -33,20 +33,20 @@ using System.Text;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprReturn : Expr {
+    class ExprReturn : Expr {
 
-		public ExprReturn (MethodInfo methodInfo)
-			: base (methodInfo)
-		{
-		}
+        public ExprReturn (MethodInfo methodInfo)
+            : base (methodInfo)
+        {
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.Return; }
-		}
+        public override ExprType ExprType {
+            get { return ExprType.Return; }
+        }
 
-		public override TypeReference ReturnType {
-			get { return base.MethodInfo.TypeVoid; }
-		}
+        public override TypeReference ReturnType {
+            get { return base.MethodInfo.TypeVoid; }
+        }
 
-	}
+    }
 }

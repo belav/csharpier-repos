@@ -9,12 +9,12 @@ public class ReturnAttribute : Attribute
 {
         public ReturnAttribute ()
         {
-	}
+    }
 }
 
 public class Blah {
         [return: Return ()]
         [return: Return ()]
-	public static void Main () { }
+    public static void Main () { }
 }
 

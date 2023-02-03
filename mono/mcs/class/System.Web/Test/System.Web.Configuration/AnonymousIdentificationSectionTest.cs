@@ -1,9 +1,9 @@
 //
 // AnonymousIdentificationSectionTest.cs 
-//	- unit tests for System.Web.Configuration.AnonymousIdentificationSection
+//    - unit tests for System.Web.Configuration.AnonymousIdentificationSection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,56 +38,56 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class AnonymousIdentificationSectionTest  {
+    [TestFixture]
+    public class AnonymousIdentificationSectionTest  {
 
-		[Test]
-		public void Defaults()
-		{
-			AnonymousIdentificationSection a = new AnonymousIdentificationSection();
+        [Test]
+        public void Defaults()
+        {
+            AnonymousIdentificationSection a = new AnonymousIdentificationSection();
 
-			Assert.AreEqual (HttpCookieMode.UseCookies, a.Cookieless, "A1");
-			Assert.AreEqual (".ASPXANONYMOUS", a.CookieName, "A2");
-			Assert.AreEqual ("/", a.CookiePath, "A3");
-			Assert.AreEqual (CookieProtection.Validation, a.CookieProtection, "A4");
-			Assert.AreEqual (false, a.CookieRequireSSL, "A5");
-			Assert.AreEqual (true, a.CookieSlidingExpiration, "A6");
-			Assert.AreEqual (TimeSpan.Parse ("69.10:40:00"), a.CookieTimeout, "A7");
-			Assert.AreEqual (null, a.Domain, "A8");
-			Assert.AreEqual (false, a.Enabled, "A9");
-		}
+            Assert.AreEqual (HttpCookieMode.UseCookies, a.Cookieless, "A1");
+            Assert.AreEqual (".ASPXANONYMOUS", a.CookieName, "A2");
+            Assert.AreEqual ("/", a.CookiePath, "A3");
+            Assert.AreEqual (CookieProtection.Validation, a.CookieProtection, "A4");
+            Assert.AreEqual (false, a.CookieRequireSSL, "A5");
+            Assert.AreEqual (true, a.CookieSlidingExpiration, "A6");
+            Assert.AreEqual (TimeSpan.Parse ("69.10:40:00"), a.CookieTimeout, "A7");
+            Assert.AreEqual (null, a.Domain, "A8");
+            Assert.AreEqual (false, a.Enabled, "A9");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void CookieName_validationFailure ()
-		{
-			AnonymousIdentificationSection a = new AnonymousIdentificationSection();
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void CookieName_validationFailure ()
+        {
+            AnonymousIdentificationSection a = new AnonymousIdentificationSection();
 
-			a.CookieName = "";
-			Assert.AreEqual ("", a.CookieName, "A1");
-		}
+            a.CookieName = "";
+            Assert.AreEqual ("", a.CookieName, "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void CookiePath_validationFailure ()
-		{
-			AnonymousIdentificationSection a = new AnonymousIdentificationSection();
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void CookiePath_validationFailure ()
+        {
+            AnonymousIdentificationSection a = new AnonymousIdentificationSection();
 
-			a.CookiePath = "";
-			Assert.AreEqual ("", a.CookiePath, "A1");
-		}
+            a.CookiePath = "";
+            Assert.AreEqual ("", a.CookiePath, "A1");
+        }
 
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void CookieTimeout_validationFailure ()
-		{
-			AnonymousIdentificationSection a = new AnonymousIdentificationSection();
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void CookieTimeout_validationFailure ()
+        {
+            AnonymousIdentificationSection a = new AnonymousIdentificationSection();
 
-			a.CookieTimeout = TimeSpan.FromSeconds (-30);
-			Assert.AreEqual (TimeSpan.FromSeconds (-30), a.CookieTimeout, "A1");
-		}
-	}
+            a.CookieTimeout = TimeSpan.FromSeconds (-30);
+            Assert.AreEqual (TimeSpan.FromSeconds (-30), a.CookieTimeout, "A1");
+        }
+    }
 
 }
 

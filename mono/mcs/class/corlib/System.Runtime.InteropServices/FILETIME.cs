@@ -30,11 +30,11 @@
 
 namespace System.Runtime.InteropServices
 {
-	[Obsolete]
-	[StructLayout (LayoutKind.Sequential)]
-	public struct FILETIME
-	{
-		public int dwLowDateTime;
-		public int dwHighDateTime;
-	}
+    [Obsolete]
+    [StructLayout (LayoutKind.Sequential)]
+    public struct FILETIME
+    {
+        public int dwLowDateTime;
+        public int dwHighDateTime;
+    }
 }

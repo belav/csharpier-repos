@@ -1,9 +1,9 @@
 //
 // SecurityCriticalAttributeTest.cs -
-//	NUnit Test Cases for SecurityCriticalAttribute
+//    NUnit Test Cases for SecurityCriticalAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,51 +33,51 @@ using System.Security;
 
 namespace MonoTests.System.Security {
 
-	[TestFixture]
-	public class SecurityCriticalAttributeTest {
+    [TestFixture]
+    public class SecurityCriticalAttributeTest {
 #if !MOBILE
-		[Test]
-		public void Constructor_Default ()
-		{
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute ();
-			Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Default ()
+        {
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute ();
+            Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
+        }
 
-		[Test]
-		public void Constructor_Scope_Everything ()
-		{
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute (SecurityCriticalScope.Everything);
-			Assert.AreEqual (SecurityCriticalScope.Everything, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Scope_Everything ()
+        {
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute (SecurityCriticalScope.Everything);
+            Assert.AreEqual (SecurityCriticalScope.Everything, sca.Scope);
+        }
 
-		[Test]
-		public void Constructor_Scope_Explicit ()
-		{
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute (SecurityCriticalScope.Explicit);
-			Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Scope_Explicit ()
+        {
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute (SecurityCriticalScope.Explicit);
+            Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
+        }
 
-		[Test]
-		public void Constructor_Scope_Bad ()
-		{
-			SecurityCriticalScope scs = (SecurityCriticalScope)UInt32.MinValue;
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute (scs);
-			Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Scope_Bad ()
+        {
+            SecurityCriticalScope scs = (SecurityCriticalScope)UInt32.MinValue;
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute (scs);
+            Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
+        }
 #endif
-		[Test]
-		public void Attributes ()
-		{
-			Type t = typeof (SecurityCriticalAttribute);
-			Assert.IsFalse (t.IsSerializable, "IsSerializable");
+        [Test]
+        public void Attributes ()
+        {
+            Type t = typeof (SecurityCriticalAttribute);
+            Assert.IsFalse (t.IsSerializable, "IsSerializable");
 
-			object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage");
-			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsFalse (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsFalse (aua.Inherited, "Inherited");
-			AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Delegate);
-			Assert.AreEqual (at, aua.ValidOn, "ValidOn");
-		}
-	}
+            object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
+            Assert.AreEqual (1, attrs.Length, "AttributeUsage");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
+            Assert.IsFalse (aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse (aua.Inherited, "Inherited");
+            AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Delegate);
+            Assert.AreEqual (at, aua.ValidOn, "ValidOn");
+        }
+    }
 }

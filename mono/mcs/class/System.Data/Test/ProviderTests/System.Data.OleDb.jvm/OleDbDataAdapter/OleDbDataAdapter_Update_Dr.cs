@@ -33,48 +33,48 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbDataAdapter_Update_Dr : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OleDbDataAdapter_Update_Dr tc = new OleDbDataAdapter_Update_Dr();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbDataAdapter_Update_Dr");
-				tc.run();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+    [TestFixture]
+    public class OleDbDataAdapter_Update_Dr : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OleDbDataAdapter_Update_Dr tc = new OleDbDataAdapter_Update_Dr();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbDataAdapter_Update_Dr");
+                tc.run();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
 
-		//public TestClass():base(true){}
+        //public TestClass():base(true){}
 
-		//Activate this constructor to log Failures to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		//Activate this constructor to log All to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-		[Test]
-		public void run()
-		{
-			OleDbDataAdapter oleDBda = new OleDbDataAdapter();
-			oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
+        [Test]
+        public void run()
+        {
+            OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+            oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
 
-			base.OleDbDataAdapter_BuildUpdateCommands(ref oleDBda);		
-			base.DbDataAdapter_Update_Dr((DbDataAdapter)oleDBda);
-		}
-	}
+            base.OleDbDataAdapter_BuildUpdateCommands(ref oleDBda);        
+            base.DbDataAdapter_Update_Dr((DbDataAdapter)oleDBda);
+        }
+    }
 }

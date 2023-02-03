@@ -1,9 +1,9 @@
 //
 // CodeTypeDeclarationCas.cs 
-//	- CAS unit tests for System.CodeDom.CodeTypeDeclaration
+//    - CAS unit tests for System.CodeDom.CodeTypeDeclaration
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,76 +37,76 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeTypeDeclarationCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeTypeDeclarationCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		private void Handler (object sender, EventArgs e)
-		{
-		}
+        private void Handler (object sender, EventArgs e)
+        {
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeTypeDeclaration ctd = new CodeTypeDeclaration ();
-			Assert.AreEqual (0, ctd.BaseTypes.Count, "BaseTypes");
-			Assert.IsTrue (ctd.IsClass, "IsClass");
-			ctd.IsClass = false;
-			Assert.IsFalse (ctd.IsEnum, "IsEnum");
-			ctd.IsEnum = true;
-			Assert.IsFalse (ctd.IsInterface, "IsInterface");
-			ctd.IsInterface = true;
-			Assert.IsFalse (ctd.IsStruct, "IsStruct");
-			ctd.IsStruct = true;
-			Assert.AreEqual (0, ctd.Members.Count, "Members");
-			Assert.AreEqual (TypeAttributes.Public, ctd.TypeAttributes, "TypeAttributes");
-			Assert.IsFalse (ctd.IsPartial, "IsPartial");
-			ctd.IsPartial = true;
-			ctd.PopulateBaseTypes += new EventHandler (Handler);
-			ctd.PopulateBaseTypes -= new EventHandler (Handler);
-			ctd.PopulateMembers += new EventHandler (Handler);
-			ctd.PopulateMembers -= new EventHandler (Handler);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeTypeDeclaration ctd = new CodeTypeDeclaration ();
+            Assert.AreEqual (0, ctd.BaseTypes.Count, "BaseTypes");
+            Assert.IsTrue (ctd.IsClass, "IsClass");
+            ctd.IsClass = false;
+            Assert.IsFalse (ctd.IsEnum, "IsEnum");
+            ctd.IsEnum = true;
+            Assert.IsFalse (ctd.IsInterface, "IsInterface");
+            ctd.IsInterface = true;
+            Assert.IsFalse (ctd.IsStruct, "IsStruct");
+            ctd.IsStruct = true;
+            Assert.AreEqual (0, ctd.Members.Count, "Members");
+            Assert.AreEqual (TypeAttributes.Public, ctd.TypeAttributes, "TypeAttributes");
+            Assert.IsFalse (ctd.IsPartial, "IsPartial");
+            ctd.IsPartial = true;
+            ctd.PopulateBaseTypes += new EventHandler (Handler);
+            ctd.PopulateBaseTypes -= new EventHandler (Handler);
+            ctd.PopulateMembers += new EventHandler (Handler);
+            ctd.PopulateMembers -= new EventHandler (Handler);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeTypeDeclaration ctd = new CodeTypeDeclaration ("mono");
-			Assert.AreEqual (0, ctd.BaseTypes.Count, "BaseTypes");
-			Assert.IsTrue (ctd.IsClass, "IsClass");
-			ctd.IsClass = false;
-			Assert.IsFalse (ctd.IsEnum, "IsEnum");
-			ctd.IsEnum = true;
-			Assert.IsFalse (ctd.IsInterface, "IsInterface");
-			ctd.IsInterface = true;
-			Assert.IsFalse (ctd.IsStruct, "IsStruct");
-			ctd.IsStruct = true;
-			Assert.AreEqual (0, ctd.Members.Count, "Members");
-			Assert.AreEqual (TypeAttributes.Public, ctd.TypeAttributes, "TypeAttributes");
-			Assert.IsFalse (ctd.IsPartial, "IsPartial");
-			ctd.IsPartial = true;
-			ctd.PopulateBaseTypes += new EventHandler (Handler);
-			ctd.PopulateBaseTypes -= new EventHandler (Handler);
-			ctd.PopulateMembers += new EventHandler (Handler);
-			ctd.PopulateMembers -= new EventHandler (Handler);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeTypeDeclaration ctd = new CodeTypeDeclaration ("mono");
+            Assert.AreEqual (0, ctd.BaseTypes.Count, "BaseTypes");
+            Assert.IsTrue (ctd.IsClass, "IsClass");
+            ctd.IsClass = false;
+            Assert.IsFalse (ctd.IsEnum, "IsEnum");
+            ctd.IsEnum = true;
+            Assert.IsFalse (ctd.IsInterface, "IsInterface");
+            ctd.IsInterface = true;
+            Assert.IsFalse (ctd.IsStruct, "IsStruct");
+            ctd.IsStruct = true;
+            Assert.AreEqual (0, ctd.Members.Count, "Members");
+            Assert.AreEqual (TypeAttributes.Public, ctd.TypeAttributes, "TypeAttributes");
+            Assert.IsFalse (ctd.IsPartial, "IsPartial");
+            ctd.IsPartial = true;
+            ctd.PopulateBaseTypes += new EventHandler (Handler);
+            ctd.PopulateBaseTypes -= new EventHandler (Handler);
+            ctd.PopulateMembers += new EventHandler (Handler);
+            ctd.PopulateMembers -= new EventHandler (Handler);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeTypeDeclaration).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeTypeDeclaration).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

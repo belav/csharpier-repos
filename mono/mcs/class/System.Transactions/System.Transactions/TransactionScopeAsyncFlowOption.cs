@@ -1,9 +1,9 @@
-﻿
+
 namespace System.Transactions
 {
-	public enum TransactionScopeAsyncFlowOption
-	{
-		Suppress,
-		Enabled
-	}
+    public enum TransactionScopeAsyncFlowOption
+    {
+        Suppress,
+        Enabled
+    }
 }

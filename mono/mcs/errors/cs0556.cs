@@ -3,8 +3,8 @@
 
 class Blah {
 
-	public static void Main () {}
-	
-	public static implicit operator int (int i) {}
+    public static void Main () {}
+    
+    public static implicit operator int (int i) {}
 
 }

@@ -2,7 +2,7 @@
 // System.Configuration.CallbackValidatorAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,36 +30,36 @@ using System;
 
 namespace System.Configuration {
 
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class CallbackValidatorAttribute : ConfigurationValidatorAttribute
-	{
-		string callbackMethodName = "";
-		Type type = null;
-		ConfigurationValidatorBase instance;
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class CallbackValidatorAttribute : ConfigurationValidatorAttribute
+    {
+        string callbackMethodName = "";
+        Type type = null;
+        ConfigurationValidatorBase instance;
 
-		public CallbackValidatorAttribute ()
-		{
-		}
+        public CallbackValidatorAttribute ()
+        {
+        }
 
-		public string CallbackMethodName {
-			get { return callbackMethodName; }
-			set { callbackMethodName = value; instance = null; }
-		}
+        public string CallbackMethodName {
+            get { return callbackMethodName; }
+            set { callbackMethodName = value; instance = null; }
+        }
 
-		public Type Type {
-			get { return type; }
-			set { type = value; instance = null; }
-		}
+        public Type Type {
+            get { return type; }
+            set { type = value; instance = null; }
+        }
 
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
+        public override ConfigurationValidatorBase ValidatorInstance {
+            get {
 #if false
-				if (instance == null)
-					instance = new CallbackValidator (type);
+                if (instance == null)
+                    instance = new CallbackValidator (type);
 #endif
-				return instance;
-			}
-		}
-	}
+                return instance;
+            }
+        }
+    }
 }
 

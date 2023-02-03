@@ -2,7 +2,7 @@
 // SettingElementTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,47 +35,47 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {
-	[TestFixture]
-	public class SettingElementTest
-	{
-		[Test]
-		public void Initial ()
-		{
-			SettingElement el = new SettingElement ();
-			Assert.IsNotNull (el.Value, "#1");
-			Assert.IsNull (el.Value.ValueXml, "#2");
-		}
+    [TestFixture]
+    public class SettingElementTest
+    {
+        [Test]
+        public void Initial ()
+        {
+            SettingElement el = new SettingElement ();
+            Assert.IsNotNull (el.Value, "#1");
+            Assert.IsNull (el.Value.ValueXml, "#2");
+        }
 
-		[Test]
-		public void CollectionAddNull ()
-		{
-			try {
-				SettingElementCollection c = new SettingElementCollection ();
-				c.Add (null);
-				Assert.Fail ();
-			} catch (NullReferenceException) {
-				// .net s cks here
-			} catch (ArgumentNullException) {
-			}
-		}
+        [Test]
+        public void CollectionAddNull ()
+        {
+            try {
+                SettingElementCollection c = new SettingElementCollection ();
+                c.Add (null);
+                Assert.Fail ();
+            } catch (NullReferenceException) {
+                // .net s cks here
+            } catch (ArgumentNullException) {
+            }
+        }
 
-		[Test]
-		public void CollectionAddNameless ()
-		{
-			SettingElement el = new SettingElement ();
-			Assert.AreEqual (String.Empty, el.Name, "premise #1");
-			SettingElementCollection c = new SettingElementCollection ();
-			Assert.AreEqual (ConfigurationElementCollectionType.BasicMap, c.CollectionType, "premise #2");
-			c.Add (el);
-			Assert.AreEqual (el, c.Get (""), "#1");
-		}
+        [Test]
+        public void CollectionAddNameless ()
+        {
+            SettingElement el = new SettingElement ();
+            Assert.AreEqual (String.Empty, el.Name, "premise #1");
+            SettingElementCollection c = new SettingElementCollection ();
+            Assert.AreEqual (ConfigurationElementCollectionType.BasicMap, c.CollectionType, "premise #2");
+            c.Add (el);
+            Assert.AreEqual (el, c.Get (""), "#1");
+        }
 
-		[Test]
-		public void CollectionGetNonExistent ()
-		{
-			SettingElementCollection c = new SettingElementCollection ();
-			Assert.IsNull (c.Get ("nonexistent"));
-		}
-	}
+        [Test]
+        public void CollectionGetNonExistent ()
+        {
+            SettingElementCollection c = new SettingElementCollection ();
+            Assert.IsNull (c.Get ("nonexistent"));
+        }
+    }
 }
 

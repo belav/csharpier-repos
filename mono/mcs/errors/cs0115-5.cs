@@ -3,14 +3,14 @@
 
 class A
 {
-	public virtual void Foo (out int i)
-	{
-	}
+    public virtual void Foo (out int i)
+    {
+    }
 }
 
 class B : A
 {
-	public override void Foo (ref int i)
-	{
-	}
+    public override void Foo (ref int i)
+    {
+    }
 }

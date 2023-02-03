@@ -2,7 +2,7 @@
 // BindingParameterCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,22 +30,22 @@ using System.Collections.Generic;
 
 namespace System.ServiceModel.Channels
 {
-	public class BindingParameterCollection
-		: KeyedByTypeCollection<object>
-	{
-		protected override Type GetKeyForItem (object item)
-		{
-			return base.GetKeyForItem (item);
-		}
+    public class BindingParameterCollection
+        : KeyedByTypeCollection<object>
+    {
+        protected override Type GetKeyForItem (object item)
+        {
+            return base.GetKeyForItem (item);
+        }
 
-		protected override void InsertItem (int index, object item)
-		{
-			base.InsertItem (index, item);
-		}
+        protected override void InsertItem (int index, object item)
+        {
+            base.InsertItem (index, item);
+        }
 
-		protected override void SetItem (int index, object item)
-		{
-			base.SetItem (index, item);
-		}
-	}
+        protected override void SetItem (int index, object item)
+        {
+            base.SetItem (index, item);
+        }
+    }
 }

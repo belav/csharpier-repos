@@ -2,7 +2,7 @@
 // SpecialSettingAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,19 +30,19 @@ using System.Collections;
 
 namespace System.Configuration
 {
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Property)]
-	public sealed class SpecialSettingAttribute : Attribute
-	{
-		SpecialSetting setting;
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Property)]
+    public sealed class SpecialSettingAttribute : Attribute
+    {
+        SpecialSetting setting;
 
-		public SpecialSettingAttribute (SpecialSetting specialSetting)
-		{
-			this.setting = specialSetting;
-		}
+        public SpecialSettingAttribute (SpecialSetting specialSetting)
+        {
+            this.setting = specialSetting;
+        }
 
-		public SpecialSetting SpecialSetting {
-			get { return setting; }
-		}
-	}
+        public SpecialSetting SpecialSetting {
+            get { return setting; }
+        }
+    }
 }
 

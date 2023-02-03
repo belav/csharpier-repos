@@ -1,9 +1,9 @@
 //
 // ImageClickEventArgsCas.cs 
-//	- CAS unit tests for System.Web.UI.ImageClickEventArgs
+//    - CAS unit tests for System.Web.UI.ImageClickEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,30 +37,30 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ImageClickEventArgsCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ImageClickEventArgsCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ImageClickEventArgs icea = new ImageClickEventArgs (0, 0);
-			Assert.AreEqual (0, icea.X, "X");
-			Assert.AreEqual (0, icea.Y, "Y");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ImageClickEventArgs icea = new ImageClickEventArgs (0, 0);
+            Assert.AreEqual (0, icea.X, "X");
+            Assert.AreEqual (0, icea.Y, "Y");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (int), typeof (int) });
-			Assert.IsNotNull (ci, ".ctor(int,int)");
-			return ci.Invoke (new object[2] { 0, 0 });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (int), typeof (int) });
+            Assert.IsNotNull (ci, ".ctor(int,int)");
+            return ci.Invoke (new object[2] { 0, 0 });
+        }
 
-		public override Type Type {
-			get { return typeof (ImageClickEventArgs); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ImageClickEventArgs); }
+        }
+    }
 }

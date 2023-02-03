@@ -1,9 +1,9 @@
 //
 // HtmlMetaCas.cs 
-//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlMeta
+//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlMeta
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,24 +38,24 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlMetaCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlMetaCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlMetaTest unit = new HtmlMetaTest ();
-			unit.Defaults ();
-			unit.Setters ();
-			unit.Render ();
-			unit.Render_Empty ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlMetaTest unit = new HtmlMetaTest ();
+            unit.Defaults ();
+            unit.Setters ();
+            unit.Render ();
+            unit.Render_Empty ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlMeta); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlMeta); }
+        }
+    }
 }
 

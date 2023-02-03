@@ -28,6 +28,6 @@
 
 namespace System.Runtime.Remoting.Contexts {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public delegate void CrossContextDelegate ();
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public delegate void CrossContextDelegate ();
 }

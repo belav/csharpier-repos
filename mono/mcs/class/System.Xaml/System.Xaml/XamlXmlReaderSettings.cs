@@ -29,27 +29,27 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlXmlReaderSettings : XamlReaderSettings
-	{
-		public XamlXmlReaderSettings ()
-		{
-		}
+    public class XamlXmlReaderSettings : XamlReaderSettings
+    {
+        public XamlXmlReaderSettings ()
+        {
+        }
 
-		public XamlXmlReaderSettings (XamlXmlReaderSettings settings)
-			: base (settings)
-		{
-			var s = settings;
-			if (s == null)
-				return;
-			CloseInput = s.CloseInput;
-			SkipXmlCompatibilityProcessing = s.SkipXmlCompatibilityProcessing;
-			XmlLang = s.XmlLang;
-			XmlSpacePreserve = s.XmlSpacePreserve;
-		}
+        public XamlXmlReaderSettings (XamlXmlReaderSettings settings)
+            : base (settings)
+        {
+            var s = settings;
+            if (s == null)
+                return;
+            CloseInput = s.CloseInput;
+            SkipXmlCompatibilityProcessing = s.SkipXmlCompatibilityProcessing;
+            XmlLang = s.XmlLang;
+            XmlSpacePreserve = s.XmlSpacePreserve;
+        }
 
-		public bool CloseInput { get; set; }
-		public bool SkipXmlCompatibilityProcessing { get; set; }
-		public string XmlLang { get; set; }
-		public bool XmlSpacePreserve { get; set; }
-	}
+        public bool CloseInput { get; set; }
+        public bool SkipXmlCompatibilityProcessing { get; set; }
+        public string XmlLang { get; set; }
+        public bool XmlSpacePreserve { get; set; }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -6195,57 +6195,57 @@ class Test
     {
         var ilSource = @"
 .class public auto ansi beforefieldinit C1`1<T>
-	extends [mscorlib]System.Object
+    extends [mscorlib]System.Object
 {
-	// Nested Types
-	.class nested public auto ansi sealed F<T>
-		extends [mscorlib]System.MulticastDelegate
-	{
-		// Methods
-		.method public hidebysig specialname rtspecialname 
-			instance void .ctor (
-				object 'object',
-				native int 'method'
-			) runtime managed 
-		{
-		} // end of method F::.ctor
+    // Nested Types
+    .class nested public auto ansi sealed F<T>
+        extends [mscorlib]System.MulticastDelegate
+    {
+        // Methods
+        .method public hidebysig specialname rtspecialname 
+            instance void .ctor (
+                object 'object',
+                native int 'method'
+            ) runtime managed 
+        {
+        } // end of method F::.ctor
 
-		.method public hidebysig newslot virtual 
-			instance string Invoke () runtime managed 
-		{
-		} // end of method F::Invoke
+        .method public hidebysig newslot virtual 
+            instance string Invoke () runtime managed 
+        {
+        } // end of method F::Invoke
 
-		.method public hidebysig newslot virtual 
-			instance class [mscorlib]System.IAsyncResult BeginInvoke (
-				class [mscorlib]System.AsyncCallback callback,
-				object 'object'
-			) runtime managed 
-		{
-		} // end of method F::BeginInvoke
+        .method public hidebysig newslot virtual 
+            instance class [mscorlib]System.IAsyncResult BeginInvoke (
+                class [mscorlib]System.AsyncCallback callback,
+                object 'object'
+            ) runtime managed 
+        {
+        } // end of method F::BeginInvoke
 
-		.method public hidebysig newslot virtual 
-			instance string EndInvoke (
-				class [mscorlib]System.IAsyncResult result
-			) runtime managed 
-		{
-		} // end of method F::EndInvoke
+        .method public hidebysig newslot virtual 
+            instance string EndInvoke (
+                class [mscorlib]System.IAsyncResult result
+            ) runtime managed 
+        {
+        } // end of method F::EndInvoke
 
-	} // end of class F
+    } // end of class F
 
 
-	// Methods
-	.method public hidebysig specialname rtspecialname 
-		instance void .ctor () cil managed 
-	{
-		// Method begins at RVA 0x211f
-		// Code size 8 (0x8)
-		.maxstack 8
+    // Methods
+    .method public hidebysig specialname rtspecialname 
+        instance void .ctor () cil managed 
+    {
+        // Method begins at RVA 0x211f
+        // Code size 8 (0x8)
+        .maxstack 8
 
-		IL_0000: ldarg.0
-		IL_0001: call instance void [mscorlib]System.Object::.ctor()
-		IL_0006: nop
-		IL_0007: ret
-	} // end of method C1`1::.ctor
+        IL_0000: ldarg.0
+        IL_0001: call instance void [mscorlib]System.Object::.ctor()
+        IL_0006: nop
+        IL_0007: ret
+    } // end of method C1`1::.ctor
 
 } // end of class C1`1
 

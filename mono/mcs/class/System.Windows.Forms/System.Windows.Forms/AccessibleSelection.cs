@@ -20,20 +20,20 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	[Flags]
-	public enum AccessibleSelection {
-		None		= 0x00000000,
-		TakeFocus	= 0x00000001,
-		TakeSelection	= 0x00000002,
-		ExtendSelection	= 0x00000004,
-		AddSelection	= 0x00000008,
-		RemoveSelection	= 0x00000010
-	}
+    [Flags]
+    public enum AccessibleSelection {
+        None        = 0x00000000,
+        TakeFocus    = 0x00000001,
+        TakeSelection    = 0x00000002,
+        ExtendSelection    = 0x00000004,
+        AddSelection    = 0x00000008,
+        RemoveSelection    = 0x00000010
+    }
 }

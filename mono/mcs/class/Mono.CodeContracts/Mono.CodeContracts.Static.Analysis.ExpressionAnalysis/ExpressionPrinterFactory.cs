@@ -2,7 +2,7 @@
 // ExpressionPrinterFactory.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -36,97 +36,97 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis {
-	static class ExpressionPrinterFactory {
-		public static Func<LabeledSymbol<APC, SymbolicValue>, string> Printer<SymbolicValue>
-			(IExpressionContextProvider<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> contextProvider,
-			 IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> methodDriver)
-			where SymbolicValue : IEquatable<SymbolicValue>
-		{
-			return new PrinterImpl<SymbolicValue> (contextProvider, methodDriver).PrintAt;
-		}
+    static class ExpressionPrinterFactory {
+        public static Func<LabeledSymbol<APC, SymbolicValue>, string> Printer<SymbolicValue>
+            (IExpressionContextProvider<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> contextProvider,
+             IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> methodDriver)
+            where SymbolicValue : IEquatable<SymbolicValue>
+        {
+            return new PrinterImpl<SymbolicValue> (contextProvider, methodDriver).PrintAt;
+        }
 
-		#region Nested type: PrinterImpl
-		private class PrinterImpl<SymbolicValue> :
-			ISymbolicExpressionVisitor<LabeledSymbol<APC, SymbolicValue>, LabeledSymbol<APC, SymbolicValue>, SymbolicValue, StringBuilder, Dummy>
-			where SymbolicValue : IEquatable<SymbolicValue> {
-			private readonly IExpressionContextProvider<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> context_provider;
-			private readonly IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> method_driver;
+        #region Nested type: PrinterImpl
+        private class PrinterImpl<SymbolicValue> :
+            ISymbolicExpressionVisitor<LabeledSymbol<APC, SymbolicValue>, LabeledSymbol<APC, SymbolicValue>, SymbolicValue, StringBuilder, Dummy>
+            where SymbolicValue : IEquatable<SymbolicValue> {
+            private readonly IExpressionContextProvider<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> context_provider;
+            private readonly IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> method_driver;
 
-			public PrinterImpl (IExpressionContextProvider<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> contextProvider,
-			                    IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> methodDriver)
-			{
-				this.context_provider = contextProvider;
-				this.method_driver = methodDriver;
-			}
+            public PrinterImpl (IExpressionContextProvider<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> contextProvider,
+                                IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> methodDriver)
+            {
+                this.context_provider = contextProvider;
+                this.method_driver = methodDriver;
+            }
 
-			public string PrintAt (LabeledSymbol<APC, SymbolicValue> expr)
-			{
-				var sb = new StringBuilder ();
-				Recurse (sb, expr);
-				return sb.ToString ();
-			}
+            public string PrintAt (LabeledSymbol<APC, SymbolicValue> expr)
+            {
+                var sb = new StringBuilder ();
+                Recurse (sb, expr);
+                return sb.ToString ();
+            }
 
-			private void Recurse (StringBuilder sb, LabeledSymbol<APC, SymbolicValue> expr)
-			{
-				if (expr.Symbol.Equals (default(SymbolicValue)))
-					sb.Append ("<!null!>");
-				else
-					this.context_provider.ExpressionContext.Decode<StringBuilder, Dummy, PrinterImpl<SymbolicValue>> (expr, this, sb);
-			}
+            private void Recurse (StringBuilder sb, LabeledSymbol<APC, SymbolicValue> expr)
+            {
+                if (expr.Symbol.Equals (default(SymbolicValue)))
+                    sb.Append ("<!null!>");
+                else
+                    this.context_provider.ExpressionContext.Decode<StringBuilder, Dummy, PrinterImpl<SymbolicValue>> (expr, this, sb);
+            }
 
-			#region Implementation of IExpressionILVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
-			public Dummy Binary (LabeledSymbol<APC, SymbolicValue> pc, BinaryOperator op, SymbolicValue dest, LabeledSymbol<APC, SymbolicValue> operand1, LabeledSymbol<APC, SymbolicValue> operand2,
-			                     StringBuilder data)
-			{
-				data.Append ('(');
-				Recurse (data, operand1);
-				data.AppendFormat (" {0} ", op);
-				Recurse (data, operand2);
-				data.Append (')');
-				return Dummy.Value;
-			}
+            #region Implementation of IExpressionILVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
+            public Dummy Binary (LabeledSymbol<APC, SymbolicValue> pc, BinaryOperator op, SymbolicValue dest, LabeledSymbol<APC, SymbolicValue> operand1, LabeledSymbol<APC, SymbolicValue> operand2,
+                                 StringBuilder data)
+            {
+                data.Append ('(');
+                Recurse (data, operand1);
+                data.AppendFormat (" {0} ", op);
+                Recurse (data, operand2);
+                data.Append (')');
+                return Dummy.Value;
+            }
 
-			public Dummy Isinst (LabeledSymbol<APC, SymbolicValue> pc, TypeNode type, SymbolicValue dest, LabeledSymbol<APC, SymbolicValue> obj, StringBuilder data)
-			{
-				data.AppendFormat ("IsInst({0}) ", this.method_driver.MetaDataProvider.FullName (type));
-				Recurse (data, obj);
-				return Dummy.Value;
-			}
+            public Dummy Isinst (LabeledSymbol<APC, SymbolicValue> pc, TypeNode type, SymbolicValue dest, LabeledSymbol<APC, SymbolicValue> obj, StringBuilder data)
+            {
+                data.AppendFormat ("IsInst({0}) ", this.method_driver.MetaDataProvider.FullName (type));
+                Recurse (data, obj);
+                return Dummy.Value;
+            }
 
-			public Dummy LoadNull (LabeledSymbol<APC, SymbolicValue> pc, SymbolicValue dest, StringBuilder polarity)
-			{
-				polarity.Append ("NULL");
-				return Dummy.Value;
-			}
+            public Dummy LoadNull (LabeledSymbol<APC, SymbolicValue> pc, SymbolicValue dest, StringBuilder polarity)
+            {
+                polarity.Append ("NULL");
+                return Dummy.Value;
+            }
 
-			public Dummy LoadConst (LabeledSymbol<APC, SymbolicValue> pc, TypeNode type, object constant, SymbolicValue dest, StringBuilder data)
-			{
-				data.Append (constant.ToString ());
-				return Dummy.Value;
-			}
+            public Dummy LoadConst (LabeledSymbol<APC, SymbolicValue> pc, TypeNode type, object constant, SymbolicValue dest, StringBuilder data)
+            {
+                data.Append (constant.ToString ());
+                return Dummy.Value;
+            }
 
-			public Dummy Sizeof (LabeledSymbol<APC, SymbolicValue> pc, TypeNode type, SymbolicValue dest, StringBuilder data)
-			{
-				data.AppendFormat ("sizeof({0})", this.method_driver.MetaDataProvider.FullName (type));
-				return Dummy.Value;
-			}
+            public Dummy Sizeof (LabeledSymbol<APC, SymbolicValue> pc, TypeNode type, SymbolicValue dest, StringBuilder data)
+            {
+                data.AppendFormat ("sizeof({0})", this.method_driver.MetaDataProvider.FullName (type));
+                return Dummy.Value;
+            }
 
-			public Dummy Unary (LabeledSymbol<APC, SymbolicValue> pc, UnaryOperator op, bool unsigned, SymbolicValue dest, LabeledSymbol<APC, SymbolicValue> source, StringBuilder data)
-			{
-				data.AppendFormat ("{0} ", op.ToString ());
-				Recurse (data, source);
-				return Dummy.Value;
-			}
-			#endregion
+            public Dummy Unary (LabeledSymbol<APC, SymbolicValue> pc, UnaryOperator op, bool unsigned, SymbolicValue dest, LabeledSymbol<APC, SymbolicValue> source, StringBuilder data)
+            {
+                data.AppendFormat ("{0} ", op.ToString ());
+                Recurse (data, source);
+                return Dummy.Value;
+            }
+            #endregion
 
-			#region Implementation of ISymbolicExpressionVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
-			public Dummy SymbolicConstant (LabeledSymbol<APC, SymbolicValue> pc, SymbolicValue variable, StringBuilder data)
-			{
-				data.Append (variable.ToString ());
-				return Dummy.Value;
-			}
-			#endregion
-		}
-		#endregion
-	}
+            #region Implementation of ISymbolicExpressionVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
+            public Dummy SymbolicConstant (LabeledSymbol<APC, SymbolicValue> pc, SymbolicValue variable, StringBuilder data)
+            {
+                data.Append (variable.ToString ());
+                return Dummy.Value;
+            }
+            #endregion
+        }
+        #endregion
+    }
 }

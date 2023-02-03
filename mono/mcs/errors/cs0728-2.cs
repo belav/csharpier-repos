@@ -6,10 +6,10 @@ using System;
 
 public class Foo
 {
-	public static void Test (IDisposable d)
-	{
-		using (d) {
-			d = null;
-		}
-	}
+    public static void Test (IDisposable d)
+    {
+        using (d) {
+            d = null;
+        }
+    }
 }

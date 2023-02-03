@@ -7,10 +7,10 @@ using System;
 
 public partial class CLSClass
 {
-	[CLSCompliant (false)]
-	partial void Foo ();
-	
-	partial void Foo ()
-	{
-	}
+    [CLSCompliant (false)]
+    partial void Foo ();
+    
+    partial void Foo ()
+    {
+    }
 }

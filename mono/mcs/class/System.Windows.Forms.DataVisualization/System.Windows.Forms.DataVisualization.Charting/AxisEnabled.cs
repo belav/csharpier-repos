@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum AxisEnabled
-	{
-		Auto = 0,
-		True = 1,
-		False = 2
-	}
+    public enum AxisEnabled
+    {
+        Auto = 0,
+        True = 1,
+        False = 2
+    }
 }

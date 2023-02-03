@@ -2,7 +2,7 @@
 // IServiceContractGenerationExtension.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,9 +31,9 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Description
 {
-	public interface IServiceContractGenerationExtension
-	{
-		void GenerateContract (
-			ServiceContractGenerationContext context);
-	}
+    public interface IServiceContractGenerationExtension
+    {
+        void GenerateContract (
+            ServiceContractGenerationContext context);
+    }
 }

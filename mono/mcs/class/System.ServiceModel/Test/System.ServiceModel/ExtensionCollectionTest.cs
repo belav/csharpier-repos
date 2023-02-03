@@ -1,8 +1,8 @@
-﻿//
+//
 // ExtensionCollectionTest.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -34,71 +34,71 @@ using System.ServiceModel;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class ExtensionCollectionTest
-	{
-		class MyExtensibleObject : IExtensibleObject<MyExtensibleObject>
-		{
-			IExtensionCollection<MyExtensibleObject> _extensions;
+    [TestFixture]
+    public class ExtensionCollectionTest
+    {
+        class MyExtensibleObject : IExtensibleObject<MyExtensibleObject>
+        {
+            IExtensionCollection<MyExtensibleObject> _extensions;
 
-			public IExtensionCollection<MyExtensibleObject> Extensions {
-				get {
-					if (_extensions == null)
-						_extensions = new ExtensionCollection<MyExtensibleObject> (this);
-					return _extensions;
-				}
-			}
-		}
+            public IExtensionCollection<MyExtensibleObject> Extensions {
+                get {
+                    if (_extensions == null)
+                        _extensions = new ExtensionCollection<MyExtensibleObject> (this);
+                    return _extensions;
+                }
+            }
+        }
 
-		abstract class MyExtensionBase : IExtension<MyExtensibleObject>
-		{
-			public bool IsAttached {
-				get;
-				private set;
-			}
+        abstract class MyExtensionBase : IExtension<MyExtensibleObject>
+        {
+            public bool IsAttached {
+                get;
+                private set;
+            }
 
-			public void Attach (MyExtensibleObject owner) {
-				IsAttached = true;
-			}
+            public void Attach (MyExtensibleObject owner) {
+                IsAttached = true;
+            }
 
-			public void Detach (MyExtensibleObject owner) {
-				IsAttached = false;
-			}
-		}
+            public void Detach (MyExtensibleObject owner) {
+                IsAttached = false;
+            }
+        }
 
-		class MyExtension1 : MyExtensionBase
-		{
-		}
+        class MyExtension1 : MyExtensionBase
+        {
+        }
 
-		class MyExtension2 : MyExtensionBase
-		{
-		}
+        class MyExtension2 : MyExtensionBase
+        {
+        }
 
-		[Test]
-		public void Add_Remove_Call_Attach () {
+        [Test]
+        public void Add_Remove_Call_Attach () {
 
-			MyExtensibleObject extObj = new MyExtensibleObject ();
-			MyExtension1 ext = new MyExtension1 ();
-			Assert.AreEqual (false, ext.IsAttached, "IsAttached #1");
-			extObj.Extensions.Add (ext);
-			Assert.AreEqual (true, ext.IsAttached, "IsAttached #2");
-			extObj.Extensions.Remove (ext);
-			Assert.AreEqual (false, ext.IsAttached, "IsAttached #3");
-		}
+            MyExtensibleObject extObj = new MyExtensibleObject ();
+            MyExtension1 ext = new MyExtension1 ();
+            Assert.AreEqual (false, ext.IsAttached, "IsAttached #1");
+            extObj.Extensions.Add (ext);
+            Assert.AreEqual (true, ext.IsAttached, "IsAttached #2");
+            extObj.Extensions.Remove (ext);
+            Assert.AreEqual (false, ext.IsAttached, "IsAttached #3");
+        }
 
-		[Test]
-		public void Clear_Calls_Attach () {
+        [Test]
+        public void Clear_Calls_Attach () {
 
-			MyExtensibleObject extObj = new MyExtensibleObject ();
-			MyExtension1 ext1 = new MyExtension1 ();
-			MyExtension2 ext2 = new MyExtension2 ();
-			extObj.Extensions.Add (ext1);
-			extObj.Extensions.Add (ext2);
-			Assert.AreEqual (true, ext1.IsAttached, "IsAttached #1");
-			Assert.AreEqual (true, ext2.IsAttached, "IsAttached #2");
-			extObj.Extensions.Clear ();
-			Assert.AreEqual (false, ext1.IsAttached, "IsAttached #3");
-			Assert.AreEqual (false, ext2.IsAttached, "IsAttached #4");
-		}
-	}
+            MyExtensibleObject extObj = new MyExtensibleObject ();
+            MyExtension1 ext1 = new MyExtension1 ();
+            MyExtension2 ext2 = new MyExtension2 ();
+            extObj.Extensions.Add (ext1);
+            extObj.Extensions.Add (ext2);
+            Assert.AreEqual (true, ext1.IsAttached, "IsAttached #1");
+            Assert.AreEqual (true, ext2.IsAttached, "IsAttached #2");
+            extObj.Extensions.Clear ();
+            Assert.AreEqual (false, ext1.IsAttached, "IsAttached #3");
+            Assert.AreEqual (false, ext2.IsAttached, "IsAttached #4");
+        }
+    }
 }

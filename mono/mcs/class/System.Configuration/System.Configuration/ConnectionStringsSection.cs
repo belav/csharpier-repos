@@ -52,10 +52,10 @@ namespace System.Configuration
                 }
 
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
                 public ConnectionStringSettingsCollection ConnectionStrings
                 {
-			get { return (ConnectionStringSettingsCollection) base [_propConnectionStrings]; }
+            get { return (ConnectionStringSettingsCollection) base [_propConnectionStrings]; }
                 }
 
                 protected internal override ConfigurationPropertyCollection Properties

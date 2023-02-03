@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,21 +14,21 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property)]
-	public class KeyBehaviorBuilderAttribute : Attribute, IDictionaryBehaviorBuilder
-	{
-		private static readonly object[] Behaviors =
-		{
-			new KeyPrefixAttribute("Foo "),
-			new KeySubstitutionAttribute("_", " ")
-		};
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property)]
+    public class KeyBehaviorBuilderAttribute : Attribute, IDictionaryBehaviorBuilder
+    {
+        private static readonly object[] Behaviors =
+        {
+            new KeyPrefixAttribute("Foo "),
+            new KeySubstitutionAttribute("_", " ")
+        };
 
-		public object[] BuildBehaviors()
-		{
-			return Behaviors;
-		}
-	}
+        public object[] BuildBehaviors()
+        {
+            return Behaviors;
+        }
+    }
 }

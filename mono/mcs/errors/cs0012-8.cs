@@ -4,8 +4,8 @@
 
 class Test
 {
-	public static void Main ()
-	{
-		A.M.Foo ();
-	}
+    public static void Main ()
+    {
+        A.M.Foo ();
+    }
 }

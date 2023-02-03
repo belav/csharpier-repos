@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,28 +28,28 @@ using System.Windows.Markup;
 
 namespace System.Windows.Input {
 
-	public class ModifierKeysValueSerializer : ValueSerializer
-	{
-		public override bool CanConvertFromString (string value, IValueSerializerContext context)
-		{
-			throw new NotImplementedException ();
-		}
+    public class ModifierKeysValueSerializer : ValueSerializer
+    {
+        public override bool CanConvertFromString (string value, IValueSerializerContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool CanConvertToString (object value, IValueSerializerContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool CanConvertToString (object value, IValueSerializerContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override object ConvertFromString (string value, IValueSerializerContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        public override object ConvertFromString (string value, IValueSerializerContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string ConvertToString (object value, IValueSerializerContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string ConvertToString (object value, IValueSerializerContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 

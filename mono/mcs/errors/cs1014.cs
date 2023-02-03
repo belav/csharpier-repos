@@ -3,9 +3,9 @@
 
 class C
 {
-	public int Prop {
-		set {
-		}
-		bool val;
-	}
+    public int Prop {
+        set {
+        }
+        bool val;
+    }
 }

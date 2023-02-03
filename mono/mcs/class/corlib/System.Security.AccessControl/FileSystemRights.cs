@@ -2,7 +2,7 @@
 // System.Security.AccessControl.FileSystemRights enum
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005, 2006 Novell, Inc (http://www.novell.com)
 //
@@ -28,31 +28,31 @@
 
 namespace System.Security.AccessControl {
 
-	[Flags]
-	public enum FileSystemRights {
-		ListDirectory			= 0x0000001,
-		ReadData			= 0x0000001,
-		CreateFiles			= 0x0000002,
-		WriteData			= 0x0000002,
-		AppendData			= 0x0000004,
-		CreateDirectories		= 0x0000004,
-		ReadExtendedAttributes		= 0x0000008,
-		WriteExtendedAttributes		= 0x0000010,
-		ExecuteFile			= 0x0000020,
-		Traverse			= 0x0000020,
-		DeleteSubdirectoriesAndFiles	= 0x0000040,
-		ReadAttributes			= 0x0000080,
-		WriteAttributes			= 0x0000100,
-		Write				= 0x0000116,
-		Delete				= 0x0010000,
-		ReadPermissions			= 0x0020000,
-		Read				= 0x0020089,
-		ReadAndExecute			= 0x00200A9,
-		Modify				= 0x00301BF,
-		ChangePermissions		= 0x0040000,
-		TakeOwnership			= 0x0080000,
-		Synchronize			= 0x0100000,
-		FullControl			= 0x01F01FF,
-	}
+    [Flags]
+    public enum FileSystemRights {
+        ListDirectory            = 0x0000001,
+        ReadData            = 0x0000001,
+        CreateFiles            = 0x0000002,
+        WriteData            = 0x0000002,
+        AppendData            = 0x0000004,
+        CreateDirectories        = 0x0000004,
+        ReadExtendedAttributes        = 0x0000008,
+        WriteExtendedAttributes        = 0x0000010,
+        ExecuteFile            = 0x0000020,
+        Traverse            = 0x0000020,
+        DeleteSubdirectoriesAndFiles    = 0x0000040,
+        ReadAttributes            = 0x0000080,
+        WriteAttributes            = 0x0000100,
+        Write                = 0x0000116,
+        Delete                = 0x0010000,
+        ReadPermissions            = 0x0020000,
+        Read                = 0x0020089,
+        ReadAndExecute            = 0x00200A9,
+        Modify                = 0x00301BF,
+        ChangePermissions        = 0x0040000,
+        TakeOwnership            = 0x0080000,
+        Synchronize            = 0x0100000,
+        FullControl            = 0x01F01FF,
+    }
 }
 

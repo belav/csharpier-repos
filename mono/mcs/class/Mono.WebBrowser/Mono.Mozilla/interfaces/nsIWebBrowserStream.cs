@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,37 +32,37 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("86d02f0e-219b-4cfc-9c88-bd98d2cce0b8")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIWebBrowserStream {
+    [Guid ("86d02f0e-219b-4cfc-9c88-bd98d2cce0b8")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIWebBrowserStream {
 
 #region nsIWebBrowserStream
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int openStream (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,
-				   /*ACString*/ HandleRef aContentType);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int openStream (
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,
+                   /*ACString*/ HandleRef aContentType);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int appendToStream (
-				IntPtr aData,
-				   uint aLen);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int appendToStream (
+                IntPtr aData,
+                   uint aLen);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int closeStream ();
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int closeStream ();
 
 #endregion
-	}
+    }
 
 
-	internal class nsWebBrowserStream {
-		public static nsIWebBrowserStream GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserStream obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserStream).GUID, obj);
-			return o as nsIWebBrowserStream;
-		}
-	}
+    internal class nsWebBrowserStream {
+        public static nsIWebBrowserStream GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserStream obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserStream).GUID, obj);
+            return o as nsIWebBrowserStream;
+        }
+    }
 }

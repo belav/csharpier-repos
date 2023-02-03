@@ -4,17 +4,17 @@
 
 public abstract class BaseClass
 {
-	private static readonly int AnInt = 1;
+    private static readonly int AnInt = 1;
 
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }
 
 public static class Wrapper
 {
-	public class DerivedClass : BaseClass
-	{
-		private new static readonly int AnInt = 2;
-	}
+    public class DerivedClass : BaseClass
+    {
+        private new static readonly int AnInt = 2;
+    }
 }

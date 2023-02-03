@@ -1,8 +1,8 @@
-﻿//
+//
 // IssuedTokenServiceCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,75 +37,75 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public class IssuedTokenServiceCredential
-	{
-		bool allow_untrusted_rsa_issuers;
-		X509CertificateValidationMode cert_verify_mode =
-			X509CertificateValidationMode.ChainTrust;
-		X509CertificateValidator custom_cert_validator;
-		List<X509Certificate2> known_certs = new List<X509Certificate2> ();
-		X509RevocationMode revocation_mode = X509RevocationMode.Online;
-		SamlSerializer saml_serializer;
-		StoreLocation store_location = StoreLocation.LocalMachine;
+    [MonoTODO]
+    public class IssuedTokenServiceCredential
+    {
+        bool allow_untrusted_rsa_issuers;
+        X509CertificateValidationMode cert_verify_mode =
+            X509CertificateValidationMode.ChainTrust;
+        X509CertificateValidator custom_cert_validator;
+        List<X509Certificate2> known_certs = new List<X509Certificate2> ();
+        X509RevocationMode revocation_mode = X509RevocationMode.Online;
+        SamlSerializer saml_serializer;
+        StoreLocation store_location = StoreLocation.LocalMachine;
 
-		internal IssuedTokenServiceCredential ()
-		{
-			AllowedAudienceUris = new List<string> ();
-		}
+        internal IssuedTokenServiceCredential ()
+        {
+            AllowedAudienceUris = new List<string> ();
+        }
 
-		internal IssuedTokenServiceCredential Clone ()
-		{
-			var ret = (IssuedTokenServiceCredential) MemberwiseClone ();
-			ret.known_certs = new List<X509Certificate2> (known_certs);
-			return ret;
-		}
+        internal IssuedTokenServiceCredential Clone ()
+        {
+            var ret = (IssuedTokenServiceCredential) MemberwiseClone ();
+            ret.known_certs = new List<X509Certificate2> (known_certs);
+            return ret;
+        }
 
-		[MonoTODO]
-		public IList<string> AllowedAudienceUris { get; private set; }
+        [MonoTODO]
+        public IList<string> AllowedAudienceUris { get; private set; }
 
-		[MonoTODO]
-		public bool AllowUntrustedRsaIssuers {
-			get { return allow_untrusted_rsa_issuers; }
-			set { allow_untrusted_rsa_issuers = value; }
-		}
+        [MonoTODO]
+        public bool AllowUntrustedRsaIssuers {
+            get { return allow_untrusted_rsa_issuers; }
+            set { allow_untrusted_rsa_issuers = value; }
+        }
 
-		[MonoTODO]
-		public AudienceUriMode AudienceUriMode { get; set; }
+        [MonoTODO]
+        public AudienceUriMode AudienceUriMode { get; set; }
 
-		[MonoTODO]
-		public X509CertificateValidationMode CertificateValidationMode {
-			get { return cert_verify_mode; }
-			set { cert_verify_mode = value; }
-		}
+        [MonoTODO]
+        public X509CertificateValidationMode CertificateValidationMode {
+            get { return cert_verify_mode; }
+            set { cert_verify_mode = value; }
+        }
 
-		[MonoTODO]
-		public X509CertificateValidator CustomCertificateValidator {
-			get { return custom_cert_validator; }
-			set { custom_cert_validator = value; }
-		}
+        [MonoTODO]
+        public X509CertificateValidator CustomCertificateValidator {
+            get { return custom_cert_validator; }
+            set { custom_cert_validator = value; }
+        }
 
-		[MonoTODO]
-		public IList<X509Certificate2> KnownCertificates {
-			get { return known_certs; }
-		}
+        [MonoTODO]
+        public IList<X509Certificate2> KnownCertificates {
+            get { return known_certs; }
+        }
 
-		[MonoTODO]
-		public X509RevocationMode RevocationMode {
-			get { return revocation_mode; }
-			set { revocation_mode = value; }
-		}
+        [MonoTODO]
+        public X509RevocationMode RevocationMode {
+            get { return revocation_mode; }
+            set { revocation_mode = value; }
+        }
 
-		[MonoTODO]
-		public SamlSerializer SamlSerializer {
-			get { return saml_serializer; }
-			set { saml_serializer = value; }
-		}
+        [MonoTODO]
+        public SamlSerializer SamlSerializer {
+            get { return saml_serializer; }
+            set { saml_serializer = value; }
+        }
 
-		[MonoTODO]
-		public StoreLocation TrustedStoreLocation {
-			get { return store_location; }
-			set { store_location = value; }
-		}
-	}
+        [MonoTODO]
+        public StoreLocation TrustedStoreLocation {
+            get { return store_location; }
+            set { store_location = value; }
+        }
+    }
 }

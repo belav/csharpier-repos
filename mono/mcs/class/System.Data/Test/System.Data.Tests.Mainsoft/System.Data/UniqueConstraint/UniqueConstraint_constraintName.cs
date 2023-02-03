@@ -39,65 +39,65 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class UniqueConstraint_constraintName : GHTBase
 {
-	[Test] public void Main()
-	{
-		UniqueConstraint_constraintName tc = new UniqueConstraint_constraintName();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("UniqueConstraint_constraintName");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        UniqueConstraint_constraintName tc = new UniqueConstraint_constraintName();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("UniqueConstraint_constraintName");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-
-		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-		
-		UniqueConstraint uc = null;
-		uc = new UniqueConstraint(dtParent.Columns[0]);
-
-		try
-		{
-			BeginCase("default ");
-			Compare(uc.ConstraintName ,string.Empty );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		uc.ConstraintName  = "myConstraint";
-
-		try
-		{
-			BeginCase("set/get ");
-			Compare(uc.ConstraintName ,"myConstraint" );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+    public void run()
+    {
+        Exception exp = null;
+
+        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+        
+        UniqueConstraint uc = null;
+        uc = new UniqueConstraint(dtParent.Columns[0]);
+
+        try
+        {
+            BeginCase("default ");
+            Compare(uc.ConstraintName ,string.Empty );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        uc.ConstraintName  = "myConstraint";
+
+        try
+        {
+            BeginCase("set/get ");
+            Compare(uc.ConstraintName ,"myConstraint" );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+
+    }
 }
 }

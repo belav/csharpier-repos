@@ -3,18 +3,18 @@
 
 public class C
 {
-	public C (bool value)
-	{		
-	}
+    public C (bool value)
+    {        
+    }
 
-	public C ()
-		: this (Foo (out int arg))
-	{	
-	}
+    public C ()
+        : this (Foo (out int arg))
+    {    
+    }
 
-	static bool Foo (out int arg)
-	{
-		arg = 2;
-		return false;
-	}
+    static bool Foo (out int arg)
+    {
+        arg = 2;
+        return false;
+    }
 }

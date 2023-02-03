@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2762,65 +2762,65 @@ using System;
 
 public interface I<T>
 {
-	T Meth(T t, int i);
-	T vMeth(T t);
+    T Meth(T t, int i);
+    T vMeth(T t);
 }
 
 public class SubSubT<T> : SubT<T> , I<T>
 {
-	public override T vMeth(T t) 
-	{
-		Console.WriteLine(""SubSubT[{0}].vMeth({0})"",typeof(T));
-		return base.vMeth(t);
-	}
+    public override T vMeth(T t) 
+    {
+        Console.WriteLine(""SubSubT[{0}].vMeth({0})"",typeof(T));
+        return base.vMeth(t);
+    }
 }
 
 public class SubSubGT<T> : SubGT<T> , I<G<T>>
 {
-	public override G<T> vMeth(G<T> t) 
-	{
-		Console.WriteLine(""SubSubGT[{0}].vMeth({1})"",typeof(T),typeof(G<T>));
-		return base.vMeth(t);
-	}
+    public override G<T> vMeth(G<T> t) 
+    {
+        Console.WriteLine(""SubSubGT[{0}].vMeth({1})"",typeof(T),typeof(G<T>));
+        return base.vMeth(t);
+    }
 }
 
 public class SubSubC : SubC , I<C>
 {
-	public override C vMeth(C t) 
-	{ 
-		Console.WriteLine(""SubSubC.vMeth(C)"");
-		return base.vMeth(t);
-	}
+    public override C vMeth(C t) 
+    { 
+        Console.WriteLine(""SubSubC.vMeth(C)"");
+        return base.vMeth(t);
+    }
 }
 
 class Test
 {
-	public static int Main()
-	{
-		new SubSubT<int>().vMeth(1);
-		new SubSubGT<int>().vMeth(new G<int>());
-		new SubSubC().vMeth(new C());
+    public static int Main()
+    {
+        new SubSubT<int>().vMeth(1);
+        new SubSubGT<int>().vMeth(new G<int>());
+        new SubSubC().vMeth(new C());
 
-		Console.WriteLine();
-		
-		new SubSubT<string>().Meth(""1"",1);
-		new SubSubGT<string>().Meth(new G<string>(),1);
-		new SubSubC().Meth(new C(),1);
+        Console.WriteLine();
+        
+        new SubSubT<string>().Meth(""1"",1);
+        new SubSubGT<string>().Meth(new G<string>(),1);
+        new SubSubC().Meth(new C(),1);
 
-		Console.WriteLine();
-		
-		((I<string>)new SubSubT<string>()).vMeth(""1"");
-		((I<G<string>>)new SubSubGT<string>()).vMeth(new G<string>());
-		((I<C>)new SubSubC()).vMeth(new C());
+        Console.WriteLine();
+        
+        ((I<string>)new SubSubT<string>()).vMeth(""1"");
+        ((I<G<string>>)new SubSubGT<string>()).vMeth(new G<string>());
+        ((I<C>)new SubSubC()).vMeth(new C());
 
-		Console.WriteLine();
+        Console.WriteLine();
 
-		((I<int>)new SubSubT<int>()).Meth(1,1);
-		((I<G<int>>)new SubSubGT<int>()).Meth(new G<int>(),1);
-		((I<C>)new SubSubC()).Meth(new C(),1);
-		
-		return 0;
-	}
+        ((I<int>)new SubSubT<int>()).Meth(1,1);
+        ((I<G<int>>)new SubSubGT<int>()).Meth(new G<int>(),1);
+        ((I<C>)new SubSubC()).Meth(new C(),1);
+        
+        return 0;
+    }
 }
 ";
             var ref1 = CompileIL(il);
@@ -2879,20 +2879,20 @@ class Test
             var source1 = @"
 public class A
 {
-	protected internal virtual int P { get; set; }
+    protected internal virtual int P { get; set; }
 }
 ";
             var source2 = @"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""C"")]
 public class B : A
 {
-	protected override int P { get; set; }
+    protected override int P { get; set; }
 }
 ";
             var source3 = @"
 public class C : B
 {
-	protected override int P { get; set; }
+    protected override int P { get; set; }
 }
 ";
 
@@ -2927,20 +2927,20 @@ public class C : B
             var source1 = @"
 public class A
 {
-	protected internal virtual int P { get; set; }
+    protected internal virtual int P { get; set; }
 }
 ";
             var source2 = @"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""C"")]
 public class B : A
 {
-	protected override int P { set { } }
+    protected override int P { set { } }
 }
 ";
             var source3 = @"
 public class C : B
 {
-	protected override int P { get { return 0; } }
+    protected override int P { get { return 0; } }
 }
 ";
 
@@ -2975,20 +2975,20 @@ public class C : B
             var source1 = @"
 public class A
 {
-	public virtual int P { get; protected internal set; }
+    public virtual int P { get; protected internal set; }
 }
 ";
             var source2 = @"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""C"")]
 public class B : A
 {
-	public override int P { protected set { } }
+    public override int P { protected set { } }
 }
 ";
             var source3 = @"
 public class C : B
 {
-	public override int P { get { return 0; } }
+    public override int P { get { return 0; } }
 }
 ";
 
@@ -3023,19 +3023,19 @@ public class C : B
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""B"")]
 public class A
 {
-	public virtual int P { get; protected internal set; }
+    public virtual int P { get; protected internal set; }
 }
 ";
             var source2 = @"
 public class B : A
 {
-	public override int P { protected internal set { } }
+    public override int P { protected internal set { } }
 }
 ";
             var source3 = @"
 public class C : B
 {
-	public override int P { get { return 0; } }
+    public override int P { get { return 0; } }
 }
 ";
 
@@ -3069,20 +3069,20 @@ public class C : B
             var source1 = @"
 public class A
 {
-	public virtual int P { get; protected set; }
+    public virtual int P { get; protected set; }
 }
 ";
             var source2 = @"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""C"")]
 public class B : A
 {
-	public override int P { protected set { } }
+    public override int P { protected set { } }
 }
 ";
             var source3 = @"
 public class C : B
 {
-	public override int P { get { return 0; } }
+    public override int P { get { return 0; } }
 }
 ";
 
@@ -3117,19 +3117,19 @@ public class C : B
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""B"")]
 public class A
 {
-	public virtual int P { get; protected set; }
+    public virtual int P { get; protected set; }
 }
 ";
             var source2 = @"
 public class B : A
 {
-	public override int P { protected set { } }
+    public override int P { protected set { } }
 }
 ";
             var source3 = @"
 public class C : B
 {
-	public override int P { get { return 0; } }
+    public override int P { get { return 0; } }
 }
 ";
 
@@ -3164,13 +3164,13 @@ public class C : B
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""B"")]
 public class A
 {
-	protected internal virtual int P { get; set; }
+    protected internal virtual int P { get; set; }
 }
 ";
             var source2 = @"
 public class B : A
 {
-	protected internal override int P { set { } }
+    protected internal override int P { set { } }
 }
 ";
             // If this was C#, we would have to change the accessibility from
@@ -3237,7 +3237,7 @@ public class B : A
             var source1 = @"
 public class A
 {
-	protected internal virtual event System.Action E;
+    protected internal virtual event System.Action E;
 
     void UseEvent() { E(); }
 }
@@ -3246,7 +3246,7 @@ public class A
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo(""C"")]
 public class B : A
 {
-	protected override event System.Action E;
+    protected override event System.Action E;
 
     void UseEvent() { E(); }
 }
@@ -3254,7 +3254,7 @@ public class B : A
             var source3 = @"
 public class C : B
 {
-	protected override event System.Action E;
+    protected override event System.Action E;
 
     void UseEvent() { E(); }
 }

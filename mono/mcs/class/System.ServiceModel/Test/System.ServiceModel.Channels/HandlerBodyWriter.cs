@@ -2,7 +2,7 @@
 // HandlerBodyWriter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,21 +35,21 @@ using System.Xml;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	public delegate void BodyContentsWriter (XmlDictionaryWriter writer);
+    public delegate void BodyContentsWriter (XmlDictionaryWriter writer);
 
-	public class HandlerBodyWriter : BodyWriter
-	{
-		BodyContentsWriter handler;
+    public class HandlerBodyWriter : BodyWriter
+    {
+        BodyContentsWriter handler;
 
-		public HandlerBodyWriter (BodyContentsWriter handler)
-			: base (true)
-		{
-			this.handler = handler;
-		}
+        public HandlerBodyWriter (BodyContentsWriter handler)
+            : base (true)
+        {
+            this.handler = handler;
+        }
 
-		protected override void OnWriteBodyContents (XmlDictionaryWriter writer)
-		{
-			handler (writer);
-		}
-	}
+        protected override void OnWriteBodyContents (XmlDictionaryWriter writer)
+        {
+            handler (writer);
+        }
+    }
 }

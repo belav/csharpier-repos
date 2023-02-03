@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	[Flags]
-	public enum TextMetricsPitchAndFamilyValues
-	{
-		FixedPitch = 1,
-		Vector = 2,
-		TrueType = 4,
-		Device = 8
-	}
+    [Flags]
+    public enum TextMetricsPitchAndFamilyValues
+    {
+        FixedPitch = 1,
+        Vector = 2,
+        TrueType = 4,
+        Device = 8
+    }
 }

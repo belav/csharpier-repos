@@ -15,23 +15,23 @@ public class Bar : Foo{}
 
 public class CMain
 {
-	public static void Indirect()
-  	{
-  		Bar b = new Bar();
-	}
+    public static void Indirect()
+      {
+          Bar b = new Bar();
+    }
 
-  	public static int Main()
-	{
-		try
-		{
-			Indirect();
-			Console.WriteLine("PASS");
-			return 100;
-    		}
-		catch(Exception e)
-		{
-			Console.WriteLine("FAIL: Caught unexpected exception: " + e);
-			return 101;
-    		}
-  	}
+      public static int Main()
+    {
+        try
+        {
+            Indirect();
+            Console.WriteLine("PASS");
+            return 100;
+            }
+        catch(Exception e)
+        {
+            Console.WriteLine("FAIL: Caught unexpected exception: " + e);
+            return 101;
+            }
+      }
 }

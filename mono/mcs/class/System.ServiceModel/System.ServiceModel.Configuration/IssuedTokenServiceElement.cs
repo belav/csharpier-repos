@@ -2,7 +2,7 @@
 // IssuedTokenServiceElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -55,84 +55,84 @@ using System.IdentityModel.Selectors;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class IssuedTokenServiceElement
-		 : ConfigurationElement
-	{
-		public IssuedTokenServiceElement () {
-		}
+    public sealed class IssuedTokenServiceElement
+         : ConfigurationElement
+    {
+        public IssuedTokenServiceElement () {
+        }
 
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("allowUntrustedRsaIssuers",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = false)]
-		public bool AllowUntrustedRsaIssuers {
-			get { return (bool) base ["allowUntrustedRsaIssuers"]; }
-			set { base ["allowUntrustedRsaIssuers"] = value; }
-		}
+        [ConfigurationProperty ("allowUntrustedRsaIssuers",
+             Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false)]
+        public bool AllowUntrustedRsaIssuers {
+            get { return (bool) base ["allowUntrustedRsaIssuers"]; }
+            set { base ["allowUntrustedRsaIssuers"] = value; }
+        }
 
-		[ConfigurationProperty ("knownCertificates",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509CertificateTrustedIssuerElementCollection KnownCertificates {
-			get { return (X509CertificateTrustedIssuerElementCollection) base ["knownCertificates"]; }
-		}
+        [ConfigurationProperty ("knownCertificates",
+             Options = ConfigurationPropertyOptions.None)]
+        public X509CertificateTrustedIssuerElementCollection KnownCertificates {
+            get { return (X509CertificateTrustedIssuerElementCollection) base ["knownCertificates"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("samlSerializerType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		[StringValidator (MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string SamlSerializerType {
-			get { return (string) base ["samlSerializerType"]; }
-			set { base ["samlSerializerType"] = value; }
-		}
+        [ConfigurationProperty ("samlSerializerType",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "")]
+        [StringValidator (MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        public string SamlSerializerType {
+            get { return (string) base ["samlSerializerType"]; }
+            set { base ["samlSerializerType"] = value; }
+        }
 
-		[ConfigurationProperty ("allowedAudienceUris")]
-		public AllowedAudienceUriElementCollection AllowedAudienceUris {
-			get { return (AllowedAudienceUriElementCollection) base ["allowedAudienceUris"]; }
-		}
+        [ConfigurationProperty ("allowedAudienceUris")]
+        public AllowedAudienceUriElementCollection AllowedAudienceUris {
+            get { return (AllowedAudienceUriElementCollection) base ["allowedAudienceUris"]; }
+        }
 
-		[ConfigurationPropertyAttribute ("audienceUriMode",
-			DefaultValue = AudienceUriMode.BearerKeyOnly)]
-		public AudienceUriMode AudienceUriMode {
-			get { return (AudienceUriMode) this ["audienceUriMode"]; }
-			set { this ["audienceUriMode"] = value; }
-		}
+        [ConfigurationPropertyAttribute ("audienceUriMode",
+            DefaultValue = AudienceUriMode.BearerKeyOnly)]
+        public AudienceUriMode AudienceUriMode {
+            get { return (AudienceUriMode) this ["audienceUriMode"]; }
+            set { this ["audienceUriMode"] = value; }
+        }
 
-		[ConfigurationPropertyAttribute ("certificateValidationMode",
-			DefaultValue = X509CertificateValidationMode.ChainTrust)]
-		public X509CertificateValidationMode CertificateValidationMode {
-			get { return (X509CertificateValidationMode) this ["certificateValidationMode"]; }
-			set { this ["certificateValidationMode"] = value; }
-		}
+        [ConfigurationPropertyAttribute ("certificateValidationMode",
+            DefaultValue = X509CertificateValidationMode.ChainTrust)]
+        public X509CertificateValidationMode CertificateValidationMode {
+            get { return (X509CertificateValidationMode) this ["certificateValidationMode"]; }
+            set { this ["certificateValidationMode"] = value; }
+        }
 
-		[StringValidatorAttribute (MinLength = 0)]
-		[ConfigurationPropertyAttribute ("customCertificateValidatorType",
-			DefaultValue = "")]
-		public string CustomCertificateValidatorType {
-			get { return (string) this ["customCertificateValidatorType"]; }
-			set { this ["customCertificateValidatorType"] = value; }
-		}
+        [StringValidatorAttribute (MinLength = 0)]
+        [ConfigurationPropertyAttribute ("customCertificateValidatorType",
+            DefaultValue = "")]
+        public string CustomCertificateValidatorType {
+            get { return (string) this ["customCertificateValidatorType"]; }
+            set { this ["customCertificateValidatorType"] = value; }
+        }
 
-		[ConfigurationPropertyAttribute ("revocationMode", 
-			DefaultValue = X509RevocationMode.Online)]
-		public X509RevocationMode RevocationMode {
-			get { return (X509RevocationMode) this ["revocationMode"]; }
-			set { this ["revocationMode"] = value; }
-		}
+        [ConfigurationPropertyAttribute ("revocationMode", 
+            DefaultValue = X509RevocationMode.Online)]
+        public X509RevocationMode RevocationMode {
+            get { return (X509RevocationMode) this ["revocationMode"]; }
+            set { this ["revocationMode"] = value; }
+        }
 
-		[ConfigurationPropertyAttribute ("trustedStoreLocation", 
-			DefaultValue = StoreLocation.LocalMachine)]
-		public StoreLocation TrustedStoreLocation {
-			get { return (StoreLocation) this ["trustedStoreLocation"]; }
-			set { this ["trustedStoreLocation"] = value; }
-		}
-	}
+        [ConfigurationPropertyAttribute ("trustedStoreLocation", 
+            DefaultValue = StoreLocation.LocalMachine)]
+        public StoreLocation TrustedStoreLocation {
+            get { return (StoreLocation) this ["trustedStoreLocation"]; }
+            set { this ["trustedStoreLocation"] = value; }
+        }
+    }
 
 }

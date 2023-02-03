@@ -31,12 +31,12 @@
 
 namespace System.Runtime.InteropServices
 {
-	
-	[ComVisible(true)]
-	[Serializable] public enum ImporterEventKind
-	{
-		NOTIF_TYPECONVERTED = 0,
-		NOTIF_CONVERTWARNING = 1,
-		ERROR_REFTOINVALIDTYPELIB = 2,	      
-	}
+    
+    [ComVisible(true)]
+    [Serializable] public enum ImporterEventKind
+    {
+        NOTIF_TYPECONVERTED = 0,
+        NOTIF_CONVERTWARNING = 1,
+        ERROR_REFTOINVALIDTYPELIB = 2,          
+    }
 }

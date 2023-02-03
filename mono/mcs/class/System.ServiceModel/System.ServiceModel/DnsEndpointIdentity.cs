@@ -2,7 +2,7 @@
 // DnsEndpointIdentity.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,23 +37,23 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	public class DnsEndpointIdentity : EndpointIdentity
-	{
+    public class DnsEndpointIdentity : EndpointIdentity
+    {
 #if !MOBILE && !XAMMAC_4_5
-		public DnsEndpointIdentity (Claim identity)
-		{
-			Initialize (identity);
-		}
+        public DnsEndpointIdentity (Claim identity)
+        {
+            Initialize (identity);
+        }
 
-		public DnsEndpointIdentity (string dnsName)
-			: this (Claim.CreateDnsClaim (dnsName))
-		{
-		}
+        public DnsEndpointIdentity (string dnsName)
+            : this (Claim.CreateDnsClaim (dnsName))
+        {
+        }
 #else
-		public DnsEndpointIdentity (string dnsName)
-		{
-			throw new NotImplementedException ();
-		}
+        public DnsEndpointIdentity (string dnsName)
+        {
+            throw new NotImplementedException ();
+        }
 #endif
-	}
+    }
 }

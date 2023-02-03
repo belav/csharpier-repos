@@ -2,7 +2,7 @@
 // System.Security.Policy.IdentityNotMappedException.cs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,39 +33,39 @@ using System.Runtime.Serialization;
 
 namespace System.Security.Principal {
 
-	[Serializable]
-	[ComVisible (false)]
-	public sealed class IdentityNotMappedException : SystemException {
+    [Serializable]
+    [ComVisible (false)]
+    public sealed class IdentityNotMappedException : SystemException {
 
-		private IdentityReferenceCollection _coll;
+        private IdentityReferenceCollection _coll;
 
-		public IdentityNotMappedException ()
-			: base (Locale.GetText ("Couldn't translate some identities."))
-		{
-		}
+        public IdentityNotMappedException ()
+            : base (Locale.GetText ("Couldn't translate some identities."))
+        {
+        }
 
-		public IdentityNotMappedException (string message)
-			: base (message)
-		{
-		}
+        public IdentityNotMappedException (string message)
+            : base (message)
+        {
+        }
 
-		public IdentityNotMappedException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public IdentityNotMappedException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		public IdentityReferenceCollection UnmappedIdentities {
-			get {
-				if (_coll == null)
-					_coll = new IdentityReferenceCollection ();
-				return _coll;
-			}
-		}
+        public IdentityReferenceCollection UnmappedIdentities {
+            get {
+                if (_coll == null)
+                    _coll = new IdentityReferenceCollection ();
+                return _coll;
+            }
+        }
 
-		[MonoTODO ("not implemented")]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-		}
-	}
+        [MonoTODO ("not implemented")]
+        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        {
+        }
+    }
 }
 

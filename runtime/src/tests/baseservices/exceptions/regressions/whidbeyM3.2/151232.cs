@@ -22,8 +22,8 @@ public class D {
     }
     catch (E<T> ei) { ei.Show(); }
     catch (Exception e) { 
-	Console.WriteLine("Not caught: "+e.GetType().ToString());
-	return -1; 
+    Console.WriteLine("Not caught: "+e.GetType().ToString());
+    return -1; 
     }
     return 100;
   }
@@ -38,9 +38,9 @@ public class M {
   public int Run(){
     int val = D.Test5<string>(true,129);
     if (val == 100)
-    	val = D.Test5<object>(false,128);
+        val = D.Test5<object>(false,128);
     else
-	D.Test5<object>(false,128);
+    D.Test5<object>(false,128);
     return val;
   }
 }

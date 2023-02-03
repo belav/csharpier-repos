@@ -2,7 +2,7 @@
 // IMethodAnalysis.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,12 +29,12 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-	interface IMethodAnalysis {
-		string Name { get; }
+    interface IMethodAnalysis {
+        string Name { get; }
 
-		IMethodResult<Variable> Analyze<Expression, Variable> (
-			string fullMethodName, IMethodDriver<Expression, Variable> methodDriver)
-			where Variable : IEquatable<Variable>
-			where Expression : IEquatable<Expression>;
-	}
+        IMethodResult<Variable> Analyze<Expression, Variable> (
+            string fullMethodName, IMethodDriver<Expression, Variable> methodDriver)
+            where Variable : IEquatable<Variable>
+            where Expression : IEquatable<Expression>;
+    }
 }

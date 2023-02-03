@@ -46,7 +46,7 @@ public class Managed
         }
     }
 
-    #region	Struct with Layout Explicit scenario1
+    #region    Struct with Layout Explicit scenario1
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsExpByValINNER2(INNER2 str1);
     [DllImport("MarshalStructAsParam")]

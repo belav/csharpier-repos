@@ -14,21 +14,21 @@
 
 namespace Castle.Services.Logging.Log4netIntegration
 {
-	using Castle.Core.Logging;
+    using Castle.Core.Logging;
 
-	using log4net;
+    using log4net;
 
-	public class ThreadContextStacks : IContextStacks
-	{
-		public IContextStack this[string key]
-		{
-			get
-			{
-				var log4netStack = ThreadContext.Stacks[key];
+    public class ThreadContextStacks : IContextStacks
+    {
+        public IContextStack this[string key]
+        {
+            get
+            {
+                var log4netStack = ThreadContext.Stacks[key];
 
-				// log4net never allows a null stack.
-				return new ThreadContextStack(log4netStack);
-			}
-		}
-	}
+                // log4net never allows a null stack.
+                return new ThreadContextStack(log4netStack);
+            }
+        }
+    }
 }

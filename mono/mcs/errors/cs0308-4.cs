@@ -6,5 +6,5 @@ class Stack
 
 class X
 {
-	Stack<float> stack;
+    Stack<float> stack;
 }

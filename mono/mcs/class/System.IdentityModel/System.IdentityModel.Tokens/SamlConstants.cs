@@ -2,7 +2,7 @@
 // SamlConstants.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -29,44 +29,44 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-	public static class SamlConstants
-	{
-		internal const string DateFormat = "yyyy-MM-ddTHH:mm:ss.fff'Z'";
+    public static class SamlConstants
+    {
+        internal const string DateFormat = "yyyy-MM-ddTHH:mm:ss.fff'Z'";
 
-		public static string EmailName {
-			get { return "EmailName"; }
-		}
+        public static string EmailName {
+            get { return "EmailName"; }
+        }
 
-		public static string EmailNamespace {
-			get { return "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"; }
-		}
+        public static string EmailNamespace {
+            get { return "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"; }
+        }
 
-		public static string HolderOfKey {
-			get { return "urn:oasis:names:tc:SAML:1.0:cm:holder-of-key"; }
-		}
+        public static string HolderOfKey {
+            get { return "urn:oasis:names:tc:SAML:1.0:cm:holder-of-key"; }
+        }
 
-		public static int MajorVersionValue {
-			get { return 1; }
-		}
+        public static int MajorVersionValue {
+            get { return 1; }
+        }
 
-		public static int MinorVersionValue {
-			get { return 1; }
-		}
+        public static int MinorVersionValue {
+            get { return 1; }
+        }
 
-		public static string Namespace {
-			get { return "urn:oasis:names:tc:SAML:1.0:assertion"; }
-		}
+        public static string Namespace {
+            get { return "urn:oasis:names:tc:SAML:1.0:assertion"; }
+        }
 
-		public static string SenderVouches {
-			get { return "urn:oasis:names:tc:SAML:1.0:cm:sender-vouches"; }
-		}
+        public static string SenderVouches {
+            get { return "urn:oasis:names:tc:SAML:1.0:cm:sender-vouches"; }
+        }
 
-		public static string UserName {
-			get { return "UserName"; }
-		}
+        public static string UserName {
+            get { return "UserName"; }
+        }
 
-		public static string UserNameNamespace {
-			get { return "urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName"; }
-		}
-	}
+        public static string UserNameNamespace {
+            get { return "urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName"; }
+        }
+    }
 }

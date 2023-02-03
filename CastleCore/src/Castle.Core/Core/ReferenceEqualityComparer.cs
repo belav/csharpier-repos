@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,45 +14,45 @@
 
 namespace Castle.Core
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Runtime.CompilerServices;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ReferenceEqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
-	{
-		private static readonly ReferenceEqualityComparer<T> instance = new ReferenceEqualityComparer<T>();
+    public class ReferenceEqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
+    {
+        private static readonly ReferenceEqualityComparer<T> instance = new ReferenceEqualityComparer<T>();
 
-		private ReferenceEqualityComparer()
-		{
-		}
+        private ReferenceEqualityComparer()
+        {
+        }
 
-		public int GetHashCode(object obj)
-		{
-			return RuntimeHelpers.GetHashCode(obj);
-		}
+        public int GetHashCode(object obj)
+        {
+            return RuntimeHelpers.GetHashCode(obj);
+        }
 
-		bool IEqualityComparer.Equals(object x, object y)
-		{
-			return ReferenceEquals(x, y);
-		}
+        bool IEqualityComparer.Equals(object x, object y)
+        {
+            return ReferenceEquals(x, y);
+        }
 
-		bool IEqualityComparer<T>.Equals(T x, T y)
-		{
-			return ReferenceEquals(x, y);
-		}
+        bool IEqualityComparer<T>.Equals(T x, T y)
+        {
+            return ReferenceEquals(x, y);
+        }
 
-		int IEqualityComparer<T>.GetHashCode(T obj)
-		{
-			return RuntimeHelpers.GetHashCode(obj);
-		}
+        int IEqualityComparer<T>.GetHashCode(T obj)
+        {
+            return RuntimeHelpers.GetHashCode(obj);
+        }
 
-		public static ReferenceEqualityComparer<T> Instance
-		{
-			get { return instance; }
-		}
-	}
+        public static ReferenceEqualityComparer<T> Instance
+        {
+            get { return instance; }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.Util.Helpers
 //
 // Authors:
-//	Marek Habersack (mhabersack@novell.com)
+//    Marek Habersack (mhabersack@novell.com)
 //
 // (C) 2009 Novell, Inc (http://novell.com)
 
@@ -31,8 +31,8 @@ using System.Globalization;
 
 namespace System.Web.Util
 {
-	class Helpers
-	{
-		public static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
-	}
+    class Helpers
+    {
+        public static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
+    }
 }

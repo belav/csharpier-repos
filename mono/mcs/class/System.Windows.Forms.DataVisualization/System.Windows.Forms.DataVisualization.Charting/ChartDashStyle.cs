@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,13 +27,13 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ChartDashStyle
-	{
-		NotSet = 0,
-		Dash = 1,
-		DashDot = 2,
-		DashDotDot = 3,
-		Dot = 4,
-		Solid = 5
-	}
+    public enum ChartDashStyle
+    {
+        NotSet = 0,
+        Dash = 1,
+        DashDot = 2,
+        DashDotDot = 3,
+        Dot = 4,
+        Solid = 5
+    }
 }

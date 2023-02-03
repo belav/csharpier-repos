@@ -1,9 +1,9 @@
 //
 // XmlSchemaExceptionCas.cs 
-//	- CAS unit tests for System.Xml.Schema.XmlSchemaException
+//    - CAS unit tests for System.Xml.Schema.XmlSchemaException
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,43 +38,43 @@ using System.Xml.Xsl;
 
 namespace MonoCasTests.System.Xml.Xsl {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XsltArgumentListCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class XsltArgumentListCas {
 
-		private MethodInfo addExtensionObject;
+        private MethodInfo addExtensionObject;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
 
-			// this executes at fulltrust
-			addExtensionObject = typeof (XsltArgumentList).GetMethod ("AddExtensionObject",
-				new Type[2] { typeof (string), typeof (object) });
-		}
+            // this executes at fulltrust
+            addExtensionObject = typeof (XsltArgumentList).GetMethod ("AddExtensionObject",
+                new Type[2] { typeof (string), typeof (object) });
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-		public void AddExtensionObject ()
-		{
-			XsltArgumentList xal = new XsltArgumentList ();
-			xal.AddExtensionObject ("http://www.example.com", new object ());
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
+        public void AddExtensionObject ()
+        {
+            XsltArgumentList xal = new XsltArgumentList ();
+            xal.AddExtensionObject ("http://www.example.com", new object ());
+        }
 
-		// we use reflection to call XsltArgumentList as it's AddExtensionObject method
-		// is protected by a LinkDemand (which will be converted into full demand, i.e.
-		// a stack walk) when reflection is used (i.e. it gets testable).
+        // we use reflection to call XsltArgumentList as it's AddExtensionObject method
+        // is protected by a LinkDemand (which will be converted into full demand, i.e.
+        // a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-		public void AddExtensionObject_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (addExtensionObject, "AddExtensionObject");
-			XsltArgumentList xal = new XsltArgumentList ();
-			addExtensionObject.Invoke (xal, new object[2] { "http://www.example.com", new object () });
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
+        public void AddExtensionObject_LinkDemand ()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull (addExtensionObject, "AddExtensionObject");
+            XsltArgumentList xal = new XsltArgumentList ();
+            addExtensionObject.Invoke (xal, new object[2] { "http://www.example.com", new object () });
+        }
+    }
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -31,50 +31,50 @@ using System.Windows.Markup;
 
 namespace System.Windows.Markup.Primitives {
 
-	public abstract class MarkupProperty {
-		internal MarkupProperty ()
-		{
-		}
+    public abstract class MarkupProperty {
+        internal MarkupProperty ()
+        {
+        }
 
-		public abstract AttributeCollection Attributes { get; }
-		public abstract IEnumerable<MarkupObject> Items { get; }
-		public abstract string Name { get; }
-		public abstract Type PropertyType { get; }
-		public abstract string StringValue { get; }
-		public abstract IEnumerable<Type> TypeReferences { get; }
-		public abstract object Value { get; }
+        public abstract AttributeCollection Attributes { get; }
+        public abstract IEnumerable<MarkupObject> Items { get; }
+        public abstract string Name { get; }
+        public abstract Type PropertyType { get; }
+        public abstract string StringValue { get; }
+        public abstract IEnumerable<Type> TypeReferences { get; }
+        public abstract object Value { get; }
 
-		public virtual DependencyProperty DependencyProperty {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual DependencyProperty DependencyProperty {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual bool IsAttached {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsAttached {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual bool IsComposite {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsComposite {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual bool IsConstructorArgument {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsConstructorArgument {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual bool IsContent {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsContent {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual bool IsKey {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsKey {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual bool IsValueAsString {
-			get { throw new NotImplementedException (); }
-		}
+        public virtual bool IsValueAsString {
+            get { throw new NotImplementedException (); }
+        }
 
-		public virtual PropertyDescriptor PropertyDescriptor {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        public virtual PropertyDescriptor PropertyDescriptor {
+            get { throw new NotImplementedException (); }
+        }
+    }
 
 }

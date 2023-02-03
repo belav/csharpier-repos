@@ -2,7 +2,7 @@
 // PeerSecurityElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,56 +54,56 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class PeerSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty mode;
-		static ConfigurationProperty transport;
+    [MonoTODO]
+    public sealed partial class PeerSecurityElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty mode;
+        static ConfigurationProperty transport;
 
-		static PeerSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			mode = new ConfigurationProperty ("mode",
-				typeof (SecurityMode), "Transport", null/* FIXME: get converter for SecurityMode*/, null,
-				ConfigurationPropertyOptions.None);
+        static PeerSecurityElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            mode = new ConfigurationProperty ("mode",
+                typeof (SecurityMode), "Transport", null/* FIXME: get converter for SecurityMode*/, null,
+                ConfigurationPropertyOptions.None);
 
-			transport = new ConfigurationProperty ("transport",
-				typeof (PeerTransportSecurityElement), null, null/* FIXME: get converter for PeerTransportSecurityElement*/, null,
-				ConfigurationPropertyOptions.None);
+            transport = new ConfigurationProperty ("transport",
+                typeof (PeerTransportSecurityElement), null, null/* FIXME: get converter for PeerTransportSecurityElement*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (mode);
-			properties.Add (transport);
-		}
+            properties.Add (mode);
+            properties.Add (transport);
+        }
 
-		public PeerSecurityElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("mode",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Transport")]
-		public SecurityMode Mode {
-			get { return (SecurityMode) base [mode]; }
-			set { base [mode] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("transport",
-			 Options = ConfigurationPropertyOptions.None)]
-		public PeerTransportSecurityElement Transport {
-			get { return (PeerTransportSecurityElement) base [transport]; }
-		}
+        public PeerSecurityElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("mode",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "Transport")]
+        public SecurityMode Mode {
+            get { return (SecurityMode) base [mode]; }
+            set { base [mode] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [ConfigurationProperty ("transport",
+             Options = ConfigurationPropertyOptions.None)]
+        public PeerTransportSecurityElement Transport {
+            get { return (PeerTransportSecurityElement) base [transport]; }
+        }
+
+
+    }
 
 }

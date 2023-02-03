@@ -34,8 +34,8 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Activation {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IConstructionReturnMessage :IMethodReturnMessage, IMethodMessage, IMessage {
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IConstructionReturnMessage :IMethodReturnMessage, IMethodMessage, IMessage {
+    }
 }
 

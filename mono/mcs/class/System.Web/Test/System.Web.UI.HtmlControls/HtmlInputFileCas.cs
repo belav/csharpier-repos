@@ -1,9 +1,9 @@
 //
 // HtmlInputFileCas.cs 
-//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputFile
+//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputFile
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,22 +37,22 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlInputFileCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlInputFileCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlInputFileTest unit = new HtmlInputFileTest ();
-			unit.Defaults ();
-			unit.Attribute_Count ();
-			unit.RenderAttributes ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlInputFileTest unit = new HtmlInputFileTest ();
+            unit.Defaults ();
+            unit.Attribute_Count ();
+            unit.RenderAttributes ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlInputFile); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlInputFile); }
+        }
+    }
 }

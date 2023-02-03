@@ -13,9 +13,9 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-	[TestFixture]
-	public class XmlSchemaLengthFacetTests
-	{
+    [TestFixture]
+    public class XmlSchemaLengthFacetTests
+    {
 
     [Test]
     public void TestValidCombinations () {

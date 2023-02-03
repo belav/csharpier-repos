@@ -33,56 +33,56 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtension ("fault", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (FaultBinding))]
-	public class SoapFaultBinding : ServiceDescriptionFormatExtension {
+    [XmlFormatExtension ("fault", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (FaultBinding))]
+    public class SoapFaultBinding : ServiceDescriptionFormatExtension {
 
-		#region Fields
+        #region Fields
 
-		string encoding;
-		string ns;
-		SoapBindingUse use;
-		string name;
+        string encoding;
+        string ns;
+        SoapBindingUse use;
+        string name;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public SoapFaultBinding ()
-		{
-			encoding = String.Empty;
-			ns = String.Empty;
-			use = SoapBindingUse.Default;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public SoapFaultBinding ()
+        {
+            encoding = String.Empty;
+            ns = String.Empty;
+            use = SoapBindingUse.Default;
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[DefaultValue ("")]
-		[XmlAttribute ("encodingStyle")]
-		public string Encoding {
-			get { return encoding; }
-			set { encoding = value; }
-		}
-	
-		[XmlAttribute ("namespace")]	
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        [DefaultValue ("")]
+        [XmlAttribute ("encodingStyle")]
+        public string Encoding {
+            get { return encoding; }
+            set { encoding = value; }
+        }
+    
+        [XmlAttribute ("namespace")]    
+        public string Namespace {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		[DefaultValue (SoapBindingUse.Default)]
-		[XmlAttribute ("use")]
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        [DefaultValue (SoapBindingUse.Default)]
+        [XmlAttribute ("use")]
+        public SoapBindingUse Use {
+            get { return use; }
+            set { use = value; }
+        }
 
-		[XmlAttribute ("name")]
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-		#endregion // Properties
-	}
+        [XmlAttribute ("name")]
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
+        #endregion // Properties
+    }
 }

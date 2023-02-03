@@ -1,9 +1,9 @@
 //
 // CodeParserCas.cs 
-//	- CAS unit tests for System.CodeDom.Compiler.CodeParser
+//    - CAS unit tests for System.CodeDom.Compiler.CodeParser
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,40 +41,40 @@ using MonoTests.System.CodeDom.Compiler;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-	class CodeParserTest: CodeParser {
+    class CodeParserTest: CodeParser {
 
-		public override CodeCompileUnit Parse (TextReader codeStream)
-		{
-			return new CodeCompileUnit ();
-		}
-	}
+        public override CodeCompileUnit Parse (TextReader codeStream)
+        {
+            return new CodeCompileUnit ();
+        }
+    }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeParserCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeParserCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor ()
-		{
-			CodeParserTest cp = new CodeParserTest ();
-			Assert.IsNotNull (cp.Parse (null), "Parse");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor ()
+        {
+            CodeParserTest cp = new CodeParserTest ();
+            Assert.IsNotNull (cp.Parse (null), "Parse");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeParserTest).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeParserTest).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

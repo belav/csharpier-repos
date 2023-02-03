@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.GenClasses
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public abstract class ClassWithMethodWithArrayOfListOfT
-	{
-		public virtual void GenericMethodWithListArrayArgument<T>(List<T>[] action) { }
-	}
+    public abstract class ClassWithMethodWithArrayOfListOfT
+    {
+        public virtual void GenericMethodWithListArrayArgument<T>(List<T>[] action) { }
+    }
 }

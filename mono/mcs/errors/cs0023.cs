@@ -3,11 +3,11 @@
 
 public class Foo {
 
-	public static void Main ()
-	{
-		Foo k = new Foo ();
-		
-		int i = ~ k;
+    public static void Main ()
+    {
+        Foo k = new Foo ();
+        
+        int i = ~ k;
 
-	}
+    }
 }

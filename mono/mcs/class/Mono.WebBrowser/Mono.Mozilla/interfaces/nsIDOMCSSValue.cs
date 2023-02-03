@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,33 +32,33 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("009f7ea5-9e80-41be-b008-db62f10823f2")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMCSSValue {
+    [Guid ("009f7ea5-9e80-41be-b008-db62f10823f2")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMCSSValue {
 
 #region nsIDOMCSSValue
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCssText (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCssText (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setCssText ( /*DOMString*/ HandleRef value);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setCssText ( /*DOMString*/ HandleRef value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCssValueType ( out ushort ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCssValueType ( out ushort ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMCSSValue {
-		public static nsIDOMCSSValue GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSValue obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSValue).GUID, obj);
-			return o as nsIDOMCSSValue;
-		}
-	}
+    internal class nsDOMCSSValue {
+        public static nsIDOMCSSValue GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSValue obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSValue).GUID, obj);
+            return o as nsIDOMCSSValue;
+        }
+    }
 }

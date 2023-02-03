@@ -36,73 +36,73 @@ using System.Runtime.Remoting.Lifetime;
 
 namespace System.Runtime.Remoting.Lifetime {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ClientSponsor : MarshalByRefObject, ISponsor
-	{
-		TimeSpan renewal_time;
-		Hashtable registered_objects = new Hashtable ();
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ClientSponsor : MarshalByRefObject, ISponsor
+    {
+        TimeSpan renewal_time;
+        Hashtable registered_objects = new Hashtable ();
 
-		public ClientSponsor ()
-		{
-			renewal_time = new TimeSpan (0, 2, 0); // default is 2 mins
-		}
+        public ClientSponsor ()
+        {
+            renewal_time = new TimeSpan (0, 2, 0); // default is 2 mins
+        }
 
-		public ClientSponsor (TimeSpan renewalTime)
-		{
-			renewal_time = renewalTime;
-		}
+        public ClientSponsor (TimeSpan renewalTime)
+        {
+            renewal_time = renewalTime;
+        }
 
-		public TimeSpan RenewalTime {
-			get {
-				return renewal_time;
-			}
+        public TimeSpan RenewalTime {
+            get {
+                return renewal_time;
+            }
 
-			set {
-				renewal_time = value;
-			}
-		}
+            set {
+                renewal_time = value;
+            }
+        }
 
-		public void Close ()
-		{
-			foreach (MarshalByRefObject obj in registered_objects.Values)
-			{
-				ILease lease = obj.GetLifetimeService () as ILease;
-				lease.Unregister (this);
-			}
-			registered_objects.Clear ();
-		}
+        public void Close ()
+        {
+            foreach (MarshalByRefObject obj in registered_objects.Values)
+            {
+                ILease lease = obj.GetLifetimeService () as ILease;
+                lease.Unregister (this);
+            }
+            registered_objects.Clear ();
+        }
 
-		~ClientSponsor ()
-		{
-			Close ();
-		}
+        ~ClientSponsor ()
+        {
+            Close ();
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return base.InitializeLifetimeService ();
-		}
+        public override object InitializeLifetimeService ()
+        {
+            return base.InitializeLifetimeService ();
+        }
 
-		public bool Register (MarshalByRefObject obj)
-		{
-			if (registered_objects.ContainsKey (obj)) return false;
-			ILease lease = obj.GetLifetimeService () as ILease;
-			if (lease == null) return false;
-			lease.Register (this);
-			registered_objects.Add (obj,obj);
-			return true;
-		}
+        public bool Register (MarshalByRefObject obj)
+        {
+            if (registered_objects.ContainsKey (obj)) return false;
+            ILease lease = obj.GetLifetimeService () as ILease;
+            if (lease == null) return false;
+            lease.Register (this);
+            registered_objects.Add (obj,obj);
+            return true;
+        }
 
-		public TimeSpan Renewal (ILease lease)
-		{
-			return renewal_time;
-		}
-		       
-		public void Unregister (MarshalByRefObject obj)
-		{
-			if (!registered_objects.ContainsKey (obj)) return;
-			ILease lease = obj.GetLifetimeService () as ILease;
-			lease.Unregister (this);
-			registered_objects.Remove (obj);
-		}
-	}
+        public TimeSpan Renewal (ILease lease)
+        {
+            return renewal_time;
+        }
+               
+        public void Unregister (MarshalByRefObject obj)
+        {
+            if (!registered_objects.ContainsKey (obj)) return;
+            ILease lease = obj.GetLifetimeService () as ILease;
+            lease.Unregister (this);
+            registered_objects.Remove (obj);
+        }
+    }
 }

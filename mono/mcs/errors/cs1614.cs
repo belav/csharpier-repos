@@ -4,8 +4,8 @@
 
 using System;
 public class A : Attribute {
-	[A]
-	public static void Main() {
-	}
+    [A]
+    public static void Main() {
+    }
 }
 public class AAttribute : Attribute {}

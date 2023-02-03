@@ -2,13 +2,13 @@
 // Line: 9
 
 class Foo {
-	static void Main ()
-	{
-		try {
-		} catch {
-			break;
-		} finally {
-			throw new System.Exception ();
-		}
-	}
+    static void Main ()
+    {
+        try {
+        } catch {
+            break;
+        } finally {
+            throw new System.Exception ();
+        }
+    }
 }

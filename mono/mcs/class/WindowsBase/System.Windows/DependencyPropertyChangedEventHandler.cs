@@ -27,5 +27,5 @@
 //
 
 namespace System.Windows {
-	public delegate void DependencyPropertyChangedEventHandler (object sender, DependencyPropertyChangedEventArgs e);
+    public delegate void DependencyPropertyChangedEventHandler (object sender, DependencyPropertyChangedEventArgs e);
 }

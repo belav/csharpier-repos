@@ -4,16 +4,16 @@
 
 class Test
 {
-	static void Main()
-	{
-		char c = 'c';
-		switch (c)
-		{
-			case 'A':
-				break;
+    static void Main()
+    {
+        char c = 'c';
+        switch (c)
+        {
+            case 'A':
+                break;
 
-			case 'a': 
-				goto case 65;
-		}
-	}
+            case 'a': 
+                goto case 65;
+        }
+    }
 }

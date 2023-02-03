@@ -39,65 +39,65 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class UniqueConstraint_Equals_O : GHTBase
 {
-	[Test] public void Main()
-	{
-		UniqueConstraint_Equals_O tc = new UniqueConstraint_Equals_O();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("UniqueConstraint_Equals_O");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        UniqueConstraint_Equals_O tc = new UniqueConstraint_Equals_O();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("UniqueConstraint_Equals_O");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataSet ds = new DataSet();
-		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-		ds.Tables.Add(dtParent);
+    public void run()
+    {
+        Exception exp = null;
+        DataSet ds = new DataSet();
+        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+        ds.Tables.Add(dtParent);
 
-		UniqueConstraint  uc1,uc2;
-		uc1 = new UniqueConstraint(dtParent.Columns[0]);
+        UniqueConstraint  uc1,uc2;
+        uc1 = new UniqueConstraint(dtParent.Columns[0]);
 
-		uc2 = new UniqueConstraint(dtParent.Columns[1]);
-		try
-		{
-			BeginCase("different columnn");
-			Compare(uc1.Equals(uc2),false);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        uc2 = new UniqueConstraint(dtParent.Columns[1]);
+        try
+        {
+            BeginCase("different columnn");
+            Compare(uc1.Equals(uc2),false);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		//Two System.Data.ForeignKeyConstraint are equal if they constrain the same columns.
-		try
-		{
-			BeginCase("same column");
-			uc2 = new UniqueConstraint(dtParent.Columns[0]);
-			Compare(uc1.Equals(uc2),true);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        //Two System.Data.ForeignKeyConstraint are equal if they constrain the same columns.
+        try
+        {
+            BeginCase("same column");
+            uc2 = new UniqueConstraint(dtParent.Columns[0]);
+            Compare(uc1.Equals(uc2),true);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
 }
 }

@@ -3,18 +3,18 @@
 // Compiler options: -unsafe
 
 class X {
-	delegate void S ();
+    delegate void S ();
 
-	unsafe void M ()
-	{
-		int i;
-		int * j ;
+    unsafe void M ()
+    {
+        int i;
+        int * j ;
 
-		S s = delegate {
-			i = 1;
-		};
-		j = &i;
-	}
+        S s = delegate {
+            i = 1;
+        };
+        j = &i;
+    }
 
-	static void Main () {}
+    static void Main () {}
 }

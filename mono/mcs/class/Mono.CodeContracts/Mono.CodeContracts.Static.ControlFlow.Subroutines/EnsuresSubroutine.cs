@@ -2,7 +2,7 @@
 // EnsuresSubroutine.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,119 +34,119 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-	sealed class EnsuresSubroutine<Label> : MethodContractSubroutine<Label>, IEquatable<EnsuresSubroutine<Label>> {
-		private readonly Dictionary<int, Pair<CFGBlock, TypeNode>> inferred_old_label_reverse_map;
+    sealed class EnsuresSubroutine<Label> : MethodContractSubroutine<Label>, IEquatable<EnsuresSubroutine<Label>> {
+        private readonly Dictionary<int, Pair<CFGBlock, TypeNode>> inferred_old_label_reverse_map;
 
-		public EnsuresSubroutine (SubroutineFacade subroutineFacade,
-		                          Method method, IImmutableSet<Subroutine> inherited) : base (subroutineFacade, method)
-		{
-			this.inferred_old_label_reverse_map = new Dictionary<int, Pair<CFGBlock, TypeNode>> ();
-			AddSuccessor (Entry, EdgeTag.Entry, Exit);
-			AddBaseEnsures (Entry, Exit, inherited);
-			Commit ();
-		}
+        public EnsuresSubroutine (SubroutineFacade subroutineFacade,
+                                  Method method, IImmutableSet<Subroutine> inherited) : base (subroutineFacade, method)
+        {
+            this.inferred_old_label_reverse_map = new Dictionary<int, Pair<CFGBlock, TypeNode>> ();
+            AddSuccessor (Entry, EdgeTag.Entry, Exit);
+            AddBaseEnsures (Entry, Exit, inherited);
+            Commit ();
+        }
 
-		public EnsuresSubroutine (SubroutineFacade subroutineFacade,
-		                          Method method,
-		                          SimpleSubroutineBuilder<Label> builder, Label startLabel, IImmutableSet<Subroutine> inherited)
-			: base (subroutineFacade, method, builder, startLabel)
-		{
-			this.inferred_old_label_reverse_map = new Dictionary<int, Pair<CFGBlock, TypeNode>> ();
-			AddBaseEnsures (Entry, GetTargetBlock (startLabel), inherited);
-		}
+        public EnsuresSubroutine (SubroutineFacade subroutineFacade,
+                                  Method method,
+                                  SimpleSubroutineBuilder<Label> builder, Label startLabel, IImmutableSet<Subroutine> inherited)
+            : base (subroutineFacade, method, builder, startLabel)
+        {
+            this.inferred_old_label_reverse_map = new Dictionary<int, Pair<CFGBlock, TypeNode>> ();
+            AddBaseEnsures (Entry, GetTargetBlock (startLabel), inherited);
+        }
 
-		public override SubroutineKind Kind
-		{
-			get { return SubroutineKind.Ensures; }
-		}
+        public override SubroutineKind Kind
+        {
+            get { return SubroutineKind.Ensures; }
+        }
 
-		public override bool IsEnsures
-		{
-			get { return true; }
-		}
+        public override bool IsEnsures
+        {
+            get { return true; }
+        }
 
-		public override bool IsContract
-		{
-			get { return true; }
-		}
+        public override bool IsContract
+        {
+            get { return true; }
+        }
 
-		#region IEquatable<EnsuresSubroutine<Label>> Members
-		public bool Equals (EnsuresSubroutine<Label> other)
-		{
-			return Id == other.Id;
-		}
-		#endregion
+        #region IEquatable<EnsuresSubroutine<Label>> Members
+        public bool Equals (EnsuresSubroutine<Label> other)
+        {
+            return Id == other.Id;
+        }
+        #endregion
 
-		private void AddBaseEnsures (CFGBlock from, CFGBlock to, IImmutableSet<Subroutine> inherited)
-		{
-			if (inherited == null)
-				return;
-			foreach (Subroutine subroutine in inherited.Elements)
-				AddEdgeSubroutine (from, to, subroutine, EdgeTag.Inherited);
-		}
+        private void AddBaseEnsures (CFGBlock from, CFGBlock to, IImmutableSet<Subroutine> inherited)
+        {
+            if (inherited == null)
+                return;
+            foreach (Subroutine subroutine in inherited.Elements)
+                AddEdgeSubroutine (from, to, subroutine, EdgeTag.Inherited);
+        }
 
-		public override void Initialize ()
-		{
-			if (Builder == null)
-				return;
-			Builder.BuildBlocks (this.StartLabel, this);
-			Commit ();
-			Builder = null;
-		}
+        public override void Initialize ()
+        {
+            if (Builder == null)
+                return;
+            Builder.BuildBlocks (this.StartLabel, this);
+            Commit ();
+            Builder = null;
+        }
 
-		public override BlockWithLabels<Label> NewBlock ()
-		{
-			return new EnsuresBlock<Label> (this, ref this.BlockIdGenerator);
-		}
+        public override BlockWithLabels<Label> NewBlock ()
+        {
+            return new EnsuresBlock<Label> (this, ref this.BlockIdGenerator);
+        }
 
-		public override void Commit ()
-		{
-			base.Commit ();
+        public override void Commit ()
+        {
+            base.Commit ();
 
-			var visitor = new OldScanStateMachine<Label> (this);
-			EnsuresBlock<Label> priorBlock = null;
+            var visitor = new OldScanStateMachine<Label> (this);
+            EnsuresBlock<Label> priorBlock = null;
 
-			foreach (CFGBlock block in Blocks) {
-				var ensuresBlock = block as EnsuresBlock<Label>;
-				if (ensuresBlock != null) {
-					priorBlock = ensuresBlock;
-					int count = ensuresBlock.Count;
-					visitor.StartBlock (ensuresBlock);
+            foreach (CFGBlock block in Blocks) {
+                var ensuresBlock = block as EnsuresBlock<Label>;
+                if (ensuresBlock != null) {
+                    priorBlock = ensuresBlock;
+                    int count = ensuresBlock.Count;
+                    visitor.StartBlock (ensuresBlock);
 
-					for (int i = 0; i < count; i++) {
-						if (ensuresBlock.OriginalForwardDecode<int, Boolean, OldScanStateMachine<Label>> (i, visitor, i))
-							ensuresBlock.AddInstruction (i);
-					}
-				} else
-					visitor.HandlePotentialCallBlock (block as MethodCallBlock<Label>, priorBlock);
-				foreach (CFGBlock succ in SuccessorBlocks (block))
-					visitor.SetStartState (succ);
-			}
-		}
+                    for (int i = 0; i < count; i++) {
+                        if (ensuresBlock.OriginalForwardDecode<int, Boolean, OldScanStateMachine<Label>> (i, visitor, i))
+                            ensuresBlock.AddInstruction (i);
+                    }
+                } else
+                    visitor.HandlePotentialCallBlock (block as MethodCallBlock<Label>, priorBlock);
+                foreach (CFGBlock succ in SuccessorBlocks (block))
+                    visitor.SetStartState (succ);
+            }
+        }
 
-		public void AddInferredOldMap (int blockIndex, int instructionIndex, CFGBlock otherBlock, TypeNode endOldType)
-		{
-			this.inferred_old_label_reverse_map.Add (OverlayInstructionKey (blockIndex, instructionIndex), new Pair<CFGBlock, TypeNode> (otherBlock, endOldType));
-		}
+        public void AddInferredOldMap (int blockIndex, int instructionIndex, CFGBlock otherBlock, TypeNode endOldType)
+        {
+            this.inferred_old_label_reverse_map.Add (OverlayInstructionKey (blockIndex, instructionIndex), new Pair<CFGBlock, TypeNode> (otherBlock, endOldType));
+        }
 
-		private static int OverlayInstructionKey (int blockIndex, int instructionIndex)
-		{
-			return (instructionIndex << 16) + blockIndex;
-		}
+        private static int OverlayInstructionKey (int blockIndex, int instructionIndex)
+        {
+            return (instructionIndex << 16) + blockIndex;
+        }
 
-		public CFGBlock InferredBeginEndBijection (APC pc)
-		{
-			TypeNode endOldType;
-			return InferredBeginEndBijection (pc, out endOldType);
-		}
+        public CFGBlock InferredBeginEndBijection (APC pc)
+        {
+            TypeNode endOldType;
+            return InferredBeginEndBijection (pc, out endOldType);
+        }
 
-		public CFGBlock InferredBeginEndBijection (APC pc, out TypeNode endOldType)
-		{
-			Pair<CFGBlock, TypeNode> pair;
-			if (!this.inferred_old_label_reverse_map.TryGetValue (OverlayInstructionKey (pc.Block.Index, pc.Index), out pair))
-				throw new InvalidOperationException ("Fatal bug in ensures CFG begin/end old map");
-			endOldType = pair.Value;
-			return pair.Key;
-		}
-	}
+        public CFGBlock InferredBeginEndBijection (APC pc, out TypeNode endOldType)
+        {
+            Pair<CFGBlock, TypeNode> pair;
+            if (!this.inferred_old_label_reverse_map.TryGetValue (OverlayInstructionKey (pc.Block.Index, pc.Index), out pair))
+                throw new InvalidOperationException ("Fatal bug in ensures CFG begin/end old map");
+            endOldType = pair.Value;
+            return pair.Key;
+        }
+    }
 }

@@ -28,10 +28,10 @@
 
 namespace System.Web.Mail
 {
-	[Obsolete ("The recommended alternative is System.Net.Mail.MailPriority. http://go.microsoft.com/fwlink/?linkid=14202")]
-	public enum MailPriority {
-		Normal,
-		Low,
-		High
-	} 
+    [Obsolete ("The recommended alternative is System.Net.Mail.MailPriority. http://go.microsoft.com/fwlink/?linkid=14202")]
+    public enum MailPriority {
+        Normal,
+        Low,
+        High
+    } 
 }

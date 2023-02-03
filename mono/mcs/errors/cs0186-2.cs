@@ -2,9 +2,9 @@
 // Line: 2
 
 class ClassMain {    
-	public static void Main() {
-		foreach (System.Type type in null) {
-		}                    
-	}
+    public static void Main() {
+        foreach (System.Type type in null) {
+        }                    
+    }
 }
 

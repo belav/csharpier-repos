@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.CircleHotSpot.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,38 +32,38 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class CircleHotSpot: HotSpot
-	{
-		public override string GetCoordinates ()
-		{
-			return X + "," + Y + "," + Radius;
-		}
-		
-		protected internal override string MarkupName {
-			get { return "circle"; }
-		}
-		
-		[DefaultValueAttribute (0)]
-		public int Radius {
-			get { return ViewState.GetInt ("Radius", 0); }
-			set {
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ();
-				ViewState ["Radius"] = value;
-			}
-		}
+    public sealed class CircleHotSpot: HotSpot
+    {
+        public override string GetCoordinates ()
+        {
+            return X + "," + Y + "," + Radius;
+        }
+        
+        protected internal override string MarkupName {
+            get { return "circle"; }
+        }
+        
+        [DefaultValueAttribute (0)]
+        public int Radius {
+            get { return ViewState.GetInt ("Radius", 0); }
+            set {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException ();
+                ViewState ["Radius"] = value;
+            }
+        }
 
-		[DefaultValueAttribute (0)]
-		public int X {
-			get { return ViewState.GetInt ("X", 0); }
-			set { ViewState ["X"] = value; }
-		}
+        [DefaultValueAttribute (0)]
+        public int X {
+            get { return ViewState.GetInt ("X", 0); }
+            set { ViewState ["X"] = value; }
+        }
 
-		[DefaultValueAttribute (0)]
-		public int Y {
-			get { return ViewState.GetInt ("Y", 0); }
-			set { ViewState ["Y"] = value; }
-		}
-	}
+        [DefaultValueAttribute (0)]
+        public int Y {
+            get { return ViewState.GetInt ("Y", 0); }
+            set { ViewState ["Y"] = value; }
+        }
+    }
 }
 

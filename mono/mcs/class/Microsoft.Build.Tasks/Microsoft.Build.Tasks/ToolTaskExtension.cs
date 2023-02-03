@@ -30,71 +30,71 @@ using System.Collections;
 using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Tasks {
-	public abstract class ToolTaskExtension : ToolTask {
+    public abstract class ToolTaskExtension : ToolTask {
 
-		internal ToolTaskExtension ()
-		{
-		}
-	
-		Hashtable bag;
+        internal ToolTaskExtension ()
+        {
+        }
+    
+        Hashtable bag;
 
-		protected internal virtual void AddCommandLineCommands (
-						CommandLineBuilderExtension commandLine)
-		{
-		}
+        protected internal virtual void AddCommandLineCommands (
+                        CommandLineBuilderExtension commandLine)
+        {
+        }
 
-		protected internal virtual void AddResponseFileCommands (
-						CommandLineBuilderExtension commandLine)
-		{
-		}
-	
-		protected override string GenerateCommandLineCommands ()
-		{
-			CommandLineBuilderExtension clbe = new CommandLineBuilderExtension ();
-			AddCommandLineCommands (clbe);
-			return clbe.ToString ();
-		}
+        protected internal virtual void AddResponseFileCommands (
+                        CommandLineBuilderExtension commandLine)
+        {
+        }
+    
+        protected override string GenerateCommandLineCommands ()
+        {
+            CommandLineBuilderExtension clbe = new CommandLineBuilderExtension ();
+            AddCommandLineCommands (clbe);
+            return clbe.ToString ();
+        }
 
-		protected override string GenerateResponseFileCommands ()
-		{
-			CommandLineBuilderExtension clbe = new CommandLineBuilderExtension ();
-			AddResponseFileCommands (clbe);
-			return clbe.ToString ();
-		}
+        protected override string GenerateResponseFileCommands ()
+        {
+            CommandLineBuilderExtension clbe = new CommandLineBuilderExtension ();
+            AddResponseFileCommands (clbe);
+            return clbe.ToString ();
+        }
 
-		protected internal bool GetBoolParameterWithDefault (string parameterName,
-								     bool defaultValue)
-		{
-			if (Bag.Contains (parameterName))
-				return (bool) Bag [parameterName];
-			else
-				return defaultValue;
-		}
+        protected internal bool GetBoolParameterWithDefault (string parameterName,
+                                     bool defaultValue)
+        {
+            if (Bag.Contains (parameterName))
+                return (bool) Bag [parameterName];
+            else
+                return defaultValue;
+        }
 
-		protected internal int GetIntParameterWithDefault (string parameterName,
-								   int defaultValue)
-		{
-			if (Bag.Contains (parameterName))
-				return (int) Bag [parameterName];
-			else
-				return defaultValue;
-		}
+        protected internal int GetIntParameterWithDefault (string parameterName,
+                                   int defaultValue)
+        {
+            if (Bag.Contains (parameterName))
+                return (int) Bag [parameterName];
+            else
+                return defaultValue;
+        }
 
-		protected override bool HasLoggedErrors {
-			get { return Log.HasLoggedErrors; }
-		}
+        protected override bool HasLoggedErrors {
+            get { return Log.HasLoggedErrors; }
+        }
 
-		protected internal Hashtable Bag {
-			get {
-				if (bag == null)
-					bag = new Hashtable ();
-				return bag;
-			}
-		}
+        protected internal Hashtable Bag {
+            get {
+                if (bag == null)
+                    bag = new Hashtable ();
+                return bag;
+            }
+        }
 
-		public new TaskLoggingHelper Log {
-			get { return base.Log; }
-		}
-	}
+        public new TaskLoggingHelper Log {
+            get { return base.Log; }
+        }
+    }
 }
 

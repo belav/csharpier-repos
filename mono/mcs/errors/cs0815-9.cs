@@ -4,8 +4,8 @@
 
 static class X
 {
-	public static void Main ()
-	{
-		var x = default;
-	}
+    public static void Main ()
+    {
+        var x = default;
+    }
 }

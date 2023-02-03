@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	public class DynamicValueDelegate<T> : DynamicValue<T>
-	{
-		private readonly Func<T> dynamicDelegate;
+    public class DynamicValueDelegate<T> : DynamicValue<T>
+    {
+        private readonly Func<T> dynamicDelegate;
 
-		public DynamicValueDelegate(Func<T> dynamicDelegate)
-		{
-			this.dynamicDelegate = dynamicDelegate;
-		}
+        public DynamicValueDelegate(Func<T> dynamicDelegate)
+        {
+            this.dynamicDelegate = dynamicDelegate;
+        }
 
-		public override T Value
-		{
-			get { return dynamicDelegate(); }
-		}
-	}
+        public override T Value
+        {
+            get { return dynamicDelegate(); }
+        }
+    }
 }

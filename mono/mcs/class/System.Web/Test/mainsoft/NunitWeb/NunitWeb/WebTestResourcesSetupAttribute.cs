@@ -33,61 +33,61 @@ using System.Reflection;
 
 namespace MonoTests.SystemWeb.Framework
 {
-	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple=false)]
-	public class WebTestResourcesSetupAttribute : Attribute
-	{
-		public delegate void SetupHandler ();
-		
-		Type type;
-		string methodName;
-		
-		public Type Type {
-			get { return type; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("value");
-				
-				type = value;
-			}
-		}
+    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple=false)]
+    public class WebTestResourcesSetupAttribute : Attribute
+    {
+        public delegate void SetupHandler ();
+        
+        Type type;
+        string methodName;
+        
+        public Type Type {
+            get { return type; }
+            set {
+                if (value == null)
+                    throw new ArgumentNullException ("value");
+                
+                type = value;
+            }
+        }
 
-		public string MethodName {
-			get { return methodName; }
-			set {
-				if (value == null || value.Length == 0)
-					throw new ArgumentNullException ("value");
-				methodName = value;
-			}
-		}
+        public string MethodName {
+            get { return methodName; }
+            set {
+                if (value == null || value.Length == 0)
+                    throw new ArgumentNullException ("value");
+                methodName = value;
+            }
+        }
 
-		public SetupHandler Handler {
-			get { return FindHandler (Type, MethodName); }
-		}
-		
-		public WebTestResourcesSetupAttribute (Type type, string methodName)
-		{
-			Type = type;
-			MethodName = methodName;
-		}
+        public SetupHandler Handler {
+            get { return FindHandler (Type, MethodName); }
+        }
+        
+        public WebTestResourcesSetupAttribute (Type type, string methodName)
+        {
+            Type = type;
+            MethodName = methodName;
+        }
 
-		SetupHandler FindHandler (Type type, string methodName)
-		{
-			SetupHandler ret;
-			MethodInfo mi = type.GetMethod (methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static, null, Type.EmptyTypes, null);
-			
-			if (mi == null)
-				throw new InvalidOperationException ("Method '" + methodName + "' cannot be found in type '" + type + "'.");
+        SetupHandler FindHandler (Type type, string methodName)
+        {
+            SetupHandler ret;
+            MethodInfo mi = type.GetMethod (methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static, null, Type.EmptyTypes, null);
+            
+            if (mi == null)
+                throw new InvalidOperationException ("Method '" + methodName + "' cannot be found in type '" + type + "'.");
 
-			if (mi.IsAbstract ||
-			    mi.IsGenericMethodDefinition ||
-			    mi.ReturnType != typeof (void) || mi.GetParameters ().Length > 0)
-				throw new InvalidOperationException ("Method '" + methodName + "' must return void and take no parameters.");
+            if (mi.IsAbstract ||
+                mi.IsGenericMethodDefinition ||
+                mi.ReturnType != typeof (void) || mi.GetParameters ().Length > 0)
+                throw new InvalidOperationException ("Method '" + methodName + "' must return void and take no parameters.");
 
-			ret = Delegate.CreateDelegate (typeof (SetupHandler), null, mi, false) as SetupHandler;
-			if (ret == null)
-				throw new InvalidOperationException ("Failed to create a delegate to method '" + methodName + "'.");
+            ret = Delegate.CreateDelegate (typeof (SetupHandler), null, mi, false) as SetupHandler;
+            if (ret == null)
+                throw new InvalidOperationException ("Failed to create a delegate to method '" + methodName + "'.");
 
-			return ret;
-		}
-	}
+            return ret;
+        }
+    }
 }

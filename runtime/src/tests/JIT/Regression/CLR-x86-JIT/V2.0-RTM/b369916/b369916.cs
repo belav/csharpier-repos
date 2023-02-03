@@ -375,7 +375,7 @@ namespace CseTest
             int v;
 
 #if LOOP
-			do {
+            do {
 #endif
             v = ((((((s.e * ((s.a + (s.b * s.c)) - (s.c * s.d))) - ((s.f + (s.e * s.f)) - (s.g * s.h))) + (s.e + ((s.a + (s.b * s.c)) - (s.c * s.d)))) - (s.g + ((s.f + (s.e * s.f)) - (s.g * s.h)))) + ((s.a + ((s.h + (s.f + s.g)) - (s.p * s.q))) * (((s.a + s.b) + s.g) - ((s.c + s.b) * s.k)))) - (((s.b * s.b) + s.g) - ((s.c + s.b) * s.k)));
             if (v != 2596789)
@@ -449,7 +449,7 @@ namespace CseTest
             }
 
 #if LOOP
-				do {
+                do {
 #endif
             v = (s.a + (s.b * s.c));
             if (v != -1037)
@@ -542,7 +542,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-				} while (v == 0);
+                } while (v == 0);
 #endif
 
             v = ((s.a + (s.b * s.c)) - (s.c * s.d));
@@ -574,7 +574,7 @@ namespace CseTest
             }
 
 #if LOOP
-			do {
+            do {
 #endif
 
             v = (s.f + (s.e * s.f));
@@ -641,7 +641,7 @@ namespace CseTest
             }
 
 #if LOOP
-			do {
+            do {
 #endif
 
             v = (s.h * s.g);
@@ -771,7 +771,7 @@ namespace CseTest
             }
 
 #if TRY
-				try {
+                try {
 #endif
             v = (s.a + (s.b * s.c));
             if (v != -1042)
@@ -808,16 +808,16 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY            
-					throw new Exception("Test exception");
-				}
-				catch (System.Exception) {
-					Console.WriteLine("In catch");
+                    throw new Exception("Test exception");
+                }
+                catch (System.Exception) {
+                    Console.WriteLine("In catch");
 #endif
             s.q = return_int(false, 33);
 
 #if TRY            
-				}
-				
+                }
+                
 #endif
             v = (s.a + (s.b * s.c));
             if (v != -1042)
@@ -2316,7 +2316,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-			} while (v == 0);
+            } while (v == 0);
 #endif
             Console.WriteLine(ret);
             if (ret == 100)

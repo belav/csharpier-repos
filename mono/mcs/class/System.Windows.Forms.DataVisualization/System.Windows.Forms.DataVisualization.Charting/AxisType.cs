@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,9 +27,9 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum AxisType
-	{
-		Primary = 0,
-		Secondary = 1
-	}
+    public enum AxisType
+    {
+        Primary = 0,
+        Secondary = 1
+    }
 }

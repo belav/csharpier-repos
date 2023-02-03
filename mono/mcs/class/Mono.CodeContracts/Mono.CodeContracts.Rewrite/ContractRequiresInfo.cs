@@ -2,7 +2,7 @@
 // ContractRequiresInfo.cs
 //
 // Authors:
-//	Chris Bacon (chrisbacon76@gmail.com)
+//    Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -33,16 +33,16 @@ using System.Text;
 using Mono.CodeContracts.Rewrite.Ast;
 
 namespace Mono.CodeContracts.Rewrite {
-	class ContractRequiresInfo {
+    class ContractRequiresInfo {
 
-		public ContractRequiresInfo (Expr originalExpr, Expr rewrittenExpr)
-		{
-			this.OriginalExpr = originalExpr;
-			this.RewrittenExpr = rewrittenExpr;
-		}
+        public ContractRequiresInfo (Expr originalExpr, Expr rewrittenExpr)
+        {
+            this.OriginalExpr = originalExpr;
+            this.RewrittenExpr = rewrittenExpr;
+        }
 
-		public Expr OriginalExpr { get; private set; }
-		public Expr RewrittenExpr { get; private set; }
+        public Expr OriginalExpr { get; private set; }
+        public Expr RewrittenExpr { get; private set; }
 
-	}
+    }
 }

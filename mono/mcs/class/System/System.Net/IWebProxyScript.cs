@@ -2,7 +2,7 @@
 // System.Net.IWebProxyScript.cs
 //
 // Author:
-//	Dick Porter (dick@ximian.com)
+//    Dick Porter (dick@ximian.com)
 //
 
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
@@ -29,9 +29,9 @@
 
 
 namespace System.Net {
-	public interface IWebProxyScript {
-		void Close ();
-		bool Load (Uri scriptLocation, string script, Type helperType);
-		string Run (string url, string host);
-	}
+    public interface IWebProxyScript {
+        void Close ();
+        bool Load (Uri scriptLocation, string script, Type helperType);
+        string Run (string url, string host);
+    }
 }

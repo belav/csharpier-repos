@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -143,8 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             => c is '\t' or '\n' or '\0';
 
         // This is a temporarily method to support preference of IntelliCode items comparing to non-IntelliCode items.
-        // We expect that Editor will introduce this support and we will get rid of relying on the "★" then.
+        // We expect that Editor will introduce this support and we will get rid of relying on the "?" then.
         internal static bool IsPreferredItem(this VSCompletionItem completionItem)
-            => completionItem.DisplayText.StartsWith("★");
+            => completionItem.DisplayText.StartsWith("?");
     }
 }

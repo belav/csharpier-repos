@@ -33,33 +33,33 @@ using System.Text;
 
 namespace MonoTests.System
 {
-	[TestFixture]
-	public class ConsoleKeyInfoTest
-	{
-		[Test]
-		public void CtorTest()
-		{
-			var cki = new ConsoleKeyInfo ('A', ConsoleKey.A, true, false, true);
+    [TestFixture]
+    public class ConsoleKeyInfoTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            var cki = new ConsoleKeyInfo ('A', ConsoleKey.A, true, false, true);
 
-			Assert.AreEqual ('A', cki.KeyChar, "#1");
-			Assert.AreEqual (ConsoleKey.A, cki.Key, "#2");
-			Assert.AreEqual ((ConsoleModifiers.Shift | ConsoleModifiers.Control) , cki.Modifiers, "#3");
-		}
+            Assert.AreEqual ('A', cki.KeyChar, "#1");
+            Assert.AreEqual (ConsoleKey.A, cki.Key, "#2");
+            Assert.AreEqual ((ConsoleModifiers.Shift | ConsoleModifiers.Control) , cki.Modifiers, "#3");
+        }
 
-		[Test]
-		public void EqualTest()
-		{
-			var ckiA = new ConsoleKeyInfo ('a', ConsoleKey.A, false, false, false);
-			var ckiB = new ConsoleKeyInfo ('b', ConsoleKey.B, false, false, false);
-			var ckiA2 = new ConsoleKeyInfo ('a', ConsoleKey.A, false, false, false);
+        [Test]
+        public void EqualTest()
+        {
+            var ckiA = new ConsoleKeyInfo ('a', ConsoleKey.A, false, false, false);
+            var ckiB = new ConsoleKeyInfo ('b', ConsoleKey.B, false, false, false);
+            var ckiA2 = new ConsoleKeyInfo ('a', ConsoleKey.A, false, false, false);
 
-			Assert.IsFalse (ckiA == ckiB, "#1");
-			Assert.IsTrue (ckiA != ckiB, "#2");
-			Assert.IsFalse (ckiA.Equals (ckiB), "#3");
+            Assert.IsFalse (ckiA == ckiB, "#1");
+            Assert.IsTrue (ckiA != ckiB, "#2");
+            Assert.IsFalse (ckiA.Equals (ckiB), "#3");
 
-			Assert.IsTrue (ckiA == ckiA2, "#4");
-			Assert.IsFalse (ckiA != ckiA2, "#5");
-			Assert.IsTrue (ckiA.Equals (ckiA2), "#6");
-		}
-	}
+            Assert.IsTrue (ckiA == ckiA2, "#4");
+            Assert.IsFalse (ckiA != ckiA2, "#5");
+            Assert.IsTrue (ckiA.Equals (ckiA2), "#6");
+        }
+    }
 }

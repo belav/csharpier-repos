@@ -211,7 +211,7 @@ namespace Newtonsoft.Json.Serialization
         /// Gets or sets a value indicating whether this property preserves object references.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance is reference; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is reference; otherwise, <c>false</c>.
         /// </value>
         public bool? IsReference { get; set; }
 

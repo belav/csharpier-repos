@@ -2,7 +2,7 @@
 // System.Net.NetworkInformation.NetworkInterface
 //
 // Authors:
-//	Conrad Meyer (cem@FreeBSD.org)
+//    Conrad Meyer (cem@FreeBSD.org)
 //
 // Copyright (c) 2019 Conrad Meyer
 //
@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net.NetworkInformation {
-	internal class FreeBSDNetworkInterfaceAPI : MacOsNetworkInterfaceAPI
-	{
-		public FreeBSDNetworkInterfaceAPI ()
-			: base (AF_INET6: 28)
-		{
-		}
-	}
+    internal class FreeBSDNetworkInterfaceAPI : MacOsNetworkInterfaceAPI
+    {
+        public FreeBSDNetworkInterfaceAPI ()
+            : base (AF_INET6: 28)
+        {
+        }
+    }
 }

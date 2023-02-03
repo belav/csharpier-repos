@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ProjectedWrapper0.cs
 //  
 // Author:
@@ -31,19 +31,19 @@ using System.Runtime;
 
 namespace System.Data.Services.Internal
 {
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public sealed class ProjectedWrapper0 : ProjectedWrapper
-	{
-		protected override object InternalGetProjectedPropertyValue (int propertyIndex)
-		{
-			throw new NotImplementedException ();
-		}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    public sealed class ProjectedWrapper0 : ProjectedWrapper
+    {
+        protected override object InternalGetProjectedPropertyValue (int propertyIndex)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[TargetedPatchingOptOut ("Performance critical to inline this type of method across NGen image boundaries")]
-		public ProjectedWrapper0 ()
-		{
-			throw new NotImplementedException ();
-		}
+        [TargetedPatchingOptOut ("Performance critical to inline this type of method across NGen image boundaries")]
+        public ProjectedWrapper0 ()
+        {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 }

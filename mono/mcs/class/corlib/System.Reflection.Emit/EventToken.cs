@@ -31,73 +31,73 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-	/// <summary>
-	///  Represents the Token returned by the metadata to represent a Event.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public readonly struct EventToken : IEquatable<EventToken> {
+    /// <summary>
+    ///  Represents the Token returned by the metadata to represent a Event.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public readonly struct EventToken : IEquatable<EventToken> {
 
-		internal readonly int tokValue;
+        internal readonly int tokValue;
 
-		public static readonly EventToken Empty = new EventToken ();
+        public static readonly EventToken Empty = new EventToken ();
 
-		internal EventToken (int val)
-		{
-			tokValue = val;
-		}
-
-
-
-		/// <summary>
-		/// </summary>
-		public override bool Equals (object obj)
-		{
-			bool res = obj is EventToken;
-
-			if (res) {
-				EventToken that = (EventToken) obj;
-				res = (this.tokValue == that.tokValue);
-			}
-
-			return res;
-		}
-
-		public bool Equals (EventToken obj)
-		{
-			return (this.tokValue == obj.tokValue);
-		}
-
-		public static bool operator == (EventToken a, EventToken b)
-		{
-			return Equals (a, b);
-		}
-
-		public static bool operator != (EventToken a, EventToken b)
-		{
-			return !Equals (a, b);
-		}
-
-		/// <summary>
-		///  Tests whether the given object is an instance of
-		///  EventToken and has the same token value.
-		/// </summary>
-		public override int GetHashCode ()
-		{
-			return tokValue;
-		}
+        internal EventToken (int val)
+        {
+            tokValue = val;
+        }
 
 
-		/// <summary>
-		///  Returns the metadata token for this Event.
-		/// </summary>
-		public int Token {
-			get {
-				return tokValue;
-			}
-		}
 
-	}
+        /// <summary>
+        /// </summary>
+        public override bool Equals (object obj)
+        {
+            bool res = obj is EventToken;
+
+            if (res) {
+                EventToken that = (EventToken) obj;
+                res = (this.tokValue == that.tokValue);
+            }
+
+            return res;
+        }
+
+        public bool Equals (EventToken obj)
+        {
+            return (this.tokValue == obj.tokValue);
+        }
+
+        public static bool operator == (EventToken a, EventToken b)
+        {
+            return Equals (a, b);
+        }
+
+        public static bool operator != (EventToken a, EventToken b)
+        {
+            return !Equals (a, b);
+        }
+
+        /// <summary>
+        ///  Tests whether the given object is an instance of
+        ///  EventToken and has the same token value.
+        /// </summary>
+        public override int GetHashCode ()
+        {
+            return tokValue;
+        }
+
+
+        /// <summary>
+        ///  Returns the metadata token for this Event.
+        /// </summary>
+        public int Token {
+            get {
+                return tokValue;
+            }
+        }
+
+    }
 
 }
 

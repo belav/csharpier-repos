@@ -2,9 +2,9 @@
 // Line: 5
 
 class TorrentEditor {
-	TorrentEditor ()
+    TorrentEditor ()
 
-	public TorrentEditor ()
-	{
-	}
+    public TorrentEditor ()
+    {
+    }
 }

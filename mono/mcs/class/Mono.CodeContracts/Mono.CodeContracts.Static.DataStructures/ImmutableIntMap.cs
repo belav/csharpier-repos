@@ -2,7 +2,7 @@
 // ImmutableIntMap.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,7 +30,7 @@ using Mono.CodeContracts.Static.DataStructures.Patricia;
 
 namespace Mono.CodeContracts.Static.DataStructures {
         public static class ImmutableIntMap<T>
-	{
+    {
         public static readonly IImmutableIntMap<T> Empty = EmptyNode<T>.Instance;    
-	}
+    }
 }

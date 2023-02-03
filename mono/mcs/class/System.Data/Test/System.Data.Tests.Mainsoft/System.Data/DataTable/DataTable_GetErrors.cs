@@ -39,68 +39,68 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_GetErrors : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataTable_GetErrors tc = new DataTable_GetErrors();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTable_GetErrors");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataTable_GetErrors tc = new DataTable_GetErrors();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTable_GetErrors");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-		DataRow[] drArr = new DataRow[3];
-		drArr[0] = dt.Rows[0];
-		drArr[1] = dt.Rows[2];
-		drArr[2] = dt.Rows[5];
-		
-		drArr[0].RowError = "Error1";
-		drArr[1].RowError = "Error2";
-		drArr[2].RowError = "Error3";
+    public void run()
+    {
+        Exception exp = null;
+        
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+        DataRow[] drArr = new DataRow[3];
+        drArr[0] = dt.Rows[0];
+        drArr[1] = dt.Rows[2];
+        drArr[2] = dt.Rows[5];
+        
+        drArr[0].RowError = "Error1";
+        drArr[1].RowError = "Error2";
+        drArr[2].RowError = "Error3";
 
         
-		try
-		{
-			BeginCase("GetErrors");
-			Compare(drArr ,dt.GetErrors());
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-				
+        try
+        {
+            BeginCase("GetErrors");
+            Compare(drArr ,dt.GetErrors());
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+                
 
 
 
-	
+    
 
 
-	}
+    }
 
-	
+    
 }
 }

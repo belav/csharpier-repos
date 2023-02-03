@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,17 +27,17 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[Flags]
-	public enum LabelAlignmentStyles
-	{
-		Top = 1,
-		Bottom = 2,
-		Right = 4,
-		Left = 8,
-		TopLeft = 16,
-		TopRight = 32,
-		BottomLeft = 64,
-		BottomRight = 128,
-		Center = 256
-	}
+    [Flags]
+    public enum LabelAlignmentStyles
+    {
+        Top = 1,
+        Bottom = 2,
+        Right = 4,
+        Left = 8,
+        TopLeft = 16,
+        TopRight = 32,
+        BottomLeft = 64,
+        BottomRight = 128,
+        Center = 256
+    }
 }

@@ -2,7 +2,7 @@
 // Line: 6
 
 class X {
-	static void Main () {
-		System.Console.WriteLine ((ushort)double.NegativeInfinity);
-	}
+    static void Main () {
+        System.Console.WriteLine ((ushort)double.NegativeInfinity);
+    }
 }

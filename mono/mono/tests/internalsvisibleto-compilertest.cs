@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 #if SIGN2048
 using System.Reflection;
@@ -13,14 +13,14 @@ namespace InternalsVisibleTo {
 
             Console.WriteLine("-- Correct case --");
 
-	    try {
-		    var a = new CorrectCaseFriendAssembly.PublicClass ();
-		    a.InternalMethod ();
-		    Console.WriteLine ("Access friend internal method: OK");
-	    } catch (MemberAccessException) {
-		    failCount += 1;
-		    Console.WriteLine ("Access friend internal method: Fail");
-	    }
+        try {
+            var a = new CorrectCaseFriendAssembly.PublicClass ();
+            a.InternalMethod ();
+            Console.WriteLine ("Access friend internal method: OK");
+        } catch (MemberAccessException) {
+            failCount += 1;
+            Console.WriteLine ("Access friend internal method: Fail");
+        }
 
             try {
                 var a = new CorrectCaseFriendAssembly.InternalClass(@internal: 0);

@@ -2,7 +2,7 @@
 // NamedPipeTransportSecurity.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -37,12 +37,12 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	public sealed class NamedPipeTransportSecurity
-	{
-		internal NamedPipeTransportSecurity ()
-		{
-		}
+    public sealed class NamedPipeTransportSecurity
+    {
+        internal NamedPipeTransportSecurity ()
+        {
+        }
 
-		public ProtectionLevel ProtectionLevel { get; set; }
-	}
+        public ProtectionLevel ProtectionLevel { get; set; }
+    }
 }

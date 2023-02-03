@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.TableViewPagerRow class
 //
 // Author:
-//	Andrew Skiba <andrews@mainsoft.com>
+//    Andrew Skiba <andrews@mainsoft.com>
 //
 // Copyright (C) 2006 Mainsoft, Corp (http://mainsoft.com)
 //
@@ -30,16 +30,16 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DetailsViewPagerRow : DetailsViewRow, INamingContainer, INonBindingContainer
-	{
-		[MonoTODO ("why this class exists at all?")]
-		public DetailsViewPagerRow (int rowIndex, DataControlRowType rowType, DataControlRowState rowState)
-			:base (rowIndex, rowType, rowState)
-		{
-		}
-	}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class DetailsViewPagerRow : DetailsViewRow, INamingContainer, INonBindingContainer
+    {
+        [MonoTODO ("why this class exists at all?")]
+        public DetailsViewPagerRow (int rowIndex, DataControlRowType rowType, DataControlRowState rowState)
+            :base (rowIndex, rowType, rowState)
+        {
+        }
+    }
 }
 

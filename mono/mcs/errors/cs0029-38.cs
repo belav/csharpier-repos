@@ -3,8 +3,8 @@
 
 class C
 {
-	static void Test ()
-	{
-		System.ValueTuple<long, bool> arg = 1;
-	}
+    static void Test ()
+    {
+        System.ValueTuple<long, bool> arg = 1;
+    }
 }

@@ -97,7 +97,7 @@ namespace Mono.ILASM {
                                 directives [".removeon"] = new ILToken (Token.D_REMOVEON, ".removeon");
                                 directives [".set"] = new ILToken (Token.D_SET, ".set");
                                 directives [".size"] = new ILToken (Token.D_SIZE, ".size");
-				directives [".stackreserve"] = new ILToken (Token.D_STACKRESERVE, ".stackreserve");
+                directives [".stackreserve"] = new ILToken (Token.D_STACKRESERVE, ".stackreserve");
                                 directives [".subsystem"] = new ILToken (Token.D_SUBSYSTEM, ".subsystem");
                                 directives [".title"] = new ILToken (Token.D_TITLE, ".title");
                                 directives [".try"] = new ILToken (Token.D_TRY, ".try");
@@ -317,8 +317,8 @@ namespace Mono.ILASM {
                                 keywords ["is"] = new ILToken (Token.K_IS, "is");
                                 keywords ["on"] = new ILToken (Token.K_ON, "on");
                                 keywords ["off"] = new ILToken (Token.K_OFF, "off");
-				keywords ["strict"] = new ILToken (Token.K_STRICT, "strict");
-				keywords ["forwarder"] = new ILToken (Token.K_FORWARDER, "forwarder");
+                keywords ["strict"] = new ILToken (Token.K_STRICT, "strict");
+                keywords ["forwarder"] = new ILToken (Token.K_FORWARDER, "forwarder");
                                 keywords ["legacy"] = new ILToken (Token.K_LEGACY, "legacy");
                                 keywords ["library"] = new ILToken (Token.K_LIBRARY, "library");
                                 keywords ["auto"] = new ILToken (Token.K_AUTO, "auto");

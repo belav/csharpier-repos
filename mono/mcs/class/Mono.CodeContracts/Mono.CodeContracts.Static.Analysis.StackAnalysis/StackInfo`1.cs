@@ -2,7 +2,7 @@
 // StackInfo`1.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,56 +27,56 @@
 //
 
 namespace Mono.CodeContracts.Static.Analysis.StackAnalysis {
-	struct StackInfo<T> {
-		private readonly T[] stack;
-		private int depth;
+    struct StackInfo<T> {
+        private readonly T[] stack;
+        private int depth;
 
-		public StackInfo (int depth, int capacity)
-		{
-			this.depth = depth;
-			this.stack = new T[capacity];
-		}
+        public StackInfo (int depth, int capacity)
+        {
+            this.depth = depth;
+            this.stack = new T[capacity];
+        }
 
-		public StackInfo (StackInfo<T> that)
-		{
-			this.depth = that.depth;
-			this.stack = (T[]) that.stack.Clone ();
-		}
+        public StackInfo (StackInfo<T> that)
+        {
+            this.depth = that.depth;
+            this.stack = (T[]) that.stack.Clone ();
+        }
 
-		public int Depth { 
-			get { return this.depth; }
-		}
+        public int Depth { 
+            get { return this.depth; }
+        }
 
-		public T this [int offset] {
-			get {
-				int index = this.depth - 1 - offset;
-				if (index >= 0 && index < this.stack.Length)
-					return this.stack [index];
-				return default(T);
-			}
-		}
+        public T this [int offset] {
+            get {
+                int index = this.depth - 1 - offset;
+                if (index >= 0 && index < this.stack.Length)
+                    return this.stack [index];
+                return default(T);
+            }
+        }
 
-		public StackInfo<T> Pop (int slots)
-		{
-			for (int i = this.depth - slots; i < this.depth; ++i) {
-				if (i < this.stack.Length)
-					this.stack [i] = default(T);
-			}
-			this.depth -= slots;
-			return this;
-		}
+        public StackInfo<T> Pop (int slots)
+        {
+            for (int i = this.depth - slots; i < this.depth; ++i) {
+                if (i < this.stack.Length)
+                    this.stack [i] = default(T);
+            }
+            this.depth -= slots;
+            return this;
+        }
 
-		public void Push (T info)
-		{
-			int index = this.depth;
-			if (index < this.stack.Length)
-				this.stack [index] = info;
-			++this.depth;
-		}
+        public void Push (T info)
+        {
+            int index = this.depth;
+            if (index < this.stack.Length)
+                this.stack [index] = info;
+            ++this.depth;
+        }
 
-		public override string ToString ()
-		{
-			return this.depth.ToString ();
-		}
-	}
+        public override string ToString ()
+        {
+            return this.depth.ToString ();
+        }
+    }
 }

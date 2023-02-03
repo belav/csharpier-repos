@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IContentResolutionService
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,11 +35,11 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design {
 
-	public interface IContentResolutionService
-	{
-		ContentDesignerState GetContentDesignerState (string identifier);
-		void SetContentDesignerState (string identifier, ContentDesignerState state);
-		IDictionary ContentDefinitions { get; }
-	}
+    public interface IContentResolutionService
+    {
+        ContentDesignerState GetContentDesignerState (string identifier);
+        void SetContentDesignerState (string identifier, ContentDesignerState state);
+        IDictionary ContentDefinitions { get; }
+    }
 }
 

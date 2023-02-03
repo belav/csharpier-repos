@@ -1,4 +1,4 @@
-﻿namespace System.Web.Util {
+namespace System.Web.Util {
     using System;
 
     // IMPORTANT: Each error code must be used in *exactly one place* in order to make

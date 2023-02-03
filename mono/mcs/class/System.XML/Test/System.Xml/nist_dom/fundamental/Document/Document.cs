@@ -55,7 +55,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0001D()
+    public void core0001D()
         {
             string computedValue = "";
             string expectedValue = "staff";
@@ -95,7 +95,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0002D()
+    public void core0002D()
         {
             string testName = "core-0002D";
             object computedValue = null;
@@ -136,7 +136,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0003D()
+    public void core0003D()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -177,7 +177,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0004D()
+    public void core0004D()
         {
             string computedValue = "";
             string expectedValue = "True";
@@ -224,7 +224,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0005D()
+    public void core0005D()
         {
             string computedValue = "";
             string expectedValue = "staff";
@@ -269,8 +269,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-	public void core0006D()
+    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+    public void core0006D()
         {
             string computedValue = "";
             string expectedValue = "HTML";
@@ -317,7 +317,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0007D()
+    public void core0007D()
         {
             string computedValue = "";
             string expectedValue = "address Element ";
@@ -368,7 +368,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0008D()
+    public void core0008D()
         {
             string computedValue = "";
             string expectedValue = "Fort Worth Dallas";
@@ -424,7 +424,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0009D()
+    public void core0009D()
         {
             string computedValue = "";
             string expectedValue = "0 #document-fragment DocumentFragment ";//"0 #document-fragment 11 null";
@@ -476,7 +476,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0010D()
+    public void core0010D()
         {
             string computedValue = "";
             string expectedValue = "This is a new Text node #text Text";//"This is a new Text node #text 3";
@@ -526,7 +526,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0011D()
+    public void core0011D()
         {
             string computedValue = "";
             string expectedValue = "This is a new Comment node #comment Comment";//"This is a new Comment node #comment 8";
@@ -576,7 +576,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0012D()
+    public void core0012D()
         {
             string computedValue = "";
             string expectedValue = "This is a new CDATASection node #cdata-section CDATA";//"This is a new CDATASection node #cdata-section 4";
@@ -629,7 +629,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0013D()
+    public void core0013D()
         {
             string computedValue = "";
             string expectedValue = "XML This is a new PI node ProcessingInstruction";//"XML This is a new PI node 7";
@@ -680,7 +680,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0014D()
+    public void core0014D()
         {
             string computedValue = "";
             string expectedValue = "district Attribute";//"district 2";
@@ -732,7 +732,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0015D()
+    public void core0015D()
         {
             string computedValue = "";
             string expectedValue = "ent1  EntityReference";//"ent1 null 5";
@@ -782,7 +782,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0016D()
+    public void core0016D()
         {
             string computedValue = "0";//0;
             string expectedValue = "5";//5;
@@ -832,7 +832,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0017D()
+    public void core0017D()
         {
             string computedValue = "0";//0;
             string expectedValue = "Jeny Oconnor";
@@ -883,10 +883,10 @@ namespace nist_dom.fundamental
 
 
         [Test]
-	public void core0018D()
+    public void core0018D()
         {
             string computedValue = "0";//0;
-	// Mmm, shouldn't the count be 36?
+    // Mmm, shouldn't the count be 36?
             string expectedValue = "36";//37;
             System.Xml.XmlDocument testNode = null;
 
@@ -935,8 +935,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-	public void core0019D()
+    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+    public void core0019D()
         {
             string computedValue = "";
             System.Xml.XmlDocument testNode = null;
@@ -994,8 +994,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-	public void core0020D()
+    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+    public void core0020D()
         {
             string computedValue = "";
             string expectedValue = util.INVALID_CHARACTER_ERR;
@@ -1053,8 +1053,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-	public void core0021D()
+    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+    public void core0021D()
         {
             string computedValue = "";
             string expectedValue = "System.Xml.XmlException";//util.INVALID_CHARACTER_ERR;
@@ -1112,8 +1112,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-	public void core0022D()
+    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+    public void core0022D()
         {
             string computedValue = "";
             string expectedValue = "System.Xml.XmlException";//util.INVALID_CHARACTER_ERR;
@@ -1165,14 +1165,14 @@ namespace nist_dom.fundamental
         //                    document was based on an HTML document, the desired
         //                    exception should be raised.
         //
-		// System.Xml       -  Microsoft System.Xml does not supporting this requirement
-		//
+        // System.Xml       -  Microsoft System.Xml does not supporting this requirement
+        //
         // Semantic Requirements: 22
         //
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0023D()
+    public void core0023D()
         {
             string computedValue = "";
             string expectedValue = "";//util.NOT_SUPPORTED_ERR;
@@ -1223,13 +1223,13 @@ namespace nist_dom.fundamental
         //                    Since this DOM document was based on an HTML document, 
         //                    the desired exception should be raised.
         //
-		// System.Xml       -  Microsoft System.Xml does not supporting this requirement
+        // System.Xml       -  Microsoft System.Xml does not supporting this requirement
         // Semantic Requirements: 23
         //
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0024D()
+    public void core0024D()
         {
             string computedValue = "";
             string expectedValue = "";//util.NOT_SUPPORTED_ERR;
@@ -1280,14 +1280,14 @@ namespace nist_dom.fundamental
         //                    document was based on an HTML document, the desired 
         //                    exception should be raised.
         //
-		// System.Xml       -  Microsoft System.Xml does not supporting this requirement
-		//
+        // System.Xml       -  Microsoft System.Xml does not supporting this requirement
+        //
         // Semantic Requirements: 24
         //
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0025D()
+    public void core0025D()
         {
             string computedValue = "";
             string expectedValue = "";//util.NOT_SUPPORTED_ERR;

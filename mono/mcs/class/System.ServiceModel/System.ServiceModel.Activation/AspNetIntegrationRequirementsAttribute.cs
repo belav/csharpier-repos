@@ -2,7 +2,7 @@
 // AspNetCompatibilityRequirementsAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,39 +34,39 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Activation
 {
-	[MonoTODO]
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class AspNetCompatibilityRequirementsAttribute
-		: Attribute, IServiceBehavior
-	{
-		AspNetCompatibilityRequirementsMode requirements_mode;
+    [MonoTODO]
+    [AttributeUsage (AttributeTargets.Class)]
+    public sealed class AspNetCompatibilityRequirementsAttribute
+        : Attribute, IServiceBehavior
+    {
+        AspNetCompatibilityRequirementsMode requirements_mode;
 
-		public AspNetCompatibilityRequirementsMode RequirementsMode {
-			get { return requirements_mode; }
-			set { requirements_mode = value; }
-		}
+        public AspNetCompatibilityRequirementsMode RequirementsMode {
+            get { return requirements_mode; }
+            set { requirements_mode = value; }
+        }
 
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IServiceBehavior.AddBindingParameters (
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			throw new NotImplementedException ();
-		}
+        void IServiceBehavior.ApplyDispatchBehavior (
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void IServiceBehavior.Validate (
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
         </item>
         </list>";
 
-            var expected = "Here is an example of a bulleted list:\r\n\r\nâ€¢ Item 1.\r\nâ€¢ Item 2.";
+            var expected = "Here is an example of a bulleted list:\r\n\r\n• Item 1.\r\n• Item 2.";
 
             TestFormat(comment, expected);
         }

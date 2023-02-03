@@ -6,18 +6,18 @@ public unsafe delegate int* Bar ();
 
 class X
 {
-	unsafe static int* Test ()
-	{
-		return null;
-	}
+    unsafe static int* Test ()
+    {
+        return null;
+    }
 
-	static void Main ()
-	{
-		Bar b;
-		unsafe {
-			b = Test;
-		}
-		
-		b ();
-	}
+    static void Main ()
+    {
+        Bar b;
+        unsafe {
+            b = Test;
+        }
+        
+        b ();
+    }
 }

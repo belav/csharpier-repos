@@ -32,48 +32,48 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbDataReader_RecordsAffected  : ADONetTesterClass 
-	{
-		public static void Main()
-		{
-			OleDbDataReader_RecordsAffected tc = new OleDbDataReader_RecordsAffected();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("RecordsAffected");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    public class OleDbDataReader_RecordsAffected  : ADONetTesterClass 
+    {
+        public static void Main()
+        {
+            OleDbDataReader_RecordsAffected tc = new OleDbDataReader_RecordsAffected();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("RecordsAffected");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			//prepare data
-			base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            //prepare data
+            base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 
-			int intRecordsAffected = 0;
-			OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			con.Open();
-			OleDbCommand cmd = new OleDbCommand("Update Employees set Title = 'title' where EmployeeID = 100", con);
-			OleDbDataReader rdr = cmd.ExecuteReader();
-			rdr.Read();
-			intRecordsAffected = rdr.RecordsAffected;
+            int intRecordsAffected = 0;
+            OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            con.Open();
+            OleDbCommand cmd = new OleDbCommand("Update Employees set Title = 'title' where EmployeeID = 100", con);
+            OleDbDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            intRecordsAffected = rdr.RecordsAffected;
 
-			try
-			{
-				BeginCase("RecordsAffected");
-				Compare(intRecordsAffected,1 );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("RecordsAffected");
+                Compare(intRecordsAffected,1 );
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			if (con.State == ConnectionState.Open) con.Close();
-		}
-	}
+            if (con.State == ConnectionState.Open) con.Close();
+        }
+    }
 }
 

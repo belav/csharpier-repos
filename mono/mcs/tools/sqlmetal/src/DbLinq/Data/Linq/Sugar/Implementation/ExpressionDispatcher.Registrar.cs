@@ -1,4 +1,4 @@
-﻿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -420,8 +420,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             var bindings = new List<MemberBinding>();
             for (int parameterIndex = 0; parameterIndex < parameters.Count; parameterIndex++)
             {
-				var parameter = parameters[parameterIndex];
-				var memberInfo = tableType.GetTableColumnMember(parameter);
+                var parameter = parameters[parameterIndex];
+                var memberInfo = tableType.GetTableColumnMember(parameter);
                 if (memberInfo == null)
                 {
                     memberInfo = tableType.GetSingleMember(parameter, BindingFlags.Public | BindingFlags.NonPublic

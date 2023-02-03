@@ -13,7 +13,7 @@ public class CLSCLass_6 {
         
     public event Delegate Disposed {
         add { event_handlers.AddHandler (disposedEvent, value); }
-	remove { event_handlers.RemoveHandler (disposedEvent, value); }
+    remove { event_handlers.RemoveHandler (disposedEvent, value); }
     }
 }
 
@@ -77,15 +77,15 @@ public class CLSClass {
             }
         }
 
-	[CLSCompliant(false)]
-	protected internal class CLSClass_2 {
-        	public sbyte XX {
-	            get { return -1; }
-        	}
-	}
+    [CLSCompliant(false)]
+    protected internal class CLSClass_2 {
+            public sbyte XX {
+                get { return -1; }
+            }
+    }
 
 #pragma warning disable 3019, 169
-		[CLSCompliant(true)]
+        [CLSCompliant(true)]
         private ulong Valid() {
                 return 1;
         }

@@ -1,4 +1,4 @@
-๏ปฟ// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -91,7 +91,7 @@ namespace System.Web.Razor.Tokenizer
             // Since the code must still be compiled by a VB compiler, this will not cause adverse effects.
             if (ParserHelpers.IsNewLine(CurrentCharacter))
             {
-                // VB Spec ยง2.1.1
+                // VB Spec ง2.1.1
                 bool checkTwoCharNewline = CurrentCharacter == '\r';
                 TakeCurrent();
                 if (checkTwoCharNewline && CurrentCharacter == '\n')
@@ -102,7 +102,7 @@ namespace System.Web.Razor.Tokenizer
             }
             else if (ParserHelpers.IsWhitespace(CurrentCharacter))
             {
-                // CSharp Spec ยง2.1.3
+                // CSharp Spec ง2.1.3
                 TakeUntil(c => !ParserHelpers.IsWhitespace(c));
                 return Stay(EndSymbol(VBSymbolType.WhiteSpace));
             }
@@ -370,7 +370,7 @@ namespace System.Web.Razor.Tokenizer
         {
             if (CurrentCharacter == '_')
             {
-                // VB Spec ยง2.2:
+                // VB Spec ง2.2:
                 //  If an identifier begins with an underscore, it must contain at least one other valid identifier character to disambiguate it from a line continuation.
                 return ParserHelpers.IsIdentifierPart(Peek());
             }

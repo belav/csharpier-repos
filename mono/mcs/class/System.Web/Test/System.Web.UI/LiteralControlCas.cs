@@ -1,9 +1,9 @@
 //
 // LiteralControlCas.cs 
-//	- CAS unit tests for System.Web.UI.LiteralControlCas
+//    - CAS unit tests for System.Web.UI.LiteralControlCas
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,32 +36,32 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class LiteralControlCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class LiteralControlCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor0_Deny_Unrestricted ()
-		{
-			LiteralControl lc = new LiteralControl ();
-			Assert.IsNull (lc.Text, "Text");
-			lc.Text = "mono";
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor0_Deny_Unrestricted ()
+        {
+            LiteralControl lc = new LiteralControl ();
+            Assert.IsNull (lc.Text, "Text");
+            lc.Text = "mono";
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor1_Deny_Unrestricted ()
-		{
-			LiteralControl lc = new LiteralControl ("mono");
-			Assert.AreEqual ("mono", lc.Text, "Text");
-			lc.Text = String.Empty;
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted ()
+        {
+            LiteralControl lc = new LiteralControl ("mono");
+            Assert.AreEqual ("mono", lc.Text, "Text");
+            lc.Text = String.Empty;
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (LiteralControl); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (LiteralControl); }
+        }
+    }
 }

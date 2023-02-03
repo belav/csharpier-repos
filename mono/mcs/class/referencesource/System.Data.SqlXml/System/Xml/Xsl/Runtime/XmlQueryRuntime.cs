@@ -1009,7 +1009,7 @@ namespace System.Xml.Xsl.Runtime {
             return 0;
         }
 
-	// 'true' if current Namespace "inherited" from it's parent. Not defined localy.
+    // 'true' if current Namespace "inherited" from it's parent. Not defined localy.
         private static bool IsInheritedNamespace(XPathNavigator node) {
             Debug.Assert(node.NodeType == XPathNodeType.Namespace);
             XPathNavigator nav = node.Clone();

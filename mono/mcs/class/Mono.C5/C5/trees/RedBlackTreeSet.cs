@@ -122,10 +122,10 @@ namespace C5
       if (isSnapShot)
       {
 #if SEPARATE_EXTRA
-				Node.Extra e = n.extra;
+                Node.Extra e = n.extra;
 
-				if (e != null && e.lastgeneration >= treegen && e.leftnode)
-					return e.oldref;
+                if (e != null && e.lastgeneration >= treegen && e.leftnode)
+                    return e.oldref;
 #else
         if (n.lastgeneration >= generation && n.leftnode)
           return n.oldref;
@@ -142,10 +142,10 @@ namespace C5
       if (isSnapShot)
       {
 #if SEPARATE_EXTRA
-				Node.Extra e = n.extra;
+                Node.Extra e = n.extra;
 
-				if (e != null && e.lastgeneration >= treegen && !e.leftnode)
-					return e.oldref;
+                if (e != null && e.lastgeneration >= treegen && !e.leftnode)
+                    return e.oldref;
 #else
         if (n.lastgeneration >= generation && !n.leftnode)
           return n.oldref;
@@ -198,18 +198,18 @@ namespace C5
       //TODO: move everything into (separate) Extra
       public int generation;
 #if SEPARATE_EXTRA
-			internal class Extra
-			{
-				public int lastgeneration;
+            internal class Extra
+            {
+                public int lastgeneration;
 
-				public Node oldref;
+                public Node oldref;
 
-				public bool leftnode;
+                public bool leftnode;
 
-				//public Node next;
-			}
+                //public Node next;
+            }
 
-			public Extra extra;
+            public Extra extra;
 
 #else
       public int lastgeneration = -1;
@@ -240,15 +240,15 @@ namespace C5
         if (cursor.generation <= maxsnapid)
         {
 #if SEPARATE_EXTRA
-					if (cursor.extra == null)
-					{
-						Extra extra = cursor.extra = new Extra();	
+                    if (cursor.extra == null)
+                    {
+                        Extra extra = cursor.extra = new Extra();    
 
-						extra.leftnode = leftnode;
-						extra.lastgeneration = maxsnapid;
-						extra.oldref = oldref;
-					}
-					else if (cursor.extra.leftnode != leftnode || cursor.extra.lastgeneration < maxsnapid)
+                        extra.leftnode = leftnode;
+                        extra.lastgeneration = maxsnapid;
+                        extra.oldref = oldref;
+                    }
+                    else if (cursor.extra.leftnode != leftnode || cursor.extra.lastgeneration < maxsnapid)
 #else
           if (cursor.lastgeneration == -1)
           {
@@ -286,7 +286,7 @@ namespace C5
           cursor = (Node)(cursor.MemberwiseClone());
           cursor.generation = generation;
 #if SEPARATE_EXTRA
-					cursor.extra = null;
+                    cursor.extra = null;
 #else
           cursor.lastgeneration = -1;
 #endif
@@ -812,8 +812,8 @@ namespace C5
           child.generation = generation;
           Node.update(ref cursor, comp > 0, child, maxsnapid, generation);
 #else
-					if (comp > 0) { cursor.left = child; }
-					else { cursor.right = child; }
+                    if (comp > 0) { cursor.left = child; }
+                    else { cursor.right = child; }
 #endif
 #if MAINTAIN_SIZE
           cursor.size++;
@@ -890,8 +890,8 @@ namespace C5
               Node.update(ref cursor, true, child.right, maxsnapid, generation);
               Node.update(ref child, false, cursor, maxsnapid, generation);
 #else
-							cursor.left = child.right;
-							child.right = cursor;
+                            cursor.left = child.right;
+                            child.right = cursor;
 #endif
               cursor = child;
             }
@@ -903,8 +903,8 @@ namespace C5
               Node.update(ref child, false, badgrandchild.left, maxsnapid, generation);
               Node.CopyNode(ref badgrandchild, maxsnapid, generation);
 #else
-							cursor.left = badgrandchild.right;
-							child.right = badgrandchild.left;
+                            cursor.left = badgrandchild.right;
+                            child.right = badgrandchild.left;
 #endif
               badgrandchild.left = child;
               badgrandchild.right = cursor;
@@ -919,8 +919,8 @@ namespace C5
               Node.update(ref cursor, false, child.left, maxsnapid, generation);
               Node.update(ref child, true, cursor, maxsnapid, generation);
 #else
-							cursor.right = child.left;
-							child.left = cursor;
+                            cursor.right = child.left;
+                            child.left = cursor;
 #endif
               cursor = child;
             }
@@ -932,8 +932,8 @@ namespace C5
               Node.update(ref child, true, badgrandchild.right, maxsnapid, generation);
               Node.CopyNode(ref badgrandchild, maxsnapid, generation);
 #else
-							cursor.right = badgrandchild.left;
-							child.left = badgrandchild.right;
+                            cursor.right = badgrandchild.left;
+                            child.left = badgrandchild.right;
 #endif
               badgrandchild.right = child;
               badgrandchild.left = cursor;
@@ -973,10 +973,10 @@ namespace C5
 #if NCP
             Node.update(ref cursor, dirs[level] > 0, child, maxsnapid, generation);
 #else
-						if (dirs[level] > 0)
-							cursor.left = child;
-						else
-							cursor.right = child;
+                        if (dirs[level] > 0)
+                            cursor.left = child;
+                        else
+                            cursor.right = child;
 #endif
 #if MAINTAIN_SIZE
             cursor.size++;
@@ -1467,13 +1467,13 @@ namespace C5
 #if NCP
             Node.update(ref cursor, dirs[level] > 0, child, maxsnapid, generation);
 #else
-						if (Node.CopyNode(maxsnapid, ref cursor, generation))
-						{
-							if (dirs[level] > 0)
-								cursor.left = child;
-							else
-								cursor.right = child;
-						}
+                        if (Node.CopyNode(maxsnapid, ref cursor, generation))
+                        {
+                            if (dirs[level] > 0)
+                                cursor.left = child;
+                            else
+                                cursor.right = child;
+                        }
 #endif
           }
 
@@ -1723,10 +1723,10 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if NCP
       Node.update(ref cursor, comp > 0, newchild, maxsnapid, generation);
 #else
-			if (comp > 0)
-				cursor.left = newchild;
-			else
-				cursor.right = newchild;
+            if (comp > 0)
+                cursor.left = newchild;
+            else
+                cursor.right = newchild;
 #endif
       childsibling = comp > 0 ? cursor.right : cursor.left;
 #if BAG
@@ -1863,9 +1863,9 @@ private bool removeIterativePhase2(Node cursor, int level)
               Node.update(ref nearnephew, true, neargrandnephew.right, maxsnapid, generation);
               Node.update(ref parent, false, neargrandnephew.left, maxsnapid, generation);
 #else
-							childsibling.left = neargrandnephew;
-							nearnephew.left = neargrandnephew.right;
-							parent.right = neargrandnephew.left;
+                            childsibling.left = neargrandnephew;
+                            nearnephew.left = neargrandnephew.right;
+                            parent.right = neargrandnephew.left;
 #endif
               neargrandnephew.left = parent;
               neargrandnephew.right = nearnephew;
@@ -1877,9 +1877,9 @@ private bool removeIterativePhase2(Node cursor, int level)
               Node.update(ref nearnephew, false, neargrandnephew.left, maxsnapid, generation);
               Node.update(ref parent, true, neargrandnephew.right, maxsnapid, generation);
 #else
-							childsibling.right = neargrandnephew;
-							nearnephew.right = neargrandnephew.left;
-							parent.left = neargrandnephew.right;
+                            childsibling.right = neargrandnephew;
+                            nearnephew.right = neargrandnephew.left;
+                            parent.left = neargrandnephew.right;
 #endif
               neargrandnephew.right = parent;
               neargrandnephew.left = nearnephew;
@@ -1905,16 +1905,16 @@ private bool removeIterativePhase2(Node cursor, int level)
             Node.update(ref parent, comp < 0, nearnephew, maxsnapid, generation);
             Node.update(ref childsibling, comp > 0, parent, maxsnapid, generation);
 #else
-						if (comp > 0)
-						{
-							childsibling.left = parent;
-							parent.right = nearnephew;
-						}
-						else
-						{
-							childsibling.right = parent;
-							parent.left = nearnephew;
-						}
+                        if (comp > 0)
+                        {
+                            childsibling.left = parent;
+                            parent.right = nearnephew;
+                        }
+                        else
+                        {
+                            childsibling.right = parent;
+                            parent.left = nearnephew;
+                        }
 #endif
             cursor = childsibling;
             childsibling.red = false;
@@ -1945,16 +1945,16 @@ private bool removeIterativePhase2(Node cursor, int level)
             childsibling.left = farnephew;
           }
 #else
-					if (comp > 0)
-					{
-						childsibling.left = parent;
-						parent.right = nearnephew;
-					}
-					else
-					{
-						childsibling.right = parent;
-						parent.left = nearnephew;
-					}
+                    if (comp > 0)
+                    {
+                        childsibling.left = parent;
+                        parent.right = nearnephew;
+                    }
+                    else
+                    {
+                        childsibling.right = parent;
+                        parent.left = nearnephew;
+                    }
 #endif
           cursor = childsibling;
           cursor.red = parent.red;
@@ -1980,8 +1980,8 @@ private bool removeIterativePhase2(Node cursor, int level)
             Node.update(ref childsibling, true, nearnephew.right, maxsnapid, generation);
             Node.update(ref parent, false, nearnephew.left, maxsnapid, generation);
 #else
-						childsibling.left = nearnephew.right;
-						parent.right = nearnephew.left;
+                        childsibling.left = nearnephew.right;
+                        parent.right = nearnephew.left;
 #endif
             nearnephew.left = parent;
             nearnephew.right = childsibling;
@@ -1992,8 +1992,8 @@ private bool removeIterativePhase2(Node cursor, int level)
             Node.update(ref childsibling, false, nearnephew.left, maxsnapid, generation);
             Node.update(ref parent, true, nearnephew.right, maxsnapid, generation);
 #else
-						childsibling.right = nearnephew.left;
-						parent.left = nearnephew.right;
+                        childsibling.right = nearnephew.left;
+                        parent.left = nearnephew.right;
 #endif
             nearnephew.right = parent;
             nearnephew.left = childsibling;
@@ -2031,11 +2031,11 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if NCP
           Node.update(ref cursor, dirs[level] > 0, swap, maxsnapid, generation);
 #else
-				
-					if (dirs[level] > 0)
-						cursor.left = swap;
-					else
-						cursor.right = swap;
+                
+                    if (dirs[level] > 0)
+                        cursor.left = swap;
+                    else
+                        cursor.right = swap;
 #endif
 #if BAG
           cursor.size = cursor.items + (cursor.right == null ? 0 : cursor.right.size) + (cursor.left == null ? 0 : cursor.left.size);
@@ -2561,7 +2561,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 
       throw new IndexOutOfRangeException();
 #else
-			throw new NotSupportedException();
+            throw new NotSupportedException();
 #endif
     }
 
@@ -2573,7 +2573,7 @@ private bool removeIterativePhase2(Node cursor, int level)
     /// <value>The i'th item of this list.</value>
     /// <param name="i">the index to lookup</param>
     [Tested]
-    public T this[int i] { [Tested]	get { return findNode(i).item; } }
+    public T this[int i] { [Tested]    get { return findNode(i).item; } }
 
     /// <summary>
     /// 
@@ -2746,7 +2746,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       removeIterativePhase2(cursor, level);
       return retval;
 #else
-			throw new NotSupportedException();
+            throw new NotSupportedException();
 #endif
     }
 
@@ -2999,7 +2999,7 @@ private bool removeIterativePhase2(Node cursor, int level)
         }
 
 #else
-			throw new NotSupportedException();
+            throw new NotSupportedException();
 #endif
       }
 
@@ -3574,7 +3574,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       //if we get here, we are at the same side of the whole collection:
       return ind;
 #else
-			throw new NotSupportedException("Code compiled w/o size!");
+            throw new NotSupportedException("Code compiled w/o size!");
 #endif
     }
 
@@ -4085,7 +4085,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if NCP
                   cursor = range.basis.left(cursor);
 #else
-									cursor = cursor.left;
+                                    cursor = cursor.left;
 #endif
                 }
                 else if (comp < 0)
@@ -4093,7 +4093,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if NCP
                   cursor = range.basis.right(cursor);
 #else
-									cursor = cursor.right;
+                                    cursor = cursor.right;
 #endif
                 }
                 else
@@ -4125,12 +4125,12 @@ private bool removeIterativePhase2(Node cursor, int level)
               }
             }
 #else
-						else if (cursor.right != null)
-						{
-							path[level] = cursor = cursor.right;
-							while (cursor.left != null)
-								path[++level] = cursor = cursor.left;
-						}
+                        else if (cursor.right != null)
+                        {
+                            path[level] = cursor = cursor.right;
+                            while (cursor.left != null)
+                                path[++level] = cursor = cursor.left;
+                        }
 #endif
             else if (level == 0)
               return valid = ready = false;
@@ -4161,7 +4161,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if NCP
                   cursor = range.basis.right(cursor);
 #else
-									cursor = cursor.right;
+                                    cursor = cursor.right;
 #endif
                 }
                 else
@@ -4169,7 +4169,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if NCP
                   cursor = range.basis.left(cursor);
 #else
-									cursor = cursor.left;
+                                    cursor = cursor.left;
 #endif
                 }
               }
@@ -4196,12 +4196,12 @@ private bool removeIterativePhase2(Node cursor, int level)
               }
             }
 #else
-						else if (cursor.left != null)
-						{
-							path[level] = cursor = cursor.left;
-							while (cursor.right != null)
-								path[++level] = cursor = cursor.right;
-						}
+                        else if (cursor.left != null)
+                        {
+                            path[level] = cursor = cursor.left;
+                            while (cursor.right != null)
+                                path[++level] = cursor = cursor.right;
+                        }
 #endif
             else if (level == 0)
               return valid = ready = false;
@@ -4324,7 +4324,7 @@ private bool removeIterativePhase2(Node cursor, int level)
     {
       if (n == null)
       {
-        //	System.Console.WriteLine(space + "null");
+        //    System.Console.WriteLine(space + "null");
       }
       else
       {
@@ -4333,7 +4333,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if MAINTAIN_SIZE
  n.size,
 #else
-				0,
+                0,
 #endif
  0,
 #if NCP
@@ -4344,12 +4344,12 @@ private bool removeIterativePhase2(Node cursor, int level)
  0,
 #if NCP
 #if SEPARATE_EXTRA
-				n.extra == null ? "" : String.Format(" [extra: lg={0}, c={1}, i={2}]", n.extra.lastgeneration, n.extra.leftnode ? "L" : "R", n.extra.oldref == null ? "()" : "" + n.extra.oldref.item),
+                n.extra == null ? "" : String.Format(" [extra: lg={0}, c={1}, i={2}]", n.extra.lastgeneration, n.extra.leftnode ? "L" : "R", n.extra.oldref == null ? "()" : "" + n.extra.oldref.item),
 #else
  n.lastgeneration == -1 ? "" : String.Format(" [extra: lg={0}, c={1}, i={2}]", n.lastgeneration, n.leftnode ? "L" : "R", n.oldref == null ? "()" : "" + n.oldref.item),
 #endif
 #else
-				"",
+                "",
 #endif
 #if BAG
  n.items
@@ -4476,8 +4476,8 @@ private bool removeIterativePhase2(Node cursor, int level)
       int lsz = 0, rsz = 0;
       T otherext;
 #if SEPARATE_EXTRA
-			Node.Extra extra = n.extra;
-			Node child = (extra != null && extra.lastgeneration >= treegen && extra.leftnode) ? extra.oldref : n.left;
+            Node.Extra extra = n.extra;
+            Node child = (extra != null && extra.lastgeneration >= treegen && extra.leftnode) ? extra.oldref : n.left;
 #else
       Node child = (n.lastgeneration >= generation && n.leftnode) ? n.oldref : n.left;
 #endif
@@ -4488,7 +4488,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       }
 
 #if SEPARATE_EXTRA
-			child = (extra != null && extra.lastgeneration >= treegen && !extra.leftnode) ? extra.oldref : n.right;
+            child = (extra != null && extra.lastgeneration >= treegen && !extra.leftnode) ? extra.oldref : n.right;
 #else
       child = (n.lastgeneration >= generation && !n.leftnode) ? n.oldref : n.right;
 #endif

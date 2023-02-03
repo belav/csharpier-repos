@@ -1044,7 +1044,7 @@ namespace System.Net {
         // ISerializable method
         //
         /// <internalonly/>
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)] 		
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)]         
         public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext) {
             //
             // for now disregard streamingContext.

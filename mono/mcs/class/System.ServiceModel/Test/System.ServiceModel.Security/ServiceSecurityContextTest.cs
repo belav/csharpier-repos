@@ -2,7 +2,7 @@
 // ServiceSecurityContextTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -42,51 +42,51 @@ using PolicyList = System.Collections.ObjectModel.ReadOnlyCollection<System.Iden
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class ServiceSecurityContextTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorNullArgs1 ()
-		{
-			new ServiceSecurityContext (null, null);
-		}
+    [TestFixture]
+    public class ServiceSecurityContextTest
+    {
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorNullArgs1 ()
+        {
+            new ServiceSecurityContext (null, null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorNullArgs2 ()
-		{
-			new ServiceSecurityContext ((AuthorizationContext) null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorNullArgs2 ()
+        {
+            new ServiceSecurityContext ((AuthorizationContext) null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorNullArgs3 ()
-		{
-			new ServiceSecurityContext ((PolicyList) null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorNullArgs3 ()
+        {
+            new ServiceSecurityContext ((PolicyList) null);
+        }
 
-		[Test]
-		public void Constructor ()
-		{
-			ServiceSecurityContext c = new ServiceSecurityContext (new PolicyList (new IAuthorizationPolicy [0]));
-			Assert.IsNotNull (c.AuthorizationContext, "#1");
-			Assert.AreEqual (0, c.AuthorizationPolicies.Count, "#2");
-			// it is somehow treated as anonymous ...
-			Assert.IsTrue (c.IsAnonymous, "#3");
-			// FIXME: test PrimaryIdentity
-		}
+        [Test]
+        public void Constructor ()
+        {
+            ServiceSecurityContext c = new ServiceSecurityContext (new PolicyList (new IAuthorizationPolicy [0]));
+            Assert.IsNotNull (c.AuthorizationContext, "#1");
+            Assert.AreEqual (0, c.AuthorizationPolicies.Count, "#2");
+            // it is somehow treated as anonymous ...
+            Assert.IsTrue (c.IsAnonymous, "#3");
+            // FIXME: test PrimaryIdentity
+        }
 
-		[Test]
-		public void Anonymous ()
-		{
-			ServiceSecurityContext c = ServiceSecurityContext.Anonymous;
-			Assert.IsNotNull (c.AuthorizationContext, "#1");
-			Assert.AreEqual (0, c.AuthorizationPolicies.Count, "#2");
-			Assert.IsTrue (c.IsAnonymous, "#3");
-			// FIXME: test PrimaryIdentity
-		}
-	}
+        [Test]
+        public void Anonymous ()
+        {
+            ServiceSecurityContext c = ServiceSecurityContext.Anonymous;
+            Assert.IsNotNull (c.AuthorizationContext, "#1");
+            Assert.AreEqual (0, c.AuthorizationPolicies.Count, "#2");
+            Assert.IsTrue (c.IsAnonymous, "#3");
+            // FIXME: test PrimaryIdentity
+        }
+    }
 }
 #endif
 

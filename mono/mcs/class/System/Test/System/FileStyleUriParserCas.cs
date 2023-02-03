@@ -2,7 +2,7 @@
 // FileStyleUriParserCas.cs - CAS unit tests for System.FileStyleUriParser
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,50 +39,50 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class FileStyleUriParserCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class FileStyleUriParserCas {
 
-		private FileStyleUriParserTest unit;
+        private FileStyleUriParserTest unit;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			unit = new FileStyleUriParserTest ();
-			unit.FixtureSetUp (); // fulltrust
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            unit = new FileStyleUriParserTest ();
+            unit.FixtureSetUp (); // fulltrust
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			FileStyleUriParser parser = new FileStyleUriParser ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            FileStyleUriParser parser = new FileStyleUriParser ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests ()
-		{
-			unit.Filex ();
-			unit.Filex_Methods ();
-			unit.SecureFilex ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests ()
+        {
+            unit.Filex ();
+            unit.Filex_Methods ();
+            unit.SecureFilex ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (FileStyleUriParser).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (FileStyleUriParser).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }
 

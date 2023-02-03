@@ -6,12 +6,12 @@ using System.Runtime.CompilerServices;
 
 partial class D
 {
-	partial void Foo (int x = 2);
+    partial void Foo (int x = 2);
 }
 
 partial class D
 {
-	partial void Foo ([CallerLineNumber] int x)
-	{
-	}
+    partial void Foo ([CallerLineNumber] int x)
+    {
+    }
 }

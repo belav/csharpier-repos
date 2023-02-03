@@ -2,7 +2,7 @@
 // Mono.Xml.XPath.DTMXPathNode2.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // (C) 2004 Novell Inc
 //
@@ -36,69 +36,69 @@ using System.Xml.XPath;
 namespace Mono.Xml.XPath
 {
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathLinkedNode2
+        class DTMXPathLinkedNode2
 #else
-		struct DTMXPathLinkedNode2
+        struct DTMXPathLinkedNode2
 #endif
-	{
-		public int FirstChild;
-		public int Parent;
-		public int PreviousSibling;
-		public int NextSibling;
-		public int FirstAttribute;
-		public int FirstNamespace;
-		public XPathNodeType NodeType;
-		public int BaseURI;
-		public bool IsEmptyElement;
-		public int LocalName;
-		public int NamespaceURI;
-		public int Prefix;
-		public int Value;
-		public int XmlLang;
-		public int LineNumber;
-		public int LinePosition;
-	}
+    {
+        public int FirstChild;
+        public int Parent;
+        public int PreviousSibling;
+        public int NextSibling;
+        public int FirstAttribute;
+        public int FirstNamespace;
+        public XPathNodeType NodeType;
+        public int BaseURI;
+        public bool IsEmptyElement;
+        public int LocalName;
+        public int NamespaceURI;
+        public int Prefix;
+        public int Value;
+        public int XmlLang;
+        public int LineNumber;
+        public int LinePosition;
+    }
 
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathAttributeNode2
+        class DTMXPathAttributeNode2
 #else
-		struct DTMXPathAttributeNode2
+        struct DTMXPathAttributeNode2
 #endif
-	{
-		public int OwnerElement;
-		public int NextAttribute;
-		public int LocalName;
-		public int NamespaceURI;
-		public int Prefix;
-		public int Value;
-		public int LineNumber;
-		public int LinePosition;
-	}
+    {
+        public int OwnerElement;
+        public int NextAttribute;
+        public int LocalName;
+        public int NamespaceURI;
+        public int Prefix;
+        public int Value;
+        public int LineNumber;
+        public int LinePosition;
+    }
 
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathNamespaceNode2
+        class DTMXPathNamespaceNode2
 #else
-		struct DTMXPathNamespaceNode2
+        struct DTMXPathNamespaceNode2
 #endif
-	{
-		public int DeclaredElement;
-		public int NextNamespace;
-		public int Name;
-		public int Namespace;
-	}
+    {
+        public int DeclaredElement;
+        public int NextNamespace;
+        public int Name;
+        public int Namespace;
+    }
 }

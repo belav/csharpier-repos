@@ -2,7 +2,7 @@
 // System.Web.UI.XhtmlMobileDocType.cs
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -29,11 +29,11 @@
 
 namespace System.Web.UI 
 {
-	public enum XhtmlMobileDocType 
-	{
-		XhtmlBasic = 0,
-		XhtmlMobileProfile = 1,
-		Wml20 = 2
-	} 
+    public enum XhtmlMobileDocType 
+    {
+        XhtmlBasic = 0,
+        XhtmlMobileProfile = 1,
+        Wml20 = 2
+    } 
 }
 

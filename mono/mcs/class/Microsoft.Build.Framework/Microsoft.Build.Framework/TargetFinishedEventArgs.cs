@@ -30,47 +30,47 @@
 using System;
 
 namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class TargetFinishedEventArgs : BuildStatusEventArgs {
-	
-		string	targetName;
-		string	projectFile;
-		string	targetFile;
-		bool	succeeded;
-				
-		protected TargetFinishedEventArgs ()
-		{
-		}
+    [Serializable]
+    public class TargetFinishedEventArgs : BuildStatusEventArgs {
+    
+        string    targetName;
+        string    projectFile;
+        string    targetFile;
+        bool    succeeded;
+                
+        protected TargetFinishedEventArgs ()
+        {
+        }
 
-		public TargetFinishedEventArgs (string message,
-						string helpKeyword,
-						string targetName,
-						string projectFile,
-						string targetFile,
-						bool succeeded)
-			: base (message, helpKeyword, null)
-		{
-			this.targetName = targetName;
-			this.projectFile = projectFile;
-			this.targetFile = targetFile;  
-			this.succeeded = succeeded;
-		}
+        public TargetFinishedEventArgs (string message,
+                        string helpKeyword,
+                        string targetName,
+                        string projectFile,
+                        string targetFile,
+                        bool succeeded)
+            : base (message, helpKeyword, null)
+        {
+            this.targetName = targetName;
+            this.projectFile = projectFile;
+            this.targetFile = targetFile;  
+            this.succeeded = succeeded;
+        }
 
-		public string ProjectFile {
-			get { return projectFile; }
-		}
+        public string ProjectFile {
+            get { return projectFile; }
+        }
 
-		public string TargetFile {
-			get { return targetFile; }
-		}
+        public string TargetFile {
+            get { return targetFile; }
+        }
 
-		public string TargetName {
-			get { return targetName; }
-		}
-		
-		public bool Succeeded {
-			get { return succeeded; }
-		}
-	}
+        public string TargetName {
+            get { return targetName; }
+        }
+        
+        public bool Succeeded {
+            get { return succeeded; }
+        }
+    }
 }
 

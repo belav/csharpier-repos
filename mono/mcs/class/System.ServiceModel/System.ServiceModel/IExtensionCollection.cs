@@ -2,7 +2,7 @@
 // IExtensionCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,11 +31,11 @@ using System.Collections.ObjectModel;
 
 namespace System.ServiceModel
 {
-	public interface IExtensionCollection<T> : ICollection<IExtension<T>>,
-		IEnumerable<IExtension<T>>, IEnumerable
-		where T : IExtensibleObject<T>
-	{
-		E Find<E> ();
-		Collection<E> FindAll<E> ();
-	}
+    public interface IExtensionCollection<T> : ICollection<IExtension<T>>,
+        IEnumerable<IExtension<T>>, IEnumerable
+        where T : IExtensibleObject<T>
+    {
+        E Find<E> ();
+        Collection<E> FindAll<E> ();
+    }
 }

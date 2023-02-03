@@ -4,26 +4,26 @@ delegate void Foo ();
 
 interface IFoo<T>
 {
-	void Test ();
+    void Test ();
 }
 
 class X<T> : IFoo<T>
 {
-	void IFoo<T>.Test ()
-	{
-		Foo foo = delegate {
-			Console.WriteLine (1);
-		};
-		
-		foo ();
-	}
+    void IFoo<T>.Test ()
+    {
+        Foo foo = delegate {
+            Console.WriteLine (1);
+        };
+        
+        foo ();
+    }
 }
 
 class M
 {
-	public static void Main ()
-	{
-		IFoo<int> x = new X<int> ();
-		x.Test ();
-	}
+    public static void Main ()
+    {
+        IFoo<int> x = new X<int> ();
+        x.Test ();
+    }
 }

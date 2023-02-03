@@ -6,6 +6,6 @@ using System;
 [assembly: CLSCompliant (true)]
 
 public class Class {
-	protected volatile int V;
-	static void Main () {}
+    protected volatile int V;
+    static void Main () {}
 }

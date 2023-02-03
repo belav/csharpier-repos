@@ -56,18 +56,18 @@ namespace Newtonsoft.Json.Utilities
             return (t.GetConstructor(BindingFlags.Instance, null, Type.EmptyTypes, null) != null);
         }
 
-		public static bool IsAssignable (Type to, Type from) {
-			if (to == null)
-				throw new ArgumentNullException("to");
+        public static bool IsAssignable (Type to, Type from) {
+            if (to == null)
+                throw new ArgumentNullException("to");
 
-			if (to.IsAssignableFrom (from))
-				return true;
+            if (to.IsAssignableFrom (from))
+                return true;
 
-			if (to.IsGenericType && from.IsGenericTypeDefinition)
-				return to.IsAssignableFrom (from.MakeGenericType (to.GetGenericArguments ()));
+            if (to.IsGenericType && from.IsGenericTypeDefinition)
+                return to.IsAssignableFrom (from.MakeGenericType (to.GetGenericArguments ()));
 
-			return false;
-		}
+            return false;
+        }
 
         public static bool IsSubClass(Type type, Type check)
         {
@@ -102,12 +102,12 @@ namespace Newtonsoft.Json.Utilities
             if (type == null)
                 throw new ArgumentNullException("type");
 
-			if (type.IsArray)
-				return type.GetElementType ();
-			else if (type.IsGenericType && typeof (List<>).IsAssignableFrom (type.GetGenericTypeDefinition ()))
-				return type.GetGenericArguments () [0];
-			else
-				throw new Exception ("Bad type");
+            if (type.IsArray)
+                return type.GetElementType ();
+            else if (type.IsGenericType && typeof (List<>).IsAssignableFrom (type.GetGenericTypeDefinition ()))
+                return type.GetGenericArguments () [0];
+            else
+                throw new Exception ("Bad type");
         }
 
         public static Type GetTypedDictionaryValueType(Type type)
@@ -115,31 +115,31 @@ namespace Newtonsoft.Json.Utilities
             if (type == null)
                 throw new ArgumentNullException("type");
 
-			Type genDictType = GetGenericDictionary(type);
+            Type genDictType = GetGenericDictionary(type);
 
-			if (genDictType != null)
-				return genDictType.GetGenericArguments () [1];
+            if (genDictType != null)
+                return genDictType.GetGenericArguments () [1];
             else if (typeof(IDictionary).IsAssignableFrom(type))
                 return null;
             else
                 throw new Exception("Bad type");
         }
 
-		static readonly Type GenericDictionaryType = typeof (IDictionary<,>);
-		public static Type GetGenericDictionary (Type type) {
-			if (type.IsGenericType && GenericDictionaryType.IsAssignableFrom (type.GetGenericTypeDefinition ()))
-				return type;
+        static readonly Type GenericDictionaryType = typeof (IDictionary<,>);
+        public static Type GetGenericDictionary (Type type) {
+            if (type.IsGenericType && GenericDictionaryType.IsAssignableFrom (type.GetGenericTypeDefinition ()))
+                return type;
 
-			Type[] ifaces = type.GetInterfaces();
-			if (ifaces != null)
-				for (int i = 0; i < ifaces.Length; i++) {
-					Type current = GetGenericDictionary (ifaces [i]);
-					if (current != null)
-						return current;
-				}
+            Type[] ifaces = type.GetInterfaces();
+            if (ifaces != null)
+                for (int i = 0; i < ifaces.Length; i++) {
+                    Type current = GetGenericDictionary (ifaces [i]);
+                    if (current != null)
+                        return current;
+                }
 
-			return null;
-		}
+            return null;
+        }
 
         public static Type GetMemberUnderlyingType(MemberInfo member)
         {
@@ -161,7 +161,7 @@ namespace Newtonsoft.Json.Utilities
         /// </summary>
         /// <param name="member">The member.</param>
         /// <returns>
-        /// 	<c>true</c> if the member is an indexed property; otherwise, <c>false</c>.
+        ///     <c>true</c> if the member is an indexed property; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsIndexedProperty(MemberInfo member)
         {
@@ -181,7 +181,7 @@ namespace Newtonsoft.Json.Utilities
         /// </summary>
         /// <param name="property">The property.</param>
         /// <returns>
-        /// 	<c>true</c> if the property is an indexed property; otherwise, <c>false</c>.
+        ///     <c>true</c> if the property is an indexed property; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsIndexedProperty(PropertyInfo property)
         {
@@ -238,32 +238,32 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-		/// <summary>
-		/// Determines whether the specified MemberInfo can be read.
-		/// </summary>
-		/// <param name="member">The MemberInfo to determine whether can be read.</param>
-		/// <returns>
-		/// 	<c>true</c> if the specified MemberInfo can be read; otherwise, <c>false</c>.
-		/// </returns>
-		public static bool CanReadMemberValue(MemberInfo member)
-		{
-			switch (member.MemberType)
-			{
-				case MemberTypes.Field:
-					return true;
-				case MemberTypes.Property:
-					return ((PropertyInfo) member).CanRead;
-				default:
-					return false;
-			}
-		}
+        /// <summary>
+        /// Determines whether the specified MemberInfo can be read.
+        /// </summary>
+        /// <param name="member">The MemberInfo to determine whether can be read.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified MemberInfo can be read; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool CanReadMemberValue(MemberInfo member)
+        {
+            switch (member.MemberType)
+            {
+                case MemberTypes.Field:
+                    return true;
+                case MemberTypes.Property:
+                    return ((PropertyInfo) member).CanRead;
+                default:
+                    return false;
+            }
+        }
 
         /// <summary>
         /// Determines whether the specified MemberInfo can be set.
         /// </summary>
         /// <param name="member">The MemberInfo to determine whether can be set.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified MemberInfo can be set; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified MemberInfo can be set; otherwise, <c>false</c>.
         /// </returns>
         public static bool CanSetMemberValue(MemberInfo member)
         {
@@ -278,14 +278,14 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-		public static IEnumerable<MemberInfo> GetFieldsAndProperties (Type type, BindingFlags bindingAttr) {
+        public static IEnumerable<MemberInfo> GetFieldsAndProperties (Type type, BindingFlags bindingAttr) {
 
-			MemberInfo [] members = type.GetFields (bindingAttr);
-			for (int i = 0; i < members.Length; i++)
-				yield return members [i];
-			members = type.GetProperties (bindingAttr);
-			for (int i = 0; i < members.Length; i++)
-				yield return members [i];
-		}
+            MemberInfo [] members = type.GetFields (bindingAttr);
+            for (int i = 0; i < members.Length; i++)
+                yield return members [i];
+            members = type.GetProperties (bindingAttr);
+            for (int i = 0; i < members.Length; i++)
+                yield return members [i];
+        }
     }
 }

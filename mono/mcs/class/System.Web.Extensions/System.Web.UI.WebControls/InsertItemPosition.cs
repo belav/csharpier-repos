@@ -29,10 +29,10 @@
 //
 namespace System.Web.UI.WebControls
 {
-	public enum InsertItemPosition
-	{
-		None,
-		FirstItem,
-		LastItem
-	}
+    public enum InsertItemPosition
+    {
+        None,
+        FirstItem,
+        LastItem
+    }
 }

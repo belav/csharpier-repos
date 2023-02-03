@@ -14,18 +14,18 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public class GenExplicitImplementation<T> : InterfaceWithExplicitImpl<T>
-	{
-		IEnumerator<T> InterfaceWithExplicitImpl<T>.GetEnum1()
-		{
-			return new List<T>.Enumerator();
-		}
-	}
+    public class GenExplicitImplementation<T> : InterfaceWithExplicitImpl<T>
+    {
+        IEnumerator<T> InterfaceWithExplicitImpl<T>.GetEnum1()
+        {
+            return new List<T>.Enumerator();
+        }
+    }
 
-	public interface InterfaceWithExplicitImpl<T>
-	{
-		IEnumerator<T> GetEnum1();
-	}
+    public interface InterfaceWithExplicitImpl<T>
+    {
+        IEnumerator<T> GetEnum1();
+    }
 }

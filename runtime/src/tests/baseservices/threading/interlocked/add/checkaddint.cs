@@ -41,20 +41,20 @@ class CheckAddInt
     private int Run(int iStart, int iAdd)
     {
         int iNew = 0;
-		int iNewExpected;
+        int iNewExpected;
         int iTotal = iStart;
         for(int i=0;i<iAdd;i++)
         {
-			iNewExpected = iTotal + (i * (i + 1));
-			iNew = Interlocked.Add(ref iTotal, (i * (i + 1)));
+            iNewExpected = iTotal + (i * (i + 1));
+            iNew = Interlocked.Add(ref iTotal, (i * (i + 1)));
 
-			if ((iNew != iNewExpected) || (iNew != iTotal))
+            if ((iNew != iNewExpected) || (iNew != iTotal))
             {
-				Console.WriteLine(iNew + " " + iNewExpected + " " + iTotal);
+                Console.WriteLine(iNew + " " + iNewExpected + " " + iTotal);
                 Console.WriteLine("Test Failed");
                 return -1;
             }
-			Console.WriteLine(iNew);
+            Console.WriteLine(iNew);
         }
 
         Console.WriteLine("Test Passed");

@@ -2,7 +2,7 @@
 // IWsdlExportExtension.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,12 +32,12 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	public interface IWsdlExportExtension
-	{
-		void ExportContract (WsdlExporter exporter,
-			WsdlContractConversionContext context);
+    public interface IWsdlExportExtension
+    {
+        void ExportContract (WsdlExporter exporter,
+            WsdlContractConversionContext context);
 
-		void ExportEndpoint (WsdlExporter exporter,
-			WsdlEndpointConversionContext context);
-	}
+        void ExportEndpoint (WsdlExporter exporter,
+            WsdlEndpointConversionContext context);
+    }
 }

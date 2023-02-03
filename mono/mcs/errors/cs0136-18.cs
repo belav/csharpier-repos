@@ -9,6 +9,6 @@ class A (Func<int, int> barg)
 }
 
 class B (int arg) 
-	: A ((arg) => 1)
+    : A ((arg) => 1)
 {
 }

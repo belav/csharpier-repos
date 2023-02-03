@@ -2,12 +2,12 @@
 // Line: 10
 
 class Foo {
-	static void Main () { int i; foo (out i); }
-	static void foo (out int i)
-	{
-		try {}
-		finally {
-			return;
-		}
-	}
+    static void Main () { int i; foo (out i); }
+    static void foo (out int i)
+    {
+        try {}
+        finally {
+            return;
+        }
+    }
 }

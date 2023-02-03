@@ -2,7 +2,7 @@
 // HttpWriterCas.cs - CAS unit tests for System.Web.HttpWriter
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,55 +40,55 @@ using System.Web.Caching;
 
 namespace MonoCasTests.System.Web {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpWriterCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HttpWriterCas : AspNetHostingMinimal {
 
-		private HttpWriter writer;
+        private HttpWriter writer;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			HttpContext context = new HttpContext (null);
-			writer = (HttpWriter) context.Response.Output;
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            HttpContext context = new HttpContext (null);
+            writer = (HttpWriter) context.Response.Output;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Properties_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (writer.Encoding, "Encoding");
-			Assert.IsNotNull (writer.OutputStream, "OutputStream");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Properties_Deny_Unrestricted ()
+        {
+            Assert.IsNotNull (writer.Encoding, "Encoding");
+            Assert.IsNotNull (writer.OutputStream, "OutputStream");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Methods_Deny_Unrestricted ()
-		{
-			writer.Write (Char.MinValue);
-			writer.Write (this);
-			writer.Write (String.Empty);
-			writer.Write (new char [1], 0, 1);
-			writer.WriteLine ();
-			writer.WriteString ("mono", 0, 4);
-			writer.WriteBytes (new byte[1], 0, 1);
-			writer.Flush ();
-			writer.Close ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Methods_Deny_Unrestricted ()
+        {
+            writer.Write (Char.MinValue);
+            writer.Write (this);
+            writer.Write (String.Empty);
+            writer.Write (new char [1], 0, 1);
+            writer.WriteLine ();
+            writer.WriteString ("mono", 0, 4);
+            writer.WriteBytes (new byte[1], 0, 1);
+            writer.Flush ();
+            writer.Close ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// there are no public ctor so we're taking a method that we know isn't protected
-			// (by a Demand) and call it thru reflection so any linkdemand (on the class) will
-			// be promoted to a Demand
-			MethodInfo mi = this.Type.GetProperty ("OutputStream").GetGetMethod ();
-			return mi.Invoke (writer, null);
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // there are no public ctor so we're taking a method that we know isn't protected
+            // (by a Demand) and call it thru reflection so any linkdemand (on the class) will
+            // be promoted to a Demand
+            MethodInfo mi = this.Type.GetProperty ("OutputStream").GetGetMethod ();
+            return mi.Invoke (writer, null);
+        }
 
-		public override Type Type {
-			get { return typeof (HttpWriter); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HttpWriter); }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // ComUdtElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,31 +54,31 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ComUdtElement),
-		 AddItemName = "userDefinedType",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	[MonoTODO]
-	public sealed partial class ComUdtElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>,  ICollection,  IEnumerable
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (ComUdtElement),
+         AddItemName = "userDefinedType",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [MonoTODO]
+    public sealed partial class ComUdtElementCollection
+         : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>,  ICollection,  IEnumerable
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static ComUdtElementCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static ComUdtElementCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public ComUdtElementCollection ()
-		{
-		}
-
-
-		// Properties
+        public ComUdtElementCollection ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

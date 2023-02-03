@@ -25,50 +25,50 @@ namespace test
   }
 
   public class RepeaterTest : Repeater {
-  	public override void DataBind ()
-  	{
-		Page.Response.Write (String.Format ("<pre>In DataBind, from {0}</pre>", Environment.StackTrace));
-		base.DataBind ();
-	}
+      public override void DataBind ()
+      {
+        Page.Response.Write (String.Format ("<pre>In DataBind, from {0}</pre>", Environment.StackTrace));
+        base.DataBind ();
+    }
 
-  	protected override void CreateControlHierarchy (bool useDataSource) {
-		Page.Response.Write (String.Format ("<pre>In CreateControlHierarchy({0}), from {1}</pre>", useDataSource, Environment.StackTrace));
-		base.CreateControlHierarchy (useDataSource);
-	}
+      protected override void CreateControlHierarchy (bool useDataSource) {
+        Page.Response.Write (String.Format ("<pre>In CreateControlHierarchy({0}), from {1}</pre>", useDataSource, Environment.StackTrace));
+        base.CreateControlHierarchy (useDataSource);
+    }
 
-  	protected override void OnInit (EventArgs e) {
-		Page.Response.Write (String.Format ("<pre>In OnInit, from {0}</pre>", Environment.StackTrace));
-		base.OnInit (e);
-	}
+      protected override void OnInit (EventArgs e) {
+        Page.Response.Write (String.Format ("<pre>In OnInit, from {0}</pre>", Environment.StackTrace));
+        base.OnInit (e);
+    }
 
-  	protected override IEnumerable GetData () {
-		Page.Response.Write (String.Format ("<pre>In GetData, from {0}</pre>", Environment.StackTrace));
+      protected override IEnumerable GetData () {
+        Page.Response.Write (String.Format ("<pre>In GetData, from {0}</pre>", Environment.StackTrace));
 
-		IEnumerable data = base.GetData();
+        IEnumerable data = base.GetData();
 
-		IEnumerator e = data.GetEnumerator();
+        IEnumerator e = data.GetEnumerator();
 
-		while (e.MoveNext()) {
-			Page.Response.Write (String.Format (" + {0}<br/>", e.Current));
-			IXPathNavigable desc = (IXPathNavigable)e.Current;
-			Page.Response.Write (String.Format ("+ + navigator = {0}<br/>", desc.CreateNavigator().GetType()));
-		}
+        while (e.MoveNext()) {
+            Page.Response.Write (String.Format (" + {0}<br/>", e.Current));
+            IXPathNavigable desc = (IXPathNavigable)e.Current;
+            Page.Response.Write (String.Format ("+ + navigator = {0}<br/>", desc.CreateNavigator().GetType()));
+        }
 
-		return data;
-	}
+        return data;
+    }
 #if false
     /* can't do this one, as it is invoked in the setter for DataSourceID. */
 
-  	protected override void OnDataPropertyChanged () {
-		if (Page != null)
-			Page.Response.Write (String.Format ("<pre>In OnDataPropertyChanged, from {0}</pre>", Environment.StackTrace));
-		base.OnDataPropertyChanged ();
-	}
+      protected override void OnDataPropertyChanged () {
+        if (Page != null)
+            Page.Response.Write (String.Format ("<pre>In OnDataPropertyChanged, from {0}</pre>", Environment.StackTrace));
+        base.OnDataPropertyChanged ();
+    }
 #endif
-  	protected override void OnDataSourceViewChanged (object sender, EventArgs e) {
-		Page.Response.Write (String.Format ("<pre>In OnDataSourceViewChanged, from {0}</pre>", Environment.StackTrace));
-		base.OnDataSourceViewChanged (sender, e);
-	}
+      protected override void OnDataSourceViewChanged (object sender, EventArgs e) {
+        Page.Response.Write (String.Format ("<pre>In OnDataSourceViewChanged, from {0}</pre>", Environment.StackTrace));
+        base.OnDataSourceViewChanged (sender, e);
+    }
 
     protected override RepeaterItem CreateItem (int itemIndex, ListItemType itemType) {
       Page.Response.Write (String.Format ("<pre>In CreateItem, from {0}</pre>", Environment.StackTrace));

@@ -2,7 +2,7 @@
 // AssemblyExtensions.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,15 +28,15 @@
 
 namespace System.Reflection.Metadata
 {
-	public static class AssemblyExtensions
-	{
-		//
-		// System.Runtime.Loader netstandard typeforwarders dependency
-		//
-		[CLSCompliant(false)]
-		public unsafe static bool TryGetRawMetadata (this System.Reflection.Assembly assembly, out byte* blob, out int length)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    public static class AssemblyExtensions
+    {
+        //
+        // System.Runtime.Loader netstandard typeforwarders dependency
+        //
+        [CLSCompliant(false)]
+        public unsafe static bool TryGetRawMetadata (this System.Reflection.Assembly assembly, out byte* blob, out int length)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // Policy.cs: Implements the managed SecPolicy wrapper.
 //
 // Authors: 
-//	Miguel de Icaza
+//    Miguel de Icaza
 //  Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2010 Novell, Inc
@@ -33,53 +33,53 @@ using ObjCRuntimeInternal;
 using Mono.Net;
 
 namespace Mono.AppleTls {
-	partial class SecPolicy : INativeObject, IDisposable {
-		IntPtr handle;
+    partial class SecPolicy : INativeObject, IDisposable {
+        IntPtr handle;
 
-		internal SecPolicy (IntPtr handle, bool owns = false)
-		{
-			if (handle == IntPtr.Zero)
-				throw new Exception ("Invalid handle");
+        internal SecPolicy (IntPtr handle, bool owns = false)
+        {
+            if (handle == IntPtr.Zero)
+                throw new Exception ("Invalid handle");
 
-			this.handle = handle;
-			if (!owns)
-				CFObject.CFRetain (handle);
-		}
+            this.handle = handle;
+            if (!owns)
+                CFObject.CFRetain (handle);
+        }
 
-		[DllImport (AppleTlsContext.SecurityLibrary)]
-		extern static IntPtr /* SecPolicyRef */ SecPolicyCreateSSL (bool server, IntPtr /* CFStringRef */ hostname);
+        [DllImport (AppleTlsContext.SecurityLibrary)]
+        extern static IntPtr /* SecPolicyRef */ SecPolicyCreateSSL (bool server, IntPtr /* CFStringRef */ hostname);
 
-		static public SecPolicy CreateSslPolicy (bool server, string hostName)
-		{
-			CFString host = hostName == null ? null : CFString.Create (hostName);
-			IntPtr handle = host == null ? IntPtr.Zero : host.Handle; 
-			SecPolicy policy = new SecPolicy (SecPolicyCreateSSL (server, handle), true);
-			if (host != null)
-				host.Dispose ();
-			return policy;
-		}
+        static public SecPolicy CreateSslPolicy (bool server, string hostName)
+        {
+            CFString host = hostName == null ? null : CFString.Create (hostName);
+            IntPtr handle = host == null ? IntPtr.Zero : host.Handle; 
+            SecPolicy policy = new SecPolicy (SecPolicyCreateSSL (server, handle), true);
+            if (host != null)
+                host.Dispose ();
+            return policy;
+        }
 
-		~SecPolicy ()
-		{
-			Dispose (false);
-		}
+        ~SecPolicy ()
+        {
+            Dispose (false);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose ()
+        {
+            Dispose (true);
+            GC.SuppressFinalize (this);
+        }
 
-		public IntPtr Handle {
-			get { return handle; }
-		}
+        public IntPtr Handle {
+            get { return handle; }
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (handle != IntPtr.Zero){
-				CFObject.CFRelease (handle);
-				handle = IntPtr.Zero;
-			}
-		}
-	}
+        protected virtual void Dispose (bool disposing)
+        {
+            if (handle != IntPtr.Zero){
+                CFObject.CFRelease (handle);
+                handle = IntPtr.Zero;
+            }
+        }
+    }
 }

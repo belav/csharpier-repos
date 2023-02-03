@@ -6,7 +6,7 @@ using System;
 [A(typeof (Func<dynamic>))]
 public class A : Attribute
 {
-	public A (Type arg)
-	{
-	}
+    public A (Type arg)
+    {
+    }
 }

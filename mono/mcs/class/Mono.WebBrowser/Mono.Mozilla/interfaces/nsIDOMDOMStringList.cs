@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,37 +32,37 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("0bbae65c-1dde-11d9-8c46-000a95dc234c")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMDOMStringList {
+    [Guid ("0bbae65c-1dde-11d9-8c46-000a95dc234c")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMDOMStringList {
 
 #region nsIDOMDOMStringList
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int item ( uint index,
-				 /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int item ( uint index,
+                 /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLength (out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength (out uint ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int contains ( /*DOMString*/ HandleRef str,
-				out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int contains ( /*DOMString*/ HandleRef str,
+                out bool ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMDOMStringList {
-		public static nsIDOMDOMStringList GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDOMStringList obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMDOMStringList).GUID, obj);
-			return o as nsIDOMDOMStringList;
-		}
-	}
+    internal class nsDOMDOMStringList {
+        public static nsIDOMDOMStringList GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDOMStringList obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMDOMStringList).GUID, obj);
+            return o as nsIDOMDOMStringList;
+        }
+    }
 }
 #if example
 
@@ -71,31 +71,31 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class DOMDOMStringList : nsIDOMDOMStringList {
+    internal class DOMDOMStringList : nsIDOMDOMStringList {
 
 #region nsIDOMDOMStringList
-		int nsIDOMDOMStringList.item ( uint index,
-				 /*DOMString*/ HandleRef ret)
-		{
-			return ;
-		}
+        int nsIDOMDOMStringList.item ( uint index,
+                 /*DOMString*/ HandleRef ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIDOMDOMStringList.getLength (out uint ret)
+        int nsIDOMDOMStringList.getLength (out uint ret)
 
-		{
-			return 0;
-		}
+        {
+            return 0;
+        }
 
-		int nsIDOMDOMStringList.contains ( /*DOMString*/ HandleRef str,
-				out bool ret)
-		{
-			return ;
-		}
+        int nsIDOMDOMStringList.contains ( /*DOMString*/ HandleRef str,
+                out bool ret)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

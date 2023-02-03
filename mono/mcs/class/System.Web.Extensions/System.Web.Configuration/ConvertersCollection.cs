@@ -1,4 +1,4 @@
-﻿//
+//
 // ConvertersCollection.cs
 //
 // Author:
@@ -34,41 +34,41 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (Converter))]
-	public class ConvertersCollection : ConfigurationElementCollection
-	{
-		public Converter this [int index] {
-			get {
-				return (Converter) BaseGet (index);
-			}
-			set {
-				if (BaseGet (index) != null) {
-					BaseRemoveAt (index);
-				}
-				BaseAdd (index, value);
-			}
-		}
+    [ConfigurationCollection (typeof (Converter))]
+    public class ConvertersCollection : ConfigurationElementCollection
+    {
+        public Converter this [int index] {
+            get {
+                return (Converter) BaseGet (index);
+            }
+            set {
+                if (BaseGet (index) != null) {
+                    BaseRemoveAt (index);
+                }
+                BaseAdd (index, value);
+            }
+        }
 
-		public void Add (Converter converter) {
-			BaseAdd (converter);
-		}
+        public void Add (Converter converter) {
+            BaseAdd (converter);
+        }
 
-		public void Clear () {
-			BaseClear ();
-		}
+        public void Clear () {
+            BaseClear ();
+        }
 
-		protected override ConfigurationElement CreateNewElement () {
-			return new Converter ();
-		}
+        protected override ConfigurationElement CreateNewElement () {
+            return new Converter ();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((Converter) element).Name;
-		}
+        protected override object GetElementKey (ConfigurationElement element) {
+            return ((Converter) element).Name;
+        }
 
-		public void Remove (Converter converter) {
-			if (BaseIndexOf (converter) >= 0)
-				BaseRemove (converter.Name);
-		}
+        public void Remove (Converter converter) {
+            if (BaseIndexOf (converter) >= 0)
+                BaseRemove (converter.Name);
+        }
 
-	}
+    }
 }

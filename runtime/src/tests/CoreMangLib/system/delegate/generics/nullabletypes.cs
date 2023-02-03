@@ -42,293 +42,293 @@ public delegate T tDi<T>(int i, out string m);
 
 //Define the custom types to be used
 public interface I{
-	bool Equals(int i);
+    bool Equals(int i);
 }
 
 public struct S : I{
-	//Dummy fields to extend this value type and stress
-	//the stub.  We really don't care that they're not used.
-	private double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    //Dummy fields to extend this value type and stress
+    //the stub.  We really don't care that they're not used.
+    private double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
 
-	//An assignable field to be checked for correctness
-	public int value;
+    //An assignable field to be checked for correctness
+    public int value;
 
-	public S(int i){
-		f1=0;f2=0;f3=0;f4=0;f5=0;f6=0;f7=0;f8=0;f9=0;f10=0;//@BUGBUG - It puzzles me to no end why there is a compiler error if I don't initialize these in the constructor
-		value = i;
-	}
+    public S(int i){
+        f1=0;f2=0;f3=0;f4=0;f5=0;f6=0;f7=0;f8=0;f9=0;f10=0;//@BUGBUG - It puzzles me to no end why there is a compiler error if I don't initialize these in the constructor
+        value = i;
+    }
 
-	public bool Equals(int i){
-		return (value==i);
-	}
+    public bool Equals(int i){
+        return (value==i);
+    }
 
-	//For later cleanliness
-	public static bool operator ==(S s, int i){
-		return s.Equals(i);
-	}
+    //For later cleanliness
+    public static bool operator ==(S s, int i){
+        return s.Equals(i);
+    }
 
-	public static bool operator !=(S s, int i){
-		return !s.Equals(i);
-	}
+    public static bool operator !=(S s, int i){
+        return !s.Equals(i);
+    }
 
-	public override bool Equals(object o){
-		throw new Exception("this just exists to stop a compiler warning, don't call it");
-	}
-	public override int GetHashCode(){
-		throw new Exception("this just exists to stop a compiler warning, don't call it");
-	}
+    public override bool Equals(object o){
+        throw new Exception("this just exists to stop a compiler warning, don't call it");
+    }
+    public override int GetHashCode(){
+        throw new Exception("this just exists to stop a compiler warning, don't call it");
+    }
 }
 
 //Define the various delegate target methods
 
 public class RefInst{ //Instance methods on a reference class
-	//The out parameters are a crude tag to verify which method
-	//was actually called.  Necessary because the other functionality
-	//of the methods is pretty much identical
+    //The out parameters are a crude tag to verify which method
+    //was actually called.  Necessary because the other functionality
+    //of the methods is pretty much identical
 
 #region Overloads for BindToMethodName ambiguity testing
-	//These should appear in order from most general to most
-	//specific or (@TODO) we should have additional tests that
-	//vary the method order.  This is to confirm that any
-	//ambiguous matching logic in BindToMethodName isn't just
-	//settling for the first "match" it sees.  There should
-	//be no ambiguity at all in matching.
+    //These should appear in order from most general to most
+    //specific or (@TODO) we should have additional tests that
+    //vary the method order.  This is to confirm that any
+    //ambiguous matching logic in BindToMethodName isn't just
+    //settling for the first "match" it sees.  There should
+    //be no ambiguity at all in matching.
 
-	public int M(int? i, out string m){
-		m = "one";
-		if(i==null)
-			throw new ArgumentNullException();
-		else
-			return (int)i;
-	}
+    public int M(int? i, out string m){
+        m = "one";
+        if(i==null)
+            throw new ArgumentNullException();
+        else
+            return (int)i;
+    }
 
-	public int M(S? s, out string m){
-		m = "two";
-		if(s==null)
-			throw new ArgumentException();
-		else
-			return ((S)s).value;
-	}
+    public int M(S? s, out string m){
+        m = "two";
+        if(s==null)
+            throw new ArgumentException();
+        else
+            return ((S)s).value;
+    }
 
-	public int M(I i, out string m){
-		m = "three";
-		if(i==null)
-			throw new ArgumentNullException();
-		if(!(i is S))
-			throw new ArgumentException();
-		return ((S)i).value;
-	}
+    public int M(I i, out string m){
+        m = "three";
+        if(i==null)
+            throw new ArgumentNullException();
+        if(!(i is S))
+            throw new ArgumentException();
+        return ((S)i).value;
+    }
 
-	public int M(object o, out string m){
-		m = "four";
-		if(o == null)
-			throw new ArgumentNullException();
-		if(!(o is S))
-			throw new ArgumentException();
-		return ((S)o).value;
-	}
+    public int M(object o, out string m){
+        m = "four";
+        if(o == null)
+            throw new ArgumentNullException();
+        if(!(o is S))
+            throw new ArgumentException();
+        return ((S)o).value;
+    }
 
-	public int M(S s, out string m){
-		m = "five";
-		return s.value;
-	}
+    public int M(S s, out string m){
+        m = "five";
+        return s.value;
+    }
 
-	public int M(int i, out string m){
-		m = "six";
-		return i;
-	}
+    public int M(int i, out string m){
+        m = "six";
+        return i;
+    }
 #endregion
 
 #region Non-overloaded methods to allow for (easier) explicit method selection
-	public int iMNi(int? i, out string m){
-		m = "iMNi";
-		if(i==null)
-			throw new ArgumentNullException();
-		else
-			return (int)i;
-	}
+    public int iMNi(int? i, out string m){
+        m = "iMNi";
+        if(i==null)
+            throw new ArgumentNullException();
+        else
+            return (int)i;
+    }
 
-	public int iMNS(S? s, out string m){
-		m = "iMNS";
-		if(s==null)
-			throw new ArgumentException();
-		else
-			return ((S)s).value;
-	}
+    public int iMNS(S? s, out string m){
+        m = "iMNS";
+        if(s==null)
+            throw new ArgumentException();
+        else
+            return ((S)s).value;
+    }
 
-	public int iMI(I i, out string m){
-		m = "iMI";
-		if(i==null)
-			throw new ArgumentNullException();
-		if(!(i is S))
-			throw new ArgumentException();
-		return ((S)i).value;
-	}
+    public int iMI(I i, out string m){
+        m = "iMI";
+        if(i==null)
+            throw new ArgumentNullException();
+        if(!(i is S))
+            throw new ArgumentException();
+        return ((S)i).value;
+    }
 
-	public int iMo(object o, out string m){
-		m = "iMo";
-		if(o == null)
-			throw new ArgumentNullException();
-		if(!(o is S))
-			throw new ArgumentException();
-		return ((S)o).value;
-	}
+    public int iMo(object o, out string m){
+        m = "iMo";
+        if(o == null)
+            throw new ArgumentNullException();
+        if(!(o is S))
+            throw new ArgumentException();
+        return ((S)o).value;
+    }
 
-	public int iMS(S s, out string m){
-		m = "iMS";
-		return s.value;
-	}
+    public int iMS(S s, out string m){
+        m = "iMS";
+        return s.value;
+    }
 
-	public int iMi(int i, out string m){
-		m = "iMi";
-		return i;
-	}
+    public int iMi(int i, out string m){
+        m = "iMi";
+        return i;
+    }
 #endregion
 
-	public S SMi(int i, out string m){
-		m = "SMi";
-		return new S(i);
-	}
+    public S SMi(int i, out string m){
+        m = "SMi";
+        return new S(i);
+    }
 
-	public S? NSMi(int i, out string m){
-		m = "NSMi";
-		return new S(i);
-	}
+    public S? NSMi(int i, out string m){
+        m = "NSMi";
+        return new S(i);
+    }
 
-	public I IMi(int i, out string m){
-		m = "IMi";
-		return new S(i);
-	}
+    public I IMi(int i, out string m){
+        m = "IMi";
+        return new S(i);
+    }
 
-	public object oMi(int i, out string m){
-		m = "oMi";
-		return new S(i);
-	}
+    public object oMi(int i, out string m){
+        m = "oMi";
+        return new S(i);
+    }
 }
 
 public class RefStat{ //Static methods on a reference class
-	//The out parameters are a crude tag to verify which method
-	//was actually called.  Necessary because the other functionality
-	//of the methods is pretty much identical
+    //The out parameters are a crude tag to verify which method
+    //was actually called.  Necessary because the other functionality
+    //of the methods is pretty much identical
 
 #region Overloads for BindToMethodName ambiguity testing
-	//These should appear in order from most general to most
-	//specific or (@TODO) we should have additional tests that
-	//vary the method order.  This is to confirm that any
-	//ambiguous matching logic in BindToMethodName isn't just
-	//settling for the first "match" it sees.  There should
-	//be no ambiguity at all in matching.
+    //These should appear in order from most general to most
+    //specific or (@TODO) we should have additional tests that
+    //vary the method order.  This is to confirm that any
+    //ambiguous matching logic in BindToMethodName isn't just
+    //settling for the first "match" it sees.  There should
+    //be no ambiguity at all in matching.
 
-	public static int M(int? i, out string m){
-		m = "one";
-		if(i==null)
-			throw new ArgumentNullException();
-		else
-			return (int)i;
-	}
+    public static int M(int? i, out string m){
+        m = "one";
+        if(i==null)
+            throw new ArgumentNullException();
+        else
+            return (int)i;
+    }
 
-	public static int M(S? s, out string m){
-		m = "two";
-		if(s==null)
-			throw new ArgumentException();
-		else
-			return ((S)s).value;
-	}
+    public static int M(S? s, out string m){
+        m = "two";
+        if(s==null)
+            throw new ArgumentException();
+        else
+            return ((S)s).value;
+    }
 
-	public static int M(I i, out string m){
-		m = "three";
-		if(i==null)
-			throw new ArgumentNullException();
-		if(!(i is S))
-			throw new ArgumentException();
-		return ((S)i).value;
-	}
+    public static int M(I i, out string m){
+        m = "three";
+        if(i==null)
+            throw new ArgumentNullException();
+        if(!(i is S))
+            throw new ArgumentException();
+        return ((S)i).value;
+    }
 
-	public static int M(object o, out string m){
-		m = "four";
-		if(o == null)
-			throw new ArgumentNullException();
-		if(!(o is S))
-			throw new ArgumentException();
-		return ((S)o).value;
-	}
+    public static int M(object o, out string m){
+        m = "four";
+        if(o == null)
+            throw new ArgumentNullException();
+        if(!(o is S))
+            throw new ArgumentException();
+        return ((S)o).value;
+    }
 
-	public static int M(S s, out string m){
-		m = "five";
-		return s.value;
-	}
+    public static int M(S s, out string m){
+        m = "five";
+        return s.value;
+    }
 
-	public static int M(int i, out string m){
-		m = "six";
-		return i;
-	}
+    public static int M(int i, out string m){
+        m = "six";
+        return i;
+    }
 #endregion
 
 #region Non-overloaded methods to allow for (easier) explicit method selection
-	public static int iMNi(int? i, out string m){
-		m = "iMNi";
-		if(i==null)
-			throw new ArgumentNullException();
-		else
-			return (int)i;
-	}
+    public static int iMNi(int? i, out string m){
+        m = "iMNi";
+        if(i==null)
+            throw new ArgumentNullException();
+        else
+            return (int)i;
+    }
 
-	public static int iMNS(S? s, out string m){
-		m = "iMNS";
-		if(s==null)
-			throw new ArgumentException();
-		else
-			return ((S)s).value;
-	}
+    public static int iMNS(S? s, out string m){
+        m = "iMNS";
+        if(s==null)
+            throw new ArgumentException();
+        else
+            return ((S)s).value;
+    }
 
-	public static int iMI(I i, out string m){
-		m = "iMI";
-		if(i==null)
-			throw new ArgumentNullException();
-		if(!(i is S))
-			throw new ArgumentException();
-		return ((S)i).value;
-	}
+    public static int iMI(I i, out string m){
+        m = "iMI";
+        if(i==null)
+            throw new ArgumentNullException();
+        if(!(i is S))
+            throw new ArgumentException();
+        return ((S)i).value;
+    }
 
-	public static int iMo(object o, out string m){
-		m = "iMo";
-		if(o == null)
-			throw new ArgumentNullException();
-		if(!(o is S))
-			throw new ArgumentException();
-		return ((S)o).value;
-	}
+    public static int iMo(object o, out string m){
+        m = "iMo";
+        if(o == null)
+            throw new ArgumentNullException();
+        if(!(o is S))
+            throw new ArgumentException();
+        return ((S)o).value;
+    }
 
-	public static int iMS(S s, out string m){
-		m = "iMS";
-		return s.value;
-	}
+    public static int iMS(S s, out string m){
+        m = "iMS";
+        return s.value;
+    }
 
-	public static int iMi(int i, out string m){
-		m = "iMi";
-		return i;
-	}
+    public static int iMi(int i, out string m){
+        m = "iMi";
+        return i;
+    }
 #endregion
 
-	public static S SMi(int i, out string m){
-		m = "SMi";
-		return new S(i);
-	}
+    public static S SMi(int i, out string m){
+        m = "SMi";
+        return new S(i);
+    }
 
-	public static S? NSMi(int i, out string m){
-		m = "NSMi";
-		return new S(i);
-	}
+    public static S? NSMi(int i, out string m){
+        m = "NSMi";
+        return new S(i);
+    }
 
-	public static I IMi(int i, out string m){
-		m = "IMi";
-		return new S(i);
-	}
+    public static I IMi(int i, out string m){
+        m = "IMi";
+        return new S(i);
+    }
 
-	public static object oMi(int i, out string m){
-		m = "oMi";
-		return new S(i);
-	}
+    public static object oMi(int i, out string m){
+        m = "oMi";
+        return new S(i);
+    }
 }
 
 public struct ValInst{ //Instance methods on a value class
@@ -339,10 +339,10 @@ public struct ValStat{ //Static methods on a value class
 
 //Some reusable helper methods
 public class Util{
-	//Method to do quick culture invariant string comparisons (quick in the sense that I don't have to type of cultureinfo.invariantlsjflakjdlfjsldkjf 7000 times).
-	public static bool Equals(string s1, string s2){
-		return String.Equals(s1, s2, StringComparison.Ordinal);
-	}
+    //Method to do quick culture invariant string comparisons (quick in the sense that I don't have to type of cultureinfo.invariantlsjflakjdlfjsldkjf 7000 times).
+    public static bool Equals(string s1, string s2){
+        return String.Equals(s1, s2, StringComparison.Ordinal);
+    }
 }
 
 #pragma warning restore

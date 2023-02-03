@@ -33,141 +33,141 @@ using System.Web.Services;
 using System.Xml;
 
 namespace System.Web.Services.Description {
-	public sealed class ServiceDescriptionCollection : ServiceDescriptionBaseCollection {
+    public sealed class ServiceDescriptionCollection : ServiceDescriptionBaseCollection {
 
-		ServiceDescriptionImporter importer;
-		
-		#region Constructors
-	
-		public ServiceDescriptionCollection () 
-			: base (null)
-		{
-		}
+        ServiceDescriptionImporter importer;
+        
+        #region Constructors
+    
+        public ServiceDescriptionCollection () 
+            : base (null)
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public ServiceDescription this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
+        public ServiceDescription this [int index] {
+            get { 
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException ();
 
-				return (ServiceDescription) List[index]; 
-			}
-			set { List [index] = value; }
-		}
+                return (ServiceDescription) List[index]; 
+            }
+            set { List [index] = value; }
+        }
 
-		public ServiceDescription this [string ns] {
-			get { 
-				return (ServiceDescription) Table[ns];
-			}
-		}
+        public ServiceDescription this [string ns] {
+            get { 
+                return (ServiceDescription) Table[ns];
+            }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
-		internal void SetImporter (ServiceDescriptionImporter i)
-		{
-			importer = i;
-		}
-		public int Add (ServiceDescription serviceDescription) 
-		{
-			Insert (Count, serviceDescription);
-			return (Count - 1);
-		}
-		
-		public bool Contains (ServiceDescription serviceDescription)
-		{
-			return List.Contains (serviceDescription);
-		}
+        #region Methods
+        internal void SetImporter (ServiceDescriptionImporter i)
+        {
+            importer = i;
+        }
+        public int Add (ServiceDescription serviceDescription) 
+        {
+            Insert (Count, serviceDescription);
+            return (Count - 1);
+        }
+        
+        public bool Contains (ServiceDescription serviceDescription)
+        {
+            return List.Contains (serviceDescription);
+        }
 
-		public void CopyTo (ServiceDescription[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        public void CopyTo (ServiceDescription[] array, int index) 
+        {
+            List.CopyTo (array, index);
+        }
 
-		public Binding GetBinding (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (Binding binding in desc.Bindings) 
-						if (binding.Name == name.Name)
-							return binding;
-				}
-			}
-			throw new InvalidOperationException ("Binding '" + name + "' not found");
-		}
+        public Binding GetBinding (XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List) {
+                if (desc.TargetNamespace == name.Namespace) {
+                    foreach (Binding binding in desc.Bindings) 
+                        if (binding.Name == name.Name)
+                            return binding;
+                }
+            }
+            throw new InvalidOperationException ("Binding '" + name + "' not found");
+        }
 
-		protected override string GetKey (object value) 
-		{
-			return ((ServiceDescription) value).TargetNamespace;
-		}
+        protected override string GetKey (object value) 
+        {
+            return ((ServiceDescription) value).TargetNamespace;
+        }
 
-		public Message GetMessage (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (Message message in desc.Messages) 
-						if (message.Name == name.Name)
-							return message;
-				}
-			}
-			throw new InvalidOperationException ("Message '" + name + "' not found");
-		}
+        public Message GetMessage (XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List) {
+                if (desc.TargetNamespace == name.Namespace) {
+                    foreach (Message message in desc.Messages) 
+                        if (message.Name == name.Name)
+                            return message;
+                }
+            }
+            throw new InvalidOperationException ("Message '" + name + "' not found");
+        }
 
-		public PortType GetPortType (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (PortType portType in desc.PortTypes) 
-						if (portType.Name == name.Name)
-							return portType;
-				}
-			}
-			throw new InvalidOperationException ("Port type '" + name + "' not found");
-		}
+        public PortType GetPortType (XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List) {
+                if (desc.TargetNamespace == name.Namespace) {
+                    foreach (PortType portType in desc.PortTypes) 
+                        if (portType.Name == name.Name)
+                            return portType;
+                }
+            }
+            throw new InvalidOperationException ("Port type '" + name + "' not found");
+        }
 
-		public Service GetService (XmlQualifiedName name)
-		{
-			foreach (ServiceDescription desc in List) {
-				if (desc.TargetNamespace == name.Namespace) {
-					foreach (Service service in desc.Services) 
-						if (service.Name == name.Name)
-							return service;
-				}
-			}
-			throw new InvalidOperationException ("Service '" + name + "' not found");
-		}
+        public Service GetService (XmlQualifiedName name)
+        {
+            foreach (ServiceDescription desc in List) {
+                if (desc.TargetNamespace == name.Namespace) {
+                    foreach (Service service in desc.Services) 
+                        if (service.Name == name.Name)
+                            return service;
+                }
+            }
+            throw new InvalidOperationException ("Service '" + name + "' not found");
+        }
 
-		public int IndexOf (ServiceDescription serviceDescription)
-		{
-			return List.IndexOf (serviceDescription);
-		}
+        public int IndexOf (ServiceDescription serviceDescription)
+        {
+            return List.IndexOf (serviceDescription);
+        }
 
-		public void Insert (int index, ServiceDescription serviceDescription)
-		{
-			List.Insert (index, serviceDescription);
-			OnInsertComplete (index, serviceDescription);
-		}
-	
-		public void Remove (ServiceDescription serviceDescription)
-		{
-			List.Remove (serviceDescription);
-		}
+        public void Insert (int index, ServiceDescription serviceDescription)
+        {
+            List.Insert (index, serviceDescription);
+            OnInsertComplete (index, serviceDescription);
+        }
+    
+        public void Remove (ServiceDescription serviceDescription)
+        {
+            List.Remove (serviceDescription);
+        }
 
-		[MonoTODO]
-		protected override
-		void OnInsertComplete (int index, object item)
-		{
-			base.OnInsertComplete (index, item);
-		}
+        [MonoTODO]
+        protected override
+        void OnInsertComplete (int index, object item)
+        {
+            base.OnInsertComplete (index, item);
+        }
 
-		[MonoTODO]
-		protected override void SetParent (object value, object parent)
-		{
-		}
+        [MonoTODO]
+        protected override void SetParent (object value, object parent)
+        {
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

@@ -35,43 +35,43 @@ using System;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapEntities : ISoapXsd
-	{
-		string _value;
-		
-		public SoapEntities ()
-		{
-		}
-		
-		public SoapEntities (string value)
-		{
-			_value = SoapHelper.Normalize (value);
-		}
-		
-		public string Value {
-			get { return _value; } 
-			set { _value = value; }
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public sealed class SoapEntities : ISoapXsd
+    {
+        string _value;
+        
+        public SoapEntities ()
+        {
+        }
+        
+        public SoapEntities (string value)
+        {
+            _value = SoapHelper.Normalize (value);
+        }
+        
+        public string Value {
+            get { return _value; } 
+            set { _value = value; }
+        }
 
-		public static string XsdType {
-			get { return "ENTITIES"; }
-		}
+        public static string XsdType {
+            get { return "ENTITIES"; }
+        }
 
-		public string GetXsdType()
-		{
-			return XsdType;
-		}
-		
-		public static SoapEntities Parse (string value)
-		{
-			return new SoapEntities (value);
-		}
+        public string GetXsdType()
+        {
+            return XsdType;
+        }
+        
+        public static SoapEntities Parse (string value)
+        {
+            return new SoapEntities (value);
+        }
 
-		public override string ToString()
-		{
-			return _value;
-		}
-	}
+        public override string ToString()
+        {
+            return _value;
+        }
+    }
 }

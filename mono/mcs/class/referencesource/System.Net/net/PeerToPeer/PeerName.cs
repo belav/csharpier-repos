@@ -139,9 +139,9 @@ namespace System.Net.PeerToPeer
             {
                 throw new ArgumentException(SR.GetString(SR.Pnrp_InvalidClassifier), "classifier");
             }
-			//--------------------------------------------------
-			//Normalize using NFC
-			//--------------------------------------------------
+            //--------------------------------------------------
+            //Normalize using NFC
+            //--------------------------------------------------
             if (classifier != null && classifier.Length > 0)
             {
                 classifier = classifier.Normalize(NormalizationForm.FormC);
@@ -276,9 +276,9 @@ namespace System.Net.PeerToPeer
                 throw new ArgumentException(SR.GetString(SR.Pnrp_InvalidClassifier), "classifier");
             }
 
-			//--------------------------------------------------
-			//Normalize using NFC
-			//--------------------------------------------------
+            //--------------------------------------------------
+            //Normalize using NFC
+            //--------------------------------------------------
             if (classifier != null && classifier.Length > 0)
             {
                 classifier = classifier.Normalize(NormalizationForm.FormC);
@@ -394,8 +394,8 @@ namespace System.Net.PeerToPeer
                     SafePeerData shPeerHostName = null;
                     try
                     {
-						//This API gives HRESULT > 0 for success instead of S_OK == 0
-						//WINDOWS OS 
+                        //This API gives HRESULT > 0 for success instead of S_OK == 0
+                        //WINDOWS OS 
 
                         result = UnsafeP2PNativeMethods.PeerNameToPeerHostName( m_PeerName, out shPeerHostName);
                         if (result < 0)
@@ -588,6 +588,6 @@ namespace System.Net.PeerToPeer
             info.AddValue("_Authority", m_Authority);
             info.AddValue("_Classifier", m_Classifier);
         }
-		
+        
     }
 }

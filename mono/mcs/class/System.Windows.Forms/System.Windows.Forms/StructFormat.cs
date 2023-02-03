@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms
 {
-	public enum StructFormat
-	{
-		Ansi = 1,
-		Unicode = 2,
-		Auto = 3
-	}
+    public enum StructFormat
+    {
+        Ansi = 1,
+        Unicode = 2,
+        Auto = 3
+    }
 }

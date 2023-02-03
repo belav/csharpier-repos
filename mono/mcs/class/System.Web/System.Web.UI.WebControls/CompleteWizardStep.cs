@@ -2,7 +2,7 @@
 // (C) 2005 Mainsoft Corporation (http://www.mainsoft.com)
 //
 // Authors:
-//	Vladimir Krasnov <vladimirk@mainsoft.com>
+//    Vladimir Krasnov <vladimirk@mainsoft.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,38 +33,38 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-	[Browsable (false)]
-	public sealed class CompleteWizardStep : TemplatedWizardStep
-	{
-		public CompleteWizardStep ()
-		{
-		}
+    [Browsable (false)]
+    public sealed class CompleteWizardStep : TemplatedWizardStep
+    {
+        public CompleteWizardStep ()
+        {
+        }
 
-		// MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of 
-		// the WizardStepType enumeration. Attempting to set the StepType property to a different value will result in an InvalidOperationException.
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Filterable (false)]
-		[Browsable (false)]
-		[ThemeableAttribute (false)]
-		public override WizardStepType StepType {
-			get { return WizardStepType.Complete; }
-			set { throw new InvalidOperationException (); }
-		}
+        // MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of 
+        // the WizardStepType enumeration. Attempting to set the StepType property to a different value will result in an InvalidOperationException.
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [Filterable (false)]
+        [Browsable (false)]
+        [ThemeableAttribute (false)]
+        public override WizardStepType StepType {
+            get { return WizardStepType.Complete; }
+            set { throw new InvalidOperationException (); }
+        }
 
-		[LocalizableAttribute (true)]
-		public override string Title {
-			get {
-				object o = ViewState ["TitleText"];
-				return (o == null) ? Locale.GetText ("Complete") : (string) o;
-			}
-			set {
-				if (value == null)
-					ViewState.Remove ("TitleText");
-				else
-					ViewState ["TitleText"] = value;
-			}
-		}
-	}
+        [LocalizableAttribute (true)]
+        public override string Title {
+            get {
+                object o = ViewState ["TitleText"];
+                return (o == null) ? Locale.GetText ("Complete") : (string) o;
+            }
+            set {
+                if (value == null)
+                    ViewState.Remove ("TitleText");
+                else
+                    ViewState ["TitleText"] = value;
+            }
+        }
+    }
 
 }
 

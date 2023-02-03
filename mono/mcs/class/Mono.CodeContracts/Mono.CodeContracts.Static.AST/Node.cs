@@ -1,8 +1,8 @@
-﻿// 
+// 
 // Node.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,12 +27,12 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	abstract class Node {
-		protected Node (NodeType nodeType)
-		{
-			NodeType = nodeType;
-		}
+    abstract class Node {
+        protected Node (NodeType nodeType)
+        {
+            NodeType = nodeType;
+        }
 
-		public NodeType NodeType { get; set; }
-	}
+        public NodeType NodeType { get; set; }
+    }
 }

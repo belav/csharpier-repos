@@ -38,100 +38,100 @@ using System;
 
 namespace System.Reflection.Emit {
 
-	[Obsolete ("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
-	[ComVisible (true)]
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential)]
-	public sealed class UnmanagedMarshal {
+    [Obsolete ("An alternate API is available: Emit the MarshalAs custom attribute instead.")]
+    [ComVisible (true)]
+    [Serializable]
+    [StructLayout (LayoutKind.Sequential)]
+    public sealed class UnmanagedMarshal {
 #pragma warning disable 169, 414
-		private int count;
-		private UnmanagedType t;
-		private UnmanagedType tbase;
-		string guid;
-		string mcookie;
-		string marshaltype;
-		internal Type marshaltyperef;
-		private int param_num;
-		private bool has_size;
+        private int count;
+        private UnmanagedType t;
+        private UnmanagedType tbase;
+        string guid;
+        string mcookie;
+        string marshaltype;
+        internal Type marshaltyperef;
+        private int param_num;
+        private bool has_size;
 #pragma warning restore 169, 414
-		
-		private UnmanagedMarshal (UnmanagedType maint, int cnt) {
-			count = cnt;
-			t = maint;
-			tbase = maint;
-		}
-		private UnmanagedMarshal (UnmanagedType maint, UnmanagedType elemt) {
-			count = 0;
-			t = maint;
-			tbase = elemt;
-		}
-		
-		public UnmanagedType BaseType {
-			get {
-				if (t == UnmanagedType.LPArray)
-					throw new ArgumentException ();
+        
+        private UnmanagedMarshal (UnmanagedType maint, int cnt) {
+            count = cnt;
+            t = maint;
+            tbase = maint;
+        }
+        private UnmanagedMarshal (UnmanagedType maint, UnmanagedType elemt) {
+            count = 0;
+            t = maint;
+            tbase = elemt;
+        }
+        
+        public UnmanagedType BaseType {
+            get {
+                if (t == UnmanagedType.LPArray)
+                    throw new ArgumentException ();
 
 #if FEATURE_COMINTEROP
-				if (t == UnmanagedType.SafeArray)
-					throw new ArgumentException ();
+                if (t == UnmanagedType.SafeArray)
+                    throw new ArgumentException ();
 #endif
-				return tbase;
-			}
-		}
+                return tbase;
+            }
+        }
 
-		public int ElementCount {
-			get {return count;}
-		}
+        public int ElementCount {
+            get {return count;}
+        }
 
-		public UnmanagedType GetUnmanagedType {
-			get {return t;}
-		}
+        public UnmanagedType GetUnmanagedType {
+            get {return t;}
+        }
 
-		public Guid IIDGuid {
-			get {return new Guid (guid);}
-		}
+        public Guid IIDGuid {
+            get {return new Guid (guid);}
+        }
 
-		public static UnmanagedMarshal DefineByValArray( int elemCount) {
-			return new UnmanagedMarshal (UnmanagedType.ByValArray, elemCount);
-		}
+        public static UnmanagedMarshal DefineByValArray( int elemCount) {
+            return new UnmanagedMarshal (UnmanagedType.ByValArray, elemCount);
+        }
 
-		public static UnmanagedMarshal DefineByValTStr( int elemCount) {
-			return new UnmanagedMarshal (UnmanagedType.ByValTStr, elemCount);
-		}
+        public static UnmanagedMarshal DefineByValTStr( int elemCount) {
+            return new UnmanagedMarshal (UnmanagedType.ByValTStr, elemCount);
+        }
 
-		public static UnmanagedMarshal DefineLPArray( UnmanagedType elemType) {
-			return new UnmanagedMarshal (UnmanagedType.LPArray, elemType);
-		}
+        public static UnmanagedMarshal DefineLPArray( UnmanagedType elemType) {
+            return new UnmanagedMarshal (UnmanagedType.LPArray, elemType);
+        }
 #if FEATURE_COMINTEROP
-		public static UnmanagedMarshal DefineSafeArray( UnmanagedType elemType) {
-			return new UnmanagedMarshal (UnmanagedType.SafeArray, elemType);
-		}
+        public static UnmanagedMarshal DefineSafeArray( UnmanagedType elemType) {
+            return new UnmanagedMarshal (UnmanagedType.SafeArray, elemType);
+        }
 #endif
-		public static UnmanagedMarshal DefineUnmanagedMarshal( UnmanagedType unmanagedType) {
-			return new UnmanagedMarshal (unmanagedType, unmanagedType);
-		}
+        public static UnmanagedMarshal DefineUnmanagedMarshal( UnmanagedType unmanagedType) {
+            return new UnmanagedMarshal (unmanagedType, unmanagedType);
+        }
 #if FEATURE_COMINTEROP
-		internal static UnmanagedMarshal DefineCustom (Type typeref, string cookie, string mtype, Guid id) {
-			UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.CustomMarshaler, UnmanagedType.CustomMarshaler);
-			res.mcookie = cookie;
-			res.marshaltype = mtype;
-			res.marshaltyperef = typeref;
-			if (id == Guid.Empty)
-				res.guid = String.Empty;
-			else
-				res.guid = id.ToString ();
-			return res;
-		}
-#endif		
-		// sizeConst and sizeParamIndex can be -1 meaning they are not specified
-		internal static UnmanagedMarshal DefineLPArrayInternal (UnmanagedType elemType, int sizeConst, int sizeParamIndex) {
-			UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.LPArray, elemType);
-			res.count = sizeConst;
-			res.param_num = sizeParamIndex;
-			res.has_size = true;
+        internal static UnmanagedMarshal DefineCustom (Type typeref, string cookie, string mtype, Guid id) {
+            UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.CustomMarshaler, UnmanagedType.CustomMarshaler);
+            res.mcookie = cookie;
+            res.marshaltype = mtype;
+            res.marshaltyperef = typeref;
+            if (id == Guid.Empty)
+                res.guid = String.Empty;
+            else
+                res.guid = id.ToString ();
+            return res;
+        }
+#endif        
+        // sizeConst and sizeParamIndex can be -1 meaning they are not specified
+        internal static UnmanagedMarshal DefineLPArrayInternal (UnmanagedType elemType, int sizeConst, int sizeParamIndex) {
+            UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.LPArray, elemType);
+            res.count = sizeConst;
+            res.param_num = sizeParamIndex;
+            res.has_size = true;
 
-			return res;
-		}
-	}
+            return res;
+        }
+    }
 }
 #endif

@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1866,7 +1866,7 @@ outerDefault:
                 return result;
             }
 
-            // In case the parameter type sequences {P1, P2, â€¦, PN} and {Q1, Q2, â€¦, QN} are
+            // In case the parameter type sequences {P1, P2, …, PN} and {Q1, Q2, …, QN} are
             // equivalent ignoring Task-like differences (i.e. each Pi has an identity conversion to the corresponding Qi), the
             // following tie-breaking rules are applied, in order, to determine the better function
             // member. 
@@ -1921,13 +1921,13 @@ outerDefault:
                 }
             }
 
-            // SPEC VIOLATION: When checking for matching parameter type sequences {P1, P2, â€¦, PN} and {Q1, Q2, â€¦, QN},
+            // SPEC VIOLATION: When checking for matching parameter type sequences {P1, P2, …, PN} and {Q1, Q2, …, QN},
             //                 native compiler includes types of optional parameters. We partially duplicate this behavior
             //                 here by comparing the number of parameters used taking params expansion and 
             //                 optional parameters into account.
             if (!allSame || m1ParametersUsedIncludingExpansionAndOptional != m2ParametersUsedIncludingExpansionAndOptional)
             {
-                // SPEC VIOLATION: Even when parameter type sequences {P1, P2, â€¦, PN} and {Q1, Q2, â€¦, QN} are
+                // SPEC VIOLATION: Even when parameter type sequences {P1, P2, …, PN} and {Q1, Q2, …, QN} are
                 //                 not equivalent, we have tie-breaking rules.
                 //
                 // Relevant code in the native compiler is at the end of
@@ -2037,7 +2037,7 @@ outerDefault:
             }
 
             // Otherwise, if MP has more specific parameter types than MQ, then MP is better than
-            // MQ. Let {R1, R2, â€¦, RN} and {S1, S2, â€¦, SN} represent the uninstantiated and
+            // MQ. Let {R1, R2, …, RN} and {S1, S2, …, SN} represent the uninstantiated and
             // unexpanded parameter types of MP and MQ. MP's parameter types are more specific than
             // MQ's if, for each parameter, RX is not less specific than SX, and, for at least one
             // parameter, RX is more specific than SX
@@ -2544,7 +2544,7 @@ outerDefault:
             {
                 BoundLambda lambda = ((UnboundLambda)node).BindForReturnTypeInference(d);
 
-                // - an inferred return type X exists for E in the context of the parameter list of D(Â§7.5.2.12), and an identity conversion exists from X to Y
+                // - an inferred return type X exists for E in the context of the parameter list of D(§7.5.2.12), and an identity conversion exists from X to Y
                 var x = lambda.GetInferredReturnType(ref useSiteInfo, out _);
                 if (x.HasType && Conversions.HasIdentityConversion(x.Type, y))
                 {
@@ -3475,10 +3475,10 @@ outerDefault:
                     member = (TMember)(Symbol)method.Construct(typeArguments);
                     leastOverriddenMember = (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom.Construct(typeArguments);
 
-                    // Spec (Â§7.6.5.1)
+                    // Spec (§7.6.5.1)
                     //   Once the (inferred) type arguments are substituted for the corresponding method type parameters, 
-                    //   all constructed types in the parameter list of F satisfy *their* constraints (Â§4.4.4), 
-                    //   and the parameter list of F is applicable with respect to A (Â§7.5.3.1).
+                    //   all constructed types in the parameter list of F satisfy *their* constraints (§4.4.4), 
+                    //   and the parameter list of F is applicable with respect to A (§7.5.3.1).
                     //
                     // This rule is a bit complicated; let's take a look at an example. Suppose we have
                     // class X<U> where U : struct {}
@@ -3762,7 +3762,7 @@ outerDefault:
             // Spec 7.5.3.1
             // For each argument in A, the parameter passing mode of the argument (i.e., value, ref, or out) is identical
             // to the parameter passing mode of the corresponding parameter, and
-            // - for a value parameter or a parameter array, an implicit conversion (Â§6.1)
+            // - for a value parameter or a parameter array, an implicit conversion (§6.1)
             //   exists from the argument to the type of the corresponding parameter, or
             // - for a ref or out parameter, the type of the argument is identical to the type of the corresponding parameter. 
 
@@ -3778,9 +3778,9 @@ outerDefault:
             // TODO (tomat): the spec wording isn't final yet
 
             // Spec 7.5.4: Compile-time checking of dynamic overload resolution:
-            // - Then, any parameter whose type is open (i.e. contains a type parameter; see Â§4.4.2) is elided, along with its corresponding parameter(s).
+            // - Then, any parameter whose type is open (i.e. contains a type parameter; see §4.4.2) is elided, along with its corresponding parameter(s).
             // and
-            // - The modified parameter list for F is applicable to the modified argument list in terms of section Â§7.5.3.1
+            // - The modified parameter list for F is applicable to the modified argument list in terms of section §7.5.3.1
             if (ignoreOpenTypes && parameterType.ContainsTypeParameter(parameterContainer: (MethodSymbol)candidate))
             {
                 // defer applicability check to runtime:

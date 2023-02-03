@@ -34,11 +34,11 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	[FlagsAttribute] 
-	public enum ViewFlags
-	{
-		CustomPaint = 1,
-		DesignTimeHtmlRequiresLoadComplete = 2,
-		TemplateEditing = 4
-	}
+    [FlagsAttribute] 
+    public enum ViewFlags
+    {
+        CustomPaint = 1,
+        DesignTimeHtmlRequiresLoadComplete = 2,
+        TemplateEditing = 4
+    }
 }

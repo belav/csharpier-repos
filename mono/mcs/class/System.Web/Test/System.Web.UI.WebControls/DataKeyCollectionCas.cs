@@ -1,9 +1,9 @@
 //
 // DataKeyCollectionCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.DataKeyCollection
+//    - CAS unit tests for System.Web.UI.WebControls.DataKeyCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,29 +40,29 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataKeyCollectionCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataKeyCollectionCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataKeyCollectionTest unit = new DataKeyCollectionTest ();
-			unit.Constructor_Empty ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            DataKeyCollectionTest unit = new DataKeyCollectionTest ();
+            unit.Constructor_Empty ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
-			Assert.IsNotNull (ci, ".ctor(ArrayList)");
-			return ci.Invoke (new object[1] { new ArrayList () });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
+            Assert.IsNotNull (ci, ".ctor(ArrayList)");
+            return ci.Invoke (new object[1] { new ArrayList () });
+        }
 
-		public override Type Type {
-			get { return typeof (DataKeyCollection); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataKeyCollection); }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // OperationContractGenerationContext.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,67 +34,67 @@ using System.Web.Services.Description;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class OperationContractGenerationContext
-	{
-		public OperationContractGenerationContext (
-			ServiceContractGenerator serviceContractGenerator,
-			ServiceContractGenerationContext contract,
-			OperationDescription operation,
-			CodeTypeDeclaration declaringType,
-			CodeMemberMethod method)
-			: this (serviceContractGenerator, contract, operation,
-				declaringType, method, null, null)
-		{
-		}
+    [MonoTODO]
+    public class OperationContractGenerationContext
+    {
+        public OperationContractGenerationContext (
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType,
+            CodeMemberMethod method)
+            : this (serviceContractGenerator, contract, operation,
+                declaringType, method, null, null)
+        {
+        }
 
-		public OperationContractGenerationContext (
-			ServiceContractGenerator serviceContractGenerator,
-			ServiceContractGenerationContext contract,
-			OperationDescription operation,
-			CodeTypeDeclaration declaringType,
-			CodeMemberMethod syncMethod,
-			CodeMemberMethod beginMethod,
-			CodeMemberMethod endMethod)
-		{
-			generator = serviceContractGenerator;
-			this.contract = contract;
-			this.operation = operation;
-			declaring_type = declaringType;
-			this.method = syncMethod;
-			this.begin_method = beginMethod;
-			this.end_method = endMethod;
-		}
+        public OperationContractGenerationContext (
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType,
+            CodeMemberMethod syncMethod,
+            CodeMemberMethod beginMethod,
+            CodeMemberMethod endMethod)
+        {
+            generator = serviceContractGenerator;
+            this.contract = contract;
+            this.operation = operation;
+            declaring_type = declaringType;
+            this.method = syncMethod;
+            this.begin_method = beginMethod;
+            this.end_method = endMethod;
+        }
 
-		ServiceContractGenerator generator;
-		ServiceContractGenerationContext contract;
-		OperationDescription operation;
-		CodeTypeDeclaration declaring_type;
-		CodeMemberMethod method, begin_method, end_method;
+        ServiceContractGenerator generator;
+        ServiceContractGenerationContext contract;
+        OperationDescription operation;
+        CodeTypeDeclaration declaring_type;
+        CodeMemberMethod method, begin_method, end_method;
 
-		public ServiceContractGenerator ServiceContractGenerator {
-			get { return generator; }
-		}
-		public ServiceContractGenerationContext Contract {
-			get { return contract; }
-		}
-		public OperationDescription Operation {
-			get { return operation; }
-		}
-		public CodeTypeDeclaration DeclaringType {
-			get { return declaring_type; }
-		}
-		public CodeMemberMethod SyncMethod {
-			get { return method; }
-		}
-		public CodeMemberMethod BeginMethod {
-			get { return begin_method; }
-		}
-		public CodeMemberMethod EndMethod {
-			get { return end_method; }
-		}
-		public bool IsAsync {
-			get { return begin_method != null; }
-		}
-	}
+        public ServiceContractGenerator ServiceContractGenerator {
+            get { return generator; }
+        }
+        public ServiceContractGenerationContext Contract {
+            get { return contract; }
+        }
+        public OperationDescription Operation {
+            get { return operation; }
+        }
+        public CodeTypeDeclaration DeclaringType {
+            get { return declaring_type; }
+        }
+        public CodeMemberMethod SyncMethod {
+            get { return method; }
+        }
+        public CodeMemberMethod BeginMethod {
+            get { return begin_method; }
+        }
+        public CodeMemberMethod EndMethod {
+            get { return end_method; }
+        }
+        public bool IsAsync {
+            get { return begin_method != null; }
+        }
+    }
 }

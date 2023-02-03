@@ -28,15 +28,15 @@
 
 namespace Mono.Cecil.Signatures {
 
-	using Mono.Cecil.Metadata;
+    using Mono.Cecil.Metadata;
 
-	internal sealed class SZARRAY : SigType {
+    internal sealed class SZARRAY : SigType {
 
-		public CustomMod [] CustomMods;
-		public SigType Type;
+        public CustomMod [] CustomMods;
+        public SigType Type;
 
-		public SZARRAY () : base (ElementType.SzArray)
-		{
-		}
-	}
+        public SZARRAY () : base (ElementType.SzArray)
+        {
+        }
+    }
 }

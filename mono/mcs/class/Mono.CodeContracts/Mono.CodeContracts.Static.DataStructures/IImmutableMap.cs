@@ -2,7 +2,7 @@
 // IImmutableMap.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,25 +30,25 @@ using System;
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-	interface IImmutableMap<K, V> {
-		V this [K key] { get; }
+    interface IImmutableMap<K, V> {
+        V this [K key] { get; }
 
-		K AnyKey { get; }
+        K AnyKey { get; }
 
-		IEnumerable<K> Keys { get; }
-		int Count { get; }
-		IImmutableMap<K, V> EmptyMap { get; }
+        IEnumerable<K> Keys { get; }
+        int Count { get; }
+        IImmutableMap<K, V> EmptyMap { get; }
 
-		IImmutableMap<K, V> Add (K key, V value);
-		IImmutableMap<K, V> Remove (K key);
+        IImmutableMap<K, V> Add (K key, V value);
+        IImmutableMap<K, V> Remove (K key);
 
-		bool ContainsKey (K key);
-		void Visit (Func<K, V, VisitStatus> func);
+        bool ContainsKey (K key);
+        void Visit (Func<K, V, VisitStatus> func);
 
-	    bool TryGetValue (K key, out V value);
+        bool TryGetValue (K key, out V value);
 
-	    IImmutableMapFactory<K, V> Factory();
-	}
+        IImmutableMapFactory<K, V> Factory();
+    }
 
     internal interface IImmutableMapFactory<K, V> {
         IImmutableMap<K, V> Empty { get; }

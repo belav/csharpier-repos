@@ -2,7 +2,7 @@
 // SecurityKeyUsage.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,9 +28,9 @@
 
 namespace System.IdentityModel.Tokens
 {
-	public enum SecurityKeyUsage
-	{
-		Exchange,
-		Signature
-	}
+    public enum SecurityKeyUsage
+    {
+        Exchange,
+        Signature
+    }
 }

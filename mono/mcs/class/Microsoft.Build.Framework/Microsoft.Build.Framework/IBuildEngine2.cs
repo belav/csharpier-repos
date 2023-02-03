@@ -3,7 +3,7 @@
 // of the MSBuild engine.
 //
 // Author:
-//	Ankit Jain (jankit@novell.com)
+//    Ankit Jain (jankit@novell.com)
 //
 // Copyright 2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,26 +32,26 @@ using System.Collections;
 
 namespace Microsoft.Build.Framework
 {
-	public interface IBuildEngine2 : IBuildEngine
-	{
-		// Initiates a build of a project file. If the build is
-		// successful, the outputs (if any) of the specified targets
-		// are returned.
-		bool BuildProjectFile (string projectFileName,
-				       string[] targetNames,
-				       IDictionary globalProperties,
-				       IDictionary targetOutputs, string toolsVersion);
+    public interface IBuildEngine2 : IBuildEngine
+    {
+        // Initiates a build of a project file. If the build is
+        // successful, the outputs (if any) of the specified targets
+        // are returned.
+        bool BuildProjectFile (string projectFileName,
+                       string[] targetNames,
+                       IDictionary globalProperties,
+                       IDictionary targetOutputs, string toolsVersion);
 
-		bool BuildProjectFilesInParallel (string[] projectFileNames,
-					string [] targetNames,
-					IDictionary[] globalProperties,
-					IDictionary[] targetOutputsPerProject,
-					string[] toolsVersion,
-					bool useResultsCache,
-					bool unloadProjectsOnCompletion);
+        bool BuildProjectFilesInParallel (string[] projectFileNames,
+                    string [] targetNames,
+                    IDictionary[] globalProperties,
+                    IDictionary[] targetOutputsPerProject,
+                    string[] toolsVersion,
+                    bool useResultsCache,
+                    bool unloadProjectsOnCompletion);
 
-		bool IsRunningMultipleNodes { get; }
+        bool IsRunningMultipleNodes { get; }
 
-	}
+    }
 }
 

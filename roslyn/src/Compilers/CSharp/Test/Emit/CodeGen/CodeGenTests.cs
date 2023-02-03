@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -361,24 +361,24 @@ using System;
 
 public class C
 {
-	public static bool f;
-	public static int x;
-	
-	public bool M()
-	{
-		bool success = f;
+    public static bool f;
+    public static int x;
+    
+    public bool M()
+    {
+        bool success = f;
 
-		if (success)
-		{
-			x = 1;
-		}
-		else
-		{
-			throw null;
-		}
+        if (success)
+        {
+            x = 1;
+        }
+        else
+        {
+            throw null;
+        }
 
-		return success;
-	}
+        return success;
+    }
 }";
             var result = CompileAndVerify(source, options: TestOptions.ReleaseDll);
 
@@ -408,9 +408,9 @@ using System;
 
 public class C
 {
-	public static bool f;
-	public static int x;
-	
+    public static bool f;
+    public static int x;
+    
     public void M()
     {
         bool success = f;
@@ -3325,7 +3325,7 @@ public class D
     }
 }
 ";
-            var compilation = CompileAndVerify(source, options: TestOptions.ReleaseExe.WithModuleName("ＭＯＤＵＬＥ"), expectedOutput: "222333");
+            var compilation = CompileAndVerify(source, options: TestOptions.ReleaseExe.WithModuleName("MODULE"), expectedOutput: "222333");
 
             compilation.VerifyIL("D.Main",
 @"{
@@ -9256,7 +9256,7 @@ public class Test
     static void Main() 
     {
         char source = '\x1';
-        decimal	dest = source;
+        decimal    dest = source;
     } 
 }";
             CompileAndVerify(source).
@@ -12470,29 +12470,29 @@ struct MyManagedStruct
 
             comp.VerifyIL("Program.Main",
 @"
-	{
-	  // Code size       76 (0x4c)
-	  .maxstack  1
-	  .locals init (Large V_0)
-	  IL_0000:  call       ""ref readonly Largest Program.GetRoRef()""
-	  IL_0005:  ldfld      ""Large Largest.ro""
-	  IL_000a:  stloc.0
-	  IL_000b:  ldloca.s   V_0
-	  IL_000d:  ldflda     ""Medium Large.ro""
-	  IL_0012:  ldflda     ""Small Medium.ro""
-	  IL_0017:  ldflda     ""Smallest Small.ro""
-	  IL_001c:  constrained. ""Smallest""
-	  IL_0022:  callvirt   ""string object.ToString()""
-	  IL_0027:  pop
-	  IL_0028:  call       ""ref readonly Largest Program.GetRoRef()""
-	  IL_002d:  ldfld      ""Large Largest.ro""
-	  IL_0032:  ldfld      ""Medium Large.ro""
-	  IL_0037:  ldfld      ""Small Medium.ro""
-	  IL_003c:  ldfld      ""Smallest Small.ro""
-	  IL_0041:  ldfld      ""int Smallest.x""
-	  IL_0046:  call       ""void System.Console.Write(int)""
-	  IL_004b:  ret
-	}
+    {
+      // Code size       76 (0x4c)
+      .maxstack  1
+      .locals init (Large V_0)
+      IL_0000:  call       ""ref readonly Largest Program.GetRoRef()""
+      IL_0005:  ldfld      ""Large Largest.ro""
+      IL_000a:  stloc.0
+      IL_000b:  ldloca.s   V_0
+      IL_000d:  ldflda     ""Medium Large.ro""
+      IL_0012:  ldflda     ""Small Medium.ro""
+      IL_0017:  ldflda     ""Smallest Small.ro""
+      IL_001c:  constrained. ""Smallest""
+      IL_0022:  callvirt   ""string object.ToString()""
+      IL_0027:  pop
+      IL_0028:  call       ""ref readonly Largest Program.GetRoRef()""
+      IL_002d:  ldfld      ""Large Largest.ro""
+      IL_0032:  ldfld      ""Medium Large.ro""
+      IL_0037:  ldfld      ""Small Medium.ro""
+      IL_003c:  ldfld      ""Smallest Small.ro""
+      IL_0041:  ldfld      ""int Smallest.x""
+      IL_0046:  call       ""void System.Console.Write(int)""
+      IL_004b:  ret
+    }
 ");
         }
 
@@ -13217,17 +13217,17 @@ class Module1
 {
     static void Main()
     {
-	    System.Console.WriteLine(Test1(100));
+        System.Console.WriteLine(Test1(100));
     }
 
     static int Test1(int x)
     {
-	    return Test2(x,checked(-x));
+        return Test2(x,checked(-x));
     }
 
     static int Test2(int x, int y)
     {   
-	     return y;
+         return y;
     }
 }", options: TestOptions.ReleaseExe,
 expectedOutput: "-100");
@@ -13513,11 +13513,11 @@ public static class P
             var il = @"
 .class interface public auto ansi abstract IVarArgs
 {
-	// Methods
-	.method public hidebysig newslot abstract virtual 
-		instance vararg int32 modopt(int64) Invoke () cil managed 
-	{
-	} // end of method IVarArgs::Invoke
+    // Methods
+    .method public hidebysig newslot abstract virtual 
+        instance vararg int32 modopt(int64) Invoke () cil managed 
+    {
+    } // end of method IVarArgs::Invoke
 
 } // end of class IVarArgs
 

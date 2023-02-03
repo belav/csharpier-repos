@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 class Test
 {
-	public static void Main ()
-	{
-		var b = new B ();
-		var t = Task.Factory.StartNew (() => {
-			b.Test ();
-			b.Test ();
-		});
+    public static void Main ()
+    {
+        var b = new B ();
+        var t = Task.Factory.StartNew (() => {
+            b.Test ();
+            b.Test ();
+        });
 
-		b.Test ();
-	}
+        b.Test ();
+    }
 }

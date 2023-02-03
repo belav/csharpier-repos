@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4924,13 +4924,13 @@ class C<T>
         [Fact]
         public async Task TestAwaitableMethod()
         {
-            var markup = @"using System.Threading.Tasks;	
-class C	
-{	
-    async Task Goo()	
-    {	
-        Go$$o();	
-    }	
+            var markup = @"using System.Threading.Tasks;    
+class C    
+{    
+    async Task Goo()    
+    {    
+        Go$$o();    
+    }    
 }";
             var description = $"({CSharpFeaturesResources.awaitable}) Task C.Goo()";
 
@@ -7236,8 +7236,8 @@ public class Program
 
 public class Test<T> : ICloneable<Test<T>>
 {
-	/// <inheritdoc/>
-	public Test<T> Clone() => new();
+    /// <inheritdoc/>
+    public Test<T> Clone() => new();
 }
 
 /// <summary>A type that has clonable instances.</summary>

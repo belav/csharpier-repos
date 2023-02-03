@@ -10,8 +10,8 @@ public struct Coord
 }
 
 public struct Point {
-	public Coord x;
-	public Coord y;
+    public Coord x;
+    public Coord y;
 }
 
 public class A : MarshalByRefObject

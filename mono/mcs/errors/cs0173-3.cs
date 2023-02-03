@@ -5,9 +5,9 @@ using System;
 
 class Test
 {
-	public static void Main ()
-	{
-		bool descending = false;
-		Comparison<int> comp = descending ? ((e1, e2) => e2 < e1) : ((e1, e2) => e1 < e2);
-	}
+    public static void Main ()
+    {
+        bool descending = false;
+        Comparison<int> comp = descending ? ((e1, e2) => e2 < e1) : ((e1, e2) => e1 < e2);
+    }
 }

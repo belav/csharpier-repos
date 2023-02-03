@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System.Data.Linq;
 
     public class LinqBinaryModelBinder : ByteArrayModelBinder {

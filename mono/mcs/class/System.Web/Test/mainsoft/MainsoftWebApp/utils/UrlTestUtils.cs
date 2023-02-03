@@ -5,14 +5,14 @@ using System.Text;
 
 namespace GHTTests
 {
-	public class UrlTestUtils
-	{
-		public static string FixUrlForDirectoriesTest (string url)
-		{
-			if (url == null)
-				return null;
+    public class UrlTestUtils
+    {
+        public static string FixUrlForDirectoriesTest (string url)
+        {
+            if (url == null)
+                return null;
 
-			return url.Replace (HttpContext.Current.Request.ApplicationPath, "root");
-		}
-	}
+            return url.Replace (HttpContext.Current.Request.ApplicationPath, "root");
+        }
+    }
 }

@@ -30,28 +30,28 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class SecurityDescriptorFlagControl : DirectoryControl
-	{
-		[MonoTODO]
-		public SecurityDescriptorFlagControl ()
-			: base (null, null, false, false)
-		{
-			throw new NotImplementedException ();
-		}
+    public class SecurityDescriptorFlagControl : DirectoryControl
+    {
+        [MonoTODO]
+        public SecurityDescriptorFlagControl ()
+            : base (null, null, false, false)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public SecurityDescriptorFlagControl (SecurityMasks masks)
-			: this ()
-		{
-			SecurityMasks = masks;
-		}
+        [MonoTODO]
+        public SecurityDescriptorFlagControl (SecurityMasks masks)
+            : this ()
+        {
+            SecurityMasks = masks;
+        }
 
-		public SecurityMasks SecurityMasks { get; set; }
+        public SecurityMasks SecurityMasks { get; set; }
 
-		[MonoTODO]
-		public override byte [] GetValue ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override byte [] GetValue ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

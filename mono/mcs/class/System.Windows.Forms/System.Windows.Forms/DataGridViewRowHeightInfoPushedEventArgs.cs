@@ -20,37 +20,37 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewRowHeightInfoPushedEventArgs : HandledEventArgs {
+    public class DataGridViewRowHeightInfoPushedEventArgs : HandledEventArgs {
 
-		private int height;
-		private int minimumHeight;
-		private int rowIndex;
+        private int height;
+        private int minimumHeight;
+        private int rowIndex;
 
-		internal DataGridViewRowHeightInfoPushedEventArgs (int rowIndex, int height, int minimumHeight) {
-			this.rowIndex = rowIndex;
-			this.height = height;
-			this.minimumHeight = minimumHeight;
-		}
+        internal DataGridViewRowHeightInfoPushedEventArgs (int rowIndex, int height, int minimumHeight) {
+            this.rowIndex = rowIndex;
+            this.height = height;
+            this.minimumHeight = minimumHeight;
+        }
 
-		public int Height {
-			get { return height; }
-		}
+        public int Height {
+            get { return height; }
+        }
 
-		public int MinimumHeight {
-			get { return minimumHeight; }
-		}
+        public int MinimumHeight {
+            get { return minimumHeight; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-	}
+    }
 
 }

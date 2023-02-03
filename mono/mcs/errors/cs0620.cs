@@ -3,6 +3,6 @@
 
 class PropertyClass {
         public void this [int i] {
-        	set {}
+            set {}
         }
 }

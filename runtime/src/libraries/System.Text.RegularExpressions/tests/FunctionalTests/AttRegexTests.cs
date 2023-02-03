@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- *	Glenn Fowler <gsf@research.att.com>
- *	AT&T Research
+ *    Glenn Fowler <gsf@research.att.com>
+ *    AT&T Research
  *
  * PLEASE: publish your tests so everyone can benefit
  *

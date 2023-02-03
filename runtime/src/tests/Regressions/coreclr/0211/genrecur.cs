@@ -52,8 +52,8 @@ class Test2
     {
       object obj = this;
       if (!(obj is I<D>)) {
-	Utils.failures++;
-	Console.WriteLine("Test2.Test failed");
+    Utils.failures++;
+    Console.WriteLine("Test2.Test failed");
       }
     }
   }
@@ -174,7 +174,7 @@ class Test6
     {
       object obj = this;
       if (!(obj is I< D<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test6 failed");
       }
     }
@@ -275,7 +275,7 @@ class Test8
 // Mutual polymorphic recursion through classes, structs and fields, where structs have two fields
 class Test9
 {
-	#pragma warning disable 649
+    #pragma warning disable 649
   class RecursiveClass2<A>
   {
     public RecursiveStruct2<A> f2; //TODO: Assign to default value after compile supports T.default
@@ -314,7 +314,7 @@ class Test9
     public ExpansiveClass2<ExpansiveStruct2<A> > f2; //TODO: Assign to default value after compile supports T.default
     public ExpansiveStruct2(int x) { f1 = null; f2 = null;  }
   }
-	#pragma warning restore 649
+    #pragma warning restore 649
   
   public static void Test()
   {
@@ -338,7 +338,7 @@ class Test9
 // Mutual polymorphic recursion through classes, structs and fields, where structs have one field (these are optimized)
 class Test10
 {
-	#pragma warning disable 649
+    #pragma warning disable 649
   class RecursiveClass1<A>
   {
     public RecursiveStruct1<A> f1;
@@ -374,7 +374,7 @@ class Test10
     public ExpansiveClass1<ExpansiveStruct1<A> > f1;
     public ExpansiveStruct1(int x) { f1 = null;  }
   }
-  	#pragma warning restore 649
+      #pragma warning restore 649
   public static void Test()
   {
     object x1 = new RecursiveClass1<int>();
@@ -447,7 +447,7 @@ class Test12 {
     egd.m(typeof(D));
   }
 }
-	 
+     
 
 // Recursion through base class instantiation at derived class (more complex)
 class Test13 {
@@ -492,9 +492,9 @@ class Test14
     {
       object obj = this;
       if (!(obj is I< D >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test14 failed");
-      	}
+          }
     }
   }
 
@@ -504,9 +504,9 @@ class Test14
     {
       object obj = this;
       if (!(obj is I< C >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test14 failed");
-      	}
+          }
     }
   }
 
@@ -515,10 +515,10 @@ class Test14
   {
     D d = new D();
     C c = new C();
-	
+    
     I< C > id = d;
     I< D > ic = c;
-	
+    
     id.m(c);
     ic.m(d);
   }
@@ -539,9 +539,9 @@ class Test15
     {
       object obj = this;
       if (!(obj is I< D<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test15 failed");
-      	}
+          }
     }
   }
 
@@ -551,9 +551,9 @@ class Test15
     {
       object obj = this;
       if (!(obj is I< C<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test15 failed");
-      	}
+          }
     }
   }
 
@@ -562,7 +562,7 @@ class Test15
     D<int> di = new D<int>();
     D<string> ds = new D<string>();
     D<object> d = new D<object>();
-		
+        
     C<int> ci = new C<int>();
     C<string> cs = new C<string>();
     C<object> c = new C<object>();
@@ -571,7 +571,7 @@ class Test15
     I< D<int> > idi = ci;
     I< D<string> > ids = cs;
     I< D<object> > id = c;
-	
+    
     idi.m(di);
     ids.m(ds);
     id.m(d);
@@ -579,7 +579,7 @@ class Test15
     I< C<int> > ici = di;
     I< C<string> > ics = ds;
     I< C<object> > ic = d;
-	
+    
     ici.m(ci);
     ics.m(cs);
     ic.m(c);
@@ -604,9 +604,9 @@ class Test16
     {
       object obj = this;
       if (!(obj is I< D >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test16 failed");
-      	}
+          }
     }
   }
 
@@ -616,11 +616,11 @@ class Test16
 
   public static void Test()
   {
-   	D d = new D();
-	C c = new C();
+       D d = new D();
+    C c = new C();
 
-	I<D> id = c;
-	id.m(d);
+    I<D> id = c;
+    id.m(d);
   }
 }
 
@@ -639,9 +639,9 @@ class Test17
     {
       object obj = this;
       if (!(obj is I< D<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test17 failed");
-      	}
+          }
     }
   }
 
@@ -651,30 +651,30 @@ class Test17
 
   public static void Test()
   {
-   	D<int> di = new D<int>();
- 	D<string> ds = new D<string>();
- 	D<object> d = new D<object>();
+       D<int> di = new D<int>();
+     D<string> ds = new D<string>();
+     D<object> d = new D<object>();
 
-	D<C<int>> ddi = new D<C<int>>();
-	
-	C<int> ci = new C<int>();
- 	C<string> cs = new C<string>();
- 	C<object> co = new C<object>();
+    D<C<int>> ddi = new D<C<int>>();
+    
+    C<int> ci = new C<int>();
+     C<string> cs = new C<string>();
+     C<object> co = new C<object>();
 
-	C<C<int>> cci = new C<C<int>>();
-	
-	I<D<int>> idi = ci;
-	I<D<string>> ids = cs;
-	I<D<object>> ido = co;
+    C<C<int>> cci = new C<C<int>>();
+    
+    I<D<int>> idi = ci;
+    I<D<string>> ids = cs;
+    I<D<object>> ido = co;
 
-	I<D<C<int>>> idci = cci;
+    I<D<C<int>>> idci = cci;
 
-	idi.m(di);
-	ids.m(ds);
-	ido.m(d);
-	
-	idci.m(ddi);
-	
+    idi.m(di);
+    ids.m(ds);
+    ido.m(d);
+    
+    idci.m(ddi);
+    
   }
 }
 
@@ -693,9 +693,9 @@ class Test18
     {
       object obj = this;
       if (!(obj is I< S >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test18 failed");
-      	}
+          }
     }
   }
 
@@ -705,9 +705,9 @@ class Test18
     {
       object obj = this;
       if (!(obj is I< S2<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test18 failed");
-      	}
+          }
     }
   }
 
@@ -725,51 +725,51 @@ class Test18
 
 // Recursion through instance field types of classes
 class Test19 {
-	#pragma warning disable 649
+    #pragma warning disable 649
   class C<T>
   {
-  	public int i;
-	public D<T> d;
+      public int i;
+    public D<T> d;
   }
 
   class D<T>
   {
-  	public double d;
-	public C<T> c;
+      public double d;
+    public C<T> c;
   }
-	#pragma warning restore 649
+    #pragma warning restore 649
   public static void Test()
   {
-  	C<int> c = new C<int>();
-	D<string> d = new D<string>();
-	
+      C<int> c = new C<int>();
+    D<string> d = new D<string>();
+    
   }
 }
 
 
 // Recursion through instance field types of structs and classes
 class Test20 {
-	#pragma warning disable 649
+    #pragma warning disable 649
   class C<T>
   {
-  	public int i;
-	public S<T> s;
+      public int i;
+    public S<T> s;
   }
 
   struct S<T>
   {
-  	public double d;
-	public C<T> c;
+      public double d;
+    public C<T> c;
   }
-	#pragma warning restore 649
+    #pragma warning restore 649
   public static void Test()
   {
-  	C<double> c = new C<double>();
+      C<double> c = new C<double>();
 
-	#pragma warning disable 219
-	S<object> s = new S<object>();
-	#pragma warning restore 219
-	
+    #pragma warning disable 219
+    S<object> s = new S<object>();
+    #pragma warning restore 219
+    
   }
 }
 
@@ -777,31 +777,31 @@ class Test20 {
 // Recursion through instance field types of structs and classes
 // and static struct/class field which is also recursive
 class Test21 {
-	#pragma warning disable 649
+    #pragma warning disable 649
   class C<T>
   {
-  	public int i;
-	public S<T> s;
-	public static C<T> c = new C<T>();
-	public static S<T> st = new S<T>();
+      public int i;
+    public S<T> s;
+    public static C<T> c = new C<T>();
+    public static S<T> st = new S<T>();
   }
 
   struct S<T>
   {
-  	public double d;
-	public C<T> c;
-	public static S<T> s = new S<T>();
-	public static C<T> ct = new C<T>();
+      public double d;
+    public C<T> c;
+    public static S<T> s = new S<T>();
+    public static C<T> ct = new C<T>();
   }
-	#pragma warning restore 649
+    #pragma warning restore 649
   public static void Test()
   {
-  	C<int> c = new C<int>();
+      C<int> c = new C<int>();
 
-	#pragma warning disable 219
-	S<int> s = new S<int>();
-	#pragma warning restore 219
-	
+    #pragma warning disable 219
+    S<int> s = new S<int>();
+    #pragma warning restore 219
+    
   }
 }
 
@@ -819,9 +819,9 @@ class Test22
     {
       object obj = this;
       if (!(obj is I< S2 >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test22 failed");
-      	}
+          }
     }
   }
 
@@ -831,9 +831,9 @@ class Test22
     {
       object obj = this;
       if (!(obj is I< S1 >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test22 failed");
-      	}
+          }
     }
   }
 
@@ -842,10 +842,10 @@ class Test22
   {
     S2 s2 = new S2();
     S1 s1 = new S1();
-	
+    
     I< S1 > is2 = s2;
     I< S2 > is1 = s1;
-	
+    
     is2.m(s1);
     is1.m(s2);
   }
@@ -866,9 +866,9 @@ class Test23
     {
       object obj = this;
       if (!(obj is I< S2<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test25 failed");
-      	}
+          }
     }
   }
 
@@ -878,9 +878,9 @@ class Test23
     {
       object obj = this;
       if (!(obj is I< S1<T> >)) {
-	Utils.failures++;
+    Utils.failures++;
         Console.WriteLine("Test25 failed");
-      	}
+          }
     }
   }
 
@@ -889,7 +889,7 @@ class Test23
     S2<int> di = new S2<int>();
     S2<string> ds = new S2<string>();
     S2<object> d = new S2<object>();
-		
+        
     S1<int> s1i = new S1<int>();
     S1<string> s1s = new S1<string>();
     S1<object> s1 = new S1<object>();
@@ -898,7 +898,7 @@ class Test23
     I< S2<int> > is2i = s1i;
     I< S2<string> > is2s = s1s;
     I< S2<object> > is2 = s1;
-	
+    
     is2i.m(di);
     is2s.m(ds);
     is2.m(d);
@@ -906,7 +906,7 @@ class Test23
     I< S1<int> > is1i = di;
     I< S1<string> > is1s = ds;
     I< S1<object> > is1 = d;
-	
+    
     is1i.m(s1i);
     is1s.m(s1s);
     is1.m(s1);
@@ -968,7 +968,7 @@ public class M {
     else 
     {
         Console.WriteLine("PASS");
-		return 100;
-	}	
+        return 100;
+    }    
   }
 }

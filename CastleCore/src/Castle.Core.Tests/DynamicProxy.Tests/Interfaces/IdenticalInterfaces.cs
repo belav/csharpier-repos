@@ -14,13 +14,13 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	public interface IIdenticalTwo
-	{
-		string Foo();
-	}
+    public interface IIdenticalTwo
+    {
+        string Foo();
+    }
 
-	public interface IIdenticalOne
-	{
-		string Foo();
-	}
+    public interface IIdenticalOne
+    {
+        string Foo();
+    }
 }

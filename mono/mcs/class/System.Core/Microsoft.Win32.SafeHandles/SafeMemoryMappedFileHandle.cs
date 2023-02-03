@@ -2,7 +2,7 @@
 // SafePipeHandle.cs
 //
 // Author:
-//	Zoltan Varga <vargaz@gmail.com>
+//    Zoltan Varga <vargaz@gmail.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -35,20 +35,20 @@ using System.IO.MemoryMappedFiles;
 
 namespace Microsoft.Win32.SafeHandles
 {
-	public sealed class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
-	{
-		public SafeMemoryMappedFileHandle (IntPtr preexistingHandle, bool ownsHandle)
-			: base (ownsHandle)
-		{
-			handle = preexistingHandle;
-		}
+    public sealed class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        public SafeMemoryMappedFileHandle (IntPtr preexistingHandle, bool ownsHandle)
+            : base (ownsHandle)
+        {
+            handle = preexistingHandle;
+        }
 
-		protected override bool ReleaseHandle ()
-		{
-			MemoryMapImpl.CloseMapping (handle);
-			handle = IntPtr.Zero;
-			return true;
-		}
-	}
+        protected override bool ReleaseHandle ()
+        {
+            MemoryMapImpl.CloseMapping (handle);
+            handle = IntPtr.Zero;
+            return true;
+        }
+    }
 }
 

@@ -14,19 +14,19 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class ClassWithProtectedDefaultConstructor
-	{
-		protected ClassWithProtectedDefaultConstructor()
-		{
-			_someString = "Something";
-		}
+    public class ClassWithProtectedDefaultConstructor
+    {
+        protected ClassWithProtectedDefaultConstructor()
+        {
+            _someString = "Something";
+        }
 
-		private string _someString = string.Empty;
+        private string _someString = string.Empty;
 
-		public string SomeString
-		{
-			get { return _someString; }
-			set { _someString = value; }
-		}
-	}
+        public string SomeString
+        {
+            get { return _someString; }
+            set { _someString = value; }
+        }
+    }
 }

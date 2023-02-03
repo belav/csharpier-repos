@@ -2,7 +2,7 @@
 // ExtendedProtectionPolicyElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -42,51 +42,51 @@ using System.Xml;
 
 namespace System.Security.Authentication.ExtendedProtection.Configuration
 {
-	[MonoTODO]
-	public sealed class ExtendedProtectionPolicyElement : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty custom_service_names, policy_enforcement, protection_scenario;
+    [MonoTODO]
+    public sealed class ExtendedProtectionPolicyElement : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty custom_service_names, policy_enforcement, protection_scenario;
 
-		static ExtendedProtectionPolicyElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
+        static ExtendedProtectionPolicyElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
 
-			var t = typeof (ExtendedProtectionPolicyElement);
-			custom_service_names = ConfigUtil.BuildProperty (t, "CustomServiceNames");
-			policy_enforcement = ConfigUtil.BuildProperty (t, "PolicyEnforcement");
-			protection_scenario = ConfigUtil.BuildProperty (t, "ProtectionScenario");
+            var t = typeof (ExtendedProtectionPolicyElement);
+            custom_service_names = ConfigUtil.BuildProperty (t, "CustomServiceNames");
+            policy_enforcement = ConfigUtil.BuildProperty (t, "PolicyEnforcement");
+            protection_scenario = ConfigUtil.BuildProperty (t, "ProtectionScenario");
 
-			foreach (var cp in new ConfigurationProperty [] {custom_service_names, policy_enforcement, protection_scenario})
-				properties.Add (cp);
-		}
-		
-		[ConfigurationProperty ("customServiceNames")]
-		public ServiceNameElementCollection CustomServiceNames {
-			get { return (ServiceNameElementCollection) this [custom_service_names]; }
-		}
+            foreach (var cp in new ConfigurationProperty [] {custom_service_names, policy_enforcement, protection_scenario})
+                properties.Add (cp);
+        }
+        
+        [ConfigurationProperty ("customServiceNames")]
+        public ServiceNameElementCollection CustomServiceNames {
+            get { return (ServiceNameElementCollection) this [custom_service_names]; }
+        }
 
-		[ConfigurationProperty ("policyEnforcement")]
-		public PolicyEnforcement PolicyEnforcement {
-			get { return (PolicyEnforcement) this [policy_enforcement]; }
-			set { this [policy_enforcement] = value; }
-		}
+        [ConfigurationProperty ("policyEnforcement")]
+        public PolicyEnforcement PolicyEnforcement {
+            get { return (PolicyEnforcement) this [policy_enforcement]; }
+            set { this [policy_enforcement] = value; }
+        }
 
-		[ConfigurationProperty ("protectionScenario", DefaultValue = ProtectionScenario.TransportSelected)]
-		public ProtectionScenario ProtectionScenario {
-			get { return (ProtectionScenario) this [protection_scenario]; }
-			set { this [protection_scenario] = value; }
-		}
+        [ConfigurationProperty ("protectionScenario", DefaultValue = ProtectionScenario.TransportSelected)]
+        public ProtectionScenario ProtectionScenario {
+            get { return (ProtectionScenario) this [protection_scenario]; }
+            set { this [protection_scenario] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		public ExtendedProtectionPolicy BuildPolicy ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public ExtendedProtectionPolicy BuildPolicy ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 
 #endif

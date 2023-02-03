@@ -1,9 +1,9 @@
 //
 // PropertyConverterCas.cs 
-//	- CAS unit tests for System.Web.UI.PropertyConverter
+//    - CAS unit tests for System.Web.UI.PropertyConverter
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,31 +38,31 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PropertyConverterCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PropertyConverterCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StaticMethods_Deny_Unrestricted ()
-		{
-			Assert.AreEqual (SecurityAction.Demand, PropertyConverter.EnumFromString (typeof (SecurityAction), "Demand"), "EnumFromString");
-			Assert.AreEqual ("Demand", PropertyConverter.EnumToString (typeof (SecurityAction), SecurityAction.Demand), "EnumToString");
-			Assert.AreEqual (String.Empty, PropertyConverter.ObjectFromString (typeof (string), null, String.Empty), "ObjectFromString");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StaticMethods_Deny_Unrestricted ()
+        {
+            Assert.AreEqual (SecurityAction.Demand, PropertyConverter.EnumFromString (typeof (SecurityAction), "Demand"), "EnumFromString");
+            Assert.AreEqual ("Demand", PropertyConverter.EnumToString (typeof (SecurityAction), SecurityAction.Demand), "EnumToString");
+            Assert.AreEqual (String.Empty, PropertyConverter.ObjectFromString (typeof (string), null, String.Empty), "ObjectFromString");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// static class 2.0 / no public ctor before (1.x)
-			MethodInfo mi = this.Type.GetMethod ("EnumToString");
-			Assert.IsNotNull (mi, "EnumToString");
-			return mi.Invoke (null, new object[2] { typeof(SecurityAction), SecurityAction.Demand });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // static class 2.0 / no public ctor before (1.x)
+            MethodInfo mi = this.Type.GetMethod ("EnumToString");
+            Assert.IsNotNull (mi, "EnumToString");
+            return mi.Invoke (null, new object[2] { typeof(SecurityAction), SecurityAction.Demand });
+        }
 
-		public override Type Type {
-			get { return typeof (PropertyConverter); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (PropertyConverter); }
+        }
+    }
 }

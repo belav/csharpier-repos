@@ -3,7 +3,7 @@
 // in a resx file.
 // 
 // Author:
-//	Gary Barnett (gary.barnett.mono@gmail.com)
+//    Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -32,45 +32,45 @@ using System.ComponentModel.Design;
 using System.ComponentModel;
 
 namespace System.Resources {
-	internal class ByteArrayFromResXHandler : ResXDataNodeHandler, IWritableHandler {
+    internal class ByteArrayFromResXHandler : ResXDataNodeHandler, IWritableHandler {
 
-		string dataString;
+        string dataString;
 
-		public ByteArrayFromResXHandler (string data)
-		{
-			dataString = data;
-		}
+        public ByteArrayFromResXHandler (string data)
+        {
+            dataString = data;
+        }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
-		public override object GetValue (ITypeResolutionService typeResolver)
-		{
-			return Convert.FromBase64String (dataString);
-		}
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
+        public override object GetValue (ITypeResolutionService typeResolver)
+        {
+            return Convert.FromBase64String (dataString);
+        }
 
-		public override object GetValue (AssemblyName [] assemblyNames)
-		{
-			return Convert.FromBase64String (dataString);
-		}
+        public override object GetValue (AssemblyName [] assemblyNames)
+        {
+            return Convert.FromBase64String (dataString);
+        }
 
-		public override string GetValueTypeName (ITypeResolutionService typeResolver)
-		{
-			Type type = ResolveType (typeof (byte []).AssemblyQualifiedName, typeResolver);
-			return type.AssemblyQualifiedName;
-		}
+        public override string GetValueTypeName (ITypeResolutionService typeResolver)
+        {
+            Type type = ResolveType (typeof (byte []).AssemblyQualifiedName, typeResolver);
+            return type.AssemblyQualifiedName;
+        }
 
-		public override string GetValueTypeName (AssemblyName [] assemblyNames)
-		{
-			return typeof (byte []).AssemblyQualifiedName;
-		}
-		#endregion		
+        public override string GetValueTypeName (AssemblyName [] assemblyNames)
+        {
+            return typeof (byte []).AssemblyQualifiedName;
+        }
+        #endregion        
 
-		#region IWritableHandler implementation
-		public string DataString {
-			get {
-				return dataString;
-			}
-		}
-		#endregion
-	}
+        #region IWritableHandler implementation
+        public string DataString {
+            get {
+                return dataString;
+            }
+        }
+        #endregion
+    }
 }
 

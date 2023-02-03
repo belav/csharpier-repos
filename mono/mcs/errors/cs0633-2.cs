@@ -11,7 +11,7 @@ public class MonthDays {
 
    public static void Main ()
    {
-	int i = new MonthDays () [1];
+    int i = new MonthDays () [1];
    }
 }
 

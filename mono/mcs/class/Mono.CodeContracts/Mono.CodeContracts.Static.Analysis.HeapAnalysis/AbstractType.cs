@@ -2,7 +2,7 @@
 // AbstractType.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,148 +32,148 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-	struct AbstractType : IAbstractDomainForEGraph<AbstractType>, IEquatable<AbstractType> {
-		public static AbstractType TopValue = new AbstractType (FlatDomain<TypeNode>.TopValue, false);
-		public static AbstractType BottomValue = new AbstractType (FlatDomain<TypeNode>.BottomValue, true);
+    struct AbstractType : IAbstractDomainForEGraph<AbstractType>, IEquatable<AbstractType> {
+        public static AbstractType TopValue = new AbstractType (FlatDomain<TypeNode>.TopValue, false);
+        public static AbstractType BottomValue = new AbstractType (FlatDomain<TypeNode>.BottomValue, true);
 
-		private FlatDomain<TypeNode> value;
+        private FlatDomain<TypeNode> value;
 
-		public AbstractType (FlatDomain<TypeNode> value, bool isZero) : this ()
-		{
-			IsZero = isZero;
-			this.value = value;
-		}
+        public AbstractType (FlatDomain<TypeNode> value, bool isZero) : this ()
+        {
+            IsZero = isZero;
+            this.value = value;
+        }
 
-		public bool IsZero { get; private set; }
+        public bool IsZero { get; private set; }
 
-		public FlatDomain<TypeNode> Type
-		{
-			get { return this.value; }
-		}
+        public FlatDomain<TypeNode> Type
+        {
+            get { return this.value; }
+        }
 
-		public TypeNode ConcreteType
-		{
-			get { return this.value.Value; }
-		}
+        public TypeNode ConcreteType
+        {
+            get { return this.value.Value; }
+        }
 
-		private static AbstractType ForManifestedFieldValue
-		{
-			get { return TopValue; }
-		}
+        private static AbstractType ForManifestedFieldValue
+        {
+            get { return TopValue; }
+        }
 
-		public AbstractType ButZero
-		{
-			get { return new AbstractType (this.value, true); }
-		}
-		public AbstractType With (FlatDomain<TypeNode> type)
-		{
-			return new AbstractType (type, this.IsZero);
-		}
+        public AbstractType ButZero
+        {
+            get { return new AbstractType (this.value, true); }
+        }
+        public AbstractType With (FlatDomain<TypeNode> type)
+        {
+            return new AbstractType (type, this.IsZero);
+        }
 
-		#region IAbstractDomainForEGraph<AbstractType> Members
-		public AbstractType Top
-		{
-			get { return new AbstractType (FlatDomain<TypeNode>.TopValue, false); }
-		}
+        #region IAbstractDomainForEGraph<AbstractType> Members
+        public AbstractType Top
+        {
+            get { return new AbstractType (FlatDomain<TypeNode>.TopValue, false); }
+        }
 
-		public AbstractType Bottom
-		{
-			get { return new AbstractType (FlatDomain<TypeNode>.BottomValue, true); }
-		}
+        public AbstractType Bottom
+        {
+            get { return new AbstractType (FlatDomain<TypeNode>.BottomValue, true); }
+        }
 
-		public bool IsTop
-		{
-			get { return !IsZero && this.value.IsTop; }
-		}
+        public bool IsTop
+        {
+            get { return !IsZero && this.value.IsTop; }
+        }
 
-		public bool IsBottom
-		{
-			get { return IsZero && this.value.IsBottom; }
-		}
+        public bool IsBottom
+        {
+            get { return IsZero && this.value.IsBottom; }
+        }
 
-	    public AbstractType Join(AbstractType that)
-	    {
-	        throw new NotImplementedException();
-	    }
+        public AbstractType Join(AbstractType that)
+        {
+            throw new NotImplementedException();
+        }
 
-	    public AbstractType Join (AbstractType that, bool widening, out bool weaker)
-		{
-			if (that.IsZero) {
-				weaker = false;
-				if (this.value.IsBottom)
-					return new AbstractType (that.value, IsZero);
-				return this;
-			}
-			if (IsZero) {
-				weaker = true;
-				if (that.value.IsBottom)
-					return new AbstractType (this.value, that.IsZero);
-				return that;
-			}
+        public AbstractType Join (AbstractType that, bool widening, out bool weaker)
+        {
+            if (that.IsZero) {
+                weaker = false;
+                if (this.value.IsBottom)
+                    return new AbstractType (that.value, IsZero);
+                return this;
+            }
+            if (IsZero) {
+                weaker = true;
+                if (that.value.IsBottom)
+                    return new AbstractType (this.value, that.IsZero);
+                return that;
+            }
 
-			FlatDomain<TypeNode> resultType = this.value.Join (that.value, widening, out weaker);
-			return new AbstractType (resultType, false);
-		}
+            FlatDomain<TypeNode> resultType = this.value.Join (that.value, widening, out weaker);
+            return new AbstractType (resultType, false);
+        }
 
-	    public AbstractType Widen(AbstractType that)
-	    {
-	        throw new NotImplementedException();
-	    }
+        public AbstractType Widen(AbstractType that)
+        {
+            throw new NotImplementedException();
+        }
 
-	    public AbstractType Meet (AbstractType that)
-		{
-			return new AbstractType (this.value.Meet (that.value), IsZero || that.IsZero);
-		}
+        public AbstractType Meet (AbstractType that)
+        {
+            return new AbstractType (this.value.Meet (that.value), IsZero || that.IsZero);
+        }
 
-		public bool LessEqual (AbstractType that)
-		{
-			if (IsZero)
-				return true;
-			if (that.IsZero)
-				return false;
+        public bool LessEqual (AbstractType that)
+        {
+            if (IsZero)
+                return true;
+            if (that.IsZero)
+                return false;
 
-			return this.value.LessEqual (that.value);
-		}
+            return this.value.LessEqual (that.value);
+        }
 
-		public AbstractType ImmutableVersion ()
-		{
-			return this;
-		}
+        public AbstractType ImmutableVersion ()
+        {
+            return this;
+        }
 
-		public AbstractType Clone ()
-		{
-			return this;
-		}
+        public AbstractType Clone ()
+        {
+            return this;
+        }
 
-		public void Dump (TextWriter tw)
-		{
-			if (IsZero)
-				tw.Write ("(Zero) ");
+        public void Dump (TextWriter tw)
+        {
+            if (IsZero)
+                tw.Write ("(Zero) ");
 
-			this.value.Dump (tw);
-		}
+            this.value.Dump (tw);
+        }
 
-		public bool HasAllBottomFields
-		{
-			get { return IsZero; }
-		}
+        public bool HasAllBottomFields
+        {
+            get { return IsZero; }
+        }
 
-		public AbstractType ForManifestedField ()
-		{
-			return ForManifestedFieldValue;
-		}
-		#endregion
+        public AbstractType ForManifestedField ()
+        {
+            return ForManifestedFieldValue;
+        }
+        #endregion
 
-		#region IEquatable<AbstractType> Members
-		public bool Equals (AbstractType that)
-		{
-			return this.IsZero == that.IsZero && this.value.Equals (that.value);
-		}
-		#endregion
+        #region IEquatable<AbstractType> Members
+        public bool Equals (AbstractType that)
+        {
+            return this.IsZero == that.IsZero && this.value.Equals (that.value);
+        }
+        #endregion
 
-		public override string ToString ()
-		{
-			return (IsZero ? "(Zero) " : "") + this.value;
-		}
-	}
+        public override string ToString ()
+        {
+            return (IsZero ? "(Zero) " : "") + this.value;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -63,16 +63,16 @@ class Program$$
 /// <summary>
 /// This is an XML doc comment defined in code.
 /// </summary>
-class العربية123
+class ???????123
 {
     static void Main()
     {
-         العربية123$$ goo;
+         ???????123$$ goo;
     }
 }", HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
             var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
-            Assert.Equal(@"class العربية123
+            Assert.Equal(@"class ???????123
 This is an XML doc comment defined in code.", quickInfo);
         }
 

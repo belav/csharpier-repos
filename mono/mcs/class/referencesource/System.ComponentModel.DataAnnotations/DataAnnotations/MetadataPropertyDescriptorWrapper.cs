@@ -1,4 +1,4 @@
-﻿#if !SILVERLIGHT
+#if !SILVERLIGHT
 
 using System;
 using System.Linq;

@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ContainerControlDesigner
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -37,63 +37,63 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class ContainerControlDesigner : ControlDesigner
-	{
-		public ContainerControlDesigner ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class ContainerControlDesigner : ControlDesigner
+    {
+        public ContainerControlDesigner ()
+        {
+        }
 
-		[MonoTODO]
-		public override bool AllowResize {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override bool AllowResize {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual string FrameCaption {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual string FrameCaption {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual Style FrameStyle {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual Style FrameStyle {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		protected virtual void AddDesignTimeCssAttributes (IDictionary styleAttributes)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected virtual void AddDesignTimeCssAttributes (IDictionary styleAttributes)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual IDictionary GetDesignTimeCssAttributes ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual IDictionary GetDesignTimeCssAttributes ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override string GetDesignTimeHtml (DesignerRegionCollection regions)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override string GetDesignTimeHtml (DesignerRegionCollection regions)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override string GetEditableDesignerRegionContent (EditableDesignerRegion region)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override string GetEditableDesignerRegionContent (EditableDesignerRegion region)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override string GetPersistenceContent ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override string GetPersistenceContent ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override void SetEditableDesignerRegionContent (EditableDesignerRegion region, string content)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override void SetEditableDesignerRegionContent (EditableDesignerRegion region, string content)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ScriptingRoleServiceSection.cs
 //  
 // Author:
@@ -29,27 +29,27 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingRoleServiceSection : ConfigurationSection
-	{
-		static ConfigurationProperty enabledProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class ScriptingRoleServiceSection : ConfigurationSection
+    {
+        static ConfigurationProperty enabledProp;
+        static ConfigurationPropertyCollection properties;
 
-		static ScriptingRoleServiceSection ()
-		{
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), false);
+        static ScriptingRoleServiceSection ()
+        {
+            enabledProp = new ConfigurationProperty ("enabled", typeof (bool), false);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (enabledProp);
-		}
-		
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (enabledProp);
+        }
+        
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("enabled", DefaultValue=false)]
-		public bool Enabled {
-			get { return (bool) base [enabledProp]; }
-			set { base [enabledProp] = value; }
-		}
-	}
+        [ConfigurationProperty ("enabled", DefaultValue=false)]
+        public bool Enabled {
+            get { return (bool) base [enabledProp]; }
+            set { base [enabledProp] = value; }
+        }
+    }
 }

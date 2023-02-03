@@ -2,7 +2,7 @@
 // ISecurityCapabilities.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,16 +30,16 @@ using System.Net.Security;
 
 namespace System.ServiceModel.Channels
 {
-	public interface ISecurityCapabilities
-	{
-		ProtectionLevel SupportedRequestProtectionLevel { get; }
+    public interface ISecurityCapabilities
+    {
+        ProtectionLevel SupportedRequestProtectionLevel { get; }
 
-		ProtectionLevel SupportedResponseProtectionLevel { get; }
+        ProtectionLevel SupportedResponseProtectionLevel { get; }
 
-		bool SupportsClientAuthentication { get; }
+        bool SupportsClientAuthentication { get; }
 
-		bool SupportsServerAuthentication { get; }
+        bool SupportsServerAuthentication { get; }
 
-		bool SupportsClientWindowsIdentity { get; }
-	}
+        bool SupportsClientWindowsIdentity { get; }
+    }
 }

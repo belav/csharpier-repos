@@ -1375,7 +1375,7 @@ namespace System.Net.Security {
                         success = (sslPolicyErrors == SslPolicyErrors.None);
                 }
 #else
-		success = SSPIWrapper.CheckRemoteCertificate(m_SecurityContext);
+        success = SSPIWrapper.CheckRemoteCertificate(m_SecurityContext);
 #endif
 
                 if (Logging.On)

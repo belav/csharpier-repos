@@ -39,82 +39,82 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_ChildRelations : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataTable_ChildRelations tc = new DataTable_ChildRelations();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTable_ChildRelations");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataTable_ChildRelations tc = new DataTable_ChildRelations();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTable_ChildRelations");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
+    public void run()
+    {
+        Exception exp = null;
 
-		DataTable dtChild,dtParent;
-		DataSet ds = new DataSet();
-		//Create tables
-		dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-		dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
-		//Add tables to dataset
-		ds.Tables.Add(dtChild);
-		ds.Tables.Add(dtParent);
+        DataTable dtChild,dtParent;
+        DataSet ds = new DataSet();
+        //Create tables
+        dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+        dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+        //Add tables to dataset
+        ds.Tables.Add(dtChild);
+        ds.Tables.Add(dtParent);
 
-		DataRelationCollection drlCollection;
-		DataRelation drl = new DataRelation("Parent-Child",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
+        DataRelationCollection drlCollection;
+        DataRelation drl = new DataRelation("Parent-Child",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
 
-		try
-		{
-			base.BeginCase("Checking ChildRelations - default value");
-			//Check default
-			drlCollection = dtParent.ChildRelations; 
-			base.Compare(drlCollection.Count  ,0);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		ds.Relations.Add(drl);
-		drlCollection = dtParent.ChildRelations; 
+        try
+        {
+            base.BeginCase("Checking ChildRelations - default value");
+            //Check default
+            drlCollection = dtParent.ChildRelations; 
+            base.Compare(drlCollection.Count  ,0);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
         
-		try
-		{
-			base.BeginCase("Checking ChildRelations Count");
-			base.Compare(drlCollection.Count  ,1);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		try
-		{
-			base.BeginCase("Checking ChildRelations Value");
-			base.Compare(drlCollection[0] ,drl);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-					
-	}
+        ds.Relations.Add(drl);
+        drlCollection = dtParent.ChildRelations; 
+        
+        try
+        {
+            base.BeginCase("Checking ChildRelations Count");
+            base.Compare(drlCollection.Count  ,1);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        try
+        {
+            base.BeginCase("Checking ChildRelations Value");
+            base.Compare(drlCollection[0] ,drl);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+                    
+    }
 }
 }

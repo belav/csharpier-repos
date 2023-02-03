@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1382,12 +1382,12 @@ class Program
             var source = @"
 class Gen<T>
 {
-	public static void TestUsing(T obj)
-	{
-		using (obj)
-		{
-		}
-	}
+    public static void TestUsing(T obj)
+    {
+        using (obj)
+        {
+        }
+    }
 }
 ";
             CreateCompilation(source).VerifyDiagnostics(Diagnostic(ErrorCode.ERR_NoConvToIDisp, "obj").WithArguments("T"));
@@ -2645,23 +2645,23 @@ struct MyManagedClass1 : IDisposable
 class A
 {
     void B()
-	{
-		using
-	}
+    {
+        using
+    }
 }
 ";
             CreateCompilation(source).VerifyDiagnostics(
                 // (6,8): error CS1031: Type expected
-                // 		using
+                //         using
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(6, 8),
                 // (6,8): error CS1001: Identifier expected
-                // 		using
+                //         using
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(6, 8),
                 // (6,8): error CS1002: ; expected
-                // 		using
+                //         using
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 8),
                 // (7,1): error CS0210: You must provide an initializer in a fixed or using statement declaration
-                // 	}
+                //     }
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "").WithLocation(7, 1));
         }
 

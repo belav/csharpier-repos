@@ -20,15 +20,15 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum CheckState {
-		Unchecked	= 0,
-		Checked		= 1,
-		Indeterminate	= 2
-	}
+    public enum CheckState {
+        Unchecked    = 0,
+        Checked        = 1,
+        Indeterminate    = 2
+    }
 }

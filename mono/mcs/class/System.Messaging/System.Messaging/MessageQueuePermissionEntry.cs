@@ -3,7 +3,7 @@
 //
 // Authors:
 //      Peter Van Isacker (sclytrack@planetinternet.be)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Peter Van Isacker
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -30,55 +30,55 @@
 
 namespace System.Messaging {
 
-	[Serializable]
-	public class MessageQueuePermissionEntry {
+    [Serializable]
+    public class MessageQueuePermissionEntry {
 
-		private MessageQueuePermissionAccess _permissionAccess;
-		private string _machineName;
-		private string _label;
-		private string _category;
-		private string _path;
+        private MessageQueuePermissionAccess _permissionAccess;
+        private string _machineName;
+        private string _label;
+        private string _category;
+        private string _path;
 
-		public MessageQueuePermissionEntry (MessageQueuePermissionAccess permissionAccess, string path)
-		{
-			if (path == null)
-				throw new ArgumentNullException ("path");
-			MessageQueuePermission.ValidatePath (path);
+        public MessageQueuePermissionEntry (MessageQueuePermissionAccess permissionAccess, string path)
+        {
+            if (path == null)
+                throw new ArgumentNullException ("path");
+            MessageQueuePermission.ValidatePath (path);
 
-			_permissionAccess = permissionAccess;
-			_path = path;
-		}
-		
-		public MessageQueuePermissionEntry (MessageQueuePermissionAccess permissionAccess, string machineName, string label, string category)
-		{
-			if (machineName == null)
-				throw new ArgumentNullException ("machineName");
-			MessageQueuePermission.ValidateMachineName (machineName);
+            _permissionAccess = permissionAccess;
+            _path = path;
+        }
+        
+        public MessageQueuePermissionEntry (MessageQueuePermissionAccess permissionAccess, string machineName, string label, string category)
+        {
+            if (machineName == null)
+                throw new ArgumentNullException ("machineName");
+            MessageQueuePermission.ValidateMachineName (machineName);
 
-			_permissionAccess = permissionAccess;
-			_machineName = machineName;
-			_label = label;
-			_category = category;
-		}
-		
-		public string Category {
-			get { return _category; }
-		}
-		
-		public string Label {
-			get { return _label; }
-		}
+            _permissionAccess = permissionAccess;
+            _machineName = machineName;
+            _label = label;
+            _category = category;
+        }
+        
+        public string Category {
+            get { return _category; }
+        }
+        
+        public string Label {
+            get { return _label; }
+        }
 
-		public string MachineName {
-			get { return _machineName; }
-		}
-		
-		public string Path {
-			get { return _path; }
-		}
-		
-		public MessageQueuePermissionAccess PermissionAccess {
-			get { return _permissionAccess; }
-		}
-	}
+        public string MachineName {
+            get { return _machineName; }
+        }
+        
+        public string Path {
+            get { return _path; }
+        }
+        
+        public MessageQueuePermissionAccess PermissionAccess {
+            get { return _permissionAccess; }
+        }
+    }
 }

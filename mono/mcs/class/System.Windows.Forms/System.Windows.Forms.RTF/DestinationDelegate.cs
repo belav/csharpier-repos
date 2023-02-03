@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,32 +29,32 @@
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	delegate void DestinationDelegate(RTF Sender);
+    delegate void DestinationDelegate(RTF Sender);
 
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	class DestinationCallback {
-		DestinationDelegate[]	callbacks;
+    class DestinationCallback {
+        DestinationDelegate[]    callbacks;
 
-		public DestinationCallback() {
-			callbacks = new DestinationDelegate[Enum.GetValues(typeof(Minor)).Length];
-		}
+        public DestinationCallback() {
+            callbacks = new DestinationDelegate[Enum.GetValues(typeof(Minor)).Length];
+        }
 
-		public DestinationDelegate this[Minor c] {
-			get {
-				return callbacks[(int)c];
-			}
+        public DestinationDelegate this[Minor c] {
+            get {
+                return callbacks[(int)c];
+            }
 
-			set {
-				callbacks[(int)c] = value;
-			}
-		}
-	}
+            set {
+                callbacks[(int)c] = value;
+            }
+        }
+    }
 }

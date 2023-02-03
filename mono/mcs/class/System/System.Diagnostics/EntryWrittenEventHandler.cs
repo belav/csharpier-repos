@@ -34,9 +34,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics {
 
-	public delegate void EntryWrittenEventHandler(
-		object sender, 
-		EntryWrittenEventArgs e);
+    public delegate void EntryWrittenEventHandler(
+        object sender, 
+        EntryWrittenEventArgs e);
 
 }
 

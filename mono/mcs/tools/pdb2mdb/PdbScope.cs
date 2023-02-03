@@ -16,7 +16,7 @@ namespace Microsoft.Cci.Pdb {
     internal uint address;
     internal uint length;
 
-	internal PdbScope(uint funcAddress, BlockSym32 block, BitAccess bits, out uint typind) {
+    internal PdbScope(uint funcAddress, BlockSym32 block, BitAccess bits, out uint typind) {
       this.segment = block.seg;
       this.address = block.off - funcAddress;
       this.length = block.len;

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4170,7 +4170,7 @@ class Test
             CreateCompilation(@"
 class Test
 {
-	void M(in int p)
+    void M(in int p)
     {
     }
     void N()
@@ -4189,7 +4189,7 @@ class Test
             CreateCompilation(@"
 class Test
 {
-	void M(out int p)
+    void M(out int p)
     {
         p = 0;
     }
@@ -4222,7 +4222,7 @@ class Test
             CreateCompilation(@"
 class Test
 {
-	void M(out int p)
+    void M(out int p)
     {
         p = 0;
     }
@@ -4255,7 +4255,7 @@ class Test
             CreateCompilation(@"
 class Test
 {
-	void M(out int p)
+    void M(out int p)
     {
         p = 0;
     }
@@ -4278,7 +4278,7 @@ class Test
             CreateCompilation(@"
 class Test
 {
-	void M(out int p)
+    void M(out int p)
     {
         p = 0;
     }
@@ -4325,13 +4325,13 @@ public class C
             CreateCompilation(@"
 public class C
 {
-	public void M(ref int x)
+    public void M(ref int x)
     {
-    	M(ref void = ref x);
+        M(ref void = ref x);
     }
 }").VerifyDiagnostics(
                 // (6,12): error CS1525: Invalid expression term 'void'
-                //     	M(ref void = ref x);
+                //         M(ref void = ref x);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "void").WithArguments("void").WithLocation(6, 12));
         }
 

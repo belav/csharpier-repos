@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IControlDesignerView
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,19 +34,19 @@ using System.Drawing;
 
 namespace System.Web.UI.Design
 {
-	public interface IControlDesignerView
-	{
-		event ViewEventHandler ViewEvent;
+    public interface IControlDesignerView
+    {
+        event ViewEventHandler ViewEvent;
 
-		DesignerRegion ContainingRegion { get; }
-		IDesigner NamingContainerDesigner { get; }
-		bool SupportsRegions { get; }
+        DesignerRegion ContainingRegion { get; }
+        IDesigner NamingContainerDesigner { get; }
+        bool SupportsRegions { get; }
 
-		Rectangle GetBounds (DesignerRegion region);
-		void Invalidate (Rectangle rectangle);
-		void SetFlags (ViewFlags viewFlags, bool setFlag);
-		void SetRegionContent (EditableDesignerRegion region, string content);
-		void Update ();
-	}
+        Rectangle GetBounds (DesignerRegion region);
+        void Invalidate (Rectangle rectangle);
+        void SetFlags (ViewFlags viewFlags, bool setFlag);
+        void SetRegionContent (EditableDesignerRegion region, string content);
+        void Update ();
+    }
 }
 

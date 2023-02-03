@@ -2,7 +2,7 @@
 // StandardEndpointElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,22 +54,22 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	// LAMESPEC: there should be ConfigurationPropertyAttribute whose AddElementName is "standardEndpoint" (see ServiceBehaviorElementCollection for reference).
-	public sealed class StandardEndpointElementCollection<TEndpointConfiguration> : ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration>
-		where TEndpointConfiguration : StandardEndpointElement, new()
-	{
-		public StandardEndpointElementCollection ()
-		{
-			AddElementName = "standardEndpoint";
-		}
+    // LAMESPEC: there should be ConfigurationPropertyAttribute whose AddElementName is "standardEndpoint" (see ServiceBehaviorElementCollection for reference).
+    public sealed class StandardEndpointElementCollection<TEndpointConfiguration> : ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration>
+        where TEndpointConfiguration : StandardEndpointElement, new()
+    {
+        public StandardEndpointElementCollection ()
+        {
+            AddElementName = "standardEndpoint";
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
+        protected override bool ThrowOnDuplicate {
+            get { return false; }
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((StandardEndpointElement) element).Name;
-		}
-	}
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            return ((StandardEndpointElement) element).Name;
+        }
+    }
 }

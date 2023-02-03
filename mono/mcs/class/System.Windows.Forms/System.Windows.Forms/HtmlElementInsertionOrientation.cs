@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum HtmlElementInsertionOrientation
-	{
-		BeforeBegin = 0,
-		AfterBegin = 1,
-		BeforeEnd = 2,
-		AfterEnd = 3
-	}
+    public enum HtmlElementInsertionOrientation
+    {
+        BeforeBegin = 0,
+        AfterBegin = 1,
+        BeforeEnd = 2,
+        AfterEnd = 3
+    }
 }

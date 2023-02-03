@@ -36,54 +36,54 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace StandAloneRunnerSupport
 {
-	public sealed class Helpers
-	{
-		public const string BEGIN_CODE_MARKER = "<!-- @CODE_BEGIN@ -->";
-		public const string END_CODE_MARKER = "<!-- @CODE_END@ -->";
-		
-		public static string ExtractCodeFromHtml (string html)
-		{
-			AppDomain ad = AppDomain.CurrentDomain;
-			return HtmlDiff.GetControlFromPageHtml (html, BEGIN_CODE_MARKER, END_CODE_MARKER);
-		}
+    public sealed class Helpers
+    {
+        public const string BEGIN_CODE_MARKER = "<!-- @CODE_BEGIN@ -->";
+        public const string END_CODE_MARKER = "<!-- @CODE_END@ -->";
+        
+        public static string ExtractCodeFromHtml (string html)
+        {
+            AppDomain ad = AppDomain.CurrentDomain;
+            return HtmlDiff.GetControlFromPageHtml (html, BEGIN_CODE_MARKER, END_CODE_MARKER);
+        }
 
-		public static void ExtractAndCompareCodeFromHtml (string html, string original, string msg)
-		{
-			string rendered = ExtractCodeFromHtml (html);
-			HtmlDiff.AssertAreEqual (original, rendered, msg);
-		}
+        public static void ExtractAndCompareCodeFromHtml (string html, string original, string msg)
+        {
+            string rendered = ExtractCodeFromHtml (html);
+            HtmlDiff.AssertAreEqual (original, rendered, msg);
+        }
 
-		public static string StripWebResourceAxdQuery (string origHtml)
-		{
-			return StripWebResourceAxdQuery (StripWebResourceAxdQuery (origHtml, "\""), "&quot;");
-		}
+        public static string StripWebResourceAxdQuery (string origHtml)
+        {
+            return StripWebResourceAxdQuery (StripWebResourceAxdQuery (origHtml, "\""), "&quot;");
+        }
 
-		static string StripWebResourceAxdQuery (string origHtml, string delimiter)
-		{
-			if (String.IsNullOrEmpty (origHtml))
-				return origHtml;
+        static string StripWebResourceAxdQuery (string origHtml, string delimiter)
+        {
+            if (String.IsNullOrEmpty (origHtml))
+                return origHtml;
 
-			// Naive approach, enough for now
-			return new Regex (delimiter + "/WebResource\\.axd.*?" + delimiter).Replace (origHtml, delimiter + "/WebResource.axd" + delimiter);
-		}
+            // Naive approach, enough for now
+            return new Regex (delimiter + "/WebResource\\.axd.*?" + delimiter).Replace (origHtml, delimiter + "/WebResource.axd" + delimiter);
+        }
 
-		public static bool HasException (string html, Type exceptionType)
-		{
-			if (exceptionType == null)
-				throw new ArgumentNullException ("exceptionType");
+        public static bool HasException (string html, Type exceptionType)
+        {
+            if (exceptionType == null)
+                throw new ArgumentNullException ("exceptionType");
 
-			return HasException (html, exceptionType.FullName);
-		}
-		
-		public static bool HasException (string html, string exceptionType)
-		{
-			if (String.IsNullOrEmpty (exceptionType))
-				throw new ArgumentNullException ("exceptionType");
-			
-			if (String.IsNullOrEmpty (html))
-				return false;
-			
-			return html.IndexOf ("[" + exceptionType + "]:") != -1;
-		}
-	}
+            return HasException (html, exceptionType.FullName);
+        }
+        
+        public static bool HasException (string html, string exceptionType)
+        {
+            if (String.IsNullOrEmpty (exceptionType))
+                throw new ArgumentNullException ("exceptionType");
+            
+            if (String.IsNullOrEmpty (html))
+                return false;
+            
+            return html.IndexOf ("[" + exceptionType + "]:") != -1;
+        }
+    }
 }

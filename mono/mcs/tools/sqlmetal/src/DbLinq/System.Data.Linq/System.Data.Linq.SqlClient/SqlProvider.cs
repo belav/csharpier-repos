@@ -31,16 +31,16 @@ using System;
 
 namespace System.Data.Linq.SqlClient
 {
-	[MonoTODO]
-	public class SqlProvider : IDisposable
-	{
-		public void Dispose ()
-		{
-			Dispose (true);
-		}
+    [MonoTODO]
+    public class SqlProvider : IDisposable
+    {
+        public void Dispose ()
+        {
+            Dispose (true);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-		}
-	}
+        protected virtual void Dispose (bool disposing)
+        {
+        }
+    }
 }

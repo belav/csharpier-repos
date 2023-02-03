@@ -21,9 +21,9 @@
 // Copyright 2011 Xamarin Inc.
 //
 // Authors:
-//	Chris Toshok (toshok@novell.com)
-//	Brian O'Keefe (zer0keefie@gmail.com)
-//	Marek Safar (marek.safar@gmail.com)
+//    Chris Toshok (toshok@novell.com)
+//    Brian O'Keefe (zer0keefie@gmail.com)
+//    Marek Safar (marek.safar@gmail.com)
 //
 
 

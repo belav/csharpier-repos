@@ -14,12 +14,12 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	public class ClassWithIndexer : InterfaceWithIndexer
-	{
-		public object this[int index]
-		{
-			get { return index; }
-			set { }
-		}
-	}
+    public class ClassWithIndexer : InterfaceWithIndexer
+    {
+        public object this[int index]
+        {
+            get { return index; }
+            set { }
+        }
+    }
 }

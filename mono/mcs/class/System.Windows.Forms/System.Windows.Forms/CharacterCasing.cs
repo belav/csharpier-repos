@@ -20,16 +20,16 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum CharacterCasing {
-		Normal	= 0,
-		Upper	= 1,
-		Lower	= 2
-	}
+    public enum CharacterCasing {
+        Normal    = 0,
+        Upper    = 1,
+        Lower    = 2
+    }
 }

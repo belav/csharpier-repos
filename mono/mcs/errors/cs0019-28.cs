@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	bool ret (ulong u, sbyte s)
-	{
-		return (u >= s);
-	}
+    bool ret (ulong u, sbyte s)
+    {
+        return (u >= s);
+    }
 }

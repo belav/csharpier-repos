@@ -5,11 +5,11 @@ using System;
 
 public class Test
 {
-	public delegate int DelegateA(bool b);
-	public delegate int DelegateB(bool b);
+    public delegate int DelegateA(bool b);
+    public delegate int DelegateB(bool b);
 
-	static bool TestCompare (DelegateA a, DelegateB b)
-	{
-		return a != b;
-	}
+    static bool TestCompare (DelegateA a, DelegateB b)
+    {
+        return a != b;
+    }
 }

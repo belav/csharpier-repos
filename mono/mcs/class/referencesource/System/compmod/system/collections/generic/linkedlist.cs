@@ -279,7 +279,7 @@ namespace System.Collections.Generic {
 
 #if !SILVERLIGHT
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)] 		
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]         
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) {
             // Customized serialization for LinkedList.
             // We need to do this because it will be too expensive to Serialize each node.

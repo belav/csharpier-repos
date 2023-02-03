@@ -444,7 +444,7 @@ namespace System.Data.Query.InternalTrees
         /// </summary>
         internal override int Arity { get { return 1; } }
 
-		/// <summary>
+        /// <summary>
         /// The property metadata
         /// </summary>
         internal EdmMember PropertyInfo { get { return m_property; } }
@@ -465,7 +465,7 @@ namespace System.Data.Query.InternalTrees
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
         internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
-	    #endregion
+        #endregion
     }
 
     /// <summary>

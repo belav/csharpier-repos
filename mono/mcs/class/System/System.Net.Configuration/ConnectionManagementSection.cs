@@ -2,8 +2,8 @@
 // System.Net.Configuration.ConnectionManagementSection.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Tim Coleman (tim@timcoleman.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,45 +36,45 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-	public sealed class ConnectionManagementSection : ConfigurationSection
-	{
-		#region Fields
+    public sealed class ConnectionManagementSection : ConfigurationSection
+    {
+        #region Fields
 
-		static ConfigurationProperty connectionManagementProp;
-		static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty connectionManagementProp;
+        static ConfigurationPropertyCollection properties;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static ConnectionManagementSection ()
-		{
-			connectionManagementProp = new ConfigurationProperty ("ConnectionManagement", typeof (ConnectionManagementElementCollection),
-									      null, ConfigurationPropertyOptions.IsDefaultCollection);
+        static ConnectionManagementSection ()
+        {
+            connectionManagementProp = new ConfigurationProperty ("ConnectionManagement", typeof (ConnectionManagementElementCollection),
+                                          null, ConfigurationPropertyOptions.IsDefaultCollection);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (connectionManagementProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (connectionManagementProp);
+        }
 
-		public ConnectionManagementSection ()
-		{
-		}
+        public ConnectionManagementSection ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public ConnectionManagementElementCollection ConnectionManagement {
-			get { return (ConnectionManagementElementCollection) base [connectionManagementProp]; }
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public ConnectionManagementElementCollection ConnectionManagement {
+            get { return (ConnectionManagementElementCollection) base [connectionManagementProp]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

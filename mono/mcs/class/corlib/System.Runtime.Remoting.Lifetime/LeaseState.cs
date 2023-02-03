@@ -36,31 +36,31 @@
 namespace System.Runtime.Remoting.Lifetime {
 
 
-	/// <summary>
-	/// </summary>
-	[System.Runtime.InteropServices.ComVisible (true)]
-	[Serializable]
-	public enum LeaseState {
+    /// <summary>
+    /// </summary>
+    [System.Runtime.InteropServices.ComVisible (true)]
+    [Serializable]
+    public enum LeaseState {
 
-		/// <summary>
-		/// </summary>
-		Null = 0,
+        /// <summary>
+        /// </summary>
+        Null = 0,
 
-		/// <summary>
-		/// </summary>
-		Initial = 1,
+        /// <summary>
+        /// </summary>
+        Initial = 1,
 
-		/// <summary>
-		/// </summary>
-		Active = 2,
+        /// <summary>
+        /// </summary>
+        Active = 2,
 
-		/// <summary>
-		/// </summary>
-		Renewing = 3,
+        /// <summary>
+        /// </summary>
+        Renewing = 3,
 
-		/// <summary>
-		/// </summary>
-		Expired = 4,
-	} // LeaseState
+        /// <summary>
+        /// </summary>
+        Expired = 4,
+    } // LeaseState
 
 } // System.Runtime.Remoting.Lifetime

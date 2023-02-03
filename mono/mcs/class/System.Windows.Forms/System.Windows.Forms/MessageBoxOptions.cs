@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jordi Mas i Hernandez, jordi@ximian.com
+//    Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 
@@ -28,14 +28,14 @@
 // COMPLETE
 
 namespace System.Windows.Forms
-{	
-	[Flags]
-	public enum MessageBoxOptions
-	{
-		DefaultDesktopOnly	= 0x20000,
-		RightAlign 		= 0x80000,
-		RtlReading 		= 0x100000,
-		ServiceNotification 	= 0x200000,
-	}
+{    
+    [Flags]
+    public enum MessageBoxOptions
+    {
+        DefaultDesktopOnly    = 0x20000,
+        RightAlign         = 0x80000,
+        RtlReading         = 0x100000,
+        ServiceNotification     = 0x200000,
+    }
 }
 

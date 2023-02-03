@@ -39,84 +39,84 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowView_EndEdit : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataRowView_EndEdit tc = new DataRowView_EndEdit();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRowView_EndEdit");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataRowView_EndEdit tc = new DataRowView_EndEdit();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataRowView_EndEdit");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-		DataView dv = new DataView(dt);
-
-		DataRowView drv = dv[0];
-		
-		drv.BeginEdit();
-		drv["String1"] = "ChangeValue";
-
-		try
-		{
-			//the row should be stay in edit mode event if changing other rows
-			BeginCase("check IsEdit - change another row");
-			dv[1]["String1"] = "something";
-			Compare(drv.IsEdit ,true);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("check if has Proposed version");
-			drv.EndEdit();
-			Compare(dt.Rows[0].HasVersion(DataRowVersion.Proposed) ,false);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("check Current value");
-			Compare(dt.Rows[0]["String1",DataRowVersion.Current] ,"ChangeValue" );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-
-		try
-		{
-			BeginCase("check IsEdit");
-			Compare(drv.IsEdit ,false);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+    public void run()
+    {
+        Exception exp = null;
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+        DataView dv = new DataView(dt);
+
+        DataRowView drv = dv[0];
+        
+        drv.BeginEdit();
+        drv["String1"] = "ChangeValue";
+
+        try
+        {
+            //the row should be stay in edit mode event if changing other rows
+            BeginCase("check IsEdit - change another row");
+            dv[1]["String1"] = "something";
+            Compare(drv.IsEdit ,true);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("check if has Proposed version");
+            drv.EndEdit();
+            Compare(dt.Rows[0].HasVersion(DataRowVersion.Proposed) ,false);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("check Current value");
+            Compare(dt.Rows[0]["String1",DataRowVersion.Current] ,"ChangeValue" );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("check IsEdit");
+            Compare(drv.IsEdit ,false);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+
+    }
 }
 }

@@ -6,11 +6,11 @@ using System;
 [BAttribute (null)]
 public class BAttribute : Attribute
 {
-	public BAttribute (Attribute a)
-	{
-	}
-	
-	public static void Main ()
-	{
-	}
+    public BAttribute (Attribute a)
+    {
+    }
+    
+    public static void Main ()
+    {
+    }
 }

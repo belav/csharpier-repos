@@ -34,52 +34,52 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	public class ErrorResponseException : DirectoryException, ISerializable
-	{
-		public ErrorResponseException ()
-			: this ("Directory response error")
-		{
-		}
+    [Serializable]
+    public class ErrorResponseException : DirectoryException, ISerializable
+    {
+        public ErrorResponseException ()
+            : this ("Directory response error")
+        {
+        }
 
-		public ErrorResponseException (string message)
-			: base (message)
-		{
-		}
+        public ErrorResponseException (string message)
+            : base (message)
+        {
+        }
 
-		public ErrorResponseException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public ErrorResponseException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		public ErrorResponseException (DsmlErrorResponse response)
-			: this ()
-		{
-			Response = response;
-		}
+        public ErrorResponseException (DsmlErrorResponse response)
+            : this ()
+        {
+            Response = response;
+        }
 
-		public ErrorResponseException (DsmlErrorResponse response, string message)
-			: this (response, message, null)
-		{
-		}
+        public ErrorResponseException (DsmlErrorResponse response, string message)
+            : this (response, message, null)
+        {
+        }
 
-		public ErrorResponseException (DsmlErrorResponse response, string message, Exception inner)
-			: base (message, inner)
-		{
-			Response = response;
-		}
+        public ErrorResponseException (DsmlErrorResponse response, string message, Exception inner)
+            : base (message, inner)
+        {
+            Response = response;
+        }
 
-		protected ErrorResponseException (SerializationInfo info, StreamingContext context)
-		{
-			Response = (DsmlErrorResponse) info.GetValue ("Response", typeof (DsmlErrorResponse));
-		}
+        protected ErrorResponseException (SerializationInfo info, StreamingContext context)
+        {
+            Response = (DsmlErrorResponse) info.GetValue ("Response", typeof (DsmlErrorResponse));
+        }
 
-		public DsmlErrorResponse Response { get; private set; }
+        public DsmlErrorResponse Response { get; private set; }
 
-		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			serializationInfo.AddValue ("Response", Response, typeof (DsmlErrorResponse));
-		}
-	}
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        {
+            serializationInfo.AddValue ("Response", Response, typeof (DsmlErrorResponse));
+        }
+    }
 }

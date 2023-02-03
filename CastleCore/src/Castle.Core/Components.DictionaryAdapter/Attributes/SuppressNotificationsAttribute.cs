@@ -14,17 +14,17 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Suppress property change notifications.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-	public class SuppressNotificationsAttribute : DictionaryBehaviorAttribute, IPropertyDescriptorInitializer
-	{
-		public void Initialize(PropertyDescriptor propertyDescriptor, object[] behaviors)
-		{
-			propertyDescriptor.SuppressNotifications = true;
-		}
-	}
+    /// <summary>
+    /// Suppress property change notifications.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public class SuppressNotificationsAttribute : DictionaryBehaviorAttribute, IPropertyDescriptorInitializer
+    {
+        public void Initialize(PropertyDescriptor propertyDescriptor, object[] behaviors)
+        {
+            propertyDescriptor.SuppressNotifications = true;
+        }
+    }
 }

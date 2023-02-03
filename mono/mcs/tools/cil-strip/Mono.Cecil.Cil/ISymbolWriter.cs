@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil.Cil {
 
-	using System;
+    using System;
 
-	internal interface ISymbolWriter : IDisposable {
+    internal interface ISymbolWriter : IDisposable {
 
-		void Write (MethodBody body);
-	}
+        void Write (MethodBody body);
+    }
 }

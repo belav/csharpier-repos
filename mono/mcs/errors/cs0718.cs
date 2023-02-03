@@ -11,5 +11,5 @@ class C<T>
 
 class Test
 {
-	C<S> foo;
+    C<S> foo;
 }

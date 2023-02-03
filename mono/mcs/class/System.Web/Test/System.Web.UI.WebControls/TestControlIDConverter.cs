@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.ControlIDConverter.cs 
 //
 // Author:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //
 
 //
@@ -39,45 +39,45 @@ using System.IO;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]	
-	public class ControlIDConverterTest 
-	{
-		ControlIDConverter ctrlConv;
+    [TestFixture]    
+    public class ControlIDConverterTest 
+    {
+        ControlIDConverter ctrlConv;
 
-		[TearDown]
-		public void TearDown () {}
+        [TearDown]
+        public void TearDown () {}
 
-		[SetUp]
-		public void SetUp ()		
-		{
-			ctrlConv = new ControlIDConverter ();
-		}
+        [SetUp]
+        public void SetUp ()        
+        {
+            ctrlConv = new ControlIDConverter ();
+        }
 
-		[Test]
-		public void TestGetStandardValues ()
-		{
-			Assert.IsNull (ctrlConv.GetStandardValues (), "GSV#1");
-			
-			Assert.IsNull (ctrlConv.GetStandardValues (null), "GSV#2");
-		}
+        [Test]
+        public void TestGetStandardValues ()
+        {
+            Assert.IsNull (ctrlConv.GetStandardValues (), "GSV#1");
+            
+            Assert.IsNull (ctrlConv.GetStandardValues (null), "GSV#2");
+        }
 
-		[Test]
-		public void TestGetStandardValuesExclusive ()
-		{
-			Assert.IsFalse (ctrlConv.GetStandardValuesExclusive (), "GSVE#1");
-			
-			Assert.IsFalse (ctrlConv.GetStandardValuesExclusive (null), "GSVE#2");
-		}
+        [Test]
+        public void TestGetStandardValuesExclusive ()
+        {
+            Assert.IsFalse (ctrlConv.GetStandardValuesExclusive (), "GSVE#1");
+            
+            Assert.IsFalse (ctrlConv.GetStandardValuesExclusive (null), "GSVE#2");
+        }
 
-		[Test]
-		public void TestGetStandardValuesSupported ()
-		{
-			Assert.IsFalse (ctrlConv.GetStandardValuesSupported (), "GSVS#1");
-			
-			Assert.IsFalse (ctrlConv.GetStandardValuesSupported (null), "GSVS#2");
-		}
-			
-	}
+        [Test]
+        public void TestGetStandardValuesSupported ()
+        {
+            Assert.IsFalse (ctrlConv.GetStandardValuesSupported (), "GSVS#1");
+            
+            Assert.IsFalse (ctrlConv.GetStandardValuesSupported (null), "GSVS#2");
+        }
+            
+    }
 }
 
 

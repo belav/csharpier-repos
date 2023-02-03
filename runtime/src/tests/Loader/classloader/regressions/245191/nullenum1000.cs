@@ -1013,8 +1013,8 @@ public enum T999 { }
 public class Test_nullenum1000 {
   public static int Main() 
   {
-  	try
-  	{
+      try
+      {
     Do0(new T0());
     Do1(new T1());
     Do2(new T2());
@@ -2016,19 +2016,19 @@ public class Test_nullenum1000 {
     Do998(new T998());
     Do999(new T999());
 
-		Console.WriteLine("PASS");
-		 return 100;
-  	}
-	catch (TypeLoadException e)
-	{
-		Console.WriteLine("FAIL: Caught unexpected TypeLoadException" + e.Message);
-		return 101;
-	}
-	catch (Exception e)
-	{
-		Console.WriteLine("FAIL: Caught unexpected exception:" + e.Message);
-		return 101;
-	}
+        Console.WriteLine("PASS");
+         return 100;
+      }
+    catch (TypeLoadException e)
+    {
+        Console.WriteLine("FAIL: Caught unexpected TypeLoadException" + e.Message);
+        return 101;
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("FAIL: Caught unexpected exception:" + e.Message);
+        return 101;
+    }
 
    
   }

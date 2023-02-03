@@ -2,7 +2,7 @@
 // HttpDigestClientElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,40 +54,40 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed partial class HttpDigestClientElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty impersonation_level;
+    public sealed partial class HttpDigestClientElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty impersonation_level;
 
-		static HttpDigestClientElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			impersonation_level = new ConfigurationProperty ("impersonationLevel",
-				typeof (TokenImpersonationLevel), "Identification", null, null,
-				ConfigurationPropertyOptions.None);
+        static HttpDigestClientElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            impersonation_level = new ConfigurationProperty ("impersonationLevel",
+                typeof (TokenImpersonationLevel), "Identification", null, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (impersonation_level);
-		}
+            properties.Add (impersonation_level);
+        }
 
-		public HttpDigestClientElement ()
-		{
-		}
+        public HttpDigestClientElement ()
+        {
+        }
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("impersonationLevel",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = TokenImpersonationLevel.Identification)]
-		public TokenImpersonationLevel ImpersonationLevel {
-			get { return (TokenImpersonationLevel) base [impersonation_level]; }
-			set { base [impersonation_level] = value; }
-		}
+        [ConfigurationProperty ("impersonationLevel",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = TokenImpersonationLevel.Identification)]
+        public TokenImpersonationLevel ImpersonationLevel {
+            get { return (TokenImpersonationLevel) base [impersonation_level]; }
+            set { base [impersonation_level] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 
 }

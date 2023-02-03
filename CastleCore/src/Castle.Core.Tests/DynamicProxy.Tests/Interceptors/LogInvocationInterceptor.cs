@@ -14,46 +14,46 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	using System;
-	using System.Collections;
-	using System.Reflection;
-	using System.Text;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections;
+    using System.Reflection;
+    using System.Text;
+    using System.Collections.Generic;
 
-	public class LogInvocationInterceptor : StandardInterceptor
-	{
-		private StringBuilder sb = new StringBuilder();
-		private List<string> invocations = new List<string>();
+    public class LogInvocationInterceptor : StandardInterceptor
+    {
+        private StringBuilder sb = new StringBuilder();
+        private List<string> invocations = new List<string>();
 
-		public bool Proceed = true;
+        public bool Proceed = true;
 
-		protected override void PreProceed(IInvocation invocation)
-		{
-			invocations.Add(invocation.Method.Name);
+        protected override void PreProceed(IInvocation invocation)
+        {
+            invocations.Add(invocation.Method.Name);
 
-			sb.Append(string.Format("{0} ", invocation.Method.Name));
-		}
+            sb.Append(string.Format("{0} ", invocation.Method.Name));
+        }
 
-		protected override void PerformProceed (IInvocation invocation)
-		{
-			if (Proceed)
-			{
-				base.PerformProceed (invocation);
-			}
-			else if (invocation.Method.ReturnType.IsValueType && invocation.Method.ReturnType != typeof (void))
-			{
-				invocation.ReturnValue = Activator.CreateInstance (invocation.Method.ReturnType); // set default return value
-			}
-		}
+        protected override void PerformProceed (IInvocation invocation)
+        {
+            if (Proceed)
+            {
+                base.PerformProceed (invocation);
+            }
+            else if (invocation.Method.ReturnType.IsValueType && invocation.Method.ReturnType != typeof (void))
+            {
+                invocation.ReturnValue = Activator.CreateInstance (invocation.Method.ReturnType); // set default return value
+            }
+        }
 
-		public string LogContents
-		{
-			get { return sb.ToString(); }
-		}
+        public string LogContents
+        {
+            get { return sb.ToString(); }
+        }
 
-		public IList Invocations
-		{
-			get { return invocations; }
-		}
-	}
+        public IList Invocations
+        {
+            get { return invocations; }
+        }
+    }
 }

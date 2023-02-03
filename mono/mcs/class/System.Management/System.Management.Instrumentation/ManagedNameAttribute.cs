@@ -30,23 +30,23 @@
 
 namespace System.Management.Instrumentation
 {
-	[AttributeUsage(AttributeTargets.Class | 
-			AttributeTargets.Struct |
-			AttributeTargets.Method | 
-			AttributeTargets.Property |
-			AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Class | 
+            AttributeTargets.Struct |
+            AttributeTargets.Method | 
+            AttributeTargets.Property |
+            AttributeTargets.Field)]
         public class ManagedNameAttribute : Attribute {
-		public ManagedNameAttribute (string name)
-		{
-			_name = name;
-		}
+        public ManagedNameAttribute (string name)
+        {
+            _name = name;
+        }
 
-		public string Name {
-			get {
-				return _name;
-			}
-		}
+        public string Name {
+            get {
+                return _name;
+            }
+        }
 
-		private string _name;
-	}
+        private string _name;
+    }
 }

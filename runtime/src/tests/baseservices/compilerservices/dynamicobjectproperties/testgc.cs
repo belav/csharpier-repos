@@ -92,7 +92,7 @@ public class TestGC
 
         for (int i = 0; i < length; i++)
         {
-	    String key = "SomeTestString" + i.ToString();
+        String key = "SomeTestString" + i.ToString();
             String value = key;
             tbl.Add(key, value);
 
@@ -152,21 +152,21 @@ public class TestGC
             tbl.Add(key, value);
 
 
-	    // these assignments should prevent the object from being collected
-	    if (i == 0)
-	    {
+        // these assignments should prevent the object from being collected
+        if (i == 0)
+        {
                 key0 = key;
                 value0 = value;
             }
 
             if (i == 21)
-	    {
+        {
                 key21 = key;
                 value21 = value;
             }
 
             if (i == 99)
-	    {
+        {
                 key99 = key;
                 value99 = value;
             }
@@ -239,10 +239,10 @@ public class TestGC
     {
         try
         {
-	    // Changing this test to 2 passes - the code has been refactored so there are no
- 	    // outstanding locals with original references to the keys.
+        // Changing this test to 2 passes - the code has been refactored so there are no
+         // outstanding locals with original references to the keys.
             // This test was failing on IA64 because of IA64 JIT or GC reporting locals longer than necessary
-	    // and the entries weren't getting reclaimed.
+        // and the entries weren't getting reclaimed.
 
             Console.WriteLine("\nTest keys with inside references");
             TestKeyWithInsideReferences_Pass1(100);

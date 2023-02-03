@@ -5,12 +5,12 @@ using System;
 
 class X
 {
-	public static void Main()
-	{
-		int [] a = new int [5] {5, 4, 3, 2, 1};
-		
-		foreach (int ) {
-			Console.WriteLine (x);
-		}
-	}
+    public static void Main()
+    {
+        int [] a = new int [5] {5, 4, 3, 2, 1};
+        
+        foreach (int ) {
+            Console.WriteLine (x);
+        }
+    }
 }

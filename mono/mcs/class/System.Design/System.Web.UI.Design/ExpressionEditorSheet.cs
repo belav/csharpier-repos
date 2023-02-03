@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ExpressionEditorSheet
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -34,29 +34,29 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design {
 
-	public abstract class ExpressionEditorSheet
-	{
-		IServiceProvider serviceProvider;
+    public abstract class ExpressionEditorSheet
+    {
+        IServiceProvider serviceProvider;
 
-		protected ExpressionEditorSheet (IServiceProvider serviceProvider)
-		{
-			this.serviceProvider = serviceProvider;
-		}
+        protected ExpressionEditorSheet (IServiceProvider serviceProvider)
+        {
+            this.serviceProvider = serviceProvider;
+        }
 
-		public abstract string GetExpression ();
+        public abstract string GetExpression ();
 
-		[Browsable (false)]
-		public virtual bool IsValid {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [Browsable (false)]
+        public virtual bool IsValid {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[Browsable (false)]
-		public IServiceProvider ServiceProvider {
-			get { return serviceProvider; }
-		}
-	}
+        [Browsable (false)]
+        public IServiceProvider ServiceProvider {
+            get { return serviceProvider; }
+        }
+    }
 
 }
 

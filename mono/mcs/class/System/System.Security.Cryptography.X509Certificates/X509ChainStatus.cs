@@ -2,7 +2,7 @@
 // X509ChainStatus.cs - System.Security.Cryptography.X509Certificates.X509ChainStatus
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2006 Novell Inc. (http://www.novell.com)
@@ -31,65 +31,65 @@
 
 namespace System.Security.Cryptography.X509Certificates {
 
-	public struct X509ChainStatus {
+    public struct X509ChainStatus {
 
-		private X509ChainStatusFlags status;
-		private string info;
+        private X509ChainStatusFlags status;
+        private string info;
 
-		internal X509ChainStatus (X509ChainStatusFlags flag)
-		{
-			status = flag;
-			info = GetInformation (flag);
-		}
+        internal X509ChainStatus (X509ChainStatusFlags flag)
+        {
+            status = flag;
+            info = GetInformation (flag);
+        }
 
-		// properties
+        // properties
 
-		public X509ChainStatusFlags Status {
-			get { return status; }
-			set { status = value; }
-		}
+        public X509ChainStatusFlags Status {
+            get { return status; }
+            set { status = value; }
+        }
 
-		public string StatusInformation {
-			get { return info; }
-			set { info = value; }
-		}
+        public string StatusInformation {
+            get { return info; }
+            set { info = value; }
+        }
 
-		// private stuff
+        // private stuff
 
-		// note: flags isn't a flag (i.e. multiple values) when used here
-		static internal string GetInformation (X509ChainStatusFlags flags)
-		{
-			switch (flags) {
-			case X509ChainStatusFlags.NotTimeValid:
-			case X509ChainStatusFlags.NotTimeNested:
-			case X509ChainStatusFlags.Revoked:
-			case X509ChainStatusFlags.NotSignatureValid:
-			case X509ChainStatusFlags.NotValidForUsage:
-			case X509ChainStatusFlags.UntrustedRoot:
-			case X509ChainStatusFlags.RevocationStatusUnknown:
-			case X509ChainStatusFlags.Cyclic:
-			case X509ChainStatusFlags.InvalidExtension:
-			case X509ChainStatusFlags.InvalidPolicyConstraints:
-			case X509ChainStatusFlags.InvalidBasicConstraints:
-			case X509ChainStatusFlags.InvalidNameConstraints:
-			case X509ChainStatusFlags.HasNotSupportedNameConstraint:
-			case X509ChainStatusFlags.HasNotDefinedNameConstraint:
-			case X509ChainStatusFlags.HasNotPermittedNameConstraint:
-			case X509ChainStatusFlags.HasExcludedNameConstraint:
-			case X509ChainStatusFlags.PartialChain:
-			case X509ChainStatusFlags.CtlNotTimeValid:
-			case X509ChainStatusFlags.CtlNotSignatureValid:
-			case X509ChainStatusFlags.CtlNotValidForUsage:
-			case X509ChainStatusFlags.OfflineRevocation:
-			case X509ChainStatusFlags.NoIssuanceChainPolicy:
-				return Locale.GetText (flags.ToString ()); // FIXME - add a better description
-			case X509ChainStatusFlags.NoError:
-			default:
-				// should never happen
-				return String.Empty;
-			}
-		}
-	}
+        // note: flags isn't a flag (i.e. multiple values) when used here
+        static internal string GetInformation (X509ChainStatusFlags flags)
+        {
+            switch (flags) {
+            case X509ChainStatusFlags.NotTimeValid:
+            case X509ChainStatusFlags.NotTimeNested:
+            case X509ChainStatusFlags.Revoked:
+            case X509ChainStatusFlags.NotSignatureValid:
+            case X509ChainStatusFlags.NotValidForUsage:
+            case X509ChainStatusFlags.UntrustedRoot:
+            case X509ChainStatusFlags.RevocationStatusUnknown:
+            case X509ChainStatusFlags.Cyclic:
+            case X509ChainStatusFlags.InvalidExtension:
+            case X509ChainStatusFlags.InvalidPolicyConstraints:
+            case X509ChainStatusFlags.InvalidBasicConstraints:
+            case X509ChainStatusFlags.InvalidNameConstraints:
+            case X509ChainStatusFlags.HasNotSupportedNameConstraint:
+            case X509ChainStatusFlags.HasNotDefinedNameConstraint:
+            case X509ChainStatusFlags.HasNotPermittedNameConstraint:
+            case X509ChainStatusFlags.HasExcludedNameConstraint:
+            case X509ChainStatusFlags.PartialChain:
+            case X509ChainStatusFlags.CtlNotTimeValid:
+            case X509ChainStatusFlags.CtlNotSignatureValid:
+            case X509ChainStatusFlags.CtlNotValidForUsage:
+            case X509ChainStatusFlags.OfflineRevocation:
+            case X509ChainStatusFlags.NoIssuanceChainPolicy:
+                return Locale.GetText (flags.ToString ()); // FIXME - add a better description
+            case X509ChainStatusFlags.NoError:
+            default:
+                // should never happen
+                return String.Empty;
+            }
+        }
+    }
 }
 
 #endif

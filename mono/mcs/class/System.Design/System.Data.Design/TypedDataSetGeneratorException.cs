@@ -38,62 +38,62 @@ using System.Runtime.Serialization;
 
 namespace System.Data.Design {
 
-	[Serializable]
-	public class TypedDataSetGeneratorException : DataException
-	{
+    [Serializable]
+    public class TypedDataSetGeneratorException : DataException
+    {
 
-		IList errorList;
+        IList errorList;
 
-		#region Constructors
-		public TypedDataSetGeneratorException ()
-			: base (Locale.GetText ("System error."))
-		{
-		}
+        #region Constructors
+        public TypedDataSetGeneratorException ()
+            : base (Locale.GetText ("System error."))
+        {
+        }
 
-		public TypedDataSetGeneratorException (IList list)
-			: base (Locale.GetText ("System error."))
-		{
-			errorList = list;
-		}
+        public TypedDataSetGeneratorException (IList list)
+            : base (Locale.GetText ("System error."))
+        {
+            errorList = list;
+        }
 
-		protected TypedDataSetGeneratorException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			int count = info.GetInt32 ("KEY_ARRAYCOUNT");
-			errorList = new ArrayList (count);
+        protected TypedDataSetGeneratorException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+            int count = info.GetInt32 ("KEY_ARRAYCOUNT");
+            errorList = new ArrayList (count);
 
-			for (int i=0; i < count; i++)
-				errorList.Add (info.GetString("KEY_ARRAYVALUES" + i));
-		}
+            for (int i=0; i < count; i++)
+                errorList.Add (info.GetString("KEY_ARRAYVALUES" + i));
+        }
 
-		public TypedDataSetGeneratorException (String message) : base (message)
-		{
-		}
-		
-		public TypedDataSetGeneratorException (String message, Exception innerException) 
-			: base (message, innerException)
-		{
-		}
-		#endregion //Constructors	
+        public TypedDataSetGeneratorException (String message) : base (message)
+        {
+        }
+        
+        public TypedDataSetGeneratorException (String message, Exception innerException) 
+            : base (message, innerException)
+        {
+        }
+        #endregion //Constructors    
 
-		public IList ErrorList {
+        public IList ErrorList {
                         get { return errorList; }
-		}
+        }
 
-		#region Methods
+        #region Methods
                                                                                                     
                 public override void GetObjectData (SerializationInfo info, StreamingContext context)
                 {
-			base.GetObjectData (info, context);
+            base.GetObjectData (info, context);
                                                 
-			int count = (errorList != null) ? ErrorList.Count : 0;
-			info.AddValue ("KEY_ARRAYCOUNT", count);
+            int count = (errorList != null) ? ErrorList.Count : 0;
+            info.AddValue ("KEY_ARRAYCOUNT", count);
 
-			for (int i=0; i < count; i++)
-				info.AddValue("KEY_ARRAYVALUES" + i, ErrorList [i]);
+            for (int i=0; i < count; i++)
+                info.AddValue("KEY_ARRAYVALUES" + i, ErrorList [i]);
                 }
                                                                                                     
                 #endregion // Methods
-	}
+    }
 }
 

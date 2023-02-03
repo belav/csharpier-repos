@@ -53,7 +53,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         /// <param name="portName">The port name.</param>
         public IpcChannel(string portName)
-	    : this()
+        : this()
         {
             serverChannel = new IpcServerChannel(portName);
         }

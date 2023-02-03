@@ -2,7 +2,7 @@
 // ChannelServicesTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@xmian.com>
+//    Atsushi Enomoto  <atsushi@xmian.com>
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -35,51 +35,51 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Remoting.Channels
 {
-	
-	[TestFixture]
-	public class ChannelServicesTest
-	{
-		[Test]
-		[ExpectedException (typeof (RemotingException))]
-		public void ConstructorEnsureSecurity ()
-		{
-			IChannel ch = new NonSecureChannel ();
-			ChannelServices.RegisterChannel (ch, true);
-			// in case it happened to successfully register the channel...
-			ChannelServices.UnregisterChannel (ch);
-		}
+    
+    [TestFixture]
+    public class ChannelServicesTest
+    {
+        [Test]
+        [ExpectedException (typeof (RemotingException))]
+        public void ConstructorEnsureSecurity ()
+        {
+            IChannel ch = new NonSecureChannel ();
+            ChannelServices.RegisterChannel (ch, true);
+            // in case it happened to successfully register the channel...
+            ChannelServices.UnregisterChannel (ch);
+        }
 
-		[Test]
-		public void ConstructorEnsureSecurity2 ()
-		{
-			IChannel ch = new SecureChannel ();
-			ChannelServices.RegisterChannel (ch, true);
-			ChannelServices.UnregisterChannel (ch);
-		}
+        [Test]
+        public void ConstructorEnsureSecurity2 ()
+        {
+            IChannel ch = new SecureChannel ();
+            ChannelServices.RegisterChannel (ch, true);
+            ChannelServices.UnregisterChannel (ch);
+        }
 
-		class NonSecureChannel : IChannel
-		{
-			public string Parse (string url, out string objectURI)
-			{
-				objectURI = "my:foo";
-				return "foo";
-			}
+        class NonSecureChannel : IChannel
+        {
+            public string Parse (string url, out string objectURI)
+            {
+                objectURI = "my:foo";
+                return "foo";
+            }
 
-			public string ChannelName {
-				get { return "my"; }
-			}
+            public string ChannelName {
+                get { return "my"; }
+            }
 
-			public int ChannelPriority {
-				get { return 0; }
-			}
-		}
+            public int ChannelPriority {
+                get { return 0; }
+            }
+        }
 
-		class SecureChannel : NonSecureChannel, ISecurableChannel
-		{
-			public bool IsSecured {
-				get { return false; }
-				set { }
-			}
-		}
-	}
+        class SecureChannel : NonSecureChannel, ISecurableChannel
+        {
+            public bool IsSecured {
+                get { return false; }
+                set { }
+            }
+        }
+    }
 }

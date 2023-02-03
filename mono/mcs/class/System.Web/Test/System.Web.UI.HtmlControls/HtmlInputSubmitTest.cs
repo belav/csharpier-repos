@@ -1,9 +1,9 @@
 //
 // HtmlInputSubmitTest.cs
-//	- Unit tests for System.Web.UI.HtmlControls.HtmlInputSubmit
+//    - Unit tests for System.Web.UI.HtmlControls.HtmlInputSubmit
 //
 // Author:
-//	Chris Toshok <toshok@ximian.com>
+//    Chris Toshok <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,75 +37,75 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-	public class HtmlInputSubmitPoker : HtmlInputSubmit {
+    public class HtmlInputSubmitPoker : HtmlInputSubmit {
 
-		public HtmlInputSubmitPoker ()
-		{
-			TrackViewState ();
-		}
+        public HtmlInputSubmitPoker ()
+        {
+            TrackViewState ();
+        }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+        public object SaveState ()
+        {
+            return SaveViewState ();
+        }
 
-		public void LoadState (object state)
-		{
-			LoadViewState (state);
-		}
+        public void LoadState (object state)
+        {
+            LoadViewState (state);
+        }
 
-		public void DoRenderAttributes (HtmlTextWriter writer)
-		{
-			RenderAttributes (writer);
-		}
-	}
+        public void DoRenderAttributes (HtmlTextWriter writer)
+        {
+            RenderAttributes (writer);
+        }
+    }
 
-	[TestFixture]
-	public class HtmlInputSubmitTest {
+    [TestFixture]
+    public class HtmlInputSubmitTest {
 
-		[Test]
-		public void Defaults ()
-		{
-			HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
+        [Test]
+        public void Defaults ()
+        {
+            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
 
-			Assert.IsTrue (p.CausesValidation, "A1");
-			Assert.AreEqual ("", p.ValidationGroup, "A2");
-		}
+            Assert.IsTrue (p.CausesValidation, "A1");
+            Assert.AreEqual ("", p.ValidationGroup, "A2");
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
+        [Test]
+        public void CleanProperties ()
+        {
+            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A1");
+            p.CausesValidation = false;
+            Assert.IsFalse (p.CausesValidation, "A1");
 
-			p.CausesValidation = true;
-			Assert.IsTrue (p.CausesValidation, "A2");
+            p.CausesValidation = true;
+            Assert.IsTrue (p.CausesValidation, "A2");
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A3");
+            p.CausesValidation = false;
+            Assert.IsFalse (p.CausesValidation, "A3");
 
-			p.ValidationGroup = "hi";
-			Assert.AreEqual ("hi", p.ValidationGroup, "A4");
+            p.ValidationGroup = "hi";
+            Assert.AreEqual ("hi", p.ValidationGroup, "A4");
 
-			p.ValidationGroup = "";
-			Assert.AreEqual ("", p.ValidationGroup, "A4");
-		}
+            p.ValidationGroup = "";
+            Assert.AreEqual ("", p.ValidationGroup, "A4");
+        }
 
-		[Test]
-		public void RenderAttributes ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
+        [Test]
+        public void RenderAttributes ()
+        {
+            StringWriter sw = new StringWriter ();
+            HtmlTextWriter tw = new HtmlTextWriter (sw);
 
-			HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
+            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
 
-			Assert.AreEqual (p.Attributes.Count, 1, "A1");
+            Assert.AreEqual (p.Attributes.Count, 1, "A1");
 
-			p.DoRenderAttributes (tw);
-			Assert.AreEqual (sw.ToString (), " name type=\"submit\" /", "A2");
-		}
-	}	
+            p.DoRenderAttributes (tw);
+            Assert.AreEqual (sw.ToString (), " name type=\"submit\" /", "A2");
+        }
+    }    
 }
 

@@ -2,8 +2,8 @@
 // System.Net.AuthenticationManager.cs
 //
 // Author:
-// 	Miguel de Icaza (miguel@ximian.com)
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//     Miguel de Icaza (miguel@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002,2003 Ximian, Inc. (http://www.ximian.com)
 //
@@ -36,193 +36,193 @@ using System.Net.Configuration;
 
 namespace System.Net
 {
-	public class AuthenticationManager {
-		static ArrayList modules;
-		static object locker = new object ();
+    public class AuthenticationManager {
+        static ArrayList modules;
+        static object locker = new object ();
 
-		private AuthenticationManager ()
-		{
-		}
+        private AuthenticationManager ()
+        {
+        }
 
-		static void EnsureModules ()
-		{
-			lock (locker) {
-				if (modules != null)
-					return;
-				
-				modules = new ArrayList ();
+        static void EnsureModules ()
+        {
+            lock (locker) {
+                if (modules != null)
+                    return;
+                
+                modules = new ArrayList ();
 #if MOBILE
-				modules.Add (new NtlmClient ());
-				modules.Add (new DigestClient ());
-				modules.Add (new BasicClient ());
+                modules.Add (new NtlmClient ());
+                modules.Add (new DigestClient ());
+                modules.Add (new BasicClient ());
 #elif CONFIGURATION_DEP
-				object cfg = ConfigurationManager.GetSection ("system.net/authenticationModules");
-				AuthenticationModulesSection s = cfg as AuthenticationModulesSection;
-				if (s != null) {
-					foreach (AuthenticationModuleElement element in s.AuthenticationModules) {
-						IAuthenticationModule module = null;
-						try {
-							Type type = Type.GetType (element.Type, true);
-							module = (IAuthenticationModule) Activator.CreateInstance (type);
-						} catch {}
-						modules.Add (module);
-					}
-				}
+                object cfg = ConfigurationManager.GetSection ("system.net/authenticationModules");
+                AuthenticationModulesSection s = cfg as AuthenticationModulesSection;
+                if (s != null) {
+                    foreach (AuthenticationModuleElement element in s.AuthenticationModules) {
+                        IAuthenticationModule module = null;
+                        try {
+                            Type type = Type.GetType (element.Type, true);
+                            module = (IAuthenticationModule) Activator.CreateInstance (type);
+                        } catch {}
+                        modules.Add (module);
+                    }
+                }
 #else
 #pragma warning disable 618
-				ConfigurationSettings.GetConfig ("system.net/authenticationModules");
+                ConfigurationSettings.GetConfig ("system.net/authenticationModules");
 #pragma warning restore 618
 #endif
-			}
-		}
-		
-		static ICredentialPolicy credential_policy = null;
-		
-		public static ICredentialPolicy CredentialPolicy
-		{
-			get {
-				return(credential_policy);
-							}
-			set {
-				credential_policy = value;
-			}
-		}
-		
-		static Exception GetMustImplement ()
-		{
-			return new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static StringDictionary CustomTargetNameDictionary
-		{
-			get {
-				throw GetMustImplement ();
-			}
-		}
+            }
+        }
+        
+        static ICredentialPolicy credential_policy = null;
+        
+        public static ICredentialPolicy CredentialPolicy
+        {
+            get {
+                return(credential_policy);
+                            }
+            set {
+                credential_policy = value;
+            }
+        }
+        
+        static Exception GetMustImplement ()
+        {
+            return new NotImplementedException ();
+        }
+        
+        [MonoTODO]
+        public static StringDictionary CustomTargetNameDictionary
+        {
+            get {
+                throw GetMustImplement ();
+            }
+        }
 
-		public static IEnumerator RegisteredModules {
-			get {
-				EnsureModules ();
-				return modules.GetEnumerator ();
-			}
-		}
+        public static IEnumerator RegisteredModules {
+            get {
+                EnsureModules ();
+                return modules.GetEnumerator ();
+            }
+        }
 
-		[MonoTODO]
-		internal static bool OSSupportsExtendedProtection {
-			get {
-				return false;
-			}
-		}
+        [MonoTODO]
+        internal static bool OSSupportsExtendedProtection {
+            get {
+                return false;
+            }
+        }
 
-		internal static void Clear ()
-		{
-			EnsureModules ();
-			lock (modules)
-				modules.Clear ();
-		}
-		
-		public static Authorization Authenticate (string challenge, WebRequest request, ICredentials credentials)
-		{
-			if (request == null)
-				throw new ArgumentNullException ("request");
+        internal static void Clear ()
+        {
+            EnsureModules ();
+            lock (modules)
+                modules.Clear ();
+        }
+        
+        public static Authorization Authenticate (string challenge, WebRequest request, ICredentials credentials)
+        {
+            if (request == null)
+                throw new ArgumentNullException ("request");
 
-			if (credentials == null)
-				throw new ArgumentNullException ("credentials");
+            if (credentials == null)
+                throw new ArgumentNullException ("credentials");
 
-			if (challenge == null)
-				throw new ArgumentNullException ("challenge");
+            if (challenge == null)
+                throw new ArgumentNullException ("challenge");
 
-			return DoAuthenticate (challenge, request, credentials);
-		}
+            return DoAuthenticate (challenge, request, credentials);
+        }
 
-		static Authorization DoAuthenticate (string challenge, WebRequest request, ICredentials credentials)
-		{
-			EnsureModules ();
-			lock (modules) {
-				foreach (IAuthenticationModule mod in modules) {
-					Authorization auth = mod.Authenticate (challenge, request, credentials);
-					if (auth == null)
-						continue;
+        static Authorization DoAuthenticate (string challenge, WebRequest request, ICredentials credentials)
+        {
+            EnsureModules ();
+            lock (modules) {
+                foreach (IAuthenticationModule mod in modules) {
+                    Authorization auth = mod.Authenticate (challenge, request, credentials);
+                    if (auth == null)
+                        continue;
 
-					auth.ModuleAuthenticationType = mod.AuthenticationType;
-					return auth;
-				}
-			}
+                    auth.ModuleAuthenticationType = mod.AuthenticationType;
+                    return auth;
+                }
+            }
 
-			return null;
-		}
+            return null;
+        }
 
-		public static Authorization PreAuthenticate (WebRequest request, ICredentials credentials)
-		{
-			if (request == null)
-				throw new ArgumentNullException ("request");
+        public static Authorization PreAuthenticate (WebRequest request, ICredentials credentials)
+        {
+            if (request == null)
+                throw new ArgumentNullException ("request");
 
-			if (credentials == null)
-				return null;
+            if (credentials == null)
+                return null;
 
-			EnsureModules ();
-			lock (modules) {
-				foreach (IAuthenticationModule mod in modules) {
-					Authorization auth = mod.PreAuthenticate (request, credentials);
-					if (auth == null)
-						continue;
+            EnsureModules ();
+            lock (modules) {
+                foreach (IAuthenticationModule mod in modules) {
+                    Authorization auth = mod.PreAuthenticate (request, credentials);
+                    if (auth == null)
+                        continue;
 
-					auth.ModuleAuthenticationType = mod.AuthenticationType;
-					return auth;
-				}
-			}
+                    auth.ModuleAuthenticationType = mod.AuthenticationType;
+                    return auth;
+                }
+            }
 
-			return null;
-		}
+            return null;
+        }
 
-		public static void Register (IAuthenticationModule authenticationModule)
-		{
-			if (authenticationModule == null)
-				throw new ArgumentNullException ("authenticationModule");
+        public static void Register (IAuthenticationModule authenticationModule)
+        {
+            if (authenticationModule == null)
+                throw new ArgumentNullException ("authenticationModule");
 
-			DoUnregister (authenticationModule.AuthenticationType, false);
-			lock (modules)
-				modules.Add (authenticationModule);
-		}
+            DoUnregister (authenticationModule.AuthenticationType, false);
+            lock (modules)
+                modules.Add (authenticationModule);
+        }
 
-		public static void Unregister (IAuthenticationModule authenticationModule)
-		{
-			if (authenticationModule == null)
-				throw new ArgumentNullException ("authenticationModule");
+        public static void Unregister (IAuthenticationModule authenticationModule)
+        {
+            if (authenticationModule == null)
+                throw new ArgumentNullException ("authenticationModule");
 
-			DoUnregister (authenticationModule.AuthenticationType, true);
-		}
+            DoUnregister (authenticationModule.AuthenticationType, true);
+        }
 
-		public static void Unregister (string authenticationScheme)
-		{
-			if (authenticationScheme == null)
-				throw new ArgumentNullException ("authenticationScheme");
-			
-			DoUnregister (authenticationScheme, true);
-		}
+        public static void Unregister (string authenticationScheme)
+        {
+            if (authenticationScheme == null)
+                throw new ArgumentNullException ("authenticationScheme");
+            
+            DoUnregister (authenticationScheme, true);
+        }
 
-		static void DoUnregister (string authenticationScheme, bool throwEx)
-		{
-			EnsureModules ();
-			lock (modules) {
-				IAuthenticationModule module = null;
-				foreach (IAuthenticationModule mod in modules) {
-					string modtype = mod.AuthenticationType;
-					if (String.Compare (modtype, authenticationScheme, true) == 0) {
-						module = mod;
-						break;
-					}
-				}
+        static void DoUnregister (string authenticationScheme, bool throwEx)
+        {
+            EnsureModules ();
+            lock (modules) {
+                IAuthenticationModule module = null;
+                foreach (IAuthenticationModule mod in modules) {
+                    string modtype = mod.AuthenticationType;
+                    if (String.Compare (modtype, authenticationScheme, true) == 0) {
+                        module = mod;
+                        break;
+                    }
+                }
 
-				if (module == null) {
-					if (throwEx)
-						throw new InvalidOperationException ("Scheme not registered.");
-				} else {
-					modules.Remove (module);
-				}
-			}
-		}
-	}
+                if (module == null) {
+                    if (throwEx)
+                        throw new InvalidOperationException ("Scheme not registered.");
+                } else {
+                    modules.Remove (module);
+                }
+            }
+        }
+    }
 }
 

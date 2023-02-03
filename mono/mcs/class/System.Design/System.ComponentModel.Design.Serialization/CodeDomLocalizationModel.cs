@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Serialization.CodeDomLocalizationModel
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,11 +36,11 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Serialization
 {
-	public enum CodeDomLocalizationModel
-	{
-		None,
-		PropertyAssignment,
-		PropertyReflection
-	}
+    public enum CodeDomLocalizationModel
+    {
+        None,
+        PropertyAssignment,
+        PropertyReflection
+    }
 }
 

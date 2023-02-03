@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,22 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System;
+    using System;
 
-	public interface IConversions
-	{
-		int Int { get; set; }
-		float Float { get; set; }
-		double Double { get; set; }
-		decimal Decimal { get; set; }
-		string String { get; set; }
-		DateTime DateTime { get; set; }
-		[NewGuid]Guid Guid { get; set; }
-		int? NullInt { get; set; }
-		float? NullFloat { get; set; }
-		double? NullDouble { get; set; }
-		DateTime? NullDateTime { get; set; }
-		Guid? NullGuid { get; set; }
-		decimal? NullDecimal { get; set; }
-	}
+    public interface IConversions
+    {
+        int Int { get; set; }
+        float Float { get; set; }
+        double Double { get; set; }
+        decimal Decimal { get; set; }
+        string String { get; set; }
+        DateTime DateTime { get; set; }
+        [NewGuid]Guid Guid { get; set; }
+        int? NullInt { get; set; }
+        float? NullFloat { get; set; }
+        double? NullDouble { get; set; }
+        DateTime? NullDateTime { get; set; }
+        Guid? NullGuid { get; set; }
+        decimal? NullDecimal { get; set; }
+    }
 }

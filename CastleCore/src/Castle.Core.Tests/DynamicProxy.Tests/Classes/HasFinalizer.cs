@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class HasFinalizer
-	{
-		~HasFinalizer()
-		{
-		}
-	}
+    public class HasFinalizer
+    {
+        ~HasFinalizer()
+        {
+        }
+    }
 }

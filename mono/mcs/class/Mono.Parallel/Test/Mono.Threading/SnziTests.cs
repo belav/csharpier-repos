@@ -33,104 +33,104 @@ using MonoTests.Mono.Threading.Tasks;
 
 namespace MonoTests.Mono.Threading
 {
-	[TestFixtureAttribute]
-	public class SnziTests
-	{
-		Snzi snzi;
-		
-		[SetUpAttribute]
-		public void Setup ()
-		{
-			snzi = new Snzi ();
-		}
-		
-		[Test]
-		public void InitialTest ()
-		{
-			Assert.IsTrue (snzi.IsSet, "#1");
-			
-		}
-		
-		[Test]
-		public void SimpleOperationTest ()
-		{
-			snzi.Increment ();
+    [TestFixtureAttribute]
+    public class SnziTests
+    {
+        Snzi snzi;
+        
+        [SetUpAttribute]
+        public void Setup ()
+        {
+            snzi = new Snzi ();
+        }
+        
+        [Test]
+        public void InitialTest ()
+        {
+            Assert.IsTrue (snzi.IsSet, "#1");
+            
+        }
+        
+        [Test]
+        public void SimpleOperationTest ()
+        {
+            snzi.Increment ();
 
-			snzi.Decrement ();
-			
-			Assert.IsTrue (snzi.IsSet, "#1");
-			
-		}
-		
-		[Test]
-		public void SimpleZeroTest ()
-		{
-			for (int i = 0; i < 10; i++) {
-				if (i % 2 == 0)
-					snzi.Increment ();
-				else
-					snzi.Decrement ();
-			}
-			
-			Assert.IsTrue (snzi.IsSet, "#1");
-		}
-		
-		[Test]
-		public void SimpleNonZeroTest ()
-		{
-			snzi.Increment ();
-			
-			for (int i = 0; i < 20; i++) {
-				if (i % 2 == 0)
-					snzi.Increment ();
-				else
-					snzi.Decrement ();
-				if (i % 5 == 0)
-					Thread.Sleep (0);
-			}
-			
-			Assert.IsFalse (snzi.IsSet, "#1");
-		}
-		
-		[Test]
-		public void StressZeroTest ()
-		{
-			ParallelTestHelper.Repeat (delegate {
-				int times = 0;
-				
-				ParallelTestHelper.ParallelStressTest (snzi, (s) => {
-					int t = Interlocked.Increment (ref times);
-					
-					for (int i = 0; i < 20; i++) {
-						if (i % 2 == 0)
-							snzi.Increment ();
-						else
-							snzi.Decrement ();
-						if (i % (3 * t) == 0)
-							Thread.Sleep (0);
-					}
-				});
-			
-				Assert.IsTrue (snzi.IsSet, "#1");
-			});
-		}
-		
-		[Test]
-		public void StressNonZeroTest ()
-		{
-			ParallelTestHelper.Repeat (delegate {
-				ParallelTestHelper.ParallelStressTest (snzi, (s) => {
-					snzi.Increment ();
-					for (int i = 0; i < 1; i++) {
-						if (i % 2 == 0)
-							snzi.Increment ();
-						else
-							snzi.Decrement ();
-					}
-				});
-			
-				Assert.IsFalse (snzi.IsSet, "#1");
-			});
-		}
-	}
+            snzi.Decrement ();
+            
+            Assert.IsTrue (snzi.IsSet, "#1");
+            
+        }
+        
+        [Test]
+        public void SimpleZeroTest ()
+        {
+            for (int i = 0; i < 10; i++) {
+                if (i % 2 == 0)
+                    snzi.Increment ();
+                else
+                    snzi.Decrement ();
+            }
+            
+            Assert.IsTrue (snzi.IsSet, "#1");
+        }
+        
+        [Test]
+        public void SimpleNonZeroTest ()
+        {
+            snzi.Increment ();
+            
+            for (int i = 0; i < 20; i++) {
+                if (i % 2 == 0)
+                    snzi.Increment ();
+                else
+                    snzi.Decrement ();
+                if (i % 5 == 0)
+                    Thread.Sleep (0);
+            }
+            
+            Assert.IsFalse (snzi.IsSet, "#1");
+        }
+        
+        [Test]
+        public void StressZeroTest ()
+        {
+            ParallelTestHelper.Repeat (delegate {
+                int times = 0;
+                
+                ParallelTestHelper.ParallelStressTest (snzi, (s) => {
+                    int t = Interlocked.Increment (ref times);
+                    
+                    for (int i = 0; i < 20; i++) {
+                        if (i % 2 == 0)
+                            snzi.Increment ();
+                        else
+                            snzi.Decrement ();
+                        if (i % (3 * t) == 0)
+                            Thread.Sleep (0);
+                    }
+                });
+            
+                Assert.IsTrue (snzi.IsSet, "#1");
+            });
+        }
+        
+        [Test]
+        public void StressNonZeroTest ()
+        {
+            ParallelTestHelper.Repeat (delegate {
+                ParallelTestHelper.ParallelStressTest (snzi, (s) => {
+                    snzi.Increment ();
+                    for (int i = 0; i < 1; i++) {
+                        if (i % 2 == 0)
+                            snzi.Increment ();
+                        else
+                            snzi.Decrement ();
+                    }
+                });
+            
+                Assert.IsFalse (snzi.IsSet, "#1");
+            });
+        }
+    }
 }

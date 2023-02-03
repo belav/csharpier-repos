@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	public interface IMutableName : IName, IDictionaryEdit
-	{
-		[ValidateStringLengthAtLeast(10)]
-		[Group("A")]new string FirstName { get; set; }
+    public interface IMutableName : IName, IDictionaryEdit
+    {
+        [ValidateStringLengthAtLeast(10)]
+        [Group("A")]new string FirstName { get; set; }
 
-		[ValidateStringLengthAtLeast(15)]
-		[Group("B")]new string LastName { get; set; }
-	}
+        [ValidateStringLengthAtLeast(15)]
+        [Group("B")]new string LastName { get; set; }
+    }
 }

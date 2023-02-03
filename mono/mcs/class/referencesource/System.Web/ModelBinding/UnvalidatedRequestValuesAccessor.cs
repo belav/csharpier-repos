@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
 
     //TBD: This seems to be existing for unit testing in MVC. 
     //Question1: Are we going to use this at all for extending the existing web forms unit test ??

@@ -2,7 +2,7 @@
 // System.Management.ManagementQuery
 //
 // Authors:
-//	Gert Driesen (drieseng@users.sourceforge.net)
+//    Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Gert Driesen
 //
@@ -30,81 +30,81 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-	[ToolboxItem (false)]
-	public class ManagementObjectSearcher : Component
-	{
-		ObjectQuery mQueryObject;
+    [ToolboxItem (false)]
+    public class ManagementObjectSearcher : Component
+    {
+        ObjectQuery mQueryObject;
 
-		public ManagementObjectSearcher ()
-		{
-			mQueryObject = new ObjectQuery ();
-		}
+        public ManagementObjectSearcher ()
+        {
+            mQueryObject = new ObjectQuery ();
+        }
 
-		public ManagementObjectSearcher (ObjectQuery query)
-		{
-			mQueryObject = (ObjectQuery)query.Clone ();
-		}
+        public ManagementObjectSearcher (ObjectQuery query)
+        {
+            mQueryObject = (ObjectQuery)query.Clone ();
+        }
 
-		public ManagementObjectSearcher (string queryString)
-		{
-			mQueryObject = new ObjectQuery (queryString);
-		}
+        public ManagementObjectSearcher (string queryString)
+        {
+            mQueryObject = new ObjectQuery (queryString);
+        }
 
-		public ManagementObjectSearcher (ManagementScope scope, ObjectQuery query)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher (ManagementScope scope, ObjectQuery query)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ManagementObjectSearcher (string scope, string queryString)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher (string scope, string queryString)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ManagementObjectSearcher (ManagementScope scope, ObjectQuery query, EnumerationOptions options)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher (ManagementScope scope, ObjectQuery query, EnumerationOptions options)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ManagementObjectSearcher (string scope, string queryString, EnumerationOptions options)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher (string scope, string queryString, EnumerationOptions options)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public EnumerationOptions Options {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public EnumerationOptions Options {
+            get {
+                throw new NotImplementedException ();
+            }
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		public ObjectQuery Query {
-			get {
-				return mQueryObject;
-			}
-			set {
-				mQueryObject = value;
-			}
-		}
+        public ObjectQuery Query {
+            get {
+                return mQueryObject;
+            }
+            set {
+                mQueryObject = value;
+            }
+        }
 
-		public ManagementScope Scope {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public ManagementScope Scope {
+            get {
+                throw new NotImplementedException ();
+            }
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		public ManagementObjectCollection Get ()
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectCollection Get ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void Get (ManagementOperationObserver watcher)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public void Get (ManagementOperationObserver watcher)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

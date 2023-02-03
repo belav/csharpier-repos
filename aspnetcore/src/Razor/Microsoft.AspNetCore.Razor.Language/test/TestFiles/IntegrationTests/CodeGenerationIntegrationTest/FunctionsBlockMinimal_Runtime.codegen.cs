@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles
 #line 3 "TestFiles/IntegrationTests/CodeGenerationIntegrationTest/FunctionsBlockMinimal.cshtml"
                
 string foo(string input) {
-	return input + "!";
+    return input + "!";
 }
 
 #line default

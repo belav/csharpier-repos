@@ -2,7 +2,7 @@
 // System.Web.Security.FileAuthorizationModule
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
@@ -31,30 +31,30 @@ using System.Security.Permissions;
 
 namespace System.Web.Security
 {
-	[MonoTODO ("that's only a stub")]
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class FileAuthorizationModule : IHttpModule
-	{
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public FileAuthorizationModule ()
-		{
-		}
+    [MonoTODO ("that's only a stub")]
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class FileAuthorizationModule : IHttpModule
+    {
+        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+        public FileAuthorizationModule ()
+        {
+        }
 
-		public void Dispose ()
-		{
-		}
+        public void Dispose ()
+        {
+        }
 
-		[MonoTODO ("Not implemented")]
-		public void Init (HttpApplication app)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO ("Not implemented")]
+        public void Init (HttpApplication app)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO ("Not implemented")]
-		public static bool CheckFileAccessForUser (string virtualPath, IntPtr token, string verb)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO ("Not implemented")]
+        public static bool CheckFileAccessForUser (string virtualPath, IntPtr token, string verb)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

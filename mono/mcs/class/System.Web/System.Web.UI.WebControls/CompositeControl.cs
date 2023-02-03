@@ -31,57 +31,57 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[Designer ("System.Web.UI.Design.WebControls.CompositeControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public abstract class CompositeControl : WebControl, INamingContainer, ICompositeControlDesignerAccessor
-	{
-		public override bool SupportsDisabledAttribute {
-			get { return RenderingCompatibilityLessThan40; }
-		}
-		protected CompositeControl ()
-		{
-		}
+    // CAS
+    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [Designer ("System.Web.UI.Design.WebControls.CompositeControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    public abstract class CompositeControl : WebControl, INamingContainer, ICompositeControlDesignerAccessor
+    {
+        public override bool SupportsDisabledAttribute {
+            get { return RenderingCompatibilityLessThan40; }
+        }
+        protected CompositeControl ()
+        {
+        }
 
-		public override void DataBind ()
-		{
-			/* make sure all the child controls have been created */
-			EnsureChildControls ();
-			/* and then... */
-			base.DataBind();
-		}
+        public override void DataBind ()
+        {
+            /* make sure all the child controls have been created */
+            EnsureChildControls ();
+            /* and then... */
+            base.DataBind();
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			/* make sure all the child controls have been created */
-			EnsureChildControls ();
-			/* and then... */
-			base.Render (writer);
-		}
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            /* make sure all the child controls have been created */
+            EnsureChildControls ();
+            /* and then... */
+            base.Render (writer);
+        }
 
-		void ICompositeControlDesignerAccessor.RecreateChildControls ()
-		{
-			RecreateChildControls ();
-		}
+        void ICompositeControlDesignerAccessor.RecreateChildControls ()
+        {
+            RecreateChildControls ();
+        }
 
-		[MonoTODO("not sure exactly what this one does..")]
-		protected virtual void RecreateChildControls ()
-		{
-			/* for now just call CreateChildControls to force
-			 * the recreation of our children. */
-			CreateChildControls ();
-		}
-	
-		public override ControlCollection Controls {
-			get {
-				/* make sure all the child controls have been created */
-				EnsureChildControls ();
-				/* and then... */
-				return base.Controls;
-			}
-		}
-	}
+        [MonoTODO("not sure exactly what this one does..")]
+        protected virtual void RecreateChildControls ()
+        {
+            /* for now just call CreateChildControls to force
+             * the recreation of our children. */
+            CreateChildControls ();
+        }
+    
+        public override ControlCollection Controls {
+            get {
+                /* make sure all the child controls have been created */
+                EnsureChildControls ();
+                /* and then... */
+                return base.Controls;
+            }
+        }
+    }
 }
 

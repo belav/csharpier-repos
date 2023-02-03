@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using POS_Server.Models;
 using System;
 using System.Collections.Generic;

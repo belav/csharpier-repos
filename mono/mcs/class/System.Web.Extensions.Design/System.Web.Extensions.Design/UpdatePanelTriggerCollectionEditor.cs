@@ -33,37 +33,37 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-	public class UpdatePanelTriggerCollectionEditor : CollectionEditorBase
-	{
-		[MonoNotSupported ("")]
-		public UpdatePanelTriggerCollectionEditor (Type type)
-			: base (type)
-		{
-			throw new NotImplementedException ();
-		}
+    public class UpdatePanelTriggerCollectionEditor : CollectionEditorBase
+    {
+        [MonoNotSupported ("")]
+        public UpdatePanelTriggerCollectionEditor (Type type)
+            : base (type)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected override bool CanSelectMultipleInstances ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected override bool CanSelectMultipleInstances ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected override Type CreateCollectionItemType ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected override Type CreateCollectionItemType ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected override Type[] CreateNewItemTypes ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected override Type[] CreateNewItemTypes ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
-	}	
+        [MonoNotSupported ("")]
+        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            throw new NotImplementedException ();
+        }
+    }    
 }

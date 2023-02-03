@@ -1,9 +1,9 @@
 //
 // GeneratedCodeAttributeTest.cs 
-//	- Unit tests for System.CodeDom.Compiler.GeneratedCodeAttribute
+//    - Unit tests for System.CodeDom.Compiler.GeneratedCodeAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,32 +35,32 @@ using System.CodeDom.Compiler;
 
 namespace MonoTests.System.CodeDom.Compiler {
 
-	[TestFixture]
-	public class GeneratedCodeAttributeTest {
+    [TestFixture]
+    public class GeneratedCodeAttributeTest {
 
-		[Test]
-		public void Constructor ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", "1.2");
-			Assert.AreEqual ("Mono", gca.Tool, "Tool");
-			Assert.AreEqual ("1.2", gca.Version, "Version");
-		}
+        [Test]
+        public void Constructor ()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", "1.2");
+            Assert.AreEqual ("Mono", gca.Tool, "Tool");
+            Assert.AreEqual ("1.2", gca.Version, "Version");
+        }
 
-		[Test]
-		public void Constructor_Null_Tool ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute (null, "1.2");
-			Assert.IsNull (gca.Tool, "Tool");
-			Assert.AreEqual ("1.2", gca.Version, "Version");
-		}
+        [Test]
+        public void Constructor_Null_Tool ()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute (null, "1.2");
+            Assert.IsNull (gca.Tool, "Tool");
+            Assert.AreEqual ("1.2", gca.Version, "Version");
+        }
 
-		[Test]
-		public void Constructor_Null_Version ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", null);
-			Assert.AreEqual ("Mono", gca.Tool, "Tool");
-			Assert.IsNull (gca.Version, "Version");
-		}
-	}
+        [Test]
+        public void Constructor_Null_Version ()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", null);
+            Assert.AreEqual ("Mono", gca.Tool, "Tool");
+            Assert.IsNull (gca.Version, "Version");
+        }
+    }
 }
 

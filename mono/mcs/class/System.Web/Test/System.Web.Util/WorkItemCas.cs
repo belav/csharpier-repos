@@ -2,7 +2,7 @@
 // WorkItemCas.cs - CAS unit tests for System.Web.Util.WorkItem
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,45 +35,45 @@ using System.Web.Util;
 
 namespace MonoCasTests.System.Web.Util {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class WorkItemCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class WorkItemCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new WorkItem ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            new WorkItem ();
+        }
 
-		private void Callback ()
-		{
-		}
+        private void Callback ()
+        {
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Post_Deny_UnmanagedCode ()
-		{
-			WorkItem.Post (new WorkItemCallback (Callback));
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Post_Deny_UnmanagedCode ()
+        {
+            WorkItem.Post (new WorkItemCallback (Callback));
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Post_PermitOnly_UnmanagedCode ()
-		{
-			try {
-				WorkItem.Post (new WorkItemCallback (Callback));
-			}
-			catch (PlatformNotSupportedException) {
-				// Mono and Windows prior to NT
-			}
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Post_PermitOnly_UnmanagedCode ()
+        {
+            try {
+                WorkItem.Post (new WorkItemCallback (Callback));
+            }
+            catch (PlatformNotSupportedException) {
+                // Mono and Windows prior to NT
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (WorkItem); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (WorkItem); }
+        }
+    }
 }

@@ -6,18 +6,18 @@ using System;
 [Obsolete ("msg", true)]
 class A
 {
-	public class M
-	{
-		public static void Foo ()
-		{
-		}
-	}
+    public class M
+    {
+        public static void Foo ()
+        {
+        }
+    }
 }
 
 class C
 {
-	public static void Main ()
-	{
-		A.M.Foo ();
-	}
+    public static void Main ()
+    {
+        A.M.Foo ();
+    }
 }

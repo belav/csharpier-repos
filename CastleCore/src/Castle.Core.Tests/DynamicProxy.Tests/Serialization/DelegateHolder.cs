@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,19 +16,19 @@
 
 namespace Castle.DynamicProxy.Tests.Serialization
 {
-	using System;
-	using System.Collections;
+    using System;
+    using System.Collections;
 
-	[Serializable]
-	public class DelegateHolder
-	{
-		public ArrayList ComplexTypeMember;
-		public EventHandler DelegateMember;
+    [Serializable]
+    public class DelegateHolder
+    {
+        public ArrayList ComplexTypeMember;
+        public EventHandler DelegateMember;
 
-		public void TestHandler(object sender, EventArgs e)
-		{
-		}
-	}
+        public void TestHandler(object sender, EventArgs e)
+        {
+        }
+    }
 }
 
 #endif

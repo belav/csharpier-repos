@@ -4,8 +4,8 @@ using System.Security;
 using System.Runtime.InteropServices;
 using TestLibrary;
 
-//Value Pass N-->M	M--->N
-//Cdecl		 -1		 678
+//Value Pass N-->M    M--->N
+//Cdecl         -1         678
 public class Test_FuncPtrAsDelegateParamManaged
 {
     //TestMethod1

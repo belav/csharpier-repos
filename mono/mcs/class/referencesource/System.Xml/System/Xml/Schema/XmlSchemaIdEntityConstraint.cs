@@ -19,8 +19,8 @@ namespace System.Xml.Schema {
         string name;        
         XmlSchemaXPath selector;
         XmlSchemaObjectCollection fields = new XmlSchemaObjectCollection();
-		XmlQualifiedName qualifiedName = XmlQualifiedName.Empty;
-		CompiledIdentityConstraint compiledConstraint = null;
+        XmlQualifiedName qualifiedName = XmlQualifiedName.Empty;
+        CompiledIdentityConstraint compiledConstraint = null;
 
         /// <include file='doc\XmlSchemaIdentityConstraint.uex' path='docs/doc[@for="XmlSchemaIdentityConstraint.Name"]/*' />
         /// <devdoc>
@@ -50,25 +50,25 @@ namespace System.Xml.Schema {
         public XmlSchemaObjectCollection Fields {
             get { return fields; }
         }
-		
+        
         /// <include file='doc\XmlSchemaIdentityConstraint.uex' path='docs/doc[@for="XmlSchemaIdentityConstraint.QualifiedName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-		[XmlIgnore]
-		public XmlQualifiedName QualifiedName { 
-			get { return qualifiedName; }
-		}
+        [XmlIgnore]
+        public XmlQualifiedName QualifiedName { 
+            get { return qualifiedName; }
+        }
 
-		internal void  SetQualifiedName(XmlQualifiedName value) { 
-			qualifiedName = value;
-		}
+        internal void  SetQualifiedName(XmlQualifiedName value) { 
+            qualifiedName = value;
+        }
 
-		[XmlIgnore]
-		internal CompiledIdentityConstraint CompiledConstraint {
-			get { return compiledConstraint; }
-			set { compiledConstraint = value; }
-		}
+        [XmlIgnore]
+        internal CompiledIdentityConstraint CompiledConstraint {
+            get { return compiledConstraint; }
+            set { compiledConstraint = value; }
+        }
 
         [XmlIgnore]
         internal override string NameAttribute {

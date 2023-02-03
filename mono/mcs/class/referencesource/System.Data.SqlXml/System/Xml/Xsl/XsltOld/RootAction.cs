@@ -257,7 +257,7 @@ namespace System.Xml.Xsl.XsltOld {
                 break;
             default:
                 Debug.Fail("Invalid RootAction execution state");
-		        break;
+                break;
             }
         }
     }

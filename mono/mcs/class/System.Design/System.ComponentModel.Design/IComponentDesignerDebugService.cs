@@ -31,12 +31,12 @@ using System.Diagnostics;
 
 namespace System.ComponentModel.Design
 {
-	public interface IComponentDesignerDebugService
-	{
-		void Assert (bool condition, string message);
-		void Fail (string message);
-		void Trace (string message, string category);
-		int IndentLevel { get; set; }
-		TraceListenerCollection Listeners { get; }
-	}
+    public interface IComponentDesignerDebugService
+    {
+        void Assert (bool condition, string message);
+        void Fail (string message);
+        void Trace (string message, string category);
+        int IndentLevel { get; set; }
+        TraceListenerCollection Listeners { get; }
+    }
 }

@@ -31,14 +31,14 @@ using Mono.Unix;
 
 namespace Mono.Unix {
 
-	public enum FileTypes {
-		Directory         = (int) Native.FilePermissions.S_IFDIR,
-		CharacterDevice   = (int) Native.FilePermissions.S_IFCHR,
-		BlockDevice       = (int) Native.FilePermissions.S_IFBLK,
-		RegularFile       = (int) Native.FilePermissions.S_IFREG,
-		Fifo              = (int) Native.FilePermissions.S_IFIFO,
-		SymbolicLink      = (int) Native.FilePermissions.S_IFLNK,
-		Socket            = (int) Native.FilePermissions.S_IFSOCK,
-	}
+    public enum FileTypes {
+        Directory         = (int) Native.FilePermissions.S_IFDIR,
+        CharacterDevice   = (int) Native.FilePermissions.S_IFCHR,
+        BlockDevice       = (int) Native.FilePermissions.S_IFBLK,
+        RegularFile       = (int) Native.FilePermissions.S_IFREG,
+        Fifo              = (int) Native.FilePermissions.S_IFIFO,
+        SymbolicLink      = (int) Native.FilePermissions.S_IFLNK,
+        Socket            = (int) Native.FilePermissions.S_IFSOCK,
+    }
 }
 

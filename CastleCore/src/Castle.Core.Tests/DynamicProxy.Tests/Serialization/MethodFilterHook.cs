@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,33 +16,33 @@
 
 namespace Castle.DynamicProxy.Tests.Serialization
 {
-	using System;
-	using System.Reflection;
-	using System.Text.RegularExpressions;
+    using System;
+    using System.Reflection;
+    using System.Text.RegularExpressions;
 
-	[Serializable]
-	public class MethodFilterHook : IProxyGenerationHook
-	{
-		private string nameFilter;
+    [Serializable]
+    public class MethodFilterHook : IProxyGenerationHook
+    {
+        private string nameFilter;
 
-		public MethodFilterHook(string nameFilter)
-		{
-			this.nameFilter = nameFilter;
-		}
+        public MethodFilterHook(string nameFilter)
+        {
+            this.nameFilter = nameFilter;
+        }
 
-		public void MethodsInspected()
-		{
-		}
+        public void MethodsInspected()
+        {
+        }
 
-		public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
-		{
-		}
+        public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+        {
+        }
 
-		public bool ShouldInterceptMethod(Type type, MethodInfo memberInfo)
-		{
-			return Regex.IsMatch(memberInfo.Name, nameFilter);
-		}
-	}
+        public bool ShouldInterceptMethod(Type type, MethodInfo memberInfo)
+        {
+            return Regex.IsMatch(memberInfo.Name, nameFilter);
+        }
+    }
 }
 
 #endif

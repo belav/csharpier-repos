@@ -2,8 +2,8 @@
 // System.Security.Cryptography.X509Certificates.X509Extension
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
-//	Tim Coleman (tim@timcoleman.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
+//    Tim Coleman (tim@timcoleman.com)
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) Tim Coleman, 2004
@@ -35,81 +35,81 @@ using System.Text;
 
 namespace System.Security.Cryptography.X509Certificates {
 
-	public class X509Extension : AsnEncodedData {
+    public class X509Extension : AsnEncodedData {
 
-		private bool _critical;
+        private bool _critical;
 
-		// constructors
+        // constructors
 
-		protected X509Extension () 
-		{
-		}
+        protected X509Extension () 
+        {
+        }
 
-		public X509Extension (AsnEncodedData encodedExtension, bool critical)
-		{
-// Match MS		if (encodedExtension == null)
-//				throw new ArgumentNullException ("encodedExtension");
-			if (encodedExtension.Oid == null)
-				throw new ArgumentNullException ("encodedExtension.Oid");
+        public X509Extension (AsnEncodedData encodedExtension, bool critical)
+        {
+// Match MS        if (encodedExtension == null)
+//                throw new ArgumentNullException ("encodedExtension");
+            if (encodedExtension.Oid == null)
+                throw new ArgumentNullException ("encodedExtension.Oid");
 
-			Oid = encodedExtension.Oid;
-			RawData = encodedExtension.RawData;
-			_critical = critical;
-		}
+            Oid = encodedExtension.Oid;
+            RawData = encodedExtension.RawData;
+            _critical = critical;
+        }
 
-		public X509Extension (Oid oid, byte[] rawData, bool critical)
-		{
-			if (oid == null)
-				throw new ArgumentNullException ("oid");
-			Oid = oid;
-			RawData = rawData;
-			_critical = critical;
-		}
+        public X509Extension (Oid oid, byte[] rawData, bool critical)
+        {
+            if (oid == null)
+                throw new ArgumentNullException ("oid");
+            Oid = oid;
+            RawData = rawData;
+            _critical = critical;
+        }
 
-		public X509Extension (string oid, byte[] rawData, bool critical)
-			: base (oid, rawData)
-		{
-			_critical = critical;
-		}
+        public X509Extension (string oid, byte[] rawData, bool critical)
+            : base (oid, rawData)
+        {
+            _critical = critical;
+        }
 
-		// properties
+        // properties
 
-		public bool Critical {
-			get { return _critical; }
-			set { _critical = value; }
-		}
+        public bool Critical {
+            get { return _critical; }
+            set { _critical = value; }
+        }
 
-		// methods
+        // methods
 
-		public override void CopyFrom (AsnEncodedData asnEncodedData) 
-		{
-			if (asnEncodedData == null)
-				throw new ArgumentNullException ("encodedData");
+        public override void CopyFrom (AsnEncodedData asnEncodedData) 
+        {
+            if (asnEncodedData == null)
+                throw new ArgumentNullException ("encodedData");
 
-			X509Extension ex = (asnEncodedData as X509Extension);
-			if (ex == null)
-				throw new ArgumentException (Locale.GetText ("Expected a X509Extension instance."));
+            X509Extension ex = (asnEncodedData as X509Extension);
+            if (ex == null)
+                throw new ArgumentException (Locale.GetText ("Expected a X509Extension instance."));
 
-			base.CopyFrom (asnEncodedData);
-			// and we deal with critical
-			_critical = ex.Critical;
-		}
+            base.CopyFrom (asnEncodedData);
+            // and we deal with critical
+            _critical = ex.Critical;
+        }
 
-		// internal stuff
+        // internal stuff
 
-		// this version doesn't includes spaces between bytes and use uppercase hexadecimal values
-		internal string FormatUnkownData (byte[] data)
-		{
-			if ((data == null) || (data.Length == 0))
-				return String.Empty;
+        // this version doesn't includes spaces between bytes and use uppercase hexadecimal values
+        internal string FormatUnkownData (byte[] data)
+        {
+            if ((data == null) || (data.Length == 0))
+                return String.Empty;
 
-			StringBuilder sb = new StringBuilder ();
-			for (int i=0; i < data.Length; i++) {
-				sb.Append (data [i].ToString ("X2"));
-			}
-			return sb.ToString ();
-		}
-	}
+            StringBuilder sb = new StringBuilder ();
+            for (int i=0; i < data.Length; i++) {
+                sb.Append (data [i].ToString ("X2"));
+            }
+            return sb.ToString ();
+        }
+    }
 }
 
 #endif

@@ -2,7 +2,7 @@
 // SemaphoreCas.cs - CAS unit tests for System.Threading.Semaphore
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,71 +39,71 @@ using MonoTests.System.Threading;
 
 namespace MonoCasTests.System.Threading {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class SemaphoreCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class SemaphoreCas {
 
-		private SemaphoreTest unit;
+        private SemaphoreTest unit;
 
-		[TestFixtureSetUp]
-		public void FixtureSetup ()
-		{
-			unit = new SemaphoreTest ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetup ()
+        {
+            unit = new SemaphoreTest ();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[Category ("NotWorking")] // not implemented in Mono
-		public void ReuseUnitTest_Deny_Unrestricted ()
-		{
-			unit.Constructor_IntInt ();
-			unit.Constructor_IntIntString_NullName ();
-			unit.Constructor_IntIntStringBool_NegativeInitialCount ();
-			unit.Constructor_IntIntStringBool_ZeroMaximumCount ();
-			unit.Constructor_IntIntStringBool_InitialBiggerThanMaximum ();
-			unit.Constructor_IntIntStringBool_NullName ();
-			unit.Constructor_IntIntStringBoolSecurity_NegativeInitialCount ();
-			unit.Constructor_IntIntStringBoolSecurity_ZeroMaximumCount ();
-			unit.Constructor_IntIntStringBoolSecurity_InitialBiggerThanMaximum ();
-			unit.Constructor_IntIntStringBoolSecurity_NullName ();
-			unit.Constructor_IntIntStringBoolSecurity ();
-			unit.OpenExisting_BadRights ();
-			unit.Release ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [Category ("NotWorking")] // not implemented in Mono
+        public void ReuseUnitTest_Deny_Unrestricted ()
+        {
+            unit.Constructor_IntInt ();
+            unit.Constructor_IntIntString_NullName ();
+            unit.Constructor_IntIntStringBool_NegativeInitialCount ();
+            unit.Constructor_IntIntStringBool_ZeroMaximumCount ();
+            unit.Constructor_IntIntStringBool_InitialBiggerThanMaximum ();
+            unit.Constructor_IntIntStringBool_NullName ();
+            unit.Constructor_IntIntStringBoolSecurity_NegativeInitialCount ();
+            unit.Constructor_IntIntStringBoolSecurity_ZeroMaximumCount ();
+            unit.Constructor_IntIntStringBoolSecurity_InitialBiggerThanMaximum ();
+            unit.Constructor_IntIntStringBoolSecurity_NullName ();
+            unit.Constructor_IntIntStringBoolSecurity ();
+            unit.OpenExisting_BadRights ();
+            unit.Release ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		[Category ("NotWorking")] // not implemented in Mono
-		public void ReuseUnitTest_Deny_UnmanagedCode ()
-		{
-			unit.AccessControl_Unnamed ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        [Category ("NotWorking")] // not implemented in Mono
+        public void ReuseUnitTest_Deny_UnmanagedCode ()
+        {
+            unit.AccessControl_Unnamed ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[Category ("NotWorking")] // not implemented in Mono
-		public void ReuseUnitTest_PermitOnly_UnmanagedCode ()
-		{
-			unit.AccessControl_Unnamed ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [Category ("NotWorking")] // not implemented in Mono
+        public void ReuseUnitTest_PermitOnly_UnmanagedCode ()
+        {
+            unit.AccessControl_Unnamed ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[2] { typeof (int), typeof (int) };
-			ConstructorInfo ci = typeof (Semaphore).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(int,int)");
-			Assert.IsNotNull (ci.Invoke (new object[2] { 0, 1 }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[2] { typeof (int), typeof (int) };
+            ConstructorInfo ci = typeof (Semaphore).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(int,int)");
+            Assert.IsNotNull (ci.Invoke (new object[2] { 0, 1 }), "invoke");
+        }
+    }
 }
 

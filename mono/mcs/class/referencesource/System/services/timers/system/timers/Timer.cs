@@ -336,7 +336,7 @@ namespace System.Timers {
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(ExternDll.Kernel32), SuppressUnmanagedCodeSecurityAttribute()]
-        internal static extern void GetSystemTimeAsFileTime(ref FILE_TIME lpSystemTimeAsFileTime);		
+        internal static extern void GetSystemTimeAsFileTime(ref FILE_TIME lpSystemTimeAsFileTime);        
 #endif
     }
 }

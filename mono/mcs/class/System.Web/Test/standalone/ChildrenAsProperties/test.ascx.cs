@@ -7,8 +7,8 @@ using System.ComponentModel;
 
 namespace testwebemailcontrols
 {
-	public partial class test : System.Web.UI.UserControl
-	{
+    public partial class test : System.Web.UI.UserControl
+    {
         private ctlItem _slam;
         StringBuilder _stringBuilderSlam;
         string _stringSlam;
@@ -22,26 +22,26 @@ namespace testwebemailcontrols
             set { _slam = value; }
         }
 
-	public StringBuilder stringBuilderSlam {
-	    get { return _stringBuilderSlam; }
-	    set { _stringBuilderSlam = value; }
-	}
+    public StringBuilder stringBuilderSlam {
+        get { return _stringBuilderSlam; }
+        set { _stringBuilderSlam = value; }
+    }
     
-	public string stringSlam {
-	    get { return _stringSlam; }
-	    set { _stringSlam = value; }
-	}
-	
-	public int intSlam {
-	    get { return _intSlam; }
-	    set { _intSlam = value; }
-	}
+    public string stringSlam {
+        get { return _stringSlam; }
+        set { _stringSlam = value; }
+    }
+    
+    public int intSlam {
+        get { return _intSlam; }
+        set { _intSlam = value; }
+    }
 
-	public DateTime dateTimeSlam {
-	    get { return _dateTimeSlam; }
-	    set { _dateTimeSlam = value; }
-	}
-	
+    public DateTime dateTimeSlam {
+        get { return _dateTimeSlam; }
+        set { _dateTimeSlam = value; }
+    }
+    
         public class ctlItem
         {
             string _Text = "123";
@@ -60,6 +60,6 @@ namespace testwebemailcontrols
                 set { _Text = value; }
             }
         }
-	}
+    }
 }
 

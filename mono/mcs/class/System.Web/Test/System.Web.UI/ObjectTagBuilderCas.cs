@@ -2,7 +2,7 @@
 // ObjectTagBuilderCas.cs - CAS unit tests for System.Web.UI.ObjectTagBuilder
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,29 +36,29 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ObjectTagBuilderCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ObjectTagBuilderCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ObjectTagBuilder otb = new ObjectTagBuilder ();
-			otb.AppendLiteralString (String.Empty);
-			otb.AppendSubBuilder (new ControlBuilder ());
-			try {
-				otb.Init (null, null, null, null, null, null);
-			}
-			catch (HttpException) {
-				// missing id
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ObjectTagBuilder otb = new ObjectTagBuilder ();
+            otb.AppendLiteralString (String.Empty);
+            otb.AppendSubBuilder (new ControlBuilder ());
+            try {
+                otb.Init (null, null, null, null, null, null);
+            }
+            catch (HttpException) {
+                // missing id
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (ObjectTagBuilder); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ObjectTagBuilder); }
+        }
+    }
 }

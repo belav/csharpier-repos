@@ -2,10 +2,10 @@
 // Line: 4
 
 class X {
-	static void Main()
-	{
-		int a = new T ();
-	}
+    static void Main()
+    {
+        int a = new T ();
+    }
 }
 
 struct T {

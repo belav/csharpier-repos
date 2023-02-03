@@ -20,19 +20,19 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 //
 
 
 namespace System.Windows.Forms {
 
-	public enum PictureBoxSizeMode {
-		Normal = 0,
-		StretchImage = 1,
-		AutoSize = 2,
-		CenterImage = 3,
-		Zoom = 4
-	}
+    public enum PictureBoxSizeMode {
+        Normal = 0,
+        StretchImage = 1,
+        AutoSize = 2,
+        CenterImage = 3,
+        Zoom = 4
+    }
 }
 
 

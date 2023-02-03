@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Buffers;
@@ -73,7 +73,7 @@ public class NewtonsoftJsonHelperTest : JsonHelperTestBase
         var helper = GetJsonHelper();
         var obj = new
         {
-            HTML = $"Hello pingüino"
+            HTML = $"Hello ping�ino"
         };
         var expectedOutput = $"{{\"html\":\"{obj.HTML}\"}}";
 

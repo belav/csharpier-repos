@@ -2,7 +2,7 @@
 // System.Web.Configuration.TagPrefixCollection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,68 +35,68 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (TagPrefixInfo), CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public sealed class TagPrefixCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (TagPrefixInfo), CollectionType = ConfigurationElementCollectionType.BasicMap)]
+    public sealed class TagPrefixCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static TagPrefixCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static TagPrefixCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public TagPrefixCollection ()
-		{
-		}
+        public TagPrefixCollection ()
+        {
+        }
 
-		public void Add (TagPrefixInfo tagPrefixInformation)
-		{
-			BaseAdd (tagPrefixInformation);
-		}
+        public void Add (TagPrefixInfo tagPrefixInformation)
+        {
+            BaseAdd (tagPrefixInformation);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear ()
+        {
+            BaseClear ();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new TagPrefixInfo ();
-		}
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new TagPrefixInfo ();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			TagPrefixInfo info = (TagPrefixInfo)element;
-			return String.Concat (info.TagPrefix, "-", info.TagName, "-", info.Source, "-", info.Namespace, "-", info.Assembly);
-		}
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            TagPrefixInfo info = (TagPrefixInfo)element;
+            return String.Concat (info.TagPrefix, "-", info.TagName, "-", info.Source, "-", info.Namespace, "-", info.Assembly);
+        }
 
-		public void Remove (TagPrefixInfo tagPrefixInformation)
-		{
-			BaseRemove (GetElementKey (tagPrefixInformation));
-		}
+        public void Remove (TagPrefixInfo tagPrefixInformation)
+        {
+            BaseRemove (GetElementKey (tagPrefixInformation));
+        }
 
-		[MonoTODO ("why override this?")]
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.BasicMap; }
-		}
+        [MonoTODO ("why override this?")]
+        public override ConfigurationElementCollectionType CollectionType {
+            get { return ConfigurationElementCollectionType.BasicMap; }
+        }
 
-		[MonoTODO ("why override this?")]
-		protected override string ElementName {
-			get { return "add"; }
-		}
+        [MonoTODO ("why override this?")]
+        protected override string ElementName {
+            get { return "add"; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		public TagPrefixInfo this[int index] {
-			get { return (TagPrefixInfo) BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
+        public TagPrefixInfo this[int index] {
+            get { return (TagPrefixInfo) BaseGet (index); }
+            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-	}
+        protected override bool ThrowOnDuplicate {
+            get { return false; }
+        }
+    }
 }
 

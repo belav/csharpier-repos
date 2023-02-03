@@ -2,7 +2,7 @@
 // System.Security.Permissions.StorePermissionFlags enum
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004 Novell Inc. (http://www.novell.com)
 //
@@ -30,19 +30,19 @@ using System;
 
 namespace System.Security.Permissions {
 
-	[Flags]
-	[SerializableAttribute]
-	public enum StorePermissionFlags {
-		NoFlags = 0,
-		CreateStore = 1,
-		DeleteStore = 2,
-		EnumerateStores = 4,
-		OpenStore = 16,
-		AddToStore = 32,
-		RemoveFromStore = 64,
-		EnumerateCertificates = 128,
-		AllFlags = AddToStore | CreateStore | DeleteStore | OpenStore |
-			EnumerateCertificates | EnumerateStores | RemoveFromStore
-	}
+    [Flags]
+    [SerializableAttribute]
+    public enum StorePermissionFlags {
+        NoFlags = 0,
+        CreateStore = 1,
+        DeleteStore = 2,
+        EnumerateStores = 4,
+        OpenStore = 16,
+        AddToStore = 32,
+        RemoveFromStore = 64,
+        EnumerateCertificates = 128,
+        AllFlags = AddToStore | CreateStore | DeleteStore | OpenStore |
+            EnumerateCertificates | EnumerateStores | RemoveFromStore
+    }
 }
 

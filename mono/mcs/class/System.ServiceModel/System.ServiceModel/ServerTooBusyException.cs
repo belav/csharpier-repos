@@ -30,15 +30,15 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-	[Serializable]
-	public class ServerTooBusyException : CommunicationException
-	{
-		public ServerTooBusyException () : base () {}
-		public ServerTooBusyException (string message) : base (message) {}
-		public ServerTooBusyException (string message, Exception innerException)
-			: base (message, innerException) {}		
-		protected ServerTooBusyException (SerializationInfo info,
-					       StreamingContext context)
-			: base (info, context) {}
-	}
+    [Serializable]
+    public class ServerTooBusyException : CommunicationException
+    {
+        public ServerTooBusyException () : base () {}
+        public ServerTooBusyException (string message) : base (message) {}
+        public ServerTooBusyException (string message, Exception innerException)
+            : base (message, innerException) {}        
+        protected ServerTooBusyException (SerializationInfo info,
+                           StreamingContext context)
+            : base (info, context) {}
+    }
 }

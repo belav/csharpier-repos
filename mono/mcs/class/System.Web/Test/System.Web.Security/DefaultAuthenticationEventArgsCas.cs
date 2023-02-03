@@ -1,9 +1,9 @@
 //
 // DefaultAuthenticationEventArgsCas.cs 
-//	- CAS unit tests for System.Web.Security.DefaultAuthenticationEventArgs
+//    - CAS unit tests for System.Web.Security.DefaultAuthenticationEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,37 +37,37 @@ using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DefaultAuthenticationEventArgsCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DefaultAuthenticationEventArgsCas : AspNetHostingMinimal {
 
-		private HttpContext context;
+        private HttpContext context;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			context = new HttpContext (null);
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            context = new HttpContext (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			DefaultAuthenticationEventArgs daea = new DefaultAuthenticationEventArgs (context);
-			Assert.IsNotNull (daea.Context, "Context");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            DefaultAuthenticationEventArgs daea = new DefaultAuthenticationEventArgs (context);
+            Assert.IsNotNull (daea.Context, "Context");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
-			Assert.IsNotNull (ci, ".ctor(HttpContext)");
-			return ci.Invoke (new object[1] { context });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
+            Assert.IsNotNull (ci, ".ctor(HttpContext)");
+            return ci.Invoke (new object[1] { context });
+        }
 
-		public override Type Type {
-			get { return typeof (DefaultAuthenticationEventArgs); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DefaultAuthenticationEventArgs); }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // SystemIdentityAuthorizationPolicy.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,52 +36,52 @@ using System.Xml;
 
 namespace System.IdentityModel.Selectors
 {
-	abstract class SystemIdentityAuthorizationPolicy : IAuthorizationPolicy
-	{
-		string id;
+    abstract class SystemIdentityAuthorizationPolicy : IAuthorizationPolicy
+    {
+        string id;
 
-		protected SystemIdentityAuthorizationPolicy (string id)
-		{
-			this.id = id;
-		}
+        protected SystemIdentityAuthorizationPolicy (string id)
+        {
+            this.id = id;
+        }
 
-		public string Id {
-			get { return id; }
-		}
+        public string Id {
+            get { return id; }
+        }
 
-		public ClaimSet Issuer {
-			get { return ClaimSet.System; }
-		}
+        public ClaimSet Issuer {
+            get { return ClaimSet.System; }
+        }
 
 
-		// This method is expected to be thread safe
-		public bool Evaluate (EvaluationContext ec, ref object state)
-		{
-			lock (ec) {
-				ec.AddClaimSet (this, CreateClaims ());
-				List<IIdentity> list;
-				if (!ec.Properties.ContainsKey ("Identities")) {
-					list = new List<IIdentity> ();
-					ec.Properties ["Identities"] = list;
-				} else {
-					IList<IIdentity> ilist = (IList<IIdentity>) ec.Properties ["Identities"];
-					list = ilist as List<IIdentity>;
-					if (list == null) {
-						list = new List<IIdentity> (ilist);
-						ec.Properties ["Identities"] = list;
-					}
-				}
-				list.Add (CreateIdentity ());
-				ec.RecordExpirationTime (ExpirationTime);
-			}
-			// FIXME: is it correct that this should always return true?
-			return true;
-		}
+        // This method is expected to be thread safe
+        public bool Evaluate (EvaluationContext ec, ref object state)
+        {
+            lock (ec) {
+                ec.AddClaimSet (this, CreateClaims ());
+                List<IIdentity> list;
+                if (!ec.Properties.ContainsKey ("Identities")) {
+                    list = new List<IIdentity> ();
+                    ec.Properties ["Identities"] = list;
+                } else {
+                    IList<IIdentity> ilist = (IList<IIdentity>) ec.Properties ["Identities"];
+                    list = ilist as List<IIdentity>;
+                    if (list == null) {
+                        list = new List<IIdentity> (ilist);
+                        ec.Properties ["Identities"] = list;
+                    }
+                }
+                list.Add (CreateIdentity ());
+                ec.RecordExpirationTime (ExpirationTime);
+            }
+            // FIXME: is it correct that this should always return true?
+            return true;
+        }
 
-		public abstract DateTime ExpirationTime { get; }
+        public abstract DateTime ExpirationTime { get; }
 
-		public abstract ClaimSet CreateClaims ();
+        public abstract ClaimSet CreateClaims ();
 
-		public abstract IIdentity CreateIdentity ();
-	}
+        public abstract IIdentity CreateIdentity ();
+    }
 }

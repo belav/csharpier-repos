@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptIgnoreAttribute.cs
 //
 // Author:
@@ -33,8 +33,8 @@ using System.Text;
 
 namespace System.Web.Script.Serialization
 {
-	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Field)]
-	public sealed class ScriptIgnoreAttribute : Attribute
-	{
-	}
+    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Field)]
+    public sealed class ScriptIgnoreAttribute : Attribute
+    {
+    }
 }

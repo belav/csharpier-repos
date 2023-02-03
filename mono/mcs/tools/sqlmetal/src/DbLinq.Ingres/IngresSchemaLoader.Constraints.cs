@@ -1,4 +1,4 @@
-﻿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -108,23 +108,23 @@ namespace DbLinq.Ingres
             //                   because relations were inversed
             string sql = @"
                 SELECT DISTINCT 
-		                c.constraint_type as constraint_type,
-		                c.constraint_name as constraint_name, 
+                        c.constraint_type as constraint_type,
+                        c.constraint_name as constraint_name, 
                         k.schema_name as schema_name,
                         k.table_name as table_name,
-		                k.column_name AS column_name,
+                        k.column_name AS column_name,
                         '' as referenced_schema_name,
                         '' as referenced_table_name,
                         '' as referenced_column_name
                 FROM 
-		                iiconstraints c, 
-		                iikeys k 
+                        iiconstraints c, 
+                        iikeys k 
                 WHERE 
-		                k.constraint_name = c.constraint_name AND 
-		                c.constraint_type = 'P'
+                        k.constraint_name = c.constraint_name AND 
+                        c.constraint_type = 'P'
                 UNION
                 SELECT DISTINCT
-		                c.constraint_type as constraint_type,
+                        c.constraint_type as constraint_type,
                         squeeze(f.table_name) || '_' || p.constraint_name as constraint_name,
                         f.schema_name as referenced_schema_name,
                         f.table_name as referenced_table_name,

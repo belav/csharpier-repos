@@ -34,54 +34,54 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleConnectionTest
-	{
-		OracleConnection connection;
+    [TestFixture]
+    public class OracleConnectionTest
+    {
+        OracleConnection connection;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			connection = new OracleConnection ();
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            connection = new OracleConnection ();
+        }
 
-		[TearDown]
-		public void TearDown ()
-		{
-			connection.Dispose ();
-		}
+        [TearDown]
+        public void TearDown ()
+        {
+            connection.Dispose ();
+        }
 
-		[Test]
-		public void ConnectionString ()
-		{
-			connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
-			Assert.AreEqual ("Data Source=Oracle8i;Integrated Security=yes",
-				connection.ConnectionString, "#1");
-			connection.ConnectionString = null;
-			Assert.AreEqual (string.Empty, connection.ConnectionString, "#2");
-			connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
-			Assert.AreEqual ("Data Source=Oracle8i;Integrated Security=yes",
-				connection.ConnectionString, "#3");
-			connection.ConnectionString = string.Empty;
-			Assert.AreEqual (string.Empty, connection.ConnectionString, "#3");
-		}
+        [Test]
+        public void ConnectionString ()
+        {
+            connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
+            Assert.AreEqual ("Data Source=Oracle8i;Integrated Security=yes",
+                connection.ConnectionString, "#1");
+            connection.ConnectionString = null;
+            Assert.AreEqual (string.Empty, connection.ConnectionString, "#2");
+            connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
+            Assert.AreEqual ("Data Source=Oracle8i;Integrated Security=yes",
+                connection.ConnectionString, "#3");
+            connection.ConnectionString = string.Empty;
+            Assert.AreEqual (string.Empty, connection.ConnectionString, "#3");
+        }
 
-		[Test]
-		public void ConnectionTimeout ()
-		{
-			OracleConnection connection = new OracleConnection ();
-			Assert.AreEqual (0, connection.ConnectionTimeout, "#1");
-			connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
-			Assert.AreEqual (0, connection.ConnectionTimeout, "#2");
-		}
+        [Test]
+        public void ConnectionTimeout ()
+        {
+            OracleConnection connection = new OracleConnection ();
+            Assert.AreEqual (0, connection.ConnectionTimeout, "#1");
+            connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
+            Assert.AreEqual (0, connection.ConnectionTimeout, "#2");
+        }
 
-		[Test]
-		public void ConnectionTimeout_IDbConnection ()
-		{
-			IDbConnection connection = new OracleConnection ();
-			Assert.AreEqual (0, connection.ConnectionTimeout, "#1");
-			connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
-			Assert.AreEqual (0, connection.ConnectionTimeout, "#2");
-		}
-	}
+        [Test]
+        public void ConnectionTimeout_IDbConnection ()
+        {
+            IDbConnection connection = new OracleConnection ();
+            Assert.AreEqual (0, connection.ConnectionTimeout, "#1");
+            connection.ConnectionString = "Data Source=Oracle8i;Integrated Security=yes";
+            Assert.AreEqual (0, connection.ConnectionTimeout, "#2");
+        }
+    }
 }

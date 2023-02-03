@@ -31,29 +31,29 @@ using System.Collections;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class PartialResultsCollection : ReadOnlyCollectionBase
-	{
-		internal PartialResultsCollection ()
-		{
-		}
+    public class PartialResultsCollection : ReadOnlyCollectionBase
+    {
+        internal PartialResultsCollection ()
+        {
+        }
 
-		public object this [int index] {
-			get { return InnerList [index]; }
-		}
+        public object this [int index] {
+            get { return InnerList [index]; }
+        }
 
-		public bool Contains (object value)
-		{
-			return InnerList.Contains (value);
-		}
+        public bool Contains (object value)
+        {
+            return InnerList.Contains (value);
+        }
 
-		public void CopyTo (object [] values, int index)
-		{
-			InnerList.CopyTo (values, index);
-		}
+        public void CopyTo (object [] values, int index)
+        {
+            InnerList.CopyTo (values, index);
+        }
 
-		public int IndexOf (object value)
-		{
-			return InnerList.IndexOf (value);
-		}
-	}
+        public int IndexOf (object value)
+        {
+            return InnerList.IndexOf (value);
+        }
+    }
 }

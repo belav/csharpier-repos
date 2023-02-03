@@ -36,60 +36,60 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-	[TestFixture] public class DataTable_Clear : GHTBase
-	{
-		DataTable dt;
+    [TestFixture] public class DataTable_Clear : GHTBase
+    {
+        DataTable dt;
 
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-				dt = GHTUtils.DataProvider.CreateParentDataTable();
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+                dt = GHTUtils.DataProvider.CreateParentDataTable();
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-		public void TearDown()
-		{
-		}
+        public void TearDown()
+        {
+        }
 
-		[Test] public void Main()
-		{
-			DataTable_Clear tc = new DataTable_Clear();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("DataTable_Clear");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+        [Test] public void Main()
+        {
+            DataTable_Clear tc = new DataTable_Clear();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataTable_Clear");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		public void run()
-		{
-			Exception exp = null;
+        public void run()
+        {
+            Exception exp = null;
         
-			dt.Clear();
-			try
-			{
-				BeginCase("Clear");
-				Compare(dt.Rows.Count  , 0);
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+            dt.Clear();
+            try
+            {
+                BeginCase("Clear");
+                Compare(dt.Rows.Count  , 0);
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
 
-		}
-	}
+        }
+    }
 }

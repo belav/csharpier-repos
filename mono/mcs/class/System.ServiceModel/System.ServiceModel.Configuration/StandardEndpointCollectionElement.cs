@@ -2,7 +2,7 @@
 // StandardEndpointCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -56,72 +56,72 @@ using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	public class StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration> : EndpointCollectionElement
-		where TStandardEndpoint : ServiceEndpoint
-		where TEndpointConfiguration : StandardEndpointElement, new()
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty endpoints = new ConfigurationProperty ("",
-				typeof (StandardEndpointElementCollection<TEndpointConfiguration>), null, null, null,
-				ConfigurationPropertyOptions.IsDefaultCollection);
+    public class StandardEndpointCollectionElement<TStandardEndpoint, TEndpointConfiguration> : EndpointCollectionElement
+        where TStandardEndpoint : ServiceEndpoint
+        where TEndpointConfiguration : StandardEndpointElement, new()
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty endpoints = new ConfigurationProperty ("",
+                typeof (StandardEndpointElementCollection<TEndpointConfiguration>), null, null, null,
+                ConfigurationPropertyOptions.IsDefaultCollection);
 
 
-		static StandardEndpointCollectionElement ()
-		{
-		}
-		
-		void FillProperties (ConfigurationPropertyCollection baseProps)
-		{
-			properties = new ConfigurationPropertyCollection ();
-			foreach (ConfigurationProperty prop in baseProps)
-				properties.Add (prop);
-			properties.Add (endpoints);
-		}
-		
-		public override ReadOnlyCollection<StandardEndpointElement> ConfiguredEndpoints {
-			get {
-				var l = new List<StandardEndpointElement> ();
-				foreach (StandardEndpointElement e in Endpoints)
-					l.Add (e);
-				return new ReadOnlyCollection<StandardEndpointElement> (l);
-			}
-		}
+        static StandardEndpointCollectionElement ()
+        {
+        }
+        
+        void FillProperties (ConfigurationPropertyCollection baseProps)
+        {
+            properties = new ConfigurationPropertyCollection ();
+            foreach (ConfigurationProperty prop in baseProps)
+                properties.Add (prop);
+            properties.Add (endpoints);
+        }
+        
+        public override ReadOnlyCollection<StandardEndpointElement> ConfiguredEndpoints {
+            get {
+                var l = new List<StandardEndpointElement> ();
+                foreach (StandardEndpointElement e in Endpoints)
+                    l.Add (e);
+                return new ReadOnlyCollection<StandardEndpointElement> (l);
+            }
+        }
 
-		[ConfigurationPropertyAttribute("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public StandardEndpointElementCollection<TEndpointConfiguration> Endpoints {
-			get { return (StandardEndpointElementCollection<TEndpointConfiguration>) base [endpoints]; }
-		}
+        [ConfigurationPropertyAttribute("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public StandardEndpointElementCollection<TEndpointConfiguration> Endpoints {
+            get { return (StandardEndpointElementCollection<TEndpointConfiguration>) base [endpoints]; }
+        }
 
-		public override Type EndpointType {
-			get { return typeof (TStandardEndpoint); }
-		}
-		
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (properties == null)
-					lock (endpoints)
-						if (properties == null)
-							FillProperties (base.Properties);
-				return properties;
-			}
-		}
+        public override Type EndpointType {
+            get { return typeof (TStandardEndpoint); }
+        }
+        
+        protected override ConfigurationPropertyCollection Properties {
+            get {
+                if (properties == null)
+                    lock (endpoints)
+                        if (properties == null)
+                            FillProperties (base.Properties);
+                return properties;
+            }
+        }
 
-		public override bool ContainsKey (string name)
-		{
-			foreach (StandardEndpointElement e in Endpoints)
-				if (e.Name == name)
-					return true;
-			return false;
-		}
-		
-		protected internal override StandardEndpointElement GetDefaultStandardEndpointElement ()
-		{
-			return (StandardEndpointElement) Activator.CreateInstance (typeof (TEndpointConfiguration));
-		}
-		
-		protected internal override bool TryAdd (string name, ServiceEndpoint endpoint, ConfigurationType config)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override bool ContainsKey (string name)
+        {
+            foreach (StandardEndpointElement e in Endpoints)
+                if (e.Name == name)
+                    return true;
+            return false;
+        }
+        
+        protected internal override StandardEndpointElement GetDefaultStandardEndpointElement ()
+        {
+            return (StandardEndpointElement) Activator.CreateInstance (typeof (TEndpointConfiguration));
+        }
+        
+        protected internal override bool TryAdd (string name, ServiceEndpoint endpoint, ConfigurationType config)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

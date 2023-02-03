@@ -13,7 +13,7 @@ class C<T>
 
     public bool Check()
     {
-	return Data.ElementAt(0).GetType() == typeof(bool);
+    return Data.ElementAt(0).GetType() == typeof(bool);
     }
 }
 

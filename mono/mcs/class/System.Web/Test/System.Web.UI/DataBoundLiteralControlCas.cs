@@ -1,9 +1,9 @@
 //
 // DataBoundLiteralControlCas.cs 
-//	- CAS unit tests for System.Web.UI.DataBoundLiteralControl
+//    - CAS unit tests for System.Web.UI.DataBoundLiteralControl
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,42 +38,42 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataBoundLiteralControlCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataBoundLiteralControlCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataBoundLiteralControl dblc = new DataBoundLiteralControl (1, 1);
-			dblc.SetDataBoundString (0, "mono");
-			dblc.SetStaticString (0, "monkey");
-			Assert.AreEqual ("monkeymono", dblc.Text, "Text");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            DataBoundLiteralControl dblc = new DataBoundLiteralControl (1, 1);
+            dblc.SetDataBoundString (0, "mono");
+            dblc.SetStaticString (0, "monkey");
+            Assert.AreEqual ("monkeymono", dblc.Text, "Text");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ITextControl_Deny_Unrestricted ()
-		{
-			ITextControl tc = new DataBoundLiteralControl (1, 1);
-			Assert.AreEqual (String.Empty, tc.Text, "ITextControl.Text");
-			// setter throw
-			tc.Text = "singe";
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void ITextControl_Deny_Unrestricted ()
+        {
+            ITextControl tc = new DataBoundLiteralControl (1, 1);
+            Assert.AreEqual (String.Empty, tc.Text, "ITextControl.Text");
+            // setter throw
+            tc.Text = "singe";
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (int), typeof (int) });
-			Assert.IsNotNull (ci, ".ctor(int,int)");
-			return ci.Invoke (new object[2] { 1, 1 });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (int), typeof (int) });
+            Assert.IsNotNull (ci, ".ctor(int,int)");
+            return ci.Invoke (new object[2] { 1, 1 });
+        }
 
-		public override Type Type {
-			get { return typeof (DataBoundLiteralControl); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataBoundLiteralControl); }
+        }
+    }
 }

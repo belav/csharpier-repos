@@ -32,52 +32,52 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	public sealed class EditorPartCollection : ReadOnlyCollectionBase
-	{
-		public static readonly EditorPartCollection Empty = new EditorPartCollection ();
+    public sealed class EditorPartCollection : ReadOnlyCollectionBase
+    {
+        public static readonly EditorPartCollection Empty = new EditorPartCollection ();
 
-		public EditorPartCollection ()
-		{
-		}
+        public EditorPartCollection ()
+        {
+        }
 
-		
-		public EditorPartCollection (ICollection editorParts)
-		{
-			foreach (object o in editorParts) {
-				/* XXX check the type? */
-				InnerList.Add (o);
-			}
-		}
+        
+        public EditorPartCollection (ICollection editorParts)
+        {
+            foreach (object o in editorParts) {
+                /* XXX check the type? */
+                InnerList.Add (o);
+            }
+        }
 
-		public EditorPartCollection (EditorPartCollection existingEditorParts,
-					     ICollection editorParts)
-		{
-			foreach (object o in existingEditorParts)
-				InnerList.Add (o);
-			foreach (object o in editorParts)
-				InnerList.Add (o);
-		}
+        public EditorPartCollection (EditorPartCollection existingEditorParts,
+                         ICollection editorParts)
+        {
+            foreach (object o in existingEditorParts)
+                InnerList.Add (o);
+            foreach (object o in editorParts)
+                InnerList.Add (o);
+        }
 
-		public bool Contains (EditorPart editorPart)
-		{
-			return InnerList.Contains (editorPart);
-		}
+        public bool Contains (EditorPart editorPart)
+        {
+            return InnerList.Contains (editorPart);
+        }
 
-		public void CopyTo (EditorPart[] array,
-				    int index)
-		{
-			((ICollection)this).CopyTo (array, index);
-		}
+        public void CopyTo (EditorPart[] array,
+                    int index)
+        {
+            ((ICollection)this).CopyTo (array, index);
+        }
 
-		public int IndexOf (EditorPart editorPart)
-		{
-			return InnerList.IndexOf (editorPart);
-		}
+        public int IndexOf (EditorPart editorPart)
+        {
+            return InnerList.IndexOf (editorPart);
+        }
 
-		public EditorPart this [ int index ] {
-			get { return (EditorPart) InnerList[index]; }
-		}
-	}
+        public EditorPart this [ int index ] {
+            get { return (EditorPart) InnerList[index]; }
+        }
+    }
 
 }
 

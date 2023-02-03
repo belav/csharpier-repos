@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4806,22 +4806,22 @@ class C
         {
             var source = @"
 namespace SomeNamespace{
-	public class Class1 {
-		public T Something<T>() { // 1
-			if (T is new()) { // 2
+    public class Class1 {
+        public T Something<T>() { // 1
+            if (T is new()) { // 2
 
 }
-		}
-	}
+        }
+    }
 }
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (4,12): error CS0161: 'Class1.Something<T>()': not all code paths return a value
-                // 		public T Something<T>() { // 1
+                //         public T Something<T>() { // 1
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "Something").WithArguments("SomeNamespace.Class1.Something<T>()").WithLocation(4, 12),
                 // (5,8): error CS0119: 'T' is a type, which is not valid in the given context
-                // 			if (T is new()) { // 2
+                //             if (T is new()) { // 2
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "T").WithArguments("T", "type").WithLocation(5, 8));
         }
 

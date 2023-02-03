@@ -4,6 +4,6 @@
 
  class C
  {
-	private string S2 { get; private protected set; }
+    private string S2 { get; private protected set; }
  }
 

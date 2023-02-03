@@ -11,8 +11,8 @@ struct C : I
 
 class X
 {
-	static void Main (string[] args)
-	{
-		C c = default (I);
-	}
+    static void Main (string[] args)
+    {
+        C c = default (I);
+    }
 }

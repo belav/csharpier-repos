@@ -2,7 +2,7 @@
 // System.Security.Policy.TrustManagerContext class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,59 +32,59 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-	[ComVisible (true)]
-	public class TrustManagerContext {
+    [ComVisible (true)]
+    public class TrustManagerContext {
 
-		private bool _ignorePersistedDecision;
-		private bool _noPrompt;
-		private bool _keepAlive;
-		private bool _persist;
-		private ApplicationIdentity _previousId;
-		private TrustManagerUIContext _ui;
+        private bool _ignorePersistedDecision;
+        private bool _noPrompt;
+        private bool _keepAlive;
+        private bool _persist;
+        private ApplicationIdentity _previousId;
+        private TrustManagerUIContext _ui;
 
-		public TrustManagerContext ()
-			: this (TrustManagerUIContext.Run)
-		{
-		}
+        public TrustManagerContext ()
+            : this (TrustManagerUIContext.Run)
+        {
+        }
 
-		public TrustManagerContext (TrustManagerUIContext uiContext)
-		{
-			_ignorePersistedDecision = false;
-			_noPrompt = false;
-			_keepAlive = false;
-			_persist = false;
-			_ui = uiContext;
-		}
+        public TrustManagerContext (TrustManagerUIContext uiContext)
+        {
+            _ignorePersistedDecision = false;
+            _noPrompt = false;
+            _keepAlive = false;
+            _persist = false;
+            _ui = uiContext;
+        }
 
-		public virtual bool IgnorePersistedDecision {
-			get { return _ignorePersistedDecision; }
-			set { _ignorePersistedDecision = value; }
-		}
+        public virtual bool IgnorePersistedDecision {
+            get { return _ignorePersistedDecision; }
+            set { _ignorePersistedDecision = value; }
+        }
 
-		public virtual bool KeepAlive {
-			get { return _keepAlive; }
-			set { _keepAlive = value; }
-		}
+        public virtual bool KeepAlive {
+            get { return _keepAlive; }
+            set { _keepAlive = value; }
+        }
 
-		public virtual bool NoPrompt {
-			get { return _noPrompt; }
-			set { _noPrompt = value; }
-		}
+        public virtual bool NoPrompt {
+            get { return _noPrompt; }
+            set { _noPrompt = value; }
+        }
 
-		public virtual bool Persist {
-			get { return _persist; }
-			set { _persist = value; }
-		}
+        public virtual bool Persist {
+            get { return _persist; }
+            set { _persist = value; }
+        }
 
-		public virtual ApplicationIdentity PreviousApplicationIdentity {
-			get { return _previousId; }
-			set { _previousId = value; }
-		}
+        public virtual ApplicationIdentity PreviousApplicationIdentity {
+            get { return _previousId; }
+            set { _previousId = value; }
+        }
 
-		public virtual TrustManagerUIContext UIContext {
-			get { return _ui; }
-			set { _ui = value; }
-		}
-	}
+        public virtual TrustManagerUIContext UIContext {
+            get { return _ui; }
+            set { _ui = value; }
+        }
+    }
 }
 

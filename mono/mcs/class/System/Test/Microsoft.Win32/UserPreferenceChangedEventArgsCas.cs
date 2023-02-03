@@ -1,9 +1,9 @@
 //
 // UserPreferenceChangedEventArgsCas.cs 
-//	- CAS unit tests for Microsoft.Win32.UserPreferenceChangedEventArgs
+//    - CAS unit tests for Microsoft.Win32.UserPreferenceChangedEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,61 +37,61 @@ using Microsoft.Win32;
 
 namespace MonoCasTests.Microsoft.Win32 {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class UserPreferenceChangedEventArgsCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class UserPreferenceChangedEventArgsCas {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			UserPreferenceChangedEventArgs upcea = new UserPreferenceChangedEventArgs (UserPreferenceCategory.Color);
-			Assert.AreEqual (UserPreferenceCategory.Color, upcea.Category, "Category");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            UserPreferenceChangedEventArgs upcea = new UserPreferenceChangedEventArgs (UserPreferenceCategory.Color);
+            Assert.AreEqual (UserPreferenceCategory.Color, upcea.Category, "Category");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		// we use reflection to call this class as it is protected by a LinkDemand 
-		// (which will be converted into full demand, i.e. a stack walk) when 
-		// reflection is used (i.e. it gets testable).
+        // we use reflection to call this class as it is protected by a LinkDemand 
+        // (which will be converted into full demand, i.e. a stack walk) when 
+        // reflection is used (i.e. it gets testable).
 
-		public virtual object Create ()
-		{
-			Type[] t = new Type[1] { typeof (UserPreferenceCategory) };
-			ConstructorInfo ci = typeof (UserPreferenceChangedEventArgs).GetConstructor (t);
-			Assert.IsNotNull (ci, ".ctor(UserPreferenceCategory)");
-			return ci.Invoke (new object[1] { UserPreferenceCategory.Color });
-		}
+        public virtual object Create ()
+        {
+            Type[] t = new Type[1] { typeof (UserPreferenceCategory) };
+            ConstructorInfo ci = typeof (UserPreferenceChangedEventArgs).GetConstructor (t);
+            Assert.IsNotNull (ci, ".ctor(UserPreferenceCategory)");
+            return ci.Invoke (new object[1] { UserPreferenceCategory.Color });
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Assert.IsNotNull (Create ());
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Anything ()
-		{
-			// denying any permissions -> not full trust!
-			Assert.IsNotNull (Create ());
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Anything ()
+        {
+            // denying any permissions -> not full trust!
+            Assert.IsNotNull (Create ());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void LinkDemand_PermitOnly_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void LinkDemand_PermitOnly_Unrestricted ()
+        {
+            Assert.IsNotNull (Create ());
+        }
+    }
 }

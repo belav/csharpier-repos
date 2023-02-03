@@ -14,15 +14,15 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class NonPublicMethodsClass
-	{
-		public virtual void DoSomething()
-		{
-			DoOtherThing();
-		}
+    public class NonPublicMethodsClass
+    {
+        public virtual void DoSomething()
+        {
+            DoOtherThing();
+        }
 
-		protected virtual void DoOtherThing()
-		{
-		}
-	}
+        protected virtual void DoOtherThing()
+        {
+        }
+    }
 }

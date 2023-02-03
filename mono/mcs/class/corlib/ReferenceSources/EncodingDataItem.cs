@@ -35,15 +35,15 @@ namespace System.Globalization {
             m_flags = EncodingTable.codePageDataPtr[dataIndex].flags;
         }
 
-		static readonly char [] sep = {'|'};
+        static readonly char [] sep = {'|'};
 
         [System.Security.SecurityCritical]
         unsafe internal static String CreateString(string pStrings, uint index)
         {
             if (pStrings[0] == '|') // |str1|str2|str3
             {
-				return pStrings.Split (sep, StringSplitOptions.RemoveEmptyEntries) [index];
-				/*
+                return pStrings.Split (sep, StringSplitOptions.RemoveEmptyEntries) [index];
+                /*
                 int start = 1;
                 
                 for (int i = 1; true; i ++)
@@ -72,7 +72,7 @@ namespace System.Globalization {
             }
             else
             {
-				return pStrings;
+                return pStrings;
                 //return new String(pStrings);
             }
         }

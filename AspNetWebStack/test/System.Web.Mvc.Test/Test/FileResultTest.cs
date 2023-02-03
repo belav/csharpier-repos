@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Net.Mime;
@@ -69,7 +69,7 @@ namespace System.Web.Mvc.Test
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")
             {
-                FileDownloadName = "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ"
+                FileDownloadName = "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~?"
             };
 
             // Act
@@ -162,10 +162,10 @@ namespace System.Web.Mvc.Test
                     { "@", "attachment; filename=\"@\"" },
                     { "\"", "attachment; filename=\"\\\"\"" },
                     { "#", "attachment; filename=#" },
-                    { "résumé.txt", "attachment; filename*=UTF-8''r%C3%A9sum%C3%A9.txt" },
-                    { "Δ", "attachment; filename*=UTF-8''%CE%94" },
-                    { "Δ\t", "attachment; filename*=UTF-8''%CE%94%09" },
-                    { "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ", @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94" },
+                    { "r�sum�.txt", "attachment; filename*=UTF-8''r%C3%A9sum%C3%A9.txt" },
+                    { "?", "attachment; filename*=UTF-8''%CE%94" },
+                    { "?\t", "attachment; filename*=UTF-8''%CE%94%09" },
+                    { "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~?", @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94" },
                 };
             }
         }

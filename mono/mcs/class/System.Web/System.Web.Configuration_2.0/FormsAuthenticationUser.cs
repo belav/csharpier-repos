@@ -2,7 +2,7 @@
 // System.Web.Configuration.FormsAuthenticationUser
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,49 +34,49 @@ using System.ComponentModel;
 
 namespace System.Web.Configuration
 {
-	public sealed class FormsAuthenticationUser : ConfigurationElement
-	{
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty passwordProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class FormsAuthenticationUser : ConfigurationElement
+    {
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty passwordProp;
+        static ConfigurationPropertyCollection properties;
 
-		static FormsAuthenticationUser ()
-		{
-			nameProp = new ConfigurationProperty ("name", typeof (string), "",
-							      new LowerCaseStringConverter (),
-							      PropertyHelper.DefaultValidator,
-							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			passwordProp = new ConfigurationProperty ("password", typeof (string), "", ConfigurationPropertyOptions.IsRequired);
+        static FormsAuthenticationUser ()
+        {
+            nameProp = new ConfigurationProperty ("name", typeof (string), "",
+                                  new LowerCaseStringConverter (),
+                                  PropertyHelper.DefaultValidator,
+                                  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            passwordProp = new ConfigurationProperty ("password", typeof (string), "", ConfigurationPropertyOptions.IsRequired);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (nameProp);
-			properties.Add (passwordProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (nameProp);
+            properties.Add (passwordProp);
+        }
 
-		public FormsAuthenticationUser (string name, string password)
-		{
-			this.Name = name;
-			this.Password = password;
-		}
+        public FormsAuthenticationUser (string name, string password)
+        {
+            this.Name = name;
+            this.Password = password;
+        }
 
-		[StringValidator]
-		[TypeConverter (typeof (LowerCaseStringConverter))]
-		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) base[nameProp]; }
-			set { base[nameProp] = value; }
-		}
+        [StringValidator]
+        [TypeConverter (typeof (LowerCaseStringConverter))]
+        [ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        public string Name {
+            get { return (string) base[nameProp]; }
+            set { base[nameProp] = value; }
+        }
 
-		[StringValidator]
-		[ConfigurationProperty ("password", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Password {
-			get { return (string) base[passwordProp]; }
-			set { base[passwordProp] = value; }
-		}
+        [StringValidator]
+        [ConfigurationProperty ("password", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string Password {
+            get { return (string) base[passwordProp]; }
+            set { base[passwordProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

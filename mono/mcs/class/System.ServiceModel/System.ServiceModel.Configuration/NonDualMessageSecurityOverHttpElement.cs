@@ -2,7 +2,7 @@
 // NonDualMessageSecurityOverHttpElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,24 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed partial class NonDualMessageSecurityOverHttpElement
-		 : MessageSecurityOverHttpElement
-	{
-		// Properties
+    public sealed partial class NonDualMessageSecurityOverHttpElement
+         : MessageSecurityOverHttpElement
+    {
+        // Properties
 
-		[ConfigurationProperty ("establishSecurityContext",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = true)]
-		public bool EstablishSecurityContext {
-			get { return (bool) base ["establishSecurityContext"]; }
-			set { base ["establishSecurityContext"] = value; }
-		}
+        [ConfigurationProperty ("establishSecurityContext",
+             Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true)]
+        public bool EstablishSecurityContext {
+            get { return (bool) base ["establishSecurityContext"]; }
+            set { base ["establishSecurityContext"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
 
-	}
+    }
 
 }

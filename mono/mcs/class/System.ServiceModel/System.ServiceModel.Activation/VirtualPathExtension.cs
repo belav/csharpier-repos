@@ -29,21 +29,21 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Activation
 {
-	public sealed class VirtualPathExtension : IExtension<ServiceHostBase>
-	{
-		internal VirtualPathExtension (string virtualPath)
-		{
-			VirtualPath = virtualPath;
-		}
+    public sealed class VirtualPathExtension : IExtension<ServiceHostBase>
+    {
+        internal VirtualPathExtension (string virtualPath)
+        {
+            VirtualPath = virtualPath;
+        }
 
-		public void Attach (ServiceHostBase owner)
-		{
-		}
+        public void Attach (ServiceHostBase owner)
+        {
+        }
 
-		public void Detach (ServiceHostBase owner)
-		{
-		}
+        public void Detach (ServiceHostBase owner)
+        {
+        }
 
-		public string VirtualPath { get; private set; }
-	}
+        public string VirtualPath { get; private set; }
+    }
 }

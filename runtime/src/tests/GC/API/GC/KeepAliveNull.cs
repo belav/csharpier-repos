@@ -30,7 +30,7 @@ public class Test_KeepAliveNull
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public void DestroyObj()
         {
-            obj = null;     // this will collect the obj even if we have KeepAlive()		
+            obj = null;     // this will collect the obj even if we have KeepAlive()        
         }
 
         public void RunTest()

@@ -35,76 +35,76 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-	[TestFixture] public class DataSet_Clone : GHTBase
-	{
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+    [TestFixture] public class DataSet_Clone : GHTBase
+    {
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-		public void TearDown()
-		{
-		}
+        public void TearDown()
+        {
+        }
 
-		[Test] public void Main()
-		{
-			DataSet_Clone tc = new DataSet_Clone();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("DataSet_Clone");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+        [Test] public void Main()
+        {
+            DataSet_Clone tc = new DataSet_Clone();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataSet_Clone");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		public void run()
-		{
-			Exception exp = null;
-	
-			DataSet ds = new DataSet(), dsTarget = null;
-			ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
-			ds.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
-			ds.Relations.Add(new DataRelation("myRelation",ds.Tables[0].Columns[0],ds.Tables[1].Columns[0]));
-			ds.Tables[0].Rows.Add(new object[] {9,"",""});
-			ds.Tables[1].Columns[2].ReadOnly = true;
-			ds.Tables[0].PrimaryKey = new DataColumn[] {ds.Tables[0].Columns[0],ds.Tables[0].Columns[1]}; 
-		
-			//copy schema only, no data
-		
-			try
-			{
-				BeginCase("Clone 1");
-				dsTarget = ds.Clone();
-				//Compare(dsTarget.GetXmlSchema() ,ds.GetXmlSchema());
-				//use my function because GetXmlSchema not implemented in java
-				Compare(DataProvider.GetDSSchema(dsTarget),DataProvider.GetDSSchema(ds));
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+        public void run()
+        {
+            Exception exp = null;
+    
+            DataSet ds = new DataSet(), dsTarget = null;
+            ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+            ds.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
+            ds.Relations.Add(new DataRelation("myRelation",ds.Tables[0].Columns[0],ds.Tables[1].Columns[0]));
+            ds.Tables[0].Rows.Add(new object[] {9,"",""});
+            ds.Tables[1].Columns[2].ReadOnly = true;
+            ds.Tables[0].PrimaryKey = new DataColumn[] {ds.Tables[0].Columns[0],ds.Tables[0].Columns[1]}; 
+        
+            //copy schema only, no data
+        
+            try
+            {
+                BeginCase("Clone 1");
+                dsTarget = ds.Clone();
+                //Compare(dsTarget.GetXmlSchema() ,ds.GetXmlSchema());
+                //use my function because GetXmlSchema not implemented in java
+                Compare(DataProvider.GetDSSchema(dsTarget),DataProvider.GetDSSchema(ds));
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("Clone 2");
-				Compare(dsTarget.GetXml() == ds.GetXml(),false);
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}	
-		}
-	}
+            try
+            {
+                BeginCase("Clone 2");
+                Compare(dsTarget.GetXml() == ds.GetXml(),false);
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}    
+        }
+    }
 }

@@ -33,9 +33,9 @@ using System;
 
 namespace System.Runtime.Remoting {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IChannelInfo
-	{
-		object[] ChannelData { get; set; }
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IChannelInfo
+    {
+        object[] ChannelData { get; set; }
+    }
 }

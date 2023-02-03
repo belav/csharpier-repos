@@ -31,42 +31,42 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class FileDialogCustomPlace
-	{
-		private string path;
-		private Guid guid;
-		
-		public FileDialogCustomPlace (string path)
-		{
-			this.path = path;
-			this.guid = Guid.Empty;
-		}
+    public class FileDialogCustomPlace
+    {
+        private string path;
+        private Guid guid;
+        
+        public FileDialogCustomPlace (string path)
+        {
+            this.path = path;
+            this.guid = Guid.Empty;
+        }
 
-		public FileDialogCustomPlace (Guid knownFolderGuid)
-		{
-			this.path = string.Empty;
-			this.guid = knownFolderGuid;
-		}
+        public FileDialogCustomPlace (Guid knownFolderGuid)
+        {
+            this.path = string.Empty;
+            this.guid = knownFolderGuid;
+        }
 
-		public string Path {
-			get { return path; }
-			set {
-				path = value;
-				guid = Guid.Empty;
-			}
-		}
+        public string Path {
+            get { return path; }
+            set {
+                path = value;
+                guid = Guid.Empty;
+            }
+        }
 
-		public Guid KnownFolderGuid {
-			get { return guid; }
-			set {
-				guid = value;
-				path = string.Empty;
-			}
-		}
+        public Guid KnownFolderGuid {
+            get { return guid; }
+            set {
+                guid = value;
+                path = string.Empty;
+            }
+        }
 
-		public override string ToString ()
-		{
-			return string.Format ("{0} Path: {1} KnownFolderGuid: {2}", GetType ().ToString (), path, guid);
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Format ("{0} Path: {1} KnownFolderGuid: {2}", GetType ().ToString (), path, guid);
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // IFactQuery.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,7 +31,7 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Proving {
-	interface IFactQuery<Expression, Variable> : IFactBase<Variable> {
+    interface IFactQuery<Expression, Variable> : IFactBase<Variable> {
         FlatDomain<bool> IsNull(APC pc, Expression expr);
         FlatDomain<bool> IsNonNull(APC pc, Expression expr);
         FlatDomain<bool> IsTrue(APC pc, Expression expr);
@@ -39,5 +39,5 @@ namespace Mono.CodeContracts.Static.Proving {
         FlatDomain<bool> IsGreaterEqualToZero(APC pc, Expression expr);
         FlatDomain<bool> IsLessThan(APC pc, Expression expr, Expression right);
         FlatDomain<bool> IsNonZero(APC pc, Expression expr);
-	}
+    }
 }

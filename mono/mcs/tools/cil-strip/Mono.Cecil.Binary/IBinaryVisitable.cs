@@ -28,8 +28,8 @@
 
 namespace Mono.Cecil.Binary {
 
-	internal interface IBinaryVisitable {
-		void Accept (IBinaryVisitor visitor);
-	}
+    internal interface IBinaryVisitable {
+        void Accept (IBinaryVisitor visitor);
+    }
 }
 

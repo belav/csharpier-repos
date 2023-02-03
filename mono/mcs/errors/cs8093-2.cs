@@ -7,17 +7,17 @@ public class A
 
 static class X
 {
-	public static string Extension (this int a)
-	{
-		return null;
-	}
+    public static string Extension (this int a)
+    {
+        return null;
+    }
 }
 
 public static class Test
 {
-	public static void Main ()
-	{
-		A a = null;
-		var x = nameof (a.Extension);
-	}
+    public static void Main ()
+    {
+        A a = null;
+        var x = nameof (a.Extension);
+    }
 }

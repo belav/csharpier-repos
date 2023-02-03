@@ -5,11 +5,11 @@ using System;
 
 public class E
 {
-	public static void Main ()
-	{
-		EventHandler eh;
-		eh = delegate {
-			Console.WriteLine (eh);
-		};
-	}
+    public static void Main ()
+    {
+        EventHandler eh;
+        eh = delegate {
+            Console.WriteLine (eh);
+        };
+    }
 }

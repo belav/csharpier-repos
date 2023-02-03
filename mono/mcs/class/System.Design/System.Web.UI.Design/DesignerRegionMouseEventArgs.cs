@@ -32,28 +32,28 @@ using System.Drawing;
 
 namespace System.Web.UI.Design
 {
-	public sealed class DesignerRegionMouseEventArgs : EventArgs
-	{
-		[MonoNotSupported ("")]
-		public DesignerRegionMouseEventArgs (DesignerRegion region, Point location)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class DesignerRegionMouseEventArgs : EventArgs
+    {
+        [MonoNotSupported ("")]
+        public DesignerRegionMouseEventArgs (DesignerRegion region, Point location)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public Point Location {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported ("")]
+        public Point Location {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		public DesignerRegion Region {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        [MonoNotSupported ("")]
+        public DesignerRegion Region {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+        }
+    }
 }

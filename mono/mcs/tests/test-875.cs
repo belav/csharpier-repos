@@ -4,8 +4,8 @@ using N;
 
 public class Test: Lib
 {
-	public static void Main ()
-	{
-		new Test ();
-	}
+    public static void Main ()
+    {
+        new Test ();
+    }
 }

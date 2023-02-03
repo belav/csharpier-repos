@@ -8,14 +8,14 @@ class X
 {
         static int Test (params Foo[] foo)
         { 
-		if (foo.Length != 1)
-			return 1;
+        if (foo.Length != 1)
+            return 1;
 
-		if (foo [0] != Foo.A)
-			return 2;
+        if (foo [0] != Foo.A)
+            return 2;
 
-		return 0;	
-	}
+        return 0;    
+    }
 
         enum Foo {
                 A, B
@@ -24,15 +24,15 @@ class X
         public static int Main ()
         {
                 int v = Test (Foo.A);
-		if (v != 0)
-			return v;
+        if (v != 0)
+            return v;
 
-		MyEnum [] arr = new MyEnum [2];
-		arr [0] = MyEnum.c;
+        MyEnum [] arr = new MyEnum [2];
+        arr [0] = MyEnum.c;
 
-		if (arr [0] != MyEnum.c)
-			return 3;
-		return 0;
+        if (arr [0] != MyEnum.c)
+            return 3;
+        return 0;
         }
 
         enum MyEnum {a,b,c};

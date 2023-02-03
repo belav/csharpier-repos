@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3970,8 +3970,8 @@ public ref struct S<T>
             ref var r1 = ref (flag1 ? ref global : ref local);
             ref var r2 = ref (flag2 ? ref global : ref local);
 
-	        // same as         global = local;   which would be an error.
-            // but we can’t fail here, since r1 and r2 are basically the same, 
+            // same as         global = local;   which would be an error.
+            // but we can�t fail here, since r1 and r2 are basically the same, 
             // so should fail when making r1 and r2 above.
             r1 = r2;   
         }

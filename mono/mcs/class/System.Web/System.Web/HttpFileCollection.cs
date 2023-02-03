@@ -2,7 +2,7 @@
 // System.Web.HttpFileCollection.cs
 //
 // Author:
-//	Chris Toshok (toshok@novell.com)
+//    Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -33,59 +33,59 @@ using System.Security.Permissions;
 
 namespace System.Web {
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HttpFileCollection : NameObjectCollectionBase
-	{
-		internal HttpFileCollection ()
-		{
-		}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HttpFileCollection : NameObjectCollectionBase
+    {
+        internal HttpFileCollection ()
+        {
+        }
 
-		internal void AddFile (string name, HttpPostedFile file)
-		{
-			BaseAdd (name, file);
-		}
+        internal void AddFile (string name, HttpPostedFile file)
+        {
+            BaseAdd (name, file);
+        }
 
-		public void CopyTo (Array dest, int index)
-		{
-			/* XXX this is kind of gross and inefficient
-			 * since it makes a copy of the superclass's
-			 * list */
-			object[] values = BaseGetAllValues();
-			values.CopyTo (dest, index);
-		}
+        public void CopyTo (Array dest, int index)
+        {
+            /* XXX this is kind of gross and inefficient
+             * since it makes a copy of the superclass's
+             * list */
+            object[] values = BaseGetAllValues();
+            values.CopyTo (dest, index);
+        }
 
-		public string GetKey (int index)
-		{
-			return BaseGetKey (index);
-		}
+        public string GetKey (int index)
+        {
+            return BaseGetKey (index);
+        }
 
-		public HttpPostedFile Get (int index)
-		{
-			return (HttpPostedFile)BaseGet (index);
-		}
+        public HttpPostedFile Get (int index)
+        {
+            return (HttpPostedFile)BaseGet (index);
+        }
 
-		public HttpPostedFile Get (string name)
-		{
-			return (HttpPostedFile)BaseGet (name);
-		}
+        public HttpPostedFile Get (string name)
+        {
+            return (HttpPostedFile)BaseGet (name);
+        }
 
-		public HttpPostedFile this [string name] {
-			get {
-				return Get (name);
-			}
-		}
+        public HttpPostedFile this [string name] {
+            get {
+                return Get (name);
+            }
+        }
 
-		public HttpPostedFile this [int index] {
-			get {
-				return Get (index);
-			}
-		}
+        public HttpPostedFile this [int index] {
+            get {
+                return Get (index);
+            }
+        }
 
-		public string[] AllKeys {
-			get {
-				return BaseGetAllKeys();
-			}
-		}
-	}
+        public string[] AllKeys {
+            get {
+                return BaseGetAllKeys();
+            }
+        }
+    }
 }

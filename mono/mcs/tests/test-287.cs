@@ -7,7 +7,7 @@ static class StaticClass
  
     delegate object D ();
     enum E {}
-	
+    
     public static string Name ()
     {
         return "OK";

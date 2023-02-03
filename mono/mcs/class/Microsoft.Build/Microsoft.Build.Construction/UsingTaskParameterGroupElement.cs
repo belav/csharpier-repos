@@ -1,4 +1,4 @@
-﻿//
+//
 // UsingTaskParameterGroupElement.cs
 //
 // Author:

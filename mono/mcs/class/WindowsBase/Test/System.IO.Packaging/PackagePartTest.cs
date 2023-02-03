@@ -122,60 +122,60 @@ namespace MonoTests.System.IO.Packaging {
             Assert.AreEqual ("/third", part.Uri.ToString (), "Wrong package selected3");
         }
 
-		[Test]
-		public void CheckPartExtensions ()
-		{
-			package.CreatePart (new Uri ("/first", UriKind.Relative), "my/a");
-			package.CreatePart (new Uri ("/second", UriKind.Relative), "my/b", CompressionOption.Maximum);
-			package.CreatePart (new Uri ("/third", UriKind.Relative), "test/c", CompressionOption.SuperFast);
-			package.CreatePart (new Uri ("/fourth.txt", UriKind.Relative), "test/d");
-			package.Close ();
-			using (var archive = new global::System.IO.Compression.ZipArchive (stream, global::System.IO.Compression.ZipArchiveMode.Read)) {
-				var contentTypes = archive.GetEntry ("[Content_Types].xml");
-				var reader = new StreamReader (contentTypes.Open ());
-				var expected = "<?xml version=\"1.0\"?><Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Override ContentType=\"my/a\" PartName=\"/first\" /><Override ContentType=\"my/b\" PartName=\"/second\" /><Override ContentType=\"test/c\" PartName=\"/third\" /><Default ContentType=\"test/d\" Extension=\"txt\" /></Types>";
-				Assert.AreEqual (expected, reader.ReadToEnd ());
-			}
-		}
+        [Test]
+        public void CheckPartExtensions ()
+        {
+            package.CreatePart (new Uri ("/first", UriKind.Relative), "my/a");
+            package.CreatePart (new Uri ("/second", UriKind.Relative), "my/b", CompressionOption.Maximum);
+            package.CreatePart (new Uri ("/third", UriKind.Relative), "test/c", CompressionOption.SuperFast);
+            package.CreatePart (new Uri ("/fourth.txt", UriKind.Relative), "test/d");
+            package.Close ();
+            using (var archive = new global::System.IO.Compression.ZipArchive (stream, global::System.IO.Compression.ZipArchiveMode.Read)) {
+                var contentTypes = archive.GetEntry ("[Content_Types].xml");
+                var reader = new StreamReader (contentTypes.Open ());
+                var expected = "<?xml version=\"1.0\"?><Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Override ContentType=\"my/a\" PartName=\"/first\" /><Override ContentType=\"my/b\" PartName=\"/second\" /><Override ContentType=\"test/c\" PartName=\"/third\" /><Default ContentType=\"test/d\" Extension=\"txt\" /></Types>";
+                Assert.AreEqual (expected, reader.ReadToEnd ());
+            }
+        }
 
-		[Test]
-		public void SameExtensionDifferentContentTypeTest ()
-		{
-			// FIXME: Ideally we should be opening the zip and checking
-			// exactly what was written to verify it's correct
-			using (var stream = new MemoryStream ()) {
-				var package = Package.Open (stream, FileMode.OpenOrCreate);
-				package.CreatePart (uris [0], contentType + "1");
-				package.CreatePart (uris [1], contentType + "2");
-				package.CreatePart (uris [2], contentType + "2");
-				package.Close ();
-				
-				package = Package.Open (new MemoryStream (stream.ToArray ()));
-				Assert.AreEqual (contentType + "1", package.GetPart (uris [0]).ContentType, "#1");
-				Assert.AreEqual (contentType + "2", package.GetPart (uris [1]).ContentType, "#2");
-				Assert.AreEqual (contentType + "2", package.GetPart (uris [2]).ContentType, "#3");
-			}
-		}
-		
-		[Test]
-		public void SameExtensionSameContentTypeTest ()
-		{
-			// FIXME: Ideally we should be opening the zip and checking
-			// exactly what was written to verify it's correct
-			using (var stream = new MemoryStream ()) {
-				var package = Package.Open (stream, FileMode.OpenOrCreate);
-				package.CreatePart (uris [0], contentType);
-				package.CreatePart (uris [1], contentType);
-				package.CreatePart (uris [2], contentType);
-				package.Close ();
-				
-				package = Package.Open (new MemoryStream (stream.ToArray ()));
-				Assert.AreEqual (contentType, package.GetPart (uris [0]).ContentType, "#1");
-				Assert.AreEqual (contentType, package.GetPart (uris [1]).ContentType, "#2");
-				Assert.AreEqual (contentType, package.GetPart (uris [2]).ContentType, "#3");
-			}
-		}
-		
+        [Test]
+        public void SameExtensionDifferentContentTypeTest ()
+        {
+            // FIXME: Ideally we should be opening the zip and checking
+            // exactly what was written to verify it's correct
+            using (var stream = new MemoryStream ()) {
+                var package = Package.Open (stream, FileMode.OpenOrCreate);
+                package.CreatePart (uris [0], contentType + "1");
+                package.CreatePart (uris [1], contentType + "2");
+                package.CreatePart (uris [2], contentType + "2");
+                package.Close ();
+                
+                package = Package.Open (new MemoryStream (stream.ToArray ()));
+                Assert.AreEqual (contentType + "1", package.GetPart (uris [0]).ContentType, "#1");
+                Assert.AreEqual (contentType + "2", package.GetPart (uris [1]).ContentType, "#2");
+                Assert.AreEqual (contentType + "2", package.GetPart (uris [2]).ContentType, "#3");
+            }
+        }
+        
+        [Test]
+        public void SameExtensionSameContentTypeTest ()
+        {
+            // FIXME: Ideally we should be opening the zip and checking
+            // exactly what was written to verify it's correct
+            using (var stream = new MemoryStream ()) {
+                var package = Package.Open (stream, FileMode.OpenOrCreate);
+                package.CreatePart (uris [0], contentType);
+                package.CreatePart (uris [1], contentType);
+                package.CreatePart (uris [2], contentType);
+                package.Close ();
+                
+                package = Package.Open (new MemoryStream (stream.ToArray ()));
+                Assert.AreEqual (contentType, package.GetPart (uris [0]).ContentType, "#1");
+                Assert.AreEqual (contentType, package.GetPart (uris [1]).ContentType, "#2");
+                Assert.AreEqual (contentType, package.GetPart (uris [2]).ContentType, "#3");
+            }
+        }
+        
         [Test]
         public void CheckPartRelationships ()
         {
@@ -383,7 +383,7 @@ namespace MonoTests.System.IO.Packaging {
         [Test]
         public void CheckContentTypes ()
         {
-	        Assert.IsFalse (package.PartExists(new Uri ("[Content_Types].xml", UriKind.Relative)));
+            Assert.IsFalse (package.PartExists(new Uri ("[Content_Types].xml", UriKind.Relative)));
         }
 
         [Test]

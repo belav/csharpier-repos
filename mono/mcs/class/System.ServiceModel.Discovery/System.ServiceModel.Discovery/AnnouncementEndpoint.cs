@@ -32,43 +32,43 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class AnnouncementEndpoint : ServiceEndpoint
-	{
-		public AnnouncementEndpoint ()
-			: this (DiscoveryVersion.WSDiscovery11)
-		{
-		}
+    public class AnnouncementEndpoint : ServiceEndpoint
+    {
+        public AnnouncementEndpoint ()
+            : this (DiscoveryVersion.WSDiscovery11)
+        {
+        }
 
-		public AnnouncementEndpoint (DiscoveryVersion discoveryVersion)
-			: this (discoveryVersion, null, null)
-		{
-			if (discoveryVersion == null)
-				throw new ArgumentNullException ("discoveryVersion");
-			DiscoveryVersion = discoveryVersion;
-			
-			IsSystemEndpoint = true;
-		}
+        public AnnouncementEndpoint (DiscoveryVersion discoveryVersion)
+            : this (discoveryVersion, null, null)
+        {
+            if (discoveryVersion == null)
+                throw new ArgumentNullException ("discoveryVersion");
+            DiscoveryVersion = discoveryVersion;
+            
+            IsSystemEndpoint = true;
+        }
 
-		public AnnouncementEndpoint (Binding binding, EndpointAddress address)
-			: this (DiscoveryVersion.WSDiscovery11, binding, address)
-		{
-		}
+        public AnnouncementEndpoint (Binding binding, EndpointAddress address)
+            : this (DiscoveryVersion.WSDiscovery11, binding, address)
+        {
+        }
 
-		public AnnouncementEndpoint (DiscoveryVersion discoveryVersion, Binding binding, EndpointAddress address)
-			: base (GetContract (discoveryVersion), binding, address)
-		{
-			DiscoveryVersion = discoveryVersion;
-		}
+        public AnnouncementEndpoint (DiscoveryVersion discoveryVersion, Binding binding, EndpointAddress address)
+            : base (GetContract (discoveryVersion), binding, address)
+        {
+            DiscoveryVersion = discoveryVersion;
+        }
 
-		static ContractDescription GetContract (DiscoveryVersion discoveryVersion)
-		{
-			if (discoveryVersion == null)
-				throw new ArgumentNullException ("discoveryVersion");
-			return ContractDescription.GetContract (discoveryVersion.AnnouncementContractType);
-		}
+        static ContractDescription GetContract (DiscoveryVersion discoveryVersion)
+        {
+            if (discoveryVersion == null)
+                throw new ArgumentNullException ("discoveryVersion");
+            return ContractDescription.GetContract (discoveryVersion.AnnouncementContractType);
+        }
 
-		public DiscoveryVersion DiscoveryVersion { get; private set; }
+        public DiscoveryVersion DiscoveryVersion { get; private set; }
 
-		public TimeSpan MaxAnnouncementDelay { get; set; }
-	}
+        public TimeSpan MaxAnnouncementDelay { get; set; }
+    }
 }

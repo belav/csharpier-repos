@@ -5,64 +5,64 @@ using System;
 
 public interface IGenX<T> 
 {
-	string m(T t);
+    string m(T t);
 }
 
 public interface IGenY<T> 
 {
-	string m(T[] tArr);
+    string m(T[] tArr);
 }
 
 class Gen<T> : IGenX<T[]>, IGenY<T> 
 {
-	string IGenX<T[]>.m(T[] t)
-	{
-   		return "IGenX.m";
-  	}
-  	string IGenY<T>.m(T[] tArr) 
-  	{
-    		return "IGenY.m";
-  	}
+    string IGenX<T[]>.m(T[] t)
+    {
+           return "IGenX.m";
+      }
+      string IGenY<T>.m(T[] tArr) 
+      {
+            return "IGenY.m";
+      }
 }
 
 public class Test_MultipleInterface01
 {
-	public static int counter = 0;
-	public static bool result = true;
-	public static void Eval(bool exp)
-	{
-		counter++;
-		if (!exp)
-		{
-			result = exp;
-			Console.WriteLine("Test Failed at location: " + counter);
-		}
-	
-	}
-	
-	public static int Main()
-	{
+    public static int counter = 0;
+    public static bool result = true;
+    public static void Eval(bool exp)
+    {
+        counter++;
+        if (!exp)
+        {
+            result = exp;
+            Console.WriteLine("Test Failed at location: " + counter);
+        }
+    
+    }
+    
+    public static int Main()
+    {
 
-		Gen<int> GenInt = new Gen<int>();
-		Eval(((IGenX<int[]>)GenInt).m(null).Equals("IGenX.m"));
-		Eval(((IGenY<int>)GenInt).m(null).Equals("IGenY.m"));
-		
-		Gen<string> GenString = new Gen<string>();
-		Eval(((IGenX<string[]>)GenString).m(null).Equals("IGenX.m"));
-		Eval(((IGenY<string>)GenString).m(null).Equals("IGenY.m"));
-		
-		
-		if (result)
-		{
-			Console.WriteLine("Test Passed");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("Test Failed");
-			return 1;
-		}
-	}
-		
+        Gen<int> GenInt = new Gen<int>();
+        Eval(((IGenX<int[]>)GenInt).m(null).Equals("IGenX.m"));
+        Eval(((IGenY<int>)GenInt).m(null).Equals("IGenY.m"));
+        
+        Gen<string> GenString = new Gen<string>();
+        Eval(((IGenX<string[]>)GenString).m(null).Equals("IGenX.m"));
+        Eval(((IGenY<string>)GenString).m(null).Equals("IGenY.m"));
+        
+        
+        if (result)
+        {
+            Console.WriteLine("Test Passed");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("Test Failed");
+            return 1;
+        }
+    }
+        
 }
 

@@ -2,7 +2,7 @@
 // StandardEndpointsSectionTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://novell.com
 //
@@ -40,15 +40,15 @@ using System.ServiceModel.Channels;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class StandardEndpointsSectionTest
-	{
-		[Test]
-		public void ServiceMetadataExists ()
-		{
-			var cfg = ConfigurationManager.OpenMachineConfiguration ();
-			Assert.IsNotNull (StandardEndpointsSection.GetSection (cfg).EndpointCollections.FirstOrDefault (e => e is ServiceMetadataEndpointCollectionElement), "#1");
-		}
-	}
+    [TestFixture]
+    public class StandardEndpointsSectionTest
+    {
+        [Test]
+        public void ServiceMetadataExists ()
+        {
+            var cfg = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.IsNotNull (StandardEndpointsSection.GetSection (cfg).EndpointCollections.FirstOrDefault (e => e is ServiceMetadataEndpointCollectionElement), "#1");
+        }
+    }
 }
 #endif

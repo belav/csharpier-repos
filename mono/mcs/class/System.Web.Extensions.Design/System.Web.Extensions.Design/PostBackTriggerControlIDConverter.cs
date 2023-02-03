@@ -31,30 +31,30 @@ using System;
 using System.ComponentModel;
 
 namespace System.Web.UI.Design {
-	public class PostBackTriggerControlIDConverter : StringConverter
-	{
-		[MonoNotSupported ("")]
-		public PostBackTriggerControlIDConverter ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class PostBackTriggerControlIDConverter : StringConverter
+    {
+        [MonoNotSupported ("")]
+        public PostBackTriggerControlIDConverter ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoNotSupported ("")]
+        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

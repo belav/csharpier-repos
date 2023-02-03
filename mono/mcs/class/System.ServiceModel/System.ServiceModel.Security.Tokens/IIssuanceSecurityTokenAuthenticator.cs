@@ -2,7 +2,7 @@
 // IIssuanceSecurityTokenAuthenticator.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,9 +28,9 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public interface IIssuanceSecurityTokenAuthenticator
-	{
-		IssuedSecurityTokenHandler IssuedSecurityTokenHandler { get; set; }
-		RenewedSecurityTokenHandler RenewedSecurityTokenHandler { get; set; }
-	}
+    public interface IIssuanceSecurityTokenAuthenticator
+    {
+        IssuedSecurityTokenHandler IssuedSecurityTokenHandler { get; set; }
+        RenewedSecurityTokenHandler RenewedSecurityTokenHandler { get; set; }
+    }
 }

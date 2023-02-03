@@ -2,7 +2,7 @@
 // System.Net.BasicClient
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -31,70 +31,70 @@
 using System.Text;
 namespace System.Net
 {
-	class BasicClient : IAuthenticationModule
-	{
-		public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials)
-		{
-			if (credentials == null || challenge == null)
-				return null;
+    class BasicClient : IAuthenticationModule
+    {
+        public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials)
+        {
+            if (credentials == null || challenge == null)
+                return null;
 
-			string header = challenge.Trim ();
-			if (header.ToLower ().IndexOf ("basic", StringComparison.Ordinal) == -1)
-				return null;
+            string header = challenge.Trim ();
+            if (header.ToLower ().IndexOf ("basic", StringComparison.Ordinal) == -1)
+                return null;
 
-			return InternalAuthenticate (webRequest, credentials);
-		}
+            return InternalAuthenticate (webRequest, credentials);
+        }
 
-		static byte [] GetBytes (string str)
-		{
-			int i = str.Length;
-			byte [] result = new byte [i];
-			for (--i; i >= 0; i--)
-				result [i] = (byte) str [i];
+        static byte [] GetBytes (string str)
+        {
+            int i = str.Length;
+            byte [] result = new byte [i];
+            for (--i; i >= 0; i--)
+                result [i] = (byte) str [i];
 
-			return result;
-		}
+            return result;
+        }
 
-		static Authorization InternalAuthenticate (WebRequest webRequest, ICredentials credentials)
-		{
-			HttpWebRequest request = webRequest as HttpWebRequest;
-			if (request == null || credentials == null)
-				return null;
+        static Authorization InternalAuthenticate (WebRequest webRequest, ICredentials credentials)
+        {
+            HttpWebRequest request = webRequest as HttpWebRequest;
+            if (request == null || credentials == null)
+                return null;
 
-			NetworkCredential cred = credentials.GetCredential (request.AuthUri, "basic");
-			if (cred == null)
-				return null;
+            NetworkCredential cred = credentials.GetCredential (request.AuthUri, "basic");
+            if (cred == null)
+                return null;
 
-			string userName = cred.UserName;
-			if (userName == null || userName == "")
-				return null;
+            string userName = cred.UserName;
+            if (userName == null || userName == "")
+                return null;
 
-			string password = cred.Password;
-			string domain = cred.Domain;
-			byte [] bytes;
+            string password = cred.Password;
+            string domain = cred.Domain;
+            byte [] bytes;
 
-			// If domain is set, MS sends "domain\user:password". 
-			if (domain == null || domain == "" || domain.Trim () == "")
-				bytes = GetBytes (userName + ":" + password);
-			else
-				bytes = GetBytes (domain + "\\" + userName + ":" + password);
+            // If domain is set, MS sends "domain\user:password". 
+            if (domain == null || domain == "" || domain.Trim () == "")
+                bytes = GetBytes (userName + ":" + password);
+            else
+                bytes = GetBytes (domain + "\\" + userName + ":" + password);
 
-			string auth = "Basic " + Convert.ToBase64String (bytes);
-			return new Authorization (auth);
-		}
+            string auth = "Basic " + Convert.ToBase64String (bytes);
+            return new Authorization (auth);
+        }
 
-		public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials)
-		{
-			return InternalAuthenticate ( webRequest, credentials);
-		}
+        public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials)
+        {
+            return InternalAuthenticate ( webRequest, credentials);
+        }
 
-		public string AuthenticationType {
-			get { return "Basic"; }
-		}
+        public string AuthenticationType {
+            get { return "Basic"; }
+        }
 
-		public bool CanPreAuthenticate {
-			get { return true; }
-		}
-	}
+        public bool CanPreAuthenticate {
+            get { return true; }
+        }
+    }
 }
 

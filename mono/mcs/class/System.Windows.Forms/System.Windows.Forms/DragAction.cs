@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -30,10 +30,10 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public enum DragAction {
-		Continue	= 0,
-		Drop		= 1,
-		Cancel		= 2
-	}
+    [ComVisible(true)]
+    public enum DragAction {
+        Continue    = 0,
+        Drop        = 1,
+        Cancel        = 2
+    }
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,57 +28,57 @@ using System.Security;
 
 namespace System.Windows.Interop {
 
-	[Serializable]
-	public struct MSG
-	{
-		public IntPtr hwnd {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+    [Serializable]
+    public struct MSG
+    {
+        public IntPtr hwnd {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
 
-		public IntPtr lParam {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public IntPtr lParam {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
 
 
-		public IntPtr wParam {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
-		public int message {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public IntPtr wParam {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
+        public int message {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
 
-		public int pt_x {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public int pt_x {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
 
-		public int pt_y {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public int pt_y {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
 
-		public int time {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
-	}
+        public int time {
+            [SecurityCritical]
+            get { throw new NotImplementedException (); }
+            [SecurityCritical]
+            set { throw new NotImplementedException (); }
+        }
+    }
 }
 

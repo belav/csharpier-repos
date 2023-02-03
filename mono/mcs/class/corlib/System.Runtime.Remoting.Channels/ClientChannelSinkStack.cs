@@ -35,64 +35,64 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ClientChannelSinkStack : IClientChannelSinkStack, IClientResponseChannelSinkStack
-	{
-		// The sink where to send the result of the async call
-		private IMessageSink _replySink = null;
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ClientChannelSinkStack : IClientChannelSinkStack, IClientResponseChannelSinkStack
+    {
+        // The sink where to send the result of the async call
+        private IMessageSink _replySink = null;
 
-		// The stack. It is a chain of ChanelSinkStackEntry.
-		ChanelSinkStackEntry _sinkStack = null;
+        // The stack. It is a chain of ChanelSinkStackEntry.
+        ChanelSinkStackEntry _sinkStack = null;
 
-		public ClientChannelSinkStack ()
-		{
-		}
-		
-		public ClientChannelSinkStack (IMessageSink replySink)
-		{
-			_replySink = replySink;
-		}
+        public ClientChannelSinkStack ()
+        {
+        }
+        
+        public ClientChannelSinkStack (IMessageSink replySink)
+        {
+            _replySink = replySink;
+        }
 
-		public void AsyncProcessResponse (ITransportHeaders headers, Stream stream)
-		{
-			if (_sinkStack == null) throw new RemotingException ("The current sink stack is empty");
+        public void AsyncProcessResponse (ITransportHeaders headers, Stream stream)
+        {
+            if (_sinkStack == null) throw new RemotingException ("The current sink stack is empty");
 
-			ChanelSinkStackEntry stackEntry = _sinkStack;
-			_sinkStack = _sinkStack.Next;
+            ChanelSinkStackEntry stackEntry = _sinkStack;
+            _sinkStack = _sinkStack.Next;
 
-			((IClientChannelSink)stackEntry.Sink).AsyncProcessResponse (this, stackEntry.State, headers, stream);
+            ((IClientChannelSink)stackEntry.Sink).AsyncProcessResponse (this, stackEntry.State, headers, stream);
 
-			// Do not call AsyncProcessResponse for each sink in the stack.
-			// The sink must recursively call IClientChannelSinkStack.AsyncProcessResponse
-			// after its own processing
-		}
+            // Do not call AsyncProcessResponse for each sink in the stack.
+            // The sink must recursively call IClientChannelSinkStack.AsyncProcessResponse
+            // after its own processing
+        }
 
-		public void DispatchException (Exception e)
-		{
-			DispatchReplyMessage (new ReturnMessage (e, null));
-		}
+        public void DispatchException (Exception e)
+        {
+            DispatchReplyMessage (new ReturnMessage (e, null));
+        }
 
-		public void DispatchReplyMessage (IMessage msg)
-		{
-			if (_replySink != null) _replySink.SyncProcessMessage(msg);
-		}
+        public void DispatchReplyMessage (IMessage msg)
+        {
+            if (_replySink != null) _replySink.SyncProcessMessage(msg);
+        }
 
-		public object Pop (IClientChannelSink sink)
-		{
-			// Pops until the sink is found
+        public object Pop (IClientChannelSink sink)
+        {
+            // Pops until the sink is found
 
-			while (_sinkStack != null)
-			{
-				ChanelSinkStackEntry stackEntry = _sinkStack;
-				_sinkStack = _sinkStack.Next;
-				if (stackEntry.Sink == sink) return stackEntry.State;
-			}
-			throw new RemotingException ("The current sink stack is empty, or the specified sink was never pushed onto the current stack");
-		}
+            while (_sinkStack != null)
+            {
+                ChanelSinkStackEntry stackEntry = _sinkStack;
+                _sinkStack = _sinkStack.Next;
+                if (stackEntry.Sink == sink) return stackEntry.State;
+            }
+            throw new RemotingException ("The current sink stack is empty, or the specified sink was never pushed onto the current stack");
+        }
 
-		public void Push (IClientChannelSink sink, object state)
-		{
-			_sinkStack = new ChanelSinkStackEntry (sink, state, _sinkStack);
-		}
-	}
+        public void Push (IClientChannelSink sink, object state)
+        {
+            _sinkStack = new ChanelSinkStackEntry (sink, state, _sinkStack);
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // MexHttpBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,25 +54,25 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class MexHttpBindingCollectionElement
-		 : MexBindingBindingCollectionElement<WSHttpBinding, MexHttpBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    public partial class MexHttpBindingCollectionElement
+         : MexBindingBindingCollectionElement<WSHttpBinding, MexHttpBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static MexHttpBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static MexHttpBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public MexHttpBindingCollectionElement ()
-		{
-		}
+        public MexHttpBindingCollectionElement ()
+        {
+        }
 
-		protected internal override Binding GetDefault ()
-		{
-			return MetadataExchangeBindings.CreateMexHttpBinding ();
-		}
-	}
+        protected internal override Binding GetDefault ()
+        {
+            return MetadataExchangeBindings.CreateMexHttpBinding ();
+        }
+    }
 
 }

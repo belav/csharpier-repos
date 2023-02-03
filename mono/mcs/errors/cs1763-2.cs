@@ -3,7 +3,7 @@
 
 class C
 {
-	public static void Test (object o = 9, params object[] args)
-	{
-	}
+    public static void Test (object o = 9, params object[] args)
+    {
+    }
 }

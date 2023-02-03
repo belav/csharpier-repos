@@ -2,7 +2,7 @@
 // MexNamedPipeBindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,22 +54,22 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class MexNamedPipeBindingElement
-		 : MexBindingElement<CustomBinding>,  IBindingConfigurationElement
-	{
+    public partial class MexNamedPipeBindingElement
+         : MexBindingElement<CustomBinding>,  IBindingConfigurationElement
+    {
 
-		public MexNamedPipeBindingElement ()
-			: this (String.Empty) {
-		}
+        public MexNamedPipeBindingElement ()
+            : this (String.Empty) {
+        }
 
-		public MexNamedPipeBindingElement (string name)
-			: base (name) {
-		}
-
-
-		// Properties
+        public MexNamedPipeBindingElement (string name)
+            : base (name) {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

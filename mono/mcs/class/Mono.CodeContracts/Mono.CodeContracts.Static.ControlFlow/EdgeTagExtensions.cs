@@ -2,7 +2,7 @@
 // EdgeTagExtensions.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,10 +27,10 @@
 // 
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-	static class EdgeTagExtensions {
-		public static bool Is (this EdgeTag current, EdgeTag mask)
-		{
-			return (current & mask) != EdgeTag.None;
-		}
-	}
+    static class EdgeTagExtensions {
+        public static bool Is (this EdgeTag current, EdgeTag mask)
+        {
+            return (current & mask) != EdgeTag.None;
+        }
+    }
 }

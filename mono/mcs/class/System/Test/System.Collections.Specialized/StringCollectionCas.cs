@@ -1,9 +1,9 @@
 //
 // StringCollectionCas.cs - CAS unit tests for 
-//	System.Collections.Specialized.StringCollection
+//    System.Collections.Specialized.StringCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,52 +40,52 @@ using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StringCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StringCollectionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTest_Deny_Unrestricted ()
-		{
-			StringCollectionTest unit = new StringCollectionTest ();
-			unit.GetReady ();
-			unit.SimpleCount ();
-			unit.SimpleIsReadOnly ();
-			unit.SimpleIsSynchronized ();
-			unit.SimpleIndexOf ();
-			unit.SimpleCopyTo ();
-			unit.SimpleGetEnumerator ();
-			unit.SimpleContains ();
-			unit.SimpleItemGet ();
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTest_Deny_Unrestricted ()
+        {
+            StringCollectionTest unit = new StringCollectionTest ();
+            unit.GetReady ();
+            unit.SimpleCount ();
+            unit.SimpleIsReadOnly ();
+            unit.SimpleIsSynchronized ();
+            unit.SimpleIndexOf ();
+            unit.SimpleCopyTo ();
+            unit.SimpleGetEnumerator ();
+            unit.SimpleContains ();
+            unit.SimpleItemGet ();
 
-			unit.SimpleAdd ();
-			unit.SimpleInsert ();
-			unit.SimpleRemove ();
-			unit.SimpleRemoveAt ();
-			unit.SimpleItemSet ();
-			unit.SimpleAddRange ();
-			unit.SimpleClear ();
+            unit.SimpleAdd ();
+            unit.SimpleInsert ();
+            unit.SimpleRemove ();
+            unit.SimpleRemoveAt ();
+            unit.SimpleItemSet ();
+            unit.SimpleAddRange ();
+            unit.SimpleClear ();
 
-			unit.IList ();
-			unit.ICollection ();
-			unit.IEnumerable ();
-		}
+            unit.IList ();
+            unit.ICollection ();
+            unit.IEnumerable ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (StringCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (StringCollection).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

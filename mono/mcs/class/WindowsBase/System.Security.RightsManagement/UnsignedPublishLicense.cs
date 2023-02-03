@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,56 +29,56 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-	[SecurityCritical (SecurityCriticalScope.Everything)]
-	public class UnsignedPublishLicense
-	{
-		public UnsignedPublishLicense ()
-		{
-			throw new NotImplementedException ();
-		}
+    [SecurityCritical (SecurityCriticalScope.Everything)]
+    public class UnsignedPublishLicense
+    {
+        public UnsignedPublishLicense ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public UnsignedPublishLicense (string publishLicenseTemplate)
-		{
-			throw new NotImplementedException ();
-		}
+        public UnsignedPublishLicense (string publishLicenseTemplate)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public Guid ContentId {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public Guid ContentId {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public ICollection<ContentGrant> Grants {
-			get { throw new NotImplementedException (); }
-		}
+        public ICollection<ContentGrant> Grants {
+            get { throw new NotImplementedException (); }
+        }
 
-		public IDictionary<int, LocalizedNameDescriptionPair> LocalizedNameDescriptionDictionary {
-			get { throw new NotImplementedException (); }
-		}
+        public IDictionary<int, LocalizedNameDescriptionPair> LocalizedNameDescriptionDictionary {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ContentUser Owner {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public ContentUser Owner {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public string ReferralInfoName {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public string ReferralInfoName {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public Uri ReferralInfoUri {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public Uri ReferralInfoUri {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public PublishLicense Sign (SecureEnvironment secureEnvironment, out UseLicense authorUseLicense)
-		{
-			throw new NotImplementedException ();
-		}
+        public PublishLicense Sign (SecureEnvironment secureEnvironment, out UseLicense authorUseLicense)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string ToString ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

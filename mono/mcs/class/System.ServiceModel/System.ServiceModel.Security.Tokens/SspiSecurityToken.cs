@@ -2,7 +2,7 @@
 // SspiSecurityToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,47 +35,47 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public class SspiSecurityToken : SecurityToken
-	{
-		string id;
-		DateTime valid_from = DateTime.Now.ToUniversalTime ();
-		DateTime valid_to;
-		ReadOnlyCollection<SecurityKey> keys;
-		bool extract_groups, allow_unauth;
+    public class SspiSecurityToken : SecurityToken
+    {
+        string id;
+        DateTime valid_from = DateTime.Now.ToUniversalTime ();
+        DateTime valid_to;
+        ReadOnlyCollection<SecurityKey> keys;
+        bool extract_groups, allow_unauth;
 
-		[MonoTODO]
-		public SspiSecurityToken (NetworkCredential networkCredential,
-			bool extractGroupsForWindowsAccounts,
-			bool allowUnauthenticatedCallers)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SspiSecurityToken (NetworkCredential networkCredential,
+            bool extractGroupsForWindowsAccounts,
+            bool allowUnauthenticatedCallers)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public SspiSecurityToken (
-			TokenImpersonationLevel impersonationLevel,
-			bool allowNtlm, NetworkCredential networkCredential)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SspiSecurityToken (
+            TokenImpersonationLevel impersonationLevel,
+            bool allowNtlm, NetworkCredential networkCredential)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override DateTime ValidFrom {
-			get { return valid_from; }
-		}
+        public override DateTime ValidFrom {
+            get { return valid_from; }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidTo {
-			get { return valid_to; }
-		}
+        [MonoTODO]
+        public override DateTime ValidTo {
+            get { return valid_to; }
+        }
 
-		[MonoTODO]
-		public override string Id {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override string Id {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+            get { throw new NotImplementedException (); }
+        }
+    }
 }

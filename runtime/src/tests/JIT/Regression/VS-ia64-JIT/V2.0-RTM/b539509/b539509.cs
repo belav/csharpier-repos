@@ -34,8 +34,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
             do
             {
                 char[][] local4 = new char[][]{(new char[48u]), new char[]{'\x3f', '\x00', 
-					'\x47' }, new char[]{'\x58', '\x39', '\x70', '\x31' }, (new char[48u]), 
-					new char[]{'\x62', '\x6b', '\x19', '\x30', '\x17' } };
+                    '\x47' }, new char[]{'\x58', '\x39', '\x70', '\x31' }, (new char[48u]), 
+                    new char[]{'\x62', '\x6b', '\x19', '\x30', '\x17' } };
                 local3 = ((String[])(((Array)(null))));
                 while ((((short)(local2)) == ((short)(local2))))
                 {
@@ -76,7 +76,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
                         }
                         while ((null != new AA<TA, TB, TC, TD, TE, TF>()));
                         local4 = (local4 = (local4 = new char[][]{(new char[local1]), (new char[
-							local1]), (new char[113u]) }));
+                            local1]), (new char[113u]) }));
                         do
                         {
                         }
@@ -122,7 +122,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         {
         }
         return new short[][][]{/*2 REFS*/(new short[36u][]), new short[][]{ }, 
-			/*2 REFS*/(new short[36u][]) };
+            /*2 REFS*/(new short[36u][]) };
     }
     public static ulong Static1(TF param1)
     {
@@ -225,7 +225,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         return ((ulong)(105));
     }
     public static char[] Static2(ulong param1, short param2, ref uint param3, ref 
-		TA param4)
+        TA param4)
     {
         long[, , , ,][, ,][][, , ,] local9 = (new long[((uint)(5.0)), 24u, 65u, 9u, 29u]
             [, ,][][,,,]);
@@ -413,7 +413,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
                         while ((/*3 REFS*/((uint)(local22)) != (local23 ?/*3 REFS*/((uint)(local22))
                             :/*3 REFS*/((uint)(local22)))));
                         local21[38].m_achField1 = new char[][,]{((char[,])(param3)), (new char[
-							102u, 36u]) };
+                            102u, 36u]) };
                     }
                     catch (DivideByZeroException)
                     {
@@ -466,7 +466,7 @@ public struct BB
     public char[][,] m_achField1;
     public void Method1(ref uint[][][,] param1, ref String[][] param2, ref char[,]
         param3, AA<sbyte, byte, uint, uint, long, bool> param4, ref 
-		AA<sbyte, byte, uint, uint, long, bool> param5, int param6)
+        AA<sbyte, byte, uint, uint, long, bool> param5, int param6)
     {
         do
         {

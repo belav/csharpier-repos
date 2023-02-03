@@ -14,37 +14,37 @@ using System.Web.Services.Description;
 
 namespace MonoTests.System.Web.Services.Description
 {
-	[TestFixture]
-	public class OperationCollectionTest
-	{
-		OperationCollection operations;
+    [TestFixture]
+    public class OperationCollectionTest
+    {
+        OperationCollection operations;
 
-		[SetUp]
-		public void InitializeOperations()
-		{
-			// workaround for internal constructor
-			PortType portType = new PortType();
-			operations = portType.Operations;
-		}
+        [SetUp]
+        public void InitializeOperations()
+        {
+            // workaround for internal constructor
+            PortType portType = new PortType();
+            operations = portType.Operations;
+        }
 
-		[Test]
-		public void TestDefaultProperties()
-		{
-			Assert.AreEqual (0, operations.Count);
-		}
+        [Test]
+        public void TestDefaultProperties()
+        {
+            Assert.AreEqual (0, operations.Count);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestAddNullObject()
-		{
-			operations.Add(null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void TestAddNullObject()
+        {
+            operations.Add(null);
+        }
 
-		[Test]
-		public void TestAddValidOperation()
-		{
-			operations.Add(new Operation());	
-			Assert.AreEqual (1, operations.Count);
-		}
-	}
+        [Test]
+        public void TestAddValidOperation()
+        {
+            operations.Add(new Operation());    
+            Assert.AreEqual (1, operations.Count);
+        }
+    }
 }

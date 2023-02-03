@@ -39,60 +39,60 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_RejectChanges : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataSet_RejectChanges tc = new DataSet_RejectChanges();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataSet_RejectChanges");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
+    [Test] public void Main()
+    {
+        DataSet_RejectChanges tc = new DataSet_RejectChanges();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataSet_RejectChanges");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
 }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-	
-		DataSet ds1,ds2 = new DataSet();
-		ds2.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
-		ds1 = ds2.Copy();
-				
-		//create changes
-		ds2.Tables[0].Rows[0][0] = "70"; 
-		ds2.Tables[0].Rows[1].Delete();
-		ds2.Tables[0].Rows.Add(new object[] {9,"string1","string2"});
-        		
-		try
-		{
-			BeginCase("RejectChanges");
-			ds2.RejectChanges();
-			Compare(ds1.GetXml(),ds2.GetXml());
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    public void run()
+    {
+        Exception exp = null;
+    
+        DataSet ds1,ds2 = new DataSet();
+        ds2.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+        ds1 = ds2.Copy();
+                
+        //create changes
+        ds2.Tables[0].Rows[0][0] = "70"; 
+        ds2.Tables[0].Rows[1].Delete();
+        ds2.Tables[0].Rows.Add(new object[] {9,"string1","string2"});
+                
+        try
+        {
+            BeginCase("RejectChanges");
+            ds2.RejectChanges();
+            Compare(ds1.GetXml(),ds2.GetXml());
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-	}
+    }
 }
 
 

@@ -2,7 +2,7 @@
 // DesignerActionPropertyItemTest.cs
 //
 // Author:
-//	  Atsushi Enomoto (atsushi@ximian.com)
+//      Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 
@@ -36,18 +36,18 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.Design
 {
-	[TestFixture]
-	public class DesignerActionPropertyItemTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			DesignerActionPropertyItem item =
-				new DesignerActionPropertyItem ("myMember", "myDisplayName");
-			Assert.AreEqual ("myMember", item.MemberName, "#1");
-			Assert.AreEqual ("myDisplayName", item.DisplayName, "#2");
-			Assert.IsNull (item.Category, "#3");
-			Assert.IsNull (item.Description, "#4");
-		}
-	}
+    [TestFixture]
+    public class DesignerActionPropertyItemTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            DesignerActionPropertyItem item =
+                new DesignerActionPropertyItem ("myMember", "myDisplayName");
+            Assert.AreEqual ("myMember", item.MemberName, "#1");
+            Assert.AreEqual ("myDisplayName", item.DisplayName, "#2");
+            Assert.IsNull (item.Category, "#3");
+            Assert.IsNull (item.Description, "#4");
+        }
+    }
 }

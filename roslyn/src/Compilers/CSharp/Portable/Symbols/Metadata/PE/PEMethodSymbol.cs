@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1128,13 +1128,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     // 10.5.1 Instance constructor
                     // An instance constructor shall be an instance (not static or virtual) method,
-                    // it shall be named .ctor, and marked instance, rtspecialname, and specialname (Â§15.4.2.6).
+                    // it shall be named .ctor, and marked instance, rtspecialname, and specialname (§15.4.2.6).
                     // An instance constructor can have parameters, but shall not return a value.
                     // An instance constructor cannot take generic type parameters.
 
                     // 10.5.3 Type initializer
                     // This method shall be static, take no parameters, return no value,
-                    // be marked with rtspecialname and specialname (Â§15.4.2.6), and be named .cctor.
+                    // be marked with rtspecialname and specialname (§15.4.2.6), and be named .cctor.
 
                     if ((Flags & (MethodAttributes.RTSpecialName | MethodAttributes.Virtual)) == MethodAttributes.RTSpecialName &&
                         _name.Equals(this.IsStatic ? WellKnownMemberNames.StaticConstructorName : WellKnownMemberNames.InstanceConstructorName) &&

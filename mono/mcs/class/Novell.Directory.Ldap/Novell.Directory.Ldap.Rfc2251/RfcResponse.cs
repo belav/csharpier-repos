@@ -34,26 +34,26 @@ using Novell.Directory.Ldap.Asn1;
 
 namespace Novell.Directory.Ldap.Rfc2251
 {
-	
-	/// <summary> This interface represents RfcLdapMessages that contain a response from a
-	/// server.
-	/// 
-	/// If the protocol operation of the RfcLdapMessage is of this type,
-	/// it contains at least an RfcLdapResult.
-	/// </summary>
-	public interface RfcResponse
-		{
-			
-			/// <summary> </summary>
-			Asn1Enumerated getResultCode();
-			
-			/// <summary> </summary>
-			RfcLdapDN getMatchedDN();
-			
-			/// <summary> </summary>
-			RfcLdapString getErrorMessage();
-			
-			/// <summary> </summary>
-			RfcReferral getReferral();
-		}
+    
+    /// <summary> This interface represents RfcLdapMessages that contain a response from a
+    /// server.
+    /// 
+    /// If the protocol operation of the RfcLdapMessage is of this type,
+    /// it contains at least an RfcLdapResult.
+    /// </summary>
+    public interface RfcResponse
+        {
+            
+            /// <summary> </summary>
+            Asn1Enumerated getResultCode();
+            
+            /// <summary> </summary>
+            RfcLdapDN getMatchedDN();
+            
+            /// <summary> </summary>
+            RfcLdapString getErrorMessage();
+            
+            /// <summary> </summary>
+            RfcReferral getReferral();
+        }
 }

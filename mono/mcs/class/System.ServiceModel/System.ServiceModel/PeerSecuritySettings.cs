@@ -1,4 +1,4 @@
-﻿// 
+// 
 // PeerSecuritySettings.cs
 // 
 // Author: 
@@ -11,26 +11,26 @@ using System;
 
 namespace System.ServiceModel
 {
-	public class PeerSecuritySettings
-	{
-		SecurityMode mode;
-		
-		public PeerSecuritySettings ()
-		{
-			Transport = new PeerTransportSecuritySettings ();
-		}
-		
-		public SecurityMode Mode {
-			get { return mode; }
-			set { mode = value; }
-		}
+    public class PeerSecuritySettings
+    {
+        SecurityMode mode;
+        
+        public PeerSecuritySettings ()
+        {
+            Transport = new PeerTransportSecuritySettings ();
+        }
+        
+        public SecurityMode Mode {
+            get { return mode; }
+            set { mode = value; }
+        }
 
-		public PeerTransportSecuritySettings Transport { get; private set; }
+        public PeerTransportSecuritySettings Transport { get; private set; }
 
-		internal void CopyTo (PeerSecuritySettings other)
-		{
-			other.mode = mode;
-			other.Transport.CredentialType = Transport.CredentialType;
-		}
-	}
+        internal void CopyTo (PeerSecuritySettings other)
+        {
+            other.mode = mode;
+            other.Transport.CredentialType = Transport.CredentialType;
+        }
+    }
 }

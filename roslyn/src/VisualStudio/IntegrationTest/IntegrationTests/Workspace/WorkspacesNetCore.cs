@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -45,7 +45,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
 </Project>");
             VisualStudio.SolutionExplorer.SaveAll();
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
-            // 🐛 This should only need WaitForAsyncOperations for FeatureAttribute.Workspace
+            // ?? This should only need WaitForAsyncOperations for FeatureAttribute.Workspace
             // https://github.com/dotnet/roslyn/issues/34264
             VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");

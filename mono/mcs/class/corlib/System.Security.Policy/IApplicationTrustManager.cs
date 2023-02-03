@@ -2,7 +2,7 @@
 // System.Security.Policy.IApplicationTrustManager interface
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,10 +31,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-	[ComVisible (true)]
-	public interface IApplicationTrustManager : ISecurityEncodable {
+    [ComVisible (true)]
+    public interface IApplicationTrustManager : ISecurityEncodable {
 
-		ApplicationTrust DetermineApplicationTrust (ActivationContext activationContext, TrustManagerContext context);
-	}
+        ApplicationTrust DetermineApplicationTrust (ActivationContext activationContext, TrustManagerContext context);
+    }
 }
 

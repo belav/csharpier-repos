@@ -74,8 +74,8 @@ namespace ArrayWithFunc
     internal class Test
     {
         /********************************************************************************************
-		* Index is modified through a function call 
-		*********************************************************************************************/
+        * Index is modified through a function call 
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -89,8 +89,8 @@ namespace ArrayWithFunc
         }
 
         /********************************************************************************************
-		* Array is modified through a function call
-		********************************************************************************************/
+        * Array is modified through a function call
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -104,8 +104,8 @@ namespace ArrayWithFunc
             }
         }
         /********************************************************************************************
-		* Loop upper bound is modified through a function call
-		********************************************************************************************/
+        * Loop upper bound is modified through a function call
+        ********************************************************************************************/
         public static void Test3()
         {
             int index = 0;
@@ -117,8 +117,8 @@ namespace ArrayWithFunc
             }
         }
         /********************************************************************************************
-		* Another way to modifier loop induction variable
-		********************************************************************************************/
+        * Another way to modifier loop induction variable
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {

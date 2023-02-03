@@ -2,7 +2,7 @@
 // StandardBindingElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,28 +54,28 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class StandardBindingElementCollection<TBindingConfiguration>
-		 : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>,  ICollection,  IEnumerable
-		where TBindingConfiguration : StandardBindingElement, new()
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public sealed partial class StandardBindingElementCollection<TBindingConfiguration>
+         : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>,  ICollection,  IEnumerable
+        where TBindingConfiguration : StandardBindingElement, new()
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static StandardBindingElementCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static StandardBindingElementCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public StandardBindingElementCollection ()
-		{
-			AddElementName = "binding";
-		}
-
-
-		// Properties
+        public StandardBindingElementCollection ()
+        {
+            AddElementName = "binding";
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

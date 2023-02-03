@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -30,80 +30,80 @@ using System.ComponentModel;
 using System.Globalization;
 
 namespace System.Windows.Forms {
-	public class SelectionRangeConverter : TypeConverter {
-		#region Public Constructors
-		public SelectionRangeConverter() {
-		}
-		#endregion	// Public Constructors
+    public class SelectionRangeConverter : TypeConverter {
+        #region Public Constructors
+        public SelectionRangeConverter() {
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Methods
-		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-			if (sourceType == typeof(string)) {
-				return true;
-			}
-			return false;
-		}
+        #region Public Instance Methods
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
+            if (sourceType == typeof(string)) {
+                return true;
+            }
+            return false;
+        }
 
-		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
-			if (destinationType == typeof(string)) {
-				return true;
-			}
-			return false;
-		}
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
+            if (destinationType == typeof(string)) {
+                return true;
+            }
+            return false;
+        }
 
-		public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-			string[]	parts;
-			DateTime	start;
-			DateTime	end;
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+            string[]    parts;
+            DateTime    start;
+            DateTime    end;
 
-			if ((value == null) || !(value is String)) {
-				return base.ConvertFrom (context, culture, value);
-			}
+            if ((value == null) || !(value is String)) {
+                return base.ConvertFrom (context, culture, value);
+            }
 
-			if (culture == null) {
-				culture = CultureInfo.CurrentCulture;
-			}
+            if (culture == null) {
+                culture = CultureInfo.CurrentCulture;
+            }
 
-			parts = ((string)value).Split(culture.TextInfo.ListSeparator.ToCharArray());
+            parts = ((string)value).Split(culture.TextInfo.ListSeparator.ToCharArray());
 
-			start = (DateTime)TypeDescriptor.GetConverter(typeof(DateTime)).ConvertFromString(context, culture, parts[0]);
-			end = (DateTime)TypeDescriptor.GetConverter(typeof(DateTime)).ConvertFromString(context, culture, parts[1]);
+            start = (DateTime)TypeDescriptor.GetConverter(typeof(DateTime)).ConvertFromString(context, culture, parts[0]);
+            end = (DateTime)TypeDescriptor.GetConverter(typeof(DateTime)).ConvertFromString(context, culture, parts[1]);
 
-			return new SelectionRange(start, end);
-		}
+            return new SelectionRange(start, end);
+        }
 
-		public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-			SelectionRange	s;
+        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+            SelectionRange    s;
 
-			if ((value == null) || !(value is SelectionRange) || (destinationType != typeof(string))) {
-				return base.ConvertTo (context, culture, value, destinationType);
-			}
+            if ((value == null) || !(value is SelectionRange) || (destinationType != typeof(string))) {
+                return base.ConvertTo (context, culture, value, destinationType);
+            }
 
-			if (culture == null) {
-				culture = CultureInfo.CurrentCulture;
-			}
+            if (culture == null) {
+                culture = CultureInfo.CurrentCulture;
+            }
 
-			s = (SelectionRange)value;
+            s = (SelectionRange)value;
 
 
-			return s.Start.ToShortDateString() + culture.TextInfo.ListSeparator + s.End.ToShortDateString();
-		}
+            return s.Start.ToShortDateString() + culture.TextInfo.ListSeparator + s.End.ToShortDateString();
+        }
 
-		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues) {
-			return new SelectionRange((DateTime)propertyValues["Start"], (DateTime)propertyValues["End"]);
-		}
+        public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues) {
+            return new SelectionRange((DateTime)propertyValues["Start"], (DateTime)propertyValues["End"]);
+        }
 
-		public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
-			return true;
-		}
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
+            return true;
+        }
 
-		public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) {
-			return TypeDescriptor.GetProperties(typeof(SelectionRange), attributes);
-		}
+        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) {
+            return TypeDescriptor.GetProperties(typeof(SelectionRange), attributes);
+        }
 
-		public override bool GetPropertiesSupported(ITypeDescriptorContext context) {
-			return true;
-		}
-		#endregion	// Public Instance Methods
-	}
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context) {
+            return true;
+        }
+        #endregion    // Public Instance Methods
+    }
 }

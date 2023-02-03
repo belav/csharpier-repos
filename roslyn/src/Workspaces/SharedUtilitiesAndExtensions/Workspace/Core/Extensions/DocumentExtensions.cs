@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class DocumentExtensions
     {
-        // ⚠ Verify IVTs do not use this method before removing it.
+        // ? Verify IVTs do not use this method before removing it.
         public static TLanguageService? GetLanguageService<TLanguageService>(this Document? document) where TLanguageService : class, ILanguageService
             => document?.Project?.GetLanguageService<TLanguageService>();
 

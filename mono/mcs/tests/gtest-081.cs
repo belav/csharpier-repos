@@ -1,17 +1,17 @@
 public class ArrayList<T>
 {
         void AddAll<U> (U u)
-		where U : T
+        where U : T
         {
-		InsertAll (u);
+        InsertAll (u);
         }
 
-	void InsertAll (T t)
-	{ }
+    void InsertAll (T t)
+    { }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main ()
+    { }
 }

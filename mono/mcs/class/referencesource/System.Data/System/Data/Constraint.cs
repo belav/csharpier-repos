@@ -79,7 +79,7 @@ namespace System.Data {
 
 
         internal virtual bool InCollection {
-            get {		// ACCESSOR: virtual was missing from this get
+            get {        // ACCESSOR: virtual was missing from this get
                 return inCollection;
             }
             set {

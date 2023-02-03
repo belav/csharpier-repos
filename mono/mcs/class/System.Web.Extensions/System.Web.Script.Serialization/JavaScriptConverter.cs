@@ -1,4 +1,4 @@
-﻿//
+//
 // JavaScriptConverter.cs
 //
 // Author:
@@ -33,13 +33,13 @@ using System.Text;
 
 namespace System.Web.Script.Serialization
 {
-	public abstract class JavaScriptConverter
-	{
-		protected JavaScriptConverter () { }
+    public abstract class JavaScriptConverter
+    {
+        protected JavaScriptConverter () { }
 
-		public abstract IEnumerable<Type> SupportedTypes { get; }
+        public abstract IEnumerable<Type> SupportedTypes { get; }
 
-		public abstract object Deserialize (IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer);
-		public abstract IDictionary<string, object> Serialize (object obj, JavaScriptSerializer serializer);
-	}
+        public abstract object Deserialize (IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer);
+        public abstract IDictionary<string, object> Serialize (object obj, JavaScriptSerializer serializer);
+    }
 }

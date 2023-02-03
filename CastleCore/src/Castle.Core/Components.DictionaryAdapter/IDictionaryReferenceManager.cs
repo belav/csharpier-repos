@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	public interface IDictionaryReferenceManager
-	{
-		bool IsReferenceProperty(IDictionaryAdapter dictionaryAdapter, string propertyName);
+    public interface IDictionaryReferenceManager
+    {
+        bool IsReferenceProperty(IDictionaryAdapter dictionaryAdapter, string propertyName);
 
-		bool TryGetReference(object keyObject, out object inGraphObject);
-		void    AddReference(object keyObject,     object relatedObject, bool isInGraph);
-	}
+        bool TryGetReference(object keyObject, out object inGraphObject);
+        void    AddReference(object keyObject,     object relatedObject, bool isInGraph);
+    }
 }

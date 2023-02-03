@@ -2,7 +2,7 @@
 // TemplateBuilderCas.cs - CAS unit tests for System.Web.UI.TemplateBuilder
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,28 +36,28 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TemplateBuilderCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class TemplateBuilderCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TemplateBuilder tb = new TemplateBuilder ();
-			tb.Text = "mono";
-			Assert.AreEqual ("mono", tb.Text, "Text");
-			tb.InstantiateIn (new Control ());
-			tb.Init (new PageParser (), new ControlBuilder (), null, null, null, null);
-			Assert.IsFalse (tb.NeedsTagInnerText (), "NeedsTagInnerText");
-			tb.SetTagInnerText ("mono");
-			Assert.IsNotNull (tb.BuildObject (), "BuildObject");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            TemplateBuilder tb = new TemplateBuilder ();
+            tb.Text = "mono";
+            Assert.AreEqual ("mono", tb.Text, "Text");
+            tb.InstantiateIn (new Control ());
+            tb.Init (new PageParser (), new ControlBuilder (), null, null, null, null);
+            Assert.IsFalse (tb.NeedsTagInnerText (), "NeedsTagInnerText");
+            tb.SetTagInnerText ("mono");
+            Assert.IsNotNull (tb.BuildObject (), "BuildObject");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (TemplateBuilder); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (TemplateBuilder); }
+        }
+    }
 }

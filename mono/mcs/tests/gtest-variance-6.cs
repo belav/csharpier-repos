@@ -14,17 +14,17 @@ delegate IContravariant<ICovariant<U>> Contra8<in U> (U u, ICovariant<U> x);
 
 interface ITest_1<out T>
 {
-	ICovariant<T> CovariantHandler (IContravariant<T> x);
+    ICovariant<T> CovariantHandler (IContravariant<T> x);
 }
 
 interface ITest_2<in T>
 {
-	IContravariant<T> CovariantHandler (ICovariant<T> x);
+    IContravariant<T> CovariantHandler (ICovariant<T> x);
 }
 
 class Program
 {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

@@ -1,11 +1,11 @@
 //
 // System.ServiceProcess.ServiceControllerPermission.cs
-//	(based on System.Diagnostics.EventLogPermission.cs)
+//    (based on System.Diagnostics.EventLogPermission.cs)
 //
 // Authors:
-//	Jonathan Pryor (jonpryor@vt.edu)
-//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Jonathan Pryor (jonpryor@vt.edu)
+//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002 Jonathan Pryor
 // (C) 2003 Andreas Nahr
@@ -35,107 +35,107 @@ using System.Security.Permissions;
 
 namespace System.ServiceProcess {
 
-	[Serializable]
-	public sealed class ServiceControllerPermission : ResourcePermissionBase {
+    [Serializable]
+    public sealed class ServiceControllerPermission : ResourcePermissionBase {
 
-		ServiceControllerPermissionEntryCollection innerCollection;
+        ServiceControllerPermissionEntryCollection innerCollection;
 
-		public ServiceControllerPermission ()
-		{
-			SetUp ();
-		}
+        public ServiceControllerPermission ()
+        {
+            SetUp ();
+        }
 
-		public ServiceControllerPermission (ServiceControllerPermissionEntry[] permissionAccessEntries)
-		{
-			if (permissionAccessEntries == null)
-				throw new ArgumentNullException ("permissionAccessEntries");
+        public ServiceControllerPermission (ServiceControllerPermissionEntry[] permissionAccessEntries)
+        {
+            if (permissionAccessEntries == null)
+                throw new ArgumentNullException ("permissionAccessEntries");
 
-			SetUp ();
-			innerCollection = new ServiceControllerPermissionEntryCollection (this);
-			innerCollection.AddRange (permissionAccessEntries);
-		}
+            SetUp ();
+            innerCollection = new ServiceControllerPermissionEntryCollection (this);
+            innerCollection.AddRange (permissionAccessEntries);
+        }
 
-		public ServiceControllerPermission (PermissionState state)
-			: base (state)
-		{
-			SetUp ();
-		}
+        public ServiceControllerPermission (PermissionState state)
+            : base (state)
+        {
+            SetUp ();
+        }
 
-		public ServiceControllerPermission (ServiceControllerPermissionAccess permissionAccess, string machineName, string serviceName)
-		{
-			SetUp ();
-			ServiceControllerPermissionEntry scpe = new ServiceControllerPermissionEntry (permissionAccess, machineName, serviceName);
-			innerCollection = new ServiceControllerPermissionEntryCollection (this);
-			innerCollection.Add (scpe);
-		}
+        public ServiceControllerPermission (ServiceControllerPermissionAccess permissionAccess, string machineName, string serviceName)
+        {
+            SetUp ();
+            ServiceControllerPermissionEntry scpe = new ServiceControllerPermissionEntry (permissionAccess, machineName, serviceName);
+            innerCollection = new ServiceControllerPermissionEntryCollection (this);
+            innerCollection.Add (scpe);
+        }
 
-		public ServiceControllerPermissionEntryCollection PermissionEntries {
-			get {
-				if (innerCollection == null) {
-					// must be here to work with XML deserialization
-					innerCollection = new ServiceControllerPermissionEntryCollection (this);
-				}
-				return innerCollection;
-			}
-		}
+        public ServiceControllerPermissionEntryCollection PermissionEntries {
+            get {
+                if (innerCollection == null) {
+                    // must be here to work with XML deserialization
+                    innerCollection = new ServiceControllerPermissionEntryCollection (this);
+                }
+                return innerCollection;
+            }
+        }
 
-		// private stuff
+        // private stuff
 
-		private void SetUp () 
-		{
-			TagNames = new string [2] { "Machine", "Service" };
-			PermissionAccessType = typeof (ServiceControllerPermissionAccess);
-		}
+        private void SetUp () 
+        {
+            TagNames = new string [2] { "Machine", "Service" };
+            PermissionAccessType = typeof (ServiceControllerPermissionAccess);
+        }
 
-		internal ResourcePermissionBaseEntry[] GetEntries ()
-		{
-			return base.GetPermissionEntries ();
-		}
+        internal ResourcePermissionBaseEntry[] GetEntries ()
+        {
+            return base.GetPermissionEntries ();
+        }
 
-		internal void ClearEntries ()
-		{
-			base.Clear ();
-		}
+        internal void ClearEntries ()
+        {
+            base.Clear ();
+        }
 
-		internal void Add (object obj) 
-		{
-			ServiceControllerPermissionEntry cspe = (obj as ServiceControllerPermissionEntry);
-			base.AddPermissionAccess (cspe.GetBaseEntry ());
-		}
+        internal void Add (object obj) 
+        {
+            ServiceControllerPermissionEntry cspe = (obj as ServiceControllerPermissionEntry);
+            base.AddPermissionAccess (cspe.GetBaseEntry ());
+        }
 
-		internal void Remove (object obj) 
-		{
-			ServiceControllerPermissionEntry cspe = (obj as ServiceControllerPermissionEntry);
-			base.RemovePermissionAccess (cspe.GetBaseEntry ());
-		}
+        internal void Remove (object obj) 
+        {
+            ServiceControllerPermissionEntry cspe = (obj as ServiceControllerPermissionEntry);
+            base.RemovePermissionAccess (cspe.GetBaseEntry ());
+        }
 
-		// static helpers
+        // static helpers
 
-		private static char[] invalidChars = new char[] { '\t', '\n', '\v', '\f', '\r', ' ', '\\', '\x160' };
+        private static char[] invalidChars = new char[] { '\t', '\n', '\v', '\f', '\r', ' ', '\\', '\x160' };
 
-		internal static void ValidateMachineName (string name)
-		{
-			// FIXME: maybe other checks are required (but not documented)
-			if ((name == null) || (name.Length == 0) || (name.IndexOfAny (invalidChars) != -1)) {
-				string msg = Locale.GetText ("Invalid machine name '{0}'.");
-				if (name == null)
-					name = "(null)";
-				msg = String.Format (msg, name);
-				throw new ArgumentException (msg, "MachineName");
-			}
-		}
+        internal static void ValidateMachineName (string name)
+        {
+            // FIXME: maybe other checks are required (but not documented)
+            if ((name == null) || (name.Length == 0) || (name.IndexOfAny (invalidChars) != -1)) {
+                string msg = Locale.GetText ("Invalid machine name '{0}'.");
+                if (name == null)
+                    name = "(null)";
+                msg = String.Format (msg, name);
+                throw new ArgumentException (msg, "MachineName");
+            }
+        }
 
-		private static char[] invalidServiceNameChars = new char[] { '/', '\\' };
+        private static char[] invalidServiceNameChars = new char[] { '/', '\\' };
 
-		internal static void ValidateServiceName (string name)
-		{
-			if (name == null)
-				throw new ArgumentNullException ("ServiceName");
-			// FIXME: maybe other checks are required (but not documented)
-			if ((name.Length == 0) || (name.IndexOfAny (invalidServiceNameChars) != -1)) {
-				string msg = String.Format (Locale.GetText ("Invalid service name '{0}'."), name);
-				throw new ArgumentException (msg, "ServiceName");
-			}
-		}
-	}
+        internal static void ValidateServiceName (string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException ("ServiceName");
+            // FIXME: maybe other checks are required (but not documented)
+            if ((name.Length == 0) || (name.IndexOfAny (invalidServiceNameChars) != -1)) {
+                string msg = String.Format (Locale.GetText ("Invalid service name '{0}'."), name);
+                throw new ArgumentException (msg, "ServiceName");
+            }
+        }
+    }
 }

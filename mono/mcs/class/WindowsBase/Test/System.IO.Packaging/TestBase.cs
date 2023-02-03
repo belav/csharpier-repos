@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Alan McGovern (amcgovern@novell.com)
+//    Alan McGovern (amcgovern@novell.com)
 //
 
 
@@ -59,13 +59,13 @@ namespace MonoTests.System.IO.Packaging {
         [TearDown]
         public virtual void TearDown ()
         {
-			try {
-	            if (package != null)
-	                package.Close ();
-			} catch {
-				
-			}
-			
+            try {
+                if (package != null)
+                    package.Close ();
+            } catch {
+                
+            }
+            
             if (stream != null)
                 stream.Close ();
         }

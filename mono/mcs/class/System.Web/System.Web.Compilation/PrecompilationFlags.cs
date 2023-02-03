@@ -2,7 +2,7 @@
 // System.Web.Compilation.IAssemblyPostProcessor
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,19 +31,19 @@
 
 namespace System.Web.Compilation
 {
-	[Flags]
-	public enum PrecompilationFlags
-	{
-		Default                      =   0,
-		Updatable                    =   1,
-		OverwriteTarget              =   2,
-		ForceDebug                   =   4,
-		Clean                        =   8,
-		CodeAnalysis                 =  16,
-		AllowPartiallyTrustedCallers =  32,
-		DelaySign                    =  64,
-		FixedNames                   = 128
-	}
+    [Flags]
+    public enum PrecompilationFlags
+    {
+        Default                      =   0,
+        Updatable                    =   1,
+        OverwriteTarget              =   2,
+        ForceDebug                   =   4,
+        Clean                        =   8,
+        CodeAnalysis                 =  16,
+        AllowPartiallyTrustedCallers =  32,
+        DelaySign                    =  64,
+        FixedNames                   = 128
+    }
 
 }
 

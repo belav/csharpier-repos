@@ -39,89 +39,89 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_Merge_Dr : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataSet_Merge_Dr tc = new DataSet_Merge_Dr();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataSet_Merge_Dr");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataSet_Merge_Dr tc = new DataSet_Merge_Dr();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataSet_Merge_Dr");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-	
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-		dt.TableName = "Table1";
-		dt.PrimaryKey = new DataColumn[] {dt.Columns[0]};
+    public void run()
+    {
+        Exception exp = null;
+    
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+        dt.TableName = "Table1";
+        dt.PrimaryKey = new DataColumn[] {dt.Columns[0]};
 
-		//create target dataset (copy of source dataset)
-		DataSet dsTarget = new DataSet();
-		dsTarget.Tables.Add(dt.Copy());
+        //create target dataset (copy of source dataset)
+        DataSet dsTarget = new DataSet();
+        dsTarget.Tables.Add(dt.Copy());
 
-		DataRow[] drArr = new DataRow[3];
-		//Update row
-		string OldValue = dt.Select("ParentId=1")[0][1].ToString();
-		drArr[0] = dt.Select("ParentId=1")[0];
-		drArr[0][1]	= "NewValue";
-		//delete rows
-		drArr[1] = dt.Select("ParentId=2")[0];
-		drArr[1].Delete();
-		//add row
-		drArr[2] = dt.NewRow();
-		drArr[2].ItemArray = new object[] {99 ,"NewRowValue1", "NewRowValue2"};
-		dt.Rows.Add(drArr[2]);
+        DataRow[] drArr = new DataRow[3];
+        //Update row
+        string OldValue = dt.Select("ParentId=1")[0][1].ToString();
+        drArr[0] = dt.Select("ParentId=1")[0];
+        drArr[0][1]    = "NewValue";
+        //delete rows
+        drArr[1] = dt.Select("ParentId=2")[0];
+        drArr[1].Delete();
+        //add row
+        drArr[2] = dt.NewRow();
+        drArr[2].ItemArray = new object[] {99 ,"NewRowValue1", "NewRowValue2"};
+        dt.Rows.Add(drArr[2]);
 
-		dsTarget.Merge(drArr,false,MissingSchemaAction.Ignore );
+        dsTarget.Merge(drArr,false,MissingSchemaAction.Ignore );
 
-		try
-		{
-			BeginCase("Merge update row");
-			Compare(dsTarget.Tables["Table1"].Select("ParentId=1")[0][1] , "NewValue");
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("Merge update row");
+            Compare(dsTarget.Tables["Table1"].Select("ParentId=1")[0][1] , "NewValue");
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
         
-		try
-		{
-			BeginCase("Merge added row");
-			Compare(dsTarget.Tables["Table1"].Select("ParentId=99").Length ,1);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("Merge added row");
+            Compare(dsTarget.Tables["Table1"].Select("ParentId=99").Length ,1);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("Merge deleted row");
-			Compare(dsTarget.Tables["Table1"].Select("ParentId=2").Length , 0);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("Merge deleted row");
+            Compare(dsTarget.Tables["Table1"].Select("ParentId=2").Length , 0);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		
-	}
+        
+    }
 }
 }

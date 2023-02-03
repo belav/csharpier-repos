@@ -2,7 +2,7 @@
 // PeerNodeAddressTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -38,19 +38,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class PeerNodeAddressTest
-	{
-		[Test]
-		public void ReadWriteXml ()
-		{
-			string nas = @"<PeerNodeAddress xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/net/2006/05/peer'><EndpointAddress xmlns:b='http://www.w3.org/2005/08/addressing'><Address xmlns='http://www.w3.org/2005/08/addressing'>net.tcp://atsushi-pc:37564/PeerChannelEndpoints/b2b137a4-3fdf-4366-a9e4-70d0ab6f2bff</Address></EndpointAddress><IPAddresses xmlns:b='http://schemas.datacontract.org/2004/07/System.Net'></IPAddresses></PeerNodeAddress>";
+    [TestFixture]
+    public class PeerNodeAddressTest
+    {
+        [Test]
+        public void ReadWriteXml ()
+        {
+            string nas = @"<PeerNodeAddress xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/net/2006/05/peer'><EndpointAddress xmlns:b='http://www.w3.org/2005/08/addressing'><Address xmlns='http://www.w3.org/2005/08/addressing'>net.tcp://atsushi-pc:37564/PeerChannelEndpoints/b2b137a4-3fdf-4366-a9e4-70d0ab6f2bff</Address></EndpointAddress><IPAddresses xmlns:b='http://schemas.datacontract.org/2004/07/System.Net'></IPAddresses></PeerNodeAddress>";
 
-			var ser = new DataContractSerializer (typeof (PeerNodeAddress));
-			var na = (PeerNodeAddress) ser.ReadObject (XmlReader.Create (new StringReader (nas)));
-			Assert.IsNotNull (na.EndpointAddress, "#1");
-			Assert.IsNotNull (na.EndpointAddress.Uri, "#2");
-		}
-	}
+            var ser = new DataContractSerializer (typeof (PeerNodeAddress));
+            var na = (PeerNodeAddress) ser.ReadObject (XmlReader.Create (new StringReader (nas)));
+            Assert.IsNotNull (na.EndpointAddress, "#1");
+            Assert.IsNotNull (na.EndpointAddress.Uri, "#2");
+        }
+    }
 }
 #endif

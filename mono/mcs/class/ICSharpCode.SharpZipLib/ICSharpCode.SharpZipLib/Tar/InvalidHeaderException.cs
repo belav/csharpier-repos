@@ -33,28 +33,28 @@
 // exception statement from your version.
 
 namespace ICSharpCode.SharpZipLib.Tar {
-	
-	/// <summary>
-	/// This exception is used to indicate that there is a problem
-	/// with a TAR archive header.
-	/// </summary>
-	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-	public class InvalidHeaderException : TarException
-	{
-		/// <summary>
-		/// Initialise a new instance of the InvalidHeaderException class.
-		/// </summary>
-		public InvalidHeaderException()
-		{
-		}
+    
+    /// <summary>
+    /// This exception is used to indicate that there is a problem
+    /// with a TAR archive header.
+    /// </summary>
+    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    public class InvalidHeaderException : TarException
+    {
+        /// <summary>
+        /// Initialise a new instance of the InvalidHeaderException class.
+        /// </summary>
+        public InvalidHeaderException()
+        {
+        }
 
-		/// <summary>
-		/// Initialises a new instance of the InvalidHeaderException class with a specified message.
-		/// </summary>
-		public InvalidHeaderException(string msg) : base(msg)
-		{
-		}
-	}
+        /// <summary>
+        /// Initialises a new instance of the InvalidHeaderException class with a specified message.
+        /// </summary>
+        public InvalidHeaderException(string msg) : base(msg)
+        {
+        }
+    }
 }
 
 /* The original Java file had this header:

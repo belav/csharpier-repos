@@ -1057,8 +1057,8 @@ namespace System {
 
 #if MONO
         private static bool nIsTransient(int hr) {
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException ();
+        }
 #else
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]

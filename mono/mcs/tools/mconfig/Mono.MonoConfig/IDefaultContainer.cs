@@ -29,8 +29,8 @@ using System;
 
 namespace Mono.MonoConfig
 {
-	public interface IDefaultContainer
-	{
-		string FindDefault (string sectionName, FeatureTarget target);
-	}
+    public interface IDefaultContainer
+    {
+        string FindDefault (string sectionName, FeatureTarget target);
+    }
 }

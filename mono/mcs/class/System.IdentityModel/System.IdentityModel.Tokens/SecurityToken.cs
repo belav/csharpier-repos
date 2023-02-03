@@ -2,7 +2,7 @@
 // SecurityToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,56 +32,56 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-	public abstract class SecurityToken
-	{
-		protected SecurityToken ()
-		{
-		}
+    public abstract class SecurityToken
+    {
+        protected SecurityToken ()
+        {
+        }
 
-		[MonoTODO]
-		public abstract DateTime ValidFrom { get; }
+        [MonoTODO]
+        public abstract DateTime ValidFrom { get; }
 
-		[MonoTODO]
-		public abstract DateTime ValidTo { get; }
+        [MonoTODO]
+        public abstract DateTime ValidTo { get; }
 
-		public abstract string Id { get; }
+        public abstract string Id { get; }
 
-		public abstract ReadOnlyCollection<SecurityKey> SecurityKeys { get; }
+        public abstract ReadOnlyCollection<SecurityKey> SecurityKeys { get; }
 
-		[MonoTODO]
-		public virtual bool CanCreateKeyIdentifierClause<T> ()
-			where T : SecurityKeyIdentifierClause
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual bool CanCreateKeyIdentifierClause<T> ()
+            where T : SecurityKeyIdentifierClause
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual T CreateKeyIdentifierClause<T> ()
-			where T : SecurityKeyIdentifierClause
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual T CreateKeyIdentifierClause<T> ()
+            where T : SecurityKeyIdentifierClause
+        {
+            throw new NotImplementedException ();
+        }
 
-		public virtual bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			return false;
-		}
+        public virtual bool MatchesKeyIdentifierClause (
+            SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            return false;
+        }
 
-		[MonoTODO]
-		public virtual SecurityKey ResolveKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			if (keyIdentifierClause == null)
-				throw new ArgumentNullException ("keyIdentifierClause");
-			if (!MatchesKeyIdentifierClause (keyIdentifierClause))
-				throw new InvalidOperationException (String.Format ("This '{0}' security token does not support resolving '{1}' key identifier clause.", GetType (), keyIdentifierClause));
-			if (keyIdentifierClause.CanCreateKey)
-				return keyIdentifierClause.CreateKey ();
-			// FIXME: examine it.
-			if (SecurityKeys.Count == 0)
-				throw new InvalidOperationException (String.Format ("This '{0}' security token does not have any keys that can be resolved.", GetType (), keyIdentifierClause));
-			return SecurityKeys [0];
-		}
-	}
+        [MonoTODO]
+        public virtual SecurityKey ResolveKeyIdentifierClause (
+            SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            if (keyIdentifierClause == null)
+                throw new ArgumentNullException ("keyIdentifierClause");
+            if (!MatchesKeyIdentifierClause (keyIdentifierClause))
+                throw new InvalidOperationException (String.Format ("This '{0}' security token does not support resolving '{1}' key identifier clause.", GetType (), keyIdentifierClause));
+            if (keyIdentifierClause.CanCreateKey)
+                return keyIdentifierClause.CreateKey ();
+            // FIXME: examine it.
+            if (SecurityKeys.Count == 0)
+                throw new InvalidOperationException (String.Format ("This '{0}' security token does not have any keys that can be resolved.", GetType (), keyIdentifierClause));
+            return SecurityKeys [0];
+        }
+    }
 }

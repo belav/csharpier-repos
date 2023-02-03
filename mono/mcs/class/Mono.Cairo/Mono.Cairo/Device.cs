@@ -1,12 +1,12 @@
-ï»¿//
+//
 // Mono.Cairo.Device.cs
 //
 // Authors:
-//			JP BruyÃ¨re (jp_bruyere@hotmail.com)
+//            JP Bruyère (jp_bruyere@hotmail.com)
 //
 // This is an OO wrapper API for the Cairo API
 //
-// Copyright (C) 2016 JP BruyÃ¨re
+// Copyright (C) 2016 JP Bruyère
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,71 +31,71 @@ using System;
 
 namespace Cairo
 {
-	public class Device : IDisposable
-	{
-		IntPtr handle = IntPtr.Zero;
+    public class Device : IDisposable
+    {
+        IntPtr handle = IntPtr.Zero;
 
-		protected Device()
-		{
-		}
+        protected Device()
+        {
+        }
 
-		protected Device (IntPtr ptr) : this (ptr, true)
-		{
-		}
+        protected Device (IntPtr ptr) : this (ptr, true)
+        {
+        }
 
-		protected Device (IntPtr handle, bool owner)
-		{
-			this.handle = handle;
-			if (!owner)
-				NativeMethods.cairo_device_reference (handle);
-			if (CairoDebug.Enabled)
-				CairoDebug.OnAllocated (handle);
-		}
+        protected Device (IntPtr handle, bool owner)
+        {
+            this.handle = handle;
+            if (!owner)
+                NativeMethods.cairo_device_reference (handle);
+            if (CairoDebug.Enabled)
+                CairoDebug.OnAllocated (handle);
+        }
 
-		~Device ()
-		{
-			Dispose (false);
-		}
+        ~Device ()
+        {
+            Dispose (false);
+        }
 
-		public IntPtr Handle {
-			get {
-				return handle;
-			}
-		}
-		public string Status {
-			get {
-				return  System.Runtime.InteropServices.Marshal.PtrToStringAuto(NativeMethods.cairo_status_to_string (NativeMethods.cairo_device_status (handle)));
-			}
-		}
-		public void SetThreadAware (bool value){
-			NativeMethods.cairo_gl_device_set_thread_aware (handle, value ? 1 : 0);
-		}
-		public Status Acquire()
-		{
-			return NativeMethods.cairo_device_acquire (handle);
-		}
-		public void Release()
-		{
-			NativeMethods.cairo_device_release (handle);
-		}
+        public IntPtr Handle {
+            get {
+                return handle;
+            }
+        }
+        public string Status {
+            get {
+                return  System.Runtime.InteropServices.Marshal.PtrToStringAuto(NativeMethods.cairo_status_to_string (NativeMethods.cairo_device_status (handle)));
+            }
+        }
+        public void SetThreadAware (bool value){
+            NativeMethods.cairo_gl_device_set_thread_aware (handle, value ? 1 : 0);
+        }
+        public Status Acquire()
+        {
+            return NativeMethods.cairo_device_acquire (handle);
+        }
+        public void Release()
+        {
+            NativeMethods.cairo_device_release (handle);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose ()
+        {
+            Dispose (true);
+            GC.SuppressFinalize (this);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!disposing || CairoDebug.Enabled)
-				CairoDebug.OnDisposed<Device> (handle, disposing);
+        protected virtual void Dispose (bool disposing)
+        {
+            if (!disposing || CairoDebug.Enabled)
+                CairoDebug.OnDisposed<Device> (handle, disposing);
 
-			if (!disposing || handle == IntPtr.Zero)
-				return;
+            if (!disposing || handle == IntPtr.Zero)
+                return;
 
-			NativeMethods.cairo_device_destroy (handle);
-			handle = IntPtr.Zero;
-		}
-	}
+            NativeMethods.cairo_device_destroy (handle);
+            handle = IntPtr.Zero;
+        }
+    }
 }
 

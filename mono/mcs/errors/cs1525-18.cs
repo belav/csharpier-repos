@@ -3,13 +3,13 @@
 
 class TestClass
 {
-	object changes = n ew object ();
-	
-	public int IndentLevel {
-		get {
-			return 0;
-		}
-		set {
-		}
-	}
+    object changes = n ew object ();
+    
+    public int IndentLevel {
+        get {
+            return 0;
+        }
+        set {
+        }
+    }
 }

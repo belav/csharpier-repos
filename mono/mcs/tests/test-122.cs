@@ -16,6 +16,6 @@ class A {
 
         public static int Main ()
         {
-		return 0;
+        return 0;
         }
 }

@@ -739,8 +739,8 @@ namespace System {
         {
             return GetProperties(Type.DefaultLookup);
         }
-#if	!FEATURE_CORECLR
-#endif	
+#if    !FEATURE_CORECLR
+#endif    
         // GetNestedTypes()
         // This set of method will return any nested types that are found inside
         //  of the type.
@@ -751,7 +751,7 @@ namespace System {
 
         abstract public Type[] GetNestedTypes(BindingFlags bindingAttr);
 
-#if	!FEATURE_CORECLR
+#if    !FEATURE_CORECLR
         // GetNestedType()
 #endif
         public Type GetNestedType(String name)

@@ -1,9 +1,9 @@
 //
 // CodeIndexerExpressionCas.cs
-//	- CAS unit tests for System.CodeDom.CodeIndexerExpression
+//    - CAS unit tests for System.CodeDom.CodeIndexerExpression
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,46 +37,46 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeIndexerExpressionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeIndexerExpressionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeIndexerExpression cie = new CodeIndexerExpression ();
-			Assert.AreEqual (0, cie.Indices.Count, "Indices");
-			Assert.IsNull (cie.TargetObject, "TargetObject");
-			cie.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeIndexerExpression cie = new CodeIndexerExpression ();
+            Assert.AreEqual (0, cie.Indices.Count, "Indices");
+            Assert.IsNull (cie.TargetObject, "TargetObject");
+            cie.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodeExpression[] indices = new CodeExpression[1] { target };
-			CodeIndexerExpression cie = new CodeIndexerExpression (target, indices);
-			Assert.AreEqual (1, cie.Indices.Count, "Indices");
-			Assert.AreSame (target, cie.TargetObject, "TargetObject");
-			cie.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeExpression target = new CodeExpression ();
+            CodeExpression[] indices = new CodeExpression[1] { target };
+            CodeIndexerExpression cie = new CodeIndexerExpression (target, indices);
+            Assert.AreEqual (1, cie.Indices.Count, "Indices");
+            Assert.AreSame (target, cie.TargetObject, "TargetObject");
+            cie.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeIndexerExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeIndexerExpression).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

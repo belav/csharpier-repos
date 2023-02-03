@@ -32,46 +32,46 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Assembly)]
-	[ComVisible(false)]
-	public sealed class ApplicationQueuingAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Assembly)]
+    [ComVisible(false)]
+    public sealed class ApplicationQueuingAttribute : Attribute {
 
-		#region Fields
+        #region Fields
 
-		bool enabled;
-		int maxListenerThreads;
-		bool queueListenerEnabled;
+        bool enabled;
+        int maxListenerThreads;
+        bool queueListenerEnabled;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ApplicationQueuingAttribute ()
-		{
-			enabled = true;
-			queueListenerEnabled = false;
-			maxListenerThreads = 0;
-		}
+        public ApplicationQueuingAttribute ()
+        {
+            enabled = true;
+            queueListenerEnabled = false;
+            maxListenerThreads = 0;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
+        public bool Enabled {
+            get { return enabled; }
+            set { enabled = value; }
+        }
 
-		public int MaxListenerThreads {
-			get { return maxListenerThreads; }
-			set { maxListenerThreads = value; }
-		}
+        public int MaxListenerThreads {
+            get { return maxListenerThreads; }
+            set { maxListenerThreads = value; }
+        }
 
-		public bool QueueListenerEnabled {
-			get { return queueListenerEnabled; }
-			set { queueListenerEnabled = value; }
-		}
+        public bool QueueListenerEnabled {
+            get { return queueListenerEnabled; }
+            set { queueListenerEnabled = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.WebROCollection
 //
 // Authors:
-//   	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//       Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // (c) 2005-2009 Novell, Inc. (http://www.novell.com)
 // Copyright 2012 Xamarin, Inc (http://xamarin.com)
@@ -34,48 +34,48 @@ using System.Web.Util;
 
 namespace System.Web
 {
-	class WebROCollection : NameValueCollection
-	{
-		bool got_id;
-		int id;
+    class WebROCollection : NameValueCollection
+    {
+        bool got_id;
+        int id;
 
-		public WebROCollection () : base (SecureHashCodeProvider.DefaultInvariant, CaseInsensitiveComparer.DefaultInvariant) { }
-		public bool GotID {
-			get { return got_id; }
-		}
+        public WebROCollection () : base (SecureHashCodeProvider.DefaultInvariant, CaseInsensitiveComparer.DefaultInvariant) { }
+        public bool GotID {
+            get { return got_id; }
+        }
 
-		public int ID {
-			get { return id; }
-			set {
-				got_id = true;
-				id = value;
-			}
-		}
-		public void Protect ()
-		{
-			IsReadOnly = true;
-		}
+        public int ID {
+            get { return id; }
+            set {
+                got_id = true;
+                id = value;
+            }
+        }
+        public void Protect ()
+        {
+            IsReadOnly = true;
+        }
 
-		public void Unprotect ()
-		{
-			IsReadOnly = false;
-		}
+        public void Unprotect ()
+        {
+            IsReadOnly = false;
+        }
 
-		public override string ToString ()
-		{
-			StringBuilder result = new StringBuilder ();
-			foreach (string key in AllKeys) {
-				if (result.Length > 0)
-					result.Append ('&');
+        public override string ToString ()
+        {
+            StringBuilder result = new StringBuilder ();
+            foreach (string key in AllKeys) {
+                if (result.Length > 0)
+                    result.Append ('&');
 
-				if (key != null && key.Length > 0){
-					result.Append (key);
-					result.Append ('=');
-				}
-				result.Append (Get (key));
-			}
+                if (key != null && key.Length > 0){
+                    result.Append (key);
+                    result.Append ('=');
+                }
+                result.Append (Get (key));
+            }
 
-			return result.ToString ();
-		}
-	}
+            return result.ToString ();
+        }
+    }
 }

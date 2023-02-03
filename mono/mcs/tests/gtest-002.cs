@@ -1,10 +1,10 @@
 class Cell <X> {
-	X value;
+    X value;
 
 }
 
 class D {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

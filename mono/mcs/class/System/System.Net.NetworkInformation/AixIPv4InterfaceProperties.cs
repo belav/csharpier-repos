@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.IPv4InterfaceProperties
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //      Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
@@ -29,24 +29,24 @@
 //
 
 namespace System.Net.NetworkInformation {
-	sealed class AixIPv4InterfaceProperties : UnixIPv4InterfaceProperties
-	{
-		private int _mtu;
+    sealed class AixIPv4InterfaceProperties : UnixIPv4InterfaceProperties
+    {
+        private int _mtu;
 
-		public AixIPv4InterfaceProperties (AixNetworkInterface iface, int mtu)
-			: base (iface)
-		{
-			_mtu = mtu;
-		}
+        public AixIPv4InterfaceProperties (AixNetworkInterface iface, int mtu)
+            : base (iface)
+        {
+            _mtu = mtu;
+        }
 
-		// dummy
-		public override bool IsForwardingEnabled {
-			get { return false; }
-		}
+        // dummy
+        public override bool IsForwardingEnabled {
+            get { return false; }
+        }
 
-		public override int Mtu {
-			get { return _mtu; }
-		}
-	}
+        public override int Mtu {
+            get { return _mtu; }
+        }
+    }
 }
 

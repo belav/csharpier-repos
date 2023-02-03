@@ -5,14 +5,14 @@ delegate int D ();
 
 class A
 {
-	protected D del;
+    protected D del;
 }
 
 class B : A
 {
     public static void Main ()
-	{
-		A b = new A ();
-		var v = b.del ();
-	}
+    {
+        A b = new A ();
+        var v = b.del ();
+    }
 }

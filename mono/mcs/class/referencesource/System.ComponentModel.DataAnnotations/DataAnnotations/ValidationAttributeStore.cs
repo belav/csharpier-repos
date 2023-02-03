@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Resources;
 using System.Diagnostics.CodeAnalysis;

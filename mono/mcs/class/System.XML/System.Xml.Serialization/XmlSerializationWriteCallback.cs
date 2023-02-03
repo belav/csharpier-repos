@@ -31,7 +31,7 @@
 using System;
 
 namespace System.Xml.Serialization {
-	
-	public delegate void XmlSerializationWriteCallback (object o);
+    
+    public delegate void XmlSerializationWriteCallback (object o);
 }
 

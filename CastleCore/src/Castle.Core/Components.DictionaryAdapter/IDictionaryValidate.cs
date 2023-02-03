@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,22 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System.Collections.Generic;
-	using System.ComponentModel;
+    using System.Collections.Generic;
+    using System.ComponentModel;
 
-	/// <summary>
-	/// Contract for validating Dictionary adapter.
-	/// </summary>
-	public interface IDictionaryValidate : IDataErrorInfo
-	{
-		bool CanValidate { get; set; }
+    /// <summary>
+    /// Contract for validating Dictionary adapter.
+    /// </summary>
+    public interface IDictionaryValidate : IDataErrorInfo
+    {
+        bool CanValidate { get; set; }
 
-		bool IsValid { get; }
+        bool IsValid { get; }
 
-		DictionaryValidateGroup ValidateGroups(params object[] groups);
+        DictionaryValidateGroup ValidateGroups(params object[] groups);
 
-		IEnumerable<IDictionaryValidator> Validators { get; }
+        IEnumerable<IDictionaryValidator> Validators { get; }
 
-		void AddValidator(IDictionaryValidator validator);
-	}
+        void AddValidator(IDictionaryValidator validator);
+    }
 }

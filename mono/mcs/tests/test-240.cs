@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 
 class TestClass {
-	static int return_code = 1;
+    static int return_code = 1;
     
         [Conditional("C1"), Conditional("C2")]    
         public static void ConditionalMethod()

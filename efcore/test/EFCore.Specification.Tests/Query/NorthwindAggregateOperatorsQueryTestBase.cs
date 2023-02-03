@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Immutable;
@@ -1516,12 +1516,12 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
 
         await AssertQuery(
             async,
-            ss => ss.Set<Customer>().Where(c => c.City == "MÃ©xico D.F.").Where(c => ids.Any(li => li == c.CustomerID)),
+            ss => ss.Set<Customer>().Where(c => c.City == "México D.F.").Where(c => ids.Any(li => li == c.CustomerID)),
             entryCount: 1);
 
         await AssertQuery(
             async,
-            ss => ss.Set<Customer>().Where(c => c.City == "MÃ©xico D.F.").Where(c => ids.Any(li => c.CustomerID == li)),
+            ss => ss.Set<Customer>().Where(c => c.City == "México D.F.").Where(c => ids.Any(li => c.CustomerID == li)),
             entryCount: 1);
     }
 
@@ -1586,12 +1586,12 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
 
         await AssertQuery(
             async,
-            ss => ss.Set<Customer>().Where(c => c.City == "MÃ©xico D.F.").Where(c => ids.All(li => li != c.CustomerID)),
+            ss => ss.Set<Customer>().Where(c => c.City == "México D.F.").Where(c => ids.All(li => li != c.CustomerID)),
             entryCount: 4);
 
         await AssertQuery(
             async,
-            ss => ss.Set<Customer>().Where(c => c.City == "MÃ©xico D.F.").Where(c => ids.All(li => c.CustomerID != li)),
+            ss => ss.Set<Customer>().Where(c => c.City == "México D.F.").Where(c => ids.All(li => c.CustomerID != li)),
             entryCount: 4);
     }
 

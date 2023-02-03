@@ -2,7 +2,7 @@
 // EventSourceSettings.cs
 //
 // Authors:
-//	Frederik Carlier  <frederik.carlier@quamotion.mobi>
+//    Frederik Carlier  <frederik.carlier@quamotion.mobi>
 //
 // Copyright (C) 2015 Quamotion (http://quamotion.mobi)
 //
@@ -29,13 +29,13 @@
 
 namespace System.Diagnostics.Tracing
 {
-	[Flags]
-	public enum EventSourceSettings
-	{
-		Default = 0,
-		ThrowOnEventWriteErrors = 1,
-		EtwManifestEventFormat = 4,
-		EtwSelfDescribingEventFormat = 8
-	}
+    [Flags]
+    public enum EventSourceSettings
+    {
+        Default = 0,
+        ThrowOnEventWriteErrors = 1,
+        EtwManifestEventFormat = 4,
+        EtwSelfDescribingEventFormat = 8
+    }
 }
 

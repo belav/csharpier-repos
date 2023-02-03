@@ -1,9 +1,9 @@
 //
 // CodePropertyReferenceExpressionCas.cs
-//	- CAS unit tests for System.CodeDom.CodePropertyReferenceExpression
+//    - CAS unit tests for System.CodeDom.CodePropertyReferenceExpression
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,47 +37,47 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodePropertyReferenceExpressionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodePropertyReferenceExpressionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression ();
-			Assert.AreEqual (String.Empty, cpre.PropertyName, "PropertyName");
-			cpre.PropertyName = "mono";
-			Assert.IsNull (cpre.TargetObject, "TargetObject");
-			cpre.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression ();
+            Assert.AreEqual (String.Empty, cpre.PropertyName, "PropertyName");
+            cpre.PropertyName = "mono";
+            Assert.IsNull (cpre.TargetObject, "TargetObject");
+            cpre.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression (target, "mono");
-			Assert.AreEqual ("mono", cpre.PropertyName, "PropertyName");
-			cpre.PropertyName = String.Empty;
-			Assert.AreSame (target, cpre.TargetObject, "TargetObject");
-			cpre.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeExpression target = new CodeExpression ();
+            CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression (target, "mono");
+            Assert.AreEqual ("mono", cpre.PropertyName, "PropertyName");
+            cpre.PropertyName = String.Empty;
+            Assert.AreSame (target, cpre.TargetObject, "TargetObject");
+            cpre.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodePropertyReferenceExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodePropertyReferenceExpression).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

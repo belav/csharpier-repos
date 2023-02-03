@@ -20,12 +20,12 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public delegate void KeyPressEventHandler (object sender, KeyPressEventArgs e);
+    public delegate void KeyPressEventHandler (object sender, KeyPressEventArgs e);
 }

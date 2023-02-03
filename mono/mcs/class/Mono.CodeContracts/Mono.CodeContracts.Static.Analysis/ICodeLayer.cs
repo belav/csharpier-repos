@@ -2,7 +2,7 @@
 // ICodeLayer.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,17 +33,17 @@ using Mono.CodeContracts.Static.DataFlowAnalysis;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis {
-	interface ICodeLayer<Expression, Variable, ContextData, EdgeData> where ContextData : IMethodContextProvider {
-		IMetaDataProvider MetaDataProvider { get; }
-		IContractProvider ContractProvider { get; }
-		IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ILDecoder { get; }
+    interface ICodeLayer<Expression, Variable, ContextData, EdgeData> where ContextData : IMethodContextProvider {
+        IMetaDataProvider MetaDataProvider { get; }
+        IContractProvider ContractProvider { get; }
+        IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ILDecoder { get; }
 
-		ILPrinter<APC> Printer { get; }
-		Func<Expression, string> ExpressionToString { get; }
-		Func<Variable, string> VariableToString { get; }
+        ILPrinter<APC> Printer { get; }
+        Func<Expression, string> ExpressionToString { get; }
+        Func<Variable, string> VariableToString { get; }
 
-		Func<AnalysisState, IFixPointInfo<APC, AnalysisState>> CreateForward<AnalysisState> (
-			IAnalysis<APC, AnalysisState, IILVisitor<APC, Expression, Variable, AnalysisState, AnalysisState>, EdgeData> analysis
-			);
-	}
+        Func<AnalysisState, IFixPointInfo<APC, AnalysisState>> CreateForward<AnalysisState> (
+            IAnalysis<APC, AnalysisState, IILVisitor<APC, Expression, Variable, AnalysisState, AnalysisState>, EdgeData> analysis
+            );
+    }
 }

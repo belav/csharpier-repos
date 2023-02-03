@@ -2,7 +2,7 @@
 // Mono.Security.Protocol.Ntlm.NtlmVersion
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // (C) 2007 Novell, Inc. (http://www.novell.com)
 //
@@ -32,10 +32,10 @@ using System;
 
 namespace Mono.Security.Protocol.Ntlm 
 {
-	public enum NtlmVersion
-	{
-		Version1,
-		Version2,
-		Version3
-	}
+    public enum NtlmVersion
+    {
+        Version1,
+        Version2,
+        Version3
+    }
 }

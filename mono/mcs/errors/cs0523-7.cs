@@ -3,10 +3,10 @@
 
 struct G<T>
 {
-	public static S s;
+    public static S s;
 }
 
 struct S
 {
-	private G<string> value;
+    private G<string> value;
 }

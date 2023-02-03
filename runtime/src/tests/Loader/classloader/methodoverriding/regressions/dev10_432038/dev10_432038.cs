@@ -19,9 +19,9 @@ class Bar3<T> : Bar2<T>, IBar<T>
 
 class MainClass
 {
-	public static int Main()
-	{
-		bool ok = true;
+    public static int Main()
+    {
+        bool ok = true;
         int result;
 
         Foo3 x3 = new Foo3();
@@ -45,5 +45,5 @@ class MainClass
         if ((result = y.A<string>()) != 2) { Console.WriteLine("NOT OK: calling IBar.A() did not return 2! it returned " + result); ok = false; }
 
         return ((ok) ? (100) : (-1));
-	}
+    }
 }

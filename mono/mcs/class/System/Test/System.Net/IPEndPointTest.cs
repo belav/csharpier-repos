@@ -29,8 +29,8 @@ public class IPEndPointTest
         private IPEndPoint endPoint1;
         private IPEndPoint endPoint2;
 
-	[SetUp]
-	public void GetReady()
+    [SetUp]
+    public void GetReady()
         {
                 ipAddress = IPAddress.Parse (MyIPAddressString);
                 ip = ipAddress.Address;
@@ -38,14 +38,14 @@ public class IPEndPointTest
                 endPoint2 = new IPEndPoint (ip, MyPort);
         }
 
-	[Test]
+    [Test]
         public void PublicFields ()
         {
                 Assert.AreEqual (IPEndPoint.MinPort, MyMinPort, "MinPort");
                 Assert.AreEqual (IPEndPoint.MaxPort, MyMaxPort, "MaxPort");
         }
 
-	[Test]
+    [Test]
         public void Constructors ()
         {
                 try {
@@ -76,7 +76,7 @@ public class IPEndPointTest
                 }
         }
 
-	[Test]
+    [Test]
         public void PortProperty ()
         {
                 try {
@@ -91,35 +91,35 @@ public class IPEndPointTest
                 }
         }
 
-	[Test]
+    [Test]
         public void CreateAndSerialize()
         {
-		SocketAddress addr = endPoint1.Serialize ();
-		EndPoint endPoint3 = endPoint2.Create (addr);
-		Assert.IsTrue (endPoint1.Equals (endPoint3), "#1");
+        SocketAddress addr = endPoint1.Serialize ();
+        EndPoint endPoint3 = endPoint2.Create (addr);
+        Assert.IsTrue (endPoint1.Equals (endPoint3), "#1");
 
-		IPAddress ipAddress = IPAddress.Parse ("255.255.255.255");
+        IPAddress ipAddress = IPAddress.Parse ("255.255.255.255");
                 IPEndPoint endPoint4 = new IPEndPoint (ipAddress, MyMaxPort);
-		addr = endPoint4.Serialize ();
-		EndPoint endPoint5 = endPoint2.Create(addr);
-		Assert.IsTrue (endPoint4.Equals (endPoint5), "#2");
-		Assert.AreEqual (endPoint5.ToString (), "255.255.255.255:" + MyMaxPort, "#3");
-	}
+        addr = endPoint4.Serialize ();
+        EndPoint endPoint5 = endPoint2.Create(addr);
+        Assert.IsTrue (endPoint4.Equals (endPoint5), "#2");
+        Assert.AreEqual (endPoint5.ToString (), "255.255.255.255:" + MyMaxPort, "#3");
+    }
 
-	[Test]
+    [Test]
         public void Equals ()
         {
                 Assert.IsTrue (endPoint1.Equals (endPoint2), "Equals");
                 Assert.IsTrue (!endPoint1.Equals (new IPEndPoint (ip, MyPort + 1)), "Not Equals");
         }
 
-	[Test]
+    [Test]
         public void GetHashCodeTest ()
         {
                 Assert.AreEqual (endPoint1.GetHashCode(), endPoint2.GetHashCode());
         }
 
-	[Test]
+    [Test]
         public void ToStringTest ()
         {
                 Assert.AreEqual (endPoint1.ToString (), MyIPAddressString + ":" + MyPort, "ToString #1");

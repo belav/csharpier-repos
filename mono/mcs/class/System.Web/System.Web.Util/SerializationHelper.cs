@@ -18,10 +18,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-// Copyright © 2006, 2007 Nauck IT KG		http://www.nauck-it.de
+// Copyright © 2006, 2007 Nauck IT KG        http://www.nauck-it.de
 //
 // Author:
-//	Daniel Nauck		<d.nauck(at)nauck-it.de>
+//    Daniel Nauck        <d.nauck(at)nauck-it.de>
 
 using System;
 using System.Collections.Generic;
@@ -33,55 +33,55 @@ using System.IO;
 
 namespace System.Web.Util
 {
-	internal class SerializationHelper
-	{
-		internal string SerializeToBase64(object value)
-		{
-			return Convert.ToBase64String(SerializeToBinary(value));
-		}
+    internal class SerializationHelper
+    {
+        internal string SerializeToBase64(object value)
+        {
+            return Convert.ToBase64String(SerializeToBinary(value));
+        }
 
-		internal object DeserializeFromBase64(string value)
-		{
-			return DeserializeFromBinary(Convert.FromBase64String(value));
-		}
+        internal object DeserializeFromBase64(string value)
+        {
+            return DeserializeFromBinary(Convert.FromBase64String(value));
+        }
 
-		internal string SerializeToXml(object value)
-		{
-			using (MemoryStream mStream = new MemoryStream())
-			{
-				XmlSerializer xmlFormatter = new XmlSerializer(typeof(object), "http://www.nauck-it.de/PostgreSQLProvider");
-				xmlFormatter.Serialize(mStream, value);
-				return Convert.ToBase64String(mStream.ToArray());
-			}
-		}
+        internal string SerializeToXml(object value)
+        {
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                XmlSerializer xmlFormatter = new XmlSerializer(typeof(object), "http://www.nauck-it.de/PostgreSQLProvider");
+                xmlFormatter.Serialize(mStream, value);
+                return Convert.ToBase64String(mStream.ToArray());
+            }
+        }
 
-		internal object DeserializeFromXml(string value)
-		{
-			using (MemoryStream mStream = new MemoryStream(Convert.FromBase64String(value)))
-			{
-				XmlSerializer xmlFormatter = new XmlSerializer(typeof(object), "http://www.nauck-it.de/PostgreSQLProvider");
-				return xmlFormatter.Deserialize(mStream);
-			}
-		}
+        internal object DeserializeFromXml(string value)
+        {
+            using (MemoryStream mStream = new MemoryStream(Convert.FromBase64String(value)))
+            {
+                XmlSerializer xmlFormatter = new XmlSerializer(typeof(object), "http://www.nauck-it.de/PostgreSQLProvider");
+                return xmlFormatter.Deserialize(mStream);
+            }
+        }
 
-		internal byte[] SerializeToBinary(object value)
-		{
-			using (MemoryStream mStream = new MemoryStream())
-			{
-				BinaryFormatter binFormatter = new BinaryFormatter();
-				binFormatter.Serialize(mStream, value);
+        internal byte[] SerializeToBinary(object value)
+        {
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                BinaryFormatter binFormatter = new BinaryFormatter();
+                binFormatter.Serialize(mStream, value);
 
-				return mStream.ToArray();
-			}
-		}
+                return mStream.ToArray();
+            }
+        }
 
-		internal object DeserializeFromBinary(byte[] value)
-		{
-			using (MemoryStream mStream = new MemoryStream(value))
-			{
-				BinaryFormatter binFormatter = new BinaryFormatter();
-				return binFormatter.Deserialize(mStream);
-			}
-		}
-	}
+        internal object DeserializeFromBinary(byte[] value)
+        {
+            using (MemoryStream mStream = new MemoryStream(value))
+            {
+                BinaryFormatter binFormatter = new BinaryFormatter();
+                return binFormatter.Deserialize(mStream);
+            }
+        }
+    }
 }

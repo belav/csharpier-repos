@@ -44,73 +44,73 @@ using System.Security.Authentication;
 
 namespace Mono.Net.Security
 {
-	sealed class MonoSslClientAuthenticationOptions : MonoSslAuthenticationOptions, IMonoSslClientAuthenticationOptions
-	{
-		public SslClientAuthenticationOptions Options {
-			get;
-		}
+    sealed class MonoSslClientAuthenticationOptions : MonoSslAuthenticationOptions, IMonoSslClientAuthenticationOptions
+    {
+        public SslClientAuthenticationOptions Options {
+            get;
+        }
 
-		public override bool ServerMode => false;
+        public override bool ServerMode => false;
 
-		public MonoSslClientAuthenticationOptions (SslClientAuthenticationOptions options)
-		{
-			Options = options;
-		}
+        public MonoSslClientAuthenticationOptions (SslClientAuthenticationOptions options)
+        {
+            Options = options;
+        }
 
-		public MonoSslClientAuthenticationOptions ()
-		{
-			Options = new SslClientAuthenticationOptions ();
-		}
+        public MonoSslClientAuthenticationOptions ()
+        {
+            Options = new SslClientAuthenticationOptions ();
+        }
 
-		public override bool AllowRenegotiation {
-			get => Options.AllowRenegotiation;
-			set => Options.AllowRenegotiation = value;
-		}
+        public override bool AllowRenegotiation {
+            get => Options.AllowRenegotiation;
+            set => Options.AllowRenegotiation = value;
+        }
 
-		public override RemoteCertificateValidationCallback RemoteCertificateValidationCallback {
-			get => Options.RemoteCertificateValidationCallback;
-			set => Options.RemoteCertificateValidationCallback = value;
-		}
+        public override RemoteCertificateValidationCallback RemoteCertificateValidationCallback {
+            get => Options.RemoteCertificateValidationCallback;
+            set => Options.RemoteCertificateValidationCallback = value;
+        }
 
 
-		public override X509RevocationMode CertificateRevocationCheckMode {
-			get => Options.CertificateRevocationCheckMode;
-			set => Options.CertificateRevocationCheckMode = value;
-		}
+        public override X509RevocationMode CertificateRevocationCheckMode {
+            get => Options.CertificateRevocationCheckMode;
+            set => Options.CertificateRevocationCheckMode = value;
+        }
 
-		public override EncryptionPolicy EncryptionPolicy {
-			get => Options.EncryptionPolicy;
-			set => Options.EncryptionPolicy = value;
-		}
+        public override EncryptionPolicy EncryptionPolicy {
+            get => Options.EncryptionPolicy;
+            set => Options.EncryptionPolicy = value;
+        }
 
-		public override SslProtocols EnabledSslProtocols {
-			get => Options.EnabledSslProtocols;
-			set => Options.EnabledSslProtocols = value;
-		}
+        public override SslProtocols EnabledSslProtocols {
+            get => Options.EnabledSslProtocols;
+            set => Options.EnabledSslProtocols = value;
+        }
 
-		public LocalCertificateSelectionCallback LocalCertificateSelectionCallback {
-			get => Options.LocalCertificateSelectionCallback;
-			set => Options.LocalCertificateSelectionCallback = value;
-		}
+        public LocalCertificateSelectionCallback LocalCertificateSelectionCallback {
+            get => Options.LocalCertificateSelectionCallback;
+            set => Options.LocalCertificateSelectionCallback = value;
+        }
 
-		public override string TargetHost {
-			get => Options.TargetHost;
-			set => Options.TargetHost = value;
-		}
+        public override string TargetHost {
+            get => Options.TargetHost;
+            set => Options.TargetHost = value;
+        }
 
-		public override bool ClientCertificateRequired {
-			get => throw new NotSupportedException ();
-			set => throw new NotSupportedException ();
-		}
+        public override bool ClientCertificateRequired {
+            get => throw new NotSupportedException ();
+            set => throw new NotSupportedException ();
+        }
 
-		public override X509CertificateCollection ClientCertificates {
-			get => Options.ClientCertificates;
-			set => Options.ClientCertificates = value;
-		}
+        public override X509CertificateCollection ClientCertificates {
+            get => Options.ClientCertificates;
+            set => Options.ClientCertificates = value;
+        }
 
-		public override X509Certificate ServerCertificate {
-			get => throw new NotSupportedException ();
-			set => throw new NotSupportedException ();
-		}
-	}
+        public override X509Certificate ServerCertificate {
+            get => throw new NotSupportedException ();
+            set => throw new NotSupportedException ();
+        }
+    }
 }

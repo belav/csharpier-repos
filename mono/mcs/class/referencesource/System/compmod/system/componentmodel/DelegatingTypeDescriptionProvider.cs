@@ -61,7 +61,7 @@ namespace System.ComponentModel {
         ///     The GetCache method returns an instance of this cache.  GetCache will return 
         ///     null if there is no supported cache for an object.
         /// </devdoc>
-	    public override IDictionary GetCache(object instance)
+        public override IDictionary GetCache(object instance)
         {
             return Provider.GetCache(instance);
         }

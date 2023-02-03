@@ -1,9 +1,9 @@
 //
 // HtmlInputCheckBoxTest.cs
-//	- Unit tests for System.Web.UI.HtmlControls.HtmlInputCheckBox
+//    - Unit tests for System.Web.UI.HtmlControls.HtmlInputCheckBox
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,72 +35,72 @@ using MonoTests.stand_alone.WebHarness;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
-	public class TestHtmlInputCheckBox : HtmlInputCheckBox {
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+    public class TestHtmlInputCheckBox : HtmlInputCheckBox {
+        public string Render ()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
+            base.Render (writer);
+            return writer.InnerWriter.ToString ();
+        }
+    }
 
-	[TestFixture]
-	public class HtmlInputCheckBoxTest {
+    [TestFixture]
+    public class HtmlInputCheckBoxTest {
 
-		[Test]
-		public void DefaultProperties ()
-		{
-			HtmlInputCheckBox c = new HtmlInputCheckBox ();
-		
-			Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count");
+        [Test]
+        public void DefaultProperties ()
+        {
+            HtmlInputCheckBox c = new HtmlInputCheckBox ();
+        
+            Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count");
 
-			Assert.IsFalse (c.Checked, "Checked");
-			
-			Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count after");
-		}
+            Assert.IsFalse (c.Checked, "Checked");
+            
+            Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count after");
+        }
 
-		[Test]
-		public void NullProperties ()
-		{
-			HtmlInputCheckBox c = new HtmlInputCheckBox ();
-			
-			Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count");
-			Assert.AreEqual ("checkbox", c.Attributes["type"], "Attributes[\"type\"]");
-			
-			c.Checked = true;
-			Assert.IsTrue (c.Checked, "Checked");
-			
-			Assert.AreEqual (2, c.Attributes.Count, "Attributes.Count after");
-			Assert.AreEqual ("checked", c.Attributes["checked"], "Attributes[\"checked\"]");
-		}
+        [Test]
+        public void NullProperties ()
+        {
+            HtmlInputCheckBox c = new HtmlInputCheckBox ();
+            
+            Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count");
+            Assert.AreEqual ("checkbox", c.Attributes["type"], "Attributes[\"type\"]");
+            
+            c.Checked = true;
+            Assert.IsTrue (c.Checked, "Checked");
+            
+            Assert.AreEqual (2, c.Attributes.Count, "Attributes.Count after");
+            Assert.AreEqual ("checked", c.Attributes["checked"], "Attributes[\"checked\"]");
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlInputCheckBox c = new HtmlInputCheckBox ();
+        [Test]
+        public void CleanProperties ()
+        {
+            HtmlInputCheckBox c = new HtmlInputCheckBox ();
 
-			c.Checked = true;
-			Assert.AreEqual (2, c.Attributes.Count, "Attributes.Count");
+            c.Checked = true;
+            Assert.AreEqual (2, c.Attributes.Count, "Attributes.Count");
 
-			c.Checked = false;
-			Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count after");
-		}
+            c.Checked = false;
+            Assert.AreEqual (1, c.Attributes.Count, "Attributes.Count after");
+        }
 
-		[Test] 
-		public void Render ()
-		{
-			TestHtmlInputCheckBox c = new TestHtmlInputCheckBox ();
+        [Test] 
+        public void Render ()
+        {
+            TestHtmlInputCheckBox c = new TestHtmlInputCheckBox ();
 
-			c.ID = "*1*";
-			
-			string s = c.Render ();
+            c.ID = "*1*";
+            
+            string s = c.Render ();
 
-			Assert.IsTrue (s.IndexOf (" type=\"checkbox\"") > 0, "type");
+            Assert.IsTrue (s.IndexOf (" type=\"checkbox\"") > 0, "type");
 
-			c.Checked = true;
-			s = c.Render ();
+            c.Checked = true;
+            s = c.Render ();
 
-			HtmlDiff.AssertAreEqual ("<input name=\"*1*\" id=\"*1*\" type=\"checkbox\" checked=\"checked\" />", s, "Render fail");
-		}
-	}
+            HtmlDiff.AssertAreEqual ("<input name=\"*1*\" id=\"*1*\" type=\"checkbox\" checked=\"checked\" />", s, "Render fail");
+        }
+    }
 }

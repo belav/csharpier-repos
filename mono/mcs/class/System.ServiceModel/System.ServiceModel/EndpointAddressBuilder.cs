@@ -2,7 +2,7 @@
 // EndpointAddressBuilder.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,88 +34,88 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public class EndpointAddressBuilder
-	{
-		Collection<AddressHeader> headers = new Collection<AddressHeader> ();
-		EndpointIdentity identity;
-		Uri uri;
-		string extension, metadata;
+    public class EndpointAddressBuilder
+    {
+        Collection<AddressHeader> headers = new Collection<AddressHeader> ();
+        EndpointIdentity identity;
+        Uri uri;
+        string extension, metadata;
 
-		public EndpointAddressBuilder ()
-		{
-		}
+        public EndpointAddressBuilder ()
+        {
+        }
 
-		public EndpointAddressBuilder (EndpointAddress address)
-		{
-			identity = address.Identity;
-			uri = address.Uri;
-			foreach (AddressHeader h in address.Headers)
-				headers.Add (h);
-		}
+        public EndpointAddressBuilder (EndpointAddress address)
+        {
+            identity = address.Identity;
+            uri = address.Uri;
+            foreach (AddressHeader h in address.Headers)
+                headers.Add (h);
+        }
 
-		public Collection<AddressHeader> Headers {
-			get { return headers; }
-		}
+        public Collection<AddressHeader> Headers {
+            get { return headers; }
+        }
 
-		public Uri Uri {
-			get { return uri; }
-			set { uri = value; }
-		}
+        public Uri Uri {
+            get { return uri; }
+            set { uri = value; }
+        }
 
-		public EndpointIdentity Identity {
-			get { return identity; }
-			set { identity = value; }
-		}
+        public EndpointIdentity Identity {
+            get { return identity; }
+            set { identity = value; }
+        }
 
 #if !MOBILE
-		public XmlDictionaryReader GetReaderAtExtensions ()
-		{
-			if (extension == null)
-				return null;
-			var r = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (extension)));
-			r.MoveToContent ();
-			return r;
-		}
+        public XmlDictionaryReader GetReaderAtExtensions ()
+        {
+            if (extension == null)
+                return null;
+            var r = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (extension)));
+            r.MoveToContent ();
+            return r;
+        }
 
-		public XmlDictionaryReader GetReaderAtMetadata ()
-		{
-			if (metadata == null)
-				return null;
-			var r = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (metadata)));
-			r.MoveToContent ();
-			return r;
-		}
+        public XmlDictionaryReader GetReaderAtMetadata ()
+        {
+            if (metadata == null)
+                return null;
+            var r = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (metadata)));
+            r.MoveToContent ();
+            return r;
+        }
 
-		public void SetExtensionReader (XmlDictionaryReader reader)
-		{
-			if (reader == null)
-				extension = null;
-			else {
-				reader.MoveToContent ();
-				extension = reader.ReadOuterXml ();
-			}
-		}
+        public void SetExtensionReader (XmlDictionaryReader reader)
+        {
+            if (reader == null)
+                extension = null;
+            else {
+                reader.MoveToContent ();
+                extension = reader.ReadOuterXml ();
+            }
+        }
 
-		public void SetMetadataReader (XmlDictionaryReader reader)
-		{
-			if (reader == null)
-				metadata = null;
-			else {
-				reader.MoveToContent ();
-				metadata = reader.ReadOuterXml ();
-			}
-		}
+        public void SetMetadataReader (XmlDictionaryReader reader)
+        {
+            if (reader == null)
+                metadata = null;
+            else {
+                reader.MoveToContent ();
+                metadata = reader.ReadOuterXml ();
+            }
+        }
 
-		public EndpointAddress ToEndpointAddress ()
-		{
-			return new EndpointAddress (uri, identity,
-				new AddressHeaderCollection (headers), GetReaderAtMetadata (), GetReaderAtExtensions ());
-		}
+        public EndpointAddress ToEndpointAddress ()
+        {
+            return new EndpointAddress (uri, identity,
+                new AddressHeaderCollection (headers), GetReaderAtMetadata (), GetReaderAtExtensions ());
+        }
 #else
-		public EndpointAddress ToEndpointAddress ()
-		{
-			return new EndpointAddress (uri, headers.ToArray ());
-		}
+        public EndpointAddress ToEndpointAddress ()
+        {
+            return new EndpointAddress (uri, headers.ToArray ());
+        }
 #endif
-	}
+    }
 }

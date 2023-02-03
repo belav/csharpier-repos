@@ -1,4 +1,4 @@
-﻿//
+//
 // ServiceReference.cs
 //
 // Author:
@@ -34,46 +34,46 @@ using System.ComponentModel;
 
 namespace System.Web.UI
 {
-	[DefaultProperty ("Path")]
-	public class ServiceReference
-	{
-		bool _inlineScript;
-		string _path;
+    [DefaultProperty ("Path")]
+    public class ServiceReference
+    {
+        bool _inlineScript;
+        string _path;
 
-		public ServiceReference ()
-		{
-		}
+        public ServiceReference ()
+        {
+        }
 
-		public ServiceReference (string path)
-		{
-			_path = path;
-		}
+        public ServiceReference (string path)
+        {
+            _path = path;
+        }
 
-		[DefaultValue (false)]
-		[Category ("Behavior")]
-		public bool InlineScript {
-			get {
-				return _inlineScript;
-			}
-			set {
-				_inlineScript = value;
-			}
-		}
+        [DefaultValue (false)]
+        [Category ("Behavior")]
+        public bool InlineScript {
+            get {
+                return _inlineScript;
+            }
+            set {
+                _inlineScript = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[Category ("Behavior")]
-		public string Path {
-			get {
-				return _path != null ? _path : String.Empty;
-			}
-			set {
-				_path = value;
-			}
-		}
+        [DefaultValue ("")]
+        [Category ("Behavior")]
+        public string Path {
+            get {
+                return _path != null ? _path : String.Empty;
+            }
+            set {
+                _path = value;
+            }
+        }
 
-		public override string ToString ()
-		{
-			return Path;
-		}
-	}
+        public override string ToString ()
+        {
+            return Path;
+        }
+    }
 }

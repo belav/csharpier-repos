@@ -28,9 +28,9 @@
 
 namespace Mono.Cecil {
 
-	internal interface IAssemblyResolver {
+    internal interface IAssemblyResolver {
 
-		AssemblyDefinition Resolve (string fullName);
-		AssemblyDefinition Resolve (AssemblyNameReference name);
-	}
+        AssemblyDefinition Resolve (string fullName);
+        AssemblyDefinition Resolve (AssemblyNameReference name);
+    }
 }

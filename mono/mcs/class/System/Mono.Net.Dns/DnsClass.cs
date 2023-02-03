@@ -2,7 +2,7 @@
 // Mono.Net.Dns.DnsClass
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -19,15 +19,15 @@
 // limitations under the License.
 //
 namespace Mono.Net.Dns {
-	enum DnsClass : ushort {
-		Internet = 1,
-		IN = 1,
-		CSNET = 2,
-		CS = 2,
-		CHAOS = 3,
-		CH = 3,
-		Hesiod = 4,
-		HS = 4,
-	}
+    enum DnsClass : ushort {
+        Internet = 1,
+        IN = 1,
+        CSNET = 2,
+        CS = 2,
+        CHAOS = 3,
+        CH = 3,
+        Hesiod = 4,
+        HS = 4,
+    }
 }
 

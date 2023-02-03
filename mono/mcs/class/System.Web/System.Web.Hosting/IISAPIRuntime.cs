@@ -33,16 +33,16 @@ using System.Runtime.InteropServices;
 
 namespace System.Web.Hosting
 {
-	//[Guid ("c4918956-485b-3503-bd10-9083e3f6b66c")] -> 1.1 pre service pack
-	[Guid ("08A2C56F-7C16-41C1-A8BE-432917A1A2D1")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImportAttribute]
-	public interface IISAPIRuntime
-	{
-		void DoGCCollect ();
-		[return: MarshalAs (UnmanagedType.I4)]
-		int ProcessRequest ([In] IntPtr ecb, [In, MarshalAs(UnmanagedType.I4)] int useProcessModel);
-		void StartProcessing ();
-		void StopProcessing ();
-	}
+    //[Guid ("c4918956-485b-3503-bd10-9083e3f6b66c")] -> 1.1 pre service pack
+    [Guid ("08A2C56F-7C16-41C1-A8BE-432917A1A2D1")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImportAttribute]
+    public interface IISAPIRuntime
+    {
+        void DoGCCollect ();
+        [return: MarshalAs (UnmanagedType.I4)]
+        int ProcessRequest ([In] IntPtr ecb, [In, MarshalAs(UnmanagedType.I4)] int useProcessModel);
+        void StartProcessing ();
+        void StopProcessing ();
+    }
 }

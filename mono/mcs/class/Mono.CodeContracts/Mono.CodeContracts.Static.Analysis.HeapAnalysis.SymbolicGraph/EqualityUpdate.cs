@@ -2,7 +2,7 @@
 // EqualityUpdate.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,32 +29,32 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-	class EqualityUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain> 
-		where TFunc : IEquatable<TFunc>, IConstantInfo 
-		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
-		private readonly SymValue sv1;
-		private readonly SymValue sv2;
+    class EqualityUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain> 
+        where TFunc : IEquatable<TFunc>, IConstantInfo 
+        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+        private readonly SymValue sv1;
+        private readonly SymValue sv2;
 
-		public EqualityUpdate (SymValue sv1, SymValue sv2)
-		{
-			this.sv1 = sv1;
-			this.sv2 = sv2;
-		}
+        public EqualityUpdate (SymValue sv1, SymValue sv2)
+        {
+            this.sv1 = sv1;
+            this.sv2 = sv2;
+        }
 
-		#region Overrides of Update
-		public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
-		{
-			if (!merge.IsCommon (this.sv1) || !merge.IsCommon (this.sv2) || (!merge.Graph1.IsEqual (this.sv1, this.sv2) || merge.Result.IsEqual (this.sv1, this.sv2)))
-				return;
-			if (merge.Graph2.IsEqual (this.sv1, this.sv2))
-				merge.Result.AssumeEqual (this.sv1, this.sv2);
-			else
-				merge.Changed = true;
-		}
+        #region Overrides of Update
+        public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
+        {
+            if (!merge.IsCommon (this.sv1) || !merge.IsCommon (this.sv2) || (!merge.Graph1.IsEqual (this.sv1, this.sv2) || merge.Result.IsEqual (this.sv1, this.sv2)))
+                return;
+            if (merge.Graph2.IsEqual (this.sv1, this.sv2))
+                merge.Result.AssumeEqual (this.sv1, this.sv2);
+            else
+                merge.Changed = true;
+        }
 
-		public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
-		{
-		}
-		#endregion
-	}
+        public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
+        {
+        }
+        #endregion
+    }
 }

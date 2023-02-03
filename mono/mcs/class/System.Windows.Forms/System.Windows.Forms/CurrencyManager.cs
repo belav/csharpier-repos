@@ -20,8 +20,8 @@
 // Copyright (c) 2005 Novell, Inc.
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
-// 	Ivan N. Zlatev (contact@i-nz.net)
+//    Jackson Harper (jackson@ximian.com)
+//     Ivan N. Zlatev (contact@i-nz.net)
 //
 
 using System;
@@ -31,423 +31,423 @@ using System.Collections;
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
-	public class CurrencyManager : BindingManagerBase {
+    public class CurrencyManager : BindingManagerBase {
 
-		protected int listposition;
-		protected Type finalType;
+        protected int listposition;
+        protected Type finalType;
 
-		private IList list;
-		private bool binding_suspended;
+        private IList list;
+        private bool binding_suspended;
 
-		private object data_source;
+        private object data_source;
 
-		bool editing;
+        bool editing;
 
-		internal CurrencyManager ()
-		{
-		}
+        internal CurrencyManager ()
+        {
+        }
 
-		internal CurrencyManager (object data_source)
-		{
-			SetDataSource (data_source);
-		}
+        internal CurrencyManager (object data_source)
+        {
+            SetDataSource (data_source);
+        }
 
-		public IList List {
-			get { return list; }
-		}
+        public IList List {
+            get { return list; }
+        }
 
-		public override object Current {
-			get {
-				if (listposition == -1 || listposition >= list.Count) {
-					// Console.WriteLine ("throwing exception from here");
-					// Console.WriteLine (Environment.StackTrace);
-					throw new IndexOutOfRangeException ("list position");
-				}
-				return list [listposition];
-			}
-		}
+        public override object Current {
+            get {
+                if (listposition == -1 || listposition >= list.Count) {
+                    // Console.WriteLine ("throwing exception from here");
+                    // Console.WriteLine (Environment.StackTrace);
+                    throw new IndexOutOfRangeException ("list position");
+                }
+                return list [listposition];
+            }
+        }
 
-		public override int Count {
-			get { return list.Count; }
-		}
+        public override int Count {
+            get { return list.Count; }
+        }
 
-		public override int Position {
-			get {
-				return listposition;
-			} 
-			set {
-				if (value < 0)
-					value = 0;
-				if (value >= list.Count)
-					value = list.Count - 1;
-				if (listposition == value)
-					return;
+        public override int Position {
+            get {
+                return listposition;
+            } 
+            set {
+                if (value < 0)
+                    value = 0;
+                if (value >= list.Count)
+                    value = list.Count - 1;
+                if (listposition == value)
+                    return;
 
-				if (listposition != -1)
-					EndCurrentEdit ();
+                if (listposition != -1)
+                    EndCurrentEdit ();
 
-				listposition = value;
-				OnCurrentChanged (EventArgs.Empty);
-				OnPositionChanged (EventArgs.Empty);
-			}
-		}
+                listposition = value;
+                OnCurrentChanged (EventArgs.Empty);
+                OnPositionChanged (EventArgs.Empty);
+            }
+        }
 
-		internal void SetDataSource (object data_source)
-		{
-			if (this.data_source is IBindingList)
-				((IBindingList)this.data_source).ListChanged -= new ListChangedEventHandler (ListChangedHandler);
+        internal void SetDataSource (object data_source)
+        {
+            if (this.data_source is IBindingList)
+                ((IBindingList)this.data_source).ListChanged -= new ListChangedEventHandler (ListChangedHandler);
 
-			if (data_source is IListSource)
-				data_source = ((IListSource)data_source).GetList();
+            if (data_source is IListSource)
+                data_source = ((IListSource)data_source).GetList();
 
-			this.data_source = data_source;
-			if (data_source != null)
-				this.finalType = data_source.GetType();
+            this.data_source = data_source;
+            if (data_source != null)
+                this.finalType = data_source.GetType();
 
-			listposition = -1;
-			if (this.data_source is IBindingList)
-				((IBindingList)this.data_source).ListChanged += new ListChangedEventHandler (ListChangedHandler);
+            listposition = -1;
+            if (this.data_source is IBindingList)
+                ((IBindingList)this.data_source).ListChanged += new ListChangedEventHandler (ListChangedHandler);
 
-			list = (IList)data_source;
+            list = (IList)data_source;
 
-			// XXX this is wrong.  MS invokes OnItemChanged directly, which seems to call PushData.
-			ListChangedHandler (null, new ListChangedEventArgs (ListChangedType.Reset, -1));
-		}
+            // XXX this is wrong.  MS invokes OnItemChanged directly, which seems to call PushData.
+            ListChangedHandler (null, new ListChangedEventArgs (ListChangedType.Reset, -1));
+        }
 
-		public override PropertyDescriptorCollection GetItemProperties ()
-		{
-			return ListBindingHelper.GetListItemProperties (list);
-		}
+        public override PropertyDescriptorCollection GetItemProperties ()
+        {
+            return ListBindingHelper.GetListItemProperties (list);
+        }
 
-		public override void RemoveAt (int index)
-		{
-			list.RemoveAt (index);
-		}
+        public override void RemoveAt (int index)
+        {
+            list.RemoveAt (index);
+        }
 
-		public override void SuspendBinding ()
-		{
-			binding_suspended = true;
-		}
-		
-		public override void ResumeBinding ()
-		{
-			binding_suspended = false;
-		}
+        public override void SuspendBinding ()
+        {
+            binding_suspended = true;
+        }
+        
+        public override void ResumeBinding ()
+        {
+            binding_suspended = false;
+        }
 
                 internal override bool IsSuspended {
                         get {
-				// Always return true if we don't have items
-				if (Count == 0)
-					return true;
+                // Always return true if we don't have items
+                if (Count == 0)
+                    return true;
 
-				return binding_suspended;
-			}
+                return binding_suspended;
+            }
                 }
 
                 internal bool AllowNew {
-                	get {
-				if (list is IBindingList)
-					return ((IBindingList)list).AllowNew;
+                    get {
+                if (list is IBindingList)
+                    return ((IBindingList)list).AllowNew;
 
-				if (list.IsReadOnly)
-					return false;
+                if (list.IsReadOnly)
+                    return false;
 
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		internal bool AllowRemove {
-			get {
-				if (list.IsReadOnly)
-					return false;
+        internal bool AllowRemove {
+            get {
+                if (list.IsReadOnly)
+                    return false;
 
-				if (list is IBindingList)
-					return ((IBindingList)list).AllowRemove;
+                if (list is IBindingList)
+                    return ((IBindingList)list).AllowRemove;
 
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		internal bool AllowEdit {
-			get {
-				if (list is IBindingList)
-					return ((IBindingList)list).AllowEdit;
+        internal bool AllowEdit {
+            get {
+                if (list is IBindingList)
+                    return ((IBindingList)list).AllowEdit;
 
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		public override void AddNew ()
-		{
-			IBindingList ibl = list as IBindingList;
+        public override void AddNew ()
+        {
+            IBindingList ibl = list as IBindingList;
 
-			if (ibl == null)
-				throw new NotSupportedException ();
+            if (ibl == null)
+                throw new NotSupportedException ();
 
-			ibl.AddNew ();
+            ibl.AddNew ();
 
-			bool validate = (Position != (list.Count - 1));
-			ChangeRecordState (list.Count - 1, validate, validate, true, true);
-		}
+            bool validate = (Position != (list.Count - 1));
+            ChangeRecordState (list.Count - 1, validate, validate, true, true);
+        }
 
 
-		void BeginEdit ()
-		{
-			IEditableObject editable = Current as IEditableObject;
+        void BeginEdit ()
+        {
+            IEditableObject editable = Current as IEditableObject;
 
-			if (editable != null) {
-				try {
-					editable.BeginEdit ();
-					editing = true;
-				}
-				catch {
-					/* swallow exceptions in IEditableObject.BeginEdit () */
-				}
-			}
-		}
+            if (editable != null) {
+                try {
+                    editable.BeginEdit ();
+                    editing = true;
+                }
+                catch {
+                    /* swallow exceptions in IEditableObject.BeginEdit () */
+                }
+            }
+        }
 
-		public override void CancelCurrentEdit ()
-		{
-			if (listposition == -1)
-				return;
+        public override void CancelCurrentEdit ()
+        {
+            if (listposition == -1)
+                return;
 
-			IEditableObject editable = Current as IEditableObject;
+            IEditableObject editable = Current as IEditableObject;
 
-			if (editable != null) {
-				editing = false;
-				editable.CancelEdit ();
-				OnItemChanged (new ItemChangedEventArgs (Position));
-			}
-			if (list is ICancelAddNew)
-				((ICancelAddNew)list).CancelNew (listposition);
-		}
-		
-		public override void EndCurrentEdit ()
-		{
-			if (listposition == -1)
-				return;
+            if (editable != null) {
+                editing = false;
+                editable.CancelEdit ();
+                OnItemChanged (new ItemChangedEventArgs (Position));
+            }
+            if (list is ICancelAddNew)
+                ((ICancelAddNew)list).CancelNew (listposition);
+        }
+        
+        public override void EndCurrentEdit ()
+        {
+            if (listposition == -1)
+                return;
 
-			IEditableObject editable = Current as IEditableObject;
+            IEditableObject editable = Current as IEditableObject;
 
-			if (editable != null) {
-				editing = false;
-				editable.EndEdit ();
-			}
+            if (editable != null) {
+                editing = false;
+                editable.EndEdit ();
+            }
 
-			if (list is ICancelAddNew)
-				((ICancelAddNew)list).EndNew (listposition);
-		}
+            if (list is ICancelAddNew)
+                ((ICancelAddNew)list).EndNew (listposition);
+        }
 
-		public void Refresh ()
-		{
-			ListChangedHandler (null, new ListChangedEventArgs (ListChangedType.Reset, -1));
-		}
+        public void Refresh ()
+        {
+            ListChangedHandler (null, new ListChangedEventArgs (ListChangedType.Reset, -1));
+        }
 
-		protected void CheckEmpty ()
-		{
-			if (list == null || list.Count < 1)
-				throw new Exception ("List is empty.");
-				
-		}
+        protected void CheckEmpty ()
+        {
+            if (list == null || list.Count < 1)
+                throw new Exception ("List is empty.");
+                
+        }
 
-		protected internal override void OnCurrentChanged (EventArgs e)
-		{
-			if (onCurrentChangedHandler != null) {
-				onCurrentChangedHandler (this, e);
-			}
+        protected internal override void OnCurrentChanged (EventArgs e)
+        {
+            if (onCurrentChangedHandler != null) {
+                onCurrentChangedHandler (this, e);
+            }
 
-			// don't call OnCurrentItemChanged here, as it can be overridden
-			if (onCurrentItemChangedHandler != null) {
-				onCurrentItemChangedHandler (this, e);
-			}
+            // don't call OnCurrentItemChanged here, as it can be overridden
+            if (onCurrentItemChangedHandler != null) {
+                onCurrentItemChangedHandler (this, e);
+            }
 
-		}
+        }
 
-		protected override void OnCurrentItemChanged (EventArgs e)
-		{
-			if (onCurrentItemChangedHandler != null) {
-				onCurrentItemChangedHandler (this, e);
-			}
-		}
+        protected override void OnCurrentItemChanged (EventArgs e)
+        {
+            if (onCurrentItemChangedHandler != null) {
+                onCurrentItemChangedHandler (this, e);
+            }
+        }
 
-		protected virtual void OnItemChanged (ItemChangedEventArgs e)
-		{
-			if (ItemChanged != null)
-				ItemChanged (this, e);
+        protected virtual void OnItemChanged (ItemChangedEventArgs e)
+        {
+            if (ItemChanged != null)
+                ItemChanged (this, e);
 
-			transfering_data = true;
-			PushData ();
-			transfering_data = false;
-		}
+            transfering_data = true;
+            PushData ();
+            transfering_data = false;
+        }
 
-		void OnListChanged (ListChangedEventArgs args)
-		{
-			if (ListChanged != null)
-				ListChanged (this, args);
-		}
+        void OnListChanged (ListChangedEventArgs args)
+        {
+            if (ListChanged != null)
+                ListChanged (this, args);
+        }
 
-		protected virtual void OnPositionChanged (EventArgs e)
-		{
-			if (onPositionChangedHandler != null)
-				onPositionChangedHandler (this, e);
-		}
+        protected virtual void OnPositionChanged (EventArgs e)
+        {
+            if (onPositionChangedHandler != null)
+                onPositionChangedHandler (this, e);
+        }
 
-		protected internal override string GetListName (ArrayList listAccessors)
-		{
-			if (list is ITypedList) {
-				PropertyDescriptor [] pds = null;
-				if (listAccessors != null) {
-					pds = new PropertyDescriptor [listAccessors.Count];
-					listAccessors.CopyTo (pds, 0);
-				}
-				return ((ITypedList) list).GetListName (pds);
-			}
-			else if (finalType != null) {
-				return finalType.Name;
-			}
-			return String.Empty;
-		}
+        protected internal override string GetListName (ArrayList listAccessors)
+        {
+            if (list is ITypedList) {
+                PropertyDescriptor [] pds = null;
+                if (listAccessors != null) {
+                    pds = new PropertyDescriptor [listAccessors.Count];
+                    listAccessors.CopyTo (pds, 0);
+                }
+                return ((ITypedList) list).GetListName (pds);
+            }
+            else if (finalType != null) {
+                return finalType.Name;
+            }
+            return String.Empty;
+        }
 
-		protected override void UpdateIsBinding ()
-		{
-			UpdateItem ();
+        protected override void UpdateIsBinding ()
+        {
+            UpdateItem ();
 
-			foreach (Binding binding in Bindings)
-				binding.UpdateIsBinding ();
+            foreach (Binding binding in Bindings)
+                binding.UpdateIsBinding ();
 
-			ChangeRecordState (listposition, false, false, true, false);
+            ChangeRecordState (listposition, false, false, true, false);
 
-			OnItemChanged (new ItemChangedEventArgs (-1));
-		}
+            OnItemChanged (new ItemChangedEventArgs (-1));
+        }
 
-		private void ChangeRecordState (int newPosition,
-						bool validating,
-						bool endCurrentEdit,
-						bool firePositionChanged,
-						bool pullData)
-		{
-			if (endCurrentEdit)
-				EndCurrentEdit ();
+        private void ChangeRecordState (int newPosition,
+                        bool validating,
+                        bool endCurrentEdit,
+                        bool firePositionChanged,
+                        bool pullData)
+        {
+            if (endCurrentEdit)
+                EndCurrentEdit ();
 
-			int old_index = listposition;
+            int old_index = listposition;
 
-			listposition = newPosition;
+            listposition = newPosition;
 
-			if (listposition >= list.Count)
-				listposition = list.Count - 1;
+            if (listposition >= list.Count)
+                listposition = list.Count - 1;
 
-			if (old_index != -1 && listposition != -1)
-				OnCurrentChanged (EventArgs.Empty);
+            if (old_index != -1 && listposition != -1)
+                OnCurrentChanged (EventArgs.Empty);
 
-			if (firePositionChanged)
-				OnPositionChanged (EventArgs.Empty);
-		}
+            if (firePositionChanged)
+                OnPositionChanged (EventArgs.Empty);
+        }
 
-		private void UpdateItem ()
-		{
-			// Probably should be validating or something here
-			if (!transfering_data && listposition == -1 && list.Count > 0) {
-				listposition = 0;
-				BeginEdit ();
-			}
-		}
-		
-		internal object this [int index] {
-			get { return list [index]; }
-		}		
-		
-		private PropertyDescriptorCollection GetBrowsableProperties (Type t)
-		{
-			Attribute [] att = new System.Attribute [1];
-			att [0] = new BrowsableAttribute (true);
-			return TypeDescriptor.GetProperties (t, att);
-		}
+        private void UpdateItem ()
+        {
+            // Probably should be validating or something here
+            if (!transfering_data && listposition == -1 && list.Count > 0) {
+                listposition = 0;
+                BeginEdit ();
+            }
+        }
+        
+        internal object this [int index] {
+            get { return list [index]; }
+        }        
+        
+        private PropertyDescriptorCollection GetBrowsableProperties (Type t)
+        {
+            Attribute [] att = new System.Attribute [1];
+            att [0] = new BrowsableAttribute (true);
+            return TypeDescriptor.GetProperties (t, att);
+        }
 
-		protected void OnMetaDataChanged (EventArgs e)
-		{
-			if (MetaDataChanged != null)
-				MetaDataChanged (this, e);
-		}
+        protected void OnMetaDataChanged (EventArgs e)
+        {
+            if (MetaDataChanged != null)
+                MetaDataChanged (this, e);
+        }
 
-		private void ListChangedHandler (object sender, ListChangedEventArgs e)
-		{
-			switch (e.ListChangedType) {
-			case ListChangedType.PropertyDescriptorAdded:
-			case ListChangedType.PropertyDescriptorDeleted:
-			case ListChangedType.PropertyDescriptorChanged:
-				OnMetaDataChanged (EventArgs.Empty);
-				OnListChanged (e);
-				break;
-			case ListChangedType.ItemDeleted:
-				if (list.Count == 0) {
-					/* the last row was deleted */
-					listposition = -1;
-					UpdateIsBinding ();
+        private void ListChangedHandler (object sender, ListChangedEventArgs e)
+        {
+            switch (e.ListChangedType) {
+            case ListChangedType.PropertyDescriptorAdded:
+            case ListChangedType.PropertyDescriptorDeleted:
+            case ListChangedType.PropertyDescriptorChanged:
+                OnMetaDataChanged (EventArgs.Empty);
+                OnListChanged (e);
+                break;
+            case ListChangedType.ItemDeleted:
+                if (list.Count == 0) {
+                    /* the last row was deleted */
+                    listposition = -1;
+                    UpdateIsBinding ();
 
-					OnPositionChanged (EventArgs.Empty);
-					OnCurrentChanged (EventArgs.Empty);
-				}
-				else if (e.NewIndex <= listposition) {
-					/* the deleted row was either the current one, or one earlier in the list.
-					   Update the index and emit PositionChanged, CurrentChanged, and ItemChanged. */
-					// FIXME: this looks wrong, shouldn't it be (listposition - 1) instead of e.NewIndex ?
-					ChangeRecordState (e.NewIndex,
-							   false, false, e.NewIndex != listposition, false);
-				}
-				else {
-					/* the deleted row was after the current one, so we don't
-					   need to update bound controls for Position/Current changed */
-				}
+                    OnPositionChanged (EventArgs.Empty);
+                    OnCurrentChanged (EventArgs.Empty);
+                }
+                else if (e.NewIndex <= listposition) {
+                    /* the deleted row was either the current one, or one earlier in the list.
+                       Update the index and emit PositionChanged, CurrentChanged, and ItemChanged. */
+                    // FIXME: this looks wrong, shouldn't it be (listposition - 1) instead of e.NewIndex ?
+                    ChangeRecordState (e.NewIndex,
+                               false, false, e.NewIndex != listposition, false);
+                }
+                else {
+                    /* the deleted row was after the current one, so we don't
+                       need to update bound controls for Position/Current changed */
+                }
 
-				OnItemChanged (new ItemChangedEventArgs (-1));
-				OnListChanged (e);
-				break;
-			case ListChangedType.ItemAdded:
-				if (list.Count == 1) {
-					/* it's the first one we've added */
-					ChangeRecordState (e.NewIndex,
-							   false, false, true, false);
+                OnItemChanged (new ItemChangedEventArgs (-1));
+                OnListChanged (e);
+                break;
+            case ListChangedType.ItemAdded:
+                if (list.Count == 1) {
+                    /* it's the first one we've added */
+                    ChangeRecordState (e.NewIndex,
+                               false, false, true, false);
 
-					OnItemChanged (new ItemChangedEventArgs (-1));
-					OnListChanged (e);
-				}
-				else {
-					if (e.NewIndex <= listposition) {
-						ChangeRecordState (listposition + 1,
-								   false, false, false, false);
-						OnItemChanged (new ItemChangedEventArgs (-1));
-						OnListChanged (e);
-						OnPositionChanged (EventArgs.Empty);
-					}
-					else {
-						OnItemChanged (new ItemChangedEventArgs (-1));
-						OnListChanged (e);
-					}
-				}
+                    OnItemChanged (new ItemChangedEventArgs (-1));
+                    OnListChanged (e);
+                }
+                else {
+                    if (e.NewIndex <= listposition) {
+                        ChangeRecordState (listposition + 1,
+                                   false, false, false, false);
+                        OnItemChanged (new ItemChangedEventArgs (-1));
+                        OnListChanged (e);
+                        OnPositionChanged (EventArgs.Empty);
+                    }
+                    else {
+                        OnItemChanged (new ItemChangedEventArgs (-1));
+                        OnListChanged (e);
+                    }
+                }
 
-				break;
-			case ListChangedType.ItemChanged:
-				if (editing) {
-					if (e.NewIndex == listposition)
-						OnCurrentItemChanged (EventArgs.Empty);
-					OnItemChanged (new ItemChangedEventArgs (e.NewIndex));
-				}
-				OnListChanged (e);
-				break;
-			case ListChangedType.Reset:
-				PushData();
-				UpdateIsBinding();
-				OnListChanged (e);
-				break;
-			default:
-				OnListChanged (e);
-				break;
-			}
-		}
+                break;
+            case ListChangedType.ItemChanged:
+                if (editing) {
+                    if (e.NewIndex == listposition)
+                        OnCurrentItemChanged (EventArgs.Empty);
+                    OnItemChanged (new ItemChangedEventArgs (e.NewIndex));
+                }
+                OnListChanged (e);
+                break;
+            case ListChangedType.Reset:
+                PushData();
+                UpdateIsBinding();
+                OnListChanged (e);
+                break;
+            default:
+                OnListChanged (e);
+                break;
+            }
+        }
 
-		public event ListChangedEventHandler ListChanged;
-		public event ItemChangedEventHandler ItemChanged;
-		public event EventHandler MetaDataChanged;
-	}
+        public event ListChangedEventHandler ListChanged;
+        public event ItemChangedEventHandler ItemChanged;
+        public event EventHandler MetaDataChanged;
+    }
 }
 

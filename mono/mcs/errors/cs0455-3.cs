@@ -5,6 +5,6 @@ class Test
 { }
 
 class Foo<T,U>
-	where T : struct, U
-	where U : Test
+    where T : struct, U
+    where U : Test
 { }

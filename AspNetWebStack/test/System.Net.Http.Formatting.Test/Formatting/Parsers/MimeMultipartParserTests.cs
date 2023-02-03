@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -120,7 +120,7 @@ namespace System.Net.Http.Formatting.Parsers
                     CRLF + "--" + "AAA" + CRLF + CRLF,
                     CRLF + "--" + "AAA" + "--" + CRLF,
                     CRLF + "--" + "AAA" + "--" + CRLF + CRLF,
-                    "--úN$(Os#»Í(Bt$(Dqf(CS'.Â‚æ0j",
+                    "--�N$(Os#��(Bt$(Dqf(CS'.�0j",
                     "--123456",
                     "123--456",
                     "123456--"

@@ -36,24 +36,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Discovery
 {
-	[TestFixture]
-	public class UdpDiscoveryEndpointTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var de = new UdpDiscoveryEndpoint ();
-			Assert.AreEqual (DiscoveryVersion.WSDiscovery11, de.DiscoveryVersion, "#1");
-			Assert.AreEqual (ServiceDiscoveryMode.Adhoc, de.DiscoveryMode, "#2");
-			Assert.AreEqual (TimeSpan.FromMilliseconds (500), de.MaxResponseDelay, "#3");
-			var cd = de.Contract;
-			Assert.IsNotNull (cd, "#11");
-			Assert.IsNotNull (de.Binding, "#12");
-			TransportBindingElement tbe;
-			Assert.IsTrue (de.Binding.CreateBindingElements ().Any (be => (tbe = be as TransportBindingElement) != null && tbe.Scheme == "soap.udp"), "#12-2");
-			Assert.IsNotNull (de.Address, "#13");
-			Assert.AreEqual (DiscoveryVersion.WSDiscovery11.AdhocAddress, de.Address.Uri, "#13-2");
-			Assert.AreEqual (Socket.SupportsIPv4 ? UdpDiscoveryEndpoint.DefaultIPv4MulticastAddress : UdpDiscoveryEndpoint.DefaultIPv6MulticastAddress, de.ListenUri, "#14");
-		}
-	}
+    [TestFixture]
+    public class UdpDiscoveryEndpointTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            var de = new UdpDiscoveryEndpoint ();
+            Assert.AreEqual (DiscoveryVersion.WSDiscovery11, de.DiscoveryVersion, "#1");
+            Assert.AreEqual (ServiceDiscoveryMode.Adhoc, de.DiscoveryMode, "#2");
+            Assert.AreEqual (TimeSpan.FromMilliseconds (500), de.MaxResponseDelay, "#3");
+            var cd = de.Contract;
+            Assert.IsNotNull (cd, "#11");
+            Assert.IsNotNull (de.Binding, "#12");
+            TransportBindingElement tbe;
+            Assert.IsTrue (de.Binding.CreateBindingElements ().Any (be => (tbe = be as TransportBindingElement) != null && tbe.Scheme == "soap.udp"), "#12-2");
+            Assert.IsNotNull (de.Address, "#13");
+            Assert.AreEqual (DiscoveryVersion.WSDiscovery11.AdhocAddress, de.Address.Uri, "#13-2");
+            Assert.AreEqual (Socket.SupportsIPv4 ? UdpDiscoveryEndpoint.DefaultIPv4MulticastAddress : UdpDiscoveryEndpoint.DefaultIPv6MulticastAddress, de.ListenUri, "#14");
+        }
+    }
 }

@@ -20,29 +20,29 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewRowsRemovedEventArgs : EventArgs {
+    public class DataGridViewRowsRemovedEventArgs : EventArgs {
 
-		private int rowIndex;
-		private int rowCount;
+        private int rowIndex;
+        private int rowCount;
 
-		public DataGridViewRowsRemovedEventArgs (int rowIndex, int rowCount) {
-			this.rowIndex = rowIndex;
-			this.rowCount = rowCount;
-		}
+        public DataGridViewRowsRemovedEventArgs (int rowIndex, int rowCount) {
+            this.rowIndex = rowIndex;
+            this.rowCount = rowCount;
+        }
 
-		public int RowCount {
-			get { return rowCount; }
-		}
+        public int RowCount {
+            get { return rowCount; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-	}
+    }
 
 }

@@ -2,7 +2,7 @@
 // ClientViaBehavior.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,41 +31,41 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public class ClientViaBehavior : IEndpointBehavior
-	{
-		Uri uri;
+    public class ClientViaBehavior : IEndpointBehavior
+    {
+        Uri uri;
 
-		public ClientViaBehavior (Uri uri)
-		{
-			this.uri = uri;
-		}
+        public ClientViaBehavior (Uri uri)
+        {
+            this.uri = uri;
+        }
 
-		public Uri Uri {
-			get { return uri; }
-			set { uri = value; }
-		}
+        public Uri Uri {
+            get { return uri; }
+            set { uri = value; }
+        }
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
+            BindingParameterCollection parameters)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
-			EndpointDispatcher dispatcher)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
+            EndpointDispatcher dispatcher)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (
-			ServiceEndpoint endpoint, ClientRuntime behavior)
-		{
-			behavior.Via = Uri;
-		}
+        void IEndpointBehavior.ApplyClientBehavior (
+            ServiceEndpoint endpoint, ClientRuntime behavior)
+        {
+            behavior.Via = Uri;
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-		{
-			// documented as not implemented (!?)
-		}
-	}
+        void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
+        {
+            // documented as not implemented (!?)
+        }
+    }
 }

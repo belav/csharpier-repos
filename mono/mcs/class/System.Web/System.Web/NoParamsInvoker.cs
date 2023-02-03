@@ -1,9 +1,9 @@
 // 
 // System.Web.NoParamsInvoker - proxy used to invoke wired up events without parameters
-//				as if they had parameters.
+//                as if they had parameters.
 //
 // Authors:
-// 	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//     Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) 2003 Ximian, Inc. (http://www.ximian.com)
 // (c) 2003-2009 Novell, Inc (http://novell.com)
@@ -33,30 +33,30 @@
 using System.Reflection;
 namespace System.Web
 {
-	delegate void NoParamsDelegate ();
-	sealed class NoParamsInvoker
-	{
-		EventHandler faked;
-		NoParamsDelegate real;
+    delegate void NoParamsDelegate ();
+    sealed class NoParamsInvoker
+    {
+        EventHandler faked;
+        NoParamsDelegate real;
 
-		public NoParamsInvoker (object o, MethodInfo method)
-		{
-			if (method.IsStatic)
-				real = (NoParamsDelegate) Delegate.CreateDelegate (
-					typeof (NoParamsDelegate), method);
-			else
-				real = (NoParamsDelegate) Delegate.CreateDelegate (typeof (NoParamsDelegate), o, method);
-			 faked = new EventHandler (InvokeNoParams);
-		}
+        public NoParamsInvoker (object o, MethodInfo method)
+        {
+            if (method.IsStatic)
+                real = (NoParamsDelegate) Delegate.CreateDelegate (
+                    typeof (NoParamsDelegate), method);
+            else
+                real = (NoParamsDelegate) Delegate.CreateDelegate (typeof (NoParamsDelegate), o, method);
+             faked = new EventHandler (InvokeNoParams);
+        }
 
-		void InvokeNoParams (object o, EventArgs args)
-		{
-			real ();
-		}
+        void InvokeNoParams (object o, EventArgs args)
+        {
+            real ();
+        }
 
-		public EventHandler FakeDelegate {
-			get { return faked; }
-		}
-	}
+        public EventHandler FakeDelegate {
+            get { return faked; }
+        }
+    }
 }
 

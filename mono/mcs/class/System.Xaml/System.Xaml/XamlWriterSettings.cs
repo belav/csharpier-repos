@@ -29,15 +29,15 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlWriterSettings
-	{
-		public XamlWriterSettings ()
-		{
-		}
+    public class XamlWriterSettings
+    {
+        public XamlWriterSettings ()
+        {
+        }
 
-		public XamlWriterSettings (XamlWriterSettings settings)
-		{
-			// huh, what to do?
-		}
-	}
+        public XamlWriterSettings (XamlWriterSettings settings)
+        {
+            // huh, what to do?
+        }
+    }
 }

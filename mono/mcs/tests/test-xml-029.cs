@@ -2,12 +2,12 @@
 using System;
 
 class Test1 {
-	/// <summary>
-	/// Some test documentation
-	/// </summary>
-	void Foo(){}
+    /// <summary>
+    /// Some test documentation
+    /// </summary>
+    void Foo(){}
 
-	public static void Main () {}
+    public static void Main () {}
 }
 
 /// <summary>
@@ -15,20 +15,20 @@ class Test1 {
 /// </summary>
 public interface ITest2 {
 
-	/// <summary>
-	/// Some test documentation
-	/// </summary>
-	void Foo();
+    /// <summary>
+    /// Some test documentation
+    /// </summary>
+    void Foo();
 
-	/// <summary>
-	/// Some test documentation
-	/// </summary>
-	long Bar { get; }
+    /// <summary>
+    /// Some test documentation
+    /// </summary>
+    long Bar { get; }
 
-	/// <summary>
-	/// Some test documentation
-	/// </summary>
-	event EventHandler EventRaised;
+    /// <summary>
+    /// Some test documentation
+    /// </summary>
+    event EventHandler EventRaised;
 }
 
 

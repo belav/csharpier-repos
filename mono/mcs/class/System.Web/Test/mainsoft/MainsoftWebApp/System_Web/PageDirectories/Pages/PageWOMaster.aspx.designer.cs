@@ -11,8 +11,8 @@
 namespace GHTTests.System_Web_dll.PageDirectories.Pages
 {
 
-	public partial class PageWOMaster
-	{
-		protected System.Web.UI.HtmlControls.HtmlForm form1;
-	}
+    public partial class PageWOMaster
+    {
+        protected System.Web.UI.HtmlControls.HtmlForm form1;
+    }
 }

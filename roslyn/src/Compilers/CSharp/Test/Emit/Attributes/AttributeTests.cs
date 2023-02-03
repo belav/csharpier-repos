@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -7114,15 +7114,15 @@ class Gen<T>
 @"
 class Gen<T> {}
 class Gen2<T>: System.Attribute {}
-	
+    
 [Gen]
 [Gen2]
 public class Test
 {
-	public static int Main()
-	{
-		return 1;
-	}
+    public static int Main()
+    {
+        return 1;
+    }
 }";
             CSharpCompilationOptions opt = TestOptions.ReleaseDll;
 
@@ -7157,10 +7157,10 @@ class Gen3<T> : System.Attribute { Gen3(T parameter) { } }
 [Gen3(1)]
 public class Test<U>
 {
-	public static int Main()
-	{
-		return 1;
-	}
+    public static int Main()
+    {
+        return 1;
+    }
 }";
             CSharpCompilationOptions opt = TestOptions.ReleaseDll;
 
@@ -7202,10 +7202,10 @@ public class Test<U>
 [Gen2]
 public class Test
 {
-	public static int Main()
-	{
-		return 1;
-	}
+    public static int Main()
+    {
+        return 1;
+    }
 }";
 
             var comp = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource, parseOptions: TestOptions.Regular9);
@@ -7585,12 +7585,12 @@ using System;
 
 public class MyAttribute2 : Attribute
 {
-	public Type[] Types;
+    public Type[] Types;
 }
 
 public class Test
 {
-	public void goo([MyAttribute2(Types = new Type[
+    public void goo([MyAttribute2(Types = new Type[
 ";
             var compilation = CreateCompilation(source);
 
@@ -7838,19 +7838,19 @@ class D
 
 public class IA
 {
-	[IndexerName(""ItemX"")]
-	[IndexerName(""ItemY"")]
-	public virtual int this[int index]
-	{
-		get	{ return 1;}
-		set	{}
-	}
+    [IndexerName(""ItemX"")]
+    [IndexerName(""ItemY"")]
+    public virtual int this[int index]
+    {
+        get    { return 1;}
+        set    {}
+    }
 }
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
                 // (6,3): error CS0579: Duplicate 'IndexerName' attribute
-                // 	[IndexerName("ItemY")]
+                //     [IndexerName("ItemY")]
                 Diagnostic(ErrorCode.ERR_DuplicateAttribute, "IndexerName").WithArguments("IndexerName").WithLocation(6, 3));
 
             var indexer = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("IA").GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
@@ -9277,30 +9277,30 @@ namespace a
 {
     class Class1
     {
-		[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-		class CommandAttribute : Attribute
-		{
-			public delegate Task FxCommand();
+        [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+        class CommandAttribute : Attribute
+        {
+            public delegate Task FxCommand();
 
-			public CommandAttribute(FxCommand Fx)
-			{
-				this.Fx = Fx;
-			}
+            public CommandAttribute(FxCommand Fx)
+            {
+                this.Fx = Fx;
+            }
 
-			public FxCommand Fx { get; set; }
-		}
-		
-		[Command(UserInfo)]
-		public static async Task UserInfo()
-		{
-			await Task.CompletedTask;
-		}
-	}
+            public FxCommand Fx { get; set; }
+        }
+        
+        [Command(UserInfo)]
+        public static async Task UserInfo()
+        {
+            await Task.CompletedTask;
+        }
+    }
 }
 ";
             CreateCompilationWithMscorlib46(code).VerifyDiagnostics(
                 // (22,4): error CS0181: Attribute constructor parameter 'Fx' has type 'Class1.CommandAttribute.FxCommand', which is not a valid attribute parameter type
-                // 		[Command(UserInfo)]
+                //         [Command(UserInfo)]
                 Diagnostic(ErrorCode.ERR_BadAttributeParamType, "Command").WithArguments("Fx", "a.Class1.CommandAttribute.FxCommand").WithLocation(22, 4));
         }
 
@@ -10329,22 +10329,22 @@ class Program
 
             verifier.VerifyTypeIL("Holder", @"
 .class private auto ansi beforefieldinit Holder
-	extends [netstandard]System.Object
+    extends [netstandard]System.Object
 {
-	.custom instance void class Attr`1<string>::.ctor(!0) = (
-		01 00 01 61 00 00
-	)
-	// Methods
-	.method public hidebysig specialname rtspecialname 
-		instance void .ctor () cil managed 
-	{
-		// Method begins at RVA 0x2058
-		// Code size 7 (0x7)
-		.maxstack 8
-		IL_0000: ldarg.0
-		IL_0001: call instance void [netstandard]System.Object::.ctor()
-		IL_0006: ret
-	} // end of method Holder::.ctor
+    .custom instance void class Attr`1<string>::.ctor(!0) = (
+        01 00 01 61 00 00
+    )
+    // Methods
+    .method public hidebysig specialname rtspecialname 
+        instance void .ctor () cil managed 
+    {
+        // Method begins at RVA 0x2058
+        // Code size 7 (0x7)
+        .maxstack 8
+        IL_0000: ldarg.0
+        IL_0001: call instance void [netstandard]System.Object::.ctor()
+        IL_0006: ret
+    } // end of method Holder::.ctor
 } // end of class Holder
 ");
 

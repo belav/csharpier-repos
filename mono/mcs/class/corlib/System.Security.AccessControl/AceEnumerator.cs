@@ -2,8 +2,8 @@
 // System.Security.AccessControl.AceEnumerator implementation
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,36 +30,36 @@
 using System.Collections;
 
 namespace System.Security.AccessControl {
-	public sealed class AceEnumerator : IEnumerator
-	{
-		GenericAcl owner;
-		int current = -1;
+    public sealed class AceEnumerator : IEnumerator
+    {
+        GenericAcl owner;
+        int current = -1;
 
-		internal AceEnumerator (GenericAcl owner)
-		{
-			this.owner = owner;
-		}
+        internal AceEnumerator (GenericAcl owner)
+        {
+            this.owner = owner;
+        }
 
-		public GenericAce Current {
-			get { return current < 0 ? null : owner [current]; }
-		}
+        public GenericAce Current {
+            get { return current < 0 ? null : owner [current]; }
+        }
 
-		object IEnumerator.Current {
-			get { return Current; }
-		}
-		
-		public bool MoveNext ()
-		{
-			if (current + 1 == owner.Count)
-				return false;
-			current++;
-			return true;
-		}
-		
-		public void Reset ()
-		{
-			current = -1;
-		}
-	}
+        object IEnumerator.Current {
+            get { return Current; }
+        }
+        
+        public bool MoveNext ()
+        {
+            if (current + 1 == owner.Count)
+                return false;
+            current++;
+            return true;
+        }
+        
+        public void Reset ()
+        {
+            current = -1;
+        }
+    }
 }
 

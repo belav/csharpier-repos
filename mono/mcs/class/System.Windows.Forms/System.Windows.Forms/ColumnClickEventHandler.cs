@@ -20,10 +20,10 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 namespace System.Windows.Forms
 {
-	public delegate void ColumnClickEventHandler (object sender, ColumnClickEventArgs e);
+    public delegate void ColumnClickEventHandler (object sender, ColumnClickEventArgs e);
 }

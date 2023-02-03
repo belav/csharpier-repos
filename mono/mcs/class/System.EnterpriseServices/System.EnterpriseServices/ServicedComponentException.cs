@@ -32,27 +32,27 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[Serializable]
-	[ComVisible(false)]
-	public sealed class ServicedComponentException : SystemException {
+    [Serializable]
+    [ComVisible(false)]
+    public sealed class ServicedComponentException : SystemException {
 
-		#region Constructors
+        #region Constructors
 
-		public ServicedComponentException ()
-			: base ()
-		{
-		}
+        public ServicedComponentException ()
+            : base ()
+        {
+        }
 
-		public ServicedComponentException (string message)
-			: base (message)
-		{
-		}
+        public ServicedComponentException (string message)
+            : base (message)
+        {
+        }
 
-		public ServicedComponentException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public ServicedComponentException (string message, Exception innerException)
+            : base (message, innerException)
+        {
+        }
 
-		#endregion // Constructors
-	}
+        #endregion // Constructors
+    }
 }

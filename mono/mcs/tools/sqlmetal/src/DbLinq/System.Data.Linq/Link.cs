@@ -33,40 +33,40 @@ using System.Reflection;
 
 namespace System.Data.Linq
 {
-	public struct Link<T>
-	{
-		[MonoTODO]
-		public Link (T value)
-		{
-			throw new NotImplementedException ();
-		}
+    public struct Link<T>
+    {
+        [MonoTODO]
+        public Link (T value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Link (IEnumerable<T> source)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Link (IEnumerable<T> source)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public Link (Link<T> link)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Link (Link<T> link)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public bool HasLoadedOrAssignedValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool HasLoadedOrAssignedValue {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public bool HasValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool HasValue {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public T Value {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public T Value {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
+    }
 }

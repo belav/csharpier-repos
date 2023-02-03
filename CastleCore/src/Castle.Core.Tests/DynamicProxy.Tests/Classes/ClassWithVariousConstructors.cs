@@ -14,50 +14,50 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class ClassWithVariousConstructors
-	{
+    public class ClassWithVariousConstructors
+    {
 
-		public ClassWithVariousConstructors(string[] arrayOfStrings)
-		{
-			ConstructorCalled = Constructor.ArrayOfStrings;
-		}
-		public ClassWithVariousConstructors(object[] arrayOfObjects)
-		{
-			ConstructorCalled = Constructor.ArrayOfObjects;
-		}
-		public ClassWithVariousConstructors(object @object)
-		{
-			ConstructorCalled = Constructor.Object;
-		}
-		public ClassWithVariousConstructors()
-		{
-			ConstructorCalled = Constructor.Default;
-		}
-		public ClassWithVariousConstructors(string[] arrayOfStrings, string singleString)
-		{
-			ConstructorCalled = Constructor.ArrayAndSingleString;
-		}
+        public ClassWithVariousConstructors(string[] arrayOfStrings)
+        {
+            ConstructorCalled = Constructor.ArrayOfStrings;
+        }
+        public ClassWithVariousConstructors(object[] arrayOfObjects)
+        {
+            ConstructorCalled = Constructor.ArrayOfObjects;
+        }
+        public ClassWithVariousConstructors(object @object)
+        {
+            ConstructorCalled = Constructor.Object;
+        }
+        public ClassWithVariousConstructors()
+        {
+            ConstructorCalled = Constructor.Default;
+        }
+        public ClassWithVariousConstructors(string[] arrayOfStrings, string singleString)
+        {
+            ConstructorCalled = Constructor.ArrayAndSingleString;
+        }
 
-		public ClassWithVariousConstructors(string first, string second)
-		{
-			ConstructorCalled = Constructor.TwoStrings;
-		}
-		public ClassWithVariousConstructors(object[] arrayOfObjects, string singleString)
-		{
-			ConstructorCalled = Constructor.ArrayOfObjectsAndSingleString;
-		}
+        public ClassWithVariousConstructors(string first, string second)
+        {
+            ConstructorCalled = Constructor.TwoStrings;
+        }
+        public ClassWithVariousConstructors(object[] arrayOfObjects, string singleString)
+        {
+            ConstructorCalled = Constructor.ArrayOfObjectsAndSingleString;
+        }
 
-		public Constructor ConstructorCalled { get; set; }
-	}
+        public Constructor ConstructorCalled { get; set; }
+    }
 
-	public enum Constructor
-	{
-		ArrayOfStrings,
-		ArrayOfObjects,
-		Object,
-		Default,
-		ArrayAndSingleString,
-		ArrayOfObjectsAndSingleString,
-		TwoStrings
-	}
+    public enum Constructor
+    {
+        ArrayOfStrings,
+        ArrayOfObjects,
+        Object,
+        Default,
+        ArrayAndSingleString,
+        ArrayOfObjectsAndSingleString,
+        TwoStrings
+    }
 }

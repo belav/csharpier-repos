@@ -40,100 +40,100 @@ using System.Collections.Generic;
 
 namespace System.Web.Caching
 {
-	sealed class CachedRawResponse
-	{
-		public sealed class DataItem
-		{
-			public readonly byte[] Buffer;
-			public readonly long Length;
-			public readonly HttpResponseSubstitutionCallback Callback;
-			
-			public DataItem (byte[] buffer, long length)
-			{
-				Buffer = buffer;
-				Length = length;
-			}
+    sealed class CachedRawResponse
+    {
+        public sealed class DataItem
+        {
+            public readonly byte[] Buffer;
+            public readonly long Length;
+            public readonly HttpResponseSubstitutionCallback Callback;
+            
+            public DataItem (byte[] buffer, long length)
+            {
+                Buffer = buffer;
+                Length = length;
+            }
 
-			public DataItem (HttpResponseSubstitutionCallback callback) : this (null, 0)
-			{
-				Callback = callback;
-			}
-		}
-		
-		HttpCachePolicy policy;
-		CachedVaryBy varyby;
-		int status_code;
-		string status_desc;
-		NameValueCollection headers;
-		List <DataItem> data;
+            public DataItem (HttpResponseSubstitutionCallback callback) : this (null, 0)
+            {
+                Callback = callback;
+            }
+        }
+        
+        HttpCachePolicy policy;
+        CachedVaryBy varyby;
+        int status_code;
+        string status_desc;
+        NameValueCollection headers;
+        List <DataItem> data;
 
-		IList Data {
-			get {
-				if (data == null)
-					data = new List <DataItem> ();
+        IList Data {
+            get {
+                if (data == null)
+                    data = new List <DataItem> ();
 
-				return data;
-			}
-		}
-		
-		public CachedRawResponse (HttpCachePolicy policy)
-		{
-			this.policy = policy;
-		}
+                return data;
+            }
+        }
+        
+        public CachedRawResponse (HttpCachePolicy policy)
+        {
+            this.policy = policy;
+        }
 
-		public HttpCachePolicy Policy {
-			get { return policy; }
-			set { policy = value; }
-		}
+        public HttpCachePolicy Policy {
+            get { return policy; }
+            set { policy = value; }
+        }
 
-		public CachedVaryBy VaryBy {
-			get { return varyby; }
-			set { varyby = value; }
-		}
-		
-		public int StatusCode {
-			get { return status_code; }
-			set { status_code = value; }
-		}
+        public CachedVaryBy VaryBy {
+            get { return varyby; }
+            set { varyby = value; }
+        }
+        
+        public int StatusCode {
+            get { return status_code; }
+            set { status_code = value; }
+        }
 
-		public string StatusDescription {
-			get { return status_desc; }
-			set { status_desc = value; }
-		}
+        public string StatusDescription {
+            get { return status_desc; }
+            set { status_desc = value; }
+        }
 
-		public NameValueCollection Headers {
-			get { return headers; }
-		}
+        public NameValueCollection Headers {
+            get { return headers; }
+        }
 
-		public void SetHeaders (NameValueCollection headers)
-		{
-			this.headers = headers;
-		}
+        public void SetHeaders (NameValueCollection headers)
+        {
+            this.headers = headers;
+        }
 
-		public void SetData (MemoryStream ms)
-		{
-			if (ms == null)
-				return;
-			
-			Data.Add (new DataItem (ms.GetBuffer (), ms.Length));
-		}
+        public void SetData (MemoryStream ms)
+        {
+            if (ms == null)
+                return;
+            
+            Data.Add (new DataItem (ms.GetBuffer (), ms.Length));
+        }
 
-		public void SetData (HttpResponseSubstitutionCallback callback)
-		{
-			if (callback == null)
-				return;
+        public void SetData (HttpResponseSubstitutionCallback callback)
+        {
+            if (callback == null)
+                return;
 
-			Data.Add (new DataItem (callback));
-		}
-		
-		public IList GetData ()
-		{
-			int count = data != null ? data.Count :0;
-			if (count == 0)
-				return null;
+            Data.Add (new DataItem (callback));
+        }
+        
+        public IList GetData ()
+        {
+            int count = data != null ? data.Count :0;
+            if (count == 0)
+                return null;
 
-			return data;
-		}
-	}
+            return data;
+        }
+    }
 }
 

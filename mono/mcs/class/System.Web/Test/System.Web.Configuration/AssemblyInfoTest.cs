@@ -1,9 +1,9 @@
 //
 // AssemblyInfoTest.cs 
-//	- unit tests for System.Web.Configuration.AssemblyInfo
+//    - unit tests for System.Web.Configuration.AssemblyInfo
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,33 +38,33 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class AssemblyInfoTest  {
+    [TestFixture]
+    public class AssemblyInfoTest  {
 
-		[Test]
-		public void Defaults()
-		{
-			AssemblyInfo a = new AssemblyInfo("hi");
+        [Test]
+        public void Defaults()
+        {
+            AssemblyInfo a = new AssemblyInfo("hi");
 
-			Assert.AreEqual ("hi", a.Assembly, "A1");
-		}
+            Assert.AreEqual ("hi", a.Assembly, "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void Assembly_validationFailure ()
-		{
-			AssemblyInfo a = new AssemblyInfo ("");
-		}
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void Assembly_validationFailure ()
+        {
+            AssemblyInfo a = new AssemblyInfo ("");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void Assembly_validationFailure2 ()
-		{
-			AssemblyInfo a = new AssemblyInfo ("hi");
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void Assembly_validationFailure2 ()
+        {
+            AssemblyInfo a = new AssemblyInfo ("hi");
 
-			a.Assembly = "";
-		}
-	}
+            a.Assembly = "";
+        }
+    }
 
 }
 

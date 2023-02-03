@@ -2,7 +2,7 @@
 // MethodContractSubroutine.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,34 +30,34 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-	abstract class MethodContractSubroutine<TLabel> : SubroutineBase<TLabel>, IMethodInfo {
-		private readonly Method method;
+    abstract class MethodContractSubroutine<TLabel> : SubroutineBase<TLabel>, IMethodInfo {
+        private readonly Method method;
 
-		protected MethodContractSubroutine (SubroutineFacade subroutineFacade,
-		                                    Method method) : base (subroutineFacade)
-		{
-			this.method = method;
-		}
+        protected MethodContractSubroutine (SubroutineFacade subroutineFacade,
+                                            Method method) : base (subroutineFacade)
+        {
+            this.method = method;
+        }
 
-		protected MethodContractSubroutine (SubroutineFacade subroutineFacade,
-		                                    Method method,
-		                                    SimpleSubroutineBuilder<TLabel> builder,
-		                                    TLabel startLabel) : base (subroutineFacade, startLabel, builder)
-		{
-			this.method = method;
-		}
+        protected MethodContractSubroutine (SubroutineFacade subroutineFacade,
+                                            Method method,
+                                            SimpleSubroutineBuilder<TLabel> builder,
+                                            TLabel startLabel) : base (subroutineFacade, startLabel, builder)
+        {
+            this.method = method;
+        }
 
-		protected new SimpleSubroutineBuilder<TLabel> Builder
-		{
-			get { return (SimpleSubroutineBuilder<TLabel>) base.Builder; }
-			set { base.Builder = value; }
-		}
+        protected new SimpleSubroutineBuilder<TLabel> Builder
+        {
+            get { return (SimpleSubroutineBuilder<TLabel>) base.Builder; }
+            set { base.Builder = value; }
+        }
 
-		#region IMethodInfo Members
-		public Method Method
-		{
-			get { return this.method; }
-		}
-		#endregion
-	}
+        #region IMethodInfo Members
+        public Method Method
+        {
+            get { return this.method; }
+        }
+        #endregion
+    }
 }

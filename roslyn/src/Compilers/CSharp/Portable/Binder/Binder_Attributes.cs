@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -921,7 +921,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // SPEC:    An expression E is an attribute-argument-expression if all of the following statements are true:
-            // SPEC:    1) The type of E is an attribute parameter type (§17.1.3).
+            // SPEC:    1) The type of E is an attribute parameter type (�17.1.3).
             // SPEC:    2) At compile-time, the value of Expression can be resolved to one of the following:
             // SPEC:        a) A constant value.
             // SPEC:        b) A System.Type object.

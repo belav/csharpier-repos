@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace System.Net.Http.Formatting
                 return new TheoryDataSet<string, string>
                 {
                     { "some+thing=10", @"{""some thing"":""10""}" },
-                    { "%E5%B8%A6%E4%B8%89%E4%B8%AA%E8%A1%A8=bar", @"{""带三个表"":""bar""}" },
-                    { "some+thing=10&%E5%B8%A6%E4%B8%89%E4%B8%AA%E8%A1%A8=bar", @"{""some thing"":""10"",""带三个表"":""bar""}"},
+                    { "%E5%B8%A6%E4%B8%89%E4%B8%AA%E8%A1%A8=bar", @"{""????"":""bar""}" },
+                    { "some+thing=10&%E5%B8%A6%E4%B8%89%E4%B8%AA%E8%A1%A8=bar", @"{""some thing"":""10"",""????"":""bar""}"},
                     { "a[0\r\n][b]=1", "{\"a\":{\"0\\r\\n\":{\"b\":\"1\"}}}" },
                     { "a[0%0d\n][b]=1", "{\"a\":{\"0\\r\\n\":{\"b\":\"1\"}}}" },
                     { "a[0%0d%0a][b]=1", "{\"a\":{\"0\\r\\n\":{\"b\":\"1\"}}}" },

@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 
 interface I {
-	void D ();
+    void D ();
 }
 
 class X : I
 {
         public static void Main ()
         {
-		List<object> l = new List<object> ();
-		List<I> i = new List<I> ();
+        List<object> l = new List<object> ();
+        List<I> i = new List<I> ();
 
-		i.Add (new X());
+        i.Add (new X());
 
-		l.AddRange (i.ToArray());
-	}
+        l.AddRange (i.ToArray());
+    }
 
-	public void D () {}
+    public void D () {}
 }
 

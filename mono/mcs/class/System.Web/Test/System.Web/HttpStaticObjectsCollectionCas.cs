@@ -1,9 +1,9 @@
 //
 // HttpStaticObjectsCollectionCas.cs 
-//	- CAS unit tests for System.Web.HttpStaticObjectsCollection
+//    - CAS unit tests for System.Web.HttpStaticObjectsCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,63 +38,63 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpStaticObjectsCollectionCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HttpStaticObjectsCollectionCas : AspNetHostingMinimal {
 
-		private HttpStaticObjectsCollection hsoc;
+        private HttpStaticObjectsCollection hsoc;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			hsoc = new HttpStaticObjectsCollection ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            hsoc = new HttpStaticObjectsCollection ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new HttpStaticObjectsCollection ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            new HttpStaticObjectsCollection ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Serialization ()
-		{
-			MemoryStream ms = new MemoryStream ();
-			BinaryWriter writer = new BinaryWriter (ms);
-			HttpStaticObjectsCollection hsoc = new HttpStaticObjectsCollection ();
-			hsoc.Serialize (writer);
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Serialization ()
+        {
+            MemoryStream ms = new MemoryStream ();
+            BinaryWriter writer = new BinaryWriter (ms);
+            HttpStaticObjectsCollection hsoc = new HttpStaticObjectsCollection ();
+            hsoc.Serialize (writer);
 
-			ms.Position = 0;
-			BinaryReader reader = new BinaryReader (ms);
-			Assert.IsNotNull (HttpStaticObjectsCollection.Deserialize (reader));
-		}
+            ms.Position = 0;
+            BinaryReader reader = new BinaryReader (ms);
+            Assert.IsNotNull (HttpStaticObjectsCollection.Deserialize (reader));
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Properties_Deny_Unrestricted ()
-		{
-			Assert.AreEqual (0, hsoc.Count, "Count");
-			Assert.IsNotNull (hsoc.GetEnumerator (), "GetEnumerator");
-			Assert.IsNull (hsoc.GetObject ("mono"), "GetObject");
-			Assert.IsNull (hsoc["mono"], "this[string]");
-			Assert.IsTrue (hsoc.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (hsoc.IsSynchronized, "IsSynchronized");
-			Assert.IsNotNull (hsoc.SyncRoot, "SyncRoot");
-			Assert.IsTrue (hsoc.NeverAccessed, "NeverAccessed");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Properties_Deny_Unrestricted ()
+        {
+            Assert.AreEqual (0, hsoc.Count, "Count");
+            Assert.IsNotNull (hsoc.GetEnumerator (), "GetEnumerator");
+            Assert.IsNull (hsoc.GetObject ("mono"), "GetObject");
+            Assert.IsNull (hsoc["mono"], "this[string]");
+            Assert.IsTrue (hsoc.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse (hsoc.IsSynchronized, "IsSynchronized");
+            Assert.IsNotNull (hsoc.SyncRoot, "SyncRoot");
+            Assert.IsTrue (hsoc.NeverAccessed, "NeverAccessed");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Methods_Deny_Unrestricted ()
-		{
-			hsoc.CopyTo (new object[0], 0);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Methods_Deny_Unrestricted ()
+        {
+            hsoc.CopyTo (new object[0], 0);
+        }
 
-		// LinkDemand
-		public override Type Type {
-			get { return typeof (HttpStaticObjectsCollection); }
-		}
-	}
+        // LinkDemand
+        public override Type Type {
+            get { return typeof (HttpStaticObjectsCollection); }
+        }
+    }
 }

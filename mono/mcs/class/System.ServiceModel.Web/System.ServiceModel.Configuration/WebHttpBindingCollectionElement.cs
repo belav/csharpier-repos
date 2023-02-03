@@ -2,7 +2,7 @@
 // WebHttpBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -46,28 +46,28 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class WebHttpBindingCollectionElement
-		 : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    public partial class WebHttpBindingCollectionElement
+         : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static WebHttpBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static WebHttpBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public WebHttpBindingCollectionElement ()
-		{
-		}
+        public WebHttpBindingCollectionElement ()
+        {
+        }
 
-		// Methods
+        // Methods
 
-		protected internal override Binding GetDefault ()
-		{
-			return new WebHttpBinding ();
-		}
+        protected internal override Binding GetDefault ()
+        {
+            return new WebHttpBinding ();
+        }
 
-	}
+    }
 
 }

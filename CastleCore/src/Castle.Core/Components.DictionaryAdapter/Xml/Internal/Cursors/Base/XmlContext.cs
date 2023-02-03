@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,49 +14,49 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	public class XmlContext : XmlContextBase, IXmlContext
-	{
-		private readonly XmlMetadata metadata;
+    public class XmlContext : XmlContextBase, IXmlContext
+    {
+        private readonly XmlMetadata metadata;
 
-		public XmlContext(XmlMetadata metadata)
-		{
-			if (metadata == null)
-				throw Error.ArgumentNull(nameof(metadata));
+        public XmlContext(XmlMetadata metadata)
+        {
+            if (metadata == null)
+                throw Error.ArgumentNull(nameof(metadata));
 
-			this.metadata = metadata;
-		}
+            this.metadata = metadata;
+        }
 
-		protected XmlContext(XmlContext parent) : base(parent)
-		{
-			this.metadata = parent.metadata;
-		}
+        protected XmlContext(XmlContext parent) : base(parent)
+        {
+            this.metadata = parent.metadata;
+        }
 
-		public IXmlContext Clone()
-		{
-			return new XmlContext(this);
-		}
+        public IXmlContext Clone()
+        {
+            return new XmlContext(this);
+        }
 
-		public string ChildNamespaceUri
-		{
-			get { return metadata.ChildNamespaceUri; }
-		}
+        public string ChildNamespaceUri
+        {
+            get { return metadata.ChildNamespaceUri; }
+        }
 
-		public bool IsReservedNamespaceUri(string namespaceUri)
-		{
-			return metadata.IsReservedNamespaceUri(namespaceUri);
-		}
+        public bool IsReservedNamespaceUri(string namespaceUri)
+        {
+            return metadata.IsReservedNamespaceUri(namespaceUri);
+        }
 
-		public XmlName GetDefaultXsiType(Type clrType)
-		{
-			return metadata.GetDefaultXsiType(clrType);
-		}
+        public XmlName GetDefaultXsiType(Type clrType)
+        {
+            return metadata.GetDefaultXsiType(clrType);
+        }
 
-		public IEnumerable<IXmlIncludedType> GetIncludedTypes(Type baseType)
-		{
-			return metadata.GetIncludedTypes(baseType);
-		}
-	}
+        public IEnumerable<IXmlIncludedType> GetIncludedTypes(Type baseType)
+        {
+            return metadata.GetIncludedTypes(baseType);
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ProfileAutoSaveEventArgs.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,31 +30,31 @@ using System;
 
 namespace System.Web.Profile
 {
-	public sealed class ProfileAutoSaveEventArgs : EventArgs
-	{
-		public ProfileAutoSaveEventArgs (HttpContext context)
-		{
-			this.context = context;
-			this.continueWithProfileAutoSave = true;
-		}
+    public sealed class ProfileAutoSaveEventArgs : EventArgs
+    {
+        public ProfileAutoSaveEventArgs (HttpContext context)
+        {
+            this.context = context;
+            this.continueWithProfileAutoSave = true;
+        }
 
-		public HttpContext Context {
-			get {
-				return context;
-			}
-		}
-		
-		public bool ContinueWithProfileAutoSave {
-			get {
-				return continueWithProfileAutoSave;
-			}
-			set {
-				continueWithProfileAutoSave = value;
-			}
-		}
+        public HttpContext Context {
+            get {
+                return context;
+            }
+        }
+        
+        public bool ContinueWithProfileAutoSave {
+            get {
+                return continueWithProfileAutoSave;
+            }
+            set {
+                continueWithProfileAutoSave = value;
+            }
+        }
 
-		HttpContext context;
-		bool continueWithProfileAutoSave;
-	}
+        HttpContext context;
+        bool continueWithProfileAutoSave;
+    }
 }
 

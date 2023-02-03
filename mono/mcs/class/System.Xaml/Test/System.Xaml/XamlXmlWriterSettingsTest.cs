@@ -30,15 +30,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class XamlXmlWriterSettingsTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var s = new XamlXmlWriterSettings ();
-			Assert.IsFalse (s.AssumeValidInput, "#1");
-			Assert.IsFalse (s.CloseOutput, "#2");
-		}
-	}
+    [TestFixture]
+    public class XamlXmlWriterSettingsTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            var s = new XamlXmlWriterSettings ();
+            Assert.IsFalse (s.AssumeValidInput, "#1");
+            Assert.IsFalse (s.CloseOutput, "#2");
+        }
+    }
 }

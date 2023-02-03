@@ -35,28 +35,28 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceProcess
 {
-	public class TimeoutException : Exception
-	{
-		public TimeoutException ()
-		{
-			throw new PlatformNotSupportedException ();
-		}
+    public class TimeoutException : Exception
+    {
+        public TimeoutException ()
+        {
+            throw new PlatformNotSupportedException ();
+        }
 
-		public TimeoutException (string message)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public TimeoutException (string message)
+        {
+            throw new PlatformNotSupportedException ();
+        }
 
-		public TimeoutException (string message, Exception innerException)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public TimeoutException (string message, Exception innerException)
+        {
+            throw new PlatformNotSupportedException ();
+        }
 
-		protected TimeoutException (SerializationInfo info, StreamingContext context)
-		{
-			throw new PlatformNotSupportedException ();
-		}
-	}
+        protected TimeoutException (SerializationInfo info, StreamingContext context)
+        {
+            throw new PlatformNotSupportedException ();
+        }
+    }
 }
 
 #endif

@@ -3,7 +3,7 @@
 
 public class Sample {
         System.ArgIterator[] arg;
-		static void Main () {}
+        static void Main () {}
 }
 
 

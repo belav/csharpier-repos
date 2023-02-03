@@ -35,71 +35,71 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbParameter_ctor_SOtype_IS : GHTBase
 {
-	public static void Main()
-	{
-		OleDbParameter_ctor_SOtype_IS tc = new OleDbParameter_ctor_SOtype_IS();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OleDbParameter_ctor_SOtypeIS");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OleDbParameter_ctor_SOtype_IS tc = new OleDbParameter_ctor_SOtype_IS();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OleDbParameter_ctor_SOtypeIS");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
-		OleDbParameter param = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
+        OleDbParameter param = null;
 
-		param = new OleDbParameter("myParam",OleDbType.Integer ,5,"myColumn");
+        param = new OleDbParameter("myParam",OleDbType.Integer ,5,"myColumn");
 
-		try
-		{
-			BeginCase("ctor ");
-			Compare(param != null, true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("ctor ");
+            Compare(param != null, true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("name ");
-			Compare(param.ParameterName ,"myParam");
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("name ");
+            Compare(param.ParameterName ,"myParam");
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("size ");
-			Compare(param.Size ,5);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("size ");
+            Compare(param.Size ,5);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("size ");
-			Compare(param.SourceColumn  ,"myColumn");
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            BeginCase("size ");
+            Compare(param.SourceColumn  ,"myColumn");
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
+    }
 }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 
 }

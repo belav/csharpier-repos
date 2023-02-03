@@ -219,7 +219,7 @@ namespace C5
     {
       bool sorted = dictionary is ISortedDictionary<K, V>;
       stringbuilder.Append(sorted ? "[ " : "{ ");
-      rest -= 4;				   // Account for "( " and " )"
+      rest -= 4;                   // Account for "( " and " )"
       bool first = true;
       bool complete = true;
 

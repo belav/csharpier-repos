@@ -1,5 +1,5 @@
 class A {
-	protected int f { get { return 1; } }
+    protected int f { get { return 1; } }
 }
 
 class B : A {
@@ -7,5 +7,5 @@ class B : A {
    }
    
 class C : B {
-	public static void Main () {}
+    public static void Main () {}
 } 

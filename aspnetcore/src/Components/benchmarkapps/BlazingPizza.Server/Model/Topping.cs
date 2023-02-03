@@ -1,4 +1,4 @@
-﻿namespace BlazingPizza
+namespace BlazingPizza
 {
     public class Topping
     {

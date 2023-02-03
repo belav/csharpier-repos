@@ -1,15 +1,15 @@
 class Program
 {
-	static int Main ()
-	{
-		X18 x18 = new X18 ();
-		x18.x1 = new X17 ();
-		x18.x2 = new X17 ();
-		if (x18.GetType () != typeof (X18))
-			return 1;
+    static int Main ()
+    {
+        X18 x18 = new X18 ();
+        x18.x1 = new X17 ();
+        x18.x2 = new X17 ();
+        if (x18.GetType () != typeof (X18))
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }
 
 

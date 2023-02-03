@@ -31,69 +31,69 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-	/// <summary>
-	///  Represents the Token returned by the metadata to represent a String.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public readonly struct StringToken : IEquatable<StringToken> {
+    /// <summary>
+    ///  Represents the Token returned by the metadata to represent a String.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public readonly struct StringToken : IEquatable<StringToken> {
 
-		internal readonly int tokValue;
+        internal readonly int tokValue;
 
-		internal StringToken (int val)
-		{
-			tokValue = val;
-		}
+        internal StringToken (int val)
+        {
+            tokValue = val;
+        }
 
-		/// <summary>
-		/// </summary>
-		public override bool Equals (object obj)
-		{
-			bool res = obj is StringToken;
+        /// <summary>
+        /// </summary>
+        public override bool Equals (object obj)
+        {
+            bool res = obj is StringToken;
 
-			if (res) {
-				StringToken that = (StringToken) obj;
-				res = (this.tokValue == that.tokValue);
-			}
+            if (res) {
+                StringToken that = (StringToken) obj;
+                res = (this.tokValue == that.tokValue);
+            }
 
-			return res;
-		}
+            return res;
+        }
 
-		public bool Equals (StringToken obj)
-		{
-			return (this.tokValue == obj.tokValue);
-		}
+        public bool Equals (StringToken obj)
+        {
+            return (this.tokValue == obj.tokValue);
+        }
 
-		public static bool operator == (StringToken a, StringToken b)
-		{
-			return Equals (a, b);
-		}
+        public static bool operator == (StringToken a, StringToken b)
+        {
+            return Equals (a, b);
+        }
 
-		public static bool operator != (StringToken a, StringToken b)
-		{
-			return !Equals (a, b);
-		}
+        public static bool operator != (StringToken a, StringToken b)
+        {
+            return !Equals (a, b);
+        }
 
-		/// <summary>
-		///  Tests whether the given object is an instance of
-		///  StringToken and has the same token value.
-		/// </summary>
-		public override int GetHashCode ()
-		{
-			return tokValue;
-		}
+        /// <summary>
+        ///  Tests whether the given object is an instance of
+        ///  StringToken and has the same token value.
+        /// </summary>
+        public override int GetHashCode ()
+        {
+            return tokValue;
+        }
 
 
-		/// <summary>
-		///  Returns the metadata token for this String.
-		/// </summary>
-		public int Token {
-			get {
-				return tokValue;
-			}
-		}
+        /// <summary>
+        ///  Returns the metadata token for this String.
+        /// </summary>
+        public int Token {
+            get {
+                return tokValue;
+            }
+        }
 
-	}
+    }
 
 }
 

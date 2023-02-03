@@ -3,13 +3,13 @@
 
 class X
 {
-	void Test (out X x)
-	{
-		x = null;
-	}
-	
-	void Run ()
-	{
-		Test (out this);
-	}
+    void Test (out X x)
+    {
+        x = null;
+    }
+    
+    void Run ()
+    {
+        Test (out this);
+    }
 }

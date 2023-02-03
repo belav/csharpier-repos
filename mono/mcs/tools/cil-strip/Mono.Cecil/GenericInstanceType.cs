@@ -2,7 +2,7 @@
 // GenericInstanceType.cs
 //
 // Author:
-//	Martin Baulig  <martin@ximian.com>
+//    Martin Baulig  <martin@ximian.com>
 //  Jb Evain  <jbevain@gmail.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -29,47 +29,47 @@
 
 namespace Mono.Cecil {
 
-	using System.Text;
+    using System.Text;
 
-	internal sealed class GenericInstanceType : TypeSpecification, IGenericInstance {
+    internal sealed class GenericInstanceType : TypeSpecification, IGenericInstance {
 
-		private GenericArgumentCollection m_genArgs;
+        private GenericArgumentCollection m_genArgs;
 
-		public GenericArgumentCollection GenericArguments {
-			get {
-				if (m_genArgs == null)
-					m_genArgs = new GenericArgumentCollection (this);
-				return m_genArgs;
-			}
-		}
+        public GenericArgumentCollection GenericArguments {
+            get {
+                if (m_genArgs == null)
+                    m_genArgs = new GenericArgumentCollection (this);
+                return m_genArgs;
+            }
+        }
 
-		public bool HasGenericArguments {
-			get { return m_genArgs == null ? false : m_genArgs.Count > 0; }
-		}
+        public bool HasGenericArguments {
+            get { return m_genArgs == null ? false : m_genArgs.Count > 0; }
+        }
 
-		public override bool IsValueType {
-			get { return m_isValueType; }
-			set { m_isValueType = value; }
-		}
+        public override bool IsValueType {
+            get { return m_isValueType; }
+            set { m_isValueType = value; }
+        }
 
-		public override string FullName {
-			get {
-				StringBuilder sb = new StringBuilder ();
-				sb.Append (base.FullName);
-				sb.Append ("<");
-				for (int i = 0; i < this.GenericArguments.Count; i++) {
-					if (i > 0)
-						sb.Append (",");
-					sb.Append (this.GenericArguments [i].FullName);
-				}
-				sb.Append (">");
-				return sb.ToString ();
-			}
-		}
+        public override string FullName {
+            get {
+                StringBuilder sb = new StringBuilder ();
+                sb.Append (base.FullName);
+                sb.Append ("<");
+                for (int i = 0; i < this.GenericArguments.Count; i++) {
+                    if (i > 0)
+                        sb.Append (",");
+                    sb.Append (this.GenericArguments [i].FullName);
+                }
+                sb.Append (">");
+                return sb.ToString ();
+            }
+        }
 
-		public GenericInstanceType (TypeReference elementType) : base (elementType)
-		{
-			m_isValueType = elementType.IsValueType;
-		}
-	}
+        public GenericInstanceType (TypeReference elementType) : base (elementType)
+        {
+            m_isValueType = elementType.IsValueType;
+        }
+    }
 }

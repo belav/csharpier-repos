@@ -9,9 +9,9 @@ using System.IO;
 // Implicit conversion to an interface is not permitted
 //
 class NoIDispose {
-	public static implicit operator IDisposable (NoIDispose a)
-	{
-		return a.x;
-	}
+    public static implicit operator IDisposable (NoIDispose a)
+    {
+        return a.x;
+    }
 }
 

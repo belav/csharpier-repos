@@ -2,7 +2,7 @@
 // OldValueSubroutine.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,54 +32,54 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-	class OldValueSubroutine<TLabel> : MethodContractSubroutine<TLabel> {
-		private BlockWithLabels<TLabel> begin_old_block;
-		private BlockWithLabels<TLabel> end_old_block;
+    class OldValueSubroutine<TLabel> : MethodContractSubroutine<TLabel> {
+        private BlockWithLabels<TLabel> begin_old_block;
+        private BlockWithLabels<TLabel> end_old_block;
 
-		public OldValueSubroutine (SubroutineFacade subroutineFacade, Method method,
-		                           SimpleSubroutineBuilder<TLabel> builder, TLabel startLabel)
-			: base (subroutineFacade, method, builder, startLabel)
-		{
-		}
+        public OldValueSubroutine (SubroutineFacade subroutineFacade, Method method,
+                                   SimpleSubroutineBuilder<TLabel> builder, TLabel startLabel)
+            : base (subroutineFacade, method, builder, startLabel)
+        {
+        }
 
-		public override SubroutineKind Kind
-		{
-			get { return SubroutineKind.Old; }
-		}
+        public override SubroutineKind Kind
+        {
+            get { return SubroutineKind.Old; }
+        }
 
-		public override int StackDelta
-		{
-			get { return 1; }
-		}
+        public override int StackDelta
+        {
+            get { return 1; }
+        }
 
-		public override bool IsOldValue
-		{
-			get { return true; }
-		}
+        public override bool IsOldValue
+        {
+            get { return true; }
+        }
 
-		public override void Initialize ()
-		{
-		}
+        public override void Initialize ()
+        {
+        }
 
-		public void Commit (BlockWithLabels<TLabel> endOldBlock)
-		{
-			this.end_old_block = endOldBlock;
-			base.Commit ();
-		}
+        public void Commit (BlockWithLabels<TLabel> endOldBlock)
+        {
+            this.end_old_block = endOldBlock;
+            base.Commit ();
+        }
 
-		public void RegisterBeginBlock (BlockWithLabels<TLabel> beginOldBlock)
-		{
-			this.begin_old_block = beginOldBlock;
-		}
+        public void RegisterBeginBlock (BlockWithLabels<TLabel> beginOldBlock)
+        {
+            this.begin_old_block = beginOldBlock;
+        }
 
-		public APC BeginOldAPC (Sequence<Edge<CFGBlock, EdgeTag>> context)
-		{
-			return new APC (this.begin_old_block, 0, context);
-		}
+        public APC BeginOldAPC (Sequence<Edge<CFGBlock, EdgeTag>> context)
+        {
+            return new APC (this.begin_old_block, 0, context);
+        }
 
-		public APC EndOldAPC (Sequence<Edge<CFGBlock, EdgeTag>> context)
-		{
-			return new APC (this.end_old_block, this.end_old_block.Count - 1, context);
-		}
-	}
+        public APC EndOldAPC (Sequence<Edge<CFGBlock, EdgeTag>> context)
+        {
+            return new APC (this.end_old_block, this.end_old_block.Count - 1, context);
+        }
+    }
 }

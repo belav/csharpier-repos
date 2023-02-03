@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	static void Main ()
-	{
-		Console.WriteLine ("Hola"
-	}
+    static void Main ()
+    {
+        Console.WriteLine ("Hola"
+    }
 }

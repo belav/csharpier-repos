@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.IDesignerDataSchema
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,12 +34,12 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-	public enum QueryBuilderMode
-	{
-		Select,
-		Update,
-		Insert,
-		Delete
-	}
+    public enum QueryBuilderMode
+    {
+        Select,
+        Update,
+        Insert,
+        Delete
+    }
 }
 

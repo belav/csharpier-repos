@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class HasFinalizeMethod
-	{
-#pragma warning disable 0465, 0114 //Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?	e:\OSS.Code\Castle.Core\src\Castle.Core.Tests\DynamicProxy.Tests\Classes\HasFinalizeMethod.cs	20	26	Castle.Core.Tests
-		protected virtual void Finalize()
-		{
-		}
+    public class HasFinalizeMethod
+    {
+#pragma warning disable 0465, 0114 //Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?    e:\OSS.Code\Castle.Core\src\Castle.Core.Tests\DynamicProxy.Tests\Classes\HasFinalizeMethod.cs    20    26    Castle.Core.Tests
+        protected virtual void Finalize()
+        {
+        }
 #pragma warning restore 0465, 0114
-	}
+    }
 }

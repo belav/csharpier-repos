@@ -2,7 +2,7 @@
 // System.Web.UI.SimplePropertyEntry
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (c) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -29,21 +29,21 @@
 //
 namespace System.Web.UI
 {
-	public class SimplePropertyEntry : PropertyEntry {
-		bool useSetAttribute;
-		object val;
+    public class SimplePropertyEntry : PropertyEntry {
+        bool useSetAttribute;
+        object val;
 
-		internal SimplePropertyEntry () { }
+        internal SimplePropertyEntry () { }
 
-		public bool UseSetAttribute {
-			get { return useSetAttribute; }
-			set { useSetAttribute = value; }
-		}
+        public bool UseSetAttribute {
+            get { return useSetAttribute; }
+            set { useSetAttribute = value; }
+        }
 
-		public object Value {
-			get { return val; }
-			set { val = value; }
-		}
-	}
+        public object Value {
+            get { return val; }
+            set { val = value; }
+        }
+    }
 }
 

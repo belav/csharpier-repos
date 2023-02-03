@@ -1,9 +1,9 @@
 //
 // ValidationPropertyAttributeCas.cs 
-//	- CAS unit tests for System.Web.UI.ValidationPropertyAttribute
+//    - CAS unit tests for System.Web.UI.ValidationPropertyAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,29 +37,29 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ValidationPropertyAttributeCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ValidationPropertyAttributeCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ValidationPropertyAttribute vpa = new ValidationPropertyAttribute (null);
-			Assert.IsNull (vpa.Name, "Name");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ValidationPropertyAttribute vpa = new ValidationPropertyAttribute (null);
+            Assert.IsNull (vpa.Name, "Name");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(string)");
-			return ci.Invoke (new object[1] { String.Empty });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
+            Assert.IsNotNull (ci, ".ctor(string)");
+            return ci.Invoke (new object[1] { String.Empty });
+        }
 
-		public override Type Type {
-			get { return typeof (ValidationPropertyAttribute); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ValidationPropertyAttribute); }
+        }
+    }
 }

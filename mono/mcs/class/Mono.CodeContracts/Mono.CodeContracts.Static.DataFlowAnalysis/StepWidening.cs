@@ -2,7 +2,7 @@
 // StepWidening.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,31 +30,31 @@ using System.Collections.Generic;
 using Mono.CodeContracts.Static.ControlFlow;
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-	abstract class StepWidening<Index> : IWidenStrategy {
-		private readonly int N;
-		private readonly Dictionary<Index, int> widenCounter;
+    abstract class StepWidening<Index> : IWidenStrategy {
+        private readonly int N;
+        private readonly Dictionary<Index, int> widenCounter;
 
-		protected StepWidening (int n)
-		{
-			this.widenCounter = new Dictionary<Index, int> ();
-			this.N = n;
-		}
+        protected StepWidening (int n)
+        {
+            this.widenCounter = new Dictionary<Index, int> ();
+            this.N = n;
+        }
 
-		protected abstract Index MakeIndex (APC from, APC to);
+        protected abstract Index MakeIndex (APC from, APC to);
 
-		#region Implementation of IWidenStrategy
-		public bool WantToWiden (APC from, APC to, bool isBackEdge)
-		{
-			if (!isBackEdge)
-				return false;
+        #region Implementation of IWidenStrategy
+        public bool WantToWiden (APC from, APC to, bool isBackEdge)
+        {
+            if (!isBackEdge)
+                return false;
 
-			Index key = MakeIndex (from, to);
-			if (this.widenCounter.ContainsKey (key))
-				this.widenCounter [key] = this.widenCounter [key] + 1;
-			else
-				this.widenCounter [key] = 1;
-			return this.N < this.widenCounter [key];
-		}
-		#endregion
-	}
+            Index key = MakeIndex (from, to);
+            if (this.widenCounter.ContainsKey (key))
+                this.widenCounter [key] = this.widenCounter [key] + 1;
+            else
+                this.widenCounter [key] = 1;
+            return this.N < this.widenCounter [key];
+        }
+        #endregion
+    }
 }

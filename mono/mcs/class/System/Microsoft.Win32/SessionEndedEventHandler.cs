@@ -29,8 +29,8 @@
 //
 namespace Microsoft.Win32 {
 
-	/// <summary>
-	/// </summary>
+    /// <summary>
+    /// </summary>
 public delegate void SessionEndedEventHandler(object sender,   SessionEndedEventArgs e);
 
 }

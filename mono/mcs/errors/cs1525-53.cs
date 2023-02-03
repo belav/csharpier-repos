@@ -3,5 +3,5 @@
 
 class Foo
 {
-	[DllImport
+    [DllImport
 }

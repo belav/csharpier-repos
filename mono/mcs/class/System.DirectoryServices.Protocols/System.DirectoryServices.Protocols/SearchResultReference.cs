@@ -30,17 +30,17 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	[MonoTODO]
-	public class SearchResultReference
-	{
-		internal SearchResultReference (DirectoryControl [] controls, Uri [] reference)
-		{
-			Controls = controls;
-			Reference = reference;
-		}
+    [MonoTODO]
+    public class SearchResultReference
+    {
+        internal SearchResultReference (DirectoryControl [] controls, Uri [] reference)
+        {
+            Controls = controls;
+            Reference = reference;
+        }
 
-		public DirectoryControl [] Controls { get; private set; }
-		public Uri [] Reference { get; private set; }
+        public DirectoryControl [] Controls { get; private set; }
+        public Uri [] Reference { get; private set; }
 
-	}
+    }
 }

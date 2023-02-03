@@ -2,7 +2,7 @@
 // ComContractElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,132 +54,132 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class ComContractElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty contract;
-		static ConfigurationProperty exposed_methods;
-		static ConfigurationProperty name;
-		static ConfigurationProperty ns;
-		static ConfigurationProperty persistable_types;
-		static ConfigurationProperty requires_session;
-		static ConfigurationProperty user_defined_types;
+    [MonoTODO]
+    public sealed partial class ComContractElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty contract;
+        static ConfigurationProperty exposed_methods;
+        static ConfigurationProperty name;
+        static ConfigurationProperty ns;
+        static ConfigurationProperty persistable_types;
+        static ConfigurationProperty requires_session;
+        static ConfigurationProperty user_defined_types;
 
-		static ComContractElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			contract = new ConfigurationProperty ("contract",
-				typeof (string), null, new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static ComContractElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            contract = new ConfigurationProperty ("contract",
+                typeof (string), null, new StringConverter (), null,
+                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
 
-			exposed_methods = new ConfigurationProperty ("exposedMethods",
-				typeof (ComMethodElementCollection), null, null/* FIXME: get converter for ComMethodElementCollection*/, null,
-				ConfigurationPropertyOptions.None);
+            exposed_methods = new ConfigurationProperty ("exposedMethods",
+                typeof (ComMethodElementCollection), null, null/* FIXME: get converter for ComMethodElementCollection*/, null,
+                ConfigurationPropertyOptions.None);
 
-			name = new ConfigurationProperty ("name",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+            name = new ConfigurationProperty ("name",
+                typeof (string), "", new StringConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			ns = new ConfigurationProperty ("namespace",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+            ns = new ConfigurationProperty ("namespace",
+                typeof (string), "", new StringConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			persistable_types = new ConfigurationProperty ("persistableTypes",
-				typeof (ComPersistableTypeElementCollection), null, null/* FIXME: get converter for ComPersistableTypeElementCollection*/, null,
-				ConfigurationPropertyOptions.None);
+            persistable_types = new ConfigurationProperty ("persistableTypes",
+                typeof (ComPersistableTypeElementCollection), null, null/* FIXME: get converter for ComPersistableTypeElementCollection*/, null,
+                ConfigurationPropertyOptions.None);
 
-			requires_session = new ConfigurationProperty ("requiresSession",
-				typeof (bool), "true", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+            requires_session = new ConfigurationProperty ("requiresSession",
+                typeof (bool), "true", new BooleanConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			user_defined_types = new ConfigurationProperty ("userDefinedTypes",
-				typeof (ComUdtElementCollection), null, null/* FIXME: get converter for ComUdtElementCollection*/, null,
-				ConfigurationPropertyOptions.None);
+            user_defined_types = new ConfigurationProperty ("userDefinedTypes",
+                typeof (ComUdtElementCollection), null, null/* FIXME: get converter for ComUdtElementCollection*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (contract);
-			properties.Add (exposed_methods);
-			properties.Add (name);
-			properties.Add (ns);
-			properties.Add (persistable_types);
-			properties.Add (requires_session);
-			properties.Add (user_defined_types);
-		}
+            properties.Add (contract);
+            properties.Add (exposed_methods);
+            properties.Add (name);
+            properties.Add (ns);
+            properties.Add (persistable_types);
+            properties.Add (requires_session);
+            properties.Add (user_defined_types);
+        }
 
-		public ComContractElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("contract",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Contract {
-			get { return (string) base [contract]; }
-			set { base [contract] = value; }
-		}
-
-		[ConfigurationProperty ("exposedMethods",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ComMethodElementCollection ExposedMethods {
-			get { return (ComMethodElementCollection) base [exposed_methods]; }
-		}
-
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("name",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		public string Name {
-			get { return (string) base [name]; }
-			set { base [name] = value; }
-		}
-
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("namespace",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		public string Namespace {
-			get { return (string) base [ns]; }
-			set { base [ns] = value; }
-		}
-
-		[ConfigurationProperty ("persistableTypes",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ComPersistableTypeElementCollection PersistableTypes {
-			get { return (ComPersistableTypeElementCollection) base [persistable_types]; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("requiresSession",
-			DefaultValue = true,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool RequiresSession {
-			get { return (bool) base [requires_session]; }
-			set { base [requires_session] = value; }
-		}
-
-		[ConfigurationProperty ("userDefinedTypes",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ComUdtElementCollection UserDefinedTypes {
-			get { return (ComUdtElementCollection) base [user_defined_types]; }
-		}
+        public ComContractElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("contract",
+             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true)]
+        [StringValidator ( MinLength = 1,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        public string Contract {
+            get { return (string) base [contract]; }
+            set { base [contract] = value; }
+        }
+
+        [ConfigurationProperty ("exposedMethods",
+             Options = ConfigurationPropertyOptions.None)]
+        public ComMethodElementCollection ExposedMethods {
+            get { return (ComMethodElementCollection) base [exposed_methods]; }
+        }
+
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("name",
+             DefaultValue = "",
+             Options = ConfigurationPropertyOptions.None)]
+        public string Name {
+            get { return (string) base [name]; }
+            set { base [name] = value; }
+        }
+
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("namespace",
+             DefaultValue = "",
+             Options = ConfigurationPropertyOptions.None)]
+        public string Namespace {
+            get { return (string) base [ns]; }
+            set { base [ns] = value; }
+        }
+
+        [ConfigurationProperty ("persistableTypes",
+             Options = ConfigurationPropertyOptions.None)]
+        public ComPersistableTypeElementCollection PersistableTypes {
+            get { return (ComPersistableTypeElementCollection) base [persistable_types]; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [ConfigurationProperty ("requiresSession",
+            DefaultValue = true,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool RequiresSession {
+            get { return (bool) base [requires_session]; }
+            set { base [requires_session] = value; }
+        }
+
+        [ConfigurationProperty ("userDefinedTypes",
+             Options = ConfigurationPropertyOptions.None)]
+        public ComUdtElementCollection UserDefinedTypes {
+            get { return (ComUdtElementCollection) base [user_defined_types]; }
+        }
+
+
+    }
 
 }

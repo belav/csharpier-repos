@@ -3,14 +3,14 @@
 
 namespace CS0143Test
 {
-	public class A
-	{
-		static void Main ()
-		{
-			string b="text";
-			int c=2;
-			
-			A  a = new A (b, c);
-		}
-	}
+    public class A
+    {
+        static void Main ()
+        {
+            string b="text";
+            int c=2;
+            
+            A  a = new A (b, c);
+        }
+    }
 }

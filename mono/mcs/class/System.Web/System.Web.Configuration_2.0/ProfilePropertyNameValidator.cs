@@ -2,7 +2,7 @@
 // System.Web.Configuration.ProfilePropertyNameValidator.cs
 //
 // Authors:
-// 	Chris Toshok (toshok@ximian.com)
+//     Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,25 +31,25 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	internal class ProfilePropertyNameValidator : StringValidator
-	{
-		public ProfilePropertyNameValidator () : base (1)
-		{
-		}
+    internal class ProfilePropertyNameValidator : StringValidator
+    {
+        public ProfilePropertyNameValidator () : base (1)
+        {
+        }
 
-		public override void Validate (object value)
-		{
-			base.Validate (value);
+        public override void Validate (object value)
+        {
+            base.Validate (value);
 
-			string val = value as string;
-			if (value == null)
-				throw new ArgumentNullException ("value");
-			val = val.Trim ();
-			if (String.IsNullOrEmpty (val))
-				throw new ArgumentException ("name cannot be empty.");
-			if (val.Contains ("."))
-				throw new ArgumentException ("name cannot contain period");
-		}
-	}
+            string val = value as string;
+            if (value == null)
+                throw new ArgumentNullException ("value");
+            val = val.Trim ();
+            if (String.IsNullOrEmpty (val))
+                throw new ArgumentException ("name cannot be empty.");
+            if (val.Contains ("."))
+                throw new ArgumentException ("name cannot contain period");
+        }
+    }
 }
 

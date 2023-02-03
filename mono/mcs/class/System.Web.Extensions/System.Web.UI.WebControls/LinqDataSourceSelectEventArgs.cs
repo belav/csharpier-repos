@@ -36,39 +36,39 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class LinqDataSourceSelectEventArgs : CancelEventArgs
-	{
-		public LinqDataSourceSelectEventArgs (
-			DataSourceSelectArguments arguments,
-			IDictionary<string, object> whereParameters,
-			IOrderedDictionary orderByParameters,
-			IDictionary<string, object> groupByParameters,
-			IDictionary<string, object> orderGroupsByParameters,
-			IDictionary<string, object> selectParameters)
-		{
-			// all nullable.
-			Arguments = arguments;
-			WhereParameters = whereParameters;
-			OrderByParameters = orderByParameters;
-			GroupByParameters = groupByParameters;
-			OrderGroupsByParameters = orderGroupsByParameters;
-			SelectParameters = selectParameters;
-		}
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class LinqDataSourceSelectEventArgs : CancelEventArgs
+    {
+        public LinqDataSourceSelectEventArgs (
+            DataSourceSelectArguments arguments,
+            IDictionary<string, object> whereParameters,
+            IOrderedDictionary orderByParameters,
+            IDictionary<string, object> groupByParameters,
+            IDictionary<string, object> orderGroupsByParameters,
+            IDictionary<string, object> selectParameters)
+        {
+            // all nullable.
+            Arguments = arguments;
+            WhereParameters = whereParameters;
+            OrderByParameters = orderByParameters;
+            GroupByParameters = groupByParameters;
+            OrderGroupsByParameters = orderGroupsByParameters;
+            SelectParameters = selectParameters;
+        }
 
-		public DataSourceSelectArguments Arguments { get; private set; }
+        public DataSourceSelectArguments Arguments { get; private set; }
 
-		public IDictionary<string, object> GroupByParameters { get; private set; }
+        public IDictionary<string, object> GroupByParameters { get; private set; }
 
-		public IOrderedDictionary OrderByParameters { get; private set; }
+        public IOrderedDictionary OrderByParameters { get; private set; }
 
-		public IDictionary<string, object> OrderGroupsByParameters { get; private set; }
+        public IDictionary<string, object> OrderGroupsByParameters { get; private set; }
 
-		public object Result { get; set; }
+        public object Result { get; set; }
 
-		public IDictionary<string, object> SelectParameters { get; private set; }
+        public IDictionary<string, object> SelectParameters { get; private set; }
 
-		public IDictionary<string, object> WhereParameters { get; private set; }
-	}
+        public IDictionary<string, object> WhereParameters { get; private set; }
+    }
 }

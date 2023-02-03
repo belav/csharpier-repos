@@ -2,7 +2,7 @@
 // ComPersistableTypeElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,31 +54,31 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ComPersistableTypeElement),
-		 AddItemName = "type",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	[MonoTODO]
-	public sealed partial class ComPersistableTypeElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>,  ICollection,  IEnumerable
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (ComPersistableTypeElement),
+         AddItemName = "type",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [MonoTODO]
+    public sealed partial class ComPersistableTypeElementCollection
+         : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>,  ICollection,  IEnumerable
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static ComPersistableTypeElementCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static ComPersistableTypeElementCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public ComPersistableTypeElementCollection ()
-		{
-		}
-
-
-		// Properties
+        public ComPersistableTypeElementCollection ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

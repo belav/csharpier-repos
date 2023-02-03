@@ -4,8 +4,8 @@
 
 public partial class C
 {
-	partial void Foo (out int i)
-	{
-		i = 8;
-	}
+    partial void Foo (out int i)
+    {
+        i = 8;
+    }
 }

@@ -35,120 +35,120 @@ using GHTUtils.Base;
 
 namespace CHttpClient
 {
-	/// <summary>
-	/// Summary description for HttpClientBase.
-	/// </summary>
-	public class HttpClientBase : GHTBase
-	{
-		protected string _testingUrl = "";
-		protected string _proxyAddress = "";
-		public HttpClientBase()
-		{
-			_testingUrl = "http://localhost/httpapp/";
-			_proxyAddress = "localhost";
-		}
+    /// <summary>
+    /// Summary description for HttpClientBase.
+    /// </summary>
+    public class HttpClientBase : GHTBase
+    {
+        protected string _testingUrl = "";
+        protected string _proxyAddress = "";
+        public HttpClientBase()
+        {
+            _testingUrl = "http://localhost/httpapp/";
+            _proxyAddress = "localhost";
+        }
 
-		protected string TCUrl(string page)
-		{
-			return _testingUrl + page;
-		}
+        protected string TCUrl(string page)
+        {
+            return _testingUrl + page;
+        }
 
-		//===========================================================
-		// HTTP request/response routines
-		//===========================================================
+        //===========================================================
+        // HTTP request/response routines
+        //===========================================================
 
-		protected HttpStatusCode HttpRequestStatusCode(string url)
-		{
-			return HttpRequestStatusCode(CreateRequest(url));
-		}
-		protected HttpStatusCode HttpRequestStatusCode(HttpWebRequest _request)
-		{
-			System.Net.HttpWebResponse _response;
-			_response = (HttpWebResponse)_request.GetResponse();
-			
-			HttpStatusCode c = _response.StatusCode;
-			_response.Close();
+        protected HttpStatusCode HttpRequestStatusCode(string url)
+        {
+            return HttpRequestStatusCode(CreateRequest(url));
+        }
+        protected HttpStatusCode HttpRequestStatusCode(HttpWebRequest _request)
+        {
+            System.Net.HttpWebResponse _response;
+            _response = (HttpWebResponse)_request.GetResponse();
+            
+            HttpStatusCode c = _response.StatusCode;
+            _response.Close();
 
-			return c;
-		}
+            return c;
+        }
 
-		protected string HttpRequestString(string url)
-		{
-			return HttpRequestString(CreateRequest(url));
-		}
-		protected string HttpRequestString(HttpWebRequest _request)
-		{
-			System.Net.HttpWebResponse _response;
-			_response = (HttpWebResponse)_request.GetResponse();
+        protected string HttpRequestString(string url)
+        {
+            return HttpRequestString(CreateRequest(url));
+        }
+        protected string HttpRequestString(HttpWebRequest _request)
+        {
+            System.Net.HttpWebResponse _response;
+            _response = (HttpWebResponse)_request.GetResponse();
 
-			Stream s = _response.GetResponseStream();
-			TextReader r = new StreamReader(s);
+            Stream s = _response.GetResponseStream();
+            TextReader r = new StreamReader(s);
 
-			string str = r.ReadToEnd();
-			_response.Close();
+            string str = r.ReadToEnd();
+            _response.Close();
 
-			return str;
-		}
+            return str;
+        }
 
-		protected HttpWebRequest CreateRequest(string url)
-		{
-			return (HttpWebRequest)System.Net.WebRequest.Create(url);
-		}
+        protected HttpWebRequest CreateRequest(string url)
+        {
+            return (HttpWebRequest)System.Net.WebRequest.Create(url);
+        }
 
-		//===========================================================
-		// Upload/Download Data utilities
-		//===========================================================
+        //===========================================================
+        // Upload/Download Data utilities
+        //===========================================================
 
-		protected bool ValidateFile(string filename)
-		{
-			FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-			byte [] buffer = new byte[fs.Length];
-			fs.Read(buffer, 0, buffer.Length);
-			fs.Close();
+        protected bool ValidateFile(string filename)
+        {
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
+            byte [] buffer = new byte[fs.Length];
+            fs.Read(buffer, 0, buffer.Length);
+            fs.Close();
 
-			return ValidateData(buffer);
-		}
+            return ValidateData(buffer);
+        }
 
-		protected bool ValidateData(byte [] sdata)
-		{
-			for (int i=0; i < sdata.Length; i++)
-			{
-				if (sdata[i] != (byte)(i % 256))
-					return false;
-			}
-			return true;
-		}
+        protected bool ValidateData(byte [] sdata)
+        {
+            for (int i=0; i < sdata.Length; i++)
+            {
+                if (sdata[i] != (byte)(i % 256))
+                    return false;
+            }
+            return true;
+        }
 
-		protected byte [] GenerateData(int size)
-		{
-			byte [] sdata = new byte[size];
-			for (int i=0; i < sdata.Length; i++)
-			{
-				sdata[i] = (byte)(i % 256);
-			}
+        protected byte [] GenerateData(int size)
+        {
+            byte [] sdata = new byte[size];
+            for (int i=0; i < sdata.Length; i++)
+            {
+                sdata[i] = (byte)(i % 256);
+            }
 
-			return sdata;
-		}
-		
-		//===========================================================
-		// Test case execution routines
-		//===========================================================
+            return sdata;
+        }
+        
+        //===========================================================
+        // Test case execution routines
+        //===========================================================
 
-		protected delegate bool TestCaseDelegate();
-		protected void ExecuteTestCase(string name, TestCaseDelegate f)
-		{
-			Exception exp = null;
+        protected delegate bool TestCaseDelegate();
+        protected void ExecuteTestCase(string name, TestCaseDelegate f)
+        {
+            Exception exp = null;
 
-			//sub test start
-			try
-			{
-				BeginCase(name);
-				Compare( f(), true );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
-			//sub test end
-		}
+            //sub test start
+            try
+            {
+                BeginCase(name);
+                Compare( f(), true );
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
+            //sub test end
+        }
 
-	}
+    }
 }

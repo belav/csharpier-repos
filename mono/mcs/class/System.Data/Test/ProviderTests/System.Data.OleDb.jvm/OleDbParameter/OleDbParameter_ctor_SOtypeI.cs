@@ -35,87 +35,87 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbParameter_ctor_SOtypeI : GHTBase
 {
-	public static void Main()
-	{
-		OleDbParameter_ctor_SOtypeI tc = new OleDbParameter_ctor_SOtypeI();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OleDbParameter_ctor_SOtypeI");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OleDbParameter_ctor_SOtypeI tc = new OleDbParameter_ctor_SOtypeI();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OleDbParameter_ctor_SOtypeI");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
-		OleDbParameter param = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
+        OleDbParameter param = null;
 
-		foreach (OleDbType dbtype in Enum.GetValues(typeof(OleDbType)))
-		{
+        foreach (OleDbType dbtype in Enum.GetValues(typeof(OleDbType)))
+        {
 
-			// not supporting OleDbType.IDispatch and OleDbType.IUnknown
-			if (( dbtype == OleDbType.IDispatch) || (dbtype == OleDbType.IUnknown) )
-			{
-				continue;
-			}
+            // not supporting OleDbType.IDispatch and OleDbType.IUnknown
+            if (( dbtype == OleDbType.IDispatch) || (dbtype == OleDbType.IUnknown) )
+            {
+                continue;
+            }
 
-			param = new OleDbParameter("myParam",dbtype,5);
+            param = new OleDbParameter("myParam",dbtype,5);
 
-			try
-			{
-				BeginCase("ctor " + dbtype.ToString());
-				Compare(param != null, true);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("ctor " + dbtype.ToString());
+                Compare(param != null, true);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("name " + dbtype.ToString());
-				Compare(param.ParameterName ,"myParam");
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("name " + dbtype.ToString());
+                Compare(param.ParameterName ,"myParam");
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("size " + dbtype.ToString());
-				Compare(param.Size ,5);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
-		}
+            try
+            {
+                BeginCase("size " + dbtype.ToString());
+                Compare(param.Size ,5);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
+        }
 
-		try
-		{
-			BeginCase("ctor - illegal size ");
-			try
-			{
-				param = new OleDbParameter("myParam",OleDbType.Integer ,-5);
-			}
-			catch (Exception ex) {exp = ex;}
-			Compare(exp.GetType().FullName , typeof(ArgumentException).FullName );
-			exp=null;
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("ctor - illegal size ");
+            try
+            {
+                param = new OleDbParameter("myParam",OleDbType.Integer ,-5);
+            }
+            catch (Exception ex) {exp = ex;}
+            Compare(exp.GetType().FullName , typeof(ArgumentException).FullName );
+            exp=null;
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-	}
+    }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

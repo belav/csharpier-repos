@@ -3,13 +3,13 @@
 // this is bug 55780.
 
 class A {
-	public int Foo { get { return 1; } }
+    public int Foo { get { return 1; } }
 }
 
 class B : A {
-	public new int Foo { set { } }
-	static void Main ()
-	{
-		System.Console.WriteLine (new B ().Foo);
-	}
+    public new int Foo { set { } }
+    static void Main ()
+    {
+        System.Console.WriteLine (new B ().Foo);
+    }
 }

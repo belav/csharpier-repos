@@ -30,15 +30,15 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-	[Serializable]
-	public class AddressAlreadyInUseException : CommunicationException
-	{
-		public AddressAlreadyInUseException () : base () {}
-		public AddressAlreadyInUseException (string message) : base (message) {}
-		public AddressAlreadyInUseException (string message, Exception innerException) : base (message, innerException) {}
-		protected AddressAlreadyInUseException (SerializationInfo info, StreamingContext context) :
-			base (info, context) {}
+    [Serializable]
+    public class AddressAlreadyInUseException : CommunicationException
+    {
+        public AddressAlreadyInUseException () : base () {}
+        public AddressAlreadyInUseException (string message) : base (message) {}
+        public AddressAlreadyInUseException (string message, Exception innerException) : base (message, innerException) {}
+        protected AddressAlreadyInUseException (SerializationInfo info, StreamingContext context) :
+            base (info, context) {}
 
 
-	}
+    }
 }

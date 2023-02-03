@@ -35,98 +35,98 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design.WebControls
 {
-	public abstract class BaseDataBoundControlDesigner : ControlDesigner
-	{
-		[MonoNotSupported ("")]
-		protected BaseDataBoundControlDesigner ()
-		{
-			throw new NotImplementedException ();
-		}
+    public abstract class BaseDataBoundControlDesigner : ControlDesigner
+    {
+        [MonoNotSupported ("")]
+        protected BaseDataBoundControlDesigner ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public string DataSource {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
+        [MonoNotSupported ("")]
+        public string DataSource {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
 
-			[MonoNotSupported ("")]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+            [MonoNotSupported ("")]
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		public string DataSourceID {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-			
-			[MonoNotSupported ("")]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported ("")]
+        public string DataSourceID {
+            [MonoNotSupported ("")]
+            get {
+                throw new NotImplementedException ();
+            }
+            
+            [MonoNotSupported ("")]
+            set {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoNotSupported ("")]
-		protected override void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected override void Dispose (bool disposing)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override void Initialize (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        public override void Initialize (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public static DialogResult ShowCreateDataSourceDialog (ControlDesigner controlDesigner, Type dataSourceType,
-								       bool configure, out string dataSourceID)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		protected abstract bool ConnectToDataSource ();
-		protected abstract void CreateDataSource ();
-		protected abstract void DataBind (BaseDataBoundControl dataBoundControl);
-		protected abstract void DisconnectFromDataSource ();
+        [MonoNotSupported ("")]
+        public static DialogResult ShowCreateDataSourceDialog (ControlDesigner controlDesigner, Type dataSourceType,
+                                       bool configure, out string dataSourceID)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        protected abstract bool ConnectToDataSource ();
+        protected abstract void CreateDataSource ();
+        protected abstract void DataBind (BaseDataBoundControl dataBoundControl);
+        protected abstract void DisconnectFromDataSource ();
 
-		[MonoNotSupported ("")]
-		protected override string GetEmptyDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected override string GetEmptyDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected override string GetErrorDesignTimeHtml (Exception e)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected override string GetErrorDesignTimeHtml (Exception e)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected virtual void OnDataSourceChanged (bool forceUpdateView)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected virtual void OnDataSourceChanged (bool forceUpdateView)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected virtual void OnSchemaRefreshed ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported ("")]
+        protected virtual void OnSchemaRefreshed ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		protected override void PreFilterProperties (IDictionary properties)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoNotSupported ("")]
+        protected override void PreFilterProperties (IDictionary properties)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // CardSelectionContext.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -37,29 +37,29 @@ using System.Xml;
 
 namespace Mono.ServiceModel.IdentitySelectors
 {
-	public class CardSelectionContext
-	{
-		EndpointAddress target;
-		EndpointAddress issuer;
-		Collection<ClaimTypeRequirement> requirements;
-		Collection<XmlElement> additional_parameters;
-		Uri policy_link;
-		int policy_ver;
+    public class CardSelectionContext
+    {
+        EndpointAddress target;
+        EndpointAddress issuer;
+        Collection<ClaimTypeRequirement> requirements;
+        Collection<XmlElement> additional_parameters;
+        Uri policy_link;
+        int policy_ver;
 
-		public CardSelectionContext (
-			EndpointAddress target,
-			EndpointAddress issuer,
-			Collection<ClaimTypeRequirement> requirements,
-			Collection<XmlElement> additionalRequestParameters,
-			Uri policyNoticeLink,
-			int policyNoticeVersion)
-		{
-			this.target = target;
-			this.issuer = issuer;
-			this.requirements = requirements;
-			additional_parameters = additionalRequestParameters;
-			policy_link = policyNoticeLink;
-			policy_ver = policyNoticeVersion;
-		}
-	}
+        public CardSelectionContext (
+            EndpointAddress target,
+            EndpointAddress issuer,
+            Collection<ClaimTypeRequirement> requirements,
+            Collection<XmlElement> additionalRequestParameters,
+            Uri policyNoticeLink,
+            int policyNoticeVersion)
+        {
+            this.target = target;
+            this.issuer = issuer;
+            this.requirements = requirements;
+            additional_parameters = additionalRequestParameters;
+            policy_link = policyNoticeLink;
+            policy_ver = policyNoticeVersion;
+        }
+    }
 }

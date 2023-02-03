@@ -2,7 +2,7 @@
 // AssemblyInfo.cs
 //
 // Authors:
-//	Marek Safar (marek.safar@gmail.com)
+//    Marek Safar (marek.safar@gmail.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //

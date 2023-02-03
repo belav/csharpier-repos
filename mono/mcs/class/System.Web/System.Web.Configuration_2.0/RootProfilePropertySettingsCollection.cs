@@ -2,7 +2,7 @@
 // System.Web.Configuration.RootProfilePropertySettingsCollection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,111 +35,111 @@ using System.Xml;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (ProfilePropertySettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class RootProfilePropertySettingsCollection : ProfilePropertySettingsCollection
-	{
-		static ConfigurationPropertyCollection properties;
-		ProfileGroupSettingsCollection groupSettings;
-		
-		static RootProfilePropertySettingsCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+    [ConfigurationCollection (typeof (ProfilePropertySettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class RootProfilePropertySettingsCollection : ProfilePropertySettingsCollection
+    {
+        static ConfigurationPropertyCollection properties;
+        ProfileGroupSettingsCollection groupSettings;
+        
+        static RootProfilePropertySettingsCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public RootProfilePropertySettingsCollection ()
-		{
-			groupSettings = new ProfileGroupSettingsCollection ();
-		}		
-		
-		public override bool Equals (object rootProfilePropertySettingsCollection)
-		{
-			RootProfilePropertySettingsCollection col = rootProfilePropertySettingsCollection as RootProfilePropertySettingsCollection;
-			if (col == null)
-				return false;
+        public RootProfilePropertySettingsCollection ()
+        {
+            groupSettings = new ProfileGroupSettingsCollection ();
+        }        
+        
+        public override bool Equals (object rootProfilePropertySettingsCollection)
+        {
+            RootProfilePropertySettingsCollection col = rootProfilePropertySettingsCollection as RootProfilePropertySettingsCollection;
+            if (col == null)
+                return false;
 
-			if (GetType () != col.GetType ())
-				return false;
+            if (GetType () != col.GetType ())
+                return false;
 
-			if (Count != col.Count)
-				return false;
+            if (Count != col.Count)
+                return false;
 
-			for (int n = 0; n < Count; n++) {
-				if (!BaseGet (n).Equals (col.BaseGet (n)))
-					return false;
-			}
-			return true;
-		}
+            for (int n = 0; n < Count; n++) {
+                if (!BaseGet (n).Equals (col.BaseGet (n)))
+                    return false;
+            }
+            return true;
+        }
 
-		public override int GetHashCode ()
-		{
-			int code = 0;
-			for (int n = 0; n < Count; n++)
-				code += BaseGet (n).GetHashCode ();
-			return code;
-		}
+        public override int GetHashCode ()
+        {
+            int code = 0;
+            for (int n = 0; n < Count; n++)
+                code += BaseGet (n).GetHashCode ();
+            return code;
+        }
 
-		protected override bool AllowClear {
-			get { return true; }
-		}
+        protected override bool AllowClear {
+            get { return true; }
+        }
 
-		// LAMESPEC: this is missing from MSDN but is present in 2.0sp1 version of the
-		// class.
-		protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader)
-		{
-			if (elementName == "group") {
-				ProfileGroupSettings newSettings = new ProfileGroupSettings ();
-				newSettings.DoDeserialize (reader);
-				GroupSettings.AddNewSettings (newSettings);
-				
-				return true;
-			}
-			
-			return base.OnDeserializeUnrecognizedElement (elementName, reader);
-		}
+        // LAMESPEC: this is missing from MSDN but is present in 2.0sp1 version of the
+        // class.
+        protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader)
+        {
+            if (elementName == "group") {
+                ProfileGroupSettings newSettings = new ProfileGroupSettings ();
+                newSettings.DoDeserialize (reader);
+                GroupSettings.AddNewSettings (newSettings);
+                
+                return true;
+            }
+            
+            return base.OnDeserializeUnrecognizedElement (elementName, reader);
+        }
 
-		// LAMESPEC: this is missing from MSDN, but is present in the 2.0sp1 version of the
-		// class
-		protected internal override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
-		{
-			// Why override?
-			base.Unmerge (sourceElement, parentElement, saveMode);
-		}
-		
-		[ConfigurationProperty ("group")]
-		public ProfileGroupSettingsCollection GroupSettings {
-			get { return groupSettings; }
-		}
+        // LAMESPEC: this is missing from MSDN, but is present in the 2.0sp1 version of the
+        // class
+        protected internal override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+        {
+            // Why override?
+            base.Unmerge (sourceElement, parentElement, saveMode);
+        }
+        
+        [ConfigurationProperty ("group")]
+        public ProfileGroupSettingsCollection GroupSettings {
+            get { return groupSettings; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return true; }
-		}
+        protected override bool ThrowOnDuplicate {
+            get { return true; }
+        }
 
-		// Why override?
-		protected internal override bool IsModified ()
-		{
-			return base.IsModified ();
-		}
+        // Why override?
+        protected internal override bool IsModified ()
+        {
+            return base.IsModified ();
+        }
 
-		// Why override?
-		protected internal override void ResetModified ()
-		{
-			base.ResetModified ();
-		}
-		
-		protected internal override void Reset (ConfigurationElement parentElement)
-		{
-			base.Reset (parentElement);
+        // Why override?
+        protected internal override void ResetModified ()
+        {
+            base.ResetModified ();
+        }
+        
+        protected internal override void Reset (ConfigurationElement parentElement)
+        {
+            base.Reset (parentElement);
 
-			RootProfilePropertySettingsCollection root = (RootProfilePropertySettingsCollection) parentElement;
-			if (root == null)
-				return;
+            RootProfilePropertySettingsCollection root = (RootProfilePropertySettingsCollection) parentElement;
+            if (root == null)
+                return;
 
-			GroupSettings.ResetInternal (root.GroupSettings);
-		}
-	}
+            GroupSettings.ResetInternal (root.GroupSettings);
+        }
+    }
 }
 

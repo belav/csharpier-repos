@@ -22,7 +22,7 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Kevin Rector (krector@nazmail.com)
+//    Kevin Rector (krector@nazmail.com)
 //
 
 
@@ -30,10 +30,10 @@
 
 namespace System.Windows.Forms
 {
-	public enum ItemActivation
-	{
-		OneClick  = 1,
-		Standard = 0,
-		TwoClick = 2
-	}
+    public enum ItemActivation
+    {
+        OneClick  = 1,
+        Standard = 0,
+        TwoClick = 2
+    }
 }

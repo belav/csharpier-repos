@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3471,7 +3471,7 @@ class C
     {
         $$";
 
-            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M(int i) (+Â 1Â {FeaturesResources.overload})");
+            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M(int i) (+ 1 {FeaturesResources.overload})");
         }
 
         [Fact]
@@ -3486,7 +3486,7 @@ class C
     {
         $$";
 
-            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M(int i) (+Â 2Â {FeaturesResources.overloads_})");
+            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M(int i) (+ 2 {FeaturesResources.overloads_})");
         }
 
         [Fact]
@@ -3500,7 +3500,7 @@ class C
     {
         $$";
 
-            await VerifyItemExistsAsync(markup, "M", displayTextSuffix: "<>", expectedDescriptionOrNull: $"void C.M<T>(T i) (+Â 1Â {FeaturesResources.generic_overload})");
+            await VerifyItemExistsAsync(markup, "M", displayTextSuffix: "<>", expectedDescriptionOrNull: $"void C.M<T>(T i) (+ 1 {FeaturesResources.generic_overload})");
         }
 
         [Fact]
@@ -3515,7 +3515,7 @@ class C
     {
         $$";
 
-            await VerifyItemExistsAsync(markup, "M", displayTextSuffix: "<>", expectedDescriptionOrNull: $"void C.M<T>(int i) (+Â 2Â {FeaturesResources.generic_overloads})");
+            await VerifyItemExistsAsync(markup, "M", displayTextSuffix: "<>", expectedDescriptionOrNull: $"void C.M<T>(int i) (+ 2 {FeaturesResources.generic_overloads})");
         }
 
         [Fact]
@@ -11169,19 +11169,19 @@ namespace Bar1
             var markup =
 @"namespace N
 {
-	enum RankedMusicians
-	{
-		BillyJoel,
-		EveryoneElse
-	}
+    enum RankedMusicians
+    {
+        BillyJoel,
+        EveryoneElse
+    }
 
-	class C
-	{
-		void M(RankedMusicians m)
-		{
-			if (m is RankedMusicians.$$
-		}
-	}
+    class C
+    {
+        void M(RankedMusicians m)
+        {
+            if (m is RankedMusicians.$$
+        }
+    }
 }";
             // VerifyItemExistsAsync also tests with the item typed.
             await VerifyItemExistsAsync(markup, "BillyJoel");
@@ -11195,21 +11195,21 @@ namespace Bar1
             var markup =
 @"namespace N
 {
-	enum RankedMusicians
-	{
-		BillyJoel,
-		EveryoneElse
-	}
+    enum RankedMusicians
+    {
+        BillyJoel,
+        EveryoneElse
+    }
 
-	class C
-	{
-		void M(RankedMusicians m)
-		{
-			if (m is RankedMusicians.$$ r)
+    class C
+    {
+        void M(RankedMusicians m)
+        {
+            if (m is RankedMusicians.$$ r)
             {
             }
-		}
-	}
+        }
+    }
 }";
             // VerifyItemExistsAsync also tests with the item typed.
             await VerifyItemExistsAsync(markup, "BillyJoel");
@@ -11223,21 +11223,21 @@ namespace Bar1
             var markup =
 @"namespace N
 {
-	enum RankedMusicians
-	{
-		BillyJoel,
-		EveryoneElse
-	}
+    enum RankedMusicians
+    {
+        BillyJoel,
+        EveryoneElse
+    }
 
-	class C
-	{
+    class C
+    {
         public RankedMusicians R;
 
-		void M(C m)
-		{
-			if (m is { R: RankedMusicians.$$
-		}
-	}
+        void M(C m)
+        {
+            if (m is { R: RankedMusicians.$$
+        }
+    }
 }";
             // VerifyItemExistsAsync also tests with the item typed.
             await VerifyItemExistsAsync(markup, "BillyJoel");
@@ -11251,15 +11251,15 @@ namespace Bar1
             var markup =
 @"namespace N
 {
-	public class D { public class E { } }
+    public class D { public class E { } }
 
-	class C
-	{
-		void M(object m)
-		{
-			if (m is D.$$
-		}
-	}
+    class C
+    {
+        void M(object m)
+        {
+            if (m is D.$$
+        }
+    }
 }";
             // VerifyItemExistsAsync also tests with the item typed.
             await VerifyItemExistsAsync(markup, "E");
@@ -11272,19 +11272,19 @@ namespace Bar1
             var markup =
 @"namespace N
 {
-	enum RankedMusicians
-	{
-		BillyJoel,
-		EveryoneElse
-	}
+    enum RankedMusicians
+    {
+        BillyJoel,
+        EveryoneElse
+    }
 
-	class C
-	{
-		void M(RankedMusicians m)
-		{
-			if (m == RankedMusicians.$$
-		}
-	}
+    class C
+    {
+        void M(RankedMusicians m)
+        {
+            if (m == RankedMusicians.$$
+        }
+    }
 }";
             // VerifyItemExistsAsync also tests with the item typed.
             await VerifyItemExistsAsync(markup, "BillyJoel");
@@ -11298,21 +11298,21 @@ namespace Bar1
             var markup =
 @"namespace N
 {
-	enum RankedMusicians
-	{
-		BillyJoel,
-		EveryoneElse
-	}
+    enum RankedMusicians
+    {
+        BillyJoel,
+        EveryoneElse
+    }
 
-	class C
-	{
-		void M(RankedMusicians m)
-		{
-			if (m == RankedMusicians.$$ r)
+    class C
+    {
+        void M(RankedMusicians m)
+        {
+            if (m == RankedMusicians.$$ r)
             {
             }
-		}
-	}
+        }
+    }
 }";
             // VerifyItemExistsAsync also tests with the item typed.
             await VerifyItemExistsAsync(markup, "BillyJoel");
@@ -11338,7 +11338,7 @@ public class C
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M(int i) (+Â 1Â {FeaturesResources.overload})");
+            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M(int i) (+ 1 {FeaturesResources.overload})");
         }
 
         [Fact, WorkItem(49609, "https://github.com/dotnet/roslyn/issues/49609")]
@@ -11360,7 +11360,7 @@ public class C
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"[{CSharpFeaturesResources.deprecated}] void C.M() (+Â 1Â {FeaturesResources.overload})");
+            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"[{CSharpFeaturesResources.deprecated}] void C.M() (+ 1 {FeaturesResources.overload})");
         }
 
         [Fact, WorkItem(49609, "https://github.com/dotnet/roslyn/issues/49609")]
@@ -11385,7 +11385,7 @@ public class C
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M() (+Â 1Â {FeaturesResources.overload})");
+            await VerifyItemExistsAsync(markup, "M", expectedDescriptionOrNull: $"void C.M() (+ 1 {FeaturesResources.overload})");
         }
 
         [InlineData("int", "")]

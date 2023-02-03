@@ -10,12 +10,12 @@ struct X {
 
 class Test { 
 
-	public static int Main ()
-	{
-		X x = new X ();
-		Console.WriteLine (x);
-	
-		return 0;
-	}
+    public static int Main ()
+    {
+        X x = new X ();
+        Console.WriteLine (x);
+    
+        return 0;
+    }
 }
 

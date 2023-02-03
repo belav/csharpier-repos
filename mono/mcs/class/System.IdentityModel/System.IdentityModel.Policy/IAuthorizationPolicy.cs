@@ -2,7 +2,7 @@
 // IAuthorizationPolicy.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,11 +29,11 @@ using System.IdentityModel.Claims;
 
 namespace System.IdentityModel.Policy
 {
-	public interface IAuthorizationPolicy : IAuthorizationComponent
-	{
-		ClaimSet Issuer { get; }
+    public interface IAuthorizationPolicy : IAuthorizationComponent
+    {
+        ClaimSet Issuer { get; }
 
-		bool Evaluate (EvaluationContext evaluationContext,
-			ref object state);
-	}
+        bool Evaluate (EvaluationContext evaluationContext,
+            ref object state);
+    }
 }

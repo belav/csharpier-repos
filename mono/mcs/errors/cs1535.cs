@@ -3,8 +3,8 @@
 
 class C
 {
-	public static C operator -- ()
-	{
-		return null;
-	}
+    public static C operator -- ()
+    {
+        return null;
+    }
 }

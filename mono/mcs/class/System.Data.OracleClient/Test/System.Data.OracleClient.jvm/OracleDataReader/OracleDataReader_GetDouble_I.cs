@@ -33,114 +33,114 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleDataReader_GetDouble_I : GHTBase
-	{
-		private Exception exp = null;
-		private int testTypesInvocations;
+    [TestFixture]
+    public class OracleDataReader_GetDouble_I : GHTBase
+    {
+        private Exception exp = null;
+        private int testTypesInvocations;
 
-		public static void Main()
-		{
-			OracleDataReader_GetDouble_I tc = new OracleDataReader_GetDouble_I();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataReader_GetDouble_I");
-				tc.run();
-			}
-			catch(Exception ex)
-			{
-				tc.exp = ex;
-			}
-			finally	
-			{
-				tc.EndTest(tc.exp);
-			}
-		}
+        public static void Main()
+        {
+            OracleDataReader_GetDouble_I tc = new OracleDataReader_GetDouble_I();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataReader_GetDouble_I");
+                tc.run();
+            }
+            catch(Exception ex)
+            {
+                tc.exp = ex;
+            }
+            finally    
+            {
+                tc.EndTest(tc.exp);
+            }
+        }
 
-		[Test]
-		public void run()
-		{
-			DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
-			DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
-		}
+        [Test]
+        public void run()
+        {
+            DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
+            DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
+        }
 
-		public void DoTestTypes(DbTypeParametersCollection row)
-		{
-			testTypesInvocations++;
-			exp = null;
-			string rowId = "43969_" + this.testTypesInvocations.ToString();
-			OracleDataReader rdr = null;
-			OracleConnection con = null;
-			try
-			{
-				row.ExecuteInsert(rowId);
-				row.ExecuteSelectReader(rowId, out rdr, out con);
-				while (rdr.Read())
-				{
-					//Run over all the columns in the result set row.
-					//For each column, try to read it as a double.
-					for (int i=0; i<row.Count; i++)
-					{
-						if (row[i].Value.GetType() == typeof(double) ||
-							row[i].Value.GetType() == typeof(decimal)) //The value in the result set should be a double.
-						{
-							try
-							{
-								BeginCase(string.Format("Calling GetDouble() on a field of dbtype {0}", row[i].DbTypeName));
-								double retDouble = rdr.GetDouble(i);
-								Compare(row[i].Value, retDouble);
-							}
-							catch (Exception ex)
-							{
-								exp = ex;
-							}
-							finally
-							{
-								EndCase(exp);
-								exp = null;
-							}
-						}
-						else //The value in the result set should NOT be double. In this case an Invalid case exception should be thrown.
-						{
-							try
-							{
-								BeginCase(string.Format("Calling GetDouble() on a field of dbtype {0}", row[i].DbTypeName));
-								double retDouble = rdr.GetDouble(i);
-								ExpectedExceptionNotCaught("InvalidCastException");
-							}
-							catch (InvalidCastException ex)
-							{
-								ExpectedExceptionCaught(ex);
-							}
-							catch (Exception ex)
-							{
-								exp = ex;
-							}
-							finally
-							{
-								EndCase(exp);
-								exp = null;
-							}
-						}
-					}
-				}
-			}
-			finally
-			{
-				row.ExecuteDelete(rowId);
-				if ( (rdr != null) && (!rdr.IsClosed) )
-				{
-					rdr.Close();
-				}
-				if ( (con != null) && (con.State != ConnectionState.Closed) )
-				{
-					con.Close();
-				}
-			}
-		}
+        public void DoTestTypes(DbTypeParametersCollection row)
+        {
+            testTypesInvocations++;
+            exp = null;
+            string rowId = "43969_" + this.testTypesInvocations.ToString();
+            OracleDataReader rdr = null;
+            OracleConnection con = null;
+            try
+            {
+                row.ExecuteInsert(rowId);
+                row.ExecuteSelectReader(rowId, out rdr, out con);
+                while (rdr.Read())
+                {
+                    //Run over all the columns in the result set row.
+                    //For each column, try to read it as a double.
+                    for (int i=0; i<row.Count; i++)
+                    {
+                        if (row[i].Value.GetType() == typeof(double) ||
+                            row[i].Value.GetType() == typeof(decimal)) //The value in the result set should be a double.
+                        {
+                            try
+                            {
+                                BeginCase(string.Format("Calling GetDouble() on a field of dbtype {0}", row[i].DbTypeName));
+                                double retDouble = rdr.GetDouble(i);
+                                Compare(row[i].Value, retDouble);
+                            }
+                            catch (Exception ex)
+                            {
+                                exp = ex;
+                            }
+                            finally
+                            {
+                                EndCase(exp);
+                                exp = null;
+                            }
+                        }
+                        else //The value in the result set should NOT be double. In this case an Invalid case exception should be thrown.
+                        {
+                            try
+                            {
+                                BeginCase(string.Format("Calling GetDouble() on a field of dbtype {0}", row[i].DbTypeName));
+                                double retDouble = rdr.GetDouble(i);
+                                ExpectedExceptionNotCaught("InvalidCastException");
+                            }
+                            catch (InvalidCastException ex)
+                            {
+                                ExpectedExceptionCaught(ex);
+                            }
+                            catch (Exception ex)
+                            {
+                                exp = ex;
+                            }
+                            finally
+                            {
+                                EndCase(exp);
+                                exp = null;
+                            }
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                row.ExecuteDelete(rowId);
+                if ( (rdr != null) && (!rdr.IsClosed) )
+                {
+                    rdr.Close();
+                }
+                if ( (con != null) && (con.State != ConnectionState.Closed) )
+                {
+                    con.Close();
+                }
+            }
+        }
 
 
-	}
+    }
 
 }

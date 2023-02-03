@@ -1303,7 +1303,7 @@ namespace System.Threading
 #endif // #if FEATURE_IMPERSONATION || FEATURE_COMPRESSEDSTACK
 #if FEATURE_CAS_POLICY
              // capture the host execution context
-            HostExecutionContext hostCtxNew = HostExecutionContextManager.CaptureHostExecutionContext();    		 
+            HostExecutionContext hostCtxNew = HostExecutionContextManager.CaptureHostExecutionContext();             
 #endif // FEATURE_CAS_POLICY
 
             SynchronizationContext syncCtxNew = null;

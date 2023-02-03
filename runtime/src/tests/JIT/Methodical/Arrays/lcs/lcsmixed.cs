@@ -111,7 +111,7 @@ namespace JitTest_lcsmixed_lcs_cs
                 seq[i] = str[i].ToCharArray();
             }
 
-            //	allocate weird matrices
+            //    allocate weird matrices
             int[,,,][,,,] c = new int[len[0], len[1], len[2], len[3]][,,,];
             int[,][,][,][,] b = new int[len[0], len[1]][,][,][,];
             int[] ind = new int[RANK];

@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.Adorner
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -35,46 +35,46 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public sealed class Adorner
-	{
-		public Adorner ()
-		{
-		}
+    public sealed class Adorner
+    {
+        public Adorner ()
+        {
+        }
 
-		[MonoTODO]
-		public void Invalidate ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Invalidate (Rectangle rectangle)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate (Rectangle rectangle)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void Invalidate (Region region)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate (Region region)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public BehaviorService BehaviorService {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public BehaviorService BehaviorService {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public bool Enabled {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool Enabled {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public GlyphCollection Glyphs {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public GlyphCollection Glyphs {
+            get { throw new NotImplementedException (); }
+        }
+    }
 }
 

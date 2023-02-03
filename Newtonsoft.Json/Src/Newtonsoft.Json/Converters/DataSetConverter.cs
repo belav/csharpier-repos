@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -113,7 +113,7 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <param name="valueType">Type of the value.</param>
         /// <returns>
-        /// 	<c>true</c> if this instance can convert the specified value type; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance can convert the specified value type; otherwise, <c>false</c>.
         /// </returns>
         public override bool CanConvert(Type valueType)
         {

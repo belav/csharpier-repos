@@ -2,7 +2,7 @@
 // HttpApplicationStateBaseTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -34,76 +34,76 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web
 {
-	class HttpApplicationStateImpl : HttpApplicationStateBase
-	{
-	}
+    class HttpApplicationStateImpl : HttpApplicationStateBase
+    {
+    }
 
-	[TestFixture]
-	public class HttpApplicationStateBaseTest
-	{
-		[Test]
-		public void DefaultImplementation ()
-		{
-			var i = new HttpApplicationStateImpl ();
-			object x;
-			try {
-				x = i.AllKeys;
-				Assert.Fail ("#1");
-			} catch (NotImplementedException) {
-			}
-			try {
-				x = i.Contents;
-				Assert.Fail ("#2");
-			} catch (NotImplementedException) {
-			}
-			try {
-				x = i.Count;
-				Assert.Fail ("#3");
-			} catch (NotImplementedException) {
-			}
-			try {
-				x = i.IsSynchronized;
-				Assert.Fail ("#4");
-			} catch (NotImplementedException) {
-			}
-			try {
-				x = i.StaticObjects;
-				Assert.Fail ("#5");
-			} catch (NotImplementedException) {
-			}
-			try {
-				x = i.SyncRoot;
-				Assert.Fail ("#6");
-			} catch (NotImplementedException) {
-			}
+    [TestFixture]
+    public class HttpApplicationStateBaseTest
+    {
+        [Test]
+        public void DefaultImplementation ()
+        {
+            var i = new HttpApplicationStateImpl ();
+            object x;
+            try {
+                x = i.AllKeys;
+                Assert.Fail ("#1");
+            } catch (NotImplementedException) {
+            }
+            try {
+                x = i.Contents;
+                Assert.Fail ("#2");
+            } catch (NotImplementedException) {
+            }
+            try {
+                x = i.Count;
+                Assert.Fail ("#3");
+            } catch (NotImplementedException) {
+            }
+            try {
+                x = i.IsSynchronized;
+                Assert.Fail ("#4");
+            } catch (NotImplementedException) {
+            }
+            try {
+                x = i.StaticObjects;
+                Assert.Fail ("#5");
+            } catch (NotImplementedException) {
+            }
+            try {
+                x = i.SyncRoot;
+                Assert.Fail ("#6");
+            } catch (NotImplementedException) {
+            }
 
-			try {
-				i.Add (null, null);
-				Assert.Fail ("#7");
-			} catch (NotImplementedException) {
-			}
-			try {
-				i.Clear ();
-				Assert.Fail ("#8");
-			} catch (NotImplementedException) {
-			}
-			try {
-				i.CopyTo (null, 0);
-				Assert.Fail ("#9");
-			} catch (NotImplementedException) {
-			}
-			try {
-				i.Get (null);
-				Assert.Fail ("#10");
-			} catch (NotImplementedException) {
-			}
-			try {
-				i.GetEnumerator ();
-				Assert.Fail ("#11");
-			} catch (NotImplementedException) {
-			}
+            try {
+                i.Add (null, null);
+                Assert.Fail ("#7");
+            } catch (NotImplementedException) {
+            }
+            try {
+                i.Clear ();
+                Assert.Fail ("#8");
+            } catch (NotImplementedException) {
+            }
+            try {
+                i.CopyTo (null, 0);
+                Assert.Fail ("#9");
+            } catch (NotImplementedException) {
+            }
+            try {
+                i.Get (null);
+                Assert.Fail ("#10");
+            } catch (NotImplementedException) {
+            }
+            try {
+                i.GetEnumerator ();
+                Assert.Fail ("#11");
+            } catch (NotImplementedException) {
+            }
 
-			// ... so, default implementation is basically NIE.
-		}
-	}
+            // ... so, default implementation is basically NIE.
+        }
+    }
 }

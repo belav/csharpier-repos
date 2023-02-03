@@ -5,18 +5,18 @@ using System;
 
 public class Base
 {
-	public virtual void Test (int[] a)
-	{
-	}
+    public virtual void Test (int[] a)
+    {
+    }
 }
 
 public class CLSClass : Base
 {
-	public override void Test (params int[] b)
-	{
-	}
-	
-	public static void Main ()
-	{
-	}
+    public override void Test (params int[] b)
+    {
+    }
+    
+    public static void Main ()
+    {
+    }
 }

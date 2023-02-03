@@ -30,69 +30,69 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public class StyleCollection : StateManagedCollection
-	{
-		internal StyleCollection ()
-		{
-		}
-		
-		public Style this [int i] {
-			get { return (Style)((IList)this) [i]; }
-			set { ((IList)this) [i] = value; }
-		}
-		
-		public int Add (Style style)
-		{
-			return ((IList)this).Add (style);
-		}
+    public class StyleCollection : StateManagedCollection
+    {
+        internal StyleCollection ()
+        {
+        }
+        
+        public Style this [int i] {
+            get { return (Style)((IList)this) [i]; }
+            set { ((IList)this) [i] = value; }
+        }
+        
+        public int Add (Style style)
+        {
+            return ((IList)this).Add (style);
+        }
 
-		public bool Contains (Style style)
-		{
-			return ((IList)this).Contains (style);
-		}
+        public bool Contains (Style style)
+        {
+            return ((IList)this).Contains (style);
+        }
 
-		public void CopyTo (Style[] styleArray, int index)
-		{
-			((IList)this).CopyTo (styleArray, index);
-		}
+        public void CopyTo (Style[] styleArray, int index)
+        {
+            ((IList)this).CopyTo (styleArray, index);
+        }
 
-		protected override object CreateKnownType (int index)
-		{
-			return new Style ();
-		}
+        protected override object CreateKnownType (int index)
+        {
+            return new Style ();
+        }
 
-		protected override Type[] GetKnownTypes ()
-		{
-			return new Type[] { typeof (Style) };
-		}
+        protected override Type[] GetKnownTypes ()
+        {
+            return new Type[] { typeof (Style) };
+        }
 
-		public int IndexOf (Style style)
-		{
-			return ((IList)this).IndexOf (style);
-		}
+        public int IndexOf (Style style)
+        {
+            return ((IList)this).IndexOf (style);
+        }
 
-		public void Insert (int index, Style style)
-		{
-			((IList)this).Insert (index, style);
-		}
+        public void Insert (int index, Style style)
+        {
+            ((IList)this).Insert (index, style);
+        }
 
-		public void Remove (Style style)
-		{
-			((IList)this).Remove (style);
-		}
+        public void Remove (Style style)
+        {
+            ((IList)this).Remove (style);
+        }
 
-		public void RemoveAt (int index)
-		{
-			((IList)this).RemoveAt (index);
-		}
+        public void RemoveAt (int index)
+        {
+            ((IList)this).RemoveAt (index);
+        }
 
-		protected override void SetDirtyObject (object o)
-		{
-			Style s = o as Style;
-			if (s == null)
-				return;
+        protected override void SetDirtyObject (object o)
+        {
+            Style s = o as Style;
+            if (s == null)
+                return;
 
-			s.SetDirty ();
-		}
-	}
+            s.SetDirty ();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // WindowsStreamSecurityElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,37 +54,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class WindowsStreamSecurityElement
-		 : BindingElementExtensionElement
-	{
-		public WindowsStreamSecurityElement () {
-		}
+    public sealed class WindowsStreamSecurityElement
+         : BindingElementExtensionElement
+    {
+        public WindowsStreamSecurityElement () {
+        }
 
 
-		// Properties
+        // Properties
 
-		public override Type BindingElementType {
-			get { return typeof (WindowsStreamSecurityBindingElement); }
-		}
+        public override Type BindingElementType {
+            get { return typeof (WindowsStreamSecurityBindingElement); }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("protectionLevel",
-			 DefaultValue = "EncryptAndSign",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ProtectionLevel ProtectionLevel {
-			get { return (ProtectionLevel) base ["protectionLevel"]; }
-			set { base ["protectionLevel"] = value; }
-		}
+        [ConfigurationProperty ("protectionLevel",
+             DefaultValue = "EncryptAndSign",
+             Options = ConfigurationPropertyOptions.None)]
+        public ProtectionLevel ProtectionLevel {
+            get { return (ProtectionLevel) base ["protectionLevel"]; }
+            set { base ["protectionLevel"] = value; }
+        }
 
 
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement () {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 
 }

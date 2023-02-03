@@ -6,31 +6,31 @@
 // implicit conversion.  
 
 class Y {
-	byte b;
-	
-	public static implicit operator int (Y i)
-	{
-		return i.b;
-	}
+    byte b;
+    
+    public static implicit operator int (Y i)
+    {
+        return i.b;
+    }
 
-	public Y (byte b)
-	{
-		this.b = b;
-	}			
+    public Y (byte b)
+    {
+        this.b = b;
+    }            
 }
 
 class X {
-	public static void Main ()
-	{
-		Y y = new Y (1);
+    public static void Main ()
+    {
+        Y y = new Y (1);
 
-		switch (y){
-		case 0:
-			break;
-		case 1:
-			break;
-		}
+        switch (y){
+        case 0:
+            break;
+        case 1:
+            break;
+        }
 
-		int a = y;
-	}
+        int a = y;
+    }
 }

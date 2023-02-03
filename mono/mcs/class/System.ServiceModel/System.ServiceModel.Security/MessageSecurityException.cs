@@ -2,7 +2,7 @@
 // MessageSecurityException.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,34 +31,34 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Security
 {
-	[Serializable]
-	public class MessageSecurityException : CommunicationException
-	{
-		public MessageSecurityException ()
-			: this ("Message security exception has happened.")
-		{
-		}
+    [Serializable]
+    public class MessageSecurityException : CommunicationException
+    {
+        public MessageSecurityException ()
+            : this ("Message security exception has happened.")
+        {
+        }
 
-		public MessageSecurityException (string message)
-			: base (message)
-		{
-		}
+        public MessageSecurityException (string message)
+            : base (message)
+        {
+        }
 
-		public MessageSecurityException (string message,
-			Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public MessageSecurityException (string message,
+            Exception innerException)
+            : base (message, innerException)
+        {
+        }
 
-		protected MessageSecurityException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected MessageSecurityException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
 
-		public override void GetObjectData (SerializationInfo info,  StreamingContext ctx)
-		{
-			base.GetObjectData (info, ctx);
-		}
-	}
+        public override void GetObjectData (SerializationInfo info,  StreamingContext ctx)
+        {
+            base.GetObjectData (info, ctx);
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // BaseAddressElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (BaseAddressElement),
-		 AddItemName = "add",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public sealed class BaseAddressElementCollection
-		 : ServiceModelConfigurationElementCollection<BaseAddressElement>,  ICollection,  IEnumerable
-	{
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((BaseAddressElement) element).BaseAddress;
-		}
+    [ConfigurationCollection (typeof (BaseAddressElement),
+         AddItemName = "add",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.BasicMap)]
+    public sealed class BaseAddressElementCollection
+         : ServiceModelConfigurationElementCollection<BaseAddressElement>,  ICollection,  IEnumerable
+    {
+        protected override object GetElementKey (ConfigurationElement element) {
+            return ((BaseAddressElement) element).BaseAddress;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new BaseAddressElement ();
-		}
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new BaseAddressElement ();
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-	}
+        protected override bool ThrowOnDuplicate {
+            get { return false; }
+        }
+    }
 
 }

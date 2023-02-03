@@ -20,15 +20,15 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 
 
 namespace System.Windows.Forms {
 
-	public enum TabSizeMode {
-		Normal,
-		FillToRight,
-		Fixed
-	}
+    public enum TabSizeMode {
+        Normal,
+        FillToRight,
+        Fixed
+    }
 }
 

@@ -28,61 +28,61 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodeWhen: CodeExpression
-	{
-		CodeExpression condition;
-		CodeExpression trueBlock;
-		CodeExpression falseBlock;
-		
-		public CodeWhen (CodeExpression condition, CodeExpression trueResult, CodeExpression falseResult)
-		{
-			this.condition = condition;
-			if (condition.GetResultType () != typeof(bool))
-				throw new InvalidOperationException ("Condition expression is not boolean");
-			if (trueResult.GetResultType() != falseResult.GetResultType())
-				throw new InvalidOperationException ("The types of the true and false expressions must be the same");
-			trueBlock = trueResult;
-			falseBlock = falseResult;
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			Label falseLabel = gen.DefineLabel ();
-			Label endLabel = gen.DefineLabel ();
-			
-			GenerateCondition (gen, falseLabel);
-			trueBlock.Generate (gen);
-			gen.Emit (OpCodes.Br, endLabel);
-			gen.MarkLabel(falseLabel);
-			falseBlock.Generate (gen);
-			
-			gen.MarkLabel(endLabel);
-		}
-		
-		void GenerateCondition (ILGenerator gen, Label falseLabel)
-		{
-			if (condition is CodeConditionExpression)
-				((CodeConditionExpression)condition).GenerateForBranch (gen, falseLabel, false);
-			else {
-				condition.Generate (gen);
-				gen.Emit (OpCodes.Brfalse, falseLabel);
-			}
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			cp.Write ("(");
-			condition.PrintCode (cp);
-			cp.Write (") ? ");
-			trueBlock.PrintCode (cp);
-			cp.Write (" : ");
-			falseBlock.PrintCode (cp);
-		}
-		
-		public override Type GetResultType ()
-		{
-			return trueBlock.GetResultType();
-		}
-	}
+    public class CodeWhen: CodeExpression
+    {
+        CodeExpression condition;
+        CodeExpression trueBlock;
+        CodeExpression falseBlock;
+        
+        public CodeWhen (CodeExpression condition, CodeExpression trueResult, CodeExpression falseResult)
+        {
+            this.condition = condition;
+            if (condition.GetResultType () != typeof(bool))
+                throw new InvalidOperationException ("Condition expression is not boolean");
+            if (trueResult.GetResultType() != falseResult.GetResultType())
+                throw new InvalidOperationException ("The types of the true and false expressions must be the same");
+            trueBlock = trueResult;
+            falseBlock = falseResult;
+        }
+        
+        public override void Generate (ILGenerator gen)
+        {
+            Label falseLabel = gen.DefineLabel ();
+            Label endLabel = gen.DefineLabel ();
+            
+            GenerateCondition (gen, falseLabel);
+            trueBlock.Generate (gen);
+            gen.Emit (OpCodes.Br, endLabel);
+            gen.MarkLabel(falseLabel);
+            falseBlock.Generate (gen);
+            
+            gen.MarkLabel(endLabel);
+        }
+        
+        void GenerateCondition (ILGenerator gen, Label falseLabel)
+        {
+            if (condition is CodeConditionExpression)
+                ((CodeConditionExpression)condition).GenerateForBranch (gen, falseLabel, false);
+            else {
+                condition.Generate (gen);
+                gen.Emit (OpCodes.Brfalse, falseLabel);
+            }
+        }
+        
+        public override void PrintCode (CodeWriter cp)
+        {
+            cp.Write ("(");
+            condition.PrintCode (cp);
+            cp.Write (") ? ");
+            trueBlock.PrintCode (cp);
+            cp.Write (" : ");
+            falseBlock.PrintCode (cp);
+        }
+        
+        public override Type GetResultType ()
+        {
+            return trueBlock.GetResultType();
+        }
+    }
 }
 #endif

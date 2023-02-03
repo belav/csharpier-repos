@@ -2,7 +2,7 @@
 // KerberosReceiverSecurityToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,53 +34,53 @@ using System.Security.Principal;
 
 namespace System.IdentityModel.Tokens
 {
-	public class KerberosReceiverSecurityToken : WindowsSecurityToken
-	{
-		[MonoTODO]
-		public KerberosReceiverSecurityToken (byte [] request)
-		{
-			throw new NotImplementedException ();
-		}
+    public class KerberosReceiverSecurityToken : WindowsSecurityToken
+    {
+        [MonoTODO]
+        public KerberosReceiverSecurityToken (byte [] request)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public KerberosReceiverSecurityToken (byte [] request, string id)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public KerberosReceiverSecurityToken (byte [] request, string id)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public SymmetricSecurityKey SecurityKey {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public SymmetricSecurityKey SecurityKey {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override bool CanCreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanCreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override T CreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override T CreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool MatchesKeyIdentifierClause (
+            SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public byte [] GetRequest ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public byte [] GetRequest ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

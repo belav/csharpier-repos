@@ -37,84 +37,84 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbDataReader_HasRows : GHTBase
 {
-	Exception exp;
+    Exception exp;
 
-	public static void Main()
-	{
-		OleDbDataReader_HasRows tc = new OleDbDataReader_HasRows();
-		tc.exp = null;
-		try
-		{
-			tc.BeginTest("OleDbDataReader_HasRows");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			tc.exp = ex;
-		}
-		finally	
-		{
-			tc.EndTest(tc.exp);
-		}
-	}
+    public static void Main()
+    {
+        OleDbDataReader_HasRows tc = new OleDbDataReader_HasRows();
+        tc.exp = null;
+        try
+        {
+            tc.BeginTest("OleDbDataReader_HasRows");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            tc.exp = ex;
+        }
+        finally    
+        {
+            tc.EndTest(tc.exp);
+        }
+    }
 
-	public void run()
-	{
-		TestHasRowsTrue();
-		TestHasRowsFalse();
-	}
+    public void run()
+    {
+        TestHasRowsTrue();
+        TestHasRowsFalse();
+    }
 
-	[Test]
-	public void TestHasRowsTrue()
-	{
-		BeginCase("Test HasRows = True");
-		exp = null;
-		string rowId = string.Format("43977_{0}", TestCaseNumber);
-		OleDbConnection con = null;
-		OleDbDataReader rdr = null;
-		try
-		{
-			DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
-			row.ExecuteInsert(rowId);
-			row.ExecuteSelectReader(rowId, out rdr, out con);
-			Compare(rdr.HasRows, true);
-		}
-		catch (Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
+    [Test]
+    public void TestHasRowsTrue()
+    {
+        BeginCase("Test HasRows = True");
+        exp = null;
+        string rowId = string.Format("43977_{0}", TestCaseNumber);
+        OleDbConnection con = null;
+        OleDbDataReader rdr = null;
+        try
+        {
+            DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
+            row.ExecuteInsert(rowId);
+            row.ExecuteSelectReader(rowId, out rdr, out con);
+            Compare(rdr.HasRows, true);
+        }
+        catch (Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
 
-	[Test]
-	public void TestHasRowsFalse()
-	{
-		BeginCase("Test HasRows = False");
-		exp = null;
-		string rowId = string.Format("43977_{0}", TestCaseNumber);
-		OleDbConnection con = null;
-		OleDbDataReader rdr = null;
-		try
-		{
-			DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
-			row.ExecuteDelete(rowId);	//Make sure that a row with such ID does not exist.
-			row.ExecuteSelectReader(rowId, out rdr, out con);
-			Compare(rdr.HasRows, false);
-		}
-		catch (Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
+    [Test]
+    public void TestHasRowsFalse()
+    {
+        BeginCase("Test HasRows = False");
+        exp = null;
+        string rowId = string.Format("43977_{0}", TestCaseNumber);
+        OleDbConnection con = null;
+        OleDbDataReader rdr = null;
+        try
+        {
+            DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
+            row.ExecuteDelete(rowId);    //Make sure that a row with such ID does not exist.
+            row.ExecuteSelectReader(rowId, out rdr, out con);
+            Compare(rdr.HasRows, false);
+        }
+        catch (Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
 }
 
 

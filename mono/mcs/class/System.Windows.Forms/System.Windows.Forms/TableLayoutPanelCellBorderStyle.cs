@@ -23,20 +23,20 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum TableLayoutPanelCellBorderStyle
-	{
-		None = 0,
-		Single = 1,
-		Inset = 2,
-		InsetDouble = 3,
-		Outset = 4,
-		OutsetDouble = 5,
-		OutsetPartial = 6
-	}
+    public enum TableLayoutPanelCellBorderStyle
+    {
+        None = 0,
+        Single = 1,
+        Inset = 2,
+        InsetDouble = 3,
+        Outset = 4,
+        OutsetDouble = 5,
+        OutsetPartial = 6
+    }
 }

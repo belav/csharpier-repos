@@ -1,4 +1,4 @@
-﻿//
+//
 // BtlsX509VerifyFlags.cs
 //
 // Author:
@@ -26,13 +26,13 @@
 using System;
 namespace Mono.Btls.Interface
 {
-	// Keep in sync with NativeBoringX509VerifyFlags
-	public enum BtlsX509VerifyFlags
-	{
-		DEFAULT = 0,
-		CRL_CHECK = 1,
-		CRL_CHECK_ALL = 2,
-		X509_STRIC = 4
-	}
+    // Keep in sync with NativeBoringX509VerifyFlags
+    public enum BtlsX509VerifyFlags
+    {
+        DEFAULT = 0,
+        CRL_CHECK = 1,
+        CRL_CHECK_ALL = 2,
+        X509_STRIC = 4
+    }
 }
 

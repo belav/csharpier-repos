@@ -2,7 +2,7 @@
 // EdgeBasedWidening.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,17 +30,17 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-	class EdgeBasedWidening : StepWidening<Pair<APC, APC>> {
-		public EdgeBasedWidening (int n)
-			: base (n)
-		{
-		}
+    class EdgeBasedWidening : StepWidening<Pair<APC, APC>> {
+        public EdgeBasedWidening (int n)
+            : base (n)
+        {
+        }
 
-		#region Overrides of StepWidening<Pair<APC,APC>>
-		protected override Pair<APC, APC> MakeIndex (APC from, APC to)
-		{
-			return new Pair<APC, APC> (from, to);
-		}
-		#endregion
-	}
+        #region Overrides of StepWidening<Pair<APC,APC>>
+        protected override Pair<APC, APC> MakeIndex (APC from, APC to)
+        {
+            return new Pair<APC, APC> (from, to);
+        }
+        #endregion
+    }
 }

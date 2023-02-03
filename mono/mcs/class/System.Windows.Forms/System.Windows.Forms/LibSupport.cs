@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc.
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 
 using System.Collections;
@@ -28,29 +28,29 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	class LibSupport {
-		static ArrayList list = new ArrayList ();
+    class LibSupport {
+        static ArrayList list = new ArrayList ();
 
-		public static void Register ()
-		{
-			FindWindowExW fw = new FindWindowExW (FindWindow);
-			list.Add (fw);
-			support_register_delegate ("FindWindowExW", fw);
-		}
+        public static void Register ()
+        {
+            FindWindowExW fw = new FindWindowExW (FindWindow);
+            list.Add (fw);
+            support_register_delegate ("FindWindowExW", fw);
+        }
 
-		static IntPtr FindWindow (IntPtr hWnd)
-		{
-			NativeWindow nw = NativeWindow.FromHandle (hWnd);
-			if (nw == null)
-				return IntPtr.Zero;
+        static IntPtr FindWindow (IntPtr hWnd)
+        {
+            NativeWindow nw = NativeWindow.FromHandle (hWnd);
+            if (nw == null)
+                return IntPtr.Zero;
 
-			return nw.Handle;
-		}
+            return nw.Handle;
+        }
 
-		delegate IntPtr FindWindowExW (IntPtr hWnd);
+        delegate IntPtr FindWindowExW (IntPtr hWnd);
 
-		[DllImport ("MonoSupportW")]
-		extern static void support_register_delegate (string fmt, Delegate d);
-	}
+        [DllImport ("MonoSupportW")]
+        extern static void support_register_delegate (string fmt, Delegate d);
+    }
 }
 

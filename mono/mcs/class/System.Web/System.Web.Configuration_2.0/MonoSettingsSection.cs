@@ -34,45 +34,45 @@ using System.ComponentModel;
 
 namespace System.Web.Configuration
 {
-	internal sealed class MonoSettingsSection : ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty compilersCompatibilityProp;
-		static ConfigurationProperty useCompilersCompatibilityProp;
-		static ConfigurationProperty verificationCompatibilityProp;
-		
-		static MonoSettingsSection ()
-		{
-			compilersCompatibilityProp = new ConfigurationProperty ("compilersCompatibility", typeof (CompilerCollection), null, null, PropertyHelper.DefaultValidator,
-										ConfigurationPropertyOptions.None);
-			useCompilersCompatibilityProp = new ConfigurationProperty ("useCompilersCompatibility", typeof (bool), true);
-			verificationCompatibilityProp = new ConfigurationProperty ("verificationCompatibility", typeof (int), 0);
-			
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (compilersCompatibilityProp);
-			properties.Add (useCompilersCompatibilityProp);
-			properties.Add (verificationCompatibilityProp);
-		}
+    internal sealed class MonoSettingsSection : ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty compilersCompatibilityProp;
+        static ConfigurationProperty useCompilersCompatibilityProp;
+        static ConfigurationProperty verificationCompatibilityProp;
+        
+        static MonoSettingsSection ()
+        {
+            compilersCompatibilityProp = new ConfigurationProperty ("compilersCompatibility", typeof (CompilerCollection), null, null, PropertyHelper.DefaultValidator,
+                                        ConfigurationPropertyOptions.None);
+            useCompilersCompatibilityProp = new ConfigurationProperty ("useCompilersCompatibility", typeof (bool), true);
+            verificationCompatibilityProp = new ConfigurationProperty ("verificationCompatibility", typeof (int), 0);
+            
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (compilersCompatibilityProp);
+            properties.Add (useCompilersCompatibilityProp);
+            properties.Add (verificationCompatibilityProp);
+        }
 
-		[ConfigurationProperty ("compilersCompatibility")]
+        [ConfigurationProperty ("compilersCompatibility")]
                 public CompilerCollection CompilersCompatibility {
                         get { return (CompilerCollection) base [compilersCompatibilityProp]; }
                 }
 
-		[ConfigurationProperty ("useCompilersCompatibility", DefaultValue = "True")]
+        [ConfigurationProperty ("useCompilersCompatibility", DefaultValue = "True")]
                 public bool UseCompilersCompatibility {
                         get { return (bool) base [useCompilersCompatibilityProp]; }
                         set { base [useCompilersCompatibilityProp] = value; }
                 }
 
-		[ConfigurationProperty ("verificationCompatibility", DefaultValue = "0")]
+        [ConfigurationProperty ("verificationCompatibility", DefaultValue = "0")]
                 public int VerificationCompatibility {
                         get { return (int) base [verificationCompatibilityProp]; }
                         set { base [verificationCompatibilityProp] = value; }
                 }
-		
-		protected internal override ConfigurationPropertyCollection Properties {
+        
+        protected internal override ConfigurationPropertyCollection Properties {
                         get { return properties; }
                 }
-	}
+    }
 }

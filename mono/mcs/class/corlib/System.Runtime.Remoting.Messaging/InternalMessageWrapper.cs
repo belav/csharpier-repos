@@ -33,14 +33,14 @@ using System;
 
 namespace System.Runtime.Remoting.Messaging {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class InternalMessageWrapper
-	{
-		public InternalMessageWrapper (IMessage msg)
-		{
-			WrappedMessage = msg;
-		}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class InternalMessageWrapper
+    {
+        public InternalMessageWrapper (IMessage msg)
+        {
+            WrappedMessage = msg;
+        }
 
-		protected IMessage WrappedMessage;
-	}
+        protected IMessage WrappedMessage;
+    }
 }

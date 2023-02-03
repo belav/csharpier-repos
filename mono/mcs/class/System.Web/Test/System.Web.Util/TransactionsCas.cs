@@ -2,7 +2,7 @@
 // TransactionsCas.cs - CAS unit tests for System.Web.Util.Transactions
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,52 +37,52 @@ using System.Web.Util;
 
 namespace MonoCasTests.System.Web.Util {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TransactionsCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class TransactionsCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new Transactions ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted ()
+        {
+            new Transactions ();
+        }
 
-		private void Callback ()
-		{
-		}
+        private void Callback ()
+        {
+        }
 
-		[Test]
-		// LAMESPEC - documented as AspNetHostingPermission, Level Medium
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void InvokeTransacted2_Deny_Unrestricted ()
-		{
-			try {
-				Transactions.InvokeTransacted (new TransactedCallback (Callback), TransactionOption.Required);
-			}
-			catch (PlatformNotSupportedException) {
-				// Mono and Windows prior to NT
-			}
-		}
+        [Test]
+        // LAMESPEC - documented as AspNetHostingPermission, Level Medium
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void InvokeTransacted2_Deny_Unrestricted ()
+        {
+            try {
+                Transactions.InvokeTransacted (new TransactedCallback (Callback), TransactionOption.Required);
+            }
+            catch (PlatformNotSupportedException) {
+                // Mono and Windows prior to NT
+            }
+        }
 
-		[Test]
-		// LAMESPEC - documented as AspNetHostingPermission, Level Medium
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void InvokeTransacted3_Deny_Unrestricted ()
-		{
-			try {
-				bool aborted = false;
-				Transactions.InvokeTransacted (new TransactedCallback (Callback), TransactionOption.Required, ref aborted);
-			}
-			catch (PlatformNotSupportedException) {
-				// Mono and Windows prior to NT
-			}
-		}
+        [Test]
+        // LAMESPEC - documented as AspNetHostingPermission, Level Medium
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void InvokeTransacted3_Deny_Unrestricted ()
+        {
+            try {
+                bool aborted = false;
+                Transactions.InvokeTransacted (new TransactedCallback (Callback), TransactionOption.Required, ref aborted);
+            }
+            catch (PlatformNotSupportedException) {
+                // Mono and Windows prior to NT
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (Transactions); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (Transactions); }
+        }
+    }
 }

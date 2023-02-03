@@ -2,7 +2,7 @@
 // Branch.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,38 +27,38 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class Branch : Statement {
-		public readonly bool LeavesExceptionBlock;
-		public Expression Condition;
-		public Block Target;
-		public bool IsShortOffset;
-		public bool Unsigned;
+    class Branch : Statement {
+        public readonly bool LeavesExceptionBlock;
+        public Expression Condition;
+        public Block Target;
+        public bool IsShortOffset;
+        public bool Unsigned;
 
-		public Branch (Expression condition, Block target, bool isShortOffset, bool unsigned, bool leavesExceptionBlock) : base (NodeType.Branch)
-		{
-			this.Condition = condition;
-			this.Target = target;
-			this.IsShortOffset = isShortOffset;
-			this.Unsigned = unsigned;
-			this.LeavesExceptionBlock = leavesExceptionBlock;
-		}
+        public Branch (Expression condition, Block target, bool isShortOffset, bool unsigned, bool leavesExceptionBlock) : base (NodeType.Branch)
+        {
+            this.Condition = condition;
+            this.Target = target;
+            this.IsShortOffset = isShortOffset;
+            this.Unsigned = unsigned;
+            this.LeavesExceptionBlock = leavesExceptionBlock;
+        }
 
-		public override string ToString ()
-		{
-			return string.Format ("Branch({0}, {1})", this.Condition == null ? "<no cond>" : this.Condition.ToString (), this.Target == null ? "<no target>" : this.Target.ToString ());
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Format ("Branch({0}, {1})", this.Condition == null ? "<no cond>" : this.Condition.ToString (), this.Target == null ? "<no target>" : this.Target.ToString ());
+        }
+    }
 
-	enum BranchOperator {
-		Beq,
-		Bge,
-		Bge_Un,
-		Bgt,
-		Bgt_Un,
-		Ble,
-		Ble_Un,
-		Blt,
-		Blt_Un,
-		Bne_un
-	}
+    enum BranchOperator {
+        Beq,
+        Bge,
+        Bge_Un,
+        Bgt,
+        Bgt_Un,
+        Ble,
+        Ble_Un,
+        Blt,
+        Blt_Un,
+        Bne_un
+    }
 }

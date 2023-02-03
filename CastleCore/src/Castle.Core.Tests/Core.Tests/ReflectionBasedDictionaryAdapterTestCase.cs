@@ -14,140 +14,140 @@
 
 namespace Castle.Core.Tests
 {
-	using System;
-	using System.Collections;
-	using System.Reflection;
+    using System;
+    using System.Collections;
+    using System.Reflection;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class ReflectionBasedDictionaryAdapterTestCase
-	{
-		public class Customer
-		{
-			private bool writeOnly;
+    [TestFixture]
+    public class ReflectionBasedDictionaryAdapterTestCase
+    {
+        public class Customer
+        {
+            private bool writeOnly;
 
-			public Customer(int id, string name)
-				: this(id, name, false)
-			{
-			}
+            public Customer(int id, string name)
+                : this(id, name, false)
+            {
+            }
 
-			public Customer(int id, string name, bool writeOnly)
-			{
-				this.Id = id;
-				this.Name = name;
-				this.writeOnly = writeOnly;
-			}
+            public Customer(int id, string name, bool writeOnly)
+            {
+                this.Id = id;
+                this.Name = name;
+                this.writeOnly = writeOnly;
+            }
 
-			public int Id { get; set; }
+            public int Id { get; set; }
 
-			public string Name { get; set; }
+            public string Name { get; set; }
 
-			public bool WriteOnly
-			{
-				set { writeOnly = value; }
-			}
+            public bool WriteOnly
+            {
+                set { writeOnly = value; }
+            }
 
-			public bool IsWriteOnly
-			{
-				get { return writeOnly; }
-			}
-		
-			public string this[int id]
-			{
-				get { return "abcdef"; }
-			}
-		}
+            public bool IsWriteOnly
+            {
+                get { return writeOnly; }
+            }
+        
+            public string this[int id]
+            {
+                get { return "abcdef"; }
+            }
+        }
 
-		[Test]
-		public void CanAccessExistingPropertiesInACaseInsensitiveFashion()
-		{
-			var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
+        [Test]
+        public void CanAccessExistingPropertiesInACaseInsensitiveFashion()
+        {
+            var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
 
-			Assert.IsTrue(dict.Contains("id"));
-			Assert.IsTrue(dict.Contains("ID"));
-			Assert.IsTrue(dict.Contains("Id"));
-			Assert.IsTrue(dict.Contains("name"));
-			Assert.IsTrue(dict.Contains("Name"));
-			Assert.IsTrue(dict.Contains("NAME"));
-		}
+            Assert.IsTrue(dict.Contains("id"));
+            Assert.IsTrue(dict.Contains("ID"));
+            Assert.IsTrue(dict.Contains("Id"));
+            Assert.IsTrue(dict.Contains("name"));
+            Assert.IsTrue(dict.Contains("Name"));
+            Assert.IsTrue(dict.Contains("NAME"));
+        }
 
-		[Test]
-		public void CanAccessPropertiesValues()
-		{
-			var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
+        [Test]
+        public void CanAccessPropertiesValues()
+        {
+            var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
 
-			Assert.AreEqual(1, dict["id"]);
-			Assert.AreEqual("name", dict["name"]);
-		}
+            Assert.AreEqual(1, dict["id"]);
+            Assert.AreEqual("name", dict["name"]);
+        }
 
-		[Test]
-		public void CannotCreateWithNullArgument()
-		{
-			Assert.Throws<ArgumentNullException>(() =>
-				new ReflectionBasedDictionaryAdapter(null)
-			);
-		}
+        [Test]
+        public void CannotCreateWithNullArgument()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new ReflectionBasedDictionaryAdapter(null)
+            );
+        }
 
-		[Test]
-		public void EnumeratorIteration()
-		{
-			var dict = new ReflectionBasedDictionaryAdapter(new {foo = 1, name = "jonh", age = 25});
+        [Test]
+        public void EnumeratorIteration()
+        {
+            var dict = new ReflectionBasedDictionaryAdapter(new {foo = 1, name = "jonh", age = 25});
 
-			Assert.AreEqual(3, dict.Count);
+            Assert.AreEqual(3, dict.Count);
 
-			var enumerator = (IDictionaryEnumerator) dict.GetEnumerator();
+            var enumerator = (IDictionaryEnumerator) dict.GetEnumerator();
 
-			while (enumerator.MoveNext())
-			{
-				Assert.IsNotNull(enumerator.Key);
-				Assert.IsNotNull(enumerator.Value);
-			}
-		}
+            while (enumerator.MoveNext())
+            {
+                Assert.IsNotNull(enumerator.Key);
+                Assert.IsNotNull(enumerator.Value);
+            }
+        }
 
-		[Test]
-		public void Using_anonymous_types_works_without_exception()
-		{
-			var target = new { foo = 1, name = "john", age = 25 };
-			Assert.IsFalse(target.GetType().IsPublic);
-			var dict = new ReflectionBasedDictionaryAdapter(target);
+        [Test]
+        public void Using_anonymous_types_works_without_exception()
+        {
+            var target = new { foo = 1, name = "john", age = 25 };
+            Assert.IsFalse(target.GetType().IsPublic);
+            var dict = new ReflectionBasedDictionaryAdapter(target);
 
-			Assert.AreEqual(3, dict.Count);
+            Assert.AreEqual(3, dict.Count);
 
-			Assert.AreEqual(1, dict["foo"]);
-			Assert.AreEqual("john", dict["name"]);
-			Assert.AreEqual(25, dict["age"]);
-		}
+            Assert.AreEqual(1, dict["foo"]);
+            Assert.AreEqual("john", dict["name"]);
+            Assert.AreEqual(25, dict["age"]);
+        }
 
-		[Test]
-		public void InexistingPropertiesReturnsNull()
-		{
-			var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
+        [Test]
+        public void InexistingPropertiesReturnsNull()
+        {
+            var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
 
-			Assert.IsNull(dict["age"]);
-		}
+            Assert.IsNull(dict["age"]);
+        }
 
-		[Test]
-		public void ShouldNotAccessInexistingProperties()
-		{
-			var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
+        [Test]
+        public void ShouldNotAccessInexistingProperties()
+        {
+            var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
 
-			Assert.IsFalse(dict.Contains("Age"), "Age property found when it should not be");
-			Assert.IsFalse(dict.Contains("Address"), "Address property found when it should not be");
-		}
+            Assert.IsFalse(dict.Contains("Age"), "Age property found when it should not be");
+            Assert.IsFalse(dict.Contains("Address"), "Address property found when it should not be");
+        }
 
-		[Test /*(Description = "Test case for patch supplied on the mailing list by Jan Limpens")*/]
-		public void ShouldNotAccessWriteOnlyProperties()
-		{
-			try
-			{
-				var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name", true));
-				Assert.IsTrue((bool) dict["IsWriteOnly"]);
-			}
-			catch (ArgumentException)
-			{
-				Assert.Fail("Attempted to read a write-only property");
-			}
-		}
-	}
+        [Test /*(Description = "Test case for patch supplied on the mailing list by Jan Limpens")*/]
+        public void ShouldNotAccessWriteOnlyProperties()
+        {
+            try
+            {
+                var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name", true));
+                Assert.IsTrue((bool) dict["IsWriteOnly"]);
+            }
+            catch (ArgumentException)
+            {
+                Assert.Fail("Attempted to read a write-only property");
+            }
+        }
+    }
 }

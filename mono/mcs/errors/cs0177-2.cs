@@ -2,13 +2,13 @@
 // Line: 5
 
 class ClassMain {
-	public static void test2 (int a, out float f)
-	{
-		// CS0177
-		if (a == 5)
-			return;
+    public static void test2 (int a, out float f)
+    {
+        // CS0177
+        if (a == 5)
+            return;
 
-		f = 8.53F;
-	}
+        f = 8.53F;
+    }
 }
 

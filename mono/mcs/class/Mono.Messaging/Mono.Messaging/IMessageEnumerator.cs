@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//		Michael Barker (mike@middlesoft.co.uk)
+//        Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -34,32 +34,32 @@ using System.ComponentModel;
 
 namespace Mono.Messaging {
 
-	public interface IMessageEnumerator : IDisposable {
-	
-		IMessage Current { get; }
-		
-		IntPtr CursorHandle { get; }		
-		
-		void Close();
+    public interface IMessageEnumerator : IDisposable {
+    
+        IMessage Current { get; }
+        
+        IntPtr CursorHandle { get; }        
+        
+        void Close();
 
-		void Dispose(bool disposing);
+        void Dispose(bool disposing);
 
-		bool MoveNext();
-		
-		bool MoveNext(TimeSpan timeout);
+        bool MoveNext();
+        
+        bool MoveNext(TimeSpan timeout);
 
-		IMessage RemoveCurrent();
+        IMessage RemoveCurrent();
 
-		IMessage RemoveCurrent(IMessageQueueTransaction transaction);
+        IMessage RemoveCurrent(IMessageQueueTransaction transaction);
 
-		IMessage RemoveCurrent(MessageQueueTransactionType transactionType);
+        IMessage RemoveCurrent(MessageQueueTransactionType transactionType);
 
-		IMessage RemoveCurrent(TimeSpan timeout);
+        IMessage RemoveCurrent(TimeSpan timeout);
 
-		IMessage RemoveCurrent(TimeSpan timeout, IMessageQueueTransaction transaction);
+        IMessage RemoveCurrent(TimeSpan timeout, IMessageQueueTransaction transaction);
 
-		IMessage RemoveCurrent(TimeSpan timeout, MessageQueueTransactionType transactionType);
+        IMessage RemoveCurrent(TimeSpan timeout, MessageQueueTransactionType transactionType);
 
-	}
+    }
 
 }

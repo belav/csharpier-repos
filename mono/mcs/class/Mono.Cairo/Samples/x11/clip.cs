@@ -1,7 +1,7 @@
 //
 //
-//	Mono.Cairo drawing samples using X11 as drawing surface
-//	Autor: Hisham Mardam Bey <hisham@hisham.cc>
+//    Mono.Cairo drawing samples using X11 as drawing surface
+//    Autor: Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -35,47 +35,47 @@ using Cairo;
 public class X11Test
 {
         static readonly double  M_PI = 3.14159265358979323846;
-	
-	static void draw (Cairo.Context gr, int width, int height)
-	{
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
-		
-		gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
-		gr.Clip ();
-		
-		gr.NewPath ();
-		gr.Rectangle (new PointD (0, 0), 1, 1);
-		gr.Fill ();
-		gr.Color = new Color (0, 1, 0, 1);
-		gr.MoveTo ( new PointD (0, 0) );
-		gr.LineTo ( new PointD (1, 1) );
-		gr.MoveTo ( new PointD (1, 0) );
-		gr.LineTo ( new PointD (0, 1) );
-		gr.Stroke ();
-	}
-	
-	
-	static void Main (string [] args)
-	{
-		Window win = new Window (500, 500);
-		
-		win.Show ();
-		
-		Cairo.XlibSurface s = new Cairo.XlibSurface (win.Display,
-			       win.XWindow,
-			       X11.XDefaultVisual (win.Display, win.Screen),
-			       (int)win.Width, (int)win.Height);
+    
+    static void draw (Cairo.Context gr, int width, int height)
+    {
+        gr.Scale (width, height);
+        gr.LineWidth = 0.04;
+        
+        gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
+        gr.Clip ();
+        
+        gr.NewPath ();
+        gr.Rectangle (new PointD (0, 0), 1, 1);
+        gr.Fill ();
+        gr.Color = new Color (0, 1, 0, 1);
+        gr.MoveTo ( new PointD (0, 0) );
+        gr.LineTo ( new PointD (1, 1) );
+        gr.MoveTo ( new PointD (1, 0) );
+        gr.LineTo ( new PointD (0, 1) );
+        gr.Stroke ();
+    }
+    
+    
+    static void Main (string [] args)
+    {
+        Window win = new Window (500, 500);
+        
+        win.Show ();
+        
+        Cairo.XlibSurface s = new Cairo.XlibSurface (win.Display,
+                   win.XWindow,
+                   X11.XDefaultVisual (win.Display, win.Screen),
+                   (int)win.Width, (int)win.Height);
 
-		
-		Cairo.Context g = new Cairo.Context (s);
-		
-		draw (g, 500, 500);
-		
-		IntPtr xev = new IntPtr ();
-		
-		while (true) {			
-			X11.XNextEvent (win.Display, xev);
-		}		
-	}
+        
+        Cairo.Context g = new Cairo.Context (s);
+        
+        draw (g, 500, 500);
+        
+        IntPtr xev = new IntPtr ();
+        
+        while (true) {            
+            X11.XNextEvent (win.Display, xev);
+        }        
+    }
 }

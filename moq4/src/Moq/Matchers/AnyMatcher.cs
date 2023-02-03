@@ -6,19 +6,19 @@ using System.Diagnostics;
 
 namespace Moq.Matchers
 {
-	internal sealed class AnyMatcher : IMatcher
-	{
-		public static AnyMatcher Instance { get; } = new AnyMatcher();
+    internal sealed class AnyMatcher : IMatcher
+    {
+        public static AnyMatcher Instance { get; } = new AnyMatcher();
 
-		private AnyMatcher()
-		{
-		}
+        private AnyMatcher()
+        {
+        }
 
-		public bool Matches(object argument, Type parameterType) => true;
+        public bool Matches(object argument, Type parameterType) => true;
 
-		public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
-		{
-			Debug.Assert(this.Matches(argument, parameterType));
-		}
-	}
+        public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
+        {
+            Debug.Assert(this.Matches(argument, parameterType));
+        }
+    }
 }

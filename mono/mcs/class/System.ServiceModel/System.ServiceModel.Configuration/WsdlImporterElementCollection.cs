@@ -2,7 +2,7 @@
 // WsdlImporterElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,21 +54,21 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (WsdlImporterElement),
-		 AddItemName = "extension",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class WsdlImporterElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<WsdlImporterElement>, ICollection, IEnumerable
-	{
-		public WsdlImporterElementCollection () {
-			AddElementName = "extension";
-		}
+    [ConfigurationCollection (typeof (WsdlImporterElement),
+         AddItemName = "extension",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class WsdlImporterElementCollection
+         : ServiceModelEnhancedConfigurationElementCollection<WsdlImporterElement>, ICollection, IEnumerable
+    {
+        public WsdlImporterElementCollection () {
+            AddElementName = "extension";
+        }
 
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((WsdlImporterElement) element).Type;
-		}
-	}
+        protected override object GetElementKey (ConfigurationElement element) {
+            return ((WsdlImporterElement) element).Type;
+        }
+    }
 
 }

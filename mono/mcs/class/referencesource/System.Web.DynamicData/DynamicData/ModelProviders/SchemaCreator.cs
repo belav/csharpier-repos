@@ -1,4 +1,4 @@
-﻿using System.Data.Linq;
+using System.Data.Linq;
 using System.Data.Objects;
 using System.Globalization;
 using System.Web.Resources;

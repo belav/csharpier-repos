@@ -2,7 +2,7 @@
 // IExtensibleObject.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -27,8 +27,8 @@
 //
 namespace System.ServiceModel
 {
-	public interface IExtensibleObject<T> where T : IExtensibleObject<T>
-	{
-		IExtensionCollection<T> Extensions { get; }
-	}
+    public interface IExtensibleObject<T> where T : IExtensibleObject<T>
+    {
+        IExtensionCollection<T> Extensions { get; }
+    }
 }

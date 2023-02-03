@@ -89,38 +89,38 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
                 throw new NamedPipeException (Marshal.GetLastWin32Error ());
             }
 
-			// Connect the named pipe with overlapped structure
-			// in order to make it altertable. This way we will
-			// wake up when someone aborts a thread waiting 
-			// for this pipe.
-			NativeOverlapped overlapped = new NativeOverlapped ();
+            // Connect the named pipe with overlapped structure
+            // in order to make it altertable. This way we will
+            // wake up when someone aborts a thread waiting 
+            // for this pipe.
+            NativeOverlapped overlapped = new NativeOverlapped ();
             bool canConnect = NamedPipeHelper.ConnectNamedPipe (hPipe, ref overlapped);
 
             int lastError = Marshal.GetLastWin32Error ();
-			if (!canConnect) {
-				if (lastError == NamedPipeHelper.ERROR_IO_PENDING) {
-					uint bytesTransferred = 0;
-					if (!GetOverlappedResultEx (hPipe, ref overlapped, out bytesTransferred, Timeout.Infinite, true)) {
-						lastError = Marshal.GetLastWin32Error ();
-						NamedPipeHelper.CloseHandle (hPipe);
-						throw new NamedPipeException (lastError);
-					}
-					canConnect = true;
-				} else if (lastError == NamedPipeHelper.ERROR_PIPE_CONNECTED)
-					canConnect = true;
-			}
+            if (!canConnect) {
+                if (lastError == NamedPipeHelper.ERROR_IO_PENDING) {
+                    uint bytesTransferred = 0;
+                    if (!GetOverlappedResultEx (hPipe, ref overlapped, out bytesTransferred, Timeout.Infinite, true)) {
+                        lastError = Marshal.GetLastWin32Error ();
+                        NamedPipeHelper.CloseHandle (hPipe);
+                        throw new NamedPipeException (lastError);
+                    }
+                    canConnect = true;
+                } else if (lastError == NamedPipeHelper.ERROR_PIPE_CONNECTED)
+                    canConnect = true;
+            }
 
-			if (!canConnect) {
-				NamedPipeHelper.CloseHandle (hPipe);
-				throw new NamedPipeException (lastError);
-			}
+            if (!canConnect) {
+                NamedPipeHelper.CloseHandle (hPipe);
+                throw new NamedPipeException (lastError);
+            }
 
-			return new NamedPipeSocket (hPipe);
+            return new NamedPipeSocket (hPipe);
         }
 
-		[DllImport("kernel32.dll", SetLastError = true)]
-		static extern bool GetOverlappedResultEx (IntPtr hFile, [In] ref System.Threading.NativeOverlapped lpOverlapped,
-												  out uint lpNumberOfBytesTransferred, int dwMilliseconds, bool bAltertable);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool GetOverlappedResultEx (IntPtr hFile, [In] ref System.Threading.NativeOverlapped lpOverlapped,
+                                                  out uint lpNumberOfBytesTransferred, int dwMilliseconds, bool bAltertable);
 
     }
 }

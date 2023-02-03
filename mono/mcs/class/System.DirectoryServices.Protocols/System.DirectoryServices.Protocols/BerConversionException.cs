@@ -33,26 +33,26 @@ using System.Runtime.Serialization;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	public class BerConversionException : DirectoryException
-	{
-		public BerConversionException ()
-			: this ("BER conversion error")
-		{
-		}
+    [Serializable]
+    public class BerConversionException : DirectoryException
+    {
+        public BerConversionException ()
+            : this ("BER conversion error")
+        {
+        }
 
-		public BerConversionException (string message)
-			: base (message)
-		{
-		}
-		public BerConversionException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public BerConversionException (string message)
+            : base (message)
+        {
+        }
+        public BerConversionException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		protected BerConversionException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected BerConversionException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+        }
+    }
 }

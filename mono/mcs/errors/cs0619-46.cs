@@ -6,7 +6,7 @@ using System;
 [Obsolete("Is obsolete", true)]
 class C
 {
-	public static string SS;
+    public static string SS;
 }
 
 class MainClass

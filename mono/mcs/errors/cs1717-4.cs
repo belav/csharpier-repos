@@ -8,6 +8,6 @@ class A
     
     void D ()
     {
-	A.Value = Value;
+    A.Value = Value;
     }
 }

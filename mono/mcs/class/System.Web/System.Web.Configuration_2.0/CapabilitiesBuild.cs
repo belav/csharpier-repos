@@ -24,54 +24,54 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace System.Web.Configuration
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
 
-	internal abstract class CapabilitiesBuild : ICapabilitiesProcess
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="list"></param>
-		/// <returns></returns>
-		protected abstract System.Collections.ObjectModel.Collection<string> HeaderNames(System.Collections.ObjectModel.Collection<string> list);
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="userAgent"></param>
-		/// <param name="initialCapabilities"></param>
-		/// <returns></returns>
-		public System.Web.Configuration.CapabilitiesResult Process(string userAgent, System.Collections.IDictionary initialCapabilities)
-		{
-			System.Collections.Specialized.NameValueCollection header;
-			header = new System.Collections.Specialized.NameValueCollection(1);
-			header.Add("User-Agent", userAgent);
-			return Process(header, initialCapabilities);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="request"></param>
-		/// <param name="initialCapabilities"></param>
-		/// <returns></returns>
-		public System.Web.Configuration.CapabilitiesResult Process(System.Web.HttpRequest request, System.Collections.IDictionary initialCapabilities)
-		{
-			if (request != null)
-			{
-				return Process(request.Headers, initialCapabilities);
-			}
-			else
-			{
-				return Process("", initialCapabilities);
-			}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="header"></param>
-		/// <param name="initialCapabilities"></param>
-		/// <returns></returns>
-		public abstract System.Web.Configuration.CapabilitiesResult Process(System.Collections.Specialized.NameValueCollection header, System.Collections.IDictionary initialCapabilities);
-	}
+    internal abstract class CapabilitiesBuild : ICapabilitiesProcess
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        protected abstract System.Collections.ObjectModel.Collection<string> HeaderNames(System.Collections.ObjectModel.Collection<string> list);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userAgent"></param>
+        /// <param name="initialCapabilities"></param>
+        /// <returns></returns>
+        public System.Web.Configuration.CapabilitiesResult Process(string userAgent, System.Collections.IDictionary initialCapabilities)
+        {
+            System.Collections.Specialized.NameValueCollection header;
+            header = new System.Collections.Specialized.NameValueCollection(1);
+            header.Add("User-Agent", userAgent);
+            return Process(header, initialCapabilities);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="initialCapabilities"></param>
+        /// <returns></returns>
+        public System.Web.Configuration.CapabilitiesResult Process(System.Web.HttpRequest request, System.Collections.IDictionary initialCapabilities)
+        {
+            if (request != null)
+            {
+                return Process(request.Headers, initialCapabilities);
+            }
+            else
+            {
+                return Process("", initialCapabilities);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="initialCapabilities"></param>
+        /// <returns></returns>
+        public abstract System.Web.Configuration.CapabilitiesResult Process(System.Collections.Specialized.NameValueCollection header, System.Collections.IDictionary initialCapabilities);
+    }
 }

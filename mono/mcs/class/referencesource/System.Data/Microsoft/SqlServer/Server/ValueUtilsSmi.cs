@@ -1231,8 +1231,8 @@ namespace Microsoft.SqlServer.Server {
                         break;
                     case SqlDbType.Udt:
                         result = GetUdt_LengthChecked( sink, getters, ordinal, metaData );
-        				break;
-        			case SqlDbType.Xml:
+                        break;
+                    case SqlDbType.Xml:
                         targetBuffer.SqlXml = GetSqlXml_Unchecked( sink, getters, ordinal, null );
                         break;
                     default:
@@ -3606,7 +3606,7 @@ namespace Microsoft.SqlServer.Server {
         private static void SetXmlReader_Unchecked(SmiEventSink_Default sink, ITypedSettersV3 setters, int ordinal, XmlReader xmlReader) {
             // set up writer
             XmlWriterSettings WriterSettings = new XmlWriterSettings();
-            WriterSettings.CloseOutput = false;		// don't close the memory stream
+            WriterSettings.CloseOutput = false;        // don't close the memory stream
             WriterSettings.ConformanceLevel = ConformanceLevel.Fragment;
             WriterSettings.Encoding = System.Text.Encoding.Unicode;
             WriterSettings.OmitXmlDeclaration = true;

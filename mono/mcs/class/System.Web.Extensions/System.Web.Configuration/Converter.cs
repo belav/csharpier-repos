@@ -1,4 +1,4 @@
-﻿//
+//
 // Converter.cs
 //
 // Author:
@@ -34,28 +34,28 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public class Converter : ConfigurationElement
-	{
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("name", IsRequired = true, IsKey = true, DefaultValue = "")]
-		public string Name {
-			get {
-				return (string) this ["name"];
-			}
-			set {
-				this ["name"] = value;
-			}
-		}
+    public class Converter : ConfigurationElement
+    {
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("name", IsRequired = true, IsKey = true, DefaultValue = "")]
+        public string Name {
+            get {
+                return (string) this ["name"];
+            }
+            set {
+                this ["name"] = value;
+            }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("type", IsRequired = true, DefaultValue = "")]
-		public string Type {
-			get {
-				return (string) this ["type"];
-			}
-			set {
-				this ["type"] = value;
-			}
-		}
-	}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("type", IsRequired = true, DefaultValue = "")]
+        public string Type {
+            get {
+                return (string) this ["type"];
+            }
+            set {
+                this ["type"] = value;
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -576,7 +576,7 @@ class C : I1
           get_A(int32 x) cil managed
   {
     ldc.i4.0
-	ret
+    ret
   }
 
   .method public hidebysig specialname rtspecialname 
@@ -637,7 +637,7 @@ class Derived : Base
           instance int32  get_A(int32 x) cil managed
   {
     ldc.i4.0
-	ret
+    ret
   }
 
   .method public hidebysig specialname rtspecialname 
@@ -695,7 +695,7 @@ class Derived : Base
           getter(int32 x) cil managed
   {
     ldc.i4.0
-	ret
+    ret
   }
 
   .method public hidebysig specialname rtspecialname 
@@ -769,7 +769,7 @@ class Derived : Base
           instance int32  getter(int32 x) cil managed
   {
     ldc.i4.0
-	ret
+    ret
   }
 
   .method public hidebysig specialname rtspecialname 

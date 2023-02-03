@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1370,7 +1370,7 @@ Class1.Property.set(0)");
         public void TestImplementingGenericNestedInterfaces_Implicit()
         {
             // Tests:
-            // Sanity check â€“ use open (T) and closed (C<String>) generic types in the signature of implemented methods
+            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of implemented methods
             // Implement members of generic interface nested inside other generic classes
 
             var source = @"
@@ -1450,7 +1450,7 @@ Derived2.Method",
         public void TestImplementingGenericNestedInterfaces_Implicit_HideTypeParameter()
         {
             // Tests:
-            // Implicitly implement generic methods on generic interfaces â€“ test case where type parameter 
+            // Implicitly implement generic methods on generic interfaces – test case where type parameter 
             // on method hides the type parameter on class (both in interface and in implementing type)
 
             var source = @"
@@ -1515,7 +1515,7 @@ Derived1.Method`2",
         public void TestImplementationInBaseGenericType()
         {
             // Tests:
-            // Implicitly implement interface member in base generic type â€“ the method that implements interface member
+            // Implicitly implement interface member in base generic type – the method that implements interface member
             // should depend on type parameter of base type to satisfy signature (return type / parameter type) equality
             // Also test variation of above case where implementing member in base generic type does not depend 
             // on any type parameters
@@ -1559,7 +1559,7 @@ Base.Method()");
         public void TestImplicitImplementationInBaseGenericType2()
         {
             // Tests:
-            // Implement I<string> implicitly in base class and I<int> implicitly in derived class â€“
+            // Implement I<string> implicitly in base class and I<int> implicitly in derived class –
             // assuming I<string> and I<int> have members with same signature (i.e. members 
             // that don't depend on generic-ness of the interface) test which (base / derived class) 
             // members are invoked when calling through each interface
@@ -1825,7 +1825,7 @@ Derived.Method()");
         public void ImplementInterfaceUsingSynthesizedSealedProperty()
         {
             // Tests: 
-            // Implicitly implement a property / indexer with a sealed property / indexer in base class â€“ 
+            // Implicitly implement a property / indexer with a sealed property / indexer in base class – 
             // test case where only one accessor is implemented by this sealed property / indexer in base class
 
             var text = @"

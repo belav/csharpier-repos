@@ -14,37 +14,37 @@
 
 namespace Castle.Services.Logging.Log4netIntegration
 {
-	using System;
+    using System;
 
-	using Castle.Core.Logging;
+    using Castle.Core.Logging;
 
-	public class ThreadContextStack : IContextStack
-	{
-		private readonly log4net.Util.ThreadContextStack log4netStack;
+    public class ThreadContextStack : IContextStack
+    {
+        private readonly log4net.Util.ThreadContextStack log4netStack;
 
-		public ThreadContextStack(log4net.Util.ThreadContextStack log4netStack)
-		{
-			this.log4netStack = log4netStack;
-		}
+        public ThreadContextStack(log4net.Util.ThreadContextStack log4netStack)
+        {
+            this.log4netStack = log4netStack;
+        }
 
-		public int Count
-		{
-			get { return log4netStack.Count; }
-		}
+        public int Count
+        {
+            get { return log4netStack.Count; }
+        }
 
-		public void Clear()
-		{
-			log4netStack.Clear();
-		}
+        public void Clear()
+        {
+            log4netStack.Clear();
+        }
 
-		public string Pop()
-		{
-			return log4netStack.Pop();
-		}
+        public string Pop()
+        {
+            return log4netStack.Pop();
+        }
 
-		public IDisposable Push(string message)
-		{
-			return log4netStack.Push(message);
-		}
-	}
+        public IDisposable Push(string message)
+        {
+            return log4netStack.Push(message);
+        }
+    }
 }

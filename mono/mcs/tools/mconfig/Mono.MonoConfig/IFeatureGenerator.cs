@@ -30,13 +30,13 @@ using System.Collections.Generic;
 
 namespace Mono.MonoConfig
 {
-	public interface IFeatureGenerator
-	{
-		bool HasFeature (string featureName);
-		void AddFeature (string configFilePath, string featureName, FeatureTarget target, 
-				 IDefaultContainer[] defaults, IConfigBlockContainer[] configBlocks);
-		ICollection <string> Features {
-			get;
-		}
-	}
+    public interface IFeatureGenerator
+    {
+        bool HasFeature (string featureName);
+        void AddFeature (string configFilePath, string featureName, FeatureTarget target, 
+                 IDefaultContainer[] defaults, IConfigBlockContainer[] configBlocks);
+        ICollection <string> Features {
+            get;
+        }
+    }
 }

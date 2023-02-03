@@ -45,7 +45,7 @@ namespace DbLinq.Data.Linq
         /// Gets a value indicating whether this instance is read only.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is read only; otherwise, <c>false</c>.
         /// </value>
         bool IsReadOnly { get; }
         /// <summary>

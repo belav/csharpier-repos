@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,13 +27,13 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ScrollBarButtonType
-	{
-		ThumbTracker = 0,
-		SmallDecrement = 1,
-		SmallIncrement = 2,
-		LargeDecrement = 3,
-		LargeIncrement = 4,
-		ZoomReset = 5
-	}
+    public enum ScrollBarButtonType
+    {
+        ThumbTracker = 0,
+        SmallDecrement = 1,
+        SmallIncrement = 2,
+        LargeDecrement = 3,
+        LargeIncrement = 4,
+        ZoomReset = 5
+    }
 }

@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[Flags]
-	public enum AreaAlignmentOrientations
-	{
-		None = 0,
-		Vertical = 1,
-		Horizontal = 2,
-		All = 3
-	}
+    [Flags]
+    public enum AreaAlignmentOrientations
+    {
+        None = 0,
+        Vertical = 1,
+        Horizontal = 2,
+        All = 3
+    }
 }

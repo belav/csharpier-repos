@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -32,26 +32,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Markup {
 
-	[TestFixture]
-	public class DependsOnAttributeTest
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			DependsOnAttribute attr = new DependsOnAttribute ("name");
-			Assert.AreEqual ("name", attr.Name);
+    [TestFixture]
+    public class DependsOnAttributeTest
+    {
+        [Test]
+        public void CtorTest ()
+        {
+            DependsOnAttribute attr = new DependsOnAttribute ("name");
+            Assert.AreEqual ("name", attr.Name);
 
-			attr = new DependsOnAttribute (null);
-			Assert.IsNull (attr.Name);
-		}
+            attr = new DependsOnAttribute (null);
+            Assert.IsNull (attr.Name);
+        }
 
-		[Test]
-		public void TypeId ()
-		{
-			DependsOnAttribute attr = new DependsOnAttribute ("name");
-			Assert.AreSame (attr, attr.TypeId);
-		}
+        [Test]
+        public void TypeId ()
+        {
+            DependsOnAttribute attr = new DependsOnAttribute ("name");
+            Assert.AreSame (attr, attr.TypeId);
+        }
 
-	}
+    }
 
 }

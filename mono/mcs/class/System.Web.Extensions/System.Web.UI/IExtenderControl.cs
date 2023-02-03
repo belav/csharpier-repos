@@ -1,4 +1,4 @@
-﻿//
+//
 // IExtenderControl.cs
 //
 // Author:
@@ -33,9 +33,9 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public interface IExtenderControl
-	{
-		IEnumerable<ScriptDescriptor> GetScriptDescriptors (Control targetControl);
-		IEnumerable<ScriptReference> GetScriptReferences ();
-	}
+    public interface IExtenderControl
+    {
+        IEnumerable<ScriptDescriptor> GetScriptDescriptors (Control targetControl);
+        IEnumerable<ScriptReference> GetScriptReferences ();
+    }
 }

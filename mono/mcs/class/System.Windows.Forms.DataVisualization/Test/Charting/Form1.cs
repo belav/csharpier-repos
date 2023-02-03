@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -36,43 +36,43 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApplication1
 {
-	public partial class Form1 : Form
-	{
-		public Form1 ()
-		{
-			InitializeComponent ();
+    public partial class Form1 : Form
+    {
+        public Form1 ()
+        {
+            InitializeComponent ();
 
-			Text = Path.GetFileNameWithoutExtension (Application.ExecutablePath);
-		}
+            Text = Path.GetFileNameWithoutExtension (Application.ExecutablePath);
+        }
 
-		private class MyChart : Chart
-		{
-			protected override void OnPaintBackground (PaintEventArgs pevent)
-			{
-				base.OnPaintBackground (pevent);
-			}
+        private class MyChart : Chart
+        {
+            protected override void OnPaintBackground (PaintEventArgs pevent)
+            {
+                base.OnPaintBackground (pevent);
+            }
 
-			protected override void OnPaint (PaintEventArgs e)
-			{
-				base.OnPaint (e);
-			}
+            protected override void OnPaint (PaintEventArgs e)
+            {
+                base.OnPaint (e);
+            }
 
-			//protected override void OnPrePaint (ChartPaintEventArgs e)
-			//{
-			//        if (e.ChartElement is Series)
-			//                e.Position.X = 100;
-			//        else
-			//                Console.WriteLine (e.ChartElement);
+            //protected override void OnPrePaint (ChartPaintEventArgs e)
+            //{
+            //        if (e.ChartElement is Series)
+            //                e.Position.X = 100;
+            //        else
+            //                Console.WriteLine (e.ChartElement);
 
-			//        Console.WriteLine ("PRE: " + e.ChartElement.ToString () + " - " + e.Position.ToString ());
-			//        base.OnPrePaint (e);
-			//}
+            //        Console.WriteLine ("PRE: " + e.ChartElement.ToString () + " - " + e.Position.ToString ());
+            //        base.OnPrePaint (e);
+            //}
 
-			//protected override void OnPostPaint (ChartPaintEventArgs e)
-			//{
-			//        Console.WriteLine ("POST: " + e.ChartElement.ToString ());
-			//        base.OnPostPaint (e);
-			//}
-		}
-	}
+            //protected override void OnPostPaint (ChartPaintEventArgs e)
+            //{
+            //        Console.WriteLine ("POST: " + e.ChartElement.ToString ());
+            //        base.OnPostPaint (e);
+            //}
+        }
+    }
 }

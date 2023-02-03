@@ -2,7 +2,7 @@
 // WebHttpSecurityElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -46,66 +46,66 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed partial class WebHttpSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty mode;
-		static ConfigurationProperty transport;
+    public sealed partial class WebHttpSecurityElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty mode;
+        static ConfigurationProperty transport;
 
-		static WebHttpSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
+        static WebHttpSecurityElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
 
-			mode = new ConfigurationProperty ("mode",
-				typeof (WebHttpSecurityMode), "None", null/* FIXME: get converter for WebHttpSecurityMode*/, null,
-				ConfigurationPropertyOptions.None);
+            mode = new ConfigurationProperty ("mode",
+                typeof (WebHttpSecurityMode), "None", null/* FIXME: get converter for WebHttpSecurityMode*/, null,
+                ConfigurationPropertyOptions.None);
 
-			transport = new ConfigurationProperty ("transport",
-				typeof (HttpTransportSecurityElement), null, null/* FIXME: get converter for HttpTransportSecurityElement*/, null,
-				ConfigurationPropertyOptions.None);
+            transport = new ConfigurationProperty ("transport",
+                typeof (HttpTransportSecurityElement), null, null/* FIXME: get converter for HttpTransportSecurityElement*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (mode);
-			properties.Add (transport);
-		}
+            properties.Add (mode);
+            properties.Add (transport);
+        }
 
-		public WebHttpSecurityElement ()
-		{
-		}
+        public WebHttpSecurityElement ()
+        {
+        }
 
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("mode",
-			 DefaultValue = "None",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WebHttpSecurityMode Mode {
-			get { return (WebHttpSecurityMode) base [mode]; }
-			set { base [mode] = value; }
-		}
+        [ConfigurationProperty ("mode",
+             DefaultValue = "None",
+             Options = ConfigurationPropertyOptions.None)]
+        public WebHttpSecurityMode Mode {
+            get { return (WebHttpSecurityMode) base [mode]; }
+            set { base [mode] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("transport",
-			 Options = ConfigurationPropertyOptions.None)]
-		public HttpTransportSecurityElement Transport {
-			get { return (HttpTransportSecurityElement) base [transport]; }
-		}
-		
-		internal void ApplyConfiguration (WebHttpSecurity security)
-		{
-			security.Mode = Mode;
-			security.Transport.ClientCredentialType = Transport.ClientCredentialType;
-		}
-		
-		internal void InitializeFrom (WebHttpSecurity security)
-		{
-			Mode = security.Mode;
-			Transport.ClientCredentialType = security.Transport.ClientCredentialType;
-		}
-	}
+        [ConfigurationProperty ("transport",
+             Options = ConfigurationPropertyOptions.None)]
+        public HttpTransportSecurityElement Transport {
+            get { return (HttpTransportSecurityElement) base [transport]; }
+        }
+        
+        internal void ApplyConfiguration (WebHttpSecurity security)
+        {
+            security.Mode = Mode;
+            security.Transport.ClientCredentialType = Transport.ClientCredentialType;
+        }
+        
+        internal void InitializeFrom (WebHttpSecurity security)
+        {
+            Mode = security.Mode;
+            Transport.ClientCredentialType = security.Transport.ClientCredentialType;
+        }
+    }
 
 }

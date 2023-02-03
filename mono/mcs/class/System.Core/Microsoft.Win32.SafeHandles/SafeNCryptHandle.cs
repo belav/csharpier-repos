@@ -2,7 +2,7 @@
 // SafeNCryptHandle.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,26 +30,26 @@ using System;
 
 namespace Microsoft.Win32.SafeHandles
 {
-	public abstract class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
-	{
-		protected SafeNCryptHandle ()
-			: base (true)
-		{
-		}
+    public abstract class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        protected SafeNCryptHandle ()
+            : base (true)
+        {
+        }
 
-		protected SafeNCryptHandle (IntPtr handle, System.Runtime.InteropServices.SafeHandle parentHandle)
-			: base (false)
-		{
-			throw new NotImplementedException ();
-		}
+        protected SafeNCryptHandle (IntPtr handle, System.Runtime.InteropServices.SafeHandle parentHandle)
+            : base (false)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool IsInvalid { get { throw new NotImplementedException (); } }
+        public override bool IsInvalid { get { throw new NotImplementedException (); } }
 
-		protected override bool ReleaseHandle ()
-		{
-			return false;
-		}
+        protected override bool ReleaseHandle ()
+        {
+            return false;
+        }
 
-		protected abstract bool ReleaseNativeHandle();
-	}
-}	
+        protected abstract bool ReleaseNativeHandle();
+    }
+}    

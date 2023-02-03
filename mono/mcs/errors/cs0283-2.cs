@@ -7,8 +7,8 @@ struct S
 
 class C
 {
-	public void Foo ()
-	{
-		const S s = new S();
-	}
+    public void Foo ()
+    {
+        const S s = new S();
+    }
 }

@@ -32,31 +32,31 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class FaultBinding : MessageBinding {
+    [XmlFormatExtensionPoint ("Extensions")]
+    public sealed class FaultBinding : MessageBinding {
 
-		#region Fields
+        #region Fields
 
-		ServiceDescriptionFormatExtensionCollection extensions;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public FaultBinding ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public FaultBinding ()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions { 	
-			get { return extensions; }
-		}
-	
-		#endregion // Properties
-	}
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions {     
+            get { return extensions; }
+        }
+    
+        #endregion // Properties
+    }
 }

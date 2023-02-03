@@ -14,35 +14,35 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	using System.Linq;
-	using System.Reflection;
+    using System.Linq;
+    using System.Reflection;
 
-	using Castle.DynamicProxy.Tests.Classes;
+    using Castle.DynamicProxy.Tests.Classes;
 
-	public class RequiredParamInterceptor : IInterceptor
-	{
-		public void Intercept(IInvocation invocation)
-		{
-			ParameterInfo[] parameters = invocation.Method.GetParameters();
+    public class RequiredParamInterceptor : IInterceptor
+    {
+        public void Intercept(IInvocation invocation)
+        {
+            ParameterInfo[] parameters = invocation.Method.GetParameters();
 
-			object[] args = invocation.Arguments;
+            object[] args = invocation.Arguments;
 
-			for (int i = 0; i < parameters.Length; i++)
-			{
-				if (parameters[i].IsDefined(typeof(RequiredAttribute), false))
-				{
-					RequiredAttribute required =
-						parameters[i].GetCustomAttributes(typeof(RequiredAttribute), false).First() as RequiredAttribute;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                if (parameters[i].IsDefined(typeof(RequiredAttribute), false))
+                {
+                    RequiredAttribute required =
+                        parameters[i].GetCustomAttributes(typeof(RequiredAttribute), false).First() as RequiredAttribute;
 
-					if ((required.BadValue == null && args[i] == null) ||
-						(required.BadValue != null && required.BadValue.Equals(args[i])))
-					{
-						args[i] = required.DefaultValue;
-					}
-				}
-			}
+                    if ((required.BadValue == null && args[i] == null) ||
+                        (required.BadValue != null && required.BadValue.Equals(args[i])))
+                    {
+                        args[i] = required.DefaultValue;
+                    }
+                }
+            }
 
-			invocation.Proceed();
-		}
-	}
+            invocation.Proceed();
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
 // ValidatedControlConverterCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.ValidatedControlConverter
+//    - CAS unit tests for System.Web.UI.WebControls.ValidatedControlConverter
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,22 +38,22 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ValidatedControlConverterCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ValidatedControlConverterCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ValidatedControlConverterTest unit = new ValidatedControlConverterTest ();
-			unit.Basic ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ValidatedControlConverterTest unit = new ValidatedControlConverterTest ();
+            unit.Basic ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (ValidatedControlConverter); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ValidatedControlConverter); }
+        }
+    }
 }

@@ -47,7 +47,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright(" (C) 2003 Novell, Inc")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]		
+[assembly: AssemblyCulture("")]        
 [assembly: CLSCompliant(true)]
 
 //

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -436,7 +436,7 @@ namespace Newtonsoft.Json
         /// The default value is <c>false</c>.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if there will be a check for additional content after deserializing an object; otherwise, <c>false</c>.
+        ///     <c>true</c> if there will be a check for additional content after deserializing an object; otherwise, <c>false</c>.
         /// </value>
         public bool CheckAdditionalContent
         {

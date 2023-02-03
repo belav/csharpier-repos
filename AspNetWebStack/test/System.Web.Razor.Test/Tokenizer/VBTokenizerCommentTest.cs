@@ -1,4 +1,4 @@
-ï»¿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Web.Razor.Tokenizer.Symbols;
@@ -54,29 +54,29 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void LeftQuote_Comment_Is_Recognized()
         {
-            // U+2018 - Left Quote: â€˜
-            TestTokenizer("â€˜ Foo Bar Baz", new VBSymbol(0, 0, 0, "â€˜ Foo Bar Baz", VBSymbolType.Comment));
+            // U+2018 - Left Quote: ‘
+            TestTokenizer("‘ Foo Bar Baz", new VBSymbol(0, 0, 0, "‘ Foo Bar Baz", VBSymbolType.Comment));
         }
 
         [Fact]
         public void LeftQuote_Comment_Is_Terminated_By_Newline()
         {
-            // U+2018 - Left Quote: â€˜
-            TestTokenizer("â€˜ Foo Bar Baz\na", new VBSymbol(0, 0, 0, "â€˜ Foo Bar Baz", VBSymbolType.Comment), IgnoreRemaining);
+            // U+2018 - Left Quote: ‘
+            TestTokenizer("‘ Foo Bar Baz\na", new VBSymbol(0, 0, 0, "‘ Foo Bar Baz", VBSymbolType.Comment), IgnoreRemaining);
         }
 
         [Fact]
         public void RightQuote_Comment_Is_Recognized()
         {
-            // U+2019 - Right Quote: â€™
-            TestTokenizer("â€™ Foo Bar Baz", new VBSymbol(0, 0, 0, "â€™ Foo Bar Baz", VBSymbolType.Comment));
+            // U+2019 - Right Quote: ’
+            TestTokenizer("’ Foo Bar Baz", new VBSymbol(0, 0, 0, "’ Foo Bar Baz", VBSymbolType.Comment));
         }
 
         [Fact]
         public void RightQuote_Comment_Is_Terminated_By_Newline()
         {
-            // U+2019 - Right Quote: â€™
-            TestTokenizer("â€™ Foo Bar Baz\na", new VBSymbol(0, 0, 0, "â€™ Foo Bar Baz", VBSymbolType.Comment), IgnoreRemaining);
+            // U+2019 - Right Quote: ’
+            TestTokenizer("’ Foo Bar Baz\na", new VBSymbol(0, 0, 0, "’ Foo Bar Baz", VBSymbolType.Comment), IgnoreRemaining);
         }
 
         [Fact]

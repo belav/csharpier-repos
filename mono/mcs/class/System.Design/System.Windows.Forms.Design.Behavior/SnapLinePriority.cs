@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.SnapLinePriority
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,12 +31,12 @@
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public enum SnapLinePriority
-	{
-		Low = 1,
-		Medium,
-		High,
-		Always
-	}
+    public enum SnapLinePriority
+    {
+        Low = 1,
+        Medium,
+        High,
+        Always
+    }
 }
 

@@ -2,7 +2,7 @@
 // TcpTransportSecurity.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -32,25 +32,25 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-	[MonoTODO]
-	public sealed class TcpTransportSecurity
-	{
-		public
-		TcpTransportSecurity ()
-		{
-			ClientCredentialType = TcpClientCredentialType.Windows; // huh
-			ProtectionLevel = ProtectionLevel.EncryptAndSign;
-		}
+    [MonoTODO]
+    public sealed class TcpTransportSecurity
+    {
+        public
+        TcpTransportSecurity ()
+        {
+            ClientCredentialType = TcpClientCredentialType.Windows; // huh
+            ProtectionLevel = ProtectionLevel.EncryptAndSign;
+        }
 
-		public TcpClientCredentialType ClientCredentialType { get; set; }
+        public TcpClientCredentialType ClientCredentialType { get; set; }
 
-		public ProtectionLevel ProtectionLevel { get; set; }
+        public ProtectionLevel ProtectionLevel { get; set; }
 
-		[MonoTODO]
-		public SslProtocols SslProtocols
-		{
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public SslProtocols SslProtocols
+        {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
+    }
 }

@@ -31,7 +31,7 @@ using System;
 
 namespace System.Messaging 
 {
-	[Serializable]
-	public delegate void PeekCompletedEventHandler(object sender, PeekCompletedEventArgs e);
-	
+    [Serializable]
+    public delegate void PeekCompletedEventHandler(object sender, PeekCompletedEventArgs e);
+    
 }

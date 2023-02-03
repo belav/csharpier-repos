@@ -35,192 +35,192 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-	/*
-	 * This class represents a ctor of an instantiation of a generic type builder.
-	 */
-	[StructLayout (LayoutKind.Sequential)]
-	internal class ConstructorOnTypeBuilderInst : ConstructorInfo
-	{
-		#region Keep in sync with object-internals.h
-		internal TypeBuilderInstantiation instantiation;
-		internal ConstructorInfo cb;
-		#endregion
+    /*
+     * This class represents a ctor of an instantiation of a generic type builder.
+     */
+    [StructLayout (LayoutKind.Sequential)]
+    internal class ConstructorOnTypeBuilderInst : ConstructorInfo
+    {
+        #region Keep in sync with object-internals.h
+        internal TypeBuilderInstantiation instantiation;
+        internal ConstructorInfo cb;
+        #endregion
 
-		public ConstructorOnTypeBuilderInst (TypeBuilderInstantiation instantiation, ConstructorInfo cb)
-		{
-			this.instantiation = instantiation;
-			this.cb = cb;
-		}
+        public ConstructorOnTypeBuilderInst (TypeBuilderInstantiation instantiation, ConstructorInfo cb)
+        {
+            this.instantiation = instantiation;
+            this.cb = cb;
+        }
 
-		//
-		// MemberInfo members
-		//
-		
-		public override Type DeclaringType {
-			get {
-				return instantiation;
-			}
-		}
+        //
+        // MemberInfo members
+        //
+        
+        public override Type DeclaringType {
+            get {
+                return instantiation;
+            }
+        }
 
-		public override string Name {
-			get {
-				return cb.Name;
-			}
-		}
+        public override string Name {
+            get {
+                return cb.Name;
+            }
+        }
 
-		public override Type ReflectedType {
-			get {
-				return instantiation;
-			}
-		}
+        public override Type ReflectedType {
+            get {
+                return instantiation;
+            }
+        }
 
-		public override Module Module {
-			get {
-				return cb.Module;
-			}
-		}
+        public override Module Module {
+            get {
+                return cb.Module;
+            }
+        }
 
-		public override bool IsDefined (Type attributeType, bool inherit)
-		{
-			return cb.IsDefined (attributeType, inherit);
-		}
+        public override bool IsDefined (Type attributeType, bool inherit)
+        {
+            return cb.IsDefined (attributeType, inherit);
+        }
 
-		public override object [] GetCustomAttributes (bool inherit)
-		{
-			return cb.GetCustomAttributes (inherit);
-		}
+        public override object [] GetCustomAttributes (bool inherit)
+        {
+            return cb.GetCustomAttributes (inherit);
+        }
 
-		public override object [] GetCustomAttributes (Type attributeType, bool inherit)
-		{
-			return cb.GetCustomAttributes (attributeType, inherit);
-		}
+        public override object [] GetCustomAttributes (Type attributeType, bool inherit)
+        {
+            return cb.GetCustomAttributes (attributeType, inherit);
+        }
 
-		//
-		// MethodBase members
-		//
+        //
+        // MethodBase members
+        //
 
-		public override MethodImplAttributes GetMethodImplementationFlags ()
-		{
-			return cb.GetMethodImplementationFlags ();
-		}
+        public override MethodImplAttributes GetMethodImplementationFlags ()
+        {
+            return cb.GetMethodImplementationFlags ();
+        }
 
-		public override ParameterInfo[] GetParameters ()
-		{
-			/*FIXME, maybe the right thing to do when the type is creates is to retrieve from the inflated type*/
-			if (!instantiation.IsCreated)
-				throw new NotSupportedException ();
+        public override ParameterInfo[] GetParameters ()
+        {
+            /*FIXME, maybe the right thing to do when the type is creates is to retrieve from the inflated type*/
+            if (!instantiation.IsCreated)
+                throw new NotSupportedException ();
 
-			return GetParametersInternal ();
-		}
+            return GetParametersInternal ();
+        }
 
-		internal override ParameterInfo[] GetParametersInternal ()
-		{
-			ParameterInfo [] res;
-			if (cb is ConstructorBuilder) {
-				ConstructorBuilder cbuilder = (ConstructorBuilder)cb;
-				res = new ParameterInfo [cbuilder.parameters.Length];
-				for (int i = 0; i < cbuilder.parameters.Length; i++) {
-					Type type = instantiation.InflateType (cbuilder.parameters [i]);
-					res [i] = RuntimeParameterInfo.New (cbuilder.pinfo?[i], type, this, i + 1);
-				}
-			} else {
-				ParameterInfo[] parms = cb.GetParameters ();
-				res = new ParameterInfo [parms.Length];
-				for (int i = 0; i < parms.Length; i++) {
-					Type type = instantiation.InflateType (parms [i].ParameterType);
-					res [i] = RuntimeParameterInfo.New (parms [i], type, this, i + 1);
-				}
-			}
-			return res;
-		}
+        internal override ParameterInfo[] GetParametersInternal ()
+        {
+            ParameterInfo [] res;
+            if (cb is ConstructorBuilder) {
+                ConstructorBuilder cbuilder = (ConstructorBuilder)cb;
+                res = new ParameterInfo [cbuilder.parameters.Length];
+                for (int i = 0; i < cbuilder.parameters.Length; i++) {
+                    Type type = instantiation.InflateType (cbuilder.parameters [i]);
+                    res [i] = RuntimeParameterInfo.New (cbuilder.pinfo?[i], type, this, i + 1);
+                }
+            } else {
+                ParameterInfo[] parms = cb.GetParameters ();
+                res = new ParameterInfo [parms.Length];
+                for (int i = 0; i < parms.Length; i++) {
+                    Type type = instantiation.InflateType (parms [i].ParameterType);
+                    res [i] = RuntimeParameterInfo.New (parms [i], type, this, i + 1);
+                }
+            }
+            return res;
+        }
 
-		internal override Type[] GetParameterTypes () {
-			if (cb is ConstructorBuilder) {
-				return (cb as ConstructorBuilder).parameters;
-			} else {
-				ParameterInfo[] parms = cb.GetParameters ();
-				var res = new Type [parms.Length];
-				for (int i = 0; i < parms.Length; i++) {
-					res [i] = parms [i].ParameterType;
-				}
-				return res;
-			}
-		}
+        internal override Type[] GetParameterTypes () {
+            if (cb is ConstructorBuilder) {
+                return (cb as ConstructorBuilder).parameters;
+            } else {
+                ParameterInfo[] parms = cb.GetParameters ();
+                var res = new Type [parms.Length];
+                for (int i = 0; i < parms.Length; i++) {
+                    res [i] = parms [i].ParameterType;
+                }
+                return res;
+            }
+        }
 
-		// Called from the runtime to return the corresponding finished ConstructorInfo object
-		internal ConstructorInfo RuntimeResolve () {
-			var type = instantiation.InternalResolve ();
-			return type.GetConstructor (cb);
-		}
+        // Called from the runtime to return the corresponding finished ConstructorInfo object
+        internal ConstructorInfo RuntimeResolve () {
+            var type = instantiation.InternalResolve ();
+            return type.GetConstructor (cb);
+        }
 
-		public override int MetadataToken {
-			get {
-				return base.MetadataToken;
-			}
-		}
+        public override int MetadataToken {
+            get {
+                return base.MetadataToken;
+            }
+        }
 
-		internal override int GetParametersCount ()
-		{
-			return cb.GetParametersCount ();
-		}
+        internal override int GetParametersCount ()
+        {
+            return cb.GetParametersCount ();
+        }
 
-		public override Object Invoke (Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
-		{
-			return cb.Invoke (obj, invokeAttr, binder, parameters,
-				culture);
-		}
+        public override Object Invoke (Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+        {
+            return cb.Invoke (obj, invokeAttr, binder, parameters,
+                culture);
+        }
 
-		public override RuntimeMethodHandle MethodHandle {
-			get {
-				return cb.MethodHandle;
-			}
-		}
+        public override RuntimeMethodHandle MethodHandle {
+            get {
+                return cb.MethodHandle;
+            }
+        }
 
-		public override MethodAttributes Attributes {
-			get {
-				return cb.Attributes;
-			}
-		}
+        public override MethodAttributes Attributes {
+            get {
+                return cb.Attributes;
+            }
+        }
 
-		public override CallingConventions CallingConvention {
-			get {
-				return cb.CallingConvention;
-			}
-		}
+        public override CallingConventions CallingConvention {
+            get {
+                return cb.CallingConvention;
+            }
+        }
 
-		public override Type [] GetGenericArguments ()
-		{
-			return cb.GetGenericArguments ();
-		}
+        public override Type [] GetGenericArguments ()
+        {
+            return cb.GetGenericArguments ();
+        }
 
-		public override bool ContainsGenericParameters {
-			get {
-				return false;
-			}
-		}
+        public override bool ContainsGenericParameters {
+            get {
+                return false;
+            }
+        }
 
-		public override bool IsGenericMethodDefinition {
-			get {
-				return false;
-			}
-		}
+        public override bool IsGenericMethodDefinition {
+            get {
+                return false;
+            }
+        }
 
-		public override bool IsGenericMethod {
-			get {
-				return false;
-			}
-		}
+        public override bool IsGenericMethod {
+            get {
+                return false;
+            }
+        }
 
-		//
-		// MethodBase members
-		//
+        //
+        // MethodBase members
+        //
 
-		public override object Invoke (BindingFlags invokeAttr, Binder binder, object[] parameters,
-									   CultureInfo culture)
-		{
-			throw new InvalidOperationException ();
-		}
-	}
+        public override object Invoke (BindingFlags invokeAttr, Binder binder, object[] parameters,
+                                       CultureInfo culture)
+        {
+            throw new InvalidOperationException ();
+        }
+    }
 }
 
 #endif

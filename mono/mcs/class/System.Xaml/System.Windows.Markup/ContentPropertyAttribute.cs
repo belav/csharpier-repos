@@ -24,23 +24,23 @@ using System;
 
 namespace System.Windows.Markup
 {
-	// This type affects on serialization by XamlXmlWriter.
-	// It does not affect on XamlObjectReader - it returns the content
-	// member regardless of this attribute.
+    // This type affects on serialization by XamlXmlWriter.
+    // It does not affect on XamlObjectReader - it returns the content
+    // member regardless of this attribute.
 
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-	public sealed class ContentPropertyAttribute : Attribute
-	{
-		public ContentPropertyAttribute ()
-		{
-		}
+    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+    public sealed class ContentPropertyAttribute : Attribute
+    {
+        public ContentPropertyAttribute ()
+        {
+        }
 
-		public ContentPropertyAttribute (string name)
-		{
-			Name = name;
-		}
-		
-		public string Name { get; private set; }
-	}
+        public ContentPropertyAttribute (string name)
+        {
+            Name = name;
+        }
+        
+        public string Name { get; private set; }
+    }
 }

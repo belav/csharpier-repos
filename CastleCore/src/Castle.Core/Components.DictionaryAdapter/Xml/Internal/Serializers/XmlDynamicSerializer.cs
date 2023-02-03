@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,31 +14,31 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	public class XmlDynamicSerializer : XmlTypeSerializer
-	{
-		public static readonly XmlDynamicSerializer
-			Instance = new XmlDynamicSerializer();
+    public class XmlDynamicSerializer : XmlTypeSerializer
+    {
+        public static readonly XmlDynamicSerializer
+            Instance = new XmlDynamicSerializer();
 
-		protected XmlDynamicSerializer() { }
+        protected XmlDynamicSerializer() { }
 
-		public override XmlTypeKind Kind
-		{
-			get { return XmlTypeKind.Simple; }
-		}
+        public override XmlTypeKind Kind
+        {
+            get { return XmlTypeKind.Simple; }
+        }
 
-		public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
-		{
-			return node.ClrType == typeof(object)
-				? new object()
-				: XmlTypeSerializer.For(node.ClrType).GetValue(node, parent, accessor);
-		}
+        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        {
+            return node.ClrType == typeof(object)
+                ? new object()
+                : XmlTypeSerializer.For(node.ClrType).GetValue(node, parent, accessor);
+        }
 
-		public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
-		{
-			if (node.ClrType != typeof(object))
-				XmlTypeSerializer.For(node.ClrType).SetValue(node, parent, accessor, oldValue, ref value);
-			else
-				node.Clear();
-		}
-	}
+        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        {
+            if (node.ClrType != typeof(object))
+                XmlTypeSerializer.For(node.ClrType).SetValue(node, parent, accessor, oldValue, ref value);
+            else
+                node.Clear();
+        }
+    }
 }

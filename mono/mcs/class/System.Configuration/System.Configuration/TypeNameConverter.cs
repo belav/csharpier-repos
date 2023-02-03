@@ -2,7 +2,7 @@
 // System.Configuration.TypeNameConverter.cs
 //
 // Authors:
-// 	Chris Toshok (toshok@ximian.com)
+//     Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,23 +31,23 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public sealed class TypeNameConverter: ConfigurationConverterBase
-	{
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			return Type.GetType ((string)data);
-		}
+    public sealed class TypeNameConverter: ConfigurationConverterBase
+    {
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            return Type.GetType ((string)data);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			if (value == null)
-				return null;
+        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        {
+            if (value == null)
+                return null;
 
-			if (! (value is Type))
-				throw new ArgumentException ("value");
+            if (! (value is Type))
+                throw new ArgumentException ("value");
 
-			return ((Type)value).AssemblyQualifiedName;
-		}
-	}
+            return ((Type)value).AssemblyQualifiedName;
+        }
+    }
 }
 

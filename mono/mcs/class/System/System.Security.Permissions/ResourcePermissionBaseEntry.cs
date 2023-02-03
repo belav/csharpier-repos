@@ -30,33 +30,33 @@
 
 namespace System.Security.Permissions {
 
-	[Serializable]
-	public class ResourcePermissionBaseEntry { 
+    [Serializable]
+    public class ResourcePermissionBaseEntry { 
 
-		private int permissionAccess;
-		private string[] permissionAccessPath;
+        private int permissionAccess;
+        private string[] permissionAccessPath;
 
-		public ResourcePermissionBaseEntry ()
-		{
-			permissionAccessPath = new string [0];
-		}
+        public ResourcePermissionBaseEntry ()
+        {
+            permissionAccessPath = new string [0];
+        }
 
-		public ResourcePermissionBaseEntry (int permissionAccess, string[] permissionAccessPath)
-		{
-			if (permissionAccessPath == null)
-				throw new ArgumentNullException ("permissionAccessPath");
+        public ResourcePermissionBaseEntry (int permissionAccess, string[] permissionAccessPath)
+        {
+            if (permissionAccessPath == null)
+                throw new ArgumentNullException ("permissionAccessPath");
 
-			this.permissionAccess = permissionAccess;
-			this.permissionAccessPath = permissionAccessPath;
-		}
+            this.permissionAccess = permissionAccess;
+            this.permissionAccessPath = permissionAccessPath;
+        }
 
-		public int PermissionAccess {
-			get { return permissionAccess; }
-		}
+        public int PermissionAccess {
+            get { return permissionAccess; }
+        }
 
-		public string[] PermissionAccessPath {
-			get { return permissionAccessPath; }
-		}
-	}
+        public string[] PermissionAccessPath {
+            get { return permissionAccessPath; }
+        }
+    }
 }
 

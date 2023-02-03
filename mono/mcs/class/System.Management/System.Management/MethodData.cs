@@ -2,7 +2,7 @@
 // System.Management.MethodDataCollection
 //
 // Authors:
-//	Gert Driesen (drieseng@users.sourceforge.net)
+//    Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Gert Driesen
 //
@@ -31,40 +31,40 @@ using System;
 
 namespace System.Management
 {
-	public class MethodData
-	{
-		internal MethodData ()
-		{
-		}
+    public class MethodData
+    {
+        internal MethodData ()
+        {
+        }
 
-		public ManagementBaseObject InParameters {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public ManagementBaseObject InParameters {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		public string Name {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string Name {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		public string Origin {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string Origin {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		public ManagementBaseObject OutParameters {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public ManagementBaseObject OutParameters {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		public QualifierDataCollection Qualifiers {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        public QualifierDataCollection Qualifiers {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
+    }
 }

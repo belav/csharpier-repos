@@ -47,7 +47,7 @@ namespace nist_dom.fundamental
         //
         //----------------------------------------------------------------------------
 
-	[Test]
+    [Test]
         public void core0001CO()
         {
             string computedValue = "";

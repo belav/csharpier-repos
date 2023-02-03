@@ -2,7 +2,7 @@
 // PeerTransportSecurityElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,44 +54,44 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class PeerTransportSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty credential_type;
+    [MonoTODO]
+    public sealed partial class PeerTransportSecurityElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty credential_type;
 
-		static PeerTransportSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			credential_type = new ConfigurationProperty ("credentialType",
-				typeof (PeerTransportCredentialType), "Password", null/* FIXME: get converter for PeerTransportCredentialType*/, null,
-				ConfigurationPropertyOptions.None);
+        static PeerTransportSecurityElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            credential_type = new ConfigurationProperty ("credentialType",
+                typeof (PeerTransportCredentialType), "Password", null/* FIXME: get converter for PeerTransportCredentialType*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (credential_type);
-		}
+            properties.Add (credential_type);
+        }
 
-		public PeerTransportSecurityElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("credentialType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Password")]
-		public PeerTransportCredentialType CredentialType {
-			get { return (PeerTransportCredentialType) base [credential_type]; }
-			set { base [credential_type] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public PeerTransportSecurityElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("credentialType",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "Password")]
+        public PeerTransportCredentialType CredentialType {
+            get { return (PeerTransportCredentialType) base [credential_type]; }
+            set { base [credential_type] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

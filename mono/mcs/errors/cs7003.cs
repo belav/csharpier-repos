@@ -5,15 +5,15 @@ using System;
 
 class C<T>
 {
-	public class G<U>
-	{
-	}
+    public class G<U>
+    {
+    }
 }
 
 class M
 {
-	public static void Main ()
-	{
-		Type t = typeof (C<int>.G<>);
-	}
+    public static void Main ()
+    {
+        Type t = typeof (C<int>.G<>);
+    }
 }

@@ -39,64 +39,64 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_Equals_O : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataRow_Equals_O tc = new DataRow_Equals_O();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRow_Equals_O");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	
-	}
+    [Test] public void Main()
+    {
+        DataRow_Equals_O tc = new DataRow_Equals_O();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataRow_Equals_O");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		
-		DataTable myTable = new DataTable("myTable"); 
-		DataRow dr1,dr2;
-		dr1 = myTable.NewRow();
-		dr2 = myTable.NewRow();
-		
+    public void run()
+    {
+        Exception exp = null;
+        
+        DataTable myTable = new DataTable("myTable"); 
+        DataRow dr1,dr2;
+        dr1 = myTable.NewRow();
+        dr2 = myTable.NewRow();
+        
 
-		try
-		{
-			BeginCase("not equals");
-			Compare(dr1.Equals(dr2),false  );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-        	dr1=dr2;
-		try
-		{
-			BeginCase("equals");
-			Compare(dr1.Equals(dr2),true );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            BeginCase("not equals");
+            Compare(dr1.Equals(dr2),false  );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+            dr1=dr2;
+        try
+        {
+            BeginCase("equals");
+            Compare(dr1.Equals(dr2),true );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
 }
 }

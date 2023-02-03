@@ -2,9 +2,9 @@
 // System.Net.NetworkInformation.IPGlobalProperties
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
-//	Marek Safar (marek.safar@gmail.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
+//    Marek Safar (marek.safar@gmail.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
 //
@@ -35,17 +35,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace System.Net.NetworkInformation {
-	internal static class UnixNetworkInterfaceFactoryPal {
-		public static NetworkInterfaceFactory Create ()
-		{
-			return null;
-		}
-	}
+    internal static class UnixNetworkInterfaceFactoryPal {
+        public static NetworkInterfaceFactory Create ()
+        {
+            return null;
+        }
+    }
 
-	internal static class UnixIPGlobalPropertiesFactoryPal {
-		public static IPGlobalProperties Create ()
-		{
-				return null;
-		}
-	}
+    internal static class UnixIPGlobalPropertiesFactoryPal {
+        public static IPGlobalProperties Create ()
+        {
+                return null;
+        }
+    }
 }

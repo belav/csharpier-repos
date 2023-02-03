@@ -3,5 +3,5 @@
 
 public class Foo
 {
-	public f 
+    public f 
 }

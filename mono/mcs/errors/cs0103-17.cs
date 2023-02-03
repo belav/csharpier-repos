@@ -5,15 +5,15 @@ using static S;
 
 class S
 {
-	public void Foo ()
-	{
-	}
+    public void Foo ()
+    {
+    }
 }
 
 class Test
 {
-	public static void Main ()
-	{
-		Foo ();
-	}
+    public static void Main ()
+    {
+        Foo ();
+    }
 }

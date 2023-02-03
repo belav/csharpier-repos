@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -173,14 +173,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         /// <summary>
-		/// Asserts that the emitted IL for a type is the same as the expected IL.
-		/// Many core library types are in different assemblies on .Net Framework, and .Net Core.
-		/// Therefore this test is likely to fail unless you  only run it only only on one of these frameworks,
-		/// or you run it on both, but provide a different expected output string for each.
-		/// See <see cref="ExecutionConditionUtil"/>.
-		/// </summary>
-		/// <param name="typeName">The non-fully-qualified name of the type</param>
-		/// <param name="expected">The expected IL</param>
+        /// Asserts that the emitted IL for a type is the same as the expected IL.
+        /// Many core library types are in different assemblies on .Net Framework, and .Net Core.
+        /// Therefore this test is likely to fail unless you  only run it only only on one of these frameworks,
+        /// or you run it on both, but provide a different expected output string for each.
+        /// See <see cref="ExecutionConditionUtil"/>.
+        /// </summary>
+        /// <param name="typeName">The non-fully-qualified name of the type</param>
+        /// <param name="expected">The expected IL</param>
         public void VerifyTypeIL(string typeName, string expected)
         {
             VerifyTypeIL(typeName, output => AssertEx.AssertEqualToleratingWhitespaceDifferences(expected, output, escapeQuotes: false));

@@ -32,79 +32,79 @@ using System.Xml.Linq;
 
 namespace Mono.ApiTools {
 
-	class NamespaceComparer : Comparer {
+    class NamespaceComparer : Comparer {
 
-		ClassComparer comparer;
+        ClassComparer comparer;
 
-		public NamespaceComparer (State state)
-			: base (state)
-		{
-			comparer =  new ClassComparer (state);
-		}
+        public NamespaceComparer (State state)
+            : base (state)
+        {
+            comparer =  new ClassComparer (state);
+        }
 
-		public void Compare (XElement source, XElement target)
-		{
-			var s = source.Element ("namespaces");
-			var t = target.Element ("namespaces");
-			if (XNode.DeepEquals (s, t))
-				return;
-			Compare (s.Elements ("namespace"), t.Elements ("namespace"));
-		}
+        public void Compare (XElement source, XElement target)
+        {
+            var s = source.Element ("namespaces");
+            var t = target.Element ("namespaces");
+            if (XNode.DeepEquals (s, t))
+                return;
+            Compare (s.Elements ("namespace"), t.Elements ("namespace"));
+        }
 
-		public override void SetContext (XElement current)
-		{
-			State.Namespace = current.Attribute ("name").Value;
-		}
+        public override void SetContext (XElement current)
+        {
+            State.Namespace = current.Attribute ("name").Value;
+        }
 
-		public override void Added (XElement target, bool wasParentAdded)
-		{
-			var namespaceDescription  = $"{State.Namespace}: Added namespace";
-			State.LogDebugMessage ($"Possible -n value: {namespaceDescription}");
-			if (State.IgnoreNew.Any (re => re.IsMatch (namespaceDescription)))
-				return;
+        public override void Added (XElement target, bool wasParentAdded)
+        {
+            var namespaceDescription  = $"{State.Namespace}: Added namespace";
+            State.LogDebugMessage ($"Possible -n value: {namespaceDescription}");
+            if (State.IgnoreNew.Any (re => re.IsMatch (namespaceDescription)))
+                return;
 
-			Formatter.BeginNamespace (Output, "New ");
-			// list all new types
-			foreach (var addedType in target.Element ("classes").Elements ("class")) {
-				State.Type = addedType.Attribute ("name").Value;
-				comparer.Added (addedType, true);
-			}
-			Formatter.EndNamespace (Output);
-		}
+            Formatter.BeginNamespace (Output, "New ");
+            // list all new types
+            foreach (var addedType in target.Element ("classes").Elements ("class")) {
+                State.Type = addedType.Attribute ("name").Value;
+                comparer.Added (addedType, true);
+            }
+            Formatter.EndNamespace (Output);
+        }
 
-		public override void Modified (XElement source, XElement target, ApiChanges differences)
-		{
-			var output = Output;
-			State.Output = new StringWriter ();
-			comparer.Compare (source, target);
+        public override void Modified (XElement source, XElement target, ApiChanges differences)
+        {
+            var output = Output;
+            State.Output = new StringWriter ();
+            comparer.Compare (source, target);
 
-			var s = Output.ToString ();
-			State.Output = output;
-			if (s.Length > 0) {
-				var name = target.Attribute ("name").Value;
-				Formatter.BeginNamespace (Output);
-				Output.WriteLine (s);
-				Formatter.EndNamespace (Output);
-			}
-		}
+            var s = Output.ToString ();
+            State.Output = output;
+            if (s.Length > 0) {
+                var name = target.Attribute ("name").Value;
+                Formatter.BeginNamespace (Output);
+                Output.WriteLine (s);
+                Formatter.EndNamespace (Output);
+            }
+        }
 
-		public override void Removed (XElement source)
-		{
-			var name = source.Attribute ("name").Value;
+        public override void Removed (XElement source)
+        {
+            var name = source.Attribute ("name").Value;
 
-			var namespaceDescription  = $"{name}: Removed namespace";
-			State.LogDebugMessage ($"Possible -r value: {namespaceDescription}");
-			if (State.IgnoreRemoved.Any (re => re.IsMatch (namespaceDescription)))
-				return;
+            var namespaceDescription  = $"{name}: Removed namespace";
+            State.LogDebugMessage ($"Possible -r value: {namespaceDescription}");
+            if (State.IgnoreRemoved.Any (re => re.IsMatch (namespaceDescription)))
+                return;
 
-			Formatter.BeginNamespace (Output, "Removed ");
-			Output.WriteLine ();
-			// list all removed types
-			foreach (var removedType in source.Element ("classes").Elements ("class")) {
-				State.Type = comparer.GetTypeName (removedType);
-				comparer.Removed (removedType);
-			}
-			Formatter.EndNamespace (Output);
-		}
-	}
+            Formatter.BeginNamespace (Output, "Removed ");
+            Output.WriteLine ();
+            // list all removed types
+            foreach (var removedType in source.Element ("classes").Elements ("class")) {
+                State.Type = comparer.GetTypeName (removedType);
+                comparer.Removed (removedType);
+            }
+            Formatter.EndNamespace (Output);
+        }
+    }
 }

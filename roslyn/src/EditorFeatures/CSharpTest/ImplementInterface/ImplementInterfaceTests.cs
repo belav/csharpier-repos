@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4196,7 +4196,7 @@ public class C : IGoo
 }",
                 Options = { AllOptionsOff },
 
-                // 🐛 one value is generated with 0L instead of 0
+                // ?? one value is generated with 0L instead of 0
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
         }
@@ -4668,7 +4668,7 @@ class C : I
 }",
                 Options = { AllOptionsOff },
 
-                // 🐛 one value is generated with 0U instead of 0
+                // ?? one value is generated with 0U instead of 0
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
         }
@@ -4751,7 +4751,7 @@ interface I
     void M05(char c = '\b');
     void M06(char c = '\v');
     void M07(char c = '\'');
-    void M08(char c = '“');
+    void M08(char c = '�');
     void M09(char c = 'a');
     void M10(char c = '""');
     void M11(char c = '\u2029');
@@ -4771,7 +4771,7 @@ interface I
     void M05(char c = '\b');
     void M06(char c = '\v');
     void M07(char c = '\'');
-    void M08(char c = '“');
+    void M08(char c = '�');
     void M09(char c = 'a');
     void M10(char c = '""');
     void M11(char c = '\u2029');
@@ -4814,7 +4814,7 @@ class C : I
         throw new NotImplementedException();
     }
 
-    public void M08(char c = '“')
+    public void M08(char c = '�')
     {
         throw new NotImplementedException();
     }
@@ -5170,7 +5170,7 @@ class C : I
     }
 }
 ",
-                // 🐛 the DateTimeConstant attribute is generated with 100L instead of 100
+                // ?? the DateTimeConstant attribute is generated with 100L instead of 100
                 CodeActionValidationMode = CodeActionValidationMode.None,
             };
 
@@ -5564,7 +5564,7 @@ class C : IDisposable
                 CodeActionEquivalenceKey = "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceWithDisposePatternCodeAction;",
                 CodeActionIndex = 3,
 
-                // 🐛 generated QualifiedName where SimpleMemberAccessExpression was expected
+                // ?? generated QualifiedName where SimpleMemberAccessExpression was expected
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
         }
@@ -5765,7 +5765,7 @@ class D : I
         throw new System.NotImplementedException();
     }
 }",
-                // 🐛 generated QualifiedName where SimpleMemberAccessExpression was expected
+                // ?? generated QualifiedName where SimpleMemberAccessExpression was expected
                 CodeActionValidationMode = CodeActionValidationMode.None,
             };
 
@@ -5933,7 +5933,7 @@ class D<T> : I<T>
         throw new System.NotImplementedException();
     }
 }",
-                // 🐛 generated QualifiedName where SimpleMemberAccessExpression was expected
+                // ?? generated QualifiedName where SimpleMemberAccessExpression was expected
                 CodeActionValidationMode = CodeActionValidationMode.None,
             };
 

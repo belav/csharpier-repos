@@ -3,17 +3,17 @@
 
 interface IA
 {
-	void M ();
+    void M ();
 }
 
 interface IB
 {
-	void M ();
+    void M ();
 }
 
 class CA : IA, IB
 {
-	void IB.M ()
-	{
-	}
+    void IB.M ()
+    {
+    }
 }

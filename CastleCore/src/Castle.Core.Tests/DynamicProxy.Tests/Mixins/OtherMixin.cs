@@ -10,29 +10,29 @@
 
 namespace Castle.DynamicProxy.Tests.Mixins
 {
-	using System;
+    using System;
 
-	public interface IOtherMixin
-	{
-		int Sum(int x, int y);
-	}
+    public interface IOtherMixin
+    {
+        int Sum(int x, int y);
+    }
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class OtherMixin : IOtherMixin
-	{
-		public OtherMixin()
-		{
-		}
+    public class OtherMixin : IOtherMixin
+    {
+        public OtherMixin()
+        {
+        }
 
-		#region IOtherMixin Members
+        #region IOtherMixin Members
 
-		public int Sum(int x, int y)
-		{
-			return x + y;
-		}
+        public int Sum(int x, int y)
+        {
+            return x + y;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

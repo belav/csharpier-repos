@@ -22,9 +22,9 @@
 using System;
 namespace System.DirectoryServices
 {
-	public enum PropertyAccess
-	{
-		Read,
-		Write
-	}
+    public enum PropertyAccess
+    {
+        Read,
+        Write
+    }
 }

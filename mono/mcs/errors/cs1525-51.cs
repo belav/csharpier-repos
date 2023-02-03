@@ -3,9 +3,9 @@
 
 public class FooTest
 {
-	public void TestFoo ()
-	{
-		Foo (() => "A"
-			 () => "B");
-	}
+    public void TestFoo ()
+    {
+        Foo (() => "A"
+             () => "B");
+    }
 }

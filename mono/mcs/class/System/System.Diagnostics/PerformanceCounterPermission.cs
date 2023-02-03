@@ -2,9 +2,9 @@
 // System.Diagnostics.PerformanceCounterPermission.cs
 //
 // Authors:
-//	Jonathan Pryor (jonpryor@vt.edu)
-//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Jonathan Pryor (jonpryor@vt.edu)
+//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002
 // (C) 2003 Andreas Nahr
@@ -34,78 +34,78 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics {
 
-	[Serializable]
-	public sealed class PerformanceCounterPermission : ResourcePermissionBase {
+    [Serializable]
+    public sealed class PerformanceCounterPermission : ResourcePermissionBase {
 
-		PerformanceCounterPermissionEntryCollection innerCollection;
+        PerformanceCounterPermissionEntryCollection innerCollection;
 
-		public PerformanceCounterPermission ()
-		{
-			SetUp ();
-		}
+        public PerformanceCounterPermission ()
+        {
+            SetUp ();
+        }
 
-		public PerformanceCounterPermission (PerformanceCounterPermissionEntry[] permissionAccessEntries)
-		{
-			if (permissionAccessEntries == null)
-				throw new ArgumentNullException("permissionAccessEntries");
+        public PerformanceCounterPermission (PerformanceCounterPermissionEntry[] permissionAccessEntries)
+        {
+            if (permissionAccessEntries == null)
+                throw new ArgumentNullException("permissionAccessEntries");
 
-			SetUp ();
-			innerCollection = new PerformanceCounterPermissionEntryCollection (this);
-			innerCollection.AddRange (permissionAccessEntries);
-		}
+            SetUp ();
+            innerCollection = new PerformanceCounterPermissionEntryCollection (this);
+            innerCollection.AddRange (permissionAccessEntries);
+        }
 
-		public PerformanceCounterPermission (PermissionState state)
-			: base (state)
-		{
-			SetUp ();
-		}
+        public PerformanceCounterPermission (PermissionState state)
+            : base (state)
+        {
+            SetUp ();
+        }
 
-		public PerformanceCounterPermission (PerformanceCounterPermissionAccess permissionAccess, string machineName, string categoryName)
-		{
-			SetUp ();
-			innerCollection = new PerformanceCounterPermissionEntryCollection (this);
-			innerCollection.Add (new PerformanceCounterPermissionEntry (permissionAccess, machineName, categoryName));
-		}
+        public PerformanceCounterPermission (PerformanceCounterPermissionAccess permissionAccess, string machineName, string categoryName)
+        {
+            SetUp ();
+            innerCollection = new PerformanceCounterPermissionEntryCollection (this);
+            innerCollection.Add (new PerformanceCounterPermissionEntry (permissionAccess, machineName, categoryName));
+        }
 
-		public PerformanceCounterPermissionEntryCollection PermissionEntries {
-			get {
-				if (innerCollection == null) {
-					// must be here to work with XML deserialization
-					innerCollection = new PerformanceCounterPermissionEntryCollection (this);
-				}
-				return innerCollection;
-			}
-		}
+        public PerformanceCounterPermissionEntryCollection PermissionEntries {
+            get {
+                if (innerCollection == null) {
+                    // must be here to work with XML deserialization
+                    innerCollection = new PerformanceCounterPermissionEntryCollection (this);
+                }
+                return innerCollection;
+            }
+        }
 
-		// private stuff
+        // private stuff
 
-		private void SetUp () 
-		{
-			TagNames = new string [2] { "Machine", "Category" };
-			PermissionAccessType = typeof (PerformanceCounterPermissionAccess);
-		}
+        private void SetUp () 
+        {
+            TagNames = new string [2] { "Machine", "Category" };
+            PermissionAccessType = typeof (PerformanceCounterPermissionAccess);
+        }
 
-		internal ResourcePermissionBaseEntry[] GetEntries ()
-		{
-			return base.GetPermissionEntries ();
-		}
+        internal ResourcePermissionBaseEntry[] GetEntries ()
+        {
+            return base.GetPermissionEntries ();
+        }
 
-		internal void ClearEntries ()
-		{
-			base.Clear ();
-		}
+        internal void ClearEntries ()
+        {
+            base.Clear ();
+        }
 
-		internal void Add (object obj) 
-		{
-			PerformanceCounterPermissionEntry pcpe = (obj as PerformanceCounterPermissionEntry);
-			base.AddPermissionAccess (pcpe.CreateResourcePermissionBaseEntry ());
-		}
+        internal void Add (object obj) 
+        {
+            PerformanceCounterPermissionEntry pcpe = (obj as PerformanceCounterPermissionEntry);
+            base.AddPermissionAccess (pcpe.CreateResourcePermissionBaseEntry ());
+        }
 
-		internal void Remove (object obj) 
-		{
-			PerformanceCounterPermissionEntry pcpe = (obj as PerformanceCounterPermissionEntry);
-			base.RemovePermissionAccess (pcpe.CreateResourcePermissionBaseEntry ());
-		}
-	}
+        internal void Remove (object obj) 
+        {
+            PerformanceCounterPermissionEntry pcpe = (obj as PerformanceCounterPermissionEntry);
+            base.RemovePermissionAccess (pcpe.CreateResourcePermissionBaseEntry ());
+        }
+    }
 }
 

@@ -13,99 +13,99 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
     internal interface IAssemblyName
     {
         [PreserveSig()]
-		int SetProperty(
-				int PropertyId,
-				IntPtr pvProperty,
-				int cbProperty);
+        int SetProperty(
+                int PropertyId,
+                IntPtr pvProperty,
+                int cbProperty);
 
-		[PreserveSig()]
-		int GetProperty(
-				int PropertyId,
-				IntPtr pvProperty,
-				ref int pcbProperty);
+        [PreserveSig()]
+        int GetProperty(
+                int PropertyId,
+                IntPtr pvProperty,
+                ref int pcbProperty);
 
-		[PreserveSig()]
-		int Finalize();
+        [PreserveSig()]
+        int Finalize();
 
-		[PreserveSig()]
-		int GetDisplayName(
-				StringBuilder pDisplayName,
-				ref int pccDisplayName,
-				int displayFlags);
+        [PreserveSig()]
+        int GetDisplayName(
+                StringBuilder pDisplayName,
+                ref int pccDisplayName,
+                int displayFlags);
 
-		[PreserveSig()]
-		int Reserved(ref Guid guid,
-			Object obj1,
-			Object obj2,
-			String string1,
-			Int64 llFlags,
-			IntPtr pvReserved,
-			int cbReserved,
-			out IntPtr ppv);
+        [PreserveSig()]
+        int Reserved(ref Guid guid,
+            Object obj1,
+            Object obj2,
+            String string1,
+            Int64 llFlags,
+            IntPtr pvReserved,
+            int cbReserved,
+            out IntPtr ppv);
 
-		[PreserveSig()]
-		int GetName(
-				ref int pccBuffer,
-				StringBuilder pwzName);
+        [PreserveSig()]
+        int GetName(
+                ref int pccBuffer,
+                StringBuilder pwzName);
 
-		[PreserveSig()]
-		int GetVersion(
-				out int versionHi,
-				out int versionLow);
-		[PreserveSig()]
-		int IsEqual(
-				IAssemblyName pAsmName,
-				int cmpFlags);
+        [PreserveSig()]
+        int GetVersion(
+                out int versionHi,
+                out int versionLow);
+        [PreserveSig()]
+        int IsEqual(
+                IAssemblyName pAsmName,
+                int cmpFlags);
 
-		[PreserveSig()]
-		int Clone(out IAssemblyName pAsmName);
-	}// IAssemblyName
+        [PreserveSig()]
+        int Clone(out IAssemblyName pAsmName);
+    }// IAssemblyName
 
-	[ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("e707dcde-d1cd-11d2-bab9-00c04f8eceae")]
-	internal interface IAssemblyCache
-	{
-		[PreserveSig()]
-		int UninstallAssembly(
-			int flags,
-			[MarshalAs(UnmanagedType.LPWStr)]
-		string assemblyName,
-			IntPtr refData,
-			out int disposition);
+    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("e707dcde-d1cd-11d2-bab9-00c04f8eceae")]
+    internal interface IAssemblyCache
+    {
+        [PreserveSig()]
+        int UninstallAssembly(
+            int flags,
+            [MarshalAs(UnmanagedType.LPWStr)]
+        string assemblyName,
+            IntPtr refData,
+            out int disposition);
 
-		[PreserveSig()]
-		int QueryAssemblyInfo(
-			int flags,
-			[MarshalAs(UnmanagedType.LPWStr)]
-		string assemblyName,
-			ref AssemblyInfo assemblyInfo);
-		[PreserveSig()]
-		int Reserved(
-			int flags,
-			IntPtr pvReserved,
-			out object ppAsmItem,
-			[MarshalAs(UnmanagedType.LPWStr)]
-		string assemblyName);
-		[PreserveSig()]
-		int Reserved(out object ppAsmScavenger);
+        [PreserveSig()]
+        int QueryAssemblyInfo(
+            int flags,
+            [MarshalAs(UnmanagedType.LPWStr)]
+        string assemblyName,
+            ref AssemblyInfo assemblyInfo);
+        [PreserveSig()]
+        int Reserved(
+            int flags,
+            IntPtr pvReserved,
+            out object ppAsmItem,
+            [MarshalAs(UnmanagedType.LPWStr)]
+        string assemblyName);
+        [PreserveSig()]
+        int Reserved(out object ppAsmScavenger);
 
-		[PreserveSig()]
-		int InstallAssembly(
-			int flags,
-			[MarshalAs(UnmanagedType.LPWStr)]
-		string assemblyFilePath,
-			IntPtr refData);
-	}// IAssemblyCache
+        [PreserveSig()]
+        int InstallAssembly(
+            int flags,
+            [MarshalAs(UnmanagedType.LPWStr)]
+        string assemblyFilePath,
+            IntPtr refData);
+    }// IAssemblyCache
 
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct AssemblyInfo
-	{
-		public int cbAssemblyInfo; // size of this structure for future expansion
-		public int assemblyFlags;
-		public long assemblySizeInKB;
-		[MarshalAs(UnmanagedType.LPWStr)]
-		public string currentAssemblyPath;
-		public int cchBuf; // size of path buf.
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct AssemblyInfo
+    {
+        public int cbAssemblyInfo; // size of this structure for future expansion
+        public int assemblyFlags;
+        public long assemblySizeInKB;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string currentAssemblyPath;
+        public int cchBuf; // size of path buf.
+    }
 
     [Flags]
     internal enum AssemblyCacheFlags

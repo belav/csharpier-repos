@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -472,9 +472,9 @@ interface D : A{}
 @"
 public enum Num
 {
-    {	
-        public enum Figure { Zero };	
-    }	
+    {    
+        public enum Figure { Zero };    
+    }    
 }
 ";
             VerifyEnumsValue(text, "Num");
@@ -492,8 +492,8 @@ public enum Num
         {
             var text =
 @"
-namespace ns	
-{	
+namespace ns    
+{    
     enum Gender { Male }
 }
 struct B

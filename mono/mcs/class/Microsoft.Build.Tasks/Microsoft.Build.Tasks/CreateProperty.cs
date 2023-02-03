@@ -30,30 +30,30 @@ using System;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-	public class CreateProperty : TaskExtension {
-	
-		string[] value;
-	
-		public CreateProperty ()
-		{
-		}
+    public class CreateProperty : TaskExtension {
+    
+        string[] value;
+    
+        public CreateProperty ()
+        {
+        }
 
-		public override bool Execute ()
-		{
-			return true;
-		}
+        public override bool Execute ()
+        {
+            return true;
+        }
 
-		[Output]
-		public string[] Value {
-			get { return this.@value; }
-			set { this.@value = value; }
-		}
+        [Output]
+        public string[] Value {
+            get { return this.@value; }
+            set { this.@value = value; }
+        }
 
-		[MonoTODO]
-		[Output]
-		public string[] ValueSetByTask {
-			get { return @value; }
-		}
-	}
+        [MonoTODO]
+        [Output]
+        public string[] ValueSetByTask {
+            get { return @value; }
+        }
+    }
 }
 

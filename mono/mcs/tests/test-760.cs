@@ -10,8 +10,8 @@ class A : D
 
 class Test
 {
-	public static void Main ()
-	{
-		new A ();
-	}
+    public static void Main ()
+    {
+        new A ();
+    }
 }

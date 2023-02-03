@@ -34,82 +34,82 @@ using System.Xml.XPath;
 
 namespace Mono.Web.Util
 {
-	public enum SettingsMappingWhatOperation
-	{
-		Add,
-		Clear,
-		Replace,
-		Remove
-	}
+    public enum SettingsMappingWhatOperation
+    {
+        Add,
+        Clear,
+        Replace,
+        Remove
+    }
 
-	public class SettingsMappingWhatContents
-	{
-		SettingsMappingWhatOperation _operation;
-		Dictionary <string, string> _attributes = new Dictionary <string, string> ();
+    public class SettingsMappingWhatContents
+    {
+        SettingsMappingWhatOperation _operation;
+        Dictionary <string, string> _attributes = new Dictionary <string, string> ();
 
-		public SettingsMappingWhatOperation Operation {
-			get { return _operation; }
-		}
+        public SettingsMappingWhatOperation Operation {
+            get { return _operation; }
+        }
 
-		public Dictionary <string, string> Attributes {
-			get { return _attributes; }
-		}
+        public Dictionary <string, string> Attributes {
+            get { return _attributes; }
+        }
     
-		public SettingsMappingWhatContents (XPathNavigator nav, SettingsMappingWhatOperation operation)
-		{
-			_operation = operation;
+        public SettingsMappingWhatContents (XPathNavigator nav, SettingsMappingWhatOperation operation)
+        {
+            _operation = operation;
       
-			if (nav.HasAttributes) {	
-				nav.MoveToFirstAttribute ();
-				_attributes.Add (nav.Name, nav.Value);
-	
-				while (nav.MoveToNextAttribute ())
-					_attributes.Add (nav.Name, nav.Value);
-			}
-		}
-	}
+            if (nav.HasAttributes) {    
+                nav.MoveToFirstAttribute ();
+                _attributes.Add (nav.Name, nav.Value);
+    
+                while (nav.MoveToNextAttribute ())
+                    _attributes.Add (nav.Name, nav.Value);
+            }
+        }
+    }
   
-	public class SettingsMappingWhat
-	{    
-		string _value;
-		List <SettingsMappingWhatContents> _contents;
+    public class SettingsMappingWhat
+    {    
+        string _value;
+        List <SettingsMappingWhatContents> _contents;
     
-		public string Value {
-			get { return _value; }
-		}
+        public string Value {
+            get { return _value; }
+        }
 
-		public List <SettingsMappingWhatContents> Contents {
-			get { return _contents; }
-		}
+        public List <SettingsMappingWhatContents> Contents {
+            get { return _contents; }
+        }
     
-		public SettingsMappingWhat (XPathNavigator nav)
-		{
-			_value = nav.GetAttribute ("value", String.Empty);
+        public SettingsMappingWhat (XPathNavigator nav)
+        {
+            _value = nav.GetAttribute ("value", String.Empty);
 
-			XPathNodeIterator iter = nav.Select ("./*");
-			XPathNavigator cur;
+            XPathNodeIterator iter = nav.Select ("./*");
+            XPathNavigator cur;
 
-			_contents = new List <SettingsMappingWhatContents> ();
-			while (iter.MoveNext ()) {
-				cur = iter.Current;
-				switch (cur.LocalName) {
-					case "replace":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Replace));
-						break;
+            _contents = new List <SettingsMappingWhatContents> ();
+            while (iter.MoveNext ()) {
+                cur = iter.Current;
+                switch (cur.LocalName) {
+                    case "replace":
+                        _contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Replace));
+                        break;
 
-					case "add":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Add));
-						break;
+                    case "add":
+                        _contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Add));
+                        break;
 
-					case "clear":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Clear));
-						break;
+                    case "clear":
+                        _contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Clear));
+                        break;
 
-					case "remove":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Remove));
-						break;
-				}
-			}
-		}
-	}
+                    case "remove":
+                        _contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Remove));
+                        break;
+                }
+            }
+        }
+    }
 }

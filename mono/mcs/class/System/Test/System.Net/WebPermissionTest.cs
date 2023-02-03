@@ -34,36 +34,36 @@ using System.Security.Permissions;
 using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Net {
-	
-	[TestFixture]
-	[Category ("CAS")]
+    
+    [TestFixture]
+    [Category ("CAS")]
 #if MOBILE
-	[Ignore ("CAS is not supported and parts will be linked away")]
+    [Ignore ("CAS is not supported and parts will be linked away")]
 #endif
-	public class WebPermissionTest {
+    public class WebPermissionTest {
 
-		[Test]
-		public void Serialization ()
-		{
-			string result1 = "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n" + 
+        [Test]
+        public void Serialization ()
+        {
+            string result1 = "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n" + 
 "version=\"1\">\n" + 
 "<ConnectAccess>\n" + 
 "<URI uri=\"Hello\"/>\n" + 
 "</ConnectAccess>\n" + 
 "</IPermission>\n";
 
-			string result2 = "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n" + 
+            string result2 = "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n" + 
 "version=\"1\">\n" + 
 "<AcceptAccess>\n" + 
 "<URI uri=\"Hello\"/>\n" + 
 "</AcceptAccess>\n" + 
 "</IPermission>\n";
-			WebPermission pp = new WebPermission (NetworkAccess.Connect, "Hello");
-			Assert.AreEqual (result1, pp.ToXml ().ToString ().Replace ("\r", ""));
-			
-			pp = new WebPermission (NetworkAccess.Accept, "Hello");
-			Assert.AreEqual (result2, pp.ToXml ().ToString ().Replace ("\r", ""));
-		}
+            WebPermission pp = new WebPermission (NetworkAccess.Connect, "Hello");
+            Assert.AreEqual (result1, pp.ToXml ().ToString ().Replace ("\r", ""));
+            
+            pp = new WebPermission (NetworkAccess.Accept, "Hello");
+            Assert.AreEqual (result2, pp.ToXml ().ToString ().Replace ("\r", ""));
+        }
 
-	}
+    }
 }

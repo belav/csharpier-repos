@@ -30,19 +30,19 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class RemoteEndpointMessageProperty
-	{
-		public static string Name {
-			get { return "System.ServiceModel.Channels.RemoteEndpointMessageProperty"; }
-		}
+    public sealed class RemoteEndpointMessageProperty
+    {
+        public static string Name {
+            get { return "System.ServiceModel.Channels.RemoteEndpointMessageProperty"; }
+        }
 
-		public RemoteEndpointMessageProperty (string address, int port)
-		{
-			Address = address;
-			Port = port;
-		}
+        public RemoteEndpointMessageProperty (string address, int port)
+        {
+            Address = address;
+            Port = port;
+        }
 
-		public string Address { get; private set; }
-		public int Port { get; private set; }
-	}
+        public string Address { get; private set; }
+        public int Port { get; private set; }
+    }
 }

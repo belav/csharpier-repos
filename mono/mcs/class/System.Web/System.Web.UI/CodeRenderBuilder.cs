@@ -2,7 +2,7 @@
 // System.Web.UI.CodeRenderBuilder
 //
 // Authors:
-// 	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//     Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc. (http://www.ximian.com)
 //
@@ -32,22 +32,22 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-	sealed class CodeRenderBuilder : CodeBuilder
-	{
-		public bool HtmlEncode {
-			get; private set;
-		}
+    sealed class CodeRenderBuilder : CodeBuilder
+    {
+        public bool HtmlEncode {
+            get; private set;
+        }
 
-		public CodeRenderBuilder (string code, bool isAssign, ILocation location, bool doHtmlEncode)
-			: base (code, isAssign, location)
-		{
-			this.HtmlEncode = doHtmlEncode;
-		}
-		
-		public CodeRenderBuilder (string code, bool isAssign, ILocation location)
-			: base (code, isAssign, location)
-		{
-		}
-	}
+        public CodeRenderBuilder (string code, bool isAssign, ILocation location, bool doHtmlEncode)
+            : base (code, isAssign, location)
+        {
+            this.HtmlEncode = doHtmlEncode;
+        }
+        
+        public CodeRenderBuilder (string code, bool isAssign, ILocation location)
+            : base (code, isAssign, location)
+        {
+        }
+    }
 }
 

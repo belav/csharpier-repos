@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,29 +14,29 @@
 
 namespace Castle.Core.Configuration.Xml.Tests
 {
-	using System.IO;
-	using System.Xml;
+    using System.IO;
+    using System.Xml;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class XmlConfigurationDeserializerTests
-	{
-		[Test]
-		[Bug("CORE-37")]
-		public void Tab_character_is_not_trimmed_from_config_value()
-		{
-			string result = XmlConfigurationDeserializer.GetConfigValue("\t");
-			Assert.AreEqual("\t", result);
-		}
+    [TestFixture]
+    public class XmlConfigurationDeserializerTests
+    {
+        [Test]
+        [Bug("CORE-37")]
+        public void Tab_character_is_not_trimmed_from_config_value()
+        {
+            string result = XmlConfigurationDeserializer.GetConfigValue("\t");
+            Assert.AreEqual("\t", result);
+        }
 
-		[Test]
-		[Bug("CORE-37")]
-		public void Tab_character_is_not_trimmed_from_config_value_XML()
-		{
-			var node = new XmlDocument().ReadNode(XmlReader.Create(new StringReader("<foo><![CDATA[\t]]></foo>")));
-			var result = XmlConfigurationDeserializer.GetDeserializedNode(node);
-			Assert.AreEqual("\t", result.Value);
-		}
-	}
+        [Test]
+        [Bug("CORE-37")]
+        public void Tab_character_is_not_trimmed_from_config_value_XML()
+        {
+            var node = new XmlDocument().ReadNode(XmlReader.Create(new StringReader("<foo><![CDATA[\t]]></foo>")));
+            var result = XmlConfigurationDeserializer.GetDeserializedNode(node);
+            Assert.AreEqual("\t", result.Value);
+        }
+    }
 }

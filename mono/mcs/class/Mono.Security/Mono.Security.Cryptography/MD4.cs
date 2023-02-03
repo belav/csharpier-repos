@@ -2,7 +2,7 @@
 // MD4.cs - Message Digest 4 Abstract class
 //
 // Author:
-//	Sebastien Pouliot (sebastien@xamarin.com)
+//    Sebastien Pouliot (sebastien@xamarin.com)
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright 2013 Xamarin Inc. (http://www.xamarin.com)
@@ -35,34 +35,34 @@ using System.Security.Cryptography;
 namespace Mono.Security.Cryptography {
 
 #if !INSIDE_CORLIB
-	public
+    public
 #endif
-	abstract class MD4 : HashAlgorithm {
+    abstract class MD4 : HashAlgorithm {
 
-		protected MD4 () 
-		{
-			// MD4 hash length are 128 bits long
-			HashSizeValue = 128; 
-		}
+        protected MD4 () 
+        {
+            // MD4 hash length are 128 bits long
+            HashSizeValue = 128; 
+        }
 
-		public static new MD4 Create () 
-		{
+        public static new MD4 Create () 
+        {
 #if FULL_AOT_RUNTIME
-			return new MD4Managed ();
+            return new MD4Managed ();
 #else
-			// for this to work we must register ourself with CryptoConfig
-			return Create ("MD4");
+            // for this to work we must register ourself with CryptoConfig
+            return Create ("MD4");
 #endif
-		}
+        }
 
-		public static new MD4 Create (string hashName) 
-		{
-			object o = CryptoConfig.CreateFromName (hashName);
-			// in case machine.config isn't configured to use any MD4 implementation
-			if (o == null) {
-				o = new MD4Managed ();
-			}
-			return (MD4) o;
-		}
-	}
+        public static new MD4 Create (string hashName) 
+        {
+            object o = CryptoConfig.CreateFromName (hashName);
+            // in case machine.config isn't configured to use any MD4 implementation
+            if (o == null) {
+                o = new MD4Managed ();
+            }
+            return (MD4) o;
+        }
+    }
 }

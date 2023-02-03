@@ -2,7 +2,7 @@
 // AuthorizationContextTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,41 +36,41 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Claims
 {
-	[TestFixture]
-	public class AuthorizationContextTest
-	{
-		class MyAuthorizationPolicy : IAuthorizationPolicy
-		{
-			string id = "uuid:" + Guid.NewGuid ();
+    [TestFixture]
+    public class AuthorizationContextTest
+    {
+        class MyAuthorizationPolicy : IAuthorizationPolicy
+        {
+            string id = "uuid:" + Guid.NewGuid ();
 
-			public string Id {
-				get { return id; }
-			}
+            public string Id {
+                get { return id; }
+            }
 
-			public ClaimSet Issuer {
-				get { return ClaimSet.System; }
-			}
+            public ClaimSet Issuer {
+                get { return ClaimSet.System; }
+            }
 
-			public bool Evaluate (EvaluationContext ctx, ref object state)
-			{
-				return true;
-			}
-		}
+            public bool Evaluate (EvaluationContext ctx, ref object state)
+            {
+                return true;
+            }
+        }
 
-		[Test]
-		public void CreateDefaultAuthorizationContext ()
-		{
-			AuthorizationContext a =
-				AuthorizationContext.CreateDefaultAuthorizationContext (new IAuthorizationPolicy [0]);
-			Assert.AreEqual (DateTime.MaxValue.AddDays (-1), a.ExpirationTime, "#1-1");
-			Assert.AreEqual (0, a.Properties.Count, "#1-2");
-			Assert.AreEqual (0, a.ClaimSets.Count, "#1-3");
+        [Test]
+        public void CreateDefaultAuthorizationContext ()
+        {
+            AuthorizationContext a =
+                AuthorizationContext.CreateDefaultAuthorizationContext (new IAuthorizationPolicy [0]);
+            Assert.AreEqual (DateTime.MaxValue.AddDays (-1), a.ExpirationTime, "#1-1");
+            Assert.AreEqual (0, a.Properties.Count, "#1-2");
+            Assert.AreEqual (0, a.ClaimSets.Count, "#1-3");
 
-			a = AuthorizationContext.CreateDefaultAuthorizationContext (new IAuthorizationPolicy [] { new MyAuthorizationPolicy ()});
-			Assert.AreEqual (DateTime.MaxValue.AddDays (-1), a.ExpirationTime, "#2-1");
-			Assert.AreEqual (0, a.Properties.Count, "#2-2");
-			Assert.AreEqual (0, a.ClaimSets.Count, "#2-3");
-		}
-	}
+            a = AuthorizationContext.CreateDefaultAuthorizationContext (new IAuthorizationPolicy [] { new MyAuthorizationPolicy ()});
+            Assert.AreEqual (DateTime.MaxValue.AddDays (-1), a.ExpirationTime, "#2-1");
+            Assert.AreEqual (0, a.Properties.Count, "#2-2");
+            Assert.AreEqual (0, a.ClaimSets.Count, "#2-3");
+        }
+    }
 }
 #endif

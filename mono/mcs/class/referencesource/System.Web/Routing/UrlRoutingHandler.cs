@@ -1,4 +1,4 @@
-﻿namespace System.Web.Routing {
+namespace System.Web.Routing {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;

@@ -226,76 +226,76 @@ namespace System.Web.UI.WebControls {
         }
 
 
-		#region ICustomTypeDesciptor implementation
-		System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes() {
-			return TypeDescriptor.GetAttributes(this, true);
-		}
+        #region ICustomTypeDesciptor implementation
+        System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes() {
+            return TypeDescriptor.GetAttributes(this, true);
+        }
 
-		string ICustomTypeDescriptor.GetClassName() {
-			return TypeDescriptor.GetClassName(this, true);
-		}
+        string ICustomTypeDescriptor.GetClassName() {
+            return TypeDescriptor.GetClassName(this, true);
+        }
 
-		string ICustomTypeDescriptor.GetComponentName() {
-			return TypeDescriptor.GetComponentName(this, true);
-		}
+        string ICustomTypeDescriptor.GetComponentName() {
+            return TypeDescriptor.GetComponentName(this, true);
+        }
 
-		TypeConverter ICustomTypeDescriptor.GetConverter() {
-			return TypeDescriptor.GetConverter(this, true);
-		}
+        TypeConverter ICustomTypeDescriptor.GetConverter() {
+            return TypeDescriptor.GetConverter(this, true);
+        }
 
-		EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
-			return TypeDescriptor.GetDefaultEvent(this, true);
-		}
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
+            return TypeDescriptor.GetDefaultEvent(this, true);
+        }
 
-		PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
-			return TypeDescriptor.GetDefaultProperty(this, true);
-		}
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
+            return TypeDescriptor.GetDefaultProperty(this, true);
+        }
 
-		object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
-			return TypeDescriptor.GetEditor(this, editorBaseType, true);
-		}
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
+            return TypeDescriptor.GetEditor(this, editorBaseType, true);
+        }
 
-		EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
-			return TypeDescriptor.GetEvents(this, true);
-		}
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
+            return TypeDescriptor.GetEvents(this, true);
+        }
 
-		EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
-			return TypeDescriptor.GetEvents(this, attributes, true);
-		}
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
+            return TypeDescriptor.GetEvents(this, attributes, true);
+        }
 
-		PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
-			return ((ICustomTypeDescriptor)this).GetProperties(null);
-		}
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
+            return ((ICustomTypeDescriptor)this).GetProperties(null);
+        }
 
-		PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
-			PropertyDescriptorCollection oldProperties = TypeDescriptor.GetProperties(GetType(), attributes);
-			PropertyDescriptor[] newProperties = new PropertyDescriptor[oldProperties.Count];
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
+            PropertyDescriptorCollection oldProperties = TypeDescriptor.GetProperties(GetType(), attributes);
+            PropertyDescriptor[] newProperties = new PropertyDescriptor[oldProperties.Count];
 
-			PropertyDescriptor fontProperty = oldProperties["Font"];
-			PropertyDescriptor forecolorProperty = oldProperties["ForeColor"];
+            PropertyDescriptor fontProperty = oldProperties["Font"];
+            PropertyDescriptor forecolorProperty = oldProperties["ForeColor"];
 
-			Attribute[] newAttributes = new Attribute[] {
+            Attribute[] newAttributes = new Attribute[] {
                 new BrowsableAttribute(false),
                 new EditorBrowsableAttribute(EditorBrowsableState.Never),
                 new ThemeableAttribute(false),
             };
 
-			for (int i = 0; i < oldProperties.Count; i++) {
-				PropertyDescriptor property = oldProperties[i];
-				if ((property == fontProperty) || (property == forecolorProperty)) {
-					newProperties[i] = TypeDescriptor.CreateProperty(GetType(), property, newAttributes);
-				}
-				else {
-					newProperties[i] = property;
-				}
-			}
+            for (int i = 0; i < oldProperties.Count; i++) {
+                PropertyDescriptor property = oldProperties[i];
+                if ((property == fontProperty) || (property == forecolorProperty)) {
+                    newProperties[i] = TypeDescriptor.CreateProperty(GetType(), property, newAttributes);
+                }
+                else {
+                    newProperties[i] = property;
+                }
+            }
 
-			return new PropertyDescriptorCollection(newProperties, true);
-		}
+            return new PropertyDescriptorCollection(newProperties, true);
+        }
 
-		object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
-			return this;
-		}
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
+            return this;
+        }
         #endregion //ICustomTypeDescriptor implementation
 
     }

@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -31,55 +31,55 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class ValidatedControlConverter
-		: ControlIDConverter
-	{
-		#region Public Constructors
-		public ValidatedControlConverter() {
-		}
-		#endregion	// Public Constructors
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class ValidatedControlConverter
+        : ControlIDConverter
+    {
+        #region Public Constructors
+        public ValidatedControlConverter() {
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Methods
-		// We need to return all controls that have a validation property
-		public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) 
-		{
-			if ((context != null) && (context.Container != null) && (context.Container.Components != null)) {
-				ArrayList		values;
-				int			count;
-				string			id;
-				ComponentCollection	components;		
+        #region Public Instance Methods
+        // We need to return all controls that have a validation property
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) 
+        {
+            if ((context != null) && (context.Container != null) && (context.Container.Components != null)) {
+                ArrayList        values;
+                int            count;
+                string            id;
+                ComponentCollection    components;        
 
-				values = new ArrayList();
-				components = context.Container.Components;
-				count = components.Count;
+                values = new ArrayList();
+                components = context.Container.Components;
+                count = components.Count;
 
-				for (int i = 0; i < count; i++) {
-					if (FilterControl((Control)components[i])) {	// We have a ValidationProperty
-						id = ((Control)components[i]).ID;
-						if ((id != null) && (id.Length > 0)) {
-							values.Add(id);
-						}
-					}
-				}
+                for (int i = 0; i < count; i++) {
+                    if (FilterControl((Control)components[i])) {    // We have a ValidationProperty
+                        id = ((Control)components[i]).ID;
+                        if ((id != null) && (id.Length > 0)) {
+                            values.Add(id);
+                        }
+                    }
+                }
 
-				// How do I sort the InvariantCulture way?
-				values.Sort();
-				if (values.Count > 0) {
-					return new StandardValuesCollection(values);
-				}
-				return null;
-			}
-			return base.GetStandardValues (context);
-		}
+                // How do I sort the InvariantCulture way?
+                values.Sort();
+                if (values.Count > 0) {
+                    return new StandardValuesCollection(values);
+                }
+                return null;
+            }
+            return base.GetStandardValues (context);
+        }
 
-		protected override 
-		bool FilterControl (Control control) 
-		{
-			return BaseValidator.GetValidationProperty (control) != null;
-		}
-		#endregion	// Public Instance Methods
-	}
+        protected override 
+        bool FilterControl (Control control) 
+        {
+            return BaseValidator.GetValidationProperty (control) != null;
+        }
+        #endregion    // Public Instance Methods
+    }
 }

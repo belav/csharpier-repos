@@ -7,15 +7,15 @@ namespace Testing
    /// comment
    public class Test
    {
-	/// comment
-	public static void Main ()
-	{
-	}
+    /// comment
+    public static void Main ()
+    {
+    }
 
-	/// <include path='/foo/bar' />
-	public void Bar (int x)
-	{
-	}
+    /// <include path='/foo/bar' />
+    public void Bar (int x)
+    {
+    }
    }
 }
 

@@ -40,213 +40,213 @@ using System.Web.Util;
 
 namespace System.Web.SessionState 
 {
-	public class HttpSessionStateContainer : IHttpSessionState
-	{
-		string id;
-		HttpStaticObjectsCollection staticObjects;
-		int timeout;
-		bool newSession;
-		bool isCookieless;
-		SessionStateMode mode;
-		bool isReadOnly;
-		internal bool abandoned;
-		ISessionStateItemCollection sessionItems;
-		HttpCookieMode cookieMode;
-		
-		public HttpSessionStateContainer (string id,
-						  ISessionStateItemCollection sessionItems,
-						  HttpStaticObjectsCollection staticObjects,
-						  int timeout,
-						  bool newSession,
-						  HttpCookieMode cookieMode,
-						  SessionStateMode mode,
-						  bool isReadonly)
-		{
-			if (id == null)
-				throw new ArgumentNullException ("id");
-			
-			this.sessionItems = sessionItems;
-			this.id = id;
-			this.staticObjects = staticObjects;
-			this.timeout = timeout;
-			this.newSession = newSession;
-			this.cookieMode = cookieMode;
-			this.mode = mode;
-			this.isReadOnly = isReadonly;
-			this.isCookieless = cookieMode == HttpCookieMode.UseUri;
-		}
-		
-		public int CodePage {
-			get {
-				HttpContext current = HttpContext.Current;
-				if (current == null)
-					return Encoding.Default.CodePage;
+    public class HttpSessionStateContainer : IHttpSessionState
+    {
+        string id;
+        HttpStaticObjectsCollection staticObjects;
+        int timeout;
+        bool newSession;
+        bool isCookieless;
+        SessionStateMode mode;
+        bool isReadOnly;
+        internal bool abandoned;
+        ISessionStateItemCollection sessionItems;
+        HttpCookieMode cookieMode;
+        
+        public HttpSessionStateContainer (string id,
+                          ISessionStateItemCollection sessionItems,
+                          HttpStaticObjectsCollection staticObjects,
+                          int timeout,
+                          bool newSession,
+                          HttpCookieMode cookieMode,
+                          SessionStateMode mode,
+                          bool isReadonly)
+        {
+            if (id == null)
+                throw new ArgumentNullException ("id");
+            
+            this.sessionItems = sessionItems;
+            this.id = id;
+            this.staticObjects = staticObjects;
+            this.timeout = timeout;
+            this.newSession = newSession;
+            this.cookieMode = cookieMode;
+            this.mode = mode;
+            this.isReadOnly = isReadonly;
+            this.isCookieless = cookieMode == HttpCookieMode.UseUri;
+        }
+        
+        public int CodePage {
+            get {
+                HttpContext current = HttpContext.Current;
+                if (current == null)
+                    return Encoding.Default.CodePage;
 
-				return current.Response.ContentEncoding.CodePage;
-			}
-			
-			set {
-				HttpContext current = HttpContext.Current;
-				if (current != null)
-					current.Response.ContentEncoding = Encoding.GetEncoding (value);
-			}
-		}
-		
-		public HttpCookieMode CookieMode {
-			get { return cookieMode; }
-		}
-		
-		public int Count {
-			get {
-				if (sessionItems != null)
-					return sessionItems.Count;
-				return 0;
-			}
-		}
-		
-		public bool IsAbandoned {
-			get { return abandoned; }
-		}
-		
-		public bool IsCookieless {
-			get { return isCookieless; }
-		}
-		
-		public bool IsNewSession {
-			get { return newSession; }
-		}
-		
-		public bool IsReadOnly {
-			get { return isReadOnly; }
-		}
-		
-		public bool IsSynchronized {
-			get { return false; }
-		}
-		
-		object IHttpSessionState.this [int index] {
-			get {
-				if (sessionItems == null || sessionItems.Count == 0)
-					return null;
-				return sessionItems [index];
-			}
-			
-			set {
-				if (sessionItems != null)
-					sessionItems [index] = value;
-			}
-		}
-		
+                return current.Response.ContentEncoding.CodePage;
+            }
+            
+            set {
+                HttpContext current = HttpContext.Current;
+                if (current != null)
+                    current.Response.ContentEncoding = Encoding.GetEncoding (value);
+            }
+        }
+        
+        public HttpCookieMode CookieMode {
+            get { return cookieMode; }
+        }
+        
+        public int Count {
+            get {
+                if (sessionItems != null)
+                    return sessionItems.Count;
+                return 0;
+            }
+        }
+        
+        public bool IsAbandoned {
+            get { return abandoned; }
+        }
+        
+        public bool IsCookieless {
+            get { return isCookieless; }
+        }
+        
+        public bool IsNewSession {
+            get { return newSession; }
+        }
+        
+        public bool IsReadOnly {
+            get { return isReadOnly; }
+        }
+        
+        public bool IsSynchronized {
+            get { return false; }
+        }
+        
+        object IHttpSessionState.this [int index] {
+            get {
+                if (sessionItems == null || sessionItems.Count == 0)
+                    return null;
+                return sessionItems [index];
+            }
+            
+            set {
+                if (sessionItems != null)
+                    sessionItems [index] = value;
+            }
+        }
+        
                 object IHttpSessionState.this [string name] {
-			get {
-				if (sessionItems == null || sessionItems.Count == 0)
-					return null;
-				return sessionItems [name];
-			}
-			
-			set {
-				if (sessionItems != null)
-					sessionItems [name] = value;
-			}
-		}
-		
-		NameObjectCollectionBase.KeysCollection IHttpSessionState.Keys {
-			get {
-				if (sessionItems != null)
-					return sessionItems.Keys;
-				return null;
-			}
-		}
-		
-		public int LCID {
-			get { return Thread.CurrentThread.CurrentCulture.LCID; }
-			set { Thread.CurrentThread.CurrentCulture = new CultureInfo(value); }
-		}
-		
-		public SessionStateMode Mode {
-			get { return mode; }
-		}
-		
-		public string SessionID {
-			get { return id; }
-		}
-		
-		public HttpStaticObjectsCollection StaticObjects {
-			get { return staticObjects; }
-		}
-		
-		public Object SyncRoot {
-			get { return this; }
-		}
-		
-		public int Timeout {
-			get { return timeout; }
-			set {
-				if (value < 1)
-					throw new ArgumentException ("The argument to SetTimeout must be greater than 0.");
-				timeout = value;
-			}
-		}
+            get {
+                if (sessionItems == null || sessionItems.Count == 0)
+                    return null;
+                return sessionItems [name];
+            }
+            
+            set {
+                if (sessionItems != null)
+                    sessionItems [name] = value;
+            }
+        }
+        
+        NameObjectCollectionBase.KeysCollection IHttpSessionState.Keys {
+            get {
+                if (sessionItems != null)
+                    return sessionItems.Keys;
+                return null;
+            }
+        }
+        
+        public int LCID {
+            get { return Thread.CurrentThread.CurrentCulture.LCID; }
+            set { Thread.CurrentThread.CurrentCulture = new CultureInfo(value); }
+        }
+        
+        public SessionStateMode Mode {
+            get { return mode; }
+        }
+        
+        public string SessionID {
+            get { return id; }
+        }
+        
+        public HttpStaticObjectsCollection StaticObjects {
+            get { return staticObjects; }
+        }
+        
+        public Object SyncRoot {
+            get { return this; }
+        }
+        
+        public int Timeout {
+            get { return timeout; }
+            set {
+                if (value < 1)
+                    throw new ArgumentException ("The argument to SetTimeout must be greater than 0.");
+                timeout = value;
+            }
+        }
 
-		internal void SetNewSession (bool value)
-		{
-			newSession = value;
-		}
-		
-		public void Abandon ()
-		{
-			abandoned = true;
-		}
+        internal void SetNewSession (bool value)
+        {
+            newSession = value;
+        }
+        
+        public void Abandon ()
+        {
+            abandoned = true;
+        }
 
-		public void Add (string name, Object value)
-		{
-			if (sessionItems == null)
-				return;
-			sessionItems [name] = value;
-		}
+        public void Add (string name, Object value)
+        {
+            if (sessionItems == null)
+                return;
+            sessionItems [name] = value;
+        }
 
-		public void Clear ()
-		{
-			if (sessionItems == null)
-				return;
-			sessionItems.Clear ();
-		}
+        public void Clear ()
+        {
+            if (sessionItems == null)
+                return;
+            sessionItems.Clear ();
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			if (sessionItems == null)
-				return;
-			NameObjectCollectionBase.KeysCollection all = sessionItems.Keys;
-			for (int i = 0; i < all.Count; i++)
-				array.SetValue (all.Get(i), i + index);
-		}
+        public void CopyTo (Array array, int index)
+        {
+            if (sessionItems == null)
+                return;
+            NameObjectCollectionBase.KeysCollection all = sessionItems.Keys;
+            for (int i = 0; i < all.Count; i++)
+                array.SetValue (all.Get(i), i + index);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			if (sessionItems == null)
-				return null;
-			return sessionItems.GetEnumerator ();
-		}
-		
-		public void Remove (string name)
-		{
-			if (sessionItems == null)
-				return;
-			sessionItems.Remove (name);
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            if (sessionItems == null)
+                return null;
+            return sessionItems.GetEnumerator ();
+        }
+        
+        public void Remove (string name)
+        {
+            if (sessionItems == null)
+                return;
+            sessionItems.Remove (name);
+        }
 
-		public void RemoveAll ()
-		{
-			if (sessionItems == null)
-				return;
-			sessionItems.Clear ();
-		}
+        public void RemoveAll ()
+        {
+            if (sessionItems == null)
+                return;
+            sessionItems.Clear ();
+        }
 
-		public void RemoveAt (int index)
-		{
-			if (sessionItems == null)
-				return;
-			sessionItems.RemoveAt (index);
-		}
-	}
+        public void RemoveAt (int index)
+        {
+            if (sessionItems == null)
+                return;
+            sessionItems.RemoveAt (index);
+        }
+    }
 }

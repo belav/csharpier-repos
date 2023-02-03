@@ -37,40 +37,40 @@ using NUnit.Framework;
 
 namespace StandAloneTests.ControlRenderingCompatibilityVersion
 {
-	[TestCase ("ControlRenderingCompatibilityVersion", "PagesSection.ControlRenderingCompatibilityVersion")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "ControlRenderingCompatibilityVersion"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("ControlRenderingCompatibilityVersion", "PagesSection.ControlRenderingCompatibilityVersion")]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "ControlRenderingCompatibilityVersion"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("LessThan3.5/Default.aspx", Default_Aspx_LessThan35));
-			runItems.Add (new TestRunItem ("MoreThan4.0/Default.aspx", Default_Aspx_MoreThan40));
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "4.0 2.0";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-		
-		void Default_Aspx_LessThan35 (string result, TestRunItem runItem)
-		{
-			Assert.IsTrue (result.IndexOf ("[System.Configuration.ConfigurationErrorsException]") != -1, "#A1");
-		}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
+            runItems.Add (new TestRunItem ("LessThan3.5/Default.aspx", Default_Aspx_LessThan35));
+            runItems.Add (new TestRunItem ("MoreThan4.0/Default.aspx", Default_Aspx_MoreThan40));
+            return true;
+        }
+        
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "4.0 2.0";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+        
+        void Default_Aspx_LessThan35 (string result, TestRunItem runItem)
+        {
+            Assert.IsTrue (result.IndexOf ("[System.Configuration.ConfigurationErrorsException]") != -1, "#A1");
+        }
 
-		void Default_Aspx_MoreThan40 (string result, TestRunItem runItem)
-		{
-			string originalHtml = "5.0";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+        void Default_Aspx_MoreThan40 (string result, TestRunItem runItem)
+        {
+            string originalHtml = "5.0";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 }

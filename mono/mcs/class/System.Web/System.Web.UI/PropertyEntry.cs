@@ -2,7 +2,7 @@
 // System.Web.UI.PropertyEntry
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (c) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,39 +32,39 @@ using System.Reflection;
 
 namespace System.Web.UI
 {
-	public abstract class PropertyEntry {
-		Type type;
-		string name;
-		string filter;
-		PropertyInfo pinfo;
+    public abstract class PropertyEntry {
+        Type type;
+        string name;
+        string filter;
+        PropertyInfo pinfo;
 
-		internal PropertyEntry () { }
+        internal PropertyEntry () { }
 
-		public Type DeclaringType {
-			get { return pinfo.DeclaringType; }
-		}
+        public Type DeclaringType {
+            get { return pinfo.DeclaringType; }
+        }
 
-		public string Filter {
-			get { return filter; }
-			set { filter = value; }
-		}
+        public string Filter {
+            get { return filter; }
+            set { filter = value; }
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public PropertyInfo PropertyInfo {
-			get { return pinfo; }
-			set { pinfo = value; }
-		}
+        public PropertyInfo PropertyInfo {
+            get { return pinfo; }
+            set { pinfo = value; }
+        }
 
-		public Type Type {
-			get { return type; }
-			set { type = value; }
-		}
-	}
-	
+        public Type Type {
+            get { return type; }
+            set { type = value; }
+        }
+    }
+    
 }
 
 

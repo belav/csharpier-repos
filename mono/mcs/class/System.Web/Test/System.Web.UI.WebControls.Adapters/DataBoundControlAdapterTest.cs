@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.Adapters.DataBoundControlAdapter
 //
 // Author:
-//	Dean Brettle (dean@brettle.com)
+//    Dean Brettle (dean@brettle.com)
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -43,56 +43,56 @@ using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
-	[TestFixture]
-	public class DataBoundControlAdapterTest
-	{
-		MyDataBoundControl c;
-		MyDataBoundControlAdapter a;
+    [TestFixture]
+    public class DataBoundControlAdapterTest
+    {
+        MyDataBoundControl c;
+        MyDataBoundControlAdapter a;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			c = new MyDataBoundControl ();
-			a = new MyDataBoundControlAdapter (c);
-		}
-		
-		[Test]
-		public void PerformDataBinding ()
-		{
-			ArrayList data = new ArrayList ();
-			a.PerformDataBinding (data);
-			Assert.AreEqual (data, c.data, "PerformDataBinding #1");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            c = new MyDataBoundControl ();
+            a = new MyDataBoundControlAdapter (c);
+        }
+        
+        [Test]
+        public void PerformDataBinding ()
+        {
+            ArrayList data = new ArrayList ();
+            a.PerformDataBinding (data);
+            Assert.AreEqual (data, c.data, "PerformDataBinding #1");
+        }
 
-		[Test]
-		public void Control ()
-		{
-			Assert.AreEqual (c, a.Control, "Control #1");
-		}
-				
+        [Test]
+        public void Control ()
+        {
+            Assert.AreEqual (c, a.Control, "Control #1");
+        }
+                
 #region Support classes
-		
-		class MyDataBoundControl : DataBoundControl
-		{
-			internal IEnumerable data;
-			
-			protected internal override void PerformDataBinding (IEnumerable data)
-			{
-				this.data = data;
-			}
-		}
+        
+        class MyDataBoundControl : DataBoundControl
+        {
+            internal IEnumerable data;
+            
+            protected internal override void PerformDataBinding (IEnumerable data)
+            {
+                this.data = data;
+            }
+        }
 
-		class MyDataBoundControlAdapter : SystemWebTestShim.DataBoundControlAdapter
-		{
-			internal MyDataBoundControlAdapter (DataBoundControl c) : base (c)
-			{
-			}
-			
-			new internal DataBoundControl Control {
-				get { return base.Control; }
-			}
-		}
+        class MyDataBoundControlAdapter : SystemWebTestShim.DataBoundControlAdapter
+        {
+            internal MyDataBoundControlAdapter (DataBoundControl c) : base (c)
+            {
+            }
+            
+            new internal DataBoundControl Control {
+                get { return base.Control; }
+            }
+        }
 #endregion
-	}
+    }
 }
 #endif

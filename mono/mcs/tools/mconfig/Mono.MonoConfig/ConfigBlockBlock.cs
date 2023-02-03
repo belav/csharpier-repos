@@ -31,29 +31,29 @@ using System.Xml.XPath;
 
 namespace Mono.MonoConfig
 {
-	public class ConfigBlockBlock
-	{
-		string name;
-		Section requires;
-		string contents;
-		
-		public string Name {
-			get { return name; }
-		}
+    public class ConfigBlockBlock
+    {
+        string name;
+        Section requires;
+        string contents;
+        
+        public string Name {
+            get { return name; }
+        }
 
-		public Section Requires {
-			get { return requires; }
-		}
+        public Section Requires {
+            get { return requires; }
+        }
 
-		public string Contents {
-			get { return contents; }
-		}
-		
-		public ConfigBlockBlock (string name, Section requires, string contents)
-		{
-			this.name = name;
-			this.requires = requires;
-			this.contents = contents;
-		}
-	}
+        public string Contents {
+            get { return contents; }
+        }
+        
+        public ConfigBlockBlock (string name, Section requires, string contents)
+        {
+            this.name = name;
+            this.requires = requires;
+            this.contents = contents;
+        }
+    }
 }

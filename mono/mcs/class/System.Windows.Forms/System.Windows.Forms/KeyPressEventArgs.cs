@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2006 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -30,38 +30,38 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class KeyPressEventArgs : EventArgs {
-		private char	key_char;
-		private bool	event_handled;
+    [ComVisible(true)]
+    public class KeyPressEventArgs : EventArgs {
+        private char    key_char;
+        private bool    event_handled;
 
-		#region Public Constructors
-		public KeyPressEventArgs(char keyChar) {
-			this.key_char=keyChar;
-			this.event_handled=false;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public KeyPressEventArgs(char keyChar) {
+            this.key_char=keyChar;
+            this.event_handled=false;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public bool Handled {
-			get {
-				return this.event_handled;
-			}
+        #region Public Instance Properties
+        public bool Handled {
+            get {
+                return this.event_handled;
+            }
 
-			set {
-				this.event_handled=value;
-			}
-		}
+            set {
+                this.event_handled=value;
+            }
+        }
 
-		public char KeyChar {
-			get {
-				return this.key_char;
-			}
+        public char KeyChar {
+            get {
+                return this.key_char;
+            }
 
-			set {
-				key_char = value;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+            set {
+                key_char = value;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

@@ -2,7 +2,7 @@
 // MessagePropertyDescription.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,12 +36,12 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class MessagePropertyDescription : MessagePartDescription
-	{
-		public MessagePropertyDescription (string name)
-			: base (name, String.Empty)
-		{
-		}
-	}
+    [MonoTODO]
+    public class MessagePropertyDescription : MessagePartDescription
+    {
+        public MessagePropertyDescription (string name)
+            : base (name, String.Empty)
+        {
+        }
+    }
 }

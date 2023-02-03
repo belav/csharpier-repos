@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
+    using System;
 
-	public class XmlListSerializer : XmlCollectionSerializer
-	{
-		public static readonly XmlListSerializer
-			Instance = new XmlListSerializer();
+    public class XmlListSerializer : XmlCollectionSerializer
+    {
+        public static readonly XmlListSerializer
+            Instance = new XmlListSerializer();
 
-		protected XmlListSerializer() { }
+        protected XmlListSerializer() { }
 
-		public override Type ListTypeConstructor
-		{
-			get { return typeof(XmlNodeList<>); }
-		}
-	}
+        public override Type ListTypeConstructor
+        {
+            get { return typeof(XmlNodeList<>); }
+        }
+    }
 }

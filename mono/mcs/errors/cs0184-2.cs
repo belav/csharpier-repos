@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:1
 
 class A {
-	static void Main () { 
-		System.Console.WriteLine (null is string);
-	}
+    static void Main () { 
+        System.Console.WriteLine (null is string);
+    }
 }

@@ -17,7 +17,7 @@ Test4
     public static string teststr1 = null;
     public static string[] teststr2 = new string[3];
     public static string teststr3 = null;
-    public const string teststr4 = "const string\"";	// special case for DiffObjRef
+    public const string teststr4 = "const string\"";    // special case for DiffObjRef
     public const string testgenstr4 = "GenC const string\"";  // special case for DiffObjRef
     public static string teststr5 = null;  // special case for DiffObjRef
 

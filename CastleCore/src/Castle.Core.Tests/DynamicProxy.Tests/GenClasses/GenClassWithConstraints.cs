@@ -14,20 +14,20 @@
 
 namespace Castle.DynamicProxy.Tests.GenClasses
 {
-	using System;
+    using System;
 
-	public class GenClassWithConstraints<T> where T : IComparable
-	{
-		private bool invoked;
+    public class GenClassWithConstraints<T> where T : IComparable
+    {
+        private bool invoked;
 
-		public bool Invoked
-		{
-			get { return invoked; }
-		}
+        public bool Invoked
+        {
+            get { return invoked; }
+        }
 
-		public virtual void DoSomething()
-		{
-			invoked = true;
-		}
-	}
+        public virtual void DoSomething()
+        {
+            invoked = true;
+        }
+    }
 }

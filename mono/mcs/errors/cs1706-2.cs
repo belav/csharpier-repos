@@ -5,14 +5,14 @@ public delegate void Proc();
 
 public class AAttribute : System.Attribute
 {
-	public AAttribute(Proc p)
-	{ }
+    public AAttribute(Proc p)
+    { }
 }
 
 public class Class
 {
-	[A((object)delegate { return; })]
-	public void Foo()
-	{
-	}
+    [A((object)delegate { return; })]
+    public void Foo()
+    {
+    }
 } 

@@ -1,4 +1,4 @@
-﻿//
+//
 // IExpandedResult.cs
 //
 // Author:
@@ -27,9 +27,9 @@
 //
 
 namespace System.Data.Services {
-	public interface IExpandedResult {
-		object ExpandedElement { get; }
+    public interface IExpandedResult {
+        object ExpandedElement { get; }
 
-		object GetExpandedPropertyValue (string name);
-	}
+        object GetExpandedPropertyValue (string name);
+    }
 }

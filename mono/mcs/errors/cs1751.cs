@@ -3,7 +3,7 @@
 
 class C
 {
-	public static void Test (params C[] a = null)
-	{
-	}
+    public static void Test (params C[] a = null)
+    {
+    }
 }

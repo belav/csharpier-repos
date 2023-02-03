@@ -2,7 +2,7 @@
 // System.IO.IFileWatcher.cs
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) 2004 Novell, Inc. (http://www.novell.com)
 //
@@ -29,10 +29,10 @@
 //
 
 namespace System.IO {
-	interface IFileWatcher {
-		void StartDispatching (object fsw);
-		void StopDispatching (object fsw);
-		void Dispose (object fsw);
-	}
+    interface IFileWatcher {
+        void StartDispatching (object fsw);
+        void StopDispatching (object fsw);
+        void Dispose (object fsw);
+    }
 }
 

@@ -4,10 +4,10 @@ using System;
 
 namespace NS.System
 {
-	class A
-	{
-		public static void Main ()
-		{
-		}
-	}
+    class A
+    {
+        public static void Main ()
+        {
+        }
+    }
 }

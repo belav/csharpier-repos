@@ -31,25 +31,25 @@ using System.Text;
 
 namespace System.ServiceModel.Channels
 {
-	internal class TextMessageEncoderFactory : MessageEncoderFactory
-	{
-		TextMessageEncodingBindingElement owner;
-		TextMessageEncoder encoder;
+    internal class TextMessageEncoderFactory : MessageEncoderFactory
+    {
+        TextMessageEncodingBindingElement owner;
+        TextMessageEncoder encoder;
 
-		public TextMessageEncoderFactory (
-			TextMessageEncodingBindingElement owner)
-		{
-			this.owner = owner;
-			encoder = new TextMessageEncoder (
-				MessageVersion, owner.WriteEncoding);
-		}
+        public TextMessageEncoderFactory (
+            TextMessageEncodingBindingElement owner)
+        {
+            this.owner = owner;
+            encoder = new TextMessageEncoder (
+                MessageVersion, owner.WriteEncoding);
+        }
 
-		public override MessageEncoder Encoder {
-			get { return encoder; }
-		}
+        public override MessageEncoder Encoder {
+            get { return encoder; }
+        }
 
-		public override MessageVersion MessageVersion {
-			get { return owner.MessageVersion; }
-		}
-	}
+        public override MessageVersion MessageVersion {
+            get { return owner.MessageVersion; }
+        }
+    }
 }

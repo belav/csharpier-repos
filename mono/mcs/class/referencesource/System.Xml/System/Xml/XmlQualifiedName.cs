@@ -223,7 +223,7 @@ namespace System.Xml {
             // This is the fallback method for calling the regular hashcode method
             return s.GetHashCode();
         }
-		
+        
         // --------- Some useful internal stuff -----------------
         internal void Init(string name, string ns) {
             Debug.Assert(name != null && ns != null);

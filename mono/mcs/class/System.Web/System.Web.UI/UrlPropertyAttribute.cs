@@ -2,8 +2,8 @@
 // System.Web.UI.UrlPropertyAttribute
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sanjay Gupta (gsanjay@novell.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,39 +31,39 @@ using System.ComponentModel;
 
 namespace System.Web.UI 
 {
-	[AttributeUsage (AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public sealed class UrlPropertyAttribute : Attribute 
-	{
-		string filter;
+    [AttributeUsage (AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public sealed class UrlPropertyAttribute : Attribute 
+    {
+        string filter;
 
-		public UrlPropertyAttribute () 
-			: this ("*.*")
-		{
-		}
+        public UrlPropertyAttribute () 
+            : this ("*.*")
+        {
+        }
 
-		public UrlPropertyAttribute (string filter) 
-		{
-			this.filter = filter;
-		}
+        public UrlPropertyAttribute (string filter) 
+        {
+            this.filter = filter;
+        }
 
 
-		public string Filter { 
-			get { return filter; } 
-		}
+        public string Filter { 
+            get { return filter; } 
+        }
 
-		public override bool Equals (object obj)
-		{
-			UrlPropertyAttribute upa = (obj as UrlPropertyAttribute);
-			if (upa == null)
-				return false;
+        public override bool Equals (object obj)
+        {
+            UrlPropertyAttribute upa = (obj as UrlPropertyAttribute);
+            if (upa == null)
+                return false;
 
-			return (filter.Equals (upa.Filter));
-		}
+            return (filter.Equals (upa.Filter));
+        }
 
-		public override int GetHashCode ()
-		{
-			return this.filter.GetHashCode ();
-		}
-	}
+        public override int GetHashCode ()
+        {
+            return this.filter.GetHashCode ();
+        }
+    }
 }
 

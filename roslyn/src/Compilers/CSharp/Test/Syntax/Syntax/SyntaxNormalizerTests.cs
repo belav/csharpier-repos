@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -180,14 +180,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             TestNormalizeStatement("""
                 var x = (object)1 switch {
-                		int { } => "two",
-                		{ } t when t.GetHashCode() == 42 => "42",
-                		System.ValueTuple<int, int> (1, _) { Item2: > 2 and < 20 } => "tuple.Item2 < 20",
-                		System.ValueTuple<int, int> (1, _) { Item2: >= 100 } greater => greater.ToString(),
-                		System.ValueType {} => "not null value",
-                		object {} i when i is not 42 => "not 42",
-                		{ } => "not null",
-                		null => "null",
+                        int { } => "two",
+                        { } t when t.GetHashCode() == 42 => "42",
+                        System.ValueTuple<int, int> (1, _) { Item2: > 2 and < 20 } => "tuple.Item2 < 20",
+                        System.ValueTuple<int, int> (1, _) { Item2: >= 100 } greater => greater.ToString(),
+                        System.ValueType {} => "not null value",
+                        object {} i when i is not 42 => "not 42",
+                        { } => "not null",
+                        null => "null",
                 };
                 """, """
                 var x = (object)1 switch
@@ -2948,12 +2948,12 @@ $"  ///  </summary>{Environment.NewLine}" +
             var expected = """
                 class c
                 {
-                	void m()
-                	{
-                	}
+                    void m()
+                    {
+                    }
                 }
                 """;
-            var actual = SyntaxFactory.ParseCompilationUnit(code).NormalizeWhitespace(indentation: "	").ToFullString();
+            var actual = SyntaxFactory.ParseCompilationUnit(code).NormalizeWhitespace(indentation: "    ").ToFullString();
             Assert.Equal(expected.NormalizeLineEndings(), actual);
         }
 
@@ -3162,7 +3162,7 @@ $"  ///  </summary>{Environment.NewLine}" +
         public void TestNormalizeXmlArgumentsInDocComment4()
         {
             TestNormalizeDeclaration(
-                """/// Prefix <b    a="x"	>S_OK</b> suffix""",
+                """/// Prefix <b    a="x"    >S_OK</b> suffix""",
                 """/// Prefix <b a="x">S_OK</b> suffix""");
         }
 
@@ -3185,7 +3185,7 @@ $"  ///  </summary>{Environment.NewLine}" +
         public void TestNormalizeXmlArgumentsInDocComment7()
         {
             TestNormalizeDeclaration(
-                """/// Prefix <b    b="y"a="x"	>S_OK</b> suffix""",
+                """/// Prefix <b    b="y"a="x"    >S_OK</b> suffix""",
                 """/// Prefix <b b="y" a="x">S_OK</b> suffix""");
         }
 

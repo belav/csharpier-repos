@@ -3,16 +3,16 @@
 using System;
 
 class Y {
-	void x () {}
+    void x () {}
 
 }
 
 class X {
-	static int Main ()
-	{
-		Y y = new Y ();
+    static int Main ()
+    {
+        Y y = new Y ();
 
-		y.x ();
-		return 0;
-	}
+        y.x ();
+        return 0;
+    }
 }

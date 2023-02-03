@@ -52,13 +52,13 @@ public class TestCase
         b.Increase(ref b, arr[1]);
         c.Increase(ref c, arr[2]);
 
-	DangerousBuffer db = new DangerousBuffer();
+    DangerousBuffer db = new DangerousBuffer();
         db.a = -1;
         db.b = -2;
         db.c = -3;
 
         long* x1 = stackalloc long[size];
-	
+    
         long sum = 0;
         if (size >= 3)
         {
@@ -83,10 +83,10 @@ public class TestCase
         Point1 p2 = new Point1(3);
         Point1 p3 = new Point1(5);
 
-	arr = new long[3];
-	arr[0] = 9;
-	arr[1] = 10;
-	arr[2] = 11;
+    arr = new long[3];
+    arr[0] = 9;
+    arr[1] = 10;
+    arr[2] = 11;
 
 
         testResult = Test(3, p1, p2, p3);

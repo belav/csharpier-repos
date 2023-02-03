@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc.Async {
+namespace System.Web.Mvc.Async {
     using System.Web.Routing;
 
     public interface IAsyncController : IController {

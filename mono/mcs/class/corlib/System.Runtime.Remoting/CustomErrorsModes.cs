@@ -2,7 +2,7 @@
 // System.Runtime.Remoting.CustomErrorsModes.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -32,11 +32,11 @@ using System;
 
 namespace System.Runtime.Remoting {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public enum CustomErrorsModes
-	{
-		On,
-		Off,
-		RemoteOnly,
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public enum CustomErrorsModes
+    {
+        On,
+        Off,
+        RemoteOnly,
+    }
 }

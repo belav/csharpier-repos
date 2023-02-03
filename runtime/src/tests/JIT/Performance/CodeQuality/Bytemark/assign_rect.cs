@@ -65,32 +65,32 @@ public class AssignRect : AssignStruct
         double iterations;
 
         /*
-		** See if we need to do self adjustment code.
-		*/
+        ** See if we need to do self adjustment code.
+        */
         if (this.adjust == 0)
         {
             /*
-			** Self-adjustment code.  The system begins by working on 1
-			** array.  If it does that in no time, then two arrays
-			** are built.  This process continues until
-			** enough arrays are built to handle the tolerance.
-			*/
+            ** Self-adjustment code.  The system begins by working on 1
+            ** array.  If it does that in no time, then two arrays
+            ** are built.  This process continues until
+            ** enough arrays are built to handle the tolerance.
+            */
             this.numarrays = 1;
             while (true)
             {
                 /*
-				** Allocate space for arrays
-				*/
+                ** Allocate space for arrays
+                */
                 arraybase = new int[this.numarrays][,];
                 for (int i = 0; i < this.numarrays; i++)
                     arraybase[i] = new int[global.ASSIGNROWS, global.ASSIGNCOLS];
 
                 /*
-				** Do an iteration of the assignment alg.  If the
-				** elapsed time is less than or equal to the permitted
-				** minimum, then allocate for more arrays and
-				** try again.
-				*/
+                ** Do an iteration of the assignment alg.  If the
+                ** elapsed time is less than or equal to the permitted
+                ** minimum, then allocate for more arrays and
+                ** try again.
+                */
                 if (DoAssignIteration(arraybase,
                     this.numarrays) > global.min_ticks)
                     break;          /* We're ok...exit */
@@ -100,8 +100,8 @@ public class AssignRect : AssignStruct
         }
         else
         {       /*
-				** Allocate space for arrays
-				*/
+                ** Allocate space for arrays
+                */
             arraybase = new int[this.numarrays][,];
             for (int i = 0; i < this.numarrays; i++)
                 arraybase[i] = new int[global.ASSIGNROWS, global.ASSIGNCOLS];
@@ -109,8 +109,8 @@ public class AssignRect : AssignStruct
 
 
         /*
-		** All's well if we get here.  Do the tests.
-		*/
+        ** All's well if we get here.  Do the tests.
+        */
         accumtime = 0;
         iterations = (double)0.0;
 
@@ -130,54 +130,54 @@ public class AssignRect : AssignStruct
     }
 
     /**********************
-	** DoAssignIteration **
-	***********************
-	** This routine executes one iteration of the assignment test.
-	** It returns the number of ticks elapsed in the iteration.
-	*/
+    ** DoAssignIteration **
+    ***********************
+    ** This routine executes one iteration of the assignment test.
+    ** It returns the number of ticks elapsed in the iteration.
+    */
     private static long DoAssignIteration(int[][,] arraybase, int numarrays)
     {
         long elapsed;                   /* Elapsed ticks */
         int i;
 
         /*
-		** Load up the arrays with a random table.
-		*/
+        ** Load up the arrays with a random table.
+        */
         LoadAssignArrayWithRand(arraybase, numarrays);
 
         /*
-		** Start the stopwatch
-		*/
+        ** Start the stopwatch
+        */
         elapsed = ByteMark.StartStopwatch();
 
         /*
-		** Execute assignment algorithms
-		*/
+        ** Execute assignment algorithms
+        */
         for (i = 0; i < numarrays; i++)
         {
             Assignment(arraybase[i]);
         }
 
         /*
-		** Get elapsed time
-		*/
+        ** Get elapsed time
+        */
         return (ByteMark.StopStopwatch(elapsed));
     }
 
     /****************************
-	** LoadAssignArrayWithRand **
-	*****************************
-	** Load the assignment arrays with random numbers.  All positive.
-	** These numbers represent costs.
-	*/
+    ** LoadAssignArrayWithRand **
+    *****************************
+    ** Load the assignment arrays with random numbers.  All positive.
+    ** These numbers represent costs.
+    */
     private static void LoadAssignArrayWithRand(int[][,] arraybase, int numarrays)
     {
         int i;
 
         /*
-		** Set up the first array.  Then just copy it into the
-		** others.
-		*/
+        ** Set up the first array.  Then just copy it into the
+        ** others.
+        */
         LoadAssign(arraybase[0]);
         if (numarrays > 1)
             for (i = 1; i < numarrays; i++)
@@ -189,18 +189,18 @@ public class AssignRect : AssignStruct
     }
 
     /***************
-	** LoadAssign **
-	****************
-	** The array given by arraybase is loaded with positive random
-	** numbers.  Elements in the array are capped at 5,000,000.
-	*/
+    ** LoadAssign **
+    ****************
+    ** The array given by arraybase is loaded with positive random
+    ** numbers.  Elements in the array are capped at 5,000,000.
+    */
     private static void LoadAssign(int[,] arraybase)
     {
         short i, j;
 
         /*
-		** Reset random number generator so things repeat.
-		*/
+        ** Reset random number generator so things repeat.
+        */
         ByteMark.randnum(13);
 
         for (i = 0; i < global.ASSIGNROWS; i++)
@@ -210,12 +210,12 @@ public class AssignRect : AssignStruct
     }
 
     /*****************
-	** CopyToAssign **
-	******************
-	** Copy the contents of one array to another.  This is called by
-	** the routine that builds the initial array, and is used to copy
-	** the contents of the initial array into all following arrays.
-	*/
+    ** CopyToAssign **
+    ******************
+    ** Copy the contents of one array to another.  This is called by
+    ** the routine that builds the initial array, and is used to copy
+    ** the contents of the initial array into all following arrays.
+    */
     private static void CopyToAssign(int[,] arrayfrom,
                              int[,] arrayto)
     {
@@ -229,21 +229,21 @@ public class AssignRect : AssignStruct
     }
 
     /***************
-	** Assignment **
-	***************/
+    ** Assignment **
+    ***************/
     private static void Assignment(int[,] arraybase)
     {
         short[,] assignedtableau = new short[global.ASSIGNROWS, global.ASSIGNCOLS];
 
         /*
-		** First, calculate minimum costs
-		*/
+        ** First, calculate minimum costs
+        */
         calc_minimum_costs(arraybase);
 
         /*
-		** Repeat following until the number of rows selected
-		** equals the number of rows in the tableau.
-		*/
+        ** Repeat following until the number of rows selected
+        ** equals the number of rows in the tableau.
+        */
         while (first_assignments(arraybase, assignedtableau) != global.ASSIGNROWS)
         {
             second_assignments(arraybase, assignedtableau);
@@ -253,12 +253,12 @@ public class AssignRect : AssignStruct
     }
 
     /***********************
-	** calc_minimum_costs **
-	************************
-	** Revise the tableau by calculating the minimum costs on a
-	** row and column basis.  These minima are subtracted from
-	** their rows and columns, creating a new tableau.
-	*/
+    ** calc_minimum_costs **
+    ************************
+    ** Revise the tableau by calculating the minimum costs on a
+    ** row and column basis.  These minima are subtracted from
+    ** their rows and columns, creating a new tableau.
+    */
     private static void calc_minimum_costs(int[,] tableau)
     {
         short i, j;              /* Index variables */
@@ -280,10 +280,10 @@ public class AssignRect : AssignStruct
         }
 
         /*
-		** Determine minimum cost on a column basis.  This works
-		** just as above, only now we step through the array
-		** column-wise
-		*/
+        ** Determine minimum cost on a column basis.  This works
+        ** just as above, only now we step through the array
+        ** column-wise
+        */
         for (j = 0; j < global.ASSIGNCOLS; j++)
         {
             currentmin = global.MAXPOSLONG;  /* Initialize minimum */
@@ -292,11 +292,11 @@ public class AssignRect : AssignStruct
                     currentmin = tableau[i, j];
 
             /*
-			** Here, we'll take the trouble to see if the current
-			** minimum is zero.  This is likely worth it, since the
-			** preceding loop will have created at least one zero in
-			** each row.  We can save ourselves a few iterations.
-			*/
+            ** Here, we'll take the trouble to see if the current
+            ** minimum is zero.  This is likely worth it, since the
+            ** preceding loop will have created at least one zero in
+            ** each row.  We can save ourselves a few iterations.
+            */
             if (currentmin != 0)
                 for (i = 0; i < global.ASSIGNROWS; i++)
                     tableau[i, j] -= currentmin;
@@ -306,18 +306,18 @@ public class AssignRect : AssignStruct
     }
 
     /**********************
-	** first_assignments **
-	***********************
-	** Do first assignments.
-	** The assignedtableau[] array holds a set of values that
-	** indicate the assignment of a value, or its elimination.
-	** The values are:
-	**      0 = Item is neither assigned nor eliminated.
-	**      1 = Item is assigned
-	**      2 = Item is eliminated
-	** Returns the number of selections made.  If this equals
-	** the number of rows, then an optimum has been determined.
-	*/
+    ** first_assignments **
+    ***********************
+    ** Do first assignments.
+    ** The assignedtableau[] array holds a set of values that
+    ** indicate the assignment of a value, or its elimination.
+    ** The values are:
+    **      0 = Item is neither assigned nor eliminated.
+    **      1 = Item is assigned
+    **      2 = Item is eliminated
+    ** Returns the number of selections made.  If this equals
+    ** the number of rows, then an optimum has been determined.
+    */
     private static int first_assignments(int[,] tableau, short[,] assignedtableau)
     {
         short i, j, k;                   /* Index variables */
@@ -327,9 +327,9 @@ public class AssignRect : AssignStruct
         int selected = 0;              /* Flag used to indicate selection */
 
         /*
-		** Clear the assignedtableau, setting all members to show that
-		** no one is yet assigned, eliminated, or anything.
-		*/
+        ** Clear the assignedtableau, setting all members to show that
+        ** no one is yet assigned, eliminated, or anything.
+        */
         for (i = 0; i < global.ASSIGNROWS; i++)
             for (j = 0; j < global.ASSIGNCOLS; j++)
                 assignedtableau[i, j] = 0;
@@ -339,11 +339,11 @@ public class AssignRect : AssignStruct
         {
             numassigns = 0;
             /*
-			** Step through rows.  For each one that is not currently
-			** assigned, see if the row has only one zero in it.  If so,
-			** mark that as an assigned row/col.  Eliminate other zeros
-			** in the same column.
-			*/
+            ** Step through rows.  For each one that is not currently
+            ** assigned, see if the row has only one zero in it.  If so,
+            ** mark that as an assigned row/col.  Eliminate other zeros
+            ** in the same column.
+            */
             for (i = 0; i < global.ASSIGNROWS; i++)
             {
                 numzeros = 0;
@@ -366,9 +366,9 @@ public class AssignRect : AssignStruct
                 }
             }
             /*
-			** Step through columns, doing same as above.  Now, be careful
-			** of items in the other rows of a selected column.
-			*/
+            ** Step through columns, doing same as above.  Now, be careful
+            ** of items in the other rows of a selected column.
+            */
             for (j = 0; j < global.ASSIGNCOLS; j++)
             {
                 numzeros = 0;
@@ -391,21 +391,21 @@ public class AssignRect : AssignStruct
                 }
             }
             /*
-			** Repeat until no more assignments to be made.
-			*/
+            ** Repeat until no more assignments to be made.
+            */
         } while (numassigns != 0);
 
         /*
-		** See if we can leave at this point.
-		*/
+        ** See if we can leave at this point.
+        */
         if (totnumassigns == global.ASSIGNROWS) return (totnumassigns);
 
         /*
-		** Now step through the array by row.  If you find any unassigned
-		** zeros, pick the first in the row.  Eliminate all zeros from
-		** that same row & column.  This occurs if there are multiple optima...
-		** possibly.
-		*/
+        ** Now step through the array by row.  If you find any unassigned
+        ** zeros, pick the first in the row.  Eliminate all zeros from
+        ** that same row & column.  This occurs if there are multiple optima...
+        ** possibly.
+        */
         for (i = 0; i < global.ASSIGNROWS; i++)
         {
             selected = -1;
@@ -435,13 +435,13 @@ public class AssignRect : AssignStruct
     }
 
     /***********************
-	** second_assignments **
-	************************
-	** This section of the algorithm creates the revised
-	** tableau, and is difficult to explain.  I suggest you
-	** refer to the algorithm's source, mentioned in comments
-	** toward the beginning of the program.
-	*/
+    ** second_assignments **
+    ************************
+    ** This section of the algorithm creates the revised
+    ** tableau, and is difficult to explain.  I suggest you
+    ** refer to the algorithm's source, mentioned in comments
+    ** toward the beginning of the program.
+    */
     private static void second_assignments(int[,] tableau, short[,] assignedtableau)
     {
         int i, j;                                /* Indexes */
@@ -459,8 +459,8 @@ public class AssignRect : AssignStruct
             linescol[i] = 0;
 
         /*
-		** Scan rows, flag each row that has no assignment in it.
-		*/
+        ** Scan rows, flag each row that has no assignment in it.
+        */
         for (i = 0; i < global.ASSIGNROWS; i++)
         {
             numassigns = 0;
@@ -477,9 +477,9 @@ public class AssignRect : AssignStruct
         {
             newrows = 0;
             /*
-			** For each row checked above, scan for any zeros.  If found,
-			** check the associated column.
-			*/
+            ** For each row checked above, scan for any zeros.  If found,
+            ** check the associated column.
+            */
             for (i = 0; i < global.ASSIGNROWS; i++)
             {
                 if (linesrow[i] == 1)
@@ -489,9 +489,9 @@ public class AssignRect : AssignStruct
             }
 
             /*
-			** Now scan checked columns.  If any contain assigned zeros, check
-			** the associated row.
-			*/
+            ** Now scan checked columns.  If any contain assigned zeros, check
+            ** the associated row.
+            */
             for (j = 0; j < global.ASSIGNCOLS; j++)
                 if (linescol[j] == 1)
                     for (i = 0; i < global.ASSIGNROWS; i++)
@@ -504,11 +504,11 @@ public class AssignRect : AssignStruct
         } while (newrows != 0);
 
         /*
-		** linesrow[n]==0 indicate rows covered by imaginary line
-		** linescol[n]==1 indicate cols covered by imaginary line
-		** For all cells not covered by imaginary lines, determine smallest
-		** value.
-		*/
+        ** linesrow[n]==0 indicate rows covered by imaginary line
+        ** linescol[n]==1 indicate cols covered by imaginary line
+        ** For all cells not covered by imaginary lines, determine smallest
+        ** value.
+        */
         smallest = global.MAXPOSLONG;
         for (i = 0; i < global.ASSIGNROWS; i++)
             if (linesrow[i] != 0)
@@ -518,8 +518,8 @@ public class AssignRect : AssignStruct
                             smallest = tableau[i, j];
 
         /*
-		** Subtract smallest from all cells in the above set.
-		*/
+        ** Subtract smallest from all cells in the above set.
+        */
         for (i = 0; i < global.ASSIGNROWS; i++)
             if (linesrow[i] != 0)
                 for (j = 0; j < global.ASSIGNCOLS; j++)
@@ -527,8 +527,8 @@ public class AssignRect : AssignStruct
                         tableau[i, j] -= smallest;
 
         /*
-		** Add smallest to all cells covered by two lines.
-		*/
+        ** Add smallest to all cells covered by two lines.
+        */
         for (i = 0; i < global.ASSIGNROWS; i++)
             if (linesrow[i] == 0)
                 for (j = 0; j < global.ASSIGNCOLS; j++)

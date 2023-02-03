@@ -2,7 +2,7 @@
 // System.Security.AccessControl.CryptoKeyRights enum
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,24 +28,24 @@
 
 namespace System.Security.AccessControl {
 
-	[Flags]
-	public enum CryptoKeyRights {
-		ReadData		= 0x00000001,
-		WriteData		= 0x00000002,
-		ReadExtendedAttributes	= 0x00000008,
-		WriteExtendedAttributes	= 0x00000010,
-		ReadAttributes		= 0x00000080,
-		WriteAttributes		= 0x00000100,
-		Delete			= 0x00010000,
-		ReadPermissions		= 0x00020000,
-		ChangePermissions	= 0x00040000,
-		TakeOwnership		= 0x00080000,
-		Synchronize		= 0x00100000,
-		FullControl		= 0x001F019B,
-		GenericAll		= 0x10000000,
-		GenericExecute		= 0x20000000,
-		GenericWrite		= 0x40000000,
-		GenericRead		= unchecked((int)0x80000000),	/* overflow */
-	}
+    [Flags]
+    public enum CryptoKeyRights {
+        ReadData        = 0x00000001,
+        WriteData        = 0x00000002,
+        ReadExtendedAttributes    = 0x00000008,
+        WriteExtendedAttributes    = 0x00000010,
+        ReadAttributes        = 0x00000080,
+        WriteAttributes        = 0x00000100,
+        Delete            = 0x00010000,
+        ReadPermissions        = 0x00020000,
+        ChangePermissions    = 0x00040000,
+        TakeOwnership        = 0x00080000,
+        Synchronize        = 0x00100000,
+        FullControl        = 0x001F019B,
+        GenericAll        = 0x10000000,
+        GenericExecute        = 0x20000000,
+        GenericWrite        = 0x40000000,
+        GenericRead        = unchecked((int)0x80000000),    /* overflow */
+    }
 }
 

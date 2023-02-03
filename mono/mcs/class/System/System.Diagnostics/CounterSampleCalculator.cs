@@ -34,71 +34,71 @@ using System;
 
 namespace System.Diagnostics {
 
-	public static class CounterSampleCalculator {
+    public static class CounterSampleCalculator {
 
-		public static float ComputeCounterValue (CounterSample newSample)
-		{
-			switch (newSample.CounterType) {
-			case PerformanceCounterType.RawFraction:
-			case PerformanceCounterType.NumberOfItems32:
-			case PerformanceCounterType.NumberOfItemsHEX32:
-			case PerformanceCounterType.NumberOfItems64:
-			case PerformanceCounterType.NumberOfItemsHEX64:
-				return (float)newSample.RawValue;
-			default:
-				return 0;
-			}
-		}
+        public static float ComputeCounterValue (CounterSample newSample)
+        {
+            switch (newSample.CounterType) {
+            case PerformanceCounterType.RawFraction:
+            case PerformanceCounterType.NumberOfItems32:
+            case PerformanceCounterType.NumberOfItemsHEX32:
+            case PerformanceCounterType.NumberOfItems64:
+            case PerformanceCounterType.NumberOfItemsHEX64:
+                return (float)newSample.RawValue;
+            default:
+                return 0;
+            }
+        }
 
-		[MonoTODO("What's the algorithm?")]
-		public static float ComputeCounterValue (CounterSample oldSample,
-			CounterSample newSample)
-		{
-			if (newSample.CounterType != oldSample.CounterType)
-				throw new Exception ("The counter samples must be of the same type");
-			switch (newSample.CounterType) {
-			case PerformanceCounterType.RawFraction:
-			case PerformanceCounterType.NumberOfItems32:
-			case PerformanceCounterType.NumberOfItemsHEX32:
-			case PerformanceCounterType.NumberOfItems64:
-			case PerformanceCounterType.NumberOfItemsHEX64:
-				return (float)newSample.RawValue;
-			case PerformanceCounterType.AverageCount64:
-				return (float)(newSample.RawValue - oldSample.RawValue)/(float)(newSample.BaseValue - oldSample.BaseValue);
-			case PerformanceCounterType.AverageTimer32:
-				return (((float)(newSample.RawValue - oldSample.RawValue))/newSample.SystemFrequency)/(float)(newSample.BaseValue - oldSample.BaseValue);
-			case PerformanceCounterType.CounterDelta32:
-			case PerformanceCounterType.CounterDelta64:
-				return (float)(newSample.RawValue - oldSample.RawValue);
-			case PerformanceCounterType.CounterMultiTimer:
-				return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp) * 100.0f/newSample.BaseValue;
-			case PerformanceCounterType.CounterMultiTimer100Ns:
-				return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp100nSec - oldSample.TimeStamp100nSec) * 100.0f/newSample.BaseValue;
-			case PerformanceCounterType.CounterMultiTimerInverse:
-				return (newSample.BaseValue - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp)) * 100.0f;
-			case PerformanceCounterType.CounterMultiTimer100NsInverse:
-				return (newSample.BaseValue - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp100nSec - oldSample.TimeStamp100nSec)) * 100.0f;
-			case PerformanceCounterType.CounterTimer:
-			case PerformanceCounterType.CountPerTimeInterval32:
-			case PerformanceCounterType.CountPerTimeInterval64:
-				return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp);
-			case PerformanceCounterType.CounterTimerInverse:
-				return (1.0f - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp100nSec - oldSample.TimeStamp100nSec)) * 100.0f;
-			case PerformanceCounterType.ElapsedTime:
-				// FIXME
-				return 0;
-			case PerformanceCounterType.Timer100Ns:
-				return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp) * 100.0f;
-			case PerformanceCounterType.Timer100NsInverse:
-				return (1f - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp)) * 100.0f;
-			case PerformanceCounterType.RateOfCountsPerSecond32:
-			case PerformanceCounterType.RateOfCountsPerSecond64:
-				return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp) * 10000000;
-			default:
-				Console.WriteLine ("Counter type {0} not handled", newSample.CounterType);
-				return 0;
-			}
-		}
-	}
+        [MonoTODO("What's the algorithm?")]
+        public static float ComputeCounterValue (CounterSample oldSample,
+            CounterSample newSample)
+        {
+            if (newSample.CounterType != oldSample.CounterType)
+                throw new Exception ("The counter samples must be of the same type");
+            switch (newSample.CounterType) {
+            case PerformanceCounterType.RawFraction:
+            case PerformanceCounterType.NumberOfItems32:
+            case PerformanceCounterType.NumberOfItemsHEX32:
+            case PerformanceCounterType.NumberOfItems64:
+            case PerformanceCounterType.NumberOfItemsHEX64:
+                return (float)newSample.RawValue;
+            case PerformanceCounterType.AverageCount64:
+                return (float)(newSample.RawValue - oldSample.RawValue)/(float)(newSample.BaseValue - oldSample.BaseValue);
+            case PerformanceCounterType.AverageTimer32:
+                return (((float)(newSample.RawValue - oldSample.RawValue))/newSample.SystemFrequency)/(float)(newSample.BaseValue - oldSample.BaseValue);
+            case PerformanceCounterType.CounterDelta32:
+            case PerformanceCounterType.CounterDelta64:
+                return (float)(newSample.RawValue - oldSample.RawValue);
+            case PerformanceCounterType.CounterMultiTimer:
+                return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp) * 100.0f/newSample.BaseValue;
+            case PerformanceCounterType.CounterMultiTimer100Ns:
+                return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp100nSec - oldSample.TimeStamp100nSec) * 100.0f/newSample.BaseValue;
+            case PerformanceCounterType.CounterMultiTimerInverse:
+                return (newSample.BaseValue - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp)) * 100.0f;
+            case PerformanceCounterType.CounterMultiTimer100NsInverse:
+                return (newSample.BaseValue - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp100nSec - oldSample.TimeStamp100nSec)) * 100.0f;
+            case PerformanceCounterType.CounterTimer:
+            case PerformanceCounterType.CountPerTimeInterval32:
+            case PerformanceCounterType.CountPerTimeInterval64:
+                return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp);
+            case PerformanceCounterType.CounterTimerInverse:
+                return (1.0f - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp100nSec - oldSample.TimeStamp100nSec)) * 100.0f;
+            case PerformanceCounterType.ElapsedTime:
+                // FIXME
+                return 0;
+            case PerformanceCounterType.Timer100Ns:
+                return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp) * 100.0f;
+            case PerformanceCounterType.Timer100NsInverse:
+                return (1f - ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp)) * 100.0f;
+            case PerformanceCounterType.RateOfCountsPerSecond32:
+            case PerformanceCounterType.RateOfCountsPerSecond64:
+                return ((float)(newSample.RawValue - oldSample.RawValue))/(float)(newSample.TimeStamp - oldSample.TimeStamp) * 10000000;
+            default:
+                Console.WriteLine ("Counter type {0} not handled", newSample.CounterType);
+                return 0;
+            }
+        }
+    }
 }
 

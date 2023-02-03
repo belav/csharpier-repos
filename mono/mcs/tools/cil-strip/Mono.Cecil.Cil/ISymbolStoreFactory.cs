@@ -28,9 +28,9 @@
 
 namespace Mono.Cecil.Cil {
 
-	internal interface ISymbolStoreFactory {
+    internal interface ISymbolStoreFactory {
 
-		ISymbolReader CreateReader (ModuleDefinition module, string assemblyFileName);
-		ISymbolWriter CreateWriter (ModuleDefinition module, string assemblyFileName);
-	}
+        ISymbolReader CreateReader (ModuleDefinition module, string assemblyFileName);
+        ISymbolWriter CreateWriter (ModuleDefinition module, string assemblyFileName);
+    }
 }

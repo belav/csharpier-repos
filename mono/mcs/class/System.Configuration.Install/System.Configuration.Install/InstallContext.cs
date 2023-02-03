@@ -1,7 +1,7 @@
 // System.Configuration.Install.InstallContext.cs
 //
 // Author:
-// 	Alejandro Sánchez Acosta  <raciel@es.gnu.org>
+//     Alejandro Sánchez Acosta  <raciel@es.gnu.org>
 //
 // (C) Alejandro Sánchez Acosta
 // 
@@ -31,61 +31,61 @@ using System.Collections.Specialized;
 
 namespace System.Configuration.Install
 {
-	public class InstallContext
-	{
-		private StringDictionary parameters;
-		string log_file;
-		bool log = false;
-		
-		public InstallContext ()
-		{
-			log_file = null;
-			log = false;
-			parameters = ParseCommandLine (new string [0]);
-		}
+    public class InstallContext
+    {
+        private StringDictionary parameters;
+        string log_file;
+        bool log = false;
+        
+        public InstallContext ()
+        {
+            log_file = null;
+            log = false;
+            parameters = ParseCommandLine (new string [0]);
+        }
 
-		public InstallContext (string logFilePath, string[] commandLine)
-		{
-			log_file = logFilePath;
-			parameters = ParseCommandLine (commandLine);
-			log = IsParameterTrue ("LogtoConsole");
-		}
+        public InstallContext (string logFilePath, string[] commandLine)
+        {
+            log_file = logFilePath;
+            parameters = ParseCommandLine (commandLine);
+            log = IsParameterTrue ("LogtoConsole");
+        }
 
-		public StringDictionary Parameters {
-			get {
-				return parameters;
-			}
-		}
+        public StringDictionary Parameters {
+            get {
+                return parameters;
+            }
+        }
 
-		public bool IsParameterTrue (string paramName)
-		{
-			return parameters [paramName] == "true";
-		}
+        public bool IsParameterTrue (string paramName)
+        {
+            return parameters [paramName] == "true";
+        }
 
-		public void LogMessage (string message)
-		{
-			if (log)
-				Console.WriteLine (message);
-		}
+        public void LogMessage (string message)
+        {
+            if (log)
+                Console.WriteLine (message);
+        }
 
-		protected static StringDictionary ParseCommandLine (string[] args)
-		{
-			StringDictionary d = new StringDictionary ();
-			
-			foreach (string s in args){
-				int p = s.IndexOf ("=");
-				if (p == -1)
-					d [s] = "true";
-				else {
-					string key = s.Substring (0, p);
-					string value = s.Substring (p+1).ToLower ();
-					if (value == "yes" || value == "true" || value == "1")
-						value = "true";
+        protected static StringDictionary ParseCommandLine (string[] args)
+        {
+            StringDictionary d = new StringDictionary ();
+            
+            foreach (string s in args){
+                int p = s.IndexOf ("=");
+                if (p == -1)
+                    d [s] = "true";
+                else {
+                    string key = s.Substring (0, p);
+                    string value = s.Substring (p+1).ToLower ();
+                    if (value == "yes" || value == "true" || value == "1")
+                        value = "true";
 
-					d [key] = value;
-				}
-			}
-			return d;
-		}
-	}
+                    d [key] = value;
+                }
+            }
+            return d;
+        }
+    }
 }

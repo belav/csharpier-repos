@@ -6,11 +6,11 @@ using System;
 
 unsafe class C
 {
-	static void Main ()
-	{
-		int *p = null;
+    static void Main ()
+    {
+        int *p = null;
 
-		if (p [value:10] == 4)
-			return;
-	}
+        if (p [value:10] == 4)
+            return;
+    }
 }

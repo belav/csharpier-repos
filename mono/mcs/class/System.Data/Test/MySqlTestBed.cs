@@ -1,7 +1,7 @@
 //
 // MySqlTestBed.cs : This is base class which manages the connections to 
 //                    mysql database. This serves as a base class for all
-//		      mysql database dependant tests.
+//              mysql database dependant tests.
 //
 // To run :
 //  * create a test database in mysql server.
@@ -85,7 +85,7 @@ namespace MonoTests.System.Data
                 }
 
                 protected void CreateTestSetup ()
-		{
+        {
                         if (!isConnAlive)
                                 return ;
                         // Create test database & tables

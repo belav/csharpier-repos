@@ -2,7 +2,7 @@
 // DynamicQueryStringParameter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -40,20 +40,20 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DynamicQueryStringParameter : Parameter, IWhereParametersProvider
-	{
-		[MonoTODO]
-		protected override object Evaluate (HttpContext context, Control control)
-		{
-			throw new NotImplementedException ();
-		}
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class DynamicQueryStringParameter : Parameter, IWhereParametersProvider
+    {
+        [MonoTODO]
+        protected override object Evaluate (HttpContext context, Control control)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual IEnumerable<Parameter> GetWhereParameters (IDynamicDataSource dataSource)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public virtual IEnumerable<Parameter> GetWhereParameters (IDynamicDataSource dataSource)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

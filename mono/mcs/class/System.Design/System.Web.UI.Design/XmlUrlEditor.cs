@@ -32,29 +32,29 @@ using System;
 
 namespace System.Web.UI.Design {
 
-	public class XmlUrlEditor : UrlEditor {
+    public class XmlUrlEditor : UrlEditor {
 
-		public XmlUrlEditor ()
-		{
-		}
+        public XmlUrlEditor ()
+        {
+        }
 
-		protected override string Caption {
-			get {
-				return "Select XML File";
-			}
-		}
+        protected override string Caption {
+            get {
+                return "Select XML File";
+            }
+        }
 
-		protected override string Filter {
-			get {
-				return "XML Files(*.xml)|*.xml|All Files(*.*)|*.*|";
-			}
-		}
+        protected override string Filter {
+            get {
+                return "XML Files(*.xml)|*.xml|All Files(*.*)|*.*|";
+            }
+        }
 
-		protected override UrlBuilderOptions Options {
-			get {
-				return UrlBuilderOptions.NoAbsolute;
-			}
-		}
-	}
+        protected override UrlBuilderOptions Options {
+            get {
+                return UrlBuilderOptions.NoAbsolute;
+            }
+        }
+    }
 }
 

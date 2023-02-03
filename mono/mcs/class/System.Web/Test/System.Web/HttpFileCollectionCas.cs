@@ -1,9 +1,9 @@
 //
 // HttpFileCollectionCas.cs 
-//	- CAS unit tests for System.Web.HttpFileCollection
+//    - CAS unit tests for System.Web.HttpFileCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,58 +36,58 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpFileCollectionCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HttpFileCollectionCas : AspNetHostingMinimal {
 
-		private HttpFileCollection coll;
+        private HttpFileCollection coll;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			coll = new HttpRequest (String.Empty, "http://localhost/", String.Empty).Files;
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            coll = new HttpRequest (String.Empty, "http://localhost/", String.Empty).Files;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (coll.AllKeys, "AllKeys");
-			coll.CopyTo (new object[0], 0);
-			Assert.IsNull (coll.Get ("mono"), "Get(string)");
-			Assert.IsNull (coll["mono"], "this[string]");
-			try {
-				Assert.IsNull (coll[0], "this[int]");
-			}
-			catch (ArgumentOutOfRangeException) {
-				// normal (can't avoid it)
-			}
-			try {
-				Assert.IsNull (coll.GetKey (0), "GetKey(int)");
-			}
-			catch (ArgumentOutOfRangeException) {
-				// normal (can't avoid it)
-			}
-			try {
-				Assert.IsNull (coll.Get (0), "Get(int)");
-			}
-			catch (ArgumentOutOfRangeException) {
-				// normal (can't avoid it)
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            Assert.IsNotNull (coll.AllKeys, "AllKeys");
+            coll.CopyTo (new object[0], 0);
+            Assert.IsNull (coll.Get ("mono"), "Get(string)");
+            Assert.IsNull (coll["mono"], "this[string]");
+            try {
+                Assert.IsNull (coll[0], "this[int]");
+            }
+            catch (ArgumentOutOfRangeException) {
+                // normal (can't avoid it)
+            }
+            try {
+                Assert.IsNull (coll.GetKey (0), "GetKey(int)");
+            }
+            catch (ArgumentOutOfRangeException) {
+                // normal (can't avoid it)
+            }
+            try {
+                Assert.IsNull (coll.Get (0), "Get(int)");
+            }
+            catch (ArgumentOutOfRangeException) {
+                // normal (can't avoid it)
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// no public ctor is available but we know that it's properties don't have any restrictions
-			MethodInfo mi = this.Type.GetProperty ("AllKeys").GetGetMethod ();
-			Assert.IsNotNull (mi, "get_AllKeys");
-			return mi.Invoke (coll, null);
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // no public ctor is available but we know that it's properties don't have any restrictions
+            MethodInfo mi = this.Type.GetProperty ("AllKeys").GetGetMethod ();
+            Assert.IsNotNull (mi, "get_AllKeys");
+            return mi.Invoke (coll, null);
+        }
 
-		public override Type Type {
-			get { return typeof (HttpFileCollection); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HttpFileCollection); }
+        }
+    }
 }

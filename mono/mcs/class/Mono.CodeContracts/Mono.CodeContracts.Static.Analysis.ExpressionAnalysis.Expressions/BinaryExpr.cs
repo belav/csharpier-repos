@@ -2,7 +2,7 @@
 // BinaryExpr.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,66 +33,66 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions {
-	class BinaryExpr<TSymbolicValue> : Expr<TSymbolicValue>
-		where TSymbolicValue : IEquatable<TSymbolicValue> {
-		
-		public readonly BinaryOperator Operator;
-		public readonly TSymbolicValue Left;
-		public readonly TSymbolicValue Right;
+    class BinaryExpr<TSymbolicValue> : Expr<TSymbolicValue>
+        where TSymbolicValue : IEquatable<TSymbolicValue> {
+        
+        public readonly BinaryOperator Operator;
+        public readonly TSymbolicValue Left;
+        public readonly TSymbolicValue Right;
 
-		public BinaryExpr (TSymbolicValue left, TSymbolicValue right, BinaryOperator op)
-		{
-			this.Left = left;
-			this.Right = right;
-			this.Operator = op;
-		}
+        public BinaryExpr (TSymbolicValue left, TSymbolicValue right, BinaryOperator op)
+        {
+            this.Left = left;
+            this.Right = right;
+            this.Operator = op;
+        }
 
-		#region Overrides of Expression
-		public override IEnumerable<TSymbolicValue> Variables
-		{
-			get
-			{
-				yield return this.Left;
-				yield return this.Right;
-			}
-		}
+        #region Overrides of Expression
+        public override IEnumerable<TSymbolicValue> Variables
+        {
+            get
+            {
+                yield return this.Left;
+                yield return this.Right;
+            }
+        }
 
-		public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
-		{
-			return visitor.Binary (pc, this.Operator, dest, this.Left, this.Right, data);
-		}
+        public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
+        {
+            return visitor.Binary (pc, this.Operator, dest, this.Left, this.Right, data);
+        }
 
-		public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
-		{
-			if (substitutions.ContainsKey (this.Left) && substitutions.ContainsKey (this.Right))
-				return new BinaryExpr<TSymbolicValue> (substitutions [this.Left].Head, substitutions [this.Right].Head, this.Operator);
+        public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
+        {
+            if (substitutions.ContainsKey (this.Left) && substitutions.ContainsKey (this.Right))
+                return new BinaryExpr<TSymbolicValue> (substitutions [this.Left].Head, substitutions [this.Right].Head, this.Operator);
 
-			return null;
-		}
+            return null;
+        }
 
-		public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
-		{
-			return candidates.Contains (this.Left) || candidates.Contains (this.Right);
-		}
+        public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
+        {
+            return candidates.Contains (this.Left) || candidates.Contains (this.Right);
+        }
 
-		public override bool Contains (TSymbolicValue symbol)
-		{
-			return this.Left.Equals (symbol) || this.Right.Equals (symbol);
-		}
+        public override bool Contains (TSymbolicValue symbol)
+        {
+            return this.Left.Equals (symbol) || this.Right.Equals (symbol);
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("Binary({0} {1} {2})", this.Left, this.Operator, this.Right);
-		}
+        public override string ToString ()
+        {
+            return String.Format ("Binary({0} {1} {2})", this.Left, this.Operator, this.Right);
+        }
 
-		public override bool Equals (Expr<TSymbolicValue> other)
-		{
-			var binary = other as BinaryExpr<TSymbolicValue>;
-			if (binary == null || binary.Operator != this.Operator)
-				return false;
+        public override bool Equals (Expr<TSymbolicValue> other)
+        {
+            var binary = other as BinaryExpr<TSymbolicValue>;
+            if (binary == null || binary.Operator != this.Operator)
+                return false;
 
-			return binary.Left.Equals (this.Left) && binary.Right.Equals (this.Right);
-		}
-		#endregion
-	}
+            return binary.Left.Equals (this.Left) && binary.Right.Equals (this.Right);
+        }
+        #endregion
+    }
 }

@@ -2,7 +2,7 @@
 // System.Security.AccessControl.FileSecurity implementation
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -30,24 +30,24 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.AccessControl
 {
-	public sealed class FileSecurity : FileSystemSecurity
+    public sealed class FileSecurity : FileSystemSecurity
 {
-		public FileSecurity ()
-			: base (false)
-		{
-		}
+        public FileSecurity ()
+            : base (false)
+        {
+        }
 
-		public FileSecurity (string fileName,
-				     AccessControlSections includeSections)
-			: base (false, fileName, includeSections)
-		{
-		}
-		
-		internal FileSecurity (SafeHandle handle,
-				       AccessControlSections includeSections)
-			: base (false, handle, includeSections)
-		{
-		}
-	}
+        public FileSecurity (string fileName,
+                     AccessControlSections includeSections)
+            : base (false, fileName, includeSections)
+        {
+        }
+        
+        internal FileSecurity (SafeHandle handle,
+                       AccessControlSections includeSections)
+            : base (false, handle, includeSections)
+        {
+        }
+    }
 }
 

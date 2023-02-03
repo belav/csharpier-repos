@@ -31,38 +31,38 @@
 using System.Web.Services.Description;
 
 namespace System.Web.Services.Protocols {
-	[AttributeUsage (AttributeTargets.Class, Inherited = true)]
-	public sealed class SoapRpcServiceAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Class, Inherited = true)]
+    public sealed class SoapRpcServiceAttribute : Attribute {
 
-		#region Fields
+        #region Fields
 
-		SoapServiceRoutingStyle routingStyle;
-		SoapBindingUse use;
+        SoapServiceRoutingStyle routingStyle;
+        SoapBindingUse use;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SoapRpcServiceAttribute ()
-		{
-			routingStyle = SoapServiceRoutingStyle.SoapAction;
-		}
+        public SoapRpcServiceAttribute ()
+        {
+            routingStyle = SoapServiceRoutingStyle.SoapAction;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public SoapServiceRoutingStyle RoutingStyle {
-			get { return routingStyle; }
-			set { routingStyle = value; }
-		}
+        public SoapServiceRoutingStyle RoutingStyle {
+            get { return routingStyle; }
+            set { routingStyle = value; }
+        }
 
-		[System.Runtime.InteropServices.ComVisible(false)]
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public SoapBindingUse Use {
+            get { return use; }
+            set { use = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

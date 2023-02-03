@@ -31,63 +31,63 @@
 
 namespace Mono.Cecil {
 
-	using System;
-	using System.Collections;
+    using System;
+    using System.Collections;
 
-	using Mono.Cecil.Cil;
+    using Mono.Cecil.Cil;
 
-	internal sealed class InterfaceCollection : CollectionBase, IReflectionVisitable {
+    internal sealed class InterfaceCollection : CollectionBase, IReflectionVisitable {
 
-		TypeDefinition m_container;
+        TypeDefinition m_container;
 
-		public TypeReference this [int index] {
-			get { return List [index] as TypeReference; }
-			set { List [index] = value; }
-		}
+        public TypeReference this [int index] {
+            get { return List [index] as TypeReference; }
+            set { List [index] = value; }
+        }
 
-		public TypeDefinition Container {
-			get { return m_container; }
-		}
+        public TypeDefinition Container {
+            get { return m_container; }
+        }
 
-		public InterfaceCollection (TypeDefinition container)
-		{
-			m_container = container;
-		}
+        public InterfaceCollection (TypeDefinition container)
+        {
+            m_container = container;
+        }
 
-		public void Add (TypeReference value)
-		{
-			List.Add (value);
-		}
+        public void Add (TypeReference value)
+        {
+            List.Add (value);
+        }
 
-		public bool Contains (TypeReference value)
-		{
-			return List.Contains (value);
-		}
+        public bool Contains (TypeReference value)
+        {
+            return List.Contains (value);
+        }
 
-		public int IndexOf (TypeReference value)
-		{
-			return List.IndexOf (value);
-		}
+        public int IndexOf (TypeReference value)
+        {
+            return List.IndexOf (value);
+        }
 
-		public void Insert (int index, TypeReference value)
-		{
-			List.Insert (index, value);
-		}
+        public void Insert (int index, TypeReference value)
+        {
+            List.Insert (index, value);
+        }
 
-		public void Remove (TypeReference value)
-		{
-			List.Remove (value);
-		}
+        public void Remove (TypeReference value)
+        {
+            List.Remove (value);
+        }
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is TypeReference))
-				throw new ArgumentException ("Must be of type " + typeof (TypeReference).FullName);
-		}
+        protected override void OnValidate (object o)
+        {
+            if (! (o is TypeReference))
+                throw new ArgumentException ("Must be of type " + typeof (TypeReference).FullName);
+        }
 
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitInterfaceCollection (this);
-		}
-	}
+        public void Accept (IReflectionVisitor visitor)
+        {
+            visitor.VisitInterfaceCollection (this);
+        }
+    }
 }

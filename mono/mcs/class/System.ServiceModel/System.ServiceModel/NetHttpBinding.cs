@@ -27,57 +27,57 @@ using System;
 using System.ServiceModel.Channels;
 
 namespace System.ServiceModel {
-	[MonoTODO]
-	public class NetHttpBinding : HttpBindingBase {
-		public NetHttpBinding ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public NetHttpBinding (BasicHttpSecurityMode securityMode)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public NetHttpBinding (string configurationName)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public NetHttpBinding (
-			BasicHttpSecurityMode securityMode, bool reliableSessionEnabled)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public NetHttpMessageEncoding MessageEncoding { get; set; }
-		public OptionalReliableSession ReliableSession { get; set; }
-		public BasicHttpSecurity Security { get; set; }
+    [MonoTODO]
+    public class NetHttpBinding : HttpBindingBase {
+        public NetHttpBinding ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public NetHttpBinding (BasicHttpSecurityMode securityMode)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public NetHttpBinding (string configurationName)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public NetHttpBinding (
+            BasicHttpSecurityMode securityMode, bool reliableSessionEnabled)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public NetHttpMessageEncoding MessageEncoding { get; set; }
+        public OptionalReliableSession ReliableSession { get; set; }
+        public BasicHttpSecurity Security { get; set; }
 
-		public WebSocketTransportSettings WebSocketSettings {
-			get { throw new NotImplementedException (); }
-		}
-		
-		public override string Scheme {
-			get { throw new NotImplementedException (); }
-		}
-		
-		public override BindingElementCollection CreateBindingElements ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public bool ShouldSerializeReliableSession ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public bool ShouldSerializeSecurity ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		
-		
-	}
+        public WebSocketTransportSettings WebSocketSettings {
+            get { throw new NotImplementedException (); }
+        }
+        
+        public override string Scheme {
+            get { throw new NotImplementedException (); }
+        }
+        
+        public override BindingElementCollection CreateBindingElements ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public bool ShouldSerializeReliableSession ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public bool ShouldSerializeSecurity ()
+        {
+            throw new NotImplementedException ();
+        }
+        
+        
+        
+    }
 }

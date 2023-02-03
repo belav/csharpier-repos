@@ -3,14 +3,14 @@
 // Compiler options: -unsafe /warnaserror /warn:1
 
 unsafe class XX {
-	static volatile int j;
+    static volatile int j;
 
-	static void X (ref int a)
-	{
-	}
-	
-	static void Main ()
-	{
-		X (ref j);
-	}
+    static void X (ref int a)
+    {
+    }
+    
+    static void Main ()
+    {
+        X (ref j);
+    }
 }

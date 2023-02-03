@@ -2,7 +2,7 @@
 // SymValue.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,51 +29,51 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-	sealed class SymValue : IEquatable<SymValue>, IComparable<SymValue>, IComparable {
-		private static int _globalIdGenerator;
+    sealed class SymValue : IEquatable<SymValue>, IComparable<SymValue>, IComparable {
+        private static int _globalIdGenerator;
 
-		public readonly int UniqueId;
-		public readonly int GlobalId;
+        public readonly int UniqueId;
+        public readonly int GlobalId;
 
-		public SymValue (int uniqueId)
-		{
-			this.UniqueId = uniqueId;
-			this.GlobalId = ++_globalIdGenerator;
-		}
+        public SymValue (int uniqueId)
+        {
+            this.UniqueId = uniqueId;
+            this.GlobalId = ++_globalIdGenerator;
+        }
 
-		#region IComparable Members
-		public int CompareTo (object obj)
-		{
-			var that = obj as SymValue;
-			if (that == null)
-				return 1;
+        #region IComparable Members
+        public int CompareTo (object obj)
+        {
+            var that = obj as SymValue;
+            if (that == null)
+                return 1;
 
-			return CompareTo (that);
-		}
-		#endregion
+            return CompareTo (that);
+        }
+        #endregion
 
-		#region Implementation of IEquatable<SymValue>
-		public bool Equals (SymValue other)
-		{
-			return this == other;
-		}
-		#endregion
+        #region Implementation of IEquatable<SymValue>
+        public bool Equals (SymValue other)
+        {
+            return this == other;
+        }
+        #endregion
 
-		#region IComparable<SymValue> Members
-		public int CompareTo (SymValue other)
-		{
-			return this.UniqueId - other.UniqueId;
-		}
-		#endregion
+        #region IComparable<SymValue> Members
+        public int CompareTo (SymValue other)
+        {
+            return this.UniqueId - other.UniqueId;
+        }
+        #endregion
 
-		public static int GetUniqueKey (SymValue sv)
-		{
-			return sv == null ? 0 : sv.GlobalId;
-		}
+        public static int GetUniqueKey (SymValue sv)
+        {
+            return sv == null ? 0 : sv.GlobalId;
+        }
 
-		public override string ToString ()
-		{
-			return string.Format ("sv{0} ({1})", this.UniqueId, this.GlobalId);
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Format ("sv{0} ({1})", this.UniqueId, this.GlobalId);
+        }
+    }
 }

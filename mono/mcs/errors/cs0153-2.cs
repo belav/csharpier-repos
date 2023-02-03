@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	void Main ()
-	{
-		goto case 5;
-	}
+    void Main ()
+    {
+        goto case 5;
+    }
 }

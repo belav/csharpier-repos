@@ -2,7 +2,7 @@
 // HttpTransportBindingElementTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -40,46 +40,46 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	[TestFixture]
-	public class HttpsTransportBindingElementTest
-	{
+    [TestFixture]
+    public class HttpsTransportBindingElementTest
+    {
 #if !MOBILE && !XAMMAC_4_5
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void BuildChannelFactoryForHttpEndpoint ()
-		{
-			var b = new BasicHttpBinding ();
-			b.Security.Mode = BasicHttpSecurityMode.Transport;
-			var cf = b.BuildChannelFactory<IRequestChannel> ();
-			cf.Open ();
-			cf.CreateChannel (new EndpointAddress ("http://localhost:8080"));
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void BuildChannelFactoryForHttpEndpoint ()
+        {
+            var b = new BasicHttpBinding ();
+            b.Security.Mode = BasicHttpSecurityMode.Transport;
+            var cf = b.BuildChannelFactory<IRequestChannel> ();
+            cf.Open ();
+            cf.CreateChannel (new EndpointAddress ("http://localhost:8080"));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void BuildChannelListenerForHttpEndpoint ()
-		{
-			var b = new BasicHttpBinding ();
-			b.Security.Mode = BasicHttpSecurityMode.Transport;
-			b.BuildChannelListener<IReplyChannel> (new Uri ("http://localhost:8080"));
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void BuildChannelListenerForHttpEndpoint ()
+        {
+            var b = new BasicHttpBinding ();
+            b.Security.Mode = BasicHttpSecurityMode.Transport;
+            b.BuildChannelListener<IReplyChannel> (new Uri ("http://localhost:8080"));
+        }
 #endif
-		[Test]
-		public void GetProperty ()
-		{
-			var b = new HttpsTransportBindingElement ();
-			var s = b.GetProperty<ISecurityCapabilities> (new BindingContext (new CustomBinding (), new BindingParameterCollection ()));
-			Assert.IsNotNull (s, "#1");
-			Assert.AreEqual (ProtectionLevel.EncryptAndSign, s.SupportedRequestProtectionLevel, "#2");
-			Assert.AreEqual (ProtectionLevel.EncryptAndSign, s.SupportedResponseProtectionLevel, "#3");
-			Assert.IsFalse (s.SupportsClientAuthentication, "#4");
-			Assert.IsFalse (s.SupportsClientWindowsIdentity, "#5");
-			Assert.IsTrue (s.SupportsServerAuthentication, "#6");
+        [Test]
+        public void GetProperty ()
+        {
+            var b = new HttpsTransportBindingElement ();
+            var s = b.GetProperty<ISecurityCapabilities> (new BindingContext (new CustomBinding (), new BindingParameterCollection ()));
+            Assert.IsNotNull (s, "#1");
+            Assert.AreEqual (ProtectionLevel.EncryptAndSign, s.SupportedRequestProtectionLevel, "#2");
+            Assert.AreEqual (ProtectionLevel.EncryptAndSign, s.SupportedResponseProtectionLevel, "#3");
+            Assert.IsFalse (s.SupportsClientAuthentication, "#4");
+            Assert.IsFalse (s.SupportsClientWindowsIdentity, "#5");
+            Assert.IsTrue (s.SupportsServerAuthentication, "#6");
 
-			b.RequireClientCertificate = true;
-			s = b.GetProperty<ISecurityCapabilities> (new BindingContext (new CustomBinding (), new BindingParameterCollection ()));
-			Assert.IsTrue (s.SupportsClientAuthentication, "#7");
-			Assert.IsTrue (s.SupportsClientWindowsIdentity, "#8");
-		}
-	}
+            b.RequireClientCertificate = true;
+            s = b.GetProperty<ISecurityCapabilities> (new BindingContext (new CustomBinding (), new BindingParameterCollection ()));
+            Assert.IsTrue (s.SupportsClientAuthentication, "#7");
+            Assert.IsTrue (s.SupportsClientWindowsIdentity, "#8");
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // Module.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,39 +31,39 @@ using System.Linq;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-	class Module : Node {
-		private readonly ModuleDefinition definition;
-		private List<TypeNode> types;
+    class Module : Node {
+        private readonly ModuleDefinition definition;
+        private List<TypeNode> types;
 
-		public Module (ModuleDefinition module) : base (NodeType.Module)
-		{
-			this.definition = module;
-		}
+        public Module (ModuleDefinition module) : base (NodeType.Module)
+        {
+            this.definition = module;
+        }
 
-		public ModuleDefinition Definition
-		{
-			get { return this.definition; }
-		}
+        public ModuleDefinition Definition
+        {
+            get { return this.definition; }
+        }
 
 
-		public List<TypeNode> Types
-		{
-			get
-			{
-				if (this.types == null)
-					this.types = this.definition.Types.Select (it => TypeNode.Create (it)).ToList ();
+        public List<TypeNode> Types
+        {
+            get
+            {
+                if (this.types == null)
+                    this.types = this.definition.Types.Select (it => TypeNode.Create (it)).ToList ();
 
-				return this.types;
-			}
-		}
+                return this.types;
+            }
+        }
 
-		public TypeNode GetType (string ns, string className)
-		{
-			TypeReference firstOrDefault = this.definition.Types.FirstOrDefault (t => t.Namespace == ns && t.Name == className);
-			if (firstOrDefault == null)
-				return null;
+        public TypeNode GetType (string ns, string className)
+        {
+            TypeReference firstOrDefault = this.definition.Types.FirstOrDefault (t => t.Namespace == ns && t.Name == className);
+            if (firstOrDefault == null)
+                return null;
 
-			return TypeNode.Create (firstOrDefault);
-		}
-	}
+            return TypeNode.Create (firstOrDefault);
+        }
+    }
 }

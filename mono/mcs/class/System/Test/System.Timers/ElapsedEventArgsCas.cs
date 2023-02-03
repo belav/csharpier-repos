@@ -2,7 +2,7 @@
 // ElapsedEventArgsCas.cs - CAS unit tests for System.Timers.ElapsedEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,54 +37,54 @@ using ST = System.Threading;
 
 namespace MonoCasTests.System.Timers {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ElapsedEventArgsCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ElapsedEventArgsCas {
 
-		Timer t;
-		ElapsedEventArgs eea;
+        Timer t;
+        ElapsedEventArgs eea;
 
-		private void SetElapsedEventArgs (object sender, ElapsedEventArgs e)
-		{
-			eea = e;
-		}
+        private void SetElapsedEventArgs (object sender, ElapsedEventArgs e)
+        {
+            eea = e;
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// fulltrust
-			t = new Timer (1);
-			t.Elapsed += new ElapsedEventHandler (SetElapsedEventArgs);
-			t.Enabled = true;
-			ST.Thread.Sleep (100);
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            // fulltrust
+            t = new Timer (1);
+            t.Elapsed += new ElapsedEventHandler (SetElapsedEventArgs);
+            t.Enabled = true;
+            ST.Thread.Sleep (100);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (eea, "ElapsedEventArgs");
-			DateTime dt = eea.SignalTime;
-			DateTime now = DateTime.Now;
-			Assert.IsTrue (dt > now.AddSeconds (-2), ">");
-			Assert.IsTrue (dt < now.AddSeconds (2), "<");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            Assert.IsNotNull (eea, "ElapsedEventArgs");
+            DateTime dt = eea.SignalTime;
+            DateTime now = DateTime.Now;
+            Assert.IsTrue (dt > now.AddSeconds (-2), ">");
+            Assert.IsTrue (dt < now.AddSeconds (2), "<");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			MethodInfo mi = typeof (ElapsedEventArgs).GetProperty ("SignalTime").GetGetMethod ();
-			Assert.IsNotNull (mi, "SignalTime");
-			Assert.IsNotNull (mi.Invoke (eea, null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            MethodInfo mi = typeof (ElapsedEventArgs).GetProperty ("SignalTime").GetGetMethod ();
+            Assert.IsNotNull (mi, "SignalTime");
+            Assert.IsNotNull (mi.Invoke (eea, null), "invoke");
+        }
+    }
 }
 

@@ -1,9 +1,9 @@
 //
 // CompilerErrorCollectionCas.cs
-//	- CAS unit tests for System.CodeDom.Compiler.CompilerErrorCollection
+//    - CAS unit tests for System.CodeDom.Compiler.CompilerErrorCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,95 +37,95 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CompilerErrorCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CompilerErrorCollectionCas {
 
-		private CompilerError ce;
-		private CompilerError[] array;
+        private CompilerError ce;
+        private CompilerError[] array;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			ce = new CompilerError ();
-			array = new CompilerError[1] { ce };
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            ce = new CompilerError ();
+            array = new CompilerError[1] { ce };
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CompilerErrorCollection coll = new CompilerErrorCollection ();
-			Assert.AreEqual (0, coll.Add (ce), "Add");
-			Assert.AreSame (ce, coll[0], "this[int]");
-			coll[0] = ce;
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (ce), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
-			coll.Insert (0, ce);
-			coll.Remove (ce);
-			ce.IsWarning = false;
-			Assert.IsTrue (coll.HasErrors, "HasErrors");
-			Assert.IsFalse (coll.HasWarnings, "HasWarnings");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CompilerErrorCollection coll = new CompilerErrorCollection ();
+            Assert.AreEqual (0, coll.Add (ce), "Add");
+            Assert.AreSame (ce, coll[0], "this[int]");
+            coll[0] = ce;
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (ce), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
+            coll.Insert (0, ce);
+            coll.Remove (ce);
+            ce.IsWarning = false;
+            Assert.IsTrue (coll.HasErrors, "HasErrors");
+            Assert.IsFalse (coll.HasWarnings, "HasWarnings");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CompilerErrorCollection coll = new CompilerErrorCollection (array);
-			coll.CopyTo (array, 0);
-			Assert.AreEqual (1, coll.Add (ce), "Add");
-			Assert.AreSame (ce, coll[0], "this[int]");
-			coll[0] = ce;
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (ce), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
-			coll.Insert (0, ce);
-			coll.Remove (ce);
-			ce.IsWarning = true;
-			Assert.IsFalse (coll.HasErrors, "HasErrors");
-			Assert.IsTrue (coll.HasWarnings, "HasWarnings");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CompilerErrorCollection coll = new CompilerErrorCollection (array);
+            coll.CopyTo (array, 0);
+            Assert.AreEqual (1, coll.Add (ce), "Add");
+            Assert.AreSame (ce, coll[0], "this[int]");
+            coll[0] = ce;
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (ce), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
+            coll.Insert (0, ce);
+            coll.Remove (ce);
+            ce.IsWarning = true;
+            Assert.IsFalse (coll.HasErrors, "HasErrors");
+            Assert.IsTrue (coll.HasWarnings, "HasWarnings");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CompilerErrorCollection c = new CompilerErrorCollection ();
-			CompilerErrorCollection coll = new CompilerErrorCollection (c);
-			Assert.AreEqual (0, coll.Add (ce), "Add");
-			Assert.AreSame (ce, coll[0], "this[int]");
-			coll[0] = ce;
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (ce), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
-			coll.Insert (0, ce);
-			coll.Remove (ce);
-			ce.IsWarning = false;
-			Assert.IsTrue (coll.HasErrors, "HasErrors");
-			Assert.IsFalse (coll.HasWarnings, "HasWarnings");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CompilerErrorCollection c = new CompilerErrorCollection ();
+            CompilerErrorCollection coll = new CompilerErrorCollection (c);
+            Assert.AreEqual (0, coll.Add (ce), "Add");
+            Assert.AreSame (ce, coll[0], "this[int]");
+            coll[0] = ce;
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (ce), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
+            coll.Insert (0, ce);
+            coll.Remove (ce);
+            ce.IsWarning = false;
+            Assert.IsTrue (coll.HasErrors, "HasErrors");
+            Assert.IsFalse (coll.HasWarnings, "HasWarnings");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CompilerErrorCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CompilerErrorCollection).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

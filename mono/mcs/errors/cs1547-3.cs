@@ -2,6 +2,6 @@
 // Line: 6
 
 class C {
-	const string s = "3";
-	public object o = (void)s;
+    const string s = "3";
+    public object o = (void)s;
 }

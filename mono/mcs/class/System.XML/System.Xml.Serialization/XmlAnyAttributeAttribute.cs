@@ -32,18 +32,18 @@ using System;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlAnyAttributeAttribute.
-	/// </summary>
-	/// 
-	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field
-		| AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-	public class XmlAnyAttributeAttribute : Attribute
-	{
-		
-		public XmlAnyAttributeAttribute()
-		{
-		
-		}
-	}
+    /// <summary>
+    /// Summary description for XmlAnyAttributeAttribute.
+    /// </summary>
+    /// 
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field
+        | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    public class XmlAnyAttributeAttribute : Attribute
+    {
+        
+        public XmlAnyAttributeAttribute()
+        {
+        
+        }
+    }
 }

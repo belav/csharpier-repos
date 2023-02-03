@@ -2,7 +2,7 @@
 // System.Configuration.RegexStringValidator.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,25 +31,25 @@ using System.Text.RegularExpressions;
 
 namespace System.Configuration
 {
-	public class RegexStringValidator: ConfigurationValidatorBase
-	{
-		string regex;
+    public class RegexStringValidator: ConfigurationValidatorBase
+    {
+        string regex;
 
-		public RegexStringValidator (string regex)
-		{
-			this.regex = regex;
-		}
-		
-		public override bool CanValidate (Type type)
-		{
-			return type == typeof(string);
-		}
+        public RegexStringValidator (string regex)
+        {
+            this.regex = regex;
+        }
+        
+        public override bool CanValidate (Type type)
+        {
+            return type == typeof(string);
+        }
 
-		public override void Validate (object value)
-		{
-			if (!Regex.IsMatch ((string)value, regex))
-				throw new ArgumentException ("The string must match the regexp `{0}'", regex);
-		}
-	}
+        public override void Validate (object value)
+        {
+            if (!Regex.IsMatch ((string)value, regex))
+                throw new ArgumentException ("The string must match the regexp `{0}'", regex);
+        }
+    }
 }
 

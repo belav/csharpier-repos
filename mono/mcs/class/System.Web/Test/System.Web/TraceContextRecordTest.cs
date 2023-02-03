@@ -2,7 +2,7 @@
 // TraceContextRecordTest.cs
 //
 // Author:
-//	Daniel Nauck  <dna(at)mono-project(dot)de>
+//    Daniel Nauck  <dna(at)mono-project(dot)de>
 //
 // Copyright (C) 2007 Daniel Nauck
 //
@@ -34,38 +34,38 @@ using NUnit.Framework;
 namespace MonoTests.System.Web
 {
 
-	[TestFixture]
-	public class TraceContextRecordTest
-	{
-		[Test]
-		public void TraceContextRecordTest_Null () 
-		{
-			TraceContextRecord record = new TraceContextRecord (null, null, false, null);
-			Assert.AreEqual (null, record.Category, "#A 1");
-			Assert.AreEqual (null, record.Message, "#A 2");
-			Assert.IsFalse (record.IsWarning, "#A 3");
-			Assert.AreEqual (null, record.ErrorInfo, "#A 4");
-		}
+    [TestFixture]
+    public class TraceContextRecordTest
+    {
+        [Test]
+        public void TraceContextRecordTest_Null () 
+        {
+            TraceContextRecord record = new TraceContextRecord (null, null, false, null);
+            Assert.AreEqual (null, record.Category, "#A 1");
+            Assert.AreEqual (null, record.Message, "#A 2");
+            Assert.IsFalse (record.IsWarning, "#A 3");
+            Assert.AreEqual (null, record.ErrorInfo, "#A 4");
+        }
 
-		[Test]
-		public void TraceContextRecordTest_Empty ()
-		{
-			TraceContextRecord record = new TraceContextRecord (string.Empty, string.Empty, false, null);
-			Assert.AreEqual (string.Empty, record.Category, "#B 1");
-			Assert.AreEqual (string.Empty, record.Message, "#B 2");
-			Assert.IsFalse (record.IsWarning, "#B 3");
-			Assert.AreEqual (null, record.ErrorInfo, "#B 4");
-		}
+        [Test]
+        public void TraceContextRecordTest_Empty ()
+        {
+            TraceContextRecord record = new TraceContextRecord (string.Empty, string.Empty, false, null);
+            Assert.AreEqual (string.Empty, record.Category, "#B 1");
+            Assert.AreEqual (string.Empty, record.Message, "#B 2");
+            Assert.IsFalse (record.IsWarning, "#B 3");
+            Assert.AreEqual (null, record.ErrorInfo, "#B 4");
+        }
 
-		[Test]
-		public void TraceContextRecordTest_WithData ()
-		{
-			Exception ex = new Exception ();
-			TraceContextRecord record = new TraceContextRecord ("Default.aspx", "Begin Page_Load", true, ex);
-			Assert.AreEqual ("Default.aspx", record.Category, "#C 1");
-			Assert.AreEqual ("Begin Page_Load", record.Message, "#C 2");
-			Assert.IsTrue (record.IsWarning, "#C 3");
-			Assert.AreEqual (ex, record.ErrorInfo, "#C 4");
-		}
-	}
+        [Test]
+        public void TraceContextRecordTest_WithData ()
+        {
+            Exception ex = new Exception ();
+            TraceContextRecord record = new TraceContextRecord ("Default.aspx", "Begin Page_Load", true, ex);
+            Assert.AreEqual ("Default.aspx", record.Category, "#C 1");
+            Assert.AreEqual ("Begin Page_Load", record.Message, "#C 2");
+            Assert.IsTrue (record.IsWarning, "#C 3");
+            Assert.AreEqual (ex, record.ErrorInfo, "#C 4");
+        }
+    }
 }

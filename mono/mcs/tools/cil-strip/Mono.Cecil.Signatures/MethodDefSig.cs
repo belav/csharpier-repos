@@ -28,21 +28,21 @@
 
 namespace Mono.Cecil.Signatures {
 
-	internal sealed class MethodDefSig : MethodRefSig {
+    internal sealed class MethodDefSig : MethodRefSig {
 
-		public int GenericParameterCount;
+        public int GenericParameterCount;
 
-		public MethodDefSig () : this (0)
-		{
-		}
+        public MethodDefSig () : this (0)
+        {
+        }
 
-		public MethodDefSig (uint blobIndex) : base (blobIndex)
-		{
-		}
+        public MethodDefSig (uint blobIndex) : base (blobIndex)
+        {
+        }
 
-		public override void Accept (ISignatureVisitor visitor)
-		{
-			visitor.VisitMethodDefSig (this);
-		}
-	}
+        public override void Accept (ISignatureVisitor visitor)
+        {
+            visitor.VisitMethodDefSig (this);
+        }
+    }
 }

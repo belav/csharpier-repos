@@ -23,7 +23,7 @@ public delegate void BarDelegate(Object o);
 
 public struct WrapFoo { public FooDelegate o; }
 public struct WrapBar { public BarDelegate o; }
-	
+    
 [ StructLayout( LayoutKind.Explicit )] public struct MyUnion1 {
     [ FieldOffset( 0 )] public int i;
     [ FieldOffset( 0 )] public WrapBar o;

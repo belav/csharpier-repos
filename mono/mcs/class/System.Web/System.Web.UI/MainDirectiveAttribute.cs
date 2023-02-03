@@ -29,35 +29,35 @@ using System;
 
 namespace System.Web.UI
 {
-	sealed class MainDirectiveAttribute <T>
-	{
-		string unparsedValue;
-		T value;
-		bool isExpression;
-//		bool isDataBound;
-		
-		public string UnparsedValue {
-			get { return unparsedValue; }
-		}
+    sealed class MainDirectiveAttribute <T>
+    {
+        string unparsedValue;
+        T value;
+        bool isExpression;
+//        bool isDataBound;
+        
+        public string UnparsedValue {
+            get { return unparsedValue; }
+        }
 
-		public bool IsExpression {
-			get { return isExpression; }
-		}
+        public bool IsExpression {
+            get { return isExpression; }
+        }
 
-		public T Value {
-			get { return value; }
-		}
+        public T Value {
+            get { return value; }
+        }
 
-		public MainDirectiveAttribute (string value)
-		{
-			this.unparsedValue = value;
-			if (value != null)
-				this.isExpression = BaseParser.IsExpression (value);
-		}
+        public MainDirectiveAttribute (string value)
+        {
+            this.unparsedValue = value;
+            if (value != null)
+                this.isExpression = BaseParser.IsExpression (value);
+        }
 
-		public MainDirectiveAttribute (T value, bool unused)
-		{
-			this.value = value;
-		}
-	}
+        public MainDirectiveAttribute (T value, bool unused)
+        {
+            this.value = value;
+        }
+    }
 }

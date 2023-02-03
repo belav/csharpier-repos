@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Substitution.cs
 //
 // Authors:
-//	Marek Habersack (mhabersack@novell.com)
+//    Marek Habersack (mhabersack@novell.com)
 //
 // (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -34,72 +34,72 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[DefaultProperty ("MethodName")]
-	[ParseChildren (true)]
-	[PersistChildren (false)]
-	[Designer ("System.Web.UI.Design.WebControls.SubstitutionDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public class Substitution : Control
-	{
-		[DefaultValue ("")]
-		[WebCategory ("Behavior")]
-		public virtual string MethodName {
-			get {
-				string methodName = ViewState ["MethodName"] as string;
-				if (String.IsNullOrEmpty (methodName))
-					return String.Empty;
+    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [DefaultProperty ("MethodName")]
+    [ParseChildren (true)]
+    [PersistChildren (false)]
+    [Designer ("System.Web.UI.Design.WebControls.SubstitutionDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    public class Substitution : Control
+    {
+        [DefaultValue ("")]
+        [WebCategory ("Behavior")]
+        public virtual string MethodName {
+            get {
+                string methodName = ViewState ["MethodName"] as string;
+                if (String.IsNullOrEmpty (methodName))
+                    return String.Empty;
 
-				return methodName;
-			}
-			
-			set { ViewState ["MethodName"] = value; }
-		}
+                return methodName;
+            }
+            
+            set { ViewState ["MethodName"] = value; }
+        }
 
-		public Substitution ()
-		{}
+        public Substitution ()
+        {}
 
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new EmptyControlCollection (this);
-		}
+        protected override ControlCollection CreateControlCollection ()
+        {
+            return new EmptyControlCollection (this);
+        }
 
-		[MonoTODO ("Why override?")]
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
-		}
+        [MonoTODO ("Why override?")]
+        protected internal override void OnPreRender (EventArgs e)
+        {
+            base.OnPreRender (e);
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			string method = MethodName;
-			if (method.Length == 0)
-				return;
-			
-			TemplateControl tc = TemplateControl;
-			if (tc == null)
-				return;
-			
-			HttpContext ctx = Context;
-			HttpResponse resp = ctx != null ? ctx.Response : null;
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            string method = MethodName;
+            if (method.Length == 0)
+                return;
+            
+            TemplateControl tc = TemplateControl;
+            if (tc == null)
+                return;
+            
+            HttpContext ctx = Context;
+            HttpResponse resp = ctx != null ? ctx.Response : null;
 
-			if (resp == null)
-				return;
+            if (resp == null)
+                return;
 
-			resp.WriteSubstitution (CreateCallback (method, tc));
-		}
+            resp.WriteSubstitution (CreateCallback (method, tc));
+        }
 
-		HttpResponseSubstitutionCallback CreateCallback (string method, TemplateControl tc)
-		{
-			try {
-				return Delegate.CreateDelegate (typeof(HttpResponseSubstitutionCallback),
-								tc.GetType (),
-								method,
-								true,
-								true) as HttpResponseSubstitutionCallback;
-			} catch (Exception ex) {
-				throw new HttpException ("Cannot find static method '" + method + "' matching HttpResponseSubstitutionCallback", ex);
-			}
-		}
-	}
+        HttpResponseSubstitutionCallback CreateCallback (string method, TemplateControl tc)
+        {
+            try {
+                return Delegate.CreateDelegate (typeof(HttpResponseSubstitutionCallback),
+                                tc.GetType (),
+                                method,
+                                true,
+                                true) as HttpResponseSubstitutionCallback;
+            } catch (Exception ex) {
+                throw new HttpException ("Cannot find static method '" + method + "' matching HttpResponseSubstitutionCallback", ex);
+            }
+        }
+    }
 }

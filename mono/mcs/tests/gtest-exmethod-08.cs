@@ -7,11 +7,11 @@ using System.Linq;
 
 class C
 {
-	public static void Main ()
-	{
-		List<int> first  = new List<int> ();
-		List<int> second = new List<int> ();
+    public static void Main ()
+    {
+        List<int> first  = new List<int> ();
+        List<int> second = new List<int> ();
 
-		IEnumerable<int> q = first.Except(second);
-	}
+        IEnumerable<int> q = first.Except(second);
+    }
 }

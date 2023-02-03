@@ -4,26 +4,26 @@
 using System;
 
 [AttributeUsage (AttributeTargets.Constructor, AllowMultiple = true)]
-	public class SimpleAttribute : Attribute {
+    public class SimpleAttribute : Attribute {
 
-		string name = null;
+        string name = null;
 
-		public string MyNamedArg;
-		
-		public SimpleAttribute (string name)
-		{
-			this.name = name;
-		}
-		
-		
-	}
+        public string MyNamedArg;
+        
+        public SimpleAttribute (string name)
+        {
+            this.name = name;
+        }
+        
+        
+    }
 
 [Simple ("Dummy", MyNamedArg = "Dude!")]
-	public class Blah {
+    public class Blah {
 
-		public static void Main ()
-		{
-		}
-	}
-					   
-	
+        public static void Main ()
+        {
+        }
+    }
+                       
+    

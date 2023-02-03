@@ -1,4 +1,4 @@
-﻿
+
 namespace System.IdentityModel.Diagnostics
 {
     using System;

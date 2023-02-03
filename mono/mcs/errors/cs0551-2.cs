@@ -3,15 +3,15 @@
 
 interface PropertyInterface
 {
-	int this [bool b] { get; set; }
+    int this [bool b] { get; set; }
 }
 
 public class PropertyClass: PropertyInterface
 {
-	int PropertyInterface.this [bool b] { 
-		set { 
-			return 0;
-		} 
-	}
+    int PropertyInterface.this [bool b] { 
+        set { 
+            return 0;
+        } 
+    }
 }
 

@@ -2,7 +2,7 @@
 // System.Net.FtpbRequestCreator.cs
 //
 // Authors:
-//	Rolf Bjarne Kvinge <rolf@xamarin.com>
+//    Rolf Bjarne Kvinge <rolf@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,12 +28,12 @@
 
 namespace System.Net
 {
-	class FtpWebRequestCreator : IWebRequestCreate
-	{
-		internal const string EXCEPTION_MESSAGE = "System.Net.FtpWebRequestCreator is not supported on the current platform.";
-		public WebRequest Create (Uri uri)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+    class FtpWebRequestCreator : IWebRequestCreate
+    {
+        internal const string EXCEPTION_MESSAGE = "System.Net.FtpWebRequestCreator is not supported on the current platform.";
+        public WebRequest Create (Uri uri)
+        {
+            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+        }
+    }
 }

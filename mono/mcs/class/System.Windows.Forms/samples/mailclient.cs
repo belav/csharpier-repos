@@ -256,7 +256,7 @@ namespace smtp_csharp
       this.ResumeLayout(false);
 
     }
-	  
+      
     [STAThread]
     static void Main() 
     {
@@ -265,7 +265,7 @@ namespace smtp_csharp
 
     private void cmdSend_Click(object sender, System.EventArgs e)
     {
-	    // send mail
+        // send mail
     }
 
     private void frmMain_Load(object sender, System.EventArgs e)

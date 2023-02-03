@@ -4,12 +4,12 @@
 
 class C
 {
-	static int i;
-	
-	public static unsafe void Test ()
-	{
-		fixed (int* a = &i) {
-			int** x = &a;
-		}
+    static int i;
+    
+    public static unsafe void Test ()
+    {
+        fixed (int* a = &i) {
+            int** x = &a;
+        }
     }
 }

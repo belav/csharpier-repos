@@ -33,41 +33,41 @@ using System.Xml;
 
 namespace System.ServiceModel.MsmqIntegration
 {
-	public class MsmqIntegrationBinding : MsmqBindingBase
-	{
-		MsmqIntegrationSecurity security;
-		MsmqMessageSerializationFormat format;
+    public class MsmqIntegrationBinding : MsmqBindingBase
+    {
+        MsmqIntegrationSecurity security;
+        MsmqMessageSerializationFormat format;
 
-		public MsmqIntegrationBinding ()
-			: this (MsmqIntegrationSecurityMode.None)
-		{
-		}
+        public MsmqIntegrationBinding ()
+            : this (MsmqIntegrationSecurityMode.None)
+        {
+        }
 
-		public MsmqIntegrationBinding (MsmqIntegrationSecurityMode securityMode)
-		{
-			security = new MsmqIntegrationSecurity ();
-			security.Mode = securityMode;
-		}
+        public MsmqIntegrationBinding (MsmqIntegrationSecurityMode securityMode)
+        {
+            security = new MsmqIntegrationSecurity ();
+            security.Mode = securityMode;
+        }
 
-		[MonoTODO]
-		public MsmqIntegrationBinding (string configurationName)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public MsmqIntegrationBinding (string configurationName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public MsmqIntegrationSecurity Security {
-			get { return security; }
-		}
+        public MsmqIntegrationSecurity Security {
+            get { return security; }
+        }
 
-		public MsmqMessageSerializationFormat SerializationFormat {
-			get { return format; }
-			set { format = value; }
-		}
+        public MsmqMessageSerializationFormat SerializationFormat {
+            get { return format; }
+            set { format = value; }
+        }
 
-		[MonoTODO]
-		public override BindingElementCollection CreateBindingElements ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override BindingElementCollection CreateBindingElements ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

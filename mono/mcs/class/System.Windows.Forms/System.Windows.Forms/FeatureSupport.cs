@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,88 +29,88 @@
 using System.Reflection;
 
 namespace System.Windows.Forms {
-	public abstract class FeatureSupport : IFeatureSupport {
-		#region Public Constructors
-		protected FeatureSupport() {
-		}
-		#endregion	// Public Constructors
+    public abstract class FeatureSupport : IFeatureSupport {
+        #region Public Constructors
+        protected FeatureSupport() {
+        }
+        #endregion    // Public Constructors
 
-		#region Private and Internal Methods
-		private static IFeatureSupport FeatureObject(string class_name) {
-			Type	class_type;
+        #region Private and Internal Methods
+        private static IFeatureSupport FeatureObject(string class_name) {
+            Type    class_type;
 
-			class_type = Type.GetType(class_name);
-			if ((class_type != null) && (typeof(IFeatureSupport).IsAssignableFrom(class_type))) {
-				ConstructorInfo	ctor;
+            class_type = Type.GetType(class_name);
+            if ((class_type != null) && (typeof(IFeatureSupport).IsAssignableFrom(class_type))) {
+                ConstructorInfo    ctor;
 
-				ctor = class_type.GetConstructor(Type.EmptyTypes);
-				if (ctor != null) {
-					return ((IFeatureSupport)ctor.Invoke(new Object[0]));
-				}
-			}
+                ctor = class_type.GetConstructor(Type.EmptyTypes);
+                if (ctor != null) {
+                    return ((IFeatureSupport)ctor.Invoke(new Object[0]));
+                }
+            }
 
-			return null;
-		}
-		#endregion	// Private and Internal Methods
+            return null;
+        }
+        #endregion    // Private and Internal Methods
 
-		#region Public Static Methods
-		public static Version GetVersionPresent(string featureClassName, string featureConstName) {
-			IFeatureSupport	obj;
+        #region Public Static Methods
+        public static Version GetVersionPresent(string featureClassName, string featureConstName) {
+            IFeatureSupport    obj;
 
-			obj = FeatureObject(featureClassName);
-			if (obj != null) {
-				return obj.GetVersionPresent(featureConstName);
-			}
-			return null;
-		}
+            obj = FeatureObject(featureClassName);
+            if (obj != null) {
+                return obj.GetVersionPresent(featureConstName);
+            }
+            return null;
+        }
 
-		public static bool IsPresent(string featureClassName, string featureConstName) {
-			IFeatureSupport	obj;
+        public static bool IsPresent(string featureClassName, string featureConstName) {
+            IFeatureSupport    obj;
 
-			obj = FeatureObject(featureClassName);
-			if (obj != null) {
-				return obj.IsPresent(featureConstName);
-			}
+            obj = FeatureObject(featureClassName);
+            if (obj != null) {
+                return obj.IsPresent(featureConstName);
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public static bool IsPresent(string featureClassName, string featureConstName, Version minimumVersion) {
-			IFeatureSupport	obj;
+        public static bool IsPresent(string featureClassName, string featureConstName, Version minimumVersion) {
+            IFeatureSupport    obj;
 
-			obj = FeatureObject(featureClassName);
-			if (obj != null) {
-				return obj.IsPresent(featureConstName, minimumVersion);
-			}
+            obj = FeatureObject(featureClassName);
+            if (obj != null) {
+                return obj.IsPresent(featureConstName, minimumVersion);
+            }
 
-			return false;
-		}
-		#endregion	// Public Static Methods
+            return false;
+        }
+        #endregion    // Public Static Methods
 
-		#region Public Instance Methods
-		public abstract Version GetVersionPresent(object feature);
+        #region Public Instance Methods
+        public abstract Version GetVersionPresent(object feature);
 
-		public virtual bool IsPresent(object feature) {
-			if (GetVersionPresent(feature) != null) {
-				return true;
-			}
+        public virtual bool IsPresent(object feature) {
+            if (GetVersionPresent(feature) != null) {
+                return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public virtual bool IsPresent(object feature, Version minimumVersion) {
-			Version	version;
-			bool	retval;
+        public virtual bool IsPresent(object feature, Version minimumVersion) {
+            Version    version;
+            bool    retval;
 
-			retval = false;
-			version = GetVersionPresent(feature);
+            retval = false;
+            version = GetVersionPresent(feature);
 
-			if ((version != null) && (version >= minimumVersion)) {
-				retval = true;
-			}
+            if ((version != null) && (version >= minimumVersion)) {
+                retval = true;
+            }
 
-			return retval;
-		}
-		#endregion	// Public Instance Methods
-	}
+            return retval;
+        }
+        #endregion    // Public Instance Methods
+    }
 }

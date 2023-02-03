@@ -1,4 +1,4 @@
-﻿#region MIT license
+#region MIT license
 // 
 // MIT license
 //
@@ -34,7 +34,7 @@ namespace DbLinq.Data.Linq.Mapping
     [DebuggerDisplay("MetaDataMember for {MappedName}")]
     internal class AttributedColumnMetaDataMember : AttributedAbstractMetaDataMember
     {
-		public AttributedColumnMetaDataMember(MemberInfo member, ColumnAttribute attribute, MetaType declaringType)
+        public AttributedColumnMetaDataMember(MemberInfo member, ColumnAttribute attribute, MetaType declaringType)
             : base(member, declaringType, attribute)
         {
             columnAttribute = attribute;

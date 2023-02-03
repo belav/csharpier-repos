@@ -39,99 +39,99 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_Delete_I : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataView_Delete_I tc = new DataView_Delete_I();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataView_Delete_I");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataView_Delete_I tc = new DataView_Delete_I();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataView_Delete_I");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-		
-		//create the source datatable
-		DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
-
-		//create the dataview for the table
-		DataView dv = new DataView(dt);
-
-		int CountView = dv.Count ;
-		int CountTable= dt.Rows.Count ;
-
-		DataRowView drv = dv[0];
-
-		BeginCase("Delete - DataView Row Count");
-		try
-		{
-			dv.Delete(0);
-			Compare(CountView-1,dv.Count );
-		}
-		catch (Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-
-		BeginCase("Delete - Table Row Count ");
-		try
-		{
-			Compare(CountTable,dt.Rows.Count );
-		}
-		catch (Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		BeginCase("Delete - check table");
-		try
-		{
-			Compare(drv.Row.Table,dt);
-		}
-		catch (Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	}
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+    public void run()
+    {
+        Exception exp = null;
+        
+        //create the source datatable
+        DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
+
+        //create the dataview for the table
+        DataView dv = new DataView(dt);
+
+        int CountView = dv.Count ;
+        int CountTable= dt.Rows.Count ;
+
+        DataRowView drv = dv[0];
+
+        BeginCase("Delete - DataView Row Count");
+        try
+        {
+            dv.Delete(0);
+            Compare(CountView-1,dv.Count );
+        }
+        catch (Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+
+        BeginCase("Delete - Table Row Count ");
+        try
+        {
+            Compare(CountTable,dt.Rows.Count );
+        }
+        catch (Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+
+
+        BeginCase("Delete - check table");
+        try
+        {
+            Compare(drv.Row.Table,dt);
+        }
+        catch (Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+
+    }
 }
 }

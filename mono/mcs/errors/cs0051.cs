@@ -3,13 +3,13 @@
 
 public class MyClass {
 
-	//
-	// To fix change the next line to "public enum X {
-	enum X {
-		a, b
-	}
+    //
+    // To fix change the next line to "public enum X {
+    enum X {
+        a, b
+    }
 
-	public void method (X arg)
-	{
-	}
+    public void method (X arg)
+    {
+    }
 }

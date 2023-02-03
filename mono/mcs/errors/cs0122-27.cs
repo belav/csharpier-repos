@@ -3,14 +3,14 @@
 
 class G
 {
-	private class GG
-	{
-		public class F { }
-	}
+    private class GG
+    {
+        public class F { }
+    }
 }
 
 class X
 {
-	G.GG.F foo;
+    G.GG.F foo;
 }
 

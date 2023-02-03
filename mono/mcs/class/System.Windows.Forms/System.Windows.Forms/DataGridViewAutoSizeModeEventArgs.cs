@@ -20,24 +20,24 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewAutoSizeModeEventArgs : EventArgs {
+    public class DataGridViewAutoSizeModeEventArgs : EventArgs {
 
-		private bool previousModeAutoSized;
+        private bool previousModeAutoSized;
 
-		public DataGridViewAutoSizeModeEventArgs (bool previousModeAutoSized) {
-			this.previousModeAutoSized = previousModeAutoSized;
-		}
+        public DataGridViewAutoSizeModeEventArgs (bool previousModeAutoSized) {
+            this.previousModeAutoSized = previousModeAutoSized;
+        }
 
-		public bool PreviousModeAutoSized {
-			get { return previousModeAutoSized; }
-		}
+        public bool PreviousModeAutoSized {
+            get { return previousModeAutoSized; }
+        }
 
-	}
+    }
 
 }

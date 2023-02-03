@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,24 +15,24 @@
 namespace Castle.Core.Configuration
 {
 #if FEATURE_SERIALIZATION
-	using System;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Runtime.Serialization;
 #endif
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ConfigurationAttributeCollection
-		: System.Collections.Specialized.NameValueCollection
-	{
-		public ConfigurationAttributeCollection()
-		{
-		}
+    public class ConfigurationAttributeCollection
+        : System.Collections.Specialized.NameValueCollection
+    {
+        public ConfigurationAttributeCollection()
+        {
+        }
 
 #if FEATURE_SERIALIZATION
-		protected ConfigurationAttributeCollection(SerializationInfo info, StreamingContext context) : base(info, context)
-		{
-		}
+        protected ConfigurationAttributeCollection(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
 #endif
-	}
+    }
 }

@@ -1,4 +1,4 @@
-﻿using System.CommandLine;
+using System.CommandLine;
 using System.CommandLine.Hosting;
 using System.CommandLine.NamingConventionBinder;
 using Microsoft.Extensions.Hosting;

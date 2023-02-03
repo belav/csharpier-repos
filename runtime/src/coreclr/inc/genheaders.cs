@@ -25,14 +25,14 @@ public class GenerateHeaders {
         StreamWriter HSW=File.CreateText(tempheaderfile);
         StreamWriter RSW=File.CreateText(temprcfile);
 
-	int FaciltyUrt=0x13;
-	int SeveritySuccess=0;
-	int SeverityError=1;
+    int FaciltyUrt=0x13;
+    int SeveritySuccess=0;
+    int SeverityError=1;
 
-	int minSR = MakeHresult(SeveritySuccess,FaciltyUrt,0);
+    int minSR = MakeHresult(SeveritySuccess,FaciltyUrt,0);
         int maxSR = MakeHresult(SeveritySuccess,FaciltyUrt,0xffff);
-	int minHR = MakeHresult(SeverityError,FaciltyUrt,0);
-	int maxHR = MakeHresult(SeverityError,FaciltyUrt,0xffff);
+    int minHR = MakeHresult(SeverityError,FaciltyUrt,0);
+    int maxHR = MakeHresult(SeverityError,FaciltyUrt,0xffff);
 
         PrintLicenseHeader(HSW);
         PrintHeader(HSW);
@@ -63,28 +63,28 @@ public class GenerateHeaders {
                 case XmlNodeType.EndElement:
                     if(rdr.Name.ToString() == "HRESULT"){
 
-			// For CLR Hresult's we take the last 4 digits as the resource strings.
+            // For CLR Hresult's we take the last 4 digits as the resource strings.
 
-			if ( (NumericValue.StartsWith("0x")) || (NumericValue.StartsWith("0X")) ) {
+            if ( (NumericValue.StartsWith("0x")) || (NumericValue.StartsWith("0X")) ) {
 
-			    String HexResult = NumericValue.Substring(2);
-			    int num = int.Parse(HexResult, System.Globalization.NumberStyles.HexNumber);
+                String HexResult = NumericValue.Substring(2);
+                int num = int.Parse(HexResult, System.Globalization.NumberStyles.HexNumber);
 
-			    if ((num>minSR) && (num <= maxSR)) {
-				num = num & 0xffff;
-				HSW.WriteLine("#define " + SymbolicName + " SMAKEHR(0x" + num.ToString("x") + ")");
-			    } else if ((num>minHR) && (num <= maxHR)) {
-				num = num & 0xffff;
-			        HSW.WriteLine("#define " + SymbolicName + " EMAKEHR(0x" + num.ToString("x") + ")");
-			    } else {
-              		        HSW.WriteLine("#define " + SymbolicName + " " + NumericValue );
+                if ((num>minSR) && (num <= maxSR)) {
+                num = num & 0xffff;
+                HSW.WriteLine("#define " + SymbolicName + " SMAKEHR(0x" + num.ToString("x") + ")");
+                } else if ((num>minHR) && (num <= maxHR)) {
+                num = num & 0xffff;
+                    HSW.WriteLine("#define " + SymbolicName + " EMAKEHR(0x" + num.ToString("x") + ")");
+                } else {
+                              HSW.WriteLine("#define " + SymbolicName + " " + NumericValue );
                             }
 
 
 
-			} else {
-	                    HSW.WriteLine("#define " + SymbolicName + " " + NumericValue );
-			}
+            } else {
+                        HSW.WriteLine("#define " + SymbolicName + " " + NumericValue );
+            }
 
                         if (Message != null) {
                             RSW.Write("\tMSG_FOR_URT_HR(" + SymbolicName + ") ");
@@ -220,7 +220,7 @@ public class GenerateHeaders {
     }
 
    private static int MakeHresult(int sev, int fac, int code) {
-	 return ((sev<<31) | (fac<<16) | (code));
+     return ((sev<<31) | (fac<<16) | (code));
    }
 }
 

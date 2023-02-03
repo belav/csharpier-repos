@@ -2,7 +2,7 @@
 // CFGBlock.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,54 +30,54 @@ using System.Collections.Generic;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-	abstract class CFGBlock {
-		public int Index;
+    abstract class CFGBlock {
+        public int Index;
 
-		protected CFGBlock (Subroutine subroutine, ref int idGen)
-		{
-			this.Index = idGen++;
-			Subroutine = subroutine;
-		}
+        protected CFGBlock (Subroutine subroutine, ref int idGen)
+        {
+            this.Index = idGen++;
+            Subroutine = subroutine;
+        }
 
-		public abstract int Count { get; }
-		public Subroutine Subroutine { get; private set; }
-		public int ReversePostOrderIndex { get; set; }
+        public abstract int Count { get; }
+        public Subroutine Subroutine { get; private set; }
+        public int ReversePostOrderIndex { get; set; }
 
-		public APC First
-		{
-			get { return APC.ForStart (this, null); }
-		}
+        public APC First
+        {
+            get { return APC.ForStart (this, null); }
+        }
 
-		public APC Last
-		{
-			get { return APC.ForEnd (this, null); }
-		}
+        public APC Last
+        {
+            get { return APC.ForEnd (this, null); }
+        }
 
-		public virtual bool IsMethodCallBlock<TMethod> (out TMethod calledMethod, out bool isNewObj, out bool isVirtual)
-		{
-			calledMethod = default(TMethod);
-			isNewObj = false;
-			isVirtual = false;
+        public virtual bool IsMethodCallBlock<TMethod> (out TMethod calledMethod, out bool isNewObj, out bool isVirtual)
+        {
+            calledMethod = default(TMethod);
+            isNewObj = false;
+            isVirtual = false;
 
-			return false;
-		}
+            return false;
+        }
 
-		public void Renumber (ref int idGen)
-		{
-			this.Index = idGen++;
-		}
+        public void Renumber (ref int idGen)
+        {
+            this.Index = idGen++;
+        }
 
-		public abstract int GetILOffset (APC pc);
+        public abstract int GetILOffset (APC pc);
 
-		public IEnumerable<APC> APCs ()
-		{
-			return APCs (null);
-		}
+        public IEnumerable<APC> APCs ()
+        {
+            return APCs (null);
+        }
 
-		private IEnumerable<APC> APCs (Sequence<Edge<CFGBlock, EdgeTag>> context)
-		{
-			for (int i = 0; i < Count; i++)
-				yield return new APC (this, i, context);
-		}
-	}
+        private IEnumerable<APC> APCs (Sequence<Edge<CFGBlock, EdgeTag>> context)
+        {
+            for (int i = 0; i < Count; i++)
+                yield return new APC (this, i, context);
+        }
+    }
 }

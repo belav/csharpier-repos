@@ -20,35 +20,35 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.ComponentModel {
 
-	public interface IEditableCollectionView {
-		void EditItem (object item);
-		object AddNew ();
+    public interface IEditableCollectionView {
+        void EditItem (object item);
+        object AddNew ();
 
-		void CancelEdit ();
-		void CancelNew ();
+        void CancelEdit ();
+        void CancelNew ();
 
-		void CommitEdit ();
-		void CommitNew ();
+        void CommitEdit ();
+        void CommitNew ();
 
-		void Remove (object item);
-		void RemoveAt (int index);
+        void Remove (object item);
+        void RemoveAt (int index);
 
-		object CurrentAddItem { get; }
-		object CurrentEditItem { get; }
+        object CurrentAddItem { get; }
+        object CurrentEditItem { get; }
 
-		bool CanAddNew { get; }
-		bool CanCancelEdit { get; }
-		bool CanRemove { get; }
+        bool CanAddNew { get; }
+        bool CanCancelEdit { get; }
+        bool CanRemove { get; }
 
-		bool IsAddingNew { get; }
-		bool IsEditingItem { get; }
+        bool IsAddingNew { get; }
+        bool IsEditingItem { get; }
 
-		NewItemPlaceholderPosition NewItemPlaceholderPosition { get; set; }
-	}
+        NewItemPlaceholderPosition NewItemPlaceholderPosition { get; set; }
+    }
 
 }

@@ -37,48 +37,48 @@ using MonoTests.System.Security;
 
 namespace MonoCasTests.System.Security {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class SecureStringCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class SecureStringCas {
 
-		private const string NotSupported = "Not supported before Windows 2000 Service Pack 3";
+        private const string NotSupported = "Not supported before Windows 2000 Service Pack 3";
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTest ()
-		{
-			try {
-				SecureStringTest unit = new SecureStringTest ();
-				unit.DefaultConstructor ();
-				unit.UnsafeConstructor ();
-				unit.ReadOnly ();
-				unit.Disposed ();
-			}
-			catch (NotSupportedException) {
-				Assert.Ignore (NotSupported);
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTest ()
+        {
+            try {
+                SecureStringTest unit = new SecureStringTest ();
+                unit.DefaultConstructor ();
+                unit.UnsafeConstructor ();
+                unit.ReadOnly ();
+                unit.Disposed ();
+            }
+            catch (NotSupportedException) {
+                Assert.Ignore (NotSupported);
+            }
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			try {
-				ConstructorInfo ci = typeof (SecureString).GetConstructor (new Type[0]);
-				Assert.IsNotNull (ci, "default .ctor()");
-				Assert.IsNotNull (ci.Invoke (null), "invoke");
-			}
-			catch (NotSupportedException) {
-				Assert.Ignore (NotSupported);
-			}
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            try {
+                ConstructorInfo ci = typeof (SecureString).GetConstructor (new Type[0]);
+                Assert.IsNotNull (ci, "default .ctor()");
+                Assert.IsNotNull (ci.Invoke (null), "invoke");
+            }
+            catch (NotSupportedException) {
+                Assert.Ignore (NotSupported);
+            }
+        }
+    }
 }
 

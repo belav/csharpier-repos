@@ -4,8 +4,8 @@
 
 class A
 {
-	public A ()
-	{
-		int a = a = 5;
-	}
+    public A ()
+    {
+        int a = a = 5;
+    }
 }

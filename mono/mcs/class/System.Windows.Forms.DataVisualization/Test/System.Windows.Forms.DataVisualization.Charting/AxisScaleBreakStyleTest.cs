@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -30,23 +30,23 @@ using System.Drawing;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {
-	[TestFixture]
-	public class AxisScaleBreakStyleTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			AxisScaleBreakStyle asbs = new AxisScaleBreakStyle ();
+    [TestFixture]
+    public class AxisScaleBreakStyleTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            AxisScaleBreakStyle asbs = new AxisScaleBreakStyle ();
 
-			Assert.AreEqual (BreakLineStyle.Ragged, asbs.BreakLineStyle, "A1");
-			Assert.AreEqual (25, asbs.CollapsibleSpaceThreshold, "A2");
-			Assert.AreEqual (false, asbs.Enabled, "A3");
-			Assert.AreEqual (Color.Black, asbs.LineColor, "A4");
-			Assert.AreEqual (ChartDashStyle.Solid, asbs.LineDashStyle, "A5");
-			Assert.AreEqual (1, asbs.LineWidth, "A6");
-			Assert.AreEqual (2, asbs.MaxNumberOfBreaks, "A7");
-			Assert.AreEqual (1.5d, asbs.Spacing, "A8");
-			Assert.AreEqual (StartFromZero.Auto, asbs.StartFromZero, "A9");
-		}
-	}
+            Assert.AreEqual (BreakLineStyle.Ragged, asbs.BreakLineStyle, "A1");
+            Assert.AreEqual (25, asbs.CollapsibleSpaceThreshold, "A2");
+            Assert.AreEqual (false, asbs.Enabled, "A3");
+            Assert.AreEqual (Color.Black, asbs.LineColor, "A4");
+            Assert.AreEqual (ChartDashStyle.Solid, asbs.LineDashStyle, "A5");
+            Assert.AreEqual (1, asbs.LineWidth, "A6");
+            Assert.AreEqual (2, asbs.MaxNumberOfBreaks, "A7");
+            Assert.AreEqual (1.5d, asbs.Spacing, "A8");
+            Assert.AreEqual (StartFromZero.Auto, asbs.StartFromZero, "A9");
+        }
+    }
 }

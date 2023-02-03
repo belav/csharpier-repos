@@ -2,8 +2,8 @@
 // System.Net.Configuration.ModuleElement.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Tim Coleman (tim@timcoleman.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,45 +36,45 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-	public sealed class ModuleElement : ConfigurationElement
-	{
-		#region Fields
+    public sealed class ModuleElement : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty typeProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static ModuleElement ()
-		{
-			typeProp = new ConfigurationProperty ("type", typeof (string), null);
-			properties = new ConfigurationPropertyCollection ();
+        static ModuleElement ()
+        {
+            typeProp = new ConfigurationProperty ("type", typeof (string), null);
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (typeProp);
-		}
+            properties.Add (typeProp);
+        }
 
-		public ModuleElement ()
-		{
-		}
+        public ModuleElement ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("type")]
-		public string Type {
-			get { return (string) base [typeProp]; }
-			set { base [typeProp] = value; }
-		}
+        [ConfigurationProperty ("type")]
+        public string Type {
+            get { return (string) base [typeProp]; }
+            set { base [typeProp] = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

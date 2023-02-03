@@ -301,9 +301,9 @@ namespace System.Net {
 #if ENTITY_ENCODE_HIGH_ASCII_CHARS
                     else if (ch >= 160 
 #if !MONO
-						&& ch < 256
+                        && ch < 256
 #endif
-					) {
+                    ) {
                         return s.Length - cch;
                     }
 #endif // ENTITY_ENCODE_HIGH_ASCII_CHARS

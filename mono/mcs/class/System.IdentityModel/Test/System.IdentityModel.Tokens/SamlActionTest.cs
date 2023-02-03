@@ -2,7 +2,7 @@
 // SamlActionTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,98 +37,98 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-	[TestFixture]
-	public class SamlActionTest
-	{
-		XmlDictionaryWriter CreateWriter (StringWriter sw)
-		{
-			return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
-		}
+    [TestFixture]
+    public class SamlActionTest
+    {
+        XmlDictionaryWriter CreateWriter (StringWriter sw)
+        {
+            return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
+        }
 
-		XmlDictionaryReader CreateReader (string xml)
-		{
-			return XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (xml)));
-		}
+        XmlDictionaryReader CreateReader (string xml)
+        {
+            return XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (xml)));
+        }
 
-		[Test]
-		public void DefaultValues ()
-		{
-			SamlAction a = new SamlAction ();
-			Assert.IsNull (a.Action, "#1");
-			Assert.IsNull (a.Namespace, "#2");
-		}
+        [Test]
+        public void DefaultValues ()
+        {
+            SamlAction a = new SamlAction ();
+            Assert.IsNull (a.Action, "#1");
+            Assert.IsNull (a.Namespace, "#2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConstructorNullAction ()
-		{
-			new SamlAction (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void ConstructorNullAction ()
+        {
+            new SamlAction (null);
+        }
 
-		[Test]
-		public void ConstructorNullNamespace ()
-		{
-			new SamlAction ("urn:myAction", null);
-		}
+        [Test]
+        public void ConstructorNullNamespace ()
+        {
+            new SamlAction ("urn:myAction", null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SetActionNull ()
-		{
-			SamlAction a = new SamlAction ();
-			a.Action = null;
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void SetActionNull ()
+        {
+            SamlAction a = new SamlAction ();
+            a.Action = null;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SetActionEmpty ()
-		{
-			SamlAction a = new SamlAction ();
-			a.Action = String.Empty;
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void SetActionEmpty ()
+        {
+            SamlAction a = new SamlAction ();
+            a.Action = String.Empty;
+        }
 
-		[Test]
-		public void SetNamespaceNull ()
-		{
-			SamlAction a = new SamlAction ();
-			a.Namespace = null;
-		}
+        [Test]
+        public void SetNamespaceNull ()
+        {
+            SamlAction a = new SamlAction ();
+            a.Namespace = null;
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityTokenException))]
-		public void WriteXmlNullAction ()
-		{
-			SamlAction c = new SamlAction ();
-			StringWriter sw = new StringWriter ();
-			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-				c.WriteXml (dw, new SamlSerializer (), null);
-			}
-		}
+        [Test]
+        [ExpectedException (typeof (SecurityTokenException))]
+        public void WriteXmlNullAction ()
+        {
+            SamlAction c = new SamlAction ();
+            StringWriter sw = new StringWriter ();
+            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
+                c.WriteXml (dw, new SamlSerializer (), null);
+            }
+        }
 
-		[Test]
-		public void WriteXml1 ()
-		{
-			SamlAction c = new SamlAction ("urn:myAction", "urn:myNS");
-			StringWriter sw = new StringWriter ();
-			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-				c.WriteXml (dw, new SamlSerializer (), null);
-			}
-			Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Action Namespace=\"urn:myNS\" xmlns:saml=\"{0}\">urn:myAction</saml:Action>", SamlConstants.Namespace), sw.ToString ());
-		}
+        [Test]
+        public void WriteXml1 ()
+        {
+            SamlAction c = new SamlAction ("urn:myAction", "urn:myNS");
+            StringWriter sw = new StringWriter ();
+            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
+                c.WriteXml (dw, new SamlSerializer (), null);
+            }
+            Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Action Namespace=\"urn:myNS\" xmlns:saml=\"{0}\">urn:myAction</saml:Action>", SamlConstants.Namespace), sw.ToString ());
+        }
 
-		[Test]
-		public void ReadXml1 ()
-		{
-			SamlSerializer ser = new SamlSerializer ();
-			string xml = String.Format ("<saml:Action Namespace=\"urn:myNS\" xmlns:saml=\"{0}\">urn:myAction</saml:Action>", SamlConstants.Namespace);
-			XmlDictionaryReader reader = CreateReader (xml);
-			reader.MoveToContent ();
+        [Test]
+        public void ReadXml1 ()
+        {
+            SamlSerializer ser = new SamlSerializer ();
+            string xml = String.Format ("<saml:Action Namespace=\"urn:myNS\" xmlns:saml=\"{0}\">urn:myAction</saml:Action>", SamlConstants.Namespace);
+            XmlDictionaryReader reader = CreateReader (xml);
+            reader.MoveToContent ();
 
-			SamlAction s = new SamlAction ();
-			s.ReadXml (reader, ser, null, null);
-			Assert.AreEqual ("urn:myAction", s.Action, "#1");
-			Assert.AreEqual ("urn:myNS", s.Namespace, "#2");
-		}
-	}
+            SamlAction s = new SamlAction ();
+            s.ReadXml (reader, ser, null, null);
+            Assert.AreEqual ("urn:myAction", s.Action, "#1");
+            Assert.AreEqual ("urn:myNS", s.Namespace, "#2");
+        }
+    }
 }
 #endif

@@ -2,7 +2,7 @@
 // RsaEndpointIdentity.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,25 +35,25 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	public class RsaEndpointIdentity : EndpointIdentity
-	{
-		RSA rsa;
+    public class RsaEndpointIdentity : EndpointIdentity
+    {
+        RSA rsa;
 
-		public RsaEndpointIdentity (Claim identity)
-		{
-		}
+        public RsaEndpointIdentity (Claim identity)
+        {
+        }
 
-		[MonoTODO]
-		public RsaEndpointIdentity (string publicKey)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public RsaEndpointIdentity (string publicKey)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public RsaEndpointIdentity (X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			rsa = (RSA) certificate.PublicKey.Key;
-		}
-	}
+        public RsaEndpointIdentity (X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException ("certificate");
+            rsa = (RSA) certificate.PublicKey.Key;
+        }
+    }
 }

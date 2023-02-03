@@ -46,7 +46,7 @@ namespace System.Xml.Xsl.XsltOld {
 
             default:
                 Debug.Fail("Invalid IfAction execution state");
-    		    break;
+                break;
             }
         }
     }

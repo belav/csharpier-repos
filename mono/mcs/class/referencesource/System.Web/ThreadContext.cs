@@ -1,4 +1,4 @@
-﻿namespace System.Web {
+namespace System.Web {
     using System;
     using System.ComponentModel;
     using System.Globalization;

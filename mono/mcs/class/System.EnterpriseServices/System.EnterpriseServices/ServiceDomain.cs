@@ -31,30 +31,30 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
 
-	[ComVisible(false)]
-	public sealed class ServiceDomain {
-		#region Constructors
+    [ComVisible(false)]
+    public sealed class ServiceDomain {
+        #region Constructors
 
-		private ServiceDomain ()
-		{
-		}
+        private ServiceDomain ()
+        {
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		public static void Enter (ServiceConfig cfg)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static void Enter (ServiceConfig cfg)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static TransactionStatus Leave ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static TransactionStatus Leave ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

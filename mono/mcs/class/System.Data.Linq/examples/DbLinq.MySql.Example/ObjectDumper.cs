@@ -15,14 +15,14 @@ public class ObjectDumper {
     }
 
     public static void Write(object o, int depth) {
-		Write(o, depth, Console.Out);
+        Write(o, depth, Console.Out);
     }
 
-	public static void Write(object o, int depth, TextWriter log) {
-		ObjectDumper dumper = new ObjectDumper(depth);
-		dumper.writer = log;
-		dumper.WriteObject(null, o);
-	}
+    public static void Write(object o, int depth, TextWriter log) {
+        ObjectDumper dumper = new ObjectDumper(depth);
+        dumper.writer = log;
+        dumper.WriteObject(null, o);
+    }
 
     TextWriter writer;
     int pos;

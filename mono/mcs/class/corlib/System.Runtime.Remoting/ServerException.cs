@@ -34,28 +34,28 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.Remoting {
 
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ServerException : SystemException
-	{
-		public ServerException ()
-			: base ()
-		{
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ServerException : SystemException
+    {
+        public ServerException ()
+            : base ()
+        {
+        }
 
-		public ServerException (string message)
-			: base (message)
-		{
-		}
+        public ServerException (string message)
+            : base (message)
+        {
+        }
 
-		public ServerException (string message, Exception InnerException)
-			: base (message, InnerException)
-		{
-		}
+        public ServerException (string message, Exception InnerException)
+            : base (message, InnerException)
+        {
+        }
 
-		internal ServerException (SerializationInfo info, StreamingContext context) 
-			: base(info, context)
-		{
-		}
-	}
+        internal ServerException (SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
+        }
+    }
 }

@@ -37,12 +37,12 @@ namespace Schemas {
         System.Xml.Serialization.XmlArrayItem(Type=typeof(field),IsNullable=false)]
         public field[] formfields;
         
-		[System.Xml.Serialization.XmlElement("field-type",Type=typeof(fieldtype)),
+        [System.Xml.Serialization.XmlElement("field-type",Type=typeof(fieldtype)),
         System.Xml.Serialization.XmlElement("compound-field",Type=typeof(compoundfield))]
         public basefieldtype[] Items;
     }
 
     public class M {
-	public static void Main () {}
+    public static void Main () {}
     }
 }

@@ -3,9 +3,9 @@
 
 class C
 {
-	void Foo ()
-	{
-		dynamic o = null;
-		var s = nameof (o.ToString ().Equals);
-	}
+    void Foo ()
+    {
+        dynamic o = null;
+        var s = nameof (o.ToString ().Equals);
+    }
 }

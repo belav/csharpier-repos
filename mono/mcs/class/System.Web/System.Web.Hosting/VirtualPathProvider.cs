@@ -2,7 +2,7 @@
 // System.Web.Hosting.VirtualPathProvider
 //
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
@@ -34,104 +34,104 @@ using System.Web.Util;
 
 namespace System.Web.Hosting {
 
-	public abstract class VirtualPathProvider : MarshalByRefObject
-	{
-		VirtualPathProvider prev;
+    public abstract class VirtualPathProvider : MarshalByRefObject
+    {
+        VirtualPathProvider prev;
 
-		protected VirtualPathProvider ()
-		{
-		}
+        protected VirtualPathProvider ()
+        {
+        }
 
-		protected internal VirtualPathProvider Previous {
-			get { return prev; }
-		}
+        protected internal VirtualPathProvider Previous {
+            get { return prev; }
+        }
 
-		protected virtual void Initialize ()
-		{
-		}
+        protected virtual void Initialize ()
+        {
+        }
 
-		internal void InitializeAndSetPrevious (VirtualPathProvider prev)
-		{
-			this.prev = prev;
-			Initialize ();
-		}
-		
-		public virtual string CombineVirtualPaths (string basePath, string relativePath)
-		{
-			return VirtualPathUtility.Combine (basePath, relativePath);
-		}
+        internal void InitializeAndSetPrevious (VirtualPathProvider prev)
+        {
+            this.prev = prev;
+            Initialize ();
+        }
+        
+        public virtual string CombineVirtualPaths (string basePath, string relativePath)
+        {
+            return VirtualPathUtility.Combine (basePath, relativePath);
+        }
 
-		public virtual bool DirectoryExists (string virtualDir)
-		{
-			if (prev != null)
-				return prev.DirectoryExists (virtualDir);
-			
-			return false;
-		}
+        public virtual bool DirectoryExists (string virtualDir)
+        {
+            if (prev != null)
+                return prev.DirectoryExists (virtualDir);
+            
+            return false;
+        }
 
-		public virtual bool FileExists (string virtualPath)
-		{
-			if (prev != null)
-				return prev.FileExists (virtualPath);
-			
-			return false;
-		}
+        public virtual bool FileExists (string virtualPath)
+        {
+            if (prev != null)
+                return prev.FileExists (virtualPath);
+            
+            return false;
+        }
 
-		public virtual CacheDependency GetCacheDependency (string virtualPath, IEnumerable virtualPathDependencies, DateTime utcStart)
-		{
-			if (prev != null)
-				return prev.GetCacheDependency (virtualPath, virtualPathDependencies, utcStart);
-			
-			return null;
-		}
+        public virtual CacheDependency GetCacheDependency (string virtualPath, IEnumerable virtualPathDependencies, DateTime utcStart)
+        {
+            if (prev != null)
+                return prev.GetCacheDependency (virtualPath, virtualPathDependencies, utcStart);
+            
+            return null;
+        }
 
-		public virtual string GetCacheKey (string virtualPath)
-		{
-			if (prev != null)
-				return prev.GetCacheKey (virtualPath);
-			
-			return null;
-		}
+        public virtual string GetCacheKey (string virtualPath)
+        {
+            if (prev != null)
+                return prev.GetCacheKey (virtualPath);
+            
+            return null;
+        }
 
-		public virtual VirtualDirectory GetDirectory (string virtualDir)
-		{
-			if (prev != null)
-				return prev.GetDirectory (virtualDir);
-			
-			return null;
-		}
+        public virtual VirtualDirectory GetDirectory (string virtualDir)
+        {
+            if (prev != null)
+                return prev.GetDirectory (virtualDir);
+            
+            return null;
+        }
 
-		public virtual VirtualFile GetFile (string virtualPath)
-		{
-			if (prev != null)
-				return prev.GetFile (virtualPath);
-			
-			return null;
-		}
+        public virtual VirtualFile GetFile (string virtualPath)
+        {
+            if (prev != null)
+                return prev.GetFile (virtualPath);
+            
+            return null;
+        }
 
-		public virtual string GetFileHash (string virtualPath, IEnumerable virtualPathDependencies)
-		{
-			if (prev != null)
-				return prev.GetFileHash (virtualPath, virtualPathDependencies);
-			
-			return null;
-		}
+        public virtual string GetFileHash (string virtualPath, IEnumerable virtualPathDependencies)
+        {
+            if (prev != null)
+                return prev.GetFileHash (virtualPath, virtualPathDependencies);
+            
+            return null;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return null; // forever young
-		}
+        public override object InitializeLifetimeService ()
+        {
+            return null; // forever young
+        }
 
-		public static Stream OpenFile (string virtualPath)
-		{
-			// This thing throws a nullref when we're not inside an ASP.NET appdomain, which is what MS does.
-			VirtualPathProvider provider = HostingEnvironment.VirtualPathProvider;
-			VirtualFile file = provider.GetFile (virtualPath);
-			if (file != null)
-				return file.Open ();
+        public static Stream OpenFile (string virtualPath)
+        {
+            // This thing throws a nullref when we're not inside an ASP.NET appdomain, which is what MS does.
+            VirtualPathProvider provider = HostingEnvironment.VirtualPathProvider;
+            VirtualFile file = provider.GetFile (virtualPath);
+            if (file != null)
+                return file.Open ();
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }
 

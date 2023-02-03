@@ -2,7 +2,7 @@
 // X509RawDataKeyIdentifierClause.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,48 +32,48 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-	public class X509RawDataKeyIdentifierClause : BinaryKeyIdentifierClause
-	{
-		public X509RawDataKeyIdentifierClause (byte [] certificateRawData)
-			: base (null, certificateRawData, true)
-		{
-		}
+    public class X509RawDataKeyIdentifierClause : BinaryKeyIdentifierClause
+    {
+        public X509RawDataKeyIdentifierClause (byte [] certificateRawData)
+            : base (null, certificateRawData, true)
+        {
+        }
 
-		public X509RawDataKeyIdentifierClause (X509Certificate2 certificate)
-			: base (null, certificate.RawData, true)
-		{
-			this.cert = certificate;
-		}
+        public X509RawDataKeyIdentifierClause (X509Certificate2 certificate)
+            : base (null, certificate.RawData, true)
+        {
+            this.cert = certificate;
+        }
 
-		X509Certificate2 cert;
+        X509Certificate2 cert;
 
-		public override bool CanCreateKey {
-			get { return true; }
-		}
+        public override bool CanCreateKey {
+            get { return true; }
+        }
 
-		public override SecurityKey CreateKey ()
-		{
-			if (cert == null)
-				cert = new X509Certificate2 (GetX509RawData ());
-			return new X509AsymmetricSecurityKey (cert);
-		}
+        public override SecurityKey CreateKey ()
+        {
+            if (cert == null)
+                cert = new X509Certificate2 (GetX509RawData ());
+            return new X509AsymmetricSecurityKey (cert);
+        }
 
-		[MonoTODO ("Not sure what should be returned when there are public/private pair key and public-only key")]
-		public byte [] GetX509RawData ()
-		{
-			return GetRawBuffer ();
-		}
+        [MonoTODO ("Not sure what should be returned when there are public/private pair key and public-only key")]
+        public byte [] GetX509RawData ()
+        {
+            return GetRawBuffer ();
+        }
 
-		[MonoTODO ("Not sure what should be returned when there are public/private pair key and public-only key")]
-		public bool Matches (X509Certificate2 certificate)
-		{
-			return Matches (certificate.RawData);
-		}
+        [MonoTODO ("Not sure what should be returned when there are public/private pair key and public-only key")]
+        public bool Matches (X509Certificate2 certificate)
+        {
+            return Matches (certificate.RawData);
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString ()
+        {
+            return base.ToString ();
+        }
+    }
 }

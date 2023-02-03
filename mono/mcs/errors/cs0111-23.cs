@@ -3,11 +3,11 @@
 
 public class C
 {
-	void Foo<T> (T i)
-	{
-	}
-	
-	void Foo<U> (U i)
-	{
-	}
+    void Foo<T> (T i)
+    {
+    }
+    
+    void Foo<U> (U i)
+    {
+    }
 }

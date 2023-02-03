@@ -1,4 +1,4 @@
-﻿/********************************************************
+/********************************************************
  * ADO.NET 2.0 Data Provider for SQLite Version 3.X
  * Written by Robert Simpson (robert@blackcastlesoft.com)
  * 
@@ -122,16 +122,16 @@ namespace Mono.Data.Sqlite
 #if !SQLITE_STANDARD
         int n = UnsafeNativeMethods.sqlite3_open_interop(ToUTF8(strFilename), (int)flags, out db);
 #else
-	// Compatibility with versions < 3.5.0
+    // Compatibility with versions < 3.5.0
         int n;
 
-	if (UnsafeNativeMethods.use_sqlite3_open_v2) {
-		n = UnsafeNativeMethods.sqlite3_open_v2(ToUTF8(strFilename), out db, (int)flags, IntPtr.Zero);
-	} else {
-		Console.WriteLine ("Your sqlite3 version is old - please upgrade to at least v3.5.0!");
-		n = UnsafeNativeMethods.sqlite3_open (ToUTF8 (strFilename), out db);
-	}
-	
+    if (UnsafeNativeMethods.use_sqlite3_open_v2) {
+        n = UnsafeNativeMethods.sqlite3_open_v2(ToUTF8(strFilename), out db, (int)flags, IntPtr.Zero);
+    } else {
+        Console.WriteLine ("Your sqlite3 version is old - please upgrade to at least v3.5.0!");
+        n = UnsafeNativeMethods.sqlite3_open (ToUTF8 (strFilename), out db);
+    }
+    
 #endif
         if (n > 0) throw new SqliteException(n, null);
 
@@ -620,9 +620,9 @@ namespace Mono.Data.Sqlite
       if (nCopied + nDataOffset > nlen) nCopied = nlen - nDataOffset;
 
       unsafe {
-	      if (nCopied > 0)
-		      Marshal.Copy((IntPtr)((byte*)ptr + nDataOffset), bDest, nStart, nCopied);
-	      else nCopied = 0;
+          if (nCopied > 0)
+              Marshal.Copy((IntPtr)((byte*)ptr + nDataOffset), bDest, nStart, nCopied);
+          else nCopied = 0;
       }
 
       return nCopied;
@@ -830,9 +830,9 @@ namespace Mono.Data.Sqlite
       if (nCopied + nDataOffset > nlen) nCopied = nlen - nDataOffset;
 
       unsafe {
-	      if (nCopied > 0)
-		      Marshal.Copy((IntPtr)((byte*)ptr + nDataOffset), bDest, nStart, nCopied);
-	      else nCopied = 0;
+          if (nCopied > 0)
+              Marshal.Copy((IntPtr)((byte*)ptr + nDataOffset), bDest, nStart, nCopied);
+          else nCopied = 0;
       }
 
       return nCopied;
@@ -948,19 +948,19 @@ namespace Mono.Data.Sqlite
       if (n > 0) throw new SqliteException(n, SQLiteLastError());
 #endif
     }
-		
+        
 #if MONOTOUCH
     SQLiteUpdateCallback update_callback;
     SQLiteCommitCallback commit_callback;
     SQLiteRollbackCallback rollback_callback;
-		
+        
     [Mono.Util.MonoPInvokeCallback (typeof (SQLiteUpdateCallback))]
     static void update (IntPtr puser, int type, IntPtr database, IntPtr table, Int64 rowid)
     {
       SQLite3 instance = GCHandle.FromIntPtr (puser).Target as SQLite3;
       instance.update_callback (puser, type, database, table, rowid);
     }
-			
+            
     internal override void SetUpdateHook (SQLiteUpdateCallback func)
     {
       update_callback = func;
@@ -976,7 +976,7 @@ namespace Mono.Data.Sqlite
       SQLite3 instance = GCHandle.FromIntPtr (puser).Target as SQLite3;
       return instance.commit_callback (puser);
     }
-		
+        
     internal override void SetCommitHook (SQLiteCommitCallback func)
     {
       commit_callback = func;

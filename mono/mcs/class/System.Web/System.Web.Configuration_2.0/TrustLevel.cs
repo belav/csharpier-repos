@@ -2,7 +2,7 @@
 // System.Web.Configuration.TrustLevel
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,51 +35,51 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public sealed class TrustLevel : ConfigurationElement
-	{
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty policyFileProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class TrustLevel : ConfigurationElement
+    {
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty policyFileProp;
+        static ConfigurationPropertyCollection properties;
 
-		static TrustLevel ()
-		{
-			nameProp = new ConfigurationProperty ("name", typeof (string), "Full",
-							      TypeDescriptor.GetConverter (typeof (string)),
-							      PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			policyFileProp = new ConfigurationProperty ("policyFile", typeof (string), "internal", ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
+        static TrustLevel ()
+        {
+            nameProp = new ConfigurationProperty ("name", typeof (string), "Full",
+                                  TypeDescriptor.GetConverter (typeof (string)),
+                                  PropertyHelper.NonEmptyStringValidator,
+                                  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            policyFileProp = new ConfigurationProperty ("policyFile", typeof (string), "internal", ConfigurationPropertyOptions.IsRequired);
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (nameProp);
-			properties.Add (policyFileProp);
-		}
+            properties.Add (nameProp);
+            properties.Add (policyFileProp);
+        }
 
-		internal TrustLevel ()
-		{
-		}
+        internal TrustLevel ()
+        {
+        }
 
-		public TrustLevel (string name, string policyFile)
-		{
-			this.Name = name;
-			this.PolicyFile = policyFile;
-		}
+        public TrustLevel (string name, string policyFile)
+        {
+            this.Name = name;
+            this.PolicyFile = policyFile;
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("name", DefaultValue = "Full", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) base [nameProp];}
-			set { base[nameProp] = value; }
-		}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("name", DefaultValue = "Full", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        public string Name {
+            get { return (string) base [nameProp];}
+            set { base[nameProp] = value; }
+        }
 
-		[ConfigurationProperty ("policyFile", DefaultValue = "internal", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string PolicyFile {
-			get { return (string) base [policyFileProp];}
-			set { base[policyFileProp] = value; }
-		}
+        [ConfigurationProperty ("policyFile", DefaultValue = "internal", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string PolicyFile {
+            get { return (string) base [policyFileProp];}
+            set { base[policyFileProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

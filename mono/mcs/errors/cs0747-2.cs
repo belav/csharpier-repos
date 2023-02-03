@@ -11,8 +11,8 @@ class Data
 
 public class Test
 {
-	static void Main ()
-	{
-		var c = new ArrayList { Count = 1, 1 };
-	}
+    static void Main ()
+    {
+        var c = new ArrayList { Count = 1, 1 };
+    }
 }

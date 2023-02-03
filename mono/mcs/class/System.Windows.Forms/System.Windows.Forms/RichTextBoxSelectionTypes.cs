@@ -20,19 +20,19 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	<pbartok@novell.com>
+//    Peter Bartok    <pbartok@novell.com>
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	[Flags]
-	public enum RichTextBoxSelectionTypes {
-		Empty		= 0x00000000,
-		Text		= 0x00000001,
-		Object		= 0x00000002,
-		MultiChar	= 0x00000004,
-		MultiObject	= 0x00000008
-	}
+    [Flags]
+    public enum RichTextBoxSelectionTypes {
+        Empty        = 0x00000000,
+        Text        = 0x00000001,
+        Object        = 0x00000002,
+        MultiChar    = 0x00000004,
+        MultiObject    = 0x00000008
+    }
 }

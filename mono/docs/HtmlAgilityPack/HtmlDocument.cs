@@ -263,7 +263,7 @@ namespace HtmlAgilityPack
                 // note: we are very limited here, too much?
                 if (((name[i] >= 'a') && (name[i] <= 'z')) ||
                     ((name[i] >= '0') && (name[i] <= '9')) ||
-                    //					(name[i]==':') || (name[i]=='_') || (name[i]=='-') || (name[i]=='.')) // these are bads in fact
+                    //                    (name[i]==':') || (name[i]=='_') || (name[i]=='-') || (name[i]=='.')) // these are bads in fact
                     (name[i] == '_') || (name[i] == '-') || (name[i] == '.'))
                 {
                     xmlname += name[i];

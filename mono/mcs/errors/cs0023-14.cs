@@ -7,7 +7,7 @@ public class C{
       return false;
     }
     set{
-    }	
+    }    
   }
   public static void Main(){
     Foo++;

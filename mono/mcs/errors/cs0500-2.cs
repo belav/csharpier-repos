@@ -2,6 +2,6 @@
 // Line: 5
 
 public abstract class A {
-	public abstract int Foo { get { return 1; } }
+    public abstract int Foo { get { return 1; } }
 }
 

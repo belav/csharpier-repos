@@ -2,5 +2,5 @@
 // Line: 5
 
 class Class {
-	virtual public void X ();
+    virtual public void X ();
 }

@@ -39,76 +39,76 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_ColumnName : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataColumn_ColumnName tc = new DataColumn_ColumnName();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumn_ColumnName");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataColumn_ColumnName tc = new DataColumn_ColumnName();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumn_ColumnName");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataColumn dc;
-		string sName = "NewName";
+    public void run()
+    {
+        Exception exp = null;
+        DataColumn dc;
+        string sName = "NewName";
 
-		dc = new DataColumn();
-		//Checking default value ("")
-		        
-		try
-		{
-			BeginCase("ColumnName default value");
-			Compare( dc.ColumnName,string.Empty );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		//Cheking Set
-		dc.ColumnName = sName;
-		//Checking Get
-		try
-		{
-			BeginCase("ColumnName Get/Set");
-			Compare(dc.ColumnName ,sName );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        dc = new DataColumn();
+        //Checking default value ("")
+                
+        try
+        {
+            BeginCase("ColumnName default value");
+            Compare( dc.ColumnName,string.Empty );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        //Cheking Set
+        dc.ColumnName = sName;
+        //Checking Get
+        try
+        {
+            BeginCase("ColumnName Get/Set");
+            Compare(dc.ColumnName ,sName );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		//Special chars (valid chars)
-		sName = "~()#\\/=><+-*%&|^'\"[]";
-		try
-		{
-			BeginCase("ColumnName Special chars");
-			dc.ColumnName = sName ;	
-			Compare(dc.ColumnName ,sName );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-			
-	}
+        //Special chars (valid chars)
+        sName = "~()#\\/=><+-*%&|^'\"[]";
+        try
+        {
+            BeginCase("ColumnName Special chars");
+            dc.ColumnName = sName ;    
+            Compare(dc.ColumnName ,sName );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+            
+    }
 }
 }

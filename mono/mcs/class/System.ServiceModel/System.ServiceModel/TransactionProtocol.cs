@@ -1,8 +1,8 @@
-﻿//
+//
 // TransactionProtocol.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,43 +33,43 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public class TransactionProtocol
-	{
-		// Static members
+    public class TransactionProtocol
+    {
+        // Static members
 
-		static TransactionProtocol wsat, oletx;
+        static TransactionProtocol wsat, oletx;
 
-		static TransactionProtocol ()
-		{
-			wsat = new WSAtomicTransactionProtocol ();
-			oletx = new OleTransactionProtocol ();
-		}
+        static TransactionProtocol ()
+        {
+            wsat = new WSAtomicTransactionProtocol ();
+            oletx = new OleTransactionProtocol ();
+        }
 
-		// Thus Mono users should not depend on default transactions
-		public static TransactionProtocol Default {
-			get { return OleTransactions; }
-		}
+        // Thus Mono users should not depend on default transactions
+        public static TransactionProtocol Default {
+            get { return OleTransactions; }
+        }
 
-		public static TransactionProtocol OleTransactions {
-			get { return oletx; }
-		}
+        public static TransactionProtocol OleTransactions {
+            get { return oletx; }
+        }
 
-		public static TransactionProtocol WSAtomicTransactionOctober2004 {
-			get { return wsat; }
-		}
+        public static TransactionProtocol WSAtomicTransactionOctober2004 {
+            get { return wsat; }
+        }
 
-		// Instance members
+        // Instance members
 
-		protected TransactionProtocol ()
-		{
-		}
+        protected TransactionProtocol ()
+        {
+        }
 
-		class WSAtomicTransactionProtocol : TransactionProtocol
-		{
-		}
+        class WSAtomicTransactionProtocol : TransactionProtocol
+        {
+        }
 
-		class OleTransactionProtocol : TransactionProtocol
-		{
-		}
-	}
+        class OleTransactionProtocol : TransactionProtocol
+        {
+        }
+    }
 }

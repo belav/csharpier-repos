@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ResourcePropertyKind.cs
 //  
 // Author:
@@ -29,14 +29,14 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services.Providers
 {
-	[Flags]
-	public enum ResourcePropertyKind
-	{
-		Primitive = 0x01,
-		Key = 0x02,
-		ComplexType = 0x04,
-		ResourceReference = 0x08,
-		ResourceSetReference = 0x10,
-		ETag = 0x20
-	}
+    [Flags]
+    public enum ResourcePropertyKind
+    {
+        Primitive = 0x01,
+        Key = 0x02,
+        ComplexType = 0x04,
+        ResourceReference = 0x08,
+        ResourceSetReference = 0x10,
+        ETag = 0x20
+    }
 }

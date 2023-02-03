@@ -2,7 +2,7 @@
 // AuthorizationPolicyTypeElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,54 +54,54 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class AuthorizationPolicyTypeElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty policy_type;
+    public sealed class AuthorizationPolicyTypeElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty policy_type;
 
-		static AuthorizationPolicyTypeElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			policy_type = new ConfigurationProperty ("policyType",
-				typeof (string), null, null, new StringValidator (1, int.MaxValue), 
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static AuthorizationPolicyTypeElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            policy_type = new ConfigurationProperty ("policyType",
+                typeof (string), null, null, new StringValidator (1, int.MaxValue), 
+                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
 
-			properties.Add (policy_type);
-		}
+            properties.Add (policy_type);
+        }
 
-		public AuthorizationPolicyTypeElement ()
-		{
-		}
-		
-		public AuthorizationPolicyTypeElement (string policyType) {
-			if (policyType == null)
-				throw new ArgumentNullException ("policyType");
+        public AuthorizationPolicyTypeElement ()
+        {
+        }
+        
+        public AuthorizationPolicyTypeElement (string policyType) {
+            if (policyType == null)
+                throw new ArgumentNullException ("policyType");
 
-			PolicyType = policyType;
-		}
-
-
-		// Properties
-
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("policyType",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		public string PolicyType {
-			get { return (string) base [policy_type]; }
-			set { base [policy_type] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+            PolicyType = policyType;
+        }
 
 
-	}
+        // Properties
+
+        [StringValidator ( MinLength = 1,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("policyType",
+             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true)]
+        public string PolicyType {
+            get { return (string) base [policy_type]; }
+            set { base [policy_type] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

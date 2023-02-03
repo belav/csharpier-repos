@@ -6,21 +6,21 @@ using System.Diagnostics;
 
 namespace ConditionalAttributeTesting
 {
-	class MainClass
-	{
-		[Some ("Test")]
-		[Some ("Test2")]
-		public static void Test ()
-		{
-		}
-	}
+    class MainClass
+    {
+        [Some ("Test")]
+        [Some ("Test2")]
+        public static void Test ()
+        {
+        }
+    }
 
-	[AttributeUsage (AttributeTargets.All)]
-	[Conditional ("NOT_DEFINED")]
-	public sealed class SomeAttribute : Attribute
-	{
-		public SomeAttribute (string someText)
-		{
-		}
-	}
+    [AttributeUsage (AttributeTargets.All)]
+    [Conditional ("NOT_DEFINED")]
+    public sealed class SomeAttribute : Attribute
+    {
+        public SomeAttribute (string someText)
+        {
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // ServiceEndpointTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://novell.com
 //
@@ -37,20 +37,20 @@ using System.ServiceModel.Channels;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class ServiceMetadataEndpointTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var se = new ServiceMetadataEndpoint ();
-			Assert.IsNotNull (se.Contract, "#1");
-			Assert.AreEqual (typeof (IMetadataExchange), se.Contract.ContractType, "#1.2");
-			Assert.IsNotNull (se.Binding, "#2");
-			// FIXME: enable once we get usable WSHttpBinding.
-			// Assert.AreEqual (typeof (WSHttpBinding), se.Binding.GetType (), "#2.2");
-			Assert.IsNull (se.Address, "#3");
-		}
-	}
+    [TestFixture]
+    public class ServiceMetadataEndpointTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            var se = new ServiceMetadataEndpoint ();
+            Assert.IsNotNull (se.Contract, "#1");
+            Assert.AreEqual (typeof (IMetadataExchange), se.Contract.ContractType, "#1.2");
+            Assert.IsNotNull (se.Binding, "#2");
+            // FIXME: enable once we get usable WSHttpBinding.
+            // Assert.AreEqual (typeof (WSHttpBinding), se.Binding.GetType (), "#2.2");
+            Assert.IsNull (se.Address, "#3");
+        }
+    }
 }
 #endif

@@ -6,8 +6,8 @@ using System;
 
 class X {
 
-	unsafe void Test ()
-	{
-		X x = *&this;
-	}
+    unsafe void Test ()
+    {
+        X x = *&this;
+    }
 }

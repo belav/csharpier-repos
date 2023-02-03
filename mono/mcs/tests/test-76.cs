@@ -8,28 +8,28 @@ using System.Text;
 
 class foo {
 
-	static string strcat (params string [] values)
-	{
-		StringBuilder s = new StringBuilder ();
-		
-		foreach (string val in values) {
-			s.Append (val);
-		}
+    static string strcat (params string [] values)
+    {
+        StringBuilder s = new StringBuilder ();
+        
+        foreach (string val in values) {
+            s.Append (val);
+        }
 
-		return s.ToString ();
-	}
+        return s.ToString ();
+    }
 
-	public static int Main ()
-	{
-		if (strcat ("Hello", "World") != "HelloWorld")
-			return 1;
+    public static int Main ()
+    {
+        if (strcat ("Hello", "World") != "HelloWorld")
+            return 1;
 
-		if (strcat () != "")
-			return 2;
+        if (strcat () != "")
+            return 2;
 
-		if (strcat ("a", "b", "c", "d", "e") != "abcde")
-			return 3;
+        if (strcat ("a", "b", "c", "d", "e") != "abcde")
+            return 3;
 
-		return 0;
-	}
+        return 0;
+    }
 };

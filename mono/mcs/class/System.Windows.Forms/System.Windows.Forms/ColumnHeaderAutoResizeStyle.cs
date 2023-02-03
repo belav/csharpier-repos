@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum ColumnHeaderAutoResizeStyle
-	{
-		None = 0,
-		HeaderSize = 1,
-		ColumnContent = 2
-	}
+    public enum ColumnHeaderAutoResizeStyle
+    {
+        None = 0,
+        HeaderSize = 1,
+        ColumnContent = 2
+    }
 }

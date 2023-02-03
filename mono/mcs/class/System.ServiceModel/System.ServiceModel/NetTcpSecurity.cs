@@ -2,7 +2,7 @@
 // NetTcpSecurity.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,37 +31,37 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public sealed class NetTcpSecurity
-	{
-		public NetTcpSecurity ()
-			: this (SecurityMode.Transport)
-		{
-		}
+    public sealed class NetTcpSecurity
+    {
+        public NetTcpSecurity ()
+            : this (SecurityMode.Transport)
+        {
+        }
 
-		internal NetTcpSecurity (SecurityMode mode)
-		{
-			this.mode = mode;
-			this.message = new MessageSecurityOverTcp ();
-			this.transport = new TcpTransportSecurity ();
-		}
+        internal NetTcpSecurity (SecurityMode mode)
+        {
+            this.mode = mode;
+            this.message = new MessageSecurityOverTcp ();
+            this.transport = new TcpTransportSecurity ();
+        }
 
-		MessageSecurityOverTcp message;
-		SecurityMode mode;
-		TcpTransportSecurity transport;
+        MessageSecurityOverTcp message;
+        SecurityMode mode;
+        TcpTransportSecurity transport;
 
-		public MessageSecurityOverTcp Message {
-			get { return message; }
-			set { message = value; }
-		}
+        public MessageSecurityOverTcp Message {
+            get { return message; }
+            set { message = value; }
+        }
 
-		public SecurityMode Mode {
-			get { return mode; }
-			set { mode = value; }
-		}
+        public SecurityMode Mode {
+            get { return mode; }
+            set { mode = value; }
+        }
 
-		public TcpTransportSecurity Transport {
-			get { return transport; }
-			set { transport = value; }
-		}
-	}
+        public TcpTransportSecurity Transport {
+            get { return transport; }
+            set { transport = value; }
+        }
+    }
 }

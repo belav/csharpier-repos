@@ -1,9 +1,9 @@
 //
 // CodePrimitiveExpressionCas.cs
-//	- CAS unit tests for System.CodeDom.CodePrimitiveExpression
+//    - CAS unit tests for System.CodeDom.CodePrimitiveExpression
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,43 +37,43 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodePrimitiveExpressionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodePrimitiveExpressionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodePrimitiveExpression cpe = new CodePrimitiveExpression ();
-			Assert.IsNull (cpe.Value, "Value");
-			cpe.Value = new object ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodePrimitiveExpression cpe = new CodePrimitiveExpression ();
+            Assert.IsNull (cpe.Value, "Value");
+            cpe.Value = new object ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			object o = new object ();
-			CodePrimitiveExpression cpe = new CodePrimitiveExpression (o);
-			Assert.AreSame (o, cpe.Value, "Value");
-			cpe.Value = new object ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            object o = new object ();
+            CodePrimitiveExpression cpe = new CodePrimitiveExpression (o);
+            Assert.AreSame (o, cpe.Value, "Value");
+            cpe.Value = new object ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodePrimitiveExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodePrimitiveExpression).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

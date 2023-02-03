@@ -2,7 +2,7 @@
 // SamlStatement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,26 +34,26 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-	public abstract class SamlStatement
-	{
-		protected SamlStatement ()
-		{
-		}
+    public abstract class SamlStatement
+    {
+        protected SamlStatement ()
+        {
+        }
 
-		public abstract bool IsReadOnly { get; }
+        public abstract bool IsReadOnly { get; }
 
-		public abstract IAuthorizationPolicy CreatePolicy (
-			ClaimSet issuer, SamlSecurityTokenAuthenticator samlAuthenticator);
+        public abstract IAuthorizationPolicy CreatePolicy (
+            ClaimSet issuer, SamlSecurityTokenAuthenticator samlAuthenticator);
 
-		public abstract void MakeReadOnly ();
+        public abstract void MakeReadOnly ();
 
-		public abstract void ReadXml (XmlDictionaryReader reader,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer,
-			SecurityTokenResolver outOfBandTokenResolver);
+        public abstract void ReadXml (XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver);
 
-		public abstract void WriteXml (XmlDictionaryWriter writer,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer);
-	}
+        public abstract void WriteXml (XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer);
+    }
 }

@@ -4,10 +4,10 @@
 using System.Text;
 
 class X {
-	static void Main () {
-		X.Y(null);	
-	}
-	
-	void Y(StringBuilder someParam) {
-	}
+    static void Main () {
+        X.Y(null);    
+    }
+    
+    void Y(StringBuilder someParam) {
+    }
 }

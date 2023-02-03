@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -139,10 +139,10 @@ class C
         boo[] arrfoo = { p.bar, abc.far };
         goo += arrfoo; // Invalid
         goo -= arrfoo; // Invalid
-        goo += new boo[] { p.bar, abc.far };	// Invalid
-        goo -= new boo[] { p.bar, abc.far };	// Invalid
-        goo += Delegate.Combine(arrfoo);	// Invalid
-        goo += Delegate.Combine(goo, goo1);  	// Invalid
+        goo += new boo[] { p.bar, abc.far };    // Invalid
+        goo -= new boo[] { p.bar, abc.far };    // Invalid
+        goo += Delegate.Combine(arrfoo);    // Invalid
+        goo += Delegate.Combine(goo, goo1);      // Invalid
     }
 }
 ";
@@ -154,16 +154,16 @@ class C
                 //         goo -= arrfoo; // Invalid
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "arrfoo").WithArguments("boo[]", "boo"),
                 // (18,16): error CS0029: Cannot implicitly convert type 'boo[]' to 'boo'
-                //         goo += new boo[] { p.bar, abc.far };	// Invalid
+                //         goo += new boo[] { p.bar, abc.far };    // Invalid
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new boo[] { p.bar, abc.far }").WithArguments("boo[]", "boo"),
                 // (19,16): error CS0029: Cannot implicitly convert type 'boo[]' to 'boo'
-                //         goo -= new boo[] { p.bar, abc.far };	// Invalid
+                //         goo -= new boo[] { p.bar, abc.far };    // Invalid
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new boo[] { p.bar, abc.far }").WithArguments("boo[]", "boo"),
                 // (20,16): error CS0266: Cannot implicitly convert type 'System.Delegate' to 'boo'. An explicit conversion exists (are you missing a cast?)
-                //         goo += Delegate.Combine(arrfoo);	// Invalid
+                //         goo += Delegate.Combine(arrfoo);    // Invalid
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "Delegate.Combine(arrfoo)").WithArguments("System.Delegate", "boo"),
                 // (21,16): error CS0266: Cannot implicitly convert type 'System.Delegate' to 'boo'. An explicit conversion exists (are you missing a cast?)
-                //         goo += Delegate.Combine(goo, goo1);  	// Invalid
+                //         goo += Delegate.Combine(goo, goo1);      // Invalid
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "Delegate.Combine(goo, goo1)").WithArguments("System.Delegate", "boo")
                 );
         }
@@ -2472,9 +2472,9 @@ class Program
 {
     static void Main()
     {
-		var z = 1;
+        var z = 1;
     
-		(Console).WriteLine();                          // error
+        (Console).WriteLine();                          // error
         (System).Console.WriteLine();                   // error
         checked(Console).WriteLine();                   // error 
         checked(System).Console.WriteLine();            // error
@@ -7013,7 +7013,7 @@ using System;
  
 struct S
 {
-	int value;
+    int value;
 
     public S(int v)
     {
@@ -7047,7 +7047,7 @@ using System;
  
 struct S
 {
-	int value;
+    int value;
 
     public S(int v)
     {
@@ -14351,7 +14351,7 @@ public class A : Attribute
         System.Console.WriteLine(((x == y)) ?); // Invalid
         System.Console.WriteLine(((x == y)) ? (x++)); // Invalid
         System.Console.WriteLine(((x == y)) ? (x++) : (x++) : ((((y++)))));    // Invalid
-        System.Console.WriteLine(((x == y)) ?  : :); 	// Invalid
+        System.Console.WriteLine(((x == y)) ?  : :);     // Invalid
     }
 }
 ")
@@ -14378,13 +14378,13 @@ public class A : Attribute
                 //         System.Console.WriteLine(((x == y)) ? (x++) : (x++) : ((((y++)))));    // Invalid
                 Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(",").WithLocation(9, 63),
                 // (10,48): error CS1525: Invalid expression term ':'
-                //         System.Console.WriteLine(((x == y)) ?  : :); 	// Invalid
+                //         System.Console.WriteLine(((x == y)) ?  : :);     // Invalid
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ":").WithArguments(":").WithLocation(10, 48),
                 // (10,50): error CS1525: Invalid expression term ':'
-                //         System.Console.WriteLine(((x == y)) ?  : :); 	// Invalid
+                //         System.Console.WriteLine(((x == y)) ?  : :);     // Invalid
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ":").WithArguments(":").WithLocation(10, 50),
                 // (10,50): error CS1003: Syntax error, ',' expected
-                //         System.Console.WriteLine(((x == y)) ?  : :); 	// Invalid
+                //         System.Console.WriteLine(((x == y)) ?  : :);     // Invalid
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(10, 50));
         }
 
@@ -20090,7 +20090,7 @@ class Program
         bool con1 = true;
         s = con1 ? x++ : y++;    // OK
         s = b ? x++ : y++;
-        s = 1 < 2 ? x++ : y++; 	// y++ unreachable
+        s = 1 < 2 ? x++ : y++;     // y++ unreachable
     }
 }
 ";
@@ -22065,7 +22065,7 @@ public class Test
     public static void Main()
     {
     }
-}	
+}    
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(text).VerifyDiagnostics(
                 // (4,29): warning CS1712: Type parameter 'W' has no matching typeparam tag in the XML comment on 'List<T, W>' (but other type parameters do)

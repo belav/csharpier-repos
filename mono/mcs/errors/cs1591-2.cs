@@ -6,7 +6,7 @@ using System;
 
 namespace Testing
 {
-	public interface InterfaceTest
-	{
-	}
+    public interface InterfaceTest
+    {
+    }
 }

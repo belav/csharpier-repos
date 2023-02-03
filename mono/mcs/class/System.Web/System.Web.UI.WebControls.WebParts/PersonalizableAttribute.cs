@@ -34,131 +34,131 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	[AttributeUsageAttribute(AttributeTargets.Property)] 
-	public sealed class PersonalizableAttribute : Attribute
-	{
-		public static readonly PersonalizableAttribute Default;
-		public static readonly PersonalizableAttribute NotPersonalizable;
-		public static readonly PersonalizableAttribute Personalizable;
-		public static readonly PersonalizableAttribute SharedPersonalizable;
-		public static readonly PersonalizableAttribute UserPersonalizable;
+    [AttributeUsageAttribute(AttributeTargets.Property)] 
+    public sealed class PersonalizableAttribute : Attribute
+    {
+        public static readonly PersonalizableAttribute Default;
+        public static readonly PersonalizableAttribute NotPersonalizable;
+        public static readonly PersonalizableAttribute Personalizable;
+        public static readonly PersonalizableAttribute SharedPersonalizable;
+        public static readonly PersonalizableAttribute UserPersonalizable;
 
-		bool isPersonalizable;
-		bool isSensitive;
-		PersonalizationScope scope;
-		
-		static PersonalizableAttribute ()
-		{
-			Default = new PersonalizableAttribute (false);
-			NotPersonalizable = Default;
-			Personalizable = new PersonalizableAttribute (PersonalizationScope.User, false);
-			SharedPersonalizable = new PersonalizableAttribute (PersonalizationScope.Shared, false);
-			UserPersonalizable = new PersonalizableAttribute (PersonalizationScope.User, false);
-		}
-		
-		public PersonalizableAttribute () : this (true)
-		{
-		}
+        bool isPersonalizable;
+        bool isSensitive;
+        PersonalizationScope scope;
+        
+        static PersonalizableAttribute ()
+        {
+            Default = new PersonalizableAttribute (false);
+            NotPersonalizable = Default;
+            Personalizable = new PersonalizableAttribute (PersonalizationScope.User, false);
+            SharedPersonalizable = new PersonalizableAttribute (PersonalizationScope.Shared, false);
+            UserPersonalizable = new PersonalizableAttribute (PersonalizationScope.User, false);
+        }
+        
+        public PersonalizableAttribute () : this (true)
+        {
+        }
 
-		public PersonalizableAttribute (bool isPersonalizable)
-		{
-			this.isPersonalizable = isPersonalizable;
-			this.scope = PersonalizationScope.User;
-			this.isSensitive = false;
-		}
+        public PersonalizableAttribute (bool isPersonalizable)
+        {
+            this.isPersonalizable = isPersonalizable;
+            this.scope = PersonalizationScope.User;
+            this.isSensitive = false;
+        }
 
-		public PersonalizableAttribute (PersonalizationScope scope) : this (scope, false)
-		{
-		}
+        public PersonalizableAttribute (PersonalizationScope scope) : this (scope, false)
+        {
+        }
 
-		public PersonalizableAttribute (PersonalizationScope scope, bool isSensitive)
-		{
-			this.isPersonalizable = true;
-			this.scope = scope;
-			this.isSensitive = isSensitive;
-		}
+        public PersonalizableAttribute (PersonalizationScope scope, bool isSensitive)
+        {
+            this.isPersonalizable = true;
+            this.scope = scope;
+            this.isSensitive = isSensitive;
+        }
 
-		public bool IsPersonalizable {
-			get { return isPersonalizable; }
-		}
+        public bool IsPersonalizable {
+            get { return isPersonalizable; }
+        }
 
-		public bool IsSensitive {
-			get { return isSensitive; }
-		}
+        public bool IsSensitive {
+            get { return isSensitive; }
+        }
 
-		public PersonalizationScope Scope {
-			get { return scope; }
-		}
+        public PersonalizationScope Scope {
+            get { return scope; }
+        }
 
-		public override bool Equals (object obj)
-		{
-			PersonalizableAttribute attr = obj as PersonalizableAttribute;
-			if (attr == null)
-				return false;
+        public override bool Equals (object obj)
+        {
+            PersonalizableAttribute attr = obj as PersonalizableAttribute;
+            if (attr == null)
+                return false;
 
-			return (this.isPersonalizable == attr.IsPersonalizable &&
-				this.isSensitive == attr.IsSensitive &&
-				this.scope == attr.Scope);
-		}
-		
-		public override int GetHashCode ()
-		{
-			return (this.isPersonalizable.GetHashCode () ^
-				this.isSensitive.GetHashCode () ^
-				this.scope.GetHashCode ());
-		}
+            return (this.isPersonalizable == attr.IsPersonalizable &&
+                this.isSensitive == attr.IsSensitive &&
+                this.scope == attr.Scope);
+        }
+        
+        public override int GetHashCode ()
+        {
+            return (this.isPersonalizable.GetHashCode () ^
+                this.isSensitive.GetHashCode () ^
+                this.scope.GetHashCode ());
+        }
 
-		public static ICollection GetPersonalizableProperties (Type type)
-		{
-			if (type == null)
-				throw new ArgumentNullException ("type");
-			
-			PropertyInfo[] properties = type.GetProperties ();
-			if (properties == null || properties.Length == 0)
-				return new PropertyInfo [0];
-			List <PropertyInfo> ret = null;
-			
-			foreach (PropertyInfo pi in properties)
-				if (PropertyQualifies (pi)) {
-					if (ret == null)
-						ret = new List <PropertyInfo> ();
-					ret.Add (pi);
-				}
-			return ret;
-		}
+        public static ICollection GetPersonalizableProperties (Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException ("type");
+            
+            PropertyInfo[] properties = type.GetProperties ();
+            if (properties == null || properties.Length == 0)
+                return new PropertyInfo [0];
+            List <PropertyInfo> ret = null;
+            
+            foreach (PropertyInfo pi in properties)
+                if (PropertyQualifies (pi)) {
+                    if (ret == null)
+                        ret = new List <PropertyInfo> ();
+                    ret.Add (pi);
+                }
+            return ret;
+        }
 
-		static bool PropertyQualifies (PropertyInfo pi)
-		{
-			object[] attributes = pi.GetCustomAttributes (false);
-			if (attributes == null || attributes.Length == 0)
-				return false;
+        static bool PropertyQualifies (PropertyInfo pi)
+        {
+            object[] attributes = pi.GetCustomAttributes (false);
+            if (attributes == null || attributes.Length == 0)
+                return false;
 
-			PersonalizableAttribute attr;
-			MethodInfo mi;
-			foreach (object a in attributes) {
-				attr = a as PersonalizableAttribute;
-				if (attr == null || !attr.IsPersonalizable)
-					continue;
-				mi = pi.GetSetMethod (false);
-				if (mi == null)
-					throw new HttpException ("A public property on the type is marked as personalizable but is read-only.");
-				return true;
-			}
+            PersonalizableAttribute attr;
+            MethodInfo mi;
+            foreach (object a in attributes) {
+                attr = a as PersonalizableAttribute;
+                if (attr == null || !attr.IsPersonalizable)
+                    continue;
+                mi = pi.GetSetMethod (false);
+                if (mi == null)
+                    throw new HttpException ("A public property on the type is marked as personalizable but is read-only.");
+                return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public override bool IsDefaultAttribute ()
-		{
-			return PersonalizableAttribute.Equals (this, Default);
-		}
+        public override bool IsDefaultAttribute ()
+        {
+            return PersonalizableAttribute.Equals (this, Default);
+        }
 
-		public override bool Match (object obj)
-		{
-			PersonalizableAttribute attr = obj as PersonalizableAttribute;
-			if (obj == null)
-				return false;
-			return (this.isPersonalizable == attr.IsPersonalizable);
-		}
-	}
+        public override bool Match (object obj)
+        {
+            PersonalizableAttribute attr = obj as PersonalizableAttribute;
+            if (obj == null)
+                return false;
+            return (this.isPersonalizable == attr.IsPersonalizable);
+        }
+    }
 }

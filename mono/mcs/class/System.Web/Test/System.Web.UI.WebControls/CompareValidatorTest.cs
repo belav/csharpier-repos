@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.CompareValidator 
 //
 // Author:
-//	Chris Toshok (toshok@novell.com)
+//    Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -38,106 +38,106 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	class CompareValidatorPoker : CompareValidator {
-		public CompareValidatorPoker ()
-		{
-			TrackViewState (); 
-		}
-		
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+    class CompareValidatorPoker : CompareValidator {
+        public CompareValidatorPoker ()
+        {
+            TrackViewState (); 
+        }
+        
+        public object SaveState ()
+        {
+            return SaveViewState ();
+        }
 
-		public void LoadState (object o)
-		{
-			LoadViewState (o);
-		}
+        public void LoadState (object o)
+        {
+            LoadViewState (o);
+        }
 
-		public void CheckControlProperties ()
-		{
-			ControlPropertiesValid ();
-		}
+        public void CheckControlProperties ()
+        {
+            ControlPropertiesValid ();
+        }
 
-		public bool DoEvaluateIsValid ()
-		{
-			return EvaluateIsValid ();
-		}
-	}
-	
-	
-	[TestFixture]	
-	public class CompareValidatorTest : ValidatorTest {
+        public bool DoEvaluateIsValid ()
+        {
+            return EvaluateIsValid ();
+        }
+    }
+    
+    
+    [TestFixture]    
+    public class CompareValidatorTest : ValidatorTest {
 
-		[Test]
-		public void CompareValidator_ViewState ()
-		{
-			CompareValidatorPoker p = new CompareValidatorPoker ();
+        [Test]
+        public void CompareValidator_ViewState ()
+        {
+            CompareValidatorPoker p = new CompareValidatorPoker ();
 
-			Assert.AreEqual (p.ControlToCompare, String.Empty, "A1");
-			Assert.AreEqual (p.ValueToCompare, String.Empty, "A2");
+            Assert.AreEqual (p.ControlToCompare, String.Empty, "A1");
+            Assert.AreEqual (p.ValueToCompare, String.Empty, "A2");
 
-			p.ControlToCompare = "TextBox";
-			Assert.AreEqual ("TextBox", p.ControlToCompare, "A3");
+            p.ControlToCompare = "TextBox";
+            Assert.AreEqual ("TextBox", p.ControlToCompare, "A3");
 
-			p.ValueToCompare = "hello mom";
-			Assert.AreEqual ("hello mom", p.ValueToCompare, "A4");
+            p.ValueToCompare = "hello mom";
+            Assert.AreEqual ("hello mom", p.ValueToCompare, "A4");
 
-			object state = p.SaveState ();
+            object state = p.SaveState ();
 
-			CompareValidatorPoker copy = new CompareValidatorPoker ();
-			copy.LoadState (state);
-			Assert.AreEqual ("TextBox", copy.ControlToCompare, "A5");
-			Assert.AreEqual ("hello mom", copy.ValueToCompare, "A6");
-		}
+            CompareValidatorPoker copy = new CompareValidatorPoker ();
+            copy.LoadState (state);
+            Assert.AreEqual ("TextBox", copy.ControlToCompare, "A5");
+            Assert.AreEqual ("hello mom", copy.ValueToCompare, "A6");
+        }
 
-		[Test]
-		public void CompareValidator_ValueToCompareTest ()
-		{
-			CompareValidatorPoker p = new CompareValidatorPoker ();
-			TextBox box;
+        [Test]
+        public void CompareValidator_ValueToCompareTest ()
+        {
+            CompareValidatorPoker p = new CompareValidatorPoker ();
+            TextBox box;
 
-			StartValidationTest (p);
+            StartValidationTest (p);
 
-			p.Type = ValidationDataType.Integer;
-			p.Operator = ValidationCompareOperator.Equal;
-			p.ValueToCompare = "10";
+            p.Type = ValidationDataType.Integer;
+            p.Operator = ValidationCompareOperator.Equal;
+            p.ValueToCompare = "10";
 
-			box = SetValidationTextBox ("textbox", "10");
-			Assert.IsTrue (p.DoEvaluateIsValid (), "B1");
+            box = SetValidationTextBox ("textbox", "10");
+            Assert.IsTrue (p.DoEvaluateIsValid (), "B1");
 
-			box.Text = "11";
-			Assert.IsFalse (p.DoEvaluateIsValid (), "B2");
+            box.Text = "11";
+            Assert.IsFalse (p.DoEvaluateIsValid (), "B2");
 
-			StopValidationTest();
-		}
+            StopValidationTest();
+        }
 
-		[Test]
-		public void CompareValidator_ControlToCompareTest ()
-		{
-			CompareValidatorPoker p = new CompareValidatorPoker ();
-			TextBox box, box2;
+        [Test]
+        public void CompareValidator_ControlToCompareTest ()
+        {
+            CompareValidatorPoker p = new CompareValidatorPoker ();
+            TextBox box, box2;
 
-			StartValidationTest (p);
+            StartValidationTest (p);
 
-			p.Type = ValidationDataType.Integer;
-			p.Operator = ValidationCompareOperator.Equal;
-			p.ControlToCompare = "textbox2";
+            p.Type = ValidationDataType.Integer;
+            p.Operator = ValidationCompareOperator.Equal;
+            p.ControlToCompare = "textbox2";
 
-			box = SetValidationTextBox ("textbox", "10");
-			box2 = AddTextBox ("textbox2", "10");
+            box = SetValidationTextBox ("textbox", "10");
+            box2 = AddTextBox ("textbox2", "10");
 
-			Assert.IsTrue (p.DoEvaluateIsValid (), "C1");
+            Assert.IsTrue (p.DoEvaluateIsValid (), "C1");
 
-			box.Text = "11";
-			Assert.IsFalse (p.DoEvaluateIsValid (), "C2");
+            box.Text = "11";
+            Assert.IsFalse (p.DoEvaluateIsValid (), "C2");
 
-			box2.Text = "";
-			Assert.IsTrue (p.DoEvaluateIsValid (), "C3");
-			
-			StopValidationTest();
-		}
-	}
+            box2.Text = "";
+            Assert.IsTrue (p.DoEvaluateIsValid (), "C3");
+            
+            StopValidationTest();
+        }
+    }
 }
 
-		
+        

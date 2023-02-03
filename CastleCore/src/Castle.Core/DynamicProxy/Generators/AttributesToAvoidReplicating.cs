@@ -14,50 +14,50 @@
 
 namespace Castle.DynamicProxy.Generators
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
-	public static class AttributesToAvoidReplicating
-	{
-		private static readonly object lockObject = new object();
+    public static class AttributesToAvoidReplicating
+    {
+        private static readonly object lockObject = new object();
 
-		private static IList<Type> attributes;
+        private static IList<Type> attributes;
 
-		static AttributesToAvoidReplicating()
-		{
-			attributes = new List<Type>()
-			{
-				typeof(System.Runtime.InteropServices.ComImportAttribute),
-				typeof(System.Runtime.InteropServices.MarshalAsAttribute),
-				typeof(System.Runtime.InteropServices.TypeIdentifierAttribute),
-				typeof(System.Security.Permissions.SecurityAttribute),
-			};
-		}
+        static AttributesToAvoidReplicating()
+        {
+            attributes = new List<Type>()
+            {
+                typeof(System.Runtime.InteropServices.ComImportAttribute),
+                typeof(System.Runtime.InteropServices.MarshalAsAttribute),
+                typeof(System.Runtime.InteropServices.TypeIdentifierAttribute),
+                typeof(System.Security.Permissions.SecurityAttribute),
+            };
+        }
 
-		public static void Add(Type attribute)
-		{
-			// note: this class is made thread-safe by replacing the backing list rather than adding to it
-			lock (lockObject)
-			{
-				attributes = new List<Type>(attributes) { attribute };
-			}
-		}
+        public static void Add(Type attribute)
+        {
+            // note: this class is made thread-safe by replacing the backing list rather than adding to it
+            lock (lockObject)
+            {
+                attributes = new List<Type>(attributes) { attribute };
+            }
+        }
 
-		public static void Add<T>()
-		{
-			Add(typeof(T));
-		}
+        public static void Add<T>()
+        {
+            Add(typeof(T));
+        }
 
-		public static bool Contains(Type attribute)
-		{
-			return attributes.Contains(attribute);
-		}
+        public static bool Contains(Type attribute)
+        {
+            return attributes.Contains(attribute);
+        }
 
-		internal static bool ShouldAvoid(Type attribute)
-		{
-			return attributes.Any(attr => attr.IsAssignableFrom(attribute));
-		}
-	}
+        internal static bool ShouldAvoid(Type attribute)
+        {
+            return attributes.Any(attr => attr.IsAssignableFrom(attribute));
+        }
+    }
 }

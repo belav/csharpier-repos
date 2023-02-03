@@ -19,114 +19,114 @@ namespace MonoTests.System
 [TestFixture]
 public class IntegerFormatterTest
 {
-	private const int INT32 = 0;
-	private const int INT64 = 1;
-	private const int UINT32 = 2;
-	private const int UINT64 = 3;
-	private int testType;
+    private const int INT32 = 0;
+    private const int INT64 = 1;
+    private const int UINT32 = 2;
+    private const int UINT64 = 3;
+    private int testType;
 
-	public IntegerFormatterTest () {}
+    public IntegerFormatterTest () {}
 
-	[Test]
-	public void TestStandard ()
-	{
-		// Make the test Culture insensitive
-		NumberFormatInfo nfi = new NumberFormatInfo ();
-		nfi.CurrencySymbol = "$";
+    [Test]
+    public void TestStandard ()
+    {
+        // Make the test Culture insensitive
+        NumberFormatInfo nfi = new NumberFormatInfo ();
+        nfi.CurrencySymbol = "$";
 
-		StringReader sr = new StringReader (tutti);
+        StringReader sr = new StringReader (tutti);
 
-		string inputLine;
-		while ((inputLine = sr.ReadLine ()) != null) {
-			if (inputLine.IndexOf ('(') != -1)
-				ProcessLine (inputLine, nfi);
-			else
-				ChangeType (inputLine);
-		}
+        string inputLine;
+        while ((inputLine = sr.ReadLine ()) != null) {
+            if (inputLine.IndexOf ('(') != -1)
+                ProcessLine (inputLine, nfi);
+            else
+                ChangeType (inputLine);
+        }
 
-		sr.Close ();
-	}
+        sr.Close ();
+    }
 
-	private void ProcessLine (string testLine, NumberFormatInfo nfi)
-	{
-		string number = "0";
-		string format = "X";
-		string expected = "XXX";
-		int idxStart;
-		int idxEnd;
+    private void ProcessLine (string testLine, NumberFormatInfo nfi)
+    {
+        string number = "0";
+        string format = "X";
+        string expected = "XXX";
+        int idxStart;
+        int idxEnd;
 
-		idxStart = testLine.IndexOf ('(');
-		if (idxStart != -1){
-			idxStart++;
-			idxEnd = testLine.IndexOf (')');
-			number = testLine.Substring (idxStart,
-						     idxEnd - idxStart);
-		}
+        idxStart = testLine.IndexOf ('(');
+        if (idxStart != -1){
+            idxStart++;
+            idxEnd = testLine.IndexOf (')');
+            number = testLine.Substring (idxStart,
+                             idxEnd - idxStart);
+        }
 
-		idxStart = testLine.IndexOf ('(', idxStart);
-		if (idxStart != -1) {
-			idxStart++;
-			idxEnd = testLine.IndexOf (')', idxStart);
-			format = testLine.Substring (idxStart,
-						     idxEnd - idxStart);
-		}
+        idxStart = testLine.IndexOf ('(', idxStart);
+        if (idxStart != -1) {
+            idxStart++;
+            idxEnd = testLine.IndexOf (')', idxStart);
+            format = testLine.Substring (idxStart,
+                             idxEnd - idxStart);
+        }
 
-		idxStart = testLine.IndexOf ('(', idxStart);
-		if (idxStart != -1) {
-			idxStart++;
-			idxEnd = testLine.LastIndexOf (')');
-			expected = testLine.Substring (idxStart,
-						       idxEnd - idxStart);
-		}
+        idxStart = testLine.IndexOf ('(', idxStart);
+        if (idxStart != -1) {
+            idxStart++;
+            idxEnd = testLine.LastIndexOf (')');
+            expected = testLine.Substring (idxStart,
+                               idxEnd - idxStart);
+        }
 
-		DoTest (number, format, expected, nfi);
-	}
+        DoTest (number, format, expected, nfi);
+    }
 
-	private void DoTest (string number,
-				   string format, 
-				   string expected,
-				   NumberFormatInfo nfi)
-	{
-		string id = number + " " + format;
+    private void DoTest (string number,
+                   string format, 
+                   string expected,
+                   NumberFormatInfo nfi)
+    {
+        string id = number + " " + format;
 
-		switch (testType) {
-		case INT32:
-			int i32 = Int32.Parse (number, nfi);
-			Assert.AreEqual(expected, i32.ToString (format, nfi), id);
-			break;
-		case INT64:
-			long i64 = Int64.Parse (number, nfi);
-			Assert.AreEqual(expected, i64.ToString (format, nfi), id);
-			break;
-		case UINT32:
-			uint ui32 = UInt32.Parse (number, nfi);
-			Assert.AreEqual(expected, ui32.ToString (format, nfi), id);
-			break;
-		case UINT64:
-			ulong ui64 = UInt64.Parse (number, nfi);
-			Assert.AreEqual(expected, ui64.ToString (format, nfi), id);
-			break;
-		}
-	}
+        switch (testType) {
+        case INT32:
+            int i32 = Int32.Parse (number, nfi);
+            Assert.AreEqual(expected, i32.ToString (format, nfi), id);
+            break;
+        case INT64:
+            long i64 = Int64.Parse (number, nfi);
+            Assert.AreEqual(expected, i64.ToString (format, nfi), id);
+            break;
+        case UINT32:
+            uint ui32 = UInt32.Parse (number, nfi);
+            Assert.AreEqual(expected, ui32.ToString (format, nfi), id);
+            break;
+        case UINT64:
+            ulong ui64 = UInt64.Parse (number, nfi);
+            Assert.AreEqual(expected, ui64.ToString (format, nfi), id);
+            break;
+        }
+    }
 
-	private void ChangeType (string newType)
-	{
-		if (newType == "Int32")
-			testType = INT32;
-		else if (newType == "Int64")
-			testType = INT64;
-		else if (newType == "UInt32")
-			testType = UINT32;
-		else if (newType == "UInt64")
-			testType = UINT64;
-		else throw new Exception ("Test of type '" + newType + "' not supported.");
+    private void ChangeType (string newType)
+    {
+        if (newType == "Int32")
+            testType = INT32;
+        else if (newType == "Int64")
+            testType = INT64;
+        else if (newType == "UInt32")
+            testType = UINT32;
+        else if (newType == "UInt64")
+            testType = UINT64;
+        else throw new Exception ("Test of type '" + newType + "' not supported.");
 
-	}
+    }
 
-	private static string tutti = tutti_1 + tutti_2;
+    private static string tutti = tutti_1 + tutti_2;
 
-	const string tutti_1 =
-	"Int32\n" +
+    const string tutti_1 =
+    "Int32\n" +
 "(-2147483648) (C) (($2,147,483,648.00))\n" +
 "(-2147483648) (C0) (($2,147,483,648))\n" +
 "(-2147483648) (C1) (($2,147,483,648.0))\n" +

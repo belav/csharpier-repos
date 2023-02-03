@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,27 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
-	using System.Xml.Serialization;
-	using Castle.Components.DictionaryAdapter.Tests;
+    using System.Xml.Serialization;
+    using Castle.Components.DictionaryAdapter.Tests;
     using NUnit.Framework;
 
-	[TestFixture]
+    [TestFixture]
     public class XmlRootBehaviorTestCase : XmlAdapterTestCase
-	{
-		[XmlRoot("XX", Namespace = "urn:a")]
-		public interface IA
-		{
-			string A { get; set; }
-		}
+    {
+        [XmlRoot("XX", Namespace = "urn:a")]
+        public interface IA
+        {
+            string A { get; set; }
+        }
 
-		[Test]
-		public void Foo()
-		{
-			var foo = Create<IA>();
+        [Test]
+        public void Foo()
+        {
+            var foo = Create<IA>();
 
-			foo.A = "a";
+            foo.A = "a";
 
-			CustomAssert.AreXmlEquivalent("<XX xmlns='urn:a'> <A>a</A> </XX>", XmlAdapter.For(foo).Node.Xml);
-		}
-	}
+            CustomAssert.AreXmlEquivalent("<XX xmlns='urn:a'> <A>a</A> </XX>", XmlAdapter.For(foo).Node.Xml);
+        }
+    }
 }

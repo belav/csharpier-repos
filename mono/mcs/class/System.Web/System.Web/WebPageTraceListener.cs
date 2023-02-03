@@ -2,7 +2,7 @@
 // WebPageTraceListener.cs
 //
 // Author:
-//	Daniel Nauck  <dna(at)mono-project(dot)de>
+//    Daniel Nauck  <dna(at)mono-project(dot)de>
 //
 // Copyright (C) 2007 Daniel Nauck
 //
@@ -37,54 +37,54 @@ using System.Web.Util;
 
 namespace System.Web
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal),
-	AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal),
-	HostProtection (SecurityAction.LinkDemand, Synchronization = true)]
-	public class WebPageTraceListener : TraceListener
-	{
-		public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string message)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal),
+    AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal),
+    HostProtection (SecurityAction.LinkDemand, Synchronization = true)]
+    public class WebPageTraceListener : TraceListener
+    {
+        public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string message)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (source, message);
-		}
+            HttpContext.Current.Trace.Write (source, message);
+        }
 
-		public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string format, params object[] args)
-		{
-			TraceEvent (eventCache, source, severity, id, string.Format (Helpers.InvariantCulture, format, args));
-		}
+        public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string format, params object[] args)
+        {
+            TraceEvent (eventCache, source, severity, id, string.Format (Helpers.InvariantCulture, format, args));
+        }
 
-		public override void Write (string message)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void Write (string message)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (message);
-		}
+            HttpContext.Current.Trace.Write (message);
+        }
 
-		public override void Write (string message, string category)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void Write (string message, string category)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (category, message);
-		}
+            HttpContext.Current.Trace.Write (category, message);
+        }
 
-		public override void WriteLine (string message)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void WriteLine (string message)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (message);
-		}
+            HttpContext.Current.Trace.Write (message);
+        }
 
-		public override void WriteLine (string message, string category)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void WriteLine (string message, string category)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (category, message);
-		}
-	}
+            HttpContext.Current.Trace.Write (category, message);
+        }
+    }
 }

@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,33 +32,33 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("A41661D4-1417-11D5-9882-00C04FA02F40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIHistoryEntry {
+    [Guid ("A41661D4-1417-11D5-9882-00C04FA02F40")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIHistoryEntry {
 
 #region nsIHistoryEntry
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getURI ([MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getURI ([MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getTitle ([MarshalAs(UnmanagedType.LPWStr)]   string ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTitle ([MarshalAs(UnmanagedType.LPWStr)]   string ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getIsSubFrame ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getIsSubFrame ( out bool ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsHistoryEntry {
-		public static nsIHistoryEntry GetProxy (Mono.WebBrowser.IWebBrowser control, nsIHistoryEntry obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIHistoryEntry).GUID, obj);
-			return o as nsIHistoryEntry;
-		}
-	}
+    internal class nsHistoryEntry {
+        public static nsIHistoryEntry GetProxy (Mono.WebBrowser.IWebBrowser control, nsIHistoryEntry obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIHistoryEntry).GUID, obj);
+            return o as nsIHistoryEntry;
+        }
+    }
 }

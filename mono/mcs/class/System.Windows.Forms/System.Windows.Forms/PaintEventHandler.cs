@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -29,5 +29,5 @@
 
 namespace System.Windows.Forms 
 {
-	public delegate void PaintEventHandler (object sender, PaintEventArgs e);
+    public delegate void PaintEventHandler (object sender, PaintEventArgs e);
 }

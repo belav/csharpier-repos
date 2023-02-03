@@ -1,9 +1,9 @@
 //
 // TemplateContainerAttributeCas.cs 
-//	- CAS unit tests for System.Web.UI.TemplateContainerAttribute
+//    - CAS unit tests for System.Web.UI.TemplateContainerAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,39 +38,39 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[NUnit.Framework.Category ("CAS")]
-	public class TemplateContainerAttributeCas : AspNetHostingMinimal {
+    [TestFixture]
+    [NUnit.Framework.Category ("CAS")]
+    public class TemplateContainerAttributeCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor1_Deny_Unrestricted ()
-		{
-			TemplateContainerAttribute tca = new TemplateContainerAttribute (null);
-			Assert.IsNull (tca.ContainerType, "ContainerType");
-			Assert.AreEqual (BindingDirection.OneWay, tca.BindingDirection, "BindingDirection");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted ()
+        {
+            TemplateContainerAttribute tca = new TemplateContainerAttribute (null);
+            Assert.IsNull (tca.ContainerType, "ContainerType");
+            Assert.AreEqual (BindingDirection.OneWay, tca.BindingDirection, "BindingDirection");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			TemplateContainerAttribute tca = new TemplateContainerAttribute (typeof (string), BindingDirection.TwoWay);
-			Assert.AreEqual (typeof (string), tca.ContainerType, "ContainerType");
-			Assert.AreEqual (BindingDirection.TwoWay, tca.BindingDirection, "BindingDirection");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted ()
+        {
+            TemplateContainerAttribute tca = new TemplateContainerAttribute (typeof (string), BindingDirection.TwoWay);
+            Assert.AreEqual (typeof (string), tca.ContainerType, "ContainerType");
+            Assert.AreEqual (BindingDirection.TwoWay, tca.BindingDirection, "BindingDirection");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Type) });
-			Assert.IsNotNull (ci, ".ctor(Type)");
-			return ci.Invoke (new object[1] { null });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Type) });
+            Assert.IsNotNull (ci, ".ctor(Type)");
+            return ci.Invoke (new object[1] { null });
+        }
 
-		public override Type Type {
-			get { return typeof (TemplateContainerAttribute); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (TemplateContainerAttribute); }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.Adapters.HideDisabledControlAdapter
 //
 // Author:
-//	Dean Brettle (dean@brettle.com)
+//    Dean Brettle (dean@brettle.com)
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -42,58 +42,58 @@ using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
-	[TestFixture]
-	public class HideDisabledControlAdapterTest
-	{
-		[Test]
-		public void Render ()
-		{
-			WebControl parent = new MyWebControl();
-			MyWebControl c = new MyWebControl ();
-			SystemWebTestShim.HideDisabledControlAdapter a = new SystemWebTestShim.HideDisabledControlAdapter (c);
-			StringWriter sw;
-			HtmlTextWriter w;
+    [TestFixture]
+    public class HideDisabledControlAdapterTest
+    {
+        [Test]
+        public void Render ()
+        {
+            WebControl parent = new MyWebControl();
+            MyWebControl c = new MyWebControl ();
+            SystemWebTestShim.HideDisabledControlAdapter a = new SystemWebTestShim.HideDisabledControlAdapter (c);
+            StringWriter sw;
+            HtmlTextWriter w;
 
-			sw = new StringWriter();
-			w = new HtmlTextWriter(sw);
-			a.Render (w);
-			Assert.AreEqual ("RenderBeginTag\nRenderContents\nRenderEndTag\n", sw.ToString().Replace ("\r", ""), "Render #1");
-			
-			
-			sw = new StringWriter();
-			w = new HtmlTextWriter(sw);
-			c.Enabled = false;
-			a.Render (w);			
-			Assert.AreEqual ("", sw.ToString(), "Render #2");
-			
-			sw = new StringWriter();
-			w = new HtmlTextWriter(sw);
-			parent.Enabled = false;
-			c.Enabled = true;
-			parent.Controls.Add(c);
-			a.Render (w);			
-			Assert.AreEqual ("", sw.ToString(), "Render #3");
-		}
+            sw = new StringWriter();
+            w = new HtmlTextWriter(sw);
+            a.Render (w);
+            Assert.AreEqual ("RenderBeginTag\nRenderContents\nRenderEndTag\n", sw.ToString().Replace ("\r", ""), "Render #1");
+            
+            
+            sw = new StringWriter();
+            w = new HtmlTextWriter(sw);
+            c.Enabled = false;
+            a.Render (w);            
+            Assert.AreEqual ("", sw.ToString(), "Render #2");
+            
+            sw = new StringWriter();
+            w = new HtmlTextWriter(sw);
+            parent.Enabled = false;
+            c.Enabled = true;
+            parent.Controls.Add(c);
+            a.Render (w);            
+            Assert.AreEqual ("", sw.ToString(), "Render #3");
+        }
 
 #region Support classes
-		
-		class MyWebControl : WebControl
-		{
-			public override void RenderBeginTag (HtmlTextWriter w)
-			{
-				w.WriteLine("RenderBeginTag");
-			}
+        
+        class MyWebControl : WebControl
+        {
+            public override void RenderBeginTag (HtmlTextWriter w)
+            {
+                w.WriteLine("RenderBeginTag");
+            }
 
-			protected internal override void RenderContents (HtmlTextWriter w)
-			{
-				w.WriteLine("RenderContents");
-			}
+            protected internal override void RenderContents (HtmlTextWriter w)
+            {
+                w.WriteLine("RenderContents");
+            }
 
-			public override void RenderEndTag (HtmlTextWriter w)
-			{
-				w.WriteLine("RenderEndTag");
-			}
-		}
+            public override void RenderEndTag (HtmlTextWriter w)
+            {
+                w.WriteLine("RenderEndTag");
+            }
+        }
 #endregion
-	}
+    }
 }

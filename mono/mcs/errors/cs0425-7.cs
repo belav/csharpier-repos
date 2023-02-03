@@ -4,7 +4,7 @@
 
 public class CB : CA, IA
 {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

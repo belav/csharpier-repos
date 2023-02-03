@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.ActiveDesignSurfaceChangedEventHandler
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -33,6 +33,6 @@ using System;
 namespace System.ComponentModel.Design
 {
 
-	public delegate void ActiveDesignSurfaceChangedEventHandler (object sender, ActiveDesignSurfaceChangedEventArgs e);
+    public delegate void ActiveDesignSurfaceChangedEventHandler (object sender, ActiveDesignSurfaceChangedEventArgs e);
 }
 

@@ -35,51 +35,51 @@ using System.Runtime.Remoting.Channels;
 
 namespace Mono.Remoting.Channels.Unix
 {
-	internal class UnixBinaryServerFormatterSinkProvider: IServerFormatterSinkProvider, IServerChannelSinkProvider
-	{
-		IServerChannelSinkProvider next = null;
-		UnixBinaryCore _binaryCore;
-		
-		internal static string[] AllowedProperties = new string [] { "includeVersions", "strictBinding" };
+    internal class UnixBinaryServerFormatterSinkProvider: IServerFormatterSinkProvider, IServerChannelSinkProvider
+    {
+        IServerChannelSinkProvider next = null;
+        UnixBinaryCore _binaryCore;
+        
+        internal static string[] AllowedProperties = new string [] { "includeVersions", "strictBinding" };
 
-		public UnixBinaryServerFormatterSinkProvider ()
-		{
-			_binaryCore = UnixBinaryCore.DefaultInstance;
-		}
+        public UnixBinaryServerFormatterSinkProvider ()
+        {
+            _binaryCore = UnixBinaryCore.DefaultInstance;
+        }
 
-		public UnixBinaryServerFormatterSinkProvider (IDictionary properties, ICollection providerData)
-		{
-			_binaryCore = new UnixBinaryCore (this, properties, AllowedProperties);
-		}
+        public UnixBinaryServerFormatterSinkProvider (IDictionary properties, ICollection providerData)
+        {
+            _binaryCore = new UnixBinaryCore (this, properties, AllowedProperties);
+        }
 
-		public IServerChannelSinkProvider Next
-		{
-			get {
-				return next;
-			}
+        public IServerChannelSinkProvider Next
+        {
+            get {
+                return next;
+            }
 
-			set {
-				next = value;
-			}
-		}
+            set {
+                next = value;
+            }
+        }
 
-		public IServerChannelSink CreateSink (IChannelReceiver channel)
-		{
-			IServerChannelSink next_sink = null;
-			UnixBinaryServerFormatterSink result;
-			
-			if (next != null)
-				next_sink = next.CreateSink (channel);
-			
-			result = new UnixBinaryServerFormatterSink (next_sink, channel);
+        public IServerChannelSink CreateSink (IChannelReceiver channel)
+        {
+            IServerChannelSink next_sink = null;
+            UnixBinaryServerFormatterSink result;
+            
+            if (next != null)
+                next_sink = next.CreateSink (channel);
+            
+            result = new UnixBinaryServerFormatterSink (next_sink, channel);
 
-			result.BinaryCore = _binaryCore;
-			return result;
-		}
+            result.BinaryCore = _binaryCore;
+            return result;
+        }
 
-		public void GetChannelData (IChannelDataStore channelData)
-		{
-			// Nothing to add here
-		}
-	}
+        public void GetChannelData (IChannelDataStore channelData)
+        {
+            // Nothing to add here
+        }
+    }
 }

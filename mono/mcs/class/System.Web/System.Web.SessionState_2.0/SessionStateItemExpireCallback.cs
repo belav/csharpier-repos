@@ -2,7 +2,7 @@
 // System.Web.SessionState.SessionStateItemExpireCallback
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -30,7 +30,7 @@
 
 namespace System.Web.SessionState
 {
-	public delegate void SessionStateItemExpireCallback (
-				string id, SessionStateStoreData item);
+    public delegate void SessionStateItemExpireCallback (
+                string id, SessionStateStoreData item);
 }
 

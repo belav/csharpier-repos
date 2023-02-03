@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum BindingCompleteState
-	{
-		Success = 0,
-		DataError = 1,
-		Exception = 2
-	}
+    public enum BindingCompleteState
+    {
+        Success = 0,
+        DataError = 1,
+        Exception = 2
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.  All rights reserved 
+// Copyright (c) Microsoft Corporation.  All rights reserved 
 // This program uses code hyperlinks available as part of the HyperAddin Visual Studio plug-in.
 // It is available from http://www.codeplex.com/hyperAddin 
 #define FEATURE_MANAGED_ETW

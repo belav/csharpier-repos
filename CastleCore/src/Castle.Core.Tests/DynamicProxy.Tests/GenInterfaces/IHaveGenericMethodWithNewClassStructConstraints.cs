@@ -14,11 +14,11 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	public interface IHaveGenericMethodWithNewClassStructConstraints
-	{
-		void MethodVoid<T, U, V>(T arg1, U arg2, V arg3)
-			where T : new()
-			where U : class
-			where V : struct;
-	}
+    public interface IHaveGenericMethodWithNewClassStructConstraints
+    {
+        void MethodVoid<T, U, V>(T arg1, U arg2, V arg3)
+            where T : new()
+            where U : class
+            where V : struct;
+    }
 }

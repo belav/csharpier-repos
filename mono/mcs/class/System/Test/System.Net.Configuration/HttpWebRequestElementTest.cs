@@ -15,20 +15,20 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {
-	[TestFixture]
-	public class HttpWebRequestElementTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			HttpWebRequestElement element = new HttpWebRequestElement ();
+    [TestFixture]
+    public class HttpWebRequestElementTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            HttpWebRequestElement element = new HttpWebRequestElement ();
 
-			Assert.AreEqual (64, element.MaximumErrorResponseLength, "#1");
-			Assert.AreEqual (64, element.MaximumResponseHeadersLength, "#2");
-			Assert.AreEqual (-1, element.MaximumUnauthorizedUploadLength, "#3");
-			Assert.AreEqual (false, element.UseUnsafeHeaderParsing, "#4");
-		}
-	}
+            Assert.AreEqual (64, element.MaximumErrorResponseLength, "#1");
+            Assert.AreEqual (64, element.MaximumResponseHeadersLength, "#2");
+            Assert.AreEqual (-1, element.MaximumUnauthorizedUploadLength, "#3");
+            Assert.AreEqual (false, element.UseUnsafeHeaderParsing, "#4");
+        }
+    }
 }
 
 #endif

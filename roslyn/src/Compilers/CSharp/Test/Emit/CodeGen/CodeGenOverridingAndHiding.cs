@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -345,7 +345,7 @@ Class5.Member2",
         public void TestOverridingChangeGenericParameterNames()
         {
             // Tests:
-            // Change names of method-level type parameters in overridden method â€“ test that we emit the type parameters correctly 
+            // Change names of method-level type parameters in overridden method – test that we emit the type parameters correctly 
 
             var source = @"
 using System;
@@ -491,7 +491,7 @@ Derived.Method3([6], [7])",
         public void TestOverridingVirtualWithAbstract()
         {
             // Tests: 
-            // Override virtual member with abstract member â€“ override this abstract member in further derived class 
+            // Override virtual member with abstract member – override this abstract member in further derived class 
 
             var source = @"
 using System;
@@ -806,7 +806,7 @@ Base.set_Property()");
         {
             // Tests: 
             // Override virtual methods declared on object (ToString, GetHashCode etc.) 
-            // Sanity check â€“ it should be possible to invoke virtual methods declared on object
+            // Sanity check – it should be possible to invoke virtual methods declared on object
             // from within derived type using base.ToString() etc.
 
             var source = @"
@@ -986,8 +986,8 @@ Derived2.Finalize()
         public void TestOverrideResolution2()
         {
             // Tests:
-            // Override overloaded base virtual / abstract member â€“ overloads differ by generic type parameter count
-            // Override overloaded base virtual / abstract member â€“ overloads spread across multiple base types
+            // Override overloaded base virtual / abstract member – overloads differ by generic type parameter count
+            // Override overloaded base virtual / abstract member – overloads spread across multiple base types
 
             var source = @"
 using System;
@@ -1036,8 +1036,8 @@ Derived.Method<,>)");
         public void TestOverrideResolution1()
         {
             // Tests:
-            // Override overloaded base virtual / abstract member â€“ overloads differ by parameter types and count
-            // Override overloaded base virtual / abstract member â€“ overloads spread across multiple base types
+            // Override overloaded base virtual / abstract member – overloads differ by parameter types and count
+            // Override overloaded base virtual / abstract member – overloads spread across multiple base types
 
             var source = @"
 using System;
@@ -2469,7 +2469,7 @@ Derived.set_Property",
         {
             // Tests:
             // Hide public base member with inaccessible internal virtual derived member
-            // On further derived try to override public base member â€“ this should result in PEVerify failure
+            // On further derived try to override public base member – this should result in PEVerify failure
 
             var source = @"
 using System;
@@ -2596,7 +2596,7 @@ public class Test
         {
             // Tests:
             // Hide public base member with inaccessible (internal) derived member
-            // In further derived class override / invoke public base member â€“ try hiding with static and instance members
+            // In further derived class override / invoke public base member – try hiding with static and instance members
 
             var source = @"
 using System;
@@ -2686,7 +2686,7 @@ Derived.set_Property",
         public void TestHideSealedMember()
         {
             // Tests:
-            // Hide sealed member with virtual / abstract member â€“ override this member in further derived class
+            // Hide sealed member with virtual / abstract member – override this member in further derived class
 
             var source = @"
 using System;
@@ -3236,7 +3236,7 @@ partial class Test
         public void TestOverridingGenericNestedClasses()
         {
             // Tests:
-            // Sanity check â€“ use open (T) and closed (C<String>) generic types in the signature of overriding methods
+            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of overriding methods
             // Override members of generic base class nested inside other generic classes
 
             var source = @"
@@ -3610,7 +3610,7 @@ public class Test
         public void TestOverridingGenericClasses_HideTypeParameter()
         {
             // Tests:
-            // Override generic methods on generic classes â€“ test case where type parameter 
+            // Override generic methods on generic classes – test case where type parameter 
             // on method hides the type parameter on class (both in base type and in overriding type)
 
             var source = @"

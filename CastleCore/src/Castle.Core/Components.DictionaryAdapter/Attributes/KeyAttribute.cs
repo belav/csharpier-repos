@@ -14,37 +14,37 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Assigns a specific dictionary key.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public class KeyAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
-	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="KeyAttribute"/> class.
-		/// </summary>
-		/// <param name="key">The key.</param>
-		public KeyAttribute(string key)
-		{
-			Key = key;
-		}
+    /// <summary>
+    /// Assigns a specific dictionary key.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class KeyAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyAttribute"/> class.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public KeyAttribute(string key)
+        {
+            Key = key;
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="KeyAttribute"/> class.
-		/// </summary>
-		/// <param name="keys">The compound key.</param>
-		public KeyAttribute(string[] keys)
-		{
-			Key = string.Join(",", keys);
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyAttribute"/> class.
+        /// </summary>
+        /// <param name="keys">The compound key.</param>
+        public KeyAttribute(string[] keys)
+        {
+            Key = string.Join(",", keys);
+        }
 
-		public string Key { get; private set; }
+        public string Key { get; private set; }
 
-		string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
-		{
-			return Key;
-		}
-	}
+        string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
+        {
+            return Key;
+        }
+    }
 }

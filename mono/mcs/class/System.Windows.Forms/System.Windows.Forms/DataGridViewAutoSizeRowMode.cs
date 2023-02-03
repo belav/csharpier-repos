@@ -20,16 +20,16 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public enum DataGridViewAutoSizeRowMode {
-		RowHeader = 1,
-		AllCellsExceptHeader = 2,
-		AllCells = 3
-	}
+    public enum DataGridViewAutoSizeRowMode {
+        RowHeader = 1,
+        AllCellsExceptHeader = 2,
+        AllCells = 3
+    }
 
 }

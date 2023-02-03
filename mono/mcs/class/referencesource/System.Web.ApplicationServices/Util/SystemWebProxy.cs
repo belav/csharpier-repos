@@ -1,4 +1,4 @@
-ï»¿//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // <copyright file="SystemWebProxy.cs" company="Microsoft">
 //    Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -42,7 +42,7 @@ namespace System.Web.Util {
         }
 
         // Partially trusted callers might not have permissions to create an instance of 
-        // System.Webâ€™s MembershipAdapter type (itâ€™s an internal type), so give them access.
+        // System.Web’s MembershipAdapter type (it’s an internal type), so give them access.
         [ReflectionPermission(SecurityAction.Assert, Flags=ReflectionPermissionFlag.MemberAccess)]
         private static object DangerousCreateInstance(Type type) {
 

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -471,11 +471,11 @@ public class neutral
             Assert.Empty(other.GetDiagnostics());
             Assert.Equal("MossBrain", ((SourceAssemblySymbol)other.Assembly).Company);
 
-            s = @"[assembly: System.Reflection.AssemblyCompany(""微软"")] public class C {}";
+            s = @"[assembly: System.Reflection.AssemblyCompany(""??"")] public class C {}";
 
             other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             Assert.Empty(other.GetDiagnostics());
-            Assert.Equal("微软", ((SourceAssemblySymbol)other.Assembly).Company);
+            Assert.Equal("??", ((SourceAssemblySymbol)other.Assembly).Company);
         }
 
         [Fact]
@@ -491,11 +491,11 @@ public class neutral
         [Fact]
         public void CopyrightAttribute()
         {
-            string s = @"[assembly: System.Reflection.AssemblyCopyright(""مايكروسوفت"")] public class C {}";
+            string s = @"[assembly: System.Reflection.AssemblyCopyright(""??????????"")] public class C {}";
 
             var other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             Assert.Empty(other.GetDiagnostics());
-            Assert.Equal("مايكروسوفت", ((SourceAssemblySymbol)other.Assembly).Copyright);
+            Assert.Equal("??????????", ((SourceAssemblySymbol)other.Assembly).Copyright);
         }
 
         [Fact]
@@ -1408,26 +1408,26 @@ using System.Runtime.CompilerServices;
         {
             // Attribute with AllowMultiple = True
             string source = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]  		    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]		        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]		        // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]		            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]              // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]                // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]                // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]                    // unique
 
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]  		                // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]	    // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                          // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]        // unique
 
 class Program
 {
@@ -1448,11 +1448,11 @@ class Program
             // Attribute with AllowMultiple = False
 
             string source1 = @"
-[assembly: UserDefinedAssemblyAttrNoAllowMultipleAttribute(0)]  		            // unique
+[assembly: UserDefinedAssemblyAttrNoAllowMultipleAttribute(0)]                      // unique
 ";
 
             string source2 = @"
-[assembly: UserDefinedAssemblyAttrNoAllowMultipleAttribute(0)]  		            // duplicate ignored, no error because identical
+[assembly: UserDefinedAssemblyAttrNoAllowMultipleAttribute(0)]                      // duplicate ignored, no error because identical
 ";
             string defaultHeaderString = @"
 using System;
@@ -1485,26 +1485,26 @@ using System;
         {
             // Duplicate ignored attributes in netmodule
             string netmoduleAttributes = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]  		    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]		        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]		        // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]		            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]              // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]                // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]                // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]                    // unique
 
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]  		                // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]	    // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                          // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]        // unique
 ";
             MetadataReference netmoduleRef = GetNetModuleWithAssemblyAttributesRef(s_defaultNetModuleSourceHeader + netmoduleAttributes + s_defaultNetModuleSourceBody);
 
@@ -1525,32 +1525,32 @@ class Program
         public void AssemblyAttributesFromNetModuleDropIdentical_02()
         {
             string netmodule1Attributes = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]		        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]  		    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]		        // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]		            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]                // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]              // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]                // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]                    // unique
 
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // unique
 ";
 
             string netmodule2Attributes = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
 ";
             string netmodule3Attributes = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]  		                // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                          // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
 ";
             string defaultBodyString = @"
 using System;
@@ -1579,30 +1579,30 @@ class Program
         {
             // All duplicate ignored attributes in netmodule
             string netmoduleAttributes = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]		        // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]  		                // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]                // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                          // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
 ";
             MetadataReference netmoduleRef = GetNetModuleWithAssemblyAttributesRef(s_defaultNetModuleSourceHeader + netmoduleAttributes + s_defaultNetModuleSourceBody);
 
             string source = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]  		    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]		        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]		            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]              // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]                // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]                    // unique
 
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]	    // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]        // unique
 
 class Program
 {
@@ -1621,35 +1621,35 @@ class Program
         {
             // Duplicate ignored attributes in netmodule & source
             string netmoduleAttributes = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]		        // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]  		                // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]                // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                          // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
 ";
             MetadataReference netmoduleRef = GetNetModuleWithAssemblyAttributesRef(s_defaultNetModuleSourceHeader + netmoduleAttributes + s_defaultNetModuleSourceBody);
 
             string source = @"
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]  		            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]  		            // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]  		    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]		        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]		        // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]	        // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]		            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(1)]                      // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0)]                      // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]              // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str2"")]                // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(""str1"")]                // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)0)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute((object)null)]            // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(null)]                    // unique
 
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]  		                // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]			            // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // unique
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]	    // duplicate
-[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]	    // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"")]                          // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str2"")]                        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str2"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str2"", Text = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // unique
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text = ""str1"", Text2 = ""str1"")]        // duplicate
+[assembly: UserDefinedAssemblyAttrAllowMultipleAttribute(0, Text2 = ""str1"", Text = ""str1"")]        // unique
 
 class Program
 {

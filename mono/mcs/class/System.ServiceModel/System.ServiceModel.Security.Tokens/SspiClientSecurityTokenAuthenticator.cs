@@ -2,7 +2,7 @@
 // SspiClientSecurityTokenAuthenticator.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -46,31 +46,31 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Security.Tokens
 {
-	// FIXME: implement all
-	class SspiClientSecurityTokenAuthenticator : SecurityTokenAuthenticator
-	{
-		ClientCredentialsSecurityTokenManager manager;
+    // FIXME: implement all
+    class SspiClientSecurityTokenAuthenticator : SecurityTokenAuthenticator
+    {
+        ClientCredentialsSecurityTokenManager manager;
 
-		public SspiClientSecurityTokenAuthenticator (
-			ClientCredentialsSecurityTokenManager manager, 
-			SecurityTokenRequirement r)
-		{
-			this.manager = manager;
-		}
+        public SspiClientSecurityTokenAuthenticator (
+            ClientCredentialsSecurityTokenManager manager, 
+            SecurityTokenRequirement r)
+        {
+            this.manager = manager;
+        }
 
-		public ClientCredentialsSecurityTokenManager Manager {
-			get { return manager; }
-		}
+        public ClientCredentialsSecurityTokenManager Manager {
+            get { return manager; }
+        }
 
-		protected override bool CanValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override bool CanValidateTokenCore (SecurityToken token)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override ReadOnlyCollection<IAuthorizationPolicy>
+            ValidateTokenCore (SecurityToken token)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -10,10 +10,10 @@ class MyException : Exception
 
 public class Help
 {
-	public static Exception s_exceptionToThrow;
-	public static bool s_matchingException;
+    public static Exception s_exceptionToThrow;
+    public static bool s_matchingException;
 
-	public static Object s_object = new object();
+    public static Object s_object = new object();
 }
 public class A<T>
 where T: Exception

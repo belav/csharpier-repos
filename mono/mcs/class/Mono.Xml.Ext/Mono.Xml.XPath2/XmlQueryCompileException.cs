@@ -36,37 +36,37 @@ using System.Runtime.Serialization;
 
 namespace System.Xml.Query
 {
-	[Serializable]
-	public class XmlQueryCompileException : XmlQueryException
-	{
-		#region Constructors
+    [Serializable]
+    public class XmlQueryCompileException : XmlQueryException
+    {
+        #region Constructors
 
-		protected XmlQueryCompileException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected XmlQueryCompileException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+        }
 
-		public XmlQueryCompileException ()
-			: base ("An XML Query Compile Exception has occurred.")
-		{
-		}
+        public XmlQueryCompileException ()
+            : base ("An XML Query Compile Exception has occurred.")
+        {
+        }
 
-		public XmlQueryCompileException (string res)
-			: this (res, null, null, null)
-		{
-		}
+        public XmlQueryCompileException (string res)
+            : this (res, null, null, null)
+        {
+        }
 
-		public XmlQueryCompileException (string resource, Exception exception)
-			: this (resource, null, null, exception)
-		{
-		}
+        public XmlQueryCompileException (string resource, Exception exception)
+            : this (resource, null, null, exception)
+        {
+        }
 
-		internal XmlQueryCompileException (string message, IXmlLineInfo li, string sourceUri, Exception innerException)
-			: base (message, li, sourceUri, innerException)
-		{
-		}
+        internal XmlQueryCompileException (string message, IXmlLineInfo li, string sourceUri, Exception innerException)
+            : base (message, li, sourceUri, innerException)
+        {
+        }
 
-		#endregion // Constructors
-	}
+        #endregion // Constructors
+    }
 }
 

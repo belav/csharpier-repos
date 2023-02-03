@@ -9,5 +9,5 @@ readonly partial struct S
 
 partial struct S
 {
-	int field;
+    int field;
 }

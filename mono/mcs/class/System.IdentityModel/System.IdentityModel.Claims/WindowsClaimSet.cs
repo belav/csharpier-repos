@@ -2,7 +2,7 @@
 // WindowsClaimSet.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,82 +33,82 @@ using System.Security.Principal;
 
 namespace System.IdentityModel.Claims
 {
-	public class WindowsClaimSet : ClaimSet, IDisposable
-	{
-		WindowsIdentity identity;
-		DateTime expiration_time;
+    public class WindowsClaimSet : ClaimSet, IDisposable
+    {
+        WindowsIdentity identity;
+        DateTime expiration_time;
 
-		// Constructors
+        // Constructors
 
-		[MonoTODO]
-		public WindowsClaimSet (WindowsIdentity windowsIdentity)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public WindowsClaimSet (WindowsIdentity windowsIdentity)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public WindowsClaimSet (WindowsIdentity windowsIdentity, bool includeWindowsGroups)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public WindowsClaimSet (WindowsIdentity windowsIdentity, bool includeWindowsGroups)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public WindowsClaimSet (WindowsIdentity windowsIdentity, DateTime expirationTime)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public WindowsClaimSet (WindowsIdentity windowsIdentity, DateTime expirationTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public WindowsClaimSet (WindowsIdentity windowsIdentity, bool includeWindowsGroups, DateTime expirationTime)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public WindowsClaimSet (WindowsIdentity windowsIdentity, bool includeWindowsGroups, DateTime expirationTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		// Properties
+        // Properties
 
-		public override int Count {
-			get { throw new NotImplementedException (); }
-		}
+        public override int Count {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override ClaimSet Issuer {
-			get { throw new NotImplementedException (); }
-		}
+        public override ClaimSet Issuer {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override Claim this [int index] {
-			get { throw new NotImplementedException (); }
-		}
+        public override Claim this [int index] {
+            get { throw new NotImplementedException (); }
+        }
 
-		public DateTime ExpirationTime {
-			get { return expiration_time; }
-		}
+        public DateTime ExpirationTime {
+            get { return expiration_time; }
+        }
 
-		public WindowsIdentity WindowsIdentity {
-			get { return identity; }
-		}
+        public WindowsIdentity WindowsIdentity {
+            get { return identity; }
+        }
 
-		// Methods
+        // Methods
 
-		[MonoTODO]
-		public void Dispose ()
-		{
-		}
+        [MonoTODO]
+        public void Dispose ()
+        {
+        }
 
-		[MonoTODO]
-		public override IEnumerable<Claim> FindClaims (
-			string claimType, string right)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override IEnumerable<Claim> FindClaims (
+            string claimType, string right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override IEnumerator<Claim> GetEnumerator ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override IEnumerator<Claim> GetEnumerator ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        public override string ToString ()
+        {
+            return base.ToString ();
+        }
+    }
 }

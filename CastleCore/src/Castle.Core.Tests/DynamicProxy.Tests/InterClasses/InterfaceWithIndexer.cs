@@ -14,8 +14,8 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	public interface InterfaceWithIndexer
-	{
-		object this[int index] { get; set; }
-	}
+    public interface InterfaceWithIndexer
+    {
+        object this[int index] { get; set; }
+    }
 }

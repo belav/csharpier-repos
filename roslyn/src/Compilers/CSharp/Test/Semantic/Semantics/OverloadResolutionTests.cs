@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1917,7 +1917,7 @@ class Test2
   {
     .param [3]
     .custom instance void [mscorlib]System.ParamArrayAttribute::.ctor() = {}
-	ret
+    ret
   } // end of method Derived::Method2
 
   //// Removes 'params' ////
@@ -1958,7 +1958,7 @@ class Test2
         public void TestBaseAccessForAbstractMembers()
         {
             // Tests:
-            // Override virtual member with abstract member â€“ override this abstract member in further derived class
+            // Override virtual member with abstract member – override this abstract member in further derived class
             // Test that call to abstract member fails when calling through "base."
 
             var source = @"
@@ -2013,7 +2013,7 @@ class Base4<U, V> : Base3<U, V>
         public void TestBaseAccessForAbstractMembers1()
         {
             // Tests:
-            // Override virtual member with abstract member â€“ override this abstract member in further derived class
+            // Override virtual member with abstract member – override this abstract member in further derived class
             // Test that assigning an abstract member referenced through "base." to a delegate fails
 
             var source = @"
@@ -6871,15 +6871,15 @@ class C
             var source = @"
 public class C
 {
-	public override T Override<T>(T t) 
-	{ 
-		return t;
-	}
+    public override T Override<T>(T t) 
+    { 
+        return t;
+    }
 
-	public void Test<T>(T t)
-	{
-		Override(t);
-	}
+    public void Test<T>(T t)
+    {
+        Override(t);
+    }
 }
 ";
             CreateCompilation(source).VerifyDiagnostics(
@@ -6961,19 +6961,19 @@ using System;
 
 public class C
 {
-	public static int F(int p1, char p2, ref dynamic p3) { return 2; }
-	public static int F(C p1, params dynamic[] p2) { return 3; }
+    public static int F(int p1, char p2, ref dynamic p3) { return 2; }
+    public static int F(C p1, params dynamic[] p2) { return 3; }
 
-	public static implicit operator int(C t) { return 1; }
-	public static implicit operator C(int t) { return new C(); }
+    public static implicit operator int(C t) { return 1; }
+    public static implicit operator C(int t) { return new C(); }
 
-	static void M()
-	{            
-		dynamic d1 = null;
-		C c = null;
+    static void M()
+    {            
+        dynamic d1 = null;
+        C c = null;
  
-		C.F(c, 'a', ref d1); //-C.F(int, char, ref dynamic)
-	}
+        C.F(c, 'a', ref d1); //-C.F(int, char, ref dynamic)
+    }
 }";
 
             TestOverloadResolutionWithDiff(source);

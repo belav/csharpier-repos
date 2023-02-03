@@ -2,16 +2,16 @@
 // Line: 14
 
 public class B {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 
-	public int Foo { get { return 1; } }
+    public int Foo { get { return 1; } }
 
-	public class C {
-		public void Baz ()
-		{
-			int x = Foo;
-		}
-	}
+    public class C {
+        public void Baz ()
+        {
+            int x = Foo;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptReferenceEventArgs.cs
 //
 // Author:
@@ -33,20 +33,20 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public class ScriptReferenceEventArgs : EventArgs
-	{
-		ScriptReference _script;
+    public class ScriptReferenceEventArgs : EventArgs
+    {
+        ScriptReference _script;
 
-		public ScriptReferenceEventArgs (ScriptReference script)
-		{
-			_script = script;
-		}
+        public ScriptReferenceEventArgs (ScriptReference script)
+        {
+            _script = script;
+        }
 
-		public ScriptReference Script {
-			get {
-				return _script;
-			}
-		}
-	}
+        public ScriptReference Script {
+            get {
+                return _script;
+            }
+        }
+    }
 }
 

@@ -2,7 +2,7 @@
 // ServiceDescription.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,77 +35,77 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Description
 {
-	public class ServiceDescription
-	{
-		ServiceEndpointCollection endpoints = new ServiceEndpointCollection ();
-		KeyedByTypeCollection<IServiceBehavior> behaviors = new KeyedByTypeCollection<IServiceBehavior> ();
-		Type service_type;
-		object well_known;
-		string name, ns, config_name;
+    public class ServiceDescription
+    {
+        ServiceEndpointCollection endpoints = new ServiceEndpointCollection ();
+        KeyedByTypeCollection<IServiceBehavior> behaviors = new KeyedByTypeCollection<IServiceBehavior> ();
+        Type service_type;
+        object well_known;
+        string name, ns, config_name;
 
-		public ServiceDescription ()
-		{
-		}
+        public ServiceDescription ()
+        {
+        }
 
-		public ServiceDescription (IEnumerable<ServiceEndpoint> endpoints)
-		{
-			foreach (ServiceEndpoint se in endpoints)
-				this.endpoints.Add (se);
-		}
+        public ServiceDescription (IEnumerable<ServiceEndpoint> endpoints)
+        {
+            foreach (ServiceEndpoint se in endpoints)
+                this.endpoints.Add (se);
+        }
 
-		public string ConfigurationName {
-			get { return config_name; }
-			set { config_name = value; }
-		}
+        public string ConfigurationName {
+            get { return config_name; }
+            set { config_name = value; }
+        }
 
-		public KeyedByTypeCollection<IServiceBehavior> Behaviors {
-			get { return behaviors; }
-		}
+        public KeyedByTypeCollection<IServiceBehavior> Behaviors {
+            get { return behaviors; }
+        }
 
-		public ServiceEndpointCollection Endpoints {
-			get { return endpoints; }
-		}
+        public ServiceEndpointCollection Endpoints {
+            get { return endpoints; }
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        public string Namespace {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		public Type ServiceType {
-			get { return service_type; }
-			set { service_type = value; }
-		}
+        public Type ServiceType {
+            get { return service_type; }
+            set { service_type = value; }
+        }
 
-		public static ServiceDescription GetService (Type serviceType)
-		{
-			// null Type is not rejected
-			ServiceDescription sd = new ServiceDescription ();
-			sd.ServiceType = serviceType;
-			if (serviceType != null) {
-				var att = serviceType.GetCustomAttribute<ServiceBehaviorAttribute> (true);
-				if (att != null) {
-					sd.Name = att.Name;
-					sd.Namespace = att.Namespace;
-				}
-				if (sd.Name == null)
-					sd.Name = serviceType.Name;
-				if (sd.Namespace == null)
-					sd.Namespace = "http://tempuri.org/";
-			}
-			return sd;
-		}
+        public static ServiceDescription GetService (Type serviceType)
+        {
+            // null Type is not rejected
+            ServiceDescription sd = new ServiceDescription ();
+            sd.ServiceType = serviceType;
+            if (serviceType != null) {
+                var att = serviceType.GetCustomAttribute<ServiceBehaviorAttribute> (true);
+                if (att != null) {
+                    sd.Name = att.Name;
+                    sd.Namespace = att.Namespace;
+                }
+                if (sd.Name == null)
+                    sd.Name = serviceType.Name;
+                if (sd.Namespace == null)
+                    sd.Namespace = "http://tempuri.org/";
+            }
+            return sd;
+        }
 
-		public static ServiceDescription GetService (object serviceImplementation)
-		{
-			// null instance is not rejected
-			ServiceDescription sd = new ServiceDescription ();
-			sd.ServiceType = serviceImplementation != null ? serviceImplementation.GetType () : null;
-			return sd;
-		}
-	}
+        public static ServiceDescription GetService (object serviceImplementation)
+        {
+            // null instance is not rejected
+            ServiceDescription sd = new ServiceDescription ();
+            sd.ServiceType = serviceImplementation != null ? serviceImplementation.GetType () : null;
+            return sd;
+        }
+    }
 }

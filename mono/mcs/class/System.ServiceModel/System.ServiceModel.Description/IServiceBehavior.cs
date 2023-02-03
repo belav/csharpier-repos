@@ -2,7 +2,7 @@
 // IServiceBehavior.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,20 +32,20 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public interface IServiceBehavior
-	{
-		void AddBindingParameters (
-			ServiceDescription serviceDescription,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection bindingParameters);
+    public interface IServiceBehavior
+    {
+        void AddBindingParameters (
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters);
 
-		void ApplyDispatchBehavior (
-			ServiceDescription serviceDescription,
-			ServiceHostBase serviceHostBase);
+        void ApplyDispatchBehavior (
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase);
 
-		void Validate (
-			ServiceDescription serviceDescription,
-			ServiceHostBase serviceHostBase);
-	}
+        void Validate (
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase);
+    }
 }

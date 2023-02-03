@@ -31,24 +31,24 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	public sealed class ExeContext
-	{
-		string path;
-		ConfigurationUserLevel level;
-		
-		internal ExeContext (string path, ConfigurationUserLevel level)
-		{
-			this.path = path;
-			this.level = level;
-		}
-		
-		public string ExePath {
-			get { return path; }
-		}
-		
-		public ConfigurationUserLevel UserLevel {
-			get { return level; }
-		}
-	}
+    public sealed class ExeContext
+    {
+        string path;
+        ConfigurationUserLevel level;
+        
+        internal ExeContext (string path, ConfigurationUserLevel level)
+        {
+            this.path = path;
+            this.level = level;
+        }
+        
+        public string ExePath {
+            get { return path; }
+        }
+        
+        public ConfigurationUserLevel UserLevel {
+            get { return level; }
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿//
+//
 // QueryInterceptorAttributeTests.cs
 //
 // Author:
@@ -31,20 +31,20 @@ using System.Data.Services;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Services {
-	[TestFixture]
-	public class QueryInterceptorAttributeTests {
-		[Test]
-		public void Ctor()
-		{
-			var qi = new QueryInterceptorAttribute ("set");
-			Assert.AreEqual ("set", qi.EntitySetName);
-		}
+    [TestFixture]
+    public class QueryInterceptorAttributeTests {
+        [Test]
+        public void Ctor()
+        {
+            var qi = new QueryInterceptorAttribute ("set");
+            Assert.AreEqual ("set", qi.EntitySetName);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CtorNull()
-		{
-			new QueryInterceptorAttribute (null);
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void CtorNull()
+        {
+            new QueryInterceptorAttribute (null);
+        }
+    }
 }

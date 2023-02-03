@@ -31,58 +31,58 @@
 
 namespace Mono.Cecil {
 
-	using System;
-	using System.Collections;
+    using System;
+    using System.Collections;
 
-	using Mono.Cecil.Cil;
+    using Mono.Cecil.Cil;
 
-	internal sealed class ArrayDimensionCollection : CollectionBase {
+    internal sealed class ArrayDimensionCollection : CollectionBase {
 
-		ArrayType m_container;
+        ArrayType m_container;
 
-		public ArrayDimension this [int index] {
-			get { return List [index] as ArrayDimension; }
-			set { List [index] = value; }
-		}
+        public ArrayDimension this [int index] {
+            get { return List [index] as ArrayDimension; }
+            set { List [index] = value; }
+        }
 
-		public ArrayType Container {
-			get { return m_container; }
-		}
+        public ArrayType Container {
+            get { return m_container; }
+        }
 
-		public ArrayDimensionCollection (ArrayType container)
-		{
-			m_container = container;
-		}
+        public ArrayDimensionCollection (ArrayType container)
+        {
+            m_container = container;
+        }
 
-		public void Add (ArrayDimension value)
-		{
-			List.Add (value);
-		}
+        public void Add (ArrayDimension value)
+        {
+            List.Add (value);
+        }
 
-		public bool Contains (ArrayDimension value)
-		{
-			return List.Contains (value);
-		}
+        public bool Contains (ArrayDimension value)
+        {
+            return List.Contains (value);
+        }
 
-		public int IndexOf (ArrayDimension value)
-		{
-			return List.IndexOf (value);
-		}
+        public int IndexOf (ArrayDimension value)
+        {
+            return List.IndexOf (value);
+        }
 
-		public void Insert (int index, ArrayDimension value)
-		{
-			List.Insert (index, value);
-		}
+        public void Insert (int index, ArrayDimension value)
+        {
+            List.Insert (index, value);
+        }
 
-		public void Remove (ArrayDimension value)
-		{
-			List.Remove (value);
-		}
+        public void Remove (ArrayDimension value)
+        {
+            List.Remove (value);
+        }
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is ArrayDimension))
-				throw new ArgumentException ("Must be of type " + typeof (ArrayDimension).FullName);
-		}
-	}
+        protected override void OnValidate (object o)
+        {
+            if (! (o is ArrayDimension))
+                throw new ArgumentException ("Must be of type " + typeof (ArrayDimension).FullName);
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.TreeNodeStyleCollection.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -35,78 +35,78 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class TreeNodeStyleCollection: StateManagedCollection
-	{
-		static Type[] types = new Type[] { typeof (TreeNodeStyle) };
-		
-		internal TreeNodeStyleCollection ()
-		{
-		}
-		
-		public int Add (TreeNodeStyle style)
-		{
-			// It looks weird, but it seems that there must be at least one style saved in the control state, or
-			// otherwise tests fail. The line below makes sure that, whether or not modified by user, the Underline
-			// property will always have unaltered value _and_ the style collection will contain at least one item.
-			style.Font.Underline = style.Font.Underline;
-			return ((IList)this).Add (style);
-		}
-		
-		public bool Contains (TreeNodeStyle style)
-		{
-			return ((IList)this).Contains (style);
-		}
-		
-		public void CopyTo (TreeNodeStyle[] styleArray, int index)
-		{
-			((IList)this).CopyTo (styleArray, index);
-		}
-		
-		protected override object CreateKnownType (int index)
-		{
-			return new TreeNodeStyle ();
-		}
-		
-		protected override Type[] GetKnownTypes ()
-		{
-			return types;
-		}
-		
-		public int IndexOf (TreeNodeStyle style)
-		{
-			return ((IList)this).IndexOf (style);
-		}
-		
-		public void Insert (int index, TreeNodeStyle style)
-		{
-			((IList)this).Insert (index, style);
-		}
-		
-		public void Remove (TreeNodeStyle style)
-		{
-			((IList)this).Remove (style);
-		}
-		
-		public void RemoveAt (int index)
-		{
-			((IList)this).RemoveAt (index);
-		}
-		
-		public TreeNodeStyle this [int i] {
-			get { return (TreeNodeStyle) ((IList)this) [i]; }
-			set { ((IList)this) [i] = value; }
-		}
-		
-		protected override void SetDirtyObject (object o)
-		{
-			((TreeNodeStyle)o).SetDirty ();
-		}
+    public sealed class TreeNodeStyleCollection: StateManagedCollection
+    {
+        static Type[] types = new Type[] { typeof (TreeNodeStyle) };
+        
+        internal TreeNodeStyleCollection ()
+        {
+        }
+        
+        public int Add (TreeNodeStyle style)
+        {
+            // It looks weird, but it seems that there must be at least one style saved in the control state, or
+            // otherwise tests fail. The line below makes sure that, whether or not modified by user, the Underline
+            // property will always have unaltered value _and_ the style collection will contain at least one item.
+            style.Font.Underline = style.Font.Underline;
+            return ((IList)this).Add (style);
+        }
+        
+        public bool Contains (TreeNodeStyle style)
+        {
+            return ((IList)this).Contains (style);
+        }
+        
+        public void CopyTo (TreeNodeStyle[] styleArray, int index)
+        {
+            ((IList)this).CopyTo (styleArray, index);
+        }
+        
+        protected override object CreateKnownType (int index)
+        {
+            return new TreeNodeStyle ();
+        }
+        
+        protected override Type[] GetKnownTypes ()
+        {
+            return types;
+        }
+        
+        public int IndexOf (TreeNodeStyle style)
+        {
+            return ((IList)this).IndexOf (style);
+        }
+        
+        public void Insert (int index, TreeNodeStyle style)
+        {
+            ((IList)this).Insert (index, style);
+        }
+        
+        public void Remove (TreeNodeStyle style)
+        {
+            ((IList)this).Remove (style);
+        }
+        
+        public void RemoveAt (int index)
+        {
+            ((IList)this).RemoveAt (index);
+        }
+        
+        public TreeNodeStyle this [int i] {
+            get { return (TreeNodeStyle) ((IList)this) [i]; }
+            set { ((IList)this) [i] = value; }
+        }
+        
+        protected override void SetDirtyObject (object o)
+        {
+            ((TreeNodeStyle)o).SetDirty ();
+        }
 
-		protected override void OnInsert (int index, object value)
-		{
-			// Why override?
-			base.OnInsert (index, value);
-		}
-	}
+        protected override void OnInsert (int index, object value)
+        {
+            // Why override?
+            base.OnInsert (index, value);
+        }
+    }
 }
 

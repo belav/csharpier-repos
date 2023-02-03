@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,89 +32,89 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("244e4c67-a1d3-44f2-9cab-cdaa31b68046")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIAccessibleRetrieval {
+    [Guid ("244e4c67-a1d3-44f2-9cab-cdaa31b68046")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIAccessibleRetrieval {
 
 #region nsIAccessibleRetrieval
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAttachedAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAttachedAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getRelevantContentNodeFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getRelevantContentNodeFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAccessibleInWindow ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIDOMWindow aDOMWin,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAccessibleInWindow ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIDOMWindow aDOMWin,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAccessibleInWeakShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aPresShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAccessibleInWeakShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aPresShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAccessibleInShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				 /*nsIPresShell*/ IntPtr aPresShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAccessibleInShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                 /*nsIPresShell*/ IntPtr aPresShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCachedAccessNode ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCachedAccessNode ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCachedAccessible ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCachedAccessible ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getStringRole ( uint aRole,
-				 /*AString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getStringRole ( uint aRole,
+                 /*AString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getStringStates ( uint aStates,
-				 uint aExtraStates,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getStringStates ( uint aStates,
+                 uint aExtraStates,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getStringEventType ( uint aEventType,
-				 /*AString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getStringEventType ( uint aEventType,
+                 /*AString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getStringRelationType ( uint aRelationType,
-				 /*AString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getStringRelationType ( uint aRelationType,
+                 /*AString*/ HandleRef ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsAccessibleRetrieval {
-		public static nsIAccessibleRetrieval GetProxy (Mono.WebBrowser.IWebBrowser control, nsIAccessibleRetrieval obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIAccessibleRetrieval).GUID, obj);
-			return o as nsIAccessibleRetrieval;
-		}
-	}
+    internal class nsAccessibleRetrieval {
+        public static nsIAccessibleRetrieval GetProxy (Mono.WebBrowser.IWebBrowser control, nsIAccessibleRetrieval obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIAccessibleRetrieval).GUID, obj);
+            return o as nsIAccessibleRetrieval;
+        }
+    }
 }
 #if example
 
@@ -123,111 +123,111 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class AccessibleRetrieval : nsIAccessibleRetrieval {
+    internal class AccessibleRetrieval : nsIAccessibleRetrieval {
 
 #region nsIAccessibleRetrieval
-		int nsIAccessibleRetrieval.getAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getAttachedAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getAttachedAccessibleFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getRelevantContentNodeFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIDOMNode ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getRelevantContentNodeFor ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIDOMNode ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getAccessibleInWindow ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIDOMWindow aDOMWin,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getAccessibleInWindow ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIDOMWindow aDOMWin,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getAccessibleInWeakShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aPresShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getAccessibleInWeakShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aPresShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getAccessibleInShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				 /*nsIPresShell*/ IntPtr aPresShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getAccessibleInShell ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                 /*nsIPresShell*/ IntPtr aPresShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getCachedAccessNode ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessNode ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getCachedAccessNode ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessNode ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getCachedAccessible ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
-				[MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getCachedAccessible ([MarshalAs (UnmanagedType.Interface) ]  nsIDOMNode aNode,
+                [MarshalAs (UnmanagedType.Interface) ]  nsIWeakReference aShell,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getStringRole ( uint aRole,
-				 /*AString*/ HandleRef ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getStringRole ( uint aRole,
+                 /*AString*/ HandleRef ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getStringStates ( uint aStates,
-				 uint aExtraStates,
-				[MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getStringStates ( uint aStates,
+                 uint aExtraStates,
+                [MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getStringEventType ( uint aEventType,
-				 /*AString*/ HandleRef ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getStringEventType ( uint aEventType,
+                 /*AString*/ HandleRef ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIAccessibleRetrieval.getStringRelationType ( uint aRelationType,
-				 /*AString*/ HandleRef ret)
-		{
-			return ;
-		}
+        int nsIAccessibleRetrieval.getStringRelationType ( uint aRelationType,
+                 /*AString*/ HandleRef ret)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

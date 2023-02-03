@@ -5,7 +5,7 @@
 public unsafe struct Foo
 {
         public Foo *foo;
-	string x;
+    string x;
 }
 
 

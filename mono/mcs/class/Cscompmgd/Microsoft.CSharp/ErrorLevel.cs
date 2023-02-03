@@ -29,11 +29,11 @@
 
 namespace Microsoft.CSharp {
 
-	[System.Obsolete]
-	public enum ErrorLevel {
-		None,
-		Warning,
-		Error,
-		FatalError,
-	}
+    [System.Obsolete]
+    public enum ErrorLevel {
+        None,
+        Warning,
+        Error,
+        FatalError,
+    }
 }

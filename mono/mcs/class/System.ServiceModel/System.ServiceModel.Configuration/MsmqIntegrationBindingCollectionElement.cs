@@ -2,7 +2,7 @@
 // MsmqIntegrationBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class MsmqIntegrationBindingCollectionElement
-		 : StandardBindingCollectionElement<MsmqIntegrationBinding, MsmqIntegrationBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public partial class MsmqIntegrationBindingCollectionElement
+         : StandardBindingCollectionElement<MsmqIntegrationBinding, MsmqIntegrationBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static MsmqIntegrationBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static MsmqIntegrationBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public MsmqIntegrationBindingCollectionElement ()
-		{
-		}
-
-
-		// Properties
+        public MsmqIntegrationBindingCollectionElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

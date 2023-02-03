@@ -32,41 +32,41 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class FindRequestContext
-	{
-		protected FindRequestContext (FindCriteria criteria)
-		{
-			if (criteria == null)
-				throw new ArgumentNullException ("criteria");
-			Criteria = criteria;
-			Endpoints = new Collection<EndpointDiscoveryMetadata> ();
-		}
+    public class FindRequestContext
+    {
+        protected FindRequestContext (FindCriteria criteria)
+        {
+            if (criteria == null)
+                throw new ArgumentNullException ("criteria");
+            Criteria = criteria;
+            Endpoints = new Collection<EndpointDiscoveryMetadata> ();
+        }
 
-		public FindCriteria Criteria { get; private set; }
+        public FindCriteria Criteria { get; private set; }
 
-		internal Collection<EndpointDiscoveryMetadata> Endpoints { get; private set; }
+        internal Collection<EndpointDiscoveryMetadata> Endpoints { get; private set; }
 
-		public void AddMatchingEndpoint (EndpointDiscoveryMetadata matchingEndpoint)
-		{
-			if (matchingEndpoint == null)
-				throw new ArgumentNullException ("matchingEndpoint");
-			OnAddMatchingEndpoint (matchingEndpoint);
-		}
+        public void AddMatchingEndpoint (EndpointDiscoveryMetadata matchingEndpoint)
+        {
+            if (matchingEndpoint == null)
+                throw new ArgumentNullException ("matchingEndpoint");
+            OnAddMatchingEndpoint (matchingEndpoint);
+        }
 
-		protected virtual void OnAddMatchingEndpoint (EndpointDiscoveryMetadata matchingEndpoint)
-		{
-			if (matchingEndpoint == null)
-				throw new ArgumentNullException ("matchingEndpoint");
-			Endpoints.Add (matchingEndpoint);
-		}
-	}
-	
-	// Not sure why it must be derived yet.
-	internal class DefaultFindRequestContext : FindRequestContext
-	{
-		public DefaultFindRequestContext (FindCriteria criteria)
-			: base (criteria)
-		{
-		}
-	}
+        protected virtual void OnAddMatchingEndpoint (EndpointDiscoveryMetadata matchingEndpoint)
+        {
+            if (matchingEndpoint == null)
+                throw new ArgumentNullException ("matchingEndpoint");
+            Endpoints.Add (matchingEndpoint);
+        }
+    }
+    
+    // Not sure why it must be derived yet.
+    internal class DefaultFindRequestContext : FindRequestContext
+    {
+        public DefaultFindRequestContext (FindCriteria criteria)
+            : base (criteria)
+        {
+        }
+    }
 }

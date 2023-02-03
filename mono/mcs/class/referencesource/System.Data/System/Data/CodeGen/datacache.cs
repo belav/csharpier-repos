@@ -27,7 +27,7 @@ namespace System.Data {
         private ICodeGenerator  codeGen;
         private ArrayList       errorList;
         private ArrayList       conflictingTables;
-        private Hashtable	lookupIdentifiers;
+        private Hashtable    lookupIdentifiers;
 
         public static void Generate(DataSet dataSet, CodeNamespace codeNamespace, ICodeGenerator codeGen) {
             new TypedDataSetGenerator().GenerateCode(dataSet, codeNamespace, codeGen);
@@ -555,8 +555,8 @@ namespace System.Data {
             //\\     return new <TableClassName>()
             //\\ }
             CodeMemberMethod createInstance = MethodDecl(typeof(DataTable), "CreateInstance", MemberAttributes.Family | MemberAttributes.Override); {
-	         createInstance.Statements.Add(Return(New(stTblClassName, new CodeExpression[] {}))); 
-	     }
+             createInstance.Statements.Add(Return(New(stTblClassName, new CodeExpression[] {}))); 
+         }
             dataTableClass.Members.Add(createInstance);
 
             //\\ private void InitClass() ...
@@ -806,7 +806,7 @@ namespace System.Data {
                     //\\
                     //\\if required: 
                     //\\ private static <ColumnType> <ColumnName>_nullValue = ...;
-		            CodeMemberProperty rowProp = PropertyDecl(DataType, rowColumnName, MemberAttributes.Public | MemberAttributes.Final); {
+                    CodeMemberProperty rowProp = PropertyDecl(DataType, rowColumnName, MemberAttributes.Public | MemberAttributes.Final); {
                         CodeStatement getStmnt = Return(Cast(GetTypeName(DataType), Indexer(This(), Property(Field(This(), stTblFieldName), tableColumnName))));
                         if(col.AllowDBNull) {
                             string nullValue = (string) col.ExtendedProperties["nullValue"];
@@ -1547,21 +1547,21 @@ namespace System.Data {
         private static CodeAttributeDeclaration               AttributeDecl(string name, CodeExpression value) {
             return new CodeAttributeDeclaration(name, new CodeAttributeArgument[] { new CodeAttributeArgument(value) });
         }
-	// -------------------- Try/Catch ---------------------------
-	//\\ try {<tryStmnt>} <catchClause>
-	private static CodeStatement      Try(CodeStatement tryStmnt, CodeCatchClause catchClause) {
-			return new CodeTryCatchFinallyStatement(
-				new CodeStatement[] {tryStmnt}, 
-				new CodeCatchClause[] {catchClause}
-			);
-	}
-	//\\ catch(<type> <name>) {<catchStmnt>}
-	private static CodeCatchClause Catch(Type type, string name, CodeStatement catchStmnt) {
+    // -------------------- Try/Catch ---------------------------
+    //\\ try {<tryStmnt>} <catchClause>
+    private static CodeStatement      Try(CodeStatement tryStmnt, CodeCatchClause catchClause) {
+            return new CodeTryCatchFinallyStatement(
+                new CodeStatement[] {tryStmnt}, 
+                new CodeCatchClause[] {catchClause}
+            );
+    }
+    //\\ catch(<type> <name>) {<catchStmnt>}
+    private static CodeCatchClause Catch(Type type, string name, CodeStatement catchStmnt) {
             CodeCatchClause ccc = new CodeCatchClause();
             ccc.CatchExceptionType = Type(type);
             ccc.LocalName = name;
             ccc.Statements.Add(catchStmnt);
             return ccc;
-	}
+    }
     }
 }

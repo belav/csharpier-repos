@@ -1,4 +1,4 @@
-﻿namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls {
     using System.Web.UI.WebControls.Expressions;
     using System;
     using System.Collections;

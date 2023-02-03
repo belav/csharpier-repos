@@ -2,7 +2,7 @@
 // X509CertificateRecipientClientCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -38,83 +38,83 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class X509CertificateRecipientClientCredential
-	{
-		internal X509CertificateRecipientClientCredential ()
-		{
-		}
+    public sealed class X509CertificateRecipientClientCredential
+    {
+        internal X509CertificateRecipientClientCredential ()
+        {
+        }
 
-		X509ServiceCertificateAuthentication auth =
-			new X509ServiceCertificateAuthentication ();
-		X509Certificate2 certificate;
-		Dictionary<Uri,X509Certificate2> scoped =
-			new Dictionary<Uri,X509Certificate2> ();
+        X509ServiceCertificateAuthentication auth =
+            new X509ServiceCertificateAuthentication ();
+        X509Certificate2 certificate;
+        Dictionary<Uri,X509Certificate2> scoped =
+            new Dictionary<Uri,X509Certificate2> ();
 #if !MOBILE
-		X509CertificateValidator validator;
+        X509CertificateValidator validator;
 #endif
-		X509RevocationMode revocation_mode;
-		StoreLocation store_loc;
+        X509RevocationMode revocation_mode;
+        StoreLocation store_loc;
 
-		internal X509CertificateRecipientClientCredential Clone ()
-		{
-			var ret = (X509CertificateRecipientClientCredential) MemberwiseClone ();
-			ret.auth = auth.Clone ();
-			ret.scoped = new Dictionary<Uri,X509Certificate2> (scoped);
-			return ret;
-		}
+        internal X509CertificateRecipientClientCredential Clone ()
+        {
+            var ret = (X509CertificateRecipientClientCredential) MemberwiseClone ();
+            ret.auth = auth.Clone ();
+            ret.scoped = new Dictionary<Uri,X509Certificate2> (scoped);
+            return ret;
+        }
 
-		public X509ServiceCertificateAuthentication Authentication {
-			get { return auth; }
-		}
+        public X509ServiceCertificateAuthentication Authentication {
+            get { return auth; }
+        }
 
-		public X509Certificate2 DefaultCertificate {
-			get { return certificate; }
-			set { certificate = value; }
-		}
+        public X509Certificate2 DefaultCertificate {
+            get { return certificate; }
+            set { certificate = value; }
+        }
 
-		public Dictionary<Uri,X509Certificate2> ScopedCertificates {
-			get { return scoped; }
-		}
+        public Dictionary<Uri,X509Certificate2> ScopedCertificates {
+            get { return scoped; }
+        }
 
-		[MonoTODO]
-		public X509ServiceCertificateAuthentication SslCertificateAuthentication
-		{
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public X509ServiceCertificateAuthentication SslCertificateAuthentication
+        {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public void SetDefaultCertificate (string subjectName,
-			StoreLocation storeLocation, StoreName storeName)
-		{
-			SetDefaultCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
-		}
+        public void SetDefaultCertificate (string subjectName,
+            StoreLocation storeLocation, StoreName storeName)
+        {
+            SetDefaultCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
+        }
 
-		public void SetDefaultCertificate (StoreLocation storeLocation,
-			StoreName storeName, X509FindType findType, Object findValue)
-		{
+        public void SetDefaultCertificate (StoreLocation storeLocation,
+            StoreName storeName, X509FindType findType, Object findValue)
+        {
 #if !MOBILE
-			DefaultCertificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+            DefaultCertificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
 #else
-			throw new NotImplementedException ();
+            throw new NotImplementedException ();
 #endif
-		}
+        }
 
-		public void SetScopedCertificate (string subjectName,
-			StoreLocation storeLocation, StoreName storeName,
-			Uri targetService)
-		{
-			SetScopedCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName, targetService);
-		}
+        public void SetScopedCertificate (string subjectName,
+            StoreLocation storeLocation, StoreName storeName,
+            Uri targetService)
+        {
+            SetScopedCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName, targetService);
+        }
 
-		public void SetScopedCertificate (StoreLocation storeLocation,
-			StoreName storeName, X509FindType findType,
-			Object findValue, Uri targetService)
-		{
+        public void SetScopedCertificate (StoreLocation storeLocation,
+            StoreName storeName, X509FindType findType,
+            Object findValue, Uri targetService)
+        {
 #if !MOBILE
-			ScopedCertificates [targetService] = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+            ScopedCertificates [targetService] = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
 #else
-			throw new NotImplementedException ();
+            throw new NotImplementedException ();
 #endif
-		}
-	}
+        }
+    }
 }

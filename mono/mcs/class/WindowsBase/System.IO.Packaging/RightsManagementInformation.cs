@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,46 +29,46 @@ using System.Security.RightsManagement;
 
 namespace System.IO.Packaging {
 
-	public class RightsManagementInformation
-	{
-		internal RightsManagementInformation ()
-		{
-		}
+    public class RightsManagementInformation
+    {
+        internal RightsManagementInformation ()
+        {
+        }
 
-		public CryptoProvider CryptoProvider {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public CryptoProvider CryptoProvider {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public void DeleteUseLicense (ContentUser userKey)
-		{
-			throw new NotImplementedException ();
-		}
+        public void DeleteUseLicense (ContentUser userKey)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public IDictionary<ContentUser, UseLicense> GetEmbeddedUseLicenses()
-		{
-			throw new NotImplementedException ();
-		}
+        public IDictionary<ContentUser, UseLicense> GetEmbeddedUseLicenses()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public PublishLicense LoadPublishLicense ()
-		{
-			throw new NotImplementedException ();
-		}
+        public PublishLicense LoadPublishLicense ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public UseLicense LoadUseLicense (ContentUser userKey)
-		{
-			throw new NotImplementedException ();
-		}
+        public UseLicense LoadUseLicense (ContentUser userKey)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void SavePublishLicense (PublishLicense publishLicense)
-		{
-			throw new NotImplementedException ();
-		}
+        public void SavePublishLicense (PublishLicense publishLicense)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void SaveUseLicense (ContentUser userKey, UseLicense useLicense)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public void SaveUseLicense (ContentUser userKey, UseLicense useLicense)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

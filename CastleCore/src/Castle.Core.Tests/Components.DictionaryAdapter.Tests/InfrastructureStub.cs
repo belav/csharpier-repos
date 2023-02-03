@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,37 +14,37 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System;
-	using System.ComponentModel;
+    using System;
+    using System.ComponentModel;
 
-	public abstract class InfrastructureStub : INotifyPropertyChanged, IEditableObject, IDataErrorInfo
+    public abstract class InfrastructureStub : INotifyPropertyChanged, IEditableObject, IDataErrorInfo
 
-	{
-		public event PropertyChangedEventHandler PropertyChanged;
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		public void BeginEdit()
-		{
-		}
+        public void BeginEdit()
+        {
+        }
 
-		public void CancelEdit()
-		{
-		}
+        public void CancelEdit()
+        {
+        }
 
-		public void EndEdit()
-		{
-			if (PropertyChanged != null)
-			{
-			}
-		}
+        public void EndEdit()
+        {
+            if (PropertyChanged != null)
+            {
+            }
+        }
 
-		public string Error
-		{
-			get { return string.Empty; }
-		}
+        public string Error
+        {
+            get { return string.Empty; }
+        }
 
-		public string this[string columnName]
-		{
-			get { return string.Empty; }
-		}
-	}
+        public string this[string columnName]
+        {
+            get { return string.Empty; }
+        }
+    }
 }

@@ -39,67 +39,67 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_ctor_D : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataView_ctor_D tc = new DataView_ctor_D();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataView_ctor_D");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataView_ctor_D tc = new DataView_ctor_D();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataView_ctor_D");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataView dv = null; 
-		DataTable dt = new DataTable("myTable");
+    public void run()
+    {
+        Exception exp = null;
+        DataView dv = null; 
+        DataTable dt = new DataTable("myTable");
 
-		try
-		{
-			BeginCase("ctor");
-			dv = new DataView(dt);
-			Compare(dv == null, false);
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
+        try
+        {
+            BeginCase("ctor");
+            dv = new DataView(dt);
+            Compare(dv == null, false);
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
 
         
-		try
-		{
-			BeginCase("ctor - table");
-			Compare(dv.Table  ,dt );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-			}
+        try
+        {
+            BeginCase("ctor - table");
+            Compare(dv.Table  ,dt );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+            }
 }
 }

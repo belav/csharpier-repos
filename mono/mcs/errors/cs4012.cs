@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 class C
 {
-	public async void Test ()
-	{
-		int i = 2;
-		TypedReference tr = __makeref (i);
-		await Task.Factory.StartNew (() => 6);
-	}
+    public async void Test ()
+    {
+        int i = 2;
+        TypedReference tr = __makeref (i);
+        await Task.Factory.StartNew (() => 6);
+    }
 }

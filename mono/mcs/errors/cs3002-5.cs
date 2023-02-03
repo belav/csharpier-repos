@@ -11,6 +11,6 @@ public interface I {}
 public class C {}
 
 public class CLSClass {
-	public I Test1() { return null; } 
-	public C Test2() { return null; }
+    public I Test1() { return null; } 
+    public C Test2() { return null; }
 }

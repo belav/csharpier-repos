@@ -1,9 +1,9 @@
 //
 // CryptoAPITransformCas.cs -
-//	CAS unit tests for System.Security.Cryptography.CryptoAPITransform
+//    CAS unit tests for System.Security.Cryptography.CryptoAPITransform
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,36 +37,36 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.Security.Cryptography {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CryptoAPITransformCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CryptoAPITransformCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void KeyHandle ()
-		{
-			CryptoAPITransform transform = null;
-			Type t = typeof (CryptoAPITransform);
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void KeyHandle ()
+        {
+            CryptoAPITransform transform = null;
+            Type t = typeof (CryptoAPITransform);
 
-			// Mono has a default, internal, constructor
-			ConstructorInfo ci = t.GetConstructor (BindingFlags.Instance | BindingFlags.NonPublic, null, Type.EmptyTypes, null);
-			if (ci != null) {
-				transform = (CryptoAPITransform) ci.Invoke (null);
-			} else {
-				// while MS use CryptoAPITransform for all unmanaged crypto
-				DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
-				transform = (CryptoAPITransform) des.CreateEncryptor ();
-			}
+            // Mono has a default, internal, constructor
+            ConstructorInfo ci = t.GetConstructor (BindingFlags.Instance | BindingFlags.NonPublic, null, Type.EmptyTypes, null);
+            if (ci != null) {
+                transform = (CryptoAPITransform) ci.Invoke (null);
+            } else {
+                // while MS use CryptoAPITransform for all unmanaged crypto
+                DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
+                transform = (CryptoAPITransform) des.CreateEncryptor ();
+            }
 
-			Assert.AreEqual (IntPtr.Zero, transform.KeyHandle, "KeyHandle");
-		}
-	}
+            Assert.AreEqual (IntPtr.Zero, transform.KeyHandle, "KeyHandle");
+        }
+    }
 }

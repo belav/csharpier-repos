@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	public interface IDictionaryEqualityHashCodeStrategy
-	{
-		bool Equals(IDictionaryAdapter adapter1, IDictionaryAdapter adapter2);
+    public interface IDictionaryEqualityHashCodeStrategy
+    {
+        bool Equals(IDictionaryAdapter adapter1, IDictionaryAdapter adapter2);
 
-		bool GetHashCode(IDictionaryAdapter adapter, out int hashCode);
-	}
+        bool GetHashCode(IDictionaryAdapter adapter, out int hashCode);
+    }
 }

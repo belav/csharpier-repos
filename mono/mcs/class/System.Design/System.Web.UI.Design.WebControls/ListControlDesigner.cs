@@ -34,78 +34,78 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class ListControlDesigner : DataBoundControlDesigner
-	{
-		string data_key_field;
-		string data_text_field;
-		string data_value_field;
-		
-		public ListControlDesigner ()
-			: base ()
-		{
-		}
+    public class ListControlDesigner : DataBoundControlDesigner
+    {
+        string data_key_field;
+        string data_text_field;
+        string data_value_field;
+        
+        public ListControlDesigner ()
+            : base ()
+        {
+        }
 
-		public override DesignerActionListCollection ActionLists {
-			get { throw new NotImplementedException (); }
-		}
+        public override DesignerActionListCollection ActionLists {
+            get { throw new NotImplementedException (); }
+        }
 
-		protected override bool UseDataSourcePickerActionList {
-			get { throw new NotImplementedException (); }
-		}
+        protected override bool UseDataSourcePickerActionList {
+            get { throw new NotImplementedException (); }
+        }
 
-		public string DataKeyField {
-			get { return data_key_field; }
-			set { data_key_field = value; }
-		}
+        public string DataKeyField {
+            get { return data_key_field; }
+            set { data_key_field = value; }
+        }
 
-		public string DataTextField {
-			get { return data_text_field; }
-			set { data_text_field = value; }
-		}
+        public string DataTextField {
+            get { return data_text_field; }
+            set { data_text_field = value; }
+        }
 
-		public string DataValueField {
-			get { return data_value_field; }
-			set { data_value_field = value; }
-		}
+        public string DataValueField {
+            get { return data_value_field; }
+            set { data_value_field = value; }
+        }
 
-		protected override void DataBind (BaseDataBoundControl dataBoundControl)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override void DataBind (BaseDataBoundControl dataBoundControl)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override void Initialize (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Initialize (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public virtual IEnumerable GetResolvedSelectedDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        public virtual IEnumerable GetResolvedSelectedDataSource ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public virtual object GetSelectedDataSource ()
-		{
-			throw new NotImplementedException ();
-		}
+        public virtual object GetSelectedDataSource ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override void OnComponentChanged (object sender, ComponentChangedEventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void OnComponentChanged (object sender, ComponentChangedEventArgs e)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected internal virtual void OnDataSourceChanged ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected internal virtual void OnDataSourceChanged ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void PreFilterProperties (IDictionary properties)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void PreFilterProperties (IDictionary properties)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

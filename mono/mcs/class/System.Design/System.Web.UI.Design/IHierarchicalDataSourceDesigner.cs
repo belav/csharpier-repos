@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IHierarchicalDataSourceDesigner
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -33,19 +33,19 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-	public interface IHierarchicalDataSourceDesigner
-	{
-		event EventHandler DataSourceChanged;
-		event EventHandler SchemaRefreshed;
+    public interface IHierarchicalDataSourceDesigner
+    {
+        event EventHandler DataSourceChanged;
+        event EventHandler SchemaRefreshed;
 
-		bool CanConfigure { get; }
-		bool CanRefreshSchema { get; }
+        bool CanConfigure { get; }
+        bool CanRefreshSchema { get; }
 
-		void Configure ();
-		DesignerHierarchicalDataSourceView GetView (string viewPath);
-		void RefreshSchema (bool preferSilent);
-		void ResumeDataSourceEvents ();
-		void SuppressDataSourceEvents ();
-	}
+        void Configure ();
+        DesignerHierarchicalDataSourceView GetView (string viewPath);
+        void RefreshSchema (bool preferSilent);
+        void ResumeDataSourceEvents ();
+        void SuppressDataSourceEvents ();
+    }
 }
 

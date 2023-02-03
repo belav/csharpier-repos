@@ -7,5 +7,5 @@ using System;
 
 public static class CLSClass
 {
-	public static void Foo (this sbyte value) { }
+    public static void Foo (this sbyte value) { }
 }

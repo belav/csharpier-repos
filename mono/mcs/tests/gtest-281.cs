@@ -8,10 +8,10 @@ public class List {
 
 public class Tests
 {
-	public static void Main ()
-	{
-		object[] args = new object [0];
-		List l = new List ();
-		l.AddRange (args);
-	}
+    public static void Main ()
+    {
+        object[] args = new object [0];
+        List l = new List ();
+        l.AddRange (args);
+    }
 }

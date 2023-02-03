@@ -3,12 +3,12 @@
 
 public class X
 {
-	ref string this [int arg] { 
-		set {
+    ref string this [int arg] { 
+        set {
 
-		}
-		get {
+        }
+        get {
 
-		}
-	}
+        }
+    }
 }

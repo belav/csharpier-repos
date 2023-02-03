@@ -20,19 +20,19 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	<pbartok@novell.com>
+//    Peter Bartok    <pbartok@novell.com>
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	[Flags]
-	public enum RichTextBoxFinds {
-		None		= 0x00000000,
-		WholeWord	= 0x00000002,
-		MatchCase	= 0x00000004,
-		NoHighlight	= 0x00000008,
-		Reverse		= 0x00000010,
-	}
+    [Flags]
+    public enum RichTextBoxFinds {
+        None        = 0x00000000,
+        WholeWord    = 0x00000002,
+        MatchCase    = 0x00000004,
+        NoHighlight    = 0x00000008,
+        Reverse        = 0x00000010,
+    }
 }

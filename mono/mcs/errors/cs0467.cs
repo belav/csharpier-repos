@@ -8,12 +8,12 @@ delegate void D (int i);
 
 interface IList 
 {
-	D Count { get; }
+    D Count { get; }
 }
 
 interface IMethod
 {
-	int Count ();
+    int Count ();
 }
 
 interface IListCounter: IList, IMethod
@@ -22,8 +22,8 @@ interface IListCounter: IList, IMethod
 
 class Test
 {
-	static void Foo (IListCounter t)
-	{
-		t.Count ();
-	}
+    static void Foo (IListCounter t)
+    {
+        t.Count ();
+    }
 }

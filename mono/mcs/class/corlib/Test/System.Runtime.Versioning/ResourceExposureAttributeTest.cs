@@ -1,6 +1,6 @@
 //
 // ResourceExposureAttributeTest.cs - Unit tests for 
-//	System.Runtime.Versioning.ResourceExposureAttribute
+//    System.Runtime.Versioning.ResourceExposureAttribute
 //
 // Author:
 //      Sebastien Pouliot  <sebastien@ximian.com>
@@ -35,27 +35,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Versioning {
 
-	[TestFixture]
-	public class ResourceExposureAttributeTest {
+    [TestFixture]
+    public class ResourceExposureAttributeTest {
 
-		[Test]
-		public void Constructor1 ()
-		{
-			ResourceExposureAttribute rea = null;
-			Array values = Enum.GetValues (typeof (ResourceScope));
-			foreach (ResourceScope resource in values) {
-				rea = new ResourceExposureAttribute (resource);
-				Assert.AreEqual (resource, rea.ResourceExposureLevel, resource.ToString ());
-			}
-		}
+        [Test]
+        public void Constructor1 ()
+        {
+            ResourceExposureAttribute rea = null;
+            Array values = Enum.GetValues (typeof (ResourceScope));
+            foreach (ResourceScope resource in values) {
+                rea = new ResourceExposureAttribute (resource);
+                Assert.AreEqual (resource, rea.ResourceExposureLevel, resource.ToString ());
+            }
+        }
 
-		[Test]
-		public void InvalidResourceScope1 ()
-		{
-			ResourceScope bad = (ResourceScope) Int32.MinValue;
-			ResourceExposureAttribute rea = new ResourceExposureAttribute (bad);
-			Assert.AreEqual (bad, rea.ResourceExposureLevel, "ResourceScope");
-		}
-	}
+        [Test]
+        public void InvalidResourceScope1 ()
+        {
+            ResourceScope bad = (ResourceScope) Int32.MinValue;
+            ResourceExposureAttribute rea = new ResourceExposureAttribute (bad);
+            Assert.AreEqual (bad, rea.ResourceExposureLevel, "ResourceScope");
+        }
+    }
 }
 

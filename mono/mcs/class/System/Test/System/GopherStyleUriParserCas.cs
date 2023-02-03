@@ -2,7 +2,7 @@
 // GopherStyleUriParserCas.cs - CAS unit tests for System.GopherStyleUriParser
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,51 +40,51 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class GopherStyleUriParserCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class GopherStyleUriParserCas {
 
-		private GopherStyleUriParserTest unit;
+        private GopherStyleUriParserTest unit;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			unit = new GopherStyleUriParserTest ();
-			unit.FixtureSetUp (); // fulltrust
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            unit = new GopherStyleUriParserTest ();
+            unit.FixtureSetUp (); // fulltrust
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			GopherStyleUriParser parser = new GopherStyleUriParser ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            GopherStyleUriParser parser = new GopherStyleUriParser ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests ()
-		{
-			unit.Gopherx ();
-			unit.Gopherx_Methods ();
-			unit.SecureGopherx ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests ()
+        {
+            unit.Gopherx ();
+            unit.Gopherx_Methods ();
+            unit.SecureGopherx ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (GopherStyleUriParser).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (GopherStyleUriParser).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }
 
 #endif

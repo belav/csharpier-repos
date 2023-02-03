@@ -2,7 +2,7 @@
 // HttpDigestClientCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,27 +33,27 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class HttpDigestClientCredential
-	{
-		internal HttpDigestClientCredential ()
-		{
-		}
+    public sealed class HttpDigestClientCredential
+    {
+        internal HttpDigestClientCredential ()
+        {
+        }
 
-		NetworkCredential credential = new NetworkCredential ();
-		TokenImpersonationLevel level;
+        NetworkCredential credential = new NetworkCredential ();
+        TokenImpersonationLevel level;
 
-		internal HttpDigestClientCredential Clone ()
-		{
-			return (HttpDigestClientCredential) MemberwiseClone ();
-		}
+        internal HttpDigestClientCredential Clone ()
+        {
+            return (HttpDigestClientCredential) MemberwiseClone ();
+        }
 
-		public NetworkCredential ClientCredential {
-			get { return credential; }
-			set { credential = value; }
-		}
-		public TokenImpersonationLevel AllowedImpersonationLevel {
-			get { return level; }
-			set { level = value; }
-		}
-	}
+        public NetworkCredential ClientCredential {
+            get { return credential; }
+            set { credential = value; }
+        }
+        public TokenImpersonationLevel AllowedImpersonationLevel {
+            get { return level; }
+            set { level = value; }
+        }
+    }
 }

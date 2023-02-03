@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -28,18 +28,18 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewBindingCompleteEventArgs : EventArgs {
+    public class DataGridViewBindingCompleteEventArgs : EventArgs {
 
-		private ListChangedType listChangedType;
+        private ListChangedType listChangedType;
 
-		public DataGridViewBindingCompleteEventArgs (ListChangedType listChangedType) {
-			this.listChangedType = listChangedType;
-		}
+        public DataGridViewBindingCompleteEventArgs (ListChangedType listChangedType) {
+            this.listChangedType = listChangedType;
+        }
 
-		public ListChangedType ListChangedType {
-			get { return listChangedType; }
-		}
+        public ListChangedType ListChangedType {
+            get { return listChangedType; }
+        }
 
-	}
+    }
 
 }

@@ -9,15 +9,15 @@ class A : B
 
 class P
 {
-	public class N<T>
-	{
-	}
+    public class N<T>
+    {
+    }
 }
 
 class Test
 {
-	public static void Main ()
-	{
-		var n = default (N<int>);
-	}
+    public static void Main ()
+    {
+        var n = default (N<int>);
+    }
 }

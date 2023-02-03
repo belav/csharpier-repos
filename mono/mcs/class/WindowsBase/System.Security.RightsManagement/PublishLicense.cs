@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,50 +28,50 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-	[SecurityCritical (SecurityCriticalScope.Everything)]
-	public class PublishLicense
-	{
-		public PublishLicense (string signedPublishLicense)
-		{
-			throw new NotImplementedException ();
-		}
+    [SecurityCritical (SecurityCriticalScope.Everything)]
+    public class PublishLicense
+    {
+        public PublishLicense (string signedPublishLicense)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public Guid ContentId {
-			get { throw new NotImplementedException (); }
+        public Guid ContentId {
+            get { throw new NotImplementedException (); }
 
-		}
+        }
 
-		public string ReferralInfoName {
-			get { throw new NotImplementedException (); }
-		}
+        public string ReferralInfoName {
+            get { throw new NotImplementedException (); }
+        }
 
-		public Uri ReferralInfoUri {
-			get { throw new NotImplementedException (); }
-		}
+        public Uri ReferralInfoUri {
+            get { throw new NotImplementedException (); }
+        }
 
-		public Uri UseLicenseAcquisitionUrl {
-			get { throw new NotImplementedException (); }
-		}
+        public Uri UseLicenseAcquisitionUrl {
+            get { throw new NotImplementedException (); }
+        }
 
-		public UseLicense AcquireUseLicense (SecureEnvironment secureEnvironment)
-		{
-			throw new NotImplementedException ();
-		}
+        public UseLicense AcquireUseLicense (SecureEnvironment secureEnvironment)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public UseLicense AcquireUseLicenseNoUI (SecureEnvironment secureEnvironment)
-		{
-			throw new NotImplementedException ();
-		}
+        public UseLicense AcquireUseLicenseNoUI (SecureEnvironment secureEnvironment)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public UnsignedPublishLicense DecryptUnsignedPublishLicense (CryptoProvider cryptoProvider)
-		{
-			throw new NotImplementedException ();
-		}
+        public UnsignedPublishLicense DecryptUnsignedPublishLicense (CryptoProvider cryptoProvider)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string ToString ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

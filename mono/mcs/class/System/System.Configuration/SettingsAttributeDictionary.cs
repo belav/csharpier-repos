@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsProperty.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,18 +31,18 @@ using System.Collections;
 
 namespace System.Configuration
 {
-	[SerializableAttribute] 
-	public class SettingsAttributeDictionary : Hashtable
-	{
-		public SettingsAttributeDictionary ()
-		{
-		}
+    [SerializableAttribute] 
+    public class SettingsAttributeDictionary : Hashtable
+    {
+        public SettingsAttributeDictionary ()
+        {
+        }
 
-		public SettingsAttributeDictionary (SettingsAttributeDictionary attributes)
-			: base ((IDictionary) attributes)
-		{
-		}
+        public SettingsAttributeDictionary (SettingsAttributeDictionary attributes)
+            : base ((IDictionary) attributes)
+        {
+        }
 
-	}
+    }
 }
 

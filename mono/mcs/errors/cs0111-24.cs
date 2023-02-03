@@ -5,18 +5,18 @@ using System;
 
 interface IMyInterface<T>
 {
-	bool Prop { set; }
+    bool Prop { set; }
 }
 
 public class MyClass: IMyInterface<string>
 {
-	bool IMyInterface<string>.Prop
-	{
-		set {}
-	}
+    bool IMyInterface<string>.Prop
+    {
+        set {}
+    }
 
-	bool IMyInterface<System.String>.Prop
-	{
-		set {}
-	}
+    bool IMyInterface<System.String>.Prop
+    {
+        set {}
+    }
 }

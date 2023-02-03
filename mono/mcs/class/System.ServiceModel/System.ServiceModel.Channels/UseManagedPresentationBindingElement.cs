@@ -2,7 +2,7 @@
 // UseManagedPresentationBindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,32 +33,32 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO]
-	public sealed class UseManagedPresentationBindingElement
-		: BindingElement, IPolicyExportExtension
-	{
-		public UseManagedPresentationBindingElement ()
-		{
-		}
+    [MonoTODO]
+    public sealed class UseManagedPresentationBindingElement
+        : BindingElement, IPolicyExportExtension
+    {
+        public UseManagedPresentationBindingElement ()
+        {
+        }
 
-		[MonoTODO]
-		public override BindingElement Clone ()
-		{
-			return new UseManagedPresentationBindingElement ();
-		}
+        [MonoTODO]
+        public override BindingElement Clone ()
+        {
+            return new UseManagedPresentationBindingElement ();
+        }
 
-		[MonoTODO]
-		public override T GetProperty<T> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override T GetProperty<T> (BindingContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		void IPolicyExportExtension.ExportPolicy (
-			MetadataExporter exporter,
-			PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        void IPolicyExportExtension.ExportPolicy (
+            MetadataExporter exporter,
+            PolicyConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

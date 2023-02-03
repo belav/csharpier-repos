@@ -15,14 +15,14 @@ public class FunctionsBlock {
 private static object @__o;
 #line hidden
 #line 1 "FunctionsBlock.cshtml"
-			
+            
 
 
 #line default
 #line hidden
 
 #line 2 "FunctionsBlock.cshtml"
-			
+            
     Random _rand = new Random();
     private int RandomInt() {
         return _rand.Next();
@@ -36,7 +36,7 @@ public FunctionsBlock() {
 public override void Execute() {
 
 #line 3 "FunctionsBlock.cshtml"
-				   __o = RandomInt();
+                   __o = RandomInt();
 
 
 #line default

@@ -32,40 +32,40 @@ using System;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for SoapEnumAttribute.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Field)]
-	public class SoapEnumAttribute : Attribute
-	{
-		private string name;
+    /// <summary>
+    /// Summary description for SoapEnumAttribute.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field)]
+    public class SoapEnumAttribute : Attribute
+    {
+        private string name;
 
-		public SoapEnumAttribute ()
-		{
-		}
+        public SoapEnumAttribute ()
+        {
+        }
 
-		public SoapEnumAttribute (string name)
-		{
-			this.name = name;
-		}
+        public SoapEnumAttribute (string name)
+        {
+            this.name = name;
+        }
 
-		public string Name {
-			get {
-				if (name == null) {
-					return string.Empty;
-				}
-				return name;
-			}
-			set {
-				name = value;
-			}
-		}
-		
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("SENA ");
-			KeyHelper.AddField (sb, 1, name);
-			sb.Append ('|');
-		}
-	}
+        public string Name {
+            get {
+                if (name == null) {
+                    return string.Empty;
+                }
+                return name;
+            }
+            set {
+                name = value;
+            }
+        }
+        
+        internal void AddKeyHash (System.Text.StringBuilder sb)
+        {
+            sb.Append ("SENA ");
+            KeyHelper.AddField (sb, 1, name);
+            sb.Append ('|');
+        }
+    }
 }

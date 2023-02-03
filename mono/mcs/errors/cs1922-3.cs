@@ -4,9 +4,9 @@
 using System;
 
 public enum GCEventType {
-	NURSERY_START
+    NURSERY_START
 }
 
 public class GCEventTypeMatcher {
-	private static GCEventTypeMatcher[] matcher = { new GCEventTypeMatcher () { NURSERY_START, s => TRUE } };
+    private static GCEventTypeMatcher[] matcher = { new GCEventTypeMatcher () { NURSERY_START, s => TRUE } };
 }

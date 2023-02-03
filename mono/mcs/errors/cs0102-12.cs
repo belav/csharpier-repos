@@ -2,7 +2,7 @@
 // Line: 7
 
 public class SampleClass {
-	class A {}
+    class A {}
         
         public void A () {}
 }

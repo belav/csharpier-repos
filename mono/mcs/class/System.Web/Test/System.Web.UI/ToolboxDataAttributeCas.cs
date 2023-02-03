@@ -1,9 +1,9 @@
 //
 // ToolboxDataAttributeCas.cs 
-//	- CAS unit tests for System.Web.UI.ToolboxDataAttribute
+//    - CAS unit tests for System.Web.UI.ToolboxDataAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,34 +38,34 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ToolboxDataAttributeCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ToolboxDataAttributeCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ToolboxDataAttribute tda = new ToolboxDataAttribute (null);
-			Assert.IsNull (tda.Data, "Data");
-			Assert.IsTrue (tda.Equals (tda), "Equals");
-			Assert.IsFalse (tda.GetHashCode () == ToolboxDataAttribute.Default.GetHashCode (), "GetHashCode");
-			// unexpected result as tda hash code is different from default
-			// seems that null and String.Empty are both considered defaults...
-			Assert.IsTrue (tda.IsDefaultAttribute (), "IsDefaultAttribute");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ToolboxDataAttribute tda = new ToolboxDataAttribute (null);
+            Assert.IsNull (tda.Data, "Data");
+            Assert.IsTrue (tda.Equals (tda), "Equals");
+            Assert.IsFalse (tda.GetHashCode () == ToolboxDataAttribute.Default.GetHashCode (), "GetHashCode");
+            // unexpected result as tda hash code is different from default
+            // seems that null and String.Empty are both considered defaults...
+            Assert.IsTrue (tda.IsDefaultAttribute (), "IsDefaultAttribute");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(string)");
-			return ci.Invoke (new object[1] { String.Empty });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
+            Assert.IsNotNull (ci, ".ctor(string)");
+            return ci.Invoke (new object[1] { String.Empty });
+        }
 
-		public override Type Type {
-			get { return typeof (ToolboxDataAttribute); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ToolboxDataAttribute); }
+        }
+    }
 }

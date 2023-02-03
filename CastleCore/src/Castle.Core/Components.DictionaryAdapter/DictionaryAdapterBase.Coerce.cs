@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,27 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	public abstract partial class DictionaryAdapterBase
-	{
-		public T Coerce<T>() where T : class
-		{
-			return (T)Coerce(typeof(T));
-		}
+    public abstract partial class DictionaryAdapterBase
+    {
+        public T Coerce<T>() where T : class
+        {
+            return (T)Coerce(typeof(T));
+        }
 
-		public object Coerce(Type type)
-		{
-			if (type.IsAssignableFrom(Meta.Type))
-				return this;
+        public object Coerce(Type type)
+        {
+            if (type.IsAssignableFrom(Meta.Type))
+                return this;
 
-			if (This.CoerceStrategy != null)
-			{
-				var coerced = This.CoerceStrategy.Coerce(this, type);
-				if (coerced != null) return coerced;
-			}
-			return This.Factory.GetAdapter(type, This.Dictionary, This.Descriptor);
-		}
-	}
+            if (This.CoerceStrategy != null)
+            {
+                var coerced = This.CoerceStrategy.Coerce(this, type);
+                if (coerced != null) return coerced;
+            }
+            return This.Factory.GetAdapter(type, This.Dictionary, This.Descriptor);
+        }
+    }
 }

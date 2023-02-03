@@ -20,5 +20,5 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 interface IAccessibleHandler {
-	// Opaque for now.
+    // Opaque for now.
 }

@@ -2,14 +2,14 @@
 // Line: 13
 
 struct S {
-	public int x;
+    public int x;
 }
 
 class C {
-	readonly S s;
+    readonly S s;
 
-	public void Test ()
+    public void Test ()
         {
-		s.x = 42;
-	}
+        s.x = 42;
+    }
 }

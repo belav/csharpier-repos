@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 //
 //
 
@@ -30,18 +30,18 @@
 
 namespace System.Windows.Forms {
 
-	internal class FixedSizeTextBox : TextBox {
+    internal class FixedSizeTextBox : TextBox {
 
-		public FixedSizeTextBox ()
-		{
-			SetStyle (ControlStyles.FixedWidth, true);
-			SetStyle (ControlStyles.FixedHeight, true);
-		}
+        public FixedSizeTextBox ()
+        {
+            SetStyle (ControlStyles.FixedWidth, true);
+            SetStyle (ControlStyles.FixedHeight, true);
+        }
 
-		public FixedSizeTextBox (bool fixed_horz, bool fixed_vert) {
-			SetStyle (ControlStyles.FixedWidth, fixed_horz);
-			SetStyle (ControlStyles.FixedHeight, fixed_vert);
-		}
-	}
+        public FixedSizeTextBox (bool fixed_horz, bool fixed_vert) {
+            SetStyle (ControlStyles.FixedWidth, fixed_horz);
+            SetStyle (ControlStyles.FixedHeight, fixed_vert);
+        }
+    }
 }
 

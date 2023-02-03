@@ -1,10 +1,10 @@
 // Compiler options: -unsafe
 
 struct Obsolete {
-	int a;
+    int a;
 }
 struct A {
-	int a, b;
+    int a, b;
 }
 
 class MainClass {

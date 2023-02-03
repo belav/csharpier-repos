@@ -2,7 +2,7 @@
 // ToolsetDefinitionLocations.cs
 //
 // Author:
-//	Ankit Jain (jankit@novell.com)
+//    Ankit Jain (jankit@novell.com)
 //
 // Copyright 2010 Novell, Inc (http://www.novell.com)
 //
@@ -27,10 +27,10 @@
 
 namespace Microsoft.Build.BuildEngine
 {
-	public enum ToolsetDefinitionLocations
-	{
-		None,
-		ConfigurationFile,
-		Registry
-	}
+    public enum ToolsetDefinitionLocations
+    {
+        None,
+        ConfigurationFile,
+        Registry
+    }
 }

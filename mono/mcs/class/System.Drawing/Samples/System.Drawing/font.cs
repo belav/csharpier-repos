@@ -34,30 +34,30 @@ using System.Drawing.Imaging;
 
 namespace MonoSamples.System.Drawing
 {
-	public class FontSample
-	{
-		public static void Main () {
+    public class FontSample
+    {
+        public static void Main () {
 
-			float width = 400.0F;
-			float height = 800.0F;
-		
-			FontCollection ifc = new InstalledFontCollection ();
-			foreach (FontFamily ffm in ifc.Families) {
-				Console.WriteLine (ffm.Name);
-			}
+            float width = 400.0F;
+            float height = 800.0F;
+        
+            FontCollection ifc = new InstalledFontCollection ();
+            foreach (FontFamily ffm in ifc.Families) {
+                Console.WriteLine (ffm.Name);
+            }
 
-			Font f = new Font ("Arial",12);
-			Console.WriteLine ("Height: {0}", f.Height);
+            Font f = new Font ("Arial",12);
+            Console.WriteLine ("Height: {0}", f.Height);
 
-			Bitmap bmp = new Bitmap ((int) width, (int) height);
-			Graphics gr = Graphics.FromImage (bmp);
-			gr.Clear (Color.White);
+            Bitmap bmp = new Bitmap ((int) width, (int) height);
+            Graphics gr = Graphics.FromImage (bmp);
+            gr.Clear (Color.White);
 
-			Brush br = new SolidBrush (Color.Black);
-			gr.DrawString ("The test string", f, br, 10, 10);
+            Brush br = new SolidBrush (Color.Black);
+            gr.DrawString ("The test string", f, br, 10, 10);
 
-			bmp.Save ("font.png", ImageFormat.Png);
-			Console.WriteLine ("output file font.png");
-		}
-	}
+            bmp.Save ("font.png", ImageFormat.Png);
+            Console.WriteLine ("output file font.png");
+        }
+    }
 }

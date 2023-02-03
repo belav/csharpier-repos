@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	using Castle.DynamicProxy.Tests.Interfaces;
+    using Castle.DynamicProxy.Tests.Interfaces;
 
-	public class WithRefOutAndEmpty : IWithRefOut, IEmpty
-	{
-		public void Did(ref int i)
-		{
-			i = 5;
-		}
+    public class WithRefOutAndEmpty : IWithRefOut, IEmpty
+    {
+        public void Did(ref int i)
+        {
+            i = 5;
+        }
 
-		public void Do(out int i)
-		{
-			i = 5;
-		}
-	}
+        public void Do(out int i)
+        {
+            i = 5;
+        }
+    }
 }

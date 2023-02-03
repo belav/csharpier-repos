@@ -33,24 +33,24 @@ using System;
 
 namespace System.Runtime.Remoting.Contexts {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ContextProperty
-	{
-		string name;
-		object prop;
-		
-		private ContextProperty (string name, object prop)
-		{
-			this.name = name;
-			this.prop = prop;
-		}
-		
-		public virtual string Name {
-			get { return name; } 
-		}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ContextProperty
+    {
+        string name;
+        object prop;
+        
+        private ContextProperty (string name, object prop)
+        {
+            this.name = name;
+            this.prop = prop;
+        }
+        
+        public virtual string Name {
+            get { return name; } 
+        }
 
-		public virtual object Property {
-			get { return prop; }
-		}
-	}
+        public virtual object Property {
+            get { return prop; }
+        }
+    }
 }

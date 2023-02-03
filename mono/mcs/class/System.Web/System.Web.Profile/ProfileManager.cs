@@ -2,8 +2,8 @@
 // System.Web.Profile.ProfileManager.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
-//	Vladimir Krasnov (vladimirk@mainsoft.com)
+//    Chris Toshok (toshok@ximian.com)
+//    Vladimir Krasnov (vladimirk@mainsoft.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,146 +34,146 @@ using System.Configuration;
 
 namespace System.Web.Profile
 {
-	public static class ProfileManager
-	{
-		static ProfileSection config;
-		static ProfileProviderCollection providersCollection;
+    public static class ProfileManager
+    {
+        static ProfileSection config;
+        static ProfileProviderCollection providersCollection;
 
-		static ProfileManager ()
-		{
-			config = (ProfileSection) WebConfigurationManager.GetSection ("system.web/profile");
-		}
+        static ProfileManager ()
+        {
+            config = (ProfileSection) WebConfigurationManager.GetSection ("system.web/profile");
+        }
 
-		public static int DeleteInactiveProfiles (ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
-		{
-			return Provider.DeleteInactiveProfiles (authenticationOption, userInactiveSinceDate);
-		}
+        public static int DeleteInactiveProfiles (ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
+        {
+            return Provider.DeleteInactiveProfiles (authenticationOption, userInactiveSinceDate);
+        }
 
-		public static bool DeleteProfile (string username)
-		{
-			return Provider.DeleteProfiles (new string [] { username }) > 0;
-		}
+        public static bool DeleteProfile (string username)
+        {
+            return Provider.DeleteProfiles (new string [] { username }) > 0;
+        }
 
-		public static int DeleteProfiles (string[] usernames)
-		{
-			return Provider.DeleteProfiles (usernames);
-		}
+        public static int DeleteProfiles (string[] usernames)
+        {
+            return Provider.DeleteProfiles (usernames);
+        }
 
-		public static int DeleteProfiles (ProfileInfoCollection profiles)
-		{
-			return Provider.DeleteProfiles (profiles);
-		}
+        public static int DeleteProfiles (ProfileInfoCollection profiles)
+        {
+            return Provider.DeleteProfiles (profiles);
+        }
 
-		public static ProfileInfoCollection FindInactiveProfilesByUserName (ProfileAuthenticationOption authenticationOption,
-										    string usernameToMatch, DateTime userInactiveSinceDate)
-		{
-			int totalRecords = 0;
-			return Provider.FindInactiveProfilesByUserName (authenticationOption, usernameToMatch, userInactiveSinceDate, 0, int.MaxValue, out totalRecords);
-		}
+        public static ProfileInfoCollection FindInactiveProfilesByUserName (ProfileAuthenticationOption authenticationOption,
+                                            string usernameToMatch, DateTime userInactiveSinceDate)
+        {
+            int totalRecords = 0;
+            return Provider.FindInactiveProfilesByUserName (authenticationOption, usernameToMatch, userInactiveSinceDate, 0, int.MaxValue, out totalRecords);
+        }
 
-		public static ProfileInfoCollection FindInactiveProfilesByUserName (ProfileAuthenticationOption authenticationOption,
-										    string usernameToMatch, DateTime userInactiveSinceDate,
-										    int pageIndex, int pageSize, out int totalRecords)
-		{
-			return Provider.FindInactiveProfilesByUserName (authenticationOption, usernameToMatch, userInactiveSinceDate, pageIndex, pageSize, out totalRecords);
-		}
+        public static ProfileInfoCollection FindInactiveProfilesByUserName (ProfileAuthenticationOption authenticationOption,
+                                            string usernameToMatch, DateTime userInactiveSinceDate,
+                                            int pageIndex, int pageSize, out int totalRecords)
+        {
+            return Provider.FindInactiveProfilesByUserName (authenticationOption, usernameToMatch, userInactiveSinceDate, pageIndex, pageSize, out totalRecords);
+        }
 
-		public static ProfileInfoCollection FindProfilesByUserName (ProfileAuthenticationOption authenticationOption, string usernameToMatch)
-		{
-			int totalRecords = 0;
-			return Provider.FindProfilesByUserName (authenticationOption, usernameToMatch, 0, int.MaxValue, out totalRecords);
-		}
+        public static ProfileInfoCollection FindProfilesByUserName (ProfileAuthenticationOption authenticationOption, string usernameToMatch)
+        {
+            int totalRecords = 0;
+            return Provider.FindProfilesByUserName (authenticationOption, usernameToMatch, 0, int.MaxValue, out totalRecords);
+        }
 
-		public static ProfileInfoCollection FindProfilesByUserName (ProfileAuthenticationOption authenticationOption, string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
-		{
-			return Provider.FindProfilesByUserName (authenticationOption, usernameToMatch, pageIndex, pageSize, out totalRecords);
-		}
+        public static ProfileInfoCollection FindProfilesByUserName (ProfileAuthenticationOption authenticationOption, string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        {
+            return Provider.FindProfilesByUserName (authenticationOption, usernameToMatch, pageIndex, pageSize, out totalRecords);
+        }
 
-		public static ProfileInfoCollection GetAllInactiveProfiles (ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
-		{
-			int totalRecords = 0;
-			return Provider.GetAllInactiveProfiles (authenticationOption, userInactiveSinceDate, 0, int.MaxValue, out totalRecords);
-		}
+        public static ProfileInfoCollection GetAllInactiveProfiles (ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
+        {
+            int totalRecords = 0;
+            return Provider.GetAllInactiveProfiles (authenticationOption, userInactiveSinceDate, 0, int.MaxValue, out totalRecords);
+        }
 
-		public static ProfileInfoCollection GetAllInactiveProfiles (ProfileAuthenticationOption authenticationOption,
-									    DateTime userInactiveSinceDate, int pageIndex, int pageSize,
-									    out int totalRecords)
-		{
-			return Provider.GetAllInactiveProfiles (authenticationOption, userInactiveSinceDate, pageIndex, pageSize, out totalRecords);
-		}
+        public static ProfileInfoCollection GetAllInactiveProfiles (ProfileAuthenticationOption authenticationOption,
+                                        DateTime userInactiveSinceDate, int pageIndex, int pageSize,
+                                        out int totalRecords)
+        {
+            return Provider.GetAllInactiveProfiles (authenticationOption, userInactiveSinceDate, pageIndex, pageSize, out totalRecords);
+        }
 
-		public static ProfileInfoCollection GetAllProfiles (ProfileAuthenticationOption authenticationOption)
-		{
-			int totalRecords = 0;
-			return Provider.GetAllProfiles (authenticationOption, 0, int.MaxValue, out totalRecords);
-		}
+        public static ProfileInfoCollection GetAllProfiles (ProfileAuthenticationOption authenticationOption)
+        {
+            int totalRecords = 0;
+            return Provider.GetAllProfiles (authenticationOption, 0, int.MaxValue, out totalRecords);
+        }
 
-		public static ProfileInfoCollection GetAllProfiles (ProfileAuthenticationOption authenticationOption, int pageIndex, int pageSize, out int totalRecords)
-		{
-			return Provider.GetAllProfiles (authenticationOption, pageIndex, pageSize, out totalRecords);
-		}
+        public static ProfileInfoCollection GetAllProfiles (ProfileAuthenticationOption authenticationOption, int pageIndex, int pageSize, out int totalRecords)
+        {
+            return Provider.GetAllProfiles (authenticationOption, pageIndex, pageSize, out totalRecords);
+        }
 
-		public static int GetNumberOfInactiveProfiles (ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
-		{
-			return Provider.GetNumberOfInactiveProfiles (authenticationOption, userInactiveSinceDate);
-		}
+        public static int GetNumberOfInactiveProfiles (ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
+        {
+            return Provider.GetNumberOfInactiveProfiles (authenticationOption, userInactiveSinceDate);
+        }
 
-		public static int GetNumberOfProfiles (ProfileAuthenticationOption authenticationOption)
-		{
-			int totalRecords = 0;
-			Provider.GetAllProfiles (authenticationOption, 0, 1, out totalRecords);
-			return totalRecords;
-		}
+        public static int GetNumberOfProfiles (ProfileAuthenticationOption authenticationOption)
+        {
+            int totalRecords = 0;
+            Provider.GetAllProfiles (authenticationOption, 0, 1, out totalRecords);
+            return totalRecords;
+        }
 
-		public static string ApplicationName {
-			get {
-				return Provider.ApplicationName;
-			}
-			set {
-				Provider.ApplicationName = value;
-			}
-		}
+        public static string ApplicationName {
+            get {
+                return Provider.ApplicationName;
+            }
+            set {
+                Provider.ApplicationName = value;
+            }
+        }
 
-		public static bool AutomaticSaveEnabled {
-			get {
-				return config.AutomaticSaveEnabled;
-			}
-		}
+        public static bool AutomaticSaveEnabled {
+            get {
+                return config.AutomaticSaveEnabled;
+            }
+        }
 
-		public static bool Enabled {
-			get {
-				return config.Enabled;
-			}
-		}
+        public static bool Enabled {
+            get {
+                return config.Enabled;
+            }
+        }
 
-		[MonoTODO ("check AspNetHostingPermissionLevel")]
-		public static ProfileProvider Provider {
-			get	{
-				ProfileProvider p = Providers [config.DefaultProvider];
-				if (p == null)
-					throw new ConfigurationErrorsException ("Provider '" + config.DefaultProvider + "' was not found");
-				return p;
-			}
-		}
+        [MonoTODO ("check AspNetHostingPermissionLevel")]
+        public static ProfileProvider Provider {
+            get    {
+                ProfileProvider p = Providers [config.DefaultProvider];
+                if (p == null)
+                    throw new ConfigurationErrorsException ("Provider '" + config.DefaultProvider + "' was not found");
+                return p;
+            }
+        }
 
-		public static ProfileProviderCollection Providers {
-			get {
-				CheckEnabled ();
-				if (providersCollection == null) {
-					ProfileProviderCollection providersCollectionTmp = new ProfileProviderCollection ();
-					ProvidersHelper.InstantiateProviders (config.Providers, providersCollectionTmp, typeof (ProfileProvider));
-					providersCollection = providersCollectionTmp;
-				}
-				return providersCollection;
-			}
-		}
+        public static ProfileProviderCollection Providers {
+            get {
+                CheckEnabled ();
+                if (providersCollection == null) {
+                    ProfileProviderCollection providersCollectionTmp = new ProfileProviderCollection ();
+                    ProvidersHelper.InstantiateProviders (config.Providers, providersCollectionTmp, typeof (ProfileProvider));
+                    providersCollection = providersCollectionTmp;
+                }
+                return providersCollection;
+            }
+        }
 
-		static void CheckEnabled ()
-		{
-			if (!Enabled)
-				throw new Exception ("This feature is not enabled.  To enable it, add <profile enabled=\"true\"> to your configuration file.");
-		}
+        static void CheckEnabled ()
+        {
+            if (!Enabled)
+                throw new Exception ("This feature is not enabled.  To enable it, add <profile enabled=\"true\"> to your configuration file.");
+        }
 
-	}
+    }
 }
 

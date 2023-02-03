@@ -81,10 +81,10 @@ namespace Views {
 
     public static int OverlapLength<T>(IList<T> u, IList<T> w) { 
       if (Overlap(u, w))
-	return Math.Min(u.Offset+u.Count, w.Offset+w.Count) 
-	     - Math.Max(u.Offset, w.Offset);
+    return Math.Min(u.Offset+u.Count, w.Offset+w.Count) 
+         - Math.Max(u.Offset, w.Offset);
       else
-	return -1; // No overlap
+    return -1; // No overlap
     }
 
     public static bool ContainsView<T>(IList<T> u, IList<T> w) { 

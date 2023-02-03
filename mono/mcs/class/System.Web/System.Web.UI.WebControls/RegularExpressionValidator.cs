@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.RegularExpressionValidator
 //
 // Authors:
-//	Chris Toshok (toshok@novell.com)
+//    Chris Toshok (toshok@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,56 +35,56 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ToolboxData ("<{0}:RegularExpressionValidator runat=\"server\" ErrorMessage=\"RegularExpressionValidator\"></{0}:RegularExpressionValidator>")]
-	public class RegularExpressionValidator : BaseValidator
-	{
-		public RegularExpressionValidator ()
-		{
-		}
+    // CAS
+    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [ToolboxData ("<{0}:RegularExpressionValidator runat=\"server\" ErrorMessage=\"RegularExpressionValidator\"></{0}:RegularExpressionValidator>")]
+    public class RegularExpressionValidator : BaseValidator
+    {
+        public RegularExpressionValidator ()
+        {
+        }
 
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			if (RenderUplevel) {
-				RegisterExpandoAttribute (ClientID, "evaluationfunction", "RegularExpressionValidatorEvaluateIsValid");
-				if (ValidationExpression.Length > 0)
-					RegisterExpandoAttribute (ClientID, "validationexpression", ValidationExpression, true);
-			}
+        protected override void AddAttributesToRender (HtmlTextWriter writer)
+        {
+            if (RenderUplevel) {
+                RegisterExpandoAttribute (ClientID, "evaluationfunction", "RegularExpressionValidatorEvaluateIsValid");
+                if (ValidationExpression.Length > 0)
+                    RegisterExpandoAttribute (ClientID, "validationexpression", ValidationExpression, true);
+            }
 
-			base.AddAttributesToRender (writer);
-		}
+            base.AddAttributesToRender (writer);
+        }
 
-		protected override bool EvaluateIsValid ()
-		{
-			if (GetControlValidationValue (ControlToValidate).Trim() == "")
-				return true;
+        protected override bool EvaluateIsValid ()
+        {
+            if (GetControlValidationValue (ControlToValidate).Trim() == "")
+                return true;
 
-			StringBuilder expr = new StringBuilder(ValidationExpression);
+            StringBuilder expr = new StringBuilder(ValidationExpression);
 
-			if (expr.Length == 0 || expr [0] != '^')
-				expr.Insert(0, '^');
-								
-			if (expr [expr.Length - 1] != '$')
-				expr.Append('$');
-				
-			return Regex.IsMatch (GetControlValidationValue(ControlToValidate), expr.ToString ());
-		}
+            if (expr.Length == 0 || expr [0] != '^')
+                expr.Insert(0, '^');
+                                
+            if (expr [expr.Length - 1] != '$')
+                expr.Append('$');
+                
+            return Regex.IsMatch (GetControlValidationValue(ControlToValidate), expr.ToString ());
+        }
 
-		[Themeable (false)]
-		[DefaultValue ("")]
-		[Editor ("System.Web.UI.Design.WebControls.RegexTypeEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
-		[WebSysDescription ("")]
-		[WebCategory ("Behavior")]
-		public string ValidationExpression {
-			get {
-				return ViewState.GetString ("ValidationExpression", "");
-			}
-			set {
-				ViewState ["ValidationExpression"] = value;
-			}
-		}
-	}
+        [Themeable (false)]
+        [DefaultValue ("")]
+        [Editor ("System.Web.UI.Design.WebControls.RegexTypeEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
+        [WebSysDescription ("")]
+        [WebCategory ("Behavior")]
+        public string ValidationExpression {
+            get {
+                return ViewState.GetString ("ValidationExpression", "");
+            }
+            set {
+                ViewState ["ValidationExpression"] = value;
+            }
+        }
+    }
 }

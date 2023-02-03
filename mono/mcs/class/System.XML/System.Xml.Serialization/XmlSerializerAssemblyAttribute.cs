@@ -33,38 +33,38 @@ using System;
 
 namespace System.Xml.Serialization 
 {
-	[AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple=false)]
-	public sealed class XmlSerializerAssemblyAttribute : Attribute
-	{	
-		string _assemblyName;
-		string _codeBase;
-		
-		public XmlSerializerAssemblyAttribute ()
-		{
-		}
+    [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple=false)]
+    public sealed class XmlSerializerAssemblyAttribute : Attribute
+    {    
+        string _assemblyName;
+        string _codeBase;
+        
+        public XmlSerializerAssemblyAttribute ()
+        {
+        }
 
-		public XmlSerializerAssemblyAttribute (string assemblyName)
-		{
-			_assemblyName = assemblyName;
-		}
+        public XmlSerializerAssemblyAttribute (string assemblyName)
+        {
+            _assemblyName = assemblyName;
+        }
 
-		public XmlSerializerAssemblyAttribute (string assemblyName, string codeBase)
-			: this (assemblyName)
-		{
-			_codeBase = codeBase;
-		}
-		
-		public string AssemblyName 
-		{
-			get { return _assemblyName; }
-			set { _assemblyName = value; }
-		}
+        public XmlSerializerAssemblyAttribute (string assemblyName, string codeBase)
+            : this (assemblyName)
+        {
+            _codeBase = codeBase;
+        }
+        
+        public string AssemblyName 
+        {
+            get { return _assemblyName; }
+            set { _assemblyName = value; }
+        }
 
-		public string CodeBase 
-		{
-			get { return _codeBase; }
-			set { _codeBase = value; }
-		}
-	}
+        public string CodeBase 
+        {
+            get { return _codeBase; }
+            set { _codeBase = value; }
+        }
+    }
 }
 

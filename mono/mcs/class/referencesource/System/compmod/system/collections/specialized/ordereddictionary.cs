@@ -356,7 +356,7 @@ namespace System.Collections.Specialized {
                          Justification="mscorlib removed all link demands, so don't warn when overriding a method " +
                                        "with no link demand.  Replace the LinkDemand with a SecurityCritical" +
                                        "annotation when the assembly is moved to the v4 security model.")]
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)] 		
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)]         
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) {
             if (info == null) {
                 throw new ArgumentNullException("info");

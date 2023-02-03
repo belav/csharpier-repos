@@ -1,4 +1,4 @@
-﻿//
+//
 // CollectionFromEnumerable.cs
 //
 // Author:

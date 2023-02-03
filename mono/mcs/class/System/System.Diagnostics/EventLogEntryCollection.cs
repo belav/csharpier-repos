@@ -35,90 +35,90 @@ using System.Diagnostics;
 
 namespace System.Diagnostics {
 
-	public class EventLogEntryCollection : ICollection, IEnumerable {
+    public class EventLogEntryCollection : ICollection, IEnumerable {
 
-		readonly EventLogImpl _impl;
+        readonly EventLogImpl _impl;
 
-		internal EventLogEntryCollection(EventLogImpl impl)
-		{
-			_impl = impl;
-		}
+        internal EventLogEntryCollection(EventLogImpl impl)
+        {
+            _impl = impl;
+        }
 
-		public int Count {
-			get { return _impl.EntryCount; }
-		}
+        public int Count {
+            get { return _impl.EntryCount; }
+        }
 
-		public virtual EventLogEntry this [int index] {
-			get { return _impl[index]; }
-		}
+        public virtual EventLogEntry this [int index] {
+            get { return _impl[index]; }
+        }
 
-		bool ICollection.IsSynchronized {
-			get { return false; }
-		}
+        bool ICollection.IsSynchronized {
+            get { return false; }
+        }
 
-		object ICollection.SyncRoot {
-			get { return this; }
-		}
+        object ICollection.SyncRoot {
+            get { return this; }
+        }
 
-		public void CopyTo (EventLogEntry[] entries, int index)
-		{
-			EventLogEntry[] evLogEntries = _impl.GetEntries ();
-			Array.Copy (evLogEntries, 0, entries, index, evLogEntries.Length);
-		}
+        public void CopyTo (EventLogEntry[] entries, int index)
+        {
+            EventLogEntry[] evLogEntries = _impl.GetEntries ();
+            Array.Copy (evLogEntries, 0, entries, index, evLogEntries.Length);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return new EventLogEntryEnumerator (_impl);
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            return new EventLogEntryEnumerator (_impl);
+        }
 
-		void ICollection.CopyTo (Array array, int index)
-		{
-			EventLogEntry[] entries = _impl.GetEntries ();
-			Array.Copy (entries, 0, array, index, entries.Length);
-		}
+        void ICollection.CopyTo (Array array, int index)
+        {
+            EventLogEntry[] entries = _impl.GetEntries ();
+            Array.Copy (entries, 0, array, index, entries.Length);
+        }
 
-		private class EventLogEntryEnumerator : IEnumerator
-		{
-			internal EventLogEntryEnumerator (EventLogImpl impl)
-			{
-				_impl = impl;
-			}
+        private class EventLogEntryEnumerator : IEnumerator
+        {
+            internal EventLogEntryEnumerator (EventLogImpl impl)
+            {
+                _impl = impl;
+            }
 
-			object IEnumerator.Current {
-				get { return Current; }
-			}
+            object IEnumerator.Current {
+                get { return Current; }
+            }
 
-			public EventLogEntry Current {
-				get {
-					if (_currentEntry != null)
-						return _currentEntry;
+            public EventLogEntry Current {
+                get {
+                    if (_currentEntry != null)
+                        return _currentEntry;
 
-					throw new InvalidOperationException ("No current EventLog"
-						+ " entry available, cursor is located before the first"
-						+ " or after the last element of the enumeration.");
-				}
-			}
+                    throw new InvalidOperationException ("No current EventLog"
+                        + " entry available, cursor is located before the first"
+                        + " or after the last element of the enumeration.");
+                }
+            }
 
-			public bool MoveNext ()
-			{
-				_currentIndex++;
-				if (_currentIndex >= _impl.EntryCount) {
-					_currentEntry = null;
-					return false;
-				}
-				_currentEntry = _impl [_currentIndex];
-				return true;
-			}
+            public bool MoveNext ()
+            {
+                _currentIndex++;
+                if (_currentIndex >= _impl.EntryCount) {
+                    _currentEntry = null;
+                    return false;
+                }
+                _currentEntry = _impl [_currentIndex];
+                return true;
+            }
 
-			public void Reset ()
-			{
-				_currentIndex = - 1;
-			}
+            public void Reset ()
+            {
+                _currentIndex = - 1;
+            }
 
-			readonly EventLogImpl _impl;
-			int _currentIndex = -1;
-			EventLogEntry _currentEntry;
-		}
+            readonly EventLogImpl _impl;
+            int _currentIndex = -1;
+            EventLogEntry _currentEntry;
+        }
 }
 }
 

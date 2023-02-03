@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AuditRule implementation
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,30 +29,30 @@
 using System.Security.Principal;
 
 namespace System.Security.AccessControl {
-	public abstract class AuditRule : AuthorizationRule
-	{
-		AuditFlags auditFlags;
-		
-		protected AuditRule (IdentityReference identity,
-				     int accessMask,
-				     bool isInherited,
-				     InheritanceFlags inheritanceFlags,
-				     PropagationFlags propagationFlags,
-				     AuditFlags auditFlags)
-			: base (identity, accessMask, isInherited,
-				inheritanceFlags, propagationFlags)
-		{
-			if (auditFlags != ((AuditFlags.Success | AuditFlags.Failure) & auditFlags))
-				throw new ArgumentException ("Invalid audit flags.", "auditFlags");
+    public abstract class AuditRule : AuthorizationRule
+    {
+        AuditFlags auditFlags;
+        
+        protected AuditRule (IdentityReference identity,
+                     int accessMask,
+                     bool isInherited,
+                     InheritanceFlags inheritanceFlags,
+                     PropagationFlags propagationFlags,
+                     AuditFlags auditFlags)
+            : base (identity, accessMask, isInherited,
+                inheritanceFlags, propagationFlags)
+        {
+            if (auditFlags != ((AuditFlags.Success | AuditFlags.Failure) & auditFlags))
+                throw new ArgumentException ("Invalid audit flags.", "auditFlags");
 
-			this.auditFlags = auditFlags;
-		}
-		
-		public AuditFlags AuditFlags
-		{
-			get {
-				return(auditFlags);
-			}
-		}
-	}
+            this.auditFlags = auditFlags;
+        }
+        
+        public AuditFlags AuditFlags
+        {
+            get {
+                return(auditFlags);
+            }
+        }
+    }
 }

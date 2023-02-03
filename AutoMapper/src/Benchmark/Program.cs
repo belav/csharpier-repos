@@ -1,4 +1,4 @@
-﻿using Benchmark.Flattening;
+using Benchmark.Flattening;
 
 namespace Benchmark;
 

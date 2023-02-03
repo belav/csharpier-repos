@@ -5,8 +5,8 @@ using System;
 struct A { int a; }
 
 class X {
-	public volatile A a;
-	static void Main ()
-		{
-		}
+    public volatile A a;
+    static void Main ()
+        {
+        }
 }

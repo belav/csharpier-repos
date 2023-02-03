@@ -19,13 +19,13 @@ public interface IA : IDisposable
 
 class Driver
 {
-	static void Foo<T> (T t) where T : IA
-	{
-	}
+    static void Foo<T> (T t) where T : IA
+    {
+    }
 
-	static void Main ()
-	{
-		IC i = null;
-		Foo<IC> (i);
-	}
+    static void Main ()
+    {
+        IC i = null;
+        Foo<IC> (i);
+    }
 }

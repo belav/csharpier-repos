@@ -2,7 +2,7 @@
 // TextMessageEncodingBindingElementTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -40,118 +40,118 @@ using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	[TestFixture]
-	public class TextMessageEncodingBindingElementTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			Element el = new Element ();
-			Assert.AreEqual (64, el.MaxReadPoolSize, "#1");
-			Assert.AreEqual (16, el.MaxWritePoolSize, "#2");
-			Assert.AreEqual (MessageVersion.Default, el.MessageVersion, "#3");
-			// FIXME: test ReaderQuotas
+    [TestFixture]
+    public class TextMessageEncodingBindingElementTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            Element el = new Element ();
+            Assert.AreEqual (64, el.MaxReadPoolSize, "#1");
+            Assert.AreEqual (16, el.MaxWritePoolSize, "#2");
+            Assert.AreEqual (MessageVersion.Default, el.MessageVersion, "#3");
+            // FIXME: test ReaderQuotas
 
-			Assert.AreEqual (Encoding.UTF8, el.WriteEncoding, "#4");
-		}
+            Assert.AreEqual (Encoding.UTF8, el.WriteEncoding, "#4");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void BuildChannelListenerNullArg ()
-		{
-			new Element ().BuildChannelListener<IReplyChannel> (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void BuildChannelListenerNullArg ()
+        {
+            new Element ().BuildChannelListener<IReplyChannel> (null);
+        }
 
-		[Test]
-		public void CanBuildChannelFactory ()
-		{
-			CustomBinding cb = new CustomBinding (
-				new HttpTransportBindingElement ());
-			BindingContext ctx = new BindingContext (
-				cb, new BindingParameterCollection ());
-			Element el = new Element ();
-			Assert.IsTrue (el.CanBuildChannelFactory<IRequestChannel> (ctx), "#1");
-			Assert.IsFalse (el.CanBuildChannelFactory<IRequestSessionChannel> (ctx), "#2");
-		}
+        [Test]
+        public void CanBuildChannelFactory ()
+        {
+            CustomBinding cb = new CustomBinding (
+                new HttpTransportBindingElement ());
+            BindingContext ctx = new BindingContext (
+                cb, new BindingParameterCollection ());
+            Element el = new Element ();
+            Assert.IsTrue (el.CanBuildChannelFactory<IRequestChannel> (ctx), "#1");
+            Assert.IsFalse (el.CanBuildChannelFactory<IRequestSessionChannel> (ctx), "#2");
+        }
 
-		[Test]
-		public void BuildChannelFactory ()
-		{
-			CustomBinding cb = new CustomBinding (
-				new HttpTransportBindingElement ());
-			BindingContext ctx = new BindingContext (
-				cb, new BindingParameterCollection ());
-			Element el = new Element ();
-			IChannelFactory<IRequestChannel> cf =
-				el.BuildChannelFactory<IRequestChannel> (ctx);
-		}
+        [Test]
+        public void BuildChannelFactory ()
+        {
+            CustomBinding cb = new CustomBinding (
+                new HttpTransportBindingElement ());
+            BindingContext ctx = new BindingContext (
+                cb, new BindingParameterCollection ());
+            Element el = new Element ();
+            IChannelFactory<IRequestChannel> cf =
+                el.BuildChannelFactory<IRequestChannel> (ctx);
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void BuildChannelListenerEmptyCustomBinding ()
-		{
-			CustomBinding cb = new CustomBinding ();
-			BindingContext ctx = new BindingContext (
-				cb, new BindingParameterCollection ());
-			new Element ().BuildChannelListener<IReplyChannel> (ctx);
-		}
+        [Test]
+        [ExpectedException (typeof (InvalidOperationException))]
+        public void BuildChannelListenerEmptyCustomBinding ()
+        {
+            CustomBinding cb = new CustomBinding ();
+            BindingContext ctx = new BindingContext (
+                cb, new BindingParameterCollection ());
+            new Element ().BuildChannelListener<IReplyChannel> (ctx);
+        }
 
-		[Test]
-		public void BuildChannelListenerWithTransport ()
-		{
-			CustomBinding cb = new CustomBinding (
-				new HttpTransportBindingElement ());
-			BindingContext ctx = new BindingContext (
-				cb, new BindingParameterCollection (),
-				new Uri ("http://localhost:8080"), String.Empty, ListenUriMode.Unique);
-			new Element ().BuildChannelListener<IReplyChannel> (ctx);
-		}
+        [Test]
+        public void BuildChannelListenerWithTransport ()
+        {
+            CustomBinding cb = new CustomBinding (
+                new HttpTransportBindingElement ());
+            BindingContext ctx = new BindingContext (
+                cb, new BindingParameterCollection (),
+                new Uri ("http://localhost:8080"), String.Empty, ListenUriMode.Unique);
+            new Element ().BuildChannelListener<IReplyChannel> (ctx);
+        }
 
-		[Test]
-		public void MessageEncoderIsContentTypeSupported ()
-		{
-			var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
-			Assert.IsFalse (enc.IsContentTypeSupported ("application/xml"), "#1");
-			Assert.IsFalse (enc.IsContentTypeSupported ("text/xml"), "#2");
-			Assert.IsTrue (enc.IsContentTypeSupported ("application/soap+xml"), "#3");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ReadNullStream ()
-		{
-			var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
-			enc.ReadMessage (null, 10, "text/xml");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ReadNullBufferManager ()
-		{
-			var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
-			enc.ReadMessage (new ArraySegment<byte> (new byte [0]), null, "text/xml");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (XmlException))] // (document is expected)
-		public void ReadEmptyBuffer ()
-		{
-			var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
-			enc.ReadMessage (new ArraySegment<byte> (new byte [0]), BufferManager.CreateBufferManager (1000, 1000), "text/xml");
-		}
-		
-		[Test]
-		public void ActionContentTypeParameter ()
-		{
-			var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
-			var msg = Message.CreateMessage (MessageVersion.Soap12, "urn:foo");
-			var ms = new MemoryStream ();
-			using (var xw = XmlWriter.Create (ms))
-				msg.WriteMessage (xw);
-			ms.Position = 0;
-			msg = enc.ReadMessage (ms, 0x1000, "application/soap+xml; action=urn:bar");
-			Assert.AreEqual ("urn:bar", msg.Headers.Action, "#1");
-		}
-	}
+        [Test]
+        public void MessageEncoderIsContentTypeSupported ()
+        {
+            var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
+            Assert.IsFalse (enc.IsContentTypeSupported ("application/xml"), "#1");
+            Assert.IsFalse (enc.IsContentTypeSupported ("text/xml"), "#2");
+            Assert.IsTrue (enc.IsContentTypeSupported ("application/soap+xml"), "#3");
+        }
+        
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ReadNullStream ()
+        {
+            var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
+            enc.ReadMessage (null, 10, "text/xml");
+        }
+        
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ReadNullBufferManager ()
+        {
+            var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
+            enc.ReadMessage (new ArraySegment<byte> (new byte [0]), null, "text/xml");
+        }
+        
+        [Test]
+        [ExpectedException (typeof (XmlException))] // (document is expected)
+        public void ReadEmptyBuffer ()
+        {
+            var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
+            enc.ReadMessage (new ArraySegment<byte> (new byte [0]), BufferManager.CreateBufferManager (1000, 1000), "text/xml");
+        }
+        
+        [Test]
+        public void ActionContentTypeParameter ()
+        {
+            var enc = new TextMessageEncodingBindingElement ().CreateMessageEncoderFactory ().Encoder;
+            var msg = Message.CreateMessage (MessageVersion.Soap12, "urn:foo");
+            var ms = new MemoryStream ();
+            using (var xw = XmlWriter.Create (ms))
+                msg.WriteMessage (xw);
+            ms.Position = 0;
+            msg = enc.ReadMessage (ms, 0x1000, "application/soap+xml; action=urn:bar");
+            Assert.AreEqual ("urn:bar", msg.Headers.Action, "#1");
+        }
+    }
 }
 #endif

@@ -5,14 +5,14 @@
 // <Area> Nullable - Lifting - Operators </Area>
 // <Title> general lifting of builtin operators on bool </Title>
 // <Description>  
-// Logical AND	&
-// Logical XOR	^
-// Logical OR	|
-// Equality	==  !=
-// Conditional AND	&& 
-// Conditional OR	||
-// Conditional	?:
-// Assignment	=  &=  ^=  |=
+// Logical AND    &
+// Logical XOR    ^
+// Logical OR    |
+// Equality    ==  !=
+// Conditional AND    && 
+// Conditional OR    ||
+// Conditional    ?:
+// Assignment    =  &=  ^=  |=
 // </Description> 
 // <RelatedBugs> </RelatedBugs>  
 
@@ -105,7 +105,7 @@ public class NullableTest
 
 
 
-    // Logical 	& |
+    // Logical     & |
 
     public static void And()
     {

@@ -6,9 +6,9 @@ using System;
 
 public class Test
 {
-	static void Main ()
-	{
-		FriendClass.MyMethod ();
-	}
+    static void Main ()
+    {
+        FriendClass.MyMethod ();
+    }
 }
 

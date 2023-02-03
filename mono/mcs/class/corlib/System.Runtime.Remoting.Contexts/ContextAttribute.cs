@@ -35,91 +35,91 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Contexts {
 
-	[AttributeUsage (AttributeTargets.Class)]
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ContextAttribute : Attribute, IContextAttribute, IContextProperty {
-		protected string AttributeName;
+    [AttributeUsage (AttributeTargets.Class)]
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ContextAttribute : Attribute, IContextAttribute, IContextProperty {
+        protected string AttributeName;
 
-		public ContextAttribute (string name)
-		{
-			AttributeName = name;
-		}
+        public ContextAttribute (string name)
+        {
+            AttributeName = name;
+        }
 
-		public virtual string Name {
-			get {
-				return AttributeName;
-			}
-		}
+        public virtual string Name {
+            get {
+                return AttributeName;
+            }
+        }
 
-		public override bool Equals (object o)
-		{
-			if (o == null)
-				return false;
+        public override bool Equals (object o)
+        {
+            if (o == null)
+                return false;
 
-			if (!(o is ContextAttribute))
-				return false;
+            if (!(o is ContextAttribute))
+                return false;
 
-			ContextAttribute ca = (ContextAttribute) o;
-			
-			if (ca.AttributeName != AttributeName)
-				return false;
+            ContextAttribute ca = (ContextAttribute) o;
+            
+            if (ca.AttributeName != AttributeName)
+                return false;
 
-			return true;
-		}
+            return true;
+        }
 
-		public virtual void Freeze (Context newContext)
-		{
-		}
+        public virtual void Freeze (Context newContext)
+        {
+        }
 
-		public override int GetHashCode ()
-		{
-			if (AttributeName == null)
-				return 0;
-			
-			return AttributeName.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            if (AttributeName == null)
+                return 0;
+            
+            return AttributeName.GetHashCode ();
+        }
 
-		/// <summary>
-		///    Adds the current context property to the IConstructionCallMessage
-		/// </summary>
-		public virtual void GetPropertiesForNewContext (IConstructionCallMessage ctorMsg)
-		{
-			if (ctorMsg == null)
-				throw new ArgumentNullException ("ctorMsg");
+        /// <summary>
+        ///    Adds the current context property to the IConstructionCallMessage
+        /// </summary>
+        public virtual void GetPropertiesForNewContext (IConstructionCallMessage ctorMsg)
+        {
+            if (ctorMsg == null)
+                throw new ArgumentNullException ("ctorMsg");
 
-			IList list = ctorMsg.ContextProperties;
+            IList list = ctorMsg.ContextProperties;
 
-			list.Add (this);
-		}
+            list.Add (this);
+        }
 
-		// <summary>
-		//   True whether the context arguments satisfies the requirements
-		//   of the current context.
-		// </summary>
-		public virtual bool IsContextOK (Context ctx, IConstructionCallMessage ctorMsg)
-		{
-			if (ctorMsg == null)
-				throw new ArgumentNullException ("ctorMsg");
-			if (ctx == null)
-				throw new ArgumentNullException ("ctx");
+        // <summary>
+        //   True whether the context arguments satisfies the requirements
+        //   of the current context.
+        // </summary>
+        public virtual bool IsContextOK (Context ctx, IConstructionCallMessage ctorMsg)
+        {
+            if (ctorMsg == null)
+                throw new ArgumentNullException ("ctorMsg");
+            if (ctx == null)
+                throw new ArgumentNullException ("ctx");
 
-			if (!ctorMsg.ActivationType.IsContextful)
-				return true;
+            if (!ctorMsg.ActivationType.IsContextful)
+                return true;
 
-			IContextProperty p = ctx.GetProperty (AttributeName);
-			if (p == null)
-				return false;
+            IContextProperty p = ctx.GetProperty (AttributeName);
+            if (p == null)
+                return false;
 
-			if (this != p)
-				return false;
-				
-			return true;
-		}
+            if (this != p)
+                return false;
+                
+            return true;
+        }
 
-		public virtual bool IsNewContextOK (Context newCtx)
-		{
-			return true;
-		}
-	}
+        public virtual bool IsNewContextOK (Context newCtx)
+        {
+            return true;
+        }
+    }
 }

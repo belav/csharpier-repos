@@ -2,8 +2,8 @@
 // System.Security.AccessControl.AuthorizationRule implementation
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,82 +30,82 @@
 using System.Security.Principal;
 
 namespace System.Security.AccessControl {
-	public abstract class AuthorizationRule
-	{
-		IdentityReference identity;
-		int accessMask;
-		bool isInherited;
-		InheritanceFlags inheritanceFlags;
-		PropagationFlags propagationFlags;
-		
-		internal AuthorizationRule ()
-		{
-			/* Give it a 0-param constructor */
-		}
-		
-		protected internal AuthorizationRule (IdentityReference identity,
-						      int accessMask, bool isInherited,
-						      InheritanceFlags inheritanceFlags,
-						      PropagationFlags propagationFlags)
-		{
-			if (null == identity)
-				throw new ArgumentNullException ("identity");
-				
-			if (!(identity is SecurityIdentifier) && !(identity is NTAccount))
-				throw new ArgumentException ("identity");
+    public abstract class AuthorizationRule
+    {
+        IdentityReference identity;
+        int accessMask;
+        bool isInherited;
+        InheritanceFlags inheritanceFlags;
+        PropagationFlags propagationFlags;
+        
+        internal AuthorizationRule ()
+        {
+            /* Give it a 0-param constructor */
+        }
+        
+        protected internal AuthorizationRule (IdentityReference identity,
+                              int accessMask, bool isInherited,
+                              InheritanceFlags inheritanceFlags,
+                              PropagationFlags propagationFlags)
+        {
+            if (null == identity)
+                throw new ArgumentNullException ("identity");
+                
+            if (!(identity is SecurityIdentifier) && !(identity is NTAccount))
+                throw new ArgumentException ("identity");
 
-			// Unit testing showed that MS.NET 4.0 actually throws ArgumentException
-			// for accessMask == 0, not the ArgumentOutOfRangeException specified.			
-			if (accessMask == 0)
-				throw new ArgumentException ("accessMask");
+            // Unit testing showed that MS.NET 4.0 actually throws ArgumentException
+            // for accessMask == 0, not the ArgumentOutOfRangeException specified.            
+            if (accessMask == 0)
+                throw new ArgumentException ("accessMask");
 
-			if (0 != (inheritanceFlags & ~(InheritanceFlags.ContainerInherit|InheritanceFlags.ObjectInherit)))
-				throw new ArgumentOutOfRangeException ();
+            if (0 != (inheritanceFlags & ~(InheritanceFlags.ContainerInherit|InheritanceFlags.ObjectInherit)))
+                throw new ArgumentOutOfRangeException ();
 
-			if (0 != (propagationFlags & ~(PropagationFlags.NoPropagateInherit|PropagationFlags.InheritOnly)))
-				throw new ArgumentOutOfRangeException ();
-			
-			this.identity = identity;
-			this.accessMask = accessMask;
-			this.isInherited = isInherited;
-			this.inheritanceFlags = inheritanceFlags;
-			this.propagationFlags = propagationFlags;
-		}
+            if (0 != (propagationFlags & ~(PropagationFlags.NoPropagateInherit|PropagationFlags.InheritOnly)))
+                throw new ArgumentOutOfRangeException ();
+            
+            this.identity = identity;
+            this.accessMask = accessMask;
+            this.isInherited = isInherited;
+            this.inheritanceFlags = inheritanceFlags;
+            this.propagationFlags = propagationFlags;
+        }
 
-		public IdentityReference IdentityReference
-		{
-			get {
-				return(identity);
-			}
-		}
-		
-		public InheritanceFlags InheritanceFlags
-		{
-			get {
-				return(inheritanceFlags);
-			}
-		}
+        public IdentityReference IdentityReference
+        {
+            get {
+                return(identity);
+            }
+        }
+        
+        public InheritanceFlags InheritanceFlags
+        {
+            get {
+                return(inheritanceFlags);
+            }
+        }
 
-		public bool IsInherited
-		{
-			get {
-				return(isInherited);
-			}
-		}
+        public bool IsInherited
+        {
+            get {
+                return(isInherited);
+            }
+        }
 
-		public PropagationFlags PropagationFlags
-		{
-			get {
-				return(propagationFlags);
-			}
-		}
+        public PropagationFlags PropagationFlags
+        {
+            get {
+                return(propagationFlags);
+            }
+        }
 
-		protected internal int AccessMask
-		{
-			get {
-				return(accessMask);
-			}
-		}
-	}
+        protected internal int AccessMask
+        {
+            get {
+                return(accessMask);
+            }
+        }
+    }
 }
 

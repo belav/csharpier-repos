@@ -2,7 +2,7 @@
 // XmlSerializerOperationBehavior.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,89 +34,89 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Description
 {
-	public class XmlSerializerOperationBehavior
-		: IOperationBehavior
+    public class XmlSerializerOperationBehavior
+        : IOperationBehavior
 #if !MOBILE
-			, IWsdlExportExtension
+            , IWsdlExportExtension
 #endif
-	{
-		XmlSerializerFormatAttribute format;
-		OperationDescription operation;
+    {
+        XmlSerializerFormatAttribute format;
+        OperationDescription operation;
 
-		public XmlSerializerOperationBehavior (
-			OperationDescription operation)
-			: this (operation, null)
-		{
-		}
+        public XmlSerializerOperationBehavior (
+            OperationDescription operation)
+            : this (operation, null)
+        {
+        }
 
-		public XmlSerializerOperationBehavior (
-			OperationDescription operation,
-			XmlSerializerFormatAttribute attribute)
-		{
-			if (operation == null)
-				throw new ArgumentNullException ("operation");
-			if (attribute == null)
-				attribute = new XmlSerializerFormatAttribute ();
-			this.format = attribute;
-			this.operation = operation;
-		}
+        public XmlSerializerOperationBehavior (
+            OperationDescription operation,
+            XmlSerializerFormatAttribute attribute)
+        {
+            if (operation == null)
+                throw new ArgumentNullException ("operation");
+            if (attribute == null)
+                attribute = new XmlSerializerFormatAttribute ();
+            this.format = attribute;
+            this.operation = operation;
+        }
 
-		[MonoTODO]
-		public Collection<XmlMapping> GetXmlMappings ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Collection<XmlMapping> GetXmlMappings ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public XmlSerializerFormatAttribute XmlSerializerFormatAttribute {
-			get { return format; }
-		}
+        public XmlSerializerFormatAttribute XmlSerializerFormatAttribute {
+            get { return format; }
+        }
 
-		void IOperationBehavior.AddBindingParameters (
-			OperationDescription description,
-			BindingParameterCollection parameters)
-		{
-		}
-		
-		void IOperationBehavior.ApplyDispatchBehavior (
-			OperationDescription description,
-			DispatchOperation dispatch)
-		{
-			if (description == null)
-				throw new ArgumentNullException ("description");
-			if (dispatch == null)
-				throw new ArgumentNullException ("dispatch");
-			dispatch.Formatter = new XmlMessagesFormatter (description, format);
-		}
+        void IOperationBehavior.AddBindingParameters (
+            OperationDescription description,
+            BindingParameterCollection parameters)
+        {
+        }
+        
+        void IOperationBehavior.ApplyDispatchBehavior (
+            OperationDescription description,
+            DispatchOperation dispatch)
+        {
+            if (description == null)
+                throw new ArgumentNullException ("description");
+            if (dispatch == null)
+                throw new ArgumentNullException ("dispatch");
+            dispatch.Formatter = new XmlMessagesFormatter (description, format);
+        }
 
-		void IOperationBehavior.ApplyClientBehavior (
-			OperationDescription description,
-			ClientOperation proxy)
-		{
-			if (description == null)
-				throw new ArgumentNullException ("description");
-			if (proxy == null)
-				throw new ArgumentNullException ("proxy");
-			proxy.Formatter = new XmlMessagesFormatter (description, format);
-		}
+        void IOperationBehavior.ApplyClientBehavior (
+            OperationDescription description,
+            ClientOperation proxy)
+        {
+            if (description == null)
+                throw new ArgumentNullException ("description");
+            if (proxy == null)
+                throw new ArgumentNullException ("proxy");
+            proxy.Formatter = new XmlMessagesFormatter (description, format);
+        }
 
-		void IOperationBehavior.Validate (
-			OperationDescription description)
-		{
-		}
+        void IOperationBehavior.Validate (
+            OperationDescription description)
+        {
+        }
 
 #if !MOBILE && !XAMMAC_4_5
-		void IWsdlExportExtension.ExportContract (
-			WsdlExporter exporter,
-			WsdlContractConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        void IWsdlExportExtension.ExportContract (
+            WsdlExporter exporter,
+            WsdlContractConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter,
-			WsdlEndpointConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter,
+            WsdlEndpointConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
 #endif
-	}
+    }
 }

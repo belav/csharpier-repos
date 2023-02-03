@@ -2,7 +2,7 @@
 // CertificateElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,47 +54,47 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class CertificateElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty encoded_value;
+    [MonoTODO]
+    public sealed partial class CertificateElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty encoded_value;
 
-		static CertificateElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			encoded_value = new ConfigurationProperty ("encodedValue",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static CertificateElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            encoded_value = new ConfigurationProperty ("encodedValue",
+                typeof (string), "", new StringConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (encoded_value);
-		}
+            properties.Add (encoded_value);
+        }
 
-		public CertificateElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("encodedValue",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string EncodedValue {
-			get { return (string) base [encoded_value]; }
-			set { base [encoded_value] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public CertificateElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("encodedValue",
+             DefaultValue = "",
+             Options = ConfigurationPropertyOptions.None)]
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        public string EncodedValue {
+            get { return (string) base [encoded_value]; }
+            set { base [encoded_value] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

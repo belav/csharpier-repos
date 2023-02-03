@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,28 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
-	using System.Xml.Serialization;
-	using NUnit.Framework;
+    using System.Xml.Serialization;
+    using NUnit.Framework;
 
-	public class XmlAttributeBehaviorTestCase
-	{
-		[TestFixture]
-		public class Nullable : XmlAdapterTestCase
-		{
-			[XmlDefaults(IsNullable = true)]
-			public interface IRoot
-			{
-				[XmlAttribute]
-				string Value { get; set; }
-			}
+    public class XmlAttributeBehaviorTestCase
+    {
+        [TestFixture]
+        public class Nullable : XmlAdapterTestCase
+        {
+            [XmlDefaults(IsNullable = true)]
+            public interface IRoot
+            {
+                [XmlAttribute]
+                string Value { get; set; }
+            }
 
-			[Test]
-			public void SetToNull()
-			{
-				var obj = Create<IRoot>("<Root Value='v'/>");
+            [Test]
+            public void SetToNull()
+            {
+                var obj = Create<IRoot>("<Root Value='v'/>");
 
-				obj.Value = null;
-			}
-		}
-	}
+                obj.Value = null;
+            }
+        }
+    }
 }

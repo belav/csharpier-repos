@@ -2,27 +2,27 @@
 // Line: 20
 
 public interface IA<K> 
-	where K : System.IComparable, System.IComparable<K>
+    where K : System.IComparable, System.IComparable<K>
 {
 }
 
 public class A<K> : IA<K> 
-	where K : System.IComparable, System.IComparable<K>
+    where K : System.IComparable, System.IComparable<K>
 {
 }
 
 public interface IB<K,T> 
-	where T : System.IDisposable
+    where T : System.IDisposable
 {
 } 
 
 public class B<K,T> : IB<K,T> 
-	where T : B<K,T>.Element, new() 
-	where K : System.IComparable, System.IComparable<K>
+    where T : B<K,T>.Element, new() 
+    where K : System.IComparable, System.IComparable<K>
 {
-	public abstract class Element : A<K>
-	{
-	}
+    public abstract class Element : A<K>
+    {
+    }
 }
 
 

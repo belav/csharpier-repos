@@ -2,7 +2,7 @@
 // SamlAudienceRestrictionCondition.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,61 +34,61 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SamlAudienceRestrictionCondition : SamlCondition
-	{
-		List<Uri> audiences = new List<Uri> ();
-		bool is_readonly;
+    public class SamlAudienceRestrictionCondition : SamlCondition
+    {
+        List<Uri> audiences = new List<Uri> ();
+        bool is_readonly;
 
-		public SamlAudienceRestrictionCondition ()
-		{
-		}
+        public SamlAudienceRestrictionCondition ()
+        {
+        }
 
-		public SamlAudienceRestrictionCondition (IEnumerable<Uri> audiences)
-		{
-			if (audiences == null)
-				throw new ArgumentNullException ("audiences");
-			foreach (Uri uri in audiences)
-				this.audiences.Add (uri);
-		}
+        public SamlAudienceRestrictionCondition (IEnumerable<Uri> audiences)
+        {
+            if (audiences == null)
+                throw new ArgumentNullException ("audiences");
+            foreach (Uri uri in audiences)
+                this.audiences.Add (uri);
+        }
 
-		public IList<Uri> Audiences {
-			get { return audiences; }
-		}
+        public IList<Uri> Audiences {
+            get { return audiences; }
+        }
 
-		public override bool IsReadOnly {
-			get { return is_readonly; }
-		}
+        public override bool IsReadOnly {
+            get { return is_readonly; }
+        }
 
-		public override void MakeReadOnly ()
-		{
-			is_readonly = true;
-		}
+        public override void MakeReadOnly ()
+        {
+            is_readonly = true;
+        }
 
-		[MonoTODO]
-		public override void ReadXml (XmlDictionaryReader reader,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer,
-			SecurityTokenResolver outOfBandTokenResolver)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override void ReadXml (XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override void WriteXml (
-			XmlDictionaryWriter writer,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer)
-		{
-			if (writer == null)
-				throw new ArgumentNullException ("writer");
-			if (samlSerializer == null)
-				throw new ArgumentNullException ("samlSerializer");
-			if (Audiences.Count == 0)
-				throw new SecurityTokenException ("SAML AudienceRestrictionCondition must contain at least one Audience.");
+        public override void WriteXml (
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer)
+        {
+            if (writer == null)
+                throw new ArgumentNullException ("writer");
+            if (samlSerializer == null)
+                throw new ArgumentNullException ("samlSerializer");
+            if (Audiences.Count == 0)
+                throw new SecurityTokenException ("SAML AudienceRestrictionCondition must contain at least one Audience.");
 
-			writer.WriteStartElement ("saml", "AudienceRestrictionCondition", SamlConstants.Namespace);
-			foreach (Uri a in Audiences)
-				writer.WriteElementString ("saml", "Audience", SamlConstants.Namespace, a.AbsoluteUri);
-			writer.WriteEndElement ();
-		}
-	}
+            writer.WriteStartElement ("saml", "AudienceRestrictionCondition", SamlConstants.Namespace);
+            foreach (Uri a in Audiences)
+                writer.WriteElementString ("saml", "Audience", SamlConstants.Namespace, a.AbsoluteUri);
+            writer.WriteEndElement ();
+        }
+    }
 }

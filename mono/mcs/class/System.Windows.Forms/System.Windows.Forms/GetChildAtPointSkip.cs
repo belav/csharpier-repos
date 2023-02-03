@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	[Flags]
-	public enum GetChildAtPointSkip
-	{
-		None = 0,
-		Invisible = 1,
-		Disabled = 2,
-		Transparent = 4
-	}
+    [Flags]
+    public enum GetChildAtPointSkip
+    {
+        None = 0,
+        Invisible = 1,
+        Disabled = 2,
+        Transparent = 4
+    }
 }

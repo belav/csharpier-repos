@@ -27,75 +27,75 @@
 
 namespace System.ServiceModel
 {
-	public class FaultCode
-	{
-		string name, ns;
-		FaultCode subcode;
-		
-		public FaultCode (string name)
-			: this (name, String.Empty)
-		{
-		}
+    public class FaultCode
+    {
+        string name, ns;
+        FaultCode subcode;
+        
+        public FaultCode (string name)
+            : this (name, String.Empty)
+        {
+        }
 
-		public FaultCode (string name, string ns)
-			: this (name, ns, null)
-		{
-		}
+        public FaultCode (string name, string ns)
+            : this (name, ns, null)
+        {
+        }
 
-		public FaultCode (string name, FaultCode subCode)
-			: this (name, String.Empty, subCode)
-		{
-		}
+        public FaultCode (string name, FaultCode subCode)
+            : this (name, String.Empty, subCode)
+        {
+        }
 
-		public FaultCode (string name, string ns, FaultCode subCode)
-		{
-			this.name = name;
-			this.ns = ns;
-			this.subcode = subCode;
-		}
+        public FaultCode (string name, string ns, FaultCode subCode)
+        {
+            this.name = name;
+            this.ns = ns;
+            this.subcode = subCode;
+        }
 
-		public bool IsPredefinedFault {
-			get { return ns == String.Empty; }
-		}
+        public bool IsPredefinedFault {
+            get { return ns == String.Empty; }
+        }
 
-		public bool IsReceiverFault {
-			get { return name == "Receiver"; }
-		}
-	
-		public bool IsSenderFault {
-			get { return name == "Sender"; }
-		}
-		
-		public string Name {
-			get { return name; }
-		}
+        public bool IsReceiverFault {
+            get { return name == "Receiver"; }
+        }
+    
+        public bool IsSenderFault {
+            get { return name == "Sender"; }
+        }
+        
+        public string Name {
+            get { return name; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-		}
+        public string Namespace {
+            get { return ns; }
+        }
 
-		public FaultCode SubCode {
-			get { return subcode; }
-		}
+        public FaultCode SubCode {
+            get { return subcode; }
+        }
 
-		public static FaultCode CreateReceiverFaultCode (FaultCode subCode)
-		{
-			return new FaultCode ("Receiver", subCode);
-		}
+        public static FaultCode CreateReceiverFaultCode (FaultCode subCode)
+        {
+            return new FaultCode ("Receiver", subCode);
+        }
 
-		public static FaultCode CreateReceiverFaultCode (string name, string ns)
-		{
-			return CreateReceiverFaultCode (new FaultCode (name, ns));
-		}
-		
-		public static FaultCode CreateSenderFaultCode (FaultCode subCode)
-		{
-			return new FaultCode ("Sender", subCode);
-		}
+        public static FaultCode CreateReceiverFaultCode (string name, string ns)
+        {
+            return CreateReceiverFaultCode (new FaultCode (name, ns));
+        }
+        
+        public static FaultCode CreateSenderFaultCode (FaultCode subCode)
+        {
+            return new FaultCode ("Sender", subCode);
+        }
 
-		public static FaultCode CreateSenderFaultCode (string name, string ns)
-		{
-			return CreateSenderFaultCode (new FaultCode (name, ns));
-		}
-	}
+        public static FaultCode CreateSenderFaultCode (string name, string ns)
+        {
+            return CreateSenderFaultCode (new FaultCode (name, ns));
+        }
+    }
 }

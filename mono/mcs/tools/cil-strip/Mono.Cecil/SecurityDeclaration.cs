@@ -28,109 +28,109 @@
 
 namespace Mono.Cecil {
 
-	using System;
-	using System.Collections;
-	using System.Security;
+    using System;
+    using System.Collections;
+    using System.Security;
 
-	internal sealed class SecurityDeclaration : IRequireResolving, IAnnotationProvider, IReflectionVisitable {
+    internal sealed class SecurityDeclaration : IRequireResolving, IAnnotationProvider, IReflectionVisitable {
 
-		SecurityAction m_action;
-		SecurityDeclarationReader m_reader;
-		IDictionary m_annotations;
-
-#if !CF_1_0 && !CF_2_0
-		PermissionSet m_permSet;
-#endif
-
-		bool m_resolved;
-		byte [] m_blob;
-
-		public SecurityAction Action {
-			get { return m_action; }
-			set { m_action = value; }
-		}
+        SecurityAction m_action;
+        SecurityDeclarationReader m_reader;
+        IDictionary m_annotations;
 
 #if !CF_1_0 && !CF_2_0
-		public PermissionSet PermissionSet {
-			get { return m_permSet; }
-			set { m_permSet = value; }
-		}
+        PermissionSet m_permSet;
 #endif
 
-		public bool Resolved {
-			get { return m_resolved; }
-			set { m_resolved = value; }
-		}
+        bool m_resolved;
+        byte [] m_blob;
 
-		public byte [] Blob {
-			get { return m_blob; }
-			set { m_blob = value; }
-		}
+        public SecurityAction Action {
+            get { return m_action; }
+            set { m_action = value; }
+        }
 
-		IDictionary IAnnotationProvider.Annotations {
-			get {
-				if (m_annotations == null)
-					m_annotations = new Hashtable ();
-				return m_annotations;
-			}
-		}
+#if !CF_1_0 && !CF_2_0
+        public PermissionSet PermissionSet {
+            get { return m_permSet; }
+            set { m_permSet = value; }
+        }
+#endif
 
-		public SecurityDeclaration (SecurityAction action)
-		{
-			m_action = action;
-		}
+        public bool Resolved {
+            get { return m_resolved; }
+            set { m_resolved = value; }
+        }
 
-		internal SecurityDeclaration (SecurityAction action, SecurityDeclarationReader reader)
-		{
-			m_action = action;
-			m_reader = reader;
-		}
+        public byte [] Blob {
+            get { return m_blob; }
+            set { m_blob = value; }
+        }
 
-		public SecurityDeclaration Clone ()
-		{
-			return Clone (this);
-		}
+        IDictionary IAnnotationProvider.Annotations {
+            get {
+                if (m_annotations == null)
+                    m_annotations = new Hashtable ();
+                return m_annotations;
+            }
+        }
 
-		internal static SecurityDeclaration Clone (SecurityDeclaration sec)
-		{
-			SecurityDeclaration sd = new SecurityDeclaration (sec.Action);
-			if (!sec.Resolved) {
-				sd.Resolved = false;
-				sd.Blob = sec.Blob;
-				return sd;
-			}
+        public SecurityDeclaration (SecurityAction action)
+        {
+            m_action = action;
+        }
+
+        internal SecurityDeclaration (SecurityAction action, SecurityDeclarationReader reader)
+        {
+            m_action = action;
+            m_reader = reader;
+        }
+
+        public SecurityDeclaration Clone ()
+        {
+            return Clone (this);
+        }
+
+        internal static SecurityDeclaration Clone (SecurityDeclaration sec)
+        {
+            SecurityDeclaration sd = new SecurityDeclaration (sec.Action);
+            if (!sec.Resolved) {
+                sd.Resolved = false;
+                sd.Blob = sec.Blob;
+                return sd;
+            }
 
 #if !CF_1_0 && !CF_2_0
             sd.PermissionSet = sec.PermissionSet.Copy ();
 #endif
-			return sd;
-		}
+            return sd;
+        }
 
-		public bool Resolve ()
-		{
-			if (m_resolved)
-				return true;
+        public bool Resolve ()
+        {
+            if (m_resolved)
+                return true;
 
-			if (m_reader == null)
-				return false;
+            if (m_reader == null)
+                return false;
 
-			SecurityDeclaration clone = m_reader.FromByteArray (m_action, m_blob, true);
-			if (!clone.Resolved)
-				return false;
+            SecurityDeclaration clone = m_reader.FromByteArray (m_action, m_blob, true);
+            if (!clone.Resolved)
+                return false;
 
-			m_action = clone.Action;
+            m_action = clone.Action;
 #if !CF_1_0 && !CF_2_0
-			m_permSet = clone.PermissionSet.Copy ();
+            m_permSet = clone.PermissionSet.Copy ();
 #endif
-			m_resolved = true;
+            m_resolved = true;
 
-			return true;
-		}
+            return true;
+        }
 
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitSecurityDeclaration (this);
-		}
-	}
+        public void Accept (IReflectionVisitor visitor)
+        {
+            visitor.VisitSecurityDeclaration (this);
+        }
+    }
 }
 

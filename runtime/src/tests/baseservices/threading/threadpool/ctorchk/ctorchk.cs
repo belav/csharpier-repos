@@ -16,11 +16,11 @@ class TestMonitor
         Console.WriteLine(m.Length);
 
         if(m.Length > 0)
-	{
+    {
             Console.WriteLine("Test FAILED!");
             return 1;
-	}
-	else
+    }
+    else
         {
             Console.WriteLine("Test PASSED!");
             return 100;

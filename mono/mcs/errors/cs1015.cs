@@ -5,8 +5,8 @@ class Test
 {
     public static void Main ()
     {
-    	try {}
-    	catch () {}
+        try {}
+        catch () {}
     }
 }
 

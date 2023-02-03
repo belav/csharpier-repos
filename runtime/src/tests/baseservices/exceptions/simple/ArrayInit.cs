@@ -5,8 +5,8 @@ using TestLibrary;
 
 public class ArrayInit {
 
-	public static int Main()
-	{
+    public static int Main()
+    {
 
         ArrayInit ai = new ArrayInit();
         TestFramework.BeginTestCase("Exception thrown in default ctor of a valuetype during Array.Initialize");
@@ -14,7 +14,7 @@ public class ArrayInit {
             return 100;
         else
             return 0;
-	}
+    }
 
     public bool RunTests()
     {

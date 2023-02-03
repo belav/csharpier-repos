@@ -1,4 +1,4 @@
-﻿namespace System.Web.DynamicData.Util {
+namespace System.Web.DynamicData.Util {
     using System;            
     using System.Web.UI;
     using System.Web.UI.WebControls;

@@ -344,7 +344,7 @@ namespace System.Reflection {
     {
         private String m_key;
         private String m_value;
-		
+        
         public AssemblyMetadataAttribute(string key, string value) 
         {
             m_key = key;
@@ -355,7 +355,7 @@ namespace System.Reflection {
         {
             get { return m_key; }
         }
-		
+        
         public string Value
         {
             get { return m_value;}

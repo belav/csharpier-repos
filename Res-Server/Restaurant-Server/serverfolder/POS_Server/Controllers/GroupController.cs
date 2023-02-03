@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using POS_Server.Models;
 using System;
 using System.Collections.Generic;
@@ -223,7 +223,7 @@ namespace POS_Server.Controllers
         //}
 
 
-        // GET api/<controller>  ارجاع قائمة المستخدمين التابعين للمجموعة
+        // GET api/<controller>  ????? ????? ?????????? ???????? ????????
         [HttpPost]
         [Route("GetUsersByGroupId")]
         public string GetUsersByGroupId(string token)

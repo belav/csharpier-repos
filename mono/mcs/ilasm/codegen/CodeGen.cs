@@ -34,8 +34,8 @@ namespace Mono.ILASM {
                 private TypeDef current_typedef;
                 private MethodDef current_methoddef;
                 private ArrayList typedef_stack;
-		private int typedef_stack_top;
-		private SymbolWriter symwriter;
+        private int typedef_stack_top;
+        private SymbolWriter symwriter;
                 private ICustomAttrTarget current_customattrtarget;
                 private IDeclSecurityTarget current_declsectarget;
                 private PEAPI.NativeType current_field_native_type;
@@ -73,13 +73,13 @@ namespace Mono.ILASM {
                         this.is_dll = is_dll;
                         this.noautoinherit = noautoinherit;
                         
-			if (debugging_info)
-				symwriter = new SymbolWriter (output_file);
+            if (debugging_info)
+                symwriter = new SymbolWriter (output_file);
 
                         type_manager = new TypeManager (this);
                         extern_table = new ExternTable ();
                         typedef_stack = new ArrayList ();
-			typedef_stack_top = 0;
+            typedef_stack_top = 0;
                         global_field_table = new Hashtable ();
                         global_method_table = new Hashtable ();
 
@@ -99,9 +99,9 @@ namespace Mono.ILASM {
                         get { return pefile; }
                 }
 
-		public SymbolWriter SymbolWriter {
-			get { return symwriter; }
-		}
+        public SymbolWriter SymbolWriter {
+            get { return symwriter; }
+        }
 
                 public string CurrentNameSpace {
                         get { return current_namespace; }
@@ -268,17 +268,17 @@ namespace Mono.ILASM {
                         return (this_module != null && name == this_module.Name);
                 }
 
-		public void BeginSourceFile (string name)
-		{
-			if (symwriter != null)
-				symwriter.BeginSourceFile (name);
-		}
+        public void BeginSourceFile (string name)
+        {
+            if (symwriter != null)
+                symwriter.BeginSourceFile (name);
+        }
 
-		public void EndSourceFile ()
-		{
-			if (symwriter != null)
-				symwriter.EndSourceFile ();
-		}
+        public void EndSourceFile ()
+        {
+            if (symwriter != null)
+                symwriter.EndSourceFile ();
+        }
 
                 public void BeginTypeDef (TypeAttr attr, string name, BaseClassRef parent,
                                 ArrayList impl_list, Location location, GenericParameters gen_params)
@@ -286,20 +286,20 @@ namespace Mono.ILASM {
                         TypeDef outer = null;
                         string cache_name = CacheName (name);
                         if (typedef_stack_top > 0) {
-				StringBuilder sb = new StringBuilder ();
+                StringBuilder sb = new StringBuilder ();
 
-				for (int i = 0; i < typedef_stack_top; i++){
-					outer = (TypeDef) typedef_stack [i];
-					if (i == 0)
-						/* Use FullName for outermost class to get the
-						   namespace also */
-						sb.Append (outer.FullName);
-					else
-						sb.Append (outer.Name);
-					sb.Append ("/");
-				}
-				sb.Append (name);
-				cache_name = sb.ToString ();
+                for (int i = 0; i < typedef_stack_top; i++){
+                    outer = (TypeDef) typedef_stack [i];
+                    if (i == 0)
+                        /* Use FullName for outermost class to get the
+                           namespace also */
+                        sb.Append (outer.FullName);
+                    else
+                        sb.Append (outer.Name);
+                    sb.Append ("/");
+                }
+                sb.Append (name);
+                cache_name = sb.ToString ();
                         }
 
                         TypeDef typedef = type_manager[cache_name];
@@ -309,7 +309,7 @@ namespace Mono.ILASM {
                                 current_customattrtarget = current_typedef = typedef;
                                 current_declsectarget = typedef;
                                 typedef_stack.Add (current_typedef);
-				typedef_stack_top++;
+                typedef_stack_top++;
                                 return;
                         }
 
@@ -319,8 +319,8 @@ namespace Mono.ILASM {
                         type_manager[cache_name] = typedef;
                         current_customattrtarget = current_typedef = typedef;
                         current_declsectarget = typedef;
-			typedef_stack.Add (typedef);
-			typedef_stack_top++;
+            typedef_stack.Add (typedef);
+            typedef_stack_top++;
                 }
 
                 public void AddFieldMarshalInfo (PEAPI.NativeType native_type)
@@ -351,12 +351,12 @@ namespace Mono.ILASM {
                         data_table [datadef.Name] = datadef;
                 }
 
-		public void AddManifestResource (ManifestResource mr)
-		{
-			if (manifestResources == null)
-				manifestResources = new ArrayList ();
-			manifestResources.Add (mr);
-		}
+        public void AddManifestResource (ManifestResource mr)
+        {
+            if (manifestResources == null)
+                manifestResources = new ArrayList ();
+            manifestResources.Add (mr);
+        }
 
                 public PEAPI.DataConstant GetDataConst (string name)
                 {
@@ -382,16 +382,16 @@ namespace Mono.ILASM {
 
                 public void EndMethodDef (Location location)
                 {
-			if (symwriter != null)
-				symwriter.EndMethod (location);
+            if (symwriter != null)
+                symwriter.EndMethod (location);
 
                         current_methoddef = null;
                 }
 
                 public void EndTypeDef ()
                 {
-			typedef_stack_top--;
-			typedef_stack.RemoveAt (typedef_stack_top);
+            typedef_stack_top--;
+            typedef_stack.RemoveAt (typedef_stack_top);
 
                         if (typedef_stack_top > 0)
                                 current_typedef = (TypeDef) typedef_stack [typedef_stack_top-1];
@@ -467,10 +467,10 @@ namespace Mono.ILASM {
                                 extern_table.Resolve (this);
                                 type_manager.DefineAll ();
 
-				if (manifestResources != null) {
-					foreach (ManifestResource mr in manifestResources)
-						pefile.AddManifestResource (mr);
-				}
+                if (manifestResources != null) {
+                    foreach (ManifestResource mr in manifestResources)
+                        pefile.AddManifestResource (mr);
+                }
 
                                 foreach (FieldDef fielddef in global_field_table.Values) {
                                         fielddef.Define (this);
@@ -497,10 +497,10 @@ namespace Mono.ILASM {
 
                                 pefile.WritePEFile ();
 
-				if (symwriter != null) {
-					Guid guid = pefile.GetThisModule ().Guid;
-					symwriter.Write (guid);
-				}
+                if (symwriter != null) {
+                    Guid guid = pefile.GetThisModule ().Guid;
+                    symwriter.Write (guid);
+                }
                         } finally {
                                 if (out_stream != null)
                                         out_stream.Close ();

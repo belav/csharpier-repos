@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -711,7 +711,7 @@ namespace Microsoft.CodeAnalysis
             int totalAssemblies = assemblies.Length;
 
             // A reusable buffer to contain the AssemblySymbols a candidate symbol refers to
-            // ⚠ PERF: https://github.com/dotnet/roslyn/issues/47471
+            // ? PERF: https://github.com/dotnet/roslyn/issues/47471
             List<TAssemblySymbol?> candidateReferencedSymbols = new List<TAssemblySymbol?>(1024);
 
             for (int i = 1; i < totalAssemblies; i++)

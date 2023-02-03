@@ -34,79 +34,79 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Reflection {
 
-	/// <summary>
-	/// Summary description for AssemblyKeyFileAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyKeyFileAttributeTest
-	{
+    /// <summary>
+    /// Summary description for AssemblyKeyFileAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyKeyFileAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyKeyFileAttribute attr;
-		
-		public AssemblyKeyFileAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName ();
+        AssemblyKeyFileAttribute attr;
+        
+        public AssemblyKeyFileAttributeTest ()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAsmName.Name = "TestAssembly";
+            dynAsmName.Name = "TestAssembly";
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
+                dynAsmName,AssemblyBuilderAccess.Run
+                );
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyKeyFileAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "test.snk" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyKeyFileAttribute;
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof (AssemblyKeyFileAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor (
+                new Type [] { typeof (string) }
+                );
+            CustomAttributeBuilder attrBuilder =
+                new CustomAttributeBuilder (ctrInfo, new object [1] { "test.snk" });
+            dynAssembly.SetCustomAttribute (attrBuilder);
+            object [] attributes = dynAssembly.GetCustomAttributes (true);
+            attr = attributes [0] as AssemblyKeyFileAttribute;
+        }
 
-		[Test]
-		public void KeyFileTest ()
-		{
-			Assert.AreEqual (
-				attr.KeyFile,
-				"test.snk", "#1");
-		}
+        [Test]
+        public void KeyFileTest ()
+        {
+            Assert.AreEqual (
+                attr.KeyFile,
+                "test.snk", "#1");
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyKeyFileAttribute), "#1"
-				);
-		}
+        [Test]
+        public void TypeIdTest ()
+        {
+            Assert.AreEqual (
+                attr.TypeId,
+                typeof (AssemblyKeyFileAttribute), "#1"
+                );
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue ()
+        {
+            Assert.AreEqual (
+                attr.Match (attr),
+                true, "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyKeyFileAttribute ("other.snk")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForFalse ()
+        {
+            Assert.AreEqual (
+                attr.Match (new AssemblyKeyFileAttribute ("other.snk")),
+                false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyKeyFileAttribute ("some text");
-			Assert.AreEqual ("some text", a.KeyFile);
-		}
-	}
+        [Test]
+        public void CtorTest ()
+        {
+            var a = new AssemblyKeyFileAttribute ("some text");
+            Assert.AreEqual ("some text", a.KeyFile);
+        }
+    }
 }
 

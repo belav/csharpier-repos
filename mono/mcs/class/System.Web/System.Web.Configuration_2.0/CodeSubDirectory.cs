@@ -2,7 +2,7 @@
 // System.Web.Configuration.CodeSubDirectory
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) Copyright 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,38 +33,38 @@ using System.ComponentModel;
 
 namespace System.Web.Configuration
 {
-	public sealed class CodeSubDirectory : ConfigurationElement
-	{
-		static ConfigurationProperty directoryNameProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class CodeSubDirectory : ConfigurationElement
+    {
+        static ConfigurationProperty directoryNameProp;
+        static ConfigurationPropertyCollection properties;
 
-		static CodeSubDirectory ()
-		{
-			directoryNameProp = new ConfigurationProperty ("directoryName", typeof (string), "",
-								       PropertyHelper.WhiteSpaceTrimStringConverter,
-								       PropertyHelper.NonEmptyStringValidator,
-								       ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        static CodeSubDirectory ()
+        {
+            directoryNameProp = new ConfigurationProperty ("directoryName", typeof (string), "",
+                                       PropertyHelper.WhiteSpaceTrimStringConverter,
+                                       PropertyHelper.NonEmptyStringValidator,
+                                       ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (directoryNameProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (directoryNameProp);
+        }
 
-		public CodeSubDirectory (string directoryName)
-		{
-			this.DirectoryName = directoryName;
-		}
+        public CodeSubDirectory (string directoryName)
+        {
+            this.DirectoryName = directoryName;
+        }
 
-		[TypeConverter (typeof (WhiteSpaceTrimStringConverter))]
-		[ConfigurationProperty ("directoryName", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		// LAMESPEC: MS lists no validator here but provides one in Properties.
-		public string DirectoryName {
-			get { return (string) base[directoryNameProp]; }
-			set { base[directoryNameProp] = value; }
-		}
+        [TypeConverter (typeof (WhiteSpaceTrimStringConverter))]
+        [ConfigurationProperty ("directoryName", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        // LAMESPEC: MS lists no validator here but provides one in Properties.
+        public string DirectoryName {
+            get { return (string) base[directoryNameProp]; }
+            set { base[directoryNameProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

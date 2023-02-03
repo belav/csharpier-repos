@@ -1,4 +1,4 @@
-﻿// 
+// 
 // PeerResolverMode.cs
 // 
 // Author: 
@@ -11,9 +11,9 @@ using System;
 
 namespace System.ServiceModel.PeerResolvers
 {
-	public enum PeerResolverMode {
-		Auto, 
-		Pnrp, 
-		Custom
-	}
+    public enum PeerResolverMode {
+        Auto, 
+        Pnrp, 
+        Custom
+    }
 }

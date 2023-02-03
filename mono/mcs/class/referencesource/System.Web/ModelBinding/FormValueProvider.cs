@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
     using System.Globalization;
 
     public sealed class FormValueProvider : NameValueCollectionValueProvider {

@@ -2,7 +2,7 @@
 // MVar.cs
 //
 // Author:
-//	Martin Baulig  <martin@ximian.com>
+//    Martin Baulig  <martin@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,15 +28,15 @@
 
 namespace Mono.Cecil.Signatures {
 
-	using Mono.Cecil.Metadata;
+    using Mono.Cecil.Metadata;
 
-	internal sealed class MVAR : SigType {
+    internal sealed class MVAR : SigType {
 
-		public int Index;
+        public int Index;
 
-		public MVAR (int index) : base (ElementType.MVar)
-		{
-			this.Index = index;
-		}
-	}
+        public MVAR (int index) : base (ElementType.MVar)
+        {
+            this.Index = index;
+        }
+    }
 }

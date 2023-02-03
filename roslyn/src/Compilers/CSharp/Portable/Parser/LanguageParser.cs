@@ -1,4 +1,4 @@
-๏ปฟ// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -8900,8 +8900,8 @@ tryAgain:
         // absence of the comma after the `D` means we don't treat the `D` as contributing to the
         // disambiguation of the expression/type. More formally, ...
         //
-        // If a sequence of tokens can be parsed(in context) as a* simple-name* (ยง7.6.3), *member-access* (ยง7.6.5),
-        // or* pointer-member-access* (ยง18.5.2) ending with a* type-argument-list* (ยง4.4.1), the token immediately
+        // If a sequence of tokens can be parsed(in context) as a* simple-name* (ง7.6.3), *member-access* (ง7.6.5),
+        // or* pointer-member-access* (ง18.5.2) ending with a* type-argument-list* (ง4.4.1), the token immediately
         // following the closing `>` token is examined, to see if it is
         // - One of `(  )  ]  }  :  ;  ,  .  ?  ==  !=  |  ^  &&  ||  &  [`; or
         // - One of the relational operators `<  >  <=  >=  is as`; or
@@ -8915,7 +8915,7 @@ tryAgain:
         // retained as part of the *simple-name*, *member-access* or  *pointer-member-access* and any other possible parse
         // of the sequence of tokens is discarded.Otherwise, the *type-argument-list* is not considered to be part of the
         // *simple-name*, *member-access* or *pointer-member-access*, even if there is no other possible parse of the
-        // sequence of tokens.Note that these rules are not applied when parsing a *type-argument-list* in a *namespace-or-type-name* (ยง3.8).
+        // sequence of tokens.Note that these rules are not applied when parsing a *type-argument-list* in a *namespace-or-type-name* (ง3.8).
         //
         // See also ScanTypeArgumentList where these disambiguation rules are encoded.
         //

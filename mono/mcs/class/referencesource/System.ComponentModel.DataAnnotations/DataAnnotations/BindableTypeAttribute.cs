@@ -1,4 +1,4 @@
-﻿namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations {
     /// <summary>
     /// Specifies that a type is considered a bindable type for automatic fields generation by controls like GridView / DetailsView.
     /// </summary>

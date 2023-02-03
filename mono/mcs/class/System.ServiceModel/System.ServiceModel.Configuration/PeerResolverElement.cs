@@ -2,7 +2,7 @@
 // PeerResolverElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,70 +54,70 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class PeerResolverElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty custom;
-		static ConfigurationProperty mode;
-		static ConfigurationProperty referral_policy;
+    [MonoTODO]
+    public sealed partial class PeerResolverElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty custom;
+        static ConfigurationProperty mode;
+        static ConfigurationProperty referral_policy;
 
-		static PeerResolverElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			custom = new ConfigurationProperty ("custom",
-				typeof (PeerCustomResolverElement), null, null/* FIXME: get converter for PeerCustomResolverElement*/, null,
-				ConfigurationPropertyOptions.None);
+        static PeerResolverElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            custom = new ConfigurationProperty ("custom",
+                typeof (PeerCustomResolverElement), null, null/* FIXME: get converter for PeerCustomResolverElement*/, null,
+                ConfigurationPropertyOptions.None);
 
-			mode = new ConfigurationProperty ("mode",
-				typeof (PeerResolverMode), "Auto", null/* FIXME: get converter for PeerResolverMode*/, null,
-				ConfigurationPropertyOptions.None);
+            mode = new ConfigurationProperty ("mode",
+                typeof (PeerResolverMode), "Auto", null/* FIXME: get converter for PeerResolverMode*/, null,
+                ConfigurationPropertyOptions.None);
 
-			referral_policy = new ConfigurationProperty ("referralPolicy",
-				typeof (PeerReferralPolicy), "Service", null/* FIXME: get converter for PeerReferralPolicy*/, null,
-				ConfigurationPropertyOptions.None);
+            referral_policy = new ConfigurationProperty ("referralPolicy",
+                typeof (PeerReferralPolicy), "Service", null/* FIXME: get converter for PeerReferralPolicy*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (custom);
-			properties.Add (mode);
-			properties.Add (referral_policy);
-		}
+            properties.Add (custom);
+            properties.Add (mode);
+            properties.Add (referral_policy);
+        }
 
-		public PeerResolverElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("custom",
-			 Options = ConfigurationPropertyOptions.None)]
-		public PeerCustomResolverElement Custom {
-			get { return (PeerCustomResolverElement) base [custom]; }
-		}
-
-		[ConfigurationProperty ("mode",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Auto")]
-		public PeerResolverMode Mode {
-			get { return (PeerResolverMode) base [mode]; }
-			set { base [mode] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("referralPolicy",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Service")]
-		public PeerReferralPolicy ReferralPolicy {
-			get { return (PeerReferralPolicy) base [referral_policy]; }
-			set { base [referral_policy] = value; }
-		}
+        public PeerResolverElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("custom",
+             Options = ConfigurationPropertyOptions.None)]
+        public PeerCustomResolverElement Custom {
+            get { return (PeerCustomResolverElement) base [custom]; }
+        }
+
+        [ConfigurationProperty ("mode",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "Auto")]
+        public PeerResolverMode Mode {
+            get { return (PeerResolverMode) base [mode]; }
+            set { base [mode] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [ConfigurationProperty ("referralPolicy",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "Service")]
+        public PeerReferralPolicy ReferralPolicy {
+            get { return (PeerReferralPolicy) base [referral_policy]; }
+            set { base [referral_policy] = value; }
+        }
+
+
+    }
 
 }

@@ -20,9 +20,9 @@ class T : IB {
                 get { return new A(); }
         }
         public static int Main() {
-		PropertyInfo[] p = typeof (T).GetProperties (BindingFlags.Public| BindingFlags.NonPublic|BindingFlags.Instance);
-		if (p == null || p.Length != 2)
-			return 1;
+        PropertyInfo[] p = typeof (T).GetProperties (BindingFlags.Public| BindingFlags.NonPublic|BindingFlags.Instance);
+        if (p == null || p.Length != 2)
+            return 1;
                 return 0;
         }
 }

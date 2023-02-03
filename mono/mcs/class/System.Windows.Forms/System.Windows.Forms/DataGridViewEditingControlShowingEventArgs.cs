@@ -20,31 +20,31 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewEditingControlShowingEventArgs : EventArgs {
+    public class DataGridViewEditingControlShowingEventArgs : EventArgs {
 
-		private Control control;
-		private DataGridViewCellStyle cellStyle;
+        private Control control;
+        private DataGridViewCellStyle cellStyle;
 
-		public DataGridViewEditingControlShowingEventArgs (Control control, DataGridViewCellStyle cellStyle) {
-			this.control = control;
-			this.cellStyle = cellStyle;
-		}
+        public DataGridViewEditingControlShowingEventArgs (Control control, DataGridViewCellStyle cellStyle) {
+            this.control = control;
+            this.cellStyle = cellStyle;
+        }
 
-		public DataGridViewCellStyle CellStyle {
-			get { return cellStyle; }
-			set { cellStyle = value; }
-		}
+        public DataGridViewCellStyle CellStyle {
+            get { return cellStyle; }
+            set { cellStyle = value; }
+        }
 
-		public Control Control {
-			get { return control; }
-		}
+        public Control Control {
+            get { return control; }
+        }
 
-	}
+    }
 
 }
 

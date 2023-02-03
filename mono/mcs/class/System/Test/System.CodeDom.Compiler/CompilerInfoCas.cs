@@ -1,9 +1,9 @@
 //
 // CompilerInfoCas.cs -
-//	CAS unit tests for System.CodeDom.Compiler.CompilerInfo
+//    CAS unit tests for System.CodeDom.Compiler.CompilerInfo
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -43,79 +43,79 @@ using MonoTests.System.CodeDom.Compiler;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-	[TestFixture]
-	[Category ("CAS")]
-	[Category ("NotWorking")] // FIXME: missing config stuff ???
-	public class CompilerInfoCas {
+    [TestFixture]
+    [Category ("CAS")]
+    [Category ("NotWorking")] // FIXME: missing config stuff ???
+    public class CompilerInfoCas {
 
-		private CompilerInfo ci;
+        private CompilerInfo ci;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			ci = CodeDomProvider.GetCompilerInfo ("c#");
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            ci = CodeDomProvider.GetCompilerInfo ("c#");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-		
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Default ()
-		{
-			Assert.AreEqual (typeof (MCSharp.CSharpCodeProvider), ci.CodeDomProviderType, "CodeDomProviderType");
-			Assert.IsTrue (ci.IsCodeDomProviderTypeValid, "IsCodeDomProviderTypeValid");
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
+        
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Default ()
+        {
+            Assert.AreEqual (typeof (MCSharp.CSharpCodeProvider), ci.CodeDomProviderType, "CodeDomProviderType");
+            Assert.IsTrue (ci.IsCodeDomProviderTypeValid, "IsCodeDomProviderTypeValid");
 
-			Assert.IsTrue (ci.Equals (ci), "Equals");
-			Assert.IsTrue (ci.GetHashCode () != 0, "GetHashCode");
-			Assert.AreEqual (2, ci.GetExtensions ().Length, "GetExtensions"); // .cs cs
-			Assert.AreEqual (3, ci.GetLanguages ().Length, "GetLanguages"); // c# cs csharp
+            Assert.IsTrue (ci.Equals (ci), "Equals");
+            Assert.IsTrue (ci.GetHashCode () != 0, "GetHashCode");
+            Assert.AreEqual (2, ci.GetExtensions ().Length, "GetExtensions"); // .cs cs
+            Assert.AreEqual (3, ci.GetLanguages ().Length, "GetLanguages"); // c# cs csharp
 
-			try {
-				Assert.IsNotNull (ci.CreateDefaultCompilerParameters (), "CreateDefaultCompilerParameters");
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-		}
+            try {
+                Assert.IsNotNull (ci.CreateDefaultCompilerParameters (), "CreateDefaultCompilerParameters");
+            }
+            catch (NotImplementedException) {
+                // mono
+            }
+        }
 
-		[Test]
-		// no restriction
-		public void CreateProvider_No_Restriction ()
-		{
-			Assert.IsNotNull (ci.CreateProvider (), "CreateProvider");
-		}
+        [Test]
+        // no restriction
+        public void CreateProvider_No_Restriction ()
+        {
+            Assert.IsNotNull (ci.CreateProvider (), "CreateProvider");
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
-		[ExpectedException (typeof (SecurityException))]
-		public void CreateProvider_Deny_Anything ()
-		{
-			ci.CreateProvider ();
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
+        [ExpectedException (typeof (SecurityException))]
+        public void CreateProvider_Deny_Anything ()
+        {
+            ci.CreateProvider ();
+        }
 
-		[Test]
-		public void LinkDemand_No_Restriction ()
-		{
-			MethodInfo mi = typeof (CompilerInfo).GetProperty ("IsCodeDomProviderTypeValid").GetGetMethod ();
-			Assert.IsNotNull (mi, "IsCodeDomProviderTypeValid");
-			Assert.IsTrue ((bool) mi.Invoke (ci, null), "invoke");
-		}
+        [Test]
+        public void LinkDemand_No_Restriction ()
+        {
+            MethodInfo mi = typeof (CompilerInfo).GetProperty ("IsCodeDomProviderTypeValid").GetGetMethod ();
+            Assert.IsNotNull (mi, "IsCodeDomProviderTypeValid");
+            Assert.IsTrue ((bool) mi.Invoke (ci, null), "invoke");
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Anything ()
-		{
-			// denying anything results in a non unrestricted permission set
-			MethodInfo mi = typeof (CompilerInfo).GetProperty ("IsCodeDomProviderTypeValid").GetGetMethod ();
-			Assert.IsNotNull (mi, "IsCodeDomProviderTypeValid");
-			Assert.IsTrue ((bool) mi.Invoke (ci, null), "invoke");
-		}
-	}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Anything ()
+        {
+            // denying anything results in a non unrestricted permission set
+            MethodInfo mi = typeof (CompilerInfo).GetProperty ("IsCodeDomProviderTypeValid").GetGetMethod ();
+            Assert.IsNotNull (mi, "IsCodeDomProviderTypeValid");
+            Assert.IsTrue ((bool) mi.Invoke (ci, null), "invoke");
+        }
+    }
 }
 

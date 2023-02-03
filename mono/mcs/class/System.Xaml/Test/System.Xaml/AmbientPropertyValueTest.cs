@@ -28,14 +28,14 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class AmbientPropertyValueTest
-	{
-		[Test]
-		public void ConstructorNullProperty ()
-		{
-			new AmbientPropertyValue (null, 5);
-			new AmbientPropertyValue (null, null);
-		}
-	}
+    [TestFixture]
+    public class AmbientPropertyValueTest
+    {
+        [Test]
+        public void ConstructorNullProperty ()
+        {
+            new AmbientPropertyValue (null, 5);
+            new AmbientPropertyValue (null, null);
+        }
+    }
 }

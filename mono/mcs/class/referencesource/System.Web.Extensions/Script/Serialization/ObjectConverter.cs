@@ -172,10 +172,10 @@ namespace System.Web.Script.Serialization {
             }
 
 #if INDIGO
-			StructuralContract contract = null;
-			if (suggestedType != null && 
+            StructuralContract contract = null;
+            if (suggestedType != null && 
                 suggestedType.GetCustomAttributes(typeof(DataContractAttribute), false).Length > 0)
-				contract = StructuralContract.Create(suggestedType);
+                contract = StructuralContract.Create(suggestedType);
 #endif
 
             // Use a different collection to avoid modifying the original during keys enumeration.
@@ -239,22 +239,22 @@ namespace System.Web.Script.Serialization {
             foreach (string memberName in memberNames) {
                 object propertyValue = dictionary[memberName];
 #if INDIGO
-	            if (contract != null) {
-		            Member member = contract.FindMember(memberName);
-		            // 
+                if (contract != null) {
+                    Member member = contract.FindMember(memberName);
+                    // 
 
-		            if (member == null)
-			            throw new InvalidOperationException();
+                    if (member == null)
+                        throw new InvalidOperationException();
 
-		            if (member.MemberType == MemberTypes.Field) {
-			            member.SetValue(o, propertyValue);
-		            }
-		            else {
-			            member.SetValue(o, propertyValue);
-		            }
+                    if (member.MemberType == MemberTypes.Field) {
+                        member.SetValue(o, propertyValue);
+                    }
+                    else {
+                        member.SetValue(o, propertyValue);
+                    }
 
                     continue;
-	            }
+                }
 #endif
                 // Assign the value into a property or field of the object
                 if (!AssignToPropertyOrField(propertyValue, o, memberName, serializer, throwOnError)) {
@@ -554,8 +554,8 @@ namespace System.Web.Script.Serialization {
             return true;
         }
 
-	// these helper methods replace inline code.
-	// they simplify the code and reduce our cyclomatic complexity
+    // these helper methods replace inline code.
+    // they simplify the code and reduce our cyclomatic complexity
 
         private static bool IsGenericDictionary(Type type) {
             return type != null &&

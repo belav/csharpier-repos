@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.ControlCollectionCodeDomSerializaer
 //
 // Authors:
-//	  Ivan N. Zlatev (contact i-nZ.net)
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -39,11 +39,11 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
-	{
+    internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
+    {
 
-		public ControlCollectionCodeDomSerializaer ()
-		{
-		}
-	}
+        public ControlCollectionCodeDomSerializaer ()
+        {
+        }
+    }
 }

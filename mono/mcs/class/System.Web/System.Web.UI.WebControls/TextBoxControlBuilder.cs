@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.TextBoxControlBuilder
 //
 // Authors:
-//	Ben Maurer <bmaurer@novell.com>
+//    Ben Maurer <bmaurer@novell.com>
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -27,15 +27,15 @@
 //
 
 namespace System.Web.UI.WebControls {
-	public class TextBoxControlBuilder : ControlBuilder {
-		public override bool AllowWhitespaceLiterals ()
-		{
-			return false;
-		}
+    public class TextBoxControlBuilder : ControlBuilder {
+        public override bool AllowWhitespaceLiterals ()
+        {
+            return false;
+        }
 
-		public override bool HtmlDecodeLiterals ()
-		{
-			return true;
-		}
-	}
+        public override bool HtmlDecodeLiterals ()
+        {
+            return true;
+        }
+    }
 }

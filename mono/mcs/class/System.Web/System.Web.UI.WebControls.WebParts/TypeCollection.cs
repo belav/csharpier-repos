@@ -33,43 +33,43 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	public class TypeCollection : ReadOnlyCollectionBase
-	{
-		public TypeCollection ()
-		{			
-		}
+    public class TypeCollection : ReadOnlyCollectionBase
+    {
+        public TypeCollection ()
+        {            
+        }
 
-		public TypeCollection (ICollection types)
-		{
-			InnerList.AddRange (types);
-		}
+        public TypeCollection (ICollection types)
+        {
+            InnerList.AddRange (types);
+        }
 
-		public TypeCollection (TypeCollection existingTypes, 
-								ICollection types)
-		{
-			InnerList.AddRange (existingTypes.InnerList);
-			InnerList.AddRange (types);
-		}
+        public TypeCollection (TypeCollection existingTypes, 
+                                ICollection types)
+        {
+            InnerList.AddRange (existingTypes.InnerList);
+            InnerList.AddRange (types);
+        }
 
-		public static readonly TypeCollection Empty = new TypeCollection ();
+        public static readonly TypeCollection Empty = new TypeCollection ();
 
-		public bool Contains (Type value)
-		{
-			return InnerList.Contains (value);
-		}
+        public bool Contains (Type value)
+        {
+            return InnerList.Contains (value);
+        }
 
-		public void CopyTo (Type [] array, int index)
-		{
-			InnerList.CopyTo (0, array, index, Count);		
-		}
+        public void CopyTo (Type [] array, int index)
+        {
+            InnerList.CopyTo (0, array, index, Count);        
+        }
 
-		public int IndexOf (Type value)
-		{
-			return (InnerList.IndexOf (value));
-		}
+        public int IndexOf (Type value)
+        {
+            return (InnerList.IndexOf (value));
+        }
 
-		public Type this [int index ] {
-			get { return (Type)InnerList [index]; }
-		}
-	}
+        public Type this [int index ] {
+            get { return (Type)InnerList [index]; }
+        }
+    }
 }

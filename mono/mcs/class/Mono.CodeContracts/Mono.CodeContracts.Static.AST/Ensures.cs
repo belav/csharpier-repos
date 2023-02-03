@@ -2,7 +2,7 @@
 // Ensures.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,21 +27,21 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class Ensures : MethodContractElement {
-		public Ensures ()
-			: base (NodeType.Ensures)
-		{
-		}
+    class Ensures : MethodContractElement {
+        public Ensures ()
+            : base (NodeType.Ensures)
+        {
+        }
 
-		public Ensures (NodeType nodeType)
-			: base (nodeType)
-		{
-		}
+        public Ensures (NodeType nodeType)
+            : base (nodeType)
+        {
+        }
 
-		public Ensures (Expression condition)
-			: this ()
-		{
-			Assertion = condition;
-		}
-	}
+        public Ensures (Expression condition)
+            : this ()
+        {
+            Assertion = condition;
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.SessionState.ISessionIDManager
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -33,16 +33,16 @@ using System;
 using System.Web;
 
 namespace System.Web.SessionState {
-	public interface ISessionIDManager
-	{
-		///methods
-		string CreateSessionID (HttpContext context);
-		string GetSessionID (HttpContext context);
-		void Initialize ();
-		bool InitializeRequest (HttpContext context, bool suppressAutoDetectRedirect, out bool supportSessionIDReissue);
-		void RemoveSessionID (HttpContext context);
-		void SaveSessionID (HttpContext context, string id, out bool redirected, out bool cookieAdded);
-		bool Validate (string id);
-	}
+    public interface ISessionIDManager
+    {
+        ///methods
+        string CreateSessionID (HttpContext context);
+        string GetSessionID (HttpContext context);
+        void Initialize ();
+        bool InitializeRequest (HttpContext context, bool suppressAutoDetectRedirect, out bool supportSessionIDReissue);
+        void RemoveSessionID (HttpContext context);
+        void SaveSessionID (HttpContext context, string id, out bool redirected, out bool cookieAdded);
+        bool Validate (string id);
+    }
 }
 

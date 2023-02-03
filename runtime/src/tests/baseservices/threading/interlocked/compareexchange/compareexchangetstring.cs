@@ -20,7 +20,7 @@ class Class1
             threads[i] = new Thread(new ParameterizedThreadStart(tsi.ThreadWorker));
             threads[i].Start();
         }
-			
+            
         tsi.Signal();
 
         Console.WriteLine("Joining threads");
@@ -35,7 +35,7 @@ class Class1
         if(tsi.Val == strExpected)
             rValue = 100;
 
-	Console.WriteLine("Test Expected {0}, but found {1}", strExpected, tsi.Val);
+    Console.WriteLine("Test Expected {0}, but found {1}", strExpected, tsi.Val);
         Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
         return rValue;
     }
@@ -44,7 +44,7 @@ class Class1
 public class ThreadSafe
 {
     ManualResetEvent signal;
-    public string Val = string.Empty;		
+    public string Val = string.Empty;        
     private int numberOfIterations;
     private string strIn = string.Empty;
     public ThreadSafe(int loops, object obj)
@@ -98,5 +98,5 @@ public class ThreadSafe
             ref Val, newValue, initialValue));
 
         return newValue;
-    }	
+    }    
 }

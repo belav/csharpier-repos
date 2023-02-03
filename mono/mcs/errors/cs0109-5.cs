@@ -3,9 +3,9 @@
 // Compiler options: -warnaserror -warn:4
 
 class Base {
-	void Test (bool arg) {}
+    void Test (bool arg) {}
 }
 
 class Derived : Base {
-	new void Test () {}
+    new void Test () {}
 }

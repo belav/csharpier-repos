@@ -33,25 +33,25 @@ using System.Web.Services;
 using System.IO;
 
 namespace System.Web.Services.Protocols {
-	public class UrlParameterWriter : UrlEncodedParameterWriter {
+    public class UrlParameterWriter : UrlEncodedParameterWriter {
 
-		#region Constructors
+        #region Constructors
 
-		public UrlParameterWriter () 
-		{
-		}
-		
-		#endregion // Constructors
+        public UrlParameterWriter () 
+        {
+        }
+        
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		public override string GetRequestUrl (string url, object[] parameters)
-		{
-			StringWriter sw = new StringWriter ();
-			Encode (sw, parameters);
-			return url + "?" + sw.ToString ();
-		}
+        public override string GetRequestUrl (string url, object[] parameters)
+        {
+            StringWriter sw = new StringWriter ();
+            Encode (sw, parameters);
+            return url + "?" + sw.ToString ();
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

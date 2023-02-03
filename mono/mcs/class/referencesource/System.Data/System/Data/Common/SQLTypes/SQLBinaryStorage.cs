@@ -42,7 +42,7 @@ namespace System.Data.Common {
                         }
                         return count;
                 }
-            	}
+                }
             catch (OverflowException) {
                 throw ExprException.Overflow(typeof(SqlBinary));
             }

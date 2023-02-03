@@ -14,42 +14,42 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public class ClassWithConstructors
-	{
-		private readonly string name;
-		private readonly int x;
+    public class ClassWithConstructors
+    {
+        private readonly string name;
+        private readonly int x;
 
-		public ClassWithConstructors(string name)
-		{
-			this.name = name;
-		}
+        public ClassWithConstructors(string name)
+        {
+            this.name = name;
+        }
 
-		public ClassWithConstructors(string name, int x)
-		{
-			this.name = name;
-			this.x = x;
-		}
+        public ClassWithConstructors(string name, int x)
+        {
+            this.name = name;
+            this.x = x;
+        }
 
-		protected ClassWithConstructors(double name)
-			: this(name.ToString())
-		{
-		}
+        protected ClassWithConstructors(double name)
+            : this(name.ToString())
+        {
+        }
 
-		protected internal ClassWithConstructors(double name, double x)
-			: this(name.ToString(), (int) x)
-		{
-		}
+        protected internal ClassWithConstructors(double name, double x)
+            : this(name.ToString(), (int) x)
+        {
+        }
 
-		public string Name
-		{
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public int X
-		{
-			get { return x; }
-		}
-	}
+        public int X
+        {
+            get { return x; }
+        }
+    }
 }

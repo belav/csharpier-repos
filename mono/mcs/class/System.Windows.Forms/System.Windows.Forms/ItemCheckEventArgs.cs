@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 // COMPLETE
@@ -31,35 +31,35 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	[ComVisible (true)]
-	public class ItemCheckEventArgs : EventArgs
-	{
-		private CheckState currentValue;
-		private int index;
-		private CheckState newValue;
+    [ComVisible (true)]
+    public class ItemCheckEventArgs : EventArgs
+    {
+        private CheckState currentValue;
+        private int index;
+        private CheckState newValue;
 
-		#region Public Constructors
-		public ItemCheckEventArgs (int index, CheckState newCheckValue, CheckState currentValue)
-		{
-			this.index = index;
-			this.newValue = newCheckValue;
-			this.currentValue = currentValue;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public ItemCheckEventArgs (int index, CheckState newCheckValue, CheckState currentValue)
+        {
+            this.index = index;
+            this.newValue = newCheckValue;
+            this.currentValue = currentValue;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public CheckState CurrentValue {
-			get { return currentValue; }
-		}
+        #region Public Instance Properties
+        public CheckState CurrentValue {
+            get { return currentValue; }
+        }
 
-		public int Index {
-			get { return index; }
-		}
+        public int Index {
+            get { return index; }
+        }
 
-		public CheckState NewValue {
-			get { return newValue; }
-			set { newValue = value; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        public CheckState NewValue {
+            get { return newValue; }
+            set { newValue = value; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

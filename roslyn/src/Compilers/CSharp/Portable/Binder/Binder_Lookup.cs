@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -502,7 +502,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             //  SPEC:   An attribute-name of the form type-name may either include or omit this suffix.
             //  SPEC:   If an attribute class is found both with and without this suffix, an ambiguity 
             //  SPEC:   is present, and a compile-time error results. If the attribute-name is spelled
-            //  SPEC:   such that its right-most identifier is a verbatim identifier (§2.4.2), then only
+            //  SPEC:   such that its right-most identifier is a verbatim identifier (�2.4.2), then only
             //  SPEC:   an attribute without a suffix is matched, thus enabling such an ambiguity to be resolved.
 
             // Roslyn Bug 9681: Compilers incorrectly use the *failure* of binding some subexpression to indicate some other strategy is applicable (attributes, 'var')

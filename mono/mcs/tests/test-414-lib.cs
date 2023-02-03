@@ -4,7 +4,7 @@
 // 
 public class AA
 {
-	internal protected virtual string Data {
-		get { return null; }
-	}
+    internal protected virtual string Data {
+        get { return null; }
+    }
 }

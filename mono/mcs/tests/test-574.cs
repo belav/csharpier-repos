@@ -8,18 +8,18 @@ enum A {
 
 class X {
 
-	public static int Main () {
-		try {
-			switch (0) {
-			default:
-			  throw new Exception("FOO");
-			  break;
-			}
-		} catch (Exception) {
-			return 0;
-		}
-		
-		return 1;
-	}
+    public static int Main () {
+        try {
+            switch (0) {
+            default:
+              throw new Exception("FOO");
+              break;
+            }
+        } catch (Exception) {
+            return 0;
+        }
+        
+        return 1;
+    }
 }
 

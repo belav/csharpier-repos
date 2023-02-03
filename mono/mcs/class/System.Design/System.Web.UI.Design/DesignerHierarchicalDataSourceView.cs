@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DesignerHierarchicalDataSourceView
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -34,35 +34,35 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design {
 
-	public abstract class DesignerHierarchicalDataSourceView
-	{
-		[MonoTODO]
-		protected DesignerHierarchicalDataSourceView (IHierarchicalDataSourceDesigner owner, string viewPath)
-		{
-			throw new NotImplementedException ();
-		}
+    public abstract class DesignerHierarchicalDataSourceView
+    {
+        [MonoTODO]
+        protected DesignerHierarchicalDataSourceView (IHierarchicalDataSourceDesigner owner, string viewPath)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public IHierarchicalDataSourceDesigner DataSourceDesigner {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public IHierarchicalDataSourceDesigner DataSourceDesigner {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public string Path {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public string Path {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual IDataSourceSchema Schema {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual IDataSourceSchema Schema {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual IHierarchicalEnumerable GetDesignTimeData (out bool isSampleData)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual IHierarchicalEnumerable GetDesignTimeData (out bool isSampleData)
+        {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 }
 

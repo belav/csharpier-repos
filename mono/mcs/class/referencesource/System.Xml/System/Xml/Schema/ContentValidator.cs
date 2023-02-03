@@ -511,7 +511,7 @@ namespace System.Xml.Schema {
         }
 
         public override void ExpandTree(InteriorNode parent, SymbolsDictionary symbols, Positions positions) {
- 	        ExpandTreeNoRecursive(parent, symbols, positions);
+             ExpandTreeNoRecursive(parent, symbols, positions);
         }
 
 #if DEBUG
@@ -610,7 +610,7 @@ namespace System.Xml.Schema {
         }
 
         public override void ExpandTree(InteriorNode parent, SymbolsDictionary symbols, Positions positions) {
- 	        ExpandTreeNoRecursive(parent, symbols, positions);
+             ExpandTreeNoRecursive(parent, symbols, positions);
         }
 
 #if DEBUG
@@ -944,7 +944,7 @@ namespace System.Xml.Schema {
             //Only then it can be head of substitutionGrp, if it is, add its members 
             XmlSchemaElement elem = p as XmlSchemaElement;
             if (elem != null && (global ||!elem.RefName.IsEmpty)) { 
-				XmlSchemaObjectTable substitutionGroups = schemaSet.SubstitutionGroups;
+                XmlSchemaObjectTable substitutionGroups = schemaSet.SubstitutionGroups;
                 XmlSchemaSubstitutionGroup grp = (XmlSchemaSubstitutionGroup)substitutionGroups[elem.QualifiedName];
                 if (grp != null) {
                     //Grp members wil contain the head as well, so filter head as we added it already

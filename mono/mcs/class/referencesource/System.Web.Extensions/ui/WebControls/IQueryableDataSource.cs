@@ -1,4 +1,4 @@
-﻿namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Web.UI;

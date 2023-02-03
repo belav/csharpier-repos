@@ -3,18 +3,18 @@
 
 public class Blah {
 
-	public delegate int MyDelegate (int i, int j);
+    public delegate int MyDelegate (int i, int j);
 
-	public int Foo (int i, int j)
-	{
-		return i+j;
-	}
+    public int Foo (int i, int j)
+    {
+        return i+j;
+    }
 
-	public static void Main ()
-	{
-		Blah i = new Blah ();
+    public static void Main ()
+    {
+        Blah i = new Blah ();
 
-		MyDelegate del = new MyDelegate ();
-	}
+        MyDelegate del = new MyDelegate ();
+    }
 }
 

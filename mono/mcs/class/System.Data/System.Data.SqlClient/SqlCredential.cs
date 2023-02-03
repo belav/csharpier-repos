@@ -34,43 +34,43 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 namespace System.Data.SqlClient {
-	/// <summary>
-	/// Describes an error from a SQL database.
-	/// </summary>
-	[Serializable]
-	public sealed class SqlCredential
-	{
-		#region Fields
+    /// <summary>
+    /// Describes an error from a SQL database.
+    /// </summary>
+    [Serializable]
+    public sealed class SqlCredential
+    {
+        #region Fields
 
-		string uid = "";
-		SecureString pwd = null;
+        string uid = "";
+        SecureString pwd = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SqlCredential (string userId, SecureString password)
-		{
-			if (userId == null)
-				throw new ArgumentNullException("userId");
-			if (password == null)
-				throw new ArgumentNullException("password");
-			this.uid = userId;
-			this.pwd = password;
-		}
+        public SqlCredential (string userId, SecureString password)
+        {
+            if (userId == null)
+                throw new ArgumentNullException("userId");
+            if (password == null)
+                throw new ArgumentNullException("password");
+            this.uid = userId;
+            this.pwd = password;
+        }
 
-		#endregion // Constructors
-		
-		#region Properties
+        #endregion // Constructors
+        
+        #region Properties
 
-		public string UserId {
-			get { return uid; }
-		}
+        public string UserId {
+            get { return uid; }
+        }
 
-		public SecureString Password {
-			get { return pwd; }
-		}
+        public SecureString Password {
+            get { return pwd; }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

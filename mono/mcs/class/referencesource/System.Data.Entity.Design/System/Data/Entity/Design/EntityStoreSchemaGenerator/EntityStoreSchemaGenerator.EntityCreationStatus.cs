@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------
+//---------------------------------------------------------------------
 // <copyright file="EntityStoreSchemaGenerator.EntityCreationStatus.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>

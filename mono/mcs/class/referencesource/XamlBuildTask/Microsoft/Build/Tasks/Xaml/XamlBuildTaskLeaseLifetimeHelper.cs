@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Build.Tasks.Xaml
+namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Globalization;

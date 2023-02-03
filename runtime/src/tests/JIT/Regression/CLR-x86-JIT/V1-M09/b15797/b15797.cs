@@ -20,7 +20,7 @@ public class Light
         days = 1000;
         seconds1 = days * 24 * 60 * 60; //this is one of the problems, more than 2 multiplication produce the error
         //seconds = days * 24;  // if we calculate "seconds" like follows it works
-        //seconds *=60;	    
+        //seconds *=60;        
         // seconds *=60;
         seconds2 = (days * 24) * (60 * 60);
         seconds3 = days * (24 * 60) * 60;

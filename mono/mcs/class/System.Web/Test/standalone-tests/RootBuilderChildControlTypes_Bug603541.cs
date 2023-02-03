@@ -37,27 +37,27 @@ using NUnit.Framework;
 
 namespace StandAloneTests.Control_GetUniqueIDRelativeTo
 {
-	[TestCase ("RootBuilderChildControlTypes_Bug603541", "HTML control types mapped by RootBuilder")]
-	public sealed class RootBuilderChildControlTypes_Bug603541 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "RootBuilderChildControlTypes_Bug603541"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("RootBuilderChildControlTypes_Bug603541", "HTML control types mapped by RootBuilder")]
+    public sealed class RootBuilderChildControlTypes_Bug603541 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "RootBuilderChildControlTypes_Bug603541"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-			
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<pre id=""log"">a: System.Web.UI.HtmlControls.HtmlAnchor
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
+            
+            return true;
+        }
+        
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"<pre id=""log"">a: System.Web.UI.HtmlControls.HtmlAnchor
 button: System.Web.UI.HtmlControls.HtmlButton
 img: System.Web.UI.HtmlControls.HtmlImage
 link: System.Web.UI.HtmlControls.HtmlGenericControl
@@ -79,8 +79,8 @@ inputRadio: System.Web.UI.HtmlControls.HtmlInputRadioButton
 inputText: System.Web.UI.HtmlControls.HtmlInputText
 inputPassword: System.Web.UI.HtmlControls.HtmlInputPassword
 </pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 }
 

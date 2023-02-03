@@ -29,40 +29,40 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public class MustUnderstandBehavior : IEndpointBehavior
-	{
-		bool validate;
+    public class MustUnderstandBehavior : IEndpointBehavior
+    {
+        bool validate;
 
-		public MustUnderstandBehavior (bool validate)
-		{
-			this.validate = validate;
-		}
+        public MustUnderstandBehavior (bool validate)
+        {
+            this.validate = validate;
+        }
 
-		public bool ValidateMustUnderstand {
-			get { return validate; }
-			set { validate = value; }
-		}
+        public bool ValidateMustUnderstand {
+            get { return validate; }
+            set { validate = value; }
+        }
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
+            BindingParameterCollection parameters)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
-			EndpointDispatcher dispatcher)
-		{
-			dispatcher.DispatchRuntime.ValidateMustUnderstand = validate;
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
+            EndpointDispatcher dispatcher)
+        {
+            dispatcher.DispatchRuntime.ValidateMustUnderstand = validate;
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint,
-			ClientRuntime proxy)
-		{
-			proxy.ValidateMustUnderstand = validate;
-		}
+        void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint,
+            ClientRuntime proxy)
+        {
+            proxy.ValidateMustUnderstand = validate;
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-		{
-		}
-	}
+        void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
+        {
+        }
+    }
 }

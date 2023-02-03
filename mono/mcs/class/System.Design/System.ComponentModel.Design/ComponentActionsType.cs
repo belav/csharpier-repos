@@ -30,10 +30,10 @@
 
 namespace System.ComponentModel.Design
 {
-	public enum ComponentActionsType
-	{
-		All,
-		Component,
-		Service,
-	}
+    public enum ComponentActionsType
+    {
+        All,
+        Component,
+        Service,
+    }
 }

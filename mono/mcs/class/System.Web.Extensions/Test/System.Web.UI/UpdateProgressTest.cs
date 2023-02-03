@@ -1,4 +1,4 @@
-﻿//
+//
 // UpdateProgress.cs
 //
 // Author:
@@ -35,14 +35,14 @@ using System.Web.UI;
 
 namespace Tests.System.Web.UI
 {
-	[TestFixture]
-	public class UpdateProgressTest
-	{
-		[Test]
-		public void UpdateProgress_Defaults () {
-			UpdateProgress up = new UpdateProgress ();
+    [TestFixture]
+    public class UpdateProgressTest
+    {
+        [Test]
+        public void UpdateProgress_Defaults () {
+            UpdateProgress up = new UpdateProgress ();
 
-			Assert.IsNotNull (((IScriptControl) up).GetScriptReferences ());
-		}
-	}
+            Assert.IsNotNull (((IScriptControl) up).GetScriptReferences ());
+        }
+    }
 }

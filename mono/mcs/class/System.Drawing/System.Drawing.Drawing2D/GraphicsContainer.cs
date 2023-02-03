@@ -30,19 +30,19 @@
 
 namespace System.Drawing.Drawing2D {
 
-	public sealed class GraphicsContainer : MarshalByRefObject {
-		
-		private uint nativeState;
+    public sealed class GraphicsContainer : MarshalByRefObject {
+        
+        private uint nativeState;
 
-		internal GraphicsContainer (uint state)
-		{
-			nativeState = state;
-		}
-		
-		internal uint NativeObject {
-			get {
-				return nativeState;
-			}
-		}
-	}
+        internal GraphicsContainer (uint state)
+        {
+            nativeState = state;
+        }
+        
+        internal uint NativeObject {
+            get {
+                return nativeState;
+            }
+        }
+    }
 }

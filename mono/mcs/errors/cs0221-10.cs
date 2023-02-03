@@ -5,8 +5,8 @@ enum AA : byte { a, b = 200 }
 
 public class C
 {
-	public static void Main ()
-	{
-		const int b = AA.a - AA.b;
-	}
+    public static void Main ()
+    {
+        const int b = AA.a - AA.b;
+    }
 }

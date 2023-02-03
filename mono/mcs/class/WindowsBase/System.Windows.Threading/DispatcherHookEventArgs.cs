@@ -20,30 +20,30 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Miguel de Icaza (miguel@novell.com)
+//    Miguel de Icaza (miguel@novell.com)
 //
 using System;
 
 namespace System.Windows.Threading {
 
-	public sealed class DispatcherHookEventArgs : EventArgs {
-		DispatcherOperation operation;
-		
-		public DispatcherHookEventArgs (DispatcherOperation operation)
-		{
-			this.operation = operation;
-		}
+    public sealed class DispatcherHookEventArgs : EventArgs {
+        DispatcherOperation operation;
+        
+        public DispatcherHookEventArgs (DispatcherOperation operation)
+        {
+            this.operation = operation;
+        }
 
-		public Dispatcher Dispatcher {
-			get {
-				return operation.Dispatcher;
-			}
-		}
+        public Dispatcher Dispatcher {
+            get {
+                return operation.Dispatcher;
+            }
+        }
 
-		public DispatcherOperation Operation {
-			get {
-				return operation;
-			}
-		}
-	}
+        public DispatcherOperation Operation {
+            get {
+                return operation;
+            }
+        }
+    }
 }

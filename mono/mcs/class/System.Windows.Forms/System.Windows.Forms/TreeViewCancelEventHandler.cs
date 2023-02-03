@@ -20,12 +20,12 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 
 
 namespace System.Windows.Forms {
 
-	public delegate void TreeViewCancelEventHandler (object sender, TreeViewCancelEventArgs e);
+    public delegate void TreeViewCancelEventHandler (object sender, TreeViewCancelEventArgs e);
 
 }
 

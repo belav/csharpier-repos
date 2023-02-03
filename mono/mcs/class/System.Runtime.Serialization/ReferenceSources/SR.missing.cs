@@ -2,27 +2,27 @@ using System.Globalization;
 
 namespace System.Runtime.Serialization
 {
-	static partial class SR
-	{
-		internal static string GetString(string name, params object[] args)
-		{
-			return GetString (CultureInfo.InvariantCulture, name, args);
-		}
+    static partial class SR
+    {
+        internal static string GetString(string name, params object[] args)
+        {
+            return GetString (CultureInfo.InvariantCulture, name, args);
+        }
 
-		internal static string GetString(CultureInfo culture, string name, params object[] args)
-		{
-			return string.Format (culture, name, args);
-		}
+        internal static string GetString(CultureInfo culture, string name, params object[] args)
+        {
+            return string.Format (culture, name, args);
+        }
 
-		internal static string GetString(string name)
-		{
-			return name;
-		}
+        internal static string GetString(string name)
+        {
+            return name;
+        }
 
-		internal static string GetString(CultureInfo culture, string name)
-		{
-			return name;
-		}
+        internal static string GetString(CultureInfo culture, string name)
+        {
+            return name;
+        }
 
 #region MissingInStrings.txt
 
@@ -34,8 +34,8 @@ namespace System.Runtime.Serialization
 // 3. csharp -e "System.IO.File.WriteAllLines ("existing.txt", System.Reflection.Assembly.ReflectionOnlyLoadFrom ("existing.dll").GetTypes ().SelectMany (t => t.GetFields ()).Select (f => f.Name).ToArray ())"
 // 4. csharp -e "System.IO.File.WriteAllLines ("full.txt", System.Reflection.Assembly.ReflectionOnlyLoadFrom ("full.dll").GetTypes ().SelectMany (t => t.GetFields ()).Select (f => f.Name).ToArray ())"
 // 5. csharp
-//	var existing = System.IO.File.ReadAllLines ("existing.txt");
-//	var full = System.IO.File.ReadAllLines ("full.txt");
+//    var existing = System.IO.File.ReadAllLines ("existing.txt");
+//    var full = System.IO.File.ReadAllLines ("full.txt");
 //  var missing = full.Where (f => !existing.Contains (f));
 //  System.IO.File.WriteAllLines ("missing.cs", missing.Select (m => "public const string " + m + " = @\"" + m + "\";").ToArray ())
 // 6. copy missing.cs contents here.
@@ -309,18 +309,18 @@ public const string XmlObjectAssignedToIncompatibleInterface = @"Object of type 
 
 #endregion
 
-	// CoreFX
-	public const string PlatformNotSupported_SchemaImporter = "The implementation of the function requires System.Runtime.Serialization.SchemaImporter which is not supported on this platform.";
-	public const string PlatformNotSupported_IDataContractSurrogate = "The implementation of the function requires System.Runtime.Serialization.IDataContractSurrogate which is not supported on this platform.";
+    // CoreFX
+    public const string PlatformNotSupported_SchemaImporter = "The implementation of the function requires System.Runtime.Serialization.SchemaImporter which is not supported on this platform.";
+    public const string PlatformNotSupported_IDataContractSurrogate = "The implementation of the function requires System.Runtime.Serialization.IDataContractSurrogate which is not supported on this platform.";
 
-	internal static string Format(string resourceFormats)
-	{
-		return resourceFormats;
-	}
+    internal static string Format(string resourceFormats)
+    {
+        return resourceFormats;
+    }
 
-	internal static string Format(string resourceFormat, object p1)
-	{
-		return string.Format (CultureInfo.InvariantCulture, resourceFormat, p1);
-	}
+    internal static string Format(string resourceFormat, object p1)
+    {
+        return string.Format (CultureInfo.InvariantCulture, resourceFormat, p1);
+    }
 }
 }

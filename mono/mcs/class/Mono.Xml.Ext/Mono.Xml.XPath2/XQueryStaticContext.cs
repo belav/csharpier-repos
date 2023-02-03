@@ -2,7 +2,7 @@
 // XQueryStaticContext.cs - XQuery static context components
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -40,190 +40,190 @@ using Mono.Xml.XPath2;
 
 namespace Mono.Xml.XPath2
 {
-	// Holds static context, that is created for each module.
-	internal class XQueryStaticContext
-	{
-		public static XQueryStaticContext Optimize (XQueryStaticContext ctx)
-		{
-			// FIXME: do type promotion and expression reduction
-			return ctx;
-		}
+    // Holds static context, that is created for each module.
+    internal class XQueryStaticContext
+    {
+        public static XQueryStaticContext Optimize (XQueryStaticContext ctx)
+        {
+            // FIXME: do type promotion and expression reduction
+            return ctx;
+        }
 
-		// Don't keep XQueryCompileOptions and XQueryMainModule
-		// inside this class. I don't want them affect this instance
-		// by being modified externally after the compilation.
+        // Don't keep XQueryCompileOptions and XQueryMainModule
+        // inside this class. I don't want them affect this instance
+        // by being modified externally after the compilation.
 
-		public XQueryStaticContext (
-			XQueryCompileOptions options,
-			XQueryCompileContext compileContext,
-			ExprSequence queryBody,
-			XmlSchemaSet inScopeSchemas,
-			IDictionary inScopeVariables,
-			XQueryFunctionTable functionSignatures,
-			IXmlNamespaceResolver nsResolver,
-			string defaultFunctionNamespace,
-			bool preserveWhitespace,
-			bool constructionSpace,
-			bool defaultOrdered,
-			string baseUri,
-			Evidence evidence,
-			XQueryCommandImpl commandImpl)
-		{
-			// Initialization phase.
-			compat = options.Compatibility;
-			nameTable = options.NameTable;
-			this.queryBody = queryBody;
-			this.nsResolver = nsResolver;
-			this.defaultFunctionNamespace = defaultFunctionNamespace;
-//			elemNSManager = new XmlNamespaceManager (nameTable);
-//			funcNSManager = new XmlNamespaceManager (nameTable);
-			xqueryFlagger = options.XQueryFlagger;
-			xqueryStaticFlagger = options.XQueryStaticFlagger;
-//			xqueryResolver = options.KnownDocumentResolver;
-			knownCollections = (IDictionary) options.KnownCollections.Clone ();
-			functions = functionSignatures;
-			this.compileContext = compileContext;
-			this.inScopeSchemas = inScopeSchemas;
-			this.inScopeVariables = inScopeVariables;
-			this.preserveWhitespace = preserveWhitespace;
-			this.preserveConstructionSpace = constructionSpace;
-			this.defaultOrdered = defaultOrdered;
-			this.baseUri = baseUri;
-			this.defaultCollation = options.DefaultCollation;
-			// FIXME: set contextItemStaticType
-			// FIXME: set extDocResolver
+        public XQueryStaticContext (
+            XQueryCompileOptions options,
+            XQueryCompileContext compileContext,
+            ExprSequence queryBody,
+            XmlSchemaSet inScopeSchemas,
+            IDictionary inScopeVariables,
+            XQueryFunctionTable functionSignatures,
+            IXmlNamespaceResolver nsResolver,
+            string defaultFunctionNamespace,
+            bool preserveWhitespace,
+            bool constructionSpace,
+            bool defaultOrdered,
+            string baseUri,
+            Evidence evidence,
+            XQueryCommandImpl commandImpl)
+        {
+            // Initialization phase.
+            compat = options.Compatibility;
+            nameTable = options.NameTable;
+            this.queryBody = queryBody;
+            this.nsResolver = nsResolver;
+            this.defaultFunctionNamespace = defaultFunctionNamespace;
+//            elemNSManager = new XmlNamespaceManager (nameTable);
+//            funcNSManager = new XmlNamespaceManager (nameTable);
+            xqueryFlagger = options.XQueryFlagger;
+            xqueryStaticFlagger = options.XQueryStaticFlagger;
+//            xqueryResolver = options.KnownDocumentResolver;
+            knownCollections = (IDictionary) options.KnownCollections.Clone ();
+            functions = functionSignatures;
+            this.compileContext = compileContext;
+            this.inScopeSchemas = inScopeSchemas;
+            this.inScopeVariables = inScopeVariables;
+            this.preserveWhitespace = preserveWhitespace;
+            this.preserveConstructionSpace = constructionSpace;
+            this.defaultOrdered = defaultOrdered;
+            this.baseUri = baseUri;
+            this.defaultCollation = options.DefaultCollation;
+            // FIXME: set contextItemStaticType
+            // FIXME: set extDocResolver
 
-			this.evidence = evidence;
-			this.commandImpl = commandImpl;
-		}
+            this.evidence = evidence;
+            this.commandImpl = commandImpl;
+        }
 
-		// It holds in-effect components et. al.
-		XQueryCompileContext compileContext;
+        // It holds in-effect components et. al.
+        XQueryCompileContext compileContext;
 
-		XmlNameTable nameTable;
-		Evidence evidence; // for safe custom function execution / safe assembly loading
-		XQueryCommandImpl commandImpl; // for event delegate
+        XmlNameTable nameTable;
+        Evidence evidence; // for safe custom function execution / safe assembly loading
+        XQueryCommandImpl commandImpl; // for event delegate
 
-		ExprSequence queryBody;
+        ExprSequence queryBody;
 
-		// See XQuery 1.0, 2.1.1 "Static Context"
-		XmlQueryDialect compat; // XPath 1.0 compatibility mode
-		IXmlNamespaceResolver nsResolver;	// Manages "statically known namespaces" and "default element/type namespace" 
-		string defaultFunctionNamespace; // default function namespace
-		XmlSchemaSet inScopeSchemas;	// in-scope schemas
-		IDictionary inScopeVariables;
-		Type contextItemStaticType;	// TODO: context item static type?
-		XQueryFunctionTable functions;
+        // See XQuery 1.0, 2.1.1 "Static Context"
+        XmlQueryDialect compat; // XPath 1.0 compatibility mode
+        IXmlNamespaceResolver nsResolver;    // Manages "statically known namespaces" and "default element/type namespace" 
+        string defaultFunctionNamespace; // default function namespace
+        XmlSchemaSet inScopeSchemas;    // in-scope schemas
+        IDictionary inScopeVariables;
+        Type contextItemStaticType;    // TODO: context item static type?
+        XQueryFunctionTable functions;
 
-		// Statically known collations is not defined here. It is equal to all supported CultureInfo.
-//		IDictionary staticallyKnownCollations;
+        // Statically known collations is not defined here. It is equal to all supported CultureInfo.
+//        IDictionary staticallyKnownCollations;
 
-		CultureInfo defaultCollation; // or TextInfo ?
-		bool preserveConstructionSpace; // construction mode
-		bool defaultOrdered; // Ordering mode
-		bool preserveWhitespace; // Xml space policy
-		string baseUri;
-//		XmlResolver extDocResolver; // statically known documents
-		IDictionary knownCollections; // statically known collections
-		bool xqueryFlagger;
-		bool xqueryStaticFlagger;
+        CultureInfo defaultCollation; // or TextInfo ?
+        bool preserveConstructionSpace; // construction mode
+        bool defaultOrdered; // Ordering mode
+        bool preserveWhitespace; // Xml space policy
+        string baseUri;
+//        XmlResolver extDocResolver; // statically known documents
+        IDictionary knownCollections; // statically known collections
+        bool xqueryFlagger;
+        bool xqueryStaticFlagger;
 
-		// Properties
+        // Properties
 
-		public XQueryCompileContext CompileContext {
-			get { return compileContext; }
-		}
+        public XQueryCompileContext CompileContext {
+            get { return compileContext; }
+        }
 
-		public XmlQueryDialect Compatibility {
-			get { return compat; }
-		}
+        public XmlQueryDialect Compatibility {
+            get { return compat; }
+        }
 
-		public ExprSequence QueryBody {
-			get { return queryBody; }
-		}
+        public ExprSequence QueryBody {
+            get { return queryBody; }
+        }
 
-		public XmlNameTable NameTable {
-			get { return nameTable; }
-		}
+        public XmlNameTable NameTable {
+            get { return nameTable; }
+        }
 
-		public Evidence Evidence {
-			get { return evidence; }
-		}
+        public Evidence Evidence {
+            get { return evidence; }
+        }
 
-		public CultureInfo DefaultCollation {
-			get { return defaultCollation; }
-		}
+        public CultureInfo DefaultCollation {
+            get { return defaultCollation; }
+        }
 
-		public XmlSchemaSet InScopeSchemas {
-			get { return inScopeSchemas; }
-		}
+        public XmlSchemaSet InScopeSchemas {
+            get { return inScopeSchemas; }
+        }
 
-		// in-scope functions.
-		public XQueryFunctionTable InScopeFunctions {
-			get { return functions; }
-		}
+        // in-scope functions.
+        public XQueryFunctionTable InScopeFunctions {
+            get { return functions; }
+        }
 
-		// in-scope variables. XmlQualifiedName to XPathItem
-		public IDictionary InScopeVariables {
-			get { return inScopeVariables; }
-		}
+        // in-scope variables. XmlQualifiedName to XPathItem
+        public IDictionary InScopeVariables {
+            get { return inScopeVariables; }
+        }
 
-		public bool PreserveWhitespace {
-			get { return preserveWhitespace; }
-		}
+        public bool PreserveWhitespace {
+            get { return preserveWhitespace; }
+        }
 
-		public bool PreserveConstructionSpace {
-			get { return preserveConstructionSpace; }
-		}
+        public bool PreserveConstructionSpace {
+            get { return preserveConstructionSpace; }
+        }
 
-		public bool DefaultOrdered {
-			get { return defaultOrdered; }
-		}
+        public bool DefaultOrdered {
+            get { return defaultOrdered; }
+        }
 
-		// statically known collections. string to ICollection (or XPathItemIterator, or XPathNodeIterator).
-		public IDictionary KnownCollections {
-			get { return knownCollections; }
-		}
+        // statically known collections. string to ICollection (or XPathItemIterator, or XPathNodeIterator).
+        public IDictionary KnownCollections {
+            get { return knownCollections; }
+        }
 
-		public bool XQueryFlagger {
-			get { return xqueryFlagger; }
-		}
+        public bool XQueryFlagger {
+            get { return xqueryFlagger; }
+        }
 
-		public bool XQueryStaticFlagger {
-			get { return xqueryStaticFlagger; }
-		}
+        public bool XQueryStaticFlagger {
+            get { return xqueryStaticFlagger; }
+        }
 
-		public string BaseUri {
-			get { return baseUri; }
-		}
+        public string BaseUri {
+            get { return baseUri; }
+        }
 
-		public IXmlNamespaceResolver NSResolver {
-			get { return nsResolver; }
-		}
+        public IXmlNamespaceResolver NSResolver {
+            get { return nsResolver; }
+        }
 
-		public string DefaultFunctionNamespace {
-			get { return defaultFunctionNamespace; }
-			set { defaultFunctionNamespace = value; }
-		}
+        public string DefaultFunctionNamespace {
+            get { return defaultFunctionNamespace; }
+            set { defaultFunctionNamespace = value; }
+        }
 
-		// FIXME: consider those from imported modules
-		public XQueryFunction ResolveFunction (XmlQualifiedName name)
-		{
-			XQueryFunction f = functions [name];
-			if (f != null)
-				return f;
-			return null;
-		}
+        // FIXME: consider those from imported modules
+        public XQueryFunction ResolveFunction (XmlQualifiedName name)
+        {
+            XQueryFunction f = functions [name];
+            if (f != null)
+                return f;
+            return null;
+        }
 
-		// FIXME: wait for W3C clarification.
-		internal CultureInfo GetCulture (string collation)
-		{
-			return null;
-		}
+        // FIXME: wait for W3C clarification.
+        internal CultureInfo GetCulture (string collation)
+        {
+            return null;
+        }
 
-		internal void OnMessageEvent (object sender, QueryEventArgs e)
-		{
-			commandImpl.ProcessMessageEvent (sender, e);
-		}
-	}
+        internal void OnMessageEvent (object sender, QueryEventArgs e)
+        {
+            commandImpl.ProcessMessageEvent (sender, e);
+        }
+    }
 }

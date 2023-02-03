@@ -2,7 +2,7 @@
 // AttributeCollectionTest.cs
 //
 // Author:
-// 	Carlos Alberto Cortez <calberto.cortez@gmail.com>
+//     Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,49 +32,49 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel {
 
-	[TestFixture]
-	public class AttributeCollectionTest {
+    [TestFixture]
+    public class AttributeCollectionTest {
 
-		[Test]
-		public void Ctor_4_0 ()
-		{
-			CustomAttributeCollection attr_coll = new CustomAttributeCollection ();
-			Attribute [] attributes = attr_coll.GetAttributes ();
-			Assert.AreEqual (true, attributes == null, "#A0");
-		}
+        [Test]
+        public void Ctor_4_0 ()
+        {
+            CustomAttributeCollection attr_coll = new CustomAttributeCollection ();
+            Attribute [] attributes = attr_coll.GetAttributes ();
+            Assert.AreEqual (true, attributes == null, "#A0");
+        }
 
-		[Test]
-		public void AttributesTest ()
-		{
-			SerializableAttribute serializable_attr = new SerializableAttribute ();
-			FlagsAttribute flags_attr = new FlagsAttribute ();
+        [Test]
+        public void AttributesTest ()
+        {
+            SerializableAttribute serializable_attr = new SerializableAttribute ();
+            FlagsAttribute flags_attr = new FlagsAttribute ();
 
-			CustomAttributeCollection attr_coll = new CustomAttributeCollection (serializable_attr, flags_attr);
-			Attribute [] attributes = attr_coll.GetAttributes ();
-			Assert.AreEqual (true, attributes != null, "#A0");
-			Assert.AreEqual (2, attributes.Length, "#A1");
+            CustomAttributeCollection attr_coll = new CustomAttributeCollection (serializable_attr, flags_attr);
+            Attribute [] attributes = attr_coll.GetAttributes ();
+            Assert.AreEqual (true, attributes != null, "#A0");
+            Assert.AreEqual (2, attributes.Length, "#A1");
 
-			// The property is supposed to be giving us the same instance in all the invocations
-			Assert.AreSame (attributes, attr_coll.GetAttributes (), "#A2");
-		}
+            // The property is supposed to be giving us the same instance in all the invocations
+            Assert.AreSame (attributes, attr_coll.GetAttributes (), "#A2");
+        }
 
-		class CustomAttributeCollection : AttributeCollection
-		{
-			public CustomAttributeCollection (params Attribute [] attributes)
-				: base (attributes)
-			{
-			}
+        class CustomAttributeCollection : AttributeCollection
+        {
+            public CustomAttributeCollection (params Attribute [] attributes)
+                : base (attributes)
+            {
+            }
 
-			public CustomAttributeCollection ()
-				: base ()
-			{
-			}
+            public CustomAttributeCollection ()
+                : base ()
+            {
+            }
 
-			public Attribute [] GetAttributes ()
-			{
-				return Attributes;
-			}
-		}
-	}
+            public Attribute [] GetAttributes ()
+            {
+                return Attributes;
+            }
+        }
+    }
 }
 

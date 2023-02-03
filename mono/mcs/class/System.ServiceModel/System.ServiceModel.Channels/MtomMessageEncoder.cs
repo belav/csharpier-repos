@@ -33,75 +33,75 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	internal class MtomMessageEncoder : MessageEncoder
-	{
-		Encoding encoding;
-		MessageVersion version;
-		XmlDictionaryReaderQuotas quotas;
+    internal class MtomMessageEncoder : MessageEncoder
+    {
+        Encoding encoding;
+        MessageVersion version;
+        XmlDictionaryReaderQuotas quotas;
 
-		public MtomMessageEncoder (MtomMessageEncoderFactory owner)
-		{
-			version = owner.MessageVersion;
-			encoding = owner.Owner.WriteEncoding;
-			quotas = owner.Owner.ReaderQuotas;
-		}
+        public MtomMessageEncoder (MtomMessageEncoderFactory owner)
+        {
+            version = owner.MessageVersion;
+            encoding = owner.Owner.WriteEncoding;
+            quotas = owner.Owner.ReaderQuotas;
+        }
 
-		public override string ContentType {
-			get { return "multipart/related; type=application/xop+xml"; }
-		}
+        public override string ContentType {
+            get { return "multipart/related; type=application/xop+xml"; }
+        }
 
-		public override string MediaType {
-			get { return "multipart/related"; }
-		}
+        public override string MediaType {
+            get { return "multipart/related"; }
+        }
 
-		public override MessageVersion MessageVersion {
-			get { return version; }
-		}
+        public override MessageVersion MessageVersion {
+            get { return version; }
+        }
 
-		[MonoTODO]
-		public override Message ReadMessage (ArraySegment<byte> buffer,
-			BufferManager bufferManager, string contentType)
-		{
-			// FIXME: where should bufferManager be used?
-			// FIXME: no way to take maxSizeOfHeaders
-			// FIXME: create proper quotas
-			var ret = Message.CreateMessage (
-				XmlDictionaryReader.CreateMtomReader (buffer.Array, buffer.Offset, buffer.Count, encoding, quotas),
-				int.MaxValue,
-				MessageVersion);
-			ret.Properties.Encoder = this;
-			return ret;
-		}
+        [MonoTODO]
+        public override Message ReadMessage (ArraySegment<byte> buffer,
+            BufferManager bufferManager, string contentType)
+        {
+            // FIXME: where should bufferManager be used?
+            // FIXME: no way to take maxSizeOfHeaders
+            // FIXME: create proper quotas
+            var ret = Message.CreateMessage (
+                XmlDictionaryReader.CreateMtomReader (buffer.Array, buffer.Offset, buffer.Count, encoding, quotas),
+                int.MaxValue,
+                MessageVersion);
+            ret.Properties.Encoder = this;
+            return ret;
+        }
 
-		[MonoTODO]
-		public override Message ReadMessage (Stream stream,
-			int maxSizeOfHeaders, string contentType)
-		{
-			// FIXME: create proper quotas
-			return Message.CreateMessage (
-				XmlDictionaryReader.CreateMtomReader (
-					stream, new Encoding[1] { encoding }, contentType, quotas),
-				maxSizeOfHeaders,
-				MessageVersion);
-		}
+        [MonoTODO]
+        public override Message ReadMessage (Stream stream,
+            int maxSizeOfHeaders, string contentType)
+        {
+            // FIXME: create proper quotas
+            return Message.CreateMessage (
+                XmlDictionaryReader.CreateMtomReader (
+                    stream, new Encoding[1] { encoding }, contentType, quotas),
+                maxSizeOfHeaders,
+                MessageVersion);
+        }
 
-		[MonoTODO]
-		public override void WriteMessage (Message message, Stream stream)
-		{
-			VerifyMessageVersion (message);
+        [MonoTODO]
+        public override void WriteMessage (Message message, Stream stream)
+        {
+            VerifyMessageVersion (message);
 
-			// FIXME: no way to acquire maxSizeInBytes and startInfo?
-			message.WriteMessage (XmlDictionaryWriter.CreateMtomWriter (stream, encoding, int.MaxValue, string.Empty));
-		}
+            // FIXME: no way to acquire maxSizeInBytes and startInfo?
+            message.WriteMessage (XmlDictionaryWriter.CreateMtomWriter (stream, encoding, int.MaxValue, string.Empty));
+        }
 
-		[MonoTODO]
-		public override ArraySegment<byte> WriteMessage (
-			Message message, int maxMessageSize,
-			BufferManager bufferManager, int messageOffset)
-		{
-			VerifyMessageVersion (message);
+        [MonoTODO]
+        public override ArraySegment<byte> WriteMessage (
+            Message message, int maxMessageSize,
+            BufferManager bufferManager, int messageOffset)
+        {
+            VerifyMessageVersion (message);
 
-			throw new NotImplementedException ();
-		}
-	}
+            throw new NotImplementedException ();
+        }
+    }
 }

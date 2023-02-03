@@ -31,51 +31,51 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	public class KeyValueConfigurationElement: ConfigurationElement
-	{
-		static ConfigurationProperty keyProp;
-		static ConfigurationProperty valueProp;
-		static ConfigurationPropertyCollection properties;
+    public class KeyValueConfigurationElement: ConfigurationElement
+    {
+        static ConfigurationProperty keyProp;
+        static ConfigurationProperty valueProp;
+        static ConfigurationPropertyCollection properties;
 
-		static KeyValueConfigurationElement ()
-		{
-			keyProp = new ConfigurationProperty ("key", typeof (string), "", ConfigurationPropertyOptions.IsKey);
-			valueProp = new ConfigurationProperty ("value", typeof (string), "");
+        static KeyValueConfigurationElement ()
+        {
+            keyProp = new ConfigurationProperty ("key", typeof (string), "", ConfigurationPropertyOptions.IsKey);
+            valueProp = new ConfigurationProperty ("value", typeof (string), "");
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (keyProp);
-			properties.Add (valueProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (keyProp);
+            properties.Add (valueProp);
+        }
 
-		internal KeyValueConfigurationElement ()
-		{
-		}
+        internal KeyValueConfigurationElement ()
+        {
+        }
 
-		public KeyValueConfigurationElement (string key, string value)
-		{
-			this[keyProp] = key;
-			this[valueProp] = value;
-		}
-		
-		[ConfigurationProperty ("key", DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
-		public string Key {
-			get { return (string) this[keyProp]; }
-		}
-		
-		[ConfigurationProperty ("value", DefaultValue = "")]
-		public string Value {
-			get { return (string) this[valueProp]; }
-			set { this [valueProp] = value; }
-		}
+        public KeyValueConfigurationElement (string key, string value)
+        {
+            this[keyProp] = key;
+            this[valueProp] = value;
+        }
+        
+        [ConfigurationProperty ("key", DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        public string Key {
+            get { return (string) this[keyProp]; }
+        }
+        
+        [ConfigurationProperty ("value", DefaultValue = "")]
+        public string Value {
+            get { return (string) this[valueProp]; }
+            set { this [valueProp] = value; }
+        }
 
-		[MonoTODO]
-		protected internal override void Init ()
-		{
-		}
-		
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        [MonoTODO]
+        protected internal override void Init ()
+        {
+        }
+        
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

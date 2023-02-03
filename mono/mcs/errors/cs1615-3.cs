@@ -4,16 +4,16 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		Foo (out var y);
-	}
+    public static void Main ()
+    {
+        Foo (out var y);
+    }
 
-	static void Foo (int x)
-	{
-	}
+    static void Foo (int x)
+    {
+    }
 
-	static void Foo (string x)
-	{
-	}
+    static void Foo (string x)
+    {
+    }
 }

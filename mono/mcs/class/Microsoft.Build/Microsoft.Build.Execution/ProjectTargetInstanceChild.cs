@@ -30,15 +30,15 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-	public abstract class ProjectTargetInstanceChild
-	{
-		public abstract string Condition { get; }
-		public string FullPath { get; internal set; }
-		public
-		abstract ElementLocation ConditionLocation { get; }
-		
-		public
-		abstract ElementLocation Location { get; }
-	}
+    public abstract class ProjectTargetInstanceChild
+    {
+        public abstract string Condition { get; }
+        public string FullPath { get; internal set; }
+        public
+        abstract ElementLocation ConditionLocation { get; }
+        
+        public
+        abstract ElementLocation Location { get; }
+    }
 }
 

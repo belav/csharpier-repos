@@ -1,9 +1,9 @@
 //
 // AuthorizationSectionTest.cs 
-//	- unit tests for System.Web.Configuration.AuthorizationSection
+//    - unit tests for System.Web.Configuration.AuthorizationSection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,18 +38,18 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class AuthorizationSectionTest  {
+    [TestFixture]
+    public class AuthorizationSectionTest  {
 
-		[Test]
-		public void Defaults()
-		{
-			AuthorizationSection a = new AuthorizationSection ();
+        [Test]
+        public void Defaults()
+        {
+            AuthorizationSection a = new AuthorizationSection ();
 
-			Assert.IsNotNull (a.Rules, "A1");
-			Assert.AreEqual (0, a.Rules.Count, "A2");
-		}
-	}
+            Assert.IsNotNull (a.Rules, "A1");
+            Assert.AreEqual (0, a.Rules.Count, "A2");
+        }
+    }
 
 }
 

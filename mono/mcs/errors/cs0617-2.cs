@@ -3,10 +3,10 @@
 
 class BazAttribute : System.Attribute 
 {
-	public object foo3 { set {} }
+    public object foo3 { set {} }
 }
 
 class Test 
 {
-	[Baz (foo3 = 3)] void f3() {}
+    [Baz (foo3 = 3)] void f3() {}
 }

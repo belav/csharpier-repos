@@ -20,19 +20,19 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.IO.Packaging {
 
-	public enum VerifyResult {
-		Success,
+    public enum VerifyResult {
+        Success,
 
-		InvalidSignature,
-		CertificateRequired,
-		InvalidCertificate,
-		ReferenceNotFound,
-		NotSigned
-	}
+        InvalidSignature,
+        CertificateRequired,
+        InvalidCertificate,
+        ReferenceNotFound,
+        NotSigned
+    }
 
 }

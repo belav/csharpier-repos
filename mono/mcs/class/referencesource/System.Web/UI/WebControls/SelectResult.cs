@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 
 namespace System.Web.UI.WebControls {
     public sealed class SelectResult {

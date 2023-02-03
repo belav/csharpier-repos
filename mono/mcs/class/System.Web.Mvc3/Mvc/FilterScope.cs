@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     public enum FilterScope {
         First = 0,
         Global = 10,

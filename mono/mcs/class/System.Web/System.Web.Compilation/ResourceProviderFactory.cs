@@ -2,7 +2,7 @@
 // System.Web.Compilation.ResourceProviderFactory
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006-2009 Novell, Inc (http://www.novell.com)
 //
@@ -30,13 +30,13 @@
 
 namespace System.Web.Compilation
 {
-	public abstract class ResourceProviderFactory
-	{
-		protected ResourceProviderFactory() { }
+    public abstract class ResourceProviderFactory
+    {
+        protected ResourceProviderFactory() { }
 
-		public abstract IResourceProvider CreateGlobalResourceProvider (string classKey);
-		public abstract IResourceProvider CreateLocalResourceProvider (string virtualPath);
-	}
+        public abstract IResourceProvider CreateGlobalResourceProvider (string classKey);
+        public abstract IResourceProvider CreateLocalResourceProvider (string virtualPath);
+    }
 
 }
 

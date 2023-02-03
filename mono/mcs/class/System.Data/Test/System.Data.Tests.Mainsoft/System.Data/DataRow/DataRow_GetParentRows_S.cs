@@ -39,78 +39,78 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_GetParentRows_S : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataRow_GetParentRows_S tc = new DataRow_GetParentRows_S();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRow_GetParentRows_S");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataRow_GetParentRows_S tc = new DataRow_GetParentRows_S();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataRow_GetParentRows_S");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
+    public void run()
+    {
+        Exception exp = null;
 
-		
-		DataRow dr;
-		DataRow[] drArrExcepted,drArrResult;
-		DataTable dtChild,dtParent;
-		DataSet ds = new DataSet();
+        
+        DataRow dr;
+        DataRow[] drArrExcepted,drArrResult;
+        DataTable dtChild,dtParent;
+        DataSet ds = new DataSet();
 
-		//Create tables
-		dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-		dtParent = GHTUtils.DataProvider.CreateParentDataTable(); 
+        //Create tables
+        dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+        dtParent = GHTUtils.DataProvider.CreateParentDataTable(); 
 
-		//Add tables to dataset
-		ds.Tables.Add(dtChild);
-		ds.Tables.Add(dtParent);
-		dr = dtParent.Rows[0];
-				
-		//Duplicate several rows in order to create Many to Many relation
-		dtParent.ImportRow(dr); 
-		dtParent.ImportRow(dr); 
-		dtParent.ImportRow(dr); 
+        //Add tables to dataset
+        ds.Tables.Add(dtChild);
+        ds.Tables.Add(dtParent);
+        dr = dtParent.Rows[0];
+                
+        //Duplicate several rows in order to create Many to Many relation
+        dtParent.ImportRow(dr); 
+        dtParent.ImportRow(dr); 
+        dtParent.ImportRow(dr); 
 
-		//Add Relation
-		DataRelation dRel = new DataRelation("Parent-Child",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"],false);
-		ds.Relations.Add(dRel);
-		//Get Excepted result
-		drArrExcepted = dtParent.Select("ParentId=" + dr["ParentId"]);
-		dr = dtChild.Select("ParentId=" + dr["ParentId"])[0];
-		//Get Result
-		drArrResult = dr.GetParentRows("Parent-Child");
-		
-		try
-		{
-			BeginCase("GetParentRows_S");
-			base.Compare( drArrResult, drArrExcepted);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-	}
+        //Add Relation
+        DataRelation dRel = new DataRelation("Parent-Child",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"],false);
+        ds.Relations.Add(dRel);
+        //Get Excepted result
+        drArrExcepted = dtParent.Select("ParentId=" + dr["ParentId"]);
+        dr = dtChild.Select("ParentId=" + dr["ParentId"])[0];
+        //Get Result
+        drArrResult = dr.GetParentRows("Parent-Child");
+        
+        try
+        {
+            BeginCase("GetParentRows_S");
+            base.Compare( drArrResult, drArrExcepted);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+    }
 }
 }

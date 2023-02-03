@@ -30,13 +30,13 @@
 
 namespace System.Management.Instrumentation
 {
-	[AttributeUsage (AttributeTargets.Method | 
-			 AttributeTargets.Property | 
-			 AttributeTargets.Field)]
-	public class IgnoreMemberAttribute : Attribute {
-		[MonoTODO]
-		public IgnoreMemberAttribute() 
-		{
-		}
-	}
+    [AttributeUsage (AttributeTargets.Method | 
+             AttributeTargets.Property | 
+             AttributeTargets.Field)]
+    public class IgnoreMemberAttribute : Attribute {
+        [MonoTODO]
+        public IgnoreMemberAttribute() 
+        {
+        }
+    }
 }

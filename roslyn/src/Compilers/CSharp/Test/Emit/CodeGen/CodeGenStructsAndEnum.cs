@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2265,14 +2265,14 @@ using System;
 
 public class NullableTest
 {
-	static decimal? NULL = null;
+    static decimal? NULL = null;
 
-	public static void EqualEqual()
-	{
-		Test.Eval((decimal?)1m == null, false);
-		Test.Eval((decimal?)1m == NULL, false);
-		Test.Eval((decimal?)0 == NULL, false);		
-	}
+    public static void EqualEqual()
+    {
+        Test.Eval((decimal?)1m == null, false);
+        Test.Eval((decimal?)1m == NULL, false);
+        Test.Eval((decimal?)0 == NULL, false);        
+    }
 }
 
 public class Test

@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 public class BaseCollection<T> : IEnumerable<T>
 {
-	protected List<T> items = new List<T> ();
+    protected List<T> items = new List<T> ();
 
-	IEnumerator<T> IEnumerable<T>.GetEnumerator ()
-	{
-		return items.GetEnumerator ();
-	}
+    IEnumerator<T> IEnumerable<T>.GetEnumerator ()
+    {
+        return items.GetEnumerator ();
+    }
 
         IEnumerator IEnumerable.GetEnumerator ()
         {
-		return items.GetEnumerator ();
+        return items.GetEnumerator ();
         }
 }
  
@@ -29,9 +29,9 @@ class X
 {
         public static void Main ()
         {
-		IntList list = new IntList ();
-		foreach (int i in list) {
-			Console.WriteLine (i);
-		}
+        IntList list = new IntList ();
+        foreach (int i in list) {
+            Console.WriteLine (i);
+        }
         }
 }

@@ -10,9 +10,9 @@ public class B
 
 public class C
 {
-	public static void Main ()
-	{
-		B b1 = null;
-		R1::B b2 = b1;
-	}
+    public static void Main ()
+    {
+        B b1 = null;
+        R1::B b2 = b1;
+    }
 }

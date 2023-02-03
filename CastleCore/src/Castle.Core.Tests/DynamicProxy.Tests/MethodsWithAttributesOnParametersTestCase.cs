@@ -14,37 +14,37 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
+    using System;
 
-	using Castle.DynamicProxy.Tests.Classes;
+    using Castle.DynamicProxy.Tests.Classes;
 
-	using Interceptors;
-	using NUnit.Framework;
+    using Interceptors;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class MethodsWithAttributesOnParametersTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void ParametersAreCopiedToProxiedObject()
-		{
-			var requiredObj = (ClassWithAttributesOnMethodParameters)generator.CreateClassProxy(
-				typeof (ClassWithAttributesOnMethodParameters), new RequiredParamInterceptor());
+    [TestFixture]
+    public class MethodsWithAttributesOnParametersTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void ParametersAreCopiedToProxiedObject()
+        {
+            var requiredObj = (ClassWithAttributesOnMethodParameters)generator.CreateClassProxy(
+                typeof (ClassWithAttributesOnMethodParameters), new RequiredParamInterceptor());
 
-			var ex = Assert.Throws<ArgumentException>(() =>
-				requiredObj.MethodOne(-1)
-			);
-			Assert.AreEqual("No default value for argument", ex.Message);
-		}
+            var ex = Assert.Throws<ArgumentException>(() =>
+                requiredObj.MethodOne(-1)
+            );
+            Assert.AreEqual("No default value for argument", ex.Message);
+        }
 
-		[Test]
-		public void CanGetParameterAttributeFromProxiedObject()
-		{
-			var requiredObj = (ClassWithAttributesOnMethodParameters)
-			                                                    generator.CreateClassProxy(
-			                                                    	typeof (ClassWithAttributesOnMethodParameters),
-			                                                    	new RequiredParamInterceptor());
+        [Test]
+        public void CanGetParameterAttributeFromProxiedObject()
+        {
+            var requiredObj = (ClassWithAttributesOnMethodParameters)
+                                                                generator.CreateClassProxy(
+                                                                    typeof (ClassWithAttributesOnMethodParameters),
+                                                                    new RequiredParamInterceptor());
 
-			requiredObj.MethodTwo(null);
-		}
-	}
+            requiredObj.MethodTwo(null);
+        }
+    }
 }

@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // Authors:
-//		Jordi Mas i Hernandez, jordi@ximian.com
+//        Jordi Mas i Hernandez, jordi@ximian.com
 //
 // Copyright (C) Novell Inc., 2004
 //
@@ -31,9 +31,9 @@
 namespace System.Windows.Forms
 {
 
-	public enum Orientation
-	{
-		Horizontal	= 0,
-		Vertical	= 1,
-	}
+    public enum Orientation
+    {
+        Horizontal    = 0,
+        Vertical    = 1,
+    }
 }

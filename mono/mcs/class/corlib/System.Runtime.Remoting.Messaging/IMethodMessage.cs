@@ -34,46 +34,46 @@ using System.Reflection;
 
 namespace System.Runtime.Remoting.Messaging {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IMethodMessage : IMessage {
-		int       ArgCount        {
-			get;
-		}
-		
-		object [] Args            {
-			get;
-		}
-		
-		bool      HasVarArgs      {
-			get;
-		}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IMethodMessage : IMessage {
+        int       ArgCount        {
+            get;
+        }
+        
+        object [] Args            {
+            get;
+        }
+        
+        bool      HasVarArgs      {
+            get;
+        }
 
-		LogicalCallContext LogicalCallContext {
-			get;
-		}
+        LogicalCallContext LogicalCallContext {
+            get;
+        }
 
-		MethodBase MethodBase {
-			get;
-		}
+        MethodBase MethodBase {
+            get;
+        }
 
-		string MethodName {
-			get;
-		}
+        string MethodName {
+            get;
+        }
 
-		object MethodSignature {
-			get;
-		}
+        object MethodSignature {
+            get;
+        }
 
-		string TypeName {
-			get;
-		}
+        string TypeName {
+            get;
+        }
 
-		string Uri {
-			get;
-		}
+        string Uri {
+            get;
+        }
 
-		object GetArg     (int argNum);
-		string GetArgName (int index);
-	}
+        object GetArg     (int argNum);
+        string GetArgName (int index);
+    }
 }
 

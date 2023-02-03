@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Resources;
+using System.ComponentModel.DataAnnotations.Resources;
 using System.Globalization;
 using System.Reflection;
 

@@ -20,15 +20,15 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
 namespace System.Windows.Forms {
-	public interface IWindowTarget {
-		#region Public Instance Methods
-		void OnHandleChange(IntPtr newHandle);
-		void OnMessage(ref Message m);
-		#endregion	// Public Instance Methods
-	}
+    public interface IWindowTarget {
+        #region Public Instance Methods
+        void OnHandleChange(IntPtr newHandle);
+        void OnMessage(ref Message m);
+        #endregion    // Public Instance Methods
+    }
 }

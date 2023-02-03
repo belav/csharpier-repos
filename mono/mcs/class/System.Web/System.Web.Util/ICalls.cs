@@ -2,7 +2,7 @@
 // System.Web.Util.ICalls
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -32,24 +32,24 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 namespace System.Web.Util
 {
-	class ICalls
-	{
-		ICalls () {}
+    class ICalls
+    {
+        ICalls () {}
 
 #if TARGET_DOTNET
-		static public string GetMachineConfigPath () {
-			return System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
-		}
+        static public string GetMachineConfigPath () {
+            return System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
+        }
 #else
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static public string GetMachineConfigPath ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern static public string GetMachineConfigPath ();
 #endif
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static public string GetMachineInstallDirectory ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern static public string GetMachineInstallDirectory ();
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static public bool GetUnmanagedResourcesPtr (Assembly assembly, out IntPtr ptr, out int length);
-	}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern static public bool GetUnmanagedResourcesPtr (Assembly assembly, out IntPtr ptr, out int length);
+    }
 }
 

@@ -14,25 +14,25 @@
 
 namespace Castle.Core.Logging
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class DiagnosticsLoggerFactory : AbstractLoggerFactory
-	{
-		private const string DefaultLogName = "CastleDefaultLogger";
+    public class DiagnosticsLoggerFactory : AbstractLoggerFactory
+    {
+        private const string DefaultLogName = "CastleDefaultLogger";
 
-		public override ILogger Create(string name)
-		{
-			return new DiagnosticsLogger(DefaultLogName, name);
-		}
+        public override ILogger Create(string name)
+        {
+            return new DiagnosticsLogger(DefaultLogName, name);
+        }
 
-		public override ILogger Create(string name, LoggerLevel level)
-		{
-			var logger = new DiagnosticsLogger(DefaultLogName, name);
-			logger.Level = level;
-			return logger;
-		}
-	}
+        public override ILogger Create(string name, LoggerLevel level)
+        {
+            var logger = new DiagnosticsLogger(DefaultLogName, name);
+            logger.Level = level;
+            return logger;
+        }
+    }
 }

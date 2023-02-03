@@ -2,7 +2,7 @@
 // System.Web.Configuration.RegexWorker
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,24 +34,24 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public class RegexWorker
-	{
-		public RegexWorker (HttpBrowserCapabilities browserCaps)
-		{
-		}
+    public class RegexWorker
+    {
+        public RegexWorker (HttpBrowserCapabilities browserCaps)
+        {
+        }
 
-		[MonoTODO ("Mono does not currently need this routine.  Always returns false.")]
-		public bool ProcessRegex (string target, string regexExpression)
-		{
-			return false;
-		}
+        [MonoTODO ("Mono does not currently need this routine.  Always returns false.")]
+        public bool ProcessRegex (string target, string regexExpression)
+        {
+            return false;
+        }
 
-		[MonoTODO ("Mono does not currently need this routine. Not implemented.")]
-		public string this [string key] {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO ("Mono does not currently need this routine. Not implemented.")]
+        public string this [string key] {
+            get { throw new NotImplementedException (); }
+        }
 
-	}
+    }
 
 }
 

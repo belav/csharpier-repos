@@ -1,9 +1,9 @@
 //
 // NameObjectCollectionBaseCas.cs - CAS unit tests for 
-//	System.Collections.Specialized.NameObjectCollectionBase
+//    System.Collections.Specialized.NameObjectCollectionBase
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,41 +39,41 @@ using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class NameObjectCollectionBaseCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class NameObjectCollectionBaseCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			NameObjectCollectionBaseTest unit = new NameObjectCollectionBaseTest ();
-			unit.Constructor_Default ();
-			unit.Constructor_Int ();
-			unit.Constructor_Provider_Comparer ();
-			unit.Constructor_Int_Provider_Comparer ();
-			unit.GetObjectData ();
-			unit.GetAllValues_Type ();
-			unit.GetAllValues ();
-			unit.Constructor_IEqualityComparer ();
-			unit.Constructor_Int_IEqualityComparer ();
-			unit.GetObjectData_IEqualityComparer ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            NameObjectCollectionBaseTest unit = new NameObjectCollectionBaseTest ();
+            unit.Constructor_Default ();
+            unit.Constructor_Int ();
+            unit.Constructor_Provider_Comparer ();
+            unit.Constructor_Int_Provider_Comparer ();
+            unit.GetObjectData ();
+            unit.GetAllValues_Type ();
+            unit.GetAllValues ();
+            unit.Constructor_IEqualityComparer ();
+            unit.Constructor_Int_IEqualityComparer ();
+            unit.GetObjectData_IEqualityComparer ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (UnitTestNameObjectCollectionBase).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (UnitTestNameObjectCollectionBase).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

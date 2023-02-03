@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	public interface IXmlContext : IXmlNamespaceSource
-	{
-		string ChildNamespaceUri { get; }
+    public interface IXmlContext : IXmlNamespaceSource
+    {
+        string ChildNamespaceUri { get; }
 
-		IXmlContext Clone();
-		XmlName GetDefaultXsiType(Type clrType);
-		IEnumerable<IXmlIncludedType> GetIncludedTypes(Type baseType);
-		bool IsReservedNamespaceUri(string namespaceUri);
+        IXmlContext Clone();
+        XmlName GetDefaultXsiType(Type clrType);
+        IEnumerable<IXmlIncludedType> GetIncludedTypes(Type baseType);
+        bool IsReservedNamespaceUri(string namespaceUri);
 
-		void AddVariable(XPathVariableAttribute attribute);
-		void AddFunction(XPathFunctionAttribute attribute);
-		void Enlist(CompiledXPath path);
-	}
+        void AddVariable(XPathVariableAttribute attribute);
+        void AddFunction(XPathFunctionAttribute attribute);
+        void Enlist(CompiledXPath path);
+    }
 }

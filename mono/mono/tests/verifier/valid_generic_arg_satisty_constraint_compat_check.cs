@@ -2,8 +2,8 @@ using System;
 
 
 public class SerializerItemProxy<TBaseClass, TActualClass> : SerializerProxy<TActualClass>
-	where TBaseClass : class
-	where TActualClass : class, TBaseClass
+    where TBaseClass : class
+    where TActualClass : class, TBaseClass
 {
 
 }

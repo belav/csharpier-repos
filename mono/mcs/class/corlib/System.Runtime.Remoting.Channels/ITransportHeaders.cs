@@ -33,11 +33,11 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface ITransportHeaders
-	{
-		object this [object key] { get; set; }
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface ITransportHeaders
+    {
+        object this [object key] { get; set; }
 
-		IEnumerator GetEnumerator();
-	}
+        IEnumerator GetEnumerator();
+    }
 }

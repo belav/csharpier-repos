@@ -2,7 +2,7 @@
 // AuthorityKeyIdentifierExtension.cs: Handles X.509 AuthorityKeyIdentifier extensions.
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005,2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,102 +35,102 @@ using Mono.Security.X509;
 
 namespace Mono.Security.X509.Extensions {
 
-	/*
-	 * id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }
-	 * 
-	 * AuthorityKeyIdentifier ::= SEQUENCE {
-	 *    keyIdentifier             [0] KeyIdentifier           OPTIONAL,
-	 *    authorityCertIssuer       [1] GeneralNames            OPTIONAL,
-	 *    authorityCertSerialNumber [2] CertificateSerialNumber OPTIONAL  }
-	 * 
-	 * KeyIdentifier ::= OCTET STRING
-	 */
+    /*
+     * id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }
+     * 
+     * AuthorityKeyIdentifier ::= SEQUENCE {
+     *    keyIdentifier             [0] KeyIdentifier           OPTIONAL,
+     *    authorityCertIssuer       [1] GeneralNames            OPTIONAL,
+     *    authorityCertSerialNumber [2] CertificateSerialNumber OPTIONAL  }
+     * 
+     * KeyIdentifier ::= OCTET STRING
+     */
 
 #if INSIDE_SYSTEM
-	internal
+    internal
 #else
-	public
+    public
 #endif
-	class AuthorityKeyIdentifierExtension : X509Extension {
+    class AuthorityKeyIdentifierExtension : X509Extension {
 
-		private byte[] aki;
+        private byte[] aki;
 
-		public AuthorityKeyIdentifierExtension () : base () 
-		{
-			extnOid = "2.5.29.35";
-		}
+        public AuthorityKeyIdentifierExtension () : base () 
+        {
+            extnOid = "2.5.29.35";
+        }
 
-		public AuthorityKeyIdentifierExtension (ASN1 asn1) : base (asn1)
-		{
-		}
+        public AuthorityKeyIdentifierExtension (ASN1 asn1) : base (asn1)
+        {
+        }
 
-		public AuthorityKeyIdentifierExtension (X509Extension extension) : base (extension)
-		{
-		}
+        public AuthorityKeyIdentifierExtension (X509Extension extension) : base (extension)
+        {
+        }
 
-		protected override void Decode () 
-		{
-			ASN1 sequence = new ASN1 (extnValue.Value);
-			if (sequence.Tag != 0x30)
-				throw new ArgumentException ("Invalid AuthorityKeyIdentifier extension");
-			for (int i=0; i < sequence.Count; i++) {
-				ASN1 el = sequence [i];
-				switch (el.Tag) {
-					case 0x80:
-						aki = el.Value;
-						break;
-					default:
-						// don't throw on stuff we don't yet support
-						// e.g. authorityCertIssuer/authorityCertSerialNumber
-						break;
-				}
-			}
-		}
+        protected override void Decode () 
+        {
+            ASN1 sequence = new ASN1 (extnValue.Value);
+            if (sequence.Tag != 0x30)
+                throw new ArgumentException ("Invalid AuthorityKeyIdentifier extension");
+            for (int i=0; i < sequence.Count; i++) {
+                ASN1 el = sequence [i];
+                switch (el.Tag) {
+                    case 0x80:
+                        aki = el.Value;
+                        break;
+                    default:
+                        // don't throw on stuff we don't yet support
+                        // e.g. authorityCertIssuer/authorityCertSerialNumber
+                        break;
+                }
+            }
+        }
 
-		protected override void Encode ()
-		{
-			ASN1 seq = new ASN1 (0x30);
-			if (aki == null) {
-				throw new InvalidOperationException ("Invalid AuthorityKeyIdentifier extension");
-			}
+        protected override void Encode ()
+        {
+            ASN1 seq = new ASN1 (0x30);
+            if (aki == null) {
+                throw new InvalidOperationException ("Invalid AuthorityKeyIdentifier extension");
+            }
 
-			seq.Add (new ASN1 (0x80, aki));
-			extnValue = new ASN1 (0x04);
-			extnValue.Add (seq);
-		}
+            seq.Add (new ASN1 (0x80, aki));
+            extnValue = new ASN1 (0x04);
+            extnValue.Add (seq);
+        }
 
-		public override string Name {
-			get { return "Authority Key Identifier"; }
-		}
+        public override string Name {
+            get { return "Authority Key Identifier"; }
+        }
 
-		public byte[] Identifier {
-			get {
-				if (aki == null)
-					return null;
-				return (byte[]) aki.Clone (); 
-			}
-			set { aki = value; }
-		}
+        public byte[] Identifier {
+            get {
+                if (aki == null)
+                    return null;
+                return (byte[]) aki.Clone (); 
+            }
+            set { aki = value; }
+        }
 
-		public override string ToString () 
-		{
-			StringBuilder sb = new StringBuilder ();
-			if (aki != null) {
-				// [0] KeyIdentifier
-				int x = 0;
-				sb.Append ("KeyID=");
-				while (x < aki.Length) {
-					sb.Append (aki [x].ToString ("X2", CultureInfo.InvariantCulture));
-					if (x % 2 == 1)
-						sb.Append (" ");
-					x++;
-				}
-				// [1] GeneralNames
-				// TODO
-				// [2] CertificateSerialNumber
-				// TODO
-			}
-			return sb.ToString ();
-		}
-	}
+        public override string ToString () 
+        {
+            StringBuilder sb = new StringBuilder ();
+            if (aki != null) {
+                // [0] KeyIdentifier
+                int x = 0;
+                sb.Append ("KeyID=");
+                while (x < aki.Length) {
+                    sb.Append (aki [x].ToString ("X2", CultureInfo.InvariantCulture));
+                    if (x % 2 == 1)
+                        sb.Append (" ");
+                    x++;
+                }
+                // [1] GeneralNames
+                // TODO
+                // [2] CertificateSerialNumber
+                // TODO
+            }
+            return sb.ToString ();
+        }
+    }
 }

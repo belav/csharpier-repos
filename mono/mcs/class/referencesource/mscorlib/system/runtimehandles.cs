@@ -1353,7 +1353,7 @@ namespace System
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-		[SuppressUnmanagedCodeSecurity]
+        [SuppressUnmanagedCodeSecurity]
         private extern static void GetMethodInstantiation(RuntimeMethodHandleInternal method, ObjectHandleOnStack types, bool fAsRuntimeTypeArray);
 
         [System.Security.SecuritySafeCritical]  // auto-generated

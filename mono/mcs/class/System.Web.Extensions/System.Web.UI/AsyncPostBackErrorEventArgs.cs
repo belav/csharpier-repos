@@ -1,4 +1,4 @@
-﻿//
+//
 // AsyncPostBackErrorEventArgs.cs
 //
 // Author:
@@ -33,19 +33,19 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public class AsyncPostBackErrorEventArgs : EventArgs
-	{
-		Exception _exception;
+    public class AsyncPostBackErrorEventArgs : EventArgs
+    {
+        Exception _exception;
 
-		public AsyncPostBackErrorEventArgs (Exception exception)
-		{
-			_exception = exception;
-		}
+        public AsyncPostBackErrorEventArgs (Exception exception)
+        {
+            _exception = exception;
+        }
 
-		public Exception Exception {
-			get {
-				return _exception;
-			}
-		}
-	}
+        public Exception Exception {
+            get {
+                return _exception;
+            }
+        }
+    }
 }

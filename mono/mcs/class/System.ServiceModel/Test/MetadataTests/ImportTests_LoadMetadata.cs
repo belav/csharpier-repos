@@ -37,27 +37,27 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace MonoTests.System.ServiceModel.MetadataTests {
-	
-	/*
-	 * Load the metadata from a file / embedded resource.
-	 * 
-	 */
-	[TestFixture]
-	public class ImportTests_LoadMetadata : ImportTests {
+    
+    /*
+     * Load the metadata from a file / embedded resource.
+     * 
+     */
+    [TestFixture]
+    public class ImportTests_LoadMetadata : ImportTests {
 
-		public override TestContext Context {
-			get { return TestContext.LoadMetadataContext; }
-		}
+        public override TestContext Context {
+            get { return TestContext.LoadMetadataContext; }
+        }
 
-		[Test]
-		public virtual void BasicHttp_Mtom_EmbeddedPolicy ()
-		{
-			TestLabel label;
-			var doc = GetMetadata ("BasicHttp_Mtom_EmbeddedPolicy", out label);
-			
-			BindingTestAssertions.BasicHttpBinding (
-				Context, doc, WSMessageEncoding.Mtom, label);
-		}
-	}
+        [Test]
+        public virtual void BasicHttp_Mtom_EmbeddedPolicy ()
+        {
+            TestLabel label;
+            var doc = GetMetadata ("BasicHttp_Mtom_EmbeddedPolicy", out label);
+            
+            BindingTestAssertions.BasicHttpBinding (
+                Context, doc, WSMessageEncoding.Mtom, label);
+        }
+    }
 }
 #endif

@@ -1,8 +1,8 @@
-﻿// 
+// 
 // ExceptionHandler.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,17 +27,17 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class ExceptionHandler : Node {
-		public ExceptionHandler () : base (NodeType.ExceptionHandler)
-		{
-		}
+    class ExceptionHandler : Node {
+        public ExceptionHandler () : base (NodeType.ExceptionHandler)
+        {
+        }
 
-		public NodeType HandlerType { get; set; }
-		public Block TryStartBlock { get; set; }
-		public Block BlockAfterTryEnd { get; set; }
-		public Block HandlerStartBlock { get; set; }
-		public Block BlockAfterHandlerEnd { get; set; }
-		public Block FilterExpression { get; set; }
-		public TypeNode FilterType { get; set; }
-	}
+        public NodeType HandlerType { get; set; }
+        public Block TryStartBlock { get; set; }
+        public Block BlockAfterTryEnd { get; set; }
+        public Block HandlerStartBlock { get; set; }
+        public Block BlockAfterHandlerEnd { get; set; }
+        public Block FilterExpression { get; set; }
+        public TypeNode FilterType { get; set; }
+    }
 }

@@ -31,22 +31,22 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel
 {
-	public class SignatureVerificationFailedException : Exception
-	{
-		public SignatureVerificationFailedException()
-			: base("ID4038: Signature verification failed.")
-		{ }
+    public class SignatureVerificationFailedException : Exception
+    {
+        public SignatureVerificationFailedException()
+            : base("ID4038: Signature verification failed.")
+        { }
 
-		public SignatureVerificationFailedException(string message)
-			: base(message)
-		{ }
+        public SignatureVerificationFailedException(string message)
+            : base(message)
+        { }
 
-		public SignatureVerificationFailedException(string message, Exception inner)
-			: base(message, inner)
-		{ }
+        public SignatureVerificationFailedException(string message, Exception inner)
+            : base(message, inner)
+        { }
 
-		public SignatureVerificationFailedException(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{ }
-	}
+        public SignatureVerificationFailedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        { }
+    }
 }

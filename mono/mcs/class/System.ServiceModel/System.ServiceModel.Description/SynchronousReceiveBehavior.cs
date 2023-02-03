@@ -1,8 +1,8 @@
-﻿//
+//
 // SynchronousReceiveBehavior.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,27 +32,27 @@ using System.Text;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class SynchronousReceiveBehavior : IEndpointBehavior
-	{
-		#region IEndpointBehavior Members
+    [MonoTODO]
+    public class SynchronousReceiveBehavior : IEndpointBehavior
+    {
+        #region IEndpointBehavior Members
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters) {
+            throw new NotImplementedException ();
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint, System.ServiceModel.Dispatcher.EndpointDispatcher dispatcher) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint, System.ServiceModel.Dispatcher.EndpointDispatcher dispatcher) {
+            throw new NotImplementedException ();
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint, System.ServiceModel.Dispatcher.ClientRuntime behavior) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint, System.ServiceModel.Dispatcher.ClientRuntime behavior) {
+            throw new NotImplementedException ();
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint) {
+            throw new NotImplementedException ();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

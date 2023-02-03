@@ -5,10 +5,10 @@ using System;
 
 public class Test
 {
-	private delegate object Conv(string str);
+    private delegate object Conv(string str);
 
-	public static void Main()
-	{
-		Conv c = new Conv(int.Parse);
-	}
+    public static void Main()
+    {
+        Conv c = new Conv(int.Parse);
+    }
 }

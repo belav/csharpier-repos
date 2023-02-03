@@ -2,7 +2,7 @@
 // AppDomainManagerTest.cs - NUnit Test Cases for AppDomainManager
 //
 // Author:
-//	Sebastien Pouliot (sebastien@ximian.com)
+//    Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -35,26 +35,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System {
 
-	[TestFixture]
-	public class AppDomainManagerTest {
+    [TestFixture]
+    public class AppDomainManagerTest {
 
-		class ContreteSecurityState : SecurityState {
-			public override void EnsureState ()
-			{
-				throw new NotImplementedException ();
-			}
-		}
+        class ContreteSecurityState : SecurityState {
+            public override void EnsureState ()
+            {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[Test]
-		public void CheckSecuritySettings ()
-		{
-			AppDomainManager adm = new AppDomainManager ();
-			Assert.IsFalse (adm.CheckSecuritySettings (null), "null");
+        [Test]
+        public void CheckSecuritySettings ()
+        {
+            AppDomainManager adm = new AppDomainManager ();
+            Assert.IsFalse (adm.CheckSecuritySettings (null), "null");
 
-			ContreteSecurityState ss = new ContreteSecurityState ();
-			Assert.IsFalse (adm.CheckSecuritySettings (ss), "ContreteSecurityState");
-		}
-	}
+            ContreteSecurityState ss = new ContreteSecurityState ();
+            Assert.IsFalse (adm.CheckSecuritySettings (ss), "ContreteSecurityState");
+        }
+    }
 }
 
 #endif // MONO_FEATURE_MULTIPLE_APPDOMAINS

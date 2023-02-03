@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil {
 
-	internal sealed class SentinelType : TypeSpecification {
+    internal sealed class SentinelType : TypeSpecification {
 
-		public SentinelType (TypeReference elementType) : base (elementType)
-		{
-		}
-	}
+        public SentinelType (TypeReference elementType) : base (elementType)
+        {
+        }
+    }
 }

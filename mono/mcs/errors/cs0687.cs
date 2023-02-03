@@ -4,8 +4,8 @@
 using foo = System.Console;
 
 class X {
-	static void Main ()
-	{
-		foo::WriteLine ("hello");
-	}
+    static void Main ()
+    {
+        foo::WriteLine ("hello");
+    }
 }

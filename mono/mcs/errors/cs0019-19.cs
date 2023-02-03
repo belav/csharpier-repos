@@ -3,5 +3,5 @@
 
 class S
 {
-	const decimal d = 0f - 1m;
+    const decimal d = 0f - 1m;
 }

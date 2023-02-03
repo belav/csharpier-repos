@@ -29,30 +29,30 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public interface IChannelListener : ICommunicationObject
-	{
-		Uri Uri { get; }
+    public interface IChannelListener : ICommunicationObject
+    {
+        Uri Uri { get; }
 
-		T GetProperty<T> () where T : class;
+        T GetProperty<T> () where T : class;
 
-		IAsyncResult BeginWaitForChannel (TimeSpan timeout,
-			AsyncCallback callback, object state);
-		bool EndWaitForChannel (IAsyncResult result);
-		bool WaitForChannel (TimeSpan timeout);
+        IAsyncResult BeginWaitForChannel (TimeSpan timeout,
+            AsyncCallback callback, object state);
+        bool EndWaitForChannel (IAsyncResult result);
+        bool WaitForChannel (TimeSpan timeout);
 
-	}
+    }
 
-	public interface IChannelListener<TChannel> : IChannelListener
-		where TChannel : class, IChannel
-	{
-		TChannel AcceptChannel ();
-		TChannel AcceptChannel (TimeSpan timeout);
+    public interface IChannelListener<TChannel> : IChannelListener
+        where TChannel : class, IChannel
+    {
+        TChannel AcceptChannel ();
+        TChannel AcceptChannel (TimeSpan timeout);
 
-		IAsyncResult BeginAcceptChannel (AsyncCallback callback,
-			object state);
-		IAsyncResult BeginAcceptChannel (TimeSpan timeout,
-			AsyncCallback callback, object state);
+        IAsyncResult BeginAcceptChannel (AsyncCallback callback,
+            object state);
+        IAsyncResult BeginAcceptChannel (TimeSpan timeout,
+            AsyncCallback callback, object state);
 
-		TChannel EndAcceptChannel (IAsyncResult result);
-	}
+        TChannel EndAcceptChannel (IAsyncResult result);
+    }
 }

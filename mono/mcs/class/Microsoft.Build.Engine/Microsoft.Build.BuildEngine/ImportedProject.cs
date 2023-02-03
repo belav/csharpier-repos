@@ -30,50 +30,50 @@ using System.IO;
 using System.Xml;
 
 namespace Microsoft.Build.BuildEngine {
-	internal class ImportedProject {
-	
-		DateTime	lastWrite;
-		XmlDocument	xmlDocument;
-		int		size;
-		string		fullFileName;
-	
-		public ImportedProject ()
-		{
-		}
-		
-		public void Load (string filename)
-		{
-			if (filename == null)
-				throw new ArgumentNullException ("filename");
-			
-			StreamReader sr = new StreamReader (filename);
-			try {
-				string text = sr.ReadToEnd ();
-				size = text.Length;
-				xmlDocument = new XmlDocument ();
-				xmlDocument.LoadXml (text);
-				lastWrite = File.GetLastWriteTime (filename);
-				fullFileName = filename;
-			}
-			finally {
-				sr.Close ();
-			}
-		}
-		
-		public XmlDocument XmlDocument {
-			get { return xmlDocument; }
-		}
-		
-		public DateTime LastWrite {
-			get { return lastWrite; }
-		}
-		
-		public int Size {
-			get { return size; }
-		}
-		
-		public string FullFileName {
-			get { return fullFileName; }
-		}
-	}
+    internal class ImportedProject {
+    
+        DateTime    lastWrite;
+        XmlDocument    xmlDocument;
+        int        size;
+        string        fullFileName;
+    
+        public ImportedProject ()
+        {
+        }
+        
+        public void Load (string filename)
+        {
+            if (filename == null)
+                throw new ArgumentNullException ("filename");
+            
+            StreamReader sr = new StreamReader (filename);
+            try {
+                string text = sr.ReadToEnd ();
+                size = text.Length;
+                xmlDocument = new XmlDocument ();
+                xmlDocument.LoadXml (text);
+                lastWrite = File.GetLastWriteTime (filename);
+                fullFileName = filename;
+            }
+            finally {
+                sr.Close ();
+            }
+        }
+        
+        public XmlDocument XmlDocument {
+            get { return xmlDocument; }
+        }
+        
+        public DateTime LastWrite {
+            get { return lastWrite; }
+        }
+        
+        public int Size {
+            get { return size; }
+        }
+        
+        public string FullFileName {
+            get { return fullFileName; }
+        }
+    }
 }

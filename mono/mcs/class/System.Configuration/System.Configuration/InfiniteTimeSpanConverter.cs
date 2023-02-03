@@ -2,7 +2,7 @@
 // System.Configuration.InfiniteTimeSpanConverter.cs
 //
 // Authors:
-// 	Chris Toshok (toshok@ximian.com)
+//     Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,34 +31,34 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public sealed class InfiniteTimeSpanConverter: ConfigurationConverterBase
-	{
-		public InfiniteTimeSpanConverter ()
-		{
-		}
+    public sealed class InfiniteTimeSpanConverter: ConfigurationConverterBase
+    {
+        public InfiniteTimeSpanConverter ()
+        {
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			if ((string)data == "Infinite")
-				return TimeSpan.MaxValue;
-			else
-				return TimeSpan.Parse ((string)data);
-		}
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            if ((string)data == "Infinite")
+                return TimeSpan.MaxValue;
+            else
+                return TimeSpan.Parse ((string)data);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			/* don't use "value is TimeSpan" here, since
-			 * we want to generate both a NRE on null
-			 * value, and ArgumentException on non-null,
-			 * but non-TimeSpan. */
-			if (value.GetType () != typeof (TimeSpan))
-				throw new ArgumentException ();
+        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        {
+            /* don't use "value is TimeSpan" here, since
+             * we want to generate both a NRE on null
+             * value, and ArgumentException on non-null,
+             * but non-TimeSpan. */
+            if (value.GetType () != typeof (TimeSpan))
+                throw new ArgumentException ();
 
-			if (((TimeSpan)value) == TimeSpan.MaxValue)
-				return "Infinite";
-			else
-				return value.ToString();
-		}
-	}
+            if (((TimeSpan)value) == TimeSpan.MaxValue)
+                return "Infinite";
+            else
+                return value.ToString();
+        }
+    }
 }
 

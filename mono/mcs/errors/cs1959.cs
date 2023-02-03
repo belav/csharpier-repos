@@ -7,5 +7,5 @@ class C
 
 class C<T> where T : C
 {
-	const T t = null;
+    const T t = null;
 }

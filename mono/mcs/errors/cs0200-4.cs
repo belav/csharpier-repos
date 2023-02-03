@@ -3,13 +3,13 @@
 
 public class A
 {
-	public int X { get; }
+    public int X { get; }
 }
 
 public class B : A
 {
-	public B ()
-	{
-		base.X = 1;
-	}
+    public B ()
+    {
+        base.X = 1;
+    }
 }

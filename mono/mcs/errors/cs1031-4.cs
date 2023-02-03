@@ -3,5 +3,5 @@
 
 enum E : this
 {
-	a = 1
+    a = 1
 }

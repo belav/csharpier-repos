@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataRelationship
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,35 +34,35 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-	public sealed class DesignerDataRelationship
-	{
-		string name;
-		ICollection parent_columns, child_columns;
-		DesignerDataTable child_table;
+    public sealed class DesignerDataRelationship
+    {
+        string name;
+        ICollection parent_columns, child_columns;
+        DesignerDataTable child_table;
 
-		public DesignerDataRelationship (string name, ICollection parentColumns, DesignerDataTable childTable, ICollection childColumns)
-		{
-			this.name = name;
-			this.parent_columns = parentColumns;
-			this.child_table = childTable;
-			this.child_columns = childColumns;
-		}
+        public DesignerDataRelationship (string name, ICollection parentColumns, DesignerDataTable childTable, ICollection childColumns)
+        {
+            this.name = name;
+            this.parent_columns = parentColumns;
+            this.child_table = childTable;
+            this.child_columns = childColumns;
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name {
+            get { return name; }
+        }
 
-		public ICollection ParentColumns {
-			get { return parent_columns; }
-		}
+        public ICollection ParentColumns {
+            get { return parent_columns; }
+        }
 
-		public DesignerDataTable ChildTable {
-			get { return child_table; }
-		}
+        public DesignerDataTable ChildTable {
+            get { return child_table; }
+        }
 
-		public ICollection ChildColumns {
-			get { return child_columns; }
-		}
-	}
+        public ICollection ChildColumns {
+            get { return child_columns; }
+        }
+    }
 }
 

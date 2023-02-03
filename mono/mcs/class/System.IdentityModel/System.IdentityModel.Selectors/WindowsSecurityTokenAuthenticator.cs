@@ -2,7 +2,7 @@
 // WindowsSecurityTokenAuthenticator.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,30 +32,30 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Selectors
 {
-	public class WindowsSecurityTokenAuthenticator
-		: SecurityTokenAuthenticator
-	{
-		[MonoTODO]
-		public WindowsSecurityTokenAuthenticator ()
-		{
-		}
+    public class WindowsSecurityTokenAuthenticator
+        : SecurityTokenAuthenticator
+    {
+        [MonoTODO]
+        public WindowsSecurityTokenAuthenticator ()
+        {
+        }
 
-		[MonoTODO]
-		public WindowsSecurityTokenAuthenticator (bool includeWindowsGroups)
-		{
-		}
+        [MonoTODO]
+        public WindowsSecurityTokenAuthenticator (bool includeWindowsGroups)
+        {
+        }
 
-		[MonoTODO]
-		protected override bool CanValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override bool CanValidateTokenCore (SecurityToken token)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected override ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override ReadOnlyCollection<IAuthorizationPolicy>
+            ValidateTokenCore (SecurityToken token)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

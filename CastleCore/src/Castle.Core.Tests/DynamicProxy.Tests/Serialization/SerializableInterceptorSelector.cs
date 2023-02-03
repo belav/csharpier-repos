@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
 
 namespace Castle.DynamicProxy.Tests.Serialization
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	[Serializable]
-	public class SerializableInterceptorSelector : IInterceptorSelector
-	{
-		public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
-		{
-			return interceptors;
-		}
-	}
+    [Serializable]
+    public class SerializableInterceptorSelector : IInterceptorSelector
+    {
+        public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
+        {
+            return interceptors;
+        }
+    }
 }
 
 #endif

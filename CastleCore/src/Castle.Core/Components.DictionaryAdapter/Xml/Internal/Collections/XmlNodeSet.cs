@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,28 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	internal class XmlNodeSet<T> : SetProjection<T>, IXmlNodeSource
-	{
-		public XmlNodeSet
-		(
-			IXmlNode               parentNode,
-			IDictionaryAdapter     parentObject,
-			IXmlCollectionAccessor accessor
-		)
-		: base
-		(
-			new XmlCollectionAdapter<T>
-			(
-				parentNode,
-				parentObject,
-				accessor
-			)
-		)
-		{ }
+    internal class XmlNodeSet<T> : SetProjection<T>, IXmlNodeSource
+    {
+        public XmlNodeSet
+        (
+            IXmlNode               parentNode,
+            IDictionaryAdapter     parentObject,
+            IXmlCollectionAccessor accessor
+        )
+        : base
+        (
+            new XmlCollectionAdapter<T>
+            (
+                parentNode,
+                parentObject,
+                accessor
+            )
+        )
+        { }
 
-		public IXmlNode Node
-		{
-		    get { return ((IXmlNodeSource)Adapter).Node; }
-		}
-	}
+        public IXmlNode Node
+        {
+            get { return ((IXmlNodeSource)Adapter).Node; }
+        }
+    }
 }

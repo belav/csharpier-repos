@@ -36,56 +36,56 @@ using System.Drawing.Imaging;
 
 namespace MonoSamples.System.Drawing
 {
-	public class BmpPaint
-	{
-		static public void CreateBitmap (string filename, ImageFormat imgFmt) {
-			Bitmap	bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb);
-			Console.WriteLine ("Bitmap created OK {0}", bmp != null);
-			if ( bmp != null) {
-				Console.WriteLine ("Bitmap Pixelformat {0}", bmp.PixelFormat);
-			}
+    public class BmpPaint
+    {
+        static public void CreateBitmap (string filename, ImageFormat imgFmt) {
+            Bitmap    bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb);
+            Console.WriteLine ("Bitmap created OK {0}", bmp != null);
+            if ( bmp != null) {
+                Console.WriteLine ("Bitmap Pixelformat {0}", bmp.PixelFormat);
+            }
 
-			Graphics gr = Graphics.FromImage (bmp);
-			Console.WriteLine ("Graphics created OK {0}", gr != null);
-			if (gr != null) {
-				Pen p = new Pen (Color.Red, 2);
-				gr.DrawLine (p, 10.0F, 10.0F, 90.0F, 90.0F);
-				gr.DrawRectangle (p, 10.0F, 10.0F, 80.0F, 80.0F);
-				p.Dispose ();
-			}
-			bmp.Save (filename, imgFmt);
-			gr.Dispose ();
-			bmp.Dispose ();
-			Console.WriteLine ("Bitmap stored to " + filename);
-		}
+            Graphics gr = Graphics.FromImage (bmp);
+            Console.WriteLine ("Graphics created OK {0}", gr != null);
+            if (gr != null) {
+                Pen p = new Pen (Color.Red, 2);
+                gr.DrawLine (p, 10.0F, 10.0F, 90.0F, 90.0F);
+                gr.DrawRectangle (p, 10.0F, 10.0F, 80.0F, 80.0F);
+                p.Dispose ();
+            }
+            bmp.Save (filename, imgFmt);
+            gr.Dispose ();
+            bmp.Dispose ();
+            Console.WriteLine ("Bitmap stored to " + filename);
+        }
 
-		static public void PaintOnBitmap (string filename, string newname, ImageFormat imgFmt) {
-			Bitmap	bmp = new Bitmap (filename);
-			Console.WriteLine ("Bitmap read OK {0}", bmp != null);
-			if (bmp != null) {
-				Console.WriteLine ("Bitmap Pixelformat {0}", bmp.PixelFormat);
-			}
-			Graphics gr = Graphics.FromImage (bmp);
-			Console.WriteLine ("Graphics created OK {0}", gr != null);
-			if (gr != null) {
-				Pen p = new Pen (Color.Blue, 2);
-				gr.DrawLine (p, 20.0F, 20.0F, 80.0F, 80.0F);
-				gr.DrawRectangle (p, 20.0F, 20.0F, 60.0F, 60.0F);
-				p.Dispose ();
-			}
-			bmp.Save (newname, imgFmt);
-			gr.Dispose ();
-			bmp.Dispose ();
-			Console.WriteLine ("Modified Bitmap stored to " + newname);
-		}
-	
-		static public void Main (string[] args) {
-			CreateBitmap ("BmpPaint.bmp", ImageFormat.Bmp);
-			PaintOnBitmap ("BmpPaint.bmp", "Bmp-Painted.bmp", ImageFormat.Bmp);
-			CreateBitmap ("BmpPaint.jpg", ImageFormat.Jpeg);
-			PaintOnBitmap ("BmpPaint.jpg", "Bmp-Painted.jpg", ImageFormat.Jpeg);
-			CreateBitmap ("BmpPaint.png", ImageFormat.Png);
-			PaintOnBitmap ("BmpPaint.png", "Bmp-Painted.png", ImageFormat.Png);
-		}
-	}
+        static public void PaintOnBitmap (string filename, string newname, ImageFormat imgFmt) {
+            Bitmap    bmp = new Bitmap (filename);
+            Console.WriteLine ("Bitmap read OK {0}", bmp != null);
+            if (bmp != null) {
+                Console.WriteLine ("Bitmap Pixelformat {0}", bmp.PixelFormat);
+            }
+            Graphics gr = Graphics.FromImage (bmp);
+            Console.WriteLine ("Graphics created OK {0}", gr != null);
+            if (gr != null) {
+                Pen p = new Pen (Color.Blue, 2);
+                gr.DrawLine (p, 20.0F, 20.0F, 80.0F, 80.0F);
+                gr.DrawRectangle (p, 20.0F, 20.0F, 60.0F, 60.0F);
+                p.Dispose ();
+            }
+            bmp.Save (newname, imgFmt);
+            gr.Dispose ();
+            bmp.Dispose ();
+            Console.WriteLine ("Modified Bitmap stored to " + newname);
+        }
+    
+        static public void Main (string[] args) {
+            CreateBitmap ("BmpPaint.bmp", ImageFormat.Bmp);
+            PaintOnBitmap ("BmpPaint.bmp", "Bmp-Painted.bmp", ImageFormat.Bmp);
+            CreateBitmap ("BmpPaint.jpg", ImageFormat.Jpeg);
+            PaintOnBitmap ("BmpPaint.jpg", "Bmp-Painted.jpg", ImageFormat.Jpeg);
+            CreateBitmap ("BmpPaint.png", ImageFormat.Png);
+            PaintOnBitmap ("BmpPaint.png", "Bmp-Painted.png", ImageFormat.Png);
+        }
+    }
 }

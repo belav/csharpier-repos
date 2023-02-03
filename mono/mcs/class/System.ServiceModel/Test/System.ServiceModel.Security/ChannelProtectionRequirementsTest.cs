@@ -2,7 +2,7 @@
 // ChannelProtectionRequirementsTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -40,29 +40,29 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Security
 {
-	[TestFixture]
-	public class ChannelProtectionRequirementsTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			ChannelProtectionRequirements r =
-				new ChannelProtectionRequirements ();
-			Assert.AreEqual (false, r.IsReadOnly, "#1");
-			Assert.IsNotNull (r.IncomingSignatureParts, "#2");
-			Assert.IsNotNull (r.IncomingEncryptionParts, "#3");
-			Assert.IsNotNull (r.OutgoingSignatureParts, "#4");
-			Assert.IsNotNull (r.OutgoingEncryptionParts, "#5");
-		}
+    [TestFixture]
+    public class ChannelProtectionRequirementsTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            ChannelProtectionRequirements r =
+                new ChannelProtectionRequirements ();
+            Assert.AreEqual (false, r.IsReadOnly, "#1");
+            Assert.IsNotNull (r.IncomingSignatureParts, "#2");
+            Assert.IsNotNull (r.IncomingEncryptionParts, "#3");
+            Assert.IsNotNull (r.OutgoingSignatureParts, "#4");
+            Assert.IsNotNull (r.OutgoingEncryptionParts, "#5");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddToReadOnly ()
-		{
-			ChannelProtectionRequirements r =
-				new ChannelProtectionRequirements ();
-			r.MakeReadOnly ();
-			r.Add (new ChannelProtectionRequirements ());
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (InvalidOperationException))]
+        public void AddToReadOnly ()
+        {
+            ChannelProtectionRequirements r =
+                new ChannelProtectionRequirements ();
+            r.MakeReadOnly ();
+            r.Add (new ChannelProtectionRequirements ());
+        }
+    }
 }

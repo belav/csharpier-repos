@@ -35,51 +35,51 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class ResolveCriteria11 : IXmlSerializable
-	{
-		public static ResolveCriteria11 FromResolveCriteria (ResolveCriteria resolveCriteria)
-		{
-			return new ResolveCriteria11 (resolveCriteria);
-		}
+    [XmlSchemaProvider ("GetSchema")]
+    public class ResolveCriteria11 : IXmlSerializable
+    {
+        public static ResolveCriteria11 FromResolveCriteria (ResolveCriteria resolveCriteria)
+        {
+            return new ResolveCriteria11 (resolveCriteria);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
-		static XmlSchema schema = ResolveCriteria.BuildSchema (version);
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
+        static XmlSchema schema = ResolveCriteria.BuildSchema (version);
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			EndpointAddress10.GetSchema (schemaSet);
-			schemaSet.Add (schema);
-			return new XmlQualifiedName ("ResolveType", version.Namespace);
-		}
+        public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
+        {
+            EndpointAddress10.GetSchema (schemaSet);
+            schemaSet.Add (schema);
+            return new XmlQualifiedName ("ResolveType", version.Namespace);
+        }
 
-		internal ResolveCriteria11 (ResolveCriteria source)
-		{
-			this.source = source;
-		}
-		
-		ResolveCriteria source;
+        internal ResolveCriteria11 (ResolveCriteria source)
+        {
+            this.source = source;
+        }
+        
+        ResolveCriteria source;
 
-		public XmlSchema GetSchema ()
-		{
-			return null;
-		}
+        public XmlSchema GetSchema ()
+        {
+            return null;
+        }
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = ResolveCriteria.ReadXml (reader, version);
-		}
+        public void ReadXml (XmlReader reader)
+        {
+            source = ResolveCriteria.ReadXml (reader, version);
+        }
 
-		public ResolveCriteria ToResolveCriteria ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method first before calling this method");
-			return source;
-		}
+        public ResolveCriteria ToResolveCriteria ()
+        {
+            if (source == null)
+                throw new InvalidOperationException ("Call ReadXml method first before calling this method");
+            return source;
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer, version);
-		}
-	}
+        public void WriteXml (XmlWriter writer)
+        {
+            source.WriteXml (writer, version);
+        }
+    }
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Miguel de Icaza (miguel@novell.com)
+//    Miguel de Icaza (miguel@novell.com)
 //
 
 using System;
@@ -29,32 +29,32 @@ using System.Threading;
 
 namespace System.Windows.Threading {
 
-	public abstract class DispatcherObject {
-		Thread base_thread;
-		
-		protected DispatcherObject ()
-		{
-			base_thread = Thread.CurrentThread;
-		}
-		
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public bool CheckAccess ()
-		{
-			return Thread.CurrentThread == base_thread;
-		}
+    public abstract class DispatcherObject {
+        Thread base_thread;
+        
+        protected DispatcherObject ()
+        {
+            base_thread = Thread.CurrentThread;
+        }
+        
+        [EditorBrowsable (EditorBrowsableState.Never)]
+        public bool CheckAccess ()
+        {
+            return Thread.CurrentThread == base_thread;
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public void VerifyAccess ()
-		{
-			if (!CheckAccess ())
-				throw new InvalidOperationException ("The calling thread is not the same as the creation thread");
-		}
+        [EditorBrowsable (EditorBrowsableState.Never)]
+        public void VerifyAccess ()
+        {
+            if (!CheckAccess ())
+                throw new InvalidOperationException ("The calling thread is not the same as the creation thread");
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public Dispatcher Dispatcher {
-			get {
-				return Dispatcher.FromThread (base_thread);
-			}
-		}
-	}
+        [EditorBrowsable (EditorBrowsableState.Never)]
+        public Dispatcher Dispatcher {
+            get {
+                return Dispatcher.FromThread (base_thread);
+            }
+        }
+    }
 }

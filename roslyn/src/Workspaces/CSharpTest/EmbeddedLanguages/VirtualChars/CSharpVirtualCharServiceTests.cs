@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -260,11 +260,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.VirtualChars
 
         [Fact]
         public void TestValidLongEscape2_NotInCharRange()
-            => Test(@"""\U0002A6A5𪚥""", @"['\U0002A6A5',[1,11]]['\U0002A6A5',[11,13]]");
+            => Test(@"""\U0002A6A5??""", @"['\U0002A6A5',[1,11]]['\U0002A6A5',[11,13]]");
 
         [Fact]
         public void TestSurrogate1()
-            => Test(@"""😊""", @"['\U0001F60A',[1,3]]");
+            => Test(@"""??""", @"['\U0001F60A',[1,3]]");
 
         [Fact]
         public void TestSurrogate2()

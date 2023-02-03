@@ -2,7 +2,7 @@
 // Indexable.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,26 +29,26 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-	class Indexable<T> : IIndexable<T> {
-		public static Indexable<T> Empty = new Indexable<T> (null);
+    class Indexable<T> : IIndexable<T> {
+        public static Indexable<T> Empty = new Indexable<T> (null);
 
-		private readonly IList<T> list;
+        private readonly IList<T> list;
 
-		public Indexable (IList<T> parameters)
-		{
-			this.list = parameters;
-		}
+        public Indexable (IList<T> parameters)
+        {
+            this.list = parameters;
+        }
 
-		#region IIndexable<T> Members
-		public int Count
-		{
-			get { return this.list == null ? 0 : this.list.Count; }
-		}
+        #region IIndexable<T> Members
+        public int Count
+        {
+            get { return this.list == null ? 0 : this.list.Count; }
+        }
 
-		public T this [int index]
-		{
-			get { return this.list [index]; }
-		}
-		#endregion
-	}
+        public T this [int index]
+        {
+            get { return this.list [index]; }
+        }
+        #endregion
+    }
 }

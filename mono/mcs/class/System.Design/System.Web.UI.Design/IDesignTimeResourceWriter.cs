@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IDesignTimeResourceWriter
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -32,12 +32,12 @@ using System.Resources;
 
 namespace System.Web.UI.Design
 {
-	public interface IDesignTimeResourceWriter : IResourceWriter, IDisposable
-	{
-		//void AddResource (string name, byte [] value);
-		//void AddResource (string name, object value);
-		//void AddResource (string name, string value);
-		string CreateResourceKey (string resourceName, object obj);
-	}
+    public interface IDesignTimeResourceWriter : IResourceWriter, IDisposable
+    {
+        //void AddResource (string name, byte [] value);
+        //void AddResource (string name, object value);
+        //void AddResource (string name, string value);
+        string CreateResourceKey (string resourceName, object obj);
+    }
 }
 

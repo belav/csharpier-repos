@@ -2,8 +2,8 @@
 // System.Diagnostics.FileVersionInfo.cs
 //
 // Authors:
-//	Dick Porter (dick@ximian.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Dick Porter (dick@ximian.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002 Ximian, Inc.
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -36,296 +36,296 @@ using System.Text;
 
 namespace System.Diagnostics {
 
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	public sealed class FileVersionInfo {
-		/* There is no public constructor for this class, it
-		 * is initialised by the runtime.  All the private
-		 * variables here are looked up by name, so dont
-		 * change them without also changing the runtime
-		 */
-		private string comments;
-		private string companyname;
-		private string filedescription;
-		private string filename;
-		private string fileversion;
-		private string internalname;
-		private string language;
-		private string legalcopyright;
-		private string legaltrademarks;
-		private string originalfilename;
-		private string privatebuild;
-		private string productname;
-		private string productversion;
-		private string specialbuild;
-		private bool isdebug;
-		private bool ispatched;
-		private bool isprerelease;
-		private bool isprivatebuild;
-		private bool isspecialbuild;
-		private int filemajorpart;
-		private int fileminorpart;
-		private int filebuildpart;
-		private int fileprivatepart;
-		private int productmajorpart;
-		private int productminorpart;
-		private int productbuildpart;
-		private int productprivatepart;
+    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+    public sealed class FileVersionInfo {
+        /* There is no public constructor for this class, it
+         * is initialised by the runtime.  All the private
+         * variables here are looked up by name, so dont
+         * change them without also changing the runtime
+         */
+        private string comments;
+        private string companyname;
+        private string filedescription;
+        private string filename;
+        private string fileversion;
+        private string internalname;
+        private string language;
+        private string legalcopyright;
+        private string legaltrademarks;
+        private string originalfilename;
+        private string privatebuild;
+        private string productname;
+        private string productversion;
+        private string specialbuild;
+        private bool isdebug;
+        private bool ispatched;
+        private bool isprerelease;
+        private bool isprivatebuild;
+        private bool isspecialbuild;
+        private int filemajorpart;
+        private int fileminorpart;
+        private int filebuildpart;
+        private int fileprivatepart;
+        private int productmajorpart;
+        private int productminorpart;
+        private int productbuildpart;
+        private int productprivatepart;
 
-		private FileVersionInfo ()
-		{
-			// no nulls (for unavailable items)
-			comments = null;
-			companyname = null;
-			filedescription = null;
-			filename = null;
-			fileversion = null;
-			internalname = null;
-			language = null;
-			legalcopyright = null;
-			legaltrademarks = null;
-			originalfilename = null;
-			privatebuild = null;
-			productname = null;
-			productversion = null;
-			specialbuild = null;
+        private FileVersionInfo ()
+        {
+            // no nulls (for unavailable items)
+            comments = null;
+            companyname = null;
+            filedescription = null;
+            filename = null;
+            fileversion = null;
+            internalname = null;
+            language = null;
+            legalcopyright = null;
+            legaltrademarks = null;
+            originalfilename = null;
+            privatebuild = null;
+            productname = null;
+            productversion = null;
+            specialbuild = null;
 
-			// This is here just to shut the compiler up
-			isdebug=false;
-			ispatched=false;
-			isprerelease=false;
-			isprivatebuild=false;
-			isspecialbuild=false;
-			filemajorpart=0;
-			fileminorpart=0;
-			filebuildpart=0;
-			fileprivatepart=0;
-			productmajorpart=0;
-			productminorpart=0;
-			productbuildpart=0;
-			productprivatepart=0;
-		}
-		
-		
-		public string Comments {
-			get {
-				return(comments);
-			}
-		}
+            // This is here just to shut the compiler up
+            isdebug=false;
+            ispatched=false;
+            isprerelease=false;
+            isprivatebuild=false;
+            isspecialbuild=false;
+            filemajorpart=0;
+            fileminorpart=0;
+            filebuildpart=0;
+            fileprivatepart=0;
+            productmajorpart=0;
+            productminorpart=0;
+            productbuildpart=0;
+            productprivatepart=0;
+        }
+        
+        
+        public string Comments {
+            get {
+                return(comments);
+            }
+        }
 
-		public string CompanyName {
-			get {
-				return(companyname);
-			}
-		}
+        public string CompanyName {
+            get {
+                return(companyname);
+            }
+        }
 
-		public int FileBuildPart {
-			get {
-				return(filebuildpart);
-			}
-		}
+        public int FileBuildPart {
+            get {
+                return(filebuildpart);
+            }
+        }
 
-		public string FileDescription {
-			get {
-				return(filedescription);
-			}
-		}
+        public string FileDescription {
+            get {
+                return(filedescription);
+            }
+        }
 
-		public int FileMajorPart {
-			get {
-				return(filemajorpart);
-			}
-		}
-		
-		public int FileMinorPart {
-			get {
-				return(fileminorpart);
-			}
-		}
+        public int FileMajorPart {
+            get {
+                return(filemajorpart);
+            }
+        }
+        
+        public int FileMinorPart {
+            get {
+                return(fileminorpart);
+            }
+        }
 
-		public string FileName {
-			get {
+        public string FileName {
+            get {
 #if MONO_FEATURE_CAS
-				if (SecurityManager.SecurityEnabled) {
-					new FileIOPermission (FileIOPermissionAccess.PathDiscovery, filename).Demand ();
-				}
+                if (SecurityManager.SecurityEnabled) {
+                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, filename).Demand ();
+                }
 #endif
-				return filename;
-			}
-		}
+                return filename;
+            }
+        }
 
-		public int FilePrivatePart {
-			get {
-				return(fileprivatepart);
-			}
-		}
+        public int FilePrivatePart {
+            get {
+                return(fileprivatepart);
+            }
+        }
 
-		public string FileVersion {
-			get {
-				return(fileversion);
-			}
-		}
+        public string FileVersion {
+            get {
+                return(fileversion);
+            }
+        }
 
-		public string InternalName {
-			get {
-				return(internalname);
-			}
-		}
+        public string InternalName {
+            get {
+                return(internalname);
+            }
+        }
 
-		public bool IsDebug {
-			get {
-				return(isdebug);
-			}
-		}
+        public bool IsDebug {
+            get {
+                return(isdebug);
+            }
+        }
 
-		public bool IsPatched {
-			get {
-				return(ispatched);
-			}
-		}
+        public bool IsPatched {
+            get {
+                return(ispatched);
+            }
+        }
 
-		public bool IsPreRelease {
-			get {
-				return(isprerelease);
-			}
-		}
-		
-		public bool IsPrivateBuild {
-			get {
-				return(isprivatebuild);
-			}
-		}
+        public bool IsPreRelease {
+            get {
+                return(isprerelease);
+            }
+        }
+        
+        public bool IsPrivateBuild {
+            get {
+                return(isprivatebuild);
+            }
+        }
 
-		public bool IsSpecialBuild {
-			get {
-				return(isspecialbuild);
-			}
-		}
+        public bool IsSpecialBuild {
+            get {
+                return(isspecialbuild);
+            }
+        }
 
-		public string Language {
-			get {
-				return(language);
-			}
-		}
+        public string Language {
+            get {
+                return(language);
+            }
+        }
 
-		public string LegalCopyright {
-			get {
-				return(legalcopyright);
-			}
-		}
+        public string LegalCopyright {
+            get {
+                return(legalcopyright);
+            }
+        }
 
-		public string LegalTrademarks {
-			get {
-				return(legaltrademarks);
-			}
-		}
+        public string LegalTrademarks {
+            get {
+                return(legaltrademarks);
+            }
+        }
 
-		public string OriginalFilename {
-			get {
-				return(originalfilename);
-			}
-		}
+        public string OriginalFilename {
+            get {
+                return(originalfilename);
+            }
+        }
 
-		public string PrivateBuild {
-			get {
-				return(privatebuild);
-			}
-		}
+        public string PrivateBuild {
+            get {
+                return(privatebuild);
+            }
+        }
 
-		public int ProductBuildPart {
-			get {
-				return(productbuildpart);
-			}
-		}
+        public int ProductBuildPart {
+            get {
+                return(productbuildpart);
+            }
+        }
 
-		public int ProductMajorPart {
-			get {
-				return(productmajorpart);
-			}
-		}
+        public int ProductMajorPart {
+            get {
+                return(productmajorpart);
+            }
+        }
 
-		public int ProductMinorPart {
-			get {
-				return(productminorpart);
-			}
-		}
+        public int ProductMinorPart {
+            get {
+                return(productminorpart);
+            }
+        }
 
-		public string ProductName {
-			get {
-				return(productname);
-			}
-		}
+        public string ProductName {
+            get {
+                return(productname);
+            }
+        }
 
-		public int ProductPrivatePart {
-			get {
-				return(productprivatepart);
-			}
-		}
+        public int ProductPrivatePart {
+            get {
+                return(productprivatepart);
+            }
+        }
 
-		public string ProductVersion {
-			get {
-				return(productversion);
-			}
-		}
+        public string ProductVersion {
+            get {
+                return(productversion);
+            }
+        }
 
-		public string SpecialBuild {
-			get {
-				return(specialbuild);
-			}
-		}
+        public string SpecialBuild {
+            get {
+                return(specialbuild);
+            }
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private unsafe extern void GetVersionInfo_icall (char *fileName, int fileName_length);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private unsafe extern void GetVersionInfo_icall (char *fileName, int fileName_length);
 
-		private unsafe void GetVersionInfo_internal (string fileName)
-		{
-			fixed (char* fixed_filename = fileName)
-				GetVersionInfo_icall (fixed_filename, fileName?.Length ?? 0);
-		}
-		
-		public static FileVersionInfo GetVersionInfo (string fileName)
-		{
+        private unsafe void GetVersionInfo_internal (string fileName)
+        {
+            fixed (char* fixed_filename = fileName)
+                GetVersionInfo_icall (fixed_filename, fileName?.Length ?? 0);
+        }
+        
+        public static FileVersionInfo GetVersionInfo (string fileName)
+        {
 #if MONO_FEATURE_CAS
-			if (SecurityManager.SecurityEnabled) {
-				new FileIOPermission (FileIOPermissionAccess.Read, fileName).Demand ();
-			}
+            if (SecurityManager.SecurityEnabled) {
+                new FileIOPermission (FileIOPermissionAccess.Read, fileName).Demand ();
+            }
 #endif
 
-			string absolute = Path.GetFullPath (fileName);
-			if (!File.Exists (absolute))
-				throw new FileNotFoundException (fileName);
+            string absolute = Path.GetFullPath (fileName);
+            if (!File.Exists (absolute))
+                throw new FileNotFoundException (fileName);
 
-			FileVersionInfo fvi = new FileVersionInfo ();
-			fvi.GetVersionInfo_internal (fileName);
-			return fvi;
-		}
+            FileVersionInfo fvi = new FileVersionInfo ();
+            fvi.GetVersionInfo_internal (fileName);
+            return fvi;
+        }
 
-		// use our own AppendFormat because MOBILE have only this overload
-		static void AppendFormat (StringBuilder sb, string format, params object [] args)
-		{
-			sb.AppendFormat (format, args);
-		}
+        // use our own AppendFormat because MOBILE have only this overload
+        static void AppendFormat (StringBuilder sb, string format, params object [] args)
+        {
+            sb.AppendFormat (format, args);
+        }
 
-		public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ();
+        public override string ToString ()
+        {
+            StringBuilder sb = new StringBuilder ();
 
-			// we use the FileName property so we don't skip the security check
-			AppendFormat (sb, "File:             {0}{1}", FileName, Environment.NewLine);
-			// the other informations aren't protected so we can use the members directly
-			AppendFormat (sb, "InternalName:     {0}{1}", internalname, Environment.NewLine);
-			AppendFormat (sb, "OriginalFilename: {0}{1}", originalfilename, Environment.NewLine);
-			AppendFormat (sb, "FileVersion:      {0}{1}", fileversion, Environment.NewLine);
-			AppendFormat (sb, "FileDescription:  {0}{1}", filedescription, Environment.NewLine);
-			AppendFormat (sb, "Product:          {0}{1}", productname, Environment.NewLine);
-			AppendFormat (sb, "ProductVersion:   {0}{1}", productversion, Environment.NewLine);
-			AppendFormat (sb, "Debug:            {0}{1}", isdebug, Environment.NewLine);
-			AppendFormat (sb, "Patched:          {0}{1}", ispatched, Environment.NewLine);
-			AppendFormat (sb, "PreRelease:       {0}{1}", isprerelease, Environment.NewLine);
-			AppendFormat (sb, "PrivateBuild:     {0}{1}", isprivatebuild, Environment.NewLine);
-			AppendFormat (sb, "SpecialBuild:     {0}{1}", isspecialbuild, Environment.NewLine);
-			AppendFormat (sb, "Language          {0}{1}", language, Environment.NewLine);
+            // we use the FileName property so we don't skip the security check
+            AppendFormat (sb, "File:             {0}{1}", FileName, Environment.NewLine);
+            // the other informations aren't protected so we can use the members directly
+            AppendFormat (sb, "InternalName:     {0}{1}", internalname, Environment.NewLine);
+            AppendFormat (sb, "OriginalFilename: {0}{1}", originalfilename, Environment.NewLine);
+            AppendFormat (sb, "FileVersion:      {0}{1}", fileversion, Environment.NewLine);
+            AppendFormat (sb, "FileDescription:  {0}{1}", filedescription, Environment.NewLine);
+            AppendFormat (sb, "Product:          {0}{1}", productname, Environment.NewLine);
+            AppendFormat (sb, "ProductVersion:   {0}{1}", productversion, Environment.NewLine);
+            AppendFormat (sb, "Debug:            {0}{1}", isdebug, Environment.NewLine);
+            AppendFormat (sb, "Patched:          {0}{1}", ispatched, Environment.NewLine);
+            AppendFormat (sb, "PreRelease:       {0}{1}", isprerelease, Environment.NewLine);
+            AppendFormat (sb, "PrivateBuild:     {0}{1}", isprivatebuild, Environment.NewLine);
+            AppendFormat (sb, "SpecialBuild:     {0}{1}", isspecialbuild, Environment.NewLine);
+            AppendFormat (sb, "Language          {0}{1}", language, Environment.NewLine);
 
-			return sb.ToString ();
-		}
-	}
+            return sb.ToString ();
+        }
+    }
 }

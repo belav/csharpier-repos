@@ -20,32 +20,32 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 
 namespace System.Windows.Forms {
 
-	public class TreeViewEventArgs : EventArgs {
+    public class TreeViewEventArgs : EventArgs {
 
-		private TreeNode node;
-		private TreeViewAction action;
+        private TreeNode node;
+        private TreeViewAction action;
 
-		public TreeViewEventArgs (TreeNode node)
-		{
-			this.node = node;
-		}
+        public TreeViewEventArgs (TreeNode node)
+        {
+            this.node = node;
+        }
 
-		public TreeViewEventArgs (TreeNode node, TreeViewAction action) : this (node)
-		{
-			this.action = action;
-		}
+        public TreeViewEventArgs (TreeNode node, TreeViewAction action) : this (node)
+        {
+            this.action = action;
+        }
 
-		public TreeViewAction Action {
-			get { return action; }
-		}
+        public TreeViewAction Action {
+            get { return action; }
+        }
 
-		public TreeNode Node {
-			get { return node; }
-		}
-	}
+        public TreeNode Node {
+            get { return node; }
+        }
+    }
 }
 

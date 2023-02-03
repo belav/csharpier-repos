@@ -1,9 +1,9 @@
 //
 // HttpCacheVaryByHeadersCas.cs 
-//	- CAS unit tests for System.Web.HttpCacheVaryByHeaders
+//    - CAS unit tests for System.Web.HttpCacheVaryByHeaders
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,48 +36,48 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpCacheVaryByHeadersCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HttpCacheVaryByHeadersCas : AspNetHostingMinimal {
 
-		private HttpResponse response;
+        private HttpResponse response;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			response = new HttpResponse (Console.Out);
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            response = new HttpResponse (Console.Out);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HttpCacheVaryByHeaders cache = response.Cache.VaryByHeaders;
-			Assert.IsFalse (cache.AcceptTypes, "AcceptTypes");
-			cache.AcceptTypes = true;
-			Assert.IsFalse (cache.UserAgent, "UserAgent");
-			cache.UserAgent = true;
-			Assert.IsFalse (cache.UserCharSet, "UserCharSet");
-			cache.UserCharSet = true;
-			Assert.IsFalse (cache.UserLanguage, "UserLanguage");
-			cache.UserLanguage = true;
-			Assert.IsFalse (cache["mono"], "this[string]");
-			cache["mono"] = true;
-			cache.VaryByUnspecifiedParameters ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HttpCacheVaryByHeaders cache = response.Cache.VaryByHeaders;
+            Assert.IsFalse (cache.AcceptTypes, "AcceptTypes");
+            cache.AcceptTypes = true;
+            Assert.IsFalse (cache.UserAgent, "UserAgent");
+            cache.UserAgent = true;
+            Assert.IsFalse (cache.UserCharSet, "UserCharSet");
+            cache.UserCharSet = true;
+            Assert.IsFalse (cache.UserLanguage, "UserLanguage");
+            cache.UserLanguage = true;
+            Assert.IsFalse (cache["mono"], "this[string]");
+            cache["mono"] = true;
+            cache.VaryByUnspecifiedParameters ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// no public ctor is available but we know that it's properties don't have any restrictions
-			MethodInfo mi = this.Type.GetProperty ("AcceptTypes").GetGetMethod ();
-			Assert.IsNotNull (mi, "get_AcceptTypes");
-			return mi.Invoke (response.Cache.VaryByHeaders, null);
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // no public ctor is available but we know that it's properties don't have any restrictions
+            MethodInfo mi = this.Type.GetProperty ("AcceptTypes").GetGetMethod ();
+            Assert.IsNotNull (mi, "get_AcceptTypes");
+            return mi.Invoke (response.Cache.VaryByHeaders, null);
+        }
 
-		public override Type Type {
-			get { return typeof (HttpCacheVaryByHeaders); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HttpCacheVaryByHeaders); }
+        }
+    }
 }

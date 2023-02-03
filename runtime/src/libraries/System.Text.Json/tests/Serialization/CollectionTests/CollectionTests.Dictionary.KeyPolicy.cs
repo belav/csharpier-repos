@@ -363,7 +363,7 @@ namespace System.Text.Json.Serialization.Tests
         private class TestClassWithDictionary
         {
            public Dictionary<string, CustomClass> Data { get; set; }
-		}
+        }
 
         [Fact]
         public static void CamelCaseSerialize_ForClassWithDictionaryProperty_ApplyDictionaryKeyPolicy()

@@ -2,7 +2,7 @@
 // System.Security.AccessControl.PropagationFlags enum
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,10 +27,10 @@
 //
 
 namespace System.Security.AccessControl {
-	[Flags]
-	public enum PropagationFlags {
-		None = 0,
-		NoPropagateInherit = 1,
-		InheritOnly = 2,
-	}
+    [Flags]
+    public enum PropagationFlags {
+        None = 0,
+        NoPropagateInherit = 1,
+        InheritOnly = 2,
+    }
 }

@@ -33,21 +33,21 @@ using System.Security.Permissions;
 
 namespace Microsoft.Win32 {
 
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-	public class TimerElapsedEventArgs : System.EventArgs
-	{
-		System.IntPtr mytimerId;
+    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+    [PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
+    public class TimerElapsedEventArgs : System.EventArgs
+    {
+        System.IntPtr mytimerId;
 
-		public TimerElapsedEventArgs (System.IntPtr timerId)
-		{
-			this.mytimerId = timerId;
-		}
+        public TimerElapsedEventArgs (System.IntPtr timerId)
+        {
+            this.mytimerId = timerId;
+        }
 
-		public System.IntPtr TimerId {
-			get {
-				return mytimerId;
-			}
-		}
-	}
+        public System.IntPtr TimerId {
+            get {
+                return mytimerId;
+            }
+        }
+    }
 }

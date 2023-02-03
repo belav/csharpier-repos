@@ -20,19 +20,19 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum ButtonBorderStyle {
-		None	= 0,
-		Dotted	= 1,
-		Dashed	= 2,
-		Solid	= 3,
-		Inset	= 4,
-		Outset	= 5
-	}
+    public enum ButtonBorderStyle {
+        None    = 0,
+        Dotted    = 1,
+        Dashed    = 2,
+        Solid    = 3,
+        Inset    = 4,
+        Outset    = 5
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.RequiredFieldValidator
 //
 // Authors:
-//	Ben Maurer (bmaurer@novell.com)
+//    Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,39 +30,39 @@ using System.ComponentModel;
 using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ToolboxData ("<{0}:RequiredFieldValidator runat=\"server\" ErrorMessage=\"RequiredFieldValidator\"></{0}:RequiredFieldValidator>")]
-	public class RequiredFieldValidator : BaseValidator {
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			if (RenderUplevel) {
-				RegisterExpandoAttribute (ClientID, "evaluationfunction", "RequiredFieldValidatorEvaluateIsValid");
-				RegisterExpandoAttribute (ClientID, "initialvalue", InitialValue, true);
-			}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [ToolboxData ("<{0}:RequiredFieldValidator runat=\"server\" ErrorMessage=\"RequiredFieldValidator\"></{0}:RequiredFieldValidator>")]
+    public class RequiredFieldValidator : BaseValidator {
+        protected override void AddAttributesToRender (HtmlTextWriter writer)
+        {
+            if (RenderUplevel) {
+                RegisterExpandoAttribute (ClientID, "evaluationfunction", "RequiredFieldValidatorEvaluateIsValid");
+                RegisterExpandoAttribute (ClientID, "initialvalue", InitialValue, true);
+            }
 
-			base.AddAttributesToRender (writer);
-		}
-		
-		protected override bool EvaluateIsValid ()
-		{
-			return GetControlValidationValue (ControlToValidate) != InitialValue;
-		}
-		
+            base.AddAttributesToRender (writer);
+        }
+        
+        protected override bool EvaluateIsValid ()
+        {
+            return GetControlValidationValue (ControlToValidate) != InitialValue;
+        }
+        
 
-		[Themeable(false)]
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Behavior")]
-		public string InitialValue {
-			get {
-				return ViewState.GetString ("InitialValue", "");
-			}
-			set {
-				ViewState ["InitialValue"] = value;
-			}
-		}
-	}
+        [Themeable(false)]
+        [DefaultValue("")]
+        [WebSysDescription ("")]
+        [WebCategory ("Behavior")]
+        public string InitialValue {
+            get {
+                return ViewState.GetString ("InitialValue", "");
+            }
+            set {
+                ViewState ["InitialValue"] = value;
+            }
+        }
+    }
 }

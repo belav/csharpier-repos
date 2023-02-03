@@ -2,9 +2,9 @@
 // Line: 5
 
 class X {
-	public abstract void myAbstract ();
+    public abstract void myAbstract ();
 }
 
 class Y : X {
 }
-	
+    

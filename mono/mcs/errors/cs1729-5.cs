@@ -3,16 +3,16 @@
 
 class C
 {
-	public C (int i)
-	{
-	}
+    public C (int i)
+    {
+    }
 }
 
 public class Blah
 {
-	public static void Main ()
-	{
-		dynamic d = 1;
-		var r = new C (1, d);
-	}
+    public static void Main ()
+    {
+        dynamic d = 1;
+        var r = new C (1, d);
+    }
 }

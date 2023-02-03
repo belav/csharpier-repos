@@ -3,9 +3,9 @@
 
 class S
 {
-	static void Main ()
-	{
-		sbyte s = 1;
-		sbyte r = +s;
-	}
+    static void Main ()
+    {
+        sbyte s = 1;
+        sbyte r = +s;
+    }
 }

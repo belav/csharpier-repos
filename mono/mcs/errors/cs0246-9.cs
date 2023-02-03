@@ -6,13 +6,13 @@ using System.Threading;
 
 public class Test
 {
-	static void Main ()
-	{
-		var tr = new Thread (delegate () {
-			Foo ();
-		});
-	}
+    static void Main ()
+    {
+        var tr = new Thread (delegate () {
+            Foo ();
+        });
+    }
 
-	[DllImport ("Foo")]
-	extern static void Foo ();
+    [DllImport ("Foo")]
+    extern static void Foo ();
 } 

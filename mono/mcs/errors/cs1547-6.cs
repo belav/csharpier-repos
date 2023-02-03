@@ -2,5 +2,5 @@
 // Line: 6
 
 class C {
-	object o = new void();
+    object o = new void();
 }

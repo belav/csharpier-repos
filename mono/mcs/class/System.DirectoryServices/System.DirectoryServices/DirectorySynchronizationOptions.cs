@@ -22,13 +22,13 @@
 using System;
 namespace System.DirectoryServices
 {
-	[Flags]
-	public enum DirectorySynchronizationOptions : long
-	{
-		None = 0L,
-		ObjectSecurity = 1L,
-		ParentsFirst = 2048L,
-		PublicDataOnly = 8192L,
-		IncrementalValues = 2147483648L
-	}
+    [Flags]
+    public enum DirectorySynchronizationOptions : long
+    {
+        None = 0L,
+        ObjectSecurity = 1L,
+        ParentsFirst = 2048L,
+        PublicDataOnly = 8192L,
+        IncrementalValues = 2147483648L
+    }
 }

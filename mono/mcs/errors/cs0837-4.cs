@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 
 class C
 {
-	public static void Main ()
-	{
-		Expression<Func<bool>> e = () => "1".ToString is string;
-	}
+    public static void Main ()
+    {
+        Expression<Func<bool>> e = () => "1".ToString is string;
+    }
 }

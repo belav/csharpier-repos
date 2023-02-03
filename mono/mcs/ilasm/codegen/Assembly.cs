@@ -109,7 +109,7 @@ namespace Mono.ILASM {
                                 }
                         
                         if (decl_sec != null)
-				decl_sec.AddTo (code_gen, asm);
+                decl_sec.AddTo (code_gen, asm);
 
 
                         asm.AddAssemblyInfo(major_version,

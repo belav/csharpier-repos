@@ -31,29 +31,29 @@ using System.Security.Permissions;
 
 namespace System.Web.Util
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class Transactions
-	{
-		public Transactions ()
-		{
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class Transactions
+    {
+        public Transactions ()
+        {
+        }
 
-		public static void InvokeTransacted (TransactedCallback callback, TransactionOption mode)
-		{
-			bool abortedTransaction = false;
-			InvokeTransacted (callback, mode, ref abortedTransaction);
-		}
+        public static void InvokeTransacted (TransactedCallback callback, TransactionOption mode)
+        {
+            bool abortedTransaction = false;
+            InvokeTransacted (callback, mode, ref abortedTransaction);
+        }
 
-		[MonoTODO ("Not implemented, not supported by Mono")]
-		public static void InvokeTransacted (TransactedCallback callback, 
-							TransactionOption mode, 
-							ref bool transactionAborted)
-		{
-			// note: this is the documented exception for (Windows) OS prior to NT
-			// so in this case we won't throw a NotImplementedException
-			throw new PlatformNotSupportedException ("Not supported on mono");
-		}
-	}
+        [MonoTODO ("Not implemented, not supported by Mono")]
+        public static void InvokeTransacted (TransactedCallback callback, 
+                            TransactionOption mode, 
+                            ref bool transactionAborted)
+        {
+            // note: this is the documented exception for (Windows) OS prior to NT
+            // so in this case we won't throw a NotImplementedException
+            throw new PlatformNotSupportedException ("Not supported on mono");
+        }
+    }
 }

@@ -33,40 +33,40 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-	internal class DiscoveryProxyClientApril2005 : ClientBase<IDiscoveryProxyContractApril2005>, DiscoveryClient.IDiscoveryCommon
-	{
-		public DiscoveryProxyClientApril2005 (ServiceEndpoint endpoint)
-			: base (endpoint)
-		{
-		}
+    internal class DiscoveryProxyClientApril2005 : ClientBase<IDiscoveryProxyContractApril2005>, DiscoveryClient.IDiscoveryCommon
+    {
+        public DiscoveryProxyClientApril2005 (ServiceEndpoint endpoint)
+            : base (endpoint)
+        {
+        }
 
-		public IAsyncResult BeginFind (FindCriteria criteria, AsyncCallback callback, object state)
-		{
-			var req = new MessageContractsApril2005.FindRequest () { Body = new FindCriteriaApril2005 (criteria) };
-			return Channel.BeginFind (req, callback, state);
-		}
-		
-		public FindResponse EndFind (IAsyncResult result)
-		{
-			var ir = Channel.EndFind (result);
-			var ret = new FindResponse ();
-			foreach (var fr in ir.Body)
-				ret.Endpoints.Add (fr.ToEndpointDiscoveryMetadata ());
-			return ret;
-		}
+        public IAsyncResult BeginFind (FindCriteria criteria, AsyncCallback callback, object state)
+        {
+            var req = new MessageContractsApril2005.FindRequest () { Body = new FindCriteriaApril2005 (criteria) };
+            return Channel.BeginFind (req, callback, state);
+        }
+        
+        public FindResponse EndFind (IAsyncResult result)
+        {
+            var ir = Channel.EndFind (result);
+            var ret = new FindResponse ();
+            foreach (var fr in ir.Body)
+                ret.Endpoints.Add (fr.ToEndpointDiscoveryMetadata ());
+            return ret;
+        }
 
-		public IAsyncResult BeginResolve (ResolveCriteria criteria, AsyncCallback callback, object state)
-		{
-			var req = new MessageContractsApril2005.ResolveRequest () { Body = new ResolveCriteriaApril2005 (criteria) };
-			return Channel.BeginResolve (req, callback, state);
-		}
+        public IAsyncResult BeginResolve (ResolveCriteria criteria, AsyncCallback callback, object state)
+        {
+            var req = new MessageContractsApril2005.ResolveRequest () { Body = new ResolveCriteriaApril2005 (criteria) };
+            return Channel.BeginResolve (req, callback, state);
+        }
 
-		public ResolveResponse EndResolve (IAsyncResult result)
-		{
-			var ir = Channel.EndResolve (result);
-			var metadata = ir.Body.ToEndpointDiscoveryMetadata ();
-			var sequence = ir.MessageSequence.ToDiscoveryMessageSequence ();
-			return new ResolveResponse (metadata, sequence);
-		}
-	}
+        public ResolveResponse EndResolve (IAsyncResult result)
+        {
+            var ir = Channel.EndResolve (result);
+            var metadata = ir.Body.ToEndpointDiscoveryMetadata ();
+            var sequence = ir.MessageSequence.ToDiscoveryMessageSequence ();
+            return new ResolveResponse (metadata, sequence);
+        }
+    }
 }

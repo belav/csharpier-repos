@@ -3,12 +3,12 @@
 
 public partial class Test
 {
-	public string get_Value () { return null; }
+    public string get_Value () { return null; }
 }
 
 public partial class Test
 {
-	public string Value {
-		get { }
-	}
+    public string Value {
+        get { }
+    }
 }

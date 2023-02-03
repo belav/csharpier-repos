@@ -1,14 +1,14 @@
-#	jay skeleton
+#    jay skeleton
 
-#	character in column 1 determines outcome...
-#		# is a comment
-#		. is copied
-#		t is copied as //t if -t is set
-#	other lines are interpreted to call jay procedures
+#    character in column 1 determines outcome...
+#        # is a comment
+#        . is copied
+#        t is copied as //t if -t is set
+#    other lines are interpreted to call jay procedures
 
 .// created by jay 0.7 (c) 1998 Axel.Schreiner@informatik.uni-osnabrueck.de
 .
- prolog		## %{ ... %} prior to the first %%
+ prolog        ## %{ ... %} prior to the first %%
 
 .
 .  /** error output stream.
@@ -46,7 +46,7 @@
 .    */
 t  internal yydebug.yyDebug debug;
 .
- debug			## tables for debugging support
+ debug            ## tables for debugging support
 .
 .  /** index-checked interface to yyNames[].
 .      @param token single character or %token value.
@@ -104,7 +104,7 @@ t  }
 .      @throws yyException on irrecoverable parse error.
 .    */
 .  internal Object yyparse (yyParser.yyInput yyLex, Object yyd)
-.				 {
+.                 {
 t    this.debug = (yydebug.yyDebug)yyd;
 .    return yyparse(yyLex);
 .  }
@@ -125,15 +125,15 @@ t    this.debug = (yydebug.yyDebug)yyd;
 .    return first;
 .  }
 .
-.	static int[] global_yyStates;
-.	static object[] global_yyVals;
+.    static int[] global_yyStates;
+.    static object[] global_yyVals;
 .#pragma warning disable 649
-.	protected bool use_global_stacks;
+.    protected bool use_global_stacks;
 .#pragma warning restore 649
-.	object[] yyVals;					// value stack
-.	object yyVal;						// value stack ptr
-.	int yyToken;						// current input
-.	int yyTop;
+.    object[] yyVals;                    // value stack
+.    object yyVal;                        // value stack ptr
+.    int yyToken;                        // current input
+.    int yyTop;
 .
 .  /** the generated parser.
 .      Maintains a state and a value stack, currently with fixed maximum size.
@@ -143,28 +143,28 @@ t    this.debug = (yydebug.yyDebug)yyd;
 .    */
 .  internal Object yyparse (yyParser.yyInput yyLex)
 .  {
-.    if (yyMax <= 0) yyMax = 256;		// initial size
+.    if (yyMax <= 0) yyMax = 256;        // initial size
 .    int yyState = 0;                   // state stack ptr
-.    int [] yyStates;               	// state stack 
+.    int [] yyStates;                   // state stack 
 .    yyVal = null;
 .    yyToken = -1;
-.    int yyErrorFlag = 0;				// #tks to shift
-.	if (use_global_stacks && global_yyStates != null) {
-.		yyVals = global_yyVals;
-.		yyStates = global_yyStates;
+.    int yyErrorFlag = 0;                // #tks to shift
+.    if (use_global_stacks && global_yyStates != null) {
+.        yyVals = global_yyVals;
+.        yyStates = global_yyStates;
 .   } else {
-.		yyVals = new object [yyMax];
-.		yyStates = new int [yyMax];
-.		if (use_global_stacks) {
-.			global_yyVals = yyVals;
-.			global_yyStates = yyStates;
-.		}
-.	}
+.        yyVals = new object [yyMax];
+.        yyStates = new int [yyMax];
+.        if (use_global_stacks) {
+.            global_yyVals = yyVals;
+.            global_yyStates = yyStates;
+.        }
+.    }
 .
- local		## %{ ... %} after the first %%
+ local        ## %{ ... %} after the first %%
 
 .    /*yyLoop:*/ for (yyTop = 0;; ++ yyTop) {
-.      if (yyTop >= yyStates.Length) {			// dynamically increase
+.      if (yyTop >= yyStates.Length) {            // dynamically increase
 .        global::System.Array.Resize (ref yyStates, yyStates.Length+yyMax);
 .        global::System.Array.Resize (ref yyVals, yyVals.Length+yyMax);
 .      }
@@ -172,9 +172,9 @@ t    this.debug = (yydebug.yyDebug)yyd;
 .      yyVals[yyTop] = yyVal;
 t      if (debug != null) debug.push(yyState, yyVal);
 .
-.      /*yyDiscarded:*/ while (true) {	// discarding a token does not change stack
+.      /*yyDiscarded:*/ while (true) {    // discarding a token does not change stack
 .        int yyN;
-.        if ((yyN = yyDefRed[yyState]) == 0) {	// else [default] reduce (yyN)
+.        if ((yyN = yyDefRed[yyState]) == 0) {    // else [default] reduce (yyN)
 .          if (yyToken < 0) {
 .            yyToken = yyLex.advance() ? yyLex.token() : 0;
 
@@ -185,7 +185,7 @@ t              debug.lex(yyState, yyToken, yyname(yyToken), yyLex.value());
 .              && (yyN < yyTable.Length) && (yyCheck[yyN] == yyToken)) {
 t            if (debug != null)
 t              debug.shift(yyState, yyTable[yyN], yyErrorFlag-1);
-.            yyState = yyTable[yyN];		// shift to yyN
+.            yyState = yyTable[yyN];        // shift to yyN
 .            yyVal = yyLex.value();
 .            yyToken = -1;
 .            if (yyErrorFlag > 0) -- yyErrorFlag;
@@ -193,7 +193,7 @@ t              debug.shift(yyState, yyTable[yyN], yyErrorFlag-1);
 .          }
 .          if ((yyN = yyRindex[yyState]) != 0 && (yyN += yyToken) >= 0
 .              && yyN < yyTable.Length && yyCheck[yyN] == yyToken)
-.            yyN = yyTable[yyN];			// reduce (yyN)
+.            yyN = yyTable[yyN];            // reduce (yyN)
 .          else
 .            switch (yyErrorFlag) {
 .  
@@ -227,9 +227,9 @@ t                if (debug != null) debug.reject();
 .              }
 t              if (debug != null)
 t                debug.discard(yyState, yyToken, yyname(yyToken),
-t  							yyLex.value());
+t                              yyLex.value());
 .              yyToken = -1;
-.              goto continue_yyDiscarded;		// leave stack alone
+.              goto continue_yyDiscarded;        // leave stack alone
 .            }
 .        }
 .        int yyV = yyTop + 1-yyLen[yyN];
@@ -238,7 +238,7 @@ t          debug.reduce(yyState, yyStates[yyV-1], yyN, YYRules.getRule (yyN), yy
 .        yyVal = yyV > yyTop ? null : yyVals[yyV]; // yyVal = yyDefault(yyV > yyTop ? null : yyVals[yyV]);
 .        switch (yyN) {
 
- actions		## code from the actions within the grammar
+ actions        ## code from the actions within the grammar
 
 .        }
 .        yyTop -= yyLen[yyN];
@@ -249,7 +249,7 @@ t          if (debug != null) debug.shift(0, yyFinal);
 .          yyState = yyFinal;
 .          if (yyToken < 0) {
 .            yyToken = yyLex.advance() ? yyLex.token() : 0;
-		
+        
 t            if (debug != null)
 t               debug.lex(yyState, yyToken,yyname(yyToken), yyLex.value());
 .          }
@@ -265,89 +265,89 @@ t            if (debug != null) debug.accept(yyVal);
 .        else
 .          yyState = yyDgoto[yyM];
 t        if (debug != null) debug.shift(yyStates[yyTop], yyState);
-.	 goto continue_yyLoop;
-.      continue_yyDiscarded: ;	// implements the named-loop continue: 'continue yyDiscarded'
+.     goto continue_yyLoop;
+.      continue_yyDiscarded: ;    // implements the named-loop continue: 'continue yyDiscarded'
 .      }
-.    continue_yyLoop: ;		// implements the named-loop continue: 'continue yyLoop'
+.    continue_yyLoop: ;        // implements the named-loop continue: 'continue yyLoop'
 .    }
 .  }
 .
- tables			## tables for rules, default reduction, and action calls
+ tables            ## tables for rules, default reduction, and action calls
 .
- epilog			## text following second %%
+ epilog            ## text following second %%
 .namespace yydebug {
 .        using System;
-.	 internal interface yyDebug {
-.		 void push (int state, Object value);
-.		 void lex (int state, int token, string name, Object value);
-.		 void shift (int from, int to, int errorFlag);
-.		 void pop (int state);
-.		 void discard (int state, int token, string name, Object value);
-.		 void reduce (int from, int to, int rule, string text, int len);
-.		 void shift (int from, int to);
-.		 void accept (Object value);
-.		 void error (string message);
-.		 void reject ();
-.	 }
-.	 
-.	 class yyDebugSimple : yyDebug {
-.		 void println (string s){
-.			 Console.Error.WriteLine (s);
-.		 }
-.		 
-.		 public void push (int state, Object value) {
-.			 println ("push\tstate "+state+"\tvalue "+value);
-.		 }
-.		 
-.		 public void lex (int state, int token, string name, Object value) {
-.			 println("lex\tstate "+state+"\treading "+name+"\tvalue "+value);
-.		 }
-.		 
-.		 public void shift (int from, int to, int errorFlag) {
-.			 switch (errorFlag) {
-.			 default:				// normally
-.				 println("shift\tfrom state "+from+" to "+to);
-.				 break;
-.			 case 0: case 1: case 2:		// in error recovery
-.				 println("shift\tfrom state "+from+" to "+to
-.					     +"\t"+errorFlag+" left to recover");
-.				 break;
-.			 case 3:				// normally
-.				 println("shift\tfrom state "+from+" to "+to+"\ton error");
-.				 break;
-.			 }
-.		 }
-.		 
-.		 public void pop (int state) {
-.			 println("pop\tstate "+state+"\ton error");
-.		 }
-.		 
-.		 public void discard (int state, int token, string name, Object value) {
-.			 println("discard\tstate "+state+"\ttoken "+name+"\tvalue "+value);
-.		 }
-.		 
-.		 public void reduce (int from, int to, int rule, string text, int len) {
-.			 println("reduce\tstate "+from+"\tuncover "+to
-.				     +"\trule ("+rule+") "+text);
-.		 }
-.		 
-.		 public void shift (int from, int to) {
-.			 println("goto\tfrom state "+from+" to "+to);
-.		 }
-.		 
-.		 public void accept (Object value) {
-.			 println("accept\tvalue "+value);
-.		 }
-.		 
-.		 public void error (string message) {
-.			 println("error\t"+message);
-.		 }
-.		 
-.		 public void reject () {
-.			 println("reject");
-.		 }
-.		 
-.	 }
+.     internal interface yyDebug {
+.         void push (int state, Object value);
+.         void lex (int state, int token, string name, Object value);
+.         void shift (int from, int to, int errorFlag);
+.         void pop (int state);
+.         void discard (int state, int token, string name, Object value);
+.         void reduce (int from, int to, int rule, string text, int len);
+.         void shift (int from, int to);
+.         void accept (Object value);
+.         void error (string message);
+.         void reject ();
+.     }
+.     
+.     class yyDebugSimple : yyDebug {
+.         void println (string s){
+.             Console.Error.WriteLine (s);
+.         }
+.         
+.         public void push (int state, Object value) {
+.             println ("push\tstate "+state+"\tvalue "+value);
+.         }
+.         
+.         public void lex (int state, int token, string name, Object value) {
+.             println("lex\tstate "+state+"\treading "+name+"\tvalue "+value);
+.         }
+.         
+.         public void shift (int from, int to, int errorFlag) {
+.             switch (errorFlag) {
+.             default:                // normally
+.                 println("shift\tfrom state "+from+" to "+to);
+.                 break;
+.             case 0: case 1: case 2:        // in error recovery
+.                 println("shift\tfrom state "+from+" to "+to
+.                         +"\t"+errorFlag+" left to recover");
+.                 break;
+.             case 3:                // normally
+.                 println("shift\tfrom state "+from+" to "+to+"\ton error");
+.                 break;
+.             }
+.         }
+.         
+.         public void pop (int state) {
+.             println("pop\tstate "+state+"\ton error");
+.         }
+.         
+.         public void discard (int state, int token, string name, Object value) {
+.             println("discard\tstate "+state+"\ttoken "+name+"\tvalue "+value);
+.         }
+.         
+.         public void reduce (int from, int to, int rule, string text, int len) {
+.             println("reduce\tstate "+from+"\tuncover "+to
+.                     +"\trule ("+rule+") "+text);
+.         }
+.         
+.         public void shift (int from, int to) {
+.             println("goto\tfrom state "+from+" to "+to);
+.         }
+.         
+.         public void accept (Object value) {
+.             println("accept\tvalue "+value);
+.         }
+.         
+.         public void error (string message) {
+.             println("error\t"+message);
+.         }
+.         
+.         public void reject () {
+.             println("reject");
+.         }
+.         
+.     }
 .}
 .// %token constants
 . class Token {

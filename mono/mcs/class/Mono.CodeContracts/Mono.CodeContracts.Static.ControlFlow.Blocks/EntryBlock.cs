@@ -2,7 +2,7 @@
 // EntryBlock.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,19 +29,19 @@
 using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-	class EntryBlock<Label> : EntryExitBlock<Label> {
-		public EntryBlock (SubroutineBase<Label> subroutine, ref int idGen)
-			: base (subroutine, ref idGen)
-		{
-		}
+    class EntryBlock<Label> : EntryExitBlock<Label> {
+        public EntryBlock (SubroutineBase<Label> subroutine, ref int idGen)
+            : base (subroutine, ref idGen)
+        {
+        }
 
-		public override Result ForwardDecode<Data, Result, Visitor> (APC pc, Visitor visitor, Data data)
-		{
-			if (pc.Index != 0 || pc.SubroutineContext != null || !Subroutine.IsMethod)
-				return visitor.Nop (pc, data);
+        public override Result ForwardDecode<Data, Result, Visitor> (APC pc, Visitor visitor, Data data)
+        {
+            if (pc.Index != 0 || pc.SubroutineContext != null || !Subroutine.IsMethod)
+                return visitor.Nop (pc, data);
 
-			var methodInfo = Subroutine as IMethodInfo;
-			return visitor.Entry (pc, methodInfo.Method, data);
-		}
-	}
+            var methodInfo = Subroutine as IMethodInfo;
+            return visitor.Entry (pc, methodInfo.Method, data);
+        }
+    }
 }

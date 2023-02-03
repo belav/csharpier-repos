@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,24 +28,24 @@ using System.ComponentModel;
 
 namespace System.Windows.Markup {
 
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	[Browsable (false)]
-	public class ServiceProviders : IServiceProvider
-	{
-		public ServiceProviders ()
-		{
-			throw new NotImplementedException ();
-		}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    [Browsable (false)]
+    public class ServiceProviders : IServiceProvider
+    {
+        public ServiceProviders ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void AddService (Type serviceType, object service)
-		{
-			throw new NotImplementedException ();
-		}
+        public void AddService (Type serviceType, object service)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public object GetService (Type serviceType)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public object GetService (Type serviceType)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

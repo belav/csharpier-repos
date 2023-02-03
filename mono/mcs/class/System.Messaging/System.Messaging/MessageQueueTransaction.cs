@@ -35,71 +35,71 @@ using Mono.Messaging;
 namespace System.Messaging 
 {
 
-	// TODO: have to comply with 'This type is safe for multithreaded operations'
-	public class MessageQueueTransaction : IDisposable 
-	{
-		private readonly IMessageQueueTransaction delegateTx;
-		private readonly object syncObj = new object ();
-		private bool isDisposed = false;
+    // TODO: have to comply with 'This type is safe for multithreaded operations'
+    public class MessageQueueTransaction : IDisposable 
+    {
+        private readonly IMessageQueueTransaction delegateTx;
+        private readonly object syncObj = new object ();
+        private bool isDisposed = false;
 
-		public MessageQueueTransaction () : this (GetMessageQueueTransaction ())
-		{
-		}
-		
-		internal MessageQueueTransaction (IMessageQueueTransaction delegateTx)
-		{
-			this.delegateTx = delegateTx;
-		}
-		
-		public MessageQueueTransactionStatus Status 
-		{
-			get { 
-				return (MessageQueueTransactionStatus) delegateTx.Status;
-			}
-		}
-		
-		internal IMessageQueueTransaction DelegateTx {
-			get { return delegateTx; }
-		}
-		
-		private static IMessageQueueTransaction GetMessageQueueTransaction ()
-		{
-			return MessagingProviderLocator.GetProvider ().CreateMessageQueueTransaction ();
-		}
-			
-		public void Abort ()
-		{
-			delegateTx.Abort ();
-		}
-		
-		public void Begin ()
-		{
-			delegateTx.Begin ();
-		}
-		
-		public void Commit ()
-		{
-			delegateTx.Commit ();
-		}
+        public MessageQueueTransaction () : this (GetMessageQueueTransaction ())
+        {
+        }
+        
+        internal MessageQueueTransaction (IMessageQueueTransaction delegateTx)
+        {
+            this.delegateTx = delegateTx;
+        }
+        
+        public MessageQueueTransactionStatus Status 
+        {
+            get { 
+                return (MessageQueueTransactionStatus) delegateTx.Status;
+            }
+        }
+        
+        internal IMessageQueueTransaction DelegateTx {
+            get { return delegateTx; }
+        }
+        
+        private static IMessageQueueTransaction GetMessageQueueTransaction ()
+        {
+            return MessagingProviderLocator.GetProvider ().CreateMessageQueueTransaction ();
+        }
+            
+        public void Abort ()
+        {
+            delegateTx.Abort ();
+        }
+        
+        public void Begin ()
+        {
+            delegateTx.Begin ();
+        }
+        
+        public void Commit ()
+        {
+            delegateTx.Commit ();
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
-		
-		protected virtual void Dispose (bool disposing)
-		{
-			lock (syncObj) {
-				if (!isDisposed && disposing) {
-					delegateTx.Dispose ();
-				}
-			}
-		}
-		
-		~MessageQueueTransaction()
-		{
-			Dispose ();
-		}
-	}
+        public void Dispose ()
+        {
+            Dispose (true);
+            GC.SuppressFinalize (this);
+        }
+        
+        protected virtual void Dispose (bool disposing)
+        {
+            lock (syncObj) {
+                if (!isDisposed && disposing) {
+                    delegateTx.Dispose ();
+                }
+            }
+        }
+        
+        ~MessageQueueTransaction()
+        {
+            Dispose ();
+        }
+    }
 }

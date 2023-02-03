@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IDocumentProjectItem
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -34,10 +34,10 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-	public interface IDocumentProjectItem
-	{
-		Stream GetContents ();
-		void Open ();
-	}
+    public interface IDocumentProjectItem
+    {
+        Stream GetContents ();
+        void Open ();
+    }
 }
 

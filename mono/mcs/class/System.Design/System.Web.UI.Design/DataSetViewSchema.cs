@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DataSetViewSchema
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,30 +35,30 @@ using System.Data;
 
 namespace System.Web.UI.Design {
 
-	public sealed class DataSetViewSchema : IDataSourceViewSchema
-	{
-		[MonoTODO]
-		public DataSetViewSchema (DataTable dataTable)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class DataSetViewSchema : IDataSourceViewSchema
+    {
+        [MonoTODO]
+        public DataSetViewSchema (DataTable dataTable)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public string Name {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public IDataSourceViewSchema [] GetChildren ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public IDataSourceViewSchema [] GetChildren ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public IDataSourceFieldSchema [] GetFields ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public IDataSourceFieldSchema [] GetFields ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

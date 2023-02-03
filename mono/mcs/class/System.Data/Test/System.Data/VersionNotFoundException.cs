@@ -34,43 +34,43 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture]
-	class VersionNotFoundExceptionTest
-	{
-		[Test]
-		[ExpectedException(typeof(VersionNotFoundException))]
-		public void Generate1()
-		{
-			DataTable tbl = DataProvider.CreateChildDataTable();
-			DataRow drParent = tbl.Rows[0];
-			drParent.Delete();
-			tbl.AcceptChanges();
-	        
-			object obj = drParent[0,DataRowVersion.Proposed];
-		}
+    [TestFixture]
+    class VersionNotFoundExceptionTest
+    {
+        [Test]
+        [ExpectedException(typeof(VersionNotFoundException))]
+        public void Generate1()
+        {
+            DataTable tbl = DataProvider.CreateChildDataTable();
+            DataRow drParent = tbl.Rows[0];
+            drParent.Delete();
+            tbl.AcceptChanges();
+            
+            object obj = drParent[0,DataRowVersion.Proposed];
+        }
 
-		[Test]
-		[ExpectedException(typeof(VersionNotFoundException))]
-		public void Generate2()
-		{
-			DataTable tbl = DataProvider.CreateChildDataTable();
-			DataRow drParent = tbl.Rows[0];
-			drParent.Delete();
-			tbl.AcceptChanges();
-	        
-			object obj = drParent[0,DataRowVersion.Current];
-		}
+        [Test]
+        [ExpectedException(typeof(VersionNotFoundException))]
+        public void Generate2()
+        {
+            DataTable tbl = DataProvider.CreateChildDataTable();
+            DataRow drParent = tbl.Rows[0];
+            drParent.Delete();
+            tbl.AcceptChanges();
+            
+            object obj = drParent[0,DataRowVersion.Current];
+        }
 
-		[Test]
-		[ExpectedException(typeof(VersionNotFoundException))]
-		public void Generate3()
-		{
-			DataTable tbl = DataProvider.CreateChildDataTable();
-			DataRow drParent = tbl.Rows[0];
-			drParent.Delete();
-			tbl.AcceptChanges();
-	        
-			object obj = drParent[0,DataRowVersion.Original];
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(VersionNotFoundException))]
+        public void Generate3()
+        {
+            DataTable tbl = DataProvider.CreateChildDataTable();
+            DataRow drParent = tbl.Rows[0];
+            drParent.Delete();
+            tbl.AcceptChanges();
+            
+            object obj = drParent[0,DataRowVersion.Original];
+        }
+    }
 }

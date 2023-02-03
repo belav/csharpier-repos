@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
+// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -596,10 +596,10 @@ namespace System.Json
             return result;
         }
 
-	private static bool TryGuidParse (string value, out Guid guid)
-	{
-		return Guid.TryParse (value, out guid);
-	}
+    private static bool TryGuidParse (string value, out Guid guid)
+    {
+        return Guid.TryParse (value, out guid);
+    }
 
         private static ConvertResult StringToGuid(string valueString)
         {

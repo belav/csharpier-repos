@@ -2,7 +2,7 @@
 // System.Web.Compilation.GlobalAsaxCompiler
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002,2003 Ximian, Inc (http://www.ximian.com)
 // (c) 2004 Novell, Inc. (http://www.novell.com)
@@ -36,71 +36,71 @@ using System.Web.Util;
 
 namespace System.Web.Compilation
 {
-	class GlobalAsaxCompiler : BaseCompiler
-	{
-		ApplicationFileParser parser;
-		static ArrayList applicationObjectTags = new ArrayList (1);
-		static ArrayList sessionObjectTags = new ArrayList (1);
+    class GlobalAsaxCompiler : BaseCompiler
+    {
+        ApplicationFileParser parser;
+        static ArrayList applicationObjectTags = new ArrayList (1);
+        static ArrayList sessionObjectTags = new ArrayList (1);
 
-		public GlobalAsaxCompiler (ApplicationFileParser parser)
-			: base (parser)
-		{
-			applicationObjectTags.Clear ();
-			sessionObjectTags.Clear ();
-			this.parser = parser;
-		}
+        public GlobalAsaxCompiler (ApplicationFileParser parser)
+            : base (parser)
+        {
+            applicationObjectTags.Clear ();
+            sessionObjectTags.Clear ();
+            this.parser = parser;
+        }
 
-		public static Type CompileApplicationType (ApplicationFileParser parser)
-		{
-			AspGenerator generator = new AspGenerator (parser);
-			return generator.GetCompiledType ();
-		}
+        public static Type CompileApplicationType (ApplicationFileParser parser)
+        {
+            AspGenerator generator = new AspGenerator (parser);
+            return generator.GetCompiledType ();
+        }
 
-		protected internal override void CreateMethods ()
-		{
-			base.CreateMethods ();
-			CreateProfileProperty ();
-			ProcessObjects (parser.RootBuilder);
-		}
+        protected internal override void CreateMethods ()
+        {
+            base.CreateMethods ();
+            CreateProfileProperty ();
+            ProcessObjects (parser.RootBuilder);
+        }
 
-		void ProcessObjects (ControlBuilder builder)
-		{
-			if (builder.Children == null)
-				return;
+        void ProcessObjects (ControlBuilder builder)
+        {
+            if (builder.Children == null)
+                return;
 
-			foreach (object t in builder.Children) {
-				if (!(t is ObjectTagBuilder))
-					continue;
+            foreach (object t in builder.Children) {
+                if (!(t is ObjectTagBuilder))
+                    continue;
 
-				ObjectTagBuilder tag = (ObjectTagBuilder) t;
-				if (tag.Scope == null) {
-					string fname = CreateFieldForObject (tag.Type, tag.ObjectID);
-					CreatePropertyForObject (tag.Type, tag.ObjectID, fname, true);
-					continue;
-				}
-				
-				if (String.Compare (tag.Scope, "session", true, Helpers.InvariantCulture) == 0) {
-					sessionObjectTags.Add (tag);
-					CreateApplicationOrSessionPropertyForObject (tag.Type, tag.ObjectID,
-										     false, false);
-				} else if (String.Compare (tag.Scope, "application", true, Helpers.InvariantCulture) == 0) {
-					applicationObjectTags.Add (tag);
-					CreateFieldForObject (tag.Type, tag.ObjectID);
-					CreateApplicationOrSessionPropertyForObject (tag.Type, tag.ObjectID,
-										     true, false);
-				} else {
-					throw new ParseException (tag.Location, "Invalid scope: " + tag.Scope);
-				}
-			}
-		}
-		
-		internal static ArrayList ApplicationObjects {
-			get { return applicationObjectTags; }
-		}
+                ObjectTagBuilder tag = (ObjectTagBuilder) t;
+                if (tag.Scope == null) {
+                    string fname = CreateFieldForObject (tag.Type, tag.ObjectID);
+                    CreatePropertyForObject (tag.Type, tag.ObjectID, fname, true);
+                    continue;
+                }
+                
+                if (String.Compare (tag.Scope, "session", true, Helpers.InvariantCulture) == 0) {
+                    sessionObjectTags.Add (tag);
+                    CreateApplicationOrSessionPropertyForObject (tag.Type, tag.ObjectID,
+                                             false, false);
+                } else if (String.Compare (tag.Scope, "application", true, Helpers.InvariantCulture) == 0) {
+                    applicationObjectTags.Add (tag);
+                    CreateFieldForObject (tag.Type, tag.ObjectID);
+                    CreateApplicationOrSessionPropertyForObject (tag.Type, tag.ObjectID,
+                                             true, false);
+                } else {
+                    throw new ParseException (tag.Location, "Invalid scope: " + tag.Scope);
+                }
+            }
+        }
+        
+        internal static ArrayList ApplicationObjects {
+            get { return applicationObjectTags; }
+        }
 
-		internal static ArrayList SessionObjects {
-			get { return sessionObjectTags; }
-		}
-	}
+        internal static ArrayList SessionObjects {
+            get { return sessionObjectTags; }
+        }
+    }
 }
 

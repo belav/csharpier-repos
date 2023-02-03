@@ -1,9 +1,9 @@
 //
 // CompiledTemplateBuilderCas.cs 
-//	- CAS unit tests for System.Web.UI.CompiledTemplateBuilder
+//    - CAS unit tests for System.Web.UI.CompiledTemplateBuilder
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,41 +39,41 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CompiledTemplateBuilderCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CompiledTemplateBuilderCas : AspNetHostingMinimal {
 
-		private Control control;
+        private Control control;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			control = new Control ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            control = new Control ();
+        }
 
-		private void BuildTemplate (Control control)
-		{
-		}
+        private void BuildTemplate (Control control)
+        {
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CompiledTemplateBuilder ctb = new CompiledTemplateBuilder (new BuildTemplateMethod (BuildTemplate));
-			ctb.InstantiateIn (control);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            CompiledTemplateBuilder ctb = new CompiledTemplateBuilder (new BuildTemplateMethod (BuildTemplate));
+            ctb.InstantiateIn (control);
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (BuildTemplateMethod) });
-			Assert.IsNotNull (ci, ".ctor(BuildTemplateMethod)");
-			return ci.Invoke (new object[1] { new BuildTemplateMethod (BuildTemplate) });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (BuildTemplateMethod) });
+            Assert.IsNotNull (ci, ".ctor(BuildTemplateMethod)");
+            return ci.Invoke (new object[1] { new BuildTemplateMethod (BuildTemplate) });
+        }
 
-		public override Type Type {
-			get { return typeof (CompiledTemplateBuilder); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (CompiledTemplateBuilder); }
+        }
+    }
 }

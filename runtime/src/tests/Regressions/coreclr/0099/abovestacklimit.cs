@@ -3,15 +3,15 @@
 using System;
 
 class Test_abovestacklimit{
-	public static int Main(){
-		int retVal;
+    public static int Main(){
+        int retVal;
 
-		TestLibrary.TestFramework.BeginTestCase("Jitting a large method");
+        TestLibrary.TestFramework.BeginTestCase("Jitting a large method");
 
-		TestLibrary.TestFramework.BeginScenario("Jitting ~8099 arguments");
+        TestLibrary.TestFramework.BeginScenario("Jitting ~8099 arguments");
 
-		try{
-			Method(
+        try{
+            Method(
 0,
 1,
 2,
@@ -8112,20 +8112,20 @@ class Test_abovestacklimit{
 8097,
 8098
 );
-			TestLibrary.TestFramework.LogInformation("Method JITTed and ran");
+            TestLibrary.TestFramework.LogInformation("Method JITTed and ran");
 
-			retVal = 100;
-		}catch(Exception e){
-			TestLibrary.TestFramework.LogError("000", "Unexpected exception: " + e);
-			retVal = 0;
-		}
+            retVal = 100;
+        }catch(Exception e){
+            TestLibrary.TestFramework.LogError("000", "Unexpected exception: " + e);
+            retVal = 0;
+        }
 
-		TestLibrary.TestFramework.LogInformation("Done");
-		TestLibrary.TestFramework.EndTestCase();
-		return retVal;
-	}
+        TestLibrary.TestFramework.LogInformation("Done");
+        TestLibrary.TestFramework.EndTestCase();
+        return retVal;
+    }
 
-	public static int Method(
+    public static int Method(
 long arg0,
 long arg1,
 long arg2,
@@ -16225,7 +16225,7 @@ long arg8095,
 long arg8096,
 long arg8097,
 long arg8098){
-		return 100;
-	}
+        return 100;
+    }
 
 }

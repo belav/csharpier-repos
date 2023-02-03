@@ -31,63 +31,63 @@
 
 namespace Mono.Cecil {
 
-	using System;
-	using System.Collections;
+    using System;
+    using System.Collections;
 
-	using Mono.Cecil.Cil;
+    using Mono.Cecil.Cil;
 
-	internal sealed class ResourceCollection : CollectionBase, IReflectionStructureVisitable {
+    internal sealed class ResourceCollection : CollectionBase, IReflectionStructureVisitable {
 
-		ModuleDefinition m_container;
+        ModuleDefinition m_container;
 
-		public Resource this [int index] {
-			get { return List [index] as Resource; }
-			set { List [index] = value; }
-		}
+        public Resource this [int index] {
+            get { return List [index] as Resource; }
+            set { List [index] = value; }
+        }
 
-		public ModuleDefinition Container {
-			get { return m_container; }
-		}
+        public ModuleDefinition Container {
+            get { return m_container; }
+        }
 
-		public ResourceCollection (ModuleDefinition container)
-		{
-			m_container = container;
-		}
+        public ResourceCollection (ModuleDefinition container)
+        {
+            m_container = container;
+        }
 
-		public void Add (Resource value)
-		{
-			List.Add (value);
-		}
+        public void Add (Resource value)
+        {
+            List.Add (value);
+        }
 
-		public bool Contains (Resource value)
-		{
-			return List.Contains (value);
-		}
+        public bool Contains (Resource value)
+        {
+            return List.Contains (value);
+        }
 
-		public int IndexOf (Resource value)
-		{
-			return List.IndexOf (value);
-		}
+        public int IndexOf (Resource value)
+        {
+            return List.IndexOf (value);
+        }
 
-		public void Insert (int index, Resource value)
-		{
-			List.Insert (index, value);
-		}
+        public void Insert (int index, Resource value)
+        {
+            List.Insert (index, value);
+        }
 
-		public void Remove (Resource value)
-		{
-			List.Remove (value);
-		}
+        public void Remove (Resource value)
+        {
+            List.Remove (value);
+        }
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is Resource))
-				throw new ArgumentException ("Must be of type " + typeof (Resource).FullName);
-		}
+        protected override void OnValidate (object o)
+        {
+            if (! (o is Resource))
+                throw new ArgumentException ("Must be of type " + typeof (Resource).FullName);
+        }
 
-		public void Accept (IReflectionStructureVisitor visitor)
-		{
-			visitor.VisitResourceCollection (this);
-		}
-	}
+        public void Accept (IReflectionStructureVisitor visitor)
+        {
+            visitor.VisitResourceCollection (this);
+        }
+    }
 }

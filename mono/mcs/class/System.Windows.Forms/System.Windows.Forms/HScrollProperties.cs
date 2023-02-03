@@ -18,16 +18,16 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // Authors:
-//	Olivier Dufour  olivier.duff@free.fr
+//    Olivier Dufour  olivier.duff@free.fr
 //
 
 namespace System.Windows.Forms
 {
-	public class HScrollProperties : ScrollProperties
-	{
-		public HScrollProperties (ScrollableControl container) : base (container)
-		{
-			scroll_bar = container.hscrollbar;
-		}
-	}
+    public class HScrollProperties : ScrollProperties
+    {
+        public HScrollProperties (ScrollableControl container) : base (container)
+        {
+            scroll_bar = container.hscrollbar;
+        }
+    }
 }

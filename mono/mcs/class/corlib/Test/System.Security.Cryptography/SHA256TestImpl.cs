@@ -2,7 +2,7 @@
 // SHA256TestImpl.cs
 //
 // Author:
-//	Alexander Köplinger  <alkpli@microsoft.com>
+//    Alexander Köplinger  <alkpli@microsoft.com>
 //
 // Copyright (C) 2017 Microsoft
 //
@@ -35,9 +35,9 @@ using System.Text;
 namespace MonoTests.System.Security.Cryptography
 {
 
-	[TestFixture]
-	public class SHA256TestImpl : SHA256TestBase {
+    [TestFixture]
+    public class SHA256TestImpl : SHA256TestBase {
 
-	}
+    }
 
 }

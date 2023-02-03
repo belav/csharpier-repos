@@ -2,17 +2,17 @@
 
 namespace Reference
 {
-	public interface IB
-	{
-	}
+    public interface IB
+    {
+    }
 
-	public interface IA : IHide
-	{
-		new IB Equals { get; }
-	}
-	
-	public interface IHide
-	{
-		bool Equals(object o);
-	}
+    public interface IA : IHide
+    {
+        new IB Equals { get; }
+    }
+    
+    public interface IHide
+    {
+        bool Equals(object o);
+    }
 }

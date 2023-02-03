@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,41 +14,41 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System;
-	using System.ComponentModel;
-	using System.Globalization;
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
 
-	public class PhoneConverter : TypeConverter
-	{
-		public override bool CanConvertFrom(ITypeDescriptorContext context,
-		                                    Type sourceType)
-		{
-			if (sourceType == typeof(string))
-			{
-				return true;
-			}
-			return base.CanConvertFrom(context, sourceType);
-		}
+    public class PhoneConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context,
+                                            Type sourceType)
+        {
+            if (sourceType == typeof(string))
+            {
+                return true;
+            }
+            return base.CanConvertFrom(context, sourceType);
+        }
 
-		public override object ConvertFrom(ITypeDescriptorContext context,
-		                                   CultureInfo culture, object value)
-		{
-			if (value is string)
-			{
-				string[] fields = ((string)value).Split(new char[] { ',' });
-				return new Phone(fields[0], fields[1]);
-			}
-			return base.ConvertFrom(context, culture, value);
-		}
+        public override object ConvertFrom(ITypeDescriptorContext context,
+                                           CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                string[] fields = ((string)value).Split(new char[] { ',' });
+                return new Phone(fields[0], fields[1]);
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
 
-		public override object ConvertTo(ITypeDescriptorContext context,
-		                                 CultureInfo culture, object value, Type destinationType)
-		{
-			if (destinationType == typeof(string))
-			{
-				return ((Phone)value).Number + "," + ((Phone)value).Extension;
-			}
-			return base.ConvertTo(context, culture, value, destinationType);
-		}
-	}
+        public override object ConvertTo(ITypeDescriptorContext context,
+                                         CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+            {
+                return ((Phone)value).Number + "," + ((Phone)value).Extension;
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+    }
 }

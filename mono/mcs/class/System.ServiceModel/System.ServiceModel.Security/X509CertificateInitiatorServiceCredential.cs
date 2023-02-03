@@ -2,7 +2,7 @@
 // X509CertificateInitiatorServiceCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,42 +36,42 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class X509CertificateInitiatorServiceCredential
-	{
-		internal X509CertificateInitiatorServiceCredential ()
-		{
-		}
+    public sealed class X509CertificateInitiatorServiceCredential
+    {
+        internal X509CertificateInitiatorServiceCredential ()
+        {
+        }
 
-		X509ClientCertificateAuthentication auth =
-			new X509ClientCertificateAuthentication ();
-		X509Certificate2 certificate;
+        X509ClientCertificateAuthentication auth =
+            new X509ClientCertificateAuthentication ();
+        X509Certificate2 certificate;
 
-		internal X509CertificateInitiatorServiceCredential Clone ()
-		{
-			return new X509CertificateInitiatorServiceCredential () { auth = this.auth.Clone (), certificate = this.certificate };
-		}
+        internal X509CertificateInitiatorServiceCredential Clone ()
+        {
+            return new X509CertificateInitiatorServiceCredential () { auth = this.auth.Clone (), certificate = this.certificate };
+        }
 
-		public X509ClientCertificateAuthentication Authentication {
-			get { return auth; }
-		}
+        public X509ClientCertificateAuthentication Authentication {
+            get { return auth; }
+        }
 
-		public X509Certificate2 Certificate {
-			get { return certificate; }
-			set { certificate = value; }
-		}
+        public X509Certificate2 Certificate {
+            get { return certificate; }
+            set { certificate = value; }
+        }
 
-		public void SetCertificate (StoreLocation storeLocation,
-			StoreName storeName, X509FindType findType,
-			object findValue)
-		{
-			certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
-		}
+        public void SetCertificate (StoreLocation storeLocation,
+            StoreName storeName, X509FindType findType,
+            object findValue)
+        {
+            certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+        }
 
-		public void SetCertificate (
-			string subjectName, StoreLocation storeLocation,
-			StoreName storeName)
-		{
-			certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
-		}
-	}
+        public void SetCertificate (
+            string subjectName, StoreLocation storeLocation,
+            StoreName storeName)
+        {
+            certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
+        }
+    }
 }

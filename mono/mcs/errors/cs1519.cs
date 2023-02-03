@@ -3,5 +3,5 @@
 
 class C
 {   
-	unchecked const decimal d = 79m;
+    unchecked const decimal d = 79m;
 }

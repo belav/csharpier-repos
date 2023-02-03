@@ -20,11 +20,11 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.Windows.Threading {
 
-	public delegate void DispatcherUnhandledExceptionEventHandler (object sender,
-								       DispatcherUnhandledExceptionEventArgs e);
+    public delegate void DispatcherUnhandledExceptionEventHandler (object sender,
+                                       DispatcherUnhandledExceptionEventArgs e);
 }

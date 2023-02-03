@@ -7,6 +7,6 @@ class C
 
 public class PublicClass
 {
-	public const C member = null;
+    public const C member = null;
 }
 

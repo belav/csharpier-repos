@@ -2,7 +2,7 @@
 // TreeViewCas.cs - CAS unit tests for System.Web.UI.WebControls.TreeView
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,23 +38,23 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TreeViewCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class TreeViewCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TreeViewTest unit = new TreeViewTest ();
-			unit.Defaults ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            TreeViewTest unit = new TreeViewTest ();
+            unit.Defaults ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (TreeView); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (TreeView); }
+        }
+    }
 }
 

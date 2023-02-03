@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	X (int arg)
-	{
-		const int x = arg;
-	}
+    X (int arg)
+    {
+        const int x = arg;
+    }
 }

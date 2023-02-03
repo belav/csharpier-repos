@@ -3,12 +3,12 @@
 
 class A 
 {
-	class B<T> 
-	{ 
-	}
-	
-	static void Main() 
-	{
-		B b = new B<A>();
-	}
+    class B<T> 
+    { 
+    }
+    
+    static void Main() 
+    {
+        B b = new B<A>();
+    }
 }

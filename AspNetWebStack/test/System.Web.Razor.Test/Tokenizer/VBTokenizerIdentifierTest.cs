@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Web.Razor.Tokenizer.Symbols;
@@ -47,25 +47,25 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Identifier_Can_Start_With_Titlecase_Letter()
         {
-            TestTokenizer("ῼfoo", new VBSymbol(0, 0, 0, "ῼfoo", VBSymbolType.Identifier));
+            TestTokenizer("?foo", new VBSymbol(0, 0, 0, "?foo", VBSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Start_With_Letter_Modifier()
         {
-            TestTokenizer("ᵊfoo", new VBSymbol(0, 0, 0, "ᵊfoo", VBSymbolType.Identifier));
+            TestTokenizer("?foo", new VBSymbol(0, 0, 0, "?foo", VBSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Start_With_Other_Letter()
         {
-            TestTokenizer("ƻfoo", new VBSymbol(0, 0, 0, "ƻfoo", VBSymbolType.Identifier));
+            TestTokenizer("?foo", new VBSymbol(0, 0, 0, "?foo", VBSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Start_With_Number_Letter()
         {
-            TestTokenizer("Ⅽool", new VBSymbol(0, 0, 0, "Ⅽool", VBSymbolType.Identifier));
+            TestTokenizer("?ool", new VBSymbol(0, 0, 0, "?ool", VBSymbolType.Identifier));
         }
 
         [Fact]
@@ -77,25 +77,25 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Identifier_Can_Contain_Spacing_Combining_Mark()
         {
-            TestTokenizer("fooः", new VBSymbol(0, 0, 0, "fooः", VBSymbolType.Identifier));
+            TestTokenizer("foo?", new VBSymbol(0, 0, 0, "foo?", VBSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Contain_Non_English_Digit()
         {
-            TestTokenizer("foo١", new VBSymbol(0, 0, 0, "foo١", VBSymbolType.Identifier));
+            TestTokenizer("foo?", new VBSymbol(0, 0, 0, "foo?", VBSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Contain_Connector_Punctuation()
         {
-            TestTokenizer("foo‿bar", new VBSymbol(0, 0, 0, "foo‿bar", VBSymbolType.Identifier));
+            TestTokenizer("foo?bar", new VBSymbol(0, 0, 0, "foo?bar", VBSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Contain_Format_Character()
         {
-            TestTokenizer("foo؃bar", new VBSymbol(0, 0, 0, "foo؃bar", VBSymbolType.Identifier));
+            TestTokenizer("foo?bar", new VBSymbol(0, 0, 0, "foo?bar", VBSymbolType.Identifier));
         }
 
         [Fact]

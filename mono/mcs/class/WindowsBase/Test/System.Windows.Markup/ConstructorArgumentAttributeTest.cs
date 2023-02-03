@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -32,19 +32,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Markup {
 
-	[TestFixture]
-	public class ConstructorArgumentAttributeTest
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			ConstructorArgumentAttribute attr = new ConstructorArgumentAttribute ("argName");
-			Assert.AreEqual ("argName", attr.ArgumentName);
+    [TestFixture]
+    public class ConstructorArgumentAttributeTest
+    {
+        [Test]
+        public void CtorTest ()
+        {
+            ConstructorArgumentAttribute attr = new ConstructorArgumentAttribute ("argName");
+            Assert.AreEqual ("argName", attr.ArgumentName);
 
-			attr = new ConstructorArgumentAttribute (null);
-			Assert.IsNull (attr.ArgumentName);
-		}
+            attr = new ConstructorArgumentAttribute (null);
+            Assert.IsNull (attr.ArgumentName);
+        }
 
-	}
+    }
 
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Configuration;
 using System.Collections;
@@ -15,11 +15,11 @@ using System.Web.DynamicData;
 
 public partial class DynamicData_FieldTemplates_CustomFieldTemplate : System.Web.DynamicData.FieldTemplateUserControl
 {
-	public override Control DataControl
-	{
-		get
-		{
-			return Literal1;
-		}
-	}	
+    public override Control DataControl
+    {
+        get
+        {
+            return Literal1;
+        }
+    }    
 }

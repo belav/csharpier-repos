@@ -15,8 +15,8 @@ namespace System.Net.NetworkInformation
         // the readonly should be removed from the None decoration.
         public static readonly  PhysicalAddress None = new PhysicalAddress(new byte[0]);
 
-    	// constructors
-    	public PhysicalAddress(byte[] address){
+        // constructors
+        public PhysicalAddress(byte[] address){
             this.address = address;
         }
 

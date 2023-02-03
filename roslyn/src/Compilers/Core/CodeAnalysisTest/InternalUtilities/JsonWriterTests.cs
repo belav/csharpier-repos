@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -54,12 +54,12 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         // #2. 0x0085 NEXT LINE
         [InlineData(@"\u0085", (char)0x85)]
         // Between #2 and #3
-        [InlineData(@"ñ", (char)0xF1)]
+        [InlineData(@"�", (char)0xF1)]
         // #3. 0x2028 LINE SEPARATOR - 0x2029 PARAGRAPH SEPARATOR
         [InlineData(@"\u2028", (char)0x2028)]
         [InlineData(@"\u2029", (char)0x2029)]
         // Between #3 and #4
-        [InlineData(@"漢", (char)0x6F22)]
+        [InlineData(@"?", (char)0x6F22)]
         // #4. 0xD800 - 0xDFFF
         [InlineData(@"\ud800", (char)0xd800)]
         [InlineData(@"\udabc", (char)0xdabc)]
@@ -75,7 +75,7 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         }
 
         [Theory]
-        [InlineData(@"\ud83d\udc4d", "👍")]
+        [InlineData(@"\ud83d\udc4d", "??")]
         public void String(string expected, string value)
         {
             WriteInMultiplePositionsAndCheck(expected, value);

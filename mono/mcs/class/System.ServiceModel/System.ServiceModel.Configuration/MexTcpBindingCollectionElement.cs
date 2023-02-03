@@ -2,7 +2,7 @@
 // MexTcpBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class MexTcpBindingCollectionElement
-		 : MexBindingBindingCollectionElement<CustomBinding, MexTcpBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public partial class MexTcpBindingCollectionElement
+         : MexBindingBindingCollectionElement<CustomBinding, MexTcpBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static MexTcpBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static MexTcpBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public MexTcpBindingCollectionElement ()
-		{
-		}
-
-
-		// Properties
+        public MexTcpBindingCollectionElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

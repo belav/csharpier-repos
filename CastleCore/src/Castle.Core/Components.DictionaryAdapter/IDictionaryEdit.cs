@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,24 +14,24 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
-	using System.ComponentModel;
+    using System;
+    using System.ComponentModel;
 
-	/// <summary>
-	/// Contract for editing the Dictionary adapter.
-	/// </summary>
-	public interface IDictionaryEdit : IEditableObject, IRevertibleChangeTracking
-	{
-		bool CanEdit { get; }
+    /// <summary>
+    /// Contract for editing the Dictionary adapter.
+    /// </summary>
+    public interface IDictionaryEdit : IEditableObject, IRevertibleChangeTracking
+    {
+        bool CanEdit { get; }
 
-		bool IsEditing { get; }
+        bool IsEditing { get; }
 
-		bool SupportsMultiLevelEdit { get; set; }
+        bool SupportsMultiLevelEdit { get; set; }
 
-		IDisposable SuppressEditingBlock();
+        IDisposable SuppressEditingBlock();
 
-		void SuppressEditing();
+        void SuppressEditing();
 
-		void ResumeEditing();
-	}
+        void ResumeEditing();
+    }
 }

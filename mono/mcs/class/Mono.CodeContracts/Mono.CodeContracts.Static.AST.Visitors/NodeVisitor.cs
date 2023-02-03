@@ -2,7 +2,7 @@
 // NodeVisitor.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,18 +29,18 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.AST.Visitors {
-	abstract class NodeVisitor {
-		public abstract Node Visit (Node node);
+    abstract class NodeVisitor {
+        public abstract Node Visit (Node node);
 
-		public virtual List<Expression> VisitExpressionList (List<Expression> list)
-		{
-			if (list == null)
-				return null;
+        public virtual List<Expression> VisitExpressionList (List<Expression> list)
+        {
+            if (list == null)
+                return null;
 
-			for (int i = 0; i < list.Count; ++i)
-				list [i] = (Expression) Visit (list [i]);
+            for (int i = 0; i < list.Count; ++i)
+                list [i] = (Expression) Visit (list [i]);
 
-			return list;
-		}
-	}
+            return list;
+        }
+    }
 }

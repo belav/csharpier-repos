@@ -32,36 +32,36 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible(false)]
-	public sealed class COMTIIntrinsicsAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Class)]
+    [ComVisible(false)]
+    public sealed class COMTIIntrinsicsAttribute : Attribute {
 
-		#region Fields
+        #region Fields
 
-		bool val;
+        bool val;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public COMTIIntrinsicsAttribute ()
-		{
-			this.val = false;
-		}
+        public COMTIIntrinsicsAttribute ()
+        {
+            this.val = false;
+        }
 
-		public COMTIIntrinsicsAttribute (bool val)
-		{
-			this.val = val;
-		}
+        public COMTIIntrinsicsAttribute (bool val)
+        {
+            this.val = val;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public bool Value {
-			get { return val; }
-		}
+        public bool Value {
+            get { return val; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

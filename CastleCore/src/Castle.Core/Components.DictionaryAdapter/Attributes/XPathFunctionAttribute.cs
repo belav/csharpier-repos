@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,25 +14,25 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Xml.XPath;
-	using System.Xml.Xsl;
+    using System;
+    using System.Xml.XPath;
+    using System.Xml.Xsl;
 
-	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
-	public abstract class XPathFunctionAttribute : Attribute, IXsltContextFunction
-	{
-		protected XPathFunctionAttribute() { }
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
+    public abstract class XPathFunctionAttribute : Attribute, IXsltContextFunction
+    {
+        protected XPathFunctionAttribute() { }
 
-		public abstract XmlName Name { get; }
-		public abstract XPathResultType ReturnType { get; }
+        public abstract XmlName Name { get; }
+        public abstract XPathResultType ReturnType { get; }
 
-		public virtual XPathResultType[] ArgTypes { get { return NoArgs; } }
-		public virtual int Maxargs { get { return ArgTypes.Length; } }
-		public virtual int Minargs { get { return ArgTypes.Length; } }
+        public virtual XPathResultType[] ArgTypes { get { return NoArgs; } }
+        public virtual int Maxargs { get { return ArgTypes.Length; } }
+        public virtual int Minargs { get { return ArgTypes.Length; } }
 
-		public static readonly XPathResultType[]
-			NoArgs = new XPathResultType[0];
+        public static readonly XPathResultType[]
+            NoArgs = new XPathResultType[0];
 
-		public abstract object Invoke(XsltContext context, object[] args, XPathNavigator node);
-	}
+        public abstract object Invoke(XsltContext context, object[] args, XPathNavigator node);
+    }
 }

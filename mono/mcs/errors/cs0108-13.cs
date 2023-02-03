@@ -4,17 +4,17 @@
 
 public interface ISequence
 {
-	object this [int index] 
-	{
-		get;
-	}
+    object this [int index] 
+    {
+        get;
+    }
 }
 
 public interface IMutableSequence : ISequence
 {
-	object this [int index] 
-	{
-		get;
-		set;
-	}
+    object this [int index] 
+    {
+        get;
+        set;
+    }
 }

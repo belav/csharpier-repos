@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3931,25 +3931,25 @@ using System;
 
 public class C
 {
-	public static void F<TF>()
-	{
-	    var f = new Func<TF>(() => default(TF));
-	}
-	
-	public static void G<TG>()
-	{
-		var f = new Func<TG>(() => default(TG));
-	}
-	
-	public static void F<TF1, TF2>()
-	{
-		var f = new Func<TF1, TF2>(a => default(TF2));
-	}
-	
-	public static void G<TG1, TG2>()
-	{
-		var f = new Func<TG1, TG2>(a => default(TG2));
-	}
+    public static void F<TF>()
+    {
+        var f = new Func<TF>(() => default(TF));
+    }
+    
+    public static void G<TG>()
+    {
+        var f = new Func<TG>(() => default(TG));
+    }
+    
+    public static void F<TF1, TF2>()
+    {
+        var f = new Func<TF1, TF2>(a => default(TF2));
+    }
+    
+    public static void G<TG1, TG2>()
+    {
+        var f = new Func<TG1, TG2>(a => default(TG2));
+    }
 }";
             CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: m =>
             {
@@ -4012,15 +4012,15 @@ using System;
 
 public class C
 {
-	public static void F<TF>() where TF : class
-	{
-	    var f = new Func<TF>(() => default(TF));
-	}
-	
-	public static void G<TG>() where TG : struct
-	{
-		var f = new Func<TG>(() => default(TG));
-	}
+    public static void F<TF>() where TF : class
+    {
+        var f = new Func<TF>(() => default(TF));
+    }
+    
+    public static void G<TG>() where TG : struct
+    {
+        var f = new Func<TG>(() => default(TG));
+    }
 }";
             CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: m =>
             {
@@ -4041,25 +4041,25 @@ using System;
 
 public class C
 {
-	public void F<TF>()
-	{
-	    var f = new Func<TF>(() => { this.F(); return default(TF); });
-	}
-	
-	public void G<TG>()
-	{
-		var f = new Func<TG>(() => { this.F(); return default(TG); });
-	}
-	
-	public void F<TF1, TF2>()
-	{
-		var f = new Func<TF1, TF2>(a => { this.F(); return default(TF2); });
-	}
-	
-	public void G<TG1, TG2>()
-	{
-		var f = new Func<TG1, TG2>(a => { this.F(); return default(TG2); });
-	}
+    public void F<TF>()
+    {
+        var f = new Func<TF>(() => { this.F(); return default(TF); });
+    }
+    
+    public void G<TG>()
+    {
+        var f = new Func<TG>(() => { this.F(); return default(TG); });
+    }
+    
+    public void F<TF1, TF2>()
+    {
+        var f = new Func<TF1, TF2>(a => { this.F(); return default(TF2); });
+    }
+    
+    public void G<TG1, TG2>()
+    {
+        var f = new Func<TG1, TG2>(a => { this.F(); return default(TG2); });
+    }
 
     private void F() {}
 }";

@@ -2,7 +2,7 @@
 // System.Configuration.SubclassTypeValidatorAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,31 +30,31 @@ using System;
 
 namespace System.Configuration {
 
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class SubclassTypeValidatorAttribute : ConfigurationValidatorAttribute
-	{
-		Type baseClass;
-		ConfigurationValidatorBase instance;
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class SubclassTypeValidatorAttribute : ConfigurationValidatorAttribute
+    {
+        Type baseClass;
+        ConfigurationValidatorBase instance;
 
-		public SubclassTypeValidatorAttribute (Type baseClass)
-		{
-			this.baseClass = baseClass;
-		}
+        public SubclassTypeValidatorAttribute (Type baseClass)
+        {
+            this.baseClass = baseClass;
+        }
 
-		public Type BaseClass {
-			get {
-				return baseClass;
-			}
-		}
+        public Type BaseClass {
+            get {
+                return baseClass;
+            }
+        }
 
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
-				if (instance == null)
-					instance = new SubclassTypeValidator (baseClass);
+        public override ConfigurationValidatorBase ValidatorInstance {
+            get {
+                if (instance == null)
+                    instance = new SubclassTypeValidator (baseClass);
 
-				return instance;
-			}
-		}
-	}
+                return instance;
+            }
+        }
+    }
 }
 

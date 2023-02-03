@@ -7,36 +7,36 @@ using System.Reflection;
 
 namespace Moq
 {
-	/// <summary>
-	///   Setup used by <see cref="Mock.SetupAllProperties(Mock)"/> for property getters.
-	/// </summary>
-	internal sealed class StubbedPropertyGetterSetup : Setup
-	{
-		private static Expression[] noArguments = new Expression[0];
+    /// <summary>
+    ///   Setup used by <see cref="Mock.SetupAllProperties(Mock)"/> for property getters.
+    /// </summary>
+    internal sealed class StubbedPropertyGetterSetup : Setup
+    {
+        private static Expression[] noArguments = new Expression[0];
 
-		private Func<object> getter;
+        private Func<object> getter;
 
-		public StubbedPropertyGetterSetup(Mock mock, LambdaExpression originalExpression, MethodInfo method, Func<object> getter)
-			: base(originalExpression: null, mock, new InvocationShape(originalExpression, method, noArguments))
-		{
-			this.getter = getter;
+        public StubbedPropertyGetterSetup(Mock mock, LambdaExpression originalExpression, MethodInfo method, Func<object> getter)
+            : base(originalExpression: null, mock, new InvocationShape(originalExpression, method, noArguments))
+        {
+            this.getter = getter;
 
-			this.MarkAsVerifiable();
-		}
+            this.MarkAsVerifiable();
+        }
 
-		protected override void ExecuteCore(Invocation invocation)
-		{
-			invocation.ReturnValue = this.getter.Invoke();
-		}
+        protected override void ExecuteCore(Invocation invocation)
+        {
+            invocation.ReturnValue = this.getter.Invoke();
+        }
 
-		public override bool TryGetReturnValue(out object returnValue)
-		{
-			returnValue = this.getter.Invoke();
-			return true;
-		}
+        public override bool TryGetReturnValue(out object returnValue)
+        {
+            returnValue = this.getter.Invoke();
+            return true;
+        }
 
-		protected override void VerifySelf()
-		{
-		}
-	}
+        protected override void VerifySelf()
+        {
+        }
+    }
 }

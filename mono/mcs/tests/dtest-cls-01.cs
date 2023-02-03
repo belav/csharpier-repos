@@ -7,15 +7,15 @@ using System.Collections.Generic;
 
 public class A
 {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 
-	public void CLSCompliantMethod (dynamic[] parameter)
-	{
-	}
+    public void CLSCompliantMethod (dynamic[] parameter)
+    {
+    }
 
-	public void CLSCompliantMethod (IEnumerable<dynamic> parameter)
-	{
-	}
+    public void CLSCompliantMethod (IEnumerable<dynamic> parameter)
+    {
+    }
 }

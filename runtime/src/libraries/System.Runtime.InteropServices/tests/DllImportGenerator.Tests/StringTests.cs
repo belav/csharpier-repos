@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -235,8 +235,8 @@ namespace DllImportGenerator.IntegrationTests
         public static IEnumerable<object[]> UnicodeStrings() => new []
         {
             new object[] { "ABCdef 123$%^" },
-            new object[] { "🍜 !! 🍜 !!"},
-            new object[] { "🌲 木 🔥 火 🌾 土 🛡 金 🌊 水" },
+            new object[] { "?? !! ?? !!"},
+            new object[] { "?? ? ?? ? ?? ? ?? ? ?? ?" },
             new object[] { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit." },
             new object[] { string.Empty },
             new object[] { null },

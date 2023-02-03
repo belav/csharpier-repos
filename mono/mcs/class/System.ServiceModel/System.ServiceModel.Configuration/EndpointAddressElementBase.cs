@@ -2,7 +2,7 @@
 // EndpointAddressElementBase.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,48 +54,48 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public class EndpointAddressElementBase
-		 : ConfigurationElement
-	{
-		ConfigurationPropertyCollection _properties;
+    public class EndpointAddressElementBase
+         : ConfigurationElement
+    {
+        ConfigurationPropertyCollection _properties;
 
-		public EndpointAddressElementBase () {
-		}
+        public EndpointAddressElementBase () {
+        }
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("address",
-			 Options = ConfigurationPropertyOptions.IsRequired,
-			 DefaultValue = null,
-			IsRequired = true)]
-		public Uri Address {
-			get { return (Uri) base ["address"]; }
-			set { base ["address"] = value; }
-		}
+        [ConfigurationProperty ("address",
+             Options = ConfigurationPropertyOptions.IsRequired,
+             DefaultValue = null,
+            IsRequired = true)]
+        public Uri Address {
+            get { return (Uri) base ["address"]; }
+            set { base ["address"] = value; }
+        }
 
-		[ConfigurationProperty ("headers",
-			 Options = ConfigurationPropertyOptions.None)]
-		public AddressHeaderCollectionElement Headers {
-			get { return (AddressHeaderCollectionElement) base ["headers"]; }
-		}
+        [ConfigurationProperty ("headers",
+             Options = ConfigurationPropertyOptions.None)]
+        public AddressHeaderCollectionElement Headers {
+            get { return (AddressHeaderCollectionElement) base ["headers"]; }
+        }
 
-		[ConfigurationProperty ("identity",
-			 Options = ConfigurationPropertyOptions.None)]
-		public IdentityElement Identity {
-			get { return (IdentityElement) base ["identity"]; }
-		}
+        [ConfigurationProperty ("identity",
+             Options = ConfigurationPropertyOptions.None)]
+        public IdentityElement Identity {
+            get { return (IdentityElement) base ["identity"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					_properties.Add (new ConfigurationProperty ("address", typeof (Uri), null, new UriTypeConverter (), null, ConfigurationPropertyOptions.IsRequired));
-					_properties.Add (new ConfigurationProperty ("headers", typeof (AddressHeaderCollectionElement), null, null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("identity", typeof (IdentityElement), null, null, null, ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
-	}
+        protected override ConfigurationPropertyCollection Properties {
+            get {
+                if (_properties == null) {
+                    _properties = new ConfigurationPropertyCollection ();
+                    _properties.Add (new ConfigurationProperty ("address", typeof (Uri), null, new UriTypeConverter (), null, ConfigurationPropertyOptions.IsRequired));
+                    _properties.Add (new ConfigurationProperty ("headers", typeof (AddressHeaderCollectionElement), null, null, null, ConfigurationPropertyOptions.None));
+                    _properties.Add (new ConfigurationProperty ("identity", typeof (IdentityElement), null, null, null, ConfigurationPropertyOptions.None));
+                }
+                return _properties;
+            }
+        }
+    }
 
 }

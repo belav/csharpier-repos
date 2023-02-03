@@ -1,9 +1,9 @@
 //
 // RC4.cs: RC4(tm) symmetric stream cipher
-//	RC4 is a trademark of RSA Security
+//    RC4 is a trademark of RSA Security
 //
 // Author:
-//	Sebastien Pouliot (sebastien@xamarin.com)
+//    Sebastien Pouliot (sebastien@xamarin.com)
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright 2013 Xamarin Inc. (http://www.xamarin.com)
@@ -36,52 +36,52 @@ using System.Security.Cryptography;
 namespace Mono.Security.Cryptography {
 
 #if !INSIDE_CORLIB
-	public
+    public
 #endif
-	abstract class RC4 : SymmetricAlgorithm {
+    abstract class RC4 : SymmetricAlgorithm {
 
-	private static KeySizes[] s_legalBlockSizes = {
-		new KeySizes (64, 64, 0)
-	};
+    private static KeySizes[] s_legalBlockSizes = {
+        new KeySizes (64, 64, 0)
+    };
 
-	private static KeySizes[] s_legalKeySizes = {
-		new KeySizes (40, 2048, 8)  
-	};
+    private static KeySizes[] s_legalKeySizes = {
+        new KeySizes (40, 2048, 8)  
+    };
 
-	public RC4() 
-	{
-		KeySizeValue = 128;
-		BlockSizeValue = 64;
-		FeedbackSizeValue = BlockSizeValue;
-		LegalBlockSizesValue = s_legalBlockSizes;
-		LegalKeySizesValue = s_legalKeySizes;
-	}
+    public RC4() 
+    {
+        KeySizeValue = 128;
+        BlockSizeValue = 64;
+        FeedbackSizeValue = BlockSizeValue;
+        LegalBlockSizesValue = s_legalBlockSizes;
+        LegalKeySizesValue = s_legalKeySizes;
+    }
 
-	// required for compatibility with .NET 2.0
-	public override byte[] IV {
-		get { return new byte [0]; }
-		set { ; }
-	}
+    // required for compatibility with .NET 2.0
+    public override byte[] IV {
+        get { return new byte [0]; }
+        set { ; }
+    }
 
-	new static public RC4 Create() 
-	{
+    new static public RC4 Create() 
+    {
 #if FULL_AOT_RUNTIME
-		return new ARC4Managed ();
+        return new ARC4Managed ();
 #else
-		return Create ("RC4");
+        return Create ("RC4");
 #endif
-	}
+    }
 
-	new static public RC4 Create (string algName) 
-	{
-		object o = CryptoConfig.CreateFromName (algName);
-		// in case machine.config isn't configured to use 
-		// any RC4 implementation
-		if (o == null) {
-			o = new ARC4Managed ();
-		}
-		return (RC4) o;
-	}
+    new static public RC4 Create (string algName) 
+    {
+        object o = CryptoConfig.CreateFromName (algName);
+        // in case machine.config isn't configured to use 
+        // any RC4 implementation
+        if (o == null) {
+            o = new ARC4Managed ();
+        }
+        return (RC4) o;
+    }
 }
 
 }

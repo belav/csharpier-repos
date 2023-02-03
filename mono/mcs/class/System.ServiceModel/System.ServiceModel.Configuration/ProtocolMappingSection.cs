@@ -2,7 +2,7 @@
 // ProtocolMappingSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,38 +54,38 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class ProtocolMappingSection : ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty collection;
+    public sealed class ProtocolMappingSection : ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty collection;
 
-		static ProtocolMappingSection ()
-		{
-			collection = new ConfigurationProperty ("", typeof (ProtocolMappingElementCollection), null, null, null, ConfigurationPropertyOptions.IsDefaultCollection);
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (collection);
-		}
+        static ProtocolMappingSection ()
+        {
+            collection = new ConfigurationProperty ("", typeof (ProtocolMappingElementCollection), null, null, null, ConfigurationPropertyOptions.IsDefaultCollection);
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (collection);
+        }
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public ProtocolMappingElementCollection ProtocolMappingCollection {
-			get { return (ProtocolMappingElementCollection) base [collection]; }
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public ProtocolMappingElementCollection ProtocolMappingCollection {
+            get { return (ProtocolMappingElementCollection) base [collection]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		protected override void InitializeDefault ()
-		{
-			base.InitializeDefault ();
-			// LAMESPEC: no https?
-			ProtocolMappingCollection.Add (new ProtocolMappingElement ("http", "basicHttpBinding", null));
-			ProtocolMappingCollection.Add (new ProtocolMappingElement ("net.tcp", "netTcpBinding", null));
-			ProtocolMappingCollection.Add (new ProtocolMappingElement ("net.msmq", "netMsmqBinding", null));
-			ProtocolMappingCollection.Add (new ProtocolMappingElement ("net.pipe", "netNamedPipeBinding", null));
-		}
-	}
+        protected override void InitializeDefault ()
+        {
+            base.InitializeDefault ();
+            // LAMESPEC: no https?
+            ProtocolMappingCollection.Add (new ProtocolMappingElement ("http", "basicHttpBinding", null));
+            ProtocolMappingCollection.Add (new ProtocolMappingElement ("net.tcp", "netTcpBinding", null));
+            ProtocolMappingCollection.Add (new ProtocolMappingElement ("net.msmq", "netMsmqBinding", null));
+            ProtocolMappingCollection.Add (new ProtocolMappingElement ("net.pipe", "netNamedPipeBinding", null));
+        }
+    }
 
 }

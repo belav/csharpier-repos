@@ -3,5 +3,5 @@
 
 class C
 {
-	long l = @0;
+    long l = @0;
 }

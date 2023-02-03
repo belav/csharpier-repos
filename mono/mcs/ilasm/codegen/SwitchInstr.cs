@@ -18,13 +18,13 @@ namespace Mono.ILASM {
                 private ArrayList label_list;
 
                 public SwitchInstr (ArrayList label_list, Location loc)
-			: base (loc)
+            : base (loc)
                 {
                         this.label_list = label_list;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-					   PEAPI.CILInstructions cil)
+                       PEAPI.CILInstructions cil)
                 {
                         int count = 0;
                         PEAPI.CILLabel[] label_array;

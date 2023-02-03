@@ -1,8 +1,8 @@
-﻿//
+//
 // SecurityAlgorithmSuiteConverter.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -34,48 +34,48 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Configuration
 {
-	sealed class SecurityAlgorithmSuiteConverter : TypeConverter
-	{
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-			return sourceType == typeof (string);
-		}
+    sealed class SecurityAlgorithmSuiteConverter : TypeConverter
+    {
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
+            return sourceType == typeof (string);
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-			string strValue = (string) value;
-			switch (strValue.ToLowerInvariant ()) {
-			case "default":
-				return SecurityAlgorithmSuite.Default;
-			case "basic128":
-				return SecurityAlgorithmSuite.Basic128;
-			case "basic128rsa15":
-				return SecurityAlgorithmSuite.Basic128Rsa15;
-			case "basic128sha256":
-				return SecurityAlgorithmSuite.Basic128Sha256;
-			case "basic128sha256rsa15":
-				return SecurityAlgorithmSuite.Basic128Sha256Rsa15;
-			case "basic192":
-				return SecurityAlgorithmSuite.Basic192;
-			case "basic192rsa15":
-				return SecurityAlgorithmSuite.Basic192Rsa15;
-			case "basic192sha256":
-				return SecurityAlgorithmSuite.Basic192Sha256;
-			case "basic192sha256rsa15":
-				return SecurityAlgorithmSuite.Basic192Sha256Rsa15;
-			case "basic256":
-				return SecurityAlgorithmSuite.Basic256;
-			case "basic256rsa15":
-				return SecurityAlgorithmSuite.Basic256Rsa15;
-			case "basic256sha256":
-				return SecurityAlgorithmSuite.Basic256Sha256;
-			case "basic256sha256rsa15":
-				return SecurityAlgorithmSuite.Basic256Sha256Rsa15;
-			}
-			throw new ArgumentException ();
-		}
+        public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+            string strValue = (string) value;
+            switch (strValue.ToLowerInvariant ()) {
+            case "default":
+                return SecurityAlgorithmSuite.Default;
+            case "basic128":
+                return SecurityAlgorithmSuite.Basic128;
+            case "basic128rsa15":
+                return SecurityAlgorithmSuite.Basic128Rsa15;
+            case "basic128sha256":
+                return SecurityAlgorithmSuite.Basic128Sha256;
+            case "basic128sha256rsa15":
+                return SecurityAlgorithmSuite.Basic128Sha256Rsa15;
+            case "basic192":
+                return SecurityAlgorithmSuite.Basic192;
+            case "basic192rsa15":
+                return SecurityAlgorithmSuite.Basic192Rsa15;
+            case "basic192sha256":
+                return SecurityAlgorithmSuite.Basic192Sha256;
+            case "basic192sha256rsa15":
+                return SecurityAlgorithmSuite.Basic192Sha256Rsa15;
+            case "basic256":
+                return SecurityAlgorithmSuite.Basic256;
+            case "basic256rsa15":
+                return SecurityAlgorithmSuite.Basic256Rsa15;
+            case "basic256sha256":
+                return SecurityAlgorithmSuite.Basic256Sha256;
+            case "basic256sha256rsa15":
+                return SecurityAlgorithmSuite.Basic256Sha256Rsa15;
+            }
+            throw new ArgumentException ();
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
+        public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+            return base.ConvertTo (context, culture, value, destinationType);
+        }
 
-	}
+    }
 }

@@ -7,21 +7,21 @@ using System.Linq;
 
 namespace Test
 {
-	static class Ex
-	{
-		public static IEnumerable<TR> Foo<T, TR> (this IEnumerable<T> t, Func<T, TR> f)
-		{
-			return null;
-		}
-	}
+    static class Ex
+    {
+        public static IEnumerable<TR> Foo<T, TR> (this IEnumerable<T> t, Func<T, TR> f)
+        {
+            return null;
+        }
+    }
 
-	public class C
-	{
-		public static void Main ()
-		{
-			int[] i = null;
-			int p;
+    public class C
+    {
+        public static void Main ()
+        {
+            int[] i = null;
+            int p;
             var prods = from pe in i.Foo (p9 => p.Value) select pe;
-		}
-	}
+        }
+    }
 }

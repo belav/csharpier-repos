@@ -28,7 +28,7 @@
 
 
 namespace Microsoft.Build.Framework {
-	public delegate void ProjectStartedEventHandler (object sender,
-							 ProjectStartedEventArgs e);
+    public delegate void ProjectStartedEventHandler (object sender,
+                             ProjectStartedEventArgs e);
 }
 

@@ -2,7 +2,7 @@
 // System.Web.HttpModuleCollection.cs
 //
 // Author:
-//	Chris Toshok (toshok@novell.com)
+//    Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -33,59 +33,59 @@ using System.Security.Permissions;
 
 namespace System.Web {
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HttpModuleCollection : NameObjectCollectionBase
-	{
-		internal HttpModuleCollection ()
-		{
-		}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HttpModuleCollection : NameObjectCollectionBase
+    {
+        internal HttpModuleCollection ()
+        {
+        }
 
-		internal void AddModule (string key, IHttpModule m)
-		{
-			BaseAdd (key, m);
-		}
+        internal void AddModule (string key, IHttpModule m)
+        {
+            BaseAdd (key, m);
+        }
 
-		public void CopyTo (Array dest, int index)
-		{
-			/* XXX this is kind of gross and inefficient
-			 * since it makes a copy of the superclass's
-			 * list */
-			object[] values = BaseGetAllValues();
-			values.CopyTo (dest, index);
-		}
-	  
-		public string GetKey (int index)
-		{
-			return BaseGetKey (index);
-		}
+        public void CopyTo (Array dest, int index)
+        {
+            /* XXX this is kind of gross and inefficient
+             * since it makes a copy of the superclass's
+             * list */
+            object[] values = BaseGetAllValues();
+            values.CopyTo (dest, index);
+        }
+      
+        public string GetKey (int index)
+        {
+            return BaseGetKey (index);
+        }
 
-		public IHttpModule Get (int index)
-		{
-			return (IHttpModule)BaseGet (index);
-		}
+        public IHttpModule Get (int index)
+        {
+            return (IHttpModule)BaseGet (index);
+        }
 
-		public IHttpModule Get (string name)
-		{
-			return (IHttpModule)BaseGet (name);
-		}
+        public IHttpModule Get (string name)
+        {
+            return (IHttpModule)BaseGet (name);
+        }
 
-		public IHttpModule this [string name] {
-			get {
-				return Get (name);
-			}
-		}
+        public IHttpModule this [string name] {
+            get {
+                return Get (name);
+            }
+        }
 
-		public IHttpModule this [int index] {
-			get {
-				return Get (index);
-			}
-		}
+        public IHttpModule this [int index] {
+            get {
+                return Get (index);
+            }
+        }
 
-		public string[] AllKeys {
-			get {
-				return BaseGetAllKeys();
-			}
-		}
-	}
+        public string[] AllKeys {
+            get {
+                return BaseGetAllKeys();
+            }
+        }
+    }
 }

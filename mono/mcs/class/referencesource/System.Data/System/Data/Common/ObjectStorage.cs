@@ -188,11 +188,11 @@ namespace System.Data.Common {
                          return Families.DATETIME;
                      }
                     else  if(dataType.IsArray) {
-                    	    return Families.ARRAY;
-                    	}
+                            return Families.ARRAY;
+                        }
                       else{
                               return Families.STRING;
-                    	  }
+                          }
                      }
             }
 
@@ -375,7 +375,7 @@ namespace System.Data.Common {
 
         override public string ConvertObjectToXml(object value) {
             if ((value == null) || (value == NullValue))// this case wont happen,  this is added in case if code in xml saver changes
-            	return String.Empty;
+                return String.Empty;
 
             Type type = DataType;
             if (type == typeof(byte[]) || (type == typeof(object) && (value is byte[]))) {
@@ -390,7 +390,7 @@ namespace System.Data.Common {
             }
 
             if (Type.GetTypeCode(value.GetType()) != TypeCode.Object) {
-            	return value.ToString();
+                return value.ToString();
             }
 
             StringWriter strwriter = new StringWriter(FormatProvider);

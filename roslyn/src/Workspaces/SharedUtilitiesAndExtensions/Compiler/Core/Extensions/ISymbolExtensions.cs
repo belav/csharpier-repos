@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -634,7 +634,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var methods = returnType.GetMembers().OfType<IMethodSymbol>();
 
-            // NOTE: (vladres) The current version of C# Spec, §7.7.7.3 'Runtime evaluation of await expressions', requires that
+            // NOTE: (vladres) The current version of C# Spec, �7.7.7.3 'Runtime evaluation of await expressions', requires that
             // NOTE: the interface method INotifyCompletion.OnCompleted or ICriticalNotifyCompletion.UnsafeOnCompleted is invoked
             // NOTE: (rather than any OnCompleted method conforming to a certain pattern).
             // NOTE: Should this code be updated to match the spec?

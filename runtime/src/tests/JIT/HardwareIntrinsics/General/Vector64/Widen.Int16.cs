@@ -325,7 +325,7 @@ namespace JIT.HardwareIntrinsics.General
                 TestLibrary.TestFramework.LogInformation($"{nameof(Vector64)}.{nameof(Vector64.Widen)}<Int16>(Vector64<SByte>): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"      firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"  lowerResult: ({string.Join(", ", lowerResult)})");
-				TestLibrary.TestFramework.LogInformation($"  upperResult: ({string.Join(", ", upperResult)})");
+                TestLibrary.TestFramework.LogInformation($"  upperResult: ({string.Join(", ", upperResult)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

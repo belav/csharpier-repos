@@ -35,55 +35,55 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class FindCriteria11 : IXmlSerializable
-	{
-		public static FindCriteria11 FromFindCriteria (FindCriteria findCriteria)
-		{
-			return new FindCriteria11 (findCriteria);
-		}
+    [XmlSchemaProvider ("GetSchema")]
+    public class FindCriteria11 : IXmlSerializable
+    {
+        public static FindCriteria11 FromFindCriteria (FindCriteria findCriteria)
+        {
+            return new FindCriteria11 (findCriteria);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
-		static XmlSchema schema = FindCriteria.BuildSchema (version);
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
+        static XmlSchema schema = FindCriteria.BuildSchema (version);
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			schemaSet.Add (schema);
-			return new XmlQualifiedName ("ProbeType", version.Namespace);
-		}
-		
-		// for deserialization
-		FindCriteria11 ()
-		{
-		}
+        public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
+        {
+            schemaSet.Add (schema);
+            return new XmlQualifiedName ("ProbeType", version.Namespace);
+        }
+        
+        // for deserialization
+        FindCriteria11 ()
+        {
+        }
 
-		internal FindCriteria11 (FindCriteria source)
-		{
-			this.source = source;
-		}
+        internal FindCriteria11 (FindCriteria source)
+        {
+            this.source = source;
+        }
 
-		FindCriteria source;
+        FindCriteria source;
 
-		public XmlSchema GetSchema ()
-		{
-			return null;
-		}
+        public XmlSchema GetSchema ()
+        {
+            return null;
+        }
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = FindCriteria.ReadXml (reader, version);
-		}
+        public void ReadXml (XmlReader reader)
+        {
+            source = FindCriteria.ReadXml (reader, version);
+        }
 
-		public FindCriteria ToFindCriteria ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method before calling this method.");
-			return source;
-		}
+        public FindCriteria ToFindCriteria ()
+        {
+            if (source == null)
+                throw new InvalidOperationException ("Call ReadXml method before calling this method.");
+            return source;
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer, version);
-		}
-	}
+        public void WriteXml (XmlWriter writer)
+        {
+            source.WriteXml (writer, version);
+        }
+    }
 }

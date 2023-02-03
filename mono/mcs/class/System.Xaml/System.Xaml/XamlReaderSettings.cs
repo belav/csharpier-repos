@@ -29,32 +29,32 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlReaderSettings
-	{
-		public XamlReaderSettings ()
-		{
-		}
+    public class XamlReaderSettings
+    {
+        public XamlReaderSettings ()
+        {
+        }
 
-		public XamlReaderSettings (XamlReaderSettings settings)
-		{
-			// null settings is allowed (!)
-			var s = settings;
-			if (s == null)
-				return;
+        public XamlReaderSettings (XamlReaderSettings settings)
+        {
+            // null settings is allowed (!)
+            var s = settings;
+            if (s == null)
+                return;
 
-			AllowProtectedMembersOnRoot = s.AllowProtectedMembersOnRoot;
-			BaseUri = s.BaseUri;
-			IgnoreUidsOnPropertyElements = s.IgnoreUidsOnPropertyElements;
-			LocalAssembly = s.LocalAssembly;
-			ProvideLineInfo = s.ProvideLineInfo;
-			ValuesMustBeString = s.ValuesMustBeString;
-		}
+            AllowProtectedMembersOnRoot = s.AllowProtectedMembersOnRoot;
+            BaseUri = s.BaseUri;
+            IgnoreUidsOnPropertyElements = s.IgnoreUidsOnPropertyElements;
+            LocalAssembly = s.LocalAssembly;
+            ProvideLineInfo = s.ProvideLineInfo;
+            ValuesMustBeString = s.ValuesMustBeString;
+        }
 
-		public bool AllowProtectedMembersOnRoot { get; set; }
-		public Uri BaseUri { get; set; }
-		public bool IgnoreUidsOnPropertyElements { get; set; }
-		public Assembly LocalAssembly { get; set; }
-		public bool ProvideLineInfo { get; set; }
-		public bool ValuesMustBeString { get; set; }
-	}
+        public bool AllowProtectedMembersOnRoot { get; set; }
+        public Uri BaseUri { get; set; }
+        public bool IgnoreUidsOnPropertyElements { get; set; }
+        public Assembly LocalAssembly { get; set; }
+        public bool ProvideLineInfo { get; set; }
+        public bool ValuesMustBeString { get; set; }
+    }
 }

@@ -33,41 +33,41 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Discovery {
 
-	[XmlRootAttribute("soap", Namespace="http://schemas.xmlsoap.org/disco/soap/", IsNullable=true)]
-	public sealed class SoapBinding  {
+    [XmlRootAttribute("soap", Namespace="http://schemas.xmlsoap.org/disco/soap/", IsNullable=true)]
+    public sealed class SoapBinding  {
 
-		#region Fields
-		
-		public const string Namespace = "http://schemas.xmlsoap.org/disco/soap/";
+        #region Fields
+        
+        public const string Namespace = "http://schemas.xmlsoap.org/disco/soap/";
 
-		private string address;
-		private XmlQualifiedName binding;
-		
-		#endregion // Fields
-		
-		#region Constructors
+        private string address;
+        private XmlQualifiedName binding;
+        
+        #endregion // Fields
+        
+        #region Constructors
 
-		public SoapBinding () 
-		{
-		}
-		
-		#endregion // Constructors
+        public SoapBinding () 
+        {
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
-		
-		[XmlAttribute("address")]
-		public string Address {
-			get { return address; }
-			set { address = value; }
-		}
-		
-		[XmlAttribute("binding")]
-		public XmlQualifiedName Binding {
-			get { return binding; }
-			set { binding = value; }
-		}
-		
-		#endregion // Properties
+        #region Properties
+        
+        [XmlAttribute("address")]
+        public string Address {
+            get { return address; }
+            set { address = value; }
+        }
+        
+        [XmlAttribute("binding")]
+        public XmlQualifiedName Binding {
+            get { return binding; }
+            set { binding = value; }
+        }
+        
+        #endregion // Properties
 
-	}
+    }
 }

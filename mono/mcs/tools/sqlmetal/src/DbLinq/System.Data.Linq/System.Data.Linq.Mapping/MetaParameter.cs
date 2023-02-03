@@ -33,12 +33,12 @@ using System.Reflection;
 
 namespace System.Data.Linq.Mapping
 {
-	public abstract class MetaParameter
-	{
-		public abstract string DbType { get; }
-		public abstract string MappedName { get; }
-		public abstract string Name { get; }
-		public abstract ParameterInfo Parameter { get; }
-		public abstract Type ParameterType { get; }
-	}
+    public abstract class MetaParameter
+    {
+        public abstract string DbType { get; }
+        public abstract string MappedName { get; }
+        public abstract string Name { get; }
+        public abstract ParameterInfo Parameter { get; }
+        public abstract Type ParameterType { get; }
+    }
 }

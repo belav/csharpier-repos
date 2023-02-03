@@ -1,4 +1,4 @@
-﻿//
+//
 // System.Web.HttpResponseTest.cs - Unit tests for System.Web.HttpResponse
 //
 // Author:
@@ -38,7 +38,7 @@ namespace MonoTests.Common
 
     public class FakeHttpWorkerRequest : HttpWorkerRequest
     {
-	const string appPath = "/";
+    const string appPath = "/";
         string queryString;
         public Hashtable KnownResponseHeaders;
         public Hashtable UnknownResponseHeaders;
@@ -47,8 +47,8 @@ namespace MonoTests.Common
         public FakeHttpWorkerRequest ()
             : this (1)
         {
-    		// for Mono
-    		AppDomain.CurrentDomain.SetData (".appVPath", appPath);
+            // for Mono
+            AppDomain.CurrentDomain.SetData (".appVPath", appPath);
         }
 
         public FakeHttpWorkerRequest (int re)
@@ -64,10 +64,10 @@ namespace MonoTests.Common
             return "/fake";
         }
 
-	public override string GetFilePath ()
-	{
-	    return GetUriPath ();
-	}
+    public override string GetFilePath ()
+    {
+        return GetUriPath ();
+    }
 
         public override string GetQueryString ()
         {
@@ -81,7 +81,7 @@ namespace MonoTests.Common
 
         public override string GetRawUrl ()
         {
-	    return "/GetRawUrl";
+        return "/GetRawUrl";
         }
 
         public override string GetHttpVerbName ()
@@ -122,14 +122,14 @@ namespace MonoTests.Common
             return 2020;
         }
 
-	public override string MapPath (string virtualPath)
-	{
+    public override string MapPath (string virtualPath)
+    {
 #if TARGET_DOTNET
-		return "c:\\fakefile";
+        return "c:\\fakefile";
 #else
-		return "/fakefile";
+        return "/fakefile";
 #endif
-	}
+    }
 
         public bool status_sent;
         public int status_code;

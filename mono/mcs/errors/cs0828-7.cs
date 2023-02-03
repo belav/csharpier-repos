@@ -3,10 +3,10 @@
 
 class XX
 {
-	public static void Main ()
-	{
-		var m = new {
-			Prop = (1, Main)
-		};
-	}
+    public static void Main ()
+    {
+        var m = new {
+            Prop = (1, Main)
+        };
+    }
 }

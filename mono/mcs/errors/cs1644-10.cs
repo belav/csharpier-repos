@@ -4,8 +4,8 @@
 
 class Program
 {
-	static void Main ()
-	{
-		System.Type t = typeof (global::System.Int32);
-	}
+    static void Main ()
+    {
+        System.Type t = typeof (global::System.Int32);
+    }
 }

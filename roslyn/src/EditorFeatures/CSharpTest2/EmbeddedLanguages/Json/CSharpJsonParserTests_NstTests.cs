@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -478,14 +478,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_invalid_utf_8_json()
         {
-            TestNST(@"@""[""""�""""]""", @"<Tree>
+            TestNST(@"@""[""""?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""�""</StringToken>
+            <StringToken>""?""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -524,14 +524,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_iso_latin_1_json()
         {
-            TestNST(@"@""[""""�""""]""", @"<Tree>
+            TestNST(@"@""[""""?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""�""</StringToken>
+            <StringToken>""?""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -570,14 +570,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_lone_utf8_continuation_byte_json()
         {
-            TestNST(@"@""[""""�""""]""", @"<Tree>
+            TestNST(@"@""[""""?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""�""</StringToken>
+            <StringToken>""?""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -593,14 +593,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_not_in_unicode_range_json()
         {
-            TestNST(@"@""[""""���""""]""", @"<Tree>
+            TestNST(@"@""[""""???""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""���""</StringToken>
+            <StringToken>""???""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -616,14 +616,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_overlong_sequence_2_bytes_json()
         {
-            TestNST(@"@""[""""��""""]""", @"<Tree>
+            TestNST(@"@""[""""??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""��""</StringToken>
+            <StringToken>""??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -639,14 +639,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_overlong_sequence_6_bytes_json()
         {
-            TestNST(@"@""[""""������""""]""", @"<Tree>
+            TestNST(@"@""[""""??????""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""������""</StringToken>
+            <StringToken>""??????""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -662,14 +662,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_overlong_sequence_6_bytes_null_json()
         {
-            TestNST(@"@""[""""������""""]""", @"<Tree>
+            TestNST(@"@""[""""??????""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""������""</StringToken>
+            <StringToken>""??????""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -685,14 +685,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_truncated_utf_8_json()
         {
-            TestNST(@"@""[""""��""""]""", @"<Tree>
+            TestNST(@"@""[""""??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""��""</StringToken>
+            <StringToken>""??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -708,14 +708,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_UTF_16LE_with_BOM_json()
         {
-            TestNST(@"@""[""""é""""]""", @"<Tree>
+            TestNST(@"@""[""""�""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""é""</StringToken>
+            <StringToken>""�""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -731,14 +731,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_UTF_8_invalid_sequence_json()
         {
-            TestNST(@"@""[""""日ш�""""]""", @"<Tree>
+            TestNST(@"@""[""""???""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""日ш�""</StringToken>
+            <StringToken>""???""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -754,14 +754,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void i_string_Utf8_surrogate_U_D800_json()
         {
-            TestNST(@"@""[""""��""""]""", @"<Tree>
+            TestNST(@"@""[""""??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""��""</StringToken>
+            <StringToken>""??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -826,14 +826,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_array_a_invalid_utf8_json()
         {
-            TestNST(@"@""[a�]""", @"<Tree>
+            TestNST(@"@""[a?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Text>
-            <TextToken>a�</TextToken>
+            <TextToken>a?</TextToken>
           </Text>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -1155,14 +1155,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_array_invalid_utf8_json()
         {
-            TestNST(@"@""[�]""", @"<Tree>
+            TestNST(@"@""[?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Text>
-            <TextToken>�</TextToken>
+            <TextToken>?</TextToken>
           </Text>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -1172,10 +1172,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'�' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'�' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -2457,14 +2457,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_number_invalid_utf_8_in_bigger_int_json()
         {
-            TestNST(@"@""[123�]""", @"<Tree>
+            TestNST(@"@""[123?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <NumberToken>123�</NumberToken>
+            <NumberToken>123?</NumberToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -2484,14 +2484,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_number_invalid_utf_8_in_exponent_json()
         {
-            TestNST(@"@""[1e1�]""", @"<Tree>
+            TestNST(@"@""[1e1?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <NumberToken>1e1�</NumberToken>
+            <NumberToken>1e1?</NumberToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -2511,7 +2511,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_number_invalid_utf_8_in_int_json()
         {
-            TestNST(@"@""[0�]
+            TestNST(@"@""[0?]
 """, @"<Tree>
   <CompilationUnit>
     <Sequence>
@@ -2519,7 +2519,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <NumberToken>0�</NumberToken>
+            <NumberToken>0?</NumberToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]<Trivia><EndOfLineTrivia>
@@ -2777,14 +2777,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_number_real_with_invalid_utf8_after_e_json()
         {
-            TestNST(@"@""[1e�]""", @"<Tree>
+            TestNST(@"@""[1e?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <NumberToken>1e�</NumberToken>
+            <NumberToken>1e?</NumberToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -2829,14 +2829,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_number_U_FF11_fullwidth_digit_one_json()
         {
-            TestNST(@"@""[１]""", @"<Tree>
+            TestNST(@"@""[1]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Text>
-            <TextToken>１</TextToken>
+            <TextToken>1</TextToken>
           </Text>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -2846,10 +2846,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'１' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'1' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'１' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'1' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -3136,14 +3136,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_object_lone_continuation_byte_in_key_and_trailing_comma_json()
         {
-            TestNST(@"@""{""""�"""":""""0"""",}""", @"<Tree>
+            TestNST(@"@""{""""?"""":""""0"""",}""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
         <OpenBraceToken>{</OpenBraceToken>
         <Sequence>
           <Property>
-            <StringToken>""�""</StringToken>
+            <StringToken>""?""</StringToken>
             <ColonToken>:</ColonToken>
             <Literal>
               <StringToken>""0""</StringToken>
@@ -3934,14 +3934,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_string_accentuated_char_no_quotes_json()
         {
-            TestNST(@"@""[é]""", @"<Tree>
+            TestNST(@"@""[�]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Text>
-            <TextToken>é</TextToken>
+            <TextToken>�</TextToken>
           </Text>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -3951,10 +3951,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'é' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'�' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'é' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'�' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -3988,14 +3988,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_string_escaped_ctrl_char_tab_json()
         {
-            TestNST(@"@""[""""\	""""]""", @"<Tree>
+            TestNST(@"@""[""""\    """"]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""\	""</StringToken>
+            <StringToken>""\    ""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -4015,14 +4015,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_string_escaped_emoji_json()
         {
-            TestNST(@"@""[""""\🌀""""]""", @"<Tree>
+            TestNST(@"@""[""""\??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""\🌀""</StringToken>
+            <StringToken>""\??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -4177,14 +4177,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_string_invalid_utf_8_in_escape_json()
         {
-            TestNST(@"@""[""""\u�""""]""", @"<Tree>
+            TestNST(@"@""[""""\u?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""\u�""]</StringToken>
+            <StringToken>""\u?""]</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken />
@@ -4258,14 +4258,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void n_string_invalid_utf8_after_escape_json()
         {
-            TestNST(@"@""[""""\�""""]""", @"<Tree>
+            TestNST(@"@""[""""\?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""\�""</StringToken>
+            <StringToken>""\?""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -4463,14 +4463,14 @@ line""</StringToken>
         [Fact]
         public void n_string_unescaped_tab_json()
         {
-            TestNST(@"@""[""""	""""]""", @"<Tree>
+            TestNST(@"@""[""""    """"]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""	""</StringToken>
+            <StringToken>""    ""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -4668,11 +4668,11 @@ line""</StringToken>
         [Fact]
         public void n_structure_ascii_unicode_identifier_json()
         {
-            TestNST(@"@""aå""", @"<Tree>
+            TestNST(@"@""a�""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
-        <TextToken>aå</TextToken>
+        <TextToken>a�</TextToken>
       </Text>
     </Sequence>
     <EndOfFile />
@@ -4821,11 +4821,11 @@ line""</StringToken>
         [Fact]
         public void n_structure_incomplete_Utf8_BOM_json()
         {
-            TestNST(@"@""�{}""", @"<Tree>
+            TestNST(@"@""?{}""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
-        <TextToken>�</TextToken>
+        <TextToken>?</TextToken>
       </Text>
       <Object>
         <OpenBraceToken>{</OpenBraceToken>
@@ -4837,10 +4837,10 @@ line""</StringToken>
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'�' unexpected"" Start=""10"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""10"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'�' unexpected"" Start=""10"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""10"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -5421,14 +5421,14 @@ line""</StringToken>
         [Fact]
         public void n_structure_U_2060_word_joined_json()
         {
-            TestNST(@"@""[⁠]""", @"<Tree>
+            TestNST(@"@""[?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Text>
-            <TextToken>⁠</TextToken>
+            <TextToken>?</TextToken>
           </Text>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -5438,10 +5438,10 @@ line""</StringToken>
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'⁠' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'⁠' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -5635,21 +5635,21 @@ line""</StringToken>
         [Fact]
         public void n_structure_unicode_identifier_json()
         {
-            TestNST(@"@""å""", @"<Tree>
+            TestNST(@"@""�""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
-        <TextToken>å</TextToken>
+        <TextToken>�</TextToken>
       </Text>
     </Sequence>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'å' unexpected"" Start=""10"" Length=""1"" />
+  <Diagnostic Message=""'�' unexpected"" Start=""10"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'å' unexpected"" Start=""10"" Length=""1"" />
+  <Diagnostic Message=""'�' unexpected"" Start=""10"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -5677,14 +5677,14 @@ line""</StringToken>
         [Fact]
         public void n_structure_whitespace_U_2060_word_joiner_json()
         {
-            TestNST(@"@""[⁠]""", @"<Tree>
+            TestNST(@"@""[?]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Text>
-            <TextToken>⁠</TextToken>
+            <TextToken>?</TextToken>
           </Text>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -5694,10 +5694,10 @@ line""</StringToken>
   </CompilationUnit>
 </Tree>",
         @"<Diagnostics>
-  <Diagnostic Message=""'⁠' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
         @"<Diagnostics>
-  <Diagnostic Message=""'⁠' unexpected"" Start=""11"" Length=""1"" />
+  <Diagnostic Message=""'?' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>");
         }
 
@@ -7167,14 +7167,14 @@ line""</StringToken>
         [Fact]
         public void y_string_nonCharacterInUTF_8_U_10FFFF_json()
         {
-            TestNST(@"@""[""""􏿿""""]""", @"<Tree>
+            TestNST(@"@""[""""??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""􏿿""</StringToken>
+            <StringToken>""??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -7236,14 +7236,14 @@ line""</StringToken>
         [Fact]
         public void y_string_pi_json()
         {
-            TestNST(@"@""[""""π""""]""", @"<Tree>
+            TestNST(@"@""[""""p""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""π""</StringToken>
+            <StringToken>""p""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -7259,14 +7259,14 @@ line""</StringToken>
         [Fact]
         public void y_string_reservedCharacterInUTF_8_U_1BFFF_json()
         {
-            TestNST(@"@""[""""𛿿""""]""", @"<Tree>
+            TestNST(@"@""[""""??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""𛿿""</StringToken>
+            <StringToken>""??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -7391,14 +7391,14 @@ line""</StringToken>
         [Fact]
         public void y_string_u_2028_line_sep_json()
         {
-            TestNST(@"@""["""" """"]""", @"<Tree>
+            TestNST(@"@""[""""?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>"" ""</StringToken>
+            <StringToken>""?""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -7414,14 +7414,14 @@ line""</StringToken>
         [Fact]
         public void y_string_u_2029_par_sep_json()
         {
-            TestNST(@"@""["""" """"]""", @"<Tree>
+            TestNST(@"@""[""""?""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>"" ""</StringToken>
+            <StringToken>""?""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -7552,14 +7552,14 @@ line""</StringToken>
         [Fact]
         public void y_string_unicode_2_json()
         {
-            TestNST(@"@""[""""⍂㈴⍂""""]""", @"<Tree>
+            TestNST(@"@""[""""???""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""⍂㈴⍂""</StringToken>
+            <StringToken>""???""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>
@@ -7736,14 +7736,14 @@ line""</StringToken>
         [Fact]
         public void y_string_utf8_json()
         {
-            TestNST(@"@""[""""€𝄞""""]""", @"<Tree>
+            TestNST(@"@""[""""�??""""]""", @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
         <OpenBracketToken>[</OpenBracketToken>
         <Sequence>
           <Literal>
-            <StringToken>""€𝄞""</StringToken>
+            <StringToken>""�??""</StringToken>
           </Literal>
         </Sequence>
         <CloseBracketToken>]</CloseBracketToken>

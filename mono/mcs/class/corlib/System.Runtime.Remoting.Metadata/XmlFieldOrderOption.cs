@@ -31,12 +31,12 @@
 
 namespace System.Runtime.Remoting.Metadata {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	[System.Serializable]
-	public enum XmlFieldOrderOption
-	{
-		All = 0,
-		Sequence = 1,
-		Choice = 2,
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Serializable]
+    public enum XmlFieldOrderOption
+    {
+        All = 0,
+        Sequence = 1,
+        Choice = 2,
+    }
 }

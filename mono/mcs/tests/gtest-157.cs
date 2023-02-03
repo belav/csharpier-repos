@@ -16,6 +16,6 @@ class m <k,v> : c <k,v>,
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main ()
+    { }
 }

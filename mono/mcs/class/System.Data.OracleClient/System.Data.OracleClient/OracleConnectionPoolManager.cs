@@ -29,49 +29,49 @@ using System.Threading;
 
 namespace System.Data.OracleClient 
 {
-	internal class OracleConnectionPoolManager 
-	{
-		Hashtable pools = new Hashtable();
-		
-		public OracleConnectionPoolManager () 
-		{
-		}
-		
-		public OracleConnectionPool GetConnectionPool (OracleConnectionInfo info, int minPoolSize, int maxPoolSize) 
-		{
-			lock (pools) {
-				
-				OracleConnectionPool pool = (OracleConnectionPool) pools [info.ConnectionString];
-				if (pool == null) {
-					pool = new OracleConnectionPool (this, info, minPoolSize, maxPoolSize);
-					pools [info.ConnectionString] = pool;
-				}
-				return pool;
-			}
-		}
-		
-		public virtual OciGlue CreateConnection (OracleConnectionInfo info) 
-		{
-			OciGlue oci;
-			oci = new OciGlue ();
-			oci.CreateConnection (info);
-			return oci;
-		}
+    internal class OracleConnectionPoolManager 
+    {
+        Hashtable pools = new Hashtable();
+        
+        public OracleConnectionPoolManager () 
+        {
+        }
+        
+        public OracleConnectionPool GetConnectionPool (OracleConnectionInfo info, int minPoolSize, int maxPoolSize) 
+        {
+            lock (pools) {
+                
+                OracleConnectionPool pool = (OracleConnectionPool) pools [info.ConnectionString];
+                if (pool == null) {
+                    pool = new OracleConnectionPool (this, info, minPoolSize, maxPoolSize);
+                    pools [info.ConnectionString] = pool;
+                }
+                return pool;
+            }
+        }
+        
+        public virtual OciGlue CreateConnection (OracleConnectionInfo info) 
+        {
+            OciGlue oci;
+            oci = new OciGlue ();
+            oci.CreateConnection (info);
+            return oci;
+        }
 
-		public void Dispose () 
-		{
-			if (pools != null) {
-				foreach (OracleConnectionPool pool in pools)
-					pool.Dispose ();
-				pools.Clear ();
-				pools = null;
-			}
-		}
+        public void Dispose () 
+        {
+            if (pools != null) {
+                foreach (OracleConnectionPool pool in pools)
+                    pool.Dispose ();
+                pools.Clear ();
+                pools = null;
+            }
+        }
 
-		~OracleConnectionPoolManager () 
-		{
-			Dispose ();
-		}
-	}
+        ~OracleConnectionPoolManager () 
+        {
+            Dispose ();
+        }
+    }
 }
 

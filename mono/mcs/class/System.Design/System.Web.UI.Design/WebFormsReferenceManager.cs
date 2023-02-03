@@ -2,7 +2,7 @@
 // System.Web.UI.Design.WebFormsReferenceManager
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,22 +38,22 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	public abstract class WebFormsReferenceManager
-	{
-		protected WebFormsReferenceManager ()
-		{
-		}
+    public abstract class WebFormsReferenceManager
+    {
+        protected WebFormsReferenceManager ()
+        {
+        }
 
-		public abstract ICollection GetRegisterDirectives ();
+        public abstract ICollection GetRegisterDirectives ();
 
-		public abstract string GetTagPrefix (Type objectType);
+        public abstract string GetTagPrefix (Type objectType);
 
-		public abstract Type GetType (string tagPrefix, string tagName);
+        public abstract Type GetType (string tagPrefix, string tagName);
 
-		public abstract string GetUserControlPath (string tagPrefix, string tagName);
+        public abstract string GetUserControlPath (string tagPrefix, string tagName);
 
-		public abstract string RegisterTagPrefix (Type objectType);
+        public abstract string RegisterTagPrefix (Type objectType);
 
-	}
+    }
 }
 

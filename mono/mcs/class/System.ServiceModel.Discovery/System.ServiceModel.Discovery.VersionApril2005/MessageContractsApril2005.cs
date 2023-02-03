@@ -35,98 +35,98 @@ using System.Xml;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-	internal class MessageContractsApril2005
-	{
-		public const string NS = DiscoveryVersion.NamespaceApril2005;
-		public const string HelloAction = NS + "/Hello";
-		public const string ByeAction = NS + "/Bye";
-		public const string ProbeAction = NS + "/Probe";
-		public const string ProbeMatchAction = NS + "/ProbeMatches";
-		public const string ResolveAction = NS + "/Resolve";
-		public const string ResolveMatchAction = NS + "/ResolveMatches";
+    internal class MessageContractsApril2005
+    {
+        public const string NS = DiscoveryVersion.NamespaceApril2005;
+        public const string HelloAction = NS + "/Hello";
+        public const string ByeAction = NS + "/Bye";
+        public const string ProbeAction = NS + "/Probe";
+        public const string ProbeMatchAction = NS + "/ProbeMatches";
+        public const string ResolveAction = NS + "/Resolve";
+        public const string ResolveMatchAction = NS + "/ResolveMatches";
 
-		[MessageContract (IsWrapped = false)]
-		public class OnlineAnnouncement
-		{
-			public OnlineAnnouncement ()
-			{
-				Id = new UniqueId ();
-			}
+        [MessageContract (IsWrapped = false)]
+        public class OnlineAnnouncement
+        {
+            public OnlineAnnouncement ()
+            {
+                Id = new UniqueId ();
+            }
 
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
-			[MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
-			public UniqueId Id { get; set; }
+            [MessageHeader (Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
+            [MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
+            public UniqueId Id { get; set; }
 
-			[MessageBodyMember (Name = "Hello", Namespace = NS)]
-			public EndpointDiscoveryMetadataApril2005 EndpointDiscoveryMetadata { get; set; }
-		}
+            [MessageBodyMember (Name = "Hello", Namespace = NS)]
+            public EndpointDiscoveryMetadataApril2005 EndpointDiscoveryMetadata { get; set; }
+        }
 
-		[MessageContract (IsWrapped = false)]
-		public class OfflineAnnouncement
-		{
-			public OfflineAnnouncement ()
-			{
-				Id = new UniqueId ();
-			}
+        [MessageContract (IsWrapped = false)]
+        public class OfflineAnnouncement
+        {
+            public OfflineAnnouncement ()
+            {
+                Id = new UniqueId ();
+            }
 
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
-			[MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
-			public UniqueId Id { get; set; }
-			[MessageBodyMember (Name = "Bye", Namespace = NS)]
-			public EndpointDiscoveryMetadataApril2005 EndpointDiscoveryMetadata { get; set; }
-		}
+            [MessageHeader (Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
+            [MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
+            public UniqueId Id { get; set; }
+            [MessageBodyMember (Name = "Bye", Namespace = NS)]
+            public EndpointDiscoveryMetadataApril2005 EndpointDiscoveryMetadata { get; set; }
+        }
 
-		[MessageContract (IsWrapped = false)]
-		public class FindRequest
-		{
-			public FindRequest ()
-			{
-				Id = new UniqueId ();
-			}
+        [MessageContract (IsWrapped = false)]
+        public class FindRequest
+        {
+            public FindRequest ()
+            {
+                Id = new UniqueId ();
+            }
 
-			[MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
-			public UniqueId Id { get; set; }
-			[MessageBodyMember (Name = "Probe", Namespace = NS)]
-			public FindCriteriaApril2005 Body { get; set; }
-		}
+            [MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
+            public UniqueId Id { get; set; }
+            [MessageBodyMember (Name = "Probe", Namespace = NS)]
+            public FindCriteriaApril2005 Body { get; set; }
+        }
 
-		[MessageContract (IsWrapped = false)]
-		public class FindResponse
-		{
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
-			[MessageBodyMember (Name = "ProbeMatches", Namespace = NS)]
-			public FindResponseApril2005 Body { get; set; }
-		}
+        [MessageContract (IsWrapped = false)]
+        public class FindResponse
+        {
+            [MessageHeader (Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
+            [MessageBodyMember (Name = "ProbeMatches", Namespace = NS)]
+            public FindResponseApril2005 Body { get; set; }
+        }
 
-		[CollectionDataContract (Name = "ProbeMatches", ItemName = "ProbeMatch", Namespace = NS)]
-		public class FindResponseApril2005 : List<EndpointDiscoveryMetadataApril2005>
-		{
-		}
+        [CollectionDataContract (Name = "ProbeMatches", ItemName = "ProbeMatch", Namespace = NS)]
+        public class FindResponseApril2005 : List<EndpointDiscoveryMetadataApril2005>
+        {
+        }
 
-		[MessageContract (IsWrapped = false)]
-		public class ResolveRequest
-		{
-			public ResolveRequest ()
-			{
-				Id = new UniqueId ();
-			}
+        [MessageContract (IsWrapped = false)]
+        public class ResolveRequest
+        {
+            public ResolveRequest ()
+            {
+                Id = new UniqueId ();
+            }
 
-			[MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
-			public UniqueId Id { get; set; }
-			[MessageBodyMember (Name = "Resolve", Namespace = NS)]
-			public ResolveCriteriaApril2005 Body { get; set; }
-		}
+            [MessageHeader (Name = "MessageID", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
+            public UniqueId Id { get; set; }
+            [MessageBodyMember (Name = "Resolve", Namespace = NS)]
+            public ResolveCriteriaApril2005 Body { get; set; }
+        }
 
-		[MessageContract (IsWrapped = false)]
-		public class ResolveResponse
-		{
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
-			[MessageBodyMember (Name = "ResolveMatches", Namespace = NS)]
-			public EndpointDiscoveryMetadataApril2005 Body { get; set; }
-		}
-	}
+        [MessageContract (IsWrapped = false)]
+        public class ResolveResponse
+        {
+            [MessageHeader (Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequenceApril2005 MessageSequence { get; set; }
+            [MessageBodyMember (Name = "ResolveMatches", Namespace = NS)]
+            public EndpointDiscoveryMetadataApril2005 Body { get; set; }
+        }
+    }
 }

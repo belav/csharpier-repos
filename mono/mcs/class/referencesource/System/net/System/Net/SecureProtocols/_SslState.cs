@@ -1687,14 +1687,14 @@ namespace System.Net.Security {
 
             try
             {
-		if (_PendingReHandshake == 1 && request.Buffer != null)
-		{
-		    ProcessReceivedBlob(request.Buffer, request.Buffer.Length, request);
-		}
-		else
-		{
+        if (_PendingReHandshake == 1 && request.Buffer != null)
+        {
+            ProcessReceivedBlob(request.Buffer, request.Buffer.Length, request);
+        }
+        else
+        {
                     ForceAuthentication(IsServer, request.Buffer, request);
-		}
+        }
             }
             catch (Exception e)
             {

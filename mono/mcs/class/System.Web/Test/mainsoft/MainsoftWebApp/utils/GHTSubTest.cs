@@ -33,46 +33,46 @@ using System.ComponentModel;
 
 namespace GHTWebControls
 {
-	/// <summary>
-	/// Summary description for WebCustomControl1.
-	/// </summary>
-	[DefaultProperty("Text"),
-	ToolboxData("<{0}:GHTSubTest runat=server></{0}:GHTSubTest>")]
-	// since we have a bug 4020, For FireFox GH render Panel as DIV instead where .Net render as TABLE,
-	// we replaced the use of Panel in Table.	public class GHTSubTest : System.Web.UI.WebControls.Table//.HtmlGenericControl
-	public class GHTSubTest : System.Web.UI.WebControls.Panel//System.Web.UI.HtmlControls.HtmlGenericControl //
-	{
-		string mDescription="";
-		[Browsable(true)]
-		public string Description
-		{
-			get 
-			{
-				return mDescription;
-			}
-			set
-			{
-				mDescription = value;
-			}
-		}
-		protected override void Render(HtmlTextWriter writer)
-		{
-			writer.WriteFullBeginTag("br");
-			writer.WriteFullBeginTag("u");
-			writer.WriteFullBeginTag("b");
-			if (mDescription != "") 
-				writer.Write(mDescription);
-			else if (this.ID !=null)
-				writer.Write(this.ID.ToString());
-			else
-				writer.Write("GHTSubTest.ID not set. Can not display the sub test id");
-			writer.WriteEndTag("b");
-			writer.WriteEndTag("u");
+    /// <summary>
+    /// Summary description for WebCustomControl1.
+    /// </summary>
+    [DefaultProperty("Text"),
+    ToolboxData("<{0}:GHTSubTest runat=server></{0}:GHTSubTest>")]
+    // since we have a bug 4020, For FireFox GH render Panel as DIV instead where .Net render as TABLE,
+    // we replaced the use of Panel in Table.    public class GHTSubTest : System.Web.UI.WebControls.Table//.HtmlGenericControl
+    public class GHTSubTest : System.Web.UI.WebControls.Panel//System.Web.UI.HtmlControls.HtmlGenericControl //
+    {
+        string mDescription="";
+        [Browsable(true)]
+        public string Description
+        {
+            get 
+            {
+                return mDescription;
+            }
+            set
+            {
+                mDescription = value;
+            }
+        }
+        protected override void Render(HtmlTextWriter writer)
+        {
+            writer.WriteFullBeginTag("br");
+            writer.WriteFullBeginTag("u");
+            writer.WriteFullBeginTag("b");
+            if (mDescription != "") 
+                writer.Write(mDescription);
+            else if (this.ID !=null)
+                writer.Write(this.ID.ToString());
+            else
+                writer.Write("GHTSubTest.ID not set. Can not display the sub test id");
+            writer.WriteEndTag("b");
+            writer.WriteEndTag("u");
 
-			base.Render (writer);
-			Literal lbl = new Literal();
-			lbl.Text=this.ID;
-			this.Controls.Add (lbl);
-		}
-  	}
+            base.Render (writer);
+            Literal lbl = new Literal();
+            lbl.Text=this.ID;
+            this.Controls.Add (lbl);
+        }
+      }
 }

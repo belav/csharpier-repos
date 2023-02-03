@@ -3,7 +3,7 @@
 // System.Configuration.ConfigXmlDocument.
 //
 // Author:
-//	Gert Driesen <drieseng@users.sourceforge.net>
+//    Gert Driesen <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2008 Gert Driesen
 //
@@ -37,44 +37,44 @@ using NUnit.Framework;
 using MonoTests.Helpers;
 
 namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class ConfigXmlDocumentTest {
-		private TempDirectory _tempFolder;
-		private string tempFolder;
+    [TestFixture]
+    public class ConfigXmlDocumentTest {
+        private TempDirectory _tempFolder;
+        private string tempFolder;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			_tempFolder = new TempDirectory ();
-			tempFolder = _tempFolder.Path;
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            _tempFolder = new TempDirectory ();
+            tempFolder = _tempFolder.Path;
+        }
 
-		[TearDown]
-		public void TearDown ()
-		{
-			_tempFolder.Dispose ();
-		}
+        [TearDown]
+        public void TearDown ()
+        {
+            _tempFolder.Dispose ();
+        }
 
-		[Test]
-		public void Load ()
-		{
-			string config_xml = @"
-				<configuration>
-					<appSettings>
-						<add key='anyKey' value='42' />
-					</appSettings>
-					<system.diagnostics />
-				</configuration>";
-			string config_file = Path.Combine (tempFolder, "config.xml");
-			File.WriteAllText (config_file, config_xml);
+        [Test]
+        public void Load ()
+        {
+            string config_xml = @"
+                <configuration>
+                    <appSettings>
+                        <add key='anyKey' value='42' />
+                    </appSettings>
+                    <system.diagnostics />
+                </configuration>";
+            string config_file = Path.Combine (tempFolder, "config.xml");
+            File.WriteAllText (config_file, config_xml);
 
-			ConfigXmlDocument doc = new ConfigXmlDocument ();
-			doc.Load (config_file);
-			Assert.AreEqual (1, doc.ChildNodes.Count, "ChildNodes");
-			Assert.AreEqual (config_file, doc.Filename, "Filename");
-			Assert.AreEqual ("#document", doc.Name, "Name");
-			File.Delete (config_file);
-		}
-	}
+            ConfigXmlDocument doc = new ConfigXmlDocument ();
+            doc.Load (config_file);
+            Assert.AreEqual (1, doc.ChildNodes.Count, "ChildNodes");
+            Assert.AreEqual (config_file, doc.Filename, "Filename");
+            Assert.AreEqual ("#document", doc.Name, "Name");
+            File.Delete (config_file);
+        }
+    }
 }
 

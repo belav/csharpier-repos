@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum LegendImageStyle
-	{
-		Rectangle = 0,
-		Line = 1,
-		Marker = 2
-	}
+    public enum LegendImageStyle
+    {
+        Rectangle = 0,
+        Line = 1,
+        Marker = 2
+    }
 }

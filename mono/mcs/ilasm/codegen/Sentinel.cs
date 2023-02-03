@@ -15,7 +15,7 @@ namespace Mono.ILASM {
         public class SentinelTypeRef : BaseTypeRef {
 
                 public SentinelTypeRef ()
-			: this (null, null)
+            : this (null, null)
                 {
                 }
 

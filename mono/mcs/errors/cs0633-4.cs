@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 
 public class C
 {
-	[IndexerName ("class")]
-	public string this [int i] {
-		set { }
-	}
+    [IndexerName ("class")]
+    public string this [int i] {
+        set { }
+    }
 }

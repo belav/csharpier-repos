@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 
@@ -30,23 +30,23 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class ColumnClickEventArgs : EventArgs
-	{
-		private int column;
+    public class ColumnClickEventArgs : EventArgs
+    {
+        private int column;
 
-		#region Public Constructors
-		public ColumnClickEventArgs (int column)
-		{
-			this.column = column;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public ColumnClickEventArgs (int column)
+        {
+            this.column = column;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public int Column {
-			get {
-				return column;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public int Column {
+            get {
+                return column;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

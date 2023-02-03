@@ -30,187 +30,187 @@ using System.Text;
 
 namespace Mono.Cecil.Binary {
 
-	using System.Collections;
+    using System.Collections;
 
-	sealed class ResourceWriter {
+    sealed class ResourceWriter {
 
-		Image m_img;
-		Section m_rsrc;
-		MemoryBinaryWriter m_writer;
+        Image m_img;
+        Section m_rsrc;
+        MemoryBinaryWriter m_writer;
 
-		ArrayList m_dataEntries;
-		ArrayList m_stringEntries;
+        ArrayList m_dataEntries;
+        ArrayList m_stringEntries;
 
-		long m_pos;
+        long m_pos;
 
-		public ResourceWriter (Image img, Section rsrc, MemoryBinaryWriter writer)
-		{
-			m_img = img;
-			m_rsrc = rsrc;
-			m_writer = writer;
+        public ResourceWriter (Image img, Section rsrc, MemoryBinaryWriter writer)
+        {
+            m_img = img;
+            m_rsrc = rsrc;
+            m_writer = writer;
 
-			m_dataEntries = new ArrayList ();
-			m_stringEntries = new ArrayList ();
-		}
+            m_dataEntries = new ArrayList ();
+            m_stringEntries = new ArrayList ();
+        }
 
-		public void Write ()
-		{
-			if (m_img.ResourceDirectoryRoot == null)
-				return;
+        public void Write ()
+        {
+            if (m_img.ResourceDirectoryRoot == null)
+                return;
 
-			ComputeOffset (m_img.ResourceDirectoryRoot);
-			WriteResourceDirectoryTable (m_img.ResourceDirectoryRoot);
-		}
+            ComputeOffset (m_img.ResourceDirectoryRoot);
+            WriteResourceDirectoryTable (m_img.ResourceDirectoryRoot);
+        }
 
-		public void Patch ()
-		{
-			foreach (ResourceDataEntry rde in m_dataEntries) {
-				GotoOffset (rde.Offset);
-				m_writer.Write ((uint) rde.Data + m_rsrc.VirtualAddress);
-				RestoreOffset ();
-			}
-		}
+        public void Patch ()
+        {
+            foreach (ResourceDataEntry rde in m_dataEntries) {
+                GotoOffset (rde.Offset);
+                m_writer.Write ((uint) rde.Data + m_rsrc.VirtualAddress);
+                RestoreOffset ();
+            }
+        }
 
-		void ComputeOffset (ResourceDirectoryTable root)
-		{
-			int offset = 0;
+        void ComputeOffset (ResourceDirectoryTable root)
+        {
+            int offset = 0;
 
-			Queue directoryTables = new Queue ();
-			directoryTables.Enqueue (root);
+            Queue directoryTables = new Queue ();
+            directoryTables.Enqueue (root);
 
-			while (directoryTables.Count > 0) {
-				ResourceDirectoryTable rdt = directoryTables.Dequeue () as ResourceDirectoryTable;
-				rdt.Offset = offset;
-				offset += 16;
+            while (directoryTables.Count > 0) {
+                ResourceDirectoryTable rdt = directoryTables.Dequeue () as ResourceDirectoryTable;
+                rdt.Offset = offset;
+                offset += 16;
 
-				foreach (ResourceDirectoryEntry rde in rdt.Entries) {
-					rde.Offset = offset;
-					offset += 8;
-					if (rde.IdentifiedByName)
-						m_stringEntries.Add (rde.Name);
+                foreach (ResourceDirectoryEntry rde in rdt.Entries) {
+                    rde.Offset = offset;
+                    offset += 8;
+                    if (rde.IdentifiedByName)
+                        m_stringEntries.Add (rde.Name);
 
-					if (rde.Child is ResourceDirectoryTable)
-						directoryTables.Enqueue (rde.Child);
-					else
-						m_dataEntries.Add (rde.Child);
-				}
-			}
+                    if (rde.Child is ResourceDirectoryTable)
+                        directoryTables.Enqueue (rde.Child);
+                    else
+                        m_dataEntries.Add (rde.Child);
+                }
+            }
 
-			foreach (ResourceDataEntry rde in m_dataEntries) {
-				rde.Offset = offset;
-				offset += 16;
-			}
+            foreach (ResourceDataEntry rde in m_dataEntries) {
+                rde.Offset = offset;
+                offset += 16;
+            }
 
-			foreach (ResourceDirectoryString rds in m_stringEntries) {
-				rds.Offset = offset;
-				byte [] str = Encoding.Unicode.GetBytes (rds.String);
-				offset += 2 + str.Length;
+            foreach (ResourceDirectoryString rds in m_stringEntries) {
+                rds.Offset = offset;
+                byte [] str = Encoding.Unicode.GetBytes (rds.String);
+                offset += 2 + str.Length;
 
-				offset += 3;
-				offset &= ~3;
-			}
+                offset += 3;
+                offset &= ~3;
+            }
 
-			foreach (ResourceDataEntry rde in m_dataEntries) {
-				rde.Data = (uint) offset;
+            foreach (ResourceDataEntry rde in m_dataEntries) {
+                rde.Data = (uint) offset;
 
-				offset += rde.ResourceData.Length;
-				offset += 3;
-				offset &= ~3;
-			}
+                offset += rde.ResourceData.Length;
+                offset += 3;
+                offset &= ~3;
+            }
 
-			m_writer.Write (new byte [offset]);
-		}
+            m_writer.Write (new byte [offset]);
+        }
 
-		void WriteResourceDirectoryTable (ResourceDirectoryTable rdt)
-		{
-			GotoOffset (rdt.Offset);
+        void WriteResourceDirectoryTable (ResourceDirectoryTable rdt)
+        {
+            GotoOffset (rdt.Offset);
 
-			m_writer.Write (rdt.Characteristics);
-			m_writer.Write (rdt.TimeDateStamp);
-			m_writer.Write (rdt.MajorVersion);
-			m_writer.Write (rdt.MinorVersion);
+            m_writer.Write (rdt.Characteristics);
+            m_writer.Write (rdt.TimeDateStamp);
+            m_writer.Write (rdt.MajorVersion);
+            m_writer.Write (rdt.MinorVersion);
 
-			ResourceDirectoryEntry [] namedEntries = GetEntries (rdt, true);
-			ResourceDirectoryEntry [] idEntries = GetEntries (rdt, false);
+            ResourceDirectoryEntry [] namedEntries = GetEntries (rdt, true);
+            ResourceDirectoryEntry [] idEntries = GetEntries (rdt, false);
 
-			m_writer.Write ((ushort) namedEntries.Length);
-			m_writer.Write ((ushort) idEntries.Length);
+            m_writer.Write ((ushort) namedEntries.Length);
+            m_writer.Write ((ushort) idEntries.Length);
 
-			foreach (ResourceDirectoryEntry rde in namedEntries)
-				WriteResourceDirectoryEntry (rde);
+            foreach (ResourceDirectoryEntry rde in namedEntries)
+                WriteResourceDirectoryEntry (rde);
 
-			foreach (ResourceDirectoryEntry rde in idEntries)
-				WriteResourceDirectoryEntry (rde);
+            foreach (ResourceDirectoryEntry rde in idEntries)
+                WriteResourceDirectoryEntry (rde);
 
-			RestoreOffset ();
-		}
+            RestoreOffset ();
+        }
 
-		ResourceDirectoryEntry [] GetEntries (ResourceDirectoryTable rdt, bool identifiedByName)
-		{
-			ArrayList entries = new ArrayList ();
-			foreach (ResourceDirectoryEntry rde in rdt.Entries)
-				if (rde.IdentifiedByName == identifiedByName)
-					entries.Add (rde);
+        ResourceDirectoryEntry [] GetEntries (ResourceDirectoryTable rdt, bool identifiedByName)
+        {
+            ArrayList entries = new ArrayList ();
+            foreach (ResourceDirectoryEntry rde in rdt.Entries)
+                if (rde.IdentifiedByName == identifiedByName)
+                    entries.Add (rde);
 
-			return entries.ToArray (typeof (ResourceDirectoryEntry)) as ResourceDirectoryEntry [];
-		}
+            return entries.ToArray (typeof (ResourceDirectoryEntry)) as ResourceDirectoryEntry [];
+        }
 
-		void WriteResourceDirectoryEntry (ResourceDirectoryEntry rde)
-		{
-			GotoOffset (rde.Offset);
+        void WriteResourceDirectoryEntry (ResourceDirectoryEntry rde)
+        {
+            GotoOffset (rde.Offset);
 
-			if (rde.IdentifiedByName) {
-				m_writer.Write ((uint) rde.Name.Offset | 0x80000000);
-				WriteResourceDirectoryString (rde.Name);
-			} else
-				m_writer.Write ((uint) rde.ID);
+            if (rde.IdentifiedByName) {
+                m_writer.Write ((uint) rde.Name.Offset | 0x80000000);
+                WriteResourceDirectoryString (rde.Name);
+            } else
+                m_writer.Write ((uint) rde.ID);
 
-			if (rde.Child is ResourceDirectoryTable) {
-				m_writer.Write((uint) rde.Child.Offset | 0x80000000);
-				WriteResourceDirectoryTable (rde.Child as ResourceDirectoryTable);
-			} else {
-				m_writer.Write (rde.Child.Offset);
-				WriteResourceDataEntry (rde.Child as ResourceDataEntry);
-			}
+            if (rde.Child is ResourceDirectoryTable) {
+                m_writer.Write((uint) rde.Child.Offset | 0x80000000);
+                WriteResourceDirectoryTable (rde.Child as ResourceDirectoryTable);
+            } else {
+                m_writer.Write (rde.Child.Offset);
+                WriteResourceDataEntry (rde.Child as ResourceDataEntry);
+            }
 
-			RestoreOffset ();
-		}
+            RestoreOffset ();
+        }
 
-		void WriteResourceDataEntry (ResourceDataEntry rde)
-		{
-			GotoOffset (rde.Offset);
+        void WriteResourceDataEntry (ResourceDataEntry rde)
+        {
+            GotoOffset (rde.Offset);
 
-			m_writer.Write (0);
-			m_writer.Write ((uint) rde.ResourceData.Length);
-			m_writer.Write (rde.Codepage);
-			m_writer.Write (rde.Reserved);
+            m_writer.Write (0);
+            m_writer.Write ((uint) rde.ResourceData.Length);
+            m_writer.Write (rde.Codepage);
+            m_writer.Write (rde.Reserved);
 
-			m_writer.BaseStream.Position = rde.Data;
-			m_writer.Write (rde.ResourceData);
+            m_writer.BaseStream.Position = rde.Data;
+            m_writer.Write (rde.ResourceData);
 
-			RestoreOffset ();
-		}
+            RestoreOffset ();
+        }
 
-		void WriteResourceDirectoryString (ResourceDirectoryString name)
-		{
-			GotoOffset (name.Offset);
+        void WriteResourceDirectoryString (ResourceDirectoryString name)
+        {
+            GotoOffset (name.Offset);
 
-			byte [] str = Encoding.Unicode.GetBytes (name.String);
-			m_writer.Write ((ushort) str.Length);
-			m_writer.Write (str);
+            byte [] str = Encoding.Unicode.GetBytes (name.String);
+            m_writer.Write ((ushort) str.Length);
+            m_writer.Write (str);
 
-			RestoreOffset ();
-		}
+            RestoreOffset ();
+        }
 
-		void GotoOffset (int offset)
-		{
-			m_pos = m_writer.BaseStream.Position;
-			m_writer.BaseStream.Position = offset;
-		}
+        void GotoOffset (int offset)
+        {
+            m_pos = m_writer.BaseStream.Position;
+            m_writer.BaseStream.Position = offset;
+        }
 
-		void RestoreOffset ()
-		{
-			m_writer.BaseStream.Position = m_pos;
-		}
-	}
+        void RestoreOffset ()
+        {
+            m_writer.BaseStream.Position = m_pos;
+        }
+    }
 }

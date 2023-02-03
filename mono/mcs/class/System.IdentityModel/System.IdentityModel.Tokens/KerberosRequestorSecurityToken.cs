@@ -2,7 +2,7 @@
 // KerberosRequestorSecurityToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,79 +34,79 @@ using System.Security.Principal;
 
 namespace System.IdentityModel.Tokens
 {
-	public class KerberosRequestorSecurityToken : SecurityToken
-	{
-		[MonoTODO]
-		public KerberosRequestorSecurityToken (string servicePrincipalName)
-		{
-			throw new NotImplementedException ();
-		}
+    public class KerberosRequestorSecurityToken : SecurityToken
+    {
+        [MonoTODO]
+        public KerberosRequestorSecurityToken (string servicePrincipalName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public KerberosRequestorSecurityToken (
-			string servicePrincipalName,
-			TokenImpersonationLevel tokenImpersonationLevel,
-			NetworkCredential networkCredential,
-			string id)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public KerberosRequestorSecurityToken (
+            string servicePrincipalName,
+            TokenImpersonationLevel tokenImpersonationLevel,
+            NetworkCredential networkCredential,
+            string id)
+        {
+            throw new NotImplementedException ();
+        }
 
-		NetworkCredential cred;
-		TokenImpersonationLevel imp_level;
-		string svc_principal_name, id;
+        NetworkCredential cred;
+        TokenImpersonationLevel imp_level;
+        string svc_principal_name, id;
 
-		public string ServicePrincipalName {
-			get { return svc_principal_name; }
-		}
+        public string ServicePrincipalName {
+            get { return svc_principal_name; }
+        }
 
-		[MonoTODO]
-		public SymmetricSecurityKey SecurityKey {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public SymmetricSecurityKey SecurityKey {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidFrom {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override DateTime ValidFrom {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidTo {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override DateTime ValidTo {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override string Id {
-			get { return id; }
-		}
+        public override string Id {
+            get { return id; }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override bool CanCreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanCreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override T CreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override T CreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool MatchesKeyIdentifierClause (
+            SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public byte [] GetRequest ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public byte [] GetRequest ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
 // PublicKeyCas.cs - CAS unit tests for 
-//	System.Security.Cryptography.X509Certificates.PublicKey
+//    System.Security.Cryptography.X509Certificates.PublicKey
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,47 +41,47 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PublicKeyCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PublicKeyCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			PublicKeyTest unit = new PublicKeyTest ();
-			unit.FixtureSetUp ();
-			unit.Constructor_RsaEmpty ();
-			unit.Constructor_UnknownEmpty ();
-			unit.Constructor_Rsa_FromCertificate ();
-			unit.Constructor_Rsa_FromScratch ();
-			unit.Constructor_Rsa_EmptyParameters ();
-			unit.Constructor_Rsa_WeirdParameters ();
-			unit.Constructor_Rsa_UnknownOid ();
-			unit.Constructor_Dsa_FromCertificate ();
-			unit.Constructor_Dsa_FromScratch ();
-			unit.Constructor_Dsa_EmptyParameters ();
-			unit.Constructor_Dsa_WeirdParameters ();
-			unit.Constructor_Dsa_UnknownOid ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            PublicKeyTest unit = new PublicKeyTest ();
+            unit.FixtureSetUp ();
+            unit.Constructor_RsaEmpty ();
+            unit.Constructor_UnknownEmpty ();
+            unit.Constructor_Rsa_FromCertificate ();
+            unit.Constructor_Rsa_FromScratch ();
+            unit.Constructor_Rsa_EmptyParameters ();
+            unit.Constructor_Rsa_WeirdParameters ();
+            unit.Constructor_Rsa_UnknownOid ();
+            unit.Constructor_Dsa_FromCertificate ();
+            unit.Constructor_Dsa_FromScratch ();
+            unit.Constructor_Dsa_EmptyParameters ();
+            unit.Constructor_Dsa_WeirdParameters ();
+            unit.Constructor_Dsa_UnknownOid ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[3] { typeof (Oid), typeof (AsnEncodedData), typeof (AsnEncodedData) };
-			ConstructorInfo ci = typeof (PublicKey).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(Oid,AsnEncodedData,AsnEncodedData)");
-			Assert.IsNotNull (ci.Invoke (new object[3] { new Oid ("1.2.3.4"), 
-				new AsnEncodedData (new byte[0]), new AsnEncodedData (new byte[0]) }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[3] { typeof (Oid), typeof (AsnEncodedData), typeof (AsnEncodedData) };
+            ConstructorInfo ci = typeof (PublicKey).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(Oid,AsnEncodedData,AsnEncodedData)");
+            Assert.IsNotNull (ci.Invoke (new object[3] { new Oid ("1.2.3.4"), 
+                new AsnEncodedData (new byte[0]), new AsnEncodedData (new byte[0]) }), "invoke");
+        }
+    }
 }
 

@@ -2,7 +2,7 @@
 // Member.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,20 +27,20 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	abstract class Member : Node {
-		public Member (NodeType nodeType) : base (nodeType)
-		{
-		}
+    abstract class Member : Node {
+        public Member (NodeType nodeType) : base (nodeType)
+        {
+        }
 
-		public abstract TypeNode DeclaringType { get; }
-		public abstract Module Module { get; }
+        public abstract TypeNode DeclaringType { get; }
+        public abstract Module Module { get; }
 
-		public abstract bool IsStatic { get; }
-		public abstract bool IsPublic { get; }
-		public abstract bool IsPrivate { get; }
-		public abstract bool IsAssembly { get; }
-		public abstract bool IsFamily { get; }
-		public abstract bool IsFamilyOrAssembly { get; }
-		public abstract bool IsFamilyAndAssembly { get; }
-	}
+        public abstract bool IsStatic { get; }
+        public abstract bool IsPublic { get; }
+        public abstract bool IsPrivate { get; }
+        public abstract bool IsAssembly { get; }
+        public abstract bool IsFamily { get; }
+        public abstract bool IsFamilyOrAssembly { get; }
+        public abstract bool IsFamilyAndAssembly { get; }
+    }
 }

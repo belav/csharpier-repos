@@ -3,21 +3,21 @@
 
 public class Test
 {
-	public void Foo ()
-	{
-	}
+    public void Foo ()
+    {
+    }
 }
 
 public class MainClass
 {
-	public Test Test
-	{
-		get;
-		set;
-	}
+    public Test Test
+    {
+        get;
+        set;
+    }
 
-	public static void Main (string[] args)
-	{
-		Test.Foo ();
-	}
+    public static void Main (string[] args)
+    {
+        Test.Foo ();
+    }
 }

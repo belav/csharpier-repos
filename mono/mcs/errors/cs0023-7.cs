@@ -4,15 +4,15 @@
 
 class C
 {
-	static unsafe int* Foo ()
-	{
-		return (int*)0;
-	}
-	
-	public static void Main ()
-	{
-		unsafe {
-			string s = Foo().ToString ();
-		}
-	}
+    static unsafe int* Foo ()
+    {
+        return (int*)0;
+    }
+    
+    public static void Main ()
+    {
+        unsafe {
+            string s = Foo().ToString ();
+        }
+    }
 }

@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,39 +32,39 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("71735f62-ac5c-4236-9a1f-5ffb280d531c")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMRect {
+    [Guid ("71735f62-ac5c-4236-9a1f-5ffb280d531c")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMRect {
 
 #region nsIDOMRect
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getTop ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getTop ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getRight ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getRight ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getBottom ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getBottom ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMRect {
-		public static nsIDOMRect GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMRect obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMRect).GUID, obj);
-			return o as nsIDOMRect;
-		}
-	}
+    internal class nsDOMRect {
+        public static nsIDOMRect GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMRect obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMRect).GUID, obj);
+            return o as nsIDOMRect;
+        }
+    }
 }
 #if example
 
@@ -73,33 +73,33 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class DOMRect : nsIDOMRect {
+    internal class DOMRect : nsIDOMRect {
 
 #region nsIDOMRect
-		int nsIDOMRect.getTop ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+        int nsIDOMRect.getTop ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-		{
-			return null;
-		}
+        {
+            return null;
+        }
 
-		int nsIDOMRect.getRight ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+        int nsIDOMRect.getRight ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-		{
-			return null;
-		}
+        {
+            return null;
+        }
 
-		int nsIDOMRect.getBottom ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+        int nsIDOMRect.getBottom ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-		{
-			return null;
-		}
+        {
+            return null;
+        }
 
-		int nsIDOMRect.getLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+        int nsIDOMRect.getLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-		{
-			return null;
-		}
+        {
+            return null;
+        }
 
 #endregion
-	}
+    }
 #endif

@@ -28,39 +28,39 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodeReturn: CodeStatement
-	{
-		CodeExpression retValue;
-		CodeBuilder codeBuilder;
-		
-		internal CodeReturn (CodeBuilder codeBuilder, CodeExpression retValue)
-		{
-			this.codeBuilder = codeBuilder;
-			this.retValue = retValue;
-		}
-		
-		internal CodeReturn (CodeBuilder codeBuilder)
-		{
-			this.codeBuilder = codeBuilder;
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			if (!object.ReferenceEquals (retValue, null))
-				retValue.Generate (gen);
+    public class CodeReturn: CodeStatement
+    {
+        CodeExpression retValue;
+        CodeBuilder codeBuilder;
+        
+        internal CodeReturn (CodeBuilder codeBuilder, CodeExpression retValue)
+        {
+            this.codeBuilder = codeBuilder;
+            this.retValue = retValue;
+        }
+        
+        internal CodeReturn (CodeBuilder codeBuilder)
+        {
+            this.codeBuilder = codeBuilder;
+        }
+        
+        public override void Generate (ILGenerator gen)
+        {
+            if (!object.ReferenceEquals (retValue, null))
+                retValue.Generate (gen);
 
-			gen.Emit (OpCodes.Br, codeBuilder.ReturnLabel);
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			if (object.ReferenceEquals (retValue, null))
-				cp.Write ("return");
-			else {
-				cp.Write ("return ");
-				retValue.PrintCode (cp);
-			}
-		}
-	}
+            gen.Emit (OpCodes.Br, codeBuilder.ReturnLabel);
+        }
+        
+        public override void PrintCode (CodeWriter cp)
+        {
+            if (object.ReferenceEquals (retValue, null))
+                cp.Write ("return");
+            else {
+                cp.Write ("return ");
+                retValue.PrintCode (cp);
+            }
+        }
+    }
 }
 #endif

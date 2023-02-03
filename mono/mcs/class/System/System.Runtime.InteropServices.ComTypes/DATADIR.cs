@@ -2,7 +2,7 @@
 // System.Runtime.InteropServices.ComTypes.DATADIR.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -32,9 +32,9 @@ using System;
 
 namespace System.Runtime.InteropServices.ComTypes
 {
-	public enum DATADIR
-	{
-		DATADIR_GET = 1,
-		DATADIR_SET,
-	}
+    public enum DATADIR
+    {
+        DATADIR_GET = 1,
+        DATADIR_SET,
+    }
 }

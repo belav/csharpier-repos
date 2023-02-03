@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		var (t, u, v) = (1, 2);
-	}
+    public static void Main ()
+    {
+        var (t, u, v) = (1, 2);
+    }
 }

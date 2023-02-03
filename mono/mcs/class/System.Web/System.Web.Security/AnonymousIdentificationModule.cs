@@ -2,8 +2,8 @@
 // System.Web.Security.AnonymousIdentificationModule
 //
 // Authors:
-//	Ben Maurer (bmaurer@users.sourceforge.net)
-//	Chris Toshok (toshok@ximian.com)
+//    Ben Maurer (bmaurer@users.sourceforge.net)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2003 Ben Maurer
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
@@ -37,83 +37,83 @@ using System.Text;
 
 namespace System.Web.Security {
 
-	public sealed class AnonymousIdentificationModule : IHttpModule {
-		static readonly object creatingEvent = new object ();
-		
-		HttpApplication app;
-		EventHandlerList events = new EventHandlerList ();
-		
-		public event AnonymousIdentificationEventHandler Creating  {
-			add { events.AddHandler (creatingEvent, value); }
-			remove { events.RemoveHandler (creatingEvent, value); }
-		}
+    public sealed class AnonymousIdentificationModule : IHttpModule {
+        static readonly object creatingEvent = new object ();
+        
+        HttpApplication app;
+        EventHandlerList events = new EventHandlerList ();
+        
+        public event AnonymousIdentificationEventHandler Creating  {
+            add { events.AddHandler (creatingEvent, value); }
+            remove { events.RemoveHandler (creatingEvent, value); }
+        }
 
-		public static void ClearAnonymousIdentifier ()
-		{
-			if (Config == null || !Config.Enabled)
-				/* XXX The user for the current request is anonymous */
-				throw new NotSupportedException ();
-		}
+        public static void ClearAnonymousIdentifier ()
+        {
+            if (Config == null || !Config.Enabled)
+                /* XXX The user for the current request is anonymous */
+                throw new NotSupportedException ();
+        }
 
-		public void Dispose ()
-		{
-			app.PostAuthenticateRequest -= OnEnter;
-			app = null;
-		}
-		
-		public void Init (HttpApplication app)
-		{
-			this.app = app;
-			app.PostAuthenticateRequest += OnEnter;
-		}
+        public void Dispose ()
+        {
+            app.PostAuthenticateRequest -= OnEnter;
+            app = null;
+        }
+        
+        public void Init (HttpApplication app)
+        {
+            this.app = app;
+            app.PostAuthenticateRequest += OnEnter;
+        }
 
-		[MonoTODO ("cookieless userid")]
-		void OnEnter (object source, EventArgs eventArgs)
-		{
-			if (!Enabled)
-				return;
+        [MonoTODO ("cookieless userid")]
+        void OnEnter (object source, EventArgs eventArgs)
+        {
+            if (!Enabled)
+                return;
 
-			string anonymousID = null;
+            string anonymousID = null;
 
-			HttpCookie cookie = app.Request.Cookies [Config.CookieName];
-			if (cookie != null && (cookie.Expires == DateTime.MinValue || cookie.Expires > DateTime.Now)) {
-				try {
-					anonymousID = Encoding.Unicode.GetString (Convert.FromBase64String (cookie.Value));
-				}
-				catch { }
-			}
+            HttpCookie cookie = app.Request.Cookies [Config.CookieName];
+            if (cookie != null && (cookie.Expires == DateTime.MinValue || cookie.Expires > DateTime.Now)) {
+                try {
+                    anonymousID = Encoding.Unicode.GetString (Convert.FromBase64String (cookie.Value));
+                }
+                catch { }
+            }
 
-			if (anonymousID == null) {
-				AnonymousIdentificationEventHandler eh = events [creatingEvent] as AnonymousIdentificationEventHandler;
-				if (eh != null) {
-					AnonymousIdentificationEventArgs e = new AnonymousIdentificationEventArgs (HttpContext.Current);
-					eh (this, e);
+            if (anonymousID == null) {
+                AnonymousIdentificationEventHandler eh = events [creatingEvent] as AnonymousIdentificationEventHandler;
+                if (eh != null) {
+                    AnonymousIdentificationEventArgs e = new AnonymousIdentificationEventArgs (HttpContext.Current);
+                    eh (this, e);
 
-					anonymousID = e.AnonymousID;
-				}
+                    anonymousID = e.AnonymousID;
+                }
 
-				if (anonymousID == null)
-					anonymousID = Guid.NewGuid ().ToString ();
+                if (anonymousID == null)
+                    anonymousID = Guid.NewGuid ().ToString ();
 
-				HttpCookie newCookie = new HttpCookie (Config.CookieName);
-				newCookie.Path = app.Request.ApplicationPath;
-				newCookie.Expires = DateTime.Now + Config.CookieTimeout;
-				newCookie.Value = Convert.ToBase64String (Encoding.Unicode.GetBytes (anonymousID));
-				app.Response.AppendCookie (newCookie);
-			}
-			app.Request.AnonymousID = anonymousID;
-		}
+                HttpCookie newCookie = new HttpCookie (Config.CookieName);
+                newCookie.Path = app.Request.ApplicationPath;
+                newCookie.Expires = DateTime.Now + Config.CookieTimeout;
+                newCookie.Value = Convert.ToBase64String (Encoding.Unicode.GetBytes (anonymousID));
+                app.Response.AppendCookie (newCookie);
+            }
+            app.Request.AnonymousID = anonymousID;
+        }
 
-		public static bool Enabled {
-			get {
-				if (Config == null)
-					return false;
+        public static bool Enabled {
+            get {
+                if (Config == null)
+                    return false;
 
-				return Config.Enabled;
-			}
-		}
+                return Config.Enabled;
+            }
+        }
 
-		static AnonymousIdentificationSection Config = (AnonymousIdentificationSection) WebConfigurationManager.GetSection ("system.web/anonymousIdentification");
-	}
+        static AnonymousIdentificationSection Config = (AnonymousIdentificationSection) WebConfigurationManager.GetSection ("system.web/anonymousIdentification");
+    }
 }
 

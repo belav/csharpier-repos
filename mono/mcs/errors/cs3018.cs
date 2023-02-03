@@ -8,8 +8,8 @@ using System;
 [CLSCompliant (false)]
 public class NotCompliant
 {
-		[CLSCompliant (true)]
-		public class Compliant
-		{
-		}
+        [CLSCompliant (true)]
+        public class Compliant
+        {
+        }
 }

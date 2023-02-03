@@ -3,8 +3,8 @@
 
 class X
 {
-	public static void Main ()
-	{
-		ref int j;
-	}
+    public static void Main ()
+    {
+        ref int j;
+    }
 }

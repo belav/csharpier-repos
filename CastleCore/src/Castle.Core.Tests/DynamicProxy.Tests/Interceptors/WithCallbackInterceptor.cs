@@ -14,20 +14,20 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	public class WithCallbackInterceptor : IInterceptor
-	{
-		private readonly InterceptorCallback callback;
+    public class WithCallbackInterceptor : IInterceptor
+    {
+        private readonly InterceptorCallback callback;
 
-		public WithCallbackInterceptor(InterceptorCallback interceptorCallback)
-		{
-			callback = interceptorCallback;
-		}
+        public WithCallbackInterceptor(InterceptorCallback interceptorCallback)
+        {
+            callback = interceptorCallback;
+        }
 
-		public void Intercept(IInvocation invocation)
-		{
-			callback(invocation);
-		}
+        public void Intercept(IInvocation invocation)
+        {
+            callback(invocation);
+        }
 
-		public delegate void InterceptorCallback(IInvocation invocation);
-	}
+        public delegate void InterceptorCallback(IInvocation invocation);
+    }
 }

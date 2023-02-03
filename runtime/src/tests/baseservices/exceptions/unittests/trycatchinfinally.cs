@@ -26,7 +26,7 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-		CountResults(new TryCatchInFinallyTest().Run(),         ref nSuccesses, ref nFailures);
+        CountResults(new TryCatchInFinallyTest().Run(),         ref nSuccesses, ref nFailures);
         
         if (0 == nFailures)
         {

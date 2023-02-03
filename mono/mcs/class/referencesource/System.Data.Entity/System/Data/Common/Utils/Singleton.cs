@@ -1,9 +1,9 @@
-﻿//---------------------------------------------------------------------
+//---------------------------------------------------------------------
 // <copyright file="Singleton.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //
-// @owner  	 Microsoft
+// @owner       Microsoft
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;

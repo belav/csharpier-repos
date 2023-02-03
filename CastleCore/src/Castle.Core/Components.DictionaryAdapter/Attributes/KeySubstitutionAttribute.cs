@@ -14,31 +14,31 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Substitutes part of key with another string.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
-	public class KeySubstitutionAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
-	{
-		private readonly string oldValue;
-		private readonly string newValue;
+    /// <summary>
+    /// Substitutes part of key with another string.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
+    public class KeySubstitutionAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
+    {
+        private readonly string oldValue;
+        private readonly string newValue;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="KeySubstitutionAttribute"/> class.
-		/// </summary>
-		/// <param name="oldValue">The old value.</param>
-		/// <param name="newValue">The new value.</param>
-		public KeySubstitutionAttribute(string oldValue, string newValue)
-		{
-			this.oldValue = oldValue;
-			this.newValue = newValue;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeySubstitutionAttribute"/> class.
+        /// </summary>
+        /// <param name="oldValue">The old value.</param>
+        /// <param name="newValue">The new value.</param>
+        public KeySubstitutionAttribute(string oldValue, string newValue)
+        {
+            this.oldValue = oldValue;
+            this.newValue = newValue;
+        }
 
-		string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
-		{
-			return key.Replace(oldValue, newValue);
-		}
-	}
+        string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
+        {
+            return key.Replace(oldValue, newValue);
+        }
+    }
 }

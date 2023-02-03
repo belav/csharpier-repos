@@ -30,20 +30,20 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class SearchResultEntry
-	{
-		internal SearchResultEntry (SearchResultAttributeCollection attributes, DirectoryControl [] controls, string distinguishedName)
-		{
-			Attributes = attributes;
-			Controls = controls;
-			DistinguishedName = distinguishedName;
-		}
+    public class SearchResultEntry
+    {
+        internal SearchResultEntry (SearchResultAttributeCollection attributes, DirectoryControl [] controls, string distinguishedName)
+        {
+            Attributes = attributes;
+            Controls = controls;
+            DistinguishedName = distinguishedName;
+        }
 
-		[MonoTODO]
-		public SearchResultAttributeCollection Attributes { get; private set; }
-		[MonoTODO]
-		public DirectoryControl [] Controls { get; private set; }
-		[MonoTODO]
-		public string DistinguishedName { get; private set; }
-	}
+        [MonoTODO]
+        public SearchResultAttributeCollection Attributes { get; private set; }
+        [MonoTODO]
+        public DirectoryControl [] Controls { get; private set; }
+        [MonoTODO]
+        public string DistinguishedName { get; private set; }
+    }
 }

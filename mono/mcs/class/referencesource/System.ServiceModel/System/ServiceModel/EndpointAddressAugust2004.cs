@@ -127,8 +127,8 @@ namespace System.ServiceModel
       <xs:any namespace=""##other"" processContents=""lax"" minOccurs=""0"" maxOccurs=""unbounded"">
         <xs:annotation>
           <xs:documentation>
-					 If ""Policy"" elements from namespace ""http://schemas.xmlsoap.org/ws/2002/12/policy#policy"" are used, they must appear first (before any extensibility elements).
-					</xs:documentation>
+                     If ""Policy"" elements from namespace ""http://schemas.xmlsoap.org/ws/2002/12/policy#policy"" are used, they must appear first (before any extensibility elements).
+                    </xs:documentation>
         </xs:annotation>
       </xs:any>
     </xs:sequence>

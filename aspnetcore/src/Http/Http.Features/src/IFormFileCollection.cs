@@ -13,7 +13,7 @@ public interface IFormFileCollection : IReadOnlyList<IFormFile>
     /// </summary>
     /// <param name="name">The name of the file to get.</param>
     /// <returns>
-    ///	The requested file, or null if it is not present.
+    ///    The requested file, or null if it is not present.
     /// </returns>
     IFormFile? this[string name] { get; }
 
@@ -22,7 +22,7 @@ public interface IFormFileCollection : IReadOnlyList<IFormFile>
     /// </summary>
     /// <param name="name">The name of the file to get.</param>
     /// <returns>
-    ///	The requested file, or null if it is not present.
+    ///    The requested file, or null if it is not present.
     /// </returns>
     IFormFile? GetFile(string name);
 

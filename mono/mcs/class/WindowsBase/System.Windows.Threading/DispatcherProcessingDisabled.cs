@@ -20,43 +20,43 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Threading {
 
-	public struct DispatcherProcessingDisabled : IDisposable
-	{
-		internal DispatcherProcessingDisabled (int foo)
-		{
-		}
+    public struct DispatcherProcessingDisabled : IDisposable
+    {
+        internal DispatcherProcessingDisabled (int foo)
+        {
+        }
 
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void Dispose ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool Equals (object obj)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Equals (object obj)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override int GetHashCode ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override int GetHashCode ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static bool operator != (DispatcherProcessingDisabled left, DispatcherProcessingDisabled right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static bool operator != (DispatcherProcessingDisabled left, DispatcherProcessingDisabled right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static bool operator == (DispatcherProcessingDisabled left, DispatcherProcessingDisabled right)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public static bool operator == (DispatcherProcessingDisabled left, DispatcherProcessingDisabled right)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

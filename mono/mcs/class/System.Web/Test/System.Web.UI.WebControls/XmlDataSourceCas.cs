@@ -1,9 +1,9 @@
 //
 // XmlDataSourceCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.XmlDataSource
+//    - CAS unit tests for System.Web.UI.WebControls.XmlDataSource
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,25 +39,25 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XmlDataSourceCas: AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class XmlDataSourceCas: AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			XmlDataSourceTest unit = new XmlDataSourceTest ();
-			unit.Defaults ();
-			unit.Attributes ();
-			unit.ViewState ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            XmlDataSourceTest unit = new XmlDataSourceTest ();
+            unit.Defaults ();
+            unit.Attributes ();
+            unit.ViewState ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (XmlDataSource); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (XmlDataSource); }
+        }
+    }
 }
 

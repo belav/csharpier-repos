@@ -3,10 +3,10 @@
 
 struct Sample
 {
-	public Sample (int arg)
-	{
-		text = base.ToString ();
-	}
+    public Sample (int arg)
+    {
+        text = base.ToString ();
+    }
 
-	internal string text;
+    internal string text;
 }

@@ -2,8 +2,8 @@
 // System.Windows.Drawing.CharacterRange.cs
 //
 // Authors:
-//	Dennis Hayes (dennish@raytek.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Dennis Hayes (dennish@raytek.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2002 Ximian, Inc http://www.ximian.com
 // Copyright (C) 2004, 2008 Novell, Inc (http://www.novell.com)
@@ -32,56 +32,56 @@ using System;
 
 namespace System.Drawing
 {
-	public struct CharacterRange
-	{
-		private int first;
-		private int length;
+    public struct CharacterRange
+    {
+        private int first;
+        private int length;
 
-		public CharacterRange (int First, int Length)
-		{
-			this.first = First;
-			this.length = Length;
-		}
+        public CharacterRange (int First, int Length)
+        {
+            this.first = First;
+            this.length = Length;
+        }
 
-		public int First {
-			get {
-				return first;
-			}
-			set {
-				first = value;
-			}
-		}
+        public int First {
+            get {
+                return first;
+            }
+            set {
+                first = value;
+            }
+        }
 
-		public int Length {
-			get {
-				return length;
-			}
-			set {
-				length = value;
-			}
-		}
-		public override bool Equals (object obj)
-		{
-			if (!(obj is CharacterRange))
-				return false;
+        public int Length {
+            get {
+                return length;
+            }
+            set {
+                length = value;
+            }
+        }
+        public override bool Equals (object obj)
+        {
+            if (!(obj is CharacterRange))
+                return false;
 
-			CharacterRange cr = (CharacterRange) obj;
-			return this == cr;
-		}
+            CharacterRange cr = (CharacterRange) obj;
+            return this == cr;
+        }
 
-		public override int GetHashCode ()
-		{
-			return (first ^ length);
-		}
-		
-		public static bool operator == (CharacterRange cr1, CharacterRange cr2)
-		{
-			return ((cr1.first == cr2.first) && (cr1.length == cr2.length));
-		}
+        public override int GetHashCode ()
+        {
+            return (first ^ length);
+        }
+        
+        public static bool operator == (CharacterRange cr1, CharacterRange cr2)
+        {
+            return ((cr1.first == cr2.first) && (cr1.length == cr2.length));
+        }
 
-		public static bool operator != (CharacterRange cr1, CharacterRange cr2)
-		{
-			return ((cr1.first != cr2.first) || (cr1.length != cr2.length));
-		}
-	}
+        public static bool operator != (CharacterRange cr1, CharacterRange cr2)
+        {
+            return ((cr1.first != cr2.first) || (cr1.length != cr2.length));
+        }
+    }
 }

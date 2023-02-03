@@ -2,7 +2,7 @@
 // TransactionAbortedException.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // (C)2005 Novell Inc,
 //
@@ -11,28 +11,28 @@ using System.Runtime.Serialization;
 
 namespace System.Transactions
 {
-	[Serializable]
-	public class TransactionAbortedException : TransactionException
-	{
-		public TransactionAbortedException ()
-		{
-		}
+    [Serializable]
+    public class TransactionAbortedException : TransactionException
+    {
+        public TransactionAbortedException ()
+        {
+        }
 
-		public TransactionAbortedException (string message)
-			: base (message)
-		{
-		}
+        public TransactionAbortedException (string message)
+            : base (message)
+        {
+        }
 
-		public TransactionAbortedException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public TransactionAbortedException (string message, Exception innerException)
+            : base (message, innerException)
+        {
+        }
 
-		protected TransactionAbortedException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected TransactionAbortedException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
+    }
 }
 

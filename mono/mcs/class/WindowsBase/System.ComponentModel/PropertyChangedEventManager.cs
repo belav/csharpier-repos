@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,36 +28,36 @@ using System.Windows;
 
 namespace System.ComponentModel {
 
-	public class PropertyChangedEventManager : WeakEventManager
-	{
-		internal PropertyChangedEventManager ()
-		{
-		}
+    public class PropertyChangedEventManager : WeakEventManager
+    {
+        internal PropertyChangedEventManager ()
+        {
+        }
 
-		public static void AddListener (INotifyPropertyChanged source, IWeakEventListener listener, string propertyName)
-		{
-			throw new NotImplementedException ();
-		}
+        public static void AddListener (INotifyPropertyChanged source, IWeakEventListener listener, string propertyName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static void RemoveListener (INotifyPropertyChanged source, IWeakEventListener listener, string propertyName)
-		{
-			throw new NotImplementedException ();
-		}
+        public static void RemoveListener (INotifyPropertyChanged source, IWeakEventListener listener, string propertyName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override bool Purge (object source, object data, bool purgeAll)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override bool Purge (object source, object data, bool purgeAll)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void StartListening (object source)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override void StartListening (object source)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void StopListening (object source)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void StopListening (object source)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

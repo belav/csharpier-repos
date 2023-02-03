@@ -3,13 +3,13 @@
 
 class Test
 {
-	public int this[bool b] { set {} }
+    public int this[bool b] { set {} }
 }
 
 class C
 {
-	public static void Main ()
-	{
-		int i = new Test()[false];
-	}
+    public static void Main ()
+    {
+        int i = new Test()[false];
+    }
 }

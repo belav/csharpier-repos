@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.TargetConverter.cs 
 //
 // Author:
-//	Peter Dennis Bartok (pbartok@novell.com)
+//    Peter Dennis Bartok (pbartok@novell.com)
 //
 
 //
@@ -41,29 +41,29 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]	
-	public class TargetConverterTest {
-		[Test]
-		public void Basic () {
-			string[]				result;
-			int					i;
-			TargetConverter				conv;
-			TypeConverter.StandardValuesCollection	values;
+    [TestFixture]    
+    public class TargetConverterTest {
+        [Test]
+        public void Basic () {
+            string[]                result;
+            int                    i;
+            TargetConverter                conv;
+            TypeConverter.StandardValuesCollection    values;
 
-			conv = new TargetConverter();
+            conv = new TargetConverter();
 
-			values = conv.GetStandardValues(null);
+            values = conv.GetStandardValues(null);
 
-			Assert.AreEqual(5, values.Count, "B1");
-			result = new string[values.Count];
-			i = 0;
-			foreach (string s in values) {
-				result[i++] = s;
-			}
+            Assert.AreEqual(5, values.Count, "B1");
+            result = new string[values.Count];
+            i = 0;
+            foreach (string s in values) {
+                result[i++] = s;
+            }
 
-			Assert.AreEqual(new string[] { "_blank", "_parent", "_search", "_self", "_top"}, result, "B2");
-			Assert.AreEqual(false, conv.GetStandardValuesExclusive(null), "B3");
-			Assert.AreEqual(true, conv.GetStandardValuesSupported(null), "B4");
-		}
-	}
+            Assert.AreEqual(new string[] { "_blank", "_parent", "_search", "_self", "_top"}, result, "B2");
+            Assert.AreEqual(false, conv.GetStandardValuesExclusive(null), "B3");
+            Assert.AreEqual(true, conv.GetStandardValuesSupported(null), "B4");
+        }
+    }
 }

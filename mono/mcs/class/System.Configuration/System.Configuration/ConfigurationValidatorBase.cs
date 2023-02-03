@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationValidatorBase.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,18 +30,18 @@ using System;
 
 namespace System.Configuration
 {
-	public abstract class ConfigurationValidatorBase
-	{
-		protected ConfigurationValidatorBase ()
-		{
-		}
-		
-		public virtual bool CanValidate (Type type)
-		{
-			return false;
-		}
+    public abstract class ConfigurationValidatorBase
+    {
+        protected ConfigurationValidatorBase ()
+        {
+        }
+        
+        public virtual bool CanValidate (Type type)
+        {
+            return false;
+        }
 
-		public abstract void Validate (object value);
-	}
+        public abstract void Validate (object value);
+    }
 }
 

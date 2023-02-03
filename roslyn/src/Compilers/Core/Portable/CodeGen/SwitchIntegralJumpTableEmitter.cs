@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -71,9 +71,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
             //  with all the case labels and fall through label. However, this approach can be optimized
             //  to improve both the code size and speed using the following optimization steps:
 
-            //  a)	Sort the switch case labels based on their constant values.
+            //  a)    Sort the switch case labels based on their constant values.
 
-            //  b)	Divide the sorted switch labels into buckets with good enough density (>50%). For example:
+            //  b)    Divide the sorted switch labels into buckets with good enough density (>50%). For example:
             //      switch(..)
             //      {
             //          case 1:
@@ -91,7 +91,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             //      can be divided into 3 buckets: (1, 2, 4) (100) (200, 201, 202).
             //      We do this bucketing so that we have reasonable size jump tables for generated switch instructions.
 
-            //  c)	After bucketing, generate code to perform a binary search on these buckets array, 
+            //  c)    After bucketing, generate code to perform a binary search on these buckets array, 
             //      emitting conditional jumps if current bucket sub-array has more than one bucket and
             //      emitting the switch instruction when we are down to a single bucket in the sub-array.
 

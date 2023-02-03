@@ -2,8 +2,8 @@
 // System.Security.AccessControl.RegistryAuditRule implementation
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,39 +31,39 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl 
 {
-	public sealed class RegistryAuditRule : AuditRule
-	{
-		public RegistryAuditRule (IdentityReference identity,
-					  RegistryRights registryRights,
-					  InheritanceFlags inheritanceFlags,
-					  PropagationFlags propagationFlags,
-					  AuditFlags flags)
-			: this (identity, registryRights, false, inheritanceFlags, propagationFlags, flags)
-		{
-		}
-		
-		internal RegistryAuditRule (IdentityReference identity,
-					    RegistryRights registryRights,
-					    bool isInherited,
-					    InheritanceFlags inheritanceFlags,
-					    PropagationFlags propagationFlags,
-					    AuditFlags flags)
-			: base (identity, (int)registryRights, isInherited, inheritanceFlags, propagationFlags, flags)
-		{
-		}
-		
-		public RegistryAuditRule (string identity,
-					  RegistryRights registryRights,
-					  InheritanceFlags inheritanceFlags,
-					  PropagationFlags propagationFlags,
-					  AuditFlags flags)
-			: this (new NTAccount (identity), registryRights, inheritanceFlags, propagationFlags, flags)
-		{
-		}
-		
-		public RegistryRights RegistryRights {
-			get { return (RegistryRights)AccessMask; }
-		}
-	}
+    public sealed class RegistryAuditRule : AuditRule
+    {
+        public RegistryAuditRule (IdentityReference identity,
+                      RegistryRights registryRights,
+                      InheritanceFlags inheritanceFlags,
+                      PropagationFlags propagationFlags,
+                      AuditFlags flags)
+            : this (identity, registryRights, false, inheritanceFlags, propagationFlags, flags)
+        {
+        }
+        
+        internal RegistryAuditRule (IdentityReference identity,
+                        RegistryRights registryRights,
+                        bool isInherited,
+                        InheritanceFlags inheritanceFlags,
+                        PropagationFlags propagationFlags,
+                        AuditFlags flags)
+            : base (identity, (int)registryRights, isInherited, inheritanceFlags, propagationFlags, flags)
+        {
+        }
+        
+        public RegistryAuditRule (string identity,
+                      RegistryRights registryRights,
+                      InheritanceFlags inheritanceFlags,
+                      PropagationFlags propagationFlags,
+                      AuditFlags flags)
+            : this (new NTAccount (identity), registryRights, inheritanceFlags, propagationFlags, flags)
+        {
+        }
+        
+        public RegistryRights RegistryRights {
+            get { return (RegistryRights)AccessMask; }
+        }
+    }
 }
 

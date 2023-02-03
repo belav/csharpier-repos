@@ -4,10 +4,10 @@
 
 namespace Test{  
     public partial class Test{  
-	public override bool Equals(object obj){  
-	    return true;  
-	}  
-	  
-	static void Main () {}
+    public override bool Equals(object obj){  
+        return true;  
+    }  
+      
+    static void Main () {}
     }  
 }

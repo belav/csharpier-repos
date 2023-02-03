@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 // COMPLETE
 //
 
 namespace System.Windows.Forms
 {
-	public enum ColumnHeaderStyle
-	{
-		None = 0,
-		Nonclickable = 1,
-		Clickable = 2
-	}
+    public enum ColumnHeaderStyle
+    {
+        None = 0,
+        Nonclickable = 1,
+        Clickable = 2
+    }
 }

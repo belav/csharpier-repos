@@ -5,10 +5,10 @@ using System.Collections;
 
 class Collection : CollectionBase
 {
-	public int Add (int x)
-	{
-		return ((IList) base).Add (x);
-	}
+    public int Add (int x)
+    {
+        return ((IList) base).Add (x);
+    }
 }
 
 

@@ -1,4 +1,4 @@
-﻿//
+//
 // SystemWebExtensionsSectionGroup.cs
 //
 // Author:
@@ -34,11 +34,11 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class SystemWebExtensionsSectionGroup : ConfigurationSectionGroup
-	{
-		[ConfigurationProperty ("scripting")]
-		public ScriptingSectionGroup Scripting {
-			get { return (ScriptingSectionGroup) SectionGroups ["scripting"]; }
-		}
-	}
+    public sealed class SystemWebExtensionsSectionGroup : ConfigurationSectionGroup
+    {
+        [ConfigurationProperty ("scripting")]
+        public ScriptingSectionGroup Scripting {
+            get { return (ScriptingSectionGroup) SectionGroups ["scripting"]; }
+        }
+    }
 }

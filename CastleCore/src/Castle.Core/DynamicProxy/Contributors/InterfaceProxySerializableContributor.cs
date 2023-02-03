@@ -16,39 +16,39 @@
 
 namespace Castle.DynamicProxy.Contributors
 {
-	using System;
+    using System;
 
-	using Castle.DynamicProxy.Generators.Emitters;
-	using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-	using Castle.DynamicProxy.Tokens;
+    using Castle.DynamicProxy.Generators.Emitters;
+    using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+    using Castle.DynamicProxy.Tokens;
 
-	internal class InterfaceProxySerializableContributor : SerializableContributor
-	{
-		public InterfaceProxySerializableContributor(Type targetType, string proxyGeneratorId, Type[] interfaces)
-			: base(targetType, interfaces, proxyGeneratorId)
-		{
-		}
+    internal class InterfaceProxySerializableContributor : SerializableContributor
+    {
+        public InterfaceProxySerializableContributor(Type targetType, string proxyGeneratorId, Type[] interfaces)
+            : base(targetType, interfaces, proxyGeneratorId)
+        {
+        }
 
-		protected override void CustomizeGetObjectData(CodeBuilder codebuilder, ArgumentReference serializationInfo,
-		                                               ArgumentReference streamingContext, ClassEmitter emitter)
-		{
-			var targetField = emitter.GetField("__target");
+        protected override void CustomizeGetObjectData(CodeBuilder codebuilder, ArgumentReference serializationInfo,
+                                                       ArgumentReference streamingContext, ClassEmitter emitter)
+        {
+            var targetField = emitter.GetField("__target");
 
-			codebuilder.AddStatement(
-				new MethodInvocationExpression(
-					serializationInfo,
-					SerializationInfoMethods.AddValue_Object,
-					new LiteralStringExpression("__targetFieldType"),
-					new LiteralStringExpression(targetField.Reference.FieldType.AssemblyQualifiedName)));
+            codebuilder.AddStatement(
+                new MethodInvocationExpression(
+                    serializationInfo,
+                    SerializationInfoMethods.AddValue_Object,
+                    new LiteralStringExpression("__targetFieldType"),
+                    new LiteralStringExpression(targetField.Reference.FieldType.AssemblyQualifiedName)));
 
-			codebuilder.AddStatement(
-				new MethodInvocationExpression(
-					serializationInfo,
-					SerializationInfoMethods.AddValue_Object,
-					new LiteralStringExpression("__theInterface"),
-					new LiteralStringExpression(targetType.AssemblyQualifiedName)));
-		}
-	}
+            codebuilder.AddStatement(
+                new MethodInvocationExpression(
+                    serializationInfo,
+                    SerializationInfoMethods.AddValue_Object,
+                    new LiteralStringExpression("__theInterface"),
+                    new LiteralStringExpression(targetType.AssemblyQualifiedName)));
+        }
+    }
 }
 
 #endif

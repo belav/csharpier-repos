@@ -2,5 +2,5 @@
 // Line: 8
 
 class X {
-	public virtual override void Y () {}
+    public virtual override void Y () {}
 }

@@ -35,48 +35,48 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture]
-	public class DataRowExtensionsTest
-	{
-		DataRow SetupRow ()
-		{
-			DataTable dt = new DataTable ("TestTable");
-			DataColumn dc = new DataColumn ("Column1", typeof (string));
-			dc.AllowDBNull = true;
-			dt.Columns.Add (dc);
+    [TestFixture]
+    public class DataRowExtensionsTest
+    {
+        DataRow SetupRow ()
+        {
+            DataTable dt = new DataTable ("TestTable");
+            DataColumn dc = new DataColumn ("Column1", typeof (string));
+            dc.AllowDBNull = true;
+            dt.Columns.Add (dc);
 
-			dc = new DataColumn ("Column2", typeof (int));
-			dc.AllowDBNull = true;
-			dt.Columns.Add (dc);
-			
-			DataRow row = dt.NewRow ();
-			dt.Rows.Add (row);
-			return row;
-		}
-		
-		[Test]
-		public void Field_T_DBNullFieldValue ()
-		{
-			DataRow row = SetupRow ();
-			row ["Column1"] = null;
-			row ["Column2"] = DBNull.Value;
-			
-			string s = row.Field <string> ("Column1");
-			Assert.AreEqual (null, s, "#A1");
+            dc = new DataColumn ("Column2", typeof (int));
+            dc.AllowDBNull = true;
+            dt.Columns.Add (dc);
+            
+            DataRow row = dt.NewRow ();
+            dt.Rows.Add (row);
+            return row;
+        }
+        
+        [Test]
+        public void Field_T_DBNullFieldValue ()
+        {
+            DataRow row = SetupRow ();
+            row ["Column1"] = null;
+            row ["Column2"] = DBNull.Value;
+            
+            string s = row.Field <string> ("Column1");
+            Assert.AreEqual (null, s, "#A1");
 
-			int? i = row.Field <int?> ("Column2");
-			Assert.AreEqual (null, i, "#A2");
-		}
+            int? i = row.Field <int?> ("Column2");
+            Assert.AreEqual (null, i, "#A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidCastException))]
-		public void Field_T_DBNullFieldValue_ValueType ()
-		{
-			DataRow row = SetupRow ();
-			row ["Column1"] = null;
-			row ["Column2"] = DBNull.Value;
+        [Test]
+        [ExpectedException (typeof (InvalidCastException))]
+        public void Field_T_DBNullFieldValue_ValueType ()
+        {
+            DataRow row = SetupRow ();
+            row ["Column1"] = null;
+            row ["Column2"] = DBNull.Value;
 
-			int i = row.Field <int> ("Column2");
-		}
-	}
+            int i = row.Field <int> ("Column2");
+        }
+    }
 }

@@ -1,13 +1,13 @@
 using System;
 
 class T {
-	static Foo GetFoo () { return new Foo (); }
+    static Foo GetFoo () { return new Foo (); }
 
-	public static void Main ()
-	{
-		string s = GetFoo ().i.ToString ();
-		Console.WriteLine (s);
-	}
+    public static void Main ()
+    {
+        string s = GetFoo ().i.ToString ();
+        Console.WriteLine (s);
+    }
 }
 
 struct Foo { public int i; }

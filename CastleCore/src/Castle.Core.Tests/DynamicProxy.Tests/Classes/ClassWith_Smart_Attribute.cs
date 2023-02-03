@@ -14,28 +14,28 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public class ClassWith_Smart_Attribute
-	{
-		[Smart]
-		public virtual string PropertyWithAttribute { get; set; }
-	}
+    public class ClassWith_Smart_Attribute
+    {
+        [Smart]
+        public virtual string PropertyWithAttribute { get; set; }
+    }
 
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-	public class SmartAttribute : Attribute
-	{
-		private int value = -1;
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class SmartAttribute : Attribute
+    {
+        private int value = -1;
 
-		public int Value
-		{
-			get { return value; }
-			set
-			{
-				if (value < 0)
-					throw new ArgumentOutOfRangeException("Got ya!");
-				this.value = value;
-			}
-		}
-	}
+        public int Value
+        {
+            get { return value; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Got ya!");
+                this.value = value;
+            }
+        }
+    }
 }

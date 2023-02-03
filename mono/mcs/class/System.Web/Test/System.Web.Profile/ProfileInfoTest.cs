@@ -2,7 +2,7 @@
 // System.Web.Profile.ProfileInfo.cs - Unit tests for System.Web.Profile.ProfileInfo
 //
 // Author:
-//	Chris Toshok  <toshok@novell.com.com>
+//    Chris Toshok  <toshok@novell.com.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,23 +33,23 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Profile {
 
-	class ProfileInfoPoker : ProfileInfo {
-	}
+    class ProfileInfoPoker : ProfileInfo {
+    }
 
-	[TestFixture]
-	public class TestProfileInfo {
+    [TestFixture]
+    public class TestProfileInfo {
 
-	  
-		[Test]
-		public void ProtectedCtor ()
-		{
-			ProfileInfoPoker poker = new ProfileInfoPoker();
+      
+        [Test]
+        public void ProtectedCtor ()
+        {
+            ProfileInfoPoker poker = new ProfileInfoPoker();
 
-			Assert.IsNull (poker.UserName, "A1");
-			Assert.AreEqual (DateTime.MinValue, poker.LastUpdatedDate.Date, "A2");
-			Assert.AreEqual (DateTime.MinValue, poker.LastActivityDate.Date, "A3");
-			Assert.IsFalse  (poker.IsAnonymous, "A4");
-			Assert.AreEqual (0, poker.Size, "A5");
-		}
-	}
+            Assert.IsNull (poker.UserName, "A1");
+            Assert.AreEqual (DateTime.MinValue, poker.LastUpdatedDate.Date, "A2");
+            Assert.AreEqual (DateTime.MinValue, poker.LastActivityDate.Date, "A3");
+            Assert.IsFalse  (poker.IsAnonymous, "A4");
+            Assert.AreEqual (0, poker.Size, "A5");
+        }
+    }
 }

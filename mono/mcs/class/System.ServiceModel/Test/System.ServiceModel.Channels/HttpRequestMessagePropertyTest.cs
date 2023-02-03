@@ -2,7 +2,7 @@
 // HttpRequestMessagePropertyTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -35,15 +35,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	[TestFixture]
-	public class HttpRequestMessagePropertyTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var hp = new HttpRequestMessageProperty ();
-			Assert.AreEqual (String.Empty, hp.QueryString, "#1");
-			Assert.AreEqual ("POST", hp.Method, "#2");
-		}
-	}
+    [TestFixture]
+    public class HttpRequestMessagePropertyTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            var hp = new HttpRequestMessageProperty ();
+            Assert.AreEqual (String.Empty, hp.QueryString, "#1");
+            Assert.AreEqual ("POST", hp.Method, "#2");
+        }
+    }
 }

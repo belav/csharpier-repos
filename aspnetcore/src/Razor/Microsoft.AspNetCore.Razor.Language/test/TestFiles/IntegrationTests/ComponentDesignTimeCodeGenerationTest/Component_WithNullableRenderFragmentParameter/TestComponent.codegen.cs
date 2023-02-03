@@ -44,7 +44,7 @@ __o = typeof(ComponentWithNullableRenderFragment);
 #nullable restore
 #line 2 "x:\dir\subdir\Test\TestComponent.cshtml"
        
-	[Parameter] public RenderFragment Header { get; set; }
+    [Parameter] public RenderFragment Header { get; set; }
 
 #line default
 #line hidden

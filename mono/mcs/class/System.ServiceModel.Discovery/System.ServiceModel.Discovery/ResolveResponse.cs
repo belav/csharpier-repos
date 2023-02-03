@@ -32,15 +32,15 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class ResolveResponse
-	{
-		internal ResolveResponse (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence)
-		{
-			EndpointDiscoveryMetadata = metadata;
-			MessageSequence = sequence;
-		}
+    public class ResolveResponse
+    {
+        internal ResolveResponse (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence)
+        {
+            EndpointDiscoveryMetadata = metadata;
+            MessageSequence = sequence;
+        }
 
-		public EndpointDiscoveryMetadata EndpointDiscoveryMetadata { get; private set; }
-		public DiscoveryMessageSequence MessageSequence { get; private set; }
-	}
+        public EndpointDiscoveryMetadata EndpointDiscoveryMetadata { get; private set; }
+        public DiscoveryMessageSequence MessageSequence { get; private set; }
+    }
 }

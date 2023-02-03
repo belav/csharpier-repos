@@ -2,7 +2,7 @@
 // System.Web.Compilation.LinePragmaCodeInfo
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,48 +31,48 @@
 
 namespace System.Web.Compilation
 {
-	[Serializable]
-	public sealed class LinePragmaCodeInfo
-	{
-		public LinePragmaCodeInfo ()
-		{
-		}
+    [Serializable]
+    public sealed class LinePragmaCodeInfo
+    {
+        public LinePragmaCodeInfo ()
+        {
+        }
 
-		[MonoTODO ("Not implemented")]
-		public int CodeLength {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO ("Not implemented")]
+        public int CodeLength {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO ("Not implemented")]
-		public bool IsCodeNugget {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO ("Not implemented")]
+        public bool IsCodeNugget {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO ("Not implemented")]
-		public int StartColumn {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO ("Not implemented")]
+        public int StartColumn {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO ("Not implemented")]
-		public int StartGeneratedColumn {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO ("Not implemented")]
+        public int StartGeneratedColumn {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO ("Not implemented")]
-		public int StartLine {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        [MonoTODO ("Not implemented")]
+        public int StartLine {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
+    }
 
 }
 

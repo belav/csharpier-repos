@@ -2,7 +2,7 @@
 // System.Web.UI.UserControlControlBuilder
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -31,25 +31,25 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class UserControlControlBuilder : ControlBuilder
-	{
-		public override bool NeedsTagInnerText ()
-		{
-			return false;
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class UserControlControlBuilder : ControlBuilder
+    {
+        public override bool NeedsTagInnerText ()
+        {
+            return false;
+        }
 
-		[MonoTODO ("Not implemented, does nothing")]
-		public override void SetTagInnerText (string text)
-		{
-			// Do something with the text
-		}
+        [MonoTODO ("Not implemented, does nothing")]
+        public override void SetTagInnerText (string text)
+        {
+            // Do something with the text
+        }
 
-		public override object BuildObject ()
-		{
-			return base.BuildObject ();
-		}
-	}
+        public override object BuildObject ()
+        {
+            return base.BuildObject ();
+        }
+    }
 }

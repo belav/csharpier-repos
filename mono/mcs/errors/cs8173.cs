@@ -3,11 +3,11 @@
 
 public class X
 {
-	int field;
+    int field;
 
-	public static void Main ()
-	{
-		int i = 5;
-		ref long j = ref i;
-	}
+    public static void Main ()
+    {
+        int i = 5;
+        ref long j = ref i;
+    }
 }

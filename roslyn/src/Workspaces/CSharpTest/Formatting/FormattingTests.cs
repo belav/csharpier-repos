@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -722,18 +722,18 @@ Program p=new Program();
         {
             await AssertFormatAsync(@"class Class1
 {
-    //	public void goo()
-    //	{
-    //		// TODO: Add the implementation for Class1.goo() here.
-    //	
-    //	}
+    //    public void goo()
+    //    {
+    //        // TODO: Add the implementation for Class1.goo() here.
+    //    
+    //    }
 }", @"class Class1
 {
-    //	public void goo()
-//	{
-//		// TODO: Add the implementation for Class1.goo() here.
-//	
-//	}
+    //    public void goo()
+//    {
+//        // TODO: Add the implementation for Class1.goo() here.
+//    
+//    }
 }");
         }
 
@@ -3753,7 +3753,7 @@ public       void       Method      (       )           {
 
         [Fact, WorkItem(538354, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538354")]
         public async Task Tab1()
-            => await AssertFormatAsync(@"using System;", @"			using System;");
+            => await AssertFormatAsync(@"using System;", @"            using System;");
 
         [Fact, WorkItem(538329, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538329")]
         public async Task SuppressLinkBreakInIfElseStatement()
@@ -4035,7 +4035,7 @@ class Program
             var code = @"class Bug
 {
     // test
-	public static void func()
+    public static void func()
     {
     }
 }";
@@ -4425,7 +4425,7 @@ class innerClass
         [Fact, WorkItem(542199, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542199")]
         public async Task ColumnOfVeryFirstToken()
         {
-            var code = @"			       W   )b";
+            var code = @"                   W   )b";
 
             var expected = @"W   )b";
 
@@ -6013,12 +6013,12 @@ class C
 
             await AssertFormatAsync(@"namespace ConsoleApplication1
 {
-	/// <summary>
-	/// fka;jsgdflkhsjflgkhdsl;
-	/// </summary>
-	class Program
-	{
-	}
+    /// <summary>
+    /// fka;jsgdflkhsjflgkhdsl;
+    /// </summary>
+    class Program
+    {
+    }
 }", @"namespace ConsoleApplication1
 {
     /// <summary>
@@ -6307,10 +6307,10 @@ class C
 class C
 {
     public void CreateSettingsFile(string path, string comment) {
-			var xml = new XDocument(
-				new XDeclaration(1.0, utf8, yes),
+            var xml = new XDocument(
+                new XDeclaration(1.0, utf8, yes),
                 new XComment(comment),
-				new XElement(UserSettings,
+                new XElement(UserSettings,
                     new XElement(ToolsOptions,
                         from t in KnownSettings.DefaultCategories
             group t by t.Item1 into cat
@@ -6320,7 +6320,7 @@ class C
             )
                     )
                 )
-			);
+            );
             UpdateSettingsXml(xml);
             xml.Save(path);
             SettingsPath = path;
@@ -6522,28 +6522,28 @@ using System;
 
 class Program
 {
-		/// <summary>
-		/// This function is the callback used to execute a command when a menu item is clicked.
-		/// See the Initialize method to see how the menu item is associated to this function using
-		/// the OleMenuCommandService service and the MenuCommand class.
-		/// </summary>
-		private void MenuItemCallback(object sender, EventArgs e) {
-			// Show a Message Box to prove we were here
-			IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
-			Guid clsid = Guid.Empty;
-			int result;
-			Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-					   0,
-					   ref clsid,
-					   Rebracer,
+        /// <summary>
+        /// This function is the callback used to execute a command when a menu item is clicked.
+        /// See the Initialize method to see how the menu item is associated to this function using
+        /// the OleMenuCommandService service and the MenuCommand class.
+        /// </summary>
+        private void MenuItemCallback(object sender, EventArgs e) {
+            // Show a Message Box to prove we were here
+            IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
+            Guid clsid = Guid.Empty;
+            int result;
+            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
+                       0,
+                       ref clsid,
+                       Rebracer,
                        string.Format(CultureInfo.CurrentCulture, Inside {0}.MenuItemCallback(), this.ToString()),
-					   string.Empty,
-					   0,
-					   OLEMSGBUTTON.OLEMSGBUTTON_OK,
-					   OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-					   OLEMSGICON.OLEMSGICON_INFO,
-					   0,        // false
-					   out result));
+                       string.Empty,
+                       0,
+                       OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
+                       OLEMSGICON.OLEMSGICON_INFO,
+                       0,        // false
+                       out result));
         }
     }
 ";
@@ -6553,30 +6553,30 @@ using System;
 
 class Program
 {
-	/// <summary>
-	/// This function is the callback used to execute a command when a menu item is clicked.
-	/// See the Initialize method to see how the menu item is associated to this function using
-	/// the OleMenuCommandService service and the MenuCommand class.
-	/// </summary>
-	private void MenuItemCallback(object sender, EventArgs e)
-	{
-		// Show a Message Box to prove we were here
-		IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
-		Guid clsid = Guid.Empty;
-		int result;
-		Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-				   0,
-				   ref clsid,
-				   Rebracer,
-				   string.Format(CultureInfo.CurrentCulture, Inside { 0}.MenuItemCallback(), this.ToString()),
-					   string.Empty,
-					   0,
-					   OLEMSGBUTTON.OLEMSGBUTTON_OK,
-					   OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-					   OLEMSGICON.OLEMSGICON_INFO,
-					   0,        // false
-					   out result));
-	}
+    /// <summary>
+    /// This function is the callback used to execute a command when a menu item is clicked.
+    /// See the Initialize method to see how the menu item is associated to this function using
+    /// the OleMenuCommandService service and the MenuCommand class.
+    /// </summary>
+    private void MenuItemCallback(object sender, EventArgs e)
+    {
+        // Show a Message Box to prove we were here
+        IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
+        Guid clsid = Guid.Empty;
+        int result;
+        Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
+                   0,
+                   ref clsid,
+                   Rebracer,
+                   string.Format(CultureInfo.CurrentCulture, Inside { 0}.MenuItemCallback(), this.ToString()),
+                       string.Empty,
+                       0,
+                       OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
+                       OLEMSGICON.OLEMSGICON_INFO,
+                       0,        // false
+                       out result));
+    }
 }
 ";
             var optionSet = new OptionsCollection(LanguageNames.CSharp) { { FormattingOptions2.UseTabs, true } };
@@ -7914,10 +7914,10 @@ class C
 
 class Program
 {
-	static void Main(string[] args)
-	{
-		Console.WriteLine("""");        // GooBar
-	}
+    static void Main(string[] args)
+    {
+        Console.WriteLine("""");        // GooBar
+    }
 }", @"using System;
 
 class Program
@@ -7939,10 +7939,10 @@ class Program
 
 class Program
 {
-	static void Main(string[] args)
-	{
-		Console.WriteLine("""");        /* GooBar */
-	}
+    static void Main(string[] args)
+    {
+        Console.WriteLine("""");        /* GooBar */
+    }
 }", @"using System;
 
 class Program
@@ -8523,16 +8523,16 @@ class Program
 
             await AssertFormatAsync(@"class Program
 {
-	static void Main()
-	{
-		return // Note the missing semicolon
-	} // The tab here should stay a tab
+    static void Main()
+    {
+        return // Note the missing semicolon
+    } // The tab here should stay a tab
 }", @"class Program
 {
-	static void Main()
-	{
-		return // Note the missing semicolon
-	} // The tab here should stay a tab
+    static void Main()
+    {
+        return // Note the missing semicolon
+    } // The tab here should stay a tab
 }", changedOptionSet: optionSet);
         }
 
@@ -8543,18 +8543,18 @@ class Program
 
             await AssertFormatAsync(@"struct Goo
 {
-	private readonly string bar;
+    private readonly string bar;
 
-	public Goo(readonly string bar)
-	{
-	}
+    public Goo(readonly string bar)
+    {
+    }
 }", @"struct Goo
 {
-	private readonly string bar;
+    private readonly string bar;
 
-	public Goo(readonly string bar)
-	{
-	}
+    public Goo(readonly string bar)
+    {
+    }
 }", changedOptionSet: optionSet);
         }
 
@@ -8565,35 +8565,35 @@ class Program
 
             await AssertFormatAsync(@"class AClass
 {
-	void AMethod(Object anArgument)
-	{
-		if (anArgument == null)
-		{
-			throw new ArgumentNullException(nameof(anArgument));
-		}
-		anArgument
+    void AMethod(Object anArgument)
+    {
+        if (anArgument == null)
+        {
+            throw new ArgumentNullException(nameof(anArgument));
+        }
+        anArgument
 
-		DoSomething();
-	}
+        DoSomething();
+    }
 
-	void DoSomething()
-	{
-	}
+    void DoSomething()
+    {
+    }
 }", @"class AClass
 {
-	void AMethod(Object anArgument)
-	{
-		if (anArgument == null)
-		{
-			throw new ArgumentNullException(nameof(anArgument));
-		}anArgument
+    void AMethod(Object anArgument)
+    {
+        if (anArgument == null)
+        {
+            throw new ArgumentNullException(nameof(anArgument));
+        }anArgument
 
-		DoSomething();
-	}
+        DoSomething();
+    }
 
-	void DoSomething()
-	{
-	}
+    void DoSomething()
+    {
+    }
 }", changedOptionSet: optionSet);
         }
 
@@ -8604,18 +8604,18 @@ class Program
 
             await AssertFormatAsync(@"class AClass
 {
-	void Main()
-	{
-		Test($""\""_{\"""");
-		Console.WriteLine(args);
-	}
+    void Main()
+    {
+        Test($""\""_{\"""");
+        Console.WriteLine(args);
+    }
 }", @"class AClass
 {
-	void Main()
-	{
-		Test($""\""_{\"""");
-		Console.WriteLine(args);
-	}
+    void Main()
+    {
+        Test($""\""_{\"""");
+        Console.WriteLine(args);
+    }
 }", changedOptionSet: optionSet);
         }
 
@@ -10366,10 +10366,10 @@ _ = this is{Count:>0 and var x}and[ 1,2,3 ];
             await AssertFormatAsync(
 @"class Program
 {
-	static void Main()
-	{
+    static void Main()
+    {
 #line (1, 1) - (1, 100) 5 ""a.razor""
-	}
+    }
 }",
 @"class Program
 {

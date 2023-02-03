@@ -28,58 +28,58 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	[MonoTODO]
-	public class HtmlControlDesigner : ComponentDesigner
-	{
-		[MonoTODO]
-		public HtmlControlDesigner () { throw new NotImplementedException (); }
+    [MonoTODO]
+    public class HtmlControlDesigner : ComponentDesigner
+    {
+        [MonoTODO]
+        public HtmlControlDesigner () { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		protected override void Dispose (bool disposing) { }
+        [MonoTODO]
+        protected override void Dispose (bool disposing) { }
 
-		[MonoTODO]
-		[Obsolete ("Use ControlDesigner.Tag instead")]
-		protected virtual void OnBehaviorAttached () { throw new NotImplementedException (); }
+        [MonoTODO]
+        [Obsolete ("Use ControlDesigner.Tag instead")]
+        protected virtual void OnBehaviorAttached () { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		[Obsolete ("Use ControlDesigner.Tag instead")]
-		protected virtual void OnBehaviorDetaching () { throw new NotImplementedException (); }
+        [MonoTODO]
+        [Obsolete ("Use ControlDesigner.Tag instead")]
+        protected virtual void OnBehaviorDetaching () { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		[Obsolete ("Use DataBinding.Changed event instead")]
-		protected virtual void OnBindingsCollectionChanged (string propName) { throw new NotImplementedException (); }
+        [MonoTODO]
+        [Obsolete ("Use DataBinding.Changed event instead")]
+        protected virtual void OnBindingsCollectionChanged (string propName) { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		public virtual void OnSetParent () { throw new NotImplementedException (); }
+        [MonoTODO]
+        public virtual void OnSetParent () { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		protected override void PreFilterEvents (IDictionary events) { throw new NotImplementedException (); }
+        [MonoTODO]
+        protected override void PreFilterEvents (IDictionary events) { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		protected override void PreFilterProperties (IDictionary properties) { throw new NotImplementedException (); }
+        [MonoTODO]
+        protected override void PreFilterProperties (IDictionary properties) { throw new NotImplementedException (); }
 
-		[MonoTODO]
-		[Obsolete ("Use ControlDesigner.Tag instead")]
-		public IHtmlControlDesignerBehavior Behavior { get { throw new NotImplementedException (); } set { throw new NotImplementedException (); } }
+        [MonoTODO]
+        [Obsolete ("Use ControlDesigner.Tag instead")]
+        public IHtmlControlDesignerBehavior Behavior { get { throw new NotImplementedException (); } set { throw new NotImplementedException (); } }
 
-		[MonoTODO]
-		public DataBindingCollection DataBindings { get { throw new NotImplementedException (); } }
+        [MonoTODO]
+        public DataBindingCollection DataBindings { get { throw new NotImplementedException (); } }
 
-		[MonoTODO]
-		[Obsolete ("Use new WebFormsRootDesigner feature instead. It is not used anymore", true)]
-		protected object DesignTimeElement { get { throw new NotImplementedException (); } }
+        [MonoTODO]
+        [Obsolete ("Use new WebFormsRootDesigner feature instead. It is not used anymore", true)]
+        protected object DesignTimeElement { get { throw new NotImplementedException (); } }
 
-		[MonoTODO]
-		[Obsolete ("Code serialization is not supported in 2.0 anymore")]
-		public virtual bool ShouldCodeSerialize { get { throw new NotImplementedException (); } set { throw new NotImplementedException (); } }
+        [MonoTODO]
+        [Obsolete ("Code serialization is not supported in 2.0 anymore")]
+        public virtual bool ShouldCodeSerialize { get { throw new NotImplementedException (); } set { throw new NotImplementedException (); } }
 
-		public ExpressionBindingCollection Expressions {
-			get { throw new NotImplementedException (); }
-		}
+        public ExpressionBindingCollection Expressions {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override void Initialize (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override void Initialize (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

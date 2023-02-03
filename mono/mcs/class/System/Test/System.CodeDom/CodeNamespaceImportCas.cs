@@ -1,9 +1,9 @@
 //
 // CodeNamespaceImportCas.cs
-//	- CAS unit tests for System.CodeDom.CodeNamespaceImport
+//    - CAS unit tests for System.CodeDom.CodeNamespaceImport
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,50 +37,50 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeNamespaceImportCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeNamespaceImportCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		private void Handler (object sender, EventArgs e)
-		{
-		}
+        private void Handler (object sender, EventArgs e)
+        {
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeNamespaceImport cni = new CodeNamespaceImport ();
-			Assert.IsNull (cni.LinePragma, "LinePragma");
-			cni.LinePragma = new CodeLinePragma (String.Empty, Int32.MinValue);
-			Assert.AreEqual (String.Empty, cni.Namespace, "Namespace");
-			cni.Namespace = "mono";
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeNamespaceImport cni = new CodeNamespaceImport ();
+            Assert.IsNull (cni.LinePragma, "LinePragma");
+            cni.LinePragma = new CodeLinePragma (String.Empty, Int32.MinValue);
+            Assert.AreEqual (String.Empty, cni.Namespace, "Namespace");
+            cni.Namespace = "mono";
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeNamespaceImport cni = new CodeNamespaceImport ("mono");
-			Assert.IsNull (cni.LinePragma, "LinePragma");
-			cni.LinePragma = new CodeLinePragma (String.Empty, Int32.MinValue);
-			Assert.AreEqual ("mono", cni.Namespace, "Namespace");
-			cni.Namespace = String.Empty;
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeNamespaceImport cni = new CodeNamespaceImport ("mono");
+            Assert.IsNull (cni.LinePragma, "LinePragma");
+            cni.LinePragma = new CodeLinePragma (String.Empty, Int32.MinValue);
+            Assert.AreEqual ("mono", cni.Namespace, "Namespace");
+            cni.Namespace = String.Empty;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeNamespaceImport).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeNamespaceImport).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

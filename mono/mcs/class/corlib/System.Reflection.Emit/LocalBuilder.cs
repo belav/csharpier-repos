@@ -43,95 +43,95 @@ using System.Diagnostics.SymbolStore;
 namespace System.Reflection.Emit {
 
 #if !MOBILE
-	[ComVisible (true)]
-	[ComDefaultInterface (typeof (_LocalBuilder))]
-	[ClassInterface (ClassInterfaceType.None)]
-	partial class LocalBuilder : _LocalBuilder
-	{
-		void _LocalBuilder.GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
-		{
-			throw new NotImplementedException ();
-		}
+    [ComVisible (true)]
+    [ComDefaultInterface (typeof (_LocalBuilder))]
+    [ClassInterface (ClassInterfaceType.None)]
+    partial class LocalBuilder : _LocalBuilder
+    {
+        void _LocalBuilder.GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void _LocalBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo)
-		{
-			throw new NotImplementedException ();
-		}
+        void _LocalBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void _LocalBuilder.GetTypeInfoCount (out uint pcTInfo)
-		{
-			throw new NotImplementedException ();
-		}
+        void _LocalBuilder.GetTypeInfoCount (out uint pcTInfo)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void _LocalBuilder.Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void _LocalBuilder.Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 #endif
-	
-	[StructLayout (LayoutKind.Sequential)]
-	public sealed partial class LocalBuilder : LocalVariableInfo
-	{
+    
+    [StructLayout (LayoutKind.Sequential)]
+    public sealed partial class LocalBuilder : LocalVariableInfo
+    {
 
-		// Some fields are already defined in LocalVariableInfo
-		#region Sync with reflection.h
-		private string name;
-		#endregion
-		
-		internal ILGenerator ilgen;
-		int startOffset;
-		int endOffset;
+        // Some fields are already defined in LocalVariableInfo
+        #region Sync with reflection.h
+        private string name;
+        #endregion
+        
+        internal ILGenerator ilgen;
+        int startOffset;
+        int endOffset;
 
-		internal LocalBuilder (Type t, ILGenerator ilgen)
-		{
-			this.type = t;
-			this.ilgen = ilgen;
-		}
+        internal LocalBuilder (Type t, ILGenerator ilgen)
+        {
+            this.type = t;
+            this.ilgen = ilgen;
+        }
 
-		public void SetLocalSymInfo (string name, int startOffset, int endOffset)
-		{
-			this.name = name;
-			this.startOffset = startOffset;
-			this.endOffset = endOffset;
-		}
+        public void SetLocalSymInfo (string name, int startOffset, int endOffset)
+        {
+            this.name = name;
+            this.startOffset = startOffset;
+            this.endOffset = endOffset;
+        }
 
-		public void SetLocalSymInfo (string name)
-		{
-			SetLocalSymInfo (name, 0, 0);
-		}
+        public void SetLocalSymInfo (string name)
+        {
+            SetLocalSymInfo (name, 0, 0);
+        }
 
-		public override Type LocalType
-		{
-			get {
-				return type;
-			}
-		}
+        public override Type LocalType
+        {
+            get {
+                return type;
+            }
+        }
 
-		public override bool IsPinned
-		{
-			get {
-				return is_pinned;
-			}
-		}
+        public override bool IsPinned
+        {
+            get {
+                return is_pinned;
+            }
+        }
 
-		public override int LocalIndex
-		{
-			get {
-				return position;
-			}
-		}
+        public override int LocalIndex
+        {
+            get {
+                return position;
+            }
+        }
 
-		internal string Name {
-			get { return name; }
-		}
-		
-		internal int StartOffset {
-			get { return startOffset; }
-		}
-		
-		internal int EndOffset {
-			get { return endOffset; }
-		}
-	}
+        internal string Name {
+            get { return name; }
+        }
+        
+        internal int StartOffset {
+            get { return startOffset; }
+        }
+        
+        internal int EndOffset {
+            get { return endOffset; }
+        }
+    }
 }

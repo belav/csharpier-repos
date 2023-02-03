@@ -32,17 +32,17 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-	public class TextControlDesigner : ControlDesigner
-	{
-		public TextControlDesigner ()
-		{
-		}
+    public class TextControlDesigner : ControlDesigner
+    {
+        public TextControlDesigner ()
+        {
+        }
 
-		[MonoTODO]
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 }

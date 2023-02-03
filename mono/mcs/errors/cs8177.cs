@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 class X
 {
-	int x;
+    int x;
 
-	async Task Test ()
-	{
-		ref int y = ref x;
-		await Task.Yield ();
-	}
+    async Task Test ()
+    {
+        ref int y = ref x;
+        await Task.Yield ();
+    }
 }

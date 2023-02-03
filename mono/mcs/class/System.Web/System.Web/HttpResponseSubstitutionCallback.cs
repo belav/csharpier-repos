@@ -2,7 +2,7 @@
 // System.Web.HttpResponseSubstitutionCallback delegate
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005-2009 Novell, Inc (http://www.novell.com)
 //
@@ -28,6 +28,6 @@
 
 namespace System.Web
 {
-	public delegate string HttpResponseSubstitutionCallback (HttpContext context);
+    public delegate string HttpResponseSubstitutionCallback (HttpContext context);
 }
 

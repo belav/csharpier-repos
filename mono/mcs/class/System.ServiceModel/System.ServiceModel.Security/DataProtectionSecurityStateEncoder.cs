@@ -2,7 +2,7 @@
 // DataProtectionSecurityStateEncoder.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc.  http://www.novell.com
 //
@@ -29,50 +29,50 @@ using System.Security.Cryptography;
 
 namespace System.ServiceModel.Security
 {
-	public class DataProtectionSecurityStateEncoder : SecurityStateEncoder
-	{
-		public DataProtectionSecurityStateEncoder ()
-			: this (true)
-		{
-		}
+    public class DataProtectionSecurityStateEncoder : SecurityStateEncoder
+    {
+        public DataProtectionSecurityStateEncoder ()
+            : this (true)
+        {
+        }
 
-		public DataProtectionSecurityStateEncoder (bool useCurrentUserProtectionScope)
-		{
-			user = useCurrentUserProtectionScope;
-		}
+        public DataProtectionSecurityStateEncoder (bool useCurrentUserProtectionScope)
+        {
+            user = useCurrentUserProtectionScope;
+        }
 
-		public DataProtectionSecurityStateEncoder (bool useCurrentUserProtectionScope, byte [] entropy)
-		{
-			user = useCurrentUserProtectionScope;
-			this.entropy = entropy;
-		}
+        public DataProtectionSecurityStateEncoder (bool useCurrentUserProtectionScope, byte [] entropy)
+        {
+            user = useCurrentUserProtectionScope;
+            this.entropy = entropy;
+        }
 
-		bool user;
-		byte [] entropy;
+        bool user;
+        byte [] entropy;
 
-		public bool UseCurrentUserProtectionScope {
-			get { return user; }
-		}
+        public bool UseCurrentUserProtectionScope {
+            get { return user; }
+        }
 
-		public byte [] GetEntropy ()
-		{
-			return entropy == null ? null : (byte []) entropy.Clone ();
-		}
+        public byte [] GetEntropy ()
+        {
+            return entropy == null ? null : (byte []) entropy.Clone ();
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
+        [MonoTODO]
+        public override string ToString ()
+        {
+            return base.ToString ();
+        }
 
-		protected internal override byte [] DecodeSecurityState (byte [] data)
-		{
-			return ProtectedData.Unprotect (data, entropy, DataProtectionScope.CurrentUser);
-		}
+        protected internal override byte [] DecodeSecurityState (byte [] data)
+        {
+            return ProtectedData.Unprotect (data, entropy, DataProtectionScope.CurrentUser);
+        }
 
-		protected internal override byte [] EncodeSecurityState (byte [] data)
-		{
-			return ProtectedData.Protect (data, entropy, DataProtectionScope.CurrentUser);
-		}
-	}
+        protected internal override byte [] EncodeSecurityState (byte [] data)
+        {
+            return ProtectedData.Protect (data, entropy, DataProtectionScope.CurrentUser);
+        }
+    }
 }

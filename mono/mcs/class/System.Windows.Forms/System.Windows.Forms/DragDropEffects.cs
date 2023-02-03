@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -29,13 +29,13 @@
 
 namespace System.Windows.Forms {
 
-	[Flags]
-	public enum DragDropEffects {
-		None	= 0x00000000,
-		Copy	= 0x00000001,
-		Move	= 0x00000002,
-		Link	= 0x00000004,
-		Scroll	= unchecked((int)0x80000000),
-		All	= unchecked((int)0x80000003)
-	}
+    [Flags]
+    public enum DragDropEffects {
+        None    = 0x00000000,
+        Copy    = 0x00000001,
+        Move    = 0x00000002,
+        Link    = 0x00000004,
+        Scroll    = unchecked((int)0x80000000),
+        All    = unchecked((int)0x80000003)
+    }
 }

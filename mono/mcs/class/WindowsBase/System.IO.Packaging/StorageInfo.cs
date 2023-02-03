@@ -20,79 +20,79 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.IO.Packaging {
 
-	public class StorageInfo
-	{
-		internal StorageInfo ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class StorageInfo
+    {
+        internal StorageInfo ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
+        public string Name {
+            get { throw new NotImplementedException (); }
+        }
 
-		public StreamInfo CreateStream (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public StreamInfo CreateStream (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public StreamInfo CreateStream (string name, CompressionOption compressionOption, EncryptionOption encryptionOption)
-		{
-			throw new NotImplementedException ();
-		}
+        public StreamInfo CreateStream (string name, CompressionOption compressionOption, EncryptionOption encryptionOption)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public StorageInfo CreateSubStorage (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public StorageInfo CreateSubStorage (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void DeleteStream (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public void DeleteStream (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void DeleteSubStorage (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public void DeleteSubStorage (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public StreamInfo GetStreamInfo (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public StreamInfo GetStreamInfo (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public StreamInfo[] GetStreams ()
-		{
-			throw new NotImplementedException ();
-		}
+        public StreamInfo[] GetStreams ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public StorageInfo GetSubStorageInfo (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public StorageInfo GetSubStorageInfo (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public StorageInfo[] GetSubStorages ()
-		{
-			throw new NotImplementedException ();
-		}
+        public StorageInfo[] GetSubStorages ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public bool StreamExists (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public bool StreamExists (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public bool SubStorageExists (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public bool SubStorageExists (string name)
+        {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 
 }

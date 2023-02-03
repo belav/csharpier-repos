@@ -2,7 +2,7 @@
 // EventIgnoreAttribute.cs
 //
 // Authors:
-//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,8 +30,8 @@ using System;
 
 namespace System.Diagnostics.Tracing
 {
-	[AttributeUsage(AttributeTargets.Property)]
-	public class EventIgnoreAttribute : Attribute
-	{
-	}
+    [AttributeUsage(AttributeTargets.Property)]
+    public class EventIgnoreAttribute : Attribute
+    {
+    }
 }

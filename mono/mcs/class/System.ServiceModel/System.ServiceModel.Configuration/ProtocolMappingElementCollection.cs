@@ -2,7 +2,7 @@
 // ProtocolMappingElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,17 +54,17 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ProtocolMappingElement), AddItemName = "add")]
-	public sealed class ProtocolMappingElementCollection : ServiceModelEnhancedConfigurationElementCollection<ProtocolMappingElement>
-	{
-		public ProtocolMappingElementCollection ()
-		{
-			AddElementName = "add";
-		}
-		
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((ProtocolMappingElement) element).Scheme;
-		}
-	}
+    [ConfigurationCollection (typeof (ProtocolMappingElement), AddItemName = "add")]
+    public sealed class ProtocolMappingElementCollection : ServiceModelEnhancedConfigurationElementCollection<ProtocolMappingElement>
+    {
+        public ProtocolMappingElementCollection ()
+        {
+            AddElementName = "add";
+        }
+        
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            return ((ProtocolMappingElement) element).Scheme;
+        }
+    }
 }

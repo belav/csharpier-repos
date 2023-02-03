@@ -34,31 +34,31 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class PageEventArgs : EventArgs
-	{
-		int startRowIndex;
-		int maximumRows;
-		int totalRowCount;
-		
-		public PageEventArgs(int startRowIndex, int maximumRows, int totalRowCount)
-		{
-			this.startRowIndex = startRowIndex;
-			this.maximumRows = maximumRows;
-			this.totalRowCount = totalRowCount;
-		}
+    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class PageEventArgs : EventArgs
+    {
+        int startRowIndex;
+        int maximumRows;
+        int totalRowCount;
+        
+        public PageEventArgs(int startRowIndex, int maximumRows, int totalRowCount)
+        {
+            this.startRowIndex = startRowIndex;
+            this.maximumRows = maximumRows;
+            this.totalRowCount = totalRowCount;
+        }
 
-		public int MaximumRows {
-			get { return maximumRows; }
-		}
+        public int MaximumRows {
+            get { return maximumRows; }
+        }
 
-		public int StartRowIndex {
-			get { return startRowIndex; }
-		}
+        public int StartRowIndex {
+            get { return startRowIndex; }
+        }
 
-		public int TotalRowCount {
-			get { return totalRowCount; }
-		}
-	}
+        public int TotalRowCount {
+            get { return totalRowCount; }
+        }
+    }
 }

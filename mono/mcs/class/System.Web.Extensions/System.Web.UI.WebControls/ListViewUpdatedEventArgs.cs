@@ -32,60 +32,60 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewUpdatedEventArgs : EventArgs
-	{
-		IOrderedDictionary _newValues;
-		IOrderedDictionary _oldValues;
+    public class ListViewUpdatedEventArgs : EventArgs
+    {
+        IOrderedDictionary _newValues;
+        IOrderedDictionary _oldValues;
 
-		internal ListViewUpdatedEventArgs (int affectedRows, Exception exception, IOrderedDictionary newValues, IOrderedDictionary oldValues)
-			: this (affectedRows, exception)
-		{
-			_newValues = newValues;
-			_oldValues = oldValues;
-		}
-		
-		public ListViewUpdatedEventArgs (int affectedRows, Exception exception)
-		{
-			AffectedRows = affectedRows;
-			Exception = exception;
-			ExceptionHandled = false;
-			KeepInEditMode = false;
-		}
-		
-		public int AffectedRows {
-			get;
-			private set;
-		}
-		
-		public Exception Exception {
-			get;
-			private set;
-		}
-		
-		public bool ExceptionHandled {
-			get;
-			set;
-		}
-		
-		public bool KeepInEditMode {
-			get;
-			set;
-		}
-		
-		public IOrderedDictionary NewValues {
-			get {
-				if (_newValues == null)
-					_newValues = new OrderedDictionary ();
-				return _newValues;
-			}
-		}
-		
-		public IOrderedDictionary OldValues {
-			get {
-				if (_oldValues == null)
-					_oldValues = new OrderedDictionary ();
-				return _newValues;
-			}
-		}
-	}
+        internal ListViewUpdatedEventArgs (int affectedRows, Exception exception, IOrderedDictionary newValues, IOrderedDictionary oldValues)
+            : this (affectedRows, exception)
+        {
+            _newValues = newValues;
+            _oldValues = oldValues;
+        }
+        
+        public ListViewUpdatedEventArgs (int affectedRows, Exception exception)
+        {
+            AffectedRows = affectedRows;
+            Exception = exception;
+            ExceptionHandled = false;
+            KeepInEditMode = false;
+        }
+        
+        public int AffectedRows {
+            get;
+            private set;
+        }
+        
+        public Exception Exception {
+            get;
+            private set;
+        }
+        
+        public bool ExceptionHandled {
+            get;
+            set;
+        }
+        
+        public bool KeepInEditMode {
+            get;
+            set;
+        }
+        
+        public IOrderedDictionary NewValues {
+            get {
+                if (_newValues == null)
+                    _newValues = new OrderedDictionary ();
+                return _newValues;
+            }
+        }
+        
+        public IOrderedDictionary OldValues {
+            get {
+                if (_oldValues == null)
+                    _oldValues = new OrderedDictionary ();
+                return _newValues;
+            }
+        }
+    }
 }

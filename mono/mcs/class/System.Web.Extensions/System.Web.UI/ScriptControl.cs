@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptControl.cs
 //
 // Author:
@@ -34,47 +34,47 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI
 {
-	public abstract class ScriptControl : WebControl, IScriptControl
-	{
-		ScriptManager _scriptManager;
+    public abstract class ScriptControl : WebControl, IScriptControl
+    {
+        ScriptManager _scriptManager;
 
-		protected ScriptControl () { }
+        protected ScriptControl () { }
 
-		ScriptManager ScriptManager {
-			get {
-				if (_scriptManager == null) {
-					_scriptManager = ScriptManager.GetCurrent (Page);
-					if (_scriptManager == null)
-						throw new InvalidOperationException (String.Format ("The control with ID '{0}' requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it.", ID));
-				}
-				return _scriptManager;
-			}
-		}
+        ScriptManager ScriptManager {
+            get {
+                if (_scriptManager == null) {
+                    _scriptManager = ScriptManager.GetCurrent (Page);
+                    if (_scriptManager == null)
+                        throw new InvalidOperationException (String.Format ("The control with ID '{0}' requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it.", ID));
+                }
+                return _scriptManager;
+            }
+        }
 
-		protected abstract IEnumerable<ScriptDescriptor> GetScriptDescriptors ();
+        protected abstract IEnumerable<ScriptDescriptor> GetScriptDescriptors ();
 
-		protected abstract IEnumerable<ScriptReference> GetScriptReferences ();
+        protected abstract IEnumerable<ScriptReference> GetScriptReferences ();
 
-		protected internal override void OnPreRender (EventArgs e) {
-			base.OnPreRender (e);
-			ScriptManager.RegisterScriptControl (this);
-		}
+        protected internal override void OnPreRender (EventArgs e) {
+            base.OnPreRender (e);
+            ScriptManager.RegisterScriptControl (this);
+        }
 
-		protected internal override void Render (HtmlTextWriter writer) {
-			ScriptManager.RegisterScriptDescriptors (this);
-			base.Render (writer);
-		}
+        protected internal override void Render (HtmlTextWriter writer) {
+            ScriptManager.RegisterScriptDescriptors (this);
+            base.Render (writer);
+        }
 
-		#region IScriptControl Members
+        #region IScriptControl Members
 
-		IEnumerable<ScriptDescriptor> IScriptControl.GetScriptDescriptors () {
-			return GetScriptDescriptors ();
-		}
+        IEnumerable<ScriptDescriptor> IScriptControl.GetScriptDescriptors () {
+            return GetScriptDescriptors ();
+        }
 
-		IEnumerable<ScriptReference> IScriptControl.GetScriptReferences () {
-			return GetScriptReferences ();
-		}
+        IEnumerable<ScriptReference> IScriptControl.GetScriptReferences () {
+            return GetScriptReferences ();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

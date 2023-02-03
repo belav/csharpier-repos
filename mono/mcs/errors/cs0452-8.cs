@@ -3,8 +3,8 @@
 
 public class C<T> where T : class
 {
-	public int this [params C<ulong>[] args] {
-		set {}
-	}
+    public int this [params C<ulong>[] args] {
+        set {}
+    }
 }
 

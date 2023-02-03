@@ -2,7 +2,7 @@
 // BindingElementExtensionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract partial class BindingElementExtensionElement
-		 : ServiceModelExtensionElement
-	{
-		protected BindingElementExtensionElement () {
-		}
+    public abstract partial class BindingElementExtensionElement
+         : ServiceModelExtensionElement
+    {
+        protected BindingElementExtensionElement () {
+        }
 
-		// Properties
-		public abstract Type BindingElementType { get; }
+        // Properties
+        public abstract Type BindingElementType { get; }
 
-		public virtual void ApplyConfiguration (BindingElement bindingElement) {
-		}
+        public virtual void ApplyConfiguration (BindingElement bindingElement) {
+        }
 
-		protected internal abstract BindingElement CreateBindingElement ();
+        protected internal abstract BindingElement CreateBindingElement ();
 
-		protected internal virtual void InitializeFrom (BindingElement bindingElement) {
-		}
+        protected internal virtual void InitializeFrom (BindingElement bindingElement) {
+        }
 
-		internal override string GetConfigurationElementName () {
-			return ConfigUtil.ExtensionsSection.BindingElementExtensions.GetConfigurationElementName (GetType());
-		}
-	}
+        internal override string GetConfigurationElementName () {
+            return ConfigUtil.ExtensionsSection.BindingElementExtensions.GetConfigurationElementName (GetType());
+        }
+    }
 
 }

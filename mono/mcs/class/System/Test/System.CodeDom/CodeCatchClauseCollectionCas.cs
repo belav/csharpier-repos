@@ -1,9 +1,9 @@
 //
 // CodeCatchClauseCollectionCas.cs
-//	- CAS unit tests for System.CodeDom.CodeCatchClauseCollection
+//    - CAS unit tests for System.CodeDom.CodeCatchClauseCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,83 +37,83 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeCatchClauseCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeCatchClauseCollectionCas {
 
-		private CodeCatchClause ccc;
-		private CodeCatchClause[] array;
+        private CodeCatchClause ccc;
+        private CodeCatchClause[] array;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			ccc = new CodeCatchClause ();
-			array = new CodeCatchClause[1] { ccc };
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            ccc = new CodeCatchClause ();
+            array = new CodeCatchClause[1] { ccc };
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeCatchClauseCollection coll = new CodeCatchClauseCollection ();
-			Assert.AreEqual (0, coll.Add (ccc), "Add");
-			Assert.AreSame (ccc, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (ccc), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (ccc), "IndexOf");
-			coll.Insert (0, ccc);
-			coll.Remove (ccc);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeCatchClauseCollection coll = new CodeCatchClauseCollection ();
+            Assert.AreEqual (0, coll.Add (ccc), "Add");
+            Assert.AreSame (ccc, coll[0], "this[int]");
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (ccc), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (ccc), "IndexOf");
+            coll.Insert (0, ccc);
+            coll.Remove (ccc);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeCatchClauseCollection coll = new CodeCatchClauseCollection (array);
-			coll.CopyTo (array, 0);
-			Assert.AreEqual (1, coll.Add (ccc), "Add");
-			Assert.AreSame (ccc, coll[0], "this[int]");
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (ccc), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (ccc), "IndexOf");
-			coll.Insert (0, ccc);
-			coll.Remove (ccc);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeCatchClauseCollection coll = new CodeCatchClauseCollection (array);
+            coll.CopyTo (array, 0);
+            Assert.AreEqual (1, coll.Add (ccc), "Add");
+            Assert.AreSame (ccc, coll[0], "this[int]");
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (ccc), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (ccc), "IndexOf");
+            coll.Insert (0, ccc);
+            coll.Remove (ccc);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeCatchClauseCollection c = new CodeCatchClauseCollection ();
-			CodeCatchClauseCollection coll = new CodeCatchClauseCollection (c);
-			Assert.AreEqual (0, coll.Add (ccc), "Add");
-			Assert.AreSame (ccc, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (ccc), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (ccc), "IndexOf");
-			coll.Insert (0, ccc);
-			coll.Remove (ccc);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeCatchClauseCollection c = new CodeCatchClauseCollection ();
+            CodeCatchClauseCollection coll = new CodeCatchClauseCollection (c);
+            Assert.AreEqual (0, coll.Add (ccc), "Add");
+            Assert.AreSame (ccc, coll[0], "this[int]");
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (ccc), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (ccc), "IndexOf");
+            coll.Insert (0, ccc);
+            coll.Remove (ccc);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeCatchClauseCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeCatchClauseCollection).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HttpContextHelper.cs
 //  
 // Author:
@@ -32,13 +32,13 @@ using System.Web;
 
 namespace Microsoft.Web.Infrastructure
 {
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public static class HttpContextHelper
-	{
-		[SecuritySafeCritical]
-		public static void ExecuteInNullContext (Action action)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    public static class HttpContextHelper
+    {
+        [SecuritySafeCritical]
+        public static void ExecuteInNullContext (Action action)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

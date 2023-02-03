@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.IntegrationTests
+namespace AutoMapper.IntegrationTests
 {
     namespace ValueTransformerTests
     {

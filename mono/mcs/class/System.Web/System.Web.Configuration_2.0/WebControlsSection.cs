@@ -2,7 +2,7 @@
 // System.Web.Configuration.WebControlsSection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,42 +36,42 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public sealed class WebControlsSection : ConfigurationSection
-	{
-		static ConfigurationProperty clientScriptsLocationProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class WebControlsSection : ConfigurationSection
+    {
+        static ConfigurationProperty clientScriptsLocationProp;
+        static ConfigurationPropertyCollection properties;
 
-		static WebControlsSection ()
-		{
-			clientScriptsLocationProp = new ConfigurationProperty ("clientScriptsLocation", typeof (string), "/aspnet_client/{0}/{1}/",
-									       TypeDescriptor.GetConverter (typeof (string)),
-									       PropertyHelper.NonEmptyStringValidator,
-									       ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
+        static WebControlsSection ()
+        {
+            clientScriptsLocationProp = new ConfigurationProperty ("clientScriptsLocation", typeof (string), "/aspnet_client/{0}/{1}/",
+                                           TypeDescriptor.GetConverter (typeof (string)),
+                                           PropertyHelper.NonEmptyStringValidator,
+                                           ConfigurationPropertyOptions.IsRequired);
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (clientScriptsLocationProp);
-		}
+            properties.Add (clientScriptsLocationProp);
+        }
 
-		protected internal override object GetRuntimeObject ()
-		{
-			Hashtable ht = new Hashtable ();
+        protected internal override object GetRuntimeObject ()
+        {
+            Hashtable ht = new Hashtable ();
 
-			ht.Add ("clientScriptsLocation", ClientScriptsLocation);
+            ht.Add ("clientScriptsLocation", ClientScriptsLocation);
 
-			return ht;
-		}
+            return ht;
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("clientScriptsLocation", DefaultValue = "/aspnet_client/{0}/{1}/", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string ClientScriptsLocation {
-			get { return (string) base [clientScriptsLocationProp];}
-		}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("clientScriptsLocation", DefaultValue = "/aspnet_client/{0}/{1}/", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string ClientScriptsLocation {
+            get { return (string) base [clientScriptsLocationProp];}
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-	}
+    }
 
 }
 

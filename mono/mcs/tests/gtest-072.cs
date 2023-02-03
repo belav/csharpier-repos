@@ -47,10 +47,10 @@ class TestLog {
       DateTime[] dts = log2.All;
       // Printing both logs:
       foreach (String s in log1.All) 
-	Console.Write("{0}   ", s);
+    Console.Write("{0}   ", s);
       Console.WriteLine();
       foreach (DateTime dt in dts) 
-	Console.Write("{0}   ", dt);
+    Console.Write("{0}   ", dt);
       Console.WriteLine();
       TestPairLog();
     }
@@ -62,7 +62,7 @@ class TestLog {
       log.Add(new Pair<DateTime,String>(DateTime.Now.AddMinutes(7), "Ready"));
       Pair<DateTime,String>[] allMsgs = log.All;
       foreach (Pair<DateTime,String> p in allMsgs) 
-	Console.WriteLine("At {0}: {1}", p.Fst, p.Snd);
+    Console.WriteLine("At {0}: {1}", p.Fst, p.Snd);
     }
 }
 

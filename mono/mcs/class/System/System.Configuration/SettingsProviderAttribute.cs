@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsProviderAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,33 +30,33 @@ using System;
 
 namespace System.Configuration
 {
-	[AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Property)]
-	public sealed class SettingsProviderAttribute : Attribute
-	{
-		string providerTypeName;
+    [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Property)]
+    public sealed class SettingsProviderAttribute : Attribute
+    {
+        string providerTypeName;
 
-		public SettingsProviderAttribute (string providerTypeName)
-		{
-			if (providerTypeName == null)
-				throw new ArgumentNullException ("providerTypeName");
-			this.providerTypeName = providerTypeName;
-		}
+        public SettingsProviderAttribute (string providerTypeName)
+        {
+            if (providerTypeName == null)
+                throw new ArgumentNullException ("providerTypeName");
+            this.providerTypeName = providerTypeName;
+        }
 
-		public SettingsProviderAttribute (Type providerType)
-		{
-			if (providerType == null)
-				throw new ArgumentNullException ("providerType");
-			this.providerTypeName = providerType.AssemblyQualifiedName;
-		}
+        public SettingsProviderAttribute (Type providerType)
+        {
+            if (providerType == null)
+                throw new ArgumentNullException ("providerType");
+            this.providerTypeName = providerType.AssemblyQualifiedName;
+        }
 
 
-		public string ProviderTypeName {
-			get {
-				return providerTypeName;
-			}
-		}
+        public string ProviderTypeName {
+            get {
+                return providerTypeName;
+            }
+        }
 
-	}
+    }
 
 }
 

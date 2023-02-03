@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,31 +14,31 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Xml.XPath;
-	using System.Xml.Xsl;
+    using System;
+    using System.Xml.XPath;
+    using System.Xml.Xsl;
 
-	public class CompiledXPathStep : CompiledXPathNode
-	{
-		private XPathExpression path;
+    public class CompiledXPathStep : CompiledXPathNode
+    {
+        private XPathExpression path;
 
-		internal CompiledXPathStep() { }
+        internal CompiledXPathStep() { }
 
-		public XPathExpression Path
-		{
-			get { return path; }
-			internal set { path = value; }
-		}
+        public XPathExpression Path
+        {
+            get { return path; }
+            internal set { path = value; }
+        }
 
-		public CompiledXPathStep NextStep
-		{
-			get { return (CompiledXPathStep) NextNode; }
-		}
+        public CompiledXPathStep NextStep
+        {
+            get { return (CompiledXPathStep) NextNode; }
+        }
 
-		internal override void SetContext(XsltContext context)
-		{
-			path.SetContext(context);
-			base.SetContext(context);
-		}
-	}
+        internal override void SetContext(XsltContext context)
+        {
+            path.SetContext(context);
+            base.SetContext(context);
+        }
+    }
 }

@@ -7,8 +7,8 @@ public class C<T> where T : struct
 
 class A
 {
-	public void Foo (C<string>[] args)
-	{
-	}
+    public void Foo (C<string>[] args)
+    {
+    }
 }
 

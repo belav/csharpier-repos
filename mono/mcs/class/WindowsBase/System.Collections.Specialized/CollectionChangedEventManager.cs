@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,53 +28,53 @@ using System.Windows;
 
 namespace System.Collections.Specialized {
 
-	public class CollectionChangedEventManager : WeakEventManager
-	{
-		internal CollectionChangedEventManager ()
-		{
-		}
+    public class CollectionChangedEventManager : WeakEventManager
+    {
+        internal CollectionChangedEventManager ()
+        {
+        }
 
-		public static void AddListener (INotifyCollectionChanged source, IWeakEventListener listener)
-		{
-			CurrentManager.ProtectedAddListener (source, listener);
-		}
+        public static void AddListener (INotifyCollectionChanged source, IWeakEventListener listener)
+        {
+            CurrentManager.ProtectedAddListener (source, listener);
+        }
 
-		public static void RemoveListener (INotifyCollectionChanged source, IWeakEventListener listener)
-		{
-			CurrentManager.ProtectedAddListener (source, listener);
-		}
+        public static void RemoveListener (INotifyCollectionChanged source, IWeakEventListener listener)
+        {
+            CurrentManager.ProtectedAddListener (source, listener);
+        }
 
-		protected override void StartListening (object source)
-		{
-			INotifyCollectionChanged inotify = (INotifyCollectionChanged) source;
-			inotify.CollectionChanged += OnCollectionChanged;
-		}
+        protected override void StartListening (object source)
+        {
+            INotifyCollectionChanged inotify = (INotifyCollectionChanged) source;
+            inotify.CollectionChanged += OnCollectionChanged;
+        }
 
-		protected override void StopListening (object source)
-		{
-			INotifyCollectionChanged inotify = (INotifyCollectionChanged) source;
-			inotify.CollectionChanged -= OnCollectionChanged;
-		}
+        protected override void StopListening (object source)
+        {
+            INotifyCollectionChanged inotify = (INotifyCollectionChanged) source;
+            inotify.CollectionChanged -= OnCollectionChanged;
+        }
 
-		private void OnCollectionChanged (object sender, NotifyCollectionChangedEventArgs e)
-		{
-			DeliverEvent (sender, e);
-		}
+        private void OnCollectionChanged (object sender, NotifyCollectionChangedEventArgs e)
+        {
+            DeliverEvent (sender, e);
+        }
 
-		private static object CurrentManagerLock = new object ();
+        private static object CurrentManagerLock = new object ();
 
-		private static CollectionChangedEventManager CurrentManager {
-			get {
-				lock (CurrentManagerLock) {
-					CollectionChangedEventManager manager = (CollectionChangedEventManager)GetCurrentManager (typeof (CollectionChangedEventManager));
-					if (manager == null) {
-						manager = new CollectionChangedEventManager ();
-						SetCurrentManager (typeof (CollectionChangedEventManager), manager);
-					}
-					return manager;
-				}
-			}
-		}
-	}
+        private static CollectionChangedEventManager CurrentManager {
+            get {
+                lock (CurrentManagerLock) {
+                    CollectionChangedEventManager manager = (CollectionChangedEventManager)GetCurrentManager (typeof (CollectionChangedEventManager));
+                    if (manager == null) {
+                        manager = new CollectionChangedEventManager ();
+                        SetCurrentManager (typeof (CollectionChangedEventManager), manager);
+                    }
+                    return manager;
+                }
+            }
+        }
+    }
 }
 

@@ -6,13 +6,13 @@ using System;
 
 public class CS0652 {
 
-	public static void Main () 
-	{
-		byte b = 0;
-		if (b == -1)
-			Console.WriteLine (":(");
-		else
-			Console.WriteLine (":)");
-	}
+    public static void Main () 
+    {
+        byte b = 0;
+        if (b == -1)
+            Console.WriteLine (":(");
+        else
+            Console.WriteLine (":)");
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -9462,7 +9462,7 @@ void goo() { }
         public void GlobalStatementSeparators_NonAsciiCharacter()
         {
             var test = @"
-H �oz
+H ?oz
 ";
             ParseAndValidate(test,
                 new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 3 },
@@ -9473,7 +9473,7 @@ H �oz
         public void GlobalStatementSeparators_UnicodeCharacter()
         {
             var test = @"
-int नुसौप्रख्यातनिदेशकपुरानी 
+int ???????????????????????? 
 ";
             ParseAndValidate(test,
                 new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 29 });

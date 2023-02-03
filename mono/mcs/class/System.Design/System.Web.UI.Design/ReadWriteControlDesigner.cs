@@ -25,24 +25,24 @@ using System.Web.UI.WebControls;
 using System.Collections;
 
 namespace System.Web.UI.Design {
-	[Obsolete ("Use ContainerControlDesigner instead")]
-	[MonoTODO] public class ReadWriteControlDesigner : ControlDesigner {
-		[MonoTODO] public ReadWriteControlDesigner () { throw new NotImplementedException (); }
-		[MonoTODO] protected virtual void MapPropertyToStyle (string propName, object varPropValue) { throw new NotImplementedException (); }
-		[Obsolete ("Use ControlDesigner.Tag instead")]
-		[MonoTODO] protected override void OnBehaviorAttached () { throw new NotImplementedException (); }
-		[MonoTODO] public override void OnComponentChanged (object sender, ComponentChangedEventArgs ce) { throw new NotImplementedException (); }
-		[MonoTODO]
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+    [Obsolete ("Use ContainerControlDesigner instead")]
+    [MonoTODO] public class ReadWriteControlDesigner : ControlDesigner {
+        [MonoTODO] public ReadWriteControlDesigner () { throw new NotImplementedException (); }
+        [MonoTODO] protected virtual void MapPropertyToStyle (string propName, object varPropValue) { throw new NotImplementedException (); }
+        [Obsolete ("Use ControlDesigner.Tag instead")]
+        [MonoTODO] protected override void OnBehaviorAttached () { throw new NotImplementedException (); }
+        [MonoTODO] public override void OnComponentChanged (object sender, ComponentChangedEventArgs ce) { throw new NotImplementedException (); }
+        [MonoTODO]
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override void UpdateDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override void UpdateDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

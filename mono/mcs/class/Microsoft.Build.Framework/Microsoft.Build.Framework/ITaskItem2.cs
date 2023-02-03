@@ -32,17 +32,17 @@ using System.Collections;
 
 namespace Microsoft.Build.Framework
 {
-	[System.Runtime.InteropServices.GuidAttribute ("ac6d5a59-f877-461b-88e3-b2f06fce0cb9")]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface ITaskItem2 : ITaskItem
-	{
-		string EvaluatedIncludeEscaped { get; set; }
-		
-		string GetMetadataValueEscaped (string metadataName);
-		
-		void SetMetadataValueLiteral (string metadataName, string metadataValue);
-		
-		IDictionary CloneCustomMetadataEscaped ();
-	}
+    [System.Runtime.InteropServices.GuidAttribute ("ac6d5a59-f877-461b-88e3-b2f06fce0cb9")]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface ITaskItem2 : ITaskItem
+    {
+        string EvaluatedIncludeEscaped { get; set; }
+        
+        string GetMetadataValueEscaped (string metadataName);
+        
+        void SetMetadataValueLiteral (string metadataName, string metadataValue);
+        
+        IDictionary CloneCustomMetadataEscaped ();
+    }
 }
 

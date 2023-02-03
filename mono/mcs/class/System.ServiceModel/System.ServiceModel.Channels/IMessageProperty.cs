@@ -28,8 +28,8 @@ using System;
 
 namespace System.ServiceModel.Channels
 {
-	public interface IMessageProperty
-	{
-		IMessageProperty CreateCopy ();
-	}
+    public interface IMessageProperty
+    {
+        IMessageProperty CreateCopy ();
+    }
 }

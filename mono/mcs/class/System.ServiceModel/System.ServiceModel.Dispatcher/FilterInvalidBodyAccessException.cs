@@ -32,29 +32,29 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-	[Serializable]
-	public class FilterInvalidBodyAccessException : InvalidBodyAccessException
-	{
-		Collection<MessageFilter> filters;
+    [Serializable]
+    public class FilterInvalidBodyAccessException : InvalidBodyAccessException
+    {
+        Collection<MessageFilter> filters;
 
-		public FilterInvalidBodyAccessException () : base ("Not allowed to navigate to body.") {}
-		public FilterInvalidBodyAccessException (string message) : base (message) {}
-		public FilterInvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}		
-		protected FilterInvalidBodyAccessException (SerializationInfo info, StreamingContext context)
-			: base (info, context) {}
+        public FilterInvalidBodyAccessException () : base ("Not allowed to navigate to body.") {}
+        public FilterInvalidBodyAccessException (string message) : base (message) {}
+        public FilterInvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}        
+        protected FilterInvalidBodyAccessException (SerializationInfo info, StreamingContext context)
+            : base (info, context) {}
 
-		public FilterInvalidBodyAccessException (string message, Collection<MessageFilter> filters)
-			: base (message)
-		{
-			this.filters = filters;
-		}
+        public FilterInvalidBodyAccessException (string message, Collection<MessageFilter> filters)
+            : base (message)
+        {
+            this.filters = filters;
+        }
 
-		public FilterInvalidBodyAccessException (string message, Exception innerException, Collection<MessageFilter> filters)
-			: base (message, innerException)
-		{
-			this.filters = filters;
-		}
-		
-		public Collection<MessageFilter> Filters { get { return filters; } }
-	}
+        public FilterInvalidBodyAccessException (string message, Exception innerException, Collection<MessageFilter> filters)
+            : base (message, innerException)
+        {
+            this.filters = filters;
+        }
+        
+        public Collection<MessageFilter> Filters { get { return filters; } }
+    }
 }

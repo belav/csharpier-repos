@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.ControlBodyGlyph
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,34 +36,34 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public class ControlBodyGlyph : ComponentGlyph
-	{
-		Rectangle bounds;
+    public class ControlBodyGlyph : ComponentGlyph
+    {
+        Rectangle bounds;
 
-		[MonoTODO]
-		public ControlBodyGlyph (Rectangle bounds, Cursor cursor, IComponent relatedComponent, Behavior behavior)
-			: base (relatedComponent, behavior)
-		{
-			this.bounds = bounds;
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public ControlBodyGlyph (Rectangle bounds, Cursor cursor, IComponent relatedComponent, Behavior behavior)
+            : base (relatedComponent, behavior)
+        {
+            this.bounds = bounds;
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public ControlBodyGlyph (Rectangle bounds, Cursor cursor, IComponent relatedComponent, ControlDesigner designer)
-			: this (bounds, cursor, relatedComponent, designer.BehaviorService.CurrentBehavior)
-		{
-		}
+        [MonoTODO]
+        public ControlBodyGlyph (Rectangle bounds, Cursor cursor, IComponent relatedComponent, ControlDesigner designer)
+            : this (bounds, cursor, relatedComponent, designer.BehaviorService.CurrentBehavior)
+        {
+        }
 
-		[MonoTODO]
-		public override Rectangle Bounds {
-			get { return bounds; }
-		}
+        [MonoTODO]
+        public override Rectangle Bounds {
+            get { return bounds; }
+        }
 
-		[MonoTODO]
-		public override Cursor GetHitTest (Point p)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override Cursor GetHitTest (Point p)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

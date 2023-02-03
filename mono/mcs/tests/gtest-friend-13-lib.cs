@@ -6,12 +6,12 @@ using System.Runtime.CompilerServices;
 
 public class FriendClass
 {
-	protected internal virtual void Test ()
-	{
-	}
-	
-	internal virtual void Test_2 ()
-	{
-	}
+    protected internal virtual void Test ()
+    {
+    }
+    
+    internal virtual void Test_2 ()
+    {
+    }
 }
 

@@ -1,8 +1,8 @@
-﻿//
+//
 // RecipientServiceModelSecurityTokenRequirement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,52 +32,52 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public sealed class RecipientServiceModelSecurityTokenRequirement
-		: ServiceModelSecurityTokenRequirement
-	{
-		public RecipientServiceModelSecurityTokenRequirement ()
-		{
-		}
+    public sealed class RecipientServiceModelSecurityTokenRequirement
+        : ServiceModelSecurityTokenRequirement
+    {
+        public RecipientServiceModelSecurityTokenRequirement ()
+        {
+        }
 
-		public AuditLogLocation AuditLogLocation {
-			get {
-				AuditLogLocation ret;
-				TryGetProperty<AuditLogLocation> (AuditLogLocationProperty, out ret);
-				return ret;
-			}
-			set { Properties [AuditLogLocationProperty] = value; }
-		}
+        public AuditLogLocation AuditLogLocation {
+            get {
+                AuditLogLocation ret;
+                TryGetProperty<AuditLogLocation> (AuditLogLocationProperty, out ret);
+                return ret;
+            }
+            set { Properties [AuditLogLocationProperty] = value; }
+        }
 
-		public Uri ListenUri {
-			get {
-				Uri ret;
-				TryGetProperty<Uri> (ListenUriProperty, out ret);
-				return ret;
-			}
-			set { Properties [ListenUriProperty] = value; }
-		}
+        public Uri ListenUri {
+            get {
+                Uri ret;
+                TryGetProperty<Uri> (ListenUriProperty, out ret);
+                return ret;
+            }
+            set { Properties [ListenUriProperty] = value; }
+        }
 
-		public AuditLevel MessageAuthenticationAuditLevel {
-			get {
-				AuditLevel ret;
-				TryGetProperty<AuditLevel> (MessageAuthenticationAuditLevelProperty, out ret);
-				return ret;
-			}
-			set { Properties [MessageAuthenticationAuditLevelProperty] = value; }
-		}
+        public AuditLevel MessageAuthenticationAuditLevel {
+            get {
+                AuditLevel ret;
+                TryGetProperty<AuditLevel> (MessageAuthenticationAuditLevelProperty, out ret);
+                return ret;
+            }
+            set { Properties [MessageAuthenticationAuditLevelProperty] = value; }
+        }
 
-		public bool SuppressAuditFailure {
-			get {
-				bool ret;
-				TryGetProperty<bool> (SuppressAuditFailureProperty, out ret);
-				return ret;
-			}
-			set { Properties [SuppressAuditFailureProperty] = value; }
-		}
+        public bool SuppressAuditFailure {
+            get {
+                bool ret;
+                TryGetProperty<bool> (SuppressAuditFailureProperty, out ret);
+                return ret;
+            }
+            set { Properties [SuppressAuditFailureProperty] = value; }
+        }
 
-		public override string ToString ()
-		{
-			return Dump ();
-		}
-	}
+        public override string ToString ()
+        {
+            return Dump ();
+        }
+    }
 }

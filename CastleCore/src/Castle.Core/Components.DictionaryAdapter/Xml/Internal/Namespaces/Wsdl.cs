@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	// Namespace for Guid type
-	public static class Wsdl
-	{
-		public const string
-			Prefix        = "wsdl",
-			NamespaceUri  = "http://microsoft.com/wsdl/types/";
+    // Namespace for Guid type
+    public static class Wsdl
+    {
+        public const string
+            Prefix        = "wsdl",
+            NamespaceUri  = "http://microsoft.com/wsdl/types/";
 
-		internal static readonly XmlNamespaceAttribute
-			Namespace = new XmlNamespaceAttribute(NamespaceUri, Prefix) { Root = true };
-	}
+        internal static readonly XmlNamespaceAttribute
+            Namespace = new XmlNamespaceAttribute(NamespaceUri, Prefix) { Root = true };
+    }
 }

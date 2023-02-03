@@ -32,11 +32,11 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class DirectoryNotificationControl : DirectoryControl
-	{
-		internal DirectoryNotificationControl ()
-			: base (null, null, false, false)
-		{
-		}
-	}
+    public class DirectoryNotificationControl : DirectoryControl
+    {
+        internal DirectoryNotificationControl ()
+            : base (null, null, false, false)
+        {
+        }
+    }
 }

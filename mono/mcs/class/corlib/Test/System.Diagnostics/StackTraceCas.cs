@@ -2,7 +2,7 @@
 // StackTraceCas.cs - CAS unit tests for System.Diagnostics.StackTrace
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,114 +36,114 @@ using System.Threading;
 
 namespace MonoCasTests.System.Diagnostics {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StackTraceCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StackTraceCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		// avoid replication of tests on all constructors (this is no 
-		// problem because the stack is already set correctly). The 
-		// goal is to call every property and methods to see if they
-		// have any* security requirements (*except for LinkDemand and
-		// InheritanceDemand).
-		private void Check (StackTrace st)
-		{
-			if (st.FrameCount > 0)
-				Assert.IsNotNull (st.GetFrame (0), "GetFrame");
-			else
-				Assert.IsNull (st.GetFrame (0), "GetFrame");
-			if (st.FrameCount > 0)
-				Assert.IsNotNull (st.GetFrames (), "GetFrames");
-			else
-				Assert.IsNull (st.GetFrames (), "GetFrames");
-			Assert.IsNotNull (st.ToString (), "ToString");
-		}
+        // avoid replication of tests on all constructors (this is no 
+        // problem because the stack is already set correctly). The 
+        // goal is to call every property and methods to see if they
+        // have any* security requirements (*except for LinkDemand and
+        // InheritanceDemand).
+        private void Check (StackTrace st)
+        {
+            if (st.FrameCount > 0)
+                Assert.IsNotNull (st.GetFrame (0), "GetFrame");
+            else
+                Assert.IsNull (st.GetFrame (0), "GetFrame");
+            if (st.FrameCount > 0)
+                Assert.IsNotNull (st.GetFrames (), "GetFrames");
+            else
+                Assert.IsNull (st.GetFrames (), "GetFrames");
+            Assert.IsNotNull (st.ToString (), "ToString");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_DefaultConstructor ()
-		{
-			StackTrace st = new StackTrace ();
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_DefaultConstructor ()
+        {
+            StackTrace st = new StackTrace ();
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_BoolConstructor ()
-		{
-			StackTrace st = new StackTrace (true);
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_BoolConstructor ()
+        {
+            StackTrace st = new StackTrace (true);
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_IntConstructor ()
-		{
-			StackTrace st = new StackTrace (1);
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_IntConstructor ()
+        {
+            StackTrace st = new StackTrace (1);
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_IntBoolConstructor ()
-		{
-			StackTrace st = new StackTrace (1, true);
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_IntBoolConstructor ()
+        {
+            StackTrace st = new StackTrace (1, true);
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_ExceptionConstructor ()
-		{
-			StackTrace st = new StackTrace (new Exception ());
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_ExceptionConstructor ()
+        {
+            StackTrace st = new StackTrace (new Exception ());
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_ExceptionBoolConstructor ()
-		{
-			StackTrace st = new StackTrace (new Exception (), true);
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_ExceptionBoolConstructor ()
+        {
+            StackTrace st = new StackTrace (new Exception (), true);
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_ExceptionIntConstructor ()
-		{
-			StackTrace st = new StackTrace (new Exception (), 1);
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_ExceptionIntConstructor ()
+        {
+            StackTrace st = new StackTrace (new Exception (), 1);
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_ExceptionIntBoolConstructor ()
-		{
-			StackTrace st = new StackTrace (new Exception (), 1, true);
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_ExceptionIntBoolConstructor ()
+        {
+            StackTrace st = new StackTrace (new Exception (), 1, true);
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StackTrace_StackFrameConstructor ()
-		{
-			StackTrace st = new StackTrace (new StackFrame ());
-			Check (st);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void StackTrace_StackFrameConstructor ()
+        {
+            StackTrace st = new StackTrace (new StackFrame ());
+            Check (st);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[Category ("NotWorking")]
-		public void StackTrace_ThreadBoolConstructor ()
-		{
-			StackTrace st = new StackTrace (Thread.CurrentThread, true);
-			Check (st);
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [Category ("NotWorking")]
+        public void StackTrace_ThreadBoolConstructor ()
+        {
+            StackTrace st = new StackTrace (Thread.CurrentThread, true);
+            Check (st);
+        }
+    }
 }

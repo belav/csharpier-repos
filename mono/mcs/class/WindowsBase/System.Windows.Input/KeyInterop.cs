@@ -20,24 +20,24 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Input {
 
-	public static class KeyInterop
-	{
-		public static Key KeyFromVirtualKey (int virtualKey)
-		{
-			throw new NotImplementedException ();
-		}
+    public static class KeyInterop
+    {
+        public static Key KeyFromVirtualKey (int virtualKey)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static int VirtualKeyFromKey (Key key)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public static int VirtualKeyFromKey (Key key)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

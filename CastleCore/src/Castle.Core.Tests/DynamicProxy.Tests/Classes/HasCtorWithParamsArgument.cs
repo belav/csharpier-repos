@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class HasCtorWithParamsArgument
-	{
-		public HasCtorWithParamsArgument(params object[] arguments)
-		{
-		}
-	}
+    public class HasCtorWithParamsArgument
+    {
+        public HasCtorWithParamsArgument(params object[] arguments)
+        {
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
 // CodeEventReferenceExpressionCas.cs
-//	- CAS unit tests for System.CodeDom.CodeEventReferenceExpression
+//    - CAS unit tests for System.CodeDom.CodeEventReferenceExpression
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,47 +37,47 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeEventReferenceExpressionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeEventReferenceExpressionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeEventReferenceExpression cere = new CodeEventReferenceExpression ();
-			Assert.AreEqual (String.Empty, cere.EventName, "EventName");
-			cere.EventName = "mono";
-			Assert.IsNull (cere.TargetObject, "TargetObject");
-			cere.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeEventReferenceExpression cere = new CodeEventReferenceExpression ();
+            Assert.AreEqual (String.Empty, cere.EventName, "EventName");
+            cere.EventName = "mono";
+            Assert.IsNull (cere.TargetObject, "TargetObject");
+            cere.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodeEventReferenceExpression cere = new CodeEventReferenceExpression (target, "mono");
-			Assert.AreEqual ("mono", cere.EventName, "EventName");
-			cere.EventName = String.Empty;
-			Assert.AreSame (target, cere.TargetObject, "TargetObject");
-			cere.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeExpression target = new CodeExpression ();
+            CodeEventReferenceExpression cere = new CodeEventReferenceExpression (target, "mono");
+            Assert.AreEqual ("mono", cere.EventName, "EventName");
+            cere.EventName = String.Empty;
+            Assert.AreSame (target, cere.TargetObject, "TargetObject");
+            cere.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeEventReferenceExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeEventReferenceExpression).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

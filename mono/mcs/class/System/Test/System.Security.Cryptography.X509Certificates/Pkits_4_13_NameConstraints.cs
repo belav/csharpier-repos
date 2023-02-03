@@ -1,9 +1,9 @@
 //
 // Pkits_4_13_NameConstraints.cs -
-//	NUnit tests for Pkits 4.13 : Name Constraints
+//    NUnit tests for Pkits 4.13 : Name Constraints
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,15 +35,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates {
 
-	/*
-	 * See PkitsTest.cs for more details
-	 */
+    /*
+     * See PkitsTest.cs for more details
+     */
 
-	[TestFixture]
-	[Category ("PKITS")]
-	public class Pkits_4_13_NameConstraints : PkitsTest {
+    [TestFixture]
+    [Category ("PKITS")]
+    public class Pkits_4_13_NameConstraints : PkitsTest {
 
-		// TODO - incomplete
-	}
+        // TODO - incomplete
+    }
 }
 

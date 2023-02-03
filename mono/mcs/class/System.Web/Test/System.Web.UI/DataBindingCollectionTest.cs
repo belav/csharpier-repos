@@ -37,30 +37,30 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataBindingCollectionTest
-	{
-		bool changed = false;
-		
-		[Test] public void ChangeTest ()
-		{
-			DataBindingCollection a = new DataBindingCollection ();
-			a.Changed += delegate {
-				changed = true;
-			};
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataBindingCollectionTest
+    {
+        bool changed = false;
+        
+        [Test] public void ChangeTest ()
+        {
+            DataBindingCollection a = new DataBindingCollection ();
+            a.Changed += delegate {
+                changed = true;
+            };
 
-			DataBinding b = new DataBinding ("a", typeof (DataBindingCollectionTest), "b");
-			a.Add (b);
-			Assert.AreEqual (true, changed, "DB1");
-			changed = false;
+            DataBinding b = new DataBinding ("a", typeof (DataBindingCollectionTest), "b");
+            a.Add (b);
+            Assert.AreEqual (true, changed, "DB1");
+            changed = false;
 
-			a.Clear ();
-			Assert.AreEqual (false, changed, "DB2");
-			
-			a.Remove (b);
-			Assert.AreEqual (true, changed, "DB3");
-		}
-	}
+            a.Clear ();
+            Assert.AreEqual (false, changed, "DB2");
+            
+            a.Remove (b);
+            Assert.AreEqual (true, changed, "DB3");
+        }
+    }
 }
-	
+    

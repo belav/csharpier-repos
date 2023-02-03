@@ -14,15 +14,15 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public class VirtuallyImplementsInterfaceWithEvent : IHasEvent
-	{
-		public virtual event EventHandler MyEvent;
+    public class VirtuallyImplementsInterfaceWithEvent : IHasEvent
+    {
+        public virtual event EventHandler MyEvent;
 
-		public void Raise()
-		{
-			MyEvent(null, EventArgs.Empty);
-		}
-	}
+        public void Raise()
+        {
+            MyEvent(null, EventArgs.Empty);
+        }
+    }
 }

@@ -76,7 +76,7 @@ public interface ISingleReliabilityTest
 {
     bool Register();
     bool Unregister();
-    bool Run();			// returns true on success, false on failure.
+    bool Run();            // returns true on success, false on failure.
 }
 
 public class ReliabilityFramework
@@ -206,8 +206,8 @@ public class ReliabilityFramework
             Console.WriteLine("Available options: ");
             Console.WriteLine("");
             Console.WriteLine(" -replay     -   Replay from log file");
-            Console.WriteLine(" -{0}:<tests>	-	Comma delimited list of tests to run (no spaces)", sTests);
-            Console.WriteLine(" -{0}:<seed>	-	Random Number seed for replays", sSeed);
+            Console.WriteLine(" -{0}:<tests>    -    Comma delimited list of tests to run (no spaces)", sTests);
+            Console.WriteLine(" -{0}:<seed>    -    Random Number seed for replays", sSeed);
             Console.WriteLine(" -unittest   -   Set when run via unit test harness");
             rf._logger.WriteToInstrumentationLog(null, LoggingLevels.StartupShutdown, "Not ok to continue.");
 
@@ -589,10 +589,10 @@ public class ReliabilityFramework
     private void TestStarter()
     {
         int totalTestsToRun = CalculateTestsToRun();
-        int lastTestStarted = 0;			// this is our index into the array of tests, this ensures fair distribution over all the tests.
-        DateTime lastStart = DateTime.Now;	// keeps track of when we last started a test
-        TimeSpan minTimeToStartTest = new TimeSpan(0, 5, 0);	// after 5 minutes if we haven't started a test we're having problems...
-        int cpuAdjust = 0, memAdjust = 0;	// if we discover that we're not starting new tests quick enough we adjust the CPU/Mem percentages
+        int lastTestStarted = 0;            // this is our index into the array of tests, this ensures fair distribution over all the tests.
+        DateTime lastStart = DateTime.Now;    // keeps track of when we last started a test
+        TimeSpan minTimeToStartTest = new TimeSpan(0, 5, 0);    // after 5 minutes if we haven't started a test we're having problems...
+        int cpuAdjust = 0, memAdjust = 0;    // if we discover that we're not starting new tests quick enough we adjust the CPU/Mem percentages
         // so we start new tests sooner (so they start BEFORE we drop below our minimum CPU)
 
         //Console.WriteLine("RF - TestStarter found {0} tests to run", totalTestsToRun);
@@ -620,15 +620,15 @@ public class ReliabilityFramework
                 // out whether or not it's actually appropriate for us to start a test.  We have a lot of
                 // different data points to be considered when starting a tests.  Some of these make
                 // tests run, while others stop tests from running.
-                //		Maximum # of tests running at once			(stops tests from running)
-                //		Minimum number of tests running at once		(makes tests run)
-                //		Machine usage characteristics:
-                //			CPU Usage								(makes tests run)
-                //			Memory Usage							(makes tests run)
-                //			Paging & Page Faults					(stops tests from running)
+                //        Maximum # of tests running at once            (stops tests from running)
+                //        Minimum number of tests running at once        (makes tests run)
+                //        Machine usage characteristics:
+                //            CPU Usage                                (makes tests run)
+                //            Memory Usage                            (makes tests run)
+                //            Paging & Page Faults                    (stops tests from running)
 
 
-                bool startTest = false;				// do we need to start a test?
+                bool startTest = false;                // do we need to start a test?
                 TimeSpan timeRunning = DateTime.Now.Subtract(_startTime);
 
                 // if the test didn't exist our test object is null
@@ -780,7 +780,7 @@ public class ReliabilityFramework
                 }
                 else
                 {
-                    Thread.Sleep(250);	// give the CPU a bit of a rest if we don't need to start a new test.
+                    Thread.Sleep(250);    // give the CPU a bit of a rest if we don't need to start a new test.
                     if (_curTestSet.DebugBreakOnMissingTest && DateTime.Now.Subtract(_startTime) > minTimeToStartTest)
                     {
                         NewTestsNotStartingDebugBreak();
@@ -793,8 +793,8 @@ public class ReliabilityFramework
                 _logger.WriteToInstrumentationLog(_curTestSet, LoggingLevels.TestStarter, String.Format("Ran all tests"));
             }
         } while ((_curTestSet.MaximumTime == 0 || // no time limit
-            (DateTime.Now.Subtract(_startTime).Ticks / TimeSpan.TicksPerMinute) < _curTestSet.MaximumTime) &&		// or time limit reached
-            _testsRanCount < totalTestsToRun);												// maximum loop / test run limit
+            (DateTime.Now.Subtract(_startTime).Ticks / TimeSpan.TicksPerMinute) < _curTestSet.MaximumTime) &&        // or time limit reached
+            _testsRanCount < totalTestsToRun);                                                // maximum loop / test run limit
 
         /************************************************************************
          * test set is finished...
@@ -977,7 +977,7 @@ public class ReliabilityFramework
                 _detourHelpers.SetThreadTestId(daTest.Index + 1);
             }
 
-            Debug.Assert(daTest != null);		// if we didn't find the test then there's something horribly wrong!
+            Debug.Assert(daTest != null);        // if we didn't find the test then there's something horribly wrong!
 
             daTest.StartTime = DateTime.Now;
             switch (daTest.TestStartMode)
@@ -1208,7 +1208,7 @@ public class ReliabilityFramework
     public void SignalTestFinished(ReliabilityTest test)
     {
         Interlocked.Decrement(ref _testsRunningCount);
-        _testDone.Set();	// we signal the event before we do the lock() below because the lock could throw due to OOM.
+        _testDone.Set();    // we signal the event before we do the lock() below because the lock could throw due to OOM.
 
         test.TestStopped();
     }
@@ -1412,11 +1412,11 @@ public class ReliabilityFramework
                 suppressConsoleMethod.Invoke(obj, new object[0]);
 
 
-            if (test.Assembly.ToLower().IndexOf(".exe") == -1 && test.Assembly.ToLower().IndexOf(".dll") == -1)	// must be a simple name or fullname...
+            if (test.Assembly.ToLower().IndexOf(".exe") == -1 && test.Assembly.ToLower().IndexOf(".dll") == -1)    // must be a simple name or fullname...
             {
                 loadMethod.Invoke(obj, new object[] { test.Assembly, paths });
             }
-            else			// has an executable extension, must be in local directory.
+            else            // has an executable extension, must be in local directory.
             {
                 loadFromMethod.Invoke(obj, new object[] { Path.Combine(test.BasePath, test.Assembly), paths });
             }
@@ -1456,7 +1456,7 @@ public class ReliabilityFramework
             {
                 iMultipleReliabilityTestType.InvokeMember("Register", BindingFlags.InvokeMethod | BindingFlags.Public, null, ourObj, new object[0]);
             }
-            else if (!(ourObj is string))	// we were unable to find a test here - a string is an executable filename.
+            else if (!(ourObj is string))    // we were unable to find a test here - a string is an executable filename.
             {
                 Interlocked.Decrement(ref LoadingCount);
                 return;
@@ -1637,7 +1637,7 @@ public class ReliabilityFramework
 <table border=1 cellspacing=0>
 <tr><td bgcolor=#cccccc>Computer Name:</td><td> {0}</td></tr>
 <tr><td bgcolor=#cccccc>Test         :</td><td> {1} {2}</td></tr>
-<tr><td bgcolor=#cccccc>Comments	 :</td><td> {3}</td></tr>
+<tr><td bgcolor=#cccccc>Comments     :</td><td> {3}</td></tr>
 </table>
 
 <P>If you are listed on the To: line, you have test failures to investigate.
@@ -1652,7 +1652,7 @@ public class ReliabilityFramework
 <p>If this is a stress harness issue please contact <a href=""mailto:timme;dinov"">the stress developers</a>.
 
 Thanks for contributing to CLR Stress!
-	</P></BODY></HTML>", Environment.MachineName, testCase == null ? "None" : testCase.Assembly, testCase == null ? "None" : testCase.Arguments, message);
+    </P></BODY></HTML>", Environment.MachineName, testCase == null ? "None" : testCase.Assembly, testCase == null ? "None" : testCase.Arguments, message);
                 }
                 else
                 {
@@ -1781,7 +1781,7 @@ Thanks for contributing to CLR Stress!
     private string ExtractAttribute(string attribute, string from)
     {
         int attrStart = from.IndexOf(attribute);
-        string value = from.Substring(attrStart + attribute.Length + 2);			// +2 is for = and "
+        string value = from.Substring(attrStart + attribute.Length + 2);            // +2 is for = and "
         return (value.Substring(0, value.IndexOf('"')));
     }
 
@@ -1893,7 +1893,7 @@ Thanks for contributing to CLR Stress!
             }
         }
 
-        while (_testsRunningCount != 0)	// let the user know what tests haven't finished...
+        while (_testsRunningCount != 0)    // let the user know what tests haven't finished...
         {
             Console.WriteLine(".");
             Thread.Sleep(2000);

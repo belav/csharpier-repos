@@ -2,15 +2,15 @@
 // Line: 14
 
 class A {
-	protected int this [int i] { get { return i; } }
+    protected int this [int i] { get { return i; } }
 }
 
 class B : A { }
 
 class C : A {
-	static int Main ()
-	{
-		B b = new B ();
-		return b [0];
-	}
+    static int Main ()
+    {
+        B b = new B ();
+        return b [0];
+    }
 }

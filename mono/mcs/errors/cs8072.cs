@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 
 class C
 {
-	static int Main ()
-	{
-		Expression<Func<string, char?>> e = l => l?[1];
-		return 0;
-	}
+    static int Main ()
+    {
+        Expression<Func<string, char?>> e = l => l?[1];
+        return 0;
+    }
 }

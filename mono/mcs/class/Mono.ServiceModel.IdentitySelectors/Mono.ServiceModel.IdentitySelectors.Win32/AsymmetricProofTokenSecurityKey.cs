@@ -2,7 +2,7 @@
 // AsymmetricProofTokenSecurityKey.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -34,77 +34,77 @@ using System.Xml;
 
 namespace Mono.ServiceModel.IdentitySelectors.Win32
 {
-	class AsymmetricProofTokenSecurityKey : AsymmetricSecurityKey, IDisposable
-	{
-		NativeAsymmetricCryptoParameters parameters;
-		NativeInfocardCryptoHandle handle;
+    class AsymmetricProofTokenSecurityKey : AsymmetricSecurityKey, IDisposable
+    {
+        NativeAsymmetricCryptoParameters parameters;
+        NativeInfocardCryptoHandle handle;
 
-		public AsymmetricProofTokenSecurityKey (NativeAsymmetricCryptoParameters parameters, NativeInfocardCryptoHandle handle)
-		{
-			this.parameters = parameters;
-			this.handle = handle;
-		}
+        public AsymmetricProofTokenSecurityKey (NativeAsymmetricCryptoParameters parameters, NativeInfocardCryptoHandle handle)
+        {
+            this.parameters = parameters;
+            this.handle = handle;
+        }
 
-		void IDisposable.Dispose ()
-		{
-			CloseCryptoHandle (handle);
-		}
+        void IDisposable.Dispose ()
+        {
+            CloseCryptoHandle (handle);
+        }
 
-		public override AsymmetricAlgorithm GetAsymmetricAlgorithm (string algorithm, bool privateKey)
-		{
-			throw new NotImplementedException ();
-		}
+        public override AsymmetricAlgorithm GetAsymmetricAlgorithm (string algorithm, bool privateKey)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override HashAlgorithm GetHashAlgorithmForSignature (string algorithm)
-		{
-			throw new NotImplementedException ();
-		}
+        public override HashAlgorithm GetHashAlgorithmForSignature (string algorithm)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm)
-		{
-			throw new NotImplementedException ();
-		}
+        public override AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm)
-		{
-			throw new NotImplementedException ();
-		}
+        public override AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override byte [] DecryptKey (string algorithm, byte [] input)
-		{
-			throw new NotImplementedException ();
-		}
+        public override byte [] DecryptKey (string algorithm, byte [] input)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override byte [] EncryptKey (string algorithm, byte [] input)
-		{
-			throw new NotImplementedException ();
-		}
+        public override byte [] EncryptKey (string algorithm, byte [] input)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool IsAsymmetricAlgorithm (string algorithm)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool IsAsymmetricAlgorithm (string algorithm)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool IsSymmetricAlgorithm (string algorithm)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool IsSymmetricAlgorithm (string algorithm)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool IsSupportedAlgorithm (string algorithm)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool IsSupportedAlgorithm (string algorithm)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override bool HasPrivateKey ()
-		{
-			return true;
-		}
+        public override bool HasPrivateKey ()
+        {
+            return true;
+        }
 
-		public override int KeySize {
-			get { return parameters.KeySize; }
-		}
+        public override int KeySize {
+            get { return parameters.KeySize; }
+        }
 
-		[DllImport ("cardspaceapi")]
-		static extern void CloseCryptoHandle (NativeInfocardCryptoHandle handle);
-	}
+        [DllImport ("cardspaceapi")]
+        static extern void CloseCryptoHandle (NativeInfocardCryptoHandle handle);
+    }
 }

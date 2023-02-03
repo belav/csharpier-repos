@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -228,7 +228,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
 
             var encoding = Encoding.UTF8;
             Assert.False(SourceText.IsBinary(encoding.GetString(new byte[] { 0x81, 0x8D, 0x8F, 0x90, 0x9D })));
-            // Unicode string: Ã¤Ã«Ã¯Ã¶Ã¼Ã»
+            // Unicode string: äëïöüû
             Assert.False(SourceText.IsBinary("abc def baz aeiouy \u00E4\u00EB\u00EF\u00F6\u00FC\u00FB"));
             Assert.True(SourceText.IsBinary(encoding.GetString(TestMetadata.ResourcesNet451.System)));
         }

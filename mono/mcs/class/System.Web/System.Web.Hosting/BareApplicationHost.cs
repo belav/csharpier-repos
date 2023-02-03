@@ -2,7 +2,7 @@
 // System.Web.Hosting.BareApplicationHost
 // 
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
@@ -31,109 +31,109 @@ using System.IO;
 using System.Collections.Generic;
 
 namespace System.Web.Hosting {
-	class RegisteredItem {
-		public IRegisteredObject Item;
-		public bool AutoClean;
-		public RegisteredItem (IRegisteredObject item, bool autoclean)
-		{
-			this.Item = item;
-			this.AutoClean = autoclean;
-		}
-	}
+    class RegisteredItem {
+        public IRegisteredObject Item;
+        public bool AutoClean;
+        public RegisteredItem (IRegisteredObject item, bool autoclean)
+        {
+            this.Item = item;
+            this.AutoClean = autoclean;
+        }
+    }
 
-	sealed class BareApplicationHost : MarshalByRefObject {
-		string vpath;
-		string phys_path;
-		Dictionary<Type, RegisteredItem> hash;
-		internal ApplicationManager Manager;
-		internal string AppID;
+    sealed class BareApplicationHost : MarshalByRefObject {
+        string vpath;
+        string phys_path;
+        Dictionary<Type, RegisteredItem> hash;
+        internal ApplicationManager Manager;
+        internal string AppID;
 
-		public BareApplicationHost ()
-		{
-			Init ();
-		}
+        public BareApplicationHost ()
+        {
+            Init ();
+        }
 
-		void Init ()
-		{
-			hash = new Dictionary<Type, RegisteredItem> ();
-			HostingEnvironment.Host = this;
-			AppDomain current = AppDomain.CurrentDomain;
-			current.DomainUnload += OnDomainUnload;
-			phys_path = (string) current.GetData (".appPath");
-			vpath = (string) current.GetData (".appVPath");
-		}
+        void Init ()
+        {
+            hash = new Dictionary<Type, RegisteredItem> ();
+            HostingEnvironment.Host = this;
+            AppDomain current = AppDomain.CurrentDomain;
+            current.DomainUnload += OnDomainUnload;
+            phys_path = (string) current.GetData (".appPath");
+            vpath = (string) current.GetData (".appVPath");
+        }
 
-		public string VirtualPath {
-			get { return vpath; }
-		}
+        public string VirtualPath {
+            get { return vpath; }
+        }
 
-		public string PhysicalPath {
-			get { return phys_path; }
-		}
+        public string PhysicalPath {
+            get { return phys_path; }
+        }
 
-		public AppDomain Domain {
-			get { return AppDomain.CurrentDomain; }
-		}
+        public AppDomain Domain {
+            get { return AppDomain.CurrentDomain; }
+        }
 
-		public void Shutdown ()
-		{
-			HostingEnvironment.InitiateShutdown ();
-		}
+        public void Shutdown ()
+        {
+            HostingEnvironment.InitiateShutdown ();
+        }
 
-		public void StopObject (Type type)
-		{
-			if (!hash.ContainsKey (type))
-				return;
+        public void StopObject (Type type)
+        {
+            if (!hash.ContainsKey (type))
+                return;
 
-			RegisteredItem reg = hash [type];
-			reg.Item.Stop (false);
-		}
+            RegisteredItem reg = hash [type];
+            reg.Item.Stop (false);
+        }
 
-		public IRegisteredObject CreateInstance (Type type)
-		{
-			return (IRegisteredObject) Activator.CreateInstance (type, null);
-		}
+        public IRegisteredObject CreateInstance (Type type)
+        {
+            return (IRegisteredObject) Activator.CreateInstance (type, null);
+        }
 
-		public void RegisterObject (IRegisteredObject obj, bool auto_clean)
-		{
-			hash [obj.GetType ()] = new RegisteredItem (obj, auto_clean);
-		}
+        public void RegisterObject (IRegisteredObject obj, bool auto_clean)
+        {
+            hash [obj.GetType ()] = new RegisteredItem (obj, auto_clean);
+        }
 
-		public bool UnregisterObject (IRegisteredObject obj)
-		{
-			return hash.Remove (obj.GetType ());
-		}
+        public bool UnregisterObject (IRegisteredObject obj)
+        {
+            return hash.Remove (obj.GetType ());
+        }
 
-		public IRegisteredObject GetObject (Type type)
-		{
-			if (hash.ContainsKey (type))
-				return hash [type].Item;
+        public IRegisteredObject GetObject (Type type)
+        {
+            if (hash.ContainsKey (type))
+                return hash [type].Item;
 
-			return null;
-		}
+            return null;
+        }
 
-		public string GetCodeGenDir ()
-		{
-			return AppDomain.CurrentDomain.SetupInformation.DynamicBase;
-		}
+        public string GetCodeGenDir ()
+        {
+            return AppDomain.CurrentDomain.SetupInformation.DynamicBase;
+        }
 
-		void OnDomainUnload (object sender, EventArgs args)
-		{
-			Manager.RemoveHost (AppID);
-			ICollection<RegisteredItem> values = hash.Values;
-			RegisteredItem [] objects = new RegisteredItem [hash.Count];
-			values.CopyTo (objects, 0);
+        void OnDomainUnload (object sender, EventArgs args)
+        {
+            Manager.RemoveHost (AppID);
+            ICollection<RegisteredItem> values = hash.Values;
+            RegisteredItem [] objects = new RegisteredItem [hash.Count];
+            values.CopyTo (objects, 0);
 
-			foreach (RegisteredItem reg in objects) {
-				try {
-					reg.Item.Stop (true); // Stop should call Unregister. It's ok if not.
-				} catch {
-					// Ignore or throw?
-				}
-			}
-			hash.Clear ();
-		}
-	}
+            foreach (RegisteredItem reg in objects) {
+                try {
+                    reg.Item.Stop (true); // Stop should call Unregister. It's ok if not.
+                } catch {
+                    // Ignore or throw?
+                }
+            }
+            hash.Clear ();
+        }
+    }
 }
 
 

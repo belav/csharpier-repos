@@ -2,16 +2,16 @@
 // Line: 11
 
 class T {
-	static void Main ()
-	{
-		while (true) {
-			try {
-				System.Console.WriteLine ("trying");
-			} finally {
-				goto foo;
-			}
-		foo :
-			;
-		}
-	}
+    static void Main ()
+    {
+        while (true) {
+            try {
+                System.Console.WriteLine ("trying");
+            } finally {
+                goto foo;
+            }
+        foo :
+            ;
+        }
+    }
 }

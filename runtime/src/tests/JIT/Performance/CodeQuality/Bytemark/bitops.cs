@@ -59,30 +59,30 @@ public class BitOps : BitOpStruct
         double iterations;              /* # of iterations */
 
         /*
-		** See if we need to run adjustment code.
-		*/
+        ** See if we need to run adjustment code.
+        */
         if (this.adjust == 0)
         {
             bitarraybase = new int[this.bitfieldarraysize];
 
             /*
-			** Initialize bitfield operations array to [2,30] elements
-			*/
+            ** Initialize bitfield operations array to [2,30] elements
+            */
             this.bitoparraysize = 30;
 
             while (true)
             {
                 /*
-				** Allocate space for operations array
-				*/
+                ** Allocate space for operations array
+                */
                 bitoparraybase = new int[this.bitoparraysize * 2];
 
                 /*
-				** Do an iteration of the bitmap test.  If the
-				** elapsed time is less than or equal to the permitted
-				** minimum, then de-allocate the array, reallocate a
-				** larger version, and try again.
-				*/
+                ** Do an iteration of the bitmap test.  If the
+                ** elapsed time is less than or equal to the permitted
+                ** minimum, then de-allocate the array, reallocate a
+                ** larger version, and try again.
+                */
                 if (DoBitfieldIteration(bitarraybase,
                                        bitoparraybase,
                                        this.bitoparraysize,
@@ -95,17 +95,17 @@ public class BitOps : BitOpStruct
         else
         {
             /*
-			** Don't need to do self adjustment, just allocate
-			** the array space.
-			*/
+            ** Don't need to do self adjustment, just allocate
+            ** the array space.
+            */
             bitarraybase = new int[this.bitfieldarraysize];
             bitoparraybase = new int[this.bitoparraysize * 2];
         }
 
         /*
-		** All's well if we get here.  Repeatedly perform bitops until the
-		** accumulated elapsed time is greater than # of seconds requested.
-		*/
+        ** All's well if we get here.  Repeatedly perform bitops until the
+        ** accumulated elapsed time is greater than # of seconds requested.
+        */
         accumtime = 0;
         iterations = (double)0.0;
 
@@ -119,10 +119,10 @@ public class BitOps : BitOpStruct
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
         /*
-		** Clean up, calculate results, and go home.
-		** Also, set adjustment flag to show that we don't have
-		** to do self adjusting in the future.
-		*/
+        ** Clean up, calculate results, and go home.
+        ** Also, set adjustment flag to show that we don't have
+        ** to do self adjusting in the future.
+        */
         if (this.adjust == 0)
             this.adjust = 1;
 
@@ -130,11 +130,11 @@ public class BitOps : BitOpStruct
     }
 
     /************************
-	** DoBitfieldIteration **
-	*************************
-	** Perform a single iteration of the bitfield benchmark.
-	** Return the # of ticks accumulated by the operation.
-	*/
+    ** DoBitfieldIteration **
+    *************************
+    ** Perform a single iteration of the bitfield benchmark.
+    ** Return the # of ticks accumulated by the operation.
+    */
     private static long DoBitfieldIteration(int[] bitarraybase,
                                     int[] bitoparraybase,
                                     int bitoparraysize,
@@ -145,19 +145,19 @@ public class BitOps : BitOpStruct
         long elapsed;                  /* Time to execute */
 
         /*
-		** Clear # bitops counter
-		*/
+        ** Clear # bitops counter
+        */
         nbitops = 0;
 
         /*
-		** Construct a set of bitmap offsets and run lengths.
-		** The offset can be any random number from 0 to the
-		** size of the bitmap (in bits).  The run length can
-		** be any random number from 1 to the number of bits
-		** between the offset and the end of the bitmap.
-		** Note that the bitmap has 8192 * 32 bits in it.
-		** (262,144 bits)
-		*/
+        ** Construct a set of bitmap offsets and run lengths.
+        ** The offset can be any random number from 0 to the
+        ** size of the bitmap (in bits).  The run length can
+        ** be any random number from 1 to the number of bits
+        ** between the offset and the end of the bitmap.
+        ** Note that the bitmap has 8192 * 32 bits in it.
+        ** (262,144 bits)
+        */
         for (i = 0; i < bitoparraysize; i++)
         {
             /* First item is offset */
@@ -168,16 +168,16 @@ public class BitOps : BitOpStruct
         }
 
         /*
-		** Array of offset and lengths built...do an iteration of
-		** the test.
-		** Start the stopwatch.
-		*/
+        ** Array of offset and lengths built...do an iteration of
+        ** the test.
+        ** Start the stopwatch.
+        */
         elapsed = ByteMark.StartStopwatch();
 
         /*
-		** Loop through array off offset/run length pairs.
-		** Execute operation based on modulus of index.
-		*/
+        ** Loop through array off offset/run length pairs.
+        ** Execute operation based on modulus of index.
+        */
         for (i = 0; i < bitoparraysize; i++)
         {
             switch (i % 3)
@@ -205,18 +205,18 @@ public class BitOps : BitOpStruct
         }
 
         /*
-		** Return elapsed time
-		*/
+        ** Return elapsed time
+        */
         return (ByteMark.StopStopwatch(elapsed));
     }
 
 
     /*****************************
-	**     ToggleBitRun          *
-	******************************
-	** Set or clear a run of nbits starting at
-	** bit_addr in bitmap.
-	*/
+    **     ToggleBitRun          *
+    ******************************
+    ** Set or clear a run of nbits starting at
+    ** bit_addr in bitmap.
+    */
     private static void ToggleBitRun(int[] bitmap,         /* Bitmap */
                              int bit_addr,         /* Address of bits to set */
                              int nbits,            /* # of bits to set/clr */
@@ -228,8 +228,8 @@ public class BitOps : BitOpStruct
         while (nbits-- > 0)
         {
 #if LONG64
-			bindex=bit_addr>>>6;     /* Index is number /64 */
-			bindex=bit_addr % 64;    /* Bit number in word */
+            bindex=bit_addr>>>6;     /* Index is number /64 */
+            bindex=bit_addr % 64;    /* Bit number in word */
 #else
             bindex = (int)((uint)bit_addr) >> 5;     /* Index is number /32 */
             bitnumb = bit_addr % 32;   /* bit number in word */
@@ -245,10 +245,10 @@ public class BitOps : BitOpStruct
     }
 
     /***************
-	** FlipBitRun **
-	****************
-	** Complements a run of bits.
-	*/
+    ** FlipBitRun **
+    ****************
+    ** Complements a run of bits.
+    */
     private static void FlipBitRun(int[] bitmap,            /* Bit map */
                            int bit_addr,            /* Bit address */
                            int nbits)               /* # of bits to flip */
@@ -259,8 +259,8 @@ public class BitOps : BitOpStruct
         while (nbits-- > 0)
         {
 #if LONG64
-			bindex=bit_addr>>6;     /* Index is number /64 */
-			bitnumb=bit_addr % 32;	 /* Bit number in longword */
+            bindex=bit_addr>>6;     /* Index is number /64 */
+            bitnumb=bit_addr % 32;     /* Bit number in longword */
 #else
             bindex = bit_addr >> 5;     /* Index is number /32 */
             bitnumb = bit_addr % 32;   /* Bit number in longword */

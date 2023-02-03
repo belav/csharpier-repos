@@ -32,18 +32,18 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-	public class ScriptManagerProxyDesigner : ControlDesigner
-	{
-		[MonoNotSupported ("")]
-		public ScriptManagerProxyDesigner ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class ScriptManagerProxyDesigner : ControlDesigner
+    {
+        [MonoNotSupported ("")]
+        public ScriptManagerProxyDesigner ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoNotSupported ("")]
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoNotSupported ("")]
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

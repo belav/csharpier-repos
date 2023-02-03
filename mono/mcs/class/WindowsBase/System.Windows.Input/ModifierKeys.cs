@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,15 +29,15 @@ using System.Windows.Markup;
 
 namespace System.Windows.Input {
 
-	[Flags]
-	[ValueSerializer (typeof (ModifierKeysValueSerializer))]
-	[TypeConverter (typeof (ModifierKeysConverter))]
-	public enum ModifierKeys {
-		None = 0,
-		Alt = 1,
-		Control = 2,
-		Shift = 4,
-		Windows = 8
-	}
+    [Flags]
+    [ValueSerializer (typeof (ModifierKeysValueSerializer))]
+    [TypeConverter (typeof (ModifierKeysConverter))]
+    public enum ModifierKeys {
+        None = 0,
+        Alt = 1,
+        Control = 2,
+        Shift = 4,
+        Windows = 8
+    }
 }
 

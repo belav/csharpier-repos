@@ -32,9 +32,9 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public enum DsmlDocumentProcessing
-	{
-		Sequential,
-		Parallel
-	}
+    public enum DsmlDocumentProcessing
+    {
+        Sequential,
+        Parallel
+    }
 }

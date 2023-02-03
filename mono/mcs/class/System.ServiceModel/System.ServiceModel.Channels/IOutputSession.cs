@@ -28,7 +28,7 @@ using System;
 
 namespace System.ServiceModel.Channels
 {
-	public interface IOutputSession : ISession
-	{
-	}
+    public interface IOutputSession : ISession
+    {
+    }
 }

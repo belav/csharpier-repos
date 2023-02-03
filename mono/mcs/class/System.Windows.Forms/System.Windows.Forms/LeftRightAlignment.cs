@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -29,9 +29,9 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public enum LeftRightAlignment {
-		Left	= 0,
-		Right	= 1
-	}
+    [ComVisible(true)]
+    public enum LeftRightAlignment {
+        Left    = 0,
+        Right    = 1
+    }
 }

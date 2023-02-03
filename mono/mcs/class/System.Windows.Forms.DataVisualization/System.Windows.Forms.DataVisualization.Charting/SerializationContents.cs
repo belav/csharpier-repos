@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[Flags]
-	public enum SerializationContents
-	{
-		Default = 1,
-		Data = 2,
-		Appearance = 4,
-		All = 7
-	}
+    [Flags]
+    public enum SerializationContents
+    {
+        Default = 1,
+        Data = 2,
+        Appearance = 4,
+        All = 7
+    }
 }

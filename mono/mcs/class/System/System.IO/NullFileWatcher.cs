@@ -2,7 +2,7 @@
 // System.Web.Compilation.NullFileWatcher
 //
 // Authors:
-//	Marek Habersack <mhabersack@novell.com>
+//    Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://novell.com/)
 //
@@ -31,34 +31,34 @@ using System;
 
 namespace System.IO
 {
-	class NullFileWatcher : IFileWatcher
-	{
-		static IFileWatcher instance;
-		
-		public void StartDispatching (object handle)
-		{
-			// does nothing
-		}
+    class NullFileWatcher : IFileWatcher
+    {
+        static IFileWatcher instance;
+        
+        public void StartDispatching (object handle)
+        {
+            // does nothing
+        }
 
-		public void StopDispatching (object handle)
-		{
-			// does nothing
-		}
+        public void StopDispatching (object handle)
+        {
+            // does nothing
+        }
 
-		public void Dispose (object handle)
-		{
-			// does nothing
-		}
+        public void Dispose (object handle)
+        {
+            // does nothing
+        }
 
-		public static bool GetInstance (out IFileWatcher watcher)
-		{
-			if (instance != null) {
-				watcher = instance;
-				return true;
-			}
+        public static bool GetInstance (out IFileWatcher watcher)
+        {
+            if (instance != null) {
+                watcher = instance;
+                return true;
+            }
 
-			instance = watcher = new NullFileWatcher ();
-			return true;
-		}
-	}
+            instance = watcher = new NullFileWatcher ();
+            return true;
+        }
+    }
 }

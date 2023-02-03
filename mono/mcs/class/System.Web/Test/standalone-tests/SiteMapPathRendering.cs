@@ -38,42 +38,42 @@ using NUnit.Framework;
 
 namespace StandAloneTests.SiteMapPathRendering
 {
-	[TestCase ("SiteMapPathRendering", "SiteMapPath does not use child controls when rendering.")]
-	public sealed class SiteMapPathRendering_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "SiteMapPathRendering"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("SiteMapPathRendering", "SiteMapPath does not use child controls when rendering.")]
+    public sealed class SiteMapPathRendering_01 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "SiteMapPathRendering"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?mode=foo", Default_Foo_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?mode=bar", Default_Bar_Aspx));
-			
-			return true;
-		}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
+            runItems.Add (new TestRunItem ("/Default.aspx?mode=foo", Default_Foo_Aspx));
+            runItems.Add (new TestRunItem ("/Default.aspx?mode=bar", Default_Bar_Aspx));
+            
+            return true;
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<span id=\"sitemap\"><a href=\"#sitemap_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><a id=\"sitemap_SkipLink\"></a></span><pre id=\"log\">\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl00]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl00$ctl00]\r\n</pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<span id=\"sitemap\"><a href=\"#sitemap_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><a id=\"sitemap_SkipLink\"></a></span><pre id=\"log\">\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl00]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl00$ctl00]\r\n</pre>";
+            Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
+        }
 
-		void Default_Foo_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<span id=\"sitemap\"><a href=\"#sitemap_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=foo\">Foo</a></span><a id=\"sitemap_SkipLink\"></a></span><pre id=\"log\">\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl00]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl00$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl01]\r\n\tSystem.Web.UI.WebControls.Literal [sitemap$ctl01$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl02]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl02$ctl00]\r\n</pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
+        void Default_Foo_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<span id=\"sitemap\"><a href=\"#sitemap_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=foo\">Foo</a></span><a id=\"sitemap_SkipLink\"></a></span><pre id=\"log\">\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl00]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl00$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl01]\r\n\tSystem.Web.UI.WebControls.Literal [sitemap$ctl01$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl02]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl02$ctl00]\r\n</pre>";
+            Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
+        }
 
-		void Default_Bar_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<span id=\"sitemap\"><a href=\"#sitemap_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=bar\">Bar</a></span><a id=\"sitemap_SkipLink\"></a></span><pre id=\"log\">\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl00]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl00$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl01]\r\n\tSystem.Web.UI.WebControls.Literal [sitemap$ctl01$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl02]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl02$ctl00]\r\n</pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
-	}
+        void Default_Bar_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<span id=\"sitemap\"><a href=\"#sitemap_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=bar\">Bar</a></span><a id=\"sitemap_SkipLink\"></a></span><pre id=\"log\">\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl00]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl00$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl01]\r\n\tSystem.Web.UI.WebControls.Literal [sitemap$ctl01$ctl00]\r\n\tSystem.Web.UI.WebControls.SiteMapNodeItem [sitemap$ctl02]\r\n\tSystem.Web.UI.WebControls.HyperLink [sitemap$ctl02$ctl00]\r\n</pre>";
+            Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
+        }
+    }
 }

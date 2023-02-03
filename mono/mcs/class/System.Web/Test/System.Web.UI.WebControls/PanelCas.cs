@@ -1,9 +1,9 @@
 //
 // PanelCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.Panel
+//    - CAS unit tests for System.Web.UI.WebControls.Panel
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,22 +39,22 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PanelCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PanelCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			PanelTest unit = new PanelTest ();
-			unit.NoWrap ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            PanelTest unit = new PanelTest ();
+            unit.NoWrap ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (Panel); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (Panel); }
+        }
+    }
 }

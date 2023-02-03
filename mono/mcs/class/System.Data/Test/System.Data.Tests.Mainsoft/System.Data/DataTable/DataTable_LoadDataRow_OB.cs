@@ -39,146 +39,146 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_LoadDataRow_OB : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataTable_LoadDataRow_OB tc = new DataTable_LoadDataRow_OB();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTable_LoadDataRow_OB");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataTable_LoadDataRow_OB tc = new DataTable_LoadDataRow_OB();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTable_LoadDataRow_OB");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataTable dt;
-		DataRow dr;
-		dt = GHTUtils.DataProvider.CreateParentDataTable();
-		dt.PrimaryKey= new DataColumn[] {dt.Columns[0]};	//add ParentId as Primary Key
-		dt.Columns["String1"].DefaultValue = "Default";
+    public void run()
+    {
+        Exception exp = null;
+        DataTable dt;
+        DataRow dr;
+        dt = GHTUtils.DataProvider.CreateParentDataTable();
+        dt.PrimaryKey= new DataColumn[] {dt.Columns[0]};    //add ParentId as Primary Key
+        dt.Columns["String1"].DefaultValue = "Default";
 
-		dr = dt.Select("ParentId=1")[0];
-	
-		//Update existing row without accept changes
-		dt.BeginLoadData();
-		dt.LoadDataRow(new object[] {1,null,"Changed"},false);
-		dt.EndLoadData();
-				
-		try
-		{
-			BeginCase("LoadDataRow(update1) - check column String1");
-			Compare(dt.Columns["String1"].DefaultValue   ,dr["String1"]);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        dr = dt.Select("ParentId=1")[0];
+    
+        //Update existing row without accept changes
+        dt.BeginLoadData();
+        dt.LoadDataRow(new object[] {1,null,"Changed"},false);
+        dt.EndLoadData();
+                
+        try
+        {
+            BeginCase("LoadDataRow(update1) - check column String1");
+            Compare(dt.Columns["String1"].DefaultValue   ,dr["String1"]);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("LoadDataRow(update1) - check column String2");
-			Compare("Changed",dr["String2"]);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("LoadDataRow(update1) - check column String2");
+            Compare("Changed",dr["String2"]);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("LoadDataRow(update1) - check row state");
-			Compare(dr.RowState ,DataRowState.Modified );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("LoadDataRow(update1) - check row state");
+            Compare(dr.RowState ,DataRowState.Modified );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
         
-		//Update existing row with accept changes
-		dr = dt.Select("ParentId=2")[0];
+        //Update existing row with accept changes
+        dr = dt.Select("ParentId=2")[0];
 
-		dt.BeginLoadData();
-		dt.LoadDataRow(new object[] {2,null,"Changed"},true);
-		dt.EndLoadData();
+        dt.BeginLoadData();
+        dt.LoadDataRow(new object[] {2,null,"Changed"},true);
+        dt.EndLoadData();
 
-		try
-		{
-			BeginCase("LoadDataRow(update2) - check row state");
-			Compare(dr.RowState ,DataRowState.Unchanged  );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("LoadDataRow(update2) - check row state");
+            Compare(dr.RowState ,DataRowState.Unchanged  );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		//Add New row without accept changes
-		dt.BeginLoadData();
-		dt.LoadDataRow(new object[] {99,null,"Changed"},false);
-		dt.EndLoadData();
-		
+        //Add New row without accept changes
+        dt.BeginLoadData();
+        dt.LoadDataRow(new object[] {99,null,"Changed"},false);
+        dt.EndLoadData();
         
-		try
-		{
-			BeginCase("LoadDataRow(insert1) - check column String2");
-			dr = dt.Select("ParentId=99")[0];
-			Compare(dr["String2"] ,"Changed" );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		try
-		{
-			BeginCase("LoadDataRow(insert1) - check row state");
-			Compare(dr.RowState ,DataRowState.Added   );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("LoadDataRow(insert1) - check column String2");
+            dr = dt.Select("ParentId=99")[0];
+            Compare(dr["String2"] ,"Changed" );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("LoadDataRow(insert1) - check row state");
+            Compare(dr.RowState ,DataRowState.Added   );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		
-		//Add New row with accept changes
-		dt.BeginLoadData();
-		dt.LoadDataRow(new object[] {100,null,"Changed"},true);
-		dt.EndLoadData();
-		        
-		try
-		{
-			BeginCase("LoadDataRow(insert2) - check row and values");
-			dr = dt.Select("ParentId=100")[0];
-			Compare(dr["String2"] ,"Changed" );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		try
-		{
-			BeginCase("LoadDataRow(insert2) - check row state");
-			Compare(dr.RowState ,DataRowState.Unchanged    );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
+        
+        //Add New row with accept changes
+        dt.BeginLoadData();
+        dt.LoadDataRow(new object[] {100,null,"Changed"},true);
+        dt.EndLoadData();
+                
+        try
+        {
+            BeginCase("LoadDataRow(insert2) - check row and values");
+            dr = dt.Select("ParentId=100")[0];
+            Compare(dr["String2"] ,"Changed" );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("LoadDataRow(insert2) - check row state");
+            Compare(dr.RowState ,DataRowState.Unchanged    );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
 
-						
-	
+                        
+    
 
 
-	}
+    }
 
-	
+    
 }
 }

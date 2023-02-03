@@ -31,24 +31,24 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-	public sealed class ProjectItemGroupTaskMetadataInstance
-	{
-		internal ProjectItemGroupTaskMetadataInstance (ProjectMetadataElement xml)
-		{
-			Condition = xml.Condition;
-			Name = xml.Name;
-			Value = xml.Value;
-			ConditionLocation = xml.ConditionLocation;
-			Location = xml.Location;
-		}
-		public string Condition { get; private set; }
+    public sealed class ProjectItemGroupTaskMetadataInstance
+    {
+        internal ProjectItemGroupTaskMetadataInstance (ProjectMetadataElement xml)
+        {
+            Condition = xml.Condition;
+            Name = xml.Name;
+            Value = xml.Value;
+            ConditionLocation = xml.ConditionLocation;
+            Location = xml.Location;
+        }
+        public string Condition { get; private set; }
 
-		public string Name { get; private set; }
+        public string Name { get; private set; }
 
-		public string Value { get; private set; }
-		public ElementLocation ConditionLocation { get; private set; }
+        public string Value { get; private set; }
+        public ElementLocation ConditionLocation { get; private set; }
 
-		public ElementLocation Location { get; private set; }
-	}
+        public ElementLocation Location { get; private set; }
+    }
 }
 

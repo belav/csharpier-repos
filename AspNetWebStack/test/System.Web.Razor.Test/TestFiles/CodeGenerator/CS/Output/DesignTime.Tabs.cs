@@ -21,7 +21,7 @@ public static Template Foo() {
 return new Template(__razor_helper_writer => {
 
 #line 10 "DesignTime.cshtml"
-			   
+               
     if(true) {
         
 
@@ -29,7 +29,7 @@ return new Template(__razor_helper_writer => {
 #line hidden
 
 #line 11 "DesignTime.cshtml"
-				  
+                  
     }
 
 
@@ -47,21 +47,21 @@ public DesignTime() {
 public override void Execute() {
 
 #line 1 "DesignTime.cshtml"
-			for(int i = 1; i <= 10; i++) {
+            for(int i = 1; i <= 10; i++) {
     
 
 #line default
 #line hidden
 
 #line 2 "DesignTime.cshtml"
-				__o = i;
+                __o = i;
 
 
 #line default
 #line hidden
 
 #line 3 "DesignTime.cshtml"
-						   
+                           
             }
 
 #line default
@@ -82,14 +82,14 @@ __o = Foo(item => new Template(__razor_template_writer => {
 #line hidden
 
 #line 6 "DesignTime.cshtml"
-		__o = baz;
+        __o = baz;
 
 
 #line default
 #line hidden
 
 #line 7 "DesignTime.cshtml"
-					   }));
+                       }));
 
 
 #line default

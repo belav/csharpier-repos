@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return strEntryDN;
+    return strEntryDN;
       }
     }
 
@@ -55,7 +55,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return retry_count;
+    return retry_count;
       }
     }
 
@@ -64,7 +64,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return strValueDN;
+    return strValueDN;
       }
     }
 
@@ -73,7 +73,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return referral_count;
+    return referral_count;
       }
     }
 
@@ -82,7 +82,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return referral_list;
+    return referral_list;
       }
     }
 
@@ -101,12 +101,12 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       referral_list = new ArrayList();
       if (referral_count > 0) 
       {
-	Asn1Sequence referalseqof = ((Asn1Sequence) referalseq.get_Renamed(1));
+    Asn1Sequence referalseqof = ((Asn1Sequence) referalseq.get_Renamed(1));
 
-	for (int i = 0; i < referral_count; i++) 
-	{
-	  referral_list.Add( new ReferralAddress( (Asn1Sequence) referalseqof.get_Renamed(i) ) );
-	}
+    for (int i = 0; i < referral_count; i++) 
+    {
+      referral_list.Add( new ReferralAddress( (Asn1Sequence) referalseqof.get_Renamed(i) ) );
+    }
       }
 
       DataInitDone();

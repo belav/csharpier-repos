@@ -1,9 +1,9 @@
 //
 // RuntimeWrappedExceptionTest.cs - NUnit Test Cases for 
-//	System.Runtime.CompilerServices.RuntimeWrappedException
+//    System.Runtime.CompilerServices.RuntimeWrappedException
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -37,52 +37,52 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Runtime.CompilerServices {
 
-	[TestFixture]
-	public class RuntimeWrappedExceptionTest {
+    [TestFixture]
+    public class RuntimeWrappedExceptionTest {
 
-		internal RuntimeWrappedException rwe;
+        internal RuntimeWrappedException rwe;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			Type rwet = typeof (RuntimeWrappedException);
-			ConstructorInfo[] ctors = rwet.GetConstructors (BindingFlags.Instance | BindingFlags.NonPublic);
-			foreach (ConstructorInfo ctor in ctors) {
-				switch (ctor.GetParameters ().Length) {
-				case 0:
-					// mono
-					rwe = (RuntimeWrappedException) ctor.Invoke (null);
-					return;
-				case 1:
-					// ms
-					rwe = (RuntimeWrappedException) ctor.Invoke (new object[1] { null });
-					return;
-				}
-			}
-			Assert.Ignore ("uho, couldn't figure out RuntimeWrappedException ctor");
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            Type rwet = typeof (RuntimeWrappedException);
+            ConstructorInfo[] ctors = rwet.GetConstructors (BindingFlags.Instance | BindingFlags.NonPublic);
+            foreach (ConstructorInfo ctor in ctors) {
+                switch (ctor.GetParameters ().Length) {
+                case 0:
+                    // mono
+                    rwe = (RuntimeWrappedException) ctor.Invoke (null);
+                    return;
+                case 1:
+                    // ms
+                    rwe = (RuntimeWrappedException) ctor.Invoke (new object[1] { null });
+                    return;
+                }
+            }
+            Assert.Ignore ("uho, couldn't figure out RuntimeWrappedException ctor");
+        }
 
-		[Test]
-		public void WrappedException ()
-		{
-			Assert.IsNull (rwe.WrappedException, "WrappedException");
-		}
+        [Test]
+        public void WrappedException ()
+        {
+            Assert.IsNull (rwe.WrappedException, "WrappedException");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void GetObjectData_Null ()
-		{
-			rwe.GetObjectData (null, new StreamingContext (StreamingContextStates.All));
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void GetObjectData_Null ()
+        {
+            rwe.GetObjectData (null, new StreamingContext (StreamingContextStates.All));
+        }
 
-		[Test]
-		public void GetObjectData ()
-		{
-			SerializationInfo info = new SerializationInfo (typeof (RuntimeWrappedException), new FormatterConverter ());
-			rwe.GetObjectData (info, new StreamingContext (StreamingContextStates.All));
-			Assert.IsNull (info.GetValue ("WrappedException", typeof (object)), "WrappedException");
-			// a SerializationException would occur if this was a bad name
-		}
-	}
+        [Test]
+        public void GetObjectData ()
+        {
+            SerializationInfo info = new SerializationInfo (typeof (RuntimeWrappedException), new FormatterConverter ());
+            rwe.GetObjectData (info, new StreamingContext (StreamingContextStates.All));
+            Assert.IsNull (info.GetValue ("WrappedException", typeof (object)), "WrappedException");
+            // a SerializationException would occur if this was a bad name
+        }
+    }
 }
 

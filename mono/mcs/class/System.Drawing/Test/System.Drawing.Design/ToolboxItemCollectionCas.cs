@@ -1,9 +1,9 @@
 //
 // ToolboxItemCollectionCas.cs
-//	- CAS unit tests for System.Drawing.Design.ToolboxItemCollection
+//    - CAS unit tests for System.Drawing.Design.ToolboxItemCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,46 +38,46 @@ using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing.Design {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ToolboxItemCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ToolboxItemCollectionCas {
 
-		private ConstructorInfo ctor;
+        private ConstructorInfo ctor;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			ConstructorInfo[] infos = typeof (ToolboxItemCollection).GetConstructors ();
-			ctor = infos[0];
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            // this executes at fulltrust
+            ConstructorInfo[] infos = typeof (ToolboxItemCollection).GetConstructors ();
+            ctor = infos[0];
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Create ()
-		{
-			new ToolboxItemCollection (new ToolboxItem [0]);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Create ()
+        {
+            new ToolboxItemCollection (new ToolboxItem [0]);
+        }
 
-		// we use reflection to call ToolboxItemCollection class as it's protected
-		// by a LinkDemand (which will be converted into full demand, i.e. a stack 
-		// walk) when reflection is used (i.e. it gets testable).
+        // we use reflection to call ToolboxItemCollection class as it's protected
+        // by a LinkDemand (which will be converted into full demand, i.e. a stack 
+        // walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Create_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (ctor, "constructor");
-			ctor.Invoke (new object[1] { new ToolboxItem[0] });
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Create_LinkDemand ()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull (ctor, "constructor");
+            ctor.Invoke (new object[1] { new ToolboxItem[0] });
+        }
+    }
 }

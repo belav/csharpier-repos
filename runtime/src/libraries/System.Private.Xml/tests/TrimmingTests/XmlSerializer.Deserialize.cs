@@ -19,13 +19,13 @@ namespace System.Xml.Serialization.TrimmingTests
         public static int Main()
         {
             using StringReader stringReader = new StringReader(@"<?xml version=""1.0"" encoding=""UTF-8""?>
-				<Response>
-				    <DataUpdates>
-				        <DataUpdateInfo DataDate=""2009-04-13T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T02:53:19.257"" />
-				        <DataUpdateInfo DataDate=""2009-04-14T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T02:53:19.257"" />
-				        <DataUpdateInfo DataDate=""2009-04-15T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T01:52:51.047"" />
-				    </DataUpdates>
-				</Response>");
+                <Response>
+                    <DataUpdates>
+                        <DataUpdateInfo DataDate=""2009-04-13T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T02:53:19.257"" />
+                        <DataUpdateInfo DataDate=""2009-04-14T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T02:53:19.257"" />
+                        <DataUpdateInfo DataDate=""2009-04-15T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T01:52:51.047"" />
+                    </DataUpdates>
+                </Response>");
 
             Response obj = (Response)new XmlSerializer(typeof(Response)).Deserialize(stringReader);
             if (obj.DataUpdates.DataUpdateInfo.Count == 3 &&

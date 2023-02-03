@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,13 +27,13 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ScrollType
-	{
-		SmallDecrement = 0,
-		SmallIncrement = 1,
-		LargeDecrement = 2,
-		LargeIncrement = 3,
-		First = 4,
-		Last = 5
-	}
+    public enum ScrollType
+    {
+        SmallDecrement = 0,
+        SmallIncrement = 1,
+        LargeDecrement = 2,
+        LargeIncrement = 3,
+        First = 4,
+        Last = 5
+    }
 }

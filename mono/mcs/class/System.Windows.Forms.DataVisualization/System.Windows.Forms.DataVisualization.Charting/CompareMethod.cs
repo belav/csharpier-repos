@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,13 +27,13 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum CompareMethod
-	{
-		MoreThan = 0,
-		LessThan = 1,
-		EqualTo = 2,
-		MoreThanOrEqualTo = 3,
-		LessThanOrEqualTo = 4,
-		NotEqualTo = 5
-	}
+    public enum CompareMethod
+    {
+        MoreThan = 0,
+        LessThan = 1,
+        EqualTo = 2,
+        MoreThanOrEqualTo = 3,
+        LessThanOrEqualTo = 4,
+        NotEqualTo = 5
+    }
 }

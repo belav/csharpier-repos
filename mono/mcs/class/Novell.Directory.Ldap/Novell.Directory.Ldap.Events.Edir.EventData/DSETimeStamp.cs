@@ -45,7 +45,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-	return nSeconds;
+    return nSeconds;
       }
     }
 
@@ -54,7 +54,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-	return replica_number;
+    return replica_number;
       }
     }
 
@@ -63,7 +63,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-	return nEvent;
+    return nEvent;
       }
     }
 

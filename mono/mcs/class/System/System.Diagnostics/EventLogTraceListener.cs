@@ -36,114 +36,114 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics 
 {
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	public sealed class EventLogTraceListener : TraceListener 
-	{
-		private EventLog event_log;
-		private string name;
+    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+    public sealed class EventLogTraceListener : TraceListener 
+    {
+        private EventLog event_log;
+        private string name;
 
-		public EventLogTraceListener ()
-		{
-		}
+        public EventLogTraceListener ()
+        {
+        }
 
-		public EventLogTraceListener (EventLog eventLog)
-		{
-			if (eventLog == null)
-				throw new ArgumentNullException ("eventLog");
-			this.event_log = eventLog;
-		}
+        public EventLogTraceListener (EventLog eventLog)
+        {
+            if (eventLog == null)
+                throw new ArgumentNullException ("eventLog");
+            this.event_log = eventLog;
+        }
 
-		public EventLogTraceListener (string source)
-		{
-			if (source == null)
-				throw new ArgumentNullException ("source");
-			event_log = new EventLog ();
-			event_log.Source = source;
-		}
+        public EventLogTraceListener (string source)
+        {
+            if (source == null)
+                throw new ArgumentNullException ("source");
+            event_log = new EventLog ();
+            event_log.Source = source;
+        }
 
-		public EventLog EventLog {
-			get { return event_log; }
-			set { event_log = value; }
-		}
+        public EventLog EventLog {
+            get { return event_log; }
+            set { event_log = value; }
+        }
 
-		public override string Name {
-			get { return name != null ? name : event_log.Source; }
-			set { name = value; }
-		}
+        public override string Name {
+            get { return name != null ? name : event_log.Source; }
+            set { name = value; }
+        }
 
-		public override void Close ()
-		{
-			event_log.Close ();
-		}
+        public override void Close ()
+        {
+            event_log.Close ();
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing)
-				event_log.Dispose ();
-		}
+        protected override void Dispose (bool disposing)
+        {
+            if (disposing)
+                event_log.Dispose ();
+        }
 
-		public override void Write (string message)
-		{
-			TraceData (new TraceEventCache (), event_log.Source,
-				   TraceEventType.Information, 0, message);
-		}
+        public override void Write (string message)
+        {
+            TraceData (new TraceEventCache (), event_log.Source,
+                   TraceEventType.Information, 0, message);
+        }
 
-		public override void WriteLine (string message)
-		{
-			Write (message);
-		}
+        public override void WriteLine (string message)
+        {
+            Write (message);
+        }
 
-		[ComVisible (false)]
-		public override void TraceData (TraceEventCache eventCache,
-						string source, TraceEventType severity,
-						int id, object data)
-		{
-			EventLogEntryType type;
-			switch (severity) {
-			case TraceEventType.Critical:
-			case TraceEventType.Error:
-				type = EventLogEntryType.Error;
-				break;
-			case TraceEventType.Warning:
-				type = EventLogEntryType.Warning;
-				break;
-			default:
-				type = EventLogEntryType.Information;
-				break;
-			}
-			event_log.WriteEntry (data != null ? data.ToString () : String.Empty, type, id, 0);
-		}
+        [ComVisible (false)]
+        public override void TraceData (TraceEventCache eventCache,
+                        string source, TraceEventType severity,
+                        int id, object data)
+        {
+            EventLogEntryType type;
+            switch (severity) {
+            case TraceEventType.Critical:
+            case TraceEventType.Error:
+                type = EventLogEntryType.Error;
+                break;
+            case TraceEventType.Warning:
+                type = EventLogEntryType.Warning;
+                break;
+            default:
+                type = EventLogEntryType.Information;
+                break;
+            }
+            event_log.WriteEntry (data != null ? data.ToString () : String.Empty, type, id, 0);
+        }
 
-		[ComVisible (false)]
-		public override void TraceData (TraceEventCache eventCache,
-						string source, TraceEventType severity,
-						int id, params object [] data)
-		{
-			string s = String.Empty;
-			if (data != null) {
-				string [] arr = new string [data.Length];
-				for (int i = 0; i < data.Length; i++)
-					arr [i] = data [i] != null ? data [i].ToString () : String.Empty;
-				s = String.Join (", ", arr);
-			}
-			TraceData (eventCache, source, severity, id, s);
-		}
+        [ComVisible (false)]
+        public override void TraceData (TraceEventCache eventCache,
+                        string source, TraceEventType severity,
+                        int id, params object [] data)
+        {
+            string s = String.Empty;
+            if (data != null) {
+                string [] arr = new string [data.Length];
+                for (int i = 0; i < data.Length; i++)
+                    arr [i] = data [i] != null ? data [i].ToString () : String.Empty;
+                s = String.Join (", ", arr);
+            }
+            TraceData (eventCache, source, severity, id, s);
+        }
 
-		[ComVisible (false)]
-		public override void TraceEvent (TraceEventCache eventCache,
-						 string source, TraceEventType severity,
-						 int id, string message)
-		{
-			TraceData (eventCache, source, severity, id, message);
-		}
+        [ComVisible (false)]
+        public override void TraceEvent (TraceEventCache eventCache,
+                         string source, TraceEventType severity,
+                         int id, string message)
+        {
+            TraceData (eventCache, source, severity, id, message);
+        }
 
-		[ComVisible (false)]
-		public override void TraceEvent (TraceEventCache eventCache,
-						 string source, TraceEventType severity,
-						 int id, string format, params object [] args)
-		{
-			TraceEvent (eventCache, source, severity, id, format != null ? String.Format (format, args) : null);
-		}
-	}
+        [ComVisible (false)]
+        public override void TraceEvent (TraceEventCache eventCache,
+                         string source, TraceEventType severity,
+                         int id, string format, params object [] args)
+        {
+            TraceEvent (eventCache, source, severity, id, format != null ? String.Format (format, args) : null);
+        }
+    }
 }
 

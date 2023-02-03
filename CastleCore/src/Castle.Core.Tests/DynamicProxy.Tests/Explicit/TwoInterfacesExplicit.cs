@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
 
 namespace Castle.DynamicProxy.Tests.Explicit
 {
-	using System;
+    using System;
 
-	public class TwoInterfacesExplicit : ISimpleInterface, IDisposable
-	{
-		void IDisposable.Dispose()
-		{
-		}
+    public class TwoInterfacesExplicit : ISimpleInterface, IDisposable
+    {
+        void IDisposable.Dispose()
+        {
+        }
 
-		int ISimpleInterface.Do()
-		{
-			return 5;
-		}
-	}
+        int ISimpleInterface.Do()
+        {
+            return 5;
+        }
+    }
 }

@@ -52,281 +52,281 @@ delegate T g3<T, U, V, W>(U u, V v, W w);
 //////////////////////////////////////////////////////////////////////
 
 class GenericClass<T> where T:Equality{
-	public long value,field2,field3,field4,field5,field6;
+    public long value,field2,field3,field4,field5,field6;
 
-	public long M1(long l){
-		if(value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M1(long l){
+        if(value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M2(T t, long l){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M2(T t, long l){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M3(long l, T t){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M3(long l, T t){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M4(EQStruct<long> t, long l){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M4(EQStruct<long> t, long l){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M5(long l, EQStruct<long> t){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M5(long l, EQStruct<long> t){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M6(EQClass<long> t, long l){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M6(EQClass<long> t, long l){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M7(long l, EQClass<long> t){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M7(long l, EQClass<long> t){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M8<U>(U u, long l) where U:Equality{
-		if(!u.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M8<U>(U u, long l) where U:Equality{
+        if(!u.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M9<U>(long l, U u) where U:Equality{
-		if(!u.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M9<U>(long l, U u) where U:Equality{
+        if(!u.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM1(long l){
-		return 100;
-	}
+    public static long SM1(long l){
+        return 100;
+    }
 
-	public static long SM2(T t, long l){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM2(T t, long l){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM3(long l, T t){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM3(long l, T t){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM4(EQStruct<long> t, long l){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM4(EQStruct<long> t, long l){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM5(long l, EQStruct<long> t){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM5(long l, EQStruct<long> t){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM6(EQClass<long> t, long l){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM6(EQClass<long> t, long l){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM7(long l, EQClass<long> t){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM7(long l, EQClass<long> t){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM8<U>(U u, long l) where U:Equality{
-		if(!u.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM8<U>(U u, long l) where U:Equality{
+        if(!u.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM9<U>(long l, U u) where U:Equality{
-		if(!u.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM9<U>(long l, U u) where U:Equality{
+        if(!u.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 }
 
 struct GenericStruct<T> where T:Equality{
-	public long value,field2,field3,field4,field5,field6;
+    public long value,field2,field3,field4,field5,field6;
 
-	public long M1(long l){
-		if(value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M1(long l){
+        if(value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M2(T t, long l){
+    public long M2(T t, long l){
         Console.WriteLine(l);
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M3(long l, T t){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M3(long l, T t){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M4(EQStruct<long> t, long l){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M4(EQStruct<long> t, long l){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M5(long l, EQStruct<long> t){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M5(long l, EQStruct<long> t){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M6(EQClass<long> t, long l){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M6(EQClass<long> t, long l){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M7(long l, EQClass<long> t){
-		if(!t.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M7(long l, EQClass<long> t){
+        if(!t.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M8<U>(U u, long l) where U:Equality{
-		if(!u.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M8<U>(U u, long l) where U:Equality{
+        if(!u.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public long M9<U>(long l, U u) where U:Equality{
-		if(!u.Equals(l) || value!=l)
-			throw new Exception();
-		return 100;
-	}
+    public long M9<U>(long l, U u) where U:Equality{
+        if(!u.Equals(l) || value!=l)
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM1(long l){
-		return 100;
-	}
+    public static long SM1(long l){
+        return 100;
+    }
 
-	public static long SM2(T t, long l){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM2(T t, long l){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM3(long l, T t){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM3(long l, T t){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM4(EQStruct<long> t, long l){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM4(EQStruct<long> t, long l){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM5(long l, EQStruct<long> t){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM5(long l, EQStruct<long> t){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM6(EQClass<long> t, long l){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM6(EQClass<long> t, long l){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM7(long l, EQClass<long> t){
-		if(!t.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM7(long l, EQClass<long> t){
+        if(!t.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM8<U>(U u, long l) where U:Equality{
-		if(!u.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM8<U>(U u, long l) where U:Equality{
+        if(!u.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 
-	public static long SM9<U>(long l, U u) where U:Equality{
-		if(!u.Equals(l))
-			throw new Exception();
-		return 100;
-	}
+    public static long SM9<U>(long l, U u) where U:Equality{
+        if(!u.Equals(l))
+            throw new Exception();
+        return 100;
+    }
 }
 
 interface Equality{
-	bool Equals(long l);
+    bool Equals(long l);
 }
 /*
 class EQClass : Equality{
-	double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-	long value;
+    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    long value;
 
-	public EQClass(long l){
-		value = l;
-	}
+    public EQClass(long l){
+        value = l;
+    }
 
-	public bool Equals(long l){
-		return (value==l);
-	}
+    public bool Equals(long l){
+        return (value==l);
+    }
 }
 
 class EQStruct : Equality{
-	double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-	long value;
+    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    long value;
 
-	public EQStruct(long l){
-		value = l;
-	}
+    public EQStruct(long l){
+        value = l;
+    }
 
-	public bool Equals(long l){
-		return (value==l);
-	}
+    public bool Equals(long l){
+        return (value==l);
+    }
 }
 */
 class EQClass<T> : Equality{
-	double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-	public T f11;
-	long value;
+    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    public T f11;
+    long value;
 
-	public EQClass(long l){
-		value = l;
-	}
+    public EQClass(long l){
+        value = l;
+    }
 
-	public bool Equals(long l){
-		return (value==l);
-	}
+    public bool Equals(long l){
+        return (value==l);
+    }
 }
 
 class EQStruct<T> : Equality{
-	double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-	public T f11;
-	long value;
+    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+    public T f11;
+    long value;
 
-	public EQStruct(long l){
-		value = l;
-	}
+    public EQStruct(long l){
+        value = l;
+    }
 
-	public bool Equals(long l){
-		return (value==l);
-	}
+    public bool Equals(long l){
+        return (value==l);
+    }
 }
 #pragma warning restore

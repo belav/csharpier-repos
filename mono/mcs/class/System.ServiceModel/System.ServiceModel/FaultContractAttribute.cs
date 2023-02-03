@@ -2,7 +2,7 @@
 // FaultContractAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,48 +29,48 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
-	public sealed class FaultContractAttribute : Attribute
-	{
-		string action, name, ns;
-		Type detail_type;
-		ProtectionLevel protection_level;
-		bool has_protection_level;
+    [AttributeUsage (AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
+    public sealed class FaultContractAttribute : Attribute
+    {
+        string action, name, ns;
+        Type detail_type;
+        ProtectionLevel protection_level;
+        bool has_protection_level;
 
-		public FaultContractAttribute (Type detailType)
-		{
-			detail_type = detailType;
-		}
+        public FaultContractAttribute (Type detailType)
+        {
+            detail_type = detailType;
+        }
 
-		public string Action {
-			get { return action; }
-			set { action = value; }
-		}
+        public string Action {
+            get { return action; }
+            set { action = value; }
+        }
 
-		public Type DetailType {
-			get { return detail_type; }
-		}
+        public Type DetailType {
+            get { return detail_type; }
+        }
 
-		public bool HasProtectionLevel {
-			get { return has_protection_level; }
-		}
+        public bool HasProtectionLevel {
+            get { return has_protection_level; }
+        }
 
-		public ProtectionLevel ProtectionLevel {
-			get { return protection_level; }
-			set {
-				protection_level = value;
-				has_protection_level = true;
-			}
-		}
+        public ProtectionLevel ProtectionLevel {
+            get { return protection_level; }
+            set {
+                protection_level = value;
+                has_protection_level = true;
+            }
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
-	}
+        public string Namespace {
+            get { return ns; }
+            set { ns = value; }
+        }
+    }
 }

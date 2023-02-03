@@ -2,9 +2,9 @@
 // System.Drawing.ImageAnimator.cs
 //
 // Authors:
-//	Dennis Hayes (dennish@Raytek.com)
-//	Sanjay Gupta (gsanjay@novell.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Dennis Hayes (dennish@Raytek.com)
+//    Sanjay Gupta (gsanjay@novell.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002 Ximian, Inc
 // Copyright (C) 2004,2006-2007 Novell, Inc (http://www.novell.com)
@@ -35,149 +35,149 @@ using System.Threading;
 
 namespace System.Drawing {
 
-	class AnimateEventArgs : EventArgs {
+    class AnimateEventArgs : EventArgs {
 
-		private int frameCount;
-		private int activeFrame;
-		private Thread thread;
+        private int frameCount;
+        private int activeFrame;
+        private Thread thread;
 
-		public AnimateEventArgs (Image image)
-		{
-			frameCount = image.GetFrameCount (FrameDimension.Time);
-		}
+        public AnimateEventArgs (Image image)
+        {
+            frameCount = image.GetFrameCount (FrameDimension.Time);
+        }
       
-		public Thread RunThread {
-			get { return thread; }
-			set { thread = value; }
-		}
+        public Thread RunThread {
+            get { return thread; }
+            set { thread = value; }
+        }
 
-		public int GetNextFrame ()
-		{
-			if (activeFrame < frameCount - 1)
-				activeFrame++;
-			else
-				activeFrame = 0;
+        public int GetNextFrame ()
+        {
+            if (activeFrame < frameCount - 1)
+                activeFrame++;
+            else
+                activeFrame = 0;
 
-			return activeFrame;
-		}
-	}
+            return activeFrame;
+        }
+    }
 
-	public sealed class ImageAnimator {
+    public sealed class ImageAnimator {
 
-		static Hashtable ht = Hashtable.Synchronized (new Hashtable ());
+        static Hashtable ht = Hashtable.Synchronized (new Hashtable ());
 
-		private ImageAnimator ()
-		{
-		}
+        private ImageAnimator ()
+        {
+        }
 
-		public static void Animate (Image image, EventHandler onFrameChangedHandler)
-		{
-			// must be non-null and contain animation time frames
-			if (!CanAnimate (image))
-				return;
+        public static void Animate (Image image, EventHandler onFrameChangedHandler)
+        {
+            // must be non-null and contain animation time frames
+            if (!CanAnimate (image))
+                return;
 
-			// is animation already in progress ?
-			if (ht.ContainsKey (image))
-				return;
+            // is animation already in progress ?
+            if (ht.ContainsKey (image))
+                return;
 
-			PropertyItem item = image.GetPropertyItem (0x5100); // FrameDelay in libgdiplus
-			byte[] value = item.Value;
-			int[] delay = new int [(value.Length >> 2)];
-			for (int i=0, n=0; i < value.Length; i += 4, n++) {
-				int d = BitConverter.ToInt32 (value, i) * 10;
-				// follow worse case (Opera) see http://news.deviantart.com/article/27613/
-				delay [n] = d < 100 ? 100 : d;
-			}
+            PropertyItem item = image.GetPropertyItem (0x5100); // FrameDelay in libgdiplus
+            byte[] value = item.Value;
+            int[] delay = new int [(value.Length >> 2)];
+            for (int i=0, n=0; i < value.Length; i += 4, n++) {
+                int d = BitConverter.ToInt32 (value, i) * 10;
+                // follow worse case (Opera) see http://news.deviantart.com/article/27613/
+                delay [n] = d < 100 ? 100 : d;
+            }
 
-			AnimateEventArgs aea = new AnimateEventArgs (image);
-			WorkerThread wt = new WorkerThread (onFrameChangedHandler, aea, delay);
-			Thread thread = new Thread (new ThreadStart (wt.LoopHandler));
-			thread.IsBackground = true;
-			aea.RunThread = thread;
-			ht.Add (image, aea);
-			thread.Start ();
-		}
+            AnimateEventArgs aea = new AnimateEventArgs (image);
+            WorkerThread wt = new WorkerThread (onFrameChangedHandler, aea, delay);
+            Thread thread = new Thread (new ThreadStart (wt.LoopHandler));
+            thread.IsBackground = true;
+            aea.RunThread = thread;
+            ht.Add (image, aea);
+            thread.Start ();
+        }
 
-		public static bool CanAnimate (Image image)
-		{
-			if (image == null)
-				return false;
+        public static bool CanAnimate (Image image)
+        {
+            if (image == null)
+                return false;
 
-			int n = image.FrameDimensionsList.Length;
-			if (n < 1)
-				return false;
+            int n = image.FrameDimensionsList.Length;
+            if (n < 1)
+                return false;
 
-			for (int i = 0; i < n; i++) {
-				if (image.FrameDimensionsList [i].Equals (FrameDimension.Time.Guid)) {
-					return (image.GetFrameCount (FrameDimension.Time) > 1);
-				}
-			}
-			return false;
-		}
+            for (int i = 0; i < n; i++) {
+                if (image.FrameDimensionsList [i].Equals (FrameDimension.Time.Guid)) {
+                    return (image.GetFrameCount (FrameDimension.Time) > 1);
+                }
+            }
+            return false;
+        }
 
-		public static void StopAnimate (Image image, EventHandler onFrameChangedHandler)
-		{
-			if (image == null)
-				return;
+        public static void StopAnimate (Image image, EventHandler onFrameChangedHandler)
+        {
+            if (image == null)
+                return;
 
-			if (ht.ContainsKey (image)) {
-				AnimateEventArgs evtArgs = (AnimateEventArgs) ht [image];
-				evtArgs.RunThread.Abort ();
-				ht.Remove (image);
-			}
-		}
+            if (ht.ContainsKey (image)) {
+                AnimateEventArgs evtArgs = (AnimateEventArgs) ht [image];
+                evtArgs.RunThread.Abort ();
+                ht.Remove (image);
+            }
+        }
 
-		public static void UpdateFrames ()
-		{
-			foreach (Image image in ht.Keys)
-				UpdateImageFrame (image);
-		}
+        public static void UpdateFrames ()
+        {
+            foreach (Image image in ht.Keys)
+                UpdateImageFrame (image);
+        }
 
 
-		public static void UpdateFrames (Image image)
-		{
-			if (image == null)
-				return;
+        public static void UpdateFrames (Image image)
+        {
+            if (image == null)
+                return;
 
-			if (ht.ContainsKey (image))
-				UpdateImageFrame (image);
-		}
+            if (ht.ContainsKey (image))
+                UpdateImageFrame (image);
+        }
 
-		// this method avoid checks that aren't requied for UpdateFrames()
-		private static void UpdateImageFrame (Image image)
-		{
-			AnimateEventArgs aea = (AnimateEventArgs) ht [image];
-			image.SelectActiveFrame (FrameDimension.Time, aea.GetNextFrame ());
-		}
-	}
+        // this method avoid checks that aren't requied for UpdateFrames()
+        private static void UpdateImageFrame (Image image)
+        {
+            AnimateEventArgs aea = (AnimateEventArgs) ht [image];
+            image.SelectActiveFrame (FrameDimension.Time, aea.GetNextFrame ());
+        }
+    }
 
-	class WorkerThread {
+    class WorkerThread {
 
-		private EventHandler frameChangeHandler;
-		private AnimateEventArgs animateEventArgs;
-		private int[] delay;
+        private EventHandler frameChangeHandler;
+        private AnimateEventArgs animateEventArgs;
+        private int[] delay;
 
-		public WorkerThread (EventHandler frmChgHandler, AnimateEventArgs aniEvtArgs, int[] delay)
-		{
-			frameChangeHandler = frmChgHandler;
-			animateEventArgs = aniEvtArgs;
-			this.delay = delay;
-		}
+        public WorkerThread (EventHandler frmChgHandler, AnimateEventArgs aniEvtArgs, int[] delay)
+        {
+            frameChangeHandler = frmChgHandler;
+            animateEventArgs = aniEvtArgs;
+            this.delay = delay;
+        }
 
-		public void LoopHandler ()
-		{
-			try {
-				int n = 0;
-				while (true) {
-					Thread.Sleep (delay [n++]);
-					frameChangeHandler (null, animateEventArgs);
-					if (n == delay.Length)
-						n = 0;
-				}
-			}
-			catch (ThreadAbortException) {
-				Thread.ResetAbort (); // we're going to finish anyway
-			}
-		}
-	}
+        public void LoopHandler ()
+        {
+            try {
+                int n = 0;
+                while (true) {
+                    Thread.Sleep (delay [n++]);
+                    frameChangeHandler (null, animateEventArgs);
+                    if (n == delay.Length)
+                        n = 0;
+                }
+            }
+            catch (ThreadAbortException) {
+                Thread.ResetAbort (); // we're going to finish anyway
+            }
+        }
+    }
 }

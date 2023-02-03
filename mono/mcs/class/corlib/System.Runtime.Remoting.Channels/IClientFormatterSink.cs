@@ -33,9 +33,9 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IClientFormatterSink : IMessageSink, IClientChannelSink, IChannelSinkBase
-	{
-		
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IClientFormatterSink : IMessageSink, IClientChannelSink, IChannelSinkBase
+    {
+        
+    }
 }

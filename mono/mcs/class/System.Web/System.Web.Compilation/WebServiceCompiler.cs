@@ -2,7 +2,7 @@
 // System.Web.Compilation.WebServiceCompiler
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002,2003 Ximian, Inc (http://www.ximian.com)
 // Copyright (c) 2040 Novell, Inc. (http://www.novell.com)
@@ -37,101 +37,101 @@ using System.Reflection;
 
 namespace System.Web.Compilation
 {
-	class WebServiceCompiler : BaseCompiler
-	{
-		SimpleWebHandlerParser parser;
-		string inputFile;
+    class WebServiceCompiler : BaseCompiler
+    {
+        SimpleWebHandlerParser parser;
+        string inputFile;
 
-		public WebServiceCompiler (SimpleWebHandlerParser wService)
-			: base (null)
-		{
-			this.parser = wService;
-		}
+        public WebServiceCompiler (SimpleWebHandlerParser wService)
+            : base (null)
+        {
+            this.parser = wService;
+        }
 
-		public static Type CompileIntoType (SimpleWebHandlerParser wService)
-		{
-			WebServiceCompiler wsc = new WebServiceCompiler (wService);
-			return wsc.GetCompiledType ();
-		}
+        public static Type CompileIntoType (SimpleWebHandlerParser wService)
+        {
+            WebServiceCompiler wsc = new WebServiceCompiler (wService);
+            return wsc.GetCompiledType ();
+        }
 
-		public override Type GetCompiledType ()
-		{
-			Type type = CachingCompiler.GetTypeFromCache (parser.PhysicalPath);
-			if (type != null)
-				return type;
+        public override Type GetCompiledType ()
+        {
+            Type type = CachingCompiler.GetTypeFromCache (parser.PhysicalPath);
+            if (type != null)
+                return type;
 
-			if (parser.Program.Trim () == "") {
-				type = Type.GetType (parser.ClassName, false);
-				if (type == null)
-					type = parser.GetTypeFromBin (parser.ClassName);
-				CachingCompiler.InsertTypeFileDep (type, parser.PhysicalPath);
-				return type;
-			}
+            if (parser.Program.Trim () == "") {
+                type = Type.GetType (parser.ClassName, false);
+                if (type == null)
+                    type = parser.GetTypeFromBin (parser.ClassName);
+                CachingCompiler.InsertTypeFileDep (type, parser.PhysicalPath);
+                return type;
+            }
 
-			string lang = parser.Language;
-			string compilerOptions;
-			string tempdir;
-			int warningLevel;
+            string lang = parser.Language;
+            string compilerOptions;
+            string tempdir;
+            int warningLevel;
 
-			CodeDomProvider provider;
-			Provider = provider = CreateProvider (parser.Context, lang, out compilerOptions, out warningLevel, out tempdir);
-			if (Provider == null)
-				throw new HttpException ("Configuration error. Language not supported: " +
-							  lang, 500);
+            CodeDomProvider provider;
+            Provider = provider = CreateProvider (parser.Context, lang, out compilerOptions, out warningLevel, out tempdir);
+            if (Provider == null)
+                throw new HttpException ("Configuration error. Language not supported: " +
+                              lang, 500);
 
-			CompilerParameters compilerParameters;
-			CompilerParameters = compilerParameters = CachingCompiler.GetOptions (parser.Assemblies);
-			compilerParameters.IncludeDebugInformation = parser.Debug;
-			compilerParameters.CompilerOptions = compilerOptions;
-			compilerParameters.WarningLevel = warningLevel;
+            CompilerParameters compilerParameters;
+            CompilerParameters = compilerParameters = CachingCompiler.GetOptions (parser.Assemblies);
+            compilerParameters.IncludeDebugInformation = parser.Debug;
+            compilerParameters.CompilerOptions = compilerOptions;
+            compilerParameters.WarningLevel = warningLevel;
 
-			bool keepFiles = (Environment.GetEnvironmentVariable ("MONO_ASPNET_NODELETE") != null);
+            bool keepFiles = (Environment.GetEnvironmentVariable ("MONO_ASPNET_NODELETE") != null);
 
-			TempFileCollection tempcoll;
-			tempcoll = new TempFileCollection (tempdir, keepFiles);
-			compilerParameters.TempFiles = tempcoll;
+            TempFileCollection tempcoll;
+            tempcoll = new TempFileCollection (tempdir, keepFiles);
+            compilerParameters.TempFiles = tempcoll;
 
-			inputFile = tempcoll.AddExtension (provider.FileExtension);
-			Stream st = File.OpenWrite (inputFile);
-			StreamWriter sw = new StreamWriter (st);
-			sw.WriteLine (parser.Program);
-			sw.Close ();
+            inputFile = tempcoll.AddExtension (provider.FileExtension);
+            Stream st = File.OpenWrite (inputFile);
+            StreamWriter sw = new StreamWriter (st);
+            sw.WriteLine (parser.Program);
+            sw.Close ();
 
-			string dllfilename = Path.GetFileName (tempcoll.AddExtension ("dll", true));
+            string dllfilename = Path.GetFileName (tempcoll.AddExtension ("dll", true));
 
-			compilerParameters.OutputAssembly = Path.Combine (DynamicDir (), dllfilename);
+            compilerParameters.OutputAssembly = Path.Combine (DynamicDir (), dllfilename);
 
-			CompilerResults results = CachingCompiler.Compile (this);
-			CheckCompilerErrors (results);
-			Assembly assembly = results.CompiledAssembly;
-			if (assembly == null) {
-				if (!File.Exists (compilerParameters.OutputAssembly))
-					throw new CompilationException (inputFile, results.Errors,
-						"No assembly returned after compilation!?");
-				assembly = Assembly.LoadFrom (compilerParameters.OutputAssembly);
-			}
+            CompilerResults results = CachingCompiler.Compile (this);
+            CheckCompilerErrors (results);
+            Assembly assembly = results.CompiledAssembly;
+            if (assembly == null) {
+                if (!File.Exists (compilerParameters.OutputAssembly))
+                    throw new CompilationException (inputFile, results.Errors,
+                        "No assembly returned after compilation!?");
+                assembly = Assembly.LoadFrom (compilerParameters.OutputAssembly);
+            }
 
-			results.TempFiles.Delete ();
-			type = assembly.GetType (parser.ClassName, true);
-			CachingCompiler.InsertTypeFileDep (type, parser.PhysicalPath);
-			return type;
-		}
+            results.TempFiles.Delete ();
+            type = assembly.GetType (parser.ClassName, true);
+            CachingCompiler.InsertTypeFileDep (type, parser.PhysicalPath);
+            return type;
+        }
 
-		void CheckCompilerErrors (CompilerResults results)
-		{
-			if (results.NativeCompilerReturnValue == 0)
-				return;
+        void CheckCompilerErrors (CompilerResults results)
+        {
+            if (results.NativeCompilerReturnValue == 0)
+                return;
  
-			throw new CompilationException (parser.PhysicalPath, results.Errors, parser.Program);
-		}
+            throw new CompilationException (parser.PhysicalPath, results.Errors, parser.Program);
+        }
 
-		internal new SimpleWebHandlerParser Parser {
-			get { return parser; }
-		}
+        internal new SimpleWebHandlerParser Parser {
+            get { return parser; }
+        }
 
-		internal string InputFile {
-			get { return inputFile; }
-		}
-	}
+        internal string InputFile {
+            get { return inputFile; }
+        }
+    }
 }
 

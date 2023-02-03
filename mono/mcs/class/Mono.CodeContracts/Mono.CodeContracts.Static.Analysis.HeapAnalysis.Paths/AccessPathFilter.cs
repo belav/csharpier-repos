@@ -2,7 +2,7 @@
 // AccessPathFilter.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,84 +29,84 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths {
-	class AccessPathFilter<TMember> {
-		public static AccessPathFilter<TMember> NoFilter = new AccessPathFilter<TMember> ();
-		private readonly Flags flags;
-		private readonly TMember member;
-		private readonly MemberFilter member_filter;
+    class AccessPathFilter<TMember> {
+        public static AccessPathFilter<TMember> NoFilter = new AccessPathFilter<TMember> ();
+        private readonly Flags flags;
+        private readonly TMember member;
+        private readonly MemberFilter member_filter;
 
-		private AccessPathFilter ()
-		{
-			this.flags = Flags.AllowLocals;
-			this.member_filter = MemberFilter.NoFilter;
-		}
+        private AccessPathFilter ()
+        {
+            this.flags = Flags.AllowLocals;
+            this.member_filter = MemberFilter.NoFilter;
+        }
 
-		private AccessPathFilter (TMember member, MemberFilter memberFilter)
-		{
-			this.member_filter = memberFilter;
-			this.member = member;
-		}
+        private AccessPathFilter (TMember member, MemberFilter memberFilter)
+        {
+            this.member_filter = memberFilter;
+            this.member = member;
+        }
 
-		public bool AllowLocal
-		{
-			get { return (this.flags & Flags.AllowLocals) == Flags.AllowLocals; }
-		}
+        public bool AllowLocal
+        {
+            get { return (this.flags & Flags.AllowLocals) == Flags.AllowLocals; }
+        }
 
-		public bool HasVisibilityMember
-		{
-			get { return this.member_filter != MemberFilter.NoFilter; }
-		}
+        public bool HasVisibilityMember
+        {
+            get { return this.member_filter != MemberFilter.NoFilter; }
+        }
 
-		public TMember VisibilityMember
-		{
-			get { return this.member; }
-		}
+        public TMember VisibilityMember
+        {
+            get { return this.member; }
+        }
 
-		public static AccessPathFilter<TMember> FromPrecondition (TMember member)
-		{
-			return new AccessPathFilter<TMember> (member, MemberFilter.FromPrecondition);
-		}
+        public static AccessPathFilter<TMember> FromPrecondition (TMember member)
+        {
+            return new AccessPathFilter<TMember> (member, MemberFilter.FromPrecondition);
+        }
 
-		public static AccessPathFilter<TMember> FromPostcondition (TMember member)
-		{
-			return new AccessPathFilter<TMember> (member, MemberFilter.FromPostcondition);
-		}
+        public static AccessPathFilter<TMember> FromPostcondition (TMember member)
+        {
+            return new AccessPathFilter<TMember> (member, MemberFilter.FromPostcondition);
+        }
 
-		public static AccessPathFilter<TMember> IsVisibleFrom (TMember member)
-		{
-			return new AccessPathFilter<TMember> (member, MemberFilter.FromMethodBody);
-		}
+        public static AccessPathFilter<TMember> IsVisibleFrom (TMember member)
+        {
+            return new AccessPathFilter<TMember> (member, MemberFilter.FromMethodBody);
+        }
 
-		public bool FilterOutPathElement<P> (P element)
-			where P : IVisibilityCheck<TMember>
-		{
-			switch (this.member_filter) {
-			case MemberFilter.FromPrecondition:
-				return !element.IsAsVisibleAs (this.member);
-			case MemberFilter.FromPostcondition:
-				return !element.IfRootIsParameter || !element.IsVisibleFrom (this.member);
-			case MemberFilter.FromMethodBody:
-				return !element.IsVisibleFrom (this.member);
-			default:
-				return false;
-			}
-		}
+        public bool FilterOutPathElement<P> (P element)
+            where P : IVisibilityCheck<TMember>
+        {
+            switch (this.member_filter) {
+            case MemberFilter.FromPrecondition:
+                return !element.IsAsVisibleAs (this.member);
+            case MemberFilter.FromPostcondition:
+                return !element.IfRootIsParameter || !element.IsVisibleFrom (this.member);
+            case MemberFilter.FromMethodBody:
+                return !element.IsVisibleFrom (this.member);
+            default:
+                return false;
+            }
+        }
 
-		#region Nested type: Flags
-		[Flags]
-		private enum Flags {
-			AllowLocals = 1,
-			RequireParameter = 2
-		}
-		#endregion
+        #region Nested type: Flags
+        [Flags]
+        private enum Flags {
+            AllowLocals = 1,
+            RequireParameter = 2
+        }
+        #endregion
 
-		#region Nested type: MemberFilter
-		private enum MemberFilter {
-			NoFilter = 0,
-			FromPrecondition,
-			FromPostcondition,
-			FromMethodBody
-		}
-		#endregion
-	}
+        #region Nested type: MemberFilter
+        private enum MemberFilter {
+            NoFilter = 0,
+            FromPrecondition,
+            FromPostcondition,
+            FromMethodBody
+        }
+        #endregion
+    }
 }

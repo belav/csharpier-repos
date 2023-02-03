@@ -4,5 +4,5 @@
 
 class C
 {
-	int this [long arg] => -9;
+    int this [long arg] => -9;
 }

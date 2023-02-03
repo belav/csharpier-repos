@@ -1,9 +1,9 @@
 //
 // CodeDelegateCreateExpressionTest.cs
-//	- Unit tests for System.CodeDom.CodeDelegateCreateExpression
+//    - Unit tests for System.CodeDom.CodeDelegateCreateExpression
 //
 // Author:
-//	Gert Driesen  <drieseng@users.sourceforge.net>
+//    Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,67 +34,67 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeDelegateCreateExpressionTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeDelegateCreateExpression cdce = new CodeDelegateCreateExpression ();
+    [TestFixture]
+    public class CodeDelegateCreateExpressionTest
+    {
+        [Test]
+        public void Constructor0 ()
+        {
+            CodeDelegateCreateExpression cdce = new CodeDelegateCreateExpression ();
 
-			Assert.IsNotNull (cdce.DelegateType, "#1");
-			Assert.AreEqual (typeof (void).FullName, cdce.DelegateType.BaseType, "#2");
-			Assert.IsNotNull (cdce.MethodName, "#3");
-			Assert.AreEqual (string.Empty, cdce.MethodName, "#4");
-			Assert.IsNull (cdce.TargetObject, "#5");
+            Assert.IsNotNull (cdce.DelegateType, "#1");
+            Assert.AreEqual (typeof (void).FullName, cdce.DelegateType.BaseType, "#2");
+            Assert.IsNotNull (cdce.MethodName, "#3");
+            Assert.AreEqual (string.Empty, cdce.MethodName, "#4");
+            Assert.IsNull (cdce.TargetObject, "#5");
 
-			CodeTypeReference type = new CodeTypeReference ("mono");
-			cdce.DelegateType = type;
-			Assert.IsNotNull (cdce.DelegateType, "#6");
-			Assert.AreSame (type, cdce.DelegateType, "#7");
+            CodeTypeReference type = new CodeTypeReference ("mono");
+            cdce.DelegateType = type;
+            Assert.IsNotNull (cdce.DelegateType, "#6");
+            Assert.AreSame (type, cdce.DelegateType, "#7");
 
-			cdce.DelegateType = null;
-			Assert.IsNotNull (cdce.DelegateType, "#8");
-			Assert.AreEqual (typeof (void).FullName, cdce.DelegateType.BaseType, "#9");
+            cdce.DelegateType = null;
+            Assert.IsNotNull (cdce.DelegateType, "#8");
+            Assert.AreEqual (typeof (void).FullName, cdce.DelegateType.BaseType, "#9");
 
-			cdce.MethodName = null;
-			Assert.IsNotNull (cdce.MethodName, "#10");
-			Assert.AreEqual (string.Empty, cdce.MethodName, "#11");
+            cdce.MethodName = null;
+            Assert.IsNotNull (cdce.MethodName, "#10");
+            Assert.AreEqual (string.Empty, cdce.MethodName, "#11");
 
-			CodeExpression expression = new CodeExpression ();
-			cdce.TargetObject = expression;
-			Assert.IsNotNull (cdce.TargetObject, "#12");
-			Assert.AreSame (expression, cdce.TargetObject, "#13");
+            CodeExpression expression = new CodeExpression ();
+            cdce.TargetObject = expression;
+            Assert.IsNotNull (cdce.TargetObject, "#12");
+            Assert.AreSame (expression, cdce.TargetObject, "#13");
 
-			cdce.TargetObject = null;
-			Assert.IsNull (cdce.TargetObject, "#14");
-		}
+            cdce.TargetObject = null;
+            Assert.IsNull (cdce.TargetObject, "#14");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			CodeExpression expression = new CodeExpression ();
-			CodeTypeReference type = new CodeTypeReference ("mono");
-			string methodName = "mono";
+        [Test]
+        public void Constructor1 ()
+        {
+            CodeExpression expression = new CodeExpression ();
+            CodeTypeReference type = new CodeTypeReference ("mono");
+            string methodName = "mono";
 
-			CodeDelegateCreateExpression cdce = new CodeDelegateCreateExpression (
-				type, expression, methodName);
+            CodeDelegateCreateExpression cdce = new CodeDelegateCreateExpression (
+                type, expression, methodName);
 
-			Assert.IsNotNull (cdce.DelegateType, "#1");
-			Assert.AreSame (type, cdce.DelegateType, "#2");
-			Assert.IsNotNull (cdce.MethodName, "#3");
-			Assert.AreSame (methodName, cdce.MethodName, "#4");
-			Assert.IsNotNull (cdce.TargetObject, "#5");
-			Assert.AreSame (expression, cdce.TargetObject, "#6");
+            Assert.IsNotNull (cdce.DelegateType, "#1");
+            Assert.AreSame (type, cdce.DelegateType, "#2");
+            Assert.IsNotNull (cdce.MethodName, "#3");
+            Assert.AreSame (methodName, cdce.MethodName, "#4");
+            Assert.IsNotNull (cdce.TargetObject, "#5");
+            Assert.AreSame (expression, cdce.TargetObject, "#6");
 
-			cdce = new CodeDelegateCreateExpression ((CodeTypeReference) null,
-				(CodeExpression) null, (string) null);
+            cdce = new CodeDelegateCreateExpression ((CodeTypeReference) null,
+                (CodeExpression) null, (string) null);
 
-			Assert.IsNotNull (cdce.DelegateType, "#7");
-			Assert.AreEqual (typeof (void).FullName, cdce.DelegateType.BaseType, "#8");
-			Assert.IsNotNull (cdce.MethodName, "#9");
-			Assert.AreEqual (string.Empty, cdce.MethodName, "#10");
-			Assert.IsNull (cdce.TargetObject, "#11");
-		}
-	}
+            Assert.IsNotNull (cdce.DelegateType, "#7");
+            Assert.AreEqual (typeof (void).FullName, cdce.DelegateType.BaseType, "#8");
+            Assert.IsNotNull (cdce.MethodName, "#9");
+            Assert.AreEqual (string.Empty, cdce.MethodName, "#10");
+            Assert.IsNull (cdce.TargetObject, "#11");
+        }
+    }
 }

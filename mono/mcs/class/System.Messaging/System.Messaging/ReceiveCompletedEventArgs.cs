@@ -33,34 +33,34 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Messaging 
 {
-	public class ReceiveCompletedEventArgs: EventArgs 
-	{
-		private MessageQueue _sender;
-		private IAsyncResult _result;
-		private Message _message;
+    public class ReceiveCompletedEventArgs: EventArgs 
+    {
+        private MessageQueue _sender;
+        private IAsyncResult _result;
+        private Message _message;
 
-		internal ReceiveCompletedEventArgs (MessageQueue sender, IAsyncResult result)
-		{
-			_sender = sender;
-			_result = result;
-		}
+        internal ReceiveCompletedEventArgs (MessageQueue sender, IAsyncResult result)
+        {
+            _sender = sender;
+            _result = result;
+        }
 
-		public IAsyncResult AsyncResult
-		{
-			get { return _result; }
-			set { _result = value; }
-		}
+        public IAsyncResult AsyncResult
+        {
+            get { return _result; }
+            set { _result = value; }
+        }
 
-		public Message Message
-		{
-			get
-			{
-				if (_message == null)
-				{
-					_message = _sender.EndPeek (_result);
-				}
-				return _message;
-			}
-		}
-	}
+        public Message Message
+        {
+            get
+            {
+                if (_message == null)
+                {
+                    _message = _sender.EndPeek (_result);
+                }
+                return _message;
+            }
+        }
+    }
 }

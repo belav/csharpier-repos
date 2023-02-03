@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -130,7 +130,7 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     await Task.WhenAll(pendingTasks.ToImmutableAndClear()).ConfigureAwait(false);
                 }
 
-                // ⚠ This local function must be 'async' to ensure exceptions are captured in the resulting task and
+                // ? This local function must be 'async' to ensure exceptions are captured in the resulting task and
                 // not thrown directly to the caller.
                 static async Task UpdateReferenceAsync(
                     ConcurrentDictionary<MetadataId, MetadataInfo> metadataIdToInfo,
@@ -142,7 +142,7 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     if (metadataId == null)
                         return;
 
-                    // 🐉 PERF: GetMetadataChecksum indirectly uses a ConditionalWeakTable. This call is intentionally
+                    // ?? PERF: GetMetadataChecksum indirectly uses a ConditionalWeakTable. This call is intentionally
                     // placed before the first 'await' of this asynchronous method to ensure it executes in the
                     // synchronous portion of the caller. https://dev.azure.com/devdiv/DevDiv/_workitems/edit/1270250
                     var checksum = SymbolTreeInfo.GetMetadataChecksum(project.Solution, reference, cancellationToken);

@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -34,14 +34,14 @@ using System.Collections;
 
 namespace MonoTests.System.Windows.Forms {
 
-	[TestFixture]
-	public class DataGridViewElementTest : TestHelper {
+    [TestFixture]
+    public class DataGridViewElementTest : TestHelper {
 
-		[Test]
-		public void TestDefaultValues () {
-			DataGridViewElement element = new DataGridViewElement();
-			Assert.AreEqual (null, element.DataGridView, "#A1");
-		}
-	}
+        [Test]
+        public void TestDefaultValues () {
+            DataGridViewElement element = new DataGridViewElement();
+            Assert.AreEqual (null, element.DataGridView, "#A1");
+        }
+    }
 }
 

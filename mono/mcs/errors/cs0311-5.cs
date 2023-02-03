@@ -3,16 +3,16 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		var mc = new G<C> ();
-		mc.Method<object> ();
-	}
+    public static void Main ()
+    {
+        var mc = new G<C> ();
+        mc.Method<object> ();
+    }
 }
 
 public class G<T> where T : C
 {
-	public void Method<U> () where U : T
-	{
-	}
+    public void Method<U> () where U : T
+    {
+    }
 }

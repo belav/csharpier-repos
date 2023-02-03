@@ -2,7 +2,7 @@
 // System.Web.Compilation.UserControlBuildProvider
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -38,27 +38,27 @@ using System.Reflection;
 using System.Web.UI;
 
 namespace System.Web.Compilation {
-	[BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
-	sealed class UserControlBuildProvider : TemplateBuildProvider {
-		public UserControlBuildProvider ()
-		{
-		}
+    [BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
+    sealed class UserControlBuildProvider : TemplateBuildProvider {
+        public UserControlBuildProvider ()
+        {
+        }
 
-		protected override BaseCompiler CreateCompiler (TemplateParser parser)
-		{
-			return new UserControlCompiler (parser as UserControlParser);
-		}
+        protected override BaseCompiler CreateCompiler (TemplateParser parser)
+        {
+            return new UserControlCompiler (parser as UserControlParser);
+        }
 
-		protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
-		{	
-			return CreateParser (virtualPath, physicalPath, OpenReader (virtualPath.Original), context);
-		}
-		
-		protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
-		{
-			return new UserControlParser (virtualPath, physicalPath, reader, context);
-		}
-	}
+        protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
+        {    
+            return CreateParser (virtualPath, physicalPath, OpenReader (virtualPath.Original), context);
+        }
+        
+        protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
+        {
+            return new UserControlParser (virtualPath, physicalPath, reader, context);
+        }
+    }
 }
 
 

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsLoadedEventArgs.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,21 +30,21 @@ using System;
 
 namespace System.Configuration
 {
-	public class SettingsLoadedEventArgs : EventArgs
-	{
-		public SettingsLoadedEventArgs (SettingsProvider provider)
-		{
-			this.provider = provider;
-		}
+    public class SettingsLoadedEventArgs : EventArgs
+    {
+        public SettingsLoadedEventArgs (SettingsProvider provider)
+        {
+            this.provider = provider;
+        }
 
-		public SettingsProvider Provider {
-			get {
-				return provider;
-			}
-		}
+        public SettingsProvider Provider {
+            get {
+                return provider;
+            }
+        }
 
-		SettingsProvider provider;
-	}
+        SettingsProvider provider;
+    }
 
 }
 

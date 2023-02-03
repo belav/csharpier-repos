@@ -61,11 +61,11 @@ namespace Mono.ILASM {
                         }
                 }
 
-		public Location Location {
-			get {
-				return reader.Location;
-			}
-		}
+        public Location Location {
+            get {
+                return reader.Location;
+            }
+        }
 
                 public bool InByteArray {
                         get { return in_byte_array; }
@@ -222,7 +222,7 @@ namespace Mono.ILASM {
                                                                 if (opcode == null) {
                                                                         if (strBuilder.TokenId != Token.ID) {
                                                                                 reader.Unread (opTail.ToCharArray ());
-										reader.Unread ('.');
+                                        reader.Unread ('.');
                                                                                 reader.RestoreLocation ();
                                                                                 res.val = val;
                                                                         } else {
@@ -236,14 +236,14 @@ namespace Mono.ILASM {
                                                                 }
 
                                                         } else if (Char.IsWhiteSpace ((char) next)) {
-								// Handle 'tail.' and 'unaligned.'
-								opcode = InstrTable.GetToken (val + ".");
-								if (opcode != null) {
-									res = opcode;
-									break;
-								}
-								// Let the parser handle the dot
-								reader.Unread ('.');
+                                // Handle 'tail.' and 'unaligned.'
+                                opcode = InstrTable.GetToken (val + ".");
+                                if (opcode != null) {
+                                    res = opcode;
+                                    break;
+                                }
+                                // Let the parser handle the dot
+                                reader.Unread ('.');
                                                         }
                                                 }
                                                 opcode = InstrTable.GetToken (val);

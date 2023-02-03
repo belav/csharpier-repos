@@ -3,9 +3,9 @@
 
 class X
 {
-	public static void Main ()
-	{
-		string y = null;
-		var x = y?.Empty;
-	}
+    public static void Main ()
+    {
+        string y = null;
+        var x = y?.Empty;
+    }
 }

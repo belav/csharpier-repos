@@ -1,9 +1,9 @@
 //
 // AspNetHostingPermissionCas.cs 
-//	- CAS unit tests for System.Web.AspNetHostingPermission
+//    - CAS unit tests for System.Web.AspNetHostingPermission
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,56 +37,56 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class AspNetHostingPermissionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class AspNetHostingPermissionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		private void CommonTests (AspNetHostingPermission p)
-		{
-			Assert.IsNotNull (p.Copy (), "Copy");
-			SecurityElement se = p.ToXml ();
-			Assert.IsNotNull (se, "ToXml");
-			p.FromXml (se);
-			Assert.IsNotNull (p.Intersect (p), "Intersect");
-			Assert.IsTrue (p.IsSubsetOf (p), "IsSubsetOf");
-			Assert.IsNotNull (p.Union (p), "Union");
-		}
+        private void CommonTests (AspNetHostingPermission p)
+        {
+            Assert.IsNotNull (p.Copy (), "Copy");
+            SecurityElement se = p.ToXml ();
+            Assert.IsNotNull (se, "ToXml");
+            p.FromXml (se);
+            Assert.IsNotNull (p.Intersect (p), "Intersect");
+            Assert.IsTrue (p.IsSubsetOf (p), "IsSubsetOf");
+            Assert.IsNotNull (p.Union (p), "Union");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ConstructorLevel_Deny_Unrestricted ()
-		{
-			AspNetHostingPermission p = new AspNetHostingPermission (AspNetHostingPermissionLevel.Unrestricted);
-			Assert.AreEqual (AspNetHostingPermissionLevel.Unrestricted, p.Level, "Level");
-			Assert.IsTrue (p.IsUnrestricted (), "IsUnrestricted");
-			CommonTests (p);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ConstructorLevel_Deny_Unrestricted ()
+        {
+            AspNetHostingPermission p = new AspNetHostingPermission (AspNetHostingPermissionLevel.Unrestricted);
+            Assert.AreEqual (AspNetHostingPermissionLevel.Unrestricted, p.Level, "Level");
+            Assert.IsTrue (p.IsUnrestricted (), "IsUnrestricted");
+            CommonTests (p);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ConstructorState_Deny_Unrestricted ()
-		{
-			AspNetHostingPermission p = new AspNetHostingPermission (PermissionState.None);
-			Assert.AreEqual (AspNetHostingPermissionLevel.None, p.Level, "Level");
-			Assert.IsFalse (p.IsUnrestricted (), "IsUnrestricted");
-			CommonTests (p);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ConstructorState_Deny_Unrestricted ()
+        {
+            AspNetHostingPermission p = new AspNetHostingPermission (PermissionState.None);
+            Assert.AreEqual (AspNetHostingPermissionLevel.None, p.Level, "Level");
+            Assert.IsFalse (p.IsUnrestricted (), "IsUnrestricted");
+            CommonTests (p);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (PermissionState) };
-			ConstructorInfo ci = typeof (AspNetHostingPermission).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(PermissionState)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { PermissionState.None }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[1] { typeof (PermissionState) };
+            ConstructorInfo ci = typeof (AspNetHostingPermission).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(PermissionState)");
+            Assert.IsNotNull (ci.Invoke (new object[1] { PermissionState.None }), "invoke");
+        }
+    }
 }

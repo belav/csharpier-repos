@@ -38,26 +38,26 @@ namespace PointLocation
       public T right, left;
       
       public Edge(double xs, double ys, double xe, double ye, T right, T left)
-	{
-	  this.xs = xs;
-	  this.ys = ys;
-	  this.xe = xe;
-	  this.ye = ye;
-	  this.right = right;
-	  this.left = left;
-	}
+    {
+      this.xs = xs;
+      this.ys = ys;
+      this.xe = xe;
+      this.ye = ye;
+      this.right = right;
+      this.left = left;
+    }
       
       
       public T Cell(bool upper)
-	{
-	  return (DoubleComparer.StaticCompare(xs, xe) < 0) == upper ? left : right;
-	}
+    {
+      return (DoubleComparer.StaticCompare(xs, xe) < 0) == upper ? left : right;
+    }
       
       
       public override string ToString()
-	{
-	  return String.Format("[({0:G5};{1:G5})->({2:G5};{3:G5})/R:{4} L:{5}]", xs, ys, xe, ye, right, left);
-	}
+    {
+      return String.Format("[({0:G5};{1:G5})->({2:G5};{3:G5})/R:{4} L:{5}]", xs, ys, xe, ye, right, left);
+    }
     }
   
   
@@ -97,7 +97,7 @@ namespace PointLocation
   /// The code assumes that the given set of edges is correct, in particular
   /// that they do not touch at interior points (e.g. cross or coincide). 
   /// </summary>
-	
+    
   public class PointLocator<T>
   {
     private TreeDictionary<double,ISorted<Edge<T>>> htree;
@@ -125,7 +125,7 @@ namespace PointLocation
       //htree = new TreeDictionary<double,TreeSet<Edge<T>>>(dc);
       endpoints = new TreeDictionary<EndPoint,Edge<T>>(epc);
       foreach (Edge<T> edge in edges)
-	add(edge);
+    add(edge);
     }
     
     private void add(Edge<T> edge)
@@ -133,7 +133,7 @@ namespace PointLocation
       int c = DoubleComparer.StaticCompare(edge.xs, edge.xe);
       
       if (c == 0)
-	return;
+    return;
       
       endpoints.Add(new EndPoint(edge.xs, edge.ys, c < 0, count), edge);
       endpoints.Add(new EndPoint(edge.xe, edge.ye, c > 0, count++), edge);
@@ -142,17 +142,17 @@ namespace PointLocation
     public void Add(Edge<T> edge)
     {
       if (built)
-	throw new InvalidOperationException("PointLocator static when built");
+    throw new InvalidOperationException("PointLocator static when built");
       add(edge);
     }
     
     public void AddAll(SCG.IEnumerable<Edge<T>> edges)
     {
       if (built)
-	throw new InvalidOperationException("PointLocator static when built");
+    throw new InvalidOperationException("PointLocator static when built");
       
       foreach (Edge<T> edge in edges)
-	add(edge);
+    add(edge);
     }
     
     public void Build()
@@ -164,37 +164,37 @@ namespace PointLocation
       double lastx = Double.NegativeInfinity;
       
       foreach (KeyValuePair<EndPoint,Edge<T>> p in endpoints)
-	{
-	  if (dc.Compare(p.Key.x,lastx)>0)
-	    {
-	      //Put an empty snapshot at -infinity!
-	      htree[lastx] = (ISorted<Edge<T>>)(vtree.Snapshot());
-	      lc.X = lastx = p.Key.x;
-	      lc.compareToRight = false;
-	    }
-	  
-	  if (p.Key.start)
-	    {
-	      if (!lc.compareToRight)
-		lc.compareToRight = true;
-	      Debug.Assert(vtree.Check());
-	      bool chk = vtree.Add(p.Value);
-	      Debug.Assert(vtree.Check());
-	      
-	      Debug.Assert(chk,"edge was not added!",""+p.Value);
-	    }
-	  else
-	    {
-	      Debug.Assert(!lc.compareToRight);
-	      
-	      Debug.Assert(vtree.Check("C"));
-	      
-	      bool chk = vtree.Remove(p.Value);
-	      Debug.Assert(vtree.Check("D"));
-	      
-	      Debug.Assert(chk,"edge was not removed!",""+p.Value);
-	    }
-	}
+    {
+      if (dc.Compare(p.Key.x,lastx)>0)
+        {
+          //Put an empty snapshot at -infinity!
+          htree[lastx] = (ISorted<Edge<T>>)(vtree.Snapshot());
+          lc.X = lastx = p.Key.x;
+          lc.compareToRight = false;
+        }
+      
+      if (p.Key.start)
+        {
+          if (!lc.compareToRight)
+        lc.compareToRight = true;
+          Debug.Assert(vtree.Check());
+          bool chk = vtree.Add(p.Value);
+          Debug.Assert(vtree.Check());
+          
+          Debug.Assert(chk,"edge was not added!",""+p.Value);
+        }
+      else
+        {
+          Debug.Assert(!lc.compareToRight);
+          
+          Debug.Assert(vtree.Check("C"));
+          
+          bool chk = vtree.Remove(p.Value);
+          Debug.Assert(vtree.Check("D"));
+          
+          Debug.Assert(chk,"edge was not removed!",""+p.Value);
+        }
+    }
       lc.compareToRight = true;
       
       htree[lastx] = (TreeSet<Edge<T>>)(vtree.Snapshot());
@@ -218,7 +218,7 @@ namespace PointLocation
     public bool Place(double x, double y, out T cell)
     {
       if (!built)
-	throw new InvalidOperationException("PointLocator must be built first");
+    throw new InvalidOperationException("PointLocator must be built first");
       
       KeyValuePair<double,ISorted<Edge<T>>> p = htree.WeakPredecessor(x);
       
@@ -236,21 +236,21 @@ namespace PointLocation
       //and just deliver some cell it is in.
       p.Value.Cut(c, out low, out lval, out high, out hval);
       if (!lval || !hval)
-	{
-	  cell = default(T);
-	  return false;
-	}
+    {
+      cell = default(T);
+      return false;
+    }
       else
-	{
-	  cell = low.Cell(true);//high.Cell(false);
-	  return true;
-	}
+    {
+      cell = low.Cell(true);//high.Cell(false);
+      return true;
+    }
     }
     
     public void Place(double x, double y, out T upper, out bool hval, out T lower, out bool lval)
     {
       if (!built)
-	throw new InvalidOperationException("PointLocator must be built first");
+    throw new InvalidOperationException("PointLocator must be built first");
       
       KeyValuePair<double,ISorted<Edge<T>>> p = htree.WeakPredecessor(x);
       
@@ -276,9 +276,9 @@ namespace PointLocation
       T cell;
       
       if (Place(x, y, out cell))
-	Console.WriteLine("({0}; {1}): <- {2} ", x, y, cell);
+    Console.WriteLine("({0}; {1}): <- {2} ", x, y, cell);
       else
-	Console.WriteLine("({0}; {1}): -", x, y);
+    Console.WriteLine("({0}; {1}): -", x, y);
     }
     
     /// <summary>
@@ -296,17 +296,17 @@ namespace PointLocation
       
       
       public EndPoint(double x, double y, bool left, int id)
-	{
-	  this.x = x;this.y = y;this.start = left;this.id = id;
-	}
+    {
+      this.x = x;this.y = y;this.start = left;this.id = id;
+    }
       
       
       public int Compare(EndPoint a, EndPoint b)
-	{
-	  int c = DoubleComparer.StaticCompare(a.x, b.x);
-	  
-	  return c != 0 ? c : (a.start && !b.start) ? 1 : (!a.start && b.start) ? -1 : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-	}
+    {
+      int c = DoubleComparer.StaticCompare(a.x, b.x);
+      
+      return c != 0 ? c : (a.start && !b.start) ? 1 : (!a.start && b.start) ? -1 : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+    }
     }
   }
 
@@ -380,388 +380,388 @@ namespace PointLocation
     {
       public class Ugly : EnumerableBase<Edge<int>>, SCG.IEnumerable<Edge<int>>, SCG.IEnumerator<Edge<int>>
       {
-	private int level = -1, maxlevel;
-	
-	private bool leftend = false;
-	
-	public Ugly(int maxlevel)
-	{
-	  this.maxlevel = maxlevel;
-	}
-	
-	public override SCG.IEnumerator<Edge<int>> GetEnumerator()
-	{
-	  return (SCG.IEnumerator<Edge<int>>)MemberwiseClone();
-	}
-	
-	public void Reset()
-	{
-	  level = -1;
-	  leftend = false;
-	}
-	
-	public bool MoveNext()
-	{
-	  if (level > maxlevel)
-	    throw new InvalidOperationException();
-	  
-	  if (leftend)
-	    {
-	      leftend = false;
-	      return true;
-	    }
-	  else
-	    {
-	      leftend = true;
-	      return ++level <= maxlevel;
-	    }
-	}
-	
-	public Edge<int> Current
-	{
-	  get
-	    {
-	      if (level < 0 || level > maxlevel)
-		throw new InvalidOperationException();
-	      
-	      double y = (level * 37) % maxlevel;
-	      double deltax = leftend ? 1 : maxlevel;
-	      
-	      if (leftend)
-		return new Edge<int>(0, y, level, y - 0.5, 0, 0);
-	      else
-		return new Edge<int>(level, y - 0.5, level, y, 0, 0);
-	    }
-	}
-	
-	
-	public void Dispose() { }
-	
+    private int level = -1, maxlevel;
+    
+    private bool leftend = false;
+    
+    public Ugly(int maxlevel)
+    {
+      this.maxlevel = maxlevel;
+    }
+    
+    public override SCG.IEnumerator<Edge<int>> GetEnumerator()
+    {
+      return (SCG.IEnumerator<Edge<int>>)MemberwiseClone();
+    }
+    
+    public void Reset()
+    {
+      level = -1;
+      leftend = false;
+    }
+    
+    public bool MoveNext()
+    {
+      if (level > maxlevel)
+        throw new InvalidOperationException();
+      
+      if (leftend)
+        {
+          leftend = false;
+          return true;
+        }
+      else
+        {
+          leftend = true;
+          return ++level <= maxlevel;
+        }
+    }
+    
+    public Edge<int> Current
+    {
+      get
+        {
+          if (level < 0 || level > maxlevel)
+        throw new InvalidOperationException();
+          
+          double y = (level * 37) % maxlevel;
+          double deltax = leftend ? 1 : maxlevel;
+          
+          if (leftend)
+        return new Edge<int>(0, y, level, y - 0.5, 0, 0);
+          else
+        return new Edge<int>(level, y - 0.5, level, y, 0, 0);
+        }
+    }
+    
+    
+    public void Dispose() { }
+    
 #region IEnumerable Members
 
-	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-	{
-	  throw new Exception("The method or operation is not implemented.");
-	}
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+      throw new Exception("The method or operation is not implemented.");
+    }
 
 #endregion
-	
+    
 #region IEnumerator Members
-	
-	object System.Collections.IEnumerator.Current
-	{
-	  get { throw new Exception("The method or operation is not implemented."); }
-	}
-	
-	void System.Collections.IEnumerator.Reset()
-	{
-	  throw new Exception("The method or operation is not implemented.");
-	}
-	
+    
+    object System.Collections.IEnumerator.Current
+    {
+      get { throw new Exception("The method or operation is not implemented."); }
+    }
+    
+    void System.Collections.IEnumerator.Reset()
+    {
+      throw new Exception("The method or operation is not implemented.");
+    }
+    
 #endregion
       }
 
       public class TestUgly
       {
-	private Ugly ugly;
-	
-	private int d;
-	
-	private PointLocator<int> pointlocator;
-	
-	
-	public TestUgly(int d)
-	{
-	  this.d = d;
-	  ugly = new Ugly(d);
-	}
-	
-	
-	public double Traverse()
-	{
-	  double xsum = 0;
-	  
-	  foreach (Edge<int> e in ugly)	xsum += e.xe;
-	  
-	  return xsum;
-	}
-	
-	public bool LookUp(int count, int seed)
-	{
-	  Random random = new Random(seed);
-	  bool res = false;
-	  
-	  for (int i = 0; i < count; i++)
-	    {
-	      int cell;
-	      
-	      res ^= pointlocator.Place(random.NextDouble() * d, random.NextDouble() * d, out cell);
-	    }
-	  
-	  return res;
-	}
+    private Ugly ugly;
+    
+    private int d;
+    
+    private PointLocator<int> pointlocator;
+    
+    
+    public TestUgly(int d)
+    {
+      this.d = d;
+      ugly = new Ugly(d);
+    }
+    
+    
+    public double Traverse()
+    {
+      double xsum = 0;
+      
+      foreach (Edge<int> e in ugly)    xsum += e.xe;
+      
+      return xsum;
+    }
+    
+    public bool LookUp(int count, int seed)
+    {
+      Random random = new Random(seed);
+      bool res = false;
+      
+      for (int i = 0; i < count; i++)
+        {
+          int cell;
+          
+          res ^= pointlocator.Place(random.NextDouble() * d, random.NextDouble() * d, out cell);
+        }
+      
+      return res;
+    }
 
-	public static void Run(string[] args)
-	{
-	  int d = args.Length >= 2 ? int.Parse(args[1]) : 400;//00;
-	  int repeats = args.Length >= 3 ? int.Parse(args[2]) : 10;
-	  int lookups = args.Length >= 4 ? int.Parse(args[3]) : 500;//00;
-	  
-	  new TestUgly(d).run(lookups);
-	}
-	
-	
-	public void run(int lookups)
-	{
-	  double s = 0;
-	  
-	  s += Traverse();
-	  
-	  pointlocator = new PointLocator<int>(ugly);
-	  pointlocator.Build();
-	  
-	  LookUp(lookups, 567);
-	}
+    public static void Run(string[] args)
+    {
+      int d = args.Length >= 2 ? int.Parse(args[1]) : 400;//00;
+      int repeats = args.Length >= 3 ? int.Parse(args[2]) : 10;
+      int lookups = args.Length >= 4 ? int.Parse(args[3]) : 500;//00;
+      
+      new TestUgly(d).run(lookups);
+    }
+    
+    
+    public void run(int lookups)
+    {
+      double s = 0;
+      
+      s += Traverse();
+      
+      pointlocator = new PointLocator<int>(ugly);
+      pointlocator.Build();
+      
+      LookUp(lookups, 567);
+    }
       }
       
       public class Lattice : EnumerableBase<Edge<string>>, SCG.IEnumerable<Edge<string>>, SCG.IEnumerator<Edge<string>>, System.Collections.IEnumerator
       {
-	private int currenti = -1, currentj = 0, currentid = 0;
-	
-	private bool currenthoriz = true;
-	
-	private int maxi, maxj;
-	
-	private double a11 = 1, a21 = -1, a12 = 1, a22 = 1;
-	
-	public Lattice(int maxi, int maxj, double a11, double a21, double a12, double a22)
-	{
-	  this.maxi = maxi;
-	  this.maxj = maxj;
-	  this.a11 = a11;
-	  this.a12 = a12;
-	  this.a21 = a21;
-	  this.a22 = a22;
-	}
+    private int currenti = -1, currentj = 0, currentid = 0;
+    
+    private bool currenthoriz = true;
+    
+    private int maxi, maxj;
+    
+    private double a11 = 1, a21 = -1, a12 = 1, a22 = 1;
+    
+    public Lattice(int maxi, int maxj, double a11, double a21, double a12, double a22)
+    {
+      this.maxi = maxi;
+      this.maxj = maxj;
+      this.a11 = a11;
+      this.a12 = a12;
+      this.a21 = a21;
+      this.a22 = a22;
+    }
 
-	public Lattice(int maxi, int maxj)
-	{
-	  this.maxi = maxi;
-	  this.maxj = maxj;
-	}
-	
-	public override SCG.IEnumerator<Edge<string>> GetEnumerator()
-	{
-	  return (SCG.IEnumerator<Edge<string>>)MemberwiseClone();
-	}
-	
-	public void Reset()
-	{
-	  currenti = -1;
-	  currentj = 0;
-	  currentid = -1;
-	  currenthoriz = true;
-	}
-	
-	public bool MoveNext()
-	{
-	  currentid++;
-	  if (currenthoriz)
-	    {
-	      if (++currenti >= maxi)
-		{
-		  if (currentj >= maxj)
-		    return false;
-		  
-		  currenti = 0;
-		  currenthoriz = false;
-		}
-	      
-	      return true;
-	    }
-	  else
-	    {
-	      if (++currenti > maxi)
-		{
-		  currenti = 0;
-		  currenthoriz = true;
-		  if (++currentj > maxj)
-		    return false;
-		}
-	      
-	      return true;
-	    }
-	}
-	
-	
-	private string i2l(int i)
-	{
-	  int ls = 0, j = i;
-	  
-	  do { ls++; j = j / 26 - 1; } while (j >= 0);
-	  
-	  char[] res = new char[ls];
-	  
-	  while (ls > 0) { res[--ls] = (char)(65 + i % 26); i = i / 26 - 1; }
-	  
-	  //res[0]--;
-	  return new String(res);
-	}
-	
-	
-	private string fmtid(int i, int j)
-	{
-	  return "";//cell + ";" + cell;
-	  /*if (cell < 0 || cell < 0 || cell >= maxi || cell >= maxj)
-	    return "Outside";
-	    
-	    return String.Format("{0}{1}", i2l(cell), cell);*/
-	}
-	
-	
-	public Edge<string> Current
-	{
-	  get
-	    {
-	      if (currenti >= maxi && currentj >= maxj)
-		throw new InvalidOperationException();
-	      
-	      double xs = currenti * a11 + currentj * a12;
-	      double ys = currenti * a21 + currentj * a22;
-	      double deltax = currenthoriz ? a11 : a12;
-	      double deltay = currenthoriz ? a21 : a22;
-	      string r = fmtid(currenti, currenthoriz ? currentj - 1 : currentj);
-	      string l = fmtid(currenthoriz ? currenti : currenti - 1, currentj);
-	      
-	      return new Edge<string>(xs, ys, xs + deltax, ys + deltay, r, l);
-	    }
-	}
-	
-	
-	public void Dispose() { }
-	
+    public Lattice(int maxi, int maxj)
+    {
+      this.maxi = maxi;
+      this.maxj = maxj;
+    }
+    
+    public override SCG.IEnumerator<Edge<string>> GetEnumerator()
+    {
+      return (SCG.IEnumerator<Edge<string>>)MemberwiseClone();
+    }
+    
+    public void Reset()
+    {
+      currenti = -1;
+      currentj = 0;
+      currentid = -1;
+      currenthoriz = true;
+    }
+    
+    public bool MoveNext()
+    {
+      currentid++;
+      if (currenthoriz)
+        {
+          if (++currenti >= maxi)
+        {
+          if (currentj >= maxj)
+            return false;
+          
+          currenti = 0;
+          currenthoriz = false;
+        }
+          
+          return true;
+        }
+      else
+        {
+          if (++currenti > maxi)
+        {
+          currenti = 0;
+          currenthoriz = true;
+          if (++currentj > maxj)
+            return false;
+        }
+          
+          return true;
+        }
+    }
+    
+    
+    private string i2l(int i)
+    {
+      int ls = 0, j = i;
+      
+      do { ls++; j = j / 26 - 1; } while (j >= 0);
+      
+      char[] res = new char[ls];
+      
+      while (ls > 0) { res[--ls] = (char)(65 + i % 26); i = i / 26 - 1; }
+      
+      //res[0]--;
+      return new String(res);
+    }
+    
+    
+    private string fmtid(int i, int j)
+    {
+      return "";//cell + ";" + cell;
+      /*if (cell < 0 || cell < 0 || cell >= maxi || cell >= maxj)
+        return "Outside";
+        
+        return String.Format("{0}{1}", i2l(cell), cell);*/
+    }
+    
+    
+    public Edge<string> Current
+    {
+      get
+        {
+          if (currenti >= maxi && currentj >= maxj)
+        throw new InvalidOperationException();
+          
+          double xs = currenti * a11 + currentj * a12;
+          double ys = currenti * a21 + currentj * a22;
+          double deltax = currenthoriz ? a11 : a12;
+          double deltay = currenthoriz ? a21 : a22;
+          string r = fmtid(currenti, currenthoriz ? currentj - 1 : currentj);
+          string l = fmtid(currenthoriz ? currenti : currenti - 1, currentj);
+          
+          return new Edge<string>(xs, ys, xs + deltax, ys + deltay, r, l);
+        }
+    }
+    
+    
+    public void Dispose() { }
+    
 #region IEnumerable Members
-	
-	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-	{
-	  throw new Exception("The method or operation is not implemented.");
-	}
-	
+    
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+      throw new Exception("The method or operation is not implemented.");
+    }
+    
 #endregion
-	
+    
 #region IEnumerator Members
-	
-	object System.Collections.IEnumerator.Current
-	{
-	  get { throw new Exception("The method or operation is not implemented."); }
-	}
-	
-	bool System.Collections.IEnumerator.MoveNext()
-	{
-	  throw new Exception("The method or operation is not implemented.");
-	}
-	
-	void System.Collections.IEnumerator.Reset()
-	{
-	  throw new Exception("The method or operation is not implemented.");
-	}
-	
+    
+    object System.Collections.IEnumerator.Current
+    {
+      get { throw new Exception("The method or operation is not implemented."); }
+    }
+    
+    bool System.Collections.IEnumerator.MoveNext()
+    {
+      throw new Exception("The method or operation is not implemented.");
+    }
+    
+    void System.Collections.IEnumerator.Reset()
+    {
+      throw new Exception("The method or operation is not implemented.");
+    }
+    
 #endregion
       }
       
       public class TestLattice
       {
-	private Lattice lattice;
-	
-	private int d;
-	
-	private PointLocator<string> pointlocator;
-	
-	
-	public TestLattice(int d)
-	{
-	  this.d = d;
-	  lattice = new Lattice(d, d, 1, 0, 0, 1);
-	}
+    private Lattice lattice;
+    
+    private int d;
+    
+    private PointLocator<string> pointlocator;
+    
+    
+    public TestLattice(int d)
+    {
+      this.d = d;
+      lattice = new Lattice(d, d, 1, 0, 0, 1);
+    }
 
-	public TestLattice(int d, double shear)
-	{
-	  this.d = d;
-	  lattice = new Lattice(d, d, 1, 0, shear, 1);
-	}
+    public TestLattice(int d, double shear)
+    {
+      this.d = d;
+      lattice = new Lattice(d, d, 1, 0, shear, 1);
+    }
 
-	public double Traverse()
-	{
-	  double xsum = 0;
-	  
-	  foreach (Edge<string> e in lattice)	xsum += e.xe;
-	  
-	  return xsum;
-	}
-	
-	
-	public bool LookUp(int count, int seed)
-	{
-	  Random random = new Random(seed);
-	  bool res = false;
-	  
-	  for (int i = 0; i < count; i++)
-	    {
-	      string cell;
-	      
-	      res ^= pointlocator.Place(random.NextDouble() * d, random.NextDouble() * d, out cell);
-	    }
-	  
-	  return res;
-	}
-	
-	
-	public static void Run()
-	{
- 	  int d = 200;
- 	  int repeats = 2;
- 	  int lookups = 50000;
- 	  TestLattice tl = null;
-	  
- 	  Console.WriteLine("TestLattice Run({0}), means over {1} repeats:", d, repeats);
- 	  tl = new TestLattice(d, 0.000001);
+    public double Traverse()
+    {
+      double xsum = 0;
+      
+      foreach (Edge<string> e in lattice)    xsum += e.xe;
+      
+      return xsum;
+    }
+    
+    
+    public bool LookUp(int count, int seed)
+    {
+      Random random = new Random(seed);
+      bool res = false;
+      
+      for (int i = 0; i < count; i++)
+        {
+          string cell;
+          
+          res ^= pointlocator.Place(random.NextDouble() * d, random.NextDouble() * d, out cell);
+        }
+      
+      return res;
+    }
+    
+    
+    public static void Run()
+    {
+       int d = 200;
+       int repeats = 2;
+       int lookups = 50000;
+       TestLattice tl = null;
+      
+       Console.WriteLine("TestLattice Run({0}), means over {1} repeats:", d, repeats);
+       tl = new TestLattice(d, 0.000001);
 
- 	  tl.Traverse();
-	  
- 	  tl.pointlocator = new PointLocator<string>();
-	  
- 	  tl.pointlocator.AddAll(tl.lattice);
-	  
- 	  tl.pointlocator.Build();
-	  
- 	  tl.LookUp(lookups, 567);
-	}
-	
-	
-	public void BasicRun()
-	{
-	  pointlocator.Test(-0.5, -0.5);
-	  pointlocator.Test(-0.5, 0.5);
-	  pointlocator.Test(-0.5, 1.5);
-	  pointlocator.Test(0.5, -0.5);
-	  pointlocator.Test(0.5, 0.5);
-	  pointlocator.Test(0.5, 1.5);
-	  pointlocator.Test(1.5, -0.5);
-	  pointlocator.Test(1.5, 0.5);
-	  pointlocator.Test(1.5, 1.5);
-	  pointlocator.Test(1.5, 4.99);
-	  pointlocator.Test(1.5, 5);
-	  pointlocator.Test(1.5, 5.01);
-	  pointlocator.Test(1.99, 4.99);
-	  pointlocator.Test(1.99, 5);
-	  pointlocator.Test(1.99, 5.01);
-	  pointlocator.Test(2, 4.99);
-	  pointlocator.Test(2, 5);
-	  pointlocator.Test(2, 5.01);
-	  pointlocator.Test(2.01, 4.99);
-	  pointlocator.Test(2.01, 5);
-	  pointlocator.Test(2.01, 5.01);
-	}
+       tl.Traverse();
+      
+       tl.pointlocator = new PointLocator<string>();
+      
+       tl.pointlocator.AddAll(tl.lattice);
+      
+       tl.pointlocator.Build();
+      
+       tl.LookUp(lookups, 567);
+    }
+    
+    
+    public void BasicRun()
+    {
+      pointlocator.Test(-0.5, -0.5);
+      pointlocator.Test(-0.5, 0.5);
+      pointlocator.Test(-0.5, 1.5);
+      pointlocator.Test(0.5, -0.5);
+      pointlocator.Test(0.5, 0.5);
+      pointlocator.Test(0.5, 1.5);
+      pointlocator.Test(1.5, -0.5);
+      pointlocator.Test(1.5, 0.5);
+      pointlocator.Test(1.5, 1.5);
+      pointlocator.Test(1.5, 4.99);
+      pointlocator.Test(1.5, 5);
+      pointlocator.Test(1.5, 5.01);
+      pointlocator.Test(1.99, 4.99);
+      pointlocator.Test(1.99, 5);
+      pointlocator.Test(1.99, 5.01);
+      pointlocator.Test(2, 4.99);
+      pointlocator.Test(2, 5);
+      pointlocator.Test(2, 5.01);
+      pointlocator.Test(2.01, 4.99);
+      pointlocator.Test(2.01, 5);
+      pointlocator.Test(2.01, 5.01);
+    }
       }
     }
 

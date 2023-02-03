@@ -583,8 +583,8 @@ namespace Microsoft.SqlServer.Server {
         }
 
 
-	private static byte[] __maxLenFromPrecision = new byte[] {5,5,5,5,5,5,5,5,5,9,9,9,9,9,
-		9,9,9,9,9,13,13,13,13,13,13,13,13,13,17,17,17,17,17,17,17,17,17,17};
+    private static byte[] __maxLenFromPrecision = new byte[] {5,5,5,5,5,5,5,5,5,9,9,9,9,9,
+        9,9,9,9,9,13,13,13,13,13,13,13,13,13,17,17,17,17,17,17,17,17,17,17};
 
         private const byte MaxTimeScale = 7;
 

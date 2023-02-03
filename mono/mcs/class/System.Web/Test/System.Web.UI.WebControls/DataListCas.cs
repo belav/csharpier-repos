@@ -1,9 +1,9 @@
 //
 // DataListCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.DataList
+//    - CAS unit tests for System.Web.UI.WebControls.DataList
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,35 +38,35 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataListCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataListCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataListTest unit = new DataListTest ();
-			unit.ConstantStrings ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.CleanProperties ();
-			unit.RepeatedItemCount ();
-			unit.GetItemStyle_Header ();
-			unit.GetItemStyle_Separator ();
-			unit.GetItemStyle_Pager_Empty ();
-			unit.Controls ();
-			unit.SelectIndexOutOfRange ();
-			unit.SaveViewState ();
-			unit.Events ();
-			unit.BubbleEvent ();
-			unit.SelectedValue_WithUnexistingDataKeyField ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            DataListTest unit = new DataListTest ();
+            unit.ConstantStrings ();
+            unit.DefaultProperties ();
+            unit.NullProperties ();
+            unit.CleanProperties ();
+            unit.RepeatedItemCount ();
+            unit.GetItemStyle_Header ();
+            unit.GetItemStyle_Separator ();
+            unit.GetItemStyle_Pager_Empty ();
+            unit.Controls ();
+            unit.SelectIndexOutOfRange ();
+            unit.SaveViewState ();
+            unit.Events ();
+            unit.BubbleEvent ();
+            unit.SelectedValue_WithUnexistingDataKeyField ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (DataList); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataList); }
+        }
+    }
 }

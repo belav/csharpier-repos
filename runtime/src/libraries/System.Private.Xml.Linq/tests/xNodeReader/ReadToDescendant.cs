@@ -18,64 +18,64 @@ namespace CoreXml.Test.XLinq
             {
                 #region XMLSTR
                 private string _xmlStr = @"<?xml version='1.0'?>
-													<root><!--Comment-->
-														<elem><!-- Comment -->
-															<child1 att='1'><?pi target?>
-																<child2 xmlns='child2'>
-																	<child3/>
-																	blahblahblah<![CDATA[ blah ]]>
-																	<child4/>
-																</child2>
-															<?pi target1?>
-															</child1>
-														</elem>
-														<elem att='1'>
-															<child1 att='1'>
-																<child2 xmlns='child2'>
-																	<child3/>
-																	blahblahblah
-																	<child4/>
-																</child2>
-															<?pi target1?>
-															</child1>
-														</elem>
-														<elem xmlns='elem'>
-															<child1 att='1'>
-																<child2 xmlns='child2'>
-																	<child3/>
-																	blahblahblah2
-																	<child4/>
-																</child2>
-															</child1>
-														</elem>
-														<elem xmlns='elem' att='1'>
-															<child1 att='1'>
-																<child2 xmlns='child2'>
-																	<child3/>
-																	blahblahblah2
-																	<child4/>
-																</child2>
-															</child1>
-														</elem>
-														<e:elem xmlns:e='elem2'>
-															<e:child1 att='1'>
-																<e:child2 xmlns='child2'>
-																	<e:child3/>
-																	blahblahblah2
-																	<e:child4/>
-																</e:child2>
-															</e:child1>
-														</e:elem>
-														<e:elem xmlns:e='elem2' att='1'>
-															<e:child1 att='1'>
-																<e:child2 xmlns='child2'>
-																	<e:child3/>
-																	blahblahblah2
-																	<e:child4/>
-																</e:child2>
-															</e:child1>
-														</e:elem>
-													</root>";
+                                                    <root><!--Comment-->
+                                                        <elem><!-- Comment -->
+                                                            <child1 att='1'><?pi target?>
+                                                                <child2 xmlns='child2'>
+                                                                    <child3/>
+                                                                    blahblahblah<![CDATA[ blah ]]>
+                                                                    <child4/>
+                                                                </child2>
+                                                            <?pi target1?>
+                                                            </child1>
+                                                        </elem>
+                                                        <elem att='1'>
+                                                            <child1 att='1'>
+                                                                <child2 xmlns='child2'>
+                                                                    <child3/>
+                                                                    blahblahblah
+                                                                    <child4/>
+                                                                </child2>
+                                                            <?pi target1?>
+                                                            </child1>
+                                                        </elem>
+                                                        <elem xmlns='elem'>
+                                                            <child1 att='1'>
+                                                                <child2 xmlns='child2'>
+                                                                    <child3/>
+                                                                    blahblahblah2
+                                                                    <child4/>
+                                                                </child2>
+                                                            </child1>
+                                                        </elem>
+                                                        <elem xmlns='elem' att='1'>
+                                                            <child1 att='1'>
+                                                                <child2 xmlns='child2'>
+                                                                    <child3/>
+                                                                    blahblahblah2
+                                                                    <child4/>
+                                                                </child2>
+                                                            </child1>
+                                                        </elem>
+                                                        <e:elem xmlns:e='elem2'>
+                                                            <e:child1 att='1'>
+                                                                <e:child2 xmlns='child2'>
+                                                                    <e:child3/>
+                                                                    blahblahblah2
+                                                                    <e:child4/>
+                                                                </e:child2>
+                                                            </e:child1>
+                                                        </e:elem>
+                                                        <e:elem xmlns:e='elem2' att='1'>
+                                                            <e:child1 att='1'>
+                                                                <e:child2 xmlns='child2'>
+                                                                    <e:child3/>
+                                                                    blahblahblah2
+                                                                    <e:child4/>
+                                                                </e:child2>
+                                                            </e:child1>
+                                                        </e:elem>
+                                                    </root>";
 
                 #endregion
 
@@ -494,7 +494,7 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation("427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node", Priority = 1)]
+                //[Variation("427176    Assertion failed when call XmlReader.ReadToDescendant() for non-existing node", Priority = 1)]
                 public void v19()
                 {
                     XmlReader DataReader = GetReader(new StringReader("<a>b</a>"));

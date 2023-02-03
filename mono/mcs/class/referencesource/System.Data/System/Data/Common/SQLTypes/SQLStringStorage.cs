@@ -27,7 +27,7 @@ namespace System.Data.Common {
 
         override public Object Aggregate(int[] recordNos, AggregateType kind) {
             try {
-            	int i;
+                int i;
                 switch (kind) {
                 case AggregateType.Min:
                     int min = -1;

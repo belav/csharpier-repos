@@ -8,6 +8,6 @@ partial struct Foo
 
 class X
 {
-	static void Main ()
-	{ }
+    static void Main ()
+    { }
 }

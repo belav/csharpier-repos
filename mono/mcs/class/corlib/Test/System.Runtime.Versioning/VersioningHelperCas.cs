@@ -1,6 +1,6 @@
 //
 // VersioningHelperCas.cs - CAS unit tests for 
-//	System.Runtime.Versioning.VersioningHelper
+//    System.Runtime.Versioning.VersioningHelper
 //
 // Author:
 //      Sebastien Pouliot  <sebastien@ximian.com>
@@ -39,39 +39,39 @@ using MonoTests.System.Runtime.Versioning;
 
 namespace MonoCasTests.System.Runtime.Versioning {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class VersioningHelperCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class VersioningHelperCas {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTest ()
-		{
-			VersioningHelperTest unit = new VersioningHelperTest ();
-			unit.Name_Null ();
-			unit.Type_Null ();
-			unit.MakeVersionSafeName ();
-			unit.ConvertTo_AppDomain ();
-			unit.ConvertTo_Process ();
-			unit.ConvertTo_AppDomain_Process ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTest ()
+        {
+            VersioningHelperTest unit = new VersioningHelperTest ();
+            unit.Name_Null ();
+            unit.Type_Null ();
+            unit.MakeVersionSafeName ();
+            unit.ConvertTo_AppDomain ();
+            unit.ConvertTo_Process ();
+            unit.ConvertTo_AppDomain_Process ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[3] { typeof (string), typeof (ResourceScope), typeof (ResourceScope) };
-			MethodInfo mi = typeof (VersioningHelper).GetMethod ("MakeVersionSafeName", types);
-			Assert.IsNotNull (mi, "MakeVersionSafeName(string,ResourceScope,ResourceScope)");
-			Assert.AreEqual (String.Empty, mi.Invoke (null, new object[3] { null, ResourceScope.AppDomain, ResourceScope.AppDomain }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[3] { typeof (string), typeof (ResourceScope), typeof (ResourceScope) };
+            MethodInfo mi = typeof (VersioningHelper).GetMethod ("MakeVersionSafeName", types);
+            Assert.IsNotNull (mi, "MakeVersionSafeName(string,ResourceScope,ResourceScope)");
+            Assert.AreEqual (String.Empty, mi.Invoke (null, new object[3] { null, ResourceScope.AppDomain, ResourceScope.AppDomain }), "invoke");
+        }
+    }
 }
 

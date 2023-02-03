@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.IApplicationSettingsProvider.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,16 +31,16 @@ using System;
 namespace System.Configuration
 {
 
-	public interface IApplicationSettingsProvider
-	{
-		SettingsPropertyValue GetPreviousVersion (SettingsContext context,
-							  SettingsProperty property);
+    public interface IApplicationSettingsProvider
+    {
+        SettingsPropertyValue GetPreviousVersion (SettingsContext context,
+                              SettingsProperty property);
 
-		void Reset (SettingsContext context);
+        void Reset (SettingsContext context);
 
-		void Upgrade (SettingsContext context,
-			      SettingsPropertyCollection properties);
+        void Upgrade (SettingsContext context,
+                  SettingsPropertyCollection properties);
 
-	}
+    }
 
 }

@@ -49,7 +49,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return debug_type;
+    return debug_type;
       }
     }
 
@@ -58,7 +58,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return objData;
+    return objData;
       }
     }
 
@@ -68,44 +68,44 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       {
       case DebugParameterType.ENTRYID:
       case DebugParameterType.INTEGER:
-	objData = getTaggedIntValue(dseObject);
-	break;
+    objData = getTaggedIntValue(dseObject);
+    break;
 
       case DebugParameterType.BINARY:
-	objData = ((Asn1OctetString) dseObject.taggedValue()).byteValue();
-	break;
+    objData = ((Asn1OctetString) dseObject.taggedValue()).byteValue();
+    break;
 
       case DebugParameterType.STRING:
-	objData = ((Asn1OctetString) dseObject.taggedValue()).stringValue();
-	break;
+    objData = ((Asn1OctetString) dseObject.taggedValue()).stringValue();
+    break;
 
       case DebugParameterType.TIMESTAMP:
-	objData = new DSETimeStamp(getTaggedSequence(dseObject));
-	break;
+    objData = new DSETimeStamp(getTaggedSequence(dseObject));
+    break;
 
       case DebugParameterType.TIMEVECTOR:
-	ArrayList timeVector = new ArrayList();
-	Asn1Sequence seq = getTaggedSequence(dseObject);
-	int count = ((Asn1Integer) seq.get_Renamed(0)).intValue();
-	if (count > 0)
-	{
-	  Asn1Sequence timeSeq = (Asn1Sequence) seq.get_Renamed(1);
-	
-	  for (int i = 0; i < count; i++)
-	  {
-	    timeVector.Add(new DSETimeStamp((Asn1Sequence) timeSeq.get_Renamed(i)));
-	  }
-	}
+    ArrayList timeVector = new ArrayList();
+    Asn1Sequence seq = getTaggedSequence(dseObject);
+    int count = ((Asn1Integer) seq.get_Renamed(0)).intValue();
+    if (count > 0)
+    {
+      Asn1Sequence timeSeq = (Asn1Sequence) seq.get_Renamed(1);
+    
+      for (int i = 0; i < count; i++)
+      {
+        timeVector.Add(new DSETimeStamp((Asn1Sequence) timeSeq.get_Renamed(i)));
+      }
+    }
 
-	objData = timeVector;
-	break;
+    objData = timeVector;
+    break;
 
       case DebugParameterType.ADDRESS:
-	objData = new ReferralAddress(getTaggedSequence(dseObject));
-	break;
+    objData = new ReferralAddress(getTaggedSequence(dseObject));
+    break;
 
       default:
-	throw new IOException("Unknown Tag in DebugParameter..");
+    throw new IOException("Unknown Tag in DebugParameter..");
       }
 
       debug_type = (DebugParameterType)(dseObject.getIdentifier().Tag);
@@ -120,8 +120,8 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       LBERDecoder decoder = new LBERDecoder();
 
       return ((int) decoder.decodeNumeric(
-				decodedData, 
-				dataBytes.Length));
+                decodedData, 
+                dataBytes.Length));
     }
 
     protected Asn1Sequence getTaggedSequence(Asn1Tagged tagVal)
@@ -144,12 +144,12 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       buf.Append("[DebugParameter");
       if (Enum.IsDefined(debug_type.GetType(), debug_type))
       {
-	  buf.AppendFormat("(type={0},", debug_type);
-	  buf.AppendFormat("value={0})", objData);
+      buf.AppendFormat("(type={0},", debug_type);
+      buf.AppendFormat("value={0})", objData);
       }
       else
       {
-	  buf.Append("(type=Unknown)");
+      buf.Append("(type=Unknown)");
       }
       buf.Append("]");
 

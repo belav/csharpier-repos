@@ -3,10 +3,10 @@
 
  public interface Error0275
  {
-	 string Message {
-		 protected get;
-		 set;
-	 }
+     string Message {
+         protected get;
+         set;
+     }
 
  }
 

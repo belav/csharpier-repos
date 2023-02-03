@@ -2,7 +2,7 @@
 // PageAction.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -38,12 +38,12 @@ using System.Web.Caching;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public static class PageAction
-	{
-		public static string Edit { get { return "Edit"; } }
-		public static string Details { get { return "Details"; } }
-		public static string Insert { get { return "Insert"; } }
-		public static string List { get { return "List"; } }
-	}
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public static class PageAction
+    {
+        public static string Edit { get { return "Edit"; } }
+        public static string Details { get { return "Details"; } }
+        public static string Insert { get { return "Insert"; } }
+        public static string List { get { return "List"; } }
+    }
 }

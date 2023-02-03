@@ -32,22 +32,22 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewCancelEventArgs : System.ComponentModel.CancelEventArgs
-	{
-		public ListViewCancelEventArgs (int itemIndex, ListViewCancelMode cancelMode)
-		{
-			CancelMode = cancelMode;
-			ItemIndex = itemIndex;
-		}
+    public class ListViewCancelEventArgs : System.ComponentModel.CancelEventArgs
+    {
+        public ListViewCancelEventArgs (int itemIndex, ListViewCancelMode cancelMode)
+        {
+            CancelMode = cancelMode;
+            ItemIndex = itemIndex;
+        }
 
-		public ListViewCancelMode CancelMode {
-			get;
-			private set;
-		}
+        public ListViewCancelMode CancelMode {
+            get;
+            private set;
+        }
 
-		public int ItemIndex {
-			get;
-			private set;
-		}
-	}
+        public int ItemIndex {
+            get;
+            private set;
+        }
+    }
 }

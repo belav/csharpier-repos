@@ -9,10 +9,10 @@ class A
 class B : A
 {
         public static void Main ()
-	{
-		A b = new A ();
-		b.n ();
-	}
+    {
+        A b = new A ();
+        b.n ();
+    }
 }
 
 

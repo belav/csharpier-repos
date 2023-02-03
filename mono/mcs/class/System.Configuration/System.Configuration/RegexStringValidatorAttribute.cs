@@ -28,28 +28,28 @@
 
 namespace System.Configuration
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class RegexStringValidatorAttribute: ConfigurationValidatorAttribute
-	{
-		string regex;
-		ConfigurationValidatorBase instance;
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class RegexStringValidatorAttribute: ConfigurationValidatorAttribute
+    {
+        string regex;
+        ConfigurationValidatorBase instance;
 
-		public RegexStringValidatorAttribute (string regex)
-		{
-			this.regex = regex;
-		}
+        public RegexStringValidatorAttribute (string regex)
+        {
+            this.regex = regex;
+        }
 
-		public string Regex {
-			get { return regex; }
-		}
-		
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
-				if (instance == null)
-					instance = new RegexStringValidator (regex);
-				return instance;
-			}
-		}
-	}
+        public string Regex {
+            get { return regex; }
+        }
+        
+        public override ConfigurationValidatorBase ValidatorInstance {
+            get {
+                if (instance == null)
+                    instance = new RegexStringValidator (regex);
+                return instance;
+            }
+        }
+    }
 }
 

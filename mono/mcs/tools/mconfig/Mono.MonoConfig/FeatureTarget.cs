@@ -29,10 +29,10 @@ using System;
 
 namespace Mono.MonoConfig
 {
-	public enum FeatureTarget
-	{
-		Any,
-		Web,
-		Application
-	};
+    public enum FeatureTarget
+    {
+        Any,
+        Web,
+        Application
+    };
 }

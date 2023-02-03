@@ -20,18 +20,18 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-	public enum DataGridViewHeaderBorderStyle {
-		Custom = 0,
-		Single = 1,
-		Raised = 2,
-		Sunken = 3,
-		None = 4
-	}
+    public enum DataGridViewHeaderBorderStyle {
+        Custom = 0,
+        Single = 1,
+        Raised = 2,
+        Sunken = 3,
+        None = 4
+    }
 
 }
 

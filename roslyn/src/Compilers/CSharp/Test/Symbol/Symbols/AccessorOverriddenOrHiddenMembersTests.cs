@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -492,7 +492,7 @@ class Derived : Base, I
             var source = @"
 interface I<T>
 {
-	T P { get; }
+    T P { get; }
 }
 class Base
 {
@@ -915,7 +915,7 @@ public class G<T>
   {
     .override I::get_P
     
-	ldc.i4.0
+    ldc.i4.0
     ret
   }
 

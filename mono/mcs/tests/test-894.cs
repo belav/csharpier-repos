@@ -12,8 +12,8 @@ class A2Attribute : Attribute
 
 public class Test
 {
-	public static void Main ()
-	{
-		
-	}
+    public static void Main ()
+    {
+        
+    }
 }

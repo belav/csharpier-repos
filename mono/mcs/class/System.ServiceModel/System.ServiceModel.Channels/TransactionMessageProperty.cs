@@ -2,7 +2,7 @@
 // TransactionMessageProperty.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,25 +36,25 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	public class TransactionMessageProperty
-	{
-		Transaction tx;
-		Message msg;
+    public class TransactionMessageProperty
+    {
+        Transaction tx;
+        Message msg;
 
-		public TransactionMessageProperty (Transaction tx, Message msg)
-		{
-			this.tx = tx;
-			this.msg = msg;
-		}
+        public TransactionMessageProperty (Transaction tx, Message msg)
+        {
+            this.tx = tx;
+            this.msg = msg;
+        }
 
-		public Transaction Transaction {
-			get { return tx; }
-		}
+        public Transaction Transaction {
+            get { return tx; }
+        }
 
-		[MonoTODO]
-		public static void Set (Transaction tx, Message msg)
-		{
-			msg.Properties.Add ("Transaction", new TransactionMessageProperty (tx, msg));
-		}
-	}
+        [MonoTODO]
+        public static void Set (Transaction tx, Message msg)
+        {
+            msg.Properties.Add ("Transaction", new TransactionMessageProperty (tx, msg));
+        }
+    }
 }

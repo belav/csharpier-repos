@@ -35,68 +35,68 @@ using System.Collections;
 
 namespace System.DirectoryServices
 {
-	/// <summary>
-	/// Contains the properties of a SearchResult instance.	
-	/// 
-	/// For a list of all members of this type, see ResultPropertyCollection 
-	/// Members.
-	/// </summary>
-	/// <remarks>
-	/// SearchResult instances are similar to DirectoryEntry instances. The 
-	/// notable difference is that the DirectoryEntry retrieves its 
-	/// information from the Active Directory hierarchy each time a new object 
-	/// is accessed, whereas the data for the SearchResult is already 
-	/// available in the SearchResultCollection that a DirectorySearcher 
-	/// query returns. If you try to get a SearchResult property that your 
-	/// query did not specify for retrieval, the property will not be 
-	/// available.
-	/// </remarks>
-	public class ResultPropertyCollection  : DictionaryBase
-	{
-		internal ResultPropertyCollection()
-		{
-			
-		}
+    /// <summary>
+    /// Contains the properties of a SearchResult instance.    
+    /// 
+    /// For a list of all members of this type, see ResultPropertyCollection 
+    /// Members.
+    /// </summary>
+    /// <remarks>
+    /// SearchResult instances are similar to DirectoryEntry instances. The 
+    /// notable difference is that the DirectoryEntry retrieves its 
+    /// information from the Active Directory hierarchy each time a new object 
+    /// is accessed, whereas the data for the SearchResult is already 
+    /// available in the SearchResultCollection that a DirectorySearcher 
+    /// query returns. If you try to get a SearchResult property that your 
+    /// query did not specify for retrieval, the property will not be 
+    /// available.
+    /// </remarks>
+    public class ResultPropertyCollection  : DictionaryBase
+    {
+        internal ResultPropertyCollection()
+        {
+            
+        }
 
-		public ResultPropertyValueCollection this[string name]
-		{
-			get {
-				return (ResultPropertyValueCollection) this.Dictionary[name.ToLower()];
-			}
-//			set { this.Dictionary[key] = value; } 
-		}
-		//add a ResultPropertyValueCollection based on key 
-		internal void Add(string key, ResultPropertyValueCollection rpcoll) 
-		{ 
-			this.Dictionary.Add(key.ToLower(), rpcoll); 
-		} 
-		
-		//see if collection contains an entry corresponding to key
-		public bool Contains(string propertyName)
-		{
-			return this.Dictionary.Contains(propertyName.ToLower());
-		}
-		
-		public ICollection PropertyNames 
-		{
-			get
-			{
-				return this.Dictionary.Keys;
-			}
-		}
+        public ResultPropertyValueCollection this[string name]
+        {
+            get {
+                return (ResultPropertyValueCollection) this.Dictionary[name.ToLower()];
+            }
+//            set { this.Dictionary[key] = value; } 
+        }
+        //add a ResultPropertyValueCollection based on key 
+        internal void Add(string key, ResultPropertyValueCollection rpcoll) 
+        { 
+            this.Dictionary.Add(key.ToLower(), rpcoll); 
+        } 
+        
+        //see if collection contains an entry corresponding to key
+        public bool Contains(string propertyName)
+        {
+            return this.Dictionary.Contains(propertyName.ToLower());
+        }
+        
+        public ICollection PropertyNames 
+        {
+            get
+            {
+                return this.Dictionary.Keys;
+            }
+        }
 
-		public ICollection Values 
-		{
-			get
-			{
-				return this.Dictionary.Values;
-			}
-		}
+        public ICollection Values 
+        {
+            get
+            {
+                return this.Dictionary.Values;
+            }
+        }
 
-		public void CopyTo (ResultPropertyValueCollection[] array, int index)
-		{
-			foreach (ResultPropertyValueCollection vals in Values)
-				array[index++] = vals;
-		}
-	}
+        public void CopyTo (ResultPropertyValueCollection[] array, int index)
+        {
+            foreach (ResultPropertyValueCollection vals in Values)
+                array[index++] = vals;
+        }
+    }
 }

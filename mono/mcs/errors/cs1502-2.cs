@@ -6,9 +6,9 @@ public class MainClass
 {
         public static void Main()
         {
-		test MyBug = new test();
+        test MyBug = new test();
                 Console.WriteLine (MyBug.mytest());
-	}
+    }
 }
 
 public class   test
@@ -16,7 +16,7 @@ public class   test
         public void mytest()
         {
                 Console.WriteLine("test");
-	}
+    }
 }
 
 

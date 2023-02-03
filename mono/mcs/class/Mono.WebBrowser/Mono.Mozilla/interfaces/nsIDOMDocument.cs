@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,218 +32,218 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("a6cf9075-15b3-11d2-932e-00805f8add32")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMDocument : nsIDOMNode {
+    [Guid ("a6cf9075-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMDocument : nsIDOMNode {
 #region nsIDOMNode
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNodeName (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNodeName (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNodeValue (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNodeValue (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setNodeValue ( /*DOMString*/ HandleRef value);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setNodeValue ( /*DOMString*/ HandleRef value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNodeType ( out ushort ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNodeType ( out ushort ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getParentNode ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getParentNode ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getChildNodes ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNodeList ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getChildNodes ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNodeList ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getFirstChild ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getFirstChild ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLastChild ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLastChild ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getPreviousSibling ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getPreviousSibling ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNextSibling ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNextSibling ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAttributes ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNamedNodeMap ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAttributes ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNamedNodeMap ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getOwnerDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocument ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getOwnerDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocument ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int insertBefore (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode newChild,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode refChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int insertBefore (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode newChild,
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode refChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int replaceChild (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode newChild,
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode oldChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int replaceChild (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode newChild,
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode oldChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int removeChild (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode oldChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int removeChild (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode oldChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int appendChild (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode newChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int appendChild (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode newChild,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int hasChildNodes ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int hasChildNodes ( out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int cloneNode (
-				   bool deep,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int cloneNode (
+                   bool deep,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int normalize ();
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int normalize ();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int isSupported (
-				   /*DOMString*/ HandleRef feature,
-				   /*DOMString*/ HandleRef version, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int isSupported (
+                   /*DOMString*/ HandleRef feature,
+                   /*DOMString*/ HandleRef version, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNamespaceURI (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNamespaceURI (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getPrefix (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getPrefix (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setPrefix ( /*DOMString*/ HandleRef value);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setPrefix ( /*DOMString*/ HandleRef value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLocalName (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLocalName (  /*DOMString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int hasAttributes ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int hasAttributes ( out bool ret);
 
 #endregion
 
 #region nsIDOMDocument
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDoctype ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentType ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDoctype ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentType ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getImplementation ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDOMImplementation ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getImplementation ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDOMImplementation ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDocumentElement ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDocumentElement ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createElement (
-				   /*DOMString*/ HandleRef tagName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createElement (
+                   /*DOMString*/ HandleRef tagName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createDocumentFragment ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentFragment ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createDocumentFragment ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentFragment ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createTextNode (
-				   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMText ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createTextNode (
+                   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMText ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createComment (
-				   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMComment ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createComment (
+                   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMComment ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createCDATASection (
-				   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCDATASection ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createCDATASection (
+                   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCDATASection ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createProcessingInstruction (
-				   /*DOMString*/ HandleRef target,
-				   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMProcessingInstruction ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createProcessingInstruction (
+                   /*DOMString*/ HandleRef target,
+                   /*DOMString*/ HandleRef data,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMProcessingInstruction ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createAttribute (
-				   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMAttr ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createAttribute (
+                   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMAttr ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createEntityReference (
-				   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMEntityReference ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createEntityReference (
+                   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMEntityReference ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getElementsByTagName (
-				   /*DOMString*/ HandleRef tagname,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNodeList ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getElementsByTagName (
+                   /*DOMString*/ HandleRef tagname,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNodeList ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int importNode (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode importedNode,
-				   bool deep,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int importNode (
+                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode importedNode,
+                   bool deep,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createElementNS (
-				   /*DOMString*/ HandleRef namespaceURI,
-				   /*DOMString*/ HandleRef qualifiedName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createElementNS (
+                   /*DOMString*/ HandleRef namespaceURI,
+                   /*DOMString*/ HandleRef qualifiedName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createAttributeNS (
-				   /*DOMString*/ HandleRef namespaceURI,
-				   /*DOMString*/ HandleRef qualifiedName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMAttr ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createAttributeNS (
+                   /*DOMString*/ HandleRef namespaceURI,
+                   /*DOMString*/ HandleRef qualifiedName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMAttr ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getElementsByTagNameNS (
-				   /*DOMString*/ HandleRef namespaceURI,
-				   /*DOMString*/ HandleRef localName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNodeList ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getElementsByTagNameNS (
+                   /*DOMString*/ HandleRef namespaceURI,
+                   /*DOMString*/ HandleRef localName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNodeList ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getElementById (
-				   /*DOMString*/ HandleRef elementId,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getElementById (
+                   /*DOMString*/ HandleRef elementId,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMElement ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMDocument {
-		public static nsIDOMDocument GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocument obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMDocument).GUID, obj);
-			return o as nsIDOMDocument;
-		}
-	}
+    internal class nsDOMDocument {
+        public static nsIDOMDocument GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocument obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMDocument).GUID, obj);
+            return o as nsIDOMDocument;
+        }
+    }
 }

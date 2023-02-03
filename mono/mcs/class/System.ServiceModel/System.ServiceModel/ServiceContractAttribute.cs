@@ -2,7 +2,7 @@
 // ServiceContractAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,51 +30,51 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, Inherited = false)]
-	public sealed class ServiceContractAttribute : Attribute
-	{
-		Type callback_contract;
-		string name, ns;
-		SessionMode session;
-		ProtectionLevel protection_level;
-		bool has_protection_level;
-		string _configurationName;
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, Inherited = false)]
+    public sealed class ServiceContractAttribute : Attribute
+    {
+        Type callback_contract;
+        string name, ns;
+        SessionMode session;
+        ProtectionLevel protection_level;
+        bool has_protection_level;
+        string _configurationName;
 
-		public Type CallbackContract {
-			get { return callback_contract; }
-			set { callback_contract = value; }
-		}
+        public Type CallbackContract {
+            get { return callback_contract; }
+            set { callback_contract = value; }
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        public string Namespace {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		public bool HasProtectionLevel {
-			get { return has_protection_level; }
-		}
+        public bool HasProtectionLevel {
+            get { return has_protection_level; }
+        }
 
-		public ProtectionLevel ProtectionLevel {
-			get { return protection_level; }
-			set {
-				protection_level = value;
-				has_protection_level = true;
-			}
-		}
+        public ProtectionLevel ProtectionLevel {
+            get { return protection_level; }
+            set {
+                protection_level = value;
+                has_protection_level = true;
+            }
+        }
 
-		public SessionMode SessionMode {
-			get { return session; }
-			set { session = value; }
-		}
+        public SessionMode SessionMode {
+            get { return session; }
+            set { session = value; }
+        }
 
-		public string ConfigurationName {
-			get { return _configurationName; }
-			set { _configurationName = value; }
-		}
-	}
+        public string ConfigurationName {
+            get { return _configurationName; }
+            set { _configurationName = value; }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
 
     public interface IAuthorizationFilter {
         void OnAuthorization(AuthorizationContext filterContext);

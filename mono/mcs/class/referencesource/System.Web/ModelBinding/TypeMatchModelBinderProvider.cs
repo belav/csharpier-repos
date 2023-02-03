@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
 
     // Returns a binder that can extract a ValueProviderResult.RawValue and return it directly.
     [ModelBinderProviderOptions(FrontOfList = true)]

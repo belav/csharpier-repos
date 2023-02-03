@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,19 +27,19 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class TickMark : Grid
-	{
-		#region Constructors
-		public TickMark ()
-		{
-			Size = 1f;
-			TickMarkStyle = TickMarkStyle.OutsideArea;
-		}
-		#endregion
+    public class TickMark : Grid
+    {
+        #region Constructors
+        public TickMark ()
+        {
+            Size = 1f;
+            TickMarkStyle = TickMarkStyle.OutsideArea;
+        }
+        #endregion
 
-		#region Public Properties
-		public float Size { get; set; }
-		public TickMarkStyle TickMarkStyle { get; set; }
-		#endregion
-	}
+        #region Public Properties
+        public float Size { get; set; }
+        public TickMarkStyle TickMarkStyle { get; set; }
+        #endregion
+    }
 }

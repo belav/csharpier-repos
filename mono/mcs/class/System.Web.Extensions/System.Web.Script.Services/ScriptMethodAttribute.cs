@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptMethodAttribute.cs
 //
 // Author:
@@ -33,27 +33,27 @@ using System.Text;
 
 namespace System.Web.Script.Services
 {
-	[AttributeUsage (AttributeTargets.Method)]
-	public sealed class ScriptMethodAttribute : Attribute
-	{
-		ResponseFormat _responseFormat = ResponseFormat.Json;
-		bool _useHttpGet;
-		bool _xmlSerializeString;
-		internal static readonly ScriptMethodAttribute Default = new ScriptMethodAttribute ();
+    [AttributeUsage (AttributeTargets.Method)]
+    public sealed class ScriptMethodAttribute : Attribute
+    {
+        ResponseFormat _responseFormat = ResponseFormat.Json;
+        bool _useHttpGet;
+        bool _xmlSerializeString;
+        internal static readonly ScriptMethodAttribute Default = new ScriptMethodAttribute ();
 
-		public ResponseFormat ResponseFormat {
-			get { return _responseFormat; }
-			set { _responseFormat = value; }
-		}
+        public ResponseFormat ResponseFormat {
+            get { return _responseFormat; }
+            set { _responseFormat = value; }
+        }
 
-		public bool UseHttpGet {
-			get { return _useHttpGet; }
-			set { _useHttpGet = value; }
-		}
+        public bool UseHttpGet {
+            get { return _useHttpGet; }
+            set { _useHttpGet = value; }
+        }
 
-		public bool XmlSerializeString {
-			get { return _xmlSerializeString; }
-			set { _xmlSerializeString = value; }
-		}
-	}
+        public bool XmlSerializeString {
+            get { return _xmlSerializeString; }
+            set { _xmlSerializeString = value; }
+        }
+    }
 }

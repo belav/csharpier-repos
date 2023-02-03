@@ -24,7 +24,7 @@
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class TitleCollection : ChartNamedElementCollection<Title>
-	{
-	}
+    public class TitleCollection : ChartNamedElementCollection<Title>
+    {
+    }
 }

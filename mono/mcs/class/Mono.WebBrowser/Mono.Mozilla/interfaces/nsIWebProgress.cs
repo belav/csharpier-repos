@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,40 +32,40 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("570F39D0-EFD0-11d3-B093-00A024FFC08C")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIWebProgress {
+    [Guid ("570F39D0-EFD0-11d3-B093-00A024FFC08C")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIWebProgress {
 
 #region nsIWebProgress
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int addProgressListener (
-				[MarshalAs (UnmanagedType.Interface)]   nsIWebProgressListener aListener,
-				   uint aNotifyMask);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int addProgressListener (
+                [MarshalAs (UnmanagedType.Interface)]   nsIWebProgressListener aListener,
+                   uint aNotifyMask);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int removeProgressListener (
-				[MarshalAs (UnmanagedType.Interface)]   nsIWebProgressListener aListener);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int removeProgressListener (
+                [MarshalAs (UnmanagedType.Interface)]   nsIWebProgressListener aListener);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDOMWindow ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMWindow ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDOMWindow ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMWindow ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getIsLoadingDocument ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getIsLoadingDocument ( out bool ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsWebProgress {
-		public static nsIWebProgress GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebProgress obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIWebProgress).GUID, obj);
-			return o as nsIWebProgress;
-		}
-	}
+    internal class nsWebProgress {
+        public static nsIWebProgress GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebProgress obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIWebProgress).GUID, obj);
+            return o as nsIWebProgress;
+        }
+    }
 }

@@ -124,15 +124,15 @@ namespace System.Xml.Xsl.XsltOld {
 
             switch (frame.State) {
             case Initialized:
-		        processor.ResetParams();
-		        processor.InitSortArray();
+                processor.ResetParams();
+                processor.InitSortArray();
                 if (this.containedActions != null && this.containedActions.Count > 0) {
                     processor.PushActionFrame(frame);
                     frame.State = ProcessedChildren;
                     break;
                 }
                 goto case ProcessedChildren;
-	        case ProcessedChildren:
+            case ProcessedChildren:
                 if (this.selectKey == Compiler.InvalidQueryKey) {
                     if (! frame.Node.HasChildren) {
                         frame.Finished();

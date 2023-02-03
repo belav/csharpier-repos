@@ -32,131 +32,131 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbConnection_BeginTransaction : ADONetTesterClass
-	{
-		Exception exp = null;
-		OleDbConnection con = null;
-		OleDbTransaction tran = null;
+    [TestFixture]
+    public class OleDbConnection_BeginTransaction : ADONetTesterClass
+    {
+        Exception exp = null;
+        OleDbConnection con = null;
+        OleDbTransaction tran = null;
 
-		public static void Main()
-		{
-			OleDbConnection_BeginTransaction tc = new OleDbConnection_BeginTransaction();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbConnection_BeginTransaction");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+        public static void Main()
+        {
+            OleDbConnection_BeginTransaction tc = new OleDbConnection_BeginTransaction();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbConnection_BeginTransaction");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[SetUp]
-		public void SetUp() {
-			con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			con.Open();
-		}
+        [SetUp]
+        public void SetUp() {
+            con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            con.Open();
+        }
 
-		[TearDown]
-		public void TearDown() {
-			if (con != null && con.State == ConnectionState.Open) con.Close();
-		}
+        [TearDown]
+        public void TearDown() {
+            if (con != null && con.State == ConnectionState.Open) con.Close();
+        }
 
-		[Test]
+        [Test]
 #if JAVA
-		[Category("NotWorking")]
+        [Category("NotWorking")]
 #endif
-		public void TestBeginTransactionChaos() {
+        public void TestBeginTransactionChaos() {
 
-			DataBaseServer dbType = ConnectedDataProvider.GetDbType(con);
-			// not supported on DB2 and Oracle and Sybase
-			if (dbType != DataBaseServer.Oracle && dbType != DataBaseServer.DB2 && dbType != DataBaseServer.Sybase) {
-				con.Close();
-				con.Open();
-				try {
-					BeginCase("BeginTransaction - IsolationLevel Chaos");
-					tran = con.BeginTransaction(IsolationLevel.Chaos);
-					Compare(tran == null, false);
-				} 
-				catch(Exception ex){exp = ex;}
-				finally{EndCase(exp); exp = null;}
-			}
-			/*	not supported by MSSQL,DB2,Oracle
-				con.Close();
-				con.Open();
-				try
-				{
-					BeginCase("BeginTransaction - IsolationLevel Unspecified");
-					tran = con.BeginTransaction(IsolationLevel.Unspecified );
-					Compare(tran == null, false);
-				} 
-				catch(Exception ex){exp = ex;}
-				finally{EndCase(exp); exp = null;}
-			*/
-			
-		}
+            DataBaseServer dbType = ConnectedDataProvider.GetDbType(con);
+            // not supported on DB2 and Oracle and Sybase
+            if (dbType != DataBaseServer.Oracle && dbType != DataBaseServer.DB2 && dbType != DataBaseServer.Sybase) {
+                con.Close();
+                con.Open();
+                try {
+                    BeginCase("BeginTransaction - IsolationLevel Chaos");
+                    tran = con.BeginTransaction(IsolationLevel.Chaos);
+                    Compare(tran == null, false);
+                } 
+                catch(Exception ex){exp = ex;}
+                finally{EndCase(exp); exp = null;}
+            }
+            /*    not supported by MSSQL,DB2,Oracle
+                con.Close();
+                con.Open();
+                try
+                {
+                    BeginCase("BeginTransaction - IsolationLevel Unspecified");
+                    tran = con.BeginTransaction(IsolationLevel.Unspecified );
+                    Compare(tran == null, false);
+                } 
+                catch(Exception ex){exp = ex;}
+                finally{EndCase(exp); exp = null;}
+            */
+            
+        }
 
-		[Test]
-		public void run()
-		{
-			try
-			{
-				BeginCase("BeginTransaction");
-				tran = con.BeginTransaction();
-				Compare(tran == null, false);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
-			con.Close();
-			con.Open();
-			try
-			{
-				BeginCase("BeginTransaction - IsolationLevel ReadCommitted");
-				tran = con.BeginTransaction(IsolationLevel.ReadCommitted);
-				Compare(tran == null, false);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+        [Test]
+        public void run()
+        {
+            try
+            {
+                BeginCase("BeginTransaction");
+                tran = con.BeginTransaction();
+                Compare(tran == null, false);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
+            con.Close();
+            con.Open();
+            try
+            {
+                BeginCase("BeginTransaction - IsolationLevel ReadCommitted");
+                tran = con.BeginTransaction(IsolationLevel.ReadCommitted);
+                Compare(tran == null, false);
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-		
-			DataBaseServer dbType = ConnectedDataProvider.GetDbType(con);
+        
+            DataBaseServer dbType = ConnectedDataProvider.GetDbType(con);
 
-			//Not supported by JDBC driver for oracle
-			if (dbType != DataBaseServer.Oracle) 
-			{
-				con.Close();
-				con.Open();
-				try
-				{
-					BeginCase("BeginTransaction - IsolationLevel ReadUncommitted");
-					tran = con.BeginTransaction(IsolationLevel.ReadUncommitted );
-					Compare(tran == null, false);
-				} 
-				catch(Exception ex){exp = ex;}
-				finally{EndCase(exp); exp = null;}
+            //Not supported by JDBC driver for oracle
+            if (dbType != DataBaseServer.Oracle) 
+            {
+                con.Close();
+                con.Open();
+                try
+                {
+                    BeginCase("BeginTransaction - IsolationLevel ReadUncommitted");
+                    tran = con.BeginTransaction(IsolationLevel.ReadUncommitted );
+                    Compare(tran == null, false);
+                } 
+                catch(Exception ex){exp = ex;}
+                finally{EndCase(exp); exp = null;}
 
-				con.Close();
-				con.Open();
-				try
-				{
-					BeginCase("BeginTransaction - IsolationLevel RepeatableRead");
-					tran = con.BeginTransaction(IsolationLevel.RepeatableRead);
-					Compare(tran == null, false);
-				} 
-				catch(Exception ex){exp = ex;}
-				finally{EndCase(exp); exp = null;}
-				con.Close();
-				con.Open();
-				try
-				{
-					BeginCase("BeginTransaction - IsolationLevel Serializable");
-					tran = con.BeginTransaction(IsolationLevel.Serializable );
-					Compare(tran == null, false);
-				} 
-				catch(Exception ex){exp = ex;}
-				finally{EndCase(exp); exp = null;}
-			}
-		}
-	}
+                con.Close();
+                con.Open();
+                try
+                {
+                    BeginCase("BeginTransaction - IsolationLevel RepeatableRead");
+                    tran = con.BeginTransaction(IsolationLevel.RepeatableRead);
+                    Compare(tran == null, false);
+                } 
+                catch(Exception ex){exp = ex;}
+                finally{EndCase(exp); exp = null;}
+                con.Close();
+                con.Open();
+                try
+                {
+                    BeginCase("BeginTransaction - IsolationLevel Serializable");
+                    tran = con.BeginTransaction(IsolationLevel.Serializable );
+                    Compare(tran == null, false);
+                } 
+                catch(Exception ex){exp = ex;}
+                finally{EndCase(exp); exp = null;}
+            }
+        }
+    }
 }

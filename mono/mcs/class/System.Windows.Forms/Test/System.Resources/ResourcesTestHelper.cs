@@ -1,9 +1,9 @@
-﻿//
+//
 // ResourcesTestHelper.cs : Base class for new resource tests with methods 
 // required across many.
 // 
 // Author:
-//	Gary Barnett (gary.barnett.mono@gmail.com)
+//    Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -41,111 +41,111 @@ using System.Runtime.Serialization.Formatters.Binary;
 using MonoTests.Helpers;
 
 namespace MonoTests.System.Resources {
-	public class ResourcesTestHelper {
-		string tempFileWithSerializable = null;
+    public class ResourcesTestHelper {
+        string tempFileWithSerializable = null;
 
-		[SetUp]
-		protected virtual void SetUp ()
-		{
+        [SetUp]
+        protected virtual void SetUp ()
+        {
 
-		}
+        }
 
-		protected ResXDataNode GetNodeFromResXReader (ResXDataNode node)
-		{
-			StringWriter sw = new StringWriter ();
-			using (ResXResourceWriter writer = new ResXResourceWriter (sw)) {
-				writer.AddResource (node);
-			}
+        protected ResXDataNode GetNodeFromResXReader (ResXDataNode node)
+        {
+            StringWriter sw = new StringWriter ();
+            using (ResXResourceWriter writer = new ResXResourceWriter (sw)) {
+                writer.AddResource (node);
+            }
 
-			StringReader sr = new StringReader (sw.GetStringBuilder ().ToString ());
+            StringReader sr = new StringReader (sw.GetStringBuilder ().ToString ());
 
-			using (ResXResourceReader reader = new ResXResourceReader (sr)) {
-				reader.UseResXDataNodes = true;
-				IDictionaryEnumerator enumerator = reader.GetEnumerator ();
-				enumerator.MoveNext ();
+            using (ResXResourceReader reader = new ResXResourceReader (sr)) {
+                reader.UseResXDataNodes = true;
+                IDictionaryEnumerator enumerator = reader.GetEnumerator ();
+                enumerator.MoveNext ();
 
-				return ((DictionaryEntry) enumerator.Current).Value as ResXDataNode;
-			}
-		}
+                return ((DictionaryEntry) enumerator.Current).Value as ResXDataNode;
+            }
+        }
 
-		protected ResXDataNode GetNodeFromResXReader (string contents)
-		{
-			StringReader sr = new StringReader (contents);
+        protected ResXDataNode GetNodeFromResXReader (string contents)
+        {
+            StringReader sr = new StringReader (contents);
 
-			using (ResXResourceReader reader = new ResXResourceReader (sr)) {
-				reader.UseResXDataNodes = true;
-				IDictionaryEnumerator enumerator = reader.GetEnumerator ();
-				enumerator.MoveNext ();
+            using (ResXResourceReader reader = new ResXResourceReader (sr)) {
+                reader.UseResXDataNodes = true;
+                IDictionaryEnumerator enumerator = reader.GetEnumerator ();
+                enumerator.MoveNext ();
 
-				return (ResXDataNode) ((DictionaryEntry) enumerator.Current).Value;
-			}
-		}
+                return (ResXDataNode) ((DictionaryEntry) enumerator.Current).Value;
+            }
+        }
 
-		public ResXDataNode GetNodeEmdeddedIcon ()
-		{
-			Icon ico = new Icon (TestResourceHelper.GetStreamOfResource ("Test/resources/32x32.ico"));
-			ResXDataNode node = new ResXDataNode ("test", ico);
-			return node;
-		}
+        public ResXDataNode GetNodeEmdeddedIcon ()
+        {
+            Icon ico = new Icon (TestResourceHelper.GetStreamOfResource ("Test/resources/32x32.ico"));
+            ResXDataNode node = new ResXDataNode ("test", ico);
+            return node;
+        }
 
-		public ResXDataNode GetNodeFileRefToIcon ()
-		{
-			ResXFileRef fileRef = new ResXFileRef (TestResourceHelper.GetFullPathOfResource ("Test/resources/32x32.ico"), typeof (Icon).AssemblyQualifiedName);
-			ResXDataNode node = new ResXDataNode ("test", fileRef);
+        public ResXDataNode GetNodeFileRefToIcon ()
+        {
+            ResXFileRef fileRef = new ResXFileRef (TestResourceHelper.GetFullPathOfResource ("Test/resources/32x32.ico"), typeof (Icon).AssemblyQualifiedName);
+            ResXDataNode node = new ResXDataNode ("test", fileRef);
 
-			return node;
-		}
+            return node;
+        }
 
-		public ResXDataNode GetNodeEmdeddedBytes1To10 ()
-		{
-			byte [] someBytes = new byte [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-			ResXDataNode node = new ResXDataNode ("test", someBytes);
-			return node;
-		}
+        public ResXDataNode GetNodeEmdeddedBytes1To10 ()
+        {
+            byte [] someBytes = new byte [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            ResXDataNode node = new ResXDataNode ("test", someBytes);
+            return node;
+        }
 
-		public ResXDataNode GetNodeEmdeddedSerializable ()
-		{
-			serializable ser = new serializable ("testName", "testValue");
-			ResXDataNode node = new ResXDataNode ("test", ser);
-			return node;
-		}
+        public ResXDataNode GetNodeEmdeddedSerializable ()
+        {
+            serializable ser = new serializable ("testName", "testValue");
+            ResXDataNode node = new ResXDataNode ("test", ser);
+            return node;
+        }
 
-		public ResXDataNode GetNodeFileRefToSerializable (string filename, bool assemblyQualifiedName)
-		{
-			tempFileWithSerializable = Path.GetTempFileName ();  // remember to delete file in teardown
-			serializable ser = new serializable ("name", "value");
-			
-			SerializeToFile (tempFileWithSerializable, ser);
+        public ResXDataNode GetNodeFileRefToSerializable (string filename, bool assemblyQualifiedName)
+        {
+            tempFileWithSerializable = Path.GetTempFileName ();  // remember to delete file in teardown
+            serializable ser = new serializable ("name", "value");
+            
+            SerializeToFile (tempFileWithSerializable, ser);
 
-			string typeName;
+            string typeName;
 
-			if (assemblyQualifiedName)
-				typeName = typeof (serializable).AssemblyQualifiedName;
-			else
-				typeName = typeof (serializable).FullName;
+            if (assemblyQualifiedName)
+                typeName = typeof (serializable).AssemblyQualifiedName;
+            else
+                typeName = typeof (serializable).FullName;
 
-			ResXFileRef fileRef = new ResXFileRef (tempFileWithSerializable, typeName);
-			ResXDataNode node = new ResXDataNode ("test", fileRef);
+            ResXFileRef fileRef = new ResXFileRef (tempFileWithSerializable, typeName);
+            ResXDataNode node = new ResXDataNode ("test", fileRef);
 
-			return node;
-		}
+            return node;
+        }
 
-		static void SerializeToFile (string filepath, serializable ser)
-		{
-			Stream stream = File.Open (filepath, FileMode.Create);
-			BinaryFormatter bFormatter = new BinaryFormatter ();
-			bFormatter.Serialize (stream, ser);
-			stream.Close ();
-		}
+        static void SerializeToFile (string filepath, serializable ser)
+        {
+            Stream stream = File.Open (filepath, FileMode.Create);
+            BinaryFormatter bFormatter = new BinaryFormatter ();
+            bFormatter.Serialize (stream, ser);
+            stream.Close ();
+        }
 
-		[TearDown]
-		protected virtual void TearDown ()
-		{
-			if (tempFileWithSerializable != null) {
-				File.Delete (tempFileWithSerializable);
-				tempFileWithSerializable = null;
-			}
-		}
-	}
+        [TearDown]
+        protected virtual void TearDown ()
+        {
+            if (tempFileWithSerializable != null) {
+                File.Delete (tempFileWithSerializable);
+                tempFileWithSerializable = null;
+            }
+        }
+    }
 }
 

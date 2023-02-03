@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------
+//---------------------------------------------------------------------
 // <copyright file="EnglishPluralizationService.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -47,9 +47,9 @@ namespace System.Data.Entity.Design.PluralizationServices
                 "news", "wildebeest", "elk", "pincers", "police", "hair", "ice", "chaos",
                 "milk", "cotton", "pneumonoultramicroscopicsilicovolcanoconiosis",
                 "information", "aircraft", "scabies", "traffic", "corn", "millet", "rice", 
-				"hay", "----", "tobacco", "cabbage", "okra", "broccoli", "asparagus", 
-				"lettuce", "beef", "pork", "venison", "mutton",  "cattle", "offspring", 
-				"molasses", "shambles", "shingles"};
+                "hay", "----", "tobacco", "cabbage", "okra", "broccoli", "asparagus", 
+                "lettuce", "beef", "pork", "venison", "mutton",  "cattle", "offspring", 
+                "molasses", "shambles", "shingles"};
 
         private Dictionary<string, string> _irregularVerbList =
             new Dictionary<string, string>()

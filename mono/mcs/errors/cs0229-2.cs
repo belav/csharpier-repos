@@ -7,12 +7,12 @@ delegate void Foo ();
 
 interface IList 
 {
-	event Foo Test;
+    event Foo Test;
 }
 
 interface ICounter 
 {
-	event Foo Test;
+    event Foo Test;
 }
 
 interface IListCounter: IList, ICounter
@@ -21,8 +21,8 @@ interface IListCounter: IList, ICounter
 
 class Test
 {
-	static void Foo (IListCounter t)
-	{
-		t.Test += null;
-	}
+    static void Foo (IListCounter t)
+    {
+        t.Test += null;
+    }
 }

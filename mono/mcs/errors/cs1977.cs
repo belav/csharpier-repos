@@ -3,9 +3,9 @@
 
 class C
 {
-	public static void Main ()
-	{
-		dynamic d = null;
-		d (delegate {});
-	}
+    public static void Main ()
+    {
+        dynamic d = null;
+        d (delegate {});
+    }
 }

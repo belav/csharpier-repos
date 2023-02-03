@@ -37,36 +37,36 @@ using NUnit.Framework;
 using NUnit.Mocks;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ {
-	
-	[TestFixture]
-	public class MessagingContentPoolTest {
-		
-		DynamicMock connectionMock;
-		IConnection connection;
-		MessageFactory messageFactory;
-		
-		public void SetUp ()
-		{
-			connectionMock = new DynamicMock (typeof (IConnection));
-			connection = (IConnection) connectionMock.MockInstance;
-			messageFactory = new MessageFactory (new RabbitMQMessagingProvider ());
-		}
-		
-		[Test]
-		public void ShouldAllocateReturnConnectionToPool ()
-		{
-			CreateConnectionDelegate handler = delegate (string host) {
-				return connection;
-			};
-			
-			MessagingContextPool pool = new MessagingContextPool (messageFactory, 
-				                                                  handler);
-			IMessagingContext context1 = pool.GetContext ("foo");
-			Assert.IsNotNull (context1);
-			context1.Dispose ();
-			IMessagingContext context2 = pool.GetContext ("foo");
-			Assert.AreEqual (context1, context2);
-		}
-	}
-	
+    
+    [TestFixture]
+    public class MessagingContentPoolTest {
+        
+        DynamicMock connectionMock;
+        IConnection connection;
+        MessageFactory messageFactory;
+        
+        public void SetUp ()
+        {
+            connectionMock = new DynamicMock (typeof (IConnection));
+            connection = (IConnection) connectionMock.MockInstance;
+            messageFactory = new MessageFactory (new RabbitMQMessagingProvider ());
+        }
+        
+        [Test]
+        public void ShouldAllocateReturnConnectionToPool ()
+        {
+            CreateConnectionDelegate handler = delegate (string host) {
+                return connection;
+            };
+            
+            MessagingContextPool pool = new MessagingContextPool (messageFactory, 
+                                                                  handler);
+            IMessagingContext context1 = pool.GetContext ("foo");
+            Assert.IsNotNull (context1);
+            context1.Dispose ();
+            IMessagingContext context2 = pool.GetContext ("foo");
+            Assert.AreEqual (context1, context2);
+        }
+    }
+    
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	using System;
+    using System;
 
-	public class ThrowingInterceptorException : Exception
-	{
-		public ThrowingInterceptorException(string message)
-			: base(message)
-		{
-		}
-	}
+    public class ThrowingInterceptorException : Exception
+    {
+        public ThrowingInterceptorException(string message)
+            : base(message)
+        {
+        }
+    }
 }

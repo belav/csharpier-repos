@@ -33,16 +33,16 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class FindProgressChangedEventArgs : ProgressChangedEventArgs
-	{
-		internal FindProgressChangedEventArgs (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence, int progressPercentage, object userState)
-			: base (progressPercentage, userState)
-		{
-			EndpointDiscoveryMetadata = metadata;
-			MessageSequence = sequence;
-		}
+    public class FindProgressChangedEventArgs : ProgressChangedEventArgs
+    {
+        internal FindProgressChangedEventArgs (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence, int progressPercentage, object userState)
+            : base (progressPercentage, userState)
+        {
+            EndpointDiscoveryMetadata = metadata;
+            MessageSequence = sequence;
+        }
 
-		public EndpointDiscoveryMetadata EndpointDiscoveryMetadata { get;private set; }
-		public DiscoveryMessageSequence MessageSequence { get; private set; }
-	}
+        public EndpointDiscoveryMetadata EndpointDiscoveryMetadata { get;private set; }
+        public DiscoveryMessageSequence MessageSequence { get; private set; }
+    }
 }

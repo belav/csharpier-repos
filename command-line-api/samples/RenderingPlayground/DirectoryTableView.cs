@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.CommandLine.Rendering;
 using System.CommandLine.Rendering.Views;
 using System.IO;

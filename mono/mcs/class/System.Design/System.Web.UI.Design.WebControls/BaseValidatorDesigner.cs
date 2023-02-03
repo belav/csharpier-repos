@@ -30,16 +30,16 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class BaseValidatorDesigner : ControlDesigner
-	{
-		public BaseValidatorDesigner ()
-			: base ()
-		{
-		}
+    public class BaseValidatorDesigner : ControlDesigner
+    {
+        public BaseValidatorDesigner ()
+            : base ()
+        {
+        }
 
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

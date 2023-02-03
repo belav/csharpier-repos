@@ -1,9 +1,9 @@
-﻿//---------------------------------------------------------------------
+//---------------------------------------------------------------------
 // <copyright file="Memoizer.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //
-// @owner  	 Microsoft, Microsoft
+// @owner       Microsoft, Microsoft
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;

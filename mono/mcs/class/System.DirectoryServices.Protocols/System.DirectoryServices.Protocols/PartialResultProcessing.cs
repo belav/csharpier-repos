@@ -30,10 +30,10 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public enum PartialResultProcessing
-	{
-		NoPartialResultSupport,
-		ReturnPartialResults,
-		ReturnPartialResultsAndNotifyCallback
-	}
+    public enum PartialResultProcessing
+    {
+        NoPartialResultSupport,
+        ReturnPartialResults,
+        ReturnPartialResultsAndNotifyCallback
+    }
 }

@@ -4,15 +4,15 @@
 
 class Program
 {
-	static int Main ()
-	{
-		int ctc_f = 0;
+    static int Main ()
+    {
+        int ctc_f = 0;
 
-		if ((++ctc_f == 0 && false)) {
-			return 1;
-		}
-		
-		return 0;
-	}
+        if ((++ctc_f == 0 && false)) {
+            return 1;
+        }
+        
+        return 0;
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class VirtualClassWithNoDefaultCtor
-	{
-		private readonly int result;
+    public class VirtualClassWithNoDefaultCtor
+    {
+        private readonly int result;
 
-		public VirtualClassWithNoDefaultCtor(int result)
-		{
-			this.result = result;
-		}
+        public VirtualClassWithNoDefaultCtor(int result)
+        {
+            this.result = result;
+        }
 
-		public virtual int Method()
-		{
-			return result;
-		}
-	}
+        public virtual int Method()
+        {
+            return result;
+        }
+    }
 }

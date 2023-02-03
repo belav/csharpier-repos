@@ -2,7 +2,7 @@
 // IVisibilityCheck.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,9 +27,9 @@
 //
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths {
-	interface IVisibilityCheck<TMember> {
-		bool IfRootIsParameter { get; }
-		bool IsAsVisibleAs (TMember member);
-		bool IsVisibleFrom (TMember member);
-	}
+    interface IVisibilityCheck<TMember> {
+        bool IfRootIsParameter { get; }
+        bool IsAsVisibleAs (TMember member);
+        bool IsVisibleFrom (TMember member);
+    }
 }

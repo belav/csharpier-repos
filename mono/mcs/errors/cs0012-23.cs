@@ -4,8 +4,8 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		var val = B.ArrayMember;
-	}
+    public static void Main ()
+    {
+        var val = B.ArrayMember;
+    }
 }

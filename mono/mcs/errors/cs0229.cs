@@ -5,12 +5,12 @@ using System;
 
 interface IList 
 {
-	int Count { set; }
+    int Count { set; }
 }
 
 interface ICounter 
 {
-	int Count { set; }
+    int Count { set; }
 }
 
 interface IListCounter: IList, ICounter
@@ -19,8 +19,8 @@ interface IListCounter: IList, ICounter
 
 class Test
 {
-	static void Foo (IListCounter t)
-	{
-		t.Count = 9; 
-	}
+    static void Foo (IListCounter t)
+    {
+        t.Count = 9; 
+    }
 }

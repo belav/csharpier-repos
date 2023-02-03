@@ -33,7 +33,7 @@ namespace System.Web.Mail {
     
     // An interface for attachment encoders ex Base64, UUEncode
     interface IAttachmentEncoder {
-	void EncodeStream(  Stream ins , Stream outs );	
+    void EncodeStream(  Stream ins , Stream outs );    
     }
     
 }

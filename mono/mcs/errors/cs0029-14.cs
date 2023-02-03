@@ -3,8 +3,8 @@
 
 class A
 {
-	public static void Main ()
-	{
-		System.IDisposable id = 1;
-	}
+    public static void Main ()
+    {
+        System.IDisposable id = 1;
+    }
 }

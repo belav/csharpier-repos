@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -725,7 +725,7 @@ public class C
             var verifier = CompileAndVerifyFunctionPointers(@"
 public unsafe class C
 {
-	public void M(delegate*<ref int, ref bool> param1,
+    public void M(delegate*<ref int, ref bool> param1,
                   delegate*<ref int, ref bool> param2,
                   delegate*<ref int, ref bool> param3,
                   delegate*<ref int, ref bool> param4,

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 namespace WebAssembly.Host {
-	public interface IHostObject {
+    public interface IHostObject {
 
-	}
+    }
 }

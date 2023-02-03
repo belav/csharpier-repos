@@ -2,7 +2,7 @@
 // MemoryFailPoint.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,23 +31,23 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Runtime
 {
-	public sealed class MemoryFailPoint : CriticalFinalizerObject, IDisposable
-	{
-		[MonoTODO]
-		public MemoryFailPoint (int sizeInMegabytes)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class MemoryFailPoint : CriticalFinalizerObject, IDisposable
+    {
+        [MonoTODO]
+        public MemoryFailPoint (int sizeInMegabytes)
+        {
+            throw new NotImplementedException ();
+        }
 
-		~MemoryFailPoint ()
-		{
-		}
+        ~MemoryFailPoint ()
+        {
+        }
 
-		[MonoTODO]
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void Dispose ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

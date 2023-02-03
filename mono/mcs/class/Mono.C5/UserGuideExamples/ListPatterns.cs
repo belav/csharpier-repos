@@ -43,12 +43,12 @@ namespace ListPatterns {
       Console.WriteLine(list);
       // Clearing all or part of list
       list.CollectionCleared 
-	+= delegate(Object c, ClearedEventArgs eargs) {
-	     ClearedRangeEventArgs ceargs = eargs as ClearedRangeEventArgs;
-	     if (ceargs != null) 
-	       Console.WriteLine("Cleared [{0}..{1}]", 
-				 ceargs.Start, ceargs.Start+ceargs.Count-1);
-	   };
+    += delegate(Object c, ClearedEventArgs eargs) {
+         ClearedRangeEventArgs ceargs = eargs as ClearedRangeEventArgs;
+         if (ceargs != null) 
+           Console.WriteLine("Cleared [{0}..{1}]", 
+                 ceargs.Start, ceargs.Start+ceargs.Count-1);
+       };
       RemoveSublist1(list, 1, 2);
       Console.WriteLine(list);
       RemoveSublist2(list, 1, 2);
@@ -99,9 +99,9 @@ namespace ListPatterns {
     private static void PatFirst<T>(IList<T> list, T x) { 
       int j = list.IndexOf(x);
       if (j >= 0) { 
-	// x is a position j in list
+    // x is a position j in list
       } else {
-	// x is not in list
+    // x is not in list
       }
     }
 
@@ -110,9 +110,9 @@ namespace ListPatterns {
     private static void PatLast<T>(IList<T> list, T x) { 
       int j = list.LastIndexOf(x);
       if (j >= 0) { 
-	// x is at position j in list
+    // x is at position j in list
       } else {
-	// x is not in list
+    // x is not in list
       }
     }
 
@@ -121,9 +121,9 @@ namespace ListPatterns {
     private static void PatFirstSublist<T>(IList<T> list, T x, int i, int n) { 
       int j = list.View(i,n).IndexOf(x);
       if (j >= 0) { 
-	// x is at position j+i in list
+    // x is at position j+i in list
       } else {
-	// x is not in list[i..i+n-1]
+    // x is not in list[i..i+n-1]
       }
     }
 
@@ -132,9 +132,9 @@ namespace ListPatterns {
     private static void PatLastSublist<T>(IList<T> list, T x, int i, int n) { 
       int j = list.View(i,n).LastIndexOf(x);
       if (j >= 0) { 
-	// x is at position j+i in list
+    // x is at position j+i in list
       } else {
-	// x is not in list[i..i+n-1]
+    // x is not in list[i..i+n-1]
       }
     }
   }

@@ -37,84 +37,84 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.InteropServices.CustomMarshalers
 {
-	public class EnumeratorToEnumVariantMarshaler : ICustomMarshaler
-	{
-		static EnumeratorToEnumVariantMarshaler instance;
-		public void CleanUpManagedData (object pManagedObj) {
-			throw new NotImplementedException ();
-		}
+    public class EnumeratorToEnumVariantMarshaler : ICustomMarshaler
+    {
+        static EnumeratorToEnumVariantMarshaler instance;
+        public void CleanUpManagedData (object pManagedObj) {
+            throw new NotImplementedException ();
+        }
 
-		public void CleanUpNativeData (IntPtr pNativeData) {
-			Marshal.Release (pNativeData);
-		}
+        public void CleanUpNativeData (IntPtr pNativeData) {
+            Marshal.Release (pNativeData);
+        }
 
-		public static ICustomMarshaler GetInstance (string pstrCookie) {
-			if (instance == null)
-				instance = new EnumeratorToEnumVariantMarshaler ();
-			return instance;
-		}
+        public static ICustomMarshaler GetInstance (string pstrCookie) {
+            if (instance == null)
+                instance = new EnumeratorToEnumVariantMarshaler ();
+            return instance;
+        }
 
-		public int GetNativeDataSize () {
-			throw new NotImplementedException ();
-		}
+        public int GetNativeDataSize () {
+            throw new NotImplementedException ();
+        }
 
-		public IntPtr MarshalManagedToNative (object pManagedObj) {
-			throw new NotImplementedException ();
-		}
+        public IntPtr MarshalManagedToNative (object pManagedObj) {
+            throw new NotImplementedException ();
+        }
 
-		public object MarshalNativeToManaged (IntPtr pNativeData) {
-			IEnumVARIANT ienumvariant = (IEnumVARIANT)Marshal.GetObjectForIUnknown (pNativeData);
-			VARIANTEnumerator e = new VARIANTEnumerator (ienumvariant);
-			return e;
-		}
+        public object MarshalNativeToManaged (IntPtr pNativeData) {
+            IEnumVARIANT ienumvariant = (IEnumVARIANT)Marshal.GetObjectForIUnknown (pNativeData);
+            VARIANTEnumerator e = new VARIANTEnumerator (ienumvariant);
+            return e;
+        }
 
-		[ComImport]
-		[Guid ("00020404-0000-0000-C000-000000000046")]
-		[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-		interface IEnumVARIANT
-		{
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			void Next (int celt, [MarshalAs (UnmanagedType.Struct)]out object rgvar, out uint pceltFetched);
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			void Skip (uint celt);
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			void Reset ();
-			[return: MarshalAs (UnmanagedType.Interface)]
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			IEnumVARIANT Clone ();
+        [ComImport]
+        [Guid ("00020404-0000-0000-C000-000000000046")]
+        [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+        interface IEnumVARIANT
+        {
+            [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            void Next (int celt, [MarshalAs (UnmanagedType.Struct)]out object rgvar, out uint pceltFetched);
+            [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            void Skip (uint celt);
+            [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            void Reset ();
+            [return: MarshalAs (UnmanagedType.Interface)]
+            [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            IEnumVARIANT Clone ();
 
-		}
+        }
 
-		class VARIANTEnumerator : IEnumerator
-		{
-			IEnumVARIANT com_enum;
-			object current;
-			public VARIANTEnumerator (IEnumVARIANT com_enum) {
-				this.com_enum = com_enum;
-			}
-			#region IEnumerator Members
+        class VARIANTEnumerator : IEnumerator
+        {
+            IEnumVARIANT com_enum;
+            object current;
+            public VARIANTEnumerator (IEnumVARIANT com_enum) {
+                this.com_enum = com_enum;
+            }
+            #region IEnumerator Members
 
-			public object Current {
-				get {
-					return current;
-				}
-			}
+            public object Current {
+                get {
+                    return current;
+                }
+            }
 
-			public bool MoveNext () {
-				object val;
-				uint fetched = 0;
-				com_enum.Next (1, out val, out fetched);
-				if (fetched == 0)
-					return false;
-				current = val;
-				return true;
-			}
+            public bool MoveNext () {
+                object val;
+                uint fetched = 0;
+                com_enum.Next (1, out val, out fetched);
+                if (fetched == 0)
+                    return false;
+                current = val;
+                return true;
+            }
 
-			public void Reset () {
-				com_enum.Reset ();
-			}
+            public void Reset () {
+                com_enum.Reset ();
+            }
 
-			#endregion
-		}
-	}
+            #endregion
+        }
+    }
 }

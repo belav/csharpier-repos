@@ -33,43 +33,43 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	public sealed class WebPartVerbCollection : ReadOnlyCollectionBase
-	{
-		public WebPartVerbCollection ()
-		{			
-		}
+    public sealed class WebPartVerbCollection : ReadOnlyCollectionBase
+    {
+        public WebPartVerbCollection ()
+        {            
+        }
 
-		public WebPartVerbCollection (ICollection verbs)
-		{
-			InnerList.AddRange (verbs);
-		}
+        public WebPartVerbCollection (ICollection verbs)
+        {
+            InnerList.AddRange (verbs);
+        }
 
-		public WebPartVerbCollection (WebPartVerbCollection existingVerbs, 
-								ICollection verbs)
-		{
-			InnerList.AddRange (existingVerbs.InnerList);
-			InnerList.AddRange (verbs);
-		}
+        public WebPartVerbCollection (WebPartVerbCollection existingVerbs, 
+                                ICollection verbs)
+        {
+            InnerList.AddRange (existingVerbs.InnerList);
+            InnerList.AddRange (verbs);
+        }
 
-		public static readonly WebPartVerbCollection Empty = new WebPartVerbCollection ();
+        public static readonly WebPartVerbCollection Empty = new WebPartVerbCollection ();
 
-		public bool Contains (WebPartVerb value)
-		{
-			return InnerList.Contains (value);
-		}
+        public bool Contains (WebPartVerb value)
+        {
+            return InnerList.Contains (value);
+        }
 
-		public void CopyTo (WebPartVerb [] array, int index)
-		{
-			InnerList.CopyTo (0, array, index, Count);		
-		}
+        public void CopyTo (WebPartVerb [] array, int index)
+        {
+            InnerList.CopyTo (0, array, index, Count);        
+        }
 
-		public int IndexOf(WebPartVerb value)
-		{
-			return (InnerList.IndexOf (value));
-		}
+        public int IndexOf(WebPartVerb value)
+        {
+            return (InnerList.IndexOf (value));
+        }
 
-		public WebPartVerb this [int index ] {
-			get { return (WebPartVerb)InnerList [index]; }
-		}
-	}
+        public WebPartVerb this [int index ] {
+            get { return (WebPartVerb)InnerList [index]; }
+        }
+    }
 }

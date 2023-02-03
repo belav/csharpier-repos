@@ -1,9 +1,9 @@
 //
 // CompilationSectionTest.cs 
-//	- unit tests for System.Web.Configuration.CompilationSection
+//    - unit tests for System.Web.Configuration.CompilationSection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,35 +38,35 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class CompilationSectionTest  {
+    [TestFixture]
+    public class CompilationSectionTest  {
 
-		[Test]
-		public void Defaults ()
-		{
-			CompilationSection c = new CompilationSection ();
+        [Test]
+        public void Defaults ()
+        {
+            CompilationSection c = new CompilationSection ();
 
-			Assert.IsNotNull (c.Assemblies, "A1");
+            Assert.IsNotNull (c.Assemblies, "A1");
 
-			Assert.AreEqual ("", c.AssemblyPostProcessorType, "A2");
-			Assert.IsTrue   (c.Batch, "A3");
-			Assert.AreEqual (TimeSpan.FromMinutes (15), c.BatchTimeout, "A4");
+            Assert.AreEqual ("", c.AssemblyPostProcessorType, "A2");
+            Assert.IsTrue   (c.Batch, "A3");
+            Assert.AreEqual (TimeSpan.FromMinutes (15), c.BatchTimeout, "A4");
 
-			Assert.IsNotNull (c.BuildProviders, "A5");
-			Assert.IsNotNull (c.CodeSubDirectories, "A6");
-			Assert.IsNotNull (c.Compilers, "A7");
+            Assert.IsNotNull (c.BuildProviders, "A5");
+            Assert.IsNotNull (c.CodeSubDirectories, "A6");
+            Assert.IsNotNull (c.Compilers, "A7");
 
-			Assert.IsFalse (c.Debug, "A8");
-			Assert.AreEqual ("vb", c.DefaultLanguage, "A9");
-			Assert.IsTrue (c.Explicit, "A10");
-			
-			Assert.IsNotNull (c.ExpressionBuilders, "A11");
-			Assert.AreEqual (1000, c.MaxBatchSize, "A12");
-			Assert.AreEqual (15, c.NumRecompilesBeforeAppRestart, "A13");
-			Assert.IsFalse  (c.Strict, "A14");
-			Assert.AreEqual ("", c.TempDirectory, "A15");
-			Assert.IsFalse (c.UrlLinePragmas, "A16");
-		}
-	}
+            Assert.IsFalse (c.Debug, "A8");
+            Assert.AreEqual ("vb", c.DefaultLanguage, "A9");
+            Assert.IsTrue (c.Explicit, "A10");
+            
+            Assert.IsNotNull (c.ExpressionBuilders, "A11");
+            Assert.AreEqual (1000, c.MaxBatchSize, "A12");
+            Assert.AreEqual (15, c.NumRecompilesBeforeAppRestart, "A13");
+            Assert.IsFalse  (c.Strict, "A14");
+            Assert.AreEqual ("", c.TempDirectory, "A15");
+            Assert.IsFalse (c.UrlLinePragmas, "A16");
+        }
+    }
 }
 

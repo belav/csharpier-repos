@@ -29,48 +29,48 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit {
 
-	/// <summary>
-	///  Describes the types of MSIL instructions.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public enum OpCodeType {
+    /// <summary>
+    ///  Describes the types of MSIL instructions.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public enum OpCodeType {
 
-		/// <summary>
-		///  "Ignorable" instruction.
-		///  Such instruction are used to supply
-		///  additional information to particular
-		///  MSIL processor.
-		/// </summary>
-		[Obsolete ("This API has been deprecated.")]
-		Annotation = 0,
+        /// <summary>
+        ///  "Ignorable" instruction.
+        ///  Such instruction are used to supply
+        ///  additional information to particular
+        ///  MSIL processor.
+        /// </summary>
+        [Obsolete ("This API has been deprecated.")]
+        Annotation = 0,
 
-		/// <summary>
-		///  Denotes "shorthand" instruction.
-		///  Such instructions take less space
-		///  than their full-size equivalents
-		///  (ex. ldarg.0 vs. ldarg 0).
-		/// </summary>
-		Macro = 1,
+        /// <summary>
+        ///  Denotes "shorthand" instruction.
+        ///  Such instructions take less space
+        ///  than their full-size equivalents
+        ///  (ex. ldarg.0 vs. ldarg 0).
+        /// </summary>
+        Macro = 1,
 
-		/// <summary>
-		///  Denotes instruction reserved for internal use.
-		/// </summary>
-		Nternal = 2,
+        /// <summary>
+        ///  Denotes instruction reserved for internal use.
+        /// </summary>
+        Nternal = 2,
 
-		/// <summary>
-		///  Denotes instruction to deal with objects.
-		///  (ex. ldobj).
-		/// </summary>
-		Objmodel = 3,
+        /// <summary>
+        ///  Denotes instruction to deal with objects.
+        ///  (ex. ldobj).
+        /// </summary>
+        Objmodel = 3,
 
-		/// <summary>
-		/// </summary>
-		Prefix = 4,
+        /// <summary>
+        /// </summary>
+        Prefix = 4,
 
-		/// <summary>
-		/// </summary>
-		Primitive = 5
-	}
+        /// <summary>
+        /// </summary>
+        Primitive = 5
+    }
 
 }

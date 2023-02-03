@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests;
+namespace AutoMapper.UnitTests;
 public class BuildExecutionPlan : AutoMapperSpecBase
 {
     Model _source;

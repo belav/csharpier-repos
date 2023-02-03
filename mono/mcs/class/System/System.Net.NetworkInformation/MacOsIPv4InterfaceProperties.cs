@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.IPv4InterfaceProperties
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //      Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
@@ -29,21 +29,21 @@
 //
 
 namespace System.Net.NetworkInformation {
-	sealed class MacOsIPv4InterfaceProperties : UnixIPv4InterfaceProperties
-	{
-		public MacOsIPv4InterfaceProperties (MacOsNetworkInterface iface)
-			: base (iface)
-		{
-		}
+    sealed class MacOsIPv4InterfaceProperties : UnixIPv4InterfaceProperties
+    {
+        public MacOsIPv4InterfaceProperties (MacOsNetworkInterface iface)
+            : base (iface)
+        {
+        }
 
-		// dummy
-		public override bool IsForwardingEnabled {
-			get { return false; }
-		}
+        // dummy
+        public override bool IsForwardingEnabled {
+            get { return false; }
+        }
 
-		// dummy
-		public override int Mtu {
-			get { return 0; }
-		}
-	}
+        // dummy
+        public override int Mtu {
+            get { return 0; }
+        }
+    }
 }

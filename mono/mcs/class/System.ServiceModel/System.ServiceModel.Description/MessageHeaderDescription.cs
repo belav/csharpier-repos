@@ -2,7 +2,7 @@
 // MessageHeaderDescription.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,35 +36,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class MessageHeaderDescription : MessagePartDescription
-	{
-		string actor;
-		bool must_understand, relay, typed_header;
+    [MonoTODO]
+    public class MessageHeaderDescription : MessagePartDescription
+    {
+        string actor;
+        bool must_understand, relay, typed_header;
 
-		public MessageHeaderDescription (string name, string ns)
-			: base (name, ns)
-		{
-		}
+        public MessageHeaderDescription (string name, string ns)
+            : base (name, ns)
+        {
+        }
 
-		public string Actor {
-			get { return actor; }
-			set { actor = value; }
-		}
+        public string Actor {
+            get { return actor; }
+            set { actor = value; }
+        }
 
-		public bool MustUnderstand {
-			get { return must_understand; }
-			set { must_understand = value; }
-		}
+        public bool MustUnderstand {
+            get { return must_understand; }
+            set { must_understand = value; }
+        }
 
-		public bool Relay {
-			get { return relay; }
-			set { relay = value; }
-		}
+        public bool Relay {
+            get { return relay; }
+            set { relay = value; }
+        }
 
-		public bool TypedHeader {
-			get { return typed_header; }
-			set { typed_header = value; }
-		}
-	}
+        public bool TypedHeader {
+            get { return typed_header; }
+            set { typed_header = value; }
+        }
+    }
 }

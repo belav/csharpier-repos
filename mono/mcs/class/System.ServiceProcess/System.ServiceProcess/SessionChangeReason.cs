@@ -2,7 +2,7 @@
 // System.ServiceProcess.SessionChangeReason
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,17 +31,17 @@
 
 namespace System.ServiceProcess
 {
-	public enum SessionChangeReason
-	{
-		ConsoleConnect = 1,
-		ConsoleDisconnect,
-		RemoteConnect,
-		RemoteDisconnect,
-		SessionLogon,
-		SessionLogoff,
-		SessionLock,
-		SessionUnlock,
-		SessionRemoteControl
-	}
+    public enum SessionChangeReason
+    {
+        ConsoleConnect = 1,
+        ConsoleDisconnect,
+        RemoteConnect,
+        RemoteDisconnect,
+        SessionLogon,
+        SessionLogoff,
+        SessionLock,
+        SessionUnlock,
+        SessionRemoteControl
+    }
 }
 

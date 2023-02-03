@@ -4,6 +4,6 @@ using System;
 using System.Runtime.CompilerServices;
 
 public interface IA {
-	[SpecialName]
-	int GetLength ();
+    [SpecialName]
+    int GetLength ();
 }

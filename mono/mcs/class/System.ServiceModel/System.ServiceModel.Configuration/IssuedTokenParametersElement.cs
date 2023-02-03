@@ -2,7 +2,7 @@
 // IssuedTokenParametersElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,75 +54,75 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class IssuedTokenParametersElement
-		 : ConfigurationElement
-	{
-		public IssuedTokenParametersElement ()
-		{
-		}
+    public sealed class IssuedTokenParametersElement
+         : ConfigurationElement
+    {
+        public IssuedTokenParametersElement ()
+        {
+        }
 
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("additionalRequestParameters",
-			 Options = ConfigurationPropertyOptions.None)]
-		public XmlElementElementCollection AdditionalRequestParameters {
-			get { return (XmlElementElementCollection) base ["additionalRequestParameters"]; }
-		}
+        [ConfigurationProperty ("additionalRequestParameters",
+             Options = ConfigurationPropertyOptions.None)]
+        public XmlElementElementCollection AdditionalRequestParameters {
+            get { return (XmlElementElementCollection) base ["additionalRequestParameters"]; }
+        }
 
-		[ConfigurationProperty ("claimTypeRequirements",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ClaimTypeElementCollection ClaimTypeRequirements {
-			get { return (ClaimTypeElementCollection) base ["claimTypeRequirements"]; }
-		}
+        [ConfigurationProperty ("claimTypeRequirements",
+             Options = ConfigurationPropertyOptions.None)]
+        public ClaimTypeElementCollection ClaimTypeRequirements {
+            get { return (ClaimTypeElementCollection) base ["claimTypeRequirements"]; }
+        }
 
-		[ConfigurationProperty ("issuer",
-			 Options = ConfigurationPropertyOptions.None)]
-		public IssuedTokenParametersEndpointAddressElement Issuer {
-			get { return (IssuedTokenParametersEndpointAddressElement) base ["issuer"]; }
-		}
+        [ConfigurationProperty ("issuer",
+             Options = ConfigurationPropertyOptions.None)]
+        public IssuedTokenParametersEndpointAddressElement Issuer {
+            get { return (IssuedTokenParametersEndpointAddressElement) base ["issuer"]; }
+        }
 
-		[ConfigurationProperty ("issuerMetadata",
-			 Options = ConfigurationPropertyOptions.None)]
-		public EndpointAddressElementBase IssuerMetadata {
-			get { return (EndpointAddressElementBase) base ["issuerMetadata"]; }
-		}
+        [ConfigurationProperty ("issuerMetadata",
+             Options = ConfigurationPropertyOptions.None)]
+        public EndpointAddressElementBase IssuerMetadata {
+            get { return (EndpointAddressElementBase) base ["issuerMetadata"]; }
+        }
 
-		[ConfigurationProperty ("keySize",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "0")]
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		public int KeySize {
-			get { return (int) base ["keySize"]; }
-			set { base ["keySize"] = value; }
-		}
+        [ConfigurationProperty ("keySize",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "0")]
+        [IntegerValidator ( MinValue = 0,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        public int KeySize {
+            get { return (int) base ["keySize"]; }
+            set { base ["keySize"] = value; }
+        }
 
-		[ConfigurationProperty ("keyType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "SymmetricKey")]
-		public SecurityKeyType KeyType {
-			get { return (SecurityKeyType) base ["keyType"]; }
-			set { base ["keyType"] = value; }
-		}
+        [ConfigurationProperty ("keyType",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "SymmetricKey")]
+        public SecurityKeyType KeyType {
+            get { return (SecurityKeyType) base ["keyType"]; }
+            set { base ["keyType"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("tokenType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		public string TokenType {
-			get { return (string) base ["tokenType"]; }
-			set { base ["tokenType"] = value; }
-		}
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("tokenType",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "")]
+        public string TokenType {
+            get { return (string) base ["tokenType"]; }
+            set { base ["tokenType"] = value; }
+        }
 
 
-	}
+    }
 
 }

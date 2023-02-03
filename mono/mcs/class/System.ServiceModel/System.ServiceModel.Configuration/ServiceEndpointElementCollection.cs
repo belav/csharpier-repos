@@ -2,7 +2,7 @@
 // ServiceEndpointElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,37 +54,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ServiceEndpointElement),
-		 AddItemName = "endpoint",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class ServiceEndpointElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<ServiceEndpointElement>,  ICollection,  IEnumerable
-	{
+    [ConfigurationCollection (typeof (ServiceEndpointElement),
+         AddItemName = "endpoint",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class ServiceEndpointElementCollection
+         : ServiceModelEnhancedConfigurationElementCollection<ServiceEndpointElement>,  ICollection,  IEnumerable
+    {
 
-		public ServiceEndpointElementCollection ()
-		{
-			AddElementName = "endpoint";
-		}
+        public ServiceEndpointElementCollection ()
+        {
+            AddElementName = "endpoint";
+        }
 
-		protected override object GetElementKey (ConfigurationElement element) {
-			ServiceEndpointElement el = (ServiceEndpointElement) element;
+        protected override object GetElementKey (ConfigurationElement element) {
+            ServiceEndpointElement el = (ServiceEndpointElement) element;
 
-			return GetHashCode (el.Address) +
-				GetHashCode (el.Binding) +
-				GetHashCode (el.BindingConfiguration) +
-				GetHashCode (el.BindingName) +
-				GetHashCode (el.BindingNamespace) +
-				GetHashCode (el.EndpointConfiguration) +
-				GetHashCode (el.Kind) +
-				GetHashCode (el.Contract);
-		}
+            return GetHashCode (el.Address) +
+                GetHashCode (el.Binding) +
+                GetHashCode (el.BindingConfiguration) +
+                GetHashCode (el.BindingName) +
+                GetHashCode (el.BindingNamespace) +
+                GetHashCode (el.EndpointConfiguration) +
+                GetHashCode (el.Kind) +
+                GetHashCode (el.Contract);
+        }
 
-		static string GetHashCode (object obj)
-		{
-			return (obj != null ? obj.GetHashCode () : 0) + ";";
-		}
-	}
+        static string GetHashCode (object obj)
+        {
+            return (obj != null ? obj.GetHashCode () : 0) + ";";
+        }
+    }
 
 }

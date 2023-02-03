@@ -9,8 +9,8 @@ using System.Runtime.CompilerServices;
 
 public class Test
 {
-	static void Main ()
-	{
-	}
+    static void Main ()
+    {
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace System.Web.Routing {
+namespace System.Web.Routing {
 
     // Represents a parameter subsegment of a ContentPathSegment
     internal sealed class ParameterSubsegment : PathSubsegment {

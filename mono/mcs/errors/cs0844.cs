@@ -3,11 +3,11 @@
 
 class C
 {
-	string s;
+    string s;
 
-	public void Test ()
-	{
-		s = "x";
-		string s = "a";
-	}
+    public void Test ()
+    {
+        s = "x";
+        string s = "a";
+    }
 }

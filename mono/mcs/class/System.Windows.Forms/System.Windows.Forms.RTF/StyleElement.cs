@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,94 +29,94 @@
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	class StyleElement {
-		#region Local Variables
-		private TokenClass	token_class;
-		private Major		major;
-		private Minor		minor;
-		private int		param;
-		private string		text;
-		private StyleElement	next;
-		#endregion Local Variables
+    class StyleElement {
+        #region Local Variables
+        private TokenClass    token_class;
+        private Major        major;
+        private Minor        minor;
+        private int        param;
+        private string        text;
+        private StyleElement    next;
+        #endregion Local Variables
 
-		#region Constructors
-		public StyleElement(Style s, TokenClass token_class, Major major, Minor minor, int param, string text) {
-			this.token_class = token_class;
-			this.major = major;
-			this.minor = minor;
-			this.param = param;
-			this.text = text;
+        #region Constructors
+        public StyleElement(Style s, TokenClass token_class, Major major, Minor minor, int param, string text) {
+            this.token_class = token_class;
+            this.major = major;
+            this.minor = minor;
+            this.param = param;
+            this.text = text;
 
-			lock (s) {
-				if (s.Elements == null) {
-					s.Elements = this;
-				} else {
-					StyleElement se = s.Elements;
-					while (se.next != null)
-						se = se.next;
-					se.next = this;
-				}
-			}
-		}
-		#endregion	// Constructors
+            lock (s) {
+                if (s.Elements == null) {
+                    s.Elements = this;
+                } else {
+                    StyleElement se = s.Elements;
+                    while (se.next != null)
+                        se = se.next;
+                    se.next = this;
+                }
+            }
+        }
+        #endregion    // Constructors
 
-		#region Properties
-		public TokenClass TokenClass {
-			get {
-				return token_class;
-			}
+        #region Properties
+        public TokenClass TokenClass {
+            get {
+                return token_class;
+            }
 
-			set {
-				token_class = value;
-			}
-		}
+            set {
+                token_class = value;
+            }
+        }
 
-		public Major Major {
-			get {
-				return major;
-			}
+        public Major Major {
+            get {
+                return major;
+            }
 
-			set {
-				major = value;
-			}
-		}
+            set {
+                major = value;
+            }
+        }
 
-		public Minor Minor {
-			get {
-				return minor;
-			}
+        public Minor Minor {
+            get {
+                return minor;
+            }
 
-			set {
-				minor = value;
-			}
-		}
+            set {
+                minor = value;
+            }
+        }
 
-		public int Param {
-			get {
-				return param;
-			}
+        public int Param {
+            get {
+                return param;
+            }
 
-			set {
-				param = value;
-			}
-		}
+            set {
+                param = value;
+            }
+        }
 
-		public string Text {
-			get {
-				return text;
-			}
+        public string Text {
+            get {
+                return text;
+            }
 
-			set {
-				text = value;
-			}
-		}
-		#endregion	// Properties
+            set {
+                text = value;
+            }
+        }
+        #endregion    // Properties
 
-		#region	Methods
-		#endregion	// Methods
-	}
+        #region    Methods
+        #endregion    // Methods
+    }
 }

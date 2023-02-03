@@ -1,8 +1,8 @@
-﻿// 
+// 
 // CheckOptions.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,18 +27,18 @@
 // 
 
 namespace Mono.CodeContracts.Static {
-	public class CheckOptions {
-		public CheckOptions ()
-		{
-		}
+    public class CheckOptions {
+        public CheckOptions ()
+        {
+        }
 
-		public string Assembly { get; set; }
-		/// <summary>
-		/// Method name constraint
-		/// If specified, check is performed only on methods containing this name as substring
-		/// </summary>
-		public string Method { get; set; }
+        public string Assembly { get; set; }
+        /// <summary>
+        /// Method name constraint
+        /// If specified, check is performed only on methods containing this name as substring
+        /// </summary>
+        public string Method { get; set; }
 
-		public bool ShowDebug { get; set; }
-	}
+        public bool ShowDebug { get; set; }
+    }
 }

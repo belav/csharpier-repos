@@ -32,46 +32,46 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible(false)]
-	public sealed class EventClassAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Class)]
+    [ComVisible(false)]
+    public sealed class EventClassAttribute : Attribute {
 
-		#region Fields
+        #region Fields
 
-		bool allowInProcSubscribers;
-		bool fireInParallel;
-		string publisherFilter;
+        bool allowInProcSubscribers;
+        bool fireInParallel;
+        string publisherFilter;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public EventClassAttribute ()
-		{
-			allowInProcSubscribers = true;
-			fireInParallel = false;
-			publisherFilter = null;
-		}
+        public EventClassAttribute ()
+        {
+            allowInProcSubscribers = true;
+            fireInParallel = false;
+            publisherFilter = null;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public bool AllowInprocSubscribers {
-			get { return allowInProcSubscribers; }
-			set { allowInProcSubscribers = value; }
-		}
+        public bool AllowInprocSubscribers {
+            get { return allowInProcSubscribers; }
+            set { allowInProcSubscribers = value; }
+        }
 
-		public bool FireInParallel {
-			get { return fireInParallel; }
-			set { fireInParallel = value; }
-		}
+        public bool FireInParallel {
+            get { return fireInParallel; }
+            set { fireInParallel = value; }
+        }
 
-		public string PublisherFilter {
-			get { return publisherFilter; }
-			set { publisherFilter = value; }
-		}
+        public string PublisherFilter {
+            get { return publisherFilter; }
+            set { publisherFilter = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

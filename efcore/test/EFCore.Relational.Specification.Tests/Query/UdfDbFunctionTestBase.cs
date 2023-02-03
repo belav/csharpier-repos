@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
@@ -477,7 +477,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             };
             var address43 = new Address
             {
-                Street = "112 ½ Beacon Street",
+                Street = "112 � Beacon Street",
                 City = "Boston",
                 State = "MA"
             };

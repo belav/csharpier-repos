@@ -3,7 +3,7 @@
 
 public class Class1
 {
-	public Class1 (int i) { }
+    public Class1 (int i) { }
 }
 
 public class Class2<T>

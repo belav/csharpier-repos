@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.FormView.cs 
 //
 // Author:
-//	Merav Sudri (meravs@mainsoft.com)
+//    Merav Sudri (meravs@mainsoft.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -42,141 +42,141 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	public class FormParameterPoker : FormParameter
-	{
-		public FormParameterPoker (FormParameter param)
-			: base (param)
-		{
-			
-		}
+    public class FormParameterPoker : FormParameter
+    {
+        public FormParameterPoker (FormParameter param)
+            : base (param)
+        {
+            
+        }
 
-		public FormParameterPoker (string name, TypeCode type, string FormField)
-			: base (name, type, FormField)
-		{
-		}
+        public FormParameterPoker (string name, TypeCode type, string FormField)
+            : base (name, type, FormField)
+        {
+        }
 
-		public FormParameterPoker (string name, string FormField)
-			: base (name, FormField)
-		{
-		}
+        public FormParameterPoker (string name, string FormField)
+            : base (name, FormField)
+        {
+        }
 
-		public FormParameterPoker () // constructor       
-		{
-			TrackViewState ();
-		}
+        public FormParameterPoker () // constructor       
+        {
+            TrackViewState ();
+        }
 
-		public object DoEvaluate (HttpContext context, Control control)
-		{
-			return base.Evaluate (context, control);
-		}
+        public object DoEvaluate (HttpContext context, Control control)
+        {
+            return base.Evaluate (context, control);
+        }
 
-		public Parameter DoClone ()
-		{
-			return base.Clone ();
-		}
+        public Parameter DoClone ()
+        {
+            return base.Clone ();
+        }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
-
-
-		public void LoadState (object o)
-		{
-			LoadViewState (o);
-		}
-
-		public StateBag StateBag
-		{
-			get { return base.ViewState; }
-		}
-
-	}
-
-	[TestFixture]
-	public class FormParameterTest
-	{
-		[TestFixtureTearDown]
-		public void Unload ()
-		{
-			WebTest.Unload ();
-		}
-
-		[Test]
-		public void FormParameter_DefaultProperties ()
-		{
-			FormParameterPoker FormParam1 = new FormParameterPoker ();
-			Assert.AreEqual ("", FormParam1.FormField , "DefaultFormField");
-			FormParameterPoker FormParam2 = new FormParameterPoker ("FirstName", "TextBox1");
-			Assert.AreEqual ("FirstName", FormParam2.Name, "OverloadContructorName1");
-			Assert.AreEqual ("TextBox1", FormParam2.FormField, "OverloadContructorFormField1");
-			FormParameterPoker FormParam3 = new FormParameterPoker ("Salary", TypeCode.UInt64, "SalaryTextBox");
-			Assert.AreEqual ("Salary", FormParam3.Name, "OverloadContructorName2");
-			Assert.AreEqual ("SalaryTextBox", FormParam3.FormField, "OverloadContructorFormField2");
-			Assert.AreEqual (TypeCode.UInt64, FormParam3.Type, "OverloadContructorType");
-			FormParameterPoker FormParam4 = new FormParameterPoker (FormParam3);
-			Assert.AreEqual ("Salary", FormParam4.Name, "OverloadContructorName2");
-			Assert.AreEqual ("SalaryTextBox", FormParam4.FormField, "OverloadContructorFormName2");
-			Assert.AreEqual (TypeCode.UInt64, FormParam4.Type, "OverloadContructorType");
+        public object SaveState ()
+        {
+            return SaveViewState ();
+        }
 
 
-		}
+        public void LoadState (object o)
+        {
+            LoadViewState (o);
+        }
 
-		[Test]
-		public void FormParameter_AssignToDefaultProperties ()
-		{
-			FormParameterPoker FormParam = new FormParameterPoker ();
-			FormParam.FormField = "FormFieldTest";
-			Assert.AreEqual ("FormFieldTest", FormParam.FormField, "AssignToFormName");
-		}
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		//Protected Methods
+    }
 
-		[Test]
-		public void FormParameter_Clone ()
-		{
-			
-			FormParameterPoker FormParam = new FormParameterPoker ("EmployeeName", TypeCode.String, "EmployeeLabel");
-			FormParameter clonedParam = (FormParameter) FormParam.DoClone ();
-			Assert.AreEqual ("EmployeeName", clonedParam.Name, "FormParameterCloneName");
-			Assert.AreEqual (TypeCode.String, clonedParam.Type, "FormParameterCloneType");
-			Assert.AreEqual ("EmployeeLabel", clonedParam.FormField, "FormParameterCloneFormField");
-		}		
+    [TestFixture]
+    public class FormParameterTest
+    {
+        [TestFixtureTearDown]
+        public void Unload ()
+        {
+            WebTest.Unload ();
+        }
 
-		[Test]
-		[Category("NunitWeb")]
-		public void FormParameter_Evaluate()
-		{
-			WebTest t = new WebTest(PageInvoker.CreateOnInit(InitForm));
-			t.Run();
-			FormRequest fr = new FormRequest(t.Response, "form1");
-			fr.Controls.Add("key");
-			fr.Controls["key"].Value = "Key1";
-			t.Request = fr;
-			PageDelegates pd = new PageDelegates();
-			pd.Load = EvaluateForm;
-			t.Invoker = new PageInvoker(pd);
-			t.Run();
-		 }
-
-		public static void InitForm(Page p)
-		{
-			LiteralControl ltl = new LiteralControl(@"<input id=""key"" type=""text"" value=""Key1""/>");
-			p.Form.Controls.Add(ltl);
-		}
-
-		public static void EvaluateForm(Page p)
-		{
-			FormParameterPoker formParam = new FormParameterPoker();
-			formParam.FormField = "key";
-			formParam.Type = TypeCode.String;
-			formParam.DefaultValue = "Default"; 
-			TextBox tb = new TextBox();
-			p.Form.Controls.Add(tb);			
-			string value = (string)formParam.DoEvaluate(HttpContext.Current, tb);
-			Assert.AreEqual("Key1", value, "EvaluateSessionParameter");
-		}
+        [Test]
+        public void FormParameter_DefaultProperties ()
+        {
+            FormParameterPoker FormParam1 = new FormParameterPoker ();
+            Assert.AreEqual ("", FormParam1.FormField , "DefaultFormField");
+            FormParameterPoker FormParam2 = new FormParameterPoker ("FirstName", "TextBox1");
+            Assert.AreEqual ("FirstName", FormParam2.Name, "OverloadContructorName1");
+            Assert.AreEqual ("TextBox1", FormParam2.FormField, "OverloadContructorFormField1");
+            FormParameterPoker FormParam3 = new FormParameterPoker ("Salary", TypeCode.UInt64, "SalaryTextBox");
+            Assert.AreEqual ("Salary", FormParam3.Name, "OverloadContructorName2");
+            Assert.AreEqual ("SalaryTextBox", FormParam3.FormField, "OverloadContructorFormField2");
+            Assert.AreEqual (TypeCode.UInt64, FormParam3.Type, "OverloadContructorType");
+            FormParameterPoker FormParam4 = new FormParameterPoker (FormParam3);
+            Assert.AreEqual ("Salary", FormParam4.Name, "OverloadContructorName2");
+            Assert.AreEqual ("SalaryTextBox", FormParam4.FormField, "OverloadContructorFormName2");
+            Assert.AreEqual (TypeCode.UInt64, FormParam4.Type, "OverloadContructorType");
 
 
-	}
+        }
+
+        [Test]
+        public void FormParameter_AssignToDefaultProperties ()
+        {
+            FormParameterPoker FormParam = new FormParameterPoker ();
+            FormParam.FormField = "FormFieldTest";
+            Assert.AreEqual ("FormFieldTest", FormParam.FormField, "AssignToFormName");
+        }
+
+        //Protected Methods
+
+        [Test]
+        public void FormParameter_Clone ()
+        {
+            
+            FormParameterPoker FormParam = new FormParameterPoker ("EmployeeName", TypeCode.String, "EmployeeLabel");
+            FormParameter clonedParam = (FormParameter) FormParam.DoClone ();
+            Assert.AreEqual ("EmployeeName", clonedParam.Name, "FormParameterCloneName");
+            Assert.AreEqual (TypeCode.String, clonedParam.Type, "FormParameterCloneType");
+            Assert.AreEqual ("EmployeeLabel", clonedParam.FormField, "FormParameterCloneFormField");
+        }        
+
+        [Test]
+        [Category("NunitWeb")]
+        public void FormParameter_Evaluate()
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnInit(InitForm));
+            t.Run();
+            FormRequest fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("key");
+            fr.Controls["key"].Value = "Key1";
+            t.Request = fr;
+            PageDelegates pd = new PageDelegates();
+            pd.Load = EvaluateForm;
+            t.Invoker = new PageInvoker(pd);
+            t.Run();
+         }
+
+        public static void InitForm(Page p)
+        {
+            LiteralControl ltl = new LiteralControl(@"<input id=""key"" type=""text"" value=""Key1""/>");
+            p.Form.Controls.Add(ltl);
+        }
+
+        public static void EvaluateForm(Page p)
+        {
+            FormParameterPoker formParam = new FormParameterPoker();
+            formParam.FormField = "key";
+            formParam.Type = TypeCode.String;
+            formParam.DefaultValue = "Default"; 
+            TextBox tb = new TextBox();
+            p.Form.Controls.Add(tb);            
+            string value = (string)formParam.DoEvaluate(HttpContext.Current, tb);
+            Assert.AreEqual("Key1", value, "EvaluateSessionParameter");
+        }
+
+
+    }
 }

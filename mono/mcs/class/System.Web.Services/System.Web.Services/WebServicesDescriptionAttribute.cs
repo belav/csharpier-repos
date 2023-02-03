@@ -31,24 +31,24 @@
 using System.ComponentModel;
 
 namespace System.Web.Services {
-	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Event, Inherited = true)]
-	internal class WebServicesDescriptionAttribute : DescriptionAttribute {
+    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Event, Inherited = true)]
+    internal class WebServicesDescriptionAttribute : DescriptionAttribute {
 
-		#region Constructors
+        #region Constructors
 
-		public WebServicesDescriptionAttribute (string description) 
-			: base (description)
-		{
-		}
+        public WebServicesDescriptionAttribute (string description) 
+            : base (description)
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public override string Description {
-			get { return DescriptionValue; }
-		}
+        public override string Description {
+            get { return DescriptionValue; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

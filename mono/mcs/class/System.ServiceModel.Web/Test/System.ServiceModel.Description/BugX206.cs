@@ -146,14 +146,14 @@ namespace DHIWebService
     {
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="IBEWebSvc/IDHIService/Login", ReplyAction="IBEWebSvc/IDHIService/LoginResponse")]
-	// FIXME: uncommenting this results in cryptic error message. We should tell what could be wrong here.
-//		[System.ServiceModel.Web.WebInvoke(BodyStyle=System.ServiceModel.Web.WebMessageBodyStyle.Wrapped)]
+    // FIXME: uncommenting this results in cryptic error message. We should tell what could be wrong here.
+//        [System.ServiceModel.Web.WebInvoke(BodyStyle=System.ServiceModel.Web.WebMessageBodyStyle.Wrapped)]
         System.IAsyncResult BeginLogin(DHIWebService.LoginRequest request, System.AsyncCallback callback, object asyncState);
         
         DHIWebService.LoginResponse EndLogin(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="IBEWebSvc/IDHIService/Login", ReplyAction="IBEWebSvc/IDHIService/LoginResponse")]
-		[System.ServiceModel.Web.WebInvoke(BodyStyle=System.ServiceModel.Web.WebMessageBodyStyle.Wrapped)]
+        [System.ServiceModel.Web.WebInvoke(BodyStyle=System.ServiceModel.Web.WebMessageBodyStyle.Wrapped)]
         DHIWebService.LoginResponse Login(DHIWebService.LoginRequest request);
         
         

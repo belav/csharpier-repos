@@ -3,12 +3,12 @@
 
 class X {
 
-	public extern int extern_method ()
-		{
-		}
-	
-	public static void Main ()
-		{
-		}
+    public extern int extern_method ()
+        {
+        }
+    
+    public static void Main ()
+        {
+        }
 }
       

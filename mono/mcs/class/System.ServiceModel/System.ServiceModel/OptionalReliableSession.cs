@@ -2,7 +2,7 @@
 // OptionalReliableSession.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,25 +33,25 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel
 {
-	public class OptionalReliableSession : ReliableSession
-	{
-		bool enabled;
-		ReliableSessionBindingElement binding;
+    public class OptionalReliableSession : ReliableSession
+    {
+        bool enabled;
+        ReliableSessionBindingElement binding;
 
-		public OptionalReliableSession ()
-		{
-		}
+        public OptionalReliableSession ()
+        {
+        }
 
-		public OptionalReliableSession (ReliableSessionBindingElement reliableSessionBindingElement)
-			: base (reliableSessionBindingElement)
-		{
-			if (reliableSessionBindingElement == null)
-				throw new ArgumentNullException ("reliableSessionBindingElement");
-		}
+        public OptionalReliableSession (ReliableSessionBindingElement reliableSessionBindingElement)
+            : base (reliableSessionBindingElement)
+        {
+            if (reliableSessionBindingElement == null)
+                throw new ArgumentNullException ("reliableSessionBindingElement");
+        }
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
-	}
+        public bool Enabled {
+            get { return enabled; }
+            set { enabled = value; }
+        }
+    }
 }

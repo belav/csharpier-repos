@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -162,8 +162,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
                 }
                 else
                 {
-                    // Either the parent is not blocklike, meaning WithStatements canâ€™t be used as in the other branch,
-                    // or thereâ€™s just no need to replace more than the statement itself because no following statements
+                    // Either the parent is not blocklike, meaning WithStatements can’t be used as in the other branch,
+                    // or there’s just no need to replace more than the statement itself because no following statements
                     // will be surrounded.
                     return document.WithSyntaxRoot(root.ReplaceNode(
                         declarationStatement,

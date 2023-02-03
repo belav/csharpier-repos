@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,27 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	// OBSOLETE: This has been replaced with IVirtual<T>.
+    // OBSOLETE: This has been replaced with IVirtual<T>.
 
-	public interface IRealizable<T> : IRealizableSource
-	{
-		bool IsReal { get; }
-		T    Value  { get; }
-	}
+    public interface IRealizable<T> : IRealizableSource
+    {
+        bool IsReal { get; }
+        T    Value  { get; }
+    }
 
-	public interface IRealizableSource
-	{
-		IRealizable<T> AsRealizable<T>();
-	}
+    public interface IRealizableSource
+    {
+        IRealizable<T> AsRealizable<T>();
+    }
 
-	public static class RealizableExtensions
-	{
-		public static IRealizable<T> RequireRealizable<T>(this IRealizableSource obj)
-		{
-			var realizable = obj.AsRealizable<T>();
-			if (realizable == null)
-				throw Error.NotRealizable<T>();
-			return realizable;
-		}
-	}
+    public static class RealizableExtensions
+    {
+        public static IRealizable<T> RequireRealizable<T>(this IRealizableSource obj)
+        {
+            var realizable = obj.AsRealizable<T>();
+            if (realizable == null)
+                throw Error.NotRealizable<T>();
+            return realizable;
+        }
+    }
 }

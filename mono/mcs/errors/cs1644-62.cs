@@ -4,7 +4,7 @@
 
 class C
 {
-	private protected enum E
-	{
-	}
+    private protected enum E
+    {
+    }
 }

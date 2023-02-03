@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
@@ -32,35 +32,35 @@ using System.ComponentModel.Design.Serialization;
 
 namespace System.Windows.Forms
 {
-	[DesignerSerializer ("System.Windows.Forms.Design.TableLayoutControlCollectionCodeDomSerializer, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.Serialization.CodeDomSerializer, " + Consts.AssemblySystem_Design)]
-	[ListBindable (false)]
-	public class TableLayoutControlCollection : Control.ControlCollection
-	{
-		private TableLayoutPanel panel;
+    [DesignerSerializer ("System.Windows.Forms.Design.TableLayoutControlCollectionCodeDomSerializer, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.Serialization.CodeDomSerializer, " + Consts.AssemblySystem_Design)]
+    [ListBindable (false)]
+    public class TableLayoutControlCollection : Control.ControlCollection
+    {
+        private TableLayoutPanel panel;
 
-		#region Public Constructor
-		public TableLayoutControlCollection (TableLayoutPanel container) : base (container)
-		{
-			this.panel = container;
-		}
-		#endregion
+        #region Public Constructor
+        public TableLayoutControlCollection (TableLayoutPanel container) : base (container)
+        {
+            this.panel = container;
+        }
+        #endregion
 
-		#region Public Property
-		public TableLayoutPanel Container { get { return this.panel; } }
-		#endregion
+        #region Public Property
+        public TableLayoutPanel Container { get { return this.panel; } }
+        #endregion
 
-		#region Public Method
-		public virtual void Add (Control control, int column, int row)
-		{
-			if (column < -1)
-				throw new ArgumentException ("column");
-			if (row < -1)
-				throw new ArgumentException ("row");
-			
-			base.Add (control);
-			
-			panel.SetCellPosition (control, new TableLayoutPanelCellPosition (column, row));
-		}
-		#endregion	
-	}
+        #region Public Method
+        public virtual void Add (Control control, int column, int row)
+        {
+            if (column < -1)
+                throw new ArgumentException ("column");
+            if (row < -1)
+                throw new ArgumentException ("row");
+            
+            base.Add (control);
+            
+            panel.SetCellPosition (control, new TableLayoutPanelCellPosition (column, row));
+        }
+        #endregion    
+    }
 }

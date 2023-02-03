@@ -2,8 +2,8 @@
 // NetPeerTcpBinding.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
-//	Marcos Cobena (marcoscobena@gmail.com)
+//    Atsushi Enomoto <atsushi@ximian.com>
+//    Marcos Cobena (marcoscobena@gmail.com)
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 // Copyright 2007 Marcos Cobena (http://www.youcannoteatbits.org/)
@@ -39,92 +39,92 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	public class NetPeerTcpBinding : Binding, IBindingRuntimePreferences
-	{
-		// We don't support PNRP
-		public static bool IsPnrpAvailable {
-			get { return false; }
-		}
+    public class NetPeerTcpBinding : Binding, IBindingRuntimePreferences
+    {
+        // We don't support PNRP
+        public static bool IsPnrpAvailable {
+            get { return false; }
+        }
 
-		XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas ();
-		PeerResolverSettings resolver = new PeerResolverSettings ();
-		PeerSecuritySettings security = new PeerSecuritySettings ();
-		PeerTransportBindingElement transport = new PeerTransportBindingElement ();
+        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas ();
+        PeerResolverSettings resolver = new PeerResolverSettings ();
+        PeerSecuritySettings security = new PeerSecuritySettings ();
+        PeerTransportBindingElement transport = new PeerTransportBindingElement ();
 
-		public NetPeerTcpBinding ()
-		{
-		}
+        public NetPeerTcpBinding ()
+        {
+        }
 
-		[MonoTODO]
-		public NetPeerTcpBinding (string configurationName)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public NetPeerTcpBinding (string configurationName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public IPAddress ListenIPAddress {
-			get { return transport.ListenIPAddress; }
-			set { transport.ListenIPAddress = value; }
-		}
+        [MonoTODO]
+        public IPAddress ListenIPAddress {
+            get { return transport.ListenIPAddress; }
+            set { transport.ListenIPAddress = value; }
+        }
 
-		[MonoTODO]
-		public long MaxBufferPoolSize {
-			get { return transport.MaxBufferPoolSize; }
-			set { transport.MaxBufferPoolSize = value; }
-		}
+        [MonoTODO]
+        public long MaxBufferPoolSize {
+            get { return transport.MaxBufferPoolSize; }
+            set { transport.MaxBufferPoolSize = value; }
+        }
 
-		[MonoTODO]
-		public long MaxReceivedMessageSize {
-			get { return transport.MaxReceivedMessageSize; }
-			set { transport.MaxReceivedMessageSize = value; }
-		}
+        [MonoTODO]
+        public long MaxReceivedMessageSize {
+            get { return transport.MaxReceivedMessageSize; }
+            set { transport.MaxReceivedMessageSize = value; }
+        }
 
-		public int Port {
-			get { return transport.Port; }
-			set { transport.Port = value; }
-		}
+        public int Port {
+            get { return transport.Port; }
+            set { transport.Port = value; }
+        }
 
-		public PeerResolverSettings Resolver {
-			get { return resolver; }
-		}
+        public PeerResolverSettings Resolver {
+            get { return resolver; }
+        }
 
-		public XmlDictionaryReaderQuotas ReaderQuotas {
-			get { return reader_quotas; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("value");
-				reader_quotas = value;
-			}
-		}
+        public XmlDictionaryReaderQuotas ReaderQuotas {
+            get { return reader_quotas; }
+            set {
+                if (value == null)
+                    throw new ArgumentNullException ("value");
+                reader_quotas = value;
+            }
+        }
 
-		public override string Scheme {
-			get { return "net.p2p"; }
-		}
-		
-		public PeerSecuritySettings Security {
-			get { return security; }
-		}
+        public override string Scheme {
+            get { return "net.p2p"; }
+        }
+        
+        public PeerSecuritySettings Security {
+            get { return security; }
+        }
 
-		public EnvelopeVersion EnvelopeVersion {
-			get { return EnvelopeVersion.Soap12; }
-		}
+        public EnvelopeVersion EnvelopeVersion {
+            get { return EnvelopeVersion.Soap12; }
+        }
 
-		public override BindingElementCollection
-			CreateBindingElements ()
-		{
-			var mbe = new BinaryMessageEncodingBindingElement ();
-			if (ReaderQuotas != null)
-				ReaderQuotas.CopyTo (mbe.ReaderQuotas);
+        public override BindingElementCollection
+            CreateBindingElements ()
+        {
+            var mbe = new BinaryMessageEncodingBindingElement ();
+            if (ReaderQuotas != null)
+                ReaderQuotas.CopyTo (mbe.ReaderQuotas);
 
-			var prbe = Resolver.CreateBinding ();
+            var prbe = Resolver.CreateBinding ();
 
-			return new BindingElementCollection (new BindingElement [] { mbe, prbe, transport.Clone () });
-		}
+            return new BindingElementCollection (new BindingElement [] { mbe, prbe, transport.Clone () });
+        }
 
-		// explicit interface implementations
+        // explicit interface implementations
 
-		bool IBindingRuntimePreferences.ReceiveSynchronously {
-			get { return false; }
-		}
-	}
+        bool IBindingRuntimePreferences.ReceiveSynchronously {
+            get { return false; }
+        }
+    }
 }

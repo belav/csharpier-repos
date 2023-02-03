@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,37 +14,37 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	/// <summary>
-	/// Contract for dictionary validation.
-	/// </summary>
-	public interface IDictionaryValidator
-	{
-		/// <summary>
-		/// Determines if <see cref="IDictionaryAdapter"/> is valid.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <returns>true if valid.</returns>
-		bool IsValid(IDictionaryAdapter dictionaryAdapter);
+    /// <summary>
+    /// Contract for dictionary validation.
+    /// </summary>
+    public interface IDictionaryValidator
+    {
+        /// <summary>
+        /// Determines if <see cref="IDictionaryAdapter"/> is valid.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <returns>true if valid.</returns>
+        bool IsValid(IDictionaryAdapter dictionaryAdapter);
 
-		/// <summary>
-		/// Validates the <see cref="IDictionaryAdapter"/>.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <returns>The error summary information.</returns>
-		string Validate(IDictionaryAdapter dictionaryAdapter);
+        /// <summary>
+        /// Validates the <see cref="IDictionaryAdapter"/>.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <returns>The error summary information.</returns>
+        string Validate(IDictionaryAdapter dictionaryAdapter);
 
-		/// <summary>
-		/// Validates the <see cref="IDictionaryAdapter"/> for a property.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="property">The property to validate.</param>
-		/// <returns>The property summary information.</returns>
-		string Validate(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property);
+        /// <summary>
+        /// Validates the <see cref="IDictionaryAdapter"/> for a property.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="property">The property to validate.</param>
+        /// <returns>The property summary information.</returns>
+        string Validate(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property);
 
-		/// <summary>
-		/// Invalidates any results cached by the validator.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		void Invalidate(IDictionaryAdapter dictionaryAdapter);
-	}
+        /// <summary>
+        /// Invalidates any results cached by the validator.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        void Invalidate(IDictionaryAdapter dictionaryAdapter);
+    }
 }

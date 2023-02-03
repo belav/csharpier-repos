@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,119 +14,119 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	using System;
-	public interface InterfaceWithMethodsWithAllKindsOfOptionalParameters
-	{
-		void MethodWithOptionalByteParameter(byte b = 0);
+    using System;
+    public interface InterfaceWithMethodsWithAllKindsOfOptionalParameters
+    {
+        void MethodWithOptionalByteParameter(byte b = 0);
 
-		void MethodWithOptionalNonDefaultByteParameter(byte b = 3);
+        void MethodWithOptionalNonDefaultByteParameter(byte b = 3);
 
-		void MethodWithOptionalNullableByteParameter(byte? b = null);
+        void MethodWithOptionalNullableByteParameter(byte? b = null);
 
-		void MethodWithOptionalNonDefaultNullableByteParameter(byte? b = 3);
+        void MethodWithOptionalNonDefaultNullableByteParameter(byte? b = 3);
 
-		void MethodWithOptionalSignedByteParameter(sbyte b = 0);
+        void MethodWithOptionalSignedByteParameter(sbyte b = 0);
 
-		void MethodWithOptionalNonDefaultSignedByteParameter(sbyte b = 3);
+        void MethodWithOptionalNonDefaultSignedByteParameter(sbyte b = 3);
 
-		void MethodWithOptionalNullableSignedByteParameter(sbyte? b = null);
+        void MethodWithOptionalNullableSignedByteParameter(sbyte? b = null);
 
-		void MethodWithOptionalNonDefaultNullableSignedByteParameter(sbyte? b = 3);
+        void MethodWithOptionalNonDefaultNullableSignedByteParameter(sbyte? b = 3);
 
-		void MethodWithOptionalShortParameter(short s = 0);
+        void MethodWithOptionalShortParameter(short s = 0);
 
-		void MethodWithOptionalNonDefaultShortParameter(short s = 3);
+        void MethodWithOptionalNonDefaultShortParameter(short s = 3);
 
-		void MethodWithOptionalNullableShortParameter(short? s = null);
+        void MethodWithOptionalNullableShortParameter(short? s = null);
 
-		void MethodWithOptionalNonDefaultNullableShortParameter(short? s = 3);
+        void MethodWithOptionalNonDefaultNullableShortParameter(short? s = 3);
 
-		void MethodWithOptionalUnsignedShortParameter(ushort s = 0);
+        void MethodWithOptionalUnsignedShortParameter(ushort s = 0);
 
-		void MethodWithOptionalNonDefaultUnsignedShortParameter(ushort s = 3);
+        void MethodWithOptionalNonDefaultUnsignedShortParameter(ushort s = 3);
 
-		void MethodWithOptionalNullableUnsignedShortParameter(ushort? s = null);
+        void MethodWithOptionalNullableUnsignedShortParameter(ushort? s = null);
 
-		void MethodWithOptionalNonDefaultNullableUnsignedShortParameter(ushort? s = 3);
+        void MethodWithOptionalNonDefaultNullableUnsignedShortParameter(ushort? s = 3);
 
-		void MethodWithOptionalIntParameter(int i = 0);
+        void MethodWithOptionalIntParameter(int i = 0);
 
-		void MethodWithOptionalNonDefaultIntParameter(int i = 3);
+        void MethodWithOptionalNonDefaultIntParameter(int i = 3);
 
-		void MethodWithOptionalNullableIntParameter(int? i = null);
+        void MethodWithOptionalNullableIntParameter(int? i = null);
 
-		void MethodWithOptionalNonDefaultNullableIntParameter(int? i = 3);
+        void MethodWithOptionalNonDefaultNullableIntParameter(int? i = 3);
 
-		void MethodWithOptionalUnsignedIntParameter(uint i = 0);
+        void MethodWithOptionalUnsignedIntParameter(uint i = 0);
 
-		void MethodWithOptionalNonDefaultUnsignedIntParameter(uint i = 3);
+        void MethodWithOptionalNonDefaultUnsignedIntParameter(uint i = 3);
 
-		void MethodWithOptionalNullableUnsignedIntParameter(uint? i = null);
+        void MethodWithOptionalNullableUnsignedIntParameter(uint? i = null);
 
-		void MethodWithOptionalNonDefaultNullableUnsignedIntParameter(uint? i = 3);
+        void MethodWithOptionalNonDefaultNullableUnsignedIntParameter(uint? i = 3);
 
-		void MethodWithOptionalLongParameter(long l = 0);
+        void MethodWithOptionalLongParameter(long l = 0);
 
-		void MethodWithOptionalNonDefaultLongParameter(long l = 3L);
+        void MethodWithOptionalNonDefaultLongParameter(long l = 3L);
 
-		void MethodWithOptionalNullableLongParameter(long? l = null);
+        void MethodWithOptionalNullableLongParameter(long? l = null);
 
-		void MethodWithOptionalNonDefaultNullableLongParameter(long? l = 3L);
+        void MethodWithOptionalNonDefaultNullableLongParameter(long? l = 3L);
 
-		void MethodWithOptionalUnsignedLongParameter(ulong l = 0);
+        void MethodWithOptionalUnsignedLongParameter(ulong l = 0);
 
-		void MethodWithOptionalNonDefaultUnsignedLongParameter(ulong l = 3L);
+        void MethodWithOptionalNonDefaultUnsignedLongParameter(ulong l = 3L);
 
-		void MethodWithOptionalNullableUnsignedLongParameter(ulong? l = null);
+        void MethodWithOptionalNullableUnsignedLongParameter(ulong? l = null);
 
-		void MethodWithOptionalNonDefaultNullableUnsignedLongParameter(ulong? l = 3L);
+        void MethodWithOptionalNonDefaultNullableUnsignedLongParameter(ulong? l = 3L);
 
-		void MethodWithOptionalFloatParameter(float f = 0f);
+        void MethodWithOptionalFloatParameter(float f = 0f);
 
-		void MethodWithOptionalNonDefaultFloatParameter(float f = 3f);
+        void MethodWithOptionalNonDefaultFloatParameter(float f = 3f);
 
-		void MethodWithOptionalNullableFloatParameter(float? f = null);
+        void MethodWithOptionalNullableFloatParameter(float? f = null);
 
-		void MethodWithOptionalNonDefaultNullableFloatParameter(float? f = 3f);
+        void MethodWithOptionalNonDefaultNullableFloatParameter(float? f = 3f);
 
-		void MethodWithOptionalDoubleParameter(double d = 0d);
+        void MethodWithOptionalDoubleParameter(double d = 0d);
 
-		void MethodWithOptionalNonDefaultDoubleParameter(double d = 3d);
+        void MethodWithOptionalNonDefaultDoubleParameter(double d = 3d);
 
-		void MethodWithOptionalNullableDoubleParameter(double? d = null);
+        void MethodWithOptionalNullableDoubleParameter(double? d = null);
 
-		void MethodWithOptionalNonDefaultNullableDoubleParameter(double? d = 3d);
+        void MethodWithOptionalNonDefaultNullableDoubleParameter(double? d = 3d);
 
-		void MethodWithOptionalCharParameter(char c = '\0');
+        void MethodWithOptionalCharParameter(char c = '\0');
 
-		void MethodWithOptionalNonDefaultCharParameter(char c = 'A');
+        void MethodWithOptionalNonDefaultCharParameter(char c = 'A');
 
-		void MethodWithOptionalNullableCharParameter(char? c = null);
+        void MethodWithOptionalNullableCharParameter(char? c = null);
 
-		void MethodWithOptionalNonDefaultNullableCharParameter(char? c = 'A');
+        void MethodWithOptionalNonDefaultNullableCharParameter(char? c = 'A');
 
-		void MethodWithOptionalBoolParameter(bool b = false);
+        void MethodWithOptionalBoolParameter(bool b = false);
 
-		void MethodWithOptionalNonDefaultBoolParameter(bool b = true);
+        void MethodWithOptionalNonDefaultBoolParameter(bool b = true);
 
-		void MethodWithOptionalNullableBoolParameter(bool? b = null);
+        void MethodWithOptionalNullableBoolParameter(bool? b = null);
 
-		void MethodWithOptionalNonDefaultNullableBoolParameter(bool? b = true);
+        void MethodWithOptionalNonDefaultNullableBoolParameter(bool? b = true);
 
-		void MethodWithOptionalObjectParameter(object o = null);
+        void MethodWithOptionalObjectParameter(object o = null);
 
-		void MethodWithOptionalNullStringParameter(string s = null);
+        void MethodWithOptionalNullStringParameter(string s = null);
 
-		void MethodWithOptionalStringParameter(string s = "");
+        void MethodWithOptionalStringParameter(string s = "");
 
-		void MethodWithOptionalDecimalParameter(decimal d = 0m);
+        void MethodWithOptionalDecimalParameter(decimal d = 0m);
 
-		void MethodWithOptionalNonDefaultDecimalParameter(decimal d = 3m);
+        void MethodWithOptionalNonDefaultDecimalParameter(decimal d = 3m);
 
-		void MethodWithOptionalNullableDecimalarameter(decimal? d = null);
+        void MethodWithOptionalNullableDecimalarameter(decimal? d = null);
 
-		void MethodWithOptionalNonDefaultNullableDecimalParameter(decimal? d = 3m);
-		void MethodWithOptionalNullableEnumParameter(ConsoleColor? c = null);
-		void MethodWithOptionalNonDefaultNullableEnumParameter(ConsoleColor? c = ConsoleColor.Cyan);
-	}
+        void MethodWithOptionalNonDefaultNullableDecimalParameter(decimal? d = 3m);
+        void MethodWithOptionalNullableEnumParameter(ConsoleColor? c = null);
+        void MethodWithOptionalNonDefaultNullableEnumParameter(ConsoleColor? c = ConsoleColor.Cyan);
+    }
 }

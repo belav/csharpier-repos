@@ -4,7 +4,7 @@
 using System;
 
 public class Test {
-	void Main () {
-		Console.WriteLine (++0);
-	}
+    void Main () {
+        Console.WriteLine (++0);
+    }
 }

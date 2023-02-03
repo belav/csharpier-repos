@@ -26,47 +26,47 @@ public class Ev
 }
 
 public interface EventInterface {
-	event EventHandler Event;
+    event EventHandler Event;
 }
 
 class Foo : EventInterface {
-	event EventHandler EventInterface.Event
-	{
-			add { }
-			remove { }
-	}
+    event EventHandler EventInterface.Event
+    {
+            add { }
+            remove { }
+    }
 }
 
 public class C {
     
-	public static void my_from_fixed(out int val)
-	{
-		val = 3;
-	}
+    public static void my_from_fixed(out int val)
+    {
+        val = 3;
+    }
         
-	public static void month_from_fixed(int date)
-	{
-		int year;
-		my_from_fixed(out year);
-	}
+    public static void month_from_fixed(int date)
+    {
+        int year;
+        my_from_fixed(out year);
+    }
         
-	internal static int CreateFromString (int arg)
-	{
-		int major = 0;
-		int number = 5;
+    internal static int CreateFromString (int arg)
+    {
+        int major = 0;
+        int number = 5;
 
-		major = number;
-		number = -1;
+        major = number;
+        number = -1;
                     
-		return major;
-	}   
+        return major;
+    }   
         
         public unsafe double* GetValue (double value)
-	{
-		double d = value;
-		return &d;
-	}        
+    {
+        double d = value;
+        return &d;
+    }        
         
-	public static void Main () {
-	}
+    public static void Main () {
+    }
 }

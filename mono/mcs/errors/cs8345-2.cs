@@ -8,5 +8,5 @@ public ref struct S
 
 ref struct Test
 {
-	static S field;
+    static S field;
 }

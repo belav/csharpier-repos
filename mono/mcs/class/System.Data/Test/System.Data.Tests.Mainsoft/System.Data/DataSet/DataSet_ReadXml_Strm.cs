@@ -40,95 +40,95 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataSet_ReadXml_Strm : GHTBase
 {
-	[Test]
-	[Category ("NotWorking")]
-	public void Main()
-	{
-		DataSet_ReadXml_Strm tc = new DataSet_ReadXml_Strm();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataSet_ReadXml_Strm");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
+    [Test]
+    [Category ("NotWorking")]
+    public void Main()
+    {
+        DataSet_ReadXml_Strm tc = new DataSet_ReadXml_Strm();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataSet_ReadXml_Strm");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
 
-	}
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
-	
-		DataSet ds1 = new DataSet();
-		ds1.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
-		ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
-
-		//add data to check GH bug of DataSet.ReadXml of empty strings
-		ds1.Tables[1].Rows.Add(new object[] {7,1,string.Empty,string.Empty,new DateTime(2000,1,1,0,0,0,0),35});
-		ds1.Tables[1].Rows.Add(new object[] {7,2," ","		",new DateTime(2000,1,1,0,0,0,0),35});
-		ds1.Tables[1].Rows.Add(new object[] {7,3,"","",new DateTime(2000,1,1,0,0,0,0),35});
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		System.IO.MemoryStream ms = new System.IO.MemoryStream();
-		//write xml file, data only
-		ds1.WriteXml(ms);
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		//copy both data and schema
-		DataSet ds2 = ds1.Copy();
-		//clear the data
-		ds2.Clear();
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-		ms.Position=0;
-		ds2.ReadXml(ms);
-		
-	
-		//check xml data
-		try
-		{
-			BeginCase("ReadXml - Tables count");
-			Compare(ds1.Tables.Count ,ds2.Tables.Count );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+    public void run()
+    {
+        Exception exp = null;
+    
+        DataSet ds1 = new DataSet();
+        ds1.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+        ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
 
-		try
-		{
-			BeginCase("ReadXml - Table 1 row count");
-			Compare(ds1.Tables[0].Rows.Count ,ds2.Tables[0].Rows.Count);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        //add data to check GH bug of DataSet.ReadXml of empty strings
+        ds1.Tables[1].Rows.Add(new object[] {7,1,string.Empty,string.Empty,new DateTime(2000,1,1,0,0,0,0),35});
+        ds1.Tables[1].Rows.Add(new object[] {7,2," ","        ",new DateTime(2000,1,1,0,0,0,0),35});
+        ds1.Tables[1].Rows.Add(new object[] {7,3,"","",new DateTime(2000,1,1,0,0,0,0),35});
 
-		try
-		{
-			BeginCase("ReadXml - Table 2 row count");
-			Compare(ds1.Tables[1].Rows.Count ,ds2.Tables[1].Rows.Count);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		ms.Close();
-		
 
-	}
+        System.IO.MemoryStream ms = new System.IO.MemoryStream();
+        //write xml file, data only
+        ds1.WriteXml(ms);
+
+        //copy both data and schema
+        DataSet ds2 = ds1.Copy();
+        //clear the data
+        ds2.Clear();
+
+        ms.Position=0;
+        ds2.ReadXml(ms);
+        
+    
+        //check xml data
+        try
+        {
+            BeginCase("ReadXml - Tables count");
+            Compare(ds1.Tables.Count ,ds2.Tables.Count );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("ReadXml - Table 1 row count");
+            Compare(ds1.Tables[0].Rows.Count ,ds2.Tables[0].Rows.Count);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("ReadXml - Table 2 row count");
+            Compare(ds1.Tables[1].Rows.Count ,ds2.Tables[1].Rows.Count);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        ms.Close();
+        
+
+    }
 }
 }

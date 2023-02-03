@@ -2,7 +2,7 @@
 // IILDecoder.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,13 +29,13 @@
 using Mono.CodeContracts.Static.AST.Visitors;
 
 namespace Mono.CodeContracts.Static.Providers {
-	interface IILDecoder<Label, Source, Dest, TContext, TEdgeData> {
-		TContext ContextProvider { get; }
+    interface IILDecoder<Label, Source, Dest, TContext, TEdgeData> {
+        TContext ContextProvider { get; }
 
-		Result ForwardDecode<Data, Result, Visitor> (Label pc, Visitor visitor, Data state)
-			where Visitor : IILVisitor<Label, Source, Dest, Data, Result>;
+        Result ForwardDecode<Data, Result, Visitor> (Label pc, Visitor visitor, Data state)
+            where Visitor : IILVisitor<Label, Source, Dest, Data, Result>;
 
-		bool IsUnreachable (Label pc);
-		TEdgeData EdgeData (Label from, Label to);
-	}
+        bool IsUnreachable (Label pc);
+        TEdgeData EdgeData (Label from, Label to);
+    }
 }

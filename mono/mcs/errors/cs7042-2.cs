@@ -5,6 +5,6 @@ using System.Runtime.InteropServices;
 
 public class C
 {
-	[DllImport ("my.dll")]
-	static extern void Foo<T> ();
+    [DllImport ("my.dll")]
+    static extern void Foo<T> ();
 }

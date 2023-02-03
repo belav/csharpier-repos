@@ -25,7 +25,7 @@
 namespace System.Windows.Forms.DataVisualization.Charting
 {
 
-	public class StripLinesCollection : ChartElementCollection<StripLine>
-	{
-	}
+    public class StripLinesCollection : ChartElementCollection<StripLine>
+    {
+    }
 }

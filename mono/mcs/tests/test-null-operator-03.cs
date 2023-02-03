@@ -27,7 +27,7 @@ class C
         if (res != null)
             return 1;
 
-    	Console.WriteLine ("ok");
+        Console.WriteLine ("ok");
         return 0;
     }
 }

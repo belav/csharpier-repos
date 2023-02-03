@@ -2,7 +2,7 @@
 // Update.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,24 +30,24 @@ using System;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-	abstract class Update<TFunc, TAbstractDomain>
-		where TFunc : IEquatable<TFunc>, IConstantInfo
-		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
-		public Update<TFunc, TAbstractDomain> Next { get; private set; }
+    abstract class Update<TFunc, TAbstractDomain>
+        where TFunc : IEquatable<TFunc>, IConstantInfo
+        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+        public Update<TFunc, TAbstractDomain> Next { get; private set; }
 
-		public abstract void Replay (MergeInfo<TFunc, TAbstractDomain> merge);
-		public abstract void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge);
+        public abstract void Replay (MergeInfo<TFunc, TAbstractDomain> merge);
+        public abstract void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge);
 
-		public static Update<TFunc, TAbstractDomain> Reverse (Sequence<Update<TFunc, TAbstractDomain>> updates,
-		                                                      Sequence<Update<TFunc, TAbstractDomain>> common)
-		{
-			Update<TFunc, TAbstractDomain> last = null;
-			for (; updates != common; updates = updates.Tail) {
-				Update<TFunc, TAbstractDomain> head = updates.Head;
-				head.Next = last;
-				last = head;
-			}
-			return last;
-		}
-	}
+        public static Update<TFunc, TAbstractDomain> Reverse (Sequence<Update<TFunc, TAbstractDomain>> updates,
+                                                              Sequence<Update<TFunc, TAbstractDomain>> common)
+        {
+            Update<TFunc, TAbstractDomain> last = null;
+            for (; updates != common; updates = updates.Tail) {
+                Update<TFunc, TAbstractDomain> head = updates.Head;
+                head.Next = last;
+                last = head;
+            }
+            return last;
+        }
+    }
 }

@@ -2,8 +2,8 @@
 // System.Web.Configuration.BuildProvider
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,76 +35,76 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class BuildProvider : ConfigurationElement {
+    public sealed class BuildProvider : ConfigurationElement {
 
-		static ConfigurationProperty extensionProp;
-		static ConfigurationProperty typeProp;
-		static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty extensionProp;
+        static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
 
-		static BuildProvider ()
-		{
-			extensionProp = new ConfigurationProperty ("extension", typeof (string), "",
-								   TypeDescriptor.GetConverter (typeof (string)), PropertyHelper.NonEmptyStringValidator,
-								   ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			typeProp = new ConfigurationProperty ("type", typeof (string), "",
-							      TypeDescriptor.GetConverter (typeof (string)), PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection();
+        static BuildProvider ()
+        {
+            extensionProp = new ConfigurationProperty ("extension", typeof (string), "",
+                                   TypeDescriptor.GetConverter (typeof (string)), PropertyHelper.NonEmptyStringValidator,
+                                   ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            typeProp = new ConfigurationProperty ("type", typeof (string), "",
+                                  TypeDescriptor.GetConverter (typeof (string)), PropertyHelper.NonEmptyStringValidator,
+                                  ConfigurationPropertyOptions.IsRequired);
+            properties = new ConfigurationPropertyCollection();
 
-			properties.Add (extensionProp);
-			properties.Add (typeProp);
-		}
+            properties.Add (extensionProp);
+            properties.Add (typeProp);
+        }
 
-		internal BuildProvider ()
-		{
-		}
+        internal BuildProvider ()
+        {
+        }
 
-		public BuildProvider (string extension, string type)
-		{
-			this.Extension = extension;
-			this.Type = type;
-		}
+        public BuildProvider (string extension, string type)
+        {
+            this.Extension = extension;
+            this.Type = type;
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("extension", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Extension {
-			get { return (string) base[extensionProp]; }
-			set {
-				string ext;
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("extension", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        public string Extension {
+            get { return (string) base[extensionProp]; }
+            set {
+                string ext;
 
-				if (!String.IsNullOrEmpty (value))
-					ext = value.ToLowerInvariant ();
-				else
-					ext = value;
-				base [extensionProp] = ext;
-			}
-		}
+                if (!String.IsNullOrEmpty (value))
+                    ext = value.ToLowerInvariant ();
+                else
+                    ext = value;
+                base [extensionProp] = ext;
+            }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Type {
-			get { return (string) base[typeProp]; }
-			set { base[typeProp] = value; }
-		}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
+        public string Type {
+            get { return (string) base[typeProp]; }
+            set { base[typeProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		public override bool Equals (object provider)
-		{
-			BuildProvider p = provider as BuildProvider;
-			if (p == null)
-				return false;
+        public override bool Equals (object provider)
+        {
+            BuildProvider p = provider as BuildProvider;
+            if (p == null)
+                return false;
 
-			return (Extension == p.Extension && Type == p.Type);
-		}
+            return (Extension == p.Extension && Type == p.Type);
+        }
 
-		public override int GetHashCode ()
-		{
-			return (Extension.GetHashCode () + Type.GetHashCode ());
-		}
-	}
-	
+        public override int GetHashCode ()
+        {
+            return (Extension.GetHashCode () + Type.GetHashCode ());
+        }
+    }
+    
 }
 

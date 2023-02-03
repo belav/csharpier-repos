@@ -3,9 +3,9 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var l = x => x + 1;
-	}
+    static void Main ()
+    {
+        var l = x => x + 1;
+    }
 }
 

@@ -2,7 +2,7 @@
 // System.Web.UI.ResourceBasedLiteralControl.cs
 //
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -32,51 +32,51 @@ using System.Text;
 namespace System.Web.UI
 {
         class ResourceBasedLiteralControl : LiteralControl
-	{
-		IntPtr ptr;
-		int length;
+    {
+        IntPtr ptr;
+        int length;
 
-		public ResourceBasedLiteralControl (IntPtr ptr, int length)
-		{
-			EnableViewState = false;
-			AutoID = false;
-			this.ptr = ptr;
-			this.length = length;
-		}
+        public ResourceBasedLiteralControl (IntPtr ptr, int length)
+        {
+            EnableViewState = false;
+            AutoID = false;
+            this.ptr = ptr;
+            this.length = length;
+        }
 
-		public override string Text {
-			get {
-				if (length == -1)
-					return base.Text;
+        public override string Text {
+            get {
+                if (length == -1)
+                    return base.Text;
 
-				byte [] bytes = new byte [length];
-				Marshal.Copy (ptr, bytes, 0, length);
-				return Encoding.UTF8.GetString (bytes);
-			}
-			set {
-				length = -1;
-				base.Text = value;
-			}
-		}
+                byte [] bytes = new byte [length];
+                Marshal.Copy (ptr, bytes, 0, length);
+                return Encoding.UTF8.GetString (bytes);
+            }
+            set {
+                length = -1;
+                base.Text = value;
+            }
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			if (length == -1) {
-				writer.Write (base.Text);
-				return;
-			}
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            if (length == -1) {
+                writer.Write (base.Text);
+                return;
+            }
 
-			HttpWriter hw = writer.GetHttpWriter ();
-			if (hw == null || hw.Response.ContentEncoding.CodePage != 65001) {
-				byte [] bytes = new byte [length];
-				Marshal.Copy (ptr, bytes, 0, length);
-				writer.Write (Encoding.UTF8.GetString (bytes));
-				bytes = null;
-				return;
-			}
+            HttpWriter hw = writer.GetHttpWriter ();
+            if (hw == null || hw.Response.ContentEncoding.CodePage != 65001) {
+                byte [] bytes = new byte [length];
+                Marshal.Copy (ptr, bytes, 0, length);
+                writer.Write (Encoding.UTF8.GetString (bytes));
+                bytes = null;
+                return;
+            }
 
-			hw.WriteUTF8Ptr (ptr, length);
-		}
-	}
+            hw.WriteUTF8Ptr (ptr, length);
+        }
+    }
 }
 

@@ -20,10 +20,10 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita	avidigal@novell.com
+//    Andreia Gaita    avidigal@novell.com
 //
 
 namespace System.Windows.Forms
 {
-	public delegate void HtmlElementEventHandler (object sender, HtmlElementEventArgs e);
+    public delegate void HtmlElementEventHandler (object sender, HtmlElementEventArgs e);
 }

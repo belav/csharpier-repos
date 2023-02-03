@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,23 +29,23 @@
 using System.Drawing;
 
 namespace System.Windows.Forms {
-	public class ContentsResizedEventArgs : EventArgs {
-		#region Local Variables
-		Rectangle	rect;
-		#endregion	// Local Variables
+    public class ContentsResizedEventArgs : EventArgs {
+        #region Local Variables
+        Rectangle    rect;
+        #endregion    // Local Variables
 
-		#region Public Constructors
-		public ContentsResizedEventArgs(Rectangle newRectangle) {
-			rect = newRectangle;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public ContentsResizedEventArgs(Rectangle newRectangle) {
+            rect = newRectangle;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public Rectangle NewRectangle {
-			get {
-				return rect;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public Rectangle NewRectangle {
+            get {
+                return rect;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

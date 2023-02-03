@@ -14,47 +14,47 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using Castle.DynamicProxy.Tests.Interceptors;
-	using Castle.DynamicProxy.Tests.InterClasses;
-	using Castle.DynamicProxy.Tests.Interfaces;
+    using Castle.DynamicProxy.Tests.Interceptors;
+    using Castle.DynamicProxy.Tests.InterClasses;
+    using Castle.DynamicProxy.Tests.Interfaces;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class InvocationTypesCachingTestCase:BasePEVerifyTestCase
-	{
-		[Test]
-		public void Should_share_invocations_for_interface_methods()
-		{
-			var interceptor1 = new KeepDataInterceptor();
-			var interceptor2 = new KeepDataInterceptor();
-			var first = generator.CreateInterfaceProxyWithTarget<IOne>(new One(), interceptor1);
-			var second = generator.CreateInterfaceProxyWithTarget<IOne>(new OneTwo(), interceptor2);
+    [TestFixture]
+    public class InvocationTypesCachingTestCase:BasePEVerifyTestCase
+    {
+        [Test]
+        public void Should_share_invocations_for_interface_methods()
+        {
+            var interceptor1 = new KeepDataInterceptor();
+            var interceptor2 = new KeepDataInterceptor();
+            var first = generator.CreateInterfaceProxyWithTarget<IOne>(new One(), interceptor1);
+            var second = generator.CreateInterfaceProxyWithTarget<IOne>(new OneTwo(), interceptor2);
 
-			Assert.AreNotEqual(first.GetType(), second.GetType(), "proxy types are different");
+            Assert.AreNotEqual(first.GetType(), second.GetType(), "proxy types are different");
 
-			first.OneMethod();
-			second.OneMethod();
+            first.OneMethod();
+            second.OneMethod();
 
-			Assert.AreEqual(interceptor1.Invocation.GetType(), interceptor2.Invocation.GetType());
-		}
+            Assert.AreEqual(interceptor1.Invocation.GetType(), interceptor2.Invocation.GetType());
+        }
 
-		[Test]
-		public void Should_not_share_invocations_for_interface_methods_when_one_is_IChangeProxyTarget()
-		{
-			var interceptor1 = new KeepDataInterceptor();
-			var interceptor2 = new KeepDataInterceptor();
-			var first = generator.CreateInterfaceProxyWithTarget<IOne>(new One(), interceptor1);
-			var second = generator.CreateInterfaceProxyWithTargetInterface<IOne>(new OneTwo(), interceptor2);
+        [Test]
+        public void Should_not_share_invocations_for_interface_methods_when_one_is_IChangeProxyTarget()
+        {
+            var interceptor1 = new KeepDataInterceptor();
+            var interceptor2 = new KeepDataInterceptor();
+            var first = generator.CreateInterfaceProxyWithTarget<IOne>(new One(), interceptor1);
+            var second = generator.CreateInterfaceProxyWithTargetInterface<IOne>(new OneTwo(), interceptor2);
 
-			Assert.AreNotEqual(first.GetType(), second.GetType(), "proxy types are different");
+            Assert.AreNotEqual(first.GetType(), second.GetType(), "proxy types are different");
 
-			first.OneMethod();
-			second.OneMethod();
+            first.OneMethod();
+            second.OneMethod();
 
-			Assert.IsNotInstanceOf<IChangeProxyTarget>(interceptor1.Invocation);
-			Assert.IsInstanceOf<IChangeProxyTarget>(interceptor2.Invocation);
-			Assert.AreNotEqual(interceptor1.Invocation.GetType(), interceptor2.Invocation.GetType());
-		}
-	}
+            Assert.IsNotInstanceOf<IChangeProxyTarget>(interceptor1.Invocation);
+            Assert.IsInstanceOf<IChangeProxyTarget>(interceptor2.Invocation);
+            Assert.AreNotEqual(interceptor1.Invocation.GetType(), interceptor2.Invocation.GetType());
+        }
+    }
 }

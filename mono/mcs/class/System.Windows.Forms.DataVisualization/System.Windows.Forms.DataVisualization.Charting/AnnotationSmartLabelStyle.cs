@@ -24,7 +24,7 @@
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class AnnotationSmartLabelStyle : SmartLabelStyle
-	{
-	}
+    public class AnnotationSmartLabelStyle : SmartLabelStyle
+    {
+    }
 }

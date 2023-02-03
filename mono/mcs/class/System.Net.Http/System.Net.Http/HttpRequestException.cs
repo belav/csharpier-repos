@@ -2,7 +2,7 @@
 // HttpRequestException.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2011 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,21 +28,21 @@
 
 namespace System.Net.Http
 {
-	[Serializable]
-	public class HttpRequestException : Exception
-	{
-		public HttpRequestException ()
-		{
-		}
+    [Serializable]
+    public class HttpRequestException : Exception
+    {
+        public HttpRequestException ()
+        {
+        }
 
-		public HttpRequestException (string message)
-			: base (message)
-		{
-		}
+        public HttpRequestException (string message)
+            : base (message)
+        {
+        }
 
-		public HttpRequestException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
-	}
+        public HttpRequestException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
+    }
 }

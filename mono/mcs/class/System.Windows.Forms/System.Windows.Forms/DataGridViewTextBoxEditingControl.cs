@@ -20,107 +20,107 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
 
-	[ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
-	[ComVisibleAttribute(true)]
-	public class DataGridViewTextBoxEditingControl : TextBox, IDataGridViewEditingControl {
+    [ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
+    [ComVisibleAttribute(true)]
+    public class DataGridViewTextBoxEditingControl : TextBox, IDataGridViewEditingControl {
 
-		private DataGridView editingControlDataGridView;
-		private int rowIndex;
-		private bool editingControlValueChanged;
-		private bool repositionEditingControlOnValueChange;
+        private DataGridView editingControlDataGridView;
+        private int rowIndex;
+        private bool editingControlValueChanged;
+        private bool repositionEditingControlOnValueChange;
 
-		public DataGridViewTextBoxEditingControl ()
-		{
-			repositionEditingControlOnValueChange = false;
-		}
+        public DataGridViewTextBoxEditingControl ()
+        {
+            repositionEditingControlOnValueChange = false;
+        }
 
-		public virtual DataGridView EditingControlDataGridView {
-			get { return editingControlDataGridView; }
-			set { editingControlDataGridView = value; }
-		}
+        public virtual DataGridView EditingControlDataGridView {
+            get { return editingControlDataGridView; }
+            set { editingControlDataGridView = value; }
+        }
 
-		public virtual object EditingControlFormattedValue {
-			get { return base.Text; }
-			set { base.Text = (string) value; }
-		}
+        public virtual object EditingControlFormattedValue {
+            get { return base.Text; }
+            set { base.Text = (string) value; }
+        }
 
-		public virtual int EditingControlRowIndex {
-			get { return rowIndex; }
-			set { rowIndex = value; }
-		}
+        public virtual int EditingControlRowIndex {
+            get { return rowIndex; }
+            set { rowIndex = value; }
+        }
 
-		public virtual bool EditingControlValueChanged {
-			get { return editingControlValueChanged; }
-			set { editingControlValueChanged = value; }
-		}
+        public virtual bool EditingControlValueChanged {
+            get { return editingControlValueChanged; }
+            set { editingControlValueChanged = value; }
+        }
 
-		public virtual Cursor EditingPanelCursor {
-			get { return Cursors.Default; }
-		}
+        public virtual Cursor EditingPanelCursor {
+            get { return Cursors.Default; }
+        }
 
-		public virtual bool RepositionEditingControlOnValueChange {
-			get { return repositionEditingControlOnValueChange; }
-		}
+        public virtual bool RepositionEditingControlOnValueChange {
+            get { return repositionEditingControlOnValueChange; }
+        }
 
-		public virtual void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle)
-		{
-			Font = dataGridViewCellStyle.Font;
-			BackColor = dataGridViewCellStyle.BackColor;
-			ForeColor = dataGridViewCellStyle.ForeColor;
-		}
+        public virtual void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle)
+        {
+            Font = dataGridViewCellStyle.Font;
+            BackColor = dataGridViewCellStyle.BackColor;
+            ForeColor = dataGridViewCellStyle.ForeColor;
+        }
 
-		public virtual bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey)
-		{
-			switch (keyData) {
-				case Keys.Left:
-					return SelectionStart != 0;
-				case Keys.Right:
-					return SelectionStart != TextLength;
-				case Keys.Down:
-				case Keys.Up:
-					return false;
-			}
-			
-			return true;
-		}
+        public virtual bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey)
+        {
+            switch (keyData) {
+                case Keys.Left:
+                    return SelectionStart != 0;
+                case Keys.Right:
+                    return SelectionStart != TextLength;
+                case Keys.Down:
+                case Keys.Up:
+                    return false;
+            }
+            
+            return true;
+        }
 
-		public virtual object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context)
-		{
-			return EditingControlFormattedValue;
-		}
+        public virtual object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context)
+        {
+            return EditingControlFormattedValue;
+        }
 
-		public virtual void PrepareEditingControlForEdit (bool selectAll)
-		{
-			Focus();
-			if (selectAll) {
-				SelectAll();
-			}
-			editingControlValueChanged = false;
-		}
+        public virtual void PrepareEditingControlForEdit (bool selectAll)
+        {
+            Focus();
+            if (selectAll) {
+                SelectAll();
+            }
+            editingControlValueChanged = false;
+        }
 
-		protected override void OnMouseWheel (MouseEventArgs e)
-		{
-			base.OnMouseWheel(e);
-		}
+        protected override void OnMouseWheel (MouseEventArgs e)
+        {
+            base.OnMouseWheel(e);
+        }
 
-		protected override void OnTextChanged (EventArgs e)
-		{
-			base.OnTextChanged(e);
-			editingControlValueChanged = true;
-		}
+        protected override void OnTextChanged (EventArgs e)
+        {
+            base.OnTextChanged(e);
+            editingControlValueChanged = true;
+        }
 
-		protected override bool ProcessKeyEventArgs (ref Message m)
-		{
-			return base.ProcessKeyEventArgs(ref m);
-		}
+        protected override bool ProcessKeyEventArgs (ref Message m)
+        {
+            return base.ProcessKeyEventArgs(ref m);
+        }
 
-	}
+    }
 
 }
 

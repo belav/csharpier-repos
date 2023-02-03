@@ -5,19 +5,19 @@ using System;
 
 namespace TestNamespace
 {
-	public class Test
-	{
-		public Test ()
-		{
-			int os;
-			TestMethod (os);
-			Console.WriteLine (os);
-		}
+    public class Test
+    {
+        public Test ()
+        {
+            int os;
+            TestMethod (os);
+            Console.WriteLine (os);
+        }
 
-		public void TestMethod (out int os)
-		{
-			os = 3;
-		}
-	}
+        public void TestMethod (out int os)
+        {
+            os = 3;
+        }
+    }
 }
 

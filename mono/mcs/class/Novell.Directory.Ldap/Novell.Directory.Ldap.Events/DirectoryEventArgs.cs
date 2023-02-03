@@ -45,16 +45,16 @@ namespace Novell.Directory.Ldap.Events
     {
       get 
       {
-	return eClassification;
+    return eClassification;
       }
       set
       {
-	eClassification = value;
+    eClassification = value;
       }
     }
 
     public DirectoryEventArgs(LdapMessage sourceMessage,
-			      EventClassifiers aClassification)
+                  EventClassifiers aClassification)
       : base(sourceMessage)
     {
       eClassification = aClassification;

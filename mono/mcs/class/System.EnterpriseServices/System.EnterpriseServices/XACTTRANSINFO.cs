@@ -33,19 +33,19 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
 
-	[ComVisible(false)]
-	public struct XACTTRANSINFO {
+    [ComVisible(false)]
+    public struct XACTTRANSINFO {
 
-		#region Fields
+        #region Fields
 
-		public int grfRMSupported;
-		public int grfRMSupportedRetaining;
-		public int grfTCSupported;
-		public int grfTCSupportedRetaining;
-		public int isoFlags;
-		public int isoLevel;
-		public BOID uow;
+        public int grfRMSupported;
+        public int grfRMSupportedRetaining;
+        public int grfTCSupported;
+        public int grfTCSupportedRetaining;
+        public int isoFlags;
+        public int isoLevel;
+        public BOID uow;
 
-		#endregion // Fields
-	}
+        #endregion // Fields
+    }
 }

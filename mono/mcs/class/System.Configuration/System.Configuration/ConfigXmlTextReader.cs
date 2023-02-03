@@ -2,7 +2,7 @@
 // System.Configuration.ConfigXmlTextReader.cs
 //
 // Authors:
-//	Gert Driesen  <drieseng@users.sourceforge.net>
+//    Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2008 Gert Driesen
 //
@@ -33,27 +33,27 @@ using System.Xml;
 
 internal class ConfigXmlTextReader : XmlTextReader, IConfigErrorInfo
 {
-	private readonly string fileName;
+    private readonly string fileName;
 
-	public ConfigXmlTextReader (Stream s, string fileName) : base (s)
-	{
-		if (fileName == null)
-			throw new ArgumentNullException ("fileName");
+    public ConfigXmlTextReader (Stream s, string fileName) : base (s)
+    {
+        if (fileName == null)
+            throw new ArgumentNullException ("fileName");
 
-		this.fileName = fileName;
-	}
+        this.fileName = fileName;
+    }
 
-	public ConfigXmlTextReader (TextReader input, string fileName)
-		: base (input)
-	{
-		if (fileName == null)
-			throw new ArgumentNullException ("fileName");
+    public ConfigXmlTextReader (TextReader input, string fileName)
+        : base (input)
+    {
+        if (fileName == null)
+            throw new ArgumentNullException ("fileName");
 
-		this.fileName = fileName;
-	}
+        this.fileName = fileName;
+    }
 
-	public string Filename {
-		get { return fileName; }
-	}
+    public string Filename {
+        get { return fileName; }
+    }
 }
 

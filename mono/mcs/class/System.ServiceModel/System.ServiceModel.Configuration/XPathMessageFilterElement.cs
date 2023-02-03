@@ -2,7 +2,7 @@
 // XPathMessageFilterElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,46 +54,46 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class XPathMessageFilterElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty filter;
+    [MonoTODO]
+    public sealed partial class XPathMessageFilterElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty filter;
 
-		static XPathMessageFilterElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			filter = new ConfigurationProperty ("filter",
-				typeof (XPathMessageFilter), null, null/* FIXME: get converter for XPathMessageFilter*/, null,
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static XPathMessageFilterElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            filter = new ConfigurationProperty ("filter",
+                typeof (XPathMessageFilter), null, null/* FIXME: get converter for XPathMessageFilter*/, null,
+                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
 
-			properties.Add (filter);
-		}
+            properties.Add (filter);
+        }
 
-		public XPathMessageFilterElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("filter",
-			 DefaultValue = null,
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		public XPathMessageFilter Filter {
-			get { return (XPathMessageFilter) base [filter]; }
-			set { base [filter] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public XPathMessageFilterElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("filter",
+             DefaultValue = null,
+             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true)]
+        public XPathMessageFilter Filter {
+            get { return (XPathMessageFilter) base [filter]; }
+            set { base [filter] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

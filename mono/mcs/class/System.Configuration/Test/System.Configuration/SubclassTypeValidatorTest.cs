@@ -3,7 +3,7 @@
 // for System.Configuration.SubclassTypeValidator.
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,40 +33,40 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-	class A { }
-	class B : A { }
+    class A { }
+    class B : A { }
 
-	[TestFixture]
-	public class SubclassTypeValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			SubclassTypeValidator v = new SubclassTypeValidator (typeof (A));
+    [TestFixture]
+    public class SubclassTypeValidatorTest
+    {
+        [Test]
+        public void CanValidate ()
+        {
+            SubclassTypeValidator v = new SubclassTypeValidator (typeof (A));
 
-			Assert.IsFalse (v.CanValidate (typeof (string)));
-			Assert.IsFalse (v.CanValidate (typeof (int)));
-			Assert.IsFalse (v.CanValidate (typeof (object)));
-			Assert.IsTrue (v.CanValidate (typeof (Type)));
-		}
+            Assert.IsFalse (v.CanValidate (typeof (string)));
+            Assert.IsFalse (v.CanValidate (typeof (int)));
+            Assert.IsFalse (v.CanValidate (typeof (object)));
+            Assert.IsTrue (v.CanValidate (typeof (Type)));
+        }
 
-		[Test]
-		public void Success ()
-		{
-			SubclassTypeValidator v = new SubclassTypeValidator (typeof (A));
+        [Test]
+        public void Success ()
+        {
+            SubclassTypeValidator v = new SubclassTypeValidator (typeof (A));
 
-			v.Validate (typeof (B));
-			v.Validate (typeof (A));
-		}
+            v.Validate (typeof (B));
+            v.Validate (typeof (A));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Failure ()
-		{
-			SubclassTypeValidator v = new SubclassTypeValidator (typeof (B));
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void Failure ()
+        {
+            SubclassTypeValidator v = new SubclassTypeValidator (typeof (B));
 
-			v.Validate (typeof (A));
-		}
-	}
+            v.Validate (typeof (A));
+        }
+    }
 }
 

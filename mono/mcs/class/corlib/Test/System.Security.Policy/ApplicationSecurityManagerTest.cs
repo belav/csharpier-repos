@@ -1,9 +1,9 @@
 //
 // ApplicationSecurityManagerTest.cs - 
-//	NUnit Test Cases for ApplicationSecurityManager
+//    NUnit Test Cases for ApplicationSecurityManager
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,135 +36,135 @@ using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy {
 
-	[TestFixture]
-	public class ApplicationSecurityManagerTest {
+    [TestFixture]
+    public class ApplicationSecurityManagerTest {
 
-		private string defaultTrustManagerTypeName;
+        private string defaultTrustManagerTypeName;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			defaultTrustManagerTypeName = ApplicationSecurityManager.ApplicationTrustManager.GetType ().AssemblyQualifiedName;
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            defaultTrustManagerTypeName = ApplicationSecurityManager.ApplicationTrustManager.GetType ().AssemblyQualifiedName;
+        }
 
-		[Test]
-		public void ApplicationTrustManager ()
-		{
-			Assert.IsNotNull (ApplicationSecurityManager.ApplicationTrustManager);
-		}
+        [Test]
+        public void ApplicationTrustManager ()
+        {
+            Assert.IsNotNull (ApplicationSecurityManager.ApplicationTrustManager);
+        }
 
-		[Test]
-		public void UserApplicationTrusts ()
-		{
-			Assert.AreEqual (0, ApplicationSecurityManager.UserApplicationTrusts.Count);
-		}
+        [Test]
+        public void UserApplicationTrusts ()
+        {
+            Assert.AreEqual (0, ApplicationSecurityManager.UserApplicationTrusts.Count);
+        }
 
-		// FIXME: creating an ActivationContext here seems not easy
+        // FIXME: creating an ActivationContext here seems not easy
 
-		[Test]
-//		[ExpectedException (typeof (ArgumentNullException))]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void DetermineApplicationTrust_Null_Null ()
-		{
-			ApplicationSecurityManager.DetermineApplicationTrust (null, null);
-		}
+        [Test]
+//        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException (typeof (NullReferenceException))]
+        public void DetermineApplicationTrust_Null_Null ()
+        {
+            ApplicationSecurityManager.DetermineApplicationTrust (null, null);
+        }
 
-		[Test]
-//		[ExpectedException (typeof (ArgumentNullException))]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void DetermineApplicationTrust_Null_TrustManagerContext ()
-		{
-			ApplicationSecurityManager.DetermineApplicationTrust (null, new TrustManagerContext ());
-		}
+        [Test]
+//        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException (typeof (NullReferenceException))]
+        public void DetermineApplicationTrust_Null_TrustManagerContext ()
+        {
+            ApplicationSecurityManager.DetermineApplicationTrust (null, new TrustManagerContext ());
+        }
 
-		// testing the default application security manager here
+        // testing the default application security manager here
 
-		// FIXME: creating an ActivationContext here seems not easy
+        // FIXME: creating an ActivationContext here seems not easy
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void DefaultTrustManager_DetermineApplicationTrust_Null_Null ()
-		{
-			ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void DefaultTrustManager_DetermineApplicationTrust_Null_Null ()
+        {
+            ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void DefaultTrustManager_DetermineApplicationTrust_Null_TrustManagerContext ()
-		{
-			ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, new TrustManagerContext ());
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void DefaultTrustManager_DetermineApplicationTrust_Null_TrustManagerContext ()
+        {
+            ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, new TrustManagerContext ());
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void DefaultTrustManager_FromXml_Null ()
-		{
-			ApplicationSecurityManager.ApplicationTrustManager.FromXml (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void DefaultTrustManager_FromXml_Null ()
+        {
+            ApplicationSecurityManager.ApplicationTrustManager.FromXml (null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void DefaultTrustManager_FromXml_BadTag ()
-		{
-			SecurityElement se = new SecurityElement (String.Empty);
-			ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void DefaultTrustManager_FromXml_BadTag ()
+        {
+            SecurityElement se = new SecurityElement (String.Empty);
+            ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
+        }
 
-		private void CheckXml (SecurityElement se)
-		{
-			Assert.AreEqual (defaultTrustManagerTypeName, se.Attribute ("class"), "class");
-			Assert.AreEqual ("1", se.Attribute ("version"), "version");
-			Assert.AreEqual (2, se.Attributes.Count, "Count");
-			Assert.IsNull (se.Children, "Children");
-		}
+        private void CheckXml (SecurityElement se)
+        {
+            Assert.AreEqual (defaultTrustManagerTypeName, se.Attribute ("class"), "class");
+            Assert.AreEqual ("1", se.Attribute ("version"), "version");
+            Assert.AreEqual (2, se.Attributes.Count, "Count");
+            Assert.IsNull (se.Children, "Children");
+        }
 
-		[Test]
-		public void DefaultTrustManager_FromXml_NoAttributes ()
-		{
-			SecurityElement se = new SecurityElement ("IApplicationTrustManager");
-			ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
-			// accepted
-			CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
-		}
+        [Test]
+        public void DefaultTrustManager_FromXml_NoAttributes ()
+        {
+            SecurityElement se = new SecurityElement ("IApplicationTrustManager");
+            ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
+            // accepted
+            CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
+        }
 
-		[Test]
-		public void DefaultTrustManager_FromXml_BadClass ()
-		{
-			SecurityElement se = new SecurityElement ("IApplicationTrustManager");
-			se.AddAttribute ("class", "System.DoesntExist");
-			se.AddAttribute ("version", "1");
-			ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
-			// accepted
-			CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
-		}
+        [Test]
+        public void DefaultTrustManager_FromXml_BadClass ()
+        {
+            SecurityElement se = new SecurityElement ("IApplicationTrustManager");
+            se.AddAttribute ("class", "System.DoesntExist");
+            se.AddAttribute ("version", "1");
+            ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
+            // accepted
+            CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
+        }
 
-		[Test]
-		public void DefaultTrustManager_FromXml_BadVersion ()
-		{
-			SecurityElement se = new SecurityElement ("IApplicationTrustManager");
-			se.AddAttribute ("class", defaultTrustManagerTypeName);
-			se.AddAttribute ("version", "42");
-			ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
-			// accepted
-			CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
-		}
+        [Test]
+        public void DefaultTrustManager_FromXml_BadVersion ()
+        {
+            SecurityElement se = new SecurityElement ("IApplicationTrustManager");
+            se.AddAttribute ("class", defaultTrustManagerTypeName);
+            se.AddAttribute ("version", "42");
+            ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
+            // accepted
+            CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
+        }
 
-		[Test]
-		public void DefaultTrustManager_FromXml ()
-		{
-			SecurityElement se = new SecurityElement ("IApplicationTrustManager");
-			se.AddAttribute ("class", defaultTrustManagerTypeName);
-			se.AddAttribute ("version", "1");
-			ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
-			// accepted
-			CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
-		}
+        [Test]
+        public void DefaultTrustManager_FromXml ()
+        {
+            SecurityElement se = new SecurityElement ("IApplicationTrustManager");
+            se.AddAttribute ("class", defaultTrustManagerTypeName);
+            se.AddAttribute ("version", "1");
+            ApplicationSecurityManager.ApplicationTrustManager.FromXml (se);
+            // accepted
+            CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
+        }
 
-		[Test]
-		public void DefaultTrustManager_ToXml ()
-		{
-			CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
-		}
-	}
+        [Test]
+        public void DefaultTrustManager_ToXml ()
+        {
+            CheckXml (ApplicationSecurityManager.ApplicationTrustManager.ToXml ());
+        }
+    }
 }
 

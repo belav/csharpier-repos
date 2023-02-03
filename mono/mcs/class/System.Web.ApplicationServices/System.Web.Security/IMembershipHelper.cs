@@ -27,11 +27,11 @@
 //
 namespace System.Web.Security
 {
-	interface IMembershipHelper
-	{
-		int UserIsOnlineTimeWindow { get; }
-		MembershipProviderCollection Providers { get; }
-		byte [] DecryptPassword (byte [] encodedPassword);
-		byte[] EncryptPassword (byte[] password);
-	}
+    interface IMembershipHelper
+    {
+        int UserIsOnlineTimeWindow { get; }
+        MembershipProviderCollection Providers { get; }
+        byte [] DecryptPassword (byte [] encodedPassword);
+        byte[] EncryptPassword (byte[] password);
+    }
 }

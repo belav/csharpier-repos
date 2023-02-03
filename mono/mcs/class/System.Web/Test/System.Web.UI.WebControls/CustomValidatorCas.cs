@@ -1,9 +1,9 @@
 //
 // CustomValidatorCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.CustomValidator
+//    - CAS unit tests for System.Web.UI.WebControls.CustomValidator
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,62 +40,62 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CustomValidatorCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CustomValidatorCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CustomValidatorTest unit = new CustomValidatorTest ();
-			unit.Defaults ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            CustomValidatorTest unit = new CustomValidatorTest ();
+            unit.Defaults ();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (TargetInvocationException))]
-		public void EventDefaults_Deny_Minimal ()
-		{
-			CustomValidatorTest unit = new CustomValidatorTest ();
-			unit.EventDefaults ();
-			// note: this is a failing security check on reflection,
-			// the SecurityException is the InnerException of the 
-			// TargetInvocationException
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException (typeof (TargetInvocationException))]
+        public void EventDefaults_Deny_Minimal ()
+        {
+            CustomValidatorTest unit = new CustomValidatorTest ();
+            unit.EventDefaults ();
+            // note: this is a failing security check on reflection,
+            // the SecurityException is the InnerException of the 
+            // TargetInvocationException
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void EventDefaults_PermitOnly_Minimal ()
-		{
-			CustomValidatorTest unit = new CustomValidatorTest ();
-			unit.EventDefaults ();
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+        public void EventDefaults_PermitOnly_Minimal ()
+        {
+            CustomValidatorTest unit = new CustomValidatorTest ();
+            unit.EventDefaults ();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (TargetInvocationException))]
-		public void Render_Deny_Minimal ()
-		{
-			CustomValidatorTest unit = new CustomValidatorTest ();
-			unit.Render ();
-			// note: this is a failing security check on reflection,
-			// the SecurityException is the InnerException of the 
-			// TargetInvocationException
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException (typeof (TargetInvocationException))]
+        public void Render_Deny_Minimal ()
+        {
+            CustomValidatorTest unit = new CustomValidatorTest ();
+            unit.Render ();
+            // note: this is a failing security check on reflection,
+            // the SecurityException is the InnerException of the 
+            // TargetInvocationException
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void Render_PermitOnly_Minimal ()
-		{
-			CustomValidatorTest unit = new CustomValidatorTest ();
-			unit.Render ();
-		}
+        [Test]
+        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+        public void Render_PermitOnly_Minimal ()
+        {
+            CustomValidatorTest unit = new CustomValidatorTest ();
+            unit.Render ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (CustomValidator); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (CustomValidator); }
+        }
+    }
 }

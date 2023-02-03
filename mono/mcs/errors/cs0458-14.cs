@@ -8,9 +8,9 @@ public enum E
 
 class C
 {
-	public static void Main ()
-	{
-		E? e = null;
-		var res = e - null;
-	}
+    public static void Main ()
+    {
+        E? e = null;
+        var res = e - null;
+    }
 }

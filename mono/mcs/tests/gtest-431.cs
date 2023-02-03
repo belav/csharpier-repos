@@ -6,9 +6,9 @@ using Library;
 
 class Program {
 
-	public static void Main ()
-	{
-		var foo = new Foo ();
-		foo.Bar ();
-	}
+    public static void Main ()
+    {
+        var foo = new Foo ();
+        foo.Bar ();
+    }
 }

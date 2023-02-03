@@ -2,7 +2,7 @@
 // ConfigurationSectionGroupTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,27 +35,27 @@ using Config = System.Configuration.Configuration;
 
 namespace MonoTests.System.Configuration
 {
-	[TestFixture]
-	public class ConfigurationSectionGroupTest
-	{
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void EditBeforeAdd ()
-		{
-			UserSettingsGroup u = new UserSettingsGroup ();
-			ClientSettingsSection c = new ClientSettingsSection ();
-			u.Sections.Add ("mine", c);
-		}
+    [TestFixture]
+    public class ConfigurationSectionGroupTest
+    {
+        [Test]
+        [ExpectedException (typeof (InvalidOperationException))]
+        public void EditBeforeAdd ()
+        {
+            UserSettingsGroup u = new UserSettingsGroup ();
+            ClientSettingsSection c = new ClientSettingsSection ();
+            u.Sections.Add ("mine", c);
+        }
 
-		[Test]
-		public void EditAfterAdd ()
-		{
-			Config cfg = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
-			UserSettingsGroup u = new UserSettingsGroup ();
-			cfg.SectionGroups.Add ("userSettings", u);
-			ClientSettingsSection c = new ClientSettingsSection ();
-			u.Sections.Add ("mine", c);
-		}
-	}
+        [Test]
+        public void EditAfterAdd ()
+        {
+            Config cfg = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            UserSettingsGroup u = new UserSettingsGroup ();
+            cfg.SectionGroups.Add ("userSettings", u);
+            ClientSettingsSection c = new ClientSettingsSection ();
+            u.Sections.Add ("mine", c);
+        }
+    }
 }
 

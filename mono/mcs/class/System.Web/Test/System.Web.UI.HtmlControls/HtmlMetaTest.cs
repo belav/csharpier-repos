@@ -2,7 +2,7 @@
 // HtmlMetaTest.cs - unit tests for System.Web.UI.HtmlControls.HtmlMeta
 //
 // Author:
-//	Chris Toshok <toshok@ximian.com>
+//    Chris Toshok <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,66 +36,66 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-	public class HtmlMetaPoker : HtmlMeta {
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+    public class HtmlMetaPoker : HtmlMeta {
+        public string Render ()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
+            base.Render (writer);
+            return writer.InnerWriter.ToString ();
+        }
+    }
 
-	[TestFixture]
-	public class HtmlMetaTest {
-		
-		[Test]
-		public void Defaults ()
-		{
-			HtmlMetaPoker meta = new HtmlMetaPoker ();
+    [TestFixture]
+    public class HtmlMetaTest {
+        
+        [Test]
+        public void Defaults ()
+        {
+            HtmlMetaPoker meta = new HtmlMetaPoker ();
 
-			Assert.AreEqual ("", meta.Content, "A1");
-			Assert.AreEqual ("", meta.HttpEquiv, "A2");
-			Assert.AreEqual ("", meta.Name, "A3");
-			Assert.AreEqual ("", meta.Scheme, "A4");
-			Assert.AreEqual (0, meta.Attributes.Count, "A5");
-		}
+            Assert.AreEqual ("", meta.Content, "A1");
+            Assert.AreEqual ("", meta.HttpEquiv, "A2");
+            Assert.AreEqual ("", meta.Name, "A3");
+            Assert.AreEqual ("", meta.Scheme, "A4");
+            Assert.AreEqual (0, meta.Attributes.Count, "A5");
+        }
 
-		[Test]
-		public void Setters ()
-		{
-			HtmlMetaPoker meta = new HtmlMetaPoker ();
+        [Test]
+        public void Setters ()
+        {
+            HtmlMetaPoker meta = new HtmlMetaPoker ();
 
-			meta.Name = "Name";
-			meta.Content = "Content";
-			meta.HttpEquiv = "Equiv";
-			meta.Scheme = "Scheme";
+            meta.Name = "Name";
+            meta.Content = "Content";
+            meta.HttpEquiv = "Equiv";
+            meta.Scheme = "Scheme";
 
-			Assert.AreEqual ("Name", meta.Name, "A1");
-			Assert.AreEqual ("Content", meta.Content, "A2");
-			Assert.AreEqual ("Equiv", meta.HttpEquiv, "A3");
-			Assert.AreEqual ("Scheme", meta.Scheme, "A4");
+            Assert.AreEqual ("Name", meta.Name, "A1");
+            Assert.AreEqual ("Content", meta.Content, "A2");
+            Assert.AreEqual ("Equiv", meta.HttpEquiv, "A3");
+            Assert.AreEqual ("Scheme", meta.Scheme, "A4");
 
-			Assert.AreEqual (4, meta.Attributes.Count, "A2");
-		}
+            Assert.AreEqual (4, meta.Attributes.Count, "A2");
+        }
 
-		[Test]
-		public void Render ()
-		{
-			HtmlMetaPoker meta = new HtmlMetaPoker ();
-			meta.Name = "Name";
-			meta.Content = "Content";
-			meta.HttpEquiv = "Equiv";
-			meta.Scheme = "Scheme";
-			HtmlDiff.AssertAreEqual ("<meta name=\"Name\" content=\"Content\" http-equiv=\"Equiv\" scheme=\"Scheme\" />", meta.Render(), "A1");
-		}
+        [Test]
+        public void Render ()
+        {
+            HtmlMetaPoker meta = new HtmlMetaPoker ();
+            meta.Name = "Name";
+            meta.Content = "Content";
+            meta.HttpEquiv = "Equiv";
+            meta.Scheme = "Scheme";
+            HtmlDiff.AssertAreEqual ("<meta name=\"Name\" content=\"Content\" http-equiv=\"Equiv\" scheme=\"Scheme\" />", meta.Render(), "A1");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void Render_Empty ()
-		{
-			HtmlMetaPoker meta = new HtmlMetaPoker ();
-			Assert.AreEqual ("<meta />", meta.Render(), "A1");
-		}
-	}
+        [Test]
+        [Category ("NotWorking")]
+        public void Render_Empty ()
+        {
+            HtmlMetaPoker meta = new HtmlMetaPoker ();
+            Assert.AreEqual ("<meta />", meta.Render(), "A1");
+        }
+    }
 }
 

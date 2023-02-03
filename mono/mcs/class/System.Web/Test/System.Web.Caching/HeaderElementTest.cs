@@ -1,4 +1,4 @@
-﻿//
+//
 // HeaderElementTest.cs
 //
 // Authors:
@@ -36,33 +36,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {
-	[TestFixture]
-	public class HeaderElementTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			HeaderElement he;
+    [TestFixture]
+    public class HeaderElementTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            HeaderElement he;
 
-			Assert.Throws<ArgumentNullException> (() => {
-				he = new HeaderElement (null, String.Empty);
-			}, "#A1");
+            Assert.Throws<ArgumentNullException> (() => {
+                he = new HeaderElement (null, String.Empty);
+            }, "#A1");
 
-			Assert.Throws<ArgumentNullException> (() => {
-				he = new HeaderElement ("Header", null);
-			}, "#A2");
+            Assert.Throws<ArgumentNullException> (() => {
+                he = new HeaderElement ("Header", null);
+            }, "#A2");
 
-			he = new HeaderElement ("Header", String.Empty);
-			Assert.AreEqual ("Header", he.Name, "#B1-1");
-			Assert.AreEqual (String.Empty, he.Value, "#B1-2");
+            he = new HeaderElement ("Header", String.Empty);
+            Assert.AreEqual ("Header", he.Name, "#B1-1");
+            Assert.AreEqual (String.Empty, he.Value, "#B1-2");
 
-			he = new HeaderElement ("Header", "Value");
-			Assert.AreEqual ("Header", he.Name, "#C1-1");
-			Assert.AreEqual ("Value", he.Value, "#C1-2");
+            he = new HeaderElement ("Header", "Value");
+            Assert.AreEqual ("Header", he.Name, "#C1-1");
+            Assert.AreEqual ("Value", he.Value, "#C1-2");
 
-			he = new HeaderElement (String.Empty, String.Empty);
-			Assert.AreEqual (String.Empty, he.Name, "#D1-1");
-			Assert.AreEqual (String.Empty, he.Value, "#D1-2");
-		}
-	}
+            he = new HeaderElement (String.Empty, String.Empty);
+            Assert.AreEqual (String.Empty, he.Name, "#D1-1");
+            Assert.AreEqual (String.Empty, he.Value, "#D1-2");
+        }
+    }
 }

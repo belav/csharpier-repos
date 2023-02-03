@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -246,7 +246,7 @@ namespace Roslyn.Utilities
                     // unlike `new System.WeakReference(null)`), but we return early to avoid an unnecessary
                     // allocation in this case.
                     //
-                    // ⚠ Note that in cases where referenceCount._weakInstance is already non-null, it would be
+                    // ? Note that in cases where referenceCount._weakInstance is already non-null, it would be
                     // possible to reconstruct a strong reference even though the current reference instance was
                     // disposed. This case is intentionally not supported (by checking 'instance' before checking
                     // 'referenceCount._weakInstance'), since it would be confusing semantics if this constructor

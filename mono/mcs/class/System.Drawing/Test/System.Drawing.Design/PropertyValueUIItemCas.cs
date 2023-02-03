@@ -1,9 +1,9 @@
 //
 // PropertyValueUIItemCas.cs 
-//	- CAS unit tests for System.Drawing.Design.PropertyValueUIItem
+//    - CAS unit tests for System.Drawing.Design.PropertyValueUIItem
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,50 +40,50 @@ using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing.Design {
 
-	[TestFixture]
-	[NUnit.Framework.Category ("CAS")]
-	public class PropertyValueUIItemCas {
+    [TestFixture]
+    [NUnit.Framework.Category ("CAS")]
+    public class PropertyValueUIItemCas {
 
-		private ConstructorInfo ctor;
+        private ConstructorInfo ctor;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			ConstructorInfo[] infos = typeof (PropertyValueUIItem).GetConstructors ();
-			ctor = infos[0];
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            // this executes at fulltrust
+            ConstructorInfo[] infos = typeof (PropertyValueUIItem).GetConstructors ();
+            ctor = infos[0];
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		private void PropertyValueUIItemInvoke (ITypeDescriptorContext context, PropertyDescriptor descriptor, PropertyValueUIItem invokedItem)
-		{
-		}
+        private void PropertyValueUIItemInvoke (ITypeDescriptorContext context, PropertyDescriptor descriptor, PropertyValueUIItem invokedItem)
+        {
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Create ()
-		{
-			new PropertyValueUIItem (new Bitmap (10, 10), new PropertyValueUIItemInvokeHandler(PropertyValueUIItemInvoke), null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Create ()
+        {
+            new PropertyValueUIItem (new Bitmap (10, 10), new PropertyValueUIItemInvokeHandler(PropertyValueUIItemInvoke), null);
+        }
 
-		// we use reflection to call PropertyValueUIItem class as it's protected 
-		// by a LinkDemand (which will be converted into full demand, i.e. a stack 
-		// walk) when reflection is used (i.e. it gets testable).
+        // we use reflection to call PropertyValueUIItem class as it's protected 
+        // by a LinkDemand (which will be converted into full demand, i.e. a stack 
+        // walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Create_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (ctor, "constructor");
-			ctor.Invoke (new object [3]);
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Create_LinkDemand ()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull (ctor, "constructor");
+            ctor.Invoke (new object [3]);
+        }
+    }
 }

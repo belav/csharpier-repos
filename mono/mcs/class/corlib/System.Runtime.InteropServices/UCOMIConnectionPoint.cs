@@ -29,17 +29,17 @@
 #if !FULL_AOT_RUNTIME
 namespace System.Runtime.InteropServices
 {
-	[Obsolete]
-	[ComImport]
-	[Guid ("b196b286-bab4-101a-b69c-00aa00341d07")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	public interface UCOMIConnectionPoint
-	{
-		void GetConnectionInterface (out Guid pIID);
-		void GetConnectionPointContainer (out UCOMIConnectionPointContainer ppCPC);
-		void Advise ([MarshalAs(UnmanagedType.Interface)] object pUnkSink, out int pdwCookie);
-		void Unadvise (int dwCookie);
-		void EnumConnections (out UCOMIEnumConnections ppEnum);
-	}
+    [Obsolete]
+    [ComImport]
+    [Guid ("b196b286-bab4-101a-b69c-00aa00341d07")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    public interface UCOMIConnectionPoint
+    {
+        void GetConnectionInterface (out Guid pIID);
+        void GetConnectionPointContainer (out UCOMIConnectionPointContainer ppCPC);
+        void Advise ([MarshalAs(UnmanagedType.Interface)] object pUnkSink, out int pdwCookie);
+        void Unadvise (int dwCookie);
+        void EnumConnections (out UCOMIEnumConnections ppEnum);
+    }
 }
 #endif

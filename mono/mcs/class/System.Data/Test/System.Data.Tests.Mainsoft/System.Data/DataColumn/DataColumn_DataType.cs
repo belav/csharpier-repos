@@ -36,78 +36,78 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-	[TestFixture] public class DataColumn_DataType : GHTBase
-	{
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+    [TestFixture] public class DataColumn_DataType : GHTBase
+    {
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-		public void TearDown()
-		{
-		}
+        public void TearDown()
+        {
+        }
 
-		[Test] public void Main()
-		{
-			DataColumn_DataType tc = new DataColumn_DataType();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("DataColumn_DataType");
-				tc.SetUp();
-				tc.run();
+        [Test] public void Main()
+        {
+            DataColumn_DataType tc = new DataColumn_DataType();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataColumn_DataType");
+                tc.SetUp();
+                tc.run();
                 tc.TearDown();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		public void run()
-		{
-			Exception exp = null;
-			DataColumn dc;
-			dc = new DataColumn();
-			string[] sTypeArr = {   "System.Boolean", "System.Byte", "System.Char", "System.DateTime",
-									"System.Decimal", "System.Double", "System.Int16", "System.Int32",
-									"System.Int64", "System.SByte", "System.Single", "System.String", 
-									"System.TimeSpan", "System.UInt16", "System.UInt32", "System.UInt64" };
-			
-			//Checking default value (string)
+        public void run()
+        {
+            Exception exp = null;
+            DataColumn dc;
+            dc = new DataColumn();
+            string[] sTypeArr = {   "System.Boolean", "System.Byte", "System.Char", "System.DateTime",
+                                    "System.Decimal", "System.Double", "System.Int16", "System.Int32",
+                                    "System.Int64", "System.SByte", "System.Single", "System.String", 
+                                    "System.TimeSpan", "System.UInt16", "System.UInt32", "System.UInt64" };
+            
+            //Checking default value (string)
         
-			try
-			{
-				BeginCase("GetType - Default");
-				Compare( dc.DataType,Type.GetType("System.String") );
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-	
-			foreach (string sType in sTypeArr) 
-			{
-				//Cheking Set
-				dc.DataType = Type.GetType(sType);
-				//Checking Get
-				try
-				{
-					BeginCase("Checking GetType " + sType);
-					Compare(dc.DataType ,Type.GetType(sType) );
-				}
-				catch(Exception ex)	{exp = ex;}
-				finally	{EndCase(exp); exp = null;}
-			}
-			
-		}
-	}
+            try
+            {
+                BeginCase("GetType - Default");
+                Compare( dc.DataType,Type.GetType("System.String") );
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+    
+            foreach (string sType in sTypeArr) 
+            {
+                //Cheking Set
+                dc.DataType = Type.GetType(sType);
+                //Checking Get
+                try
+                {
+                    BeginCase("Checking GetType " + sType);
+                    Compare(dc.DataType ,Type.GetType(sType) );
+                }
+                catch(Exception ex)    {exp = ex;}
+                finally    {EndCase(exp); exp = null;}
+            }
+            
+        }
+    }
 }

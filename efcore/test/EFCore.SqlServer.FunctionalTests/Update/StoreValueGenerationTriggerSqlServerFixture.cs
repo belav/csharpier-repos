@@ -20,8 +20,8 @@ CREATE OR ALTER TRIGGER [{table}_Trigger]
 ON [{table}]
 FOR INSERT, UPDATE, DELETE AS
 BEGIN
-	IF @@ROWCOUNT = 0
-		return
+    IF @@ROWCOUNT = 0
+        return
 END");
         }
     }

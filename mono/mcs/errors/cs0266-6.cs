@@ -2,9 +2,9 @@
 // Line: 7
 
 namespace MWFTestApplication {
-	class MainWindow {
-		public enum Testme : uint {
-			value   = (1L << 1)
-		}
-	}
+    class MainWindow {
+        public enum Testme : uint {
+            value   = (1L << 1)
+        }
+    }
 }

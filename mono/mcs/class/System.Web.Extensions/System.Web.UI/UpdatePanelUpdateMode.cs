@@ -1,4 +1,4 @@
-﻿//
+//
 // UpdatePanelUpdateMode.cs
 //
 // Author:
@@ -33,9 +33,9 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public enum UpdatePanelUpdateMode
-	{
-		Always = 0,
-		Conditional = 1,
-	}
+    public enum UpdatePanelUpdateMode
+    {
+        Always = 0,
+        Conditional = 1,
+    }
 }

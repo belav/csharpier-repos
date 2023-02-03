@@ -2,7 +2,7 @@
 // OperatorExtensions.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,32 +27,32 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	static class OperatorExtensions {
-		public static bool IsConversionOperator (this UnaryOperator op)
-		{
-			switch (op) {
-			case UnaryOperator.Conv_i:
-			case UnaryOperator.Conv_i1:
-			case UnaryOperator.Conv_i2:
-			case UnaryOperator.Conv_i4:
-			case UnaryOperator.Conv_i8:
-			case UnaryOperator.Conv_r4:
-			case UnaryOperator.Conv_r8:
-			case UnaryOperator.Conv_u:
-			case UnaryOperator.Conv_u1:
-			case UnaryOperator.Conv_u2:
-			case UnaryOperator.Conv_u4:
-			case UnaryOperator.Conv_u8:
-			case UnaryOperator.Conv_r_un:
-				return true;
-			default:
-				return false;
-			}
-		}
+    static class OperatorExtensions {
+        public static bool IsConversionOperator (this UnaryOperator op)
+        {
+            switch (op) {
+            case UnaryOperator.Conv_i:
+            case UnaryOperator.Conv_i1:
+            case UnaryOperator.Conv_i2:
+            case UnaryOperator.Conv_i4:
+            case UnaryOperator.Conv_i8:
+            case UnaryOperator.Conv_r4:
+            case UnaryOperator.Conv_r8:
+            case UnaryOperator.Conv_u:
+            case UnaryOperator.Conv_u1:
+            case UnaryOperator.Conv_u2:
+            case UnaryOperator.Conv_u4:
+            case UnaryOperator.Conv_u8:
+            case UnaryOperator.Conv_r_un:
+                return true;
+            default:
+                return false;
+            }
+        }
 
-		public static bool IsEqualityOperator (this BinaryOperator bop)
-		{
-			return bop == BinaryOperator.Ceq || bop == BinaryOperator.Cobjeq;
-		}
-	}
+        public static bool IsEqualityOperator (this BinaryOperator bop)
+        {
+            return bop == BinaryOperator.Ceq || bop == BinaryOperator.Cobjeq;
+        }
+    }
 }

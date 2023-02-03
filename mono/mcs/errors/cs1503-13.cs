@@ -3,12 +3,12 @@
 
 public class C
 {
-	static void Foo<T>(T t)
-	{
-	}
-	
-	public static void Main ()
-	{
-		Foo<int> (true);
-	}
+    static void Foo<T>(T t)
+    {
+    }
+    
+    public static void Main ()
+    {
+        Foo<int> (true);
+    }
 }

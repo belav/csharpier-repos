@@ -14,9 +14,9 @@ class Class_1 {
 public class MainClass {
         
         public static int Main() 
-	{
-		return 0;
-	}
+    {
+        return 0;
+    }
 }
 
 

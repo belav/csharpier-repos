@@ -2,7 +2,7 @@
 // GraphicsCas.cs - CAS unit tests for System.Drawing.Graphics
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,59 +37,59 @@ using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class RegionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class RegionCas {
 
-		private MethodInfo fromHdcInternal;
-		private MethodInfo fromHwndInternal;
-		private MethodInfo releaseHdcInternal;
+        private MethodInfo fromHdcInternal;
+        private MethodInfo fromHwndInternal;
+        private MethodInfo releaseHdcInternal;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			fromHdcInternal = typeof (Graphics).GetMethod ("FromHdcInternal");
-			fromHwndInternal = typeof (Graphics).GetMethod ("FromHwndInternal");
-			releaseHdcInternal = typeof (Graphics).GetMethod ("ReleaseHdcInternal");
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            // this executes at fulltrust
+            fromHdcInternal = typeof (Graphics).GetMethod ("FromHdcInternal");
+            fromHwndInternal = typeof (Graphics).GetMethod ("FromHwndInternal");
+            releaseHdcInternal = typeof (Graphics).GetMethod ("ReleaseHdcInternal");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void FromHrgn_Deny_UnmanagedCode ()
-		{
-			Region.FromHrgn (IntPtr.Zero);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void FromHrgn_Deny_UnmanagedCode ()
+        {
+            Region.FromHrgn (IntPtr.Zero);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromHrgn_PermitOnly_UnmanagedCode ()
-		{
-			Region.FromHrgn (IntPtr.Zero);
-		}
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ReleaseHrgn_Deny_UnmanagedCode ()
-		{
-			new Region ().ReleaseHrgn (IntPtr.Zero);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [ExpectedException (typeof (ArgumentException))]
+        public void FromHrgn_PermitOnly_UnmanagedCode ()
+        {
+            Region.FromHrgn (IntPtr.Zero);
+        }
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void ReleaseHrgn_Deny_UnmanagedCode ()
+        {
+            new Region ().ReleaseHrgn (IntPtr.Zero);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ReleaseHrgn_PermitOnly_UnmanagedCode ()
-		{
-			new Region ().ReleaseHrgn (IntPtr.Zero);
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ReleaseHrgn_PermitOnly_UnmanagedCode ()
+        {
+            new Region ().ReleaseHrgn (IntPtr.Zero);
+        }
+    }
 }

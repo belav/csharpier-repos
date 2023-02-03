@@ -28,7 +28,7 @@
 
 
 namespace Microsoft.Build.Framework {
-	public delegate void TaskFinishedEventHandler (object sender,
-						       TaskFinishedEventArgs e);
+    public delegate void TaskFinishedEventHandler (object sender,
+                               TaskFinishedEventArgs e);
 }
 

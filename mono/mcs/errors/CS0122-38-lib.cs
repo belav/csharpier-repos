@@ -4,5 +4,5 @@ using System.Runtime.CompilerServices;
 
 class InternalClass
 {
-	
+    
 }

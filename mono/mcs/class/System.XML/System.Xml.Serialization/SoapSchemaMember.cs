@@ -31,40 +31,40 @@
 using System.Xml;
 
 namespace System.Xml.Serialization {
-	public class SoapSchemaMember {
+    public class SoapSchemaMember {
 
-		#region Fields
+        #region Fields
 
-		private string memberName;
-		private XmlQualifiedName memberType = XmlQualifiedName.Empty;
+        private string memberName;
+        private XmlQualifiedName memberType = XmlQualifiedName.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		public SoapSchemaMember ()
-		{
-		}
+        public SoapSchemaMember ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public string MemberName {
-			get {
-				if (memberName == null) {
-					return string.Empty;
-				}
-				return memberName;
-			}
-			set { memberName = value; }
-		}
+        public string MemberName {
+            get {
+                if (memberName == null) {
+                    return string.Empty;
+                }
+                return memberName;
+            }
+            set { memberName = value; }
+        }
 
-		public XmlQualifiedName MemberType {
-			get { return memberType; }
-			set { memberType = value; }
-		}
+        public XmlQualifiedName MemberType {
+            get { return memberType; }
+            set { memberType = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

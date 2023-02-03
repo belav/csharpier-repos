@@ -1,4 +1,4 @@
-﻿namespace System.Web.Routing {
+namespace System.Web.Routing {
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.CompilerServices;
@@ -79,7 +79,7 @@
 
             RequestContext requestContext = new RequestContext(context, routeData);
 
-            // Dev10 766875	Adding RouteData to HttpContext
+            // Dev10 766875    Adding RouteData to HttpContext
             context.Request.RequestContext = requestContext;
 
             IHttpHandler httpHandler = routeHandler.GetHttpHandler(requestContext);

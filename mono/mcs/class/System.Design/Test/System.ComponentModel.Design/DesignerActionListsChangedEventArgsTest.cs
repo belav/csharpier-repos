@@ -2,7 +2,7 @@
 // DesignerActionListsChangedEventArgsTest.cs
 //
 // Author:
-//	  Atsushi Enomoto (atsushi@ximian.com)
+//      Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 
@@ -36,15 +36,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.Design
 {
-	[TestFixture]
-	public class DesignerActionListsChangedEventArgsTest
-	{
-		[Test]
-		public void ConstructorNullRelatedObject ()
-		{
-			new DesignerActionListsChangedEventArgs (null,
-				DesignerActionListsChangedType.ActionListsAdded,
-				new DesignerActionListCollection ());
-		}
-	}
+    [TestFixture]
+    public class DesignerActionListsChangedEventArgsTest
+    {
+        [Test]
+        public void ConstructorNullRelatedObject ()
+        {
+            new DesignerActionListsChangedEventArgs (null,
+                DesignerActionListsChangedType.ActionListsAdded,
+                new DesignerActionListCollection ());
+        }
+    }
 }

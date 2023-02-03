@@ -2,7 +2,7 @@
 // RequiresFactory.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,54 +30,54 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders {
-	class RequiresFactory : SubroutineFactory<Method, Pair<Method, IImmutableSet<Subroutine>>> {
-		public RequiresFactory (SubroutineFacade subroutineFacade)
-			: base (subroutineFacade)
-		{
-		}
+    class RequiresFactory : SubroutineFactory<Method, Pair<Method, IImmutableSet<Subroutine>>> {
+        public RequiresFactory (SubroutineFacade subroutineFacade)
+            : base (subroutineFacade)
+        {
+        }
 
-		#region Overrides of SubroutineFactory<Method,Pair<Method,IImmutableSet<Subroutine>>>
-		protected override Subroutine BuildNewSubroutine (Method method)
-		{
-			if (ContractProvider != null) {
-				IImmutableSet<Subroutine> inheritedRequires = GetInheritedRequires (method);
-				if (ContractProvider.HasRequires (method))
-					return ContractProvider.AccessRequires (method, this, new Pair<Method, IImmutableSet<Subroutine>> (method, inheritedRequires));
-				if (inheritedRequires.Count > 0) {
-					if (inheritedRequires.Count == 1)
-						return inheritedRequires.Any;
+        #region Overrides of SubroutineFactory<Method,Pair<Method,IImmutableSet<Subroutine>>>
+        protected override Subroutine BuildNewSubroutine (Method method)
+        {
+            if (ContractProvider != null) {
+                IImmutableSet<Subroutine> inheritedRequires = GetInheritedRequires (method);
+                if (ContractProvider.HasRequires (method))
+                    return ContractProvider.AccessRequires (method, this, new Pair<Method, IImmutableSet<Subroutine>> (method, inheritedRequires));
+                if (inheritedRequires.Count > 0) {
+                    if (inheritedRequires.Count == 1)
+                        return inheritedRequires.Any;
 
-					return new RequiresSubroutine<Dummy> (this.SubroutineFacade, method, inheritedRequires);
-				}
-			}
-			return null;
-		}
+                    return new RequiresSubroutine<Dummy> (this.SubroutineFacade, method, inheritedRequires);
+                }
+            }
+            return null;
+        }
 
-		private IImmutableSet<Subroutine> GetInheritedRequires (Method method)
-		{
-			IImmutableSet<Subroutine> result = ImmutableSet<Subroutine>.Empty ();
+        private IImmutableSet<Subroutine> GetInheritedRequires (Method method)
+        {
+            IImmutableSet<Subroutine> result = ImmutableSet<Subroutine>.Empty ();
 
-			if (MetaDataProvider.IsVirtual (method) && ContractProvider.CanInheritContracts (method)) {
-				Method rootMethod;
-				if (MetaDataProvider.TryGetRootMethod (method, out rootMethod)) {
-					Subroutine sub = Get (MetaDataProvider.Unspecialized (method));
-					if (sub != null)
-						result = result.Add (sub);
-				}
-				foreach (Method implMethod in MetaDataProvider.ImplementedMethods (method)) {
-					Subroutine sub = Get (MetaDataProvider.Unspecialized (implMethod));
-					if (sub != null)
-						result = result.Add (sub);
-				}
-			}
+            if (MetaDataProvider.IsVirtual (method) && ContractProvider.CanInheritContracts (method)) {
+                Method rootMethod;
+                if (MetaDataProvider.TryGetRootMethod (method, out rootMethod)) {
+                    Subroutine sub = Get (MetaDataProvider.Unspecialized (method));
+                    if (sub != null)
+                        result = result.Add (sub);
+                }
+                foreach (Method implMethod in MetaDataProvider.ImplementedMethods (method)) {
+                    Subroutine sub = Get (MetaDataProvider.Unspecialized (implMethod));
+                    if (sub != null)
+                        result = result.Add (sub);
+                }
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		protected override Subroutine Factory<Label> (SimpleSubroutineBuilder<Label> builder, Label entry, Pair<Method, IImmutableSet<Subroutine>> data)
-		{
-			return new RequiresSubroutine<Label> (this.SubroutineFacade, data.Key, builder, entry, data.Value);
-		}
-		#endregion
-	}
+        protected override Subroutine Factory<Label> (SimpleSubroutineBuilder<Label> builder, Label entry, Pair<Method, IImmutableSet<Subroutine>> data)
+        {
+            return new RequiresSubroutine<Label> (this.SubroutineFacade, data.Key, builder, entry, data.Value);
+        }
+        #endregion
+    }
 }

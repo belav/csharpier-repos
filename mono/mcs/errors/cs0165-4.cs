@@ -2,16 +2,16 @@
 // Line: 9
 
 class C {
-	public static int test4 ()
-	{
-		int a;
+    public static int test4 ()
+    {
+        int a;
 
-		try {
-			a = 3;
-		} catch {
-		}
+        try {
+            a = 3;
+        } catch {
+        }
 
-		// CS0165
-		return a;
-	}
+        // CS0165
+        return a;
+    }
 }

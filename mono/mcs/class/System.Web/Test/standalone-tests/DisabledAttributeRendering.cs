@@ -37,65 +37,65 @@ using NUnit.Framework;
 
 namespace StandAloneTests.DisabledAttributeRendering
 {
-	[TestCase ("DisabledAttributeRendering 01", "4.0 does not render the 'disabled' attribute in default mode. Using default CSS class name.")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "DisabledAttributeRendering", "DefaultClassName"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("DisabledAttributeRendering 01", "4.0 does not render the 'disabled' attribute in default mode. Using default CSS class name.")]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "DisabledAttributeRendering", "DefaultClassName"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("OldRendering/Default.aspx", OldRendering_Default_Aspx));
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div class=\"aspNetDisabled MyClass\">\r\n\tI am disabled\r\n</div><a class=\"aspNetDisabled\">Disabled link</a>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-		
-		void OldRendering_Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div disabled=\"disabled\" class=\"MyClass\">\r\n\tI am disabled\r\n</div><a disabled=\"disabled\">Disabled link</a>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
+            runItems.Add (new TestRunItem ("OldRendering/Default.aspx", OldRendering_Default_Aspx));
+            return true;
+        }
+        
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div class=\"aspNetDisabled MyClass\">\r\n\tI am disabled\r\n</div><a class=\"aspNetDisabled\">Disabled link</a>";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+        
+        void OldRendering_Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div disabled=\"disabled\" class=\"MyClass\">\r\n\tI am disabled\r\n</div><a disabled=\"disabled\">Disabled link</a>";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 
-	[TestCase ("DisabledAttributeRendering 02", "4.0 does not render the 'disabled' attribute in default mode. Using custom CSS class name.")]
-	public sealed class Test_02 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "DisabledAttributeRendering", "CustomClassName"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("DisabledAttributeRendering 02", "4.0 does not render the 'disabled' attribute in default mode. Using custom CSS class name.")]
+    public sealed class Test_02 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "DisabledAttributeRendering", "CustomClassName"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("OldRendering/Default.aspx", OldRendering_Default_Aspx));
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div class=\"MyDisabledControlClass MyClass\">\r\n\tI am disabled\r\n</div><a class=\"MyDisabledControlClass\">Disabled link</a>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-		
-		void OldRendering_Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div disabled=\"disabled\" class=\"MyClass\">\r\n\tI am disabled\r\n</div><a disabled=\"disabled\">Disabled link</a>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
+            runItems.Add (new TestRunItem ("OldRendering/Default.aspx", OldRendering_Default_Aspx));
+            return true;
+        }
+        
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div class=\"MyDisabledControlClass MyClass\">\r\n\tI am disabled\r\n</div><a class=\"MyDisabledControlClass\">Disabled link</a>";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+        
+        void OldRendering_Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div disabled=\"disabled\" class=\"MyClass\">\r\n\tI am disabled\r\n</div><a disabled=\"disabled\">Disabled link</a>";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 }

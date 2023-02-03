@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,11 +27,11 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum BreakLineStyle
-	{
-		None = 0,
-		Straight = 1,
-		Wave = 2,
-		Ragged = 3
-	}
+    public enum BreakLineStyle
+    {
+        None = 0,
+        Straight = 1,
+        Wave = 2,
+        Ragged = 3
+    }
 }

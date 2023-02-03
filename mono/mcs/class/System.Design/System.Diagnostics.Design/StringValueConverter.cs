@@ -2,7 +2,7 @@
 // System.Diagnostics.Design.StringValueConverter.cs
 //
 // Authors:
-//	Gert Driesen (drieseng@users.sourceforge.net)
+//    Gert Driesen (drieseng@users.sourceforge.net)
 //
 // Copyright (C) 2008 Gert Driesen
 //
@@ -32,31 +32,31 @@ using System.Globalization;
 
 namespace System.Diagnostics.Design
 {
-	internal class StringValueConverter : TypeConverter
-	{
-		public StringValueConverter ()
-		{
-		}
+    internal class StringValueConverter : TypeConverter
+    {
+        public StringValueConverter ()
+        {
+        }
 
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-		{
-			if (sourceType == typeof (String))
-				return true;
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof (String))
+                return true;
 
-			return base.CanConvertFrom (context, sourceType);
-		}
+            return base.CanConvertFrom (context, sourceType);
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			string text = value as string;
-			if (text != null) {
-				text = text.Trim ();
-				if (text.Length == 0)
-					return null;
-				return text;
-			}
+        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            string text = value as string;
+            if (text != null) {
+                text = text.Trim ();
+                if (text.Length == 0)
+                    return null;
+                return text;
+            }
 
-			return base.ConvertFrom (context, culture, value);
-		}
-	}
+            return base.ConvertFrom (context, culture, value);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -345,25 +345,25 @@ public class C
 {
    public void Goo() 
    {
-	  var _0 = new { };
-	  var _1 = new { X0 = 1 };
-	  var _2 = new { X0 = 1, X1 = 1 };
-	  var _3 = new { X0 = 1, X1 = 1, X2 = 1 };
-	  var _4 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1 };
-	  var _5 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1 };
-	  var _6 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1 };
-	  var _7 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1 };
-	  var _8 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1, X7 = 1 };
+      var _0 = new { };
+      var _1 = new { X0 = 1 };
+      var _2 = new { X0 = 1, X1 = 1 };
+      var _3 = new { X0 = 1, X1 = 1, X2 = 1 };
+      var _4 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1 };
+      var _5 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1 };
+      var _6 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1 };
+      var _7 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1 };
+      var _8 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1, X7 = 1 };
       var _10 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1, X7 = 1, X8 = 1 };   
       var _11 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1, X7 = 1, X8 = 1, X9 = 1 }; 
       var _12 = new { X0 = 1, X1 = 1, X2 = 1, X3 = 1, X4 = 1, X5 = 1, X6 = 1, X7 = 1, X8 = 1, X9 = 1, X10 = 1 }; 
       var _13 = new { 
-	     X10 = 1, X11 = 1, X12 = 1, X13 = 1, X14 = 1, X15 = 1, X16 = 1, X17 = 1,
-	     X20 = 1, X21 = 1, X22 = 1, X23 = 1, X24 = 1, X25 = 1, X26 = 1, X27 = 1,
-	     X30 = 1, X31 = 1, X32 = 1, X33 = 1, X34 = 1, X35 = 1, X36 = 1, X37 = 1,
-	     X40 = 1, X41 = 1, X42 = 1, X43 = 1, X44 = 1, X45 = 1, X46 = 1, X47 = 1,
-	     X50 = 1, X51 = 1, X52 = 1, X53 = 1, X54 = 1, X55 = 1, X56 = 1, X57 = 1,
-	     X60 = 1, X61 = 1, X62 = 1, X63 = 1, X64 = 1, X65 = 1, X66 = 1, X67 = 1,
+         X10 = 1, X11 = 1, X12 = 1, X13 = 1, X14 = 1, X15 = 1, X16 = 1, X17 = 1,
+         X20 = 1, X21 = 1, X22 = 1, X23 = 1, X24 = 1, X25 = 1, X26 = 1, X27 = 1,
+         X30 = 1, X31 = 1, X32 = 1, X33 = 1, X34 = 1, X35 = 1, X36 = 1, X37 = 1,
+         X40 = 1, X41 = 1, X42 = 1, X43 = 1, X44 = 1, X45 = 1, X46 = 1, X47 = 1,
+         X50 = 1, X51 = 1, X52 = 1, X53 = 1, X54 = 1, X55 = 1, X56 = 1, X57 = 1,
+         X60 = 1, X61 = 1, X62 = 1, X63 = 1, X64 = 1, X65 = 1, X66 = 1, X67 = 1,
       };  
    }
 }

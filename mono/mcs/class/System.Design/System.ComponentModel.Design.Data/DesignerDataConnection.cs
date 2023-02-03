@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataConnection
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,43 +36,43 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-	public sealed class DesignerDataConnection
-	{
-		string name, provider_name, connection_string;
-		bool is_configured;
+    public sealed class DesignerDataConnection
+    {
+        string name, provider_name, connection_string;
+        bool is_configured;
 
-		[MonoTODO]
-		public DesignerDataConnection (string name, string providerName, string connectionString)
-			: this (name, providerName, connectionString, false)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public DesignerDataConnection (string name, string providerName, string connectionString)
+            : this (name, providerName, connectionString, false)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public DesignerDataConnection (string name, string providerName, string connectionString, bool isConfigured)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public DesignerDataConnection (string name, string providerName, string connectionString, bool isConfigured)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string Name {
-			get { return name; }
-		}
+        [MonoTODO]
+        public string Name {
+            get { return name; }
+        }
 
-		[MonoTODO]
-		public string ProviderName{
-			get { return provider_name; }
-		}
+        [MonoTODO]
+        public string ProviderName{
+            get { return provider_name; }
+        }
 
-		[MonoTODO]
-		public string ConnectionString {
-			get { return connection_string; }
-		}
+        [MonoTODO]
+        public string ConnectionString {
+            get { return connection_string; }
+        }
 
-		[MonoTODO]
-		public bool IsConfigured {
-			get { return is_configured; }
-		}
-	}
+        [MonoTODO]
+        public bool IsConfigured {
+            get { return is_configured; }
+        }
+    }
 }
 

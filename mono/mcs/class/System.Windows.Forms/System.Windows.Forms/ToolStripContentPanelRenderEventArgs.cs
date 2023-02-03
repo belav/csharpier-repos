@@ -23,39 +23,39 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	public class ToolStripContentPanelRenderEventArgs : EventArgs
-	{
-		private Graphics graphics;
-		private bool handled;
-		private ToolStripContentPanel tool_strip_content_panel;
+    public class ToolStripContentPanelRenderEventArgs : EventArgs
+    {
+        private Graphics graphics;
+        private bool handled;
+        private ToolStripContentPanel tool_strip_content_panel;
 
-		public ToolStripContentPanelRenderEventArgs (Graphics g, ToolStripContentPanel contentPanel) : base ()
-		{
-			this.graphics = g;
-			this.tool_strip_content_panel = contentPanel;
-			this.handled = false;
-		}
+        public ToolStripContentPanelRenderEventArgs (Graphics g, ToolStripContentPanel contentPanel) : base ()
+        {
+            this.graphics = g;
+            this.tool_strip_content_panel = contentPanel;
+            this.handled = false;
+        }
 
-		#region Public Properties
-		public Graphics Graphics {
-			get { return this.graphics; }
-		}
+        #region Public Properties
+        public Graphics Graphics {
+            get { return this.graphics; }
+        }
 
-		public bool Handled {
-			get { return this.handled; }
-			set { this.handled = value; }
-		}
+        public bool Handled {
+            get { return this.handled; }
+            set { this.handled = value; }
+        }
 
-		public ToolStripContentPanel ToolStripContentPanel {
-			get { return this.tool_strip_content_panel; }
-		}
-		#endregion		
-	}
+        public ToolStripContentPanel ToolStripContentPanel {
+            get { return this.tool_strip_content_panel; }
+        }
+        #endregion        
+    }
 }

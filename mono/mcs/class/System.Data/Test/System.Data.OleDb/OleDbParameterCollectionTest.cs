@@ -1,9 +1,9 @@
 //
 // OleDbParameterCollectionTest.cs -
-//	NUnit Test Cases for OleDbParameterCollection
+//    NUnit Test Cases for OleDbParameterCollection
 //
 // Author:
-//	Frederik Carlier  <frederik.carlier@ugent.be>
+//    Frederik Carlier  <frederik.carlier@ugent.be>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -35,27 +35,27 @@ using System.Data.OleDb;
 
 namespace MonoTests.System.Data.OleDb {
 
-	[TestFixture]
-	public class OleDbParameterCollectionTest {
+    [TestFixture]
+    public class OleDbParameterCollectionTest {
 
-		[Test]
-		[Category ("NotWorking")] // it tries to PInvoke LocalAlloc() and fails on non-Windows.
-		public void AddWithValueTest ()
-		{
-			OleDbCommand command = new OleDbCommand();
-			OleDbParameterCollection parameters = command.Parameters;
+        [Test]
+        [Category ("NotWorking")] // it tries to PInvoke LocalAlloc() and fails on non-Windows.
+        public void AddWithValueTest ()
+        {
+            OleDbCommand command = new OleDbCommand();
+            OleDbParameterCollection parameters = command.Parameters;
 
-			// Test with string
-			OleDbParameter parameter = parameters.AddWithValue("parameterName", "parameterValue");
-			
-			Assert.AreEqual("parameterValue", parameter.Value);
-			Assert.AreEqual("parameterName", parameter.ParameterName);
-			Assert.AreEqual(DbType.AnsiString, parameter.DbType);
-			Assert.AreEqual(OleDbType.VarChar, parameter.OleDbType);
-			Assert.AreEqual(1, parameters.Count);
-			Assert.AreEqual(parameter, parameters[0]);	
-		}
-	}
+            // Test with string
+            OleDbParameter parameter = parameters.AddWithValue("parameterName", "parameterValue");
+            
+            Assert.AreEqual("parameterValue", parameter.Value);
+            Assert.AreEqual("parameterName", parameter.ParameterName);
+            Assert.AreEqual(DbType.AnsiString, parameter.DbType);
+            Assert.AreEqual(OleDbType.VarChar, parameter.OleDbType);
+            Assert.AreEqual(1, parameters.Count);
+            Assert.AreEqual(parameter, parameters[0]);    
+        }
+    }
 }
 
 #endif

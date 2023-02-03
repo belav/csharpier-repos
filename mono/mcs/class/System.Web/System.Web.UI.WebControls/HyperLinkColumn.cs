@@ -31,150 +31,150 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // CAS
+    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
         public class HyperLinkColumn : DataGridColumn
         {
-		public HyperLinkColumn ()
-		{
-		}
+        public HyperLinkColumn ()
+        {
+        }
 
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public virtual string DataNavigateUrlField {
-			get {
-				return ViewState.GetString ("DataNavigateUrlField", String.Empty);
-			}
-			set { ViewState ["DataNavigateUrlField"] = value; }
-		}
+        [DefaultValue("")]
+        [WebSysDescription ("")]
+        [WebCategory ("Misc")]
+        public virtual string DataNavigateUrlField {
+            get {
+                return ViewState.GetString ("DataNavigateUrlField", String.Empty);
+            }
+            set { ViewState ["DataNavigateUrlField"] = value; }
+        }
 
-		[DefaultValue("")]
-		[Description("The formatting applied to the value bound to the NavigateUrl property.")]
-		[WebCategory ("Misc")]
-		public virtual string DataNavigateUrlFormatString {
-			get {
-				return ViewState.GetString ("DataNavigateUrlFormatString", String.Empty);
-			}
-			set { ViewState ["DataNavigateUrlFormatString"] = value; }
-		}
+        [DefaultValue("")]
+        [Description("The formatting applied to the value bound to the NavigateUrl property.")]
+        [WebCategory ("Misc")]
+        public virtual string DataNavigateUrlFormatString {
+            get {
+                return ViewState.GetString ("DataNavigateUrlFormatString", String.Empty);
+            }
+            set { ViewState ["DataNavigateUrlFormatString"] = value; }
+        }
 
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public virtual string DataTextField {
-			get {
-				return ViewState.GetString ("DataTextField", String.Empty);
-			}
-			set { ViewState ["DataTextField"] = value; }
-		}
+        [DefaultValue("")]
+        [WebSysDescription ("")]
+        [WebCategory ("Misc")]
+        public virtual string DataTextField {
+            get {
+                return ViewState.GetString ("DataTextField", String.Empty);
+            }
+            set { ViewState ["DataTextField"] = value; }
+        }
 
-		[Description("The formatting applied to the value bound to the Text property.")]
-		[DefaultValue("")]
-		[WebCategory ("Misc")]
-		public virtual string DataTextFormatString {
-			get {
-				return ViewState.GetString ("DataTextFormatString", String.Empty);
-			}
-			set { ViewState ["DataTextFormatString"] = value; }
-		}
+        [Description("The formatting applied to the value bound to the Text property.")]
+        [DefaultValue("")]
+        [WebCategory ("Misc")]
+        public virtual string DataTextFormatString {
+            get {
+                return ViewState.GetString ("DataTextFormatString", String.Empty);
+            }
+            set { ViewState ["DataTextFormatString"] = value; }
+        }
 
-		[UrlProperty]
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public virtual string NavigateUrl {
-			get {
-				return ViewState.GetString ("NavigateUrl", String.Empty);
-			}
-			set { ViewState ["NavigateUrl"] = value; }
-		}
+        [UrlProperty]
+        [DefaultValue("")]
+        [WebSysDescription ("")]
+        [WebCategory ("Misc")]
+        public virtual string NavigateUrl {
+            get {
+                return ViewState.GetString ("NavigateUrl", String.Empty);
+            }
+            set { ViewState ["NavigateUrl"] = value; }
+        }
 
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		[TypeConverter ("System.Web.UI.WebControls.TargetConverter")]
-		public virtual string Target {
-			get {
-				return ViewState.GetString ("Target", String.Empty);
-			}
-			set { ViewState ["Target"] = value; }
-		}
+        [DefaultValue("")]
+        [WebSysDescription ("")]
+        [WebCategory ("Misc")]
+        [TypeConverter ("System.Web.UI.WebControls.TargetConverter")]
+        public virtual string Target {
+            get {
+                return ViewState.GetString ("Target", String.Empty);
+            }
+            set { ViewState ["Target"] = value; }
+        }
 
-		[Localizable (true)]
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public virtual string Text {
-			get {
-				return ViewState.GetString ("Text", String.Empty);
-			}
-			set { ViewState ["Text"] = value; }
-		}
+        [Localizable (true)]
+        [DefaultValue("")]
+        [WebSysDescription ("")]
+        [WebCategory ("Misc")]
+        public virtual string Text {
+            get {
+                return ViewState.GetString ("Text", String.Empty);
+            }
+            set { ViewState ["Text"] = value; }
+        }
 
-		protected virtual string FormatDataNavigateUrlValue (object dataUrlValue)
-		{
-			string format = DataNavigateUrlFormatString;
-			if (format == "")
-				format = null;
+        protected virtual string FormatDataNavigateUrlValue (object dataUrlValue)
+        {
+            string format = DataNavigateUrlFormatString;
+            if (format == "")
+                format = null;
 
-			return DataBinder.FormatResult (dataUrlValue, format);
-		}
+            return DataBinder.FormatResult (dataUrlValue, format);
+        }
 
-		protected virtual string FormatDataTextValue (object dataTextValue)
-		{
-			string format = DataTextFormatString;
-			if (format == "")
-				format = null;
+        protected virtual string FormatDataTextValue (object dataTextValue)
+        {
+            string format = DataTextFormatString;
+            if (format == "")
+                format = null;
 
-			return DataBinder.FormatResult (dataTextValue, format);
-		}
+            return DataBinder.FormatResult (dataTextValue, format);
+        }
 
-		public override void Initialize ()
-		{
-			base.Initialize ();
-		}
+        public override void Initialize ()
+        {
+            base.Initialize ();
+        }
 
-		void ItemDataBinding (object sender, EventArgs args)
-		{
-			TableCell cell = (TableCell)sender;
-			HyperLink ctrl = (HyperLink)cell.Controls[0];
-			DataGridItem item = (DataGridItem)cell.NamingContainer;
+        void ItemDataBinding (object sender, EventArgs args)
+        {
+            TableCell cell = (TableCell)sender;
+            HyperLink ctrl = (HyperLink)cell.Controls[0];
+            DataGridItem item = (DataGridItem)cell.NamingContainer;
 
-			if (DataNavigateUrlField != "")
-				ctrl.NavigateUrl = FormatDataNavigateUrlValue (DataBinder.Eval (item.DataItem, DataNavigateUrlField));
-			else
-				ctrl.NavigateUrl = NavigateUrl;
+            if (DataNavigateUrlField != "")
+                ctrl.NavigateUrl = FormatDataNavigateUrlValue (DataBinder.Eval (item.DataItem, DataNavigateUrlField));
+            else
+                ctrl.NavigateUrl = NavigateUrl;
 
-			if (DataTextField != "")
-				ctrl.Text = FormatDataTextValue (DataBinder.Eval (item.DataItem, DataTextField));
-			else
-				ctrl.Text = Text;
+            if (DataTextField != "")
+                ctrl.Text = FormatDataTextValue (DataBinder.Eval (item.DataItem, DataTextField));
+            else
+                ctrl.Text = Text;
 
-			ctrl.Target = Target;
-		}
+            ctrl.Target = Target;
+        }
 
-		public override void InitializeCell (TableCell cell, int columnIndex, ListItemType itemType)
-		{
-			base.InitializeCell (cell, columnIndex, itemType);
+        public override void InitializeCell (TableCell cell, int columnIndex, ListItemType itemType)
+        {
+            base.InitializeCell (cell, columnIndex, itemType);
 
-			switch (itemType)
-			{
-			case ListItemType.Separator: 
-			case ListItemType.Pager:
-			case ListItemType.Footer:
-			case ListItemType.Header: {
-				// Base handles header and footer, dunno about the others
-				return;
-			}
-			case ListItemType.Item:
-			case ListItemType.EditItem:
-			case ListItemType.AlternatingItem:
-				cell.DataBinding += new EventHandler(ItemDataBinding);
-				cell.Controls.Add (new HyperLink ());
-				break;
-			}
-		}
+            switch (itemType)
+            {
+            case ListItemType.Separator: 
+            case ListItemType.Pager:
+            case ListItemType.Footer:
+            case ListItemType.Header: {
+                // Base handles header and footer, dunno about the others
+                return;
+            }
+            case ListItemType.Item:
+            case ListItemType.EditItem:
+            case ListItemType.AlternatingItem:
+                cell.DataBinding += new EventHandler(ItemDataBinding);
+                cell.Controls.Add (new HyperLink ());
+                break;
+            }
+        }
         }
 }

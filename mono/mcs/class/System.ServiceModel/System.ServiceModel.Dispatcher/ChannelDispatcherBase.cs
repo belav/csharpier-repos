@@ -2,7 +2,7 @@
 // ChannelDispatcherBase.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,24 +34,24 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public abstract class ChannelDispatcherBase : CommunicationObject
-	{
-		internal bool IsMex { get; set; }
+    public abstract class ChannelDispatcherBase : CommunicationObject
+    {
+        internal bool IsMex { get; set; }
 
-		public abstract IChannelListener Listener { get; }
+        public abstract IChannelListener Listener { get; }
 
-		public abstract ServiceHostBase Host { get; }
+        public abstract ServiceHostBase Host { get; }
 
-		protected internal virtual void Attach (ServiceHostBase host)
-		{
-		}
+        protected internal virtual void Attach (ServiceHostBase host)
+        {
+        }
 
-		public virtual void CloseInput ()
-		{
-		}
+        public virtual void CloseInput ()
+        {
+        }
 
-		protected internal virtual void Detach (ServiceHostBase host)
-		{
-		}
-	}
+        protected internal virtual void Detach (ServiceHostBase host)
+        {
+        }
+    }
 }

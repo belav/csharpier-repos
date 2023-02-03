@@ -1,9 +1,9 @@
 //
 // UrlAuthorizationModuleCas.cs 
-//	- CAS unit tests for System.Web.Security.UrlAuthorizationModule
+//    - CAS unit tests for System.Web.Security.UrlAuthorizationModule
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,54 +38,54 @@ using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class UrlAuthorizationModuleCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class UrlAuthorizationModuleCas : AspNetHostingMinimal {
 
-		private HttpApplication app;
-		private UrlAuthorizationModule module;
+        private HttpApplication app;
+        private UrlAuthorizationModule module;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			app = new HttpApplication ();
-			module = new UrlAuthorizationModule ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            app = new HttpApplication ();
+            module = new UrlAuthorizationModule ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_UnmanagedCode ()
-		{
-			new UrlAuthorizationModule ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Constructor_Deny_UnmanagedCode ()
+        {
+            new UrlAuthorizationModule ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Constructor_PermitOnly_UnmanagedCode ()
-		{
-			new UrlAuthorizationModule ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Constructor_PermitOnly_UnmanagedCode ()
+        {
+            new UrlAuthorizationModule ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Module ()
-		{
-			// only the ctor requires UnmanagedCode
-			module.Init (app);
-			module.Dispose (); // but doesn't implement IDisposable
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Module ()
+        {
+            // only the ctor requires UnmanagedCode
+            module.Init (app);
+            module.Dispose (); // but doesn't implement IDisposable
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			return base.CreateControl (action, level);
-		}
+        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            return base.CreateControl (action, level);
+        }
 
-		public override Type Type {
-			get { return typeof (UrlAuthorizationModule); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (UrlAuthorizationModule); }
+        }
+    }
 }

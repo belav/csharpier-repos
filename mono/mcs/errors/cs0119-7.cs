@@ -3,8 +3,8 @@
 
 class C
 {
-	static void Main ()
-	{
-		throw Main;
-	}
+    static void Main ()
+    {
+        throw Main;
+    }
 }

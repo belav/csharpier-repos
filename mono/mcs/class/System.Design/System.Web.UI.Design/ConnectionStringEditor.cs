@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ConnectionStringEditor
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,36 +38,36 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design
 {
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class ConnectionStringEditor : UITypeEditor
-	{
-		public ConnectionStringEditor ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class ConnectionStringEditor : UITypeEditor
+    {
+        public ConnectionStringEditor ()
+        {
+        }
 
-		[MonoTODO]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected virtual string GetProviderName (object instance)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected virtual string GetProviderName (object instance)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected virtual void SetProviderName (object instance, DesignerDataConnection connection)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected virtual void SetProviderName (object instance, DesignerDataConnection connection)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

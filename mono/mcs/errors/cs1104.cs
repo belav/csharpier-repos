@@ -3,7 +3,7 @@
 
 static class S
 {
-	static void Foo (params this int[] o)
-	{
-	}
+    static void Foo (params this int[] o)
+    {
+    }
 }

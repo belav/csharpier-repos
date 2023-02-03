@@ -254,7 +254,7 @@ namespace DbLinq.Data.Linq
         void ITable.AttachAll(IEnumerable entities, bool asModified)
         {
             foreach (var entity in entities)
-				Context.RegisterUpdate(entity, asModified ? null : entity);
+                Context.RegisterUpdate(entity, asModified ? null : entity);
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace DbLinq.Data.Linq
         /// Gets a value indicating whether this instance is read only.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is read only; otherwise, <c>false</c>.
         /// </value>
         public bool IsReadOnly { get { return false; } }
 

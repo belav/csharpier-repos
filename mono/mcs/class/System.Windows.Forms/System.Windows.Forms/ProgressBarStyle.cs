@@ -20,16 +20,16 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Dennis Bartok  (pbartok@novell.com)
+//    Peter Dennis Bartok  (pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum ProgressBarStyle {
-		Blocks		= 0,
-		Continuous	= 1,
-		Marquee		= 2
-	}
+    public enum ProgressBarStyle {
+        Blocks        = 0,
+        Continuous    = 1,
+        Marquee        = 2
+    }
 }

@@ -33,121 +33,121 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbDataAdapter_RowUpdating : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OleDbDataAdapter_RowUpdating tc = new OleDbDataAdapter_RowUpdating();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbDataAdapter_RowUpdating");
-				tc.run();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+    [TestFixture]
+    public class OleDbDataAdapter_RowUpdating : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OleDbDataAdapter_RowUpdating tc = new OleDbDataAdapter_RowUpdating();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbDataAdapter_RowUpdating");
+                tc.run();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
 
-		//public TestClass():base(true){}
+        //public TestClass():base(true){}
 
-		//Activate this constructor to log Failures to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-		//Activate this constructor to log All to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		int EventCounter = 0;
-		DataRow drInsert,drDelete,drUpdate;
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-			OleDbDataAdapter oleDBda = new OleDbDataAdapter();
-			oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-			base.OleDbDataAdapter_BuildUpdateCommands(ref oleDBda);		
-			// --------- get data from DB -----------------
-			DataSet ds = base.PrepareDBData_Update((DbDataAdapter)oleDBda);
-			// add event handler
-			oleDBda.RowUpdating +=new OleDbRowUpdatingEventHandler(oleDBda_RowUpdating);
-			
-			//insert ,delete, update
-			drInsert = ds.Tables[0].NewRow();
-			drInsert.ItemArray = new object[] {9991,"Ofer","Borshtein","Insert"};
-			drDelete = ds.Tables[0].Rows.Find(9992);
-			drUpdate = ds.Tables[0].Rows.Find(9993);
-		
-			ds.Tables[0].Rows.Add(drInsert);
-			drDelete.Delete();
-			drUpdate["Title"] = "Jack the ripper"; 
 
-			//execute update to db, will raise events
-			oleDBda.Update(ds);
+        int EventCounter = 0;
+        DataRow drInsert,drDelete,drUpdate;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			try
-			{
-				BeginCase("EventCounter ");
-				Compare(EventCounter ,3);
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		
-			oleDBda.RowUpdating -=new OleDbRowUpdatingEventHandler(oleDBda_RowUpdating);
-				
-			//close connection
-			if (  ((IDbDataAdapter)oleDBda).SelectCommand.Connection.State != ConnectionState.Closed )
-				((IDbDataAdapter)oleDBda).SelectCommand.Connection.Close();
-		}
+            OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+            oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
 
-		private void oleDBda_RowUpdating(object sender, OleDbRowUpdatingEventArgs e)
-		{
-			Exception exp = null;
-			switch (e.StatementType)
-			{
-				case StatementType.Insert: 
-					try
-					{
-						BeginCase("RowInsert");
-						Compare(drInsert ,e.Row );
-					}
-					catch(Exception ex)	{exp = ex;}
-					finally	{EndCase(exp); exp = null;}
-					EventCounter++;
-					break;
-				case StatementType.Delete:
-					try
-					{
-						BeginCase("RowDelete");
-						Compare(drDelete ,e.Row );
-					}
-					catch(Exception ex)	{exp = ex;}
-					finally	{EndCase(exp); exp = null;}
-					EventCounter++;
-					break;
-				case StatementType.Update:
-					try
-					{
-						BeginCase("RowUpdate");
-						Compare(drUpdate ,e.Row );
-					}
-					catch(Exception ex)	{exp = ex;}
-					finally	{EndCase(exp); exp = null;}
-					EventCounter++;
-					break;
-			}
-		}
-	}
+            base.OleDbDataAdapter_BuildUpdateCommands(ref oleDBda);        
+            // --------- get data from DB -----------------
+            DataSet ds = base.PrepareDBData_Update((DbDataAdapter)oleDBda);
+            // add event handler
+            oleDBda.RowUpdating +=new OleDbRowUpdatingEventHandler(oleDBda_RowUpdating);
+            
+            //insert ,delete, update
+            drInsert = ds.Tables[0].NewRow();
+            drInsert.ItemArray = new object[] {9991,"Ofer","Borshtein","Insert"};
+            drDelete = ds.Tables[0].Rows.Find(9992);
+            drUpdate = ds.Tables[0].Rows.Find(9993);
+        
+            ds.Tables[0].Rows.Add(drInsert);
+            drDelete.Delete();
+            drUpdate["Title"] = "Jack the ripper"; 
+
+            //execute update to db, will raise events
+            oleDBda.Update(ds);
+
+            try
+            {
+                BeginCase("EventCounter ");
+                Compare(EventCounter ,3);
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        
+            oleDBda.RowUpdating -=new OleDbRowUpdatingEventHandler(oleDBda_RowUpdating);
+                
+            //close connection
+            if (  ((IDbDataAdapter)oleDBda).SelectCommand.Connection.State != ConnectionState.Closed )
+                ((IDbDataAdapter)oleDBda).SelectCommand.Connection.Close();
+        }
+
+        private void oleDBda_RowUpdating(object sender, OleDbRowUpdatingEventArgs e)
+        {
+            Exception exp = null;
+            switch (e.StatementType)
+            {
+                case StatementType.Insert: 
+                    try
+                    {
+                        BeginCase("RowInsert");
+                        Compare(drInsert ,e.Row );
+                    }
+                    catch(Exception ex)    {exp = ex;}
+                    finally    {EndCase(exp); exp = null;}
+                    EventCounter++;
+                    break;
+                case StatementType.Delete:
+                    try
+                    {
+                        BeginCase("RowDelete");
+                        Compare(drDelete ,e.Row );
+                    }
+                    catch(Exception ex)    {exp = ex;}
+                    finally    {EndCase(exp); exp = null;}
+                    EventCounter++;
+                    break;
+                case StatementType.Update:
+                    try
+                    {
+                        BeginCase("RowUpdate");
+                        Compare(drUpdate ,e.Row );
+                    }
+                    catch(Exception ex)    {exp = ex;}
+                    finally    {EndCase(exp); exp = null;}
+                    EventCounter++;
+                    break;
+            }
+        }
+    }
 }

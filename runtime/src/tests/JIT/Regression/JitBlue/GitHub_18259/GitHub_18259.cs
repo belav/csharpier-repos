@@ -33,7 +33,7 @@ public class Program
 
         vr7.F0 = 0;                // Bug: We fail to update the Map with the proper ValueNum here.
 
-	if (vr7.F0 != 0)           // Bug: We continue to return the old value for vr7.F0
+    if (vr7.F0 != 0)           // Bug: We continue to return the old value for vr7.F0
         {
             System.Console.WriteLine(vr7.F0);
             System.Console.WriteLine("Failed");

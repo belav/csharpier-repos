@@ -31,22 +31,22 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class StreamUpgradeAcceptor
-	{
-		protected StreamUpgradeAcceptor ()
-		{
-		}
+    public abstract class StreamUpgradeAcceptor
+    {
+        protected StreamUpgradeAcceptor ()
+        {
+        }
 
-		public virtual Stream AcceptUpgrade (Stream stream)
-		{
-			return EndAcceptUpgrade (BeginAcceptUpgrade (stream, null, null));
-		}
+        public virtual Stream AcceptUpgrade (Stream stream)
+        {
+            return EndAcceptUpgrade (BeginAcceptUpgrade (stream, null, null));
+        }
 
-		public abstract IAsyncResult BeginAcceptUpgrade (Stream stream,
-			AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginAcceptUpgrade (Stream stream,
+            AsyncCallback callback, object state);
 
-		public abstract bool CanUpgrade (string contentType);
+        public abstract bool CanUpgrade (string contentType);
 
-		public abstract Stream EndAcceptUpgrade (IAsyncResult result);
-	}
+        public abstract Stream EndAcceptUpgrade (IAsyncResult result);
+    }
 }

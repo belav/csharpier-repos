@@ -7,13 +7,13 @@ interface I<T>
 
 class C : I<long>, I<int>
 {
-	static void Foo<T> (I<T> i)
-	{
-	}
+    static void Foo<T> (I<T> i)
+    {
+    }
 
-	static void Main ()
-	{
-		C c = new C ();
-		Foo (c);
-	}
+    static void Main ()
+    {
+        C c = new C ();
+        Foo (c);
+    }
 }

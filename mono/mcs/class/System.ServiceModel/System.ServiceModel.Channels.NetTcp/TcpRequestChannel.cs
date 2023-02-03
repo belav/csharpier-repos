@@ -2,7 +2,7 @@
 // TcpRequestChannel.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -37,76 +37,76 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels.NetTcp
 {
-	internal class TcpRequestChannel : RequestChannelBase
-	{
-		TcpChannelInfo info;
-		TcpClient client;
-		TcpBinaryFrameManager frame;
+    internal class TcpRequestChannel : RequestChannelBase
+    {
+        TcpChannelInfo info;
+        TcpClient client;
+        TcpBinaryFrameManager frame;
 
-		public TcpRequestChannel (ChannelFactoryBase factory, TcpChannelInfo info, EndpointAddress address, Uri via)
-			: base (factory, address, via)
-		{
-			this.info = info;
-		}
+        public TcpRequestChannel (ChannelFactoryBase factory, TcpChannelInfo info, EndpointAddress address, Uri via)
+            : base (factory, address, via)
+        {
+            this.info = info;
+        }
 
-		public MessageEncoder Encoder {
-			get { return info.MessageEncoder; }
-		}
+        public MessageEncoder Encoder {
+            get { return info.MessageEncoder; }
+        }
 
-		protected override void OnAbort ()
-		{
-			OnClose (TimeSpan.Zero);
-		}
+        protected override void OnAbort ()
+        {
+            OnClose (TimeSpan.Zero);
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			if (client != null)
-				client.Close ();
-		}
+        protected override void OnClose (TimeSpan timeout)
+        {
+            if (client != null)
+                client.Close ();
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			CreateClient (timeout);
-		}
+        protected override void OnOpen (TimeSpan timeout)
+        {
+            CreateClient (timeout);
+        }
 
-		void CreateClient (TimeSpan timeout)
-		{
-			int explicitPort = Via.Port;
-			client = new TcpClient (Via.Host, explicitPort <= 0 ? TcpTransportBindingElement.DefaultPort : explicitPort);
-			
-			NetworkStream ns = client.GetStream ();
-			frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, ns, false) {
-				Encoder = this.Encoder,
-				Via = this.Via };
-		}
+        void CreateClient (TimeSpan timeout)
+        {
+            int explicitPort = Via.Port;
+            client = new TcpClient (Via.Host, explicitPort <= 0 ? TcpTransportBindingElement.DefaultPort : explicitPort);
+            
+            NetworkStream ns = client.GetStream ();
+            frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, ns, false) {
+                Encoder = this.Encoder,
+                Via = this.Via };
+        }
 
-		public override Message Request (Message input, TimeSpan timeout)
-		{
-			DateTime start = DateTime.UtcNow;
+        public override Message Request (Message input, TimeSpan timeout)
+        {
+            DateTime start = DateTime.UtcNow;
 
-			// FIXME: use timeouts.
-			frame.ProcessPreambleInitiator ();
-			frame.ProcessPreambleAckInitiator ();
+            // FIXME: use timeouts.
+            frame.ProcessPreambleInitiator ();
+            frame.ProcessPreambleAckInitiator ();
 
-			if (input.Headers.To == null)
-				input.Headers.To = RemoteAddress.Uri;
-			if (input.Headers.MessageId == null)
-				input.Headers.MessageId = new UniqueId ();
+            if (input.Headers.To == null)
+                input.Headers.To = RemoteAddress.Uri;
+            if (input.Headers.MessageId == null)
+                input.Headers.MessageId = new UniqueId ();
 
-			Logger.LogMessage (MessageLogSourceKind.TransportSend, ref input, int.MaxValue); // It is not a receive buffer
+            Logger.LogMessage (MessageLogSourceKind.TransportSend, ref input, int.MaxValue); // It is not a receive buffer
 
-			frame.WriteUnsizedMessage (input, timeout - (DateTime.UtcNow - start));
+            frame.WriteUnsizedMessage (input, timeout - (DateTime.UtcNow - start));
 
-			// LAMESPEC: it contradicts the protocol described at section 3.1.1.1.1 in [MC-NMF].
-			// Moving this WriteEndRecord() after ReadUnsizedMessage() causes TCP connection blocking.
-			frame.WriteEndRecord ();
+            // LAMESPEC: it contradicts the protocol described at section 3.1.1.1.1 in [MC-NMF].
+            // Moving this WriteEndRecord() after ReadUnsizedMessage() causes TCP connection blocking.
+            frame.WriteEndRecord ();
 
-			var ret = frame.ReadUnsizedMessage (timeout - (DateTime.UtcNow - start));
+            var ret = frame.ReadUnsizedMessage (timeout - (DateTime.UtcNow - start));
 
-			Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref ret, info.BindingElement.MaxReceivedMessageSize);
+            Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref ret, info.BindingElement.MaxReceivedMessageSize);
 
-			frame.ReadEndRecord (); // both
-			return ret;
-		}
-	}
+            frame.ReadEndRecord (); // both
+            return ret;
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // RootBuilderCas.cs - CAS unit tests for System.Web.UI.RootBuilder
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,46 +38,46 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class RootBuilderCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class RootBuilderCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor1_Deny_Unrestricted ()
-		{
-			RootBuilder rb = new RootBuilder (new PageParser ());
-			try {
-				rb.GetChildControlType (null, null);
-			}
-			catch (ArgumentNullException) {
-				// mono and ms 1.x
-			}
-			catch (NullReferenceException) {
-				// ms 2.0 - more likely parameters don't change this result
-			}
-			Assert.IsNotNull (rb.BuiltObjects, "BuiltObjects");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted ()
+        {
+            RootBuilder rb = new RootBuilder (new PageParser ());
+            try {
+                rb.GetChildControlType (null, null);
+            }
+            catch (ArgumentNullException) {
+                // mono and ms 1.x
+            }
+            catch (NullReferenceException) {
+                // ms 2.0 - more likely parameters don't change this result
+            }
+            Assert.IsNotNull (rb.BuiltObjects, "BuiltObjects");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor0_Deny_Unrestricted ()
-		{
-			RootBuilder rb = new RootBuilder ();
-			Assert.IsNotNull (rb.BuiltObjects, "BuiltObjects");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor0_Deny_Unrestricted ()
+        {
+            RootBuilder rb = new RootBuilder ();
+            Assert.IsNotNull (rb.BuiltObjects, "BuiltObjects");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (TemplateParser) });
-			Assert.IsNotNull (ci, ".ctor(TemplateParser)");
-			return ci.Invoke (new object[1] { null });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (TemplateParser) });
+            Assert.IsNotNull (ci, ".ctor(TemplateParser)");
+            return ci.Invoke (new object[1] { null });
+        }
 
-		public override Type Type {
-			get { return typeof (RootBuilder); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (RootBuilder); }
+        }
+    }
 }

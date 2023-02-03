@@ -2,7 +2,7 @@
 // System.Web.UI.CompiledBindableTemplateBuilder.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -30,26 +30,26 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI
 {
-	public sealed class CompiledBindableTemplateBuilder : IBindableTemplate
-	{
-		BuildTemplateMethod templateMethod;
-		ExtractTemplateValuesMethod extractMethod;
+    public sealed class CompiledBindableTemplateBuilder : IBindableTemplate
+    {
+        BuildTemplateMethod templateMethod;
+        ExtractTemplateValuesMethod extractMethod;
 
-		public CompiledBindableTemplateBuilder (BuildTemplateMethod buildTemplateMethod, ExtractTemplateValuesMethod extractTemplateValuesMethod)
-		{
-			this.templateMethod = buildTemplateMethod;
-			this.extractMethod = extractTemplateValuesMethod;
-		}
+        public CompiledBindableTemplateBuilder (BuildTemplateMethod buildTemplateMethod, ExtractTemplateValuesMethod extractTemplateValuesMethod)
+        {
+            this.templateMethod = buildTemplateMethod;
+            this.extractMethod = extractTemplateValuesMethod;
+        }
 
-		public void InstantiateIn (Control container)
-		{
-			templateMethod (container);
-		}
-		
-		public IOrderedDictionary ExtractValues (Control container)
-		{
-			if (extractMethod == null) return null;
-			return extractMethod (container);
-		}
-	}
+        public void InstantiateIn (Control container)
+        {
+            templateMethod (container);
+        }
+        
+        public IOrderedDictionary ExtractValues (Control container)
+        {
+            if (extractMethod == null) return null;
+            return extractMethod (container);
+        }
+    }
 }

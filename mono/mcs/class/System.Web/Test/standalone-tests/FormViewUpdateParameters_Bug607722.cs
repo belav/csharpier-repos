@@ -37,77 +37,77 @@ using NUnit.Framework;
 
 namespace StandAloneTests.FormViewUpdateParameters_Bug607722
 {
-	[TestCase ("FormViewUpdateParameters_Bug607722", "FormView update parameters should include keys")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "FormViewUpdateParameters_Bug607722"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase ("FormViewUpdateParameters_Bug607722", "FormView update parameters should include keys")]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath {
+            get { return Path.Combine (Consts.BasePhysicalDir, "FormViewUpdateParameters_Bug607722"); }
+        }
+        
+        public string VirtualPath  {
+            get { return "/"; }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-			
+        public bool SetUp (List <TestRunItem> runItems)
+        {
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
+            
 #if BUG_IN_THE_RUNTIME_IS_FIXED
-			// With this version of code, the runtime segfaults. Until this is fixed,
-			// we'll be using an alternative version of the code
-			runItems.Add (new TestRunItem ("Default.aspx", null) {
-					PostValues = new SerializableDictionary <string, string> {
-						{"__EVENTTARGET", "FormView1$EditButton"},
-						{"__EVENTARGUMENT", String.Empty}
-					},
-					UrlDescription = "Edit phase"
-				}
-			);
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx_POST) {
-					PostValues = new SerializableDictionary <string, string> {
-						{"__EVENTTARGET", "FormView1$UpdateButton"},
-						{"__EVENTARGUMENT", String.Empty},
-						{"FormView1$M1TextBox", "12"},
-						{"FormView1$M2TextBox", "12"}
-					},
-					UrlDescription = "Update phase"
-				}
-			);
+            // With this version of code, the runtime segfaults. Until this is fixed,
+            // we'll be using an alternative version of the code
+            runItems.Add (new TestRunItem ("Default.aspx", null) {
+                    PostValues = new SerializableDictionary <string, string> {
+                        {"__EVENTTARGET", "FormView1$EditButton"},
+                        {"__EVENTARGUMENT", String.Empty}
+                    },
+                    UrlDescription = "Edit phase"
+                }
+            );
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx_POST) {
+                    PostValues = new SerializableDictionary <string, string> {
+                        {"__EVENTTARGET", "FormView1$UpdateButton"},
+                        {"__EVENTARGUMENT", String.Empty},
+                        {"FormView1$M1TextBox", "12"},
+                        {"FormView1$M2TextBox", "12"}
+                    },
+                    UrlDescription = "Update phase"
+                }
+            );
 #else
-			runItems.Add (new TestRunItem ("Default.aspx", null) {
-					PostValues = new string[] {
-						"__EVENTTARGET", "FormView1$EditButton",
-						"__EVENTARGUMENT", String.Empty
-					},
-					UrlDescription = "Edit phase"
-				}
-			);
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx_Update) {
-					PostValues = new string[] {
-						"__EVENTTARGET", "FormView1$UpdateButton",
-						"__EVENTARGUMENT", String.Empty,
-						"FormView1$M1TextBox", "12",
-						"FormView1$M2TextBox", "12"
-					},
-					UrlDescription = "Update phase"
-				}
-			);
+            runItems.Add (new TestRunItem ("Default.aspx", null) {
+                    PostValues = new string[] {
+                        "__EVENTTARGET", "FormView1$EditButton",
+                        "__EVENTARGUMENT", String.Empty
+                    },
+                    UrlDescription = "Edit phase"
+                }
+            );
+            runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx_Update) {
+                    PostValues = new string[] {
+                        "__EVENTTARGET", "FormView1$UpdateButton",
+                        "__EVENTARGUMENT", String.Empty,
+                        "FormView1$M1TextBox", "12",
+                        "FormView1$M2TextBox", "12"
+                    },
+                    UrlDescription = "Update phase"
+                }
+            );
 #endif
-			
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"M1: <span id=""FormView1_M1Label"">0</span><br />M2: <span id=""FormView1_M2Label"">0</span>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-		
-		void Default_Aspx_Update (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"M1: <span id=""FormView1_M1Label"">12</span><br />M2: <span id=""FormView1_M2Label"">12</span>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+            
+            return true;
+        }
+        
+        void Default_Aspx (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"M1: <span id=""FormView1_M1Label"">0</span><br />M2: <span id=""FormView1_M2Label"">0</span>";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+        
+        void Default_Aspx_Update (string result, TestRunItem runItem)
+        {
+            string originalHtml = @"M1: <span id=""FormView1_M1Label"">12</span><br />M2: <span id=""FormView1_M2Label"">12</span>";
+            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+        }
+    }
 }
 

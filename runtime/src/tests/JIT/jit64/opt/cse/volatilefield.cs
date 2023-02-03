@@ -45,15 +45,15 @@ namespace CseTest
             s.d = return_int(false, 56);
 
 #if LOOP         
-			
-			do {
+            
+            do {
 #endif
 #if TRY
-				try {
+                try {
 #endif
 #if LOOP  
-					do {
-						for (int i = 0; i < 10; i++) {
+                    do {
+                        for (int i = 0; i < 10; i++) {
 #endif
 
 
@@ -225,15 +225,15 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP                  
-						}
-					} while (ret == 1000);
+                        }
+                    } while (ret == 1000);
 #endif
 #if TRY
-				} finally {
-				}
+                } finally {
+                }
 #endif
 #if LOOP                  
-			} while (ret== 1000);
+            } while (ret== 1000);
 #endif
 
 

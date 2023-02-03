@@ -30,10 +30,10 @@
 
 namespace System.Web
 {
-	public enum HttpCacheRevalidation
-	{
-		AllCaches = 0x1,
-		ProxyCaches,
-		None,
-	}
+    public enum HttpCacheRevalidation
+    {
+        AllCaches = 0x1,
+        ProxyCaches,
+        None,
+    }
 }

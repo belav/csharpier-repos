@@ -1,6 +1,6 @@
-﻿//
+//
 // Authors:
-//	Marek Habersack <mhabersack@novell.com>
+//    Marek Habersack <mhabersack@novell.com>
 //
 // (C) 2010 Novell, Inc (http://novell.com)
 //
@@ -30,32 +30,32 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-	[TestFixture]
-	public class DataKeyPropertyAttributeTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			var a = new DataKeyPropertyAttribute (null);
-			Assert.AreEqual (null, a.Name, "#A1");
+    [TestFixture]
+    public class DataKeyPropertyAttributeTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            var a = new DataKeyPropertyAttribute (null);
+            Assert.AreEqual (null, a.Name, "#A1");
 
-			a = new DataKeyPropertyAttribute ("test");
-			Assert.AreEqual ("test", a.Name, "#A2");
-		}
+            a = new DataKeyPropertyAttribute ("test");
+            Assert.AreEqual ("test", a.Name, "#A2");
+        }
 
-		[Test]
-		public void EqualsTest ()
-		{
-			var a = new DataKeyPropertyAttribute (null);
+        [Test]
+        public void EqualsTest ()
+        {
+            var a = new DataKeyPropertyAttribute (null);
 
-			Assert.IsFalse (a.Equals (null), "#A1-1");
-			Assert.IsFalse (a.Equals ("test"), "#A1-2");
+            Assert.IsFalse (a.Equals (null), "#A1-1");
+            Assert.IsFalse (a.Equals ("test"), "#A1-2");
 
-			a = new DataKeyPropertyAttribute ("test");
-			Assert.IsFalse (a.Equals ("test"), "#A2-1");
-			Assert.IsTrue (a.Equals ((object)new DataKeyPropertyAttribute ("test")), "#A2-2");
-			Assert.IsFalse (a.Equals (new DataKeyPropertyAttribute ("invalid")), "#A2-3");
-			Assert.IsFalse (a.Equals ((object) new DataKeyPropertyAttribute ("TEST")), "#A2-3");
-		}
-	}
+            a = new DataKeyPropertyAttribute ("test");
+            Assert.IsFalse (a.Equals ("test"), "#A2-1");
+            Assert.IsTrue (a.Equals ((object)new DataKeyPropertyAttribute ("test")), "#A2-2");
+            Assert.IsFalse (a.Equals (new DataKeyPropertyAttribute ("invalid")), "#A2-3");
+            Assert.IsFalse (a.Equals ((object) new DataKeyPropertyAttribute ("TEST")), "#A2-3");
+        }
+    }
 }

@@ -3,8 +3,8 @@
 
 class F
 {
-	T Bar<T> (T t)
-	{
-		return t ?? default(T);
-	}
+    T Bar<T> (T t)
+    {
+        return t ?? default(T);
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
 
 namespace Castle.DynamicProxy.Contributors
 {
-	using System.Reflection;
+    using System.Reflection;
 
-	using Castle.DynamicProxy.Generators.Emitters;
-	using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+    using Castle.DynamicProxy.Generators.Emitters;
+    using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 
-	internal interface IInvocationCreationContributor
-	{
-		ConstructorEmitter CreateConstructor(ArgumentReference[] baseCtorArguments, AbstractTypeEmitter invocation);
+    internal interface IInvocationCreationContributor
+    {
+        ConstructorEmitter CreateConstructor(ArgumentReference[] baseCtorArguments, AbstractTypeEmitter invocation);
 
-		MethodInfo GetCallbackMethod();
+        MethodInfo GetCallbackMethod();
 
-		MethodInvocationExpression GetCallbackMethodInvocation(AbstractTypeEmitter invocation, IExpression[] args,
-		                                                       Reference targetField, MethodEmitter invokeMethodOnTarget);
+        MethodInvocationExpression GetCallbackMethodInvocation(AbstractTypeEmitter invocation, IExpression[] args,
+                                                               Reference targetField, MethodEmitter invokeMethodOnTarget);
 
-		IExpression[] GetConstructorInvocationArguments(IExpression[] arguments, ClassEmitter proxy);
-	}
+        IExpression[] GetConstructorInvocationArguments(IExpression[] arguments, ClassEmitter proxy);
+    }
 }

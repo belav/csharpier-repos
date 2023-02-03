@@ -20,10 +20,10 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.Windows {
 
-	public delegate void PropertyChangedCallback (DependencyObject d, DependencyPropertyChangedEventArgs e);
+    public delegate void PropertyChangedCallback (DependencyObject d, DependencyPropertyChangedEventArgs e);
 }

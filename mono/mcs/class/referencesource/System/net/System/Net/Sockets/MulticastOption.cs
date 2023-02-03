@@ -15,8 +15,8 @@ namespace System.Net.Sockets {
     /// </devdoc>
     public class MulticastOption {
 #if MONO
-		// Don't change the names of these fields without also
-		// changing socket-io.c in the runtime
+        // Don't change the names of these fields without also
+        // changing socket-io.c in the runtime
 #endif
         IPAddress group;
         IPAddress localAddress;
@@ -127,8 +127,8 @@ namespace System.Net.Sockets {
     /// </devdoc>
     public class IPv6MulticastOption {
 #if MONO
-		// Don't change the names of these fields without also
-		// changing socket-io.c in the runtime
+        // Don't change the names of these fields without also
+        // changing socket-io.c in the runtime
 #endif
         IPAddress m_Group;
         long      m_Interface;

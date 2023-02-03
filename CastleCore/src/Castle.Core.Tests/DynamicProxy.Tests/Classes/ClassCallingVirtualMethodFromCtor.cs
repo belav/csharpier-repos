@@ -13,18 +13,18 @@
 // limitations under the License.
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class ClassCallingVirtualMethodFromCtor
-	{
-		public int Result;
+    public class ClassCallingVirtualMethodFromCtor
+    {
+        public int Result;
 
-		public ClassCallingVirtualMethodFromCtor()
-		{
-			Result = VirtualMethod();
-		}
+        public ClassCallingVirtualMethodFromCtor()
+        {
+            Result = VirtualMethod();
+        }
 
-		public virtual int VirtualMethod()
-		{
-			return 7;
-		}
-	}
+        public virtual int VirtualMethod()
+        {
+            return 7;
+        }
+    }
 }

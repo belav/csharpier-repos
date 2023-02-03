@@ -1,5 +1,5 @@
 class Foo
 {
-	public class Bar {
-	}
+    public class Bar {
+    }
 }

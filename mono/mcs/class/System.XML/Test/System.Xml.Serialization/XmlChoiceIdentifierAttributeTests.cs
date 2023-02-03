@@ -13,17 +13,17 @@ using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {
-	[TestFixture]
-	public class XmlChoiceIdentifierAttributeTests
-	{
-		[Test]
-		public void MemerNameDefault ()
-		{
-			XmlChoiceIdentifierAttribute attr = new XmlChoiceIdentifierAttribute ();
-			Assert.AreEqual (string.Empty, attr.MemberName, "#1");
+    [TestFixture]
+    public class XmlChoiceIdentifierAttributeTests
+    {
+        [Test]
+        public void MemerNameDefault ()
+        {
+            XmlChoiceIdentifierAttribute attr = new XmlChoiceIdentifierAttribute ();
+            Assert.AreEqual (string.Empty, attr.MemberName, "#1");
 
-			attr.MemberName = null;
-			Assert.AreEqual (string.Empty, attr.MemberName, "#2");
-		}
-	}
+            attr.MemberName = null;
+            Assert.AreEqual (string.Empty, attr.MemberName, "#2");
+        }
+    }
 }

@@ -39,16 +39,16 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices.Providers
 {
-	public class UserValidatedEventArgs : EventArgs
-	{
-		public string UserName {
-			get;
-			private set;
-		}
-		
-		public UserValidatedEventArgs (string username)
-		{
-			UserName = username;
-		}		
-	}
+    public class UserValidatedEventArgs : EventArgs
+    {
+        public string UserName {
+            get;
+            private set;
+        }
+        
+        public UserValidatedEventArgs (string username)
+        {
+            UserName = username;
+        }        
+    }
 }

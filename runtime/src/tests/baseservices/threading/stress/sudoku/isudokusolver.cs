@@ -11,7 +11,7 @@ using System;
 public interface ISudokuSolver<T>
 {
     ISudokuBoard<int> Board {set;} 
-    bool Guess{get; set;}	//Sets Solver with Guess token (since only one solver can guess for a given board)
+    bool Guess{get; set;}    //Sets Solver with Guess token (since only one solver can guess for a given board)
     void Solve(); //Solves given Board
     int Seed{get; set;} //use default, if check for set returns false
 }

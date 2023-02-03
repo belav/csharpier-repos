@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
 
     // Returns a binder that can bind ComplexModel objects.
     public sealed class ComplexModelBinderProvider : ModelBinderProvider {

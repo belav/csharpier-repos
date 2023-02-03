@@ -33,8 +33,8 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-	public abstract class DsmlDocument
-	{
-		public abstract XmlDocument ToXml ();
-	}
+    public abstract class DsmlDocument
+    {
+        public abstract XmlDocument ToXml ();
+    }
 }

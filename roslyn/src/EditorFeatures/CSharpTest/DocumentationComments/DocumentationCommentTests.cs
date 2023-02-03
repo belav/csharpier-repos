@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1600,24 +1600,24 @@ static void Main(string[] args)
             const string code =
 @"class C
 {
-	/// <summary>
-	///     hello world$$
-	/// </summary>
-	void M()
-	{
-	}
+    /// <summary>
+    ///     hello world$$
+    /// </summary>
+    void M()
+    {
+    }
 }";
 
             const string expected =
 @"class C
 {
-	/// <summary>
-	///     hello world
-	///     $$
-	/// </summary>
-	void M()
-	{
-	}
+    /// <summary>
+    ///     hello world
+    ///     $$
+    /// </summary>
+    void M()
+    {
+    }
 }";
 
             VerifyPressingEnter(code, expected, useTabs: true);
@@ -2013,10 +2013,10 @@ class C { } class D { }";
 
 public class Class1
 {
-	//$$
-	public Class1()
-	{
-	}
+    //$$
+    public Class1()
+    {
+    }
 }";
 
             var expected =
@@ -2024,12 +2024,12 @@ public class Class1
 
 public class Class1
 {
-	/// <summary>
-	/// $$
-	/// </summary>
-	public Class1()
-	{
-	}
+    /// <summary>
+    /// $$
+    /// </summary>
+    public Class1()
+    {
+    }
 }";
 
             VerifyTypingCharacter(code, expected, useTabs: true);
@@ -2134,24 +2134,24 @@ $$
             const string code =
 @"class C
 {
-		  /// <summary>
-	/// $$stuff
-	/// </summary>
-	void M()
-	{
-	}
+          /// <summary>
+    /// $$stuff
+    /// </summary>
+    void M()
+    {
+    }
 }";
 
             const string expected =
 @"class C
 {
-		  /// <summary>
-		  /// $$
-	/// stuff
-	/// </summary>
-	void M()
-	{
-	}
+          /// <summary>
+          /// $$
+    /// stuff
+    /// </summary>
+    void M()
+    {
+    }
 }";
 
             VerifyOpenLineAbove(code, expected, useTabs: true);
@@ -2244,24 +2244,24 @@ $$
             const string code =
 @"class C
 {
-	/// <summary>
-		  /// $$stuff
-	/// </summary>
-	void M()
-	{
-	}
+    /// <summary>
+          /// $$stuff
+    /// </summary>
+    void M()
+    {
+    }
 }";
 
             const string expected =
 @"class C
 {
-	/// <summary>
-		  /// stuff
-		  /// $$
-	/// </summary>
-	void M()
-	{
-	}
+    /// <summary>
+          /// stuff
+          /// $$
+    /// </summary>
+    void M()
+    {
+    }
 }";
 
             VerifyOpenLineBelow(code, expected, useTabs: true);

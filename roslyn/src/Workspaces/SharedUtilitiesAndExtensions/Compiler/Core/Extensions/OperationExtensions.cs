@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -28,22 +28,22 @@ namespace Microsoft.CodeAnalysis
         {
             /*
             |    code                  | Read | Write | ReadableRef | WritableRef | NonReadWriteRef |
-            | x.Prop = 1               |      |  ✔️   |             |             |                 |
-            | x.Prop += 1              |  ✔️  |  ✔️   |             |             |                 |
-            | x.Prop++                 |  ✔️  |  ✔️   |             |             |                 |
-            | Foo(x.Prop)              |  ✔️  |       |             |             |                 |
-            | Foo(x.Prop),             |      |       |     ✔️      |             |                 |
+            | x.Prop = 1               |      |  ??   |             |             |                 |
+            | x.Prop += 1              |  ??  |  ??   |             |             |                 |
+            | x.Prop++                 |  ??  |  ??   |             |             |                 |
+            | Foo(x.Prop)              |  ??  |       |             |             |                 |
+            | Foo(x.Prop),             |      |       |     ??      |             |                 |
                where void Foo(in T v)
-            | Foo(out x.Prop)          |      |       |             |     ✔️      |                 |
-            | Foo(ref x.Prop)          |      |       |     ✔️      |     ✔️      |                 |
-            | nameof(x)                |      |       |             |             |       ✔️        | ️
-            | sizeof(x)                |      |       |             |             |       ✔️        | ️
-            | typeof(x)                |      |       |             |             |       ✔️        | ️
-            | out var x                |      |  ✔️   |             |             |                 | ️
-            | case X x:                |      |  ✔️   |             |             |                 | ️
-            | obj is X x               |      |  ✔️   |             |             |                 |
-            | ref var x =              |      |       |     ✔️      |     ✔️      |                 |
-            | ref readonly var x =     |      |       |     ✔️      |             |                 |
+            | Foo(out x.Prop)          |      |       |             |     ??      |                 |
+            | Foo(ref x.Prop)          |      |       |     ??      |     ??      |                 |
+            | nameof(x)                |      |       |             |             |       ??        | ?
+            | sizeof(x)                |      |       |             |             |       ??        | ?
+            | typeof(x)                |      |       |             |             |       ??        | ?
+            | out var x                |      |  ??   |             |             |                 | ?
+            | case X x:                |      |  ??   |             |             |                 | ?
+            | obj is X x               |      |  ??   |             |             |                 |
+            | ref var x =              |      |       |     ??      |     ??      |                 |
+            | ref readonly var x =     |      |       |     ??      |             |                 |
 
             */
             if (operation is ILocalReferenceOperation localReference &&

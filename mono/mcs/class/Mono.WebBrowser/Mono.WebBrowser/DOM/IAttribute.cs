@@ -20,17 +20,17 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
 
 namespace Mono.WebBrowser.DOM
 {
-	public interface IAttribute : INode
-	{
-		string Name { get;}
-		
-		int GetHashCode ();
-	}
+    public interface IAttribute : INode
+    {
+        string Name { get;}
+        
+        int GetHashCode ();
+    }
 }

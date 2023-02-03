@@ -1,4 +1,4 @@
-﻿namespace System.ServiceModel.Channels
+namespace System.ServiceModel.Channels
 {
     public class WrappedOptions
     {

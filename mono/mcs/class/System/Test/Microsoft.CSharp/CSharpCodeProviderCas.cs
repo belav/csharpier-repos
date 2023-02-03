@@ -1,9 +1,9 @@
 //
 // CSharpCodeProviderCas.cs 
-//	- CAS unit tests for Microsoft.CSharp.CSharpCodeProvider
+//    - CAS unit tests for Microsoft.CSharp.CSharpCodeProvider
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,77 +40,77 @@ using Microsoft.CSharp;
 
 namespace MonoCasTests.Microsoft.CSharp {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CSharpCodeProviderCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CSharpCodeProviderCas {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CSharpCodeProvider csprov = new CSharpCodeProvider ();
-			Assert.AreEqual ("cs", csprov.FileExtension, "FileExtension");
-			Assert.IsNotNull (csprov.CreateCompiler (), "CreateCompiler");
-			Assert.IsNotNull (csprov.CreateGenerator (), "CreateGenerator");
-			try {
-				Assert.IsNotNull (csprov.GetConverter (typeof (string)), "GetConverter");
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-			CodeTypeMember ctm = new CodeTypeMember ();
-			StringWriter sw = new StringWriter ();
-			CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
-			try {
-				csprov.GenerateCodeFromMember (ctm, sw, cgo);
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            CSharpCodeProvider csprov = new CSharpCodeProvider ();
+            Assert.AreEqual ("cs", csprov.FileExtension, "FileExtension");
+            Assert.IsNotNull (csprov.CreateCompiler (), "CreateCompiler");
+            Assert.IsNotNull (csprov.CreateGenerator (), "CreateGenerator");
+            try {
+                Assert.IsNotNull (csprov.GetConverter (typeof (string)), "GetConverter");
+            }
+            catch (NotImplementedException) {
+                // mono
+            }
+            CodeTypeMember ctm = new CodeTypeMember ();
+            StringWriter sw = new StringWriter ();
+            CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
+            try {
+                csprov.GenerateCodeFromMember (ctm, sw, cgo);
+            }
+            catch (NotImplementedException) {
+                // mono
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		// we use reflection to call this class as it is protected by a LinkDemand 
-		// (which will be converted into full demand, i.e. a stack walk) when 
-		// reflection is used (i.e. it gets testable).
+        // we use reflection to call this class as it is protected by a LinkDemand 
+        // (which will be converted into full demand, i.e. a stack walk) when 
+        // reflection is used (i.e. it gets testable).
 
-		public virtual object Create ()
-		{
-			ConstructorInfo ci = typeof (CSharpCodeProvider).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			return ci.Invoke (null);
-		}
+        public virtual object Create ()
+        {
+            ConstructorInfo ci = typeof (CSharpCodeProvider).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            return ci.Invoke (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Assert.IsNotNull (Create ());
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Anything ()
-		{
-			// denying any permissions -> not full trust!
-			Assert.IsNotNull (Create ());
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Anything ()
+        {
+            // denying any permissions -> not full trust!
+            Assert.IsNotNull (Create ());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void LinkDemand_PermitOnly_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void LinkDemand_PermitOnly_Unrestricted ()
+        {
+            Assert.IsNotNull (Create ());
+        }
+    }
 }

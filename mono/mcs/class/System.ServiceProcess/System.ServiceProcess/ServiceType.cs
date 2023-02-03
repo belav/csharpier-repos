@@ -29,15 +29,15 @@
 
 namespace System.ServiceProcess
 {
-	[Flags]
-	public enum ServiceType
-	{
-		KernelDriver = 1,
-		FileSystemDriver = 2,
-		Adapter = 4,
-		RecognizerDriver = 8,
-		Win32OwnProcess = 16,
-		Win32ShareProcess = 32,
-		InteractiveProcess = 256
-	}
+    [Flags]
+    public enum ServiceType
+    {
+        KernelDriver = 1,
+        FileSystemDriver = 2,
+        Adapter = 4,
+        RecognizerDriver = 8,
+        Win32OwnProcess = 16,
+        Win32ShareProcess = 32,
+        InteractiveProcess = 256
+    }
 }

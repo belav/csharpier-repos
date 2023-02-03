@@ -2,7 +2,7 @@
 // Block.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,22 +29,22 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.AST {
-	class Block : Statement {
-		public Block (List<Statement> statements) : base (NodeType.Block)
-		{
-			Statements = statements;
-		}
+    class Block : Statement {
+        public Block (List<Statement> statements) : base (NodeType.Block)
+        {
+            Statements = statements;
+        }
 
-		public Block () : base (NodeType.Block)
-		{
-		}
+        public Block () : base (NodeType.Block)
+        {
+        }
 
-		public int ILOffset { get; set; }
-		public List<Statement> Statements { get; set; }
+        public int ILOffset { get; set; }
+        public List<Statement> Statements { get; set; }
 
-		public override string ToString ()
-		{
-			return string.Format ("Block(Off:{0}, Stmts:{1})", ILOffset, Statements.Count);
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Format ("Block(Off:{0}, Stmts:{1})", ILOffset, Statements.Count);
+        }
+    }
 }

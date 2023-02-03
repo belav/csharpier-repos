@@ -30,11 +30,11 @@
 using System;
 
 namespace Microsoft.Build.Framework {
-	[Serializable]
-	public enum MessageImportance {
-		High,
-		Normal,
-		Low
-	}
+    [Serializable]
+    public enum MessageImportance {
+        High,
+        Normal,
+        Low
+    }
 }
 

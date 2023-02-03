@@ -1,4 +1,4 @@
-﻿//
+//
 // FileResponseElementTest.cs
 //
 // Authors:
@@ -36,35 +36,35 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {
-	[TestFixture]
-	public class FileResponseElementTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			FileResponseElement fre;
+    [TestFixture]
+    public class FileResponseElementTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            FileResponseElement fre;
 
-			Assert.Throws<ArgumentNullException> (() => {
-				fre = new FileResponseElement (null, 0, 0);
-			}, "#A1");
+            Assert.Throws<ArgumentNullException> (() => {
+                fre = new FileResponseElement (null, 0, 0);
+            }, "#A1");
 
-			Assert.Throws<ArgumentOutOfRangeException> (() => {
-				fre = new FileResponseElement ("file.txt", -1, 0);
-			}, "#A2");
+            Assert.Throws<ArgumentOutOfRangeException> (() => {
+                fre = new FileResponseElement ("file.txt", -1, 0);
+            }, "#A2");
 
-			Assert.Throws<ArgumentOutOfRangeException> (() => {
-				fre = new FileResponseElement ("file.txt", 0, -1);
-			}, "#A3");
+            Assert.Throws<ArgumentOutOfRangeException> (() => {
+                fre = new FileResponseElement ("file.txt", 0, -1);
+            }, "#A3");
 
-			fre = new FileResponseElement (String.Empty, 0, 0);
-			Assert.AreEqual (String.Empty, fre.Path, "#B1-1");
-			Assert.AreEqual (0, fre.Length, "#B1-2");
-			Assert.AreEqual (0, fre.Offset, "#B1-3");
+            fre = new FileResponseElement (String.Empty, 0, 0);
+            Assert.AreEqual (String.Empty, fre.Path, "#B1-1");
+            Assert.AreEqual (0, fre.Length, "#B1-2");
+            Assert.AreEqual (0, fre.Offset, "#B1-3");
 
-			fre = new FileResponseElement ("file.txt", 10, 30);
-			Assert.AreEqual ("file.txt", fre.Path, "#C1-1");
-			Assert.AreEqual (30, fre.Length, "#C1-2");
-			Assert.AreEqual (10, fre.Offset, "#C1-3");
-		}
-	}
+            fre = new FileResponseElement ("file.txt", 10, 30);
+            Assert.AreEqual ("file.txt", fre.Path, "#C1-1");
+            Assert.AreEqual (30, fre.Length, "#C1-2");
+            Assert.AreEqual (10, fre.Offset, "#C1-3");
+        }
+    }
 }

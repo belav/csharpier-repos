@@ -132,7 +132,7 @@ namespace System.Xml {
 
             // Attach all rows from children nodes
             for ( XmlNode child = node.FirstChild; child != null; child = child.NextSibling )
-            	SyncRows( parentRow, child, fAddRowsToTable );
+                SyncRows( parentRow, child, fAddRowsToTable );
         }
 
         // All detached DataRows are synchronized with the xml tree and inserted to their tables.
@@ -168,7 +168,7 @@ namespace System.Xml {
 
             // Attach all rows from children nodes
             for ( XmlNode child = node.FirstChild; child != null; child = child.NextSibling )
-            	SyncRows( parentRow, child, fAddRowsToTable );
+                SyncRows( parentRow, child, fAddRowsToTable );
         }
 
         internal ElementState AutoFoliationState {
@@ -2746,8 +2746,8 @@ lblDoNestedRelationSync:
             else if (TablesAreOrdered(ds)) {
                 retValue =  new DataTable[ds.Tables.Count];
                 ds.Tables.CopyTo(retValue, 0); 
-		// XDD assumes PArent table exist before its child, if it does not we wont be handle the case
-		// same as Everett
+        // XDD assumes PArent table exist before its child, if it does not we wont be handle the case
+        // same as Everett
             }
             
             if (null == retValue) {

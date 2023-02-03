@@ -3,10 +3,10 @@
 
 class X
 {
-	readonly int f = 0;
+    readonly int f = 0;
 
-	ref int Test ()
-	{
-		return ref f;
-	}
+    ref int Test ()
+    {
+        return ref f;
+    }
 }

@@ -4,11 +4,11 @@
 
 public class Test
 {
-	public static void Main ()
-	{
-		return;
+    public static void Main ()
+    {
+        return;
 
-		Test testStr;
-		return;
-	}
+        Test testStr;
+        return;
+    }
 }

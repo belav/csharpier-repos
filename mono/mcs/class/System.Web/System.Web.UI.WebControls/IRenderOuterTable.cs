@@ -27,8 +27,8 @@ using System;
 
 namespace System.Web.UI.WebControls
 {
-	interface IRenderOuterTable
-	{
-		bool RenderOuterTable { get; set; }
-	}
+    interface IRenderOuterTable
+    {
+        bool RenderOuterTable { get; set; }
+    }
 }

@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	int Y ()
-	{
-		return;
-	}
+    int Y ()
+    {
+        return;
+    }
 }

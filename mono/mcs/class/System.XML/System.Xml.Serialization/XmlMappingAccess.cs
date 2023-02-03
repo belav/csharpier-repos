@@ -34,12 +34,12 @@ using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {
-	[Flags]
-	public
-	enum XmlMappingAccess
-	{
-		None,
-		Read,
-		Write
-	}
+    [Flags]
+    public
+    enum XmlMappingAccess
+    {
+        None,
+        Read,
+        Write
+    }
 }

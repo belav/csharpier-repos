@@ -1,4 +1,4 @@
-﻿namespace OmmitedDatabaseModel3;
+namespace OmmitedDatabaseModel3;
 
 public class Entity22 : BaseEntity
 {

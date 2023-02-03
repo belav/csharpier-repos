@@ -15,15 +15,15 @@ class TestClass
 
     public static int Main()
     {
-	try {
-		M<object,object>();
-		Console.WriteLine("PASS");
-		return 100;
-	} catch (Exception e)
-	{
-		Console.WriteLine("CATCH UNEXPECTED EXCEPTION: " + e.ToString());
-		Console.WriteLine("FAIL");
-		return 99;
-	}
+    try {
+        M<object,object>();
+        Console.WriteLine("PASS");
+        return 100;
+    } catch (Exception e)
+    {
+        Console.WriteLine("CATCH UNEXPECTED EXCEPTION: " + e.ToString());
+        Console.WriteLine("FAIL");
+        return 99;
+    }
     }
 }

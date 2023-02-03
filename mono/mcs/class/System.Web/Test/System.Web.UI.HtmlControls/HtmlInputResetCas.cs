@@ -1,9 +1,9 @@
 //
 // HtmlInputResetCas.cs 
-//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputReset
+//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputReset
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,24 +38,24 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlInputResetCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlInputResetCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlInputResetTest unit = new HtmlInputResetTest ();
-			unit.OverrideProperties ();
-			unit.Defaults ();
-			unit.CleanProperties ();
-			unit.RenderAttributes ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlInputResetTest unit = new HtmlInputResetTest ();
+            unit.OverrideProperties ();
+            unit.Defaults ();
+            unit.CleanProperties ();
+            unit.RenderAttributes ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlInputReset); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlInputReset); }
+        }
+    }
 }
 

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.GridViewRowCollection.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -33,49 +33,49 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-	public class GridViewRowCollection: ICollection, IEnumerable
-	{
-		ArrayList rows = new ArrayList ();
-		
-		public GridViewRowCollection (ArrayList rows)
-		{
-			this.rows = rows;
-		}
-		
-		public GridViewRow this [int index] {
-			get { return (GridViewRow) rows [index]; }
-		}
-		
-		public void CopyTo (GridViewRow[] array, int index)
-		{
-			rows.CopyTo (array, index);
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			return rows.GetEnumerator ();
-		}
-		
-		public int Count {
-			get { return rows.Count; }
-		}
+    public class GridViewRowCollection: ICollection, IEnumerable
+    {
+        ArrayList rows = new ArrayList ();
+        
+        public GridViewRowCollection (ArrayList rows)
+        {
+            this.rows = rows;
+        }
+        
+        public GridViewRow this [int index] {
+            get { return (GridViewRow) rows [index]; }
+        }
+        
+        public void CopyTo (GridViewRow[] array, int index)
+        {
+            rows.CopyTo (array, index);
+        }
+        
+        public IEnumerator GetEnumerator ()
+        {
+            return rows.GetEnumerator ();
+        }
+        
+        public int Count {
+            get { return rows.Count; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
-		
-		public bool IsSynchronized {
-			get { return false; }
-		}
-		
-		public object SyncRoot {
-			get { return this; }
-		}
-		
-		void System.Collections.ICollection.CopyTo (Array array, int index)
-		{
-			rows.CopyTo (array, index);
-		}
-	}
+        public bool IsReadOnly {
+            get { return false; }
+        }
+        
+        public bool IsSynchronized {
+            get { return false; }
+        }
+        
+        public object SyncRoot {
+            get { return this; }
+        }
+        
+        void System.Collections.ICollection.CopyTo (Array array, int index)
+        {
+            rows.CopyTo (array, index);
+        }
+    }
 }
 

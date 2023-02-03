@@ -2,7 +2,7 @@
 // FilterRepeater.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -41,71 +41,71 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[ParseChildren (true)]
-//	[ToolboxItem]
-	public class FilterRepeater : Repeater, IWhereParametersProvider
-	{
-		[MonoTODO]
-		[Themeable (false)]
-		[Category ("Data")]
-		[DefaultValue (null)]
-		public string ContextTypeName { get; set; }
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [ParseChildren (true)]
+//    [ToolboxItem]
+    public class FilterRepeater : Repeater, IWhereParametersProvider
+    {
+        [MonoTODO]
+        [Themeable (false)]
+        [Category ("Data")]
+        [DefaultValue (null)]
+        public string ContextTypeName { get; set; }
 
-		[MonoTODO]
-		[Themeable (false)]
-		[Category ("Behavior")]
-		[DefaultValue ("DynamicFilter")]
-		[IDReferenceProperty (typeof (FilterUserControlBase))]
-		public string DynamicFilterContainerId { get; set; }
+        [MonoTODO]
+        [Themeable (false)]
+        [Category ("Behavior")]
+        [DefaultValue ("DynamicFilter")]
+        [IDReferenceProperty (typeof (FilterUserControlBase))]
+        public string DynamicFilterContainerId { get; set; }
 
-		[MonoTODO]
-		public MetaTable Table { get; private set; }
+        [MonoTODO]
+        public MetaTable Table { get; private set; }
 
-		[MonoTODO]
-		[Themeable (false)]
-		[Category ("Data")]
-		[DefaultValue (null)]
-		public string TableName { get; set; }
+        [MonoTODO]
+        [Themeable (false)]
+        [Category ("Data")]
+        [DefaultValue (null)]
+        public string TableName { get; set; }
 
-		[MonoTODO]
-		public override bool Visible { get; set; }
+        [MonoTODO]
+        public override bool Visible { get; set; }
 
-		[MonoTODO]
-		public override void DataBind ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override void DataBind ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected internal virtual IEnumerable<MetaColumn> GetFilteredColumns ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected internal virtual IEnumerable<MetaColumn> GetFilteredColumns ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual IEnumerable<Parameter> GetWhereParameters (IDynamicDataSource dataSource)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual IEnumerable<Parameter> GetWhereParameters (IDynamicDataSource dataSource)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected virtual void OnFilterItemCreated (RepeaterItem item)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected virtual void OnFilterItemCreated (RepeaterItem item)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected override void OnInit (EventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override void OnInit (EventArgs e)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected override void OnItemCreated (RepeaterItemEventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override void OnItemCreated (RepeaterItemEventArgs e)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -38,70 +38,70 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture]
-	public class DataTableExtensionsTest
-	{
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))] // for no rows
-		public void CopyToDataTableNoArgNoRows ()
-		{
-			DataTable dt = new DataTable ();
-			dt.Columns.Add ("CID", typeof (int));
-			dt.Columns.Add ("CName", typeof (string));
-			dt.AsEnumerable ().CopyToDataTable<DataRow> ();
-		}
+    [TestFixture]
+    public class DataTableExtensionsTest
+    {
+        [Test]
+        [ExpectedException (typeof (InvalidOperationException))] // for no rows
+        public void CopyToDataTableNoArgNoRows ()
+        {
+            DataTable dt = new DataTable ();
+            dt.Columns.Add ("CID", typeof (int));
+            dt.Columns.Add ("CName", typeof (string));
+            dt.AsEnumerable ().CopyToDataTable<DataRow> ();
+        }
 
-		[Test]
-		public void CopyToDataTableNoArg ()
-		{
-			DataTable dt = new DataTable ();
-			dt.Columns.Add ("CID", typeof (int));
-			dt.Columns.Add ("CName", typeof (string));
-			dt.Rows.Add (new object [] {1, "foo"});
-			DataTable dst = dt.AsEnumerable ().CopyToDataTable<DataRow> ();
-			Assert.AreEqual (1, dst.Rows.Count, "#1");
-			Assert.AreEqual ("foo", dst.Rows [0] ["CName"], "#2");
-		}
+        [Test]
+        public void CopyToDataTableNoArg ()
+        {
+            DataTable dt = new DataTable ();
+            dt.Columns.Add ("CID", typeof (int));
+            dt.Columns.Add ("CName", typeof (string));
+            dt.Rows.Add (new object [] {1, "foo"});
+            DataTable dst = dt.AsEnumerable ().CopyToDataTable<DataRow> ();
+            Assert.AreEqual (1, dst.Rows.Count, "#1");
+            Assert.AreEqual ("foo", dst.Rows [0] ["CName"], "#2");
+        }
 
-		[Test]
-		// no error for empty table this time.
-		[Category ("NotWorking")] // some DataTableReader internal issues
-		public void CopyToDataTableTableArgNoRows ()
-		{
-			DataTable dt = new DataTable ();
-			dt.Columns.Add ("CID", typeof (int));
-			dt.Columns.Add ("CName", typeof (string));
-			DataTable dst = new DataTable ();
-			dt.AsEnumerable ().CopyToDataTable<DataRow> (dst, LoadOption.PreserveChanges);
-		}
+        [Test]
+        // no error for empty table this time.
+        [Category ("NotWorking")] // some DataTableReader internal issues
+        public void CopyToDataTableTableArgNoRows ()
+        {
+            DataTable dt = new DataTable ();
+            dt.Columns.Add ("CID", typeof (int));
+            dt.Columns.Add ("CName", typeof (string));
+            DataTable dst = new DataTable ();
+            dt.AsEnumerable ().CopyToDataTable<DataRow> (dst, LoadOption.PreserveChanges);
+        }
 
-		[Test]
-		public void AsEnumerable ()
-		{
-			DataSet ds = new DataSet ();
-			ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-			DataTable dt = ds.Tables [0];
-			Assert.AreEqual ("ScoreList", dt.TableName, "TableName");
-			var dv = dt.AsEnumerable ();
-			Assert.AreEqual (4, dv.Count (), "#0");
-			var i = dv.GetEnumerator ();
-			Assert.IsTrue (i.MoveNext (), "#1");
-			Assert.AreEqual (1, i.Current ["ID"], "#2");
-			Assert.IsTrue (i.MoveNext (), "#3");
-			Assert.AreEqual (2, i.Current ["ID"], "#4");
-		}
+        [Test]
+        public void AsEnumerable ()
+        {
+            DataSet ds = new DataSet ();
+            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
+            DataTable dt = ds.Tables [0];
+            Assert.AreEqual ("ScoreList", dt.TableName, "TableName");
+            var dv = dt.AsEnumerable ();
+            Assert.AreEqual (4, dv.Count (), "#0");
+            var i = dv.GetEnumerator ();
+            Assert.IsTrue (i.MoveNext (), "#1");
+            Assert.AreEqual (1, i.Current ["ID"], "#2");
+            Assert.IsTrue (i.MoveNext (), "#3");
+            Assert.AreEqual (2, i.Current ["ID"], "#4");
+        }
 
 #if !COREFX //LinqDataView is not supported yet
-		[Test]
-		public void AsDataView ()
-		{
-			DataSet ds = new DataSet ();
-			ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
-			DataTable dt = ds.Tables [0];
-			var dv = dt.AsEnumerable ().Where<DataRow> ((DataRow r) => (int) r ["Score"] > 60).AsDataView<DataRow> ();
-			Assert.AreEqual (1, dv [0] ["ID"], "#1");
-			Assert.AreEqual (4, dv [1] ["ID"], "#2");
-		}
+        [Test]
+        public void AsDataView ()
+        {
+            DataSet ds = new DataSet ();
+            ds.ReadXml (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/testdataset1.xml"));
+            DataTable dt = ds.Tables [0];
+            var dv = dt.AsEnumerable ().Where<DataRow> ((DataRow r) => (int) r ["Score"] > 60).AsDataView<DataRow> ();
+            Assert.AreEqual (1, dv [0] ["ID"], "#1");
+            Assert.AreEqual (4, dv [1] ["ID"], "#2");
+        }
 #endif
-	}
+    }
 }

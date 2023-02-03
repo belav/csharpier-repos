@@ -4,8 +4,8 @@
 
 class C
 {
-	static void Main ()
-	{
-		int h = 1 + default;
-	}
+    static void Main ()
+    {
+        int h = 1 + default;
+    }
 }

@@ -2,7 +2,7 @@
 // AssemblyInfo.cs
 //
 // Authors:
-//	Marek Safar (marek.safar@gmail.com)
+//    Marek Safar (marek.safar@gmail.com)
 //
 // Copyright 2014 Xamarin Inc (http://www.xamarin.com)
 //

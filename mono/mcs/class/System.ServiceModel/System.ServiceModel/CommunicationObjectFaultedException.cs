@@ -30,14 +30,14 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-	[Serializable]
-	public class CommunicationObjectFaultedException : CommunicationException
-	{
-		public CommunicationObjectFaultedException () : base () {}
-		public CommunicationObjectFaultedException (string message) : base (message) {}
-		public CommunicationObjectFaultedException (string message, Exception innerException)
-			: base (message, innerException) {}
-		protected CommunicationObjectFaultedException (SerializationInfo info, StreamingContext context)
-			: base (info, context) {}
-	}
+    [Serializable]
+    public class CommunicationObjectFaultedException : CommunicationException
+    {
+        public CommunicationObjectFaultedException () : base () {}
+        public CommunicationObjectFaultedException (string message) : base (message) {}
+        public CommunicationObjectFaultedException (string message, Exception innerException)
+            : base (message, innerException) {}
+        protected CommunicationObjectFaultedException (SerializationInfo info, StreamingContext context)
+            : base (info, context) {}
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace System.ServiceModel.Activities.Configuration
+namespace System.ServiceModel.Activities.Configuration
 {
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;

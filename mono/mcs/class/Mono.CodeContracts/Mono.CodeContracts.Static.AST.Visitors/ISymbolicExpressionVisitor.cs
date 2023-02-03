@@ -2,7 +2,7 @@
 // ISymbolicExpressionVisitor.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,8 +27,8 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST.Visitors {
-	interface ISymbolicExpressionVisitor<Label, Source, Dest, Data, Result>
-		: IExpressionILVisitor<Label, Source, Dest, Data, Result> {
-		Result SymbolicConstant (Label pc, Dest variable, Data data);
-	}
+    interface ISymbolicExpressionVisitor<Label, Source, Dest, Data, Result>
+        : IExpressionILVisitor<Label, Source, Dest, Data, Result> {
+        Result SymbolicConstant (Label pc, Dest variable, Data data);
+    }
 }

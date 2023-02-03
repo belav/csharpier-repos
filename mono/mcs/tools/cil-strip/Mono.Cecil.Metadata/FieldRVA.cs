@@ -31,51 +31,51 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil.Binary;
+    using Mono.Cecil.Binary;
 
-	internal sealed class FieldRVATable : IMetadataTable {
+    internal sealed class FieldRVATable : IMetadataTable {
 
-		public const int RId = 0x1d;
+        public const int RId = 0x1d;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public FieldRVARow this [int index] {
-			get { return m_rows [index] as FieldRVARow; }
-			set { m_rows [index] = value; }
-		}
+        public FieldRVARow this [int index] {
+            get { return m_rows [index] as FieldRVARow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal FieldRVATable ()
-		{
-		}
+        internal FieldRVATable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitFieldRVATable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitFieldRVATable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class FieldRVARow : IMetadataRow {
+    internal sealed class FieldRVARow : IMetadataRow {
 
-		public RVA RVA;
-		public uint Field;
+        public RVA RVA;
+        public uint Field;
 
-		internal FieldRVARow ()
-		{
-		}
+        internal FieldRVARow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitFieldRVARow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitFieldRVARow (this);
+        }
+    }
 }

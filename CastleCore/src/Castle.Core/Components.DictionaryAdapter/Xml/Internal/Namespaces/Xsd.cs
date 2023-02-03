@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	public static class Xsd
-	{
-		public const string
-			Prefix       = "xsd",
-			NamespaceUri = "http://www.w3.org/2001/XMLSchema";
+    public static class Xsd
+    {
+        public const string
+            Prefix       = "xsd",
+            NamespaceUri = "http://www.w3.org/2001/XMLSchema";
 
-		internal static readonly XmlNamespaceAttribute
-			Namespace = new XmlNamespaceAttribute(NamespaceUri, Prefix) { Root = true };
-	}
+        internal static readonly XmlNamespaceAttribute
+            Namespace = new XmlNamespaceAttribute(NamespaceUri, Prefix) { Root = true };
+    }
 }

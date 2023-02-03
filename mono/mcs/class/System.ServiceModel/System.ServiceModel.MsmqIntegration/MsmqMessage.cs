@@ -31,102 +31,102 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.MsmqIntegration
 {
-	[MessageContract]
-	public sealed class MsmqMessage<T>
-	{
-		MsmqIntegrationMessageProperty prop;
+    [MessageContract]
+    public sealed class MsmqMessage<T>
+    {
+        MsmqIntegrationMessageProperty prop;
 
-		public MsmqMessage (T body)
-		{
-			prop = new MsmqIntegrationMessageProperty ();
-			Body = body;
-		}
+        public MsmqMessage (T body)
+        {
+            prop = new MsmqIntegrationMessageProperty ();
+            Body = body;
+        }
 
-		public AcknowledgeTypes? AcknowledgeType {
-			get { return prop.AcknowledgeType; }
-			set { prop.AcknowledgeType = value; }
-		}
+        public AcknowledgeTypes? AcknowledgeType {
+            get { return prop.AcknowledgeType; }
+            set { prop.AcknowledgeType = value; }
+        }
 
-		public Acknowledgment? Acknowledgment {
-			get { return prop.Acknowledgment; }
-		}
-		
-		public Uri AdministrationQueue {
-			get { return prop.AdministrationQueue; }
-			set { prop.AdministrationQueue = value; }
-		}
+        public Acknowledgment? Acknowledgment {
+            get { return prop.Acknowledgment; }
+        }
+        
+        public Uri AdministrationQueue {
+            get { return prop.AdministrationQueue; }
+            set { prop.AdministrationQueue = value; }
+        }
 
-		public int? AppSpecific {
-			get { return prop.AppSpecific; }
-			set { prop.AppSpecific = value; }
-		}
+        public int? AppSpecific {
+            get { return prop.AppSpecific; }
+            set { prop.AppSpecific = value; }
+        }
 
-		public DateTime? ArrivedTime {
-			get { return prop.ArrivedTime; }
-		}
+        public DateTime? ArrivedTime {
+            get { return prop.ArrivedTime; }
+        }
 
-		public bool? Authenticated {
-			get { return prop.Authenticated; }
-		}
+        public bool? Authenticated {
+            get { return prop.Authenticated; }
+        }
 
-		public T Body {
-			get { return (T) prop.Body; }
-			set { prop.Body = value; }
-		}
+        public T Body {
+            get { return (T) prop.Body; }
+            set { prop.Body = value; }
+        }
 
-		public int? BodyType {
-			get { return prop.BodyType; }
-			set { prop.BodyType = value; }
-		}
+        public int? BodyType {
+            get { return prop.BodyType; }
+            set { prop.BodyType = value; }
+        }
 
-		public string CorrelationId {
-			get { return prop.CorrelationId; }
-			set { prop.CorrelationId = value; }
-		}
+        public string CorrelationId {
+            get { return prop.CorrelationId; }
+            set { prop.CorrelationId = value; }
+        }
 
-		public Uri DestinationQueue {
-			get { return prop.DestinationQueue; }
-		}
+        public Uri DestinationQueue {
+            get { return prop.DestinationQueue; }
+        }
 
-		public byte [] Extension {
-			get { return prop.Extension; }
-			set { prop.Extension = value; }
-		}
+        public byte [] Extension {
+            get { return prop.Extension; }
+            set { prop.Extension = value; }
+        }
 
-		public string Id {
-			get { return prop.Id; }
-		}
+        public string Id {
+            get { return prop.Id; }
+        }
 
-		public string Label {
-			get { return prop.Label; }
-			set { prop.Label = value; }
-		}
+        public string Label {
+            get { return prop.Label; }
+            set { prop.Label = value; }
+        }
 
-		public MessageType? MessageType {
-			get { return prop.MessageType; }
-		}
+        public MessageType? MessageType {
+            get { return prop.MessageType; }
+        }
 
-		public MessagePriority? Priority {
-			get { return prop.Priority; }
-			set { prop.Priority = value; }
-		}
+        public MessagePriority? Priority {
+            get { return prop.Priority; }
+            set { prop.Priority = value; }
+        }
 
-		public Uri ResponseQueue {
-			get { return prop.ResponseQueue; }
-			set { prop.ResponseQueue = value; }
-		}
+        public Uri ResponseQueue {
+            get { return prop.ResponseQueue; }
+            set { prop.ResponseQueue = value; }
+        }
 
-		public byte [] SenderId {
-			get { return prop.SenderId; }
-		}
+        public byte [] SenderId {
+            get { return prop.SenderId; }
+        }
 
-		public DateTime? SentTime {
-			get { return prop.SentTime; }
-		}
+        public DateTime? SentTime {
+            get { return prop.SentTime; }
+        }
 
-		public TimeSpan? TimeToReachQueue {
-			get { return prop.TimeToReachQueue; }
-			set { prop.TimeToReachQueue = value; }
-		}
-	}
+        public TimeSpan? TimeToReachQueue {
+            get { return prop.TimeToReachQueue; }
+            set { prop.TimeToReachQueue = value; }
+        }
+    }
 }

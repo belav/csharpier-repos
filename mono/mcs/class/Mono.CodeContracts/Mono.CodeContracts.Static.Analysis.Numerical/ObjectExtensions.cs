@@ -2,7 +2,7 @@
 // ObjectExtensions.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2012 Alexander Chebaturkin
 // 

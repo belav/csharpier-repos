@@ -9,42 +9,42 @@ using System.Collections.Specialized;
 
 public class MyClass
 {
-	public Container this [ string s ]
-	{
-		get { return null; }
-		set { ; }
-	}		
+    public Container this [ string s ]
+    {
+        get { return null; }
+        set { ; }
+    }        
 }
 
 
 public class Container
 {
-	public static Container operator + ( Container c, object o )
-	{
-		return c;
-	}	
+    public static Container operator + ( Container c, object o )
+    {
+        return c;
+    }    
 }
 
 class D {
-	static void A (NameValueCollection n, MyClass m, object o)
+    static void A (NameValueCollection n, MyClass m, object o)
         {
-		//
-		// Tests that ";" is a StringLiteral, *and* it has been resolved.  Triggered
-		// by indexers, as indexers trigger an OverloadResolve.
-		//
+        //
+        // Tests that ";" is a StringLiteral, *and* it has been resolved.  Triggered
+        // by indexers, as indexers trigger an OverloadResolve.
+        //
                 n ["a"] += ";";
 
-		//
-		// A different, but similar beast.  A bug existed in the compiler that
-		// prevented the following from working (bug 36505)
-		//
-		m["apple"] += o;
+        //
+        // A different, but similar beast.  A bug existed in the compiler that
+        // prevented the following from working (bug 36505)
+        //
+        m["apple"] += o;
         }
 
-	
-	public static int Main ()
-	{
-		return 0;
-	}
+    
+    public static int Main ()
+    {
+        return 0;
+    }
 }
 

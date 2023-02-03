@@ -1,9 +1,9 @@
 //
 // CodeDelegateInvokeExpressionCas.cs
-//	- CAS unit tests for System.CodeDom.CodeDelegateInvokeExpression
+//    - CAS unit tests for System.CodeDom.CodeDelegateInvokeExpression
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,57 +37,57 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeDelegateInvokeExpressionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeDelegateInvokeExpressionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeDelegateInvokeExpression cdie = new CodeDelegateInvokeExpression ();
-			Assert.AreEqual (0, cdie.Parameters.Count, "Parameters");
-			Assert.IsNull (cdie.TargetObject, "TargetObject");
-			cdie.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeDelegateInvokeExpression cdie = new CodeDelegateInvokeExpression ();
+            Assert.AreEqual (0, cdie.Parameters.Count, "Parameters");
+            Assert.IsNull (cdie.TargetObject, "TargetObject");
+            cdie.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodeDelegateInvokeExpression cdie = new CodeDelegateInvokeExpression (target);
-			Assert.AreEqual (0, cdie.Parameters.Count, "Parameters");
-			Assert.AreSame (target, cdie.TargetObject, "TargetObject");
-			cdie.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeExpression target = new CodeExpression ();
+            CodeDelegateInvokeExpression cdie = new CodeDelegateInvokeExpression (target);
+            Assert.AreEqual (0, cdie.Parameters.Count, "Parameters");
+            Assert.AreSame (target, cdie.TargetObject, "TargetObject");
+            cdie.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodeExpression[] parameters = new CodeExpression[1] { target };
-			CodeDelegateInvokeExpression cdie = new CodeDelegateInvokeExpression (target, parameters);
-			Assert.AreEqual (1, cdie.Parameters.Count, "Parameters");
-			Assert.AreSame (target, cdie.TargetObject, "TargetObject");
-			cdie.TargetObject = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeExpression target = new CodeExpression ();
+            CodeExpression[] parameters = new CodeExpression[1] { target };
+            CodeDelegateInvokeExpression cdie = new CodeDelegateInvokeExpression (target, parameters);
+            Assert.AreEqual (1, cdie.Parameters.Count, "Parameters");
+            Assert.AreSame (target, cdie.TargetObject, "TargetObject");
+            cdie.TargetObject = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeDelegateInvokeExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeDelegateInvokeExpression).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

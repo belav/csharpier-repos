@@ -14,7 +14,7 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	public class DoNothingInterceptor : IInterceptor
+    public class DoNothingInterceptor : IInterceptor
     {
         public void Intercept(IInvocation invocation)
         {

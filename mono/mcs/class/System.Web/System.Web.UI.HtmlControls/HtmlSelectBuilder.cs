@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlSelectBuilder
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -35,26 +35,26 @@ using System.Web.Util;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class HtmlSelectBuilder : ControlBuilder
-	{
-		public override bool AllowWhitespaceLiterals () 
-		{
-			return false;
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class HtmlSelectBuilder : ControlBuilder
+    {
+        public override bool AllowWhitespaceLiterals () 
+        {
+            return false;
+        }
 
-		public override Type GetChildControlType (string tagName, IDictionary attribs) 
-		{
-			if (String.Compare (tagName, "option", true, Helpers.InvariantCulture) != 0)
-				return null;
+        public override Type GetChildControlType (string tagName, IDictionary attribs) 
+        {
+            if (String.Compare (tagName, "option", true, Helpers.InvariantCulture) != 0)
+                return null;
 
-			string selected = attribs ["selected"] as string;
-			if (selected != null && selected.Length > 0 && String.Compare (selected, "selected", true, Helpers.InvariantCulture) == 0)
-				attribs ["selected"] = "true";
-			return typeof (ListItem);
-		}
-	}
+            string selected = attribs ["selected"] as string;
+            if (selected != null && selected.Length > 0 && String.Compare (selected, "selected", true, Helpers.InvariantCulture) == 0)
+                attribs ["selected"] = "true";
+            return typeof (ListItem);
+        }
+    }
 }
 

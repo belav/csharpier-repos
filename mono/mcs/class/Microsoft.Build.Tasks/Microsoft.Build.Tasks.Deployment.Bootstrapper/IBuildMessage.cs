@@ -32,26 +32,26 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
 
-	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
-	[Guid ("E3C981EA-99E6-4f48-8955-1AAFDFB5ACE4")]
-	[ComVisible (true)]
-	public interface IBuildMessage {
-		
-		int HelpId {
-			get;
-		}
-		
-		string HelpKeyword {
-			get;
-		}
-		
-		string Message {
-			get;
-		}
-		
-		BuildMessageSeverity Severity {
-			get;
-		}
-	}
+    [InterfaceType (ComInterfaceType.InterfaceIsDual)]
+    [Guid ("E3C981EA-99E6-4f48-8955-1AAFDFB5ACE4")]
+    [ComVisible (true)]
+    public interface IBuildMessage {
+        
+        int HelpId {
+            get;
+        }
+        
+        string HelpKeyword {
+            get;
+        }
+        
+        string Message {
+            get;
+        }
+        
+        BuildMessageSeverity Severity {
+            get;
+        }
+    }
 }
 

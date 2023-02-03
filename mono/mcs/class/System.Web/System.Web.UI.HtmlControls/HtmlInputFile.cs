@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlInputFile.cs
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,172 +32,172 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls 
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ValidationProperty ("Value")]
-	public class HtmlInputFile : HtmlInputControl , IPostBackDataHandler
-	{
-		HttpPostedFile posted_file;
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [ValidationProperty ("Value")]
+    public class HtmlInputFile : HtmlInputControl , IPostBackDataHandler
+    {
+        HttpPostedFile posted_file;
 
-		public HtmlInputFile () : base ("file")
-		{
-		}
+        public HtmlInputFile () : base ("file")
+        {
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		public string Accept {
-			get {
-				string acc = Attributes["accept"];
+        [DefaultValue ("")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        public string Accept {
+            get {
+                string acc = Attributes["accept"];
 
-				if (acc == null) {
-					return (String.Empty);
-				}
+                if (acc == null) {
+                    return (String.Empty);
+                }
 
-				return (acc);
-			}
-			set {
-				if (value == null) {
-					Attributes.Remove ("accept");
-				} else {
-					Attributes["accept"] = value;
-				}
-			}
-		}
+                return (acc);
+            }
+            set {
+                if (value == null) {
+                    Attributes.Remove ("accept");
+                } else {
+                    Attributes["accept"] = value;
+                }
+            }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		public int MaxLength {
-			get {
-				string maxlen = Attributes["maxlength"];
-				
-				if (maxlen == null) {
-					return (-1);
-				} else {
-					return (Convert.ToInt32 (maxlen));
-				}
-			}
-			set {
-				if (value == -1) {
-					Attributes.Remove ("maxlength");
-				} else {
-					Attributes["maxlength"] = value.ToString ();
-				}
-			}
-		}
-		
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Misc")]
-		public HttpPostedFile PostedFile {
-			get {
-				return (posted_file);
-			}
-		}
-		
-		[DefaultValue ("-1")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Appearance")]
-		public int Size {
-			get {
-				string size = Attributes["size"];
-				
-				if (size == null) {
-					return (-1);
-				} else {
-					return (Convert.ToInt32 (size));
-				}
-			}
-			set {
-				if (value == -1) {
-					Attributes.Remove ("size");
-				} else {
-					Attributes["size"] = value.ToString ();
-				}
-			}
-		}
-		
-		[Browsable (false)]
-		public override string Value {
-			get {
-				HttpPostedFile file = PostedFile;
-				if (file == null)
-					return string.Empty;
+        [DefaultValue ("")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        public int MaxLength {
+            get {
+                string maxlen = Attributes["maxlength"];
+                
+                if (maxlen == null) {
+                    return (-1);
+                } else {
+                    return (Convert.ToInt32 (maxlen));
+                }
+            }
+            set {
+                if (value == -1) {
+                    Attributes.Remove ("maxlength");
+                } else {
+                    Attributes["maxlength"] = value.ToString ();
+                }
+            }
+        }
+        
+        [DefaultValue ("")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public HttpPostedFile PostedFile {
+            get {
+                return (posted_file);
+            }
+        }
+        
+        [DefaultValue ("-1")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public int Size {
+            get {
+                string size = Attributes["size"];
+                
+                if (size == null) {
+                    return (-1);
+                } else {
+                    return (Convert.ToInt32 (size));
+                }
+            }
+            set {
+                if (value == -1) {
+                    Attributes.Remove ("size");
+                } else {
+                    Attributes["size"] = value.ToString ();
+                }
+            }
+        }
+        
+        [Browsable (false)]
+        public override string Value {
+            get {
+                HttpPostedFile file = PostedFile;
+                if (file == null)
+                    return string.Empty;
 
-				return file.FileName;
-			}
-			set {
-				throw new NotSupportedException ("The value property on HtmlInputFile is not settable.");
-			}
-		}
+                return file.FileName;
+            }
+            set {
+                throw new NotSupportedException ("The value property on HtmlInputFile is not settable.");
+            }
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
+        protected internal override void OnPreRender (EventArgs e)
+        {
+            base.OnPreRender (e);
 
-			Page page = Page;
-			if (page != null && !Disabled) {
-				page.RegisterRequiresPostBack (this);
-				page.RegisterEnabledControl (this);
-			}
-			
-			HtmlForm form = (HtmlForm) SearchParentByType (typeof (HtmlForm));
-			if (form != null && form.Enctype == String.Empty)
-				form.Enctype = "multipart/form-data";
-		}
+            Page page = Page;
+            if (page != null && !Disabled) {
+                page.RegisterRequiresPostBack (this);
+                page.RegisterEnabledControl (this);
+            }
+            
+            HtmlForm form = (HtmlForm) SearchParentByType (typeof (HtmlForm));
+            if (form != null && form.Enctype == String.Empty)
+                form.Enctype = "multipart/form-data";
+        }
 
-		Control SearchParentByType (Type type)
-		{
-			Control ctrl = Parent;
-			while (ctrl != null) {
-				if (type.IsAssignableFrom (ctrl.GetType ())) {
-					return ctrl;
-				}
-				ctrl = ctrl.Parent;
-			}
+        Control SearchParentByType (Type type)
+        {
+            Control ctrl = Parent;
+            while (ctrl != null) {
+                if (type.IsAssignableFrom (ctrl.GetType ())) {
+                    return ctrl;
+                }
+                ctrl = ctrl.Parent;
+            }
 
-			return null;
-		}
+            return null;
+        }
 
-		bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
-		{
-			Page page = Page;
-			if (page != null)
-				posted_file = page.Request.Files [postDataKey];
-			
-			return (false);
-		}
+        bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
+        {
+            Page page = Page;
+            if (page != null)
+                posted_file = page.Request.Files [postDataKey];
+            
+            return (false);
+        }
 
-		void RaisePostDataChangedEventInternal ()
-		{
-			/* No events to raise */
-		}
+        void RaisePostDataChangedEventInternal ()
+        {
+            /* No events to raise */
+        }
 
-		protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
-		{
-			return LoadPostDataInternal (postDataKey, postCollection);
-		}
+        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        {
+            return LoadPostDataInternal (postDataKey, postCollection);
+        }
 
-		protected virtual void RaisePostDataChangedEvent ()
-		{
-			RaisePostDataChangedEventInternal ();
-		}
-		
-		bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
-		{
-			return LoadPostData (postDataKey, postCollection);
-		}
+        protected virtual void RaisePostDataChangedEvent ()
+        {
+            RaisePostDataChangedEventInternal ();
+        }
+        
+        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        {
+            return LoadPostData (postDataKey, postCollection);
+        }
 
-		void IPostBackDataHandler.RaisePostDataChangedEvent ()
-		{
-			RaisePostDataChangedEvent ();
-		}
-	}
+        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        {
+            RaisePostDataChangedEvent ();
+        }
+    }
 }
 
-	
+    

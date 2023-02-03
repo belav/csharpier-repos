@@ -2,7 +2,7 @@
 // IMethodResult.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,8 +30,8 @@ using System.Collections.Generic;
 using Mono.CodeContracts.Static.Proving;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-	interface IMethodResult<Variable> : IMethodAnalysisFixPoint<Variable> {
-		IMethodAnalysis MethodAnalysis { get; set; }
-		void ValidateImplicitAssertions (IFactQuery<BoxedExpression, Variable> facts, List<string> proofResults);
-	}
+    interface IMethodResult<Variable> : IMethodAnalysisFixPoint<Variable> {
+        IMethodAnalysis MethodAnalysis { get; set; }
+        void ValidateImplicitAssertions (IFactQuery<BoxedExpression, Variable> facts, List<string> proofResults);
+    }
 }

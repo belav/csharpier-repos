@@ -31,19 +31,19 @@
 
 namespace System.Web.Services.Description 
 {
-	public abstract class NamedItem: DocumentableItem
-	{
-		string name;
-		
-		protected NamedItem()
-		{
-		}
+    public abstract class NamedItem: DocumentableItem
+    {
+        string name;
+        
+        protected NamedItem()
+        {
+        }
 
-		[System.Xml.Serialization.XmlAttribute ("name")]
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-	}
+        [System.Xml.Serialization.XmlAttribute ("name")]
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
+    }
 }
 

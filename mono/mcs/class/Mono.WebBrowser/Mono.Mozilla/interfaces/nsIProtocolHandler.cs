@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,51 +32,51 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("15fd6940-8ea7-11d3-93ad-00104ba0fd40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIProtocolHandler {
+    [Guid ("15fd6940-8ea7-11d3-93ad-00104ba0fd40")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIProtocolHandler {
 
 #region nsIProtocolHandler
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getScheme (  /*ACString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getScheme (  /*ACString*/ HandleRef ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDefaultPort ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDefaultPort ( out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getProtocolFlags ( out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getProtocolFlags ( out uint ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int newURI (
-				   /*AUTF8String*/ HandleRef aSpec,
-				[MarshalAs (UnmanagedType.LPStr)]   string aOriginCharset,
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,[MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int newURI (
+                   /*AUTF8String*/ HandleRef aSpec,
+                [MarshalAs (UnmanagedType.LPStr)]   string aOriginCharset,
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,[MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int newChannel (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aURI,[MarshalAs (UnmanagedType.Interface)]  out nsIChannel ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int newChannel (
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aURI,[MarshalAs (UnmanagedType.Interface)]  out nsIChannel ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int allowPort (
-				   int port,
-				[MarshalAs (UnmanagedType.LPStr)]   string scheme, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int allowPort (
+                   int port,
+                [MarshalAs (UnmanagedType.LPStr)]   string scheme, out bool ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsProtocolHandler {
-		public static nsIProtocolHandler GetProxy (Mono.WebBrowser.IWebBrowser control, nsIProtocolHandler obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIProtocolHandler).GUID, obj);
-			return o as nsIProtocolHandler;
-		}
-	}
+    internal class nsProtocolHandler {
+        public static nsIProtocolHandler GetProxy (Mono.WebBrowser.IWebBrowser control, nsIProtocolHandler obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIProtocolHandler).GUID, obj);
+            return o as nsIProtocolHandler;
+        }
+    }
 }

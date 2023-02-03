@@ -1,9 +1,9 @@
 //
 // CodeVariableDeclarationStatementCas.cs 
-//	- CAS unit tests for System.CodeDom.CodeVariableDeclarationStatement
+//    - CAS unit tests for System.CodeDom.CodeVariableDeclarationStatement
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,120 +37,120 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeVariableDeclarationStatementCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeVariableDeclarationStatementCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ();
-			Assert.IsNull (cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual (String.Empty, cvds.Name, "Name");
-			cvds.Name = "mono";
-			Assert.AreEqual ("System.Void", cvds.Type.BaseType, "Type");
-			cvds.Type = new CodeTypeReference ("System.Int32");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ();
+            Assert.IsNull (cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual (String.Empty, cvds.Name, "Name");
+            cvds.Name = "mono";
+            Assert.AreEqual ("System.Void", cvds.Type.BaseType, "Type");
+            cvds.Type = new CodeTypeReference ("System.Int32");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeTypeReference type = new CodeTypeReference ("System.Int32");
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (type, "mono");
-			Assert.IsNull (cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual ("mono", cvds.Name, "Name");
-			cvds.Name = String.Empty;
-			Assert.AreSame (type, cvds.Type, "Type");
-			cvds.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeTypeReference type = new CodeTypeReference ("System.Int32");
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (type, "mono");
+            Assert.IsNull (cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual ("mono", cvds.Name, "Name");
+            cvds.Name = String.Empty;
+            Assert.AreSame (type, cvds.Type, "Type");
+            cvds.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ("System.Int32", "mono");
-			Assert.IsNull (cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual ("mono", cvds.Name, "Name");
-			cvds.Name = String.Empty;
-			Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
-			cvds.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ("System.Int32", "mono");
+            Assert.IsNull (cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual ("mono", cvds.Name, "Name");
+            cvds.Name = String.Empty;
+            Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
+            cvds.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor3_Deny_Unrestricted ()
-		{
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (typeof (int), "mono");
-			Assert.IsNull (cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual ("mono", cvds.Name, "Name");
-			cvds.Name = String.Empty;
-			Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
-			cvds.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor3_Deny_Unrestricted ()
+        {
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (typeof (int), "mono");
+            Assert.IsNull (cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual ("mono", cvds.Name, "Name");
+            cvds.Name = String.Empty;
+            Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
+            cvds.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor4_Deny_Unrestricted ()
-		{
-			CodeTypeReference type = new CodeTypeReference ("System.Int32");
-			CodeExpression init = new CodeExpression ();
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (type, "mono", init);
-			Assert.AreSame (init, cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual ("mono", cvds.Name, "Name");
-			cvds.Name = String.Empty;
-			Assert.AreSame (type, cvds.Type, "Type");
-			cvds.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor4_Deny_Unrestricted ()
+        {
+            CodeTypeReference type = new CodeTypeReference ("System.Int32");
+            CodeExpression init = new CodeExpression ();
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (type, "mono", init);
+            Assert.AreSame (init, cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual ("mono", cvds.Name, "Name");
+            cvds.Name = String.Empty;
+            Assert.AreSame (type, cvds.Type, "Type");
+            cvds.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor5_Deny_Unrestricted ()
-		{
-			CodeExpression init = new CodeExpression ();
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ("System.Int32", "mono", init);
-			Assert.AreSame (init, cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual ("mono", cvds.Name, "Name");
-			cvds.Name = String.Empty;
-			Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
-			cvds.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor5_Deny_Unrestricted ()
+        {
+            CodeExpression init = new CodeExpression ();
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement ("System.Int32", "mono", init);
+            Assert.AreSame (init, cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual ("mono", cvds.Name, "Name");
+            cvds.Name = String.Empty;
+            Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
+            cvds.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor6_Deny_Unrestricted ()
-		{
-			CodeExpression init = new CodeExpression ();
-			CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (typeof (int), "mono", init);
-			Assert.AreSame (init, cvds.InitExpression, "InitExpression");
-			cvds.InitExpression = new CodeExpression ();
-			Assert.AreEqual ("mono", cvds.Name, "Name");
-			cvds.Name = String.Empty;
-			Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
-			cvds.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor6_Deny_Unrestricted ()
+        {
+            CodeExpression init = new CodeExpression ();
+            CodeVariableDeclarationStatement cvds = new CodeVariableDeclarationStatement (typeof (int), "mono", init);
+            Assert.AreSame (init, cvds.InitExpression, "InitExpression");
+            cvds.InitExpression = new CodeExpression ();
+            Assert.AreEqual ("mono", cvds.Name, "Name");
+            cvds.Name = String.Empty;
+            Assert.AreEqual ("System.Int32", cvds.Type.BaseType, "Type");
+            cvds.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeVariableDeclarationStatement).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeVariableDeclarationStatement).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

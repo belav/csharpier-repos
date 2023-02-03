@@ -31,13 +31,13 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IChannel
-	{
-		string ChannelName { get; }
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IChannel
+    {
+        string ChannelName { get; }
 
-		int ChannelPriority { get; }
+        int ChannelPriority { get; }
 
-		string Parse (string url, out string objectURI);
-	}
+        string Parse (string url, out string objectURI);
+    }
 }

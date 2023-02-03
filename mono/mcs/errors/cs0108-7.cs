@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:2
 
 class Base {
-	public bool Prop = false;
+    public bool Prop = false;
 }
 
 class Derived : Base {

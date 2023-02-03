@@ -1,8 +1,8 @@
-﻿//
+//
 // SamlCondition.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,24 +34,24 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-	public abstract class SamlCondition
-	{
-		protected SamlCondition ()
-		{
-		}
+    public abstract class SamlCondition
+    {
+        protected SamlCondition ()
+        {
+        }
 
-		public abstract bool IsReadOnly { get; }
+        public abstract bool IsReadOnly { get; }
 
-		public abstract void MakeReadOnly ();
+        public abstract void MakeReadOnly ();
 
-		public abstract void ReadXml (XmlDictionaryReader reader,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer,
-			SecurityTokenResolver outOfBandTokenResolver);
+        public abstract void ReadXml (XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver);
 
-		public abstract void WriteXml (
-			XmlDictionaryWriter writer,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer);
-	}
+        public abstract void WriteXml (
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer);
+    }
 }

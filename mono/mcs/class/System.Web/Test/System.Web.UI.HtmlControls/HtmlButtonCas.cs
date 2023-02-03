@@ -2,7 +2,7 @@
 // HtmlButtonCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlButton
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,23 +36,23 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlButtonCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlButtonCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlButtonTest unit = new HtmlButtonTest ();
-			unit.Defaults ();
-			unit.CleanProperties ();
-			unit.ViewState ();
-			unit.RenderAttributes ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlButtonTest unit = new HtmlButtonTest ();
+            unit.Defaults ();
+            unit.CleanProperties ();
+            unit.ViewState ();
+            unit.RenderAttributes ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlButton); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlButton); }
+        }
+    }
 }

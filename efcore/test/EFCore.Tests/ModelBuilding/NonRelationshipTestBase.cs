@@ -429,9 +429,9 @@ public abstract partial class ModelBuilderTest
             Assert.Null(model["foo"]);
         }
 
-		[ConditionalFact]
+        [ConditionalFact]
         public virtual void Conventions_can_be_removed_by_generic_method()
-		{
+        {
             var modelBuilder = CreateModelBuilder(
                 c =>
                 {

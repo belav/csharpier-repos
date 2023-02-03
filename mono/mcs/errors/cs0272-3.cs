@@ -5,14 +5,14 @@ using System;
 
 public class Test
 {
-	private class A
-	{
-		public string B { get; private set; }
-	}
-	
-	static void Main ()
-	{
-		A a = new A ();
-		a.B = "Foo";
-	}
+    private class A
+    {
+        public string B { get; private set; }
+    }
+    
+    static void Main ()
+    {
+        A a = new A ();
+        a.B = "Foo";
+    }
 }

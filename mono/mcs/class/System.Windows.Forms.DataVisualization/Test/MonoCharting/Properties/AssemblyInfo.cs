@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Novell")]
 [assembly: AssemblyProduct ("MonoCharting")]
-[assembly: AssemblyCopyright ("Copyright © Novell 2009")]
+[assembly: AssemblyCopyright ("Copyright � Novell 2009")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

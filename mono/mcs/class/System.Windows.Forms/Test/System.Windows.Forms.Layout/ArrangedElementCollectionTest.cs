@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Rolf Bjarne Kvinge  (RKvinge@novell.com)
+//    Rolf Bjarne Kvinge  (RKvinge@novell.com)
 //
 
 
@@ -36,19 +36,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.Layout
 {
-	[TestFixture]
-	public class ArrangedElementCollectionTest : TestHelper
-	{
-		
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void IList_InsertTest ()
-		{
-			ArrangedElementCollection c = (ArrangedElementCollection) typeof (ArrangedElementCollection).GetConstructor (BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null).Invoke (null);
-			IList list = c;
-			
-			list.Insert (0, new object ());
-		}
-	}
+    [TestFixture]
+    public class ArrangedElementCollectionTest : TestHelper
+    {
+        
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void IList_InsertTest ()
+        {
+            ArrangedElementCollection c = (ArrangedElementCollection) typeof (ArrangedElementCollection).GetConstructor (BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null).Invoke (null);
+            IList list = c;
+            
+            list.Insert (0, new object ());
+        }
+    }
 }
-	
+    

@@ -2,7 +2,7 @@
 // MessagePartDescriptionCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,16 +33,16 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	public class MessagePartDescriptionCollection : KeyedCollection<XmlQualifiedName, MessagePartDescription>
-	{
-		internal MessagePartDescriptionCollection ()
-		{
-		}
+    public class MessagePartDescriptionCollection : KeyedCollection<XmlQualifiedName, MessagePartDescription>
+    {
+        internal MessagePartDescriptionCollection ()
+        {
+        }
 
-		protected override XmlQualifiedName
-			GetKeyForItem (MessagePartDescription item)
-		{
-			return new XmlQualifiedName (item.Name, item.Namespace);
-		}
-	}
+        protected override XmlQualifiedName
+            GetKeyForItem (MessagePartDescription item)
+        {
+            return new XmlQualifiedName (item.Name, item.Namespace);
+        }
+    }
 }

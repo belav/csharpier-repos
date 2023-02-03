@@ -5,19 +5,19 @@ using System;
 
 public class Test
 {
-	struct Container
-	{
-		public int foo { get; set; }
-	}
-	
-	readonly Container p;
-	
-	void Foo ()
-	{
-		p.foo = 0;
-	}
+    struct Container
+    {
+        public int foo { get; set; }
+    }
+    
+    readonly Container p;
+    
+    void Foo ()
+    {
+        p.foo = 0;
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

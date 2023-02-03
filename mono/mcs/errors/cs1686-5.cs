@@ -5,12 +5,12 @@
 delegate void D ();
 
 unsafe class X {
-	public D T (int a)
-	{
-		int *y = &a;
-		
-		return delegate {
-			int x = a;
-		};
-	}
+    public D T (int a)
+    {
+        int *y = &a;
+        
+        return delegate {
+            int x = a;
+        };
+    }
 }

@@ -32,7 +32,7 @@ namespace Microsoft.AspNetCore.Components.WebView
             var i = (int)c;
 
             // Array is in chunks of 32 bits, so get offset by dividing by 32
-            var offset = i >> 5;		// i / 32;
+            var offset = i >> 5;        // i / 32;
             // Significant bit position is the remainder of the above calc; i % 32 => i & 31
             var significantBit = 1u << (i & 31);
 

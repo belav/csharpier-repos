@@ -35,46 +35,46 @@ namespace System.Web.Hosting {
 
         public sealed class ISAPIRuntime : MarshalByRefObject, IISAPIRuntime, IRegisteredObject {
 
-		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+        [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
+        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
                 public ISAPIRuntime ()
-		{
-		}
-		
+        {
+        }
+        
                 public void DoGCCollect ()
-		{
-			// Do nothing.
-		}
-		
-		[MonoTODO ("Not implemented")]
+        {
+            // Do nothing.
+        }
+        
+        [MonoTODO ("Not implemented")]
                 public int ProcessRequest (IntPtr ecb, int iWRType)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO ("Not implemented")]
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO ("Not implemented")]
                 public void StartProcessing ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO ("Not implemented")]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+        {
+            throw new NotImplementedException ();
+        }
+        
+        [MonoTODO ("Not implemented")]
+        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
                 public void StopProcessing ()
-		{
-			throw new NotImplementedException ();
-		}
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO ("Not implemented")]
-		public override object InitializeLifetimeService ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO ("Not implemented")]
+        public override object InitializeLifetimeService ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO ("Not implemented")]
-		void IRegisteredObject.Stop (bool immediate)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO ("Not implemented")]
+        void IRegisteredObject.Stop (bool immediate)
+        {
+            throw new NotImplementedException ();
+        }
         }
 }

@@ -32,65 +32,65 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbParameterCollection_Add : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OleDbParameterCollection_Add tc = new OleDbParameterCollection_Add();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbParameterCollection_Add");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    public class OleDbParameterCollection_Add : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OleDbParameterCollection_Add tc = new OleDbParameterCollection_Add();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbParameterCollection_Add");
+                tc.run();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
 
-			OleDbCommand cmd = new OleDbCommand();
-			OleDbParameter param = cmd.Parameters.Add(new OleDbParameter("MyParam", "abcd"));
+            OleDbCommand cmd = new OleDbCommand();
+            OleDbParameter param = cmd.Parameters.Add(new OleDbParameter("MyParam", "abcd"));
 
-			try
-			{
-				BeginCase("check value");
-				Compare(param.Value ,"abcd" );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("check value");
+                Compare(param.Value ,"abcd" );
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			param = cmd.Parameters.Add("MyParam", OleDbType.VarChar, 50);
-			try
-			{
-				BeginCase("check parameter type");
-				Compare(param.GetType().FullName ,typeof(OleDbParameter).FullName  );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            param = cmd.Parameters.Add("MyParam", OleDbType.VarChar, 50);
+            try
+            {
+                BeginCase("check parameter type");
+                Compare(param.GetType().FullName ,typeof(OleDbParameter).FullName  );
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("check parameter name");
-				Compare(param.ParameterName ,"MyParam" );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
-		}
-		
-		[Test]
-		public void TestAddCloned()
-		{
-			OleDbCommand c = new OleDbCommand ();
-			OleDbParameter p = c.Parameters.Add ("SDF", OleDbType.BigInt);
-			OleDbCommand c1 = new OleDbCommand ();
-			c1.Parameters.Add ((OleDbParameter) ((ICloneable) p).Clone ());
-			Assert.AreEqual(1, c1.Parameters.Count, "#01");
-		}
-	}
+            try
+            {
+                BeginCase("check parameter name");
+                Compare(param.ParameterName ,"MyParam" );
+            } 
+            catch(Exception ex){exp = ex;}
+            finally{EndCase(exp); exp = null;}
+        }
+        
+        [Test]
+        public void TestAddCloned()
+        {
+            OleDbCommand c = new OleDbCommand ();
+            OleDbParameter p = c.Parameters.Add ("SDF", OleDbType.BigInt);
+            OleDbCommand c1 = new OleDbCommand ();
+            c1.Parameters.Add ((OleDbParameter) ((ICloneable) p).Clone ());
+            Assert.AreEqual(1, c1.Parameters.Count, "#01");
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.Configuration.Annotations;
+namespace AutoMapper.Configuration.Annotations;
 
 /// <summary>
 /// Supply a custom mapping order instead of what the .NET runtime returns

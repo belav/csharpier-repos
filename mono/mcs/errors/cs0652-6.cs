@@ -6,11 +6,11 @@ using System;
 
 public class CS0652 {
 
-	public static void Main () 
-	{
-		short value = 5;
-		if (value > char.MaxValue)
-			return;
-	}
+    public static void Main () 
+    {
+        short value = 5;
+        if (value > char.MaxValue)
+            return;
+    }
 }
 

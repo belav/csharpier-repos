@@ -33,31 +33,31 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-	[ServiceContract (Name = "TargetService", Namespace = MessageContractsCD1.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContractCD1))]
-	internal interface IDiscoveryTargetContractCD1
-	{
-		[OperationContract (Name = "ProbeCD1", Action = MessageContractsCD1.ProbeAction, AsyncPattern = true, IsOneWay = true)]
-		IAsyncResult BeginFind (MessageContractsCD1.FindRequest message, AsyncCallback callback, object state);
+    [ServiceContract (Name = "TargetService", Namespace = MessageContractsCD1.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContractCD1))]
+    internal interface IDiscoveryTargetContractCD1
+    {
+        [OperationContract (Name = "ProbeCD1", Action = MessageContractsCD1.ProbeAction, AsyncPattern = true, IsOneWay = true)]
+        IAsyncResult BeginFind (MessageContractsCD1.FindRequest message, AsyncCallback callback, object state);
 
-		void EndFind (IAsyncResult result);
+        void EndFind (IAsyncResult result);
 
-		[OperationContract (Name = "ResolveCD1", Action = MessageContractsCD1.ResolveAction, AsyncPattern = true, IsOneWay = true)]
-		IAsyncResult BeginResolve (MessageContractsCD1.ResolveRequest message, AsyncCallback callback, object state);
+        [OperationContract (Name = "ResolveCD1", Action = MessageContractsCD1.ResolveAction, AsyncPattern = true, IsOneWay = true)]
+        IAsyncResult BeginResolve (MessageContractsCD1.ResolveRequest message, AsyncCallback callback, object state);
 
-		void EndResolve (IAsyncResult result);
+        void EndResolve (IAsyncResult result);
 
-		[OperationContract (Name = "HelloCD1", Action = MessageContractsCD1.HelloAction, IsOneWay = true, AsyncPattern = true)]
-		IAsyncResult BeginOnlineAnnouncement (MessageContractsCD1.OnlineAnnouncement message, AsyncCallback callback, object state);
+        [OperationContract (Name = "HelloCD1", Action = MessageContractsCD1.HelloAction, IsOneWay = true, AsyncPattern = true)]
+        IAsyncResult BeginOnlineAnnouncement (MessageContractsCD1.OnlineAnnouncement message, AsyncCallback callback, object state);
 
-		void EndOnlineAnnouncement (IAsyncResult result);
-	}
+        void EndOnlineAnnouncement (IAsyncResult result);
+    }
 
-	internal interface IDiscoveryTargetCallbackContractCD1
-	{
-		[OperationContract (Name = "ProbeMatchesCD1", Action = MessageContractsCD1.ProbeMatchAction, IsOneWay = true)]
-		void ReplyFind (MessageContractsCD1.FindResponse message);
+    internal interface IDiscoveryTargetCallbackContractCD1
+    {
+        [OperationContract (Name = "ProbeMatchesCD1", Action = MessageContractsCD1.ProbeMatchAction, IsOneWay = true)]
+        void ReplyFind (MessageContractsCD1.FindResponse message);
 
-		[OperationContract (Name = "ResolveMatchesCD1", Action = MessageContractsCD1.ResolveMatchAction, IsOneWay = true)]
-		void ReplyResolve (MessageContractsCD1.ResolveResponse message);
-	}
+        [OperationContract (Name = "ResolveMatchesCD1", Action = MessageContractsCD1.ResolveMatchAction, IsOneWay = true)]
+        void ReplyResolve (MessageContractsCD1.ResolveResponse message);
+    }
 }

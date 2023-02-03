@@ -9,11 +9,11 @@ using System.Reflection;
 
 namespace NS 
 {
-	class MyClass 
-	{
-		static void Main ()
-		{
-			Console.WriteLine (typeof(MyClass).Assembly.FullName);
-		}
-	}
+    class MyClass 
+    {
+        static void Main ()
+        {
+            Console.WriteLine (typeof(MyClass).Assembly.FullName);
+        }
+    }
 }

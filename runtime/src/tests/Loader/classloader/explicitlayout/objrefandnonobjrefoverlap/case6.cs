@@ -23,7 +23,7 @@ public class Bar{
 
 public struct WrapFoo { public Foo o; }
 public struct WrapBar { public Bar o; }
-	
+    
 [ StructLayout( LayoutKind.Explicit )] public class MyUnion1 {
     [ FieldOffset( 0 )] public WrapBar o;
     [ FieldOffset( 0 )] public int i;

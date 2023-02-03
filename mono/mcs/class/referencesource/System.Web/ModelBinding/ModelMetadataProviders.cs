@@ -1,4 +1,4 @@
-﻿namespace System.Web.ModelBinding {
+namespace System.Web.ModelBinding {
     public static class ModelMetadataProviders {
         private static ModelMetadataProvider _current = new DataAnnotationsModelMetadataProvider();
 

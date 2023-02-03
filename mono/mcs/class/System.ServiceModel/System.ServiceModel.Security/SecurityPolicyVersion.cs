@@ -2,7 +2,7 @@
 // SecurityPolicyVersion.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -28,22 +28,22 @@
 
 namespace System.ServiceModel.Security
 {
-	public abstract class SecurityPolicyVersion
-	{
-		static SecurityPolicyVersion ()
-		{
-			WSSecurityPolicy11 = new SecurityPolicyVersionImpl () { Prefix = "wsp", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/policy" };
-			WSSecurityPolicy12 = new SecurityPolicyVersionImpl () { Prefix = "wsp", Namespace = "http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" };
-		}
+    public abstract class SecurityPolicyVersion
+    {
+        static SecurityPolicyVersion ()
+        {
+            WSSecurityPolicy11 = new SecurityPolicyVersionImpl () { Prefix = "wsp", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/policy" };
+            WSSecurityPolicy12 = new SecurityPolicyVersionImpl () { Prefix = "wsp", Namespace = "http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" };
+        }
 
-		public static SecurityPolicyVersion WSSecurityPolicy11 { get; private set; }
-		public static SecurityPolicyVersion WSSecurityPolicy12 { get; private set; }
+        public static SecurityPolicyVersion WSSecurityPolicy11 { get; private set; }
+        public static SecurityPolicyVersion WSSecurityPolicy12 { get; private set; }
 
-		public string Namespace { get; internal set; }
-		public string Prefix { get; internal set; }
-	}
+        public string Namespace { get; internal set; }
+        public string Prefix { get; internal set; }
+    }
 
-	class SecurityPolicyVersionImpl : SecurityPolicyVersion
-	{
-	}
+    class SecurityPolicyVersionImpl : SecurityPolicyVersion
+    {
+    }
 }

@@ -4,10 +4,10 @@
 
 class Test {
 
-	public int Ändern;
+    public int Ändern;
 
-	public static void Main()
-	{
-		string s = 　"(" + 1;	// This line contains IDEOGRAPHIC SPACE
-	}
+    public static void Main()
+    {
+        string s = 　"(" + 1;    // This line contains IDEOGRAPHIC SPACE
+    }
 }

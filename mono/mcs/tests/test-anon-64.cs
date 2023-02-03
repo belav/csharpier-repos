@@ -1,8 +1,8 @@
 using System;
 
 class Source {
-	public event EventHandler ChildSourceAdded;
-	public event EventHandler ChildSourceRemoved;
+    public event EventHandler ChildSourceAdded;
+    public event EventHandler ChildSourceRemoved;
 
         Source FindSource (Source x){ return null; }
 

@@ -2,7 +2,7 @@
 // AspNetHostingPermissionHelper.cs - CAS unit tests helper for System.Web
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,30 +37,30 @@ using System.Web.UI;
 
 namespace MonoCasTests {
 
-	public abstract class AspNetHostingPermissionHelper {
+    public abstract class AspNetHostingPermissionHelper {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		// we use reflection to call Mutex as it's named constructors are protected by
-		// a LinkDemand (which will be converted into full demand, i.e. a stack walk) 
-		// when reflection is used (i.e. it gets testable).
+        // we use reflection to call Mutex as it's named constructors are protected by
+        // a LinkDemand (which will be converted into full demand, i.e. a stack walk) 
+        // when reflection is used (i.e. it gets testable).
 
-		public static Type[] VoidType = new Type[0];
+        public static Type[] VoidType = new Type[0];
 
-		public virtual object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (VoidType);
-			Assert.IsNotNull (ci, "default .ctor");
-			return ci.Invoke (null);
-		}
+        public virtual object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (VoidType);
+            Assert.IsNotNull (ci, "default .ctor");
+            return ci.Invoke (null);
+        }
 
-		public abstract Type Type {
-			get;
-		}
-	}
+        public abstract Type Type {
+            get;
+        }
+    }
 }

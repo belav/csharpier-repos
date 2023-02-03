@@ -2,7 +2,7 @@
 // AssemblyNode.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,56 +31,56 @@ using System.Linq;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-	class AssemblyNode : Node {
-		private readonly AssemblyDefinition definition;
-		private IEnumerable<Module> modules;
+    class AssemblyNode : Node {
+        private readonly AssemblyDefinition definition;
+        private IEnumerable<Module> modules;
 
-		public AssemblyNode (AssemblyDefinition definition) : base (NodeType.Assembly)
-		{
-			this.definition = definition;
-		}
+        public AssemblyNode (AssemblyDefinition definition) : base (NodeType.Assembly)
+        {
+            this.definition = definition;
+        }
 
-		public string FullName
-		{
-			get { return this.definition.FullName; }
-		}
+        public string FullName
+        {
+            get { return this.definition.FullName; }
+        }
 
-		public IEnumerable<Module> Modules
-		{
-			get
-			{
-				if (this.modules == null)
-					this.modules = this.definition.Modules.Select (it => new Module (it)).ToList ();
-				return this.modules;
-			}
-		}
+        public IEnumerable<Module> Modules
+        {
+            get
+            {
+                if (this.modules == null)
+                    this.modules = this.definition.Modules.Select (it => new Module (it)).ToList ();
+                return this.modules;
+            }
+        }
 
-		public TypeNode GetType (string ns, string className)
-		{
-			foreach (Module module in Modules) {
-				TypeNode type = module.GetType (ns, className);
-				if (type != null)
-					return type;
-			}
-			IEnumerable<TypeDefinition> enumerable = this.definition.Modules.SelectMany (m => m.Types);
-			TypeDefinition firstOrDefault = enumerable.FirstOrDefault (t => t.Namespace == ns && t.Name == className);
-			if (firstOrDefault == null)
-				return null;
+        public TypeNode GetType (string ns, string className)
+        {
+            foreach (Module module in Modules) {
+                TypeNode type = module.GetType (ns, className);
+                if (type != null)
+                    return type;
+            }
+            IEnumerable<TypeDefinition> enumerable = this.definition.Modules.SelectMany (m => m.Types);
+            TypeDefinition firstOrDefault = enumerable.FirstOrDefault (t => t.Namespace == ns && t.Name == className);
+            if (firstOrDefault == null)
+                return null;
 
-			return TypeNode.Create (firstOrDefault);
-		}
+            return TypeNode.Create (firstOrDefault);
+        }
 
-		public static AssemblyNode ReadAssembly (string filename)
-		{
-			var readerParameters = new ReaderParameters () { InMemory = true };
-			AssemblyDefinition definition = AssemblyDefinition.ReadAssembly (filename, readerParameters);
+        public static AssemblyNode ReadAssembly (string filename)
+        {
+            var readerParameters = new ReaderParameters () { InMemory = true };
+            AssemblyDefinition definition = AssemblyDefinition.ReadAssembly (filename, readerParameters);
 
-			return new AssemblyNode (definition);
-		}
+            return new AssemblyNode (definition);
+        }
 
-		public static AssemblyNode GetSystemAssembly ()
-		{
-			return ReadAssembly (typeof (object).Module.Assembly.Location);
-		}
-	}
+        public static AssemblyNode GetSystemAssembly ()
+        {
+            return ReadAssembly (typeof (object).Module.Assembly.Location);
+        }
+    }
 }

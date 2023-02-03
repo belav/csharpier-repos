@@ -2,7 +2,7 @@
 // Reference.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,30 +27,30 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class Reference : TypeNode {
-		private readonly TypeNode element_type;
-		private readonly string name;
+    class Reference : TypeNode {
+        private readonly TypeNode element_type;
+        private readonly string name;
 
-		public Reference (TypeNode elementType) : base (NodeType.Reference)
-		{
-			TypeDefinition = null;
-			this.element_type = elementType;
-			this.name = elementType.Name + "^";
-		}
+        public Reference (TypeNode elementType) : base (NodeType.Reference)
+        {
+            TypeDefinition = null;
+            this.element_type = elementType;
+            this.name = elementType.Name + "^";
+        }
 
-		public override string Name
-		{
-			get { return this.name; }
-		}
+        public override string Name
+        {
+            get { return this.name; }
+        }
 
-		public override string FullName
-		{
-			get { return this.element_type.FullName + "^"; }
-		}
+        public override string FullName
+        {
+            get { return this.element_type.FullName + "^"; }
+        }
 
-		public TypeNode ElementType
-		{
-			get { return this.element_type; }
-		}
-	}
+        public TypeNode ElementType
+        {
+            get { return this.element_type; }
+        }
+    }
 }

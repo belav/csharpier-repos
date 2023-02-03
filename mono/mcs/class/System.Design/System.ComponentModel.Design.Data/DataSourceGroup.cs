@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DataSourceGroup
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,19 +33,19 @@ using System.Drawing;
 
 namespace System.ComponentModel.Design.Data
 {
-	public abstract class DataSourceGroup
-	{
-		protected DataSourceGroup ()
-		{
-		}
+    public abstract class DataSourceGroup
+    {
+        protected DataSourceGroup ()
+        {
+        }
 
-		public abstract DataSourceDescriptorCollection DataSources { get; }
+        public abstract DataSourceDescriptorCollection DataSources { get; }
 
-		public abstract Bitmap Image { get; }
+        public abstract Bitmap Image { get; }
 
-		public abstract bool IsDefault { get; }
+        public abstract bool IsDefault { get; }
 
-		public abstract string Name { get; }
-	}
+        public abstract string Name { get; }
+    }
 }
 

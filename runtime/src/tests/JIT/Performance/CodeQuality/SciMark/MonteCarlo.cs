@@ -32,7 +32,7 @@ namespace SciMark2
     /// so Pi can be approximated by 
     /// <pre>
     /// # points with x^2+y^2 < 1
-    /// Pi =~ 		--------------------------  * 4.0
+    /// Pi =~         --------------------------  * 4.0
     /// total # points
     /// </pre>
     /// </summary>

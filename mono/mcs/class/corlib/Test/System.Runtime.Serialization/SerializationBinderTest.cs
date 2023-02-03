@@ -31,28 +31,28 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class SerializationBinderTest
-	{
-		[Test]
-		public void BindToName ()
-		{
-			TestSerializationBinder binder = new TestSerializationBinder ();
-			string assembly_name;
-			string type_name;
+    [TestFixture]
+    public class SerializationBinderTest
+    {
+        [Test]
+        public void BindToName ()
+        {
+            TestSerializationBinder binder = new TestSerializationBinder ();
+            string assembly_name;
+            string type_name;
 
-			binder.BindToName (typeof (SerializationBinder), out assembly_name, out type_name);
-			Assert.AreEqual (null, assembly_name, "#A0");
-			Assert.AreEqual (null, type_name, "#A1");
-		}
-	}
+            binder.BindToName (typeof (SerializationBinder), out assembly_name, out type_name);
+            Assert.AreEqual (null, assembly_name, "#A0");
+            Assert.AreEqual (null, type_name, "#A1");
+        }
+    }
 
-	class TestSerializationBinder : SerializationBinder
-	{
-		public override Type BindToType (string assemblyName, string typeName)
-		{
-			return null;
-		}
-	}
+    class TestSerializationBinder : SerializationBinder
+    {
+        public override Type BindToType (string assemblyName, string typeName)
+        {
+            return null;
+        }
+    }
 }
 

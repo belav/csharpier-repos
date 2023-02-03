@@ -39,61 +39,61 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_HasErrors : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataTable_HasErrors tc = new DataTable_HasErrors();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTable_HasErrors");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataTable_HasErrors tc = new DataTable_HasErrors();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTable_HasErrors");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataTable dtParent;
-		dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+    public void run()
+    {
+        Exception exp = null;
+        DataTable dtParent;
+        dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
         
-		try
-		{
-			base.BeginCase("Checking HasErrors default ");
-			base.Compare(dtParent.HasErrors ,false);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            base.BeginCase("Checking HasErrors default ");
+            base.Compare(dtParent.HasErrors ,false);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		try
-		{
-			base.BeginCase("Checking HasErrors Get ");
-			dtParent.Rows[0].RowError = "Error on row 0";
-			dtParent.Rows[2].RowError = "Error on row 2";
-			base.Compare(dtParent.HasErrors ,true);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-					
-	}
+        try
+        {
+            base.BeginCase("Checking HasErrors Get ");
+            dtParent.Rows[0].RowError = "Error on row 0";
+            dtParent.Rows[2].RowError = "Error on row 2";
+            base.Compare(dtParent.HasErrors ,true);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+                    
+    }
 }
 }

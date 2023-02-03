@@ -1,9 +1,9 @@
 //
 // RijndaelManaged.cs: Use CommonCrypto AES when possible, 
-//	fallback on RijndaelManagedTransform otherwise
+//    fallback on RijndaelManagedTransform otherwise
 //
 // Authors:
-//	Sebastien Pouliot  <sebastien@xamarin.com>
+//    Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2012 Xamarin Inc.
 //
@@ -15,66 +15,66 @@ using Mono.Security.Cryptography;
 using Crimson.CommonCrypto;
 
 namespace System.Security.Cryptography {
-	
-	public sealed class RijndaelManaged : Rijndael {
-		
-		public RijndaelManaged ()
-		{
-		}
-		
-		public override void GenerateIV ()
-		{
-			IVValue = KeyBuilder.IV (BlockSizeValue >> 3);
-		}
-		
-		public override void GenerateKey ()
-		{
-			KeyValue = KeyBuilder.Key (KeySizeValue >> 3);
-		}
-		
-		public override ICryptoTransform CreateDecryptor (byte[] rgbKey, byte[] rgbIV) 
-		{
-			// AES is Rijndael with a 128 bits block size, so we can use CommonCrypto in this case
-			if (BlockSize == 128) {
-				IntPtr decryptor = IntPtr.Zero;
-				switch (Mode) {
-				case CipherMode.CBC:
-					decryptor = Cryptor.Create (CCOperation.Decrypt, CCAlgorithm.AES128, CCOptions.None, rgbKey, rgbIV);
-					return new FastCryptorTransform (decryptor, this, false, rgbIV);
-				case CipherMode.ECB:
-					decryptor = Cryptor.Create (CCOperation.Decrypt, CCAlgorithm.AES128, CCOptions.ECBMode, rgbKey, rgbIV);
-					return new FastCryptorTransform (decryptor, this, false, rgbIV);
-				default:
-					// CFB cipher mode is not supported by the (old) API we used (for compatibility) so we fallback for them
-					// FIXME: benchmark if we're better with RijndaelManagedTransform or CryptorTransform for CFB mode
-					break;
-				}
-			}
+    
+    public sealed class RijndaelManaged : Rijndael {
+        
+        public RijndaelManaged ()
+        {
+        }
+        
+        public override void GenerateIV ()
+        {
+            IVValue = KeyBuilder.IV (BlockSizeValue >> 3);
+        }
+        
+        public override void GenerateKey ()
+        {
+            KeyValue = KeyBuilder.Key (KeySizeValue >> 3);
+        }
+        
+        public override ICryptoTransform CreateDecryptor (byte[] rgbKey, byte[] rgbIV) 
+        {
+            // AES is Rijndael with a 128 bits block size, so we can use CommonCrypto in this case
+            if (BlockSize == 128) {
+                IntPtr decryptor = IntPtr.Zero;
+                switch (Mode) {
+                case CipherMode.CBC:
+                    decryptor = Cryptor.Create (CCOperation.Decrypt, CCAlgorithm.AES128, CCOptions.None, rgbKey, rgbIV);
+                    return new FastCryptorTransform (decryptor, this, false, rgbIV);
+                case CipherMode.ECB:
+                    decryptor = Cryptor.Create (CCOperation.Decrypt, CCAlgorithm.AES128, CCOptions.ECBMode, rgbKey, rgbIV);
+                    return new FastCryptorTransform (decryptor, this, false, rgbIV);
+                default:
+                    // CFB cipher mode is not supported by the (old) API we used (for compatibility) so we fallback for them
+                    // FIXME: benchmark if we're better with RijndaelManagedTransform or CryptorTransform for CFB mode
+                    break;
+                }
+            }
 
             return NewEncryptor(rgbKey,
                                 ModeValue,
                                 rgbIV,
                                 FeedbackSizeValue,
                                 RijndaelManagedTransformMode.Decrypt);
-		}
-		
-		public override ICryptoTransform CreateEncryptor (byte[] rgbKey, byte[] rgbIV) 
-		{
-			if (BlockSize == 128) {
-				IntPtr encryptor = IntPtr.Zero;
-				switch (Mode) {
-				case CipherMode.CBC:
-					encryptor = Cryptor.Create (CCOperation.Encrypt, CCAlgorithm.AES128, CCOptions.None, rgbKey, rgbIV);
-					return new FastCryptorTransform (encryptor, this, true, rgbIV);
-				case CipherMode.ECB:
-					encryptor = Cryptor.Create (CCOperation.Encrypt, CCAlgorithm.AES128, CCOptions.ECBMode, rgbKey, rgbIV);
-					return new FastCryptorTransform (encryptor, this, true, rgbIV);
-				default:
-					// CFB cipher mode is not supported by the (old) API we used (for compatibility) so we fallback for them
-					// FIXME: benchmark if we're better with RijndaelManagedTransform or CryptorTransform for CFB mode
-					break;
-				}
-			}
+        }
+        
+        public override ICryptoTransform CreateEncryptor (byte[] rgbKey, byte[] rgbIV) 
+        {
+            if (BlockSize == 128) {
+                IntPtr encryptor = IntPtr.Zero;
+                switch (Mode) {
+                case CipherMode.CBC:
+                    encryptor = Cryptor.Create (CCOperation.Encrypt, CCAlgorithm.AES128, CCOptions.None, rgbKey, rgbIV);
+                    return new FastCryptorTransform (encryptor, this, true, rgbIV);
+                case CipherMode.ECB:
+                    encryptor = Cryptor.Create (CCOperation.Encrypt, CCAlgorithm.AES128, CCOptions.ECBMode, rgbKey, rgbIV);
+                    return new FastCryptorTransform (encryptor, this, true, rgbIV);
+                default:
+                    // CFB cipher mode is not supported by the (old) API we used (for compatibility) so we fallback for them
+                    // FIXME: benchmark if we're better with RijndaelManagedTransform or CryptorTransform for CFB mode
+                    break;
+                }
+            }
 
             return NewEncryptor(rgbKey,
                                 ModeValue,
@@ -115,5 +115,5 @@ namespace System.Security.Cryptography {
                                                  PaddingValue,
                                                  encryptMode);
         }                            
-	}
+    }
 }

@@ -1,7 +1,7 @@
 //
 //
-//	Mono.Cairo drawing samples using image (png) as drawing surface
-//	Author: Hisham Mardam Bey <hisham@hisham.cc>
+//    Mono.Cairo drawing samples using image (png) as drawing surface
+//    Author: Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -29,55 +29,55 @@
 
 using System;
 using Cairo;
-	
+    
 public class CairoTest
-{	
-	static readonly double  M_PI = 3.14159265358979323846;
-	
-	static void draw (Cairo.Context gr, int width, int height)
-	{
-		int w, h;
-		ImageSurface image;
+{    
+    static readonly double  M_PI = 3.14159265358979323846;
+    
+    static void draw (Cairo.Context gr, int width, int height)
+    {
+        int w, h;
+        ImageSurface image;
 
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
+        gr.Scale (width, height);
+        gr.LineWidth = 0.04;
 
-		gr.Arc (0.5, 0.5, 0.3, 0, 2*M_PI);
-		gr.Clip ();
-		gr.NewPath ();
+        gr.Arc (0.5, 0.5, 0.3, 0, 2*M_PI);
+        gr.Clip ();
+        gr.NewPath ();
 
-		image = new ImageSurface("data/e.png");
-		w = image.Width;
-		h = image.Height;
+        image = new ImageSurface("data/e.png");
+        w = image.Width;
+        h = image.Height;
 
-		gr.Scale (1.0/w, 1.0/h);
+        gr.Scale (1.0/w, 1.0/h);
 
-		image.Show (gr, 0, 0);
+        image.Show (gr, 0, 0);
 
-		image.Destroy();
+        image.Destroy();
 
-		gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
-		gr.Clip ();
+        gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
+        gr.Clip ();
 
-		gr.NewPath ();
-		gr.Rectangle (new PointD (0, 0), 1, 1);
-		gr.Fill ();
-		gr.Color = new Color (0, 1, 0, 1);
-		gr.MoveTo ( new PointD (0, 0) );
-	        gr.LineTo ( new PointD (1, 1) );
-		gr.MoveTo ( new PointD (1, 0) );
-		gr.LineTo ( new PointD (0, 1) );
-		gr.Stroke ();
-	}
-	
-	
-	static void Main ()
-	{		
-		Surface s = new ImageSurface (Format.ARGB32, 500, 500);
-		Cairo.Context g = new Cairo.Context (s);
+        gr.NewPath ();
+        gr.Rectangle (new PointD (0, 0), 1, 1);
+        gr.Fill ();
+        gr.Color = new Color (0, 1, 0, 1);
+        gr.MoveTo ( new PointD (0, 0) );
+            gr.LineTo ( new PointD (1, 1) );
+        gr.MoveTo ( new PointD (1, 0) );
+        gr.LineTo ( new PointD (0, 1) );
+        gr.Stroke ();
+    }
+    
+    
+    static void Main ()
+    {        
+        Surface s = new ImageSurface (Format.ARGB32, 500, 500);
+        Cairo.Context g = new Cairo.Context (s);
 
-		draw (g, 500, 500);
-		
-		s.WriteToPng ("clip_img.png");
-	}
+        draw (g, 500, 500);
+        
+        s.WriteToPng ("clip_img.png");
+    }
 }

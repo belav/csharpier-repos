@@ -3,7 +3,7 @@
 
 public class C
 {
-	public void Foo (ref out int)
-	{
-	}
+    public void Foo (ref out int)
+    {
+    }
 }

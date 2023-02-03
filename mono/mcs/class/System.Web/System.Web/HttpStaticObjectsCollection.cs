@@ -28,76 +28,76 @@ using System.Web.UI;
 
 namespace System.Web
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HttpStaticObjectsCollection : ICollection, IEnumerable
-	{
-		sealed class StaticItem {
-			object this_lock = new object();
-			
-			Type type;
-			object instance;
-			
-			public StaticItem (Type type)
-			{
-				this.type = type;
-			}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HttpStaticObjectsCollection : ICollection, IEnumerable
+    {
+        sealed class StaticItem {
+            object this_lock = new object();
+            
+            Type type;
+            object instance;
+            
+            public StaticItem (Type type)
+            {
+                this.type = type;
+            }
 
-			public StaticItem (StaticItem item)
-			{
-				this.type = item.type;
-			}
-			
-			public object Instance {
-				get {
-					lock (this_lock) {
-						if (instance == null)
-							instance = Activator.CreateInstance (type);
-					}
+            public StaticItem (StaticItem item)
+            {
+                this.type = item.type;
+            }
+            
+            public object Instance {
+                get {
+                    lock (this_lock) {
+                        if (instance == null)
+                            instance = Activator.CreateInstance (type);
+                    }
 
-					return instance;
-				}
-			}
-		}
+                    return instance;
+                }
+            }
+        }
 
-		Dictionary <string, object> objects;
+        Dictionary <string, object> objects;
 
-		Dictionary <string, object> Objects {
-			get {
-				if (objects == null)
-					objects = new Dictionary <string, object> (StringComparer.Ordinal);
+        Dictionary <string, object> Objects {
+            get {
+                if (objects == null)
+                    objects = new Dictionary <string, object> (StringComparer.Ordinal);
 
-				return objects;
-			}
-		}
-		
-		// Needs to hold object items that can be latebound and can be serialized
-		public HttpStaticObjectsCollection ()
-		{
-		}
+                return objects;
+            }
+        }
+        
+        // Needs to hold object items that can be latebound and can be serialized
+        public HttpStaticObjectsCollection ()
+        {
+        }
 
-		// this ctor has no security requirements and is used when creating HttpApplicationState
-		internal HttpStaticObjectsCollection (HttpApplicationState appstate)
-		{
-		}
+        // this ctor has no security requirements and is used when creating HttpApplicationState
+        internal HttpStaticObjectsCollection (HttpApplicationState appstate)
+        {
+        }
 
-		public object GetObject (string name)
-		{
-			return this [name];
-		}
+        public object GetObject (string name)
+        {
+            return this [name];
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return Objects.GetEnumerator ();
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            return Objects.GetEnumerator ();
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			if (objects == null)
-				return;
+        public void CopyTo (Array array, int index)
+        {
+            if (objects == null)
+                return;
 
-			// Copied from Hashtable.CopyTo for the most part
-			if (array == null)
+            // Copied from Hashtable.CopyTo for the most part
+            if (array == null)
                                 throw new ArgumentNullException ("array");
 
                         if (index < 0)
@@ -112,137 +112,137 @@ namespace System.Web
                         if (index + objects.Count > array.Length)
                                 throw new ArgumentException ("Not enough room from index to end of array for this collection");
 
-			// We need to emulate Hashtable here, which uses DictionaryEntry for its items
-			foreach (var de in objects)
-				array.SetValue (new DictionaryEntry (de.Key, de.Value), index++);
-		}   
+            // We need to emulate Hashtable here, which uses DictionaryEntry for its items
+            foreach (var de in objects)
+                array.SetValue (new DictionaryEntry (de.Key, de.Value), index++);
+        }   
 
-		internal IDictionary GetObjects ()
-		{
-			return Objects;
-		}
+        internal IDictionary GetObjects ()
+        {
+            return Objects;
+        }
 
-		public object this [string name] {
-			get {
-				if (objects == null)
-					return null;
-				
-				StaticItem item = null;
-				object o;
-				if (Objects.TryGetValue (name, out o))
-					item = o as StaticItem;
-				
-				if (item == null)
-					return null;
-				
-				return item.Instance;
-			}
-		}
+        public object this [string name] {
+            get {
+                if (objects == null)
+                    return null;
+                
+                StaticItem item = null;
+                object o;
+                if (Objects.TryGetValue (name, out o))
+                    item = o as StaticItem;
+                
+                if (item == null)
+                    return null;
+                
+                return item.Instance;
+            }
+        }
 
-		public int Count {
-			get {
-				if (objects == null)
-					return 0;
-				
-				return Objects.Count;
-			}
-		}
+        public int Count {
+            get {
+                if (objects == null)
+                    return 0;
+                
+                return Objects.Count;
+            }
+        }
 
-		public bool IsReadOnly {
-			get { return true; }
-		}
+        public bool IsReadOnly {
+            get { return true; }
+        }
 
-		public bool IsSynchronized {
-			get { return false; }
-		}
+        public bool IsSynchronized {
+            get { return false; }
+        }
 
-		[MonoTODO ("Not implemented")]
-		public bool NeverAccessed {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO ("Not implemented")]
+        public bool NeverAccessed {
+            get { throw new NotImplementedException (); }
+        }
 
-		public object SyncRoot {
-			get { return this; }
-		}
+        public object SyncRoot {
+            get { return this; }
+        }
 
-		internal HttpStaticObjectsCollection Clone ()
-		{
-			HttpStaticObjectsCollection coll = new HttpStaticObjectsCollection ();
-			if (objects == null)
-				return coll;
-			
-			var collObjects = coll.Objects;
-			foreach (var de in objects) {
-				StaticItem item = new StaticItem ((StaticItem) de.Value);
-				collObjects [de.Key] = item;
-			}
-			
-			return coll;
-		}
+        internal HttpStaticObjectsCollection Clone ()
+        {
+            HttpStaticObjectsCollection coll = new HttpStaticObjectsCollection ();
+            if (objects == null)
+                return coll;
+            
+            var collObjects = coll.Objects;
+            foreach (var de in objects) {
+                StaticItem item = new StaticItem ((StaticItem) de.Value);
+                collObjects [de.Key] = item;
+            }
+            
+            return coll;
+        }
 
-		internal void Add (ObjectTagBuilder tag)
-		{
-			Objects.Add (tag.ObjectID, new StaticItem (tag.Type));
-		}
-		
-		void Set (string name, object obj)
-		{
-			Objects [name] = obj;
-		}
+        internal void Add (ObjectTagBuilder tag)
+        {
+            Objects.Add (tag.ObjectID, new StaticItem (tag.Type));
+        }
+        
+        void Set (string name, object obj)
+        {
+            Objects [name] = obj;
+        }
 
-		public void Serialize (BinaryWriter writer)
-		{
-			if (objects == null) {
-				writer.Write (0);
-				return;
-			}
+        public void Serialize (BinaryWriter writer)
+        {
+            if (objects == null) {
+                writer.Write (0);
+                return;
+            }
 
-			writer.Write (objects.Count);
-			foreach (var de in objects) {
-				writer.Write (de.Key);
-				System.Web.Util.AltSerialization.Serialize (writer, de.Value);
-			}
-		}
+            writer.Write (objects.Count);
+            foreach (var de in objects) {
+                writer.Write (de.Key);
+                System.Web.Util.AltSerialization.Serialize (writer, de.Value);
+            }
+        }
 
-		public static HttpStaticObjectsCollection Deserialize (BinaryReader reader)
-		{
-			HttpStaticObjectsCollection result = new HttpStaticObjectsCollection ();
-			for (int i = reader.ReadInt32 (); i > 0; i--)
-				result.Set (reader.ReadString (), System.Web.Util.AltSerialization.Deserialize (reader));
+        public static HttpStaticObjectsCollection Deserialize (BinaryReader reader)
+        {
+            HttpStaticObjectsCollection result = new HttpStaticObjectsCollection ();
+            for (int i = reader.ReadInt32 (); i > 0; i--)
+                result.Set (reader.ReadString (), System.Web.Util.AltSerialization.Deserialize (reader));
 
-			return result;
-		}
+            return result;
+        }
 
-		internal byte [] ToByteArray ()
-		{
-			MemoryStream stream = null;
-			try {
-				stream = new MemoryStream ();
-				Serialize (new BinaryWriter (stream));
-				return stream.GetBuffer ();
-			} catch {
-				throw;
-			} finally {
-				if (stream != null)
-					stream.Close ();
-			}
-		}
+        internal byte [] ToByteArray ()
+        {
+            MemoryStream stream = null;
+            try {
+                stream = new MemoryStream ();
+                Serialize (new BinaryWriter (stream));
+                return stream.GetBuffer ();
+            } catch {
+                throw;
+            } finally {
+                if (stream != null)
+                    stream.Close ();
+            }
+        }
 
-		internal static HttpStaticObjectsCollection FromByteArray (byte [] data)
-		{
-			HttpStaticObjectsCollection objs = null;
-			MemoryStream stream = null;
-			try {
-				stream = new MemoryStream (data);
-				objs = Deserialize (new BinaryReader (stream));
-			} catch {
-				throw;
-			} finally {
-				if (stream != null)
-					stream.Close ();
-			}
-			return objs;
-		}
-	}
+        internal static HttpStaticObjectsCollection FromByteArray (byte [] data)
+        {
+            HttpStaticObjectsCollection objs = null;
+            MemoryStream stream = null;
+            try {
+                stream = new MemoryStream (data);
+                objs = Deserialize (new BinaryReader (stream));
+            } catch {
+                throw;
+            } finally {
+                if (stream != null)
+                    stream.Close ();
+            }
+            return objs;
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Authors:
+// Authors:
 //      Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2010 Novell Inc. http://novell.com
@@ -33,15 +33,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web
 {
-	[TestFixture]
-	public class HttpApplicationTest
-	{
-		[Test]
-		public void GetOutputCacheProviderName ()
-		{
-			var app = new HttpApplication ();
+    [TestFixture]
+    public class HttpApplicationTest
+    {
+        [Test]
+        public void GetOutputCacheProviderName ()
+        {
+            var app = new HttpApplication ();
 
-			Assert.AreEqual ("AspNetInternalProvider", app.GetOutputCacheProviderName (null), "#A1");
-		}
-	}
+            Assert.AreEqual ("AspNetInternalProvider", app.GetOutputCacheProviderName (null), "#A1");
+        }
+    }
 }

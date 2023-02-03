@@ -1,7 +1,7 @@
 //
 // Authors:
-//	David Straw
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    David Straw
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2011 Novell, Inc.  http://www.novell.com
 //
@@ -41,199 +41,199 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-	[TestFixture]
-	public class Bug652331_2Test
-	{
-		[Test]
-		[Category ("NotWorking")]
-		public void Bug652331_3 ()
-		{
-			// Init service
-			ServiceHost serviceHost = new ServiceHost(typeof(Service1), new Uri("http://localhost:" + NetworkHelpers.FindFreePort () + "/Service1"));
-			serviceHost.AddServiceEndpoint(typeof(IService1), new BasicHttpBinding(), string.Empty);
+    [TestFixture]
+    public class Bug652331_2Test
+    {
+        [Test]
+        [Category ("NotWorking")]
+        public void Bug652331_3 ()
+        {
+            // Init service
+            ServiceHost serviceHost = new ServiceHost(typeof(Service1), new Uri("http://localhost:" + NetworkHelpers.FindFreePort () + "/Service1"));
+            serviceHost.AddServiceEndpoint(typeof(IService1), new BasicHttpBinding(), string.Empty);
 
-			// Enable metadata exchange (WSDL publishing)
-			ServiceMetadataBehavior mexBehavior = new ServiceMetadataBehavior();
-			mexBehavior.HttpGetEnabled = true;
-			serviceHost.Description.Behaviors.Add(mexBehavior);
-			serviceHost.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
+            // Enable metadata exchange (WSDL publishing)
+            ServiceMetadataBehavior mexBehavior = new ServiceMetadataBehavior();
+            mexBehavior.HttpGetEnabled = true;
+            serviceHost.Description.Behaviors.Add(mexBehavior);
+            serviceHost.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
 
-			serviceHost.Open();
+            serviceHost.Open();
 
-			try {
-				RunClient ();
-			} finally {
-				serviceHost.Close ();
-			}
-		}
+            try {
+                RunClient ();
+            } finally {
+                serviceHost.Close ();
+            }
+        }
 
-		void RunClient ()
-		{
-			var binding = new BasicHttpBinding ();
-			var remoteAddress = new EndpointAddress ("http://localhost:" + NetworkHelpers.FindFreePort () + "/Service1");
+        void RunClient ()
+        {
+            var binding = new BasicHttpBinding ();
+            var remoteAddress = new EndpointAddress ("http://localhost:" + NetworkHelpers.FindFreePort () + "/Service1");
 
-			var normalClient      = new Service1Client (binding, remoteAddress);
-			var collectionClient  = new Service1Client (binding, remoteAddress);
-			var nestedClient      = new Service1Client (binding, remoteAddress);
-			var dbClient          = new Service1Client (binding, remoteAddress);
+            var normalClient      = new Service1Client (binding, remoteAddress);
+            var collectionClient  = new Service1Client (binding, remoteAddress);
+            var nestedClient      = new Service1Client (binding, remoteAddress);
+            var dbClient          = new Service1Client (binding, remoteAddress);
 
-			{
-				ManualResetEvent wait = new ManualResetEvent (false);
-				Exception error = null;
-				object result = null;
+            {
+                ManualResetEvent wait = new ManualResetEvent (false);
+                Exception error = null;
+                object result = null;
 
-				normalClient.GetDataCompleted += delegate (object o, GetDataCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
-				normalClient.GetDataAsync ();
+                normalClient.GetDataCompleted += delegate (object o, GetDataCompletedEventArgs e) {
+                    try {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    } finally {
+                        wait.Set ();
+                    }
+                };
+                normalClient.GetDataAsync ();
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#1 timeout");
-				Assert.IsNull (error, "#1.1, inner exception: {0}", error);
-				Assert.AreEqual ("A", ((DataType1) result).Id, "#1.2");
-			}
+                Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#1 timeout");
+                Assert.IsNull (error, "#1.1, inner exception: {0}", error);
+                Assert.AreEqual ("A", ((DataType1) result).Id, "#1.2");
+            }
 
-			{
-				ManualResetEvent wait = new ManualResetEvent (false);
-				Exception error = null;
-				ObservableCollection<object> result = null;
+            {
+                ManualResetEvent wait = new ManualResetEvent (false);
+                Exception error = null;
+                ObservableCollection<object> result = null;
 
-				collectionClient.GetCollectionDataCompleted += delegate (object sender, GetCollectionDataCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
-				collectionClient.GetCollectionDataAsync ();
+                collectionClient.GetCollectionDataCompleted += delegate (object sender, GetCollectionDataCompletedEventArgs e) {
+                    try {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    } finally {
+                        wait.Set ();
+                    }
+                };
+                collectionClient.GetCollectionDataAsync ();
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#2 timeout");
-				Assert.IsNull (error, "#2.1, inner exception: {0}", error);
-				Assert.AreEqual ("B,C", ItemsToString (result.Cast<DataType1> ()), "#2.2");
-			}
+                Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#2 timeout");
+                Assert.IsNull (error, "#2.1, inner exception: {0}", error);
+                Assert.AreEqual ("B,C", ItemsToString (result.Cast<DataType1> ()), "#2.2");
+            }
 
-			{
-				ManualResetEvent wait = new ManualResetEvent (false);
-				Exception error = null;
-				WebServiceMoonlightTest.ServiceReference2.DataType2 result = null;
+            {
+                ManualResetEvent wait = new ManualResetEvent (false);
+                Exception error = null;
+                WebServiceMoonlightTest.ServiceReference2.DataType2 result = null;
 
-				nestedClient.GetNestedDataCompleted += delegate (object sender, GetNestedDataCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
-				nestedClient.GetNestedDataAsync ();
+                nestedClient.GetNestedDataCompleted += delegate (object sender, GetNestedDataCompletedEventArgs e) {
+                    try {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    } finally {
+                        wait.Set ();
+                    }
+                };
+                nestedClient.GetNestedDataAsync ();
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#3 timeout");
-				Assert.IsNull (error, "#3.1, inner exception: {0}", error);
-				Assert.AreEqual ("D,E", ItemsToString (result.Items.Cast<DataType1> ()), "#3.2");
-			}
+                Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#3 timeout");
+                Assert.IsNull (error, "#3.1, inner exception: {0}", error);
+                Assert.AreEqual ("D,E", ItemsToString (result.Items.Cast<DataType1> ()), "#3.2");
+            }
 
-			{
-				ManualResetEvent wait = new ManualResetEvent (false);
-				Exception error = null;
-				string result = null;
+            {
+                ManualResetEvent wait = new ManualResetEvent (false);
+                Exception error = null;
+                string result = null;
 
-				dbClient.JSMGetDatabasesCompleted += delegate (object sender, JSMGetDatabasesCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
-				dbClient.JSMGetDatabasesAsync();
+                dbClient.JSMGetDatabasesCompleted += delegate (object sender, JSMGetDatabasesCompletedEventArgs e) {
+                    try {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    } finally {
+                        wait.Set ();
+                    }
+                };
+                dbClient.JSMGetDatabasesAsync();
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#4 timeout");
-				Assert.IsNull (error, "#4.1, inner exception: {0}", error);
-				Assert.AreEqual ("databases", result, "#4.2");
-			}
-		}
+                Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "#4 timeout");
+                Assert.IsNull (error, "#4.1, inner exception: {0}", error);
+                Assert.AreEqual ("databases", result, "#4.2");
+            }
+        }
 
-		string ItemsToString (IEnumerable<DataType1> items)
-		{
-			return items.Aggregate ((string) null, (result, item) => result == null ? item.Id : result + "," + item.Id);
-		}
-	}
+        string ItemsToString (IEnumerable<DataType1> items)
+        {
+            return items.Aggregate ((string) null, (result, item) => result == null ? item.Id : result + "," + item.Id);
+        }
+    }
 
-	public class Service1 : IService1
-	{
-		public object GetData()
-		{
-			return new DataType1 { Id = "A" };
-		}
+    public class Service1 : IService1
+    {
+        public object GetData()
+        {
+            return new DataType1 { Id = "A" };
+        }
 
-		Func<object> gd;
-		public IAsyncResult BeginGetData(AsyncCallback cb, object st)
-		{
-			gd = new Func<object> (GetData);
-			return gd.BeginInvoke (cb, st);
-		}
+        Func<object> gd;
+        public IAsyncResult BeginGetData(AsyncCallback cb, object st)
+        {
+            gd = new Func<object> (GetData);
+            return gd.BeginInvoke (cb, st);
+        }
 
-		public object EndGetData (IAsyncResult result)
-		{
-			return gd.EndInvoke (result);
-		}
+        public object EndGetData (IAsyncResult result)
+        {
+            return gd.EndInvoke (result);
+        }
 
-		public ObservableCollection<object> GetCollectionData()
-		{
-			return new ObservableCollection<object> { new DataType1 { Id = "B" }, new DataType1 { Id = "C" } };
-		}
+        public ObservableCollection<object> GetCollectionData()
+        {
+            return new ObservableCollection<object> { new DataType1 { Id = "B" }, new DataType1 { Id = "C" } };
+        }
 
-		Func<ObservableCollection<object>> gcd;
-		public IAsyncResult BeginGetCollectionData(AsyncCallback cb, object st)
-		{
-			gcd = new Func<ObservableCollection<object>> (GetCollectionData);
-			return gcd.BeginInvoke (cb, st);
-		}
+        Func<ObservableCollection<object>> gcd;
+        public IAsyncResult BeginGetCollectionData(AsyncCallback cb, object st)
+        {
+            gcd = new Func<ObservableCollection<object>> (GetCollectionData);
+            return gcd.BeginInvoke (cb, st);
+        }
 
-		public ObservableCollection<object> EndGetCollectionData (IAsyncResult result)
-		{
-			return gcd.EndInvoke (result);
-		}
+        public ObservableCollection<object> EndGetCollectionData (IAsyncResult result)
+        {
+            return gcd.EndInvoke (result);
+        }
 
-		public DataType2 GetNestedData()
-		{
-			return new DataType2 { Items = new ObservableCollection<object> { new DataType1 { Id = "D" }, new DataType1 { Id = "E" } } };
-		}
+        public DataType2 GetNestedData()
+        {
+            return new DataType2 { Items = new ObservableCollection<object> { new DataType1 { Id = "D" }, new DataType1 { Id = "E" } } };
+        }
 
-		Func<DataType2> gnd;
-		public IAsyncResult BeginGetNestedData(AsyncCallback cb, object st)
-		{
-			gnd = new Func<DataType2> (GetNestedData);
-			return gnd.BeginInvoke (cb, st);
-		}
+        Func<DataType2> gnd;
+        public IAsyncResult BeginGetNestedData(AsyncCallback cb, object st)
+        {
+            gnd = new Func<DataType2> (GetNestedData);
+            return gnd.BeginInvoke (cb, st);
+        }
 
-		public DataType2 EndGetNestedData (IAsyncResult result)
-		{
-			return gnd.EndInvoke (result);
-		}
+        public DataType2 EndGetNestedData (IAsyncResult result)
+        {
+            return gnd.EndInvoke (result);
+        }
 
-		public JSMGetDatabasesResponse JSMGetDatabases(JSMGetDatabasesRequest request)
-		{
-			return new JSMGetDatabasesResponse { JSMGetDatabasesResult = "databases" };
-		}
+        public JSMGetDatabasesResponse JSMGetDatabases(JSMGetDatabasesRequest request)
+        {
+            return new JSMGetDatabasesResponse { JSMGetDatabasesResult = "databases" };
+        }
 
-		Func<JSMGetDatabasesRequest, JSMGetDatabasesResponse> gjgdb;
-		public IAsyncResult BeginJSMGetDatabases(JSMGetDatabasesRequest request, AsyncCallback callback, object asyncState)
-		{
-			gjgdb = JSMGetDatabases;
-			return gjgdb.BeginInvoke (request, callback, asyncState);
-		}
+        Func<JSMGetDatabasesRequest, JSMGetDatabasesResponse> gjgdb;
+        public IAsyncResult BeginJSMGetDatabases(JSMGetDatabasesRequest request, AsyncCallback callback, object asyncState)
+        {
+            gjgdb = JSMGetDatabases;
+            return gjgdb.BeginInvoke (request, callback, asyncState);
+        }
 
-		public JSMGetDatabasesResponse EndJSMGetDatabases(IAsyncResult result)
-		{
-			return gjgdb.EndInvoke (result);
-		}
-	}
+        public JSMGetDatabasesResponse EndJSMGetDatabases(IAsyncResult result)
+        {
+            return gjgdb.EndInvoke (result);
+        }
+    }
 }
 
 

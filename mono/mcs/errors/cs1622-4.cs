@@ -5,21 +5,21 @@ using System.Collections.Generic;
 
 namespace McsDiff
 {
-	class MyObj
-	{
-	}
-	
-	class MainClass
-	{
-		protected static IEnumerable<MyObj> GetStuff ()
-		{
-			yield return null;
-			
-			try {
-			}
-			catch {
-				return true;
-			}
-		}
-	}
+    class MyObj
+    {
+    }
+    
+    class MainClass
+    {
+        protected static IEnumerable<MyObj> GetStuff ()
+        {
+            yield return null;
+            
+            try {
+            }
+            catch {
+                return true;
+            }
+        }
+    }
 }

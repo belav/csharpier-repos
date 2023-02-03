@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
 
 namespace Castle.DynamicProxy.Tests.Explicit
 {
-	public class GenericMethodExplicit : IGenericInterface
-	{
-		T IGenericInterface.GenericMethod<T>()
-		{
-			if(typeof(T) == typeof(int))
-			{
-				return (T)(object)7;
-			}
-			return default(T);
-		}
-	}
+    public class GenericMethodExplicit : IGenericInterface
+    {
+        T IGenericInterface.GenericMethod<T>()
+        {
+            if(typeof(T) == typeof(int))
+            {
+                return (T)(object)7;
+            }
+            return default(T);
+        }
+    }
 }

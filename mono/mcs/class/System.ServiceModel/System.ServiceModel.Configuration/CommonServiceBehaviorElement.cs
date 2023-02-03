@@ -2,7 +2,7 @@
 // CommonServiceBehaviorElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class CommonServiceBehaviorElement
-		 : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>,  ICollection<BehaviorExtensionElement>,  IEnumerable<BehaviorExtensionElement>,  IEnumerable
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public partial class CommonServiceBehaviorElement
+         : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>,  ICollection<BehaviorExtensionElement>,  IEnumerable<BehaviorExtensionElement>,  IEnumerable
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static CommonServiceBehaviorElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static CommonServiceBehaviorElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public CommonServiceBehaviorElement ()
-		{
-		}
-
-
-		// Properties
+        public CommonServiceBehaviorElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

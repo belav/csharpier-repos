@@ -2,7 +2,7 @@
 // ServiceEndpointTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://novell.com
 //
@@ -39,44 +39,44 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class ServiceEndpointTest
-	{
-		static ContractDescription contract1 = ContractDescription.GetContract (typeof (Foo));
+    [TestFixture]
+    public class ServiceEndpointTest
+    {
+        static ContractDescription contract1 = ContractDescription.GetContract (typeof (Foo));
 
-		[Test]
-		public void NullArguments ()
-		{
-			new ServiceEndpoint (contract1, null, null);
-		}
+        [Test]
+        public void NullArguments ()
+        {
+            new ServiceEndpoint (contract1, null, null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void NullArguments2 ()
-		{
-			new ServiceEndpoint (null, null, null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void NullArguments2 ()
+        {
+            new ServiceEndpoint (null, null, null);
+        }
 
-		[Test]
+        [Test]
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException (typeof (PlatformNotSupportedException))]
 #endif
-		public void ListenUri ()
-		{
-			Uri uri = new Uri ("http://localhost:" + NetworkHelpers.FindFreePort ());
-			var se = new ServiceEndpoint (contract1, null, new EndpointAddress (uri));
-			Assert.AreEqual (uri, se.ListenUri, "#1");
-		}
+        public void ListenUri ()
+        {
+            Uri uri = new Uri ("http://localhost:" + NetworkHelpers.FindFreePort ());
+            var se = new ServiceEndpoint (contract1, null, new EndpointAddress (uri));
+            Assert.AreEqual (uri, se.ListenUri, "#1");
+        }
 
-		#region contracts
+        #region contracts
 
-		[ServiceContract]
-		interface Foo
-		{
-			[OperationContract]
-			string Echo (string input);
-		}
+        [ServiceContract]
+        interface Foo
+        {
+            [OperationContract]
+            string Echo (string input);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

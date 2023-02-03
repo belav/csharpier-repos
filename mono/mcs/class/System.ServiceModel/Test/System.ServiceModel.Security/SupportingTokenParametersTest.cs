@@ -1,8 +1,8 @@
-﻿//
+//
 // SupportingTokenParametersTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -40,17 +40,17 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class SupportingTokenParametersTest
-	{
-		[Test]
-		public void DefaultItems ()
-		{
-			SupportingTokenParameters p = new SupportingTokenParameters ();
-			Assert.AreEqual (0, p.Endorsing.Count, "#1");
-			Assert.AreEqual (0, p.Signed.Count, "#2");
-			Assert.AreEqual (0, p.SignedEncrypted.Count, "#3");
-			Assert.AreEqual (0, p.SignedEndorsing.Count, "#4");
-		}
-	}
+    [TestFixture]
+    public class SupportingTokenParametersTest
+    {
+        [Test]
+        public void DefaultItems ()
+        {
+            SupportingTokenParameters p = new SupportingTokenParameters ();
+            Assert.AreEqual (0, p.Endorsing.Count, "#1");
+            Assert.AreEqual (0, p.Signed.Count, "#2");
+            Assert.AreEqual (0, p.SignedEncrypted.Count, "#3");
+            Assert.AreEqual (0, p.SignedEndorsing.Count, "#4");
+        }
+    }
 }

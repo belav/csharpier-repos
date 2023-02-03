@@ -32,13 +32,13 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Flags]
-	public enum DirectorySynchronizationOptions
-	{
-		None = 0,
-		ObjectSecurity,
-		ParentsFirst = 2,
-		PublicDataOnly = 4,
-		IncrementalValues = 8,
-	}
+    [Flags]
+    public enum DirectorySynchronizationOptions
+    {
+        None = 0,
+        ObjectSecurity,
+        ParentsFirst = 2,
+        PublicDataOnly = 4,
+        IncrementalValues = 8,
+    }
 }

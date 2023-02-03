@@ -34,79 +34,79 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Reflection {
 
-	/// <summary>
-	/// Summary description for AssemblyTrademarkAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyTrademarkAttributeTest
-	{
+    /// <summary>
+    /// Summary description for AssemblyTrademarkAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyTrademarkAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyTrademarkAttribute attr;
-		
-		public AssemblyTrademarkAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName ();
+        AssemblyTrademarkAttribute attr;
+        
+        public AssemblyTrademarkAttributeTest ()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAsmName.Name = "TestAssembly";
+            dynAsmName.Name = "TestAssembly";
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
+                dynAsmName,AssemblyBuilderAccess.Run
+                );
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyTrademarkAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "(c) Xamarin" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyTrademarkAttribute;
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof (AssemblyTrademarkAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor (
+                new Type [] { typeof (string) }
+                );
+            CustomAttributeBuilder attrBuilder =
+                new CustomAttributeBuilder (ctrInfo, new object [1] { "(c) Xamarin" });
+            dynAssembly.SetCustomAttribute (attrBuilder);
+            object [] attributes = dynAssembly.GetCustomAttributes (true);
+            attr = attributes [0] as AssemblyTrademarkAttribute;
+        }
 
-		[Test]
-		public void TrademarkTest ()
-		{
-			Assert.AreEqual (
-				attr.Trademark,
-				"(c) Xamarin", "#1");
-		}
+        [Test]
+        public void TrademarkTest ()
+        {
+            Assert.AreEqual (
+                attr.Trademark,
+                "(c) Xamarin", "#1");
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyTrademarkAttribute), "#1"
-				);
-		}
+        [Test]
+        public void TypeIdTest ()
+        {
+            Assert.AreEqual (
+                attr.TypeId,
+                typeof (AssemblyTrademarkAttribute), "#1"
+                );
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue ()
+        {
+            Assert.AreEqual (
+                attr.Match (attr),
+                true, "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyTrademarkAttribute ("(c) Microsoft")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForFalse ()
+        {
+            Assert.AreEqual (
+                attr.Match (new AssemblyTrademarkAttribute ("(c) Microsoft")),
+                false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyTrademarkAttribute ("some text");
-			Assert.AreEqual ("some text", a.Trademark);
-		}
-	}
+        [Test]
+        public void CtorTest ()
+        {
+            var a = new AssemblyTrademarkAttribute ("some text");
+            Assert.AreEqual ("some text", a.Trademark);
+        }
+    }
 }
 

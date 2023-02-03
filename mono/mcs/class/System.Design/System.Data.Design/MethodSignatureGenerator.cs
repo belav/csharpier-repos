@@ -2,7 +2,7 @@
 // MethodSignatureGenerator.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,83 +36,83 @@ using System.ComponentModel.Design;
 
 namespace System.Data.Design
 {
-	public class MethodSignatureGenerator
-	{
-		public MethodSignatureGenerator ()
-		{
-		}
+    public class MethodSignatureGenerator
+    {
+        public MethodSignatureGenerator ()
+        {
+        }
 
-		[MonoTODO]
-		public CodeDomProvider CodeProvider {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public CodeDomProvider CodeProvider {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public Type ContainerParameterType {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public Type ContainerParameterType {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public string DataSetClassName {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public string DataSetClassName {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public bool IsGetMethod {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool IsGetMethod {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public bool PagingMethod {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool PagingMethod {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public ParameterGenerationOption ParameterOption {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ParameterGenerationOption ParameterOption {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public string TableClassName {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public string TableClassName {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public CodeMemberMethod GenerateMethod ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public CodeMemberMethod GenerateMethod ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string GenerateMethodSignature ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GenerateMethodSignature ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public CodeTypeDeclaration GenerateUpdatingMethods ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public CodeTypeDeclaration GenerateUpdatingMethods ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void SetDesignTableContent (string designTableContent)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void SetDesignTableContent (string designTableContent)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void SetMethodSourceContent (string methodSourceContent)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void SetMethodSourceContent (string methodSourceContent)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

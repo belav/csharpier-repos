@@ -2,7 +2,7 @@
 // System.Management.CodeLanguage
 //
 // Authors:
-//	Gert Driesen (drieseng@users.sourceforge.net)
+//    Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Gert Driesen
 //
@@ -29,12 +29,12 @@
 
 namespace System.Management
 {
-	public enum CodeLanguage
-	{
-		CSharp,
-		JScript,
-		VB,
-		VJSharp,
-		Mcpp,
-	}
+    public enum CodeLanguage
+    {
+        CSharp,
+        JScript,
+        VB,
+        VJSharp,
+        Mcpp,
+    }
 }

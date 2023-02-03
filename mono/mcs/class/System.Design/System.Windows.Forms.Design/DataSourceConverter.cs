@@ -30,8 +30,8 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms.Design {
 
-	// XXX this is just a stub class to keep things from crashing when a property grid is used on a control.
-	internal class DataSourceConverter : TypeConverter {
-	}
+    // XXX this is just a stub class to keep things from crashing when a property grid is used on a control.
+    internal class DataSourceConverter : TypeConverter {
+    }
 
 }

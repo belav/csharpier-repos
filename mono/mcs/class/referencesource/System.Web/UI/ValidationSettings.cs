@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 using System.Web.Util;
 
 namespace System.Web.UI {

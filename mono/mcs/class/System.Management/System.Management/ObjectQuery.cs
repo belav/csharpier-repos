@@ -2,7 +2,7 @@
 // System.Management.ObjectQuery
 //
 // Authors:
-//	Gert Driesen (drieseng@users.sourceforge.net)
+//    Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Gert Driesen
 //
@@ -29,23 +29,23 @@
 
 namespace System.Management
 {
-	public class ObjectQuery : ManagementQuery
-	{
-		public ObjectQuery ()
-		{
-		}
+    public class ObjectQuery : ManagementQuery
+    {
+        public ObjectQuery ()
+        {
+        }
 
-		public ObjectQuery (string query) : base(query)
-		{
-		}
+        public ObjectQuery (string query) : base(query)
+        {
+        }
 
-		public ObjectQuery (string language, string query) : base(language, query)
-		{
-		}
+        public ObjectQuery (string language, string query) : base(language, query)
+        {
+        }
 
-		public override object Clone ()
-		{
-			return new ObjectQuery(this.QueryLanguage, this.QueryString);
-		}
-	}
+        public override object Clone ()
+        {
+            return new ObjectQuery(this.QueryLanguage, this.QueryString);
+        }
+    }
 }

@@ -3,12 +3,12 @@
 
 class X
 {
-	public static int Main ()
-	{
-		string[] a = null;
-		int res;
-		var m = a?[res = 3];
-		System.Console.WriteLine (res);
-		return 0;
-	}
+    public static int Main ()
+    {
+        string[] a = null;
+        int res;
+        var m = a?[res = 3];
+        System.Console.WriteLine (res);
+        return 0;
+    }
 }

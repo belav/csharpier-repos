@@ -33,76 +33,76 @@ using System.Text;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlRootAttribute.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
-		AttributeTargets.Enum | AttributeTargets.Interface |
-		AttributeTargets.ReturnValue)]
-	public class XmlRootAttribute : Attribute
-	{
-		private string dataType;
-		private string elementName;
-		private bool isNullable = true;
-		private string ns;
+    /// <summary>
+    /// Summary description for XmlRootAttribute.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
+        AttributeTargets.Enum | AttributeTargets.Interface |
+        AttributeTargets.ReturnValue)]
+    public class XmlRootAttribute : Attribute
+    {
+        private string dataType;
+        private string elementName;
+        private bool isNullable = true;
+        private string ns;
 
-		public XmlRootAttribute ()
-		{
-		}
+        public XmlRootAttribute ()
+        {
+        }
 
-		public XmlRootAttribute (string elementName)
-		{
-			this.elementName = elementName;
-		}
+        public XmlRootAttribute (string elementName)
+        {
+            this.elementName = elementName;
+        }
 
-		public string DataType {
-			get {
-				if (dataType == null) {
-					return string.Empty;
-				}
-				return dataType;
-			}
-			set { dataType = value; }
-		}
+        public string DataType {
+            get {
+                if (dataType == null) {
+                    return string.Empty;
+                }
+                return dataType;
+            }
+            set { dataType = value; }
+        }
 
-		public string ElementName {
-			get {
-				if (elementName == null) {
-					return string.Empty;
-				}
-				return elementName;
-			}
-			set { elementName = value; }
-		}
+        public string ElementName {
+            get {
+                if (elementName == null) {
+                    return string.Empty;
+                }
+                return elementName;
+            }
+            set { elementName = value; }
+        }
 
-		public bool IsNullable {
-			get { return isNullable; }
-			set {
-				isNullable = value;
-			}
-		}
-		
-		public string Namespace {
-			get { return ns; } 
-			set { ns = value; }
-		}
+        public bool IsNullable {
+            get { return isNullable; }
+            set {
+                isNullable = value;
+            }
+        }
+        
+        public string Namespace {
+            get { return ns; } 
+            set { ns = value; }
+        }
 
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("XRA ");
-			KeyHelper.AddField (sb, 1, ns);
-			KeyHelper.AddField (sb, 2, elementName);
-			KeyHelper.AddField (sb, 3, dataType);
-			KeyHelper.AddField (sb, 4, isNullable);
-			sb.Append ('|');
-		}
+        internal void AddKeyHash (System.Text.StringBuilder sb)
+        {
+            sb.Append ("XRA ");
+            KeyHelper.AddField (sb, 1, ns);
+            KeyHelper.AddField (sb, 2, elementName);
+            KeyHelper.AddField (sb, 3, dataType);
+            KeyHelper.AddField (sb, 4, isNullable);
+            sb.Append ('|');
+        }
 
-		internal string Key {
-			get {
-				var sb = new StringBuilder ();
-				AddKeyHash (sb);
-				return sb.ToString ();
-			}
-		}
-	}
+        internal string Key {
+            get {
+                var sb = new StringBuilder ();
+                AddKeyHash (sb);
+                return sb.ToString ();
+            }
+        }
+    }
 }

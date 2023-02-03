@@ -30,59 +30,59 @@ using System;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-	public sealed class GenerateTrustInfo : TaskExtension {
-	
-		ITaskItem	baseManifest;
-		string		excludedPermissions;
-		string		targetZone;
-		ITaskItem	trustInfoFile;
-		
-		public GenerateTrustInfo ()
-		{
-		}
+    public sealed class GenerateTrustInfo : TaskExtension {
+    
+        ITaskItem    baseManifest;
+        string        excludedPermissions;
+        string        targetZone;
+        ITaskItem    trustInfoFile;
+        
+        public GenerateTrustInfo ()
+        {
+        }
 
-		public override bool Execute ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Execute ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ITaskItem BaseManifest {
-			get {
-				return baseManifest;
-			}
-			set {
-				baseManifest = value;
-			}
-		}
+        public ITaskItem BaseManifest {
+            get {
+                return baseManifest;
+            }
+            set {
+                baseManifest = value;
+            }
+        }
 
-		public string ExcludedPermissions {
-			get {
-				return excludedPermissions;
-			}
-			set {
-				excludedPermissions = value;
-			}
-		}
+        public string ExcludedPermissions {
+            get {
+                return excludedPermissions;
+            }
+            set {
+                excludedPermissions = value;
+            }
+        }
 
-		public string TargetZone {
-			get {
-				return targetZone;
-			}
-			set {
-				targetZone = value;
-			}
-		}
+        public string TargetZone {
+            get {
+                return targetZone;
+            }
+            set {
+                targetZone = value;
+            }
+        }
 
-		[Required]
-		[Output]
-		public ITaskItem TrustInfoFile {
-			get {
-				return trustInfoFile;
-			}
-			set {
-				trustInfoFile = value;
-			}
-		}
-	}
+        [Required]
+        [Output]
+        public ITaskItem TrustInfoFile {
+            get {
+                return trustInfoFile;
+            }
+            set {
+                trustInfoFile = value;
+            }
+        }
+    }
 }
 

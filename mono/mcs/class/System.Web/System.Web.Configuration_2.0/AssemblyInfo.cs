@@ -2,8 +2,8 @@
 // System.Web.Configuration.AssemblyCollection
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2004,2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,40 +36,40 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class AssemblyInfo: ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty assemblyProp;
-		
-		static AssemblyInfo ()
-		{
-			assemblyProp = new ConfigurationProperty ("assembly", typeof (string), null, TypeDescriptor.GetConverter (typeof (string)),
-								  PropertyHelper.NonEmptyStringValidator,
-								  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+    public sealed class AssemblyInfo: ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty assemblyProp;
+        
+        static AssemblyInfo ()
+        {
+            assemblyProp = new ConfigurationProperty ("assembly", typeof (string), null, TypeDescriptor.GetConverter (typeof (string)),
+                                  PropertyHelper.NonEmptyStringValidator,
+                                  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (assemblyProp);
-		}
-		
-		internal AssemblyInfo ()
-		{
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (assemblyProp);
+        }
+        
+        internal AssemblyInfo ()
+        {
+        }
 
-		public AssemblyInfo (string assemblyName)
-		{
-			this.Assembly = assemblyName;
-		}
+        public AssemblyInfo (string assemblyName)
+        {
+            this.Assembly = assemblyName;
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("assembly", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Assembly {
-			get { return (string) base [assemblyProp]; }
-			set { base [assemblyProp] = value; }
-		}
-		
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        [StringValidator (MinLength = 1)]
+        [ConfigurationProperty ("assembly", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        public string Assembly {
+            get { return (string) base [assemblyProp]; }
+            set { base [assemblyProp] = value; }
+        }
+        
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

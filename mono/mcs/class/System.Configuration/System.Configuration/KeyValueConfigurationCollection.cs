@@ -31,70 +31,70 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	[ConfigurationCollection (typeof (KeyValueConfigurationElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public class KeyValueConfigurationCollection: ConfigurationElementCollection
-	{
-		public void Add (KeyValueConfigurationElement keyValue)
-		{
-			keyValue.Init ();
-			BaseAdd (keyValue);
-		}
-		
-		public void Add (string key, string value)
-		{
-			Add (new KeyValueConfigurationElement (key, value));
-		}
-		
-		public void Clear ()
-		{
-			BaseClear ();
-		}
-		
-		public void Remove (string key)
-		{
-			BaseRemove (key);
-		}
-		
-		public string[] AllKeys {
-			get {
-				string[] keys = new string [Count];
-				int n=0;
-				foreach (KeyValueConfigurationElement kv in this)
-					keys [n++] = kv.Key;
-				return keys;
-			}
-		}
-		
-		public new KeyValueConfigurationElement this [string key] {
-			get { return (KeyValueConfigurationElement) BaseGet (key); }
-		}
-		
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new KeyValueConfigurationElement ();
-		}
-		
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			//			if (BaseIndexOf (element) == -1)
-			//				return "";
+    [ConfigurationCollection (typeof (KeyValueConfigurationElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public class KeyValueConfigurationCollection: ConfigurationElementCollection
+    {
+        public void Add (KeyValueConfigurationElement keyValue)
+        {
+            keyValue.Init ();
+            BaseAdd (keyValue);
+        }
+        
+        public void Add (string key, string value)
+        {
+            Add (new KeyValueConfigurationElement (key, value));
+        }
+        
+        public void Clear ()
+        {
+            BaseClear ();
+        }
+        
+        public void Remove (string key)
+        {
+            BaseRemove (key);
+        }
+        
+        public string[] AllKeys {
+            get {
+                string[] keys = new string [Count];
+                int n=0;
+                foreach (KeyValueConfigurationElement kv in this)
+                    keys [n++] = kv.Key;
+                return keys;
+            }
+        }
+        
+        public new KeyValueConfigurationElement this [string key] {
+            get { return (KeyValueConfigurationElement) BaseGet (key); }
+        }
+        
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new KeyValueConfigurationElement ();
+        }
+        
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            //            if (BaseIndexOf (element) == -1)
+            //                return "";
 
-			return ((KeyValueConfigurationElement)element).Key;
-		}
+            return ((KeyValueConfigurationElement)element).Key;
+        }
 
-		ConfigurationPropertyCollection properties;
-		protected internal override ConfigurationPropertyCollection Properties {
-			get {
-				if (properties == null)
-					properties = new ConfigurationPropertyCollection ();
+        ConfigurationPropertyCollection properties;
+        protected internal override ConfigurationPropertyCollection Properties {
+            get {
+                if (properties == null)
+                    properties = new ConfigurationPropertyCollection ();
 
-				return properties;
-			}
-		}
-		
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-	}
+                return properties;
+            }
+        }
+        
+        protected override bool ThrowOnDuplicate {
+            get { return false; }
+        }
+    }
 }
 

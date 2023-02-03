@@ -3,13 +3,13 @@
 
 public class A {
 
-	public Blah [] B {
-		get { return null; }
-	}
+    public Blah [] B {
+        get { return null; }
+    }
 
-	static void Main () {}
+    static void Main () {}
 }
 
 class Blah {
-	
+    
 }

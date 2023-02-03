@@ -27,10 +27,10 @@ using System;
 
 namespace MonoTests.System.ServiceModel.MetadataTests {
 
-	public static class ExportUtil {
-		public static void Main (string[] args)
-		{
-			MetadataSamples.Export ();
-		}
-	}
+    public static class ExportUtil {
+        public static void Main (string[] args)
+        {
+            MetadataSamples.Export ();
+        }
+    }
 }

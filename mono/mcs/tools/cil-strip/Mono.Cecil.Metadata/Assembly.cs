@@ -31,58 +31,58 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil;
+    using Mono.Cecil;
 
-	internal sealed class AssemblyTable : IMetadataTable {
+    internal sealed class AssemblyTable : IMetadataTable {
 
-		public const int RId = 0x20;
+        public const int RId = 0x20;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public AssemblyRow this [int index] {
-			get { return m_rows [index] as AssemblyRow; }
-			set { m_rows [index] = value; }
-		}
+        public AssemblyRow this [int index] {
+            get { return m_rows [index] as AssemblyRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal AssemblyTable ()
-		{
-		}
+        internal AssemblyTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitAssemblyTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitAssemblyTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class AssemblyRow : IMetadataRow {
+    internal sealed class AssemblyRow : IMetadataRow {
 
-		public AssemblyHashAlgorithm HashAlgId;
-		public ushort MajorVersion;
-		public ushort MinorVersion;
-		public ushort BuildNumber;
-		public ushort RevisionNumber;
-		public AssemblyFlags Flags;
-		public uint PublicKey;
-		public uint Name;
-		public uint Culture;
+        public AssemblyHashAlgorithm HashAlgId;
+        public ushort MajorVersion;
+        public ushort MinorVersion;
+        public ushort BuildNumber;
+        public ushort RevisionNumber;
+        public AssemblyFlags Flags;
+        public uint PublicKey;
+        public uint Name;
+        public uint Culture;
 
-		internal AssemblyRow ()
-		{
-		}
+        internal AssemblyRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitAssemblyRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitAssemblyRow (this);
+        }
+    }
 }

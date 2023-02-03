@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -488,7 +488,7 @@ class C
         CreateCompilation(
 "class C\r\n{\r\nconst string s = \"\"\"\r\n\t\r\n \"\"\";\r\n}").VerifyDiagnostics(
                 // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
-                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "	").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
+                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "    ").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
     }
 
     [Fact]
@@ -506,7 +506,7 @@ class C
         CreateCompilation(
 "class C\r\n{\r\nconst string s = \"\"\"\r\n \t\r\n  \"\"\";\r\n}").VerifyDiagnostics(
                 // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
-                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " 	").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
+                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "     ").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
     }
 
     [Fact]
@@ -515,7 +515,7 @@ class C
         CreateCompilation(
 "class C\r\n{\r\nconst string s = \"\"\"\r\n \t\r\n   \"\"\";\r\n}").VerifyDiagnostics(
                     // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
-                    Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " 	").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
+                    Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "     ").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
     }
 
     [Fact]

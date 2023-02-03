@@ -2,7 +2,7 @@
 // HtmlLinkTest.cs - unit tests for System.Web.UI.HtmlControls.HtmlLink
 //
 // Author:
-//	Chris Toshok <toshok@ximian.com>
+//    Chris Toshok <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,50 +36,50 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-	public class HtmlLinkPoker : HtmlLink {
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+    public class HtmlLinkPoker : HtmlLink {
+        public string Render ()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
+            base.Render (writer);
+            return writer.InnerWriter.ToString ();
+        }
+    }
 
-	[TestFixture]
-	public class HtmlLinkTest {
-		
-		[Test]
-		public void Defaults ()
-		{
-			HtmlLinkPoker link = new HtmlLinkPoker ();
+    [TestFixture]
+    public class HtmlLinkTest {
+        
+        [Test]
+        public void Defaults ()
+        {
+            HtmlLinkPoker link = new HtmlLinkPoker ();
 
-			Assert.AreEqual ("", link.Href, "A1");
-			Assert.AreEqual (0, link.Attributes.Count, "A2");
-		}
+            Assert.AreEqual ("", link.Href, "A1");
+            Assert.AreEqual (0, link.Attributes.Count, "A2");
+        }
 
-		[Test]
-		public void Setters ()
-		{
-			HtmlLinkPoker link = new HtmlLinkPoker ();
-			link.Href = "http://www.ximian.com/";
-			Assert.AreEqual ("http://www.ximian.com/", link.Href, "A1");
-			Assert.AreEqual (1, link.Attributes.Count, "A2");
-		}
+        [Test]
+        public void Setters ()
+        {
+            HtmlLinkPoker link = new HtmlLinkPoker ();
+            link.Href = "http://www.ximian.com/";
+            Assert.AreEqual ("http://www.ximian.com/", link.Href, "A1");
+            Assert.AreEqual (1, link.Attributes.Count, "A2");
+        }
 
-		[Test]
-		public void Render ()
-		{
-			HtmlLinkPoker link = new HtmlLinkPoker ();
-			link.Href = "http://www.ximian.com/";
-			Assert.AreEqual ("<link href=\"http://www.ximian.com/\" />", link.Render(), "A1");
-		}
+        [Test]
+        public void Render ()
+        {
+            HtmlLinkPoker link = new HtmlLinkPoker ();
+            link.Href = "http://www.ximian.com/";
+            Assert.AreEqual ("<link href=\"http://www.ximian.com/\" />", link.Render(), "A1");
+        }
 
-		[Test]
-		public void Render_EmptyHref ()
-		{
-			HtmlLinkPoker link = new HtmlLinkPoker ();
-			Assert.AreEqual ("<link />", link.Render(), "A1");
-		}
-	}
+        [Test]
+        public void Render_EmptyHref ()
+        {
+            HtmlLinkPoker link = new HtmlLinkPoker ();
+            Assert.AreEqual ("<link />", link.Render(), "A1");
+        }
+    }
 }
 

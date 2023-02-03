@@ -2,7 +2,7 @@
 // EncryptedKeyIdentifierClauseTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,22 +34,22 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class EncryptedKeyIdentifierClauseTest
-	{
-		[Test]
-		public void Constructors ()
-		{
-			byte [] bytes = new byte [32];
-			// null identifier / null CarriedKeyName
-			EncryptedKeyIdentifierClause ekic =
-				new EncryptedKeyIdentifierClause (bytes, SecurityAlgorithms.Aes256Encryption, null, null);
-			Assert.IsNull (ekic.EncryptingKeyIdentifier, "#1");
-			Assert.IsNull (ekic.CarriedKeyName, "#2");
+    [TestFixture]
+    public class EncryptedKeyIdentifierClauseTest
+    {
+        [Test]
+        public void Constructors ()
+        {
+            byte [] bytes = new byte [32];
+            // null identifier / null CarriedKeyName
+            EncryptedKeyIdentifierClause ekic =
+                new EncryptedKeyIdentifierClause (bytes, SecurityAlgorithms.Aes256Encryption, null, null);
+            Assert.IsNull (ekic.EncryptingKeyIdentifier, "#1");
+            Assert.IsNull (ekic.CarriedKeyName, "#2");
 
-			// any EncryptionMethods are allowed here..
-			new EncryptedKeyIdentifierClause (new byte [32], "urn:foo");
-		}
-	}
+            // any EncryptionMethods are allowed here..
+            new EncryptedKeyIdentifierClause (new byte [32], "urn:foo");
+        }
+    }
 }
 #endif

@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataParameter
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,30 +34,30 @@ using System.Data;
 
 namespace System.ComponentModel.Design.Data
 {
-	public sealed class DesignerDataParameter
-	{
-		string name;
-		DbType type;
-		ParameterDirection direction;
+    public sealed class DesignerDataParameter
+    {
+        string name;
+        DbType type;
+        ParameterDirection direction;
 
-		public DesignerDataParameter (string name, DbType dataType, ParameterDirection direction)
-		{
-			this.name = name;
-			this.type = dataType;
-			this.direction = direction;
-		}
+        public DesignerDataParameter (string name, DbType dataType, ParameterDirection direction)
+        {
+            this.name = name;
+            this.type = dataType;
+            this.direction = direction;
+        }
 
-		public DbType DataType {
-			get { return type; }
-		}
+        public DbType DataType {
+            get { return type; }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name {
+            get { return name; }
+        }
 
-		public ParameterDirection Direction {
-			get { return direction; }
-		}
-	}
+        public ParameterDirection Direction {
+            get { return direction; }
+        }
+    }
 }
 

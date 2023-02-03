@@ -2,7 +2,7 @@
 // PermissionSetCas.cs - CAS Unit Tests for PermissionSet
 //
 // Author:
-//	Sebastien Pouliot (sebastien@ximian.com)
+//    Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,30 +34,30 @@ using NUnit.Framework;
 
 namespace MonoCasTests.System.Security {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PermissionSetCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PermissionSetCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager isn't enabled");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager isn't enabled");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ExecutionEngineException))]
-		public void RevertAssert_WithoutAssertion ()
-		{
-			PermissionSet.RevertAssert ();
-		}
+        [Test]
+        [ExpectedException (typeof (ExecutionEngineException))]
+        public void RevertAssert_WithoutAssertion ()
+        {
+            PermissionSet.RevertAssert ();
+        }
 
-		[Test]
-		public void RevertAssert_WithAssertion ()
-		{
-			PermissionSet ups = new PermissionSet (PermissionState.Unrestricted);
-			ups.Assert ();
-			PermissionSet.RevertAssert ();
-		}
-	}
+        [Test]
+        public void RevertAssert_WithAssertion ()
+        {
+            PermissionSet ups = new PermissionSet (PermissionState.Unrestricted);
+            ups.Assert ();
+            PermissionSet.RevertAssert ();
+        }
+    }
 }

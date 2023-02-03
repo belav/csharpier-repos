@@ -222,7 +222,7 @@ namespace System.Xml.Tests
         [Variation("Read with two DOCTYPE nodes")]
         public int Read5()
         {
-            string strxml = "<!DOCTYPE root [<!ELEMENT root ANY >]><!DOCTYPE root [	<!ELEMENT root ANY >]><root/>";
+            string strxml = "<!DOCTYPE root [<!ELEMENT root ANY >]><!DOCTYPE root [    <!ELEMENT root ANY >]><root/>";
             try
             {
                 ReloadSource(new StringReader(strxml));
@@ -1449,7 +1449,7 @@ namespace System.Xml.Tests
 ?><!DOCTYPE doc [
  <!ELEMENT doc ANY >
  <!ELEMENT a ANY >
-	<!ATTLIST a xml:lang CDATA #IMPLIED>
+    <!ATTLIST a xml:lang CDATA #IMPLIED>
 ]>
 <doc>
    <a xml:lang='de'>
@@ -1538,7 +1538,7 @@ namespace System.Xml.Tests
         public int Read57()
         {
             string xml = @"<?xml version   =   '1.0'" + "\r\n" + @" ?><!DOCTYPE" + "\r" + @"doc " + "\n" + @"[ <!ELEMENT " + "\r\n" + @"doc " + "\r\n" + @"ANY" + "\r\n" + @">
- <!ELEMENT a" + "\r\n" + @"ANY >" + "\r\n" + @"	<!ATTLIST" + "\r\n" + @"a" + "\r\n" + @"xml:lang CDATA #IMPLIED>" + "\r\n" + @"]>" + "\r\n" + @"<doc>" + "\r\n" +
+ <!ELEMENT a" + "\r\n" + @"ANY >" + "\r\n" + @"    <!ATTLIST" + "\r\n" + @"a" + "\r\n" + @"xml:lang CDATA #IMPLIED>" + "\r\n" + @"]>" + "\r\n" + @"<doc>" + "\r\n" +
 @"   <a " + "\r\n" + @"xml:lang='de'>" + "\r\n" + @"      blar" + "\r\n" + @"   </a>" + "\r\n" + @"   <a xml:lang='\r\n'>" + "\r\n" + @"      blar" + "\r\n"
 + @"   </a>" + "\r\n" + @"   <a xml:lang='\r'>" + "\r\n" + @"      blar   " + "\r\n" + @"</a>   <a xml:lang='\n'>  " + "\r\n" + @"    blar   </a>" + "\r\n" + @"</doc>";
             ReloadSource(new StringReader(xml));
@@ -1562,7 +1562,7 @@ namespace System.Xml.Tests
         public int Read58()
         {
             string xml = @"<?xml version   =   '1.0'" + "\r\n" + @" ?><!DOCTYPE'" + "\r" + @"doc '" + "\n" + @"[ <!ELEMENT '" + "\r\n" + @"doc '" + "\r\n" + @"ANY'" + "\r\n" + @">
- <!ELEMENT a'" + "\r\n" + @"ANY >'" + "\r\n" + @"	<!ATTLIST'" + "\r\n" + @"a'" + "\r\n" + @"xml:lang CDATA #IMPLIED>'" + "\r\n" + @"]>'" + "\r\n" + @"<doc>'" + "\r\n" +
+ <!ELEMENT a'" + "\r\n" + @"ANY >'" + "\r\n" + @"    <!ATTLIST'" + "\r\n" + @"a'" + "\r\n" + @"xml:lang CDATA #IMPLIED>'" + "\r\n" + @"]>'" + "\r\n" + @"<doc>'" + "\r\n" +
 @"   <a '" + "\r\n" + @"xml:lang='de'>'" + "\r\n" + @"      blar'" + "\r\n" + @"   </a>'" + "\r\n" + @"   <a xml:lang='\r\n'>'" + "\r\n" + @"      blar'" + "\r\n"
 + @"   </a>'" + "\r\n" + @"   <a xml:lang='\r'>'" + "\r\n" + @"      blar   '" + "\r\n" + @"</a>   <a xml:lang='\n'>  '" + "\r\n" + @"    blar   </a>'" + "\r\n" + @"</doc>";
             try

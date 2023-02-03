@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 namespace Mono
 {
-	interface ISystemDependencyProvider
-	{
-		ISystemCertificateProvider CertificateProvider {
-			get;
-		}
-	}
+    interface ISystemDependencyProvider
+    {
+        ISystemCertificateProvider CertificateProvider {
+            get;
+        }
+    }
 }

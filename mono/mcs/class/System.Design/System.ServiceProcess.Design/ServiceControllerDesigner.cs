@@ -33,16 +33,16 @@ using System.ComponentModel.Design;
 
 namespace System.ServiceProcess.Design
 {
-	public class ServiceControllerDesigner : ComponentDesigner
-	{
-		public ServiceControllerDesigner ()
-		{
-		}
+    public class ServiceControllerDesigner : ComponentDesigner
+    {
+        public ServiceControllerDesigner ()
+        {
+        }
 
-		[MonoTODO]
-		protected override void PreFilterProperties (IDictionary properties)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override void PreFilterProperties (IDictionary properties)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

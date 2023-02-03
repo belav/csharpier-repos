@@ -31,11 +31,11 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-	public sealed class InheritanceMappingAttribute : Attribute
-	{
-		public object Code { get; set; }
-		public bool IsDefault { get; set; }
-		public Type Type { get; set; }
-	}
+    [AttributeUsage (AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    public sealed class InheritanceMappingAttribute : Attribute
+    {
+        public object Code { get; set; }
+        public bool IsDefault { get; set; }
+        public Type Type { get; set; }
+    }
 }

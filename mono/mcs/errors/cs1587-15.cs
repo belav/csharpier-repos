@@ -6,9 +6,9 @@ using System;
 
 namespace TopNS
 {
-	internal class Hoge
-	{
-		/// invalid comment
-	}
+    internal class Hoge
+    {
+        /// invalid comment
+    }
 
 }

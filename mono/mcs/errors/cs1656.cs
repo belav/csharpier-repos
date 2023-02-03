@@ -4,11 +4,11 @@ using System.IO;
 
 class X {
 
-	static void Main ()
-	{
-		using (MemoryStream m = new MemoryStream ()){
-			m = null;
-		}
-	}
+    static void Main ()
+    {
+        using (MemoryStream m = new MemoryStream ()){
+            m = null;
+        }
+    }
 }
-	
+    

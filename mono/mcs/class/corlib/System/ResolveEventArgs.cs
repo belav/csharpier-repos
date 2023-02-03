@@ -34,32 +34,32 @@ using System.Reflection;
 
 namespace System
 {
-	[ComVisible (true)]
-	public class ResolveEventArgs : EventArgs
-	{
-		private string m_Name;
-		private Assembly m_Requesting;
+    [ComVisible (true)]
+    public class ResolveEventArgs : EventArgs
+    {
+        private string m_Name;
+        private Assembly m_Requesting;
 
-		public ResolveEventArgs (string name)
-		{
-			m_Name = name;
-		}
+        public ResolveEventArgs (string name)
+        {
+            m_Name = name;
+        }
 
-		public ResolveEventArgs (string name, Assembly requestingAssembly) {
-			this.m_Name = name;
-			this.m_Requesting = requestingAssembly;
-		}
+        public ResolveEventArgs (string name, Assembly requestingAssembly) {
+            this.m_Name = name;
+            this.m_Requesting = requestingAssembly;
+        }
 
-		public string Name {
-			get {
-				return m_Name;
-			}
-		}
+        public string Name {
+            get {
+                return m_Name;
+            }
+        }
 
-		public Assembly RequestingAssembly {
-			get {
-				return m_Requesting;
-			}
-		}
-	}
+        public Assembly RequestingAssembly {
+            get {
+                return m_Requesting;
+            }
+        }
+    }
 }

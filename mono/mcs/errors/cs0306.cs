@@ -4,6 +4,6 @@
 
 class F<U> {}
 unsafe class O {
-	F<char *> f;
-	static void Main () {}
+    F<char *> f;
+    static void Main () {}
 }

@@ -2,7 +2,7 @@
 // SecurityAccessDeniedException.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,29 +31,29 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Security
 {
-	[Serializable]
-	public class SecurityAccessDeniedException : CommunicationException
-	{
-		public SecurityAccessDeniedException ()
-			: this ("Access is denied for some security reason.")
-		{
-		}
+    [Serializable]
+    public class SecurityAccessDeniedException : CommunicationException
+    {
+        public SecurityAccessDeniedException ()
+            : this ("Access is denied for some security reason.")
+        {
+        }
 
-		public SecurityAccessDeniedException (string message)
-			: base (message)
-		{
-		}
+        public SecurityAccessDeniedException (string message)
+            : base (message)
+        {
+        }
 
-		public SecurityAccessDeniedException (string message,
-			Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public SecurityAccessDeniedException (string message,
+            Exception innerException)
+            : base (message, innerException)
+        {
+        }
 
-		protected SecurityAccessDeniedException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected SecurityAccessDeniedException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
+    }
 }

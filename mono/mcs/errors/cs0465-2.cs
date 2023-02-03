@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:1
 
 class T
-{	
+{    
     static void Finalize ()
     {
     }

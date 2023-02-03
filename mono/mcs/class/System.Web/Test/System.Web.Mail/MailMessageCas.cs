@@ -2,7 +2,7 @@
 // MailMessageCas.cs - CAS unit tests for System.Web.Mail.MailMessage
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,48 +39,48 @@ using System.Web.Mail;
 
 namespace MonoCasTests.System.Web.Mail {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class MailMessageCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class MailMessageCas : AspNetHostingMinimal {
 
-		private MailAttachment attachment;
+        private MailAttachment attachment;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			string fname = Path.GetTempFileName ();
-			using (FileStream fs = File.OpenWrite (fname)) {
-				fs.WriteByte (0);
-				fs.Close ();
-			}
-			attachment = new MailAttachment (fname);
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            string fname = Path.GetTempFileName ();
+            using (FileStream fs = File.OpenWrite (fname)) {
+                fs.WriteByte (0);
+                fs.Close ();
+            }
+            attachment = new MailAttachment (fname);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void MailMessage_Deny_Unrestricted ()
-		{
-			MailMessage msg = new MailMessage ();
-			// we can include attachments (if created without the deny)
-			msg.Attachments.Add (attachment);
-			msg.Bcc = "bcc@localhost.com";
-			msg.Body = "Hola!";
-			msg.BodyEncoding = Encoding.ASCII;
-			msg.Cc = "cc@localhost.com";
-			msg.Fields["mono"] = "monkey";
-			msg.From = "from@localhost.com";
-			msg.Headers["monkey"] = "mono";
-			msg.Priority = MailPriority.High;
-			msg.Subject = "Monkey business";
-			msg.To = "to@localhost.com";
-			msg.UrlContentBase = "http://www.example.org";
-			msg.UrlContentLocation = "http://www.example.com";
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void MailMessage_Deny_Unrestricted ()
+        {
+            MailMessage msg = new MailMessage ();
+            // we can include attachments (if created without the deny)
+            msg.Attachments.Add (attachment);
+            msg.Bcc = "bcc@localhost.com";
+            msg.Body = "Hola!";
+            msg.BodyEncoding = Encoding.ASCII;
+            msg.Cc = "cc@localhost.com";
+            msg.Fields["mono"] = "monkey";
+            msg.From = "from@localhost.com";
+            msg.Headers["monkey"] = "mono";
+            msg.Priority = MailPriority.High;
+            msg.Subject = "Monkey business";
+            msg.To = "to@localhost.com";
+            msg.UrlContentBase = "http://www.example.org";
+            msg.UrlContentLocation = "http://www.example.com";
+        }
 
-		// LinkDemand tests
+        // LinkDemand tests
 
-		public override Type Type {
-			get { return typeof (MailMessage); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (MailMessage); }
+        }
+    }
 }

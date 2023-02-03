@@ -87,7 +87,7 @@ namespace C5
  | Feature.ValueTypeBucket
 #endif
 #if SHRINK
-		| Feature.ShrinkTable
+        | Feature.ShrinkTable
 #endif
 #if LINEARPROBING
  | Feature.LinearProbing
@@ -95,7 +95,7 @@ namespace C5
  | Feature.Chaining
 #endif
 #if INTERHASHING
-		| Feature.InterHashing
+        | Feature.InterHashing
 #elif RANDOMINTERHASHING
  | Feature.RandomInterHashing
 #endif
@@ -185,36 +185,36 @@ namespace C5
         this.hashval = hashval;
       }
 #else
-			internal OverflowBucket overflow;
+            internal OverflowBucket overflow;
 
 
-			internal Bucket(T item, int hashval)
-			{
-				this.item = item;
-				this.hashval = hashval;
-				this.overflow = default(OverflowBucket);
-			}
+            internal Bucket(T item, int hashval)
+            {
+                this.item = item;
+                this.hashval = hashval;
+                this.overflow = default(OverflowBucket);
+            }
 #endif
     }
 
 
 #if !LINEARPROBING
-		class OverflowBucket
-		{
-			internal T item;
+        class OverflowBucket
+        {
+            internal T item;
 
-			internal int hashval; //Cache!
+            internal int hashval; //Cache!
 
-			internal OverflowBucket overflow;
+            internal OverflowBucket overflow;
 
 
-			internal OverflowBucket(T item, int hashval, OverflowBucket overflow)
-			{
-				this.item = item;
-				this.hashval = hashval;
-				this.overflow = overflow;
-			}
-		}
+            internal OverflowBucket(T item, int hashval, OverflowBucket overflow)
+            {
+                this.item = item;
+                this.hashval = hashval;
+                this.overflow = overflow;
+            }
+        }
 #endif
 #endif
 
@@ -234,12 +234,12 @@ namespace C5
     int hv2i(int hashval)
     {
 #if INTERHASHING
-			//Note: *inverse  mod 2^32 is -1503427877
-			return (int)(((uint)hashval * 1529784659) >>bitsc); 
+            //Note: *inverse  mod 2^32 is -1503427877
+            return (int)(((uint)hashval * 1529784659) >>bitsc); 
 #elif RANDOMINTERHASHING
       return (int)(((uint)hashval * randomhashfactor) >> bitsc);
 #else
-			return indexmask & hashval;
+            return indexmask & hashval;
 #endif
     }
 
@@ -304,18 +304,18 @@ namespace C5
           b = b.overflow;
         }
 #else
-				if (!isnull(b.item))
-				{
-					insert(b.item, b.hashval, newtable);
+                if (!isnull(b.item))
+                {
+                    insert(b.item, b.hashval, newtable);
 
-					OverflowBucket ob = b.overflow;
+                    OverflowBucket ob = b.overflow;
 
-					while (ob != null)
-					{
-						insert(ob.item, ob.hashval, newtable);
-						ob = ob.overflow;
-					}
-				}
+                    while (ob != null)
+                    {
+                        insert(ob.item, ob.hashval, newtable);
+                        ob = ob.overflow;
+                    }
+                }
 #endif
 #endif
       }
@@ -329,19 +329,19 @@ namespace C5
 #else
 #if LINEARPROBING
 #else
-		//Only for resize!!!
-		private void insert(T item, int hashval, Bucket[] t)
-		{
-			int i = hv2i(hashval);
-			Bucket b = t[i];
+        //Only for resize!!!
+        private void insert(T item, int hashval, Bucket[] t)
+        {
+            int i = hv2i(hashval);
+            Bucket b = t[i];
 
-			if (!isnull(b.item))
-			{
-				t[i].overflow = new OverflowBucket(item, hashval, b.overflow);
-			}
-			else
-				t[i] = new Bucket(item, hashval);
-		}
+            if (!isnull(b.item))
+            {
+                t[i].overflow = new OverflowBucket(item, hashval, b.overflow);
+            }
+            else
+                t[i] = new Bucket(item, hashval);
+        }
 #endif
 #endif
 
@@ -472,8 +472,8 @@ namespace C5
         table[i] = new Bucket(item, hashval, null);
       }
 #else
-			if (isnull(item))
-			{
+            if (isnull(item))
+            {
         if (defaultvalid)
         {
           T olditem = defaultitem;
@@ -487,44 +487,44 @@ namespace C5
           return true;
         }
 
-				if (!add) goto notfound;
+                if (!add) goto notfound;
 
-				defaultvalid = true;
-				defaultitem = item;
-			}
-			else
-			{
-				int hashval = gethashcode(item);
-				int i = hv2i(hashval);
-				Bucket b = table[i];
+                defaultvalid = true;
+                defaultitem = item;
+            }
+            else
+            {
+                int hashval = gethashcode(item);
+                int i = hv2i(hashval);
+                Bucket b = table[i];
 
-				if (!isnull(b.item))
-				{
-					if (equals(b.item, item))
-					{
-						if (update)
-							table[i].item = item;
-						else
-							item = b.item;
+                if (!isnull(b.item))
+                {
+                    if (equals(b.item, item))
+                    {
+                        if (update)
+                            table[i].item = item;
+                        else
+                            item = b.item;
 
             if (raise && update)
               raiseForUpdate(item, b.item);
             return true;
-					}
+                    }
 
-					OverflowBucket ob = table[i].overflow;
+                    OverflowBucket ob = table[i].overflow;
 
-					if (ob == null)
-					{
-						if (!add) goto notfound;
+                    if (ob == null)
+                    {
+                        if (!add) goto notfound;
 
-						table[i].overflow = new OverflowBucket(item, hashval, null);
-					}
-					else
-					{
+                        table[i].overflow = new OverflowBucket(item, hashval, null);
+                    }
+                    else
+                    {
             T olditem = ob.item;
-						while (ob.overflow != null)
-						{
+                        while (ob.overflow != null)
+                        {
               if (equals(item, olditem))
               {
                 if (update)
@@ -537,9 +537,9 @@ namespace C5
                 return true;
               }
 
-							ob = ob.overflow;
+                            ob = ob.overflow;
               olditem = ob.item;
-						}
+                        }
 
             if (equals(item, olditem))
             {
@@ -553,18 +553,18 @@ namespace C5
               return true;
             }
 
-						if (!add) goto notfound;
+                        if (!add) goto notfound;
 
-						ob.overflow = new OverflowBucket(item, hashval, null);
-					}
-				}
-				else
-				{
-					if (!add) goto notfound;
+                        ob.overflow = new OverflowBucket(item, hashval, null);
+                    }
+                }
+                else
+                {
+                    if (!add) goto notfound;
 
-					table[i] = new Bucket(item, hashval);
-				}
-			}
+                    table[i] = new Bucket(item, hashval);
+                }
+            }
 #endif
 #endif
       size++;
@@ -712,68 +712,68 @@ namespace C5
       }
 
 #else
-			if (isnull(item))
-			{
-				if (!defaultvalid)
-					return false;
+            if (isnull(item))
+            {
+                if (!defaultvalid)
+                    return false;
 
-				//ref
-				item = defaultitem;
-				defaultvalid = false;
-				defaultitem = default(T); //No spaceleaks!
-			}
-			else
-			{
-				int hashval = gethashcode(item);
-				int index = hv2i(hashval);
-				Bucket b = table[index];
-				OverflowBucket ob = b.overflow;
+                //ref
+                item = defaultitem;
+                defaultvalid = false;
+                defaultitem = default(T); //No spaceleaks!
+            }
+            else
+            {
+                int hashval = gethashcode(item);
+                int index = hv2i(hashval);
+                Bucket b = table[index];
+                OverflowBucket ob = b.overflow;
 
-				if (equals(item, b.item))
-				{
-					//ref
-					item = b.item;
-					if (ob == null)
-					{
-						table[index] = new Bucket();
-					}
-					else
-					{
-						b = new Bucket(ob.item, ob.hashval);
-						b.overflow = ob.overflow;
-						table[index] = b;
-					}
-				}
-				else
-				{
-					if (ob == null)
-						return false;
+                if (equals(item, b.item))
+                {
+                    //ref
+                    item = b.item;
+                    if (ob == null)
+                    {
+                        table[index] = new Bucket();
+                    }
+                    else
+                    {
+                        b = new Bucket(ob.item, ob.hashval);
+                        b.overflow = ob.overflow;
+                        table[index] = b;
+                    }
+                }
+                else
+                {
+                    if (ob == null)
+                        return false;
 
-					if (equals(item, ob.item)) 
-					{
-						//ref
-						item=ob.item;
-						table[index].overflow = ob.overflow;
-					}
-					else
-					{
-						while (ob.overflow != null)
-							if (equals(item, ob.overflow.item))
-							{
-								//ref
-								item = ob.overflow.item;
-								break;
-							}
-							else
-								ob = ob.overflow;
+                    if (equals(item, ob.item)) 
+                    {
+                        //ref
+                        item=ob.item;
+                        table[index].overflow = ob.overflow;
+                    }
+                    else
+                    {
+                        while (ob.overflow != null)
+                            if (equals(item, ob.overflow.item))
+                            {
+                                //ref
+                                item = ob.overflow.item;
+                                break;
+                            }
+                            else
+                                ob = ob.overflow;
 
-						if (ob.overflow == null)
-							return false;
+                        if (ob.overflow == null)
+                            return false;
 
-						ob.overflow = ob.overflow.overflow;
-					}
-				}
-			}
+                        ob.overflow = ob.overflow.overflow;
+                    }
+                }
+            }
 #endif
 #endif
       size--;
@@ -947,8 +947,8 @@ namespace C5
       if (remove(ref item))
       {
 #if SHRINK
-				if (size<resizethreshhold/2 && resizethreshhold>8)
-					shrink();
+                if (size<resizethreshhold/2 && resizethreshhold>8)
+                    shrink();
 #endif
         raiseForRemove(item);
         return true;
@@ -972,8 +972,8 @@ namespace C5
       if (remove(ref removeditem))
       {
 #if SHRINK
-				if (size<resizethreshhold/2 && resizethreshhold>8)
-					shrink();
+                if (size<resizethreshhold/2 && resizethreshhold>8)
+                    shrink();
 #endif
         raiseForRemove(removeditem);
         return true;
@@ -998,15 +998,15 @@ namespace C5
       foreach (U item in items)
       { jtem = item; if (remove(ref jtem) && raise) raiseHandler.Remove(jtem); }
 #if SHRINK
-			if (size < resizethreshhold / 2 && resizethreshhold > 16)
-			{
-				int newlength = table.Length;
+            if (size < resizethreshhold / 2 && resizethreshhold > 16)
+            {
+                int newlength = table.Length;
 
-				while (newlength >= 32 && newlength * fillfactor / 2 > size)
-					newlength /= 2;
+                while (newlength >= 32 && newlength * fillfactor / 2 > size)
+                    newlength /= 2;
 
-				resize(newlength - 1);
-			}
+                resize(newlength - 1);
+            }
 #endif
       if (raise) raiseHandler.Raise();
     }
@@ -1132,18 +1132,18 @@ namespace C5
           b = b.overflow;
         }
 #else
-				if (!isnull(b.item))
-				{
-					res[index++] = b.item;
+                if (!isnull(b.item))
+                {
+                    res[index++] = b.item;
 
-					OverflowBucket ob = b.overflow;
+                    OverflowBucket ob = b.overflow;
 
-					while (ob != null)
-					{
-						res[index++] = ob.item;
-						ob = ob.overflow;
-					}
-				}
+                    while (ob != null)
+                    {
+                        res[index++] = ob.item;
+                        ob = ob.overflow;
+                    }
+                }
 #endif
 #endif
       }
@@ -1244,10 +1244,10 @@ namespace C5
 #if REFBUCKET
       Bucket b = null;
 #else
-			OverflowBucket ob = null;
+            OverflowBucket ob = null;
 
-			if (defaultvalid)
-				yield return defaultitem;
+            if (defaultvalid)
+                yield return defaultitem;
 #endif
       while (true)
       {
@@ -1271,25 +1271,25 @@ namespace C5
           yield return b.item;
         }
 #else
-				if (ob != null && ob.overflow != null)
-				{
-					ob = ob.overflow;
-					yield return ob.item;
-				}
-				else if (index >= 0 && ob == null && (ob = table[index].overflow) != null)
-				{
-					yield return  ob.item;
-				}
-				else
-				{
-					do
-					{
-						if (++index >= len) yield break;
-					} while (isnull(table[index].item));
+                if (ob != null && ob.overflow != null)
+                {
+                    ob = ob.overflow;
+                    yield return ob.item;
+                }
+                else if (index >= 0 && ob == null && (ob = table[index].overflow) != null)
+                {
+                    yield return  ob.item;
+                }
+                else
+                {
+                    do
+                    {
+                        if (++index >= len) yield break;
+                    } while (isnull(table[index].item));
 
           yield return table[index].item;
           ob = null;
-				}
+                }
 #endif
       }
 #endif
@@ -1510,30 +1510,30 @@ namespace C5
           b = b.overflow;
         }
 #else
-				if (!isnull(b.item))
-				{
-					count++;
-					if (i != hv2i(b.hashval))
-					{
-						Console.WriteLine("Bad cell item={0}, hashval={1}, index={2}, level={3}", b.item, b.hashval, i, level);
-						retval = false;
-					}
+                if (!isnull(b.item))
+                {
+                    count++;
+                    if (i != hv2i(b.hashval))
+                    {
+                        Console.WriteLine("Bad cell item={0}, hashval={1}, index={2}, level={3}", b.item, b.hashval, i, level);
+                        retval = false;
+                    }
 
-					OverflowBucket ob = b.overflow;
+                    OverflowBucket ob = b.overflow;
 
-					while (ob != null)
-					{
-						level++;
-						count++;
-						if (i != hv2i(ob.hashval))
-						{
-							Console.WriteLine("Bad cell item={0}, hashval={1}, index={2}, level={3}", b.item, b.hashval, i, level);
-							retval = false;
-						}
+                    while (ob != null)
+                    {
+                        level++;
+                        count++;
+                        if (i != hv2i(ob.hashval))
+                        {
+                            Console.WriteLine("Bad cell item={0}, hashval={1}, index={2}, level={3}", b.item, b.hashval, i, level);
+                            retval = false;
+                        }
 
-						ob = ob.overflow;
-					}
-				}
+                        ob = ob.overflow;
+                    }
+                }
 #endif
       }
 
@@ -1594,20 +1594,20 @@ namespace C5
           b = b.overflow;
         }
 #else
-				Bucket b = table[i];
+                Bucket b = table[i];
 
-				if (!isnull(b.item))
-				{
-					count = 1;
+                if (!isnull(b.item))
+                {
+                    count = 1;
 
-					OverflowBucket ob = b.overflow;
+                    OverflowBucket ob = b.overflow;
 
-					while (ob != null)
-					{
-						count++;
-						ob = ob.overflow;
-					}
-				}
+                    while (ob != null)
+                    {
+                        count++;
+                        ob = ob.overflow;
+                    }
+                }
 #endif
         if (res.Contains(count))
           res[count]++;

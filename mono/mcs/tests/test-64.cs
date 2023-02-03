@@ -11,19 +11,19 @@ class Operator {
 
 class Blah {
 
-	public enum Operator { A, B };
-	
-	public Blah (Operator x)
-	{
-	}
+    public enum Operator { A, B };
+    
+    public Blah (Operator x)
+    {
+    }
 }
 
 class T {
-	public static int Main ()
-	{
-		Blah b = new Blah (Blah.Operator.A);
+    public static int Main ()
+    {
+        Blah b = new Blah (Blah.Operator.A);
 
-		return 0;
-	}
+        return 0;
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Threading;
-	using System.Xml;
-	using System.Xml.Serialization;
+    using System;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     public class XmlSubtreeReader : XmlReader
     {
         private readonly string rootLocalName;
-		private readonly string rootNamespaceURI;
-		private string underlyingNamespaceURI;
+        private readonly string rootNamespaceURI;
+        private string underlyingNamespaceURI;
         private XmlReader reader;
 
-		public XmlSubtreeReader(IXmlNode node, XmlRootAttribute root)
-			: this(node, root.ElementName, root.Namespace) { }
+        public XmlSubtreeReader(IXmlNode node, XmlRootAttribute root)
+            : this(node, root.ElementName, root.Namespace) { }
 
         public XmlSubtreeReader(IXmlNode node, string rootLocalName, string rootNamespaceUri)
         {
@@ -38,7 +38,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             this.reader           = node.ReadSubtree();
             this.rootLocalName    = reader.NameTable.Add(rootLocalName);
-			this.rootNamespaceURI = rootNamespaceUri ?? string.Empty;
+            this.rootNamespaceURI = rootNamespaceUri ?? string.Empty;
         }
 
         protected override void Dispose(bool managed)
@@ -119,20 +119,20 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get { return IsAtRootElement ? CaptureNamespaceUri() : TranslateNamespaceURI(); }
         }
 
-		private string CaptureNamespaceUri()
-		{
-			if (underlyingNamespaceURI == null)
-				underlyingNamespaceURI = Reader.NamespaceURI;
-			return rootNamespaceURI;
-		}
+        private string CaptureNamespaceUri()
+        {
+            if (underlyingNamespaceURI == null)
+                underlyingNamespaceURI = Reader.NamespaceURI;
+            return rootNamespaceURI;
+        }
 
-		private string TranslateNamespaceURI()
-		{
-			var actualNamespaceURI = Reader.NamespaceURI;
-			return actualNamespaceURI == underlyingNamespaceURI
-				? rootNamespaceURI
-				: actualNamespaceURI;
-		}
+        private string TranslateNamespaceURI()
+        {
+            var actualNamespaceURI = Reader.NamespaceURI;
+            return actualNamespaceURI == underlyingNamespaceURI
+                ? rootNamespaceURI
+                : actualNamespaceURI;
+        }
 
         public override string Value
         {

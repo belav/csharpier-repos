@@ -2,13 +2,13 @@
 // Line: 9
 
 class Foo {
-	static void Main ()
-	{
-		int i = 9;
-		goto a;
-		do {
-		a:
-			throw new System.Exception ("huh?");
-		} while (i != 9);
-	}
+    static void Main ()
+    {
+        int i = 9;
+        goto a;
+        do {
+        a:
+            throw new System.Exception ("huh?");
+        } while (i != 9);
+    }
 }

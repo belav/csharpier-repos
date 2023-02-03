@@ -14,50 +14,50 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 #if FEATURE_SERIALIZATION
-	using System.Runtime.Serialization;
+    using System.Runtime.Serialization;
 #endif
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class MySerializableClass
-	{
-		protected DateTime current;
+    public class MySerializableClass
+    {
+        protected DateTime current;
 
-		public MySerializableClass()
-		{
-			current = DateTime.Now;
-		}
+        public MySerializableClass()
+        {
+            current = DateTime.Now;
+        }
 
-		public virtual DateTime Current
-		{
-			get { return current; }
-		}
+        public virtual DateTime Current
+        {
+            get { return current; }
+        }
 
-		public virtual double CalculateSumDistanceNow()
-		{
-			return Math.PI;
-		}
-	}
+        public virtual double CalculateSumDistanceNow()
+        {
+            return Math.PI;
+        }
+    }
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
-	public class MySerializableClass2 : MySerializableClass, ISerializable
-	{
-		public MySerializableClass2()
-		{
-		}
+    [Serializable]
+    public class MySerializableClass2 : MySerializableClass, ISerializable
+    {
+        public MySerializableClass2()
+        {
+        }
 
-		public MySerializableClass2(SerializationInfo info, StreamingContext context)
-		{
-			current = (DateTime) info.GetValue("dt", typeof (DateTime));
-		}
+        public MySerializableClass2(SerializationInfo info, StreamingContext context)
+        {
+            current = (DateTime) info.GetValue("dt", typeof (DateTime));
+        }
 
-		public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			info.AddValue("dt", current);
-		}
-	}
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("dt", current);
+        }
+    }
 #endif
 }

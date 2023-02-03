@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum FlowDirection
-	{
-		LeftToRight = 0,
-		TopDown = 1,
-		RightToLeft = 2,
-		BottomUp = 3
-	}
+    public enum FlowDirection
+    {
+        LeftToRight = 0,
+        TopDown = 1,
+        RightToLeft = 2,
+        BottomUp = 3
+    }
 }

@@ -1,6 +1,6 @@
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2011 Novell, Inc.  http://www.novell.com
 //
@@ -32,24 +32,24 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Diagnostics
 {
-	// This class is based on .NET WCF trace log MessageLogTraceRecord element.
-	// (maybe not fully compatible; I only saw trace xml in its intrinsic namespace)
-	internal class MessageLogTraceRecord
-	{
-		public MessageLogTraceRecord ()
-		{
-		}
-		
-		public MessageLogTraceRecord (MessageLogSourceKind kind, Type type, MessageBuffer msgbuf)
-		{
-			Time = DateTime.Now;
-			Source = kind;
-			Type = type;
-			Message = msgbuf;
-		}
-		public DateTime Time { get; set; }
-		public MessageLogSourceKind Source { get; set; }
-		public Type Type { get; set; }
-		public MessageBuffer Message { get; set; }
-	}
+    // This class is based on .NET WCF trace log MessageLogTraceRecord element.
+    // (maybe not fully compatible; I only saw trace xml in its intrinsic namespace)
+    internal class MessageLogTraceRecord
+    {
+        public MessageLogTraceRecord ()
+        {
+        }
+        
+        public MessageLogTraceRecord (MessageLogSourceKind kind, Type type, MessageBuffer msgbuf)
+        {
+            Time = DateTime.Now;
+            Source = kind;
+            Type = type;
+            Message = msgbuf;
+        }
+        public DateTime Time { get; set; }
+        public MessageLogSourceKind Source { get; set; }
+        public Type Type { get; set; }
+        public MessageBuffer Message { get; set; }
+    }
 }

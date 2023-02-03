@@ -1,4 +1,4 @@
-﻿//
+//
 // BtlsX509Format.cs
 //
 // Author:
@@ -27,11 +27,11 @@ using System;
 
 namespace Mono.Btls.Interface
 {
-	// Keep in sync with NativeBoringX509Format
-	public enum BtlsX509Format
-	{
-		DER = 1,
-		PEM = 2
-	}
+    // Keep in sync with NativeBoringX509Format
+    public enum BtlsX509Format
+    {
+        DER = 1,
+        PEM = 2
+    }
 }
 

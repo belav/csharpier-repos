@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class ClassWithAttributesOnConstructorParameters
-	{
-		public ClassWithAttributesOnConstructorParameters([Required(1)] int intParam, [Required("test")] string stringParam)
-		{
-		}
-	}
+    public class ClassWithAttributesOnConstructorParameters
+    {
+        public ClassWithAttributesOnConstructorParameters([Required(1)] int intParam, [Required("test")] string stringParam)
+        {
+        }
+    }
 }

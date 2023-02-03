@@ -22,14 +22,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
 
-	internal interface ICapabilitiesProcess
-	{
-		System.Web.Configuration.CapabilitiesResult Process(string userAgent, System.Collections.IDictionary initialCapabilities);
-		System.Web.Configuration.CapabilitiesResult Process(System.Web.HttpRequest request, System.Collections.IDictionary initialCapabilities);
-		System.Web.Configuration.CapabilitiesResult Process(System.Collections.Specialized.NameValueCollection header, System.Collections.IDictionary initialCapabilities);
-	}
+    internal interface ICapabilitiesProcess
+    {
+        System.Web.Configuration.CapabilitiesResult Process(string userAgent, System.Collections.IDictionary initialCapabilities);
+        System.Web.Configuration.CapabilitiesResult Process(System.Web.HttpRequest request, System.Collections.IDictionary initialCapabilities);
+        System.Web.Configuration.CapabilitiesResult Process(System.Collections.Specialized.NameValueCollection header, System.Collections.IDictionary initialCapabilities);
+    }
 }

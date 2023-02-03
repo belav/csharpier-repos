@@ -33,23 +33,23 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class DsmlAuthRequest : DirectoryRequest
-	{
-		public DsmlAuthRequest ()
-		{
-		}
+    public class DsmlAuthRequest : DirectoryRequest
+    {
+        public DsmlAuthRequest ()
+        {
+        }
 
-		public DsmlAuthRequest (string principal)
-		{
-			Principal = principal;
-		}
+        public DsmlAuthRequest (string principal)
+        {
+            Principal = principal;
+        }
 
-		public string Principal { get; set; }
+        public string Principal { get; set; }
 
-		[MonoTODO]
-		protected override XmlElement ToXmlNode (XmlDocument doc)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override XmlElement ToXmlNode (XmlDocument doc)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

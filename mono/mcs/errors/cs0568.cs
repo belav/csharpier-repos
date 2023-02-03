@@ -3,7 +3,7 @@
 
 struct S
 {
-	public S ()
-	{
-	}
+    public S ()
+    {
+    }
 }

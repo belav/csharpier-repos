@@ -6,10 +6,10 @@ using System;
 
 partial class C
 {
-	[Obsolete ("A")]
-	partial void PartialMethod ();
-	[Obsolete ("A")]
-	partial void PartialMethod ()
-	{
-	}
+    [Obsolete ("A")]
+    partial void PartialMethod ();
+    [Obsolete ("A")]
+    partial void PartialMethod ()
+    {
+    }
 }

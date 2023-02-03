@@ -2,7 +2,7 @@
 // Expr.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,25 +33,25 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions {
-	abstract class Expr<TSymbolicValue> : IEquatable<Expr<TSymbolicValue>>
-		where TSymbolicValue : IEquatable<TSymbolicValue> {
-		
-		public abstract IEnumerable<TSymbolicValue> Variables { get; }
+    abstract class Expr<TSymbolicValue> : IEquatable<Expr<TSymbolicValue>>
+        where TSymbolicValue : IEquatable<TSymbolicValue> {
+        
+        public abstract IEnumerable<TSymbolicValue> Variables { get; }
 
-		public abstract bool Equals (Expr<TSymbolicValue> other);
+        public abstract bool Equals (Expr<TSymbolicValue> other);
 
-		public abstract Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
-			where Visitor : IExpressionILVisitor<APC, TSymbolicValue, TSymbolicValue, Data, Result>;
+        public abstract Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
+            where Visitor : IExpressionILVisitor<APC, TSymbolicValue, TSymbolicValue, Data, Result>;
 
-		public abstract Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions);
+        public abstract Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions);
 
-		/// <summary>
-		/// Specifies that current expression is partially contained in candidates
-		/// </summary>
-		public abstract bool IsContained (IImmutableSet<TSymbolicValue> candidates);
+        /// <summary>
+        /// Specifies that current expression is partially contained in candidates
+        /// </summary>
+        public abstract bool IsContained (IImmutableSet<TSymbolicValue> candidates);
 
-		public abstract bool Contains (TSymbolicValue symbol);
+        public abstract bool Contains (TSymbolicValue symbol);
 
-		public abstract override string ToString ();
-	}
+        public abstract override string ToString ();
+    }
 }

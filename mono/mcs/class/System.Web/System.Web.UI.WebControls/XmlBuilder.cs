@@ -2,8 +2,8 @@
 // System.Web.UI.WebControls.XmlBuilder.cs
 //
 // Author:
-// 	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//     Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
@@ -37,43 +37,43 @@ using System.Xml;
 
 namespace System.Web.UI.WebControls
 {
-	public
-	class XmlBuilder : ControlBuilder
-	{
-		public override void AppendLiteralString (string s)
-		{
-		}
+    public
+    class XmlBuilder : ControlBuilder
+    {
+        public override void AppendLiteralString (string s)
+        {
+        }
 
-		public override Type GetChildControlType (string tagName, IDictionary attribs)
-		{
-			return null;
-		}
+        public override Type GetChildControlType (string tagName, IDictionary attribs)
+        {
+            return null;
+        }
 
-		public override bool NeedsTagInnerText ()
-		{
-			return true;
-		}
+        public override bool NeedsTagInnerText ()
+        {
+            return true;
+        }
 
-		public override void SetTagInnerText (string text)
-		{
-			string trimmed = text.Trim ();
-			if (trimmed == "")
-				return;
+        public override void SetTagInnerText (string text)
+        {
+            string trimmed = text.Trim ();
+            if (trimmed == "")
+                return;
 
-			XmlDocument doc = new XmlDocument ();
-			try {
-				doc.LoadXml (text);
-			} catch (XmlException xmle) {
-				Location newloc = new Location (Location);
-				if (xmle.LineNumber >= 0)
-					newloc.BeginLine += xmle.LineNumber - 1;
+            XmlDocument doc = new XmlDocument ();
+            try {
+                doc.LoadXml (text);
+            } catch (XmlException xmle) {
+                Location newloc = new Location (Location);
+                if (xmle.LineNumber >= 0)
+                    newloc.BeginLine += xmle.LineNumber - 1;
 
-				Location = newloc;
-				throw;
-			}
+                Location = newloc;
+                throw;
+            }
 
-			base.AppendLiteralString (trimmed);
-		}
-	}
+            base.AppendLiteralString (trimmed);
+        }
+    }
 }
 

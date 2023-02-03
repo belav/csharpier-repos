@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
+// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Text;
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             var expectedEncoding = CharsetFormatter.GetCharset(expectedValue);
 
             // Use unicode to ensure that "latin1" and "utf8" don't look equivalent.
-            var testCode = "class 🤵 { }";
+            var testCode = "class ?? { }";
 
             var editorConfig = new Dictionary<string, string>()
             {
@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             // This encoding is not supported by .editorconfig, so if it roundtrips then there was no change.
             var codeEncoding = Encoding.UTF32;
 
-            var testCode = "class 🤵 { }";
+            var testCode = "class ?? { }";
 
             var editorConfig = new Dictionary<string, string>()
             {

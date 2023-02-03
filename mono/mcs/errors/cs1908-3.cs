@@ -2,7 +2,7 @@
 // Line: 
 
 class Test<T> where T : class {
-	internal void f ([System.Runtime.InteropServices.DefaultParameterValue (null)] T x)
-	{
-	}
+    internal void f ([System.Runtime.InteropServices.DefaultParameterValue (null)] T x)
+    {
+    }
 }

@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-	void A ()
-	{
-		decimal d = -2.0;
-	}
+    void A ()
+    {
+        decimal d = -2.0;
+    }
 }

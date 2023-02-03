@@ -2,7 +2,7 @@
 // DbTransactionTest.cs - NUnit Test Cases for testing the DbTransaction class
 //
 // Author:
-//	Gert Driesen (drieseng@users.sourceforge.net)
+//    Gert Driesen (drieseng@users.sourceforge.net)
 //
 // Copyright (c) 2007 Gert Driesen
 //
@@ -34,68 +34,68 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.Common
 {
-	[TestFixture]
-	public class DbTransactionTest
-	{
-		[Test] // bug #325397
-		public void DisposeTest ()
-		{
-			MockTransaction trans = new MockTransaction ();
-			trans.Dispose ();
+    [TestFixture]
+    public class DbTransactionTest
+    {
+        [Test] // bug #325397
+        public void DisposeTest ()
+        {
+            MockTransaction trans = new MockTransaction ();
+            trans.Dispose ();
 
-			Assert.IsFalse (trans.IsCommitted, "#1");
-			Assert.IsFalse (trans.IsRolledback, "#2");
-			Assert.IsTrue (trans.IsDisposed, "#3");
-			Assert.IsTrue (trans.Disposing, "#4");
-		}
+            Assert.IsFalse (trans.IsCommitted, "#1");
+            Assert.IsFalse (trans.IsRolledback, "#2");
+            Assert.IsTrue (trans.IsDisposed, "#3");
+            Assert.IsTrue (trans.Disposing, "#4");
+        }
 
-		class MockTransaction : DbTransaction
-		{
-			protected override DbConnection DbConnection {
-				get { return null; }
-			}
+        class MockTransaction : DbTransaction
+        {
+            protected override DbConnection DbConnection {
+                get { return null; }
+            }
 
-			public override IsolationLevel IsolationLevel {
-				get { return IsolationLevel.RepeatableRead; }
-			}
+            public override IsolationLevel IsolationLevel {
+                get { return IsolationLevel.RepeatableRead; }
+            }
 
-			public bool IsCommitted {
-				get { return _isCommitted; }
-			}
+            public bool IsCommitted {
+                get { return _isCommitted; }
+            }
 
-			public bool IsRolledback {
-				get { return _isRolledback; }
-			}
+            public bool IsRolledback {
+                get { return _isRolledback; }
+            }
 
-			public bool IsDisposed {
-				get { return _isDisposed; }
-			}
+            public bool IsDisposed {
+                get { return _isDisposed; }
+            }
 
-			public bool Disposing {
-				get { return _disposing; }
-			}
+            public bool Disposing {
+                get { return _disposing; }
+            }
 
-			public override void Commit ()
-			{
-				_isCommitted = true;
-			}
+            public override void Commit ()
+            {
+                _isCommitted = true;
+            }
 
-			public override void Rollback ()
-			{
-				_isRolledback = true;
-			}
+            public override void Rollback ()
+            {
+                _isRolledback = true;
+            }
 
-			protected override void Dispose (bool disposing)
-			{
-				_isDisposed = true;
-				_disposing = disposing;
-				base.Dispose (disposing);
-			}
+            protected override void Dispose (bool disposing)
+            {
+                _isDisposed = true;
+                _disposing = disposing;
+                base.Dispose (disposing);
+            }
 
-			private bool _isCommitted;
-			private bool _isRolledback;
-			private bool _isDisposed;
-			private bool _disposing;
-		}
-	}
+            private bool _isCommitted;
+            private bool _isRolledback;
+            private bool _isDisposed;
+            private bool _disposing;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // OpenTypeMethods.cs
 //  
 // Author:
@@ -31,201 +31,201 @@ using System.Reflection;
 
 namespace System.Data.Services.Providers
 {
-	public static class OpenTypeMethods
-	{
-		public static object GetValue (object value, string propertyName)
-		{
-			throw new NotImplementedException ();
-		}
+    public static class OpenTypeMethods
+    {
+        public static object GetValue (object value, string propertyName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Add (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Add (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object AndAlso (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object AndAlso (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Divide (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Divide (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Equal (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Equal (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object GreaterThan (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object GreaterThan (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object GreaterThanOrEqual (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object GreaterThanOrEqual (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object LessThan (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object LessThan (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object LessThanOrEqual (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object LessThanOrEqual (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Modulo (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Modulo (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Multiply (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Multiply (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object NotEqual (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object NotEqual (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object OrElse (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object OrElse (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Subtract (object left, object right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Subtract (object left, object right)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Negate (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Negate (object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Not (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Not (object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Convert (object value, ResourceType type)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Convert (object value, ResourceType type)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object TypeIs (object value, ResourceType type)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object TypeIs (object value, ResourceType type)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Concat (object first, object second)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Concat (object first, object second)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object EndsWith (object targetString, object substring)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object EndsWith (object targetString, object substring)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object IndexOf (object targetString, object substring)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object IndexOf (object targetString, object substring)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Length (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Length (object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Replace (object targetString, object substring, object newString)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Replace (object targetString, object substring, object newString)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object StartsWith (object targetString, object substring)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object StartsWith (object targetString, object substring)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Substring (object targetString, object startIndex)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Substring (object targetString, object startIndex)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Substring (object targetString, object startIndex, object length)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Substring (object targetString, object startIndex, object length)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object SubstringOf (object substring, object targetString)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object SubstringOf (object substring, object targetString)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object ToLower (object targetString)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object ToLower (object targetString)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object ToUpper (object targetString)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object ToUpper (object targetString)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Trim (object targetString)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Trim (object targetString)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Year (object dateTime)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Year (object dateTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Month (object dateTime)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Month (object dateTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Day (object dateTime)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Day (object dateTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Hour (object dateTime)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Hour (object dateTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Minute (object dateTime)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Minute (object dateTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Second (object dateTime)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Second (object dateTime)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Ceiling (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Ceiling (object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Floor (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        public static object Floor (object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static object Round (object value)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public static object Round (object value)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

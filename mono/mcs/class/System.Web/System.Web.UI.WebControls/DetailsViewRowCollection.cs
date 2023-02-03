@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DetailsViewRowCollection.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -33,49 +33,49 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-	public class DetailsViewRowCollection: ICollection, IEnumerable
-	{
-		ArrayList rows = new ArrayList ();
-		
-		public DetailsViewRowCollection (ArrayList rows)
-		{
-			this.rows = rows;
-		}
-		
-		public DetailsViewRow this [int index] {
-			get { return (DetailsViewRow) rows [index]; }
-		}
-		
-		public void CopyTo (DetailsViewRow[] array, int index)
-		{
-			rows.CopyTo (array, index);
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			return rows.GetEnumerator ();
-		}
-		
-		public int Count {
-			get { return rows.Count; }
-		}
-		
-		public bool IsSynchronized {
-			get { return false; }
-		}
-		
-		public object SyncRoot {
-			get { return this; }
-		}
-		
-		public bool IsReadOnly {
-			get { return false; }
-		}
-		
-		void System.Collections.ICollection.CopyTo (Array array, int index)
-		{
-			rows.CopyTo (array, index);
-		}
-	}
+    public class DetailsViewRowCollection: ICollection, IEnumerable
+    {
+        ArrayList rows = new ArrayList ();
+        
+        public DetailsViewRowCollection (ArrayList rows)
+        {
+            this.rows = rows;
+        }
+        
+        public DetailsViewRow this [int index] {
+            get { return (DetailsViewRow) rows [index]; }
+        }
+        
+        public void CopyTo (DetailsViewRow[] array, int index)
+        {
+            rows.CopyTo (array, index);
+        }
+        
+        public IEnumerator GetEnumerator ()
+        {
+            return rows.GetEnumerator ();
+        }
+        
+        public int Count {
+            get { return rows.Count; }
+        }
+        
+        public bool IsSynchronized {
+            get { return false; }
+        }
+        
+        public object SyncRoot {
+            get { return this; }
+        }
+        
+        public bool IsReadOnly {
+            get { return false; }
+        }
+        
+        void System.Collections.ICollection.CopyTo (Array array, int index)
+        {
+            rows.CopyTo (array, index);
+        }
+    }
 }
 

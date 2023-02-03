@@ -2,7 +2,7 @@
 // AcceptEncodingModule.cs
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -36,32 +36,32 @@ using Mono.Http.Configuration;
 
 namespace Mono.Http.Modules
 {
-	public class AcceptEncodingModule : IHttpModule
-	{
-		static readonly string configSection = "mono.aspnet/acceptEncoding";
-		AcceptEncodingConfig config;
+    public class AcceptEncodingModule : IHttpModule
+    {
+        static readonly string configSection = "mono.aspnet/acceptEncoding";
+        AcceptEncodingConfig config;
 
-		public void Init (HttpApplication app)
-		{
-			app.BeginRequest += new EventHandler (CheckIfAddFilter);
-		}
+        public void Init (HttpApplication app)
+        {
+            app.BeginRequest += new EventHandler (CheckIfAddFilter);
+        }
 
-		public void Dispose ()
-		{
-		}
+        public void Dispose ()
+        {
+        }
 
-		void CheckIfAddFilter (object sender, EventArgs args)
-		{
-			HttpApplication app = (HttpApplication) sender;
-			HttpRequest request = app.Request;
-			HttpResponse response = app.Response;
+        void CheckIfAddFilter (object sender, EventArgs args)
+        {
+            HttpApplication app = (HttpApplication) sender;
+            HttpRequest request = app.Request;
+            HttpResponse response = app.Response;
 
-			if (config == null)
-				config = (AcceptEncodingConfig) app.Context.GetConfig (configSection);
+            if (config == null)
+                config = (AcceptEncodingConfig) app.Context.GetConfig (configSection);
 
-			if (config != null)
-				config.SetFilter (response, request.Headers ["Accept-Encoding"]);
-		}
-	}
+            if (config != null)
+                config.SetFilter (response, request.Headers ["Accept-Encoding"]);
+        }
+    }
 }
 

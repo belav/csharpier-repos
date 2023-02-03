@@ -39,64 +39,64 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_Equals_O : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataColumn_Equals_O tc = new DataColumn_Equals_O();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumn_Equals_O");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataColumn_Equals_O tc = new DataColumn_Equals_O();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumn_Equals_O");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataColumn dc1,dc2;
-		dc1 = new DataColumn();
-		dc2 = new DataColumn();
-		// #1
-		
-		try
-		{
-			BeginCase("Equals 1");
-			Compare(dc1.Equals(dc2) ,false );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		dc1 = dc2;
+    public void run()
+    {
+        Exception exp = null;
+        DataColumn dc1,dc2;
+        dc1 = new DataColumn();
+        dc2 = new DataColumn();
+        // #1
+        
+        try
+        {
+            BeginCase("Equals 1");
+            Compare(dc1.Equals(dc2) ,false );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        dc1 = dc2;
 
-		// #2
-		try
-		{
-			BeginCase("Equals 2");
-			Compare(dc1 ,dc2 );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-					
-	}
+        // #2
+        try
+        {
+            BeginCase("Equals 2");
+            Compare(dc1 ,dc2 );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+                    
+    }
 }
 }

@@ -17,10 +17,10 @@ namespace ClassLibrary2
                 }
         }
 
-	class Foo
-	{
-		public static void Main () {}
-	}
+    class Foo
+    {
+        public static void Main () {}
+    }
 }
  
 

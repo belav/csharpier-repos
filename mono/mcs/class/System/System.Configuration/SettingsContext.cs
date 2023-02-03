@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsPropertyValueCollection.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,17 +32,17 @@ using System.Collections;
 namespace System.Configuration
 {
 
-	[Serializable] 
-	public class SettingsContext : Hashtable
-	{
-		[NonSerialized]
-		ApplicationSettingsBase current;
+    [Serializable] 
+    public class SettingsContext : Hashtable
+    {
+        [NonSerialized]
+        ApplicationSettingsBase current;
 
-		internal ApplicationSettingsBase CurrentSettings {
-			get { return current; }
-			set { current = value; }
-		}
-	}
+        internal ApplicationSettingsBase CurrentSettings {
+            get { return current; }
+            set { current = value; }
+        }
+    }
 
 }
 

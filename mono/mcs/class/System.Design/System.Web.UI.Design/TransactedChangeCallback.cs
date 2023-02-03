@@ -2,7 +2,7 @@
 // System.Web.UI.Design.TransactedChangeCallback
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,6 +31,6 @@
 
 namespace System.Web.UI.Design
 {
-	public delegate bool TransactedChangeCallback (object context);
+    public delegate bool TransactedChangeCallback (object context);
 }
 

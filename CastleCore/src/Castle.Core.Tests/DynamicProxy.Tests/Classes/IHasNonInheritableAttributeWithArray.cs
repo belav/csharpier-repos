@@ -14,8 +14,8 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	[NonInheritableWithArray(Values = new[] {"1", "2", "3"})]
-	public interface IHasNonInheritableAttributeWithArray
-	{
-	}
+    [NonInheritableWithArray(Values = new[] {"1", "2", "3"})]
+    public interface IHasNonInheritableAttributeWithArray
+    {
+    }
 }

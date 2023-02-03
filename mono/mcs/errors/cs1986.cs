@@ -3,17 +3,17 @@
 
 static class S
 {
-	public static void GetAwaiter (this int i)
-	{
-	}
+    public static void GetAwaiter (this int i)
+    {
+    }
 }
 
 class A
 {
-	bool GetAwaiter;
-	
-	static async void Test ()
-	{
-		await new A ();
-	}
+    bool GetAwaiter;
+    
+    static async void Test ()
+    {
+        await new A ();
+    }
 }

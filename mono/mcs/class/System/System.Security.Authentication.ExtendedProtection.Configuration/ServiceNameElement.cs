@@ -2,7 +2,7 @@
 // ServiceNameElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -42,31 +42,31 @@ using System.Xml;
 
 namespace System.Security.Authentication.ExtendedProtection.Configuration
 {
-	public sealed class ServiceNameElement : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty name;
+    public sealed class ServiceNameElement : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty name;
 
-		static ServiceNameElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
+        static ServiceNameElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
 
-			var t = typeof (ServiceNameElement);
-			name = ConfigUtil.BuildProperty (t, "Name");
+            var t = typeof (ServiceNameElement);
+            name = ConfigUtil.BuildProperty (t, "Name");
 
-			properties.Add (name);
-		}
-		
-		[ConfigurationProperty ("name")]
-		public string Name {
-			get { return (string) this [name]; }
-			set { this [name] = value; }
-		}
+            properties.Add (name);
+        }
+        
+        [ConfigurationProperty ("name")]
+        public string Name {
+            get { return (string) this [name]; }
+            set { this [name] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 
 #endif

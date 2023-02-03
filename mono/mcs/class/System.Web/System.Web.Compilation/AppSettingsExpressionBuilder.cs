@@ -2,7 +2,7 @@
 // System.Web.Compilation.AppSettingsExpressionBuilder
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006-2009 Novell, Inc (http://www.novell.com)
 //
@@ -39,62 +39,62 @@ using System.Reflection;
 
 namespace System.Web.Compilation
 {
-	[ExpressionEditor("System.Web.UI.Design.AppSettingsExpressionEditor, " + Consts.AssemblySystem_Design)]
-	[ExpressionPrefix("AppSettings")]
-	public class AppSettingsExpressionBuilder : ExpressionBuilder
-	{
-		public override object EvaluateExpression (object target, BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
-		{
-			return GetAppSetting (entry.Expression.Trim ());
-		}
+    [ExpressionEditor("System.Web.UI.Design.AppSettingsExpressionEditor, " + Consts.AssemblySystem_Design)]
+    [ExpressionPrefix("AppSettings")]
+    public class AppSettingsExpressionBuilder : ExpressionBuilder
+    {
+        public override object EvaluateExpression (object target, BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
+        {
+            return GetAppSetting (entry.Expression.Trim ());
+        }
 
-		public static object GetAppSetting (string key)
-		{
-			string value = WebConfigurationManager.AppSettings [key];
+        public static object GetAppSetting (string key)
+        {
+            string value = WebConfigurationManager.AppSettings [key];
 
-			if (value == null)
-				throw new InvalidOperationException (String.Format ("The application setting '{0}' was not found.", key));
-			return value;
-		}
+            if (value == null)
+                throw new InvalidOperationException (String.Format ("The application setting '{0}' was not found.", key));
+            return value;
+        }
 
-		public static object GetAppSetting (string key, Type targetType, string propertyName)
-		{
-			object value = GetAppSetting (key);
+        public static object GetAppSetting (string key, Type targetType, string propertyName)
+        {
+            object value = GetAppSetting (key);
 
-			if (targetType == null)
-				return value.ToString ();
+            if (targetType == null)
+                return value.ToString ();
 
-			PropertyInfo pi = targetType.GetProperty(propertyName);
-			if (pi == null)
-				return value.ToString ();
+            PropertyInfo pi = targetType.GetProperty(propertyName);
+            if (pi == null)
+                return value.ToString ();
 
-			try {
-				TypeConverter converter = TypeDescriptor.GetConverter (pi.PropertyType);
-				return converter.ConvertFrom (value);
-			} catch (NotSupportedException) {
-				throw new InvalidOperationException (String.Format (
-					"Could not convert application setting '{0}' " +
-					" to type '{1}' for property '{2}'.", value,
-					pi.PropertyType.Name, pi.Name));
-			}
-		}
+            try {
+                TypeConverter converter = TypeDescriptor.GetConverter (pi.PropertyType);
+                return converter.ConvertFrom (value);
+            } catch (NotSupportedException) {
+                throw new InvalidOperationException (String.Format (
+                    "Could not convert application setting '{0}' " +
+                    " to type '{1}' for property '{2}'.", value,
+                    pi.PropertyType.Name, pi.Name));
+            }
+        }
 
-		public override CodeExpression GetCodeExpression (BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
-		{
-			Type type = entry.DeclaringType;
-			PropertyDescriptor descriptor = TypeDescriptor.GetProperties(type)[entry.PropertyInfo.Name];
-			CodeExpression[] expressionArray = new CodeExpression[3];
-			expressionArray[0] = new CodePrimitiveExpression(entry.Expression.Trim());
-			expressionArray[1] = new CodeTypeOfExpression(entry.Type);
-			expressionArray[2] = new CodePrimitiveExpression(entry.Name);
-			return new CodeCastExpression(descriptor.PropertyType, new CodeMethodInvokeExpression(new 
-								       CodeTypeReferenceExpression(base.GetType()), "GetAppSetting", expressionArray));
-		}
+        public override CodeExpression GetCodeExpression (BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
+        {
+            Type type = entry.DeclaringType;
+            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(type)[entry.PropertyInfo.Name];
+            CodeExpression[] expressionArray = new CodeExpression[3];
+            expressionArray[0] = new CodePrimitiveExpression(entry.Expression.Trim());
+            expressionArray[1] = new CodeTypeOfExpression(entry.Type);
+            expressionArray[2] = new CodePrimitiveExpression(entry.Name);
+            return new CodeCastExpression(descriptor.PropertyType, new CodeMethodInvokeExpression(new 
+                                       CodeTypeReferenceExpression(base.GetType()), "GetAppSetting", expressionArray));
+        }
 
-		public override bool SupportsEvaluate {
-			get { return true; }
-		}
-	}
+        public override bool SupportsEvaluate {
+            get { return true; }
+        }
+    }
 
 }
 

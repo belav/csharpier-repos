@@ -23,21 +23,21 @@
 // Copyright (c) Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
 
 namespace System.Windows.Forms.Design
 {
-	[Flags]
-	public enum ToolStripItemDesignerAvailability
-	{
-		None = 0,
-		ToolStrip = 1,
-		MenuStrip = 2,
-		ContextMenuStrip = 4,
-		StatusStrip = 8,
-		All = 15
-	}
+    [Flags]
+    public enum ToolStripItemDesignerAvailability
+    {
+        None = 0,
+        ToolStrip = 1,
+        MenuStrip = 2,
+        ContextMenuStrip = 4,
+        StatusStrip = 8,
+        All = 15
+    }
 }

@@ -1,4 +1,4 @@
-﻿using AutoMapper.Features;
+using AutoMapper.Features;
 
 namespace AutoMapper.UnitTests;
 

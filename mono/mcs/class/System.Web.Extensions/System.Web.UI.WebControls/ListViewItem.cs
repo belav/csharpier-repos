@@ -32,49 +32,49 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	[ToolboxItemAttribute (false)]
-	public class ListViewItem : Control, INamingContainer
-	, IDataItemContainer
-	{
-		internal ListViewItem ()
-			: this (ListViewItemType.DataItem)
-		{
-		}
-		
-		public ListViewItem (ListViewItemType itemType)
-		{
-			ItemType = itemType;
-		}
-		
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			CommandEventArgs args = e as CommandEventArgs;
-			if (args != null) {
-				RaiseBubbleEvent (this, new ListViewCommandEventArgs (this, source, args));
-				return true;
-			}
-			
-			return base.OnBubbleEvent (source, e);
-		}
-		
-		public ListViewItemType ItemType {
-			get;
-			private set;
-		}
-		
-		public virtual object DataItem {
-			get;
-			set;
-		}
-		
-		public virtual int DataItemIndex {
-			get;
-			protected set;
-		}
-		
-		public virtual int DisplayIndex {
-			get;
-			protected set;
-		}
-	}
+    [ToolboxItemAttribute (false)]
+    public class ListViewItem : Control, INamingContainer
+    , IDataItemContainer
+    {
+        internal ListViewItem ()
+            : this (ListViewItemType.DataItem)
+        {
+        }
+        
+        public ListViewItem (ListViewItemType itemType)
+        {
+            ItemType = itemType;
+        }
+        
+        protected override bool OnBubbleEvent (object source, EventArgs e)
+        {
+            CommandEventArgs args = e as CommandEventArgs;
+            if (args != null) {
+                RaiseBubbleEvent (this, new ListViewCommandEventArgs (this, source, args));
+                return true;
+            }
+            
+            return base.OnBubbleEvent (source, e);
+        }
+        
+        public ListViewItemType ItemType {
+            get;
+            private set;
+        }
+        
+        public virtual object DataItem {
+            get;
+            set;
+        }
+        
+        public virtual int DataItemIndex {
+            get;
+            protected set;
+        }
+        
+        public virtual int DisplayIndex {
+            get;
+            protected set;
+        }
+    }
 }

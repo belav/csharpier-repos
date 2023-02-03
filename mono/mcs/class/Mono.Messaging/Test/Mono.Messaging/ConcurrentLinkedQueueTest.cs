@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//		Michael Barker (mike@middlesoft.co.uk)
+//        Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -34,34 +34,34 @@ using Mono.Messaging;
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Messaging {
-	
-	[TestFixture]
-	public class ConcurrentLinkedQueueTest
-	{
-		
-		[Test]
-		public void ShouldEnqueueAndDequeue ()
-		{
-			ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
-			
-			pool.Enqueue (1);
-			
-			Assert.AreEqual (1, pool.Dequeue ());			
-		}
+    
+    [TestFixture]
+    public class ConcurrentLinkedQueueTest
+    {
+        
+        [Test]
+        public void ShouldEnqueueAndDequeue ()
+        {
+            ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
+            
+            pool.Enqueue (1);
+            
+            Assert.AreEqual (1, pool.Dequeue ());            
+        }
 
-		
-		[Test]
-		public void ShouldEnqueueAndDequeueMultiple ()
-		{
-			ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
-			
-			for (int i = 1; i <= 10; i++) {
-				pool.Enqueue (i);
-			}
-			
-			for (int i = 1; i <= 10; i++) {
-				Assert.AreEqual (i, pool.Dequeue ());
-			}
-		}
-	}
+        
+        [Test]
+        public void ShouldEnqueueAndDequeueMultiple ()
+        {
+            ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
+            
+            for (int i = 1; i <= 10; i++) {
+                pool.Enqueue (i);
+            }
+            
+            for (int i = 1; i <= 10; i++) {
+                Assert.AreEqual (i, pool.Dequeue ());
+            }
+        }
+    }
 }

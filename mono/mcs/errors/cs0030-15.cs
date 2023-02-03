@@ -7,6 +7,6 @@ class C
 {
     static void Main ()
     {
-		var dow = (DayOfWeek?) long.MaxValue;
+        var dow = (DayOfWeek?) long.MaxValue;
     }
 }

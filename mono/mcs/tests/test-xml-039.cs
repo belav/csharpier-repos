@@ -8,12 +8,12 @@ using System;
 public interface ITest {
         /// <summary>whatever</summary>
         event EventHandler Start;
-	/// <summary>hogehoge</summary>
-	int Foo { get; }
+    /// <summary>hogehoge</summary>
+    int Foo { get; }
 }
 
 class Test
 {
-	public static void Main () {}
+    public static void Main () {}
 }
 

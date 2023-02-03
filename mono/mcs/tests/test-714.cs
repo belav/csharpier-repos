@@ -2,18 +2,18 @@ using System;
 
 class Hello : IFoo
 {
-	void IBar.Test ()
-	{
-	}
-	
-	public static void Main ()
-	{
-	}
+    void IBar.Test ()
+    {
+    }
+    
+    public static void Main ()
+    {
+    }
 }
 
 interface IBar
 {
-	void Test ();
+    void Test ();
 }
 
 interface IFoo : IBar

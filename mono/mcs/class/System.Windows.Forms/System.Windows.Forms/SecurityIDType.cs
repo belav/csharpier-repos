@@ -20,22 +20,22 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum SecurityIDType {
-		User		= 1,
-		Group		= 2,
-		Domain		= 3,
-		Alias		= 4,
-		WellKnownGroup	= 5,
-		DeletedAccount	= 6,
-		Invalid		= 7,
-		Unknown		= 8,
-		Computer	= 9
-	}
+    public enum SecurityIDType {
+        User        = 1,
+        Group        = 2,
+        Domain        = 3,
+        Alias        = 4,
+        WellKnownGroup    = 5,
+        DeletedAccount    = 6,
+        Invalid        = 7,
+        Unknown        = 8,
+        Computer    = 9
+    }
 }

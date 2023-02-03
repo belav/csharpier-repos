@@ -14,11 +14,11 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class VirtuallyImplementsInterfaceWithProperty:IHasProperty
-	{
-		public virtual int Prop
-		{
-			get; set;
-		}
-	}
+    public class VirtuallyImplementsInterfaceWithProperty:IHasProperty
+    {
+        public virtual int Prop
+        {
+            get; set;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -29,40 +29,40 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[DefaultProperty ("Name")]
-	public class NamedImage : ChartNamedElement, IDisposable
-	{
-		private string name;
+    [DefaultProperty ("Name")]
+    public class NamedImage : ChartNamedElement, IDisposable
+    {
+        private string name;
 
-		#region Constructors
-		public NamedImage ()
-		{
-		}
+        #region Constructors
+        public NamedImage ()
+        {
+        }
 
-		public NamedImage (string name, Image image)
-		{
-		}
-		#endregion
+        public NamedImage (string name, Image image)
+        {
+        }
+        #endregion
 
-		#region Public Properties
-		[Bindable (false)]
-		public Image Image { get; set; }
+        #region Public Properties
+        [Bindable (false)]
+        public Image Image { get; set; }
 
-		[Bindable (false)]
-		public override string Name {
-			get { return name; }
-			set { name = value; }
-		}
-		#endregion
+        [Bindable (false)]
+        public override string Name {
+            get { return name; }
+            set { name = value; }
+        }
+        #endregion
 
-		#region Protected Methods
-		protected override void Dispose (bool disposing)
-		{
-			base.Dispose (disposing);
+        #region Protected Methods
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
 
-			if (Image != null)
-				Image.Dispose ();
-		}
-		#endregion
-	}
+            if (Image != null)
+                Image.Dispose ();
+        }
+        #endregion
+    }
 }

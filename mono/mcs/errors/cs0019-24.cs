@@ -3,11 +3,11 @@
 
 class Program
 {
-	static int Main ()
-	{
-		object[] o = null;
-		int ii = 2;
-		o [ii++] += new object ();
-		return 0;
-	}
+    static int Main ()
+    {
+        object[] o = null;
+        int ii = 2;
+        o [ii++] += new object ();
+        return 0;
+    }
 }

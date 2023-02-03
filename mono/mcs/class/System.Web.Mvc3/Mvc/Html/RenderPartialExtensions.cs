@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc.Html {
+namespace System.Web.Mvc.Html {
     public static class RenderPartialExtensions {
         // Renders the partial view with the parent's view data and model
         public static void RenderPartial(this HtmlHelper htmlHelper, string partialViewName) {

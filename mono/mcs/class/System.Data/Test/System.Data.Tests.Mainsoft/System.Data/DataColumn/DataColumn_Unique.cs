@@ -39,64 +39,64 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_Unique : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataColumn_Unique tc = new DataColumn_Unique();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumn_Unique");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataColumn_Unique tc = new DataColumn_Unique();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumn_Unique");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		DataColumn dc;
-		dc = new DataColumn();
-		//Checking default value (false)
+    public void run()
+    {
+        Exception exp = null;
+        DataColumn dc;
+        dc = new DataColumn();
+        //Checking default value (false)
 
-		try
-		{
-			BeginCase("Unique default");
-			Compare(dc.Unique ,false );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		//Cheking Set
-		dc.Unique=true;
+        try
+        {
+            BeginCase("Unique default");
+            Compare(dc.Unique ,false );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        //Cheking Set
+        dc.Unique=true;
 
-		//Checking Get
-		try
-		{
-			BeginCase("Unique Get/Set");
-			Compare( dc.Unique, true);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-	}
+        //Checking Get
+        try
+        {
+            BeginCase("Unique Get/Set");
+            Compare( dc.Unique, true);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+    }
 }
 }

@@ -1,11 +1,11 @@
 //
 // NOTE: DO NOT EDIT - This file was automatically generated using
-//	/mcs/class/System.Core/tools/hashwrap.cs
+//    /mcs/class/System.Core/tools/hashwrap.cs
 //
 // System.Security.Cryptography.SHA512Cng
 //
 // Authors:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -33,50 +33,50 @@
 
 namespace System.Security.Cryptography {
 
-	// this is a wrapper around SHA512Managed
-	// see README.CNG and README.CSP for more details
+    // this is a wrapper around SHA512Managed
+    // see README.CNG and README.CSP for more details
 
-	public sealed class SHA512Cng : SHA512 {
+    public sealed class SHA512Cng : SHA512 {
 
-		static byte[] Empty = new byte [0];
+        static byte[] Empty = new byte [0];
 
-		private SHA512 hash;
+        private SHA512 hash;
 
-		[SecurityCritical]
-		public SHA512Cng ()
-		{
-			// note: we don't use SHA512.Create since CryptoConfig could, 
-			// if set to use this class, result in a endless recursion
-			hash = new SHA512Managed ();
-		}
+        [SecurityCritical]
+        public SHA512Cng ()
+        {
+            // note: we don't use SHA512.Create since CryptoConfig could, 
+            // if set to use this class, result in a endless recursion
+            hash = new SHA512Managed ();
+        }
 
-		[SecurityCritical]
-		public override void Initialize ()
-		{
-			hash.Initialize ();
-		}
+        [SecurityCritical]
+        public override void Initialize ()
+        {
+            hash.Initialize ();
+        }
 
-		[SecurityCritical]
-		protected override void HashCore (byte[] array, int ibStart, int cbSize)
-		{
-			hash.TransformBlock (array, ibStart, cbSize, null, 0);
-		}
+        [SecurityCritical]
+        protected override void HashCore (byte[] array, int ibStart, int cbSize)
+        {
+            hash.TransformBlock (array, ibStart, cbSize, null, 0);
+        }
 
-		[SecurityCritical]
-		protected override byte[] HashFinal ()
-		{
-			hash.TransformFinalBlock (Empty, 0, 0);
-			HashValue = hash.Hash;
-			return HashValue;
-		}
+        [SecurityCritical]
+        protected override byte[] HashFinal ()
+        {
+            hash.TransformFinalBlock (Empty, 0, 0);
+            HashValue = hash.Hash;
+            return HashValue;
+        }
 
-		[SecurityCritical]
-		protected override void Dispose (bool disposing)
-		{
-			(hash as IDisposable).Dispose ();
-			base.Dispose (disposing);
-		}
-	}
+        [SecurityCritical]
+        protected override void Dispose (bool disposing)
+        {
+            (hash as IDisposable).Dispose ();
+            base.Dispose (disposing);
+        }
+    }
 }
 
 #endif

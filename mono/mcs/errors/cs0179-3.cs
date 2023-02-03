@@ -2,9 +2,9 @@
 // Line: 5
 
 class Bar {
-	extern int Foo {
-		set { }
-		get { }
-	}
+    extern int Foo {
+        set { }
+        get { }
+    }
 }
 

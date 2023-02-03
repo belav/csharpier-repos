@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.CommandLine.Generator.Parameters;
 using System.Diagnostics.CodeAnalysis;

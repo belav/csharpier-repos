@@ -28,10 +28,10 @@
 namespace System.Web.UI.WebControls
 {
         enum SiteMapViewType
-	{
+    {
                 Automatic = 0,
-		Flat = 1,
-		Path = 2,
-		Tree = 3				
+        Flat = 1,
+        Path = 2,
+        Tree = 3                
         }
 }

@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum VisualStyleState
-	{
-		NoneEnabled = 0,
-		NonClientAreaEnabled = 1,
-		ClientAreaEnabled = 2,
-		ClientAndNonClientAreasEnabled = 3
-	}
+    public enum VisualStyleState
+    {
+        NoneEnabled = 0,
+        NonClientAreaEnabled = 1,
+        ClientAreaEnabled = 2,
+        ClientAndNonClientAreasEnabled = 3
+    }
 }

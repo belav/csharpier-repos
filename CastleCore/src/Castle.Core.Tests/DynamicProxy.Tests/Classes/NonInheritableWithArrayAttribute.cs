@@ -14,14 +14,14 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	[AttributeUsage(AttributeTargets.All, Inherited = false)]
-	public class NonInheritableWithArrayAttribute : Attribute
-	{
-		public string[] Values { get; set; }
-	}
+    [AttributeUsage(AttributeTargets.All, Inherited = false)]
+    public class NonInheritableWithArrayAttribute : Attribute
+    {
+        public string[] Values { get; set; }
+    }
 }

@@ -2,7 +2,7 @@
 // BindingsSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,126 +54,126 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class BindingsSection
-		 : ConfigurationSection
-	{
-		ConfigurationPropertyCollection _properties;
-		List<BindingCollectionElement> _collections;
+    public sealed class BindingsSection
+         : ConfigurationSection
+    {
+        ConfigurationPropertyCollection _properties;
+        List<BindingCollectionElement> _collections;
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("basicHttpBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public BasicHttpBindingCollectionElement BasicHttpBinding {
-			get { return (BasicHttpBindingCollectionElement) this ["basicHttpBinding"]; }
-		}
+        [ConfigurationProperty ("basicHttpBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public BasicHttpBindingCollectionElement BasicHttpBinding {
+            get { return (BasicHttpBindingCollectionElement) this ["basicHttpBinding"]; }
+        }
 
-		[ConfigurationProperty ("basicHttpsBinding",
-		                        Options = ConfigurationPropertyOptions.None)]
-		public BasicHttpsBindingCollectionElement BasicHttpsBinding {
-			get { return (BasicHttpsBindingCollectionElement) this ["basicHttpsBinding"]; }
-		}
+        [ConfigurationProperty ("basicHttpsBinding",
+                                Options = ConfigurationPropertyOptions.None)]
+        public BasicHttpsBindingCollectionElement BasicHttpsBinding {
+            get { return (BasicHttpsBindingCollectionElement) this ["basicHttpsBinding"]; }
+        }
 
-		public List<BindingCollectionElement> BindingCollections {
-			get {
-				if (_collections != null)
-					return _collections;
-				_collections = new List<BindingCollectionElement> ();
-				foreach (PropertyInformation prop in ElementInformation.Properties) {
-					var element = prop.Value as BindingCollectionElement;
-					if (element != null)
-						_collections.Add (element);
-				}
-				return _collections;
-			}
-		}
+        public List<BindingCollectionElement> BindingCollections {
+            get {
+                if (_collections != null)
+                    return _collections;
+                _collections = new List<BindingCollectionElement> ();
+                foreach (PropertyInformation prop in ElementInformation.Properties) {
+                    var element = prop.Value as BindingCollectionElement;
+                    if (element != null)
+                        _collections.Add (element);
+                }
+                return _collections;
+            }
+        }
 
-		[ConfigurationProperty ("customBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public CustomBindingCollectionElement CustomBinding {
-			get { return (CustomBindingCollectionElement) this ["customBinding"]; }
-		}
+        [ConfigurationProperty ("customBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public CustomBindingCollectionElement CustomBinding {
+            get { return (CustomBindingCollectionElement) this ["customBinding"]; }
+        }
 
-		[ConfigurationProperty ("msmqIntegrationBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public MsmqIntegrationBindingCollectionElement MsmqIntegrationBinding {
-			get { return (MsmqIntegrationBindingCollectionElement) this ["msmqIntegrationBinding"]; }
-		}
+        [ConfigurationProperty ("msmqIntegrationBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public MsmqIntegrationBindingCollectionElement MsmqIntegrationBinding {
+            get { return (MsmqIntegrationBindingCollectionElement) this ["msmqIntegrationBinding"]; }
+        }
 
-		[ConfigurationProperty ("netMsmqBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public NetMsmqBindingCollectionElement NetMsmqBinding {
-			get { return (NetMsmqBindingCollectionElement) this ["netMsmqBinding"]; }
-		}
+        [ConfigurationProperty ("netMsmqBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public NetMsmqBindingCollectionElement NetMsmqBinding {
+            get { return (NetMsmqBindingCollectionElement) this ["netMsmqBinding"]; }
+        }
 
-		[ConfigurationProperty ("netNamedPipeBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public NetNamedPipeBindingCollectionElement NetNamedPipeBinding {
-			get { return (NetNamedPipeBindingCollectionElement) this ["netNamedPipeBinding"]; }
-		}
+        [ConfigurationProperty ("netNamedPipeBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public NetNamedPipeBindingCollectionElement NetNamedPipeBinding {
+            get { return (NetNamedPipeBindingCollectionElement) this ["netNamedPipeBinding"]; }
+        }
 
-		[ConfigurationProperty ("netPeerTcpBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public NetPeerTcpBindingCollectionElement NetPeerTcpBinding {
-			get { return (NetPeerTcpBindingCollectionElement) this ["netPeerTcpBinding"]; }
-		}
+        [ConfigurationProperty ("netPeerTcpBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public NetPeerTcpBindingCollectionElement NetPeerTcpBinding {
+            get { return (NetPeerTcpBindingCollectionElement) this ["netPeerTcpBinding"]; }
+        }
 
-		[ConfigurationProperty ("netTcpBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public NetTcpBindingCollectionElement NetTcpBinding {
-			get { return (NetTcpBindingCollectionElement) this ["netTcpBinding"]; }
-		}
+        [ConfigurationProperty ("netTcpBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public NetTcpBindingCollectionElement NetTcpBinding {
+            get { return (NetTcpBindingCollectionElement) this ["netTcpBinding"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).BindingExtensions;
-					for (int i = 0; i < extensions.Count; i++) {
-						ExtensionElement extension = extensions [i];
-						_properties.Add (new ConfigurationProperty (extension.Name, Type.GetType (extension.Type), null, null, null, ConfigurationPropertyOptions.None));
-					}
-				}
-				return _properties;
-			}
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get {
+                if (_properties == null) {
+                    _properties = new ConfigurationPropertyCollection ();
+                    ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).BindingExtensions;
+                    for (int i = 0; i < extensions.Count; i++) {
+                        ExtensionElement extension = extensions [i];
+                        _properties.Add (new ConfigurationProperty (extension.Name, Type.GetType (extension.Type), null, null, null, ConfigurationPropertyOptions.None));
+                    }
+                }
+                return _properties;
+            }
+        }
 
-		[ConfigurationProperty ("wsDualHttpBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WSDualHttpBindingCollectionElement WSDualHttpBinding {
-			get { return (WSDualHttpBindingCollectionElement) this ["wsDualHttpBinding"]; }
-		}
+        [ConfigurationProperty ("wsDualHttpBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public WSDualHttpBindingCollectionElement WSDualHttpBinding {
+            get { return (WSDualHttpBindingCollectionElement) this ["wsDualHttpBinding"]; }
+        }
 
-		[ConfigurationProperty ("wsFederationHttpBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WSFederationHttpBindingCollectionElement WSFederationHttpBinding {
-			get { return (WSFederationHttpBindingCollectionElement) this ["wsFederationHttpBinding"]; }
-		}
+        [ConfigurationProperty ("wsFederationHttpBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public WSFederationHttpBindingCollectionElement WSFederationHttpBinding {
+            get { return (WSFederationHttpBindingCollectionElement) this ["wsFederationHttpBinding"]; }
+        }
 
-		[ConfigurationProperty ("wsHttpBinding",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WSHttpBindingCollectionElement WSHttpBinding {
-			get { return (WSHttpBindingCollectionElement) this ["wsHttpBinding"]; }
-		}
+        [ConfigurationProperty ("wsHttpBinding",
+             Options = ConfigurationPropertyOptions.None)]
+        public WSHttpBindingCollectionElement WSHttpBinding {
+            get { return (WSHttpBindingCollectionElement) this ["wsHttpBinding"]; }
+        }
 
-		public static BindingsSection GetSection (System.Configuration.Configuration config) {
-			ServiceModelSectionGroup sm = ServiceModelSectionGroup.GetSectionGroup (config);
-			if (sm == null)
-				throw new SystemException ("Could not retrieve configuration section group 'system.serviceModel'");
-			if (sm.Bindings == null)
-				throw new SystemException ("Could not retrieve configuration sub section group 'bindings' in 'system.serviceModel'");
-			return sm.Bindings;
-		}
+        public static BindingsSection GetSection (System.Configuration.Configuration config) {
+            ServiceModelSectionGroup sm = ServiceModelSectionGroup.GetSectionGroup (config);
+            if (sm == null)
+                throw new SystemException ("Could not retrieve configuration section group 'system.serviceModel'");
+            if (sm.Bindings == null)
+                throw new SystemException ("Could not retrieve configuration sub section group 'bindings' in 'system.serviceModel'");
+            return sm.Bindings;
+        }
 
-		public new BindingCollectionElement this [string binding] {
-			get {
-				object element = base [binding];
-				if (element is BindingCollectionElement)
-					return (BindingCollectionElement) element;
-				throw new NotImplementedException (String.Format ("Could not find {0}", binding));
-			}
-		}
+        public new BindingCollectionElement this [string binding] {
+            get {
+                object element = base [binding];
+                if (element is BindingCollectionElement)
+                    return (BindingCollectionElement) element;
+                throw new NotImplementedException (String.Format ("Could not find {0}", binding));
+            }
+        }
 
-	}
+    }
 
 }

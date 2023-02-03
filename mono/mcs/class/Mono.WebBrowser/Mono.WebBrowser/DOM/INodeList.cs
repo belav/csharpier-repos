@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -28,11 +28,11 @@ using System.Collections;
 
 namespace Mono.WebBrowser.DOM
 {
-	
-	public interface INodeList : IList
-	{
-		INode this [int index]{ get; set; }
-		
-		int GetHashCode ();
-	}
+    
+    public interface INodeList : IList
+    {
+        INode this [int index]{ get; set; }
+        
+        int GetHashCode ();
+    }
 }

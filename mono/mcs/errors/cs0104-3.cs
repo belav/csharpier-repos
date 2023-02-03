@@ -3,31 +3,31 @@
 
 namespace A
 {
-	class X { }
+    class X { }
 }
 
 namespace B
 {
-	class X { }
+    class X { }
 }
 
 namespace C
 {
-	using System;
-	using A;
-	using B;
+    using System;
+    using A;
+    using B;
 
-	class Test 
-	{
-		static void Main ()
-		{
-			Foo (delegate {
-				X x;
-			});
-		}
-		
-		static void Foo (Action a)
-		{
-		}
-	}
+    class Test 
+    {
+        static void Main ()
+        {
+            Foo (delegate {
+                X x;
+            });
+        }
+        
+        static void Foo (Action a)
+        {
+        }
+    }
 }

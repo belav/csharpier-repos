@@ -29,80 +29,80 @@
 //
 
 namespace System.Web.Services.Description {
-	public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection {
+    public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection {
 
-		#region Constructors
+        #region Constructors
 
-		internal OperationFaultCollection (Operation operation) 
-			: base (operation)
-		{
-		}
+        internal OperationFaultCollection (Operation operation) 
+            : base (operation)
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public OperationFault this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
-				return (OperationFault) List[index]; 
-			}
+        public OperationFault this [int index] {
+            get { 
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException ();
+                return (OperationFault) List[index]; 
+            }
                         set { List [index] = value; }
-		}
+        }
 
-		public OperationFault this [string name] {
-			get { return this [IndexOf ((OperationFault) Table[name])]; }
-		}
+        public OperationFault this [string name] {
+            get { return this [IndexOf ((OperationFault) Table[name])]; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public int Add (OperationFault operationFaultMessage) 
-		{
-			Insert (Count, operationFaultMessage);
-			return (Count - 1);
-		}
+        public int Add (OperationFault operationFaultMessage) 
+        {
+            Insert (Count, operationFaultMessage);
+            return (Count - 1);
+        }
 
-		public bool Contains (OperationFault operationFaultMessage)
-		{
-			return List.Contains (operationFaultMessage);
-		}
+        public bool Contains (OperationFault operationFaultMessage)
+        {
+            return List.Contains (operationFaultMessage);
+        }
 
-		public void CopyTo (OperationFault[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        public void CopyTo (OperationFault[] array, int index) 
+        {
+            List.CopyTo (array, index);
+        }
 
-		protected override string GetKey (object value)
-		{
-			if (!(value is OperationFault))
-				throw new InvalidCastException ();
+        protected override string GetKey (object value)
+        {
+            if (!(value is OperationFault))
+                throw new InvalidCastException ();
 
-			return ((OperationFault) value).Name;
-		}
+            return ((OperationFault) value).Name;
+        }
 
-		public int IndexOf (OperationFault operationFaultMessage)
-		{
-			return List.IndexOf (operationFaultMessage);
-		}
+        public int IndexOf (OperationFault operationFaultMessage)
+        {
+            return List.IndexOf (operationFaultMessage);
+        }
 
-		public void Insert (int index, OperationFault operationFaultMessage)
-		{
-			List.Insert (index, operationFaultMessage);
-		}
-	
-		public void Remove (OperationFault operationFaultMessage)
-		{
-			List.Remove (operationFaultMessage);
-		}
+        public void Insert (int index, OperationFault operationFaultMessage)
+        {
+            List.Insert (index, operationFaultMessage);
+        }
+    
+        public void Remove (OperationFault operationFaultMessage)
+        {
+            List.Remove (operationFaultMessage);
+        }
 
-		protected override void SetParent (object value, object parent)
-		{
-			((OperationFault) value).SetParent ((Operation) parent);
-		}
-			
-		#endregion // Methods
-	}
+        protected override void SetParent (object value, object parent)
+        {
+            ((OperationFault) value).SetParent ((Operation) parent);
+        }
+            
+        #endregion // Methods
+    }
 }

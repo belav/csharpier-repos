@@ -5,5 +5,5 @@ using System;
 
 class X
 {
-	DateTime<int> now;
+    DateTime<int> now;
 }

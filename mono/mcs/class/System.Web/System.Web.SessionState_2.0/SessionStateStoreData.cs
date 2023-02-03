@@ -2,7 +2,7 @@
 // System.Web.SessionState.SessionStateStoreData.cs
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -32,33 +32,33 @@
 using System.Web;
 
 namespace System.Web.SessionState {
-	public class SessionStateStoreData 
-	{
-		ISessionStateItemCollection sessionItems;
-		HttpStaticObjectsCollection staticObjects;
-		int timeout;
+    public class SessionStateStoreData 
+    {
+        ISessionStateItemCollection sessionItems;
+        HttpStaticObjectsCollection staticObjects;
+        int timeout;
 
-		public SessionStateStoreData (ISessionStateItemCollection sessionItems,
-						HttpStaticObjectsCollection staticObjects,
-						int timeout)
-		{
-			this.sessionItems = sessionItems;
-			this.staticObjects = staticObjects;
-			this.timeout = timeout;
-		}
+        public SessionStateStoreData (ISessionStateItemCollection sessionItems,
+                        HttpStaticObjectsCollection staticObjects,
+                        int timeout)
+        {
+            this.sessionItems = sessionItems;
+            this.staticObjects = staticObjects;
+            this.timeout = timeout;
+        }
 
-		public virtual ISessionStateItemCollection Items { 
-			get { return sessionItems ; }
-		}
+        public virtual ISessionStateItemCollection Items { 
+            get { return sessionItems ; }
+        }
 
-		public virtual HttpStaticObjectsCollection StaticObjects { 
-			get { return staticObjects; }
-		}
+        public virtual HttpStaticObjectsCollection StaticObjects { 
+            get { return staticObjects; }
+        }
 
-		public virtual int Timeout { 
-			get { return timeout; }
-			set { timeout = value; }
-		}
-	}		
+        public virtual int Timeout { 
+            get { return timeout; }
+            set { timeout = value; }
+        }
+    }        
 }
 

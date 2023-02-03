@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,45 +32,45 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("1a637020-1482-11d3-9333-00104ba0fd40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIStreamListener : nsIRequestObserver {
+    [Guid ("1a637020-1482-11d3-9333-00104ba0fd40")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIStreamListener : nsIRequestObserver {
 #region nsIRequestObserver
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onStartRequest (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onStartRequest (
+                [MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
+                   IntPtr aContext);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onStopRequest (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext,
-				   int aStatusCode);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onStopRequest (
+                [MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
+                   IntPtr aContext,
+                   int aStatusCode);
 
 #endregion
 
 #region nsIStreamListener
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onDataAvailable (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext,
-				[MarshalAs (UnmanagedType.Interface)]   nsIInputStream aInputStream,
-				   uint aOffset,
-				   uint aCount);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onDataAvailable (
+                [MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
+                   IntPtr aContext,
+                [MarshalAs (UnmanagedType.Interface)]   nsIInputStream aInputStream,
+                   uint aOffset,
+                   uint aCount);
 
 #endregion
-	}
+    }
 
 
-	internal class nsStreamListener {
-		public static nsIStreamListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsIStreamListener obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIStreamListener).GUID, obj);
-			return o as nsIStreamListener;
-		}
-	}
+    internal class nsStreamListener {
+        public static nsIStreamListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsIStreamListener obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIStreamListener).GUID, obj);
+            return o as nsIStreamListener;
+        }
+    }
 }

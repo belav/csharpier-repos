@@ -25,10 +25,10 @@ using System.Collections.Generic;
 
 namespace System.Xaml.Schema
 {
-	public enum ShouldSerializeResult
-	{
-		Default,
-		True,
-		False
-	}
+    public enum ShouldSerializeResult
+    {
+        Default,
+        True,
+        False
+    }
 }

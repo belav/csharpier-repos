@@ -1,6 +1,6 @@
-﻿namespace Mono.Linker.Tests.Cases.Reflection.Dependencies
+namespace Mono.Linker.Tests.Cases.Reflection.Dependencies
 {
-	public class AssemblyDependencyWithReference : AssemblyDependency
-	{
-	}
+    public class AssemblyDependencyWithReference : AssemblyDependency
+    {
+    }
 }

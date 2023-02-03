@@ -2,7 +2,7 @@
 // System.Web.Compilation.IgnoreFileBuildProvider
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,14 +31,14 @@
 
 
 namespace System.Web.Compilation {
-	[BuildProviderAppliesTo (BuildProviderAppliesTo.All)]
-	sealed class IgnoreFileBuildProvider : BuildProvider
-	{
-		public override void GenerateCode (AssemblyBuilder assemblyBuilder)
-		{
-			/* do nothing */
-		}
-	}
+    [BuildProviderAppliesTo (BuildProviderAppliesTo.All)]
+    sealed class IgnoreFileBuildProvider : BuildProvider
+    {
+        public override void GenerateCode (AssemblyBuilder assemblyBuilder)
+        {
+            /* do nothing */
+        }
+    }
 
 }
 

@@ -23,10 +23,10 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public delegate void WebBrowserNavigatingEventHandler (object sender, WebBrowserNavigatingEventArgs e);
+    public delegate void WebBrowserNavigatingEventHandler (object sender, WebBrowserNavigatingEventArgs e);
 }

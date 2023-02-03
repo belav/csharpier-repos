@@ -4,10 +4,10 @@
 
 class Test
 {
-	public bool Foo (bool x)
-	{
-		bool b;
-		return (b = true) ? true : b;
-	}
+    public bool Foo (bool x)
+    {
+        bool b;
+        return (b = true) ? true : b;
+    }
 }
 

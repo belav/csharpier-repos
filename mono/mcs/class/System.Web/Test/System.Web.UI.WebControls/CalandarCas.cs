@@ -1,9 +1,9 @@
 //
 // CalandarCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.Calandar
+//    - CAS unit tests for System.Web.UI.WebControls.Calandar
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,42 +40,42 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CalendarCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CalendarCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CalendarTest unit = new CalendarTest ();
-			unit.Calendar_DefaultValues ();
-			unit.NextMonthTextProperty ();
-			unit.NextPrevFormatProperty ();
-			unit.DayHeaderStyleProperty ();
-			unit.NextPrevStyleProperty ();
-			unit.SelectorStyleProperty ();
-			unit.OtherMonthDayStyleProperty ();
-			unit.SelectedDayStyleProperty ();
-			unit.TodayDayStyleProperty ();
-			unit.WeekendDayStyleProperty ();
-			unit.SelectDateProperty ();
-			unit.PrevMonthTextProperty ();
-			unit.ShowNextPrevMonthProperty ();
-			unit.ShowTitleProperty ();
-			unit.SelectionChanged ();
-			unit.VisibleMonthChanged ();
-			unit.DayRender ();
-			unit.Calendar_ViewState ();
-			unit.TestDayRenderCellAdd ();
-			unit.TestRenderMonthStartsOnSunday ();
-			unit.TestSelectedColorDefault ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            CalendarTest unit = new CalendarTest ();
+            unit.Calendar_DefaultValues ();
+            unit.NextMonthTextProperty ();
+            unit.NextPrevFormatProperty ();
+            unit.DayHeaderStyleProperty ();
+            unit.NextPrevStyleProperty ();
+            unit.SelectorStyleProperty ();
+            unit.OtherMonthDayStyleProperty ();
+            unit.SelectedDayStyleProperty ();
+            unit.TodayDayStyleProperty ();
+            unit.WeekendDayStyleProperty ();
+            unit.SelectDateProperty ();
+            unit.PrevMonthTextProperty ();
+            unit.ShowNextPrevMonthProperty ();
+            unit.ShowTitleProperty ();
+            unit.SelectionChanged ();
+            unit.VisibleMonthChanged ();
+            unit.DayRender ();
+            unit.Calendar_ViewState ();
+            unit.TestDayRenderCellAdd ();
+            unit.TestRenderMonthStartsOnSunday ();
+            unit.TestSelectedColorDefault ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (Calendar); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (Calendar); }
+        }
+    }
 }

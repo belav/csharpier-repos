@@ -14,26 +14,26 @@
 
 namespace Castle.Core.Logging
 {
-	using System;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Runtime.Serialization;
 
-	[Serializable]
-	public class LoggerException : Exception
-	{
-		public LoggerException()
-		{
-		}
+    [Serializable]
+    public class LoggerException : Exception
+    {
+        public LoggerException()
+        {
+        }
 
-		public LoggerException(string message) : base(message)
-		{
-		}
+        public LoggerException(string message) : base(message)
+        {
+        }
 
-		public LoggerException(string message, Exception innerException) : base(message, innerException)
-		{
-		}
+        public LoggerException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
 
-		protected LoggerException(SerializationInfo info, StreamingContext context) : base(info, context)
-		{
-		}
-	}
+        protected LoggerException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
 }

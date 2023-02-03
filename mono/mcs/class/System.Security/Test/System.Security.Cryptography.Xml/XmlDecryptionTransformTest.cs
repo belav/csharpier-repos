@@ -2,7 +2,7 @@
 // Unit tests for XmlDecryptionTransform
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -35,37 +35,37 @@ using System.Xml;
 
 namespace MonoTests.System.Security.Cryptography.Xml {
 
-	public class UnprotectedXmlDecryptionTransform : XmlDecryptionTransform {
+    public class UnprotectedXmlDecryptionTransform : XmlDecryptionTransform {
 
-		public bool UnprotectedIsTargetElement (XmlElement inputElement, string idValue)
-		{
-			return base.IsTargetElement (inputElement, idValue);
-		}
-	}
+        public bool UnprotectedIsTargetElement (XmlElement inputElement, string idValue)
+        {
+            return base.IsTargetElement (inputElement, idValue);
+        }
+    }
 
-	[TestFixture]
-	public class XmlDecryptionTransformTest {
+    [TestFixture]
+    public class XmlDecryptionTransformTest {
 
-		private UnprotectedXmlDecryptionTransform transform;
+        private UnprotectedXmlDecryptionTransform transform;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			transform = new UnprotectedXmlDecryptionTransform ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            transform = new UnprotectedXmlDecryptionTransform ();
+        }
 
-		[Test]
-		public void IsTargetElement_XmlElementNull ()
-		{
-			Assert.IsFalse (transform.UnprotectedIsTargetElement (null, "value"));
-		}
+        [Test]
+        public void IsTargetElement_XmlElementNull ()
+        {
+            Assert.IsFalse (transform.UnprotectedIsTargetElement (null, "value"));
+        }
 
-		[Test]
-		public void IsTargetElement_StringNull ()
-		{
-			XmlDocument doc = new XmlDocument ();
-			Assert.IsFalse (transform.UnprotectedIsTargetElement (doc.DocumentElement, null));
-		}
-	}
+        [Test]
+        public void IsTargetElement_StringNull ()
+        {
+            XmlDocument doc = new XmlDocument ();
+            Assert.IsFalse (transform.UnprotectedIsTargetElement (doc.DocumentElement, null));
+        }
+    }
 }
 #endif

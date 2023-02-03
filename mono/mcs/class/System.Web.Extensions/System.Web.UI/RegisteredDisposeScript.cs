@@ -31,28 +31,28 @@ using System;
 
 namespace System.Web.UI
 {
-	public sealed class RegisteredDisposeScript
-	{
-		readonly Control _control;
-		readonly UpdatePanel _updatePanel;
-		readonly string _script;
+    public sealed class RegisteredDisposeScript
+    {
+        readonly Control _control;
+        readonly UpdatePanel _updatePanel;
+        readonly string _script;
 
-		internal RegisteredDisposeScript (Control control, string script, UpdatePanel updatePanel) {
-			_control = control;
-			_script = script;
-			_updatePanel = updatePanel;
-		}
+        internal RegisteredDisposeScript (Control control, string script, UpdatePanel updatePanel) {
+            _control = control;
+            _script = script;
+            _updatePanel = updatePanel;
+        }
 
-		public Control Control {
-			get { return _control; }
-		}
+        public Control Control {
+            get { return _control; }
+        }
 
-		public string Script {
-			get { return _script; }
-		}
+        public string Script {
+            get { return _script; }
+        }
 
-		internal UpdatePanel UpdatePanel {
-			get { return _updatePanel; }
-		}
-	}
+        internal UpdatePanel UpdatePanel {
+            get { return _updatePanel; }
+        }
+    }
 }

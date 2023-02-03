@@ -2,7 +2,7 @@
 // HtmlImageCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlImage
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,23 +36,23 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlImageCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlImageCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlImageTest unit = new HtmlImageTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.Negative ();
-			unit.RenderAttributes ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlImageTest unit = new HtmlImageTest ();
+            unit.DefaultProperties ();
+            unit.NullProperties ();
+            unit.Negative ();
+            unit.RenderAttributes ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlImage); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlImage); }
+        }
+    }
 }

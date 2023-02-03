@@ -2,7 +2,7 @@
 // IncomingWebResponseContext.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -32,53 +32,53 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Web
 {
-	public class IncomingWebResponseContext
-	{
-		OperationContext ctx;
+    public class IncomingWebResponseContext
+    {
+        OperationContext ctx;
 
-		HttpResponseMessageProperty hp {
-			get {
-				if (ctx.IncomingMessageProperties != null)
-					return (HttpResponseMessageProperty) ctx.IncomingMessageProperties [HttpResponseMessageProperty.Name];
-				else
-					return new HttpResponseMessageProperty ();
-			}
-		}
+        HttpResponseMessageProperty hp {
+            get {
+                if (ctx.IncomingMessageProperties != null)
+                    return (HttpResponseMessageProperty) ctx.IncomingMessageProperties [HttpResponseMessageProperty.Name];
+                else
+                    return new HttpResponseMessageProperty ();
+            }
+        }
 
-		internal IncomingWebResponseContext (OperationContext context)
-		{
-			ctx = context;
-		}
+        internal IncomingWebResponseContext (OperationContext context)
+        {
+            ctx = context;
+        }
 
-		public long ContentLength {
-			get {
-				string s = hp.Headers ["Content-Length"];
-				return s != null ? long.Parse (s, CultureInfo.InvariantCulture) : 0;
-			}
-		}
+        public long ContentLength {
+            get {
+                string s = hp.Headers ["Content-Length"];
+                return s != null ? long.Parse (s, CultureInfo.InvariantCulture) : 0;
+            }
+        }
 
-		public string ContentType {
-			get { return hp.Headers ["Content-Type"]; }
-		}
+        public string ContentType {
+            get { return hp.Headers ["Content-Type"]; }
+        }
 
-		public string ETag {
-			get { return hp.Headers ["ETag"]; }
-		}
+        public string ETag {
+            get { return hp.Headers ["ETag"]; }
+        }
 
-		public WebHeaderCollection Headers {
-			get { return hp.Headers; }
-		}
+        public WebHeaderCollection Headers {
+            get { return hp.Headers; }
+        }
 
-		public string Location {
-			get { return hp.Headers ["Location"]; }
-		}
+        public string Location {
+            get { return hp.Headers ["Location"]; }
+        }
 
-		public HttpStatusCode StatusCode {
-			get { return hp.StatusCode; }
-		}
+        public HttpStatusCode StatusCode {
+            get { return hp.StatusCode; }
+        }
 
-		public string StatusDescription {
-			get { return hp.StatusDescription; }
-		}
-	}
+        public string StatusDescription {
+            get { return hp.StatusDescription; }
+        }
+    }
 }

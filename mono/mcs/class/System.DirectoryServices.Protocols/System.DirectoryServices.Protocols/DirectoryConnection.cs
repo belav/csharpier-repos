@@ -36,31 +36,31 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices.Protocols
 {
-	public abstract class DirectoryConnection
-	{
-		protected DirectoryConnection ()
-		{
-		}
+    public abstract class DirectoryConnection
+    {
+        protected DirectoryConnection ()
+        {
+        }
 
-		[MonoTODO]
-		public X509CertificateCollection ClientCertificates {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public X509CertificateCollection ClientCertificates {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual NetworkCredential Credential {
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual NetworkCredential Credential {
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual DirectoryIdentifier Directory {	
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual DirectoryIdentifier Directory {    
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public virtual TimeSpan Timeout { get; set; }
+        [MonoTODO]
+        public virtual TimeSpan Timeout { get; set; }
 
-		[DirectoryServicesPermission (SecurityAction.LinkDemand, Unrestricted = true)]
-		public abstract DirectoryResponse SendRequest (DirectoryRequest request);
-	}
+        [DirectoryServicesPermission (SecurityAction.LinkDemand, Unrestricted = true)]
+        public abstract DirectoryResponse SendRequest (DirectoryRequest request);
+    }
 }

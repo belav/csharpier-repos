@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,32 +14,32 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System.ComponentModel;
-	using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Collections.Generic;
 
-	public interface ICollectionAdapter<T>
-	{
-		// Configuration
-		void Initialize(ICollectionAdapterObserver<T> advisor);
-		IEqualityComparer<T> Comparer { get; }
+    public interface ICollectionAdapter<T>
+    {
+        // Configuration
+        void Initialize(ICollectionAdapterObserver<T> advisor);
+        IEqualityComparer<T> Comparer { get; }
 
-		// Collection Access
-		int  Count  { get; }
-		T    this   [int index] { get; set; }
-		T    AddNew ();
-		bool Add    (T value);
-		bool Insert (int index, T value);
-		void Remove (int index);
-		void Clear  ();
-		void ClearReferences(); // A bit of a hack. Make this nicer in a future version.
+        // Collection Access
+        int  Count  { get; }
+        T    this   [int index] { get; set; }
+        T    AddNew ();
+        bool Add    (T value);
+        bool Insert (int index, T value);
+        void Remove (int index);
+        void Clear  ();
+        void ClearReferences(); // A bit of a hack. Make this nicer in a future version.
 
-		// Snapshot Support
-		bool HasSnapshot     { get; }
-		int  SnapshotCount   { get; }
-		T    GetCurrentItem  (int index);
-		T    GetSnapshotItem (int index);
-		void SaveSnapshot    ();
-		void LoadSnapshot    ();
-		void DropSnapshot    ();
-	}
+        // Snapshot Support
+        bool HasSnapshot     { get; }
+        int  SnapshotCount   { get; }
+        T    GetCurrentItem  (int index);
+        T    GetSnapshotItem (int index);
+        void SaveSnapshot    ();
+        void LoadSnapshot    ();
+        void DropSnapshot    ();
+    }
 }

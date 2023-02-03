@@ -1,4 +1,4 @@
-﻿//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // <copyright file="SqlException.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -11,8 +11,8 @@ namespace System.Data.SqlClient
 
     /// <summary>
     /// Abstract base class for all TCE encryption algorithms. It exposes two functions
-    ///		1. Encrypt - This function is used by SqlClient under the covers to transparently encrypt TCE enabled column data.
-    ///		2. Decrypt - This function is used by SqlClient under the covers to transparently decrypt TCE enabled column data.
+    ///        1. Encrypt - This function is used by SqlClient under the covers to transparently encrypt TCE enabled column data.
+    ///        2. Decrypt - This function is used by SqlClient under the covers to transparently decrypt TCE enabled column data.
     /// </summary>
     internal abstract class SqlClientEncryptionAlgorithm
     {

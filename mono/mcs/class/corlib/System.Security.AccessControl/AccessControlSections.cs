@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AccessControlSections enum
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,13 +29,13 @@
 
 namespace System.Security.AccessControl {
 
-	[Flags]
-	public enum AccessControlSections {
-		None,
-		Audit = 1,
-		Access = 2,
-		Owner = 4,
-		Group = 8,
-		All = Audit | Access | Owner | Group
-	}
+    [Flags]
+    public enum AccessControlSections {
+        None,
+        Audit = 1,
+        Access = 2,
+        Owner = 4,
+        Group = 8,
+        All = Audit | Access | Owner | Group
+    }
 }

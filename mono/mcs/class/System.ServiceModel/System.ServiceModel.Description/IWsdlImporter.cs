@@ -2,7 +2,7 @@
 // IWsdlImportExtension.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,15 +35,15 @@ using System.Xml.Schema;
 
 namespace System.ServiceModel.Description
 {
-	public interface IWsdlImportExtension
-	{
-		void BeforeImport (ServiceDescriptionCollection wsdlDocuments,
-			XmlSchemaSet xmlSchemas, ICollection<XmlElement> policy);
+    public interface IWsdlImportExtension
+    {
+        void BeforeImport (ServiceDescriptionCollection wsdlDocuments,
+            XmlSchemaSet xmlSchemas, ICollection<XmlElement> policy);
 
-		void ImportContract (WsdlImporter importer,
-			WsdlContractConversionContext context);
+        void ImportContract (WsdlImporter importer,
+            WsdlContractConversionContext context);
 
-		void ImportEndpoint (WsdlImporter importer,
-			WsdlEndpointConversionContext context);
-	}
+        void ImportEndpoint (WsdlImporter importer,
+            WsdlEndpointConversionContext context);
+    }
 }

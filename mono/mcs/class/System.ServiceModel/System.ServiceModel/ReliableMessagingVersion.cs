@@ -1,8 +1,8 @@
-﻿//
+//
 // ReliableMessagingVersion.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,28 +32,28 @@ using System.Text;
 
 namespace System.ServiceModel
 {
-	[MonoTODO]
-	public abstract class ReliableMessagingVersion
-	{
-		static ReliableMessagingVersion _default = new FakeReliableMessagingVersion ();
-		static ReliableMessagingVersion _wsReliableMessaging11 = new FakeReliableMessagingVersion ();
-		static ReliableMessagingVersion _wsReliableMessagingFebruary2005 = new FakeReliableMessagingVersion ();
+    [MonoTODO]
+    public abstract class ReliableMessagingVersion
+    {
+        static ReliableMessagingVersion _default = new FakeReliableMessagingVersion ();
+        static ReliableMessagingVersion _wsReliableMessaging11 = new FakeReliableMessagingVersion ();
+        static ReliableMessagingVersion _wsReliableMessagingFebruary2005 = new FakeReliableMessagingVersion ();
 
-		public static ReliableMessagingVersion Default {
-			get { return _default; }
-		}
+        public static ReliableMessagingVersion Default {
+            get { return _default; }
+        }
 
-		public static ReliableMessagingVersion WSReliableMessaging11 {
-			get { return _wsReliableMessaging11; }
-		}
+        public static ReliableMessagingVersion WSReliableMessaging11 {
+            get { return _wsReliableMessaging11; }
+        }
 
-		public static ReliableMessagingVersion WSReliableMessagingFebruary2005 {
-			get { return _wsReliableMessagingFebruary2005; }
-		}
+        public static ReliableMessagingVersion WSReliableMessagingFebruary2005 {
+            get { return _wsReliableMessagingFebruary2005; }
+        }
 
-		[MonoTODO ("must be replaces with a correct implementation")]
-		class FakeReliableMessagingVersion : ReliableMessagingVersion
-		{
-		}
-	}
+        [MonoTODO ("must be replaces with a correct implementation")]
+        class FakeReliableMessagingVersion : ReliableMessagingVersion
+        {
+        }
+    }
 }

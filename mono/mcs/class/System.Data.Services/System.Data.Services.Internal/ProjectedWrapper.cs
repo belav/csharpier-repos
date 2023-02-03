@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ProjectedWrapper.cs
 //  
 // Author:
@@ -35,29 +35,29 @@ using System.Runtime;
 
 namespace System.Data.Services.Internal
 {
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public abstract class ProjectedWrapper
-	{
-		public string ResourceTypeName {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    public abstract class ProjectedWrapper
+    {
+        public string ResourceTypeName {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public string PropertyNameList {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public string PropertyNameList {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		public object GetProjectedPropertyValue (string propertyName)
-		{
-			throw new NotImplementedException ();
-		}
+        public object GetProjectedPropertyValue (string propertyName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected abstract object InternalGetProjectedPropertyValue (int propertyIndex);
+        protected abstract object InternalGetProjectedPropertyValue (int propertyIndex);
 
-		protected ProjectedWrapper ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected ProjectedWrapper ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // SymbolicValue.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,71 +29,71 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-	struct SymbolicValue : IEquatable<SymbolicValue>, IComparable<SymbolicValue>, IComparable {
-		public readonly SymValue Symbol;
+    struct SymbolicValue : IEquatable<SymbolicValue>, IComparable<SymbolicValue>, IComparable {
+        public readonly SymValue Symbol;
 
-		public SymbolicValue (SymValue symbol)
-		{
-			this.Symbol = symbol;
-		}
+        public SymbolicValue (SymValue symbol)
+        {
+            this.Symbol = symbol;
+        }
 
-		public bool IsNull
-		{
-			get { return this.Symbol == null; }
-		}
+        public bool IsNull
+        {
+            get { return this.Symbol == null; }
+        }
 
-		public int MethodLocalId
-		{
-			get { return this.Symbol.UniqueId; }
-		}
+        public int MethodLocalId
+        {
+            get { return this.Symbol.UniqueId; }
+        }
 
-		#region Implementation of IEquatable<SymbolicValue>
-		public bool Equals (SymbolicValue other)
-		{
-			return this.Symbol == other.Symbol;
-		}
-		#endregion
+        #region Implementation of IEquatable<SymbolicValue>
+        public bool Equals (SymbolicValue other)
+        {
+            return this.Symbol == other.Symbol;
+        }
+        #endregion
 
-		#region Implementation of IComparable<in SymbolicValue>
-		public int CompareTo (SymbolicValue other)
-		{
-			return this.Symbol.CompareTo (other.Symbol);
-		}
-		#endregion
+        #region Implementation of IComparable<in SymbolicValue>
+        public int CompareTo (SymbolicValue other)
+        {
+            return this.Symbol.CompareTo (other.Symbol);
+        }
+        #endregion
 
-		#region Implementation of IComparable
-		public int CompareTo (object obj)
-		{
-			if (!(obj is SymbolicValue))
-				return 1;
+        #region Implementation of IComparable
+        public int CompareTo (object obj)
+        {
+            if (!(obj is SymbolicValue))
+                return 1;
 
-			return CompareTo ((SymbolicValue) obj);
-		}
-		#endregion
+            return CompareTo ((SymbolicValue) obj);
+        }
+        #endregion
 
-		public override bool Equals (object obj)
-		{
-			if (obj is SymbolicValue)
-				return Equals ((SymbolicValue) obj);
+        public override bool Equals (object obj)
+        {
+            if (obj is SymbolicValue)
+                return Equals ((SymbolicValue) obj);
 
-			return false;
-		}
+            return false;
+        }
 
-		public override int GetHashCode ()
-		{
-			return this.Symbol == null ? 0 : this.Symbol.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            return this.Symbol == null ? 0 : this.Symbol.GetHashCode ();
+        }
 
-		public override string ToString ()
-		{
-			if (this.Symbol == null)
-				return "<!null!>";
-			return this.Symbol.ToString ();
-		}
+        public override string ToString ()
+        {
+            if (this.Symbol == null)
+                return "<!null!>";
+            return this.Symbol.ToString ();
+        }
 
-		public static int GetUniqueKey (SymbolicValue arg)
-		{
-			return SymValue.GetUniqueKey (arg.Symbol);
-		}
-	}
+        public static int GetUniqueKey (SymbolicValue arg)
+        {
+            return SymValue.GetUniqueKey (arg.Symbol);
+        }
+    }
 }

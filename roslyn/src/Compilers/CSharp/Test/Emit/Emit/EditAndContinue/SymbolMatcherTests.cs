@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1110,16 +1110,16 @@ using System;
 
 interface I<T, S>
 {
-	int this[int index] { set; }
+    int this[int index] { set; }
 }
 
 class C : I<int, bool>
 {
     int _current;
-	int I<int, bool>.this[int anotherIndex] 
-	{
-		set { _current = anotherIndex + value; }
-	}
+    int I<int, bool>.this[int anotherIndex] 
+    {
+        set { _current = anotherIndex + value; }
+    }
 }";
 
             var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll);

@@ -16,21 +16,21 @@ using System.Collections;
         
 class ProtectedAccessToPropertyOnChild : Hashtable {
 
-	ProtectedAccessToPropertyOnChild ()
-	{
-		comparer = null;
-	}
-	
-	public static int Main ()
-	{
-		TestAccessToProtectedOnChildInstanceFromParent t = new TestAccessToProtectedOnChildInstanceFromParent ();
+    ProtectedAccessToPropertyOnChild ()
+    {
+        comparer = null;
+    }
+    
+    public static int Main ()
+    {
+        TestAccessToProtectedOnChildInstanceFromParent t = new TestAccessToProtectedOnChildInstanceFromParent ();
 
-		if (t.Test () != 0)
-			return 1;
-		
-		return 0;
-		
-	}
+        if (t.Test () != 0)
+            return 1;
+        
+        return 0;
+        
+    }
 }
 
 //
@@ -69,42 +69,42 @@ public class TestAccessToPrivateMemberInParentClass
 
 public class TestAccessToProtectedOnChildInstanceFromParent {
 
-	class Parent {
-		protected int a;
+    class Parent {
+        protected int a;
 
-		static int x;
-		
-		protected Parent ()
-		{
-			a = x++;
-		}
-		
-		public int TestAccessToProtected (Child c)
-		{
-			if (c.a == 0)
-				return 1;
-			else
-				return 2;
-		}
-	}
+        static int x;
+        
+        protected Parent ()
+        {
+            a = x++;
+        }
+        
+        public int TestAccessToProtected (Child c)
+        {
+            if (c.a == 0)
+                return 1;
+            else
+                return 2;
+        }
+    }
 
-	class Child : Parent {
-		
-	}
+    class Child : Parent {
+        
+    }
 
-	Child c, d;
-	
-	public TestAccessToProtectedOnChildInstanceFromParent ()
-	{
-		c = new Child ();
-		d = new Child ();
-	}
+    Child c, d;
+    
+    public TestAccessToProtectedOnChildInstanceFromParent ()
+    {
+        c = new Child ();
+        d = new Child ();
+    }
 
-	public int Test ()
-	{
-		if (d.TestAccessToProtected (c) == 1)
-			return 0;
-		return 1;
-	}
-	
+    public int Test ()
+    {
+        if (d.TestAccessToProtected (c) == 1)
+            return 0;
+        return 1;
+    }
+    
 }

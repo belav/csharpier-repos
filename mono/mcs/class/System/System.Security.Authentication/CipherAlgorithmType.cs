@@ -2,7 +2,7 @@
 // System.Net.Security.CipherAlgorithmType.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
+//    Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (c) 2004 Novell, Inc. (http://www.novell.com)
@@ -31,18 +31,18 @@
 
 namespace System.Security.Authentication
 {
-	public enum CipherAlgorithmType 
-	{
-		None       = 0,
-		Null	   = 0x6000,
-		Aes        = 0x6611,
-		Aes128     = 0x660e,
-		Aes192     = 0x660f,
-		Aes256     = 0x6610,
-		Des        = 0x6601,
-		Rc2        = 0x6602,
-		Rc4        = 0x6801,
-		TripleDes  = 0x6603
-	}
+    public enum CipherAlgorithmType 
+    {
+        None       = 0,
+        Null       = 0x6000,
+        Aes        = 0x6611,
+        Aes128     = 0x660e,
+        Aes192     = 0x660f,
+        Aes256     = 0x6610,
+        Des        = 0x6601,
+        Rc2        = 0x6602,
+        Rc4        = 0x6801,
+        TripleDes  = 0x6603
+    }
 }
 

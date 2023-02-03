@@ -6,10 +6,10 @@ partial class C
 
 partial class C1
 {
-	int a = 55;
+    int a = 55;
 }
 
 partial class C2
 {
-	int a = 55;
+    int a = 55;
 }

@@ -32,26 +32,26 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class DirectoryControl
-	{
-		public DirectoryControl (string type, byte [] value, bool isCritical, bool serverSide)
-		{
-			Type = type;
-			IsCritical = isCritical;
-			ServerSide = serverSide;
+    public class DirectoryControl
+    {
+        public DirectoryControl (string type, byte [] value, bool isCritical, bool serverSide)
+        {
+            Type = type;
+            IsCritical = isCritical;
+            ServerSide = serverSide;
 
-			// value
-			throw new NotImplementedException ();
-		}
+            // value
+            throw new NotImplementedException ();
+        }
 
-		public bool IsCritical { get; set; }
-		public bool ServerSide { get; set; }
-		public string Type { get; private set; }
+        public bool IsCritical { get; set; }
+        public bool ServerSide { get; set; }
+        public string Type { get; private set; }
 
-		[MonoTODO]
-		public virtual byte [] GetValue ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public virtual byte [] GetValue ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

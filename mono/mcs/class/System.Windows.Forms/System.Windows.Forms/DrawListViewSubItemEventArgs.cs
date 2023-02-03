@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Alan McGovern (alan.mcgovern@gmail.com)
+//    Alan McGovern (alan.mcgovern@gmail.com)
 //
 
 
@@ -34,7 +34,7 @@ namespace System.Windows.Forms
 
         private Rectangle bounds;
         private int columnIndex;
-		private bool drawDefault;
+        private bool drawDefault;
         private Graphics graphics;
         private ColumnHeader header;
         private ListViewItem item;
@@ -111,27 +111,27 @@ namespace System.Windows.Forms
 
         public void DrawBackground ()
         {
-		graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (subItem.BackColor), bounds);
+        graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (subItem.BackColor), bounds);
         }
 
         public void DrawFocusRectangle (Rectangle bounds)
         {
-		if ((itemState & ListViewItemStates.Focused) != 0) {
-			Rectangle rect = new Rectangle (bounds.X + 1, bounds.Y + 1, bounds.Width - 1, bounds.Height - 1);
-			ThemeEngine.Current.CPDrawFocusRectangle (graphics, rect, subItem.ForeColor, subItem.BackColor);
-		}
+        if ((itemState & ListViewItemStates.Focused) != 0) {
+            Rectangle rect = new Rectangle (bounds.X + 1, bounds.Y + 1, bounds.Width - 1, bounds.Height - 1);
+            ThemeEngine.Current.CPDrawFocusRectangle (graphics, rect, subItem.ForeColor, subItem.BackColor);
+        }
         }
 
         public void DrawText ()
         {
-		DrawText (TextFormatFlags.EndEllipsis | TextFormatFlags.HorizontalCenter);
+        DrawText (TextFormatFlags.EndEllipsis | TextFormatFlags.HorizontalCenter);
         }
 
         public void DrawText (TextFormatFlags flags)
         {
-		// Text adjustments
-		Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
-		TextRenderer.DrawText (graphics, subItem.Text, subItem.Font, text_bounds, subItem.ForeColor, flags);
+        // Text adjustments
+        Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
+        TextRenderer.DrawText (graphics, subItem.Text, subItem.Font, text_bounds, subItem.ForeColor, flags);
         }
 
         #endregion Public Methods

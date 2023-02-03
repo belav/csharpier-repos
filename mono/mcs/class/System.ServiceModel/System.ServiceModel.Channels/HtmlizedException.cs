@@ -2,7 +2,7 @@
 // HtmlizedException
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -34,30 +34,30 @@ using System.Text;
 
 namespace System.ServiceModel.Channels
 {
-	internal abstract class HtmlizedException : Exception
-	{
-		protected HtmlizedException ()
-		{
-		}
+    internal abstract class HtmlizedException : Exception
+    {
+        protected HtmlizedException ()
+        {
+        }
 
-		protected HtmlizedException (string message)
-			: base (message)
-		{
-		}
+        protected HtmlizedException (string message)
+            : base (message)
+        {
+        }
 
-		protected HtmlizedException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        protected HtmlizedException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		public abstract string Title { get; }
-		public abstract string Description { get; }
-		public abstract string ErrorMessage { get; }
-		public abstract string FileName { get; }
-		public abstract string SourceFile { get; }
-		public abstract string FileText { get; }
-		public abstract int [] ErrorLines { get; }
-		public abstract bool ErrorLinesPaired { get; }
-	}
+        public abstract string Title { get; }
+        public abstract string Description { get; }
+        public abstract string ErrorMessage { get; }
+        public abstract string FileName { get; }
+        public abstract string SourceFile { get; }
+        public abstract string FileText { get; }
+        public abstract int [] ErrorLines { get; }
+        public abstract bool ErrorLinesPaired { get; }
+    }
 }
 

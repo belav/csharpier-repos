@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.ImageListCodeDomSerializer.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,23 +34,23 @@ using System.ComponentModel.Design.Serialization;
 
 namespace System.Windows.Forms.Design
 {
-	public class ImageListCodeDomSerializer : CodeDomSerializer
-	{
-		public ImageListCodeDomSerializer ()
-		{
-		}
+    public class ImageListCodeDomSerializer : CodeDomSerializer
+    {
+        public ImageListCodeDomSerializer ()
+        {
+        }
 
-		[MonoTODO]
-		public override object Deserialize (IDesignerSerializationManager manager, object codeObject)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object Deserialize (IDesignerSerializationManager manager, object codeObject)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override object Serialize (IDesignerSerializationManager manager, object value)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override object Serialize (IDesignerSerializationManager manager, object value)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

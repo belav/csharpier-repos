@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DataServiceProcessingPipeline.cs
 //  
 // Author:
@@ -30,31 +30,31 @@ using System.Runtime;
 
 namespace System.Data.Services
 {
-	public sealed class DataServiceProcessingPipeline
-	{
-		public event EventHandler <DataServiceProcessingPipelineEventArgs> ProcessingRequest {
-			add { throw new NotImplementedException (); }
-			remove { throw new NotImplementedException (); }
-		}
+    public sealed class DataServiceProcessingPipeline
+    {
+        public event EventHandler <DataServiceProcessingPipelineEventArgs> ProcessingRequest {
+            add { throw new NotImplementedException (); }
+            remove { throw new NotImplementedException (); }
+        }
 
-		public event EventHandler <DataServiceProcessingPipelineEventArgs> ProcessedRequest {
-			add { throw new NotImplementedException (); }
-			remove { throw new NotImplementedException (); }
-		}
+        public event EventHandler <DataServiceProcessingPipelineEventArgs> ProcessedRequest {
+            add { throw new NotImplementedException (); }
+            remove { throw new NotImplementedException (); }
+        }
 
-		public event EventHandler <EventArgs> ProcessingChangeset {
-			add { throw new NotImplementedException (); }
-			remove { throw new NotImplementedException (); }
-		}
+        public event EventHandler <EventArgs> ProcessingChangeset {
+            add { throw new NotImplementedException (); }
+            remove { throw new NotImplementedException (); }
+        }
 
-		public event EventHandler <EventArgs> ProcessedChangeset {
-			add { throw new NotImplementedException (); }
-			remove { throw new NotImplementedException (); }
-		}
+        public event EventHandler <EventArgs> ProcessedChangeset {
+            add { throw new NotImplementedException (); }
+            remove { throw new NotImplementedException (); }
+        }
 
-		public DataServiceProcessingPipeline ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public DataServiceProcessingPipeline ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -2,14 +2,14 @@
 // Line: 13
 
 class X {
-	X (int a)
-	{
-	}
+    X (int a)
+    {
+    }
 }
 
 class Y {
-	static void Main ()
-	{
-		X x (4);
-	}
+    static void Main ()
+    {
+        X x (4);
+    }
 }

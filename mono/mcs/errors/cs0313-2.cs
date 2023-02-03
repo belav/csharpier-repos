@@ -11,12 +11,12 @@ interface I
 
 class C<U>
 {
-	static void Foo<T> (T value) where T : U
-	{
-	}
+    static void Foo<T> (T value) where T : U
+    {
+    }
 
-	static void Bar (S? s)
-	{
-		C<I>.Foo (s);
-	}
+    static void Bar (S? s)
+    {
+        C<I>.Foo (s);
+    }
 }

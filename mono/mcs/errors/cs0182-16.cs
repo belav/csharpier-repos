@@ -4,8 +4,8 @@
 using System.Runtime.InteropServices;
 
 class X {
-	static string dll = "some.dll";
-	
-	[DllImport (dll)]
-	extern static void Blah ();
+    static string dll = "some.dll";
+    
+    [DllImport (dll)]
+    extern static void Blah ();
 }

@@ -31,40 +31,40 @@
 using System.Web;
 namespace System.Web.Mail 
 {
-	public class RelatedBodyPart
-	{
-		string id;
-		string fileName;
-		
-		public RelatedBodyPart (string id, string fileName)
-		{
-			this.id = id;
-			if (FileExists (fileName))
-				this.fileName = fileName;
-			else
-				throw new HttpException(500, "Invalid related body part");
-		}
-		
-		public string Name {
-			get { return id; }
-			set { id = value; }
-		}
+    public class RelatedBodyPart
+    {
+        string id;
+        string fileName;
+        
+        public RelatedBodyPart (string id, string fileName)
+        {
+            this.id = id;
+            if (FileExists (fileName))
+                this.fileName = fileName;
+            else
+                throw new HttpException(500, "Invalid related body part");
+        }
+        
+        public string Name {
+            get { return id; }
+            set { id = value; }
+        }
 
-		public string Path {
-			get { return fileName; }
-			set { fileName = value; }
-		}
-		
-		bool FileExists (string fileName)
-		{
-			//I am handling local files only . Not sure how URL's
-			//need to be handled.
-			try {
-				System.IO.File.OpenRead (fileName).Close ();
-				return true;
-			} catch (Exception) {
-			    return false;
-			}
-		}
-	}
+        public string Path {
+            get { return fileName; }
+            set { fileName = value; }
+        }
+        
+        bool FileExists (string fileName)
+        {
+            //I am handling local files only . Not sure how URL's
+            //need to be handled.
+            try {
+                System.IO.File.OpenRead (fileName).Close ();
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
+    }
 }

@@ -6,15 +6,15 @@ interface ITest : IEnumerable<int> {
 }
 
 class Test : ITest {
-	IEnumerator IEnumerable.GetEnumerator () { throw new Exception (); }
-	IEnumerator<int> IEnumerable<int>.GetEnumerator () { yield break; }
+    IEnumerator IEnumerable.GetEnumerator () { throw new Exception (); }
+    IEnumerator<int> IEnumerable<int>.GetEnumerator () { yield break; }
 }
 
 class M {
-	public static void Main ()
-	{
-		ITest foo = new Test ();
-		foreach (int i in foo)
-			Console.WriteLine (i);
-	}
+    public static void Main ()
+    {
+        ITest foo = new Test ();
+        foreach (int i in foo)
+            Console.WriteLine (i);
+    }
 }

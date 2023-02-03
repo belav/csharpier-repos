@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,25 +32,25 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("7b9badc6-c9bc-447a-8670-dbd195aed24b")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMDocumentRange {
+    [Guid ("7b9badc6-c9bc-447a-8670-dbd195aed24b")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMDocumentRange {
 
 #region nsIDOMDocumentRange
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createRange ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMRange ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createRange ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMRange ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMDocumentRange {
-		public static nsIDOMDocumentRange GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentRange obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentRange).GUID, obj);
-			return o as nsIDOMDocumentRange;
-		}
-	}
+    internal class nsDOMDocumentRange {
+        public static nsIDOMDocumentRange GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentRange obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentRange).GUID, obj);
+            return o as nsIDOMDocumentRange;
+        }
+    }
 }

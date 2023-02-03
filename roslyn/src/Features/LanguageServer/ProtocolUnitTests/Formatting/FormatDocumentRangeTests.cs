@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -56,16 +56,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 {
 {|format:void|} M()
 {
-			int i = 1;
-	}
+            int i = 1;
+    }
 }";
             var expected =
 @"class A
 {
-	void M()
+    void M()
 {
-			int i = 1;
-	}
+            int i = 1;
+    }
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var rangeToFormat = testLspServer.GetLocations("format").Single();

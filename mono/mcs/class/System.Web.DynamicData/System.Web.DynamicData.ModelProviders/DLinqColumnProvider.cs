@@ -2,7 +2,7 @@
 // DLinqColumnProvider.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
 //
@@ -41,25 +41,25 @@ using DMetaTable = System.Data.Linq.Mapping.MetaTable;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-	class DLinqColumnProvider : ColumnProvider
-	{
-		public DLinqColumnProvider (TableProvider owner, MetaDataMember meta)
-			: base (owner)
-		{
-			if (owner == null)
-				throw new ArgumentNullException ("owner");
-			if (meta == null)
-				throw new ArgumentNullException ("meta");
+    class DLinqColumnProvider : ColumnProvider
+    {
+        public DLinqColumnProvider (TableProvider owner, MetaDataMember meta)
+            : base (owner)
+        {
+            if (owner == null)
+                throw new ArgumentNullException ("owner");
+            if (meta == null)
+                throw new ArgumentNullException ("meta");
 
-			// FIXME: fill more
-			Name = meta.Name;
-			Nullable = meta.CanBeNull;
-		}
+            // FIXME: fill more
+            Name = meta.Name;
+            Nullable = meta.CanBeNull;
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString ()
+        {
+            return base.ToString ();
+        }
+    }
 }

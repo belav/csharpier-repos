@@ -2,7 +2,7 @@
 // WSHttpBindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,52 +54,52 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class WSHttpBindingElement
-		 : WSHttpBindingBaseElement,  IBindingConfigurationElement
-	{
-		ConfigurationPropertyCollection _properties;
+    public partial class WSHttpBindingElement
+         : WSHttpBindingBaseElement,  IBindingConfigurationElement
+    {
+        ConfigurationPropertyCollection _properties;
 
-		public WSHttpBindingElement () {
-		}
+        public WSHttpBindingElement () {
+        }
 
-		public WSHttpBindingElement (string name) :
-			base (name) {
-		}
+        public WSHttpBindingElement (string name) :
+            base (name) {
+        }
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("allowCookies",
-			DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool AllowCookies {
-			get { return (bool)this ["allowCookies"]; }
-			set {this ["allowCookies"] = value; }
-		}
+        [ConfigurationProperty ("allowCookies",
+            DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool AllowCookies {
+            get { return (bool)this ["allowCookies"]; }
+            set {this ["allowCookies"] = value; }
+        }
 
-		protected override Type BindingElementType {
-			get { return typeof (WSHttpBinding); }
-		}
+        protected override Type BindingElementType {
+            get { return typeof (WSHttpBinding); }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = base.Properties;
-					_properties.Add (new ConfigurationProperty ("allowCookies", typeof (bool), "false", null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("security", typeof (WSHttpSecurityElement), null, null, null, ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get {
+                if (_properties == null) {
+                    _properties = base.Properties;
+                    _properties.Add (new ConfigurationProperty ("allowCookies", typeof (bool), "false", null, null, ConfigurationPropertyOptions.None));
+                    _properties.Add (new ConfigurationProperty ("security", typeof (WSHttpSecurityElement), null, null, null, ConfigurationPropertyOptions.None));
+                }
+                return _properties;
+            }
+        }
 
-		[ConfigurationProperty ("security",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WSHttpSecurityElement Security {
-			get { return (WSHttpSecurityElement)this ["security"]; }
-		}
+        [ConfigurationProperty ("security",
+             Options = ConfigurationPropertyOptions.None)]
+        public WSHttpSecurityElement Security {
+            get { return (WSHttpSecurityElement)this ["security"]; }
+        }
 
-		protected override void OnApplyConfiguration (Binding binding) {
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void OnApplyConfiguration (Binding binding) {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

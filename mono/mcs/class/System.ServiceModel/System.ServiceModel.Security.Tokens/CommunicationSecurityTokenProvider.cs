@@ -2,7 +2,7 @@
 // CommunicationSecurityTokenProvider.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -40,101 +40,101 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Security.Tokens
 {
-	abstract class CommunicationSecurityTokenProvider : SecurityTokenProvider, ICommunicationObject
-	{
-		public abstract ProviderCommunicationObject Communication { get; }
+    abstract class CommunicationSecurityTokenProvider : SecurityTokenProvider, ICommunicationObject
+    {
+        public abstract ProviderCommunicationObject Communication { get; }
 
-		protected override SecurityToken GetTokenCore (TimeSpan timeout)
-		{
-			if (State != CommunicationState.Opened)
-				throw new InvalidOperationException ("Open the provider before issuing actual request to get token.");
-			return GetOnlineToken (timeout);
-		}
+        protected override SecurityToken GetTokenCore (TimeSpan timeout)
+        {
+            if (State != CommunicationState.Opened)
+                throw new InvalidOperationException ("Open the provider before issuing actual request to get token.");
+            return GetOnlineToken (timeout);
+        }
 
-		public abstract SecurityToken GetOnlineToken (TimeSpan timeout);
+        public abstract SecurityToken GetOnlineToken (TimeSpan timeout);
 
-		public CommunicationState State {
-			get { return Communication.State; }
-		}
+        public CommunicationState State {
+            get { return Communication.State; }
+        }
 
-		public void Abort ()
-		{
-			Communication.Abort ();
-		}
+        public void Abort ()
+        {
+            Communication.Abort ();
+        }
 
-		public void Open ()
-		{
-			Communication.Open ();
-		}
+        public void Open ()
+        {
+            Communication.Open ();
+        }
 
-		public void Open (TimeSpan timeout)
-		{
-			Communication.Open (timeout);
-		}
+        public void Open (TimeSpan timeout)
+        {
+            Communication.Open (timeout);
+        }
 
-		public IAsyncResult BeginOpen (AsyncCallback callback, object state)
-		{
-			return Communication.BeginOpen (callback, state);
-		}
+        public IAsyncResult BeginOpen (AsyncCallback callback, object state)
+        {
+            return Communication.BeginOpen (callback, state);
+        }
 
-		public IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return Communication.BeginOpen (timeout, callback, state);
-		}
+        public IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        {
+            return Communication.BeginOpen (timeout, callback, state);
+        }
 
-		public void EndOpen (IAsyncResult result)
-		{
-			Communication.EndOpen (result);
-		}
+        public void EndOpen (IAsyncResult result)
+        {
+            Communication.EndOpen (result);
+        }
 
-		public void Close ()
-		{
-			Communication.Close ();
-		}
+        public void Close ()
+        {
+            Communication.Close ();
+        }
 
-		public void Close (TimeSpan timeout)
-		{
-			Communication.Close (timeout);
-		}
+        public void Close (TimeSpan timeout)
+        {
+            Communication.Close (timeout);
+        }
 
-		public IAsyncResult BeginClose (AsyncCallback callback, object state)
-		{
-			return Communication.BeginClose (callback, state);
-		}
+        public IAsyncResult BeginClose (AsyncCallback callback, object state)
+        {
+            return Communication.BeginClose (callback, state);
+        }
 
-		public IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return Communication.BeginClose (timeout, callback, state);
-		}
+        public IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        {
+            return Communication.BeginClose (timeout, callback, state);
+        }
 
-		public void EndClose (IAsyncResult result)
-		{
-			Communication.EndClose (result);
-		}
+        public void EndClose (IAsyncResult result)
+        {
+            Communication.EndClose (result);
+        }
 
-		public event EventHandler Opening {
-			add { Communication.Opening += value; }
-			remove { Communication.Opening -= value; }
-		}
+        public event EventHandler Opening {
+            add { Communication.Opening += value; }
+            remove { Communication.Opening -= value; }
+        }
 
-		public event EventHandler Opened {
-			add { Communication.Opened += value; }
-			remove { Communication.Opened -= value; }
-		}
+        public event EventHandler Opened {
+            add { Communication.Opened += value; }
+            remove { Communication.Opened -= value; }
+        }
 
-		public event EventHandler Closing {
-			add { Communication.Closing += value; }
-			remove { Communication.Closing -= value; }
-		}
+        public event EventHandler Closing {
+            add { Communication.Closing += value; }
+            remove { Communication.Closing -= value; }
+        }
 
-		public event EventHandler Closed {
-			add { Communication.Closed += value; }
-			remove { Communication.Closed -= value; }
-		}
+        public event EventHandler Closed {
+            add { Communication.Closed += value; }
+            remove { Communication.Closed -= value; }
+        }
 
-		public event EventHandler Faulted {
-			add { Communication.Faulted += value; }
-			remove { Communication.Faulted -= value; }
-		}
-	}
+        public event EventHandler Faulted {
+            add { Communication.Faulted += value; }
+            remove { Communication.Faulted -= value; }
+        }
+    }
 }

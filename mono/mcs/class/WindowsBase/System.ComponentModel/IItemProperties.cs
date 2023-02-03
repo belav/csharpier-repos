@@ -20,15 +20,15 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System.Collections.ObjectModel;
 
 namespace System.ComponentModel {
 
-	public interface IItemProperties {
-		ReadOnlyCollection<ItemPropertyInfo> ItemProperties { get; }
-	}
+    public interface IItemProperties {
+        ReadOnlyCollection<ItemPropertyInfo> ItemProperties { get; }
+    }
 
 }

@@ -7,8 +7,8 @@ public class C<T> where T : class
 
 class A
 {
-	public A (ref C<int> args)
-	{
-	}
+    public A (ref C<int> args)
+    {
+    }
 }
 

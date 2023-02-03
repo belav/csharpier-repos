@@ -2,7 +2,7 @@
 // OutgoingWebRequestContext.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -32,60 +32,60 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Web
 {
-	public class OutgoingWebRequestContext
-	{
-		internal OutgoingWebRequestContext ()
-		{
-			Headers = new WebHeaderCollection ();
-		}
+    public class OutgoingWebRequestContext
+    {
+        internal OutgoingWebRequestContext ()
+        {
+            Headers = new WebHeaderCollection ();
+        }
 
-		public string Accept { get; set; }
+        public string Accept { get; set; }
 
-		public long ContentLength { get; set; }
+        public long ContentLength { get; set; }
 
-		public string ContentType { get; set; }
+        public string ContentType { get; set; }
 
-		public WebHeaderCollection Headers { get; private set; }
+        public WebHeaderCollection Headers { get; private set; }
 
-		public string IfMatch { get; set; }
+        public string IfMatch { get; set; }
 
-		public string IfModifiedSince { get; set; }
+        public string IfModifiedSince { get; set; }
 
-		public string IfNoneMatch { get; set; }
+        public string IfNoneMatch { get; set; }
 
-		public string IfUnmodifiedSince { get; set; }
+        public string IfUnmodifiedSince { get; set; }
 
-		public string Method { get; set; }
+        public string Method { get; set; }
 
-		public bool SuppressEntityBody { get; set; }
+        public bool SuppressEntityBody { get; set; }
 
-		public string UserAgent { get; set; }
+        public string UserAgent { get; set; }
 
-		internal void Apply (HttpRequestMessageProperty hp)
-		{
-			if (Headers != null)
-				foreach (var key in Headers.AllKeys)
-					hp.Headers [key] = Headers [key];
-			if (Accept != null)
-				hp.Headers ["Accept"] = Accept;
-			if (ContentLength > 0)
-				hp.Headers ["Content-Length"] = ContentLength.ToString (NumberFormatInfo.InvariantInfo);
-			if (ContentType != null)
-				hp.Headers ["Content-Type"] = ContentType;
-			if (IfMatch != null)
-				hp.Headers ["If-Match"] = IfMatch;
-			if (IfModifiedSince != null)
-				hp.Headers ["If-Modified-Since"] = IfModifiedSince;
-			if (IfNoneMatch != null)
-				hp.Headers ["If-None-Match"] = IfNoneMatch;
-			if (IfUnmodifiedSince != null)
-				hp.Headers ["If-Unmodified-Since"] = IfUnmodifiedSince;
-			if (Method != null)
-				hp.Method = Method;
-			if (SuppressEntityBody)
-				hp.SuppressEntityBody = true;
-			if (UserAgent != null)
-				hp.Headers ["User-Agent"] = UserAgent;
-		}
-	}
+        internal void Apply (HttpRequestMessageProperty hp)
+        {
+            if (Headers != null)
+                foreach (var key in Headers.AllKeys)
+                    hp.Headers [key] = Headers [key];
+            if (Accept != null)
+                hp.Headers ["Accept"] = Accept;
+            if (ContentLength > 0)
+                hp.Headers ["Content-Length"] = ContentLength.ToString (NumberFormatInfo.InvariantInfo);
+            if (ContentType != null)
+                hp.Headers ["Content-Type"] = ContentType;
+            if (IfMatch != null)
+                hp.Headers ["If-Match"] = IfMatch;
+            if (IfModifiedSince != null)
+                hp.Headers ["If-Modified-Since"] = IfModifiedSince;
+            if (IfNoneMatch != null)
+                hp.Headers ["If-None-Match"] = IfNoneMatch;
+            if (IfUnmodifiedSince != null)
+                hp.Headers ["If-Unmodified-Since"] = IfUnmodifiedSince;
+            if (Method != null)
+                hp.Method = Method;
+            if (SuppressEntityBody)
+                hp.SuppressEntityBody = true;
+            if (UserAgent != null)
+                hp.Headers ["User-Agent"] = UserAgent;
+        }
+    }
 }

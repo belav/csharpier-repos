@@ -4,10 +4,10 @@
 class A
 {
         private string test;
-	public void f ()
+    public void f ()
         {
                 this.test bad = null;
         }
-	static void Main () {}
+    static void Main () {}
 }
 

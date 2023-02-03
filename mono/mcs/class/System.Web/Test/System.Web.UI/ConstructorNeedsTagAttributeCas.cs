@@ -1,9 +1,9 @@
 //
 // ConstructorNeedsTagAttributeCas.cs 
-//	- CAS unit tests for System.Web.UI.ConstructorNeedsTagAttributeCas
+//    - CAS unit tests for System.Web.UI.ConstructorNeedsTagAttributeCas
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,24 +36,24 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ConstructorNeedsTagAttributeCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ConstructorNeedsTagAttributeCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ConstructorNeedsTagAttribute a1 = new ConstructorNeedsTagAttribute ();
-			Assert.IsFalse (a1.NeedsTag, "NeedsTag-1");
-			ConstructorNeedsTagAttribute a2 = new ConstructorNeedsTagAttribute (true);
-			Assert.IsTrue (a2.NeedsTag, "NeedsTag-2");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ConstructorNeedsTagAttribute a1 = new ConstructorNeedsTagAttribute ();
+            Assert.IsFalse (a1.NeedsTag, "NeedsTag-1");
+            ConstructorNeedsTagAttribute a2 = new ConstructorNeedsTagAttribute (true);
+            Assert.IsTrue (a2.NeedsTag, "NeedsTag-2");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (ConstructorNeedsTagAttribute); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (ConstructorNeedsTagAttribute); }
+        }
+    }
 }

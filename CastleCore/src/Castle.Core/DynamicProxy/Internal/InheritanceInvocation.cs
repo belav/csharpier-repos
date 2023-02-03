@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,39 +14,39 @@
 
 namespace Castle.DynamicProxy.Internal
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	public abstract class InheritanceInvocation : AbstractInvocation
-	{
-		private readonly Type targetType;
+    public abstract class InheritanceInvocation : AbstractInvocation
+    {
+        private readonly Type targetType;
 
-		protected InheritanceInvocation(
-			Type targetType,
-			object proxy,
-			IInterceptor[] interceptors,
-			MethodInfo proxiedMethod,
-			object[] arguments)
-			: base(proxy, interceptors, proxiedMethod, arguments)
-		{
-			this.targetType = targetType;
-		}
+        protected InheritanceInvocation(
+            Type targetType,
+            object proxy,
+            IInterceptor[] interceptors,
+            MethodInfo proxiedMethod,
+            object[] arguments)
+            : base(proxy, interceptors, proxiedMethod, arguments)
+        {
+            this.targetType = targetType;
+        }
 
-		public override object InvocationTarget
-		{
-			get { return Proxy; }
-		}
+        public override object InvocationTarget
+        {
+            get { return Proxy; }
+        }
 
-		public override MethodInfo MethodInvocationTarget
-		{
-			get { return InvocationHelper.GetMethodOnType(targetType, Method); }
-		}
+        public override MethodInfo MethodInvocationTarget
+        {
+            get { return InvocationHelper.GetMethodOnType(targetType, Method); }
+        }
 
-		public override Type TargetType
-		{
-			get { return targetType; }
-		}
+        public override Type TargetType
+        {
+            get { return targetType; }
+        }
 
-		protected abstract override void InvokeMethodOnTarget();
-	}
+        protected abstract override void InvokeMethodOnTarget();
+    }
 }

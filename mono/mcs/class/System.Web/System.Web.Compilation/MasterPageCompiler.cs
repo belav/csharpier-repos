@@ -2,7 +2,7 @@
 // System.Web.Compilation.MasterPageCompiler
 //
 // Authors:
-//	Joel W. Reed (joelwreed@gmail.com)
+//    Joel W. Reed (joelwreed@gmail.com)
 //
 //
 
@@ -33,34 +33,34 @@ using System.Web.UI;
 
 namespace System.Web.Compilation
 {
-	class MasterPageCompiler : UserControlCompiler
-	{
-		MasterPageParser parser;
+    class MasterPageCompiler : UserControlCompiler
+    {
+        MasterPageParser parser;
 
-		public MasterPageCompiler (MasterPageParser parser)
-			: base (parser)
-		{
-			this.parser = parser;
-		}
+        public MasterPageCompiler (MasterPageParser parser)
+            : base (parser)
+        {
+            this.parser = parser;
+        }
 
-		protected internal override void CreateMethods ()
-		{
-			base.CreateMethods ();
+        protected internal override void CreateMethods ()
+        {
+            base.CreateMethods ();
 
-			Type type = parser.MasterType;
-			if (type != null) {
-				CodeMemberProperty mprop = new CodeMemberProperty ();
-				mprop.Name = "Master";
-				mprop.Type = new CodeTypeReference (parser.MasterType);
-				mprop.Attributes = MemberAttributes.Public | MemberAttributes.New;
-				CodeExpression prop = new CodePropertyReferenceExpression (new CodeBaseReferenceExpression (), "Master");
-				prop = new CodeCastExpression (parser.MasterType, prop);
-				mprop.GetStatements.Add (new CodeMethodReturnStatement (prop));
-				mainClass.Members.Add (mprop);
-				AddReferencedAssembly (type.Assembly);
-			}
-		}
-	}
+            Type type = parser.MasterType;
+            if (type != null) {
+                CodeMemberProperty mprop = new CodeMemberProperty ();
+                mprop.Name = "Master";
+                mprop.Type = new CodeTypeReference (parser.MasterType);
+                mprop.Attributes = MemberAttributes.Public | MemberAttributes.New;
+                CodeExpression prop = new CodePropertyReferenceExpression (new CodeBaseReferenceExpression (), "Master");
+                prop = new CodeCastExpression (parser.MasterType, prop);
+                mprop.GetStatements.Add (new CodeMethodReturnStatement (prop));
+                mainClass.Members.Add (mprop);
+                AddReferencedAssembly (type.Assembly);
+            }
+        }
+    }
 }
 
 

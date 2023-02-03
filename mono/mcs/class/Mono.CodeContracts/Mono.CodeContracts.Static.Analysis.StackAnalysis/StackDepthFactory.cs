@@ -2,7 +2,7 @@
 // StackDepthFactory.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,11 +31,11 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.StackAnalysis {
-	static class StackDepthFactory {
-		public static IILDecoder<APC, int, int, IStackContextProvider, Dummy> Create<TContext> (IILDecoder<APC, Dummy, Dummy, TContext, Dummy> ilDecoder,
-		                                                                                IMetaDataProvider metadataDecoder) where TContext : IMethodContextProvider
-		{
-			return new StackDepthProvider<TContext> (ilDecoder, metadataDecoder);
-		}
-	}
+    static class StackDepthFactory {
+        public static IILDecoder<APC, int, int, IStackContextProvider, Dummy> Create<TContext> (IILDecoder<APC, Dummy, Dummy, TContext, Dummy> ilDecoder,
+                                                                                        IMetaDataProvider metadataDecoder) where TContext : IMethodContextProvider
+        {
+            return new StackDepthProvider<TContext> (ilDecoder, metadataDecoder);
+        }
+    }
 }

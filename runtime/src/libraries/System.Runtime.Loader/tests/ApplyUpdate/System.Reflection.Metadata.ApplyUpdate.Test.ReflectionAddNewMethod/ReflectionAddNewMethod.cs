@@ -8,7 +8,7 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
     public class ReflectionAddNewMethod
     {
         public string ExistingMethod(string u, double f)
-	{
+    {
             return u + f.ToString();;
         }
 

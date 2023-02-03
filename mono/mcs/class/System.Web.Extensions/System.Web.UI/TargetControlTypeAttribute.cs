@@ -1,4 +1,4 @@
-﻿//
+//
 // TargetControlTypeAttribute.cs
 //
 // Author:
@@ -33,17 +33,17 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = true)]
-	public sealed class TargetControlTypeAttribute : Attribute
-	{
-		Type _targetControlType;
+    [AttributeUsage (AttributeTargets.Class, AllowMultiple = true)]
+    public sealed class TargetControlTypeAttribute : Attribute
+    {
+        Type _targetControlType;
 
-		public TargetControlTypeAttribute (Type targetControlType) {
-			_targetControlType = targetControlType;
-		}
+        public TargetControlTypeAttribute (Type targetControlType) {
+            _targetControlType = targetControlType;
+        }
 
-		public Type TargetControlType {
-			get { return _targetControlType; } 
-		}
-	}
+        public Type TargetControlType {
+            get { return _targetControlType; } 
+        }
+    }
 }

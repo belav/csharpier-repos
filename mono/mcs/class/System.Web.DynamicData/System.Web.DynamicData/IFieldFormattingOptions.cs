@@ -2,7 +2,7 @@
 // IFieldFormattingOptions.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -38,14 +38,14 @@ using System.Web.Caching;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public interface IFieldFormattingOptions
-	{
-		bool ApplyFormatInEditMode { get; }
-		bool ConvertEmptyStringToNull { get; }
-		string DataFormatString { get; }
-		bool HtmlEncode { get; }
-		string NullDisplayText { get; }
-	}
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public interface IFieldFormattingOptions
+    {
+        bool ApplyFormatInEditMode { get; }
+        bool ConvertEmptyStringToNull { get; }
+        string DataFormatString { get; }
+        bool HtmlEncode { get; }
+        string NullDisplayText { get; }
+    }
 }

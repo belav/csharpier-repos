@@ -2,7 +2,7 @@
 // HtmlAnchorCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlAnchor
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,25 +36,25 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlAnchorCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlAnchorCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlAnchorTest unit = new HtmlAnchorTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.Target ();
-			unit.HRef ();
-			unit.AbsoluteHRef ();
-			unit.RenderAttributes ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlAnchorTest unit = new HtmlAnchorTest ();
+            unit.DefaultProperties ();
+            unit.NullProperties ();
+            unit.Target ();
+            unit.HRef ();
+            unit.AbsoluteHRef ();
+            unit.RenderAttributes ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlAnchor); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlAnchor); }
+        }
+    }
 }

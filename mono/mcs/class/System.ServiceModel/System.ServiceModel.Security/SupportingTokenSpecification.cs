@@ -2,7 +2,7 @@
 // SupportingTokenSpecification.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,21 +33,21 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Security
 {
-	public class SupportingTokenSpecification : SecurityTokenSpecification
-	{
-		SecurityTokenAttachmentMode mode;
+    public class SupportingTokenSpecification : SecurityTokenSpecification
+    {
+        SecurityTokenAttachmentMode mode;
 
-		public SupportingTokenSpecification (
-			SecurityToken token,
-			ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies,
-			SecurityTokenAttachmentMode attachmentMode)
-			: base (token, tokenPolicies)
-		{
-			mode = attachmentMode;
-		}
+        public SupportingTokenSpecification (
+            SecurityToken token,
+            ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies,
+            SecurityTokenAttachmentMode attachmentMode)
+            : base (token, tokenPolicies)
+        {
+            mode = attachmentMode;
+        }
 
-		public SecurityTokenAttachmentMode SecurityTokenAttachmentMode {
-			get { return mode; }
-		}
-	}
+        public SecurityTokenAttachmentMode SecurityTokenAttachmentMode {
+            get { return mode; }
+        }
+    }
 }

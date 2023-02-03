@@ -31,30 +31,30 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-	public abstract class MetaAccessor
-	{
-		public abstract Type Type { get; }
+    public abstract class MetaAccessor
+    {
+        public abstract Type Type { get; }
 
-		public abstract object GetBoxedValue (object instance);
+        public abstract object GetBoxedValue (object instance);
 
-		[MonoTODO]
-		public virtual bool HasAssignedValue (object instance)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual bool HasAssignedValue (object instance)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual bool HasLoadedValue (object instance)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual bool HasLoadedValue (object instance)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public virtual bool HasValue (object instance)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual bool HasValue (object instance)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public abstract void SetBoxedValue (ref object instance, object value);
-	}
+        public abstract void SetBoxedValue (ref object instance, object value);
+    }
 }

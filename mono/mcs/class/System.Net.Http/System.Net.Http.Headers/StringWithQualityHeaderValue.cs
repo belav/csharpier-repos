@@ -2,7 +2,7 @@
 // StringWithQualityHeaderValue.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2011 Xamarin Inc (http://www.xamarin.com)
 //
@@ -31,121 +31,121 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public class StringWithQualityHeaderValue : ICloneable
-	{
-		public StringWithQualityHeaderValue (string value)
-		{
-			Parser.Token.Check (value);
-			this.Value = value;
-		}
+    public class StringWithQualityHeaderValue : ICloneable
+    {
+        public StringWithQualityHeaderValue (string value)
+        {
+            Parser.Token.Check (value);
+            this.Value = value;
+        }
 
-		public StringWithQualityHeaderValue (string value, double quality)
-			: this (value)
-		{
-			if (quality < 0 || quality > 1)
-				throw new ArgumentOutOfRangeException ("quality");
+        public StringWithQualityHeaderValue (string value, double quality)
+            : this (value)
+        {
+            if (quality < 0 || quality > 1)
+                throw new ArgumentOutOfRangeException ("quality");
 
-			Quality = quality;
-		}
+            Quality = quality;
+        }
 
-		private StringWithQualityHeaderValue ()
-		{
-		}
+        private StringWithQualityHeaderValue ()
+        {
+        }
 
-		public double? Quality { get; private set; }
-		public string Value { get; private set; }
+        public double? Quality { get; private set; }
+        public string Value { get; private set; }
 
-		object ICloneable.Clone ()
-		{
-			return MemberwiseClone ();
-		}
+        object ICloneable.Clone ()
+        {
+            return MemberwiseClone ();
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as StringWithQualityHeaderValue;
-			return source != null &&
-				string.Equals (source.Value, Value, StringComparison.OrdinalIgnoreCase) &&
-				source.Quality == Quality;
-		}
+        public override bool Equals (object obj)
+        {
+            var source = obj as StringWithQualityHeaderValue;
+            return source != null &&
+                string.Equals (source.Value, Value, StringComparison.OrdinalIgnoreCase) &&
+                source.Quality == Quality;
+        }
 
-		public override int GetHashCode ()
-		{
-			return Value.ToLowerInvariant ().GetHashCode () ^ Quality.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            return Value.ToLowerInvariant ().GetHashCode () ^ Quality.GetHashCode ();
+        }
 
-		public static StringWithQualityHeaderValue Parse (string input)
-		{
-			StringWithQualityHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static StringWithQualityHeaderValue Parse (string input)
+        {
+            StringWithQualityHeaderValue value;
+            if (TryParse (input, out value))
+                return value;
 
-			throw new FormatException (input);
-		}
-		
-		public static bool TryParse (string input, out StringWithQualityHeaderValue parsedValue)
-		{
-			var lexer = new Lexer (input);
-			Token token;
-			if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
-				return true;
+            throw new FormatException (input);
+        }
+        
+        public static bool TryParse (string input, out StringWithQualityHeaderValue parsedValue)
+        {
+            var lexer = new Lexer (input);
+            Token token;
+            if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
+                return true;
 
-			parsedValue = null;
-			return false;
-		}
+            parsedValue = null;
+            return false;
+        }
 
-		internal static bool TryParse (string input, int minimalCount, out List<StringWithQualityHeaderValue> result)
-		{
-			return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
-		}
+        internal static bool TryParse (string input, int minimalCount, out List<StringWithQualityHeaderValue> result)
+        {
+            return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
+        }
 
-		static bool TryParseElement (Lexer lexer, out StringWithQualityHeaderValue parsedValue, out Token t)
-		{
-			parsedValue = null;
-			t = lexer.Scan ();
-			if (t != Token.Type.Token)
-				return false;
+        static bool TryParseElement (Lexer lexer, out StringWithQualityHeaderValue parsedValue, out Token t)
+        {
+            parsedValue = null;
+            t = lexer.Scan ();
+            if (t != Token.Type.Token)
+                return false;
 
-			var value = new StringWithQualityHeaderValue ();
-			value.Value = lexer.GetStringValue (t);
+            var value = new StringWithQualityHeaderValue ();
+            value.Value = lexer.GetStringValue (t);
 
-			t = lexer.Scan ();
-			if (t == Token.Type.SeparatorSemicolon) {
-				t = lexer.Scan ();
-				if (t != Token.Type.Token)
-					return false;
+            t = lexer.Scan ();
+            if (t == Token.Type.SeparatorSemicolon) {
+                t = lexer.Scan ();
+                if (t != Token.Type.Token)
+                    return false;
 
-				var s = lexer.GetStringValue (t);
-				if (s != "q" && s != "Q")
-					return false;
+                var s = lexer.GetStringValue (t);
+                if (s != "q" && s != "Q")
+                    return false;
 
-				t = lexer.Scan ();
-				if (t != Token.Type.SeparatorEqual)
-					return false;
+                t = lexer.Scan ();
+                if (t != Token.Type.SeparatorEqual)
+                    return false;
 
-				t = lexer.Scan ();
+                t = lexer.Scan ();
 
-				double d;
-				if (!lexer.TryGetDoubleValue (t, out d))
-					return false;
+                double d;
+                if (!lexer.TryGetDoubleValue (t, out d))
+                    return false;
 
-				if (d > 1)
-					return false;
+                if (d > 1)
+                    return false;
 
-				value.Quality = d;
+                value.Quality = d;
 
-				t = lexer.Scan ();
-			}
+                t = lexer.Scan ();
+            }
 
-			parsedValue = value;
-			return true;
-		}
+            parsedValue = value;
+            return true;
+        }
 
-		public override string ToString ()
-		{
-			if (Quality != null)
-				return Value + "; q=" + Quality.Value.ToString ("0.0##", CultureInfo.InvariantCulture);
+        public override string ToString ()
+        {
+            if (Quality != null)
+                return Value + "; q=" + Quality.Value.ToString ("0.0##", CultureInfo.InvariantCulture);
 
-			return Value;
-		}
-	}
+            return Value;
+        }
+    }
 }

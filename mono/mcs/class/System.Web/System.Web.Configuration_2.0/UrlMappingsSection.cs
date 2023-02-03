@@ -2,7 +2,7 @@
 // System.Web.Configuration.UrlMappingsSection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,37 +34,37 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public sealed class UrlMappingsSection : ConfigurationSection
-	{
-		static ConfigurationProperty enabledProp;
-		static ConfigurationProperty urlMappingsProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class UrlMappingsSection : ConfigurationSection
+    {
+        static ConfigurationProperty enabledProp;
+        static ConfigurationProperty urlMappingsProp;
+        static ConfigurationPropertyCollection properties;
 
-		static UrlMappingsSection ()
-		{
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-			urlMappingsProp = new ConfigurationProperty ("", typeof (UrlMappingCollection), null,
-								     null, null, ConfigurationPropertyOptions.IsDefaultCollection);
-			properties = new ConfigurationPropertyCollection ();
+        static UrlMappingsSection ()
+        {
+            enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
+            urlMappingsProp = new ConfigurationProperty ("", typeof (UrlMappingCollection), null,
+                                     null, null, ConfigurationPropertyOptions.IsDefaultCollection);
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (enabledProp);
-			properties.Add (urlMappingsProp);
-		}
+            properties.Add (enabledProp);
+            properties.Add (urlMappingsProp);
+        }
 
-		[ConfigurationProperty ("enabled", DefaultValue = "True")]
-		public bool IsEnabled {
-			get { return (bool) base [enabledProp];}
-			set { base[enabledProp] = value; }
-		}
+        [ConfigurationProperty ("enabled", DefaultValue = "True")]
+        public bool IsEnabled {
+            get { return (bool) base [enabledProp];}
+            set { base[enabledProp] = value; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public UrlMappingCollection UrlMappings {
-			get { return (UrlMappingCollection) base [urlMappingsProp];}
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public UrlMappingCollection UrlMappings {
+            get { return (UrlMappingCollection) base [urlMappingsProp];}
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

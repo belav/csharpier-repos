@@ -5,14 +5,14 @@ using System;
 
 class Program
 {
-	public static void Main ()
-	{
-		int a;
-		string s = "";
+    public static void Main ()
+    {
+        int a;
+        string s = "";
 
-		for (int i = 0; s != "s" && (a = 4) > 3; ++i) {
-		}
+        for (int i = 0; s != "s" && (a = 4) > 3; ++i) {
+        }
 
-		Console.WriteLine (a);
-	}
+        Console.WriteLine (a);
+    }
 }

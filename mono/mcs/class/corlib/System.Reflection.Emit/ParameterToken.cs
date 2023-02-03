@@ -31,71 +31,71 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-	/// <summary>
-	///  Represents the Token returned by the metadata to represent a Parameter.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public readonly struct ParameterToken : IEquatable<ParameterToken> {
+    /// <summary>
+    ///  Represents the Token returned by the metadata to represent a Parameter.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public readonly struct ParameterToken : IEquatable<ParameterToken> {
 
-		internal readonly int tokValue;
+        internal readonly int tokValue;
 
-		public static readonly ParameterToken Empty = new ParameterToken ();
+        public static readonly ParameterToken Empty = new ParameterToken ();
 
-		internal ParameterToken (int val)
-		{
-			tokValue = val;
-		}
+        internal ParameterToken (int val)
+        {
+            tokValue = val;
+        }
 
-		/// <summary>
-		/// </summary>
-		public override bool Equals (object obj)
-		{
-			bool res = obj is ParameterToken;
+        /// <summary>
+        /// </summary>
+        public override bool Equals (object obj)
+        {
+            bool res = obj is ParameterToken;
 
-			if (res) {
-				ParameterToken that = (ParameterToken) obj;
-				res = (this.tokValue == that.tokValue);
-			}
+            if (res) {
+                ParameterToken that = (ParameterToken) obj;
+                res = (this.tokValue == that.tokValue);
+            }
 
-			return res;
-		}
+            return res;
+        }
 
-		public bool Equals (ParameterToken obj)
-		{
-			return (this.tokValue == obj.tokValue);
-		}
+        public bool Equals (ParameterToken obj)
+        {
+            return (this.tokValue == obj.tokValue);
+        }
 
-		public static bool operator == (ParameterToken a, ParameterToken b)
-		{
-			return Equals (a, b);
-		}
+        public static bool operator == (ParameterToken a, ParameterToken b)
+        {
+            return Equals (a, b);
+        }
 
-		public static bool operator != (ParameterToken a, ParameterToken b)
-		{
-			return !Equals (a, b);
-		}
+        public static bool operator != (ParameterToken a, ParameterToken b)
+        {
+            return !Equals (a, b);
+        }
 
-		/// <summary>
-		///  Tests whether the given object is an instance of
-		///  ParameterToken and has the same token value.
-		/// </summary>
-		public override int GetHashCode ()
-		{
-			return tokValue;
-		}
+        /// <summary>
+        ///  Tests whether the given object is an instance of
+        ///  ParameterToken and has the same token value.
+        /// </summary>
+        public override int GetHashCode ()
+        {
+            return tokValue;
+        }
 
 
-		/// <summary>
-		///  Returns the metadata token for this Parameter.
-		/// </summary>
-		public int Token {
-			get {
-				return tokValue;
-			}
-		}
+        /// <summary>
+        ///  Returns the metadata token for this Parameter.
+        /// </summary>
+        public int Token {
+            get {
+                return tokValue;
+            }
+        }
 
-	}
+    }
 
 }
 

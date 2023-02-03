@@ -8,6 +8,6 @@ class World
 { }
 
 class Foo<T,U>
-	where T : Test, U
-	where U : World
+    where T : Test, U
+    where U : World
 { }

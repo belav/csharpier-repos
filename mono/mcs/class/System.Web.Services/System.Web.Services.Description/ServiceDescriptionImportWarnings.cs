@@ -30,15 +30,15 @@
 
 namespace System.Web.Services.Description 
 {
-	[Flags]
-	public enum ServiceDescriptionImportWarnings {
-		NoCodeGenerated = 0x1,
-		NoMethodsGenerated = 0x20,
-		OptionalExtensionsIgnored = 0x2,
-		RequiredExtensionsIgnored = 0x4,
-		UnsupportedBindingsIgnored = 0x10,
-		UnsupportedOperationsIgnored = 0x8,
-		SchemaValidation = 0x40,
-		WsiConformance = 0x80
-	}
+    [Flags]
+    public enum ServiceDescriptionImportWarnings {
+        NoCodeGenerated = 0x1,
+        NoMethodsGenerated = 0x20,
+        OptionalExtensionsIgnored = 0x2,
+        RequiredExtensionsIgnored = 0x4,
+        UnsupportedBindingsIgnored = 0x10,
+        UnsupportedOperationsIgnored = 0x8,
+        SchemaValidation = 0x40,
+        WsiConformance = 0x80
+    }
 }

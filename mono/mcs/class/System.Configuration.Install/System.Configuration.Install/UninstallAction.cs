@@ -31,9 +31,9 @@
 using System;
 
 namespace System.Configuration.Install {
-	public enum UninstallAction {
-		NoAction=0x01,
-		Remove=0x00
-	}
+    public enum UninstallAction {
+        NoAction=0x01,
+        Remove=0x00
+    }
 }
 

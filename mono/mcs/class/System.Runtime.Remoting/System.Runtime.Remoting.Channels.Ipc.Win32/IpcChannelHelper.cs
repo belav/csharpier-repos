@@ -121,11 +121,11 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public static void Copy(Stream input, Stream output) 
         {
             MemoryStream ms = input as MemoryStream;
-	    if (ms != null)
-	    {
-	        ms.WriteTo (output);
-		return;
-	    }
+        if (ms != null)
+        {
+            ms.WriteTo (output);
+        return;
+        }
 
             // TODO: find out the optimal chunk size.
             const int size = 1024 * 1024;

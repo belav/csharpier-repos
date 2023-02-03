@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3203,7 +3203,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // of each element is null. It is not possible for the same array creation expression to
             // also instantiate the sub-arrays, and the statement
             //
-            // int[][] a = new int[100][5];		// Error
+            // int[][] a = new int[100][5];        // Error
             //
             // results in a compile-time error. 
             //

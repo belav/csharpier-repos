@@ -377,7 +377,7 @@ namespace TestLibrary
             return GetChar(allowsurrogate, allownoweight);
         }
         public static Char GetChar(bool allowsurrogate, bool allownoweight)
-        {			
+        {            
             Int16 iVal = GetInt16();
             
             Char c = (char)(iVal);
@@ -386,7 +386,7 @@ namespace TestLibrary
             {
                 // we tried and failed to get a letter
                 // Just grab an ASCII letter
-				// This is a hack but will work for now
+                // This is a hack but will work for now
                 c = (char)(GetInt16() % 26 + 'A');
             }
 

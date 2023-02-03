@@ -28,38 +28,38 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodePropertyReference: CodeValueReference
-	{
-		CodeExpression target;
-		PropertyInfo property;
-		
-		public CodePropertyReference (CodeExpression target, PropertyInfo property)
-		{
-			this.target = target;
-			this.property = property;		
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			CodeGenerationHelper.GenerateMethodCall (gen, target, property.GetGetMethod());
-		}
-		
-		public override void GenerateSet (ILGenerator gen, CodeExpression value)
-		{
-			CodeGenerationHelper.GenerateMethodCall (gen, target, property.GetSetMethod(), value);
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			target.PrintCode (cp);
-			cp.Write (".");
-			cp.Write (property.Name);
-		}
-		
-		public override Type GetResultType ()
-		{
-			return property.PropertyType;
-		}
-	}
+    public class CodePropertyReference: CodeValueReference
+    {
+        CodeExpression target;
+        PropertyInfo property;
+        
+        public CodePropertyReference (CodeExpression target, PropertyInfo property)
+        {
+            this.target = target;
+            this.property = property;        
+        }
+        
+        public override void Generate (ILGenerator gen)
+        {
+            CodeGenerationHelper.GenerateMethodCall (gen, target, property.GetGetMethod());
+        }
+        
+        public override void GenerateSet (ILGenerator gen, CodeExpression value)
+        {
+            CodeGenerationHelper.GenerateMethodCall (gen, target, property.GetSetMethod(), value);
+        }
+        
+        public override void PrintCode (CodeWriter cp)
+        {
+            target.PrintCode (cp);
+            cp.Write (".");
+            cp.Write (property.Name);
+        }
+        
+        public override Type GetResultType ()
+        {
+            return property.PropertyType;
+        }
+    }
 }
 #endif

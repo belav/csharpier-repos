@@ -31,52 +31,52 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil;
+    using Mono.Cecil;
 
-	internal sealed class DeclSecurityTable : IMetadataTable {
+    internal sealed class DeclSecurityTable : IMetadataTable {
 
-		public const int RId = 0x0e;
+        public const int RId = 0x0e;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public DeclSecurityRow this [int index] {
-			get { return m_rows [index] as DeclSecurityRow; }
-			set { m_rows [index] = value; }
-		}
+        public DeclSecurityRow this [int index] {
+            get { return m_rows [index] as DeclSecurityRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal DeclSecurityTable ()
-		{
-		}
+        internal DeclSecurityTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitDeclSecurityTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitDeclSecurityTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class DeclSecurityRow : IMetadataRow {
+    internal sealed class DeclSecurityRow : IMetadataRow {
 
-		public SecurityAction Action;
-		public MetadataToken Parent;
-		public uint PermissionSet;
+        public SecurityAction Action;
+        public MetadataToken Parent;
+        public uint PermissionSet;
 
-		internal DeclSecurityRow ()
-		{
-		}
+        internal DeclSecurityRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitDeclSecurityRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitDeclSecurityRow (this);
+        }
+    }
 }

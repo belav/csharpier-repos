@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -97,7 +97,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="other">The <see cref="JEnumerable{T}"/> to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="JEnumerable{T}"/> is equal to this instance; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified <see cref="JEnumerable{T}"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(JEnumerable<T> other)
         {
@@ -109,7 +109,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="obj">The <see cref="Object"/> to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="Object"/> is equal to this instance; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified <see cref="Object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object? obj)
         {

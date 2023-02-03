@@ -3,18 +3,18 @@
 
 public class Outer
 {
-	public enum Inner
-	{
-		ONE,
-		TWO
-	}
+    public enum Inner
+    {
+        ONE,
+        TWO
+    }
 }
 
 public class C
 {
-	public static bool Test ()
-	{
-		Outer outer = null;
-		return 0 == outer.Inner.ONE;
-	}
+    public static bool Test ()
+    {
+        Outer outer = null;
+        return 0 == outer.Inner.ONE;
+    }
 }

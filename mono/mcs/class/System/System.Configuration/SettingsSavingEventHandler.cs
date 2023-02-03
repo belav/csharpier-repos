@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsSavingEventHandler.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,6 +31,6 @@ using System.ComponentModel;
 
 namespace System.Configuration
 {
-	public delegate void SettingsSavingEventHandler (object sender, CancelEventArgs e);
+    public delegate void SettingsSavingEventHandler (object sender, CancelEventArgs e);
 }
 

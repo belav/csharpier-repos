@@ -1,9 +1,9 @@
 //
 // CompilerErrorCas.cs 
-//	- CAS unit tests for System.CodeDom.Compiler.CompilerError
+//    - CAS unit tests for System.CodeDom.Compiler.CompilerError
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,73 +38,73 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CompilerErrorCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CompilerErrorCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		private string fname;
+        private string fname;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// at full trust
-			fname = Path.GetTempFileName ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            // at full trust
+            fname = Path.GetTempFileName ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CompilerError ce = new CompilerError ();
-			Assert.AreEqual (0, ce.Column, "Column");
-			ce.Column = 1;
-			Assert.AreEqual (String.Empty, ce.ErrorNumber, "ErrorNumber");
-			ce.ErrorNumber = "cs0000";
-			Assert.AreEqual (String.Empty, ce.ErrorText, "ErrorText");
-			ce.ErrorText = "error text";
-			Assert.AreEqual (String.Empty, ce.FileName, "FileName");
-			ce.FileName = fname;
-			Assert.IsFalse (ce.IsWarning, "IsWarning");
-			ce.IsWarning = true;
-			Assert.AreEqual (0, ce.Line, "Line");
-			ce.Line = 1;
-			Assert.IsNotNull (ce.ToString (), "ToString");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CompilerError ce = new CompilerError ();
+            Assert.AreEqual (0, ce.Column, "Column");
+            ce.Column = 1;
+            Assert.AreEqual (String.Empty, ce.ErrorNumber, "ErrorNumber");
+            ce.ErrorNumber = "cs0000";
+            Assert.AreEqual (String.Empty, ce.ErrorText, "ErrorText");
+            ce.ErrorText = "error text";
+            Assert.AreEqual (String.Empty, ce.FileName, "FileName");
+            ce.FileName = fname;
+            Assert.IsFalse (ce.IsWarning, "IsWarning");
+            ce.IsWarning = true;
+            Assert.AreEqual (0, ce.Line, "Line");
+            ce.Line = 1;
+            Assert.IsNotNull (ce.ToString (), "ToString");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor5_Deny_Unrestricted ()
-		{
-			CompilerError ce = new CompilerError (fname, 1, 1, "cs0000", "error text");
-			Assert.IsTrue ((ce.ToString ().IndexOf (fname) >= 0), "ToString");
-			Assert.AreEqual (1, ce.Column, "Column");
-			ce.Column = Int32.MinValue;
-			Assert.AreEqual ("cs0000", ce.ErrorNumber, "ErrorNumber");
-			ce.ErrorNumber = String.Empty;
-			Assert.AreEqual ("error text", ce.ErrorText, "ErrorText");
-			ce.ErrorText = String.Empty;
-			Assert.AreEqual (fname, ce.FileName, "FileName");
-			ce.FileName = String.Empty;
-			Assert.IsFalse (ce.IsWarning, "IsWarning");
-			ce.IsWarning = true;
-			Assert.AreEqual (1, ce.Line, "Line");
-			ce.Line = Int32.MinValue;
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor5_Deny_Unrestricted ()
+        {
+            CompilerError ce = new CompilerError (fname, 1, 1, "cs0000", "error text");
+            Assert.IsTrue ((ce.ToString ().IndexOf (fname) >= 0), "ToString");
+            Assert.AreEqual (1, ce.Column, "Column");
+            ce.Column = Int32.MinValue;
+            Assert.AreEqual ("cs0000", ce.ErrorNumber, "ErrorNumber");
+            ce.ErrorNumber = String.Empty;
+            Assert.AreEqual ("error text", ce.ErrorText, "ErrorText");
+            ce.ErrorText = String.Empty;
+            Assert.AreEqual (fname, ce.FileName, "FileName");
+            ce.FileName = String.Empty;
+            Assert.IsFalse (ce.IsWarning, "IsWarning");
+            ce.IsWarning = true;
+            Assert.AreEqual (1, ce.Line, "Line");
+            ce.Line = Int32.MinValue;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CompilerError).GetConstructor (new Type [0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CompilerError).GetConstructor (new Type [0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

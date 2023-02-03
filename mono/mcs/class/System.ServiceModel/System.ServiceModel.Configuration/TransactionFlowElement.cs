@@ -2,7 +2,7 @@
 // TransactionFlowElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,45 +54,45 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class TransactionFlowElement
-		 : BindingElementExtensionElement
-	{
-		ConfigurationPropertyCollection _properties;
+    public partial class TransactionFlowElement
+         : BindingElementExtensionElement
+    {
+        ConfigurationPropertyCollection _properties;
 
-		public TransactionFlowElement () {
-		}
+        public TransactionFlowElement () {
+        }
 
 
-		// Properties
+        // Properties
 
-		public override Type BindingElementType {
-			get { return typeof (TransactionFlowBindingElement); }
-		}
+        public override Type BindingElementType {
+            get { return typeof (TransactionFlowBindingElement); }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					_properties.Add (new ConfigurationProperty ("transactionProtocol", typeof (TransactionProtocol), "OleTransactions", new TransactionProtocolConverter (), null, ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get {
+                if (_properties == null) {
+                    _properties = new ConfigurationPropertyCollection ();
+                    _properties.Add (new ConfigurationProperty ("transactionProtocol", typeof (TransactionProtocol), "OleTransactions", new TransactionProtocolConverter (), null, ConfigurationPropertyOptions.None));
+                }
+                return _properties;
+            }
+        }
 
-		[ConfigurationProperty ("transactionProtocol",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "OleTransactions")]
-		[TypeConverter (typeof (TransactionProtocolConverter))]
-		public TransactionProtocol TransactionProtocol {
-			get { return (TransactionProtocol) base ["transactionProtocol"]; }
-			set { base ["transactionProtocol"] = value; }
-		}
+        [ConfigurationProperty ("transactionProtocol",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "OleTransactions")]
+        [TypeConverter (typeof (TransactionProtocolConverter))]
+        public TransactionProtocol TransactionProtocol {
+            get { return (TransactionProtocol) base ["transactionProtocol"]; }
+            set { base ["transactionProtocol"] = value; }
+        }
 
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement () {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 
 }

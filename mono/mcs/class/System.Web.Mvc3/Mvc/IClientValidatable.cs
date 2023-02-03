@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     using System.Collections.Generic;
 
     // The purpose of this interface is to make something as supporting client-side

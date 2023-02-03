@@ -1,4 +1,4 @@
-๏ปฟ// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -241,7 +241,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // SPEC VIOLATION for Dev10 COMPATIBILITY:
 
                 // Dev10 compiler violates the SPEC comment below:
-                //      "if the constant-expression is not implicitly convertible (ยง6.1) to 
+                //      "if the constant-expression is not implicitly convertible (ง6.1) to 
                 //      the governing type of the nearest enclosing switch statement, 
                 //      a compile-time error occurs"
 
@@ -381,7 +381,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // SPEC:    1) If the type of the switch expression is sbyte, byte, short, ushort, int, uint,
                 // SPEC:       long, ulong, bool, char, string, or an enum-type, or if it is the nullable type
                 // SPEC:       corresponding to one of these types, then that is the governing type of the switch statement. 
-                // SPEC:    2) Otherwise if exactly one user-defined implicit conversion (ยง6.4) exists from the
+                // SPEC:    2) Otherwise if exactly one user-defined implicit conversion (ง6.4) exists from the
                 // SPEC:       type of the switch expression to one of the following possible governing types:
                 // SPEC:       sbyte, byte, short, ushort, int, uint, long, ulong, char, string, or, a nullable type
                 // SPEC:       corresponding to one of those types, then the result is the switch governing type
@@ -478,7 +478,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SourceLabelSymbol matchedLabelSymbol;
 
                 // SPEC:    If the goto case statement is not enclosed by a switch statement, if the constant-expression
-                // SPEC:    is not implicitly convertible (ยง6.1) to the governing type of the nearest enclosing switch statement,
+                // SPEC:    is not implicitly convertible (ง6.1) to the governing type of the nearest enclosing switch statement,
                 // SPEC:    or if the nearest enclosing switch statement does not contain a case label with the given constant value,
                 // SPEC:    a compile-time error occurs.
 

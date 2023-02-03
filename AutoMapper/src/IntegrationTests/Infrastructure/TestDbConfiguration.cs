@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
 namespace AutoMapper.IntegrationTests.Net4

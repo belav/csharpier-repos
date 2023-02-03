@@ -7,12 +7,12 @@ namespace Testing
    /// <include file='cs1589.inc' path='/foo' />
    public class Test
    {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 
-	/// <include file='cs1589.inc' path='/root/@attr'/>
-	public string S3;
+    /// <include file='cs1589.inc' path='/root/@attr'/>
+    public string S3;
    }
 }
 

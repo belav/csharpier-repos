@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.ControlCollection
 //
 // Authors:
-//	Gonzalo Paniagua Javier  <gonzalo@novell.com>
+//    Gonzalo Paniagua Javier  <gonzalo@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,22 +34,22 @@ using System.Web;
 using System.Web.UI;
 
 namespace MonoTests.System.Web.UI {
-	[TestFixture]	
-	public class ControlCollectionTest {
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void AddNull ()
-		{
-			Page p = new Page ();
-			p.Controls.Add (null);
-		}
+    [TestFixture]    
+    public class ControlCollectionTest {
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void AddNull ()
+        {
+            Page p = new Page ();
+            p.Controls.Add (null);
+        }
 
-		[Test]
-		public void RemoveNull ()
-		{
-			Page p = new Page ();
-			p.Controls.Remove (null);
-		}
-	}
+        [Test]
+        public void RemoveNull ()
+        {
+            Page p = new Page ();
+            p.Controls.Remove (null);
+        }
+    }
 }
 

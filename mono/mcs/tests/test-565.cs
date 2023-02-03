@@ -2,11 +2,11 @@
 
 class T
 {
-	public new bool Equals (object obj)
-	{
-		return true;
-	}
+    public new bool Equals (object obj)
+    {
+        return true;
+    }
 
-	public static void Main ()
-	{ }
+    public static void Main ()
+    { }
 }

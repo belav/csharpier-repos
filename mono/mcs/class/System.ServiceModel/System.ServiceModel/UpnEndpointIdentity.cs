@@ -2,7 +2,7 @@
 // UpnEndpointIdentity.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,23 +37,23 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	public class UpnEndpointIdentity : EndpointIdentity
-	{
+    public class UpnEndpointIdentity : EndpointIdentity
+    {
 #if !MOBILE && !XAMMAC_4_5
-		public UpnEndpointIdentity (Claim identity)
-		{
-			Initialize (identity);
-		}
+        public UpnEndpointIdentity (Claim identity)
+        {
+            Initialize (identity);
+        }
 
-		public UpnEndpointIdentity (string upnName)
-			: this (Claim.CreateUpnClaim (upnName))
-		{
-		}
+        public UpnEndpointIdentity (string upnName)
+            : this (Claim.CreateUpnClaim (upnName))
+        {
+        }
 #else
-		public UpnEndpointIdentity (string upnName)
-		{
-			throw new NotImplementedException ();
-		}
+        public UpnEndpointIdentity (string upnName)
+        {
+            throw new NotImplementedException ();
+        }
 #endif
-	}
+    }
 }

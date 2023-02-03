@@ -2,7 +2,7 @@
 // System.Security.Permissions.DataProtectionPermissionAttribute class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -31,90 +31,90 @@ using System.Globalization;
 
 namespace System.Security.Permissions {
 
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-		AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
-		AllowMultiple = true, Inherited = false)]
-	[Serializable]
-	public sealed class DataProtectionPermissionAttribute : CodeAccessSecurityAttribute {
+    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
+        AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
+        AllowMultiple = true, Inherited = false)]
+    [Serializable]
+    public sealed class DataProtectionPermissionAttribute : CodeAccessSecurityAttribute {
 
-		private DataProtectionPermissionFlags _flags;
+        private DataProtectionPermissionFlags _flags;
 
-		public DataProtectionPermissionAttribute (SecurityAction action)
-			: base (action) 
-		{
-		}
-
-
-		public DataProtectionPermissionFlags Flags {
-			get { return _flags; }
-			set {
-				if ((value & DataProtectionPermissionFlags.AllFlags) != value) {
-					string msg = String.Format (Locale.GetText ("Invalid flags {0}"), value);
-					throw new ArgumentException (msg, "DataProtectionPermissionFlags");
-				}
-
-				_flags = value;
-			}
-		}
-
-		public bool ProtectData {
-			get { return ((_flags & DataProtectionPermissionFlags.ProtectData) != 0); }
-			set {
-				if (value) {
-					_flags |= DataProtectionPermissionFlags.ProtectData;
-				}
-				else {
-					_flags &= ~DataProtectionPermissionFlags.ProtectData;
-				}
-			}
-		}
-
-		public bool UnprotectData {
-			get { return ((_flags & DataProtectionPermissionFlags.UnprotectData) != 0); }
-			set {
-				if (value) {
-					_flags |= DataProtectionPermissionFlags.UnprotectData;
-				}
-				else {
-					_flags &= ~DataProtectionPermissionFlags.UnprotectData;
-				}
-			}
-		}
-
-		public bool ProtectMemory {
-			get { return ((_flags & DataProtectionPermissionFlags.ProtectMemory) != 0); }
-			set {
-				if (value) {
-					_flags |= DataProtectionPermissionFlags.ProtectMemory;
-				}
-				else {
-					_flags &= ~DataProtectionPermissionFlags.ProtectMemory;
-				}
-			}
-		}
-
-		public bool UnprotectMemory {
-			get { return ((_flags & DataProtectionPermissionFlags.UnprotectMemory) != 0); }
-			set {
-				if (value) {
-					_flags |= DataProtectionPermissionFlags.UnprotectMemory;
-				}
-				else {
-					_flags &= ~DataProtectionPermissionFlags.UnprotectMemory;
-				}
-			}
-		}
+        public DataProtectionPermissionAttribute (SecurityAction action)
+            : base (action) 
+        {
+        }
 
 
-		public override IPermission CreatePermission ()
-		{
-			DataProtectionPermission perm = null;
-			if (this.Unrestricted)
-				perm = new DataProtectionPermission (PermissionState.Unrestricted);
-			else
-				perm = new DataProtectionPermission (_flags);
-			return perm;
-		}
-	}
+        public DataProtectionPermissionFlags Flags {
+            get { return _flags; }
+            set {
+                if ((value & DataProtectionPermissionFlags.AllFlags) != value) {
+                    string msg = String.Format (Locale.GetText ("Invalid flags {0}"), value);
+                    throw new ArgumentException (msg, "DataProtectionPermissionFlags");
+                }
+
+                _flags = value;
+            }
+        }
+
+        public bool ProtectData {
+            get { return ((_flags & DataProtectionPermissionFlags.ProtectData) != 0); }
+            set {
+                if (value) {
+                    _flags |= DataProtectionPermissionFlags.ProtectData;
+                }
+                else {
+                    _flags &= ~DataProtectionPermissionFlags.ProtectData;
+                }
+            }
+        }
+
+        public bool UnprotectData {
+            get { return ((_flags & DataProtectionPermissionFlags.UnprotectData) != 0); }
+            set {
+                if (value) {
+                    _flags |= DataProtectionPermissionFlags.UnprotectData;
+                }
+                else {
+                    _flags &= ~DataProtectionPermissionFlags.UnprotectData;
+                }
+            }
+        }
+
+        public bool ProtectMemory {
+            get { return ((_flags & DataProtectionPermissionFlags.ProtectMemory) != 0); }
+            set {
+                if (value) {
+                    _flags |= DataProtectionPermissionFlags.ProtectMemory;
+                }
+                else {
+                    _flags &= ~DataProtectionPermissionFlags.ProtectMemory;
+                }
+            }
+        }
+
+        public bool UnprotectMemory {
+            get { return ((_flags & DataProtectionPermissionFlags.UnprotectMemory) != 0); }
+            set {
+                if (value) {
+                    _flags |= DataProtectionPermissionFlags.UnprotectMemory;
+                }
+                else {
+                    _flags &= ~DataProtectionPermissionFlags.UnprotectMemory;
+                }
+            }
+        }
+
+
+        public override IPermission CreatePermission ()
+        {
+            DataProtectionPermission perm = null;
+            if (this.Unrestricted)
+                perm = new DataProtectionPermission (PermissionState.Unrestricted);
+            else
+                perm = new DataProtectionPermission (_flags);
+            return perm;
+        }
+    }
 }
 

@@ -33,56 +33,56 @@ using Mono.Unix;
 
 namespace Mono.Unix {
 
-	public struct UnixPipes
-		: IEquatable <UnixPipes>
-	{
-		public UnixPipes (UnixStream reading, UnixStream writing)
-		{
-			Reading = reading;
-			Writing = writing;
-		}
+    public struct UnixPipes
+        : IEquatable <UnixPipes>
+    {
+        public UnixPipes (UnixStream reading, UnixStream writing)
+        {
+            Reading = reading;
+            Writing = writing;
+        }
 
-		public UnixStream Reading;
-		public UnixStream Writing;
+        public UnixStream Reading;
+        public UnixStream Writing;
 
-		public static UnixPipes CreatePipes ()
-		{
-			int reading, writing;
-			int r = Native.Syscall.pipe (out reading, out writing);
-			UnixMarshal.ThrowExceptionForLastErrorIf (r);
-			return new UnixPipes (new UnixStream (reading), new UnixStream (writing));
-		}
+        public static UnixPipes CreatePipes ()
+        {
+            int reading, writing;
+            int r = Native.Syscall.pipe (out reading, out writing);
+            UnixMarshal.ThrowExceptionForLastErrorIf (r);
+            return new UnixPipes (new UnixStream (reading), new UnixStream (writing));
+        }
 
-		public override bool Equals (object value)
-		{
-			if ((value == null) || (value.GetType () != GetType ()))
-				return false;
-			UnixPipes other = (UnixPipes) value;
-			return Reading.Handle == other.Reading.Handle &&
-				Writing.Handle == other.Writing.Handle;
-		}
+        public override bool Equals (object value)
+        {
+            if ((value == null) || (value.GetType () != GetType ()))
+                return false;
+            UnixPipes other = (UnixPipes) value;
+            return Reading.Handle == other.Reading.Handle &&
+                Writing.Handle == other.Writing.Handle;
+        }
 
-		public bool Equals (UnixPipes value)
-		{
-			return Reading.Handle == value.Reading.Handle &&
-				Writing.Handle == value.Writing.Handle;
-		}
+        public bool Equals (UnixPipes value)
+        {
+            return Reading.Handle == value.Reading.Handle &&
+                Writing.Handle == value.Writing.Handle;
+        }
 
-		public override int GetHashCode ()
-		{
-			return Reading.Handle.GetHashCode () ^ Writing.Handle.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            return Reading.Handle.GetHashCode () ^ Writing.Handle.GetHashCode ();
+        }
 
-		public static bool operator== (UnixPipes lhs, UnixPipes rhs)
-		{
-			return lhs.Equals (rhs);
-		}
+        public static bool operator== (UnixPipes lhs, UnixPipes rhs)
+        {
+            return lhs.Equals (rhs);
+        }
 
-		public static bool operator!= (UnixPipes lhs, UnixPipes rhs)
-		{
-			return !lhs.Equals (rhs);
-		}
-	}
+        public static bool operator!= (UnixPipes lhs, UnixPipes rhs)
+        {
+            return !lhs.Equals (rhs);
+        }
+    }
 }
 
 // vim: noexpandtab

@@ -2,7 +2,7 @@
 // System.Management.EventWatcherOptions
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,31 +30,31 @@
 
 namespace System.Management
 {
-	public class EventWatcherOptions : ManagementOptions
-	{
-		[MonoTODO]
-		public EventWatcherOptions ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class EventWatcherOptions : ManagementOptions
+    {
+        [MonoTODO]
+        public EventWatcherOptions ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public EventWatcherOptions (ManagementNamedValueCollection context, TimeSpan timeout, int blockSize)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public EventWatcherOptions (ManagementNamedValueCollection context, TimeSpan timeout, int blockSize)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override object Clone ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object Clone ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public int BlockSize {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public int BlockSize {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
+    }
 }
 

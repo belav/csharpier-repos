@@ -54,7 +54,7 @@ public class App
   public void Run ()
   {
     if (templateFile == null || templateFile.Length == 0 ||
-	targetDir == null || targetDir.Length == 0)
+    targetDir == null || targetDir.Length == 0)
       throw new ApplicationException ("Missing or invalid installation data");
 
     XmlDocument doc = new XmlDocument ();
@@ -130,12 +130,12 @@ public class App
     
     switch (node.Name) {
       case "Folder":
-	ProcessFolder (node);
-	break;
+    ProcessFolder (node);
+    break;
 
       case "ProjectItem":
-	ProcessItem (node);
-	break;
+    ProcessItem (node);
+    break;
       }
   }
   

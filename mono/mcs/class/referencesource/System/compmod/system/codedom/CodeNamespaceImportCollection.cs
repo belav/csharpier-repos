@@ -54,23 +54,23 @@ namespace System.CodeDom {
             }
         }
 
-		/// <internalonly/>
-		bool IList.IsReadOnly
-		{
-			get
-			{
-				return false;
-			}
-		}
+        /// <internalonly/>
+        bool IList.IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
 
-		/// <internalonly/>
-		bool IList.IsFixedSize
-		{
-			get
-			{
-				return false;
-			}
-		}
+        /// <internalonly/>
+        bool IList.IsFixedSize
+        {
+            get
+            {
+                return false;
+            }
+        }
 
 
         /// <devdoc>

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -60,8 +60,8 @@ namespace Microsoft.CodeAnalysis.Collections
     ///
     /// <para>This type should be thread-safe. As a struct, it cannot protect its own fields from being changed from one
     /// thread while its members are executing on other threads because structs can change <em>in place</em> simply by
-    /// reassigning the field containing this struct. Therefore it is extremely important that <strong>⚠⚠ Every member
-    /// should only dereference <c>this</c> ONCE ⚠⚠</strong>. If a member needs to reference the
+    /// reassigning the field containing this struct. Therefore it is extremely important that <strong>?? Every member
+    /// should only dereference <c>this</c> ONCE ??</strong>. If a member needs to reference the
     /// <see cref="_list"/> field, that counts as a dereference of <c>this</c>. Calling other instance members
     /// (properties or methods) also counts as dereferencing <c>this</c>. Any member that needs to use <c>this</c> more
     /// than once must instead assign <c>this</c> to a local variable and use that for the rest of the code instead.

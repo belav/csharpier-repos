@@ -2,7 +2,7 @@
 // IEndpointBehavior.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,14 +31,14 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public interface IEndpointBehavior
-	{
-		void AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection bindingParameters);
-		void ApplyDispatchBehavior (ServiceEndpoint endpoint,
-			EndpointDispatcher endpointDispatcher);
-		void ApplyClientBehavior (ServiceEndpoint endpoint,
-			ClientRuntime clientRuntime);
-		void Validate (ServiceEndpoint endpoint);
-	}
+    public interface IEndpointBehavior
+    {
+        void AddBindingParameters (ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters);
+        void ApplyDispatchBehavior (ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher);
+        void ApplyClientBehavior (ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime);
+        void Validate (ServiceEndpoint endpoint);
+    }
 }

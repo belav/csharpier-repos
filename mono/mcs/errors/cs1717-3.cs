@@ -8,6 +8,6 @@ class A
     
     void C ()
     {
-	i = i;
+    i = i;
     }
 }

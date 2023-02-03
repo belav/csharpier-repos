@@ -37,75 +37,75 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataTableCollection_IndexOf_D : GHTBase
 {
-	public static void Main()
-	{
-		DataTableCollection_IndexOf_D tc = new DataTableCollection_IndexOf_D();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTableCollection_IndexOf_D");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    public static void Main()
+    {
+        DataTableCollection_IndexOf_D tc = new DataTableCollection_IndexOf_D();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTableCollection_IndexOf_D");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataTableCollection_IndexOf_D");
-			DataTableCollection_IndexOf_D1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
-	[Test]
-	public void DataTableCollection_IndexOf_D1()
-	{
-		DataSet ds = new DataSet();
-		DataTable dt = new DataTable("NewTable1");
-		DataTable dt1 = new DataTable("NewTable2");
-		ds.Tables.AddRange(new DataTable[] {dt,dt1});
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataTableCollection_IndexOf_D");
+            DataTableCollection_IndexOf_D1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
+    [Test]
+    public void DataTableCollection_IndexOf_D1()
+    {
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable("NewTable1");
+        DataTable dt1 = new DataTable("NewTable2");
+        ds.Tables.AddRange(new DataTable[] {dt,dt1});
 
-		Compare(ds.Tables.IndexOf(dt),0);
-		Compare(ds.Tables.IndexOf(dt1),1);
+        Compare(ds.Tables.IndexOf(dt),0);
+        Compare(ds.Tables.IndexOf(dt1),1);
 
-		ds.Tables.IndexOf((DataTable)null);
+        ds.Tables.IndexOf((DataTable)null);
 
-		DataTable dt2 = new DataTable("NewTable2");
+        DataTable dt2 = new DataTable("NewTable2");
 
-		Compare(ds.Tables.IndexOf(dt2),-1);
+        Compare(ds.Tables.IndexOf(dt2),-1);
 
-		
+        
 
-	}
+    }
 }
 }

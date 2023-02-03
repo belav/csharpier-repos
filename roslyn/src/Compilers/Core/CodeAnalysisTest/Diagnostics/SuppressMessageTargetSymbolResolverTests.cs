@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -811,17 +811,17 @@ class C
         {
             VerifyMemberResolution(@"
 Class C
-	Public Default ReadOnly Property $$Item(i As Integer, j As String) As C
-		Get
-			Return Me
-		End Get
-	End Property
+    Public Default ReadOnly Property $$Item(i As Integer, j As String) As C
+        Get
+            Return Me
+        End Get
+    End Property
 
-	Public Default ReadOnly Property Item(i As String) As C
-		Get
-			Return Me
-		End Get
-	End Property
+    Public Default ReadOnly Property Item(i As String) As C
+        Get
+            Return Me
+        End Get
+    End Property
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -895,9 +895,9 @@ class C
         {
             VerifyMemberResolution(@"
 Class C
-	Public Shared Function $$IsComplex(Of T0, T1)(a As Integer, ByRef b As Integer, ByRef c As T0, d As T1()) As Boolean
-		Return True
-	End Function
+    Public Shared Function $$IsComplex(Of T0, T1)(a As Integer, ByRef b As Integer, ByRef c As T0, d As T1()) As Boolean
+        Return True
+    End Function
 End Class",
                 LanguageNames.VisualBasic, false,
                 "C.#IsComplex`2(System.Int32,System.Int32&,!!0&,!!1[])",
@@ -925,12 +925,12 @@ class A
         {
             VerifyMemberResolution(@"
 Class A
-	Protected Overrides Sub $$Finalize()
-		Try
-		Finally
-			MyBase.Finalize()
-		End Try
-	End Sub
+    Protected Overrides Sub $$Finalize()
+        Try
+        Finally
+            MyBase.Finalize()
+        End Try
+    End Sub
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -960,9 +960,9 @@ class C
         {
             VerifyMemberResolution(@"
 Class C
-	Public Shared Function $$GetComplex(Of T)() As T()()(,,)(,)
-		Return Nothing
-	End Function
+    Public Shared Function $$GetComplex(Of T)() As T()()(,,)(,)
+        Return Nothing
+    End Function
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -995,11 +995,11 @@ public class C<T0>
         {
             VerifyMemberResolution(@"
 Public Class C(Of T0)
-	Public Class D(Of T1)
-		Public Function $$M(Of T2, T3)(a As T0, b As T1, c As T2) As T3
-			Return Nothing
-		End Function
-	End Class
+    Public Class D(Of T1)
+        Public Function $$M(Of T2, T3)(a As T0, b As T1, c As T2) As T3
+            Return Nothing
+        End Function
+    End Class
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -1032,13 +1032,13 @@ public class C<T0>
         {
             VerifyMemberResolution(@"
 Public Class C(Of T0)
-	Public Class D(Of T1)
-		Public Default ReadOnly Property $$Item(a As T1) As T0
-			Get
-				Return Nothing
-			End Get
-		End Property
-	End Class
+    Public Class D(Of T1)
+        Public Default ReadOnly Property $$Item(a As T1) As T0
+            Get
+                Return Nothing
+            End Get
+        End Property
+    End Class
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -1072,12 +1072,12 @@ class C
         {
             VerifyMemberResolution(@"
 Class C
-	Private Sub M0(x As Integer)
-	End Sub
+    Private Sub M0(x As Integer)
+    End Sub
 
-	Private Sub $$M1(ByRef x As Integer)
-		x = 1
-	End Sub
+    Private Sub $$M1(ByRef x As Integer)
+        x = 1
+    End Sub
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -1113,8 +1113,8 @@ Class G(Of T0, T1)
 End Class
 
 Class C(Of T3)
-	Private Function $$M(Of T4)(g As G(Of Double, Double), h As G(Of T3, T4())) As G(Of Integer, Integer)
-	End Function
+    Private Function $$M(Of T4)(g As G(Of Double, Double), h As G(Of T3, T4())) As G(Of Integer, Integer)
+    End Function
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -1143,9 +1143,9 @@ namespace @namespace
         {
             VerifyMemberResolution(@"
 Namespace [Namespace]
-	Class [Class]
-		Private $$[If] As Integer
-	End Class
+    Class [Class]
+        Private $$[If] As Integer
+    End Class
 End Namespace
 ",
                 LanguageNames.VisualBasic, false,
@@ -1218,13 +1218,13 @@ public class C<T0>
         {
             VerifyNoMemberResolution(@"
 Public Class C(Of T0)
-	Public Class D(Of T1)
-		Private [Namespace] As Integer
+    Public Class D(Of T1)
+        Private [Namespace] As Integer
 
-		Public Function M(Of T2, T3)(a As T0, b As T1, c As T2) As T3
-			Return Nothing
-		End Function
-	End Class
+        Public Function M(Of T2, T3)(a As T0, b As T1, c As T2) As T3
+            Return Nothing
+        End Function
+    End Class
 End Class
 ",
                 LanguageNames.VisualBasic, false,
@@ -1259,8 +1259,8 @@ End Class
                 Class G(Of T0, T1)
                 End Class
                 Class C(Of T3)
-                	Private Function M(Of T4)(g As G(Of T3, T4())) As G(Of Integer, Integer)
-                	End Function
+                    Private Function M(Of T4)(g As G(Of T3, T4())) As G(Of Integer, Integer)
+                    End Function
                 End Class
                 """,
                 LanguageNames.VisualBasic, false, names);

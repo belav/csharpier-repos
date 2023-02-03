@@ -35,50 +35,50 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleDataAdapter_Fill_DsStr : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OracleDataAdapter_Fill_DsStr tc = new OracleDataAdapter_Fill_DsStr();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataAdapter_Fill_DsStr");
-				tc.run();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+    [TestFixture]
+    public class OracleDataAdapter_Fill_DsStr : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OracleDataAdapter_Fill_DsStr tc = new OracleDataAdapter_Fill_DsStr();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataAdapter_Fill_DsStr");
+                tc.run();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
 
-		//public TestClass():base(true){}
+        //public TestClass():base(true){}
 
-		//Activate this constructor to log Failures to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		//Activate this constructor to log All to a log file
-		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-		[Test]
+        [Test]
 #if JAVA
-		[Category("NotWorking")]
+        [Category("NotWorking")]
 #endif
-		public void run()
-		{
-			OracleDataAdapter oleDBda = new OracleDataAdapter();
-			oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
+        public void run()
+        {
+            OracleDataAdapter oleDBda = new OracleDataAdapter();
+            oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
 
-			base.DbDataAdapter_Fill_Ds_Str((DbDataAdapter)oleDBda);
-		}
-	}
+            base.DbDataAdapter_Fill_Ds_Str((DbDataAdapter)oleDBda);
+        }
+    }
 }

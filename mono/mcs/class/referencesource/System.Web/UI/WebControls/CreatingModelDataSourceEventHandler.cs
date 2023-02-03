@@ -1,4 +1,4 @@
-﻿namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls {
 
     /// <summary>
     /// Represents a method that handles the CreatingModelDataSource event of Databound controls for customizing the 

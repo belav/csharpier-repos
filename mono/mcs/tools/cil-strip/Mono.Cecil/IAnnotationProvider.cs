@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil {
 
-	using System.Collections;
+    using System.Collections;
 
-	internal interface IAnnotationProvider {
+    internal interface IAnnotationProvider {
 
-		IDictionary Annotations { get; }
-	}
+        IDictionary Annotations { get; }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,28 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	internal struct XmlCollectionItem<T>
-	{
-		public readonly IXmlNode Node;
-		public readonly T        Value;
-		public readonly bool     HasValue;
+    internal struct XmlCollectionItem<T>
+    {
+        public readonly IXmlNode Node;
+        public readonly T        Value;
+        public readonly bool     HasValue;
 
-		public XmlCollectionItem(IXmlNode node)
-			: this(node, default(T), false) { }
+        public XmlCollectionItem(IXmlNode node)
+            : this(node, default(T), false) { }
 
-		public XmlCollectionItem(IXmlNode node, T value)
-			: this(node, value, true) { }
+        public XmlCollectionItem(IXmlNode node, T value)
+            : this(node, value, true) { }
 
-		private XmlCollectionItem(IXmlNode node, T value, bool hasValue)
-		{
-			Node     = node;
-			Value    = value;
-			HasValue = hasValue;
-		}
+        private XmlCollectionItem(IXmlNode node, T value, bool hasValue)
+        {
+            Node     = node;
+            Value    = value;
+            HasValue = hasValue;
+        }
 
-		public XmlCollectionItem<T> WithValue(T value)
-		{
-			return new XmlCollectionItem<T>(Node, value);
-		}
-	}
+        public XmlCollectionItem<T> WithValue(T value)
+        {
+            return new XmlCollectionItem<T>(Node, value);
+        }
+    }
 }

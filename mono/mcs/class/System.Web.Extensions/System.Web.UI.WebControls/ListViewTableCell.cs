@@ -33,11 +33,11 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.WebControls
 {
-	internal class ListViewTableCell : HtmlTableCell
-	{
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			RenderChildren(writer);
-		}
-	}
+    internal class ListViewTableCell : HtmlTableCell
+    {
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            RenderChildren(writer);
+        }
+    }
 }

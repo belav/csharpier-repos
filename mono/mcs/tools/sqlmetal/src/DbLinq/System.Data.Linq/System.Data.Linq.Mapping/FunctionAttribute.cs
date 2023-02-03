@@ -36,10 +36,10 @@ using System.Linq.Expressions;
 
 namespace System.Data.Linq.Mapping
 {
-	[AttributeUsage (AttributeTargets.Method, AllowMultiple = false)]
-	public sealed class FunctionAttribute : Attribute
-	{
-		public bool IsComposable { get; set; }
-		public string Name { get; set; }
-	}
+    [AttributeUsage (AttributeTargets.Method, AllowMultiple = false)]
+    public sealed class FunctionAttribute : Attribute
+    {
+        public bool IsComposable { get; set; }
+        public string Name { get; set; }
+    }
 }

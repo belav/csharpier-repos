@@ -6,7 +6,7 @@ using System;
 [assembly:CLSCompliant(true)]
 
 namespace DuplicateAttributes {
-	[CLSCompliant(true)]
-	[CLSCompliant(true)]
-	public class ClassA {}
+    [CLSCompliant(true)]
+    [CLSCompliant(true)]
+    public class ClassA {}
 }

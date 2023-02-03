@@ -2,7 +2,7 @@
 // SmtpDeliveryFormat.cs:
 //
 // Authors:
-//	Marek Safar (marek.safar@gmail.com)
+//    Marek Safar (marek.safar@gmail.com)
 //
 // (C) 2015 Xamarin, Inc. (http://www.xamarin.com)
 //
@@ -28,9 +28,9 @@
 
 namespace System.Net.Mail {
 
-	public enum SmtpDeliveryFormat
-	{
-		SevenBit = 0,
-		International = 1
-	}
+    public enum SmtpDeliveryFormat
+    {
+        SevenBit = 0,
+        International = 1
+    }
 }

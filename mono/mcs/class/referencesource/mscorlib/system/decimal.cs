@@ -227,15 +227,15 @@ namespace System {
         public extern Decimal(double value);
 
 #if MONO
-	public static long ToOACurrency (decimal value)
-	{
-		return (long) (value * 10000);
-	}
+    public static long ToOACurrency (decimal value)
+    {
+        return (long) (value * 10000);
+    }
 
-	public static decimal FromOACurrency (long cy)
-	{
-		return (decimal)cy / (decimal)10000;
-	}
+    public static decimal FromOACurrency (long cy)
+    {
+        return (decimal)cy / (decimal)10000;
+    }
 #else
         // Constructs a Decimal from a Currency value.
         //
@@ -902,7 +902,7 @@ namespace System {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void FCallToCurrency(ref Currency result, Decimal d);
 #endif
-	
+    
         // Converts a Decimal to a double. Since a double has fewer significant
         // digits than a Decimal, this operation may produce round-off errors.
         //

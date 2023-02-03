@@ -27,7 +27,7 @@ namespace System.Collections.Generic
         static volatile EqualityComparer<T> defaultComparer;
 
         public static EqualityComparer<T> Default {
-			[MethodImplAttribute (MethodImplOptions.AggressiveInlining)]
+            [MethodImplAttribute (MethodImplOptions.AggressiveInlining)]
             get {
                 Contract.Ensures(Contract.Result<EqualityComparer<T>>() != null);
 
@@ -50,10 +50,10 @@ namespace System.Collections.Generic
 
             RuntimeType t = (RuntimeType)typeof(T);
 
-			/////////////////////////////////////////////////
-			// KEEP THIS IN SYNC WITH THE DEVIRT CODE
-			// IN METHOD-TO-IR.C
-			/////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            // KEEP THIS IN SYNC WITH THE DEVIRT CODE
+            // IN METHOD-TO-IR.C
+            /////////////////////////////////////////////////
 
             // Specialize type byte for performance reasons
             if (t == typeof(byte)) {

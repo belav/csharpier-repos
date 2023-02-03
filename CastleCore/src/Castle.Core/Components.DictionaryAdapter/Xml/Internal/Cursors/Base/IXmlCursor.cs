@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
+    using System;
 
-	public interface IXmlCursor : IXmlIterator
-	{
-		void Reset();
-		void MoveTo(IXmlNode node);
-		void MoveToEnd();
+    public interface IXmlCursor : IXmlIterator
+    {
+        void Reset();
+        void MoveTo(IXmlNode node);
+        void MoveToEnd();
 
-		void Create(Type type);
-		void Coerce(Type type);
-		void Remove();
-		void RemoveAllNext();
-	}
+        void Create(Type type);
+        void Coerce(Type type);
+        void Remove();
+        void RemoveAllNext();
+    }
 }

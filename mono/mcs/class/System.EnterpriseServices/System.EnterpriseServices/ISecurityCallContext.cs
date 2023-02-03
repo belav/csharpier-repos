@@ -32,24 +32,24 @@ using System;
 using System.Collections;
 
 namespace System.EnterpriseServices {
-	internal interface ISecurityCallContext {
+    internal interface ISecurityCallContext {
 
-		#region Properties
+        #region Properties
 
-		int Count {
-			get;
-		}
+        int Count {
+            get;
+        }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		void GetEnumerator (ref IEnumerator enumerator);
-		object GetItem (string user);
-		bool IsCallerInRole (string role);
-		bool IsSecurityEnabled ();
-		bool IsUserInRole (ref object user, string role);
+        void GetEnumerator (ref IEnumerator enumerator);
+        object GetItem (string user);
+        bool IsCallerInRole (string role);
+        bool IsSecurityEnabled ();
+        bool IsUserInRole (ref object user, string role);
 
-		#endregion
-	}
+        #endregion
+    }
 }

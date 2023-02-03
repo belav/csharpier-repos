@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -858,7 +858,7 @@ class Program
         }
 
         [Fact, WorkItem(24612, "https://github.com/dotnet/roslyn/issues/24612")]
-        public async Task ObjectInitializerOfGenericTypeСonstraint1()
+        public async Task ObjectInitializerOfGenericType?onstraint1()
         {
             var markup = @"
 internal interface IExample
@@ -884,7 +884,7 @@ internal class Example
         }
 
         [Fact, WorkItem(24612, "https://github.com/dotnet/roslyn/issues/24612")]
-        public async Task ObjectInitializerOfGenericTypeСonstraint2()
+        public async Task ObjectInitializerOfGenericType?onstraint2()
         {
             var markup = @"
 internal class Example
@@ -903,7 +903,7 @@ internal class Example
         }
 
         [Fact, WorkItem(24612, "https://github.com/dotnet/roslyn/issues/24612")]
-        public async Task ObjectInitializerOfGenericTypeСonstraint3()
+        public async Task ObjectInitializerOfGenericType?onstraint3()
         {
             var markup = @"
 internal class Example
@@ -923,7 +923,7 @@ internal class Example
         }
 
         [Fact, WorkItem(24612, "https://github.com/dotnet/roslyn/issues/24612")]
-        public async Task ObjectInitializerOfGenericTypeСonstraint4()
+        public async Task ObjectInitializerOfGenericType?onstraint4()
         {
             var markup = @"
 internal class Example

@@ -2,8 +2,8 @@
 // System.Web.Configuration.PassportAuthentication
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -34,43 +34,43 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[Obsolete ("This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
-	public sealed class PassportAuthentication : ConfigurationElement
-	{
-		static ConfigurationProperty redirectUrlProp;
-		static ConfigurationPropertyCollection properties;
+    [Obsolete ("This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
+    public sealed class PassportAuthentication : ConfigurationElement
+    {
+        static ConfigurationProperty redirectUrlProp;
+        static ConfigurationPropertyCollection properties;
 
-		static ConfigurationElementProperty elementProperty;
+        static ConfigurationElementProperty elementProperty;
 
-		static PassportAuthentication ()
-		{
-			redirectUrlProp = new ConfigurationProperty ("redirectUrl", typeof (string), "internal");
-			properties = new ConfigurationPropertyCollection ();
+        static PassportAuthentication ()
+        {
+            redirectUrlProp = new ConfigurationProperty ("redirectUrl", typeof (string), "internal");
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (redirectUrlProp);
+            properties.Add (redirectUrlProp);
 
-			elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (PassportAuthentication), ValidateElement));
-		}
+            elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (PassportAuthentication), ValidateElement));
+        }
 
-		static void ValidateElement (object o)
-		{
-			/* XXX do some sort of element validation here? */
-		}
+        static void ValidateElement (object o)
+        {
+            /* XXX do some sort of element validation here? */
+        }
 
-		protected internal override ConfigurationElementProperty ElementProperty {
-			get { return elementProperty; }
-		}
+        protected internal override ConfigurationElementProperty ElementProperty {
+            get { return elementProperty; }
+        }
 
-		[StringValidator] /* why is this here? */
-		[ConfigurationProperty ("redirectUrl", DefaultValue = "internal")]
-		public string RedirectUrl {
-			get { return (string) base [redirectUrlProp];}
-			set { base[redirectUrlProp] = value; }
-		}
+        [StringValidator] /* why is this here? */
+        [ConfigurationProperty ("redirectUrl", DefaultValue = "internal")]
+        public string RedirectUrl {
+            get { return (string) base [redirectUrlProp];}
+            set { base[redirectUrlProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

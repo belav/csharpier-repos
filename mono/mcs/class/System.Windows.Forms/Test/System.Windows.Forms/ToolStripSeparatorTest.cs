@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 using System;
 using System.Collections.Generic;
@@ -34,73 +34,73 @@ using System.Windows.Forms;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class ToolStripSeparatorTests : TestHelper
-	{
-		[Test]
-		public void Constructor ()
-		{
-			ToolStripSeparator tsi = new ToolStripSeparator ();
+    [TestFixture]
+    public class ToolStripSeparatorTests : TestHelper
+    {
+        [Test]
+        public void Constructor ()
+        {
+            ToolStripSeparator tsi = new ToolStripSeparator ();
 
-			Assert.AreEqual (false, tsi.CanSelect, "A1");
-		}
+            Assert.AreEqual (false, tsi.CanSelect, "A1");
+        }
 
-		[Test]
-		public void ProtectedProperties ()
-		{
-			ExposeProtectedProperties epp = new ExposeProtectedProperties ();
+        [Test]
+        public void ProtectedProperties ()
+        {
+            ExposeProtectedProperties epp = new ExposeProtectedProperties ();
 
-			Assert.AreEqual (new Padding (0), epp.DefaultMargin, "C1");
-			Assert.AreEqual (new Size (6, 6), epp.DefaultSize, "C2");
-		}
-		
-		[Test]
-		public void Accessibility ()
-		{
-			ToolStripSeparator tsi = new ToolStripSeparator ();
-			AccessibleObject ao = tsi.AccessibilityObject;
+            Assert.AreEqual (new Padding (0), epp.DefaultMargin, "C1");
+            Assert.AreEqual (new Size (6, 6), epp.DefaultSize, "C2");
+        }
+        
+        [Test]
+        public void Accessibility ()
+        {
+            ToolStripSeparator tsi = new ToolStripSeparator ();
+            AccessibleObject ao = tsi.AccessibilityObject;
 
-			Assert.AreEqual ("ToolStripItemAccessibleObject: Owner = " + tsi.ToString (), ao.ToString (), "L");
-			Assert.AreEqual (Rectangle.Empty, ao.Bounds, "L1");
-			Assert.AreEqual ("Press", ao.DefaultAction, "L2");
-			Assert.AreEqual (null, ao.Description, "L3");
-			Assert.AreEqual (null, ao.Help, "L4");
-			Assert.AreEqual (string.Empty, ao.KeyboardShortcut, "L5");
-			Assert.AreEqual (string.Empty, ao.Name, "L6");
-			Assert.AreEqual (null, ao.Parent, "L7");
-			Assert.AreEqual (AccessibleRole.Separator, ao.Role, "L8");
-			Assert.AreEqual (AccessibleStates.None, ao.State, "L9");
-			Assert.AreEqual (string.Empty, ao.Value, "L10");
+            Assert.AreEqual ("ToolStripItemAccessibleObject: Owner = " + tsi.ToString (), ao.ToString (), "L");
+            Assert.AreEqual (Rectangle.Empty, ao.Bounds, "L1");
+            Assert.AreEqual ("Press", ao.DefaultAction, "L2");
+            Assert.AreEqual (null, ao.Description, "L3");
+            Assert.AreEqual (null, ao.Help, "L4");
+            Assert.AreEqual (string.Empty, ao.KeyboardShortcut, "L5");
+            Assert.AreEqual (string.Empty, ao.Name, "L6");
+            Assert.AreEqual (null, ao.Parent, "L7");
+            Assert.AreEqual (AccessibleRole.Separator, ao.Role, "L8");
+            Assert.AreEqual (AccessibleStates.None, ao.State, "L9");
+            Assert.AreEqual (string.Empty, ao.Value, "L10");
 
-			tsi.Name = "Label1";
-			tsi.Text = "Test Label";
-			tsi.AccessibleDescription = "Label Desc";
+            tsi.Name = "Label1";
+            tsi.Text = "Test Label";
+            tsi.AccessibleDescription = "Label Desc";
 
-			Assert.AreEqual (Rectangle.Empty, ao.Bounds, "L11");
-			Assert.AreEqual ("Press", ao.DefaultAction, "L12");
-			Assert.AreEqual ("Label Desc", ao.Description, "L13");
-			Assert.AreEqual (null, ao.Help, "L14");
-			Assert.AreEqual (string.Empty, ao.KeyboardShortcut, "L15");
-			Assert.AreEqual ("Test Label", ao.Name, "L16");
-			Assert.AreEqual (null, ao.Parent, "L17");
-			Assert.AreEqual (AccessibleRole.Separator, ao.Role, "L18");
-			Assert.AreEqual (AccessibleStates.None, ao.State, "L19");
-			Assert.AreEqual (string.Empty, ao.Value, "L20");
+            Assert.AreEqual (Rectangle.Empty, ao.Bounds, "L11");
+            Assert.AreEqual ("Press", ao.DefaultAction, "L12");
+            Assert.AreEqual ("Label Desc", ao.Description, "L13");
+            Assert.AreEqual (null, ao.Help, "L14");
+            Assert.AreEqual (string.Empty, ao.KeyboardShortcut, "L15");
+            Assert.AreEqual ("Test Label", ao.Name, "L16");
+            Assert.AreEqual (null, ao.Parent, "L17");
+            Assert.AreEqual (AccessibleRole.Separator, ao.Role, "L18");
+            Assert.AreEqual (AccessibleStates.None, ao.State, "L19");
+            Assert.AreEqual (string.Empty, ao.Value, "L20");
 
-			tsi.AccessibleName = "Access Label";
-			Assert.AreEqual ("Access Label", ao.Name, "L21");
+            tsi.AccessibleName = "Access Label";
+            Assert.AreEqual ("Access Label", ao.Name, "L21");
 
-			tsi.Text = "Test Label";
-			Assert.AreEqual ("Access Label", ao.Name, "L22");
+            tsi.Text = "Test Label";
+            Assert.AreEqual ("Access Label", ao.Name, "L22");
 
-			tsi.AccessibleDefaultActionDescription = "AAA";
-			Assert.AreEqual ("AAA", tsi.AccessibleDefaultActionDescription, "L23");
-		}
-		
-		private class ExposeProtectedProperties : ToolStripSeparator
-		{
-			public new Padding DefaultMargin { get { return base.DefaultMargin; } }
-			public new Size DefaultSize { get { return base.DefaultSize; } }
-		}
-	}
+            tsi.AccessibleDefaultActionDescription = "AAA";
+            Assert.AreEqual ("AAA", tsi.AccessibleDefaultActionDescription, "L23");
+        }
+        
+        private class ExposeProtectedProperties : ToolStripSeparator
+        {
+            public new Padding DefaultMargin { get { return base.DefaultMargin; } }
+            public new Size DefaultSize { get { return base.DefaultSize; } }
+        }
+    }
 }

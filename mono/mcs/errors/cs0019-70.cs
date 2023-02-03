@@ -3,19 +3,19 @@
 
 struct S
 {
-	public static S operator & (S s, S i)
-	{
-		return s;
-	}
+    public static S operator & (S s, S i)
+    {
+        return s;
+    }
 }
 
 class C
 {
-	public static void Main ()
-	{
-		S? s = new S ();
-		S? s2 = null;
+    public static void Main ()
+    {
+        S? s = new S ();
+        S? s2 = null;
 
-		var res = s && s2;
-	}
+        var res = s && s2;
+    }
 }

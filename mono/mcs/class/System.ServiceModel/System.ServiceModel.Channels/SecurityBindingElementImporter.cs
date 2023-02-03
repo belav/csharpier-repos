@@ -2,7 +2,7 @@
 // SecurityBindingElementImporter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,18 +34,18 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public class SecurityBindingElementImporter : IPolicyImportExtension
-	{
-		[MonoTODO]
-		public int MaxPolicyRedirections {
-			get { throw new NotImplementedException (); }
-		}
+    public class SecurityBindingElementImporter : IPolicyImportExtension
+    {
+        [MonoTODO]
+        public int MaxPolicyRedirections {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		void IPolicyImportExtension.ImportPolicy (MetadataImporter importer,
-			PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        void IPolicyImportExtension.ImportPolicy (MetadataImporter importer,
+            PolicyConversionContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

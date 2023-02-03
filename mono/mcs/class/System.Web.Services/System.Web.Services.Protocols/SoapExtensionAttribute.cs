@@ -29,27 +29,27 @@
 //
 
 namespace System.Web.Services.Protocols {
-	public abstract class SoapExtensionAttribute : Attribute {
+    public abstract class SoapExtensionAttribute : Attribute {
 
-		#region Constructors
+        #region Constructors
 
-		protected SoapExtensionAttribute () 
-		{
-		}
+        protected SoapExtensionAttribute () 
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public abstract Type ExtensionType {
-			get;
-		}
+        public abstract Type ExtensionType {
+            get;
+        }
 
-		public abstract int Priority {
-			get;
-			set;
-		}
+        public abstract int Priority {
+            get;
+            set;
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

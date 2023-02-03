@@ -5,10 +5,10 @@ class P
 {
     public static int Prop
     {
-	private get {
-	    return 4;
-	}
-	set {}
+    private get {
+        return 4;
+    }
+    set {}
     }
 }
 
@@ -16,6 +16,6 @@ public class C
 {
     public static int Main ()
     {
-	return P.Prop;
+    return P.Prop;
     }
 }

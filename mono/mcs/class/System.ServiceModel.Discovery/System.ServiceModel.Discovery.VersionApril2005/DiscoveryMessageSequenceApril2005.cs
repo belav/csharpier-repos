@@ -35,63 +35,63 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class DiscoveryMessageSequenceApril2005 : IXmlSerializable
-	{
-		public static DiscoveryMessageSequenceApril2005 FromDiscoveryMessageSequence (DiscoveryMessageSequence discoveryMessageSequence)
-		{
-			return new DiscoveryMessageSequenceApril2005 (discoveryMessageSequence);
-		}
+    [XmlSchemaProvider ("GetSchema")]
+    public class DiscoveryMessageSequenceApril2005 : IXmlSerializable
+    {
+        public static DiscoveryMessageSequenceApril2005 FromDiscoveryMessageSequence (DiscoveryMessageSequence discoveryMessageSequence)
+        {
+            return new DiscoveryMessageSequenceApril2005 (discoveryMessageSequence);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscoveryApril2005;
-		static XmlSchema schema;
-		
-		static XmlSchema Schema {
-			get {
-				if (schema == null)
-					schema = DiscoveryMessageSequence.BuildSchema (version);
-				return schema;
-			}
-		}
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscoveryApril2005;
+        static XmlSchema schema;
+        
+        static XmlSchema Schema {
+            get {
+                if (schema == null)
+                    schema = DiscoveryMessageSequence.BuildSchema (version);
+                return schema;
+            }
+        }
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			schemaSet.Add (Schema);
-			return new XmlQualifiedName ("AppSequenceType", version.Namespace);
-		}
+        public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
+        {
+            schemaSet.Add (Schema);
+            return new XmlQualifiedName ("AppSequenceType", version.Namespace);
+        }
 
-		// for deserialization
-		DiscoveryMessageSequenceApril2005 ()
-		{
-		}
-		
-		internal DiscoveryMessageSequenceApril2005 (DiscoveryMessageSequence source)
-		{
-			this.source = source;
-		}
+        // for deserialization
+        DiscoveryMessageSequenceApril2005 ()
+        {
+        }
+        
+        internal DiscoveryMessageSequenceApril2005 (DiscoveryMessageSequence source)
+        {
+            this.source = source;
+        }
 
-		DiscoveryMessageSequence source;
+        DiscoveryMessageSequence source;
 
-		public XmlSchema GetSchema ()
-		{
-			return Schema;
-		}
+        public XmlSchema GetSchema ()
+        {
+            return Schema;
+        }
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = DiscoveryMessageSequence.ReadXml (reader, version);
-		}
+        public void ReadXml (XmlReader reader)
+        {
+            source = DiscoveryMessageSequence.ReadXml (reader, version);
+        }
 
-		public DiscoveryMessageSequence ToDiscoveryMessageSequence ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method first to fill its contents");
-			return source;
-		}
+        public DiscoveryMessageSequence ToDiscoveryMessageSequence ()
+        {
+            if (source == null)
+                throw new InvalidOperationException ("Call ReadXml method first to fill its contents");
+            return source;
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer);
-		}
-	}
+        public void WriteXml (XmlWriter writer)
+        {
+            source.WriteXml (writer);
+        }
+    }
 }

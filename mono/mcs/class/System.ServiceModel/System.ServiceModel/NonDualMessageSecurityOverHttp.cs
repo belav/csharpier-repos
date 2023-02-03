@@ -28,18 +28,18 @@ using System;
 
 namespace System.ServiceModel
 {
-	public sealed class NonDualMessageSecurityOverHttp : MessageSecurityOverHttp
-	{
-		bool establish_sec_ctx = true;
+    public sealed class NonDualMessageSecurityOverHttp : MessageSecurityOverHttp
+    {
+        bool establish_sec_ctx = true;
 
-		internal NonDualMessageSecurityOverHttp ()
-		{
-		}
+        internal NonDualMessageSecurityOverHttp ()
+        {
+        }
 
-		[MonoTODO]
-		public bool EstablishSecurityContext {
-			get { return establish_sec_ctx; }
-			set { establish_sec_ctx = value; }
-		}
-	}
+        [MonoTODO]
+        public bool EstablishSecurityContext {
+            get { return establish_sec_ctx; }
+            set { establish_sec_ctx = value; }
+        }
+    }
 }

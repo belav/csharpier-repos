@@ -4,13 +4,13 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		Foo (out var y);
-	}
+    public static void Main ()
+    {
+        Foo (out var y);
+    }
 
-	static void Foo<T> (out T t)
-	{
-		t = default (T);
-	}
+    static void Foo<T> (out T t)
+    {
+        t = default (T);
+    }
 }

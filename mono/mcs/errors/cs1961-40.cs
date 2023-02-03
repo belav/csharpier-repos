@@ -3,5 +3,5 @@
 
 interface InterfaceContravariat<in T>
 {
-	T Prop { set; get; }
+    T Prop { set; get; }
 }

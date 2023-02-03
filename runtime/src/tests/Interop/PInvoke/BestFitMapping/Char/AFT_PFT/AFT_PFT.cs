@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -50,7 +50,7 @@ public class BFM_CharMarshaler
         sbl.Append((char)0x2215);
         sbl.Append((char)0x0589);
         sbl.Append((char)0x2236);
-        sbl.Append('乀');
+        sbl.Append('?');
         return sbl.ToString();
     }
 
@@ -68,7 +68,7 @@ public class BFM_CharMarshaler
         sbl.Append((char)0x2215);
         sbl.Append((char)0x0589);
         sbl.Append((char)0x2236);
-        sbl.Append('乀');
+        sbl.Append('?');
         return sbl;
     }
 

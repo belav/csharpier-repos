@@ -4,8 +4,8 @@ using System;
 
 class X
 {
-	static void Main ()
-	{
-		void[] a;
-	}
+    static void Main ()
+    {
+        void[] a;
+    }
 }

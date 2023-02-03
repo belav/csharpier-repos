@@ -31,43 +31,43 @@ using System.Reflection;
 using System.Web.Hosting;
 
 namespace System.Web.UI
-{	  
-	sealed class CompositeEntry
-	{
-		public Assembly Assembly;
-		public string NameOrPath;
-		public WebResourceAttribute Attribute;
+{      
+    sealed class CompositeEntry
+    {
+        public Assembly Assembly;
+        public string NameOrPath;
+        public WebResourceAttribute Attribute;
 
-		string GetFilePath ()
-		{
-			if (Assembly != null)
-				return Assembly.Location;
-			else if (!String.IsNullOrEmpty (NameOrPath))
-				return HostingEnvironment.MapPath (NameOrPath);
-			else
-				return String.Empty;
-		}
-		
-		public bool IsModifiedSince (DateTime since)
-		{
-			return File.GetLastWriteTimeUtc (GetFilePath ()) > since;
-		}
+        string GetFilePath ()
+        {
+            if (Assembly != null)
+                return Assembly.Location;
+            else if (!String.IsNullOrEmpty (NameOrPath))
+                return HostingEnvironment.MapPath (NameOrPath);
+            else
+                return String.Empty;
+        }
+        
+        public bool IsModifiedSince (DateTime since)
+        {
+            return File.GetLastWriteTimeUtc (GetFilePath ()) > since;
+        }
 
-		public bool IsModifiedSince (long atime)
-		{
-			return File.GetLastWriteTimeUtc (GetFilePath ()).Ticks > atime;
-		}
-		
-		public override int GetHashCode ()
-		{
-			int ret = 0;
+        public bool IsModifiedSince (long atime)
+        {
+            return File.GetLastWriteTimeUtc (GetFilePath ()).Ticks > atime;
+        }
+        
+        public override int GetHashCode ()
+        {
+            int ret = 0;
 
-			if (Assembly != null)
-				ret ^= Assembly.GetHashCode ();
-			if (NameOrPath != null)
-				ret ^= NameOrPath.GetHashCode ();
+            if (Assembly != null)
+                ret ^= Assembly.GetHashCode ();
+            if (NameOrPath != null)
+                ret ^= NameOrPath.GetHashCode ();
 
-			return ret;
-		}
-	}
+            return ret;
+        }
+    }
 }

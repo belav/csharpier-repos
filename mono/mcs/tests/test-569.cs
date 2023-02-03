@@ -6,9 +6,9 @@ public class MyAttribute : Attribute {}
 public class SubAttribute : MyAttribute {}
 
 public class test {
-	[SubAttribute]
-	[SubAttribute]
-	public void method() {}
+    [SubAttribute]
+    [SubAttribute]
+    public void method() {}
 
-	public static void Main (){}
+    public static void Main (){}
 }

@@ -2,7 +2,7 @@
 // Expression.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,22 +27,22 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class Expression : Node {
-		protected TypeNode type;
+    class Expression : Node {
+        protected TypeNode type;
 
-		public Expression (NodeType nodeType) : base (nodeType)
-		{
-		}
+        public Expression (NodeType nodeType) : base (nodeType)
+        {
+        }
 
-		public Expression (NodeType nodeType, TypeNode type) : base (nodeType)
-		{
-			this.type = type;
-		}
+        public Expression (NodeType nodeType, TypeNode type) : base (nodeType)
+        {
+            this.type = type;
+        }
 
-		public virtual TypeNode Type
-		{
-			get { return this.type; }
-			set { this.type = value; }
-		}
-	}
+        public virtual TypeNode Type
+        {
+            get { return this.type; }
+            set { this.type = value; }
+        }
+    }
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,56 +29,56 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-	[SecurityCritical (SecurityCriticalScope.Everything)]
-	public class SecureEnvironment : IDisposable
-	{
-		internal SecureEnvironment ()
-		{
-			throw new NotImplementedException ();
-		}
+    [SecurityCritical (SecurityCriticalScope.Everything)]
+    public class SecureEnvironment : IDisposable
+    {
+        internal SecureEnvironment ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public string ApplicationManifest {
-			get { throw new NotImplementedException (); }
-		}
+        public string ApplicationManifest {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ContentUser User {
-			get { throw new NotImplementedException (); }
-		}
+        public ContentUser User {
+            get { throw new NotImplementedException (); }
+        }
 
-		public static SecureEnvironment Create (string applicationManifest, ContentUser user)
-		{
-			throw new NotImplementedException ();
-		}
+        public static SecureEnvironment Create (string applicationManifest, ContentUser user)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static SecureEnvironment Create (string applicationManifest, AuthenticationType authentication, UserActivationMode userActivationMode)
-		{
-			throw new NotImplementedException ();
-		}
+        public static SecureEnvironment Create (string applicationManifest, AuthenticationType authentication, UserActivationMode userActivationMode)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void Dispose ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();
-		}
+        protected virtual void Dispose (bool disposing)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static ReadOnlyCollection<ContentUser> GetActivatedUsers ()
-		{
-			throw new NotImplementedException ();
-		}
+        public static ReadOnlyCollection<ContentUser> GetActivatedUsers ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static bool IsUserActivated (ContentUser user)
-		{
-			throw new NotImplementedException ();
-		}
+        public static bool IsUserActivated (ContentUser user)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static void RemoveActivatedUser (ContentUser user)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public static void RemoveActivatedUser (ContentUser user)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }

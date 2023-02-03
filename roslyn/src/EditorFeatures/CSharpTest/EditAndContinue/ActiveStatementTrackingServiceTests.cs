@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -201,8 +201,8 @@ class C
                 var spans1 = trackingSession.Test_GetTrackingSpans();
                 AssertEx.Equal(new[]
                 {
-                    $"V0 →←@[10..15): NonLeafFrame",
-                    $"V0 →←@[20..25): LeafFrame"
+                    $"V0 ??@[10..15): NonLeafFrame",
+                    $"V0 ??@[20..25): LeafFrame"
                 }, spans1[document1.FilePath].Select(s => $"{s.Span}: {s.Flags}"));
 
                 var spans2 = await trackingSession.GetSpansAsync(solution, document1.Id, document1.FilePath, CancellationToken.None);
@@ -215,8 +215,8 @@ class C
             var spans4 = await trackingSession.GetAdjustedTrackingSpansAsync(document1, snapshot1, CancellationToken.None);
             AssertEx.Equal(new[]
             {
-                $"V0 →←@[11..16): NonLeafFrame",
-                $"V0 →←@[21..26): LeafFrame"
+                $"V0 ??@[11..16): NonLeafFrame",
+                $"V0 ??@[21..26): LeafFrame"
             }, spans4.Select(s => $"{s.Span}: {s.Flags}"));
 
             AssertEx.Empty(await trackingSession.GetAdjustedTrackingSpansAsync(document2, snapshot2, CancellationToken.None));
@@ -228,8 +228,8 @@ class C
                 var spans5 = trackingSession.Test_GetTrackingSpans();
                 AssertEx.Equal(new[]
                 {
-                    $"V0 →←@[11..16): NonLeafFrame",
-                    $"V0 →←@[21..26): LeafFrame"
+                    $"V0 ??@[11..16): NonLeafFrame",
+                    $"V0 ??@[21..26): LeafFrame"
                 }, spans5[document1.FilePath].Select(s => $"{s.Span}: {s.Flags}"));
             }
 
@@ -239,8 +239,8 @@ class C
             var spans6 = await trackingSession.GetAdjustedTrackingSpansAsync(document1, snapshot1, CancellationToken.None);
             AssertEx.Equal(new[]
             {
-                $"V0 →←@[11..16): NonLeafFrame",
-                $"V0 →←@[21..26): LeafFrame"
+                $"V0 ??@[11..16): NonLeafFrame",
+                $"V0 ??@[21..26): LeafFrame"
             }, spans6.Select(s => $"{s.Span}: {s.Flags}"));
         }
     }

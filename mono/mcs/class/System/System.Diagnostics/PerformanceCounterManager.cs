@@ -33,32 +33,32 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics {
 
-	[ComVisible(true)]
-	[Guid("82840be1-d273-11d2-b94a-00600893b17a")]
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[Obsolete ("use PerformanceCounter")]
-	[MonoTODO ("not implemented")]
-	public sealed class PerformanceCounterManager : ICollectData {
+    [ComVisible(true)]
+    [Guid("82840be1-d273-11d2-b94a-00600893b17a")]
+    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+    [Obsolete ("use PerformanceCounter")]
+    [MonoTODO ("not implemented")]
+    public sealed class PerformanceCounterManager : ICollectData {
 
-		[Obsolete ("use PerformanceCounter")]
-		public PerformanceCounterManager ()
-		{
-		}
+        [Obsolete ("use PerformanceCounter")]
+        public PerformanceCounterManager ()
+        {
+        }
 
-		void ICollectData.CloseData ()
-		{
-			throw new NotImplementedException ();
-		}
+        void ICollectData.CloseData ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		void ICollectData.CollectData (
-			int callIdx,
-			IntPtr valueNamePtr,
-			IntPtr dataPtr,
-			int totalBytes,
-			out IntPtr res)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void ICollectData.CollectData (
+            int callIdx,
+            IntPtr valueNamePtr,
+            IntPtr dataPtr,
+            int totalBytes,
+            out IntPtr res)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

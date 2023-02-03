@@ -35,18 +35,18 @@ using NUnit.Framework;
 
 namespace MonoTests.WebMatrix.Data
 {
-	[TestFixtureAttribute]
-	public class ConnectionEventArgsTests
-	{
-		[Test]
-		public void InstantiateTest ()
-		{
-			var evtArgs = new ConnectionEventArgs (null);
-			Assert.IsNull (evtArgs.Connection, "#1");
+    [TestFixtureAttribute]
+    public class ConnectionEventArgsTests
+    {
+        [Test]
+        public void InstantiateTest ()
+        {
+            var evtArgs = new ConnectionEventArgs (null);
+            Assert.IsNull (evtArgs.Connection, "#1");
 
-			var conn = new SqlConnection ();
-			evtArgs = new ConnectionEventArgs (conn);
-			Assert.AreEqual (conn, evtArgs.Connection, "#2");
-		}
-	}
+            var conn = new SqlConnection ();
+            evtArgs = new ConnectionEventArgs (conn);
+            Assert.AreEqual (conn, evtArgs.Connection, "#2");
+        }
+    }
 }

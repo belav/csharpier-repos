@@ -34,26 +34,26 @@ using System.Web.Services.Protocols;
 
 namespace MonoTests.System.Web.Services.Protocols
 {
-	[TestFixture]
-	public class WebClientProtocolTest
-	{
-		[WebServiceBinding (Name = "PokerSoap", Namespace = "http://tempuri.org/")]
-		public class Poker : SoapHttpClientProtocol
-		{
-		}
+    [TestFixture]
+    public class WebClientProtocolTest
+    {
+        [WebServiceBinding (Name = "PokerSoap", Namespace = "http://tempuri.org/")]
+        public class Poker : SoapHttpClientProtocol
+        {
+        }
 
-		[Test]
-		public void TestUseDefaultCredentials () {
-			Poker client = new Poker ();
-			Assert.IsFalse (client.UseDefaultCredentials, "#1");
-			client.UseDefaultCredentials = true;
-			Assert.IsTrue (client.Credentials == CredentialCache.DefaultCredentials, "#2");
-			client.Credentials = new NetworkCredential ("a", "b");
-			Assert.IsFalse (client.UseDefaultCredentials, "#3");
-			client.UseDefaultCredentials = false;
-			Assert.IsNull (client.Credentials, "#4");
-			client.Credentials = CredentialCache.DefaultCredentials;
-			Assert.IsTrue (client.UseDefaultCredentials, "#5");
-		}
-	}
+        [Test]
+        public void TestUseDefaultCredentials () {
+            Poker client = new Poker ();
+            Assert.IsFalse (client.UseDefaultCredentials, "#1");
+            client.UseDefaultCredentials = true;
+            Assert.IsTrue (client.Credentials == CredentialCache.DefaultCredentials, "#2");
+            client.Credentials = new NetworkCredential ("a", "b");
+            Assert.IsFalse (client.UseDefaultCredentials, "#3");
+            client.UseDefaultCredentials = false;
+            Assert.IsNull (client.Credentials, "#4");
+            client.Credentials = CredentialCache.DefaultCredentials;
+            Assert.IsTrue (client.UseDefaultCredentials, "#5");
+        }
+    }
 }

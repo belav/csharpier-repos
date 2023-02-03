@@ -3,7 +3,7 @@
 
 public class Same
 {
-	public class Same
-	{
-	}
+    public class Same
+    {
+    }
 }

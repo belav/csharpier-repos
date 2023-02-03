@@ -2,7 +2,7 @@
 // This.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,32 +27,32 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-	class This : Parameter {
-		public This ()
-		{
-			base.NodeType = NodeType.This;
-			base.Name = "this";
-		}
+    class This : Parameter {
+        public This ()
+        {
+            base.NodeType = NodeType.This;
+            base.Name = "this";
+        }
 
-		public This (TypeNode type) : this ()
-		{
-			this.type = type;
-			DeclaringMethod = null;
-		}
+        public This (TypeNode type) : this ()
+        {
+            this.type = type;
+            DeclaringMethod = null;
+        }
 
-		public override int Index
-		{
-			get { return 0; }
-		}
+        public override int Index
+        {
+            get { return 0; }
+        }
 
-		public override bool IsOut
-		{
-			get { return false; }
-		}
+        public override bool IsOut
+        {
+            get { return false; }
+        }
 
-		public override string ToString ()
-		{
-			return "<this>";
-		}
-	}
+        public override string ToString ()
+        {
+            return "<this>";
+        }
+    }
 }

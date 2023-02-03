@@ -7,8 +7,8 @@ class X <Y> {
 
 unsafe class A {
 
-	static void Main ()
-	{
-		int size = sizeof (X<A>);
-	}
+    static void Main ()
+    {
+        int size = sizeof (X<A>);
+    }
 }

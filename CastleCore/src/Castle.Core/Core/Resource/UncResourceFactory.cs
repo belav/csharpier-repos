@@ -14,27 +14,27 @@
 
 namespace Castle.Core.Resource
 {
-	using System;
+    using System;
 
-	public class UncResourceFactory : IResourceFactory
-	{
-		public UncResourceFactory()
-		{
-		}
+    public class UncResourceFactory : IResourceFactory
+    {
+        public UncResourceFactory()
+        {
+        }
 
-		public bool Accept(CustomUri uri)
-		{
-			return uri.IsUnc;
-		}
+        public bool Accept(CustomUri uri)
+        {
+            return uri.IsUnc;
+        }
 
-		public IResource Create(CustomUri uri)
-		{
-			return new UncResource(uri);
-		}
+        public IResource Create(CustomUri uri)
+        {
+            return new UncResource(uri);
+        }
 
-		public IResource Create(CustomUri uri, string basePath)
-		{
-			return new UncResource(uri, basePath);
-		}
-	}
+        public IResource Create(CustomUri uri, string basePath)
+        {
+            return new UncResource(uri, basePath);
+        }
+    }
 }

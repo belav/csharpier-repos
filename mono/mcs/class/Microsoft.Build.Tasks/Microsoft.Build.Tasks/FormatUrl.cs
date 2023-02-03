@@ -30,31 +30,31 @@ using System;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-	public sealed class FormatUrl : TaskExtension {
-	
-		string	inputUrl;
-		string	outputUrl;
-	
-		public FormatUrl ()
-		{
-		}
-		
-		[MonoTODO]
-		public override bool Execute ()
-		{
-			return false;
-		}
-		
-		public string InputUrl {
-			get { return inputUrl; }
-			set { inputUrl = value; }
-		}
-		
-		[Output]
-		public string OutputUrl {
-			get { return outputUrl; }
-			set { outputUrl = value; }
-		}
-	}
+    public sealed class FormatUrl : TaskExtension {
+    
+        string    inputUrl;
+        string    outputUrl;
+    
+        public FormatUrl ()
+        {
+        }
+        
+        [MonoTODO]
+        public override bool Execute ()
+        {
+            return false;
+        }
+        
+        public string InputUrl {
+            get { return inputUrl; }
+            set { inputUrl = value; }
+        }
+        
+        [Output]
+        public string OutputUrl {
+            get { return outputUrl; }
+            set { outputUrl = value; }
+        }
+    }
 }
 

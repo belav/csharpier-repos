@@ -4,8 +4,8 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		B.Sum (null);
-	}
+    public static void Main ()
+    {
+        B.Sum (null);
+    }
 }

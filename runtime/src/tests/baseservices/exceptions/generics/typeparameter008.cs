@@ -34,67 +34,67 @@ public class GenException<T> : Exception {}
 
 public struct Gen 
 {
-	public void ExceptionTest<Ex>(Ex e) where Ex : Exception
-	{
-		try
-		{
-			throw e;
-		}
-		catch(Ex E)
-		{
-			Test_typeparameter008.Eval(Object.ReferenceEquals(e,E));
-		}
-		catch
-		{
-			Console.WriteLine("Caught Wrong Exception");
-			Test_typeparameter008.Eval(false);
-		}
-	}
+    public void ExceptionTest<Ex>(Ex e) where Ex : Exception
+    {
+        try
+        {
+            throw e;
+        }
+        catch(Ex E)
+        {
+            Test_typeparameter008.Eval(Object.ReferenceEquals(e,E));
+        }
+        catch
+        {
+            Console.WriteLine("Caught Wrong Exception");
+            Test_typeparameter008.Eval(false);
+        }
+    }
 }
 
 public class Test_typeparameter008
 {
-	public static int counter = 0;
-	public static bool result = true;
-	public static void Eval(bool exp)
-	{
-		counter++;
-		if (!exp)
-		{
-			result = exp;
-			Console.WriteLine("Test Failed at location: " + counter);
-		}
-	
-	}
-	
-	public static int Main()
-	{
-		new Gen().ExceptionTest<Exception>(new Exception()); 
-		new Gen().ExceptionTest<Exception>(new InvalidOperationException());
-		new Gen().ExceptionTest<Exception>(new GenException<int>());
-		new Gen().ExceptionTest<Exception>(new GenException<string>());
-		new Gen().ExceptionTest<Exception>(new GenException<Guid>());
-		new Gen().ExceptionTest<Exception>(new GenException<ValX3<ValX1<int[][,,,]>,ValX2<object[,,,][][],Guid[][][]>,ValX3<double[,,,,,,,,,,],Guid[][][][,,,,][,,,,][][][],string[][][][][][][][][][][]>>>());
-		
-		new Gen().ExceptionTest<InvalidOperationException>(new InvalidOperationException());
+    public static int counter = 0;
+    public static bool result = true;
+    public static void Eval(bool exp)
+    {
+        counter++;
+        if (!exp)
+        {
+            result = exp;
+            Console.WriteLine("Test Failed at location: " + counter);
+        }
+    
+    }
+    
+    public static int Main()
+    {
+        new Gen().ExceptionTest<Exception>(new Exception()); 
+        new Gen().ExceptionTest<Exception>(new InvalidOperationException());
+        new Gen().ExceptionTest<Exception>(new GenException<int>());
+        new Gen().ExceptionTest<Exception>(new GenException<string>());
+        new Gen().ExceptionTest<Exception>(new GenException<Guid>());
+        new Gen().ExceptionTest<Exception>(new GenException<ValX3<ValX1<int[][,,,]>,ValX2<object[,,,][][],Guid[][][]>,ValX3<double[,,,,,,,,,,],Guid[][][][,,,,][,,,,][][][],string[][][][][][][][][][][]>>>());
+        
+        new Gen().ExceptionTest<InvalidOperationException>(new InvalidOperationException());
 
-		new Gen().ExceptionTest<GenException<int>>(new GenException<int>());
-		new Gen().ExceptionTest<GenException<string>>(new GenException<string>());
-		new Gen().ExceptionTest<GenException<Guid>>(new GenException<Guid>());
-		new Gen().ExceptionTest<GenException<ValX3<ValX1<int[][,,,]>,ValX2<object[,,,][][],Guid[][][]>,ValX3<double[,,,,,,,,,,],Guid[][][][,,,,][,,,,][][][],string[][][][][][][][][][][]>>>>(new GenException<ValX3<ValX1<int[][,,,]>,ValX2<object[,,,][][],Guid[][][]>,ValX3<double[,,,,,,,,,,],Guid[][][][,,,,][,,,,][][][],string[][][][][][][][][][][]>>>());
-		
-		if (result)
-		{
-			Console.WriteLine("Test Passed");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("Test Failed");
-			return 1;
-		}
-	}
-		
+        new Gen().ExceptionTest<GenException<int>>(new GenException<int>());
+        new Gen().ExceptionTest<GenException<string>>(new GenException<string>());
+        new Gen().ExceptionTest<GenException<Guid>>(new GenException<Guid>());
+        new Gen().ExceptionTest<GenException<ValX3<ValX1<int[][,,,]>,ValX2<object[,,,][][],Guid[][][]>,ValX3<double[,,,,,,,,,,],Guid[][][][,,,,][,,,,][][][],string[][][][][][][][][][][]>>>>(new GenException<ValX3<ValX1<int[][,,,]>,ValX2<object[,,,][][],Guid[][][]>,ValX3<double[,,,,,,,,,,],Guid[][][][,,,,][,,,,][][][],string[][][][][][][][][][][]>>>());
+        
+        if (result)
+        {
+            Console.WriteLine("Test Passed");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("Test Failed");
+            return 1;
+        }
+    }
+        
 }
 
 // </Code>

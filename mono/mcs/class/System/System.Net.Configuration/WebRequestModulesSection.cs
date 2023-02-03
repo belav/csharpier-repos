@@ -2,7 +2,7 @@
 // System.Net.Configuration.WebRequestModulesSection.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
+//    Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (c) 2004 Novell, Inc. (http://www.novell.com)
@@ -35,55 +35,55 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-	public sealed class WebRequestModulesSection : ConfigurationSection
-	{
-		#region Fields
+    public sealed class WebRequestModulesSection : ConfigurationSection
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty webRequestModulesProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty webRequestModulesProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static WebRequestModulesSection ()
-		{
-			webRequestModulesProp = new ConfigurationProperty ("", typeof (WebRequestModuleElementCollection),
-									   null, ConfigurationPropertyOptions.IsDefaultCollection);
+        static WebRequestModulesSection ()
+        {
+            webRequestModulesProp = new ConfigurationProperty ("", typeof (WebRequestModuleElementCollection),
+                                       null, ConfigurationPropertyOptions.IsDefaultCollection);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (webRequestModulesProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (webRequestModulesProp);
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public WebRequestModuleElementCollection WebRequestModules {
-			get { return (WebRequestModuleElementCollection) base [webRequestModulesProp]; }
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public WebRequestModuleElementCollection WebRequestModules {
+            get { return (WebRequestModuleElementCollection) base [webRequestModulesProp]; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		protected override void PostDeserialize ()
-		{
-		}
+        [MonoTODO]
+        protected override void PostDeserialize ()
+        {
+        }
 
-		[MonoTODO]
-		protected override void InitializeDefault ()
-		{
-		}
+        [MonoTODO]
+        protected override void InitializeDefault ()
+        {
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

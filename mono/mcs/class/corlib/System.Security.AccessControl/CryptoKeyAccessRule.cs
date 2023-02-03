@@ -2,8 +2,8 @@
 // System.Security.AccessControl.CryptoKeyAccessRule implementation
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,26 +31,26 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public sealed class CryptoKeyAccessRule : AccessRule
-	{
-		public CryptoKeyAccessRule (IdentityReference identity,
-					    CryptoKeyRights cryptoKeyRights,
-					    AccessControlType type)
-			: base (identity, (int)cryptoKeyRights, false,
-				InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow)
-		{
-		}
+    public sealed class CryptoKeyAccessRule : AccessRule
+    {
+        public CryptoKeyAccessRule (IdentityReference identity,
+                        CryptoKeyRights cryptoKeyRights,
+                        AccessControlType type)
+            : base (identity, (int)cryptoKeyRights, false,
+                InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow)
+        {
+        }
 
-		public CryptoKeyAccessRule (string identity,
-					    CryptoKeyRights cryptoKeyRights,
-					    AccessControlType type)
-			: this (new NTAccount (identity), cryptoKeyRights, type)
-		{
-		}
-		
-		public CryptoKeyRights CryptoKeyRights {
-			get { return (CryptoKeyRights)AccessMask; }
-		}
-	}
+        public CryptoKeyAccessRule (string identity,
+                        CryptoKeyRights cryptoKeyRights,
+                        AccessControlType type)
+            : this (new NTAccount (identity), cryptoKeyRights, type)
+        {
+        }
+        
+        public CryptoKeyRights CryptoKeyRights {
+            get { return (CryptoKeyRights)AccessMask; }
+        }
+    }
 }
 

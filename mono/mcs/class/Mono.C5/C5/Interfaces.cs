@@ -1708,7 +1708,7 @@ namespace C5
     /// <param name="key">The key to look for</param>
     /// <param name="val">The new value</param>
     /// <returns>True if key was found</returns>
-    bool Update(K key, V val);          //no-adding				    	
+    bool Update(K key, V val);          //no-adding                        
 
 
     /// <summary>
@@ -1719,7 +1719,7 @@ namespace C5
     /// <param name="val">The new value</param>
     /// <param name="oldval">The old value if any</param>
     /// <returns>True if key was found</returns>
-    bool Update(K key, V val, out V oldval);          //no-adding				    	
+    bool Update(K key, V val, out V oldval);          //no-adding                        
 
     /// <summary>
     /// Look for a specific key in the dictionary. If found, report the corresponding value,

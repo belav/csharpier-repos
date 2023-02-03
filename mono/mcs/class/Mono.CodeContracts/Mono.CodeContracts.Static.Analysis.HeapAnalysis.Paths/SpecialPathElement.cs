@@ -2,7 +2,7 @@
 // SpecialPathElement.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,72 +32,72 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths {
-	class SpecialPathElement : PathElement<SpecialPathElementKind> {
-		private object type;
+    class SpecialPathElement : PathElement<SpecialPathElementKind> {
+        private object type;
 
-		public SpecialPathElement (SpecialPathElementKind element, SymFunction c) : base (element, element.ToString (), c)
-		{
-			this.castTo = "";
-		}
+        public SpecialPathElement (SpecialPathElementKind element, SymFunction c) : base (element, element.ToString (), c)
+        {
+            this.castTo = "";
+        }
 
-		public override bool IsAddressOf
-		{
-			get { return false; }
-		}
+        public override bool IsAddressOf
+        {
+            get { return false; }
+        }
 
-		public override bool IsDeref
-		{
-			get { return this.Element == SpecialPathElementKind.Deref; }
-		}
+        public override bool IsDeref
+        {
+            get { return this.Element == SpecialPathElementKind.Deref; }
+        }
 
 
-		public override bool TryGetResultType (out TypeNode resultType)
-		{
-			if (this.type is TypeNode) {
-				resultType = (TypeNode) this.type;
-				return true;
-			}
+        public override bool TryGetResultType (out TypeNode resultType)
+        {
+            if (this.type is TypeNode) {
+                resultType = (TypeNode) this.type;
+                return true;
+            }
 
-			resultType = default (TypeNode);
-			return false;
-		}
+            resultType = default (TypeNode);
+            return false;
+        }
 
-		public override bool TrySetType (TypeNode expectedType, IMetaDataProvider metaDataProvider, out TypeNode resultType)
-		{
-			switch (this.Element) {
-			case SpecialPathElementKind.Length:
-				this.castTo = metaDataProvider.IsArray (expectedType)
-				              || metaDataProvider.System_String.Equals (expectedType)
-				              	? ""
-				              	: "System.Array";
-				resultType = metaDataProvider.System_Int32;
-				return true;
-			case SpecialPathElementKind.Deref:
-				if (metaDataProvider.IsManagedPointer (expectedType)) {
-					TypeNode type = metaDataProvider.ElementType (expectedType);
-					this.type = type;
-					resultType = type;
-					return true;
-				}
-				resultType = default(TypeNode);
-				return false;
+        public override bool TrySetType (TypeNode expectedType, IMetaDataProvider metaDataProvider, out TypeNode resultType)
+        {
+            switch (this.Element) {
+            case SpecialPathElementKind.Length:
+                this.castTo = metaDataProvider.IsArray (expectedType)
+                              || metaDataProvider.System_String.Equals (expectedType)
+                                  ? ""
+                                  : "System.Array";
+                resultType = metaDataProvider.System_Int32;
+                return true;
+            case SpecialPathElementKind.Deref:
+                if (metaDataProvider.IsManagedPointer (expectedType)) {
+                    TypeNode type = metaDataProvider.ElementType (expectedType);
+                    this.type = type;
+                    resultType = type;
+                    return true;
+                }
+                resultType = default(TypeNode);
+                return false;
 
-			default:
-				resultType = default(TypeNode);
-				return false;
-			}
-		}
+            default:
+                resultType = default(TypeNode);
+                return false;
+            }
+        }
 
-		public override Result Decode<Data, Result, Visitor, Label> (Label label, Visitor visitor, Data data)
-		{
-			switch (this.Element) {
-			case SpecialPathElementKind.Length:
-				return visitor.LoadLength (label, Dummy.Value, Dummy.Value, data);
-			case SpecialPathElementKind.Deref:
-				throw new NotImplementedException ();
-			default:
-				throw new InvalidOperationException ();
-			}
-		}
-	}
+        public override Result Decode<Data, Result, Visitor, Label> (Label label, Visitor visitor, Data data)
+        {
+            switch (this.Element) {
+            case SpecialPathElementKind.Length:
+                return visitor.LoadLength (label, Dummy.Value, Dummy.Value, data);
+            case SpecialPathElementKind.Deref:
+                throw new NotImplementedException ();
+            default:
+                throw new InvalidOperationException ();
+            }
+        }
+    }
 }

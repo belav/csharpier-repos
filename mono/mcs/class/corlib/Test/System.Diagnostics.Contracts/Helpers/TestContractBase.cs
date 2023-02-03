@@ -11,32 +11,32 @@ using System.Diagnostics.Contracts.Internal;
 
 namespace MonoTests.System.Diagnostics.Contracts.Helpers {
 
-	public class TestContractBase {
+    public class TestContractBase {
 
-		protected TestContractBase() {
-			// Get the type of System.Diagnostics.Contracts.ContractException
-			// Have to do this differently depending on how the test is being run.
-			this.ContractExceptionType = Type.GetType("System.Diagnostics.Contracts.ContractException");
-			if (this.ContractExceptionType == null) {
-				// Special code for when Contracts namespace is not in CorLib
-				var mGetContractExceptionType = typeof (Contract).GetMethod ("GetContractExceptionType", BindingFlags.NonPublic | BindingFlags.Static);
-				this.ContractExceptionType = (Type) mGetContractExceptionType.Invoke (null, null);
-			}
-		}
+        protected TestContractBase() {
+            // Get the type of System.Diagnostics.Contracts.ContractException
+            // Have to do this differently depending on how the test is being run.
+            this.ContractExceptionType = Type.GetType("System.Diagnostics.Contracts.ContractException");
+            if (this.ContractExceptionType == null) {
+                // Special code for when Contracts namespace is not in CorLib
+                var mGetContractExceptionType = typeof (Contract).GetMethod ("GetContractExceptionType", BindingFlags.NonPublic | BindingFlags.Static);
+                this.ContractExceptionType = (Type) mGetContractExceptionType.Invoke (null, null);
+            }
+        }
 
-		[SetUp]
-		public void Setup() {
-			// Remove all event handlers from Contract.ContractFailed
-			var eventField = typeof(global::System.Runtime.CompilerServices.ContractHelper).GetField("contractFailedEvent", BindingFlags.Static | BindingFlags.NonPublic);
-			eventField.SetValue(null, null);
-		}
+        [SetUp]
+        public void Setup() {
+            // Remove all event handlers from Contract.ContractFailed
+            var eventField = typeof(global::System.Runtime.CompilerServices.ContractHelper).GetField("contractFailedEvent", BindingFlags.Static | BindingFlags.NonPublic);
+            eventField.SetValue(null, null);
+        }
 
-		[TearDown]
-		public void TearDown() {
-		}
+        [TearDown]
+        public void TearDown() {
+        }
 
-		protected Type ContractExceptionType { get; private set; }
+        protected Type ContractExceptionType { get; private set; }
 
-	}
+    }
 }
 

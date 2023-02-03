@@ -2,7 +2,7 @@
 // PeerResolverBindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -37,18 +37,18 @@ using System.Xml;
 // make sense.
 namespace System.ServiceModel.Channels
 {
-	public abstract class PeerResolverBindingElement : BindingElement
-	{
-		protected PeerResolverBindingElement ()
-		{
-		}
+    public abstract class PeerResolverBindingElement : BindingElement
+    {
+        protected PeerResolverBindingElement ()
+        {
+        }
 
-		protected PeerResolverBindingElement (PeerResolverBindingElement other)
-		{
-		}
+        protected PeerResolverBindingElement (PeerResolverBindingElement other)
+        {
+        }
 
-		public abstract PeerReferralPolicy ReferralPolicy { get; set; }
+        public abstract PeerReferralPolicy ReferralPolicy { get; set; }
 
-		public abstract PeerResolver CreatePeerResolver ();
-	}
+        public abstract PeerResolver CreatePeerResolver ();
+    }
 }

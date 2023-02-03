@@ -14,27 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Assigns a specific dictionary key.
-	/// </summary>
-	public abstract class DictionaryBehaviorAttribute : Attribute, IDictionaryBehavior
-	{
-		public const int FirstExecutionOrder = 0;
-		public const int DefaultExecutionOrder = int.MaxValue / 2;
-		public const int LastExecutionOrder = int.MaxValue;
+    /// <summary>
+    /// Assigns a specific dictionary key.
+    /// </summary>
+    public abstract class DictionaryBehaviorAttribute : Attribute, IDictionaryBehavior
+    {
+        public const int FirstExecutionOrder = 0;
+        public const int DefaultExecutionOrder = int.MaxValue / 2;
+        public const int LastExecutionOrder = int.MaxValue;
 
-		public DictionaryBehaviorAttribute()
-		{
-			ExecutionOrder = DefaultExecutionOrder;
-		}
+        public DictionaryBehaviorAttribute()
+        {
+            ExecutionOrder = DefaultExecutionOrder;
+        }
 
-		public int ExecutionOrder { get; set; }
+        public int ExecutionOrder { get; set; }
 
-		public virtual IDictionaryBehavior Copy()
-		{
-			return this;
-		}
-	}
+        public virtual IDictionaryBehavior Copy()
+        {
+            return this;
+        }
+    }
 }

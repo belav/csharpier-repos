@@ -2,26 +2,26 @@
 
 namespace Test1
 {
-	public class Base
-	{ }
+    public class Base
+    { }
 
-	public partial class Foo : Base
-	{ }
+    public partial class Foo : Base
+    { }
 
-	public partial class Foo : Base
-	{ }
+    public partial class Foo : Base
+    { }
 }
 
 namespace Test2
 {
-	public interface Base
-	{ }
+    public interface Base
+    { }
 
-	public partial class Foo : Base
-	{ }
+    public partial class Foo : Base
+    { }
 
-	public partial class Foo : Base
-	{ }
+    public partial class Foo : Base
+    { }
 }
 
 public partial class ReflectedType { }
@@ -33,6 +33,6 @@ partial class D { }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main ()
+    { }
 }

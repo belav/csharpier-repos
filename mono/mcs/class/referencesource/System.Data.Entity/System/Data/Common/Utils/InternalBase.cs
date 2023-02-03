@@ -28,13 +28,13 @@ namespace System.Data.Common.Utils {
         }
 
         public override string ToString() {
-			StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             ToCompactString(builder);
             return builder.ToString();
         }        
 
         internal virtual string ToFullString() {
-			StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             ToFullString(builder);
             return builder.ToString();
         }

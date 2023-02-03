@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests;
+namespace AutoMapper.UnitTests;
 
 public class SealGenerics : AutoMapperSpecBase
 {
@@ -170,7 +170,7 @@ public class GenericValueResolver : AutoMapperSpecBase
         cfg.CreateMap(typeof(Source), typeof(Destination<>))
             .ForMember("MyValues", o => o.MapFrom(typeof(ValuesResolver<>)));
         cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
-            .ForMember("MyValues", o => o.MapFrom(typeof(ValuesResolver<,>)));				
+            .ForMember("MyValues", o => o.MapFrom(typeof(ValuesResolver<,>)));                
     });
     private class KeyResolver<TKey> : IValueResolver<KeyValuePair<TKey, int>, Destination, string>
     {

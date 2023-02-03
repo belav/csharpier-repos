@@ -2,7 +2,7 @@
 // CryptographicAttributeTest.cs - NUnit tests for CryptographicAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -36,60 +36,60 @@ using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography {
 
-	[TestFixture]
-	public class CryptographicAttributeTest {
+    [TestFixture]
+    public class CryptographicAttributeTest {
 
-		static string defaultOid = "1.2.840.113549.1.7.1";
-		static string defaultName = "PKCS 7 Data";
+        static string defaultOid = "1.2.840.113549.1.7.1";
+        static string defaultName = "PKCS 7 Data";
 
-		[Test]
-		public void ConstructorOid () 
-		{
-			Oid o = new Oid (defaultOid);
-			CryptographicAttributeObject ca = new CryptographicAttributeObject (o);
-			Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
-			Assert.AreEqual (0, ca.Values.Count, "Values");
-		}
+        [Test]
+        public void ConstructorOid () 
+        {
+            Oid o = new Oid (defaultOid);
+            CryptographicAttributeObject ca = new CryptographicAttributeObject (o);
+            Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
+            Assert.AreEqual (0, ca.Values.Count, "Values");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorOidNull () 
-		{
-			CryptographicAttributeObject ca = new CryptographicAttributeObject (null);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorOidNull () 
+        {
+            CryptographicAttributeObject ca = new CryptographicAttributeObject (null);
+        }
 
-		[Test]
-		public void ConstructorOidCollection () 
-		{
-			Oid o = new Oid (defaultOid);
-			AsnEncodedDataCollection coll = new AsnEncodedDataCollection ();
-			CryptographicAttributeObject ca = new CryptographicAttributeObject (o, coll);
-			Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
-			Assert.AreEqual (0, ca.Values.Count, "Values - 0");
-			coll.Add (new AsnEncodedData (new byte [0]));
-			Assert.AreEqual (1, ca.Values.Count, "Values - 1");
-		}
+        [Test]
+        public void ConstructorOidCollection () 
+        {
+            Oid o = new Oid (defaultOid);
+            AsnEncodedDataCollection coll = new AsnEncodedDataCollection ();
+            CryptographicAttributeObject ca = new CryptographicAttributeObject (o, coll);
+            Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
+            Assert.AreEqual (0, ca.Values.Count, "Values - 0");
+            coll.Add (new AsnEncodedData (new byte [0]));
+            Assert.AreEqual (1, ca.Values.Count, "Values - 1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorOidNullCollection ()
-		{
-			AsnEncodedDataCollection coll = new AsnEncodedDataCollection ();
-			CryptographicAttributeObject ca = new CryptographicAttributeObject (null, coll);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ConstructorOidNullCollection ()
+        {
+            AsnEncodedDataCollection coll = new AsnEncodedDataCollection ();
+            CryptographicAttributeObject ca = new CryptographicAttributeObject (null, coll);
+        }
 
-		[Test]
-		public void ConstructorOidAsnEncodedDataCollectionNull ()
-		{
-			Oid o = new Oid (defaultOid);
-			AsnEncodedDataCollection coll = null;
-			CryptographicAttributeObject ca = new CryptographicAttributeObject (o, coll);
-			Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
-			Assert.AreEqual (0, ca.Values.Count, "Values");
-		}
-	}
+        [Test]
+        public void ConstructorOidAsnEncodedDataCollectionNull ()
+        {
+            Oid o = new Oid (defaultOid);
+            AsnEncodedDataCollection coll = null;
+            CryptographicAttributeObject ca = new CryptographicAttributeObject (o, coll);
+            Assert.AreEqual (defaultName, ca.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual (defaultOid, ca.Oid.Value, "Oid.Value");
+            Assert.AreEqual (0, ca.Values.Count, "Values");
+        }
+    }
 }
 

@@ -3,20 +3,20 @@
 
 public class A
 {
-	protected A (int a)
-	{
-	}
+    protected A (int a)
+    {
+    }
 }
 
 public class B : A
 {
-	public B ()
-		: base (1)
-	{
-	}
-	
-	public static void Main ()
-	{
-		A a = new A (1);
-	}
+    public B ()
+        : base (1)
+    {
+    }
+    
+    public static void Main ()
+    {
+        A a = new A (1);
+    }
 }

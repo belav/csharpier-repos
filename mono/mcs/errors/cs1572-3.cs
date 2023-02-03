@@ -4,9 +4,9 @@
 
 namespace Testing
 {
-	class Test
-	{
-		/// <param name='mismatch'>mismatch</param>
-		public delegate void D (int i);
-	}
+    class Test
+    {
+        /// <param name='mismatch'>mismatch</param>
+        public delegate void D (int i);
+    }
 }

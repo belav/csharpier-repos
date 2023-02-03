@@ -36,40 +36,40 @@ using System.Runtime.Remoting.Contexts;
 
 namespace System.Runtime.Remoting {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ActivatedServiceTypeEntry : TypeEntry
-	{
-		Type obj_type;
-		
-		public ActivatedServiceTypeEntry (Type type)			
-		{
-			AssemblyName = type.Assembly.FullName;
-			TypeName = type.FullName;
-			obj_type = type;
-		}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ActivatedServiceTypeEntry : TypeEntry
+    {
+        Type obj_type;
+        
+        public ActivatedServiceTypeEntry (Type type)            
+        {
+            AssemblyName = type.Assembly.FullName;
+            TypeName = type.FullName;
+            obj_type = type;
+        }
 
-		public ActivatedServiceTypeEntry (string typeName, string assemblyName)
-		{
-			AssemblyName = assemblyName;
-			TypeName = typeName;
-			Assembly a = Assembly.Load (assemblyName);
-			obj_type = a.GetType (typeName);
-			if (obj_type == null) 
-				throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
-		}
-		
-		public IContextAttribute [] ContextAttributes {
-			get { return null; }
-			set { } // This is not implemented in the MS runtime yet.
-		}
+        public ActivatedServiceTypeEntry (string typeName, string assemblyName)
+        {
+            AssemblyName = assemblyName;
+            TypeName = typeName;
+            Assembly a = Assembly.Load (assemblyName);
+            obj_type = a.GetType (typeName);
+            if (obj_type == null) 
+                throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
+        }
+        
+        public IContextAttribute [] ContextAttributes {
+            get { return null; }
+            set { } // This is not implemented in the MS runtime yet.
+        }
 
-		public Type ObjectType {
-			get { return obj_type; }
-		}
+        public Type ObjectType {
+            get { return obj_type; }
+        }
 
-		public override string ToString ()
-		{
-			return AssemblyName + TypeName;
-		}
-	}
+        public override string ToString ()
+        {
+            return AssemblyName + TypeName;
+        }
+    }
 }

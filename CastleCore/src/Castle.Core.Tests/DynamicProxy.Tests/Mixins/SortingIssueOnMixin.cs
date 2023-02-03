@@ -14,39 +14,39 @@
 
 namespace Castle.DynamicProxy.Tests.Mixins
 {
-	using System;
+    using System;
 
-	public interface IDomainWithMixin
-	{
-		void DoSomething();
-	}
-	public interface IDomainsAs
-	{
-		void DoSomethingElse();
-	}
-
-#if FEATURE_SERIALIZATION
-	[Serializable]
-#endif
-	public class DomainWithMixin : IDomainWithMixin
-	{
-		public void DoSomething() { }
-	}
+    public interface IDomainWithMixin
+    {
+        void DoSomething();
+    }
+    public interface IDomainsAs
+    {
+        void DoSomethingElse();
+    }
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class DomainsAs : IDomainsAs
-	{
-		public void DoSomethingElse() { }
-	}
+    public class DomainWithMixin : IDomainWithMixin
+    {
+        public void DoSomething() { }
+    }
 
-	public class MixinDomainObject
-	{
-		public readonly string Name;
-		public MixinDomainObject(string name)
-		{
-			this.Name = name;
-		}
-	}
+#if FEATURE_SERIALIZATION
+    [Serializable]
+#endif
+    public class DomainsAs : IDomainsAs
+    {
+        public void DoSomethingElse() { }
+    }
+
+    public class MixinDomainObject
+    {
+        public readonly string Name;
+        public MixinDomainObject(string name)
+        {
+            this.Name = name;
+        }
+    }
 }

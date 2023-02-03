@@ -29,21 +29,21 @@ using System;
 
 namespace System.Web.Util
 {
-	sealed class SimpleWebObjectFactory : IWebObjectFactory
-	{
-		Type type;
-		
-		public SimpleWebObjectFactory (Type type)
-		{
-			this.type = type;
-		}
-		
-		public object CreateInstance ()
-		{
-			if (type == null)
-				return null;
+    sealed class SimpleWebObjectFactory : IWebObjectFactory
+    {
+        Type type;
+        
+        public SimpleWebObjectFactory (Type type)
+        {
+            this.type = type;
+        }
+        
+        public object CreateInstance ()
+        {
+            if (type == null)
+                return null;
 
-			return Activator.CreateInstance (type);
-		}
-	}
+            return Activator.CreateInstance (type);
+        }
+    }
 }

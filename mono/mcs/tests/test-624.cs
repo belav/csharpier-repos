@@ -6,15 +6,15 @@ using System;
 //
 class X {
 
-	int Type {
-		get {
-			return 1;
-		}
-	}
+    int Type {
+        get {
+            return 1;
+        }
+    }
 
-	public static void Main ()
-	{
-		Type t = (Type) null;
-	}
+    public static void Main ()
+    {
+        Type t = (Type) null;
+    }
 
 }

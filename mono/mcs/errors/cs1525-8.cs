@@ -3,12 +3,12 @@
 
 class X {
 
-	static void Main ()
-	{
-		int i = 0;
+    static void Main ()
+    {
+        int i = 0;
 
-		switch (i){
-			i = 4;
-		}
-	}
+        switch (i){
+            i = 4;
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
 // RadioButtonListCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.RadioButtonList
+//    - CAS unit tests for System.Web.UI.WebControls.RadioButtonList
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,27 +39,27 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class RadioButtonListCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class RadioButtonListCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			RadioButtonListTest unit = new RadioButtonListTest ();
-			unit.RadioButtonList_Constructor ();
-			unit.CellPaddingProperties ();
-			unit.CellSpacingProperties ();
-			unit.LoadAndRaise1 ();
-			unit.LoadAndRaise2 ();
-			unit.LoadAndRaise3 ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            RadioButtonListTest unit = new RadioButtonListTest ();
+            unit.RadioButtonList_Constructor ();
+            unit.CellPaddingProperties ();
+            unit.CellSpacingProperties ();
+            unit.LoadAndRaise1 ();
+            unit.LoadAndRaise2 ();
+            unit.LoadAndRaise3 ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (RadioButtonList); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (RadioButtonList); }
+        }
+    }
 }

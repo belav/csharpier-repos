@@ -1,9 +1,9 @@
 //
 // CodeRemoveEventStatementCas.cs - CAS unit tests for 
-//	System.CodeDom.CodeRemoveEventStatement
+//    System.CodeDom.CodeRemoveEventStatement
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,62 +37,62 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeRemoveEventStatementCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeRemoveEventStatementCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeRemoveEventStatement cres = new CodeRemoveEventStatement ();
-			Assert.AreEqual (String.Empty, cres.Event.EventName, "Event");
-			cres.Event = new CodeEventReferenceExpression ();
-			Assert.IsNull (cres.Listener, "Listener");
-			cres.Listener = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeRemoveEventStatement cres = new CodeRemoveEventStatement ();
+            Assert.AreEqual (String.Empty, cres.Event.EventName, "Event");
+            cres.Event = new CodeEventReferenceExpression ();
+            Assert.IsNull (cres.Listener, "Listener");
+            cres.Listener = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeEventReferenceExpression event_ref = new CodeEventReferenceExpression ();
-			CodeExpression listener = new CodeExpression ();
-			CodeRemoveEventStatement cres = new CodeRemoveEventStatement (event_ref, listener);
-			Assert.AreSame (event_ref, cres.Event, "Event");
-			cres.Event = new CodeEventReferenceExpression ();
-			Assert.AreSame (listener, cres.Listener, "Listener");
-			cres.Listener = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeEventReferenceExpression event_ref = new CodeEventReferenceExpression ();
+            CodeExpression listener = new CodeExpression ();
+            CodeRemoveEventStatement cres = new CodeRemoveEventStatement (event_ref, listener);
+            Assert.AreSame (event_ref, cres.Event, "Event");
+            cres.Event = new CodeEventReferenceExpression ();
+            Assert.AreSame (listener, cres.Listener, "Listener");
+            cres.Listener = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodeExpression listener = new CodeExpression ();
-			CodeRemoveEventStatement cres = new CodeRemoveEventStatement (target, "mono", listener);
-			Assert.AreEqual ("mono", cres.Event.EventName, "Event.EventName");
-			Assert.AreSame (target, cres.Event.TargetObject, "Event.TargetObject");
-			cres.Event = new CodeEventReferenceExpression ();
-			Assert.AreSame (listener, cres.Listener, "Listener");
-			cres.Listener = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeExpression target = new CodeExpression ();
+            CodeExpression listener = new CodeExpression ();
+            CodeRemoveEventStatement cres = new CodeRemoveEventStatement (target, "mono", listener);
+            Assert.AreEqual ("mono", cres.Event.EventName, "Event.EventName");
+            Assert.AreSame (target, cres.Event.TargetObject, "Event.TargetObject");
+            cres.Event = new CodeEventReferenceExpression ();
+            Assert.AreSame (listener, cres.Listener, "Listener");
+            cres.Listener = new CodeExpression ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeRemoveEventStatement).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeRemoveEventStatement).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

@@ -9,12 +9,12 @@ class X
         public static int Main ()
         {
                 Mapper mapper = new Mapper (delegate (int i){
-			return i * 12; });
+            return i * 12; });
 
-		if (mapper (3) == 36)
-			return 0;
+        if (mapper (3) == 36)
+            return 0;
 
-		// Failure
-		return 1;
+        // Failure
+        return 1;
         }
 }

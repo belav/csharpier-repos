@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,11 +27,11 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum AxisArrowStyle
-	{
-		None = 0,
-		Triangle = 1,
-		SharpTriangle = 2,
-		Lines = 3
-	}
+    public enum AxisArrowStyle
+    {
+        None = 0,
+        Triangle = 1,
+        SharpTriangle = 2,
+        Lines = 3
+    }
 }

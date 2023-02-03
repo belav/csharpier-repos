@@ -38,7 +38,7 @@ namespace InterlockedRead
     public class ThreadSafe
     {
         ManualResetEvent signal;
-        private long totalValue = Int64.MinValue;		
+        private long totalValue = Int64.MinValue;        
         private int numberOfIterations;
         private long newValueA = 0;
         private long newValueB = Int64.MinValue;
@@ -77,7 +77,7 @@ namespace InterlockedRead
             {
                 long l = Interlocked.Read(ref totalValue);
                 if(l != newValueB && l != newValueA)
-                {	
+                {    
                     Console.WriteLine(l + "," +
                         newValueB + "," + newValueA);
                     success = false;
@@ -92,5 +92,5 @@ namespace InterlockedRead
                 return (success);
             }
         }
-    }	
+    }    
 }

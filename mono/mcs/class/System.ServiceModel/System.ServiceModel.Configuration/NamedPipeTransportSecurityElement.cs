@@ -2,7 +2,7 @@
 // NamedPipeTransportSecurityElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,44 +54,44 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class NamedPipeTransportSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty protection_level;
+    [MonoTODO]
+    public sealed partial class NamedPipeTransportSecurityElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty protection_level;
 
-		static NamedPipeTransportSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			protection_level = new ConfigurationProperty ("protectionLevel",
-				typeof (ProtectionLevel), "EncryptAndSign", null/* FIXME: get converter for ProtectionLevel*/, null,
-				ConfigurationPropertyOptions.None);
+        static NamedPipeTransportSecurityElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            protection_level = new ConfigurationProperty ("protectionLevel",
+                typeof (ProtectionLevel), "EncryptAndSign", null/* FIXME: get converter for ProtectionLevel*/, null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (protection_level);
-		}
+            properties.Add (protection_level);
+        }
 
-		public NamedPipeTransportSecurityElement ()
-		{
-		}
-
-
-		// Properties
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("protectionLevel",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "EncryptAndSign")]
-		public ProtectionLevel ProtectionLevel {
-			get { return (ProtectionLevel) base [protection_level]; }
-			set { base [protection_level] = value; }
-		}
+        public NamedPipeTransportSecurityElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [ConfigurationProperty ("protectionLevel",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "EncryptAndSign")]
+        public ProtectionLevel ProtectionLevel {
+            get { return (ProtectionLevel) base [protection_level]; }
+            set { base [protection_level] = value; }
+        }
+
+
+    }
 
 }

@@ -32,34 +32,34 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtension ("binding", "http://schemas.xmlsoap.org/wsdl/http/", typeof (Binding))]
-	[XmlFormatExtensionPrefix ("http", "http://schemas.xmlsoap.org/wsdl/http/")]
-	public sealed class HttpBinding : ServiceDescriptionFormatExtension {
+    [XmlFormatExtension ("binding", "http://schemas.xmlsoap.org/wsdl/http/", typeof (Binding))]
+    [XmlFormatExtensionPrefix ("http", "http://schemas.xmlsoap.org/wsdl/http/")]
+    public sealed class HttpBinding : ServiceDescriptionFormatExtension {
 
-		#region Fields
+        #region Fields
 
-		public const string Namespace = "http://schemas.xmlsoap.org/wsdl/http/";
-		string verb;
+        public const string Namespace = "http://schemas.xmlsoap.org/wsdl/http/";
+        string verb;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public HttpBinding ()
-		{
-			verb = String.Empty;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public HttpBinding ()
+        {
+            verb = String.Empty;
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[XmlAttribute ("verb")]
-		public string Verb { 	
-			get { return verb; }
-			set { verb = value; }
-		}
-	
-		#endregion // Properties
-	}
+        [XmlAttribute ("verb")]
+        public string Verb {     
+            get { return verb; }
+            set { verb = value; }
+        }
+    
+        #endregion // Properties
+    }
 }

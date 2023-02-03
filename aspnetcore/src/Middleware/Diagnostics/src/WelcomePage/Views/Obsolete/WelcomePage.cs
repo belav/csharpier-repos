@@ -201,7 +201,7 @@ WriteAttributeValue("", 133, System.Globalization.CultureInfo.CurrentUICulture.T
         }
     </style>
     <script>
-	</script>
+    </script>
 </head>
 <body>
     <div class=""wrapper"">

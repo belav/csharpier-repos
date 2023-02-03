@@ -31,30 +31,30 @@ using System.Collections;
 
 namespace System.DirectoryServices.Protocols
 {
-	[MonoTODO]
-	public class SearchResultEntryCollection : ReadOnlyCollectionBase
-	{
-		internal SearchResultEntryCollection ()
-		{
-		}
+    [MonoTODO]
+    public class SearchResultEntryCollection : ReadOnlyCollectionBase
+    {
+        internal SearchResultEntryCollection ()
+        {
+        }
 
-		public SearchResultEntry this [int index] {
-			get { return (SearchResultEntry) InnerList [index]; }
-		}
+        public SearchResultEntry this [int index] {
+            get { return (SearchResultEntry) InnerList [index]; }
+        }
 
-		public bool Contains (SearchResultEntry value)
-		{
-			return InnerList.Contains (value);
-		}
+        public bool Contains (SearchResultEntry value)
+        {
+            return InnerList.Contains (value);
+        }
 
-		public void CopyTo (SearchResultEntry [] values, int index)
-		{
-			InnerList.CopyTo (values, index);
-		}
+        public void CopyTo (SearchResultEntry [] values, int index)
+        {
+            InnerList.CopyTo (values, index);
+        }
 
-		public int IndexOf (SearchResultEntry value)
-		{
-			return InnerList.IndexOf (value);
-		}
-	}
+        public int IndexOf (SearchResultEntry value)
+        {
+            return InnerList.IndexOf (value);
+        }
+    }
 }

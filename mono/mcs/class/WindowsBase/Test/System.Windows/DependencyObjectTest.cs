@@ -22,8 +22,8 @@
 // (C) iain@mccoy.id.au
 //
 // Authors:
-//	Iain McCoy (iain@mccoy.id.au)
-//	Chris Toshok (toshok@ximian.com)
+//    Iain McCoy (iain@mccoy.id.au)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -33,88 +33,88 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows {
 
-	class X {
-		public static readonly DependencyProperty AProperty = DependencyProperty.RegisterAttached("A", typeof(int), typeof(X));
-		public static void SetA(DependencyObject obj, int value)
-		{
-			obj.SetValue(AProperty, value);
-		}
-		public static int GetA(DependencyObject obj)
-		{
-			return (int)obj.GetValue(AProperty);
-		}
+    class X {
+        public static readonly DependencyProperty AProperty = DependencyProperty.RegisterAttached("A", typeof(int), typeof(X));
+        public static void SetA(DependencyObject obj, int value)
+        {
+            obj.SetValue(AProperty, value);
+        }
+        public static int GetA(DependencyObject obj)
+        {
+            return (int)obj.GetValue(AProperty);
+        }
 
-		public static readonly DependencyProperty BProperty = DependencyProperty.RegisterAttached("B", typeof(string), typeof(X));
-		public static void SetB(DependencyObject obj, string value)
-		{
-			obj.SetValue(BProperty, value);
-		}
-		public static string GetB(DependencyObject obj)
-		{
-			return (string)obj.GetValue(BProperty);
-		}
+        public static readonly DependencyProperty BProperty = DependencyProperty.RegisterAttached("B", typeof(string), typeof(X));
+        public static void SetB(DependencyObject obj, string value)
+        {
+            obj.SetValue(BProperty, value);
+        }
+        public static string GetB(DependencyObject obj)
+        {
+            return (string)obj.GetValue(BProperty);
+        }
 
-	}
+    }
 
-	class Y : DependencyObject {
-	}
+    class Y : DependencyObject {
+    }
 
-	class DefaultValueTest : DependencyObject {
-		public static readonly DependencyProperty AProperty = DependencyProperty.Register("A", typeof(string), typeof(DefaultValueTest), new PropertyMetadata("defaultValueTest"));
-	}
+    class DefaultValueTest : DependencyObject {
+        public static readonly DependencyProperty AProperty = DependencyProperty.Register("A", typeof(string), typeof(DefaultValueTest), new PropertyMetadata("defaultValueTest"));
+    }
 
-	[TestFixture]
-	public class DependencyObjectTest {
-		[Test]
-		[Category ("NotWorking")]
-		public void TestAttachedProperty()
-		{
-			Y y1 = new Y();
-			X.SetA(y1, 2);
-			Assert.AreEqual(2, X.GetA(y1));
-		}
-	
-		[Test]
-		[Category ("NotWorking")]
-		public void Test2AttachedProperties()
-		{
-			Y y1 = new Y();
-			Y y2 = new Y();
-			X.SetA(y1, 2);
-			X.SetA(y2, 3);
-			Assert.AreEqual(2, X.GetA(y1));
-			Assert.AreEqual(3, X.GetA(y2));
-		}
+    [TestFixture]
+    public class DependencyObjectTest {
+        [Test]
+        [Category ("NotWorking")]
+        public void TestAttachedProperty()
+        {
+            Y y1 = new Y();
+            X.SetA(y1, 2);
+            Assert.AreEqual(2, X.GetA(y1));
+        }
+    
+        [Test]
+        [Category ("NotWorking")]
+        public void Test2AttachedProperties()
+        {
+            Y y1 = new Y();
+            Y y2 = new Y();
+            X.SetA(y1, 2);
+            X.SetA(y2, 3);
+            Assert.AreEqual(2, X.GetA(y1));
+            Assert.AreEqual(3, X.GetA(y2));
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void TestEnumerationOfAttachedProperties()
-		{
-			int count = 0;
-			Y y = new Y();
-			X.SetA(y, 2);
-			X.SetB(y, "Hi");
+        [Test]
+        [Category ("NotWorking")]
+        public void TestEnumerationOfAttachedProperties()
+        {
+            int count = 0;
+            Y y = new Y();
+            X.SetA(y, 2);
+            X.SetB(y, "Hi");
 
-			LocalValueEnumerator e = y.GetLocalValueEnumerator();
-			while (e.MoveNext()) {
-				count++;
-				if (e.Current.Property == X.AProperty)
-					Assert.AreEqual(e.Current.Value, 2);
-				else if (e.Current.Property == X.BProperty)
-					Assert.AreEqual(e.Current.Value, "Hi");
-				else
-					Assert.Fail("Wrong sort of property" + e.Current.Property);
-			}
+            LocalValueEnumerator e = y.GetLocalValueEnumerator();
+            while (e.MoveNext()) {
+                count++;
+                if (e.Current.Property == X.AProperty)
+                    Assert.AreEqual(e.Current.Value, 2);
+                else if (e.Current.Property == X.BProperty)
+                    Assert.AreEqual(e.Current.Value, "Hi");
+                else
+                    Assert.Fail("Wrong sort of property" + e.Current.Property);
+            }
 
-			Assert.AreEqual(2, count);
-		}
+            Assert.AreEqual(2, count);
+        }
 
-		[Test]
-		public void TestDefaultValue()
-		{
-			DefaultValueTest obj = new DefaultValueTest ();
-			Assert.AreEqual (obj.GetValue(DefaultValueTest.AProperty), "defaultValueTest");
-		}
+        [Test]
+        public void TestDefaultValue()
+        {
+            DefaultValueTest obj = new DefaultValueTest ();
+            Assert.AreEqual (obj.GetValue(DefaultValueTest.AProperty), "defaultValueTest");
+        }
 
-	}
+    }
 }

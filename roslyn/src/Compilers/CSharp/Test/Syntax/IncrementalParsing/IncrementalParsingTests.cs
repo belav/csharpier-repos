@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -663,9 +663,9 @@ public class Test
             SourceText oldText = SourceText.From(@"
 class C
 {   
-	public extern C();
-	static int Main ()
-	");
+    public extern C();
+    static int Main ()
+    ");
             char newCharacter = '{';
             SyntaxTree incrementalTree, parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
@@ -678,7 +678,7 @@ class C
         {
             SourceText oldText = SourceText.From(@"
 class MyClass {
-	internal internal const in");
+    internal internal const in");
             char newCharacter = 't';
             SyntaxTree incrementalTree, parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
@@ -729,12 +729,12 @@ public partial clas");
         [Fact]
         public void ErrorConstKeywordInMethodName()
         {
-            SourceText oldText = SourceText.From(@"	class A
-	{
-		protected virtual void Finalize const () { }
-	}
+            SourceText oldText = SourceText.From(@"    class A
+    {
+        protected virtual void Finalize const () { }
+    }
 
-	class B");
+    class B");
             char newCharacter = ' ';
             SyntaxTree incrementalTree, parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
@@ -761,8 +761,8 @@ public partial clas");
             SourceText oldText = SourceText.From(@"using System;
 
 class Test {
-	static public int Main(String[] args) {
-		AbstractBase b = new AbstractBase.");
+    static public int Main(String[] args) {
+        AbstractBase b = new AbstractBase.");
             char newCharacter = 'I';
             SyntaxTree incrementalTree, parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
@@ -773,8 +773,8 @@ class Test {
         [Fact]
         public void ErrorWithInvalidMethodName()
         {
-            SourceText oldText = SourceText.From(@"public class MyClass {	
-	int -goo(");
+            SourceText oldText = SourceText.From(@"public class MyClass {    
+    int -goo(");
             char newCharacter = ')';
             SyntaxTree incrementalTree, parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
@@ -861,12 +861,12 @@ public class Test
         {
             SourceText oldText = SourceText.From(@"class MyClass 
 {
-	private enum E {zero, one, two, three};
-	public const E test = E.two;
-	public static int Main() 
-	{
-		return 1;
-	}
+    private enum E {zero, one, two, three};
+    public const E test = E.two;
+    public static int Main() 
+    {
+        return 1;
+    }
 }");
             int locationOfChange = 0, widthOfChange = 5;
             SyntaxTree incrementalTree;
@@ -883,13 +883,13 @@ public class Test
 private class B{ public class MyClass 
 {
 
-	private enum E {zero, one, two, three};
-	public const E test = E.two;
+    private enum E {zero, one, two, three};
+    public const E test = E.two;
 
-	public static int Main() 
-	{
-		return 1;
-	}
+    public static int Main() 
+    {
+        return 1;
+    }
 }}");
             int locationOfChange = 42, widthOfChange = 1;
             SyntaxTree incrementalTree;
@@ -907,13 +907,13 @@ private class B{ public class MyClass
 private class B{ private class MyClass 
 {
 
-	private enum E {zero, one, two, three};
-	public const E test = E.two;
+    private enum E {zero, one, two, three};
+    public const E test = E.two;
 
-	public int Main() 
-	{
-		return 1;
-	}
+    public int Main() 
+    {
+        return 1;
+    }
 }}");
             int locationOfChange = 139, widthOfChange = 2;
             SyntaxTree incrementalTree;
@@ -929,15 +929,15 @@ private class B{ private class MyClass
         {
             SourceText oldText = SourceText.From(@"interface IGoo
 {
-	event EventHandler E { add { } remove { } }
+    event EventHandler E { add { } remove { } }
 }
 
 class Test 
 {
-	public static int Main()
-	{
-		return 1;
-	}
+    public static int Main()
+    {
+        return 1;
+    }
 }");
             int locationOfChange = 20, widthOfChange = 6;
             SyntaxTree incrementalTree;
@@ -953,15 +953,15 @@ class Test
         {
             SourceText oldText = SourceText.From(@"interface IGoo
 {
-	event EventHandler E { add { } remove { } }
+    event EventHandler E { add { } remove { } }
 }
 
 class Test 
 {
-	public static int Main()
-	{
-		return 1;
-	}
+    public static int Main()
+    {
+        return 1;
+    }
 }");
             int locationOfChange = 43, widthOfChange = 3;
             SyntaxTree incrementalTree;
@@ -979,11 +979,11 @@ class Test
 [assembly:InternalsVisibleTo(a)]
 class A
 {
-	public int x = 0;
-	static int Main()
-	{	
-		return 0;
-	}
+    public int x = 0;
+    static int Main()
+    {    
+        return 0;
+    }
 }
 ");
             int locationOfChange = 12, widthOfChange = 1;
@@ -999,14 +999,14 @@ class A
         {
             SourceText oldText = SourceText.From(@"class A
 {
-		int MyInter.this[int i] {
-		get {
-			return intI + 1;
-		}
-		set {
-			intI = value + 1;
-		}
-	}
+        int MyInter.this[int i] {
+        get {
+            return intI + 1;
+        }
+        set {
+            intI = value + 1;
+        }
+    }
 
 }
 ");
@@ -1022,14 +1022,14 @@ class A
         public void CommentOutReturnStatementInProperty()
         {
             SourceText oldText = SourceText.From(@"public class MyClass {
-	int this[] {
-		get {
-			return intI;
-		}
-		set {
-			intI = value;
-		}
-	}
+    int this[] {
+        get {
+            return intI;
+        }
+        set {
+            intI = value;
+        }
+    }
 }
 ");
             int locationOfChange = 51, widthOfChange = 7;
@@ -1135,7 +1135,7 @@ string s = @
         public void CodeWithDollarSign()
         {
             SourceText oldText = SourceText.From(@"class  filesystem{
-	po$i$;
+    po$i$;
 }");
             int locationOfChange = 0, widthOfChange = 5;
             SyntaxTree incrementalTree;
@@ -1432,8 +1432,8 @@ class Test
     static void Main()
     { 
         var q = 
-	from  string  @params in ( @foreach/9)
-	join");
+    from  string  @params in ( @foreach/9)
+    join");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1837,13 +1837,13 @@ namespace N");
         public void AddCurlyBracesToIncompleteCode()
         {
             SourceText oldText = SourceText.From(
-@"		int[][] arr;
+@"        int[][] arr;
 
-		if (arr[1][1] == 0)
-			return 0;
-		else
-			return 1;
-	}
+        if (arr[1][1] == 0)
+            return 0;
+        else
+            return 1;
+    }
 }
 ");
 
@@ -1901,7 +1901,7 @@ namespace N");
             SourceText oldText = SourceText.From(
 @"class GenInt : IGenX<int[]>, IGenY<int> 
 {
-	string IGenX<int[]>.m");
+    string IGenX<int[]>.m");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1920,7 +1920,7 @@ namespace N");
             SourceText oldText = SourceText.From(
 @"public class Test 
 {
-	int this[ params int [] args, i");
+    int this[ params int [] args, i");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1960,7 +1960,7 @@ namespace N");
             SourceText oldText = SourceText.From(
 @"unsafe class Test 
 {
-	unsafe void*[] A = {(void*");
+    unsafe void*[] A = {(void*");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -2107,16 +2107,16 @@ namespace N");
             SourceText oldText = SourceText.From(
 @"public class Test
 {
-	public int Prop
-	{
-		set
-		{
-			D d = delegate
-			{
-				Validator(value);
-			};
-		}
-	}
+    public int Prop
+    {
+        set
+        {
+            D d = delegate
+            {
+                Validator(value);
+            };
+        }
+    }
 }
 ");
 
@@ -2191,13 +2191,13 @@ namespace N");
             SourceText oldText = SourceText.From(
 @"public class Driver 
 {
-	public void AddValidations()
-	{
-		if (typeof(K) is System.ValueType)
-		{
+    public void AddValidations()
+    {
+        if (typeof(K) is System.ValueType)
+        {
 
-		}
-	}
+        }
+    }
 }");
 
             SyntaxTree incrementalTree;
@@ -2273,17 +2273,17 @@ namespace N");
 {
 
 #if PUBLIC
-		public
+        public
 #else
-		internal
+        internal
 #endif
-			static RecordNotFound Method(){}
+            static RecordNotFound Method(){}
 }
 //<Code>");
 
             string txtToCmnt = @"internal
 #endif
-			static RecordNotFound Method(){}";
+            static RecordNotFound Method(){}";
 
             int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal), widthOfChange = txtToCmnt.Length;
             SyntaxTree incrementalTree;
@@ -2385,8 +2385,8 @@ class Program
         public void InsertOpenBraceBeforeCodes()
         {
             SourceText oldText = SourceText.From(@"
-		this.I = i;
-	};
+        this.I = i;
+    };
 }");
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
@@ -3263,10 +3263,10 @@ using System;
 
 switch (getVirtualKey())
 {
-	case VirtualKey.Up or VirtualKey.Down or VirtualKey.Left or VirtualKey.Right:
-	{
+    case VirtualKey.Up or VirtualKey.Down or VirtualKey.Left or VirtualKey.Right:
+    {
 
-	}
+    }
 }
 
 // A local function to simulate get operation.
@@ -3275,10 +3275,10 @@ static VirtualKey getVirtualKey() => VirtualKey.Up;
 
 enum VirtualKey
 {
-	Up,
-	Down,
-	Left,
-	Right
+    Up,
+    Down,
+    Left,
+    Right
 }
 ";
             var tree = SyntaxFactory.ParseSyntaxTree(source);

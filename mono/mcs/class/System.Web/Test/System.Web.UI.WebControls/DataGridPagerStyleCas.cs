@@ -1,9 +1,9 @@
 //
 // DataGridPagerStyleCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.DataGridPagerStyle
+//    - CAS unit tests for System.Web.UI.WebControls.DataGridPagerStyle
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,42 +40,42 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataGridPagerStyleCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class DataGridPagerStyleCas : AspNetHostingMinimal {
 
-		private DataGridPagerStyle pager_style;
+        private DataGridPagerStyle pager_style;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			pager_style = new DataGrid ().PagerStyle;
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            pager_style = new DataGrid ().PagerStyle;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataGridPagerStyleTest unit = new DataGridPagerStyleTest ();
-			unit.DataGridPagerStyle_Defaults ();
-			unit.DataGridPagerStyle_Assignment ();
-			unit.DataGridPagerStyle_Copy ();
-			unit.DataGridPagerStyle_Merge ();
-			unit.DataGridPagerStyle_Reset ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            DataGridPagerStyleTest unit = new DataGridPagerStyleTest ();
+            unit.DataGridPagerStyle_Defaults ();
+            unit.DataGridPagerStyle_Assignment ();
+            unit.DataGridPagerStyle_Copy ();
+            unit.DataGridPagerStyle_Merge ();
+            unit.DataGridPagerStyle_Reset ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// no public ctor but we know the properties aren't protected
-			MethodInfo mi = this.Type.GetProperty ("Visible").GetGetMethod ();
-			Assert.IsNotNull (mi, "Visible");
-			return mi.Invoke (pager_style, null);
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // no public ctor but we know the properties aren't protected
+            MethodInfo mi = this.Type.GetProperty ("Visible").GetGetMethod ();
+            Assert.IsNotNull (mi, "Visible");
+            return mi.Invoke (pager_style, null);
+        }
 
-		public override Type Type {
-			get { return typeof (DataGridPagerStyle); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (DataGridPagerStyle); }
+        }
+    }
 }

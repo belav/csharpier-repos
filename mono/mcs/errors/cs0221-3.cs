@@ -2,12 +2,12 @@
 // Line: 10
 
 enum E:byte {
-	Min = 9
+    Min = 9
 }
 
 class T {
-	static void Main () {
-			E error = (E)(-9);
-			System.Console.WriteLine (error);
-	}
+    static void Main () {
+            E error = (E)(-9);
+            System.Console.WriteLine (error);
+    }
 }

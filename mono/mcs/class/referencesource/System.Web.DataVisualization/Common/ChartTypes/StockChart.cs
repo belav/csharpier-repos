@@ -5,11 +5,11 @@
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
 //=================================================================
-//  File:		StockChart.cs
+//  File:        StockChart.cs
 //
-//  Namespace:	DataVisualization.Charting.ChartTypes
+//  Namespace:    DataVisualization.Charting.ChartTypes
 //
-//	Classes:	StockChart, CandleStickChart
+//    Classes:    StockChart, CandleStickChart
 //
 //  Purpose:    Stock chart requires 4 Y values High, Low, Open and Close.
 //  
@@ -25,7 +25,7 @@
 //  scientific data, because each series of data displays a high, low, 
 //  open, and close value.
 //
-//	Reviewed:	AG - Aug 6, 2002
+//    Reviewed:    AG - Aug 6, 2002
 //              AG - Microsoft 7, 2007
 //
 //===================================================================
@@ -39,506 +39,506 @@ using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 
 #if Microsoft_CONTROL
-	using System.Windows.Forms.DataVisualization.Charting.Utilities;
+    using System.Windows.Forms.DataVisualization.Charting.Utilities;
 #else
-	using System.Web.UI.DataVisualization.Charting.Utilities;
+    using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-	namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
+    namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 #else
-	namespace System.Web.UI.DataVisualization.Charting.ChartTypes
+    namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
-	#region Open/close marks style enumeration
+    #region Open/close marks style enumeration
 
-	/// <summary>
-	/// Style of the Open-Close marks in the stock chart
-	/// </summary>
-	internal enum StockOpenCloseMarkStyle
-	{
-		/// <summary>
-		/// Line
-		/// </summary>
-		Line,
+    /// <summary>
+    /// Style of the Open-Close marks in the stock chart
+    /// </summary>
+    internal enum StockOpenCloseMarkStyle
+    {
+        /// <summary>
+        /// Line
+        /// </summary>
+        Line,
 
-		/// <summary>
-		/// Triangle
-		/// </summary>
-		Triangle,
+        /// <summary>
+        /// Triangle
+        /// </summary>
+        Triangle,
 
-		/// <summary>
-		/// CandleStick. Color of the bar depends if Open value was bigger than Close value.
-		/// </summary>
-		Candlestick
-	}
+        /// <summary>
+        /// CandleStick. Color of the bar depends if Open value was bigger than Close value.
+        /// </summary>
+        Candlestick
+    }
 
-	#endregion
+    #endregion
 
-	/// <summary>
-	/// CandleStick class provides chart unique name and changes the marking 
+    /// <summary>
+    /// CandleStick class provides chart unique name and changes the marking 
     /// style in the StockChart class to StockOpenCloseMarkStyle.CandleStick.
-	/// </summary>
-	internal class CandleStickChart : StockChart
-	{
-		#region Constructor
+    /// </summary>
+    internal class CandleStickChart : StockChart
+    {
+        #region Constructor
 
-		/// <summary>
-		/// CandleStick chart constructor.
-		/// </summary>
-		public CandleStickChart() : base(StockOpenCloseMarkStyle.Candlestick)
-		{
-			forceCandleStick = true;
-		}
+        /// <summary>
+        /// CandleStick chart constructor.
+        /// </summary>
+        public CandleStickChart() : base(StockOpenCloseMarkStyle.Candlestick)
+        {
+            forceCandleStick = true;
+        }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
-		/// <summary>
-		/// Chart type name
-		/// </summary>
-		override public string Name			{ get{ return ChartTypeNames.Candlestick;}}
+        /// <summary>
+        /// Chart type name
+        /// </summary>
+        override public string Name            { get{ return ChartTypeNames.Candlestick;}}
 
-		/// <summary>
-		/// Gets chart type image.
-		/// </summary>
-		/// <param name="registry">Chart types registry object.</param>
-		/// <returns>Chart type image.</returns>
-		override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
-		{
-			return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
-		}
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        {
+            return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 
-	/// <summary>
+    /// <summary>
     /// StockChart class provides 2D/3D drawing and hit testing 
     /// functionality for the Stock and CandleStick charts.
-	/// </summary>
-	internal class StockChart : IChartType
-	{
-		#region Fields
+    /// </summary>
+    internal class StockChart : IChartType
+    {
+        #region Fields
 
-		/// <summary>
-		/// Vertical axis
-		/// </summary>
+        /// <summary>
+        /// Vertical axis
+        /// </summary>
         internal Axis VAxis { get; set; }
 
-		/// <summary>
-		/// Horizontal axis
-		/// </summary>
+        /// <summary>
+        /// Horizontal axis
+        /// </summary>
         internal Axis HAxis { get; set; }
 
-		/// <summary>
-		/// Default open-close style
-		/// </summary>
-		protected	StockOpenCloseMarkStyle	openCloseStyle = StockOpenCloseMarkStyle.Line;
+        /// <summary>
+        /// Default open-close style
+        /// </summary>
+        protected    StockOpenCloseMarkStyle    openCloseStyle = StockOpenCloseMarkStyle.Line;
 
-		/// <summary>
-		/// Indicates that only candle-stick type of the open-close marks should be used
-		/// </summary>
-		protected	bool	forceCandleStick = false;
+        /// <summary>
+        /// Indicates that only candle-stick type of the open-close marks should be used
+        /// </summary>
+        protected    bool    forceCandleStick = false;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
-		/// <summary>
-		/// Stock chart constructor.
-		/// </summary>
-		public StockChart()
-		{
-		}
+        /// <summary>
+        /// Stock chart constructor.
+        /// </summary>
+        public StockChart()
+        {
+        }
 
-		/// <summary>
-		/// Stock chart constructor.
-		/// </summary>
-		/// <param name="style">Open-close marks default style.</param>
-		public StockChart(StockOpenCloseMarkStyle style)
-		{
-			this.openCloseStyle = style;
-		}
+        /// <summary>
+        /// Stock chart constructor.
+        /// </summary>
+        /// <param name="style">Open-close marks default style.</param>
+        public StockChart(StockOpenCloseMarkStyle style)
+        {
+            this.openCloseStyle = style;
+        }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
-		/// <summary>
-		/// Chart type name
-		/// </summary>
-		virtual public string Name			{ get{ return ChartTypeNames.Stock;}}
+        /// <summary>
+        /// Chart type name
+        /// </summary>
+        virtual public string Name            { get{ return ChartTypeNames.Stock;}}
 
-		/// <summary>
-		/// True if chart type is stacked
-		/// </summary>
-		virtual public bool Stacked		{ get{ return false;}}
-
-
-		/// <summary>
-		/// True if stacked chart type supports groups
-		/// </summary>
-		virtual public bool SupportStackedGroups	{ get { return false; } }
+        /// <summary>
+        /// True if chart type is stacked
+        /// </summary>
+        virtual public bool Stacked        { get{ return false;}}
 
 
-		/// <summary>
-		/// True if stacked chart type should draw separately positive and 
-		/// negative data points ( Bar and column Stacked types ).
-		/// </summary>
-		public bool StackSign		{ get{ return false;}}
+        /// <summary>
+        /// True if stacked chart type supports groups
+        /// </summary>
+        virtual public bool SupportStackedGroups    { get { return false; } }
 
-		/// <summary>
-		/// True if chart type supports axeses
-		/// </summary>
-		virtual public bool RequireAxes	{ get{ return true;} }
 
-		/// <summary>
-		/// Chart type with two y values used for scale ( bubble chart type )
-		/// </summary>
-		public bool SecondYScale{ get{ return false;} }
+        /// <summary>
+        /// True if stacked chart type should draw separately positive and 
+        /// negative data points ( Bar and column Stacked types ).
+        /// </summary>
+        public bool StackSign        { get{ return false;}}
 
-		/// <summary>
-		/// True if chart type requires circular chart area.
-		/// </summary>
-		public bool CircularChartArea	{ get{ return false;} }
+        /// <summary>
+        /// True if chart type supports axeses
+        /// </summary>
+        virtual public bool RequireAxes    { get{ return true;} }
 
-		/// <summary>
-		/// True if chart type supports Logarithmic axes
-		/// </summary>
-		virtual public bool SupportLogarithmicAxes	{ get{ return true;} }
+        /// <summary>
+        /// Chart type with two y values used for scale ( bubble chart type )
+        /// </summary>
+        public bool SecondYScale{ get{ return false;} }
 
-		/// <summary>
-		/// True if chart type requires to switch the value (Y) axes position
-		/// </summary>
-		virtual public bool SwitchValueAxes	{ get{ return false;} }
+        /// <summary>
+        /// True if chart type requires circular chart area.
+        /// </summary>
+        public bool CircularChartArea    { get{ return false;} }
 
-		/// <summary>
-		/// True if chart series can be placed side-by-side.
-		/// </summary>
-		public bool SideBySideSeries { get{ return false;} }
+        /// <summary>
+        /// True if chart type supports Logarithmic axes
+        /// </summary>
+        virtual public bool SupportLogarithmicAxes    { get{ return true;} }
 
-		/// <summary>
-		/// True if each data point of a chart must be represented in the legend
-		/// </summary>
-		virtual public bool DataPointsInLegend	{ get{ return false;} }
+        /// <summary>
+        /// True if chart type requires to switch the value (Y) axes position
+        /// </summary>
+        virtual public bool SwitchValueAxes    { get{ return false;} }
 
-		/// <summary>
-		/// If the crossing value is auto Crossing value should be 
-		/// automatically set to zero for some chart 
-		/// types (Bar, column, area etc.)
-		/// </summary>
-		virtual public bool ZeroCrossing { get{ return false;} }
+        /// <summary>
+        /// True if chart series can be placed side-by-side.
+        /// </summary>
+        public bool SideBySideSeries { get{ return false;} }
 
-		/// <summary>
-		/// True if palette colors should be applied for each data paoint.
-		/// Otherwise the color is applied to the series.
-		/// </summary>
-		virtual public bool ApplyPaletteColorsToPoints	{ get { return false; } }
+        /// <summary>
+        /// True if each data point of a chart must be represented in the legend
+        /// </summary>
+        virtual public bool DataPointsInLegend    { get{ return false;} }
 
-		/// <summary>
-		/// Indicates that extra Y values are connected to the scale of the Y axis
-		/// </summary>
-		virtual public bool ExtraYValuesConnectedToYAxis{ get { return true; } }
-		
-		/// <summary>
-		/// Indicates that it's a hundredred percent chart.
-		/// Axis scale from 0 to 100 percent should be used.
-		/// </summary>
-		virtual public bool HundredPercent{ get{return false;} }
+        /// <summary>
+        /// If the crossing value is auto Crossing value should be 
+        /// automatically set to zero for some chart 
+        /// types (Bar, column, area etc.)
+        /// </summary>
+        virtual public bool ZeroCrossing { get{ return false;} }
 
-		/// <summary>
-		/// Indicates that it's a hundredred percent chart.
-		/// Axis scale from 0 to 100 percent should be used.
-		/// </summary>
-		virtual public bool HundredPercentSupportNegative{ get{return false;} }
+        /// <summary>
+        /// True if palette colors should be applied for each data paoint.
+        /// Otherwise the color is applied to the series.
+        /// </summary>
+        virtual public bool ApplyPaletteColorsToPoints    { get { return false; } }
 
-		/// <summary>
-		/// How to draw series/points in legend:
-		/// Filled rectangle, Line or Marker
-		/// </summary>
-		/// <param name="series">Legend item series.</param>
-		/// <returns>Legend item style.</returns>
-		virtual public LegendImageStyle GetLegendImageStyle(Series series)
-		{
-			return LegendImageStyle.Line;
-		}
-	
-		/// <summary>
-		/// Number of supported Y value(s) per point 
-		/// </summary>
-		virtual public int YValuesPerPoint	{ get { return 4; } }
+        /// <summary>
+        /// Indicates that extra Y values are connected to the scale of the Y axis
+        /// </summary>
+        virtual public bool ExtraYValuesConnectedToYAxis{ get { return true; } }
+        
+        /// <summary>
+        /// Indicates that it's a hundredred percent chart.
+        /// Axis scale from 0 to 100 percent should be used.
+        /// </summary>
+        virtual public bool HundredPercent{ get{return false;} }
 
-		/// <summary>
-		/// Gets chart type image.
-		/// </summary>
-		/// <param name="registry">Chart types registry object.</param>
-		/// <returns>Chart type image.</returns>
-		virtual public System.Drawing.Image GetImage(ChartTypeRegistry registry)
-		{
-			return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
-		}
-		#endregion
+        /// <summary>
+        /// Indicates that it's a hundredred percent chart.
+        /// Axis scale from 0 to 100 percent should be used.
+        /// </summary>
+        virtual public bool HundredPercentSupportNegative{ get{return false;} }
 
-		#region Painting and Selection methods
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        virtual public LegendImageStyle GetLegendImageStyle(Series series)
+        {
+            return LegendImageStyle.Line;
+        }
+    
+        /// <summary>
+        /// Number of supported Y value(s) per point 
+        /// </summary>
+        virtual public int YValuesPerPoint    { get { return 4; } }
 
-		/// <summary>
-		/// Paint stock chart.
-		/// </summary>
-		/// <param name="graph">The Chart Graphics object.</param>
-		/// <param name="common">The Common elements object.</param>
-		/// <param name="area">Chart area for this chart.</param>
-		/// <param name="seriesToDraw">Chart series to draw.</param>
-		virtual public void Paint( ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw )
-		{	
-			ProcessChartType( false, graph, common, area, seriesToDraw );
-		}
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        virtual public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        {
+            return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
+        }
+        #endregion
 
-		/// <summary>
-		/// This method recalculates size of the bars. This method is used 
-		/// from Paint or Select method.
-		/// </summary>
-		/// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
-		/// <param name="graph">The Chart Graphics object.</param>
-		/// <param name="common">The Common elements object.</param>
-		/// <param name="area">Chart area for this chart.</param>
-		/// <param name="seriesToDraw">Chart series to draw.</param>
-		virtual protected void ProcessChartType( 
-			bool selection, 
-			ChartGraphics graph, 
-			CommonElements common, 
-			ChartArea area, 
-			Series seriesToDraw )
-		{
-			
-			// Prosess 3D chart type
-			if(area.Area3DStyle.Enable3D)
-			{
-				ProcessChartType3D( selection, graph, common, area, seriesToDraw );
-				return;
-			}
-			
+        #region Painting and Selection methods
 
-			// All data series from chart area which have Stock chart type
-			List<string>	typeSeries = area.GetSeriesFromChartType(this.Name);
+        /// <summary>
+        /// Paint stock chart.
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual public void Paint( ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw )
+        {    
+            ProcessChartType( false, graph, common, area, seriesToDraw );
+        }
 
-			// Zero X values mode.
-			bool indexedSeries = ChartHelper.IndexedSeries(common, typeSeries.ToArray() );
+        /// <summary>
+        /// This method recalculates size of the bars. This method is used 
+        /// from Paint or Select method.
+        /// </summary>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual protected void ProcessChartType( 
+            bool selection, 
+            ChartGraphics graph, 
+            CommonElements common, 
+            ChartArea area, 
+            Series seriesToDraw )
+        {
+            
+            // Prosess 3D chart type
+            if(area.Area3DStyle.Enable3D)
+            {
+                ProcessChartType3D( selection, graph, common, area, seriesToDraw );
+                return;
+            }
+            
 
-			//************************************************************
-			//** Loop through all series
-			//************************************************************
-			foreach( Series ser in common.DataManager.Series )
-			{
-				// Process non empty series of the area with stock chart type
-				if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
-					|| ser.ChartArea != area.Name || !ser.IsVisible())
-				{
-					continue;
-				}
+            // All data series from chart area which have Stock chart type
+            List<string>    typeSeries = area.GetSeriesFromChartType(this.Name);
 
-				// Check that we have at least 4 Y values
-				if(ser.YValuesPerPoint < 4)
-				{
-					throw(new ArgumentException(SR.ExceptionChartTypeRequiresYValues("StockChart", "4")));
-				}
+            // Zero X values mode.
+            bool indexedSeries = ChartHelper.IndexedSeries(common, typeSeries.ToArray() );
 
-				// Set active horizontal/vertical axis
-				HAxis = area.GetAxis(AxisName.X, ser.XAxisType, ser.XSubAxisName);
-				VAxis = area.GetAxis(AxisName.Y, ser.YAxisType, ser.YSubAxisName);
+            //************************************************************
+            //** Loop through all series
+            //************************************************************
+            foreach( Series ser in common.DataManager.Series )
+            {
+                // Process non empty series of the area with stock chart type
+                if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
+                    || ser.ChartArea != area.Name || !ser.IsVisible())
+                {
+                    continue;
+                }
 
-				// Get interval between points
-				double interval = (indexedSeries) ? 1 : area.GetPointsInterval( HAxis.IsLogarithmic, HAxis.logarithmBase );
+                // Check that we have at least 4 Y values
+                if(ser.YValuesPerPoint < 4)
+                {
+                    throw(new ArgumentException(SR.ExceptionChartTypeRequiresYValues("StockChart", "4")));
+                }
 
-				// Calculates the width of the candles.
-				float width = (float)(ser.GetPointWidth(graph, HAxis, interval, 0.8));
+                // Set active horizontal/vertical axis
+                HAxis = area.GetAxis(AxisName.X, ser.XAxisType, ser.XSubAxisName);
+                VAxis = area.GetAxis(AxisName.Y, ser.YAxisType, ser.YSubAxisName);
 
-				// Call Back Paint event
-				if( !selection )
-				{
+                // Get interval between points
+                double interval = (indexedSeries) ? 1 : area.GetPointsInterval( HAxis.IsLogarithmic, HAxis.logarithmBase );
+
+                // Calculates the width of the candles.
+                float width = (float)(ser.GetPointWidth(graph, HAxis, interval, 0.8));
+
+                // Call Back Paint event
+                if( !selection )
+                {
                     common.Chart.CallOnPrePaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
-				}
+                }
 
 
-				//************************************************************
-				//** Series data points loop
-				//************************************************************
-				int	index = 1;
-				foreach( DataPoint point in ser.Points )
-				{
-					// Reset pre-calculated point position
-					point.positionRel = new PointF(float.NaN, float.NaN);
+                //************************************************************
+                //** Series data points loop
+                //************************************************************
+                int    index = 1;
+                foreach( DataPoint point in ser.Points )
+                {
+                    // Reset pre-calculated point position
+                    point.positionRel = new PointF(float.NaN, float.NaN);
 
-					// Get point X position
-					double	xValue = point.XValue;
-					if( indexedSeries )
-					{
-						xValue = (double)index;
-					}
-					float xPosition = (float)HAxis.GetPosition( xValue );
+                    // Get point X position
+                    double    xValue = point.XValue;
+                    if( indexedSeries )
+                    {
+                        xValue = (double)index;
+                    }
+                    float xPosition = (float)HAxis.GetPosition( xValue );
 
-					double yValue0 = VAxis.GetLogValue( point.YValues[0] );
-					double yValue1 = VAxis.GetLogValue( point.YValues[1] );
-					xValue = HAxis.GetLogValue(xValue);
-					
-					// Check if chart is completly out of the data scaleView
-					if(xValue < HAxis.ViewMinimum || 
-						xValue > HAxis.ViewMaximum ||
-						(yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
-						(yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
-					{
-						++index;
-						continue;
-					}
-					
-					// Make sure High/Low values are in data scaleView range						
-					double	high = VAxis.GetLogValue( point.YValues[0] );
-					double	low = VAxis.GetLogValue( point.YValues[1] );
-					
-					if( high > VAxis.ViewMaximum )
-					{
-						high = VAxis.ViewMaximum;
-					}
-					if( high < VAxis.ViewMinimum )
-					{
-						high = VAxis.ViewMinimum;
-					}
-					high = (float)VAxis.GetLinearPosition(high);
-					
-					if( low > VAxis.ViewMaximum )
-					{
-						low = VAxis.ViewMaximum;
-					}
-					if( low < VAxis.ViewMinimum )
-					{
-						low = VAxis.ViewMinimum;
-					}
-					low = VAxis.GetLinearPosition(low);
+                    double yValue0 = VAxis.GetLogValue( point.YValues[0] );
+                    double yValue1 = VAxis.GetLogValue( point.YValues[1] );
+                    xValue = HAxis.GetLogValue(xValue);
+                    
+                    // Check if chart is completly out of the data scaleView
+                    if(xValue < HAxis.ViewMinimum || 
+                        xValue > HAxis.ViewMaximum ||
+                        (yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
+                        (yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
+                    {
+                        ++index;
+                        continue;
+                    }
+                    
+                    // Make sure High/Low values are in data scaleView range                        
+                    double    high = VAxis.GetLogValue( point.YValues[0] );
+                    double    low = VAxis.GetLogValue( point.YValues[1] );
+                    
+                    if( high > VAxis.ViewMaximum )
+                    {
+                        high = VAxis.ViewMaximum;
+                    }
+                    if( high < VAxis.ViewMinimum )
+                    {
+                        high = VAxis.ViewMinimum;
+                    }
+                    high = (float)VAxis.GetLinearPosition(high);
+                    
+                    if( low > VAxis.ViewMaximum )
+                    {
+                        low = VAxis.ViewMaximum;
+                    }
+                    if( low < VAxis.ViewMinimum )
+                    {
+                        low = VAxis.ViewMinimum;
+                    }
+                    low = VAxis.GetLinearPosition(low);
 
-					// Remeber pre-calculated point position
-					point.positionRel = new PointF((float)xPosition, (float)high);
+                    // Remeber pre-calculated point position
+                    point.positionRel = new PointF((float)xPosition, (float)high);
 
-					if( common.ProcessModePaint )
-					{
+                    if( common.ProcessModePaint )
+                    {
 
-						// Check if chart is partialy in the data scaleView
-						bool	clipRegionSet = false;
-						if(xValue == HAxis.ViewMinimum || xValue == HAxis.ViewMaximum )
-						{
-							// Set clipping region for line drawing 
-							graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
-							clipRegionSet = true;
-						}
+                        // Check if chart is partialy in the data scaleView
+                        bool    clipRegionSet = false;
+                        if(xValue == HAxis.ViewMinimum || xValue == HAxis.ViewMaximum )
+                        {
+                            // Set clipping region for line drawing 
+                            graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
+                            clipRegionSet = true;
+                        }
 
-						// Start Svg Selection mode
-						graph.StartHotRegion( point );
+                        // Start Svg Selection mode
+                        graph.StartHotRegion( point );
 
-						// Draw Hi-Low line
-						graph.DrawLineRel( 
-							point.Color, 
-							point.BorderWidth, 
-							point.BorderDashStyle, 
-							new PointF(xPosition, (float)high), 
-							new PointF(xPosition, (float)low),
-							ser.ShadowColor, 
-							ser.ShadowOffset );
+                        // Draw Hi-Low line
+                        graph.DrawLineRel( 
+                            point.Color, 
+                            point.BorderWidth, 
+                            point.BorderDashStyle, 
+                            new PointF(xPosition, (float)high), 
+                            new PointF(xPosition, (float)low),
+                            ser.ShadowColor, 
+                            ser.ShadowOffset );
 
-						// Draw Open-Close marks
-						DrawOpenCloseMarks(graph, area, ser, point, xPosition, width);
+                        // Draw Open-Close marks
+                        DrawOpenCloseMarks(graph, area, ser, point, xPosition, width);
 
-						// End Svg Selection mode
-						graph.EndHotRegion( );
+                        // End Svg Selection mode
+                        graph.EndHotRegion( );
 
-						// Reset Clip Region
-						if(clipRegionSet)
-						{
-							graph.ResetClip();
-						}
-					}
+                        // Reset Clip Region
+                        if(clipRegionSet)
+                        {
+                            graph.ResetClip();
+                        }
+                    }
 
-					if( common.ProcessModeRegions )
-					{
-						// Calculate rect around the hi-lo line and open-close marks
-						RectangleF	areaRect = RectangleF.Empty;
-						areaRect.X = xPosition - width / 2f;
-						areaRect.Y = (float)Math.Min(high, low);
-						areaRect.Width = width;
-						areaRect.Height = (float)Math.Max(high, low) - areaRect.Y;
+                    if( common.ProcessModeRegions )
+                    {
+                        // Calculate rect around the hi-lo line and open-close marks
+                        RectangleF    areaRect = RectangleF.Empty;
+                        areaRect.X = xPosition - width / 2f;
+                        areaRect.Y = (float)Math.Min(high, low);
+                        areaRect.Width = width;
+                        areaRect.Height = (float)Math.Max(high, low) - areaRect.Y;
 
-						common.HotRegionsList.AddHotRegion( 
-							areaRect, 
-							point, 
-							ser.Name, 
-							index - 1 );
-						
-					}
-					++index;
-				}
+                        common.HotRegionsList.AddHotRegion( 
+                            areaRect, 
+                            point, 
+                            ser.Name, 
+                            index - 1 );
+                        
+                    }
+                    ++index;
+                }
 
-				//************************************************************
-				//** Second series data points loop, when markers and labels
-				//** are drawn.
-				//************************************************************
-				
-				int markerIndex = 0;
-				index = 1;
-				foreach( DataPoint point in ser.Points )
-				{
-					// Get point X position
-					double	xValue = point.XValue;
-					if( indexedSeries )
-					{
-						xValue = (double)index;
-					}
-					float xPosition = (float)HAxis.GetPosition( xValue );
+                //************************************************************
+                //** Second series data points loop, when markers and labels
+                //** are drawn.
+                //************************************************************
+                
+                int markerIndex = 0;
+                index = 1;
+                foreach( DataPoint point in ser.Points )
+                {
+                    // Get point X position
+                    double    xValue = point.XValue;
+                    if( indexedSeries )
+                    {
+                        xValue = (double)index;
+                    }
+                    float xPosition = (float)HAxis.GetPosition( xValue );
 
-					double yValue0 = VAxis.GetLogValue( point.YValues[0] );
-					double yValue1 = VAxis.GetLogValue( point.YValues[1] );
-					xValue = HAxis.GetLogValue(xValue);
-				
-					// Check if chart is completly out of the data scaleView
-					if(xValue < HAxis.ViewMinimum || 
-						xValue > HAxis.ViewMaximum ||
-						(yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
-						(yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
-					{
-						++index;
-						continue;
-					}
+                    double yValue0 = VAxis.GetLogValue( point.YValues[0] );
+                    double yValue1 = VAxis.GetLogValue( point.YValues[1] );
+                    xValue = HAxis.GetLogValue(xValue);
+                
+                    // Check if chart is completly out of the data scaleView
+                    if(xValue < HAxis.ViewMinimum || 
+                        xValue > HAxis.ViewMaximum ||
+                        (yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
+                        (yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
+                    {
+                        ++index;
+                        continue;
+                    }
 
-					// Make sure High/Low values are in data scaleView range						
-					double	high = VAxis.GetLogValue( point.YValues[0] );
-					double	low = VAxis.GetLogValue( point.YValues[1] );
-				
-					if( high > VAxis.ViewMaximum )
-					{
-						high = VAxis.ViewMaximum;
-					}
-					if( high < VAxis.ViewMinimum )
-					{
-						high = VAxis.ViewMinimum;
-					}
-					high = (float)VAxis.GetLinearPosition(high);
-				
-					if( low > VAxis.ViewMaximum )
-					{
-						low = VAxis.ViewMaximum;
-					}
-					if( low < VAxis.ViewMinimum )
-					{
-						low = VAxis.ViewMinimum;
-					}
-					low = VAxis.GetLinearPosition(low);
+                    // Make sure High/Low values are in data scaleView range                        
+                    double    high = VAxis.GetLogValue( point.YValues[0] );
+                    double    low = VAxis.GetLogValue( point.YValues[1] );
+                
+                    if( high > VAxis.ViewMaximum )
+                    {
+                        high = VAxis.ViewMaximum;
+                    }
+                    if( high < VAxis.ViewMinimum )
+                    {
+                        high = VAxis.ViewMinimum;
+                    }
+                    high = (float)VAxis.GetLinearPosition(high);
+                
+                    if( low > VAxis.ViewMaximum )
+                    {
+                        low = VAxis.ViewMaximum;
+                    }
+                    if( low < VAxis.ViewMinimum )
+                    {
+                        low = VAxis.ViewMinimum;
+                    }
+                    low = VAxis.GetLinearPosition(low);
 
-					// Draw marker
-					if(point.MarkerStyle != MarkerStyle.None || point.MarkerImage.Length > 0)
-					{
-						// Get marker size
-						SizeF markerSize = SizeF.Empty;
-						markerSize.Width = point.MarkerSize;
-						markerSize.Height = point.MarkerSize;
+                    // Draw marker
+                    if(point.MarkerStyle != MarkerStyle.None || point.MarkerImage.Length > 0)
+                    {
+                        // Get marker size
+                        SizeF markerSize = SizeF.Empty;
+                        markerSize.Width = point.MarkerSize;
+                        markerSize.Height = point.MarkerSize;
                         if (graph != null && graph.Graphics != null)
                         {
                             // Marker size is in pixels and we do the mapping for higher DPIs
@@ -549,207 +549,207 @@ using System.Collections.Generic;
                         if (point.MarkerImage.Length > 0)
                             common.ImageLoader.GetAdjustedImageSize(point.MarkerImage, graph.Graphics, ref markerSize);
                         
-						// Get marker position
-						PointF markerPosition = PointF.Empty;
-						markerPosition.X = xPosition;
-						markerPosition.Y = (float)high - graph.GetRelativeSize(markerSize).Height/2f;
+                        // Get marker position
+                        PointF markerPosition = PointF.Empty;
+                        markerPosition.X = xPosition;
+                        markerPosition.Y = (float)high - graph.GetRelativeSize(markerSize).Height/2f;
 
-						// Draw marker
-						if(markerIndex == 0)
-						{
-							// Draw the marker
-							graph.DrawMarkerRel(markerPosition, 
-								point.MarkerStyle,
-								(int)markerSize.Height,
-								(point.MarkerColor == Color.Empty) ? point.Color : point.MarkerColor,
-								(point.MarkerBorderColor == Color.Empty) ? point.BorderColor : point.MarkerBorderColor,
-								point.MarkerBorderWidth,
-								point.MarkerImage,
-								point.MarkerImageTransparentColor,
-								(point.series != null) ? point.series.ShadowOffset : 0,
-								(point.series != null) ? point.series.ShadowColor : Color.Empty,
-								new RectangleF(markerPosition.X, markerPosition.Y, markerSize.Width, markerSize.Height));
+                        // Draw marker
+                        if(markerIndex == 0)
+                        {
+                            // Draw the marker
+                            graph.DrawMarkerRel(markerPosition, 
+                                point.MarkerStyle,
+                                (int)markerSize.Height,
+                                (point.MarkerColor == Color.Empty) ? point.Color : point.MarkerColor,
+                                (point.MarkerBorderColor == Color.Empty) ? point.BorderColor : point.MarkerBorderColor,
+                                point.MarkerBorderWidth,
+                                point.MarkerImage,
+                                point.MarkerImageTransparentColor,
+                                (point.series != null) ? point.series.ShadowOffset : 0,
+                                (point.series != null) ? point.series.ShadowColor : Color.Empty,
+                                new RectangleF(markerPosition.X, markerPosition.Y, markerSize.Width, markerSize.Height));
 
-							if( common.ProcessModeRegions )
-							{
-								// Get relative marker size
-								SizeF relativeMarkerSize = graph.GetRelativeSize(markerSize);
+                            if( common.ProcessModeRegions )
+                            {
+                                // Get relative marker size
+                                SizeF relativeMarkerSize = graph.GetRelativeSize(markerSize);
 
-								// Insert area just after the last custom area
-								int insertIndex = common.HotRegionsList.FindInsertIndex();
-								common.HotRegionsList.FindInsertIndex();
+                                // Insert area just after the last custom area
+                                int insertIndex = common.HotRegionsList.FindInsertIndex();
+                                common.HotRegionsList.FindInsertIndex();
 
-								// Insert circle area
-								if(point.MarkerStyle == MarkerStyle.Circle)
-								{
-									float[]	circCoord = new float[3];
-									circCoord[0] = markerPosition.X;
-									circCoord[1] = markerPosition.Y;
-									circCoord[2] = relativeMarkerSize.Width/2f;
+                                // Insert circle area
+                                if(point.MarkerStyle == MarkerStyle.Circle)
+                                {
+                                    float[]    circCoord = new float[3];
+                                    circCoord[0] = markerPosition.X;
+                                    circCoord[1] = markerPosition.Y;
+                                    circCoord[2] = relativeMarkerSize.Width/2f;
 
-									common.HotRegionsList.AddHotRegion( 
-										insertIndex, 
-										graph, 
-										circCoord[0], 
-										circCoord[1], 
-										circCoord[2], 
-										point, 
-										ser.Name, 
-										index - 1 );
-								}
-								// All other markers represented as rectangles
-								else
-								{
-									common.HotRegionsList.AddHotRegion(
-										new RectangleF(markerPosition.X - relativeMarkerSize.Width/2f, markerPosition.Y - relativeMarkerSize.Height/2f, relativeMarkerSize.Width, relativeMarkerSize.Height),
-										point,
-										ser.Name,
-										index - 1 );
-								}
-							}
+                                    common.HotRegionsList.AddHotRegion( 
+                                        insertIndex, 
+                                        graph, 
+                                        circCoord[0], 
+                                        circCoord[1], 
+                                        circCoord[2], 
+                                        point, 
+                                        ser.Name, 
+                                        index - 1 );
+                                }
+                                // All other markers represented as rectangles
+                                else
+                                {
+                                    common.HotRegionsList.AddHotRegion(
+                                        new RectangleF(markerPosition.X - relativeMarkerSize.Width/2f, markerPosition.Y - relativeMarkerSize.Height/2f, relativeMarkerSize.Width, relativeMarkerSize.Height),
+                                        point,
+                                        ser.Name,
+                                        index - 1 );
+                                }
+                            }
 
-						}
-				
-						// Increase the markers counter
-						++markerIndex;
-						if(ser.MarkerStep == markerIndex)
-						{
-							markerIndex = 0;
-						}
-					}
+                        }
+                
+                        // Increase the markers counter
+                        ++markerIndex;
+                        if(ser.MarkerStep == markerIndex)
+                        {
+                            markerIndex = 0;
+                        }
+                    }
 
-					// Draw label
-					DrawLabel(common, area, graph, ser, point, new PointF(xPosition, (float)Math.Min(high, low)), index);
+                    // Draw label
+                    DrawLabel(common, area, graph, ser, point, new PointF(xPosition, (float)Math.Min(high, low)), index);
 
-					// Increase point counter
-					++index;
-				}
-				
-				// Call Paint event
-				if( !selection )
-				{
+                    // Increase point counter
+                    ++index;
+                }
+                
+                // Call Paint event
+                if( !selection )
+                {
                     common.Chart.CallOnPostPaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
-				}
-			}
-		}
+                }
+            }
+        }
 
-		/// <summary>
-		/// Draws stock chart open-close marks depending on selected style.
-		/// </summary>
-		/// <param name="graph">Chart graphics object.</param>
-		/// <param name="area">Chart area.</param>
-		/// <param name="ser">Data point series.</param>
-		/// <param name="point">Data point to draw.</param>
-		/// <param name="xPosition">X position.</param>
-		/// <param name="width">Point width.</param>
-		virtual protected void DrawOpenCloseMarks(
-			ChartGraphics graph, 
-			ChartArea area,
-			Series ser, 
-			DataPoint point, 
-			float xPosition, 
-			float width)
-		{
-			double openY = VAxis.GetLogValue( point.YValues[2] );
-			double closeY = VAxis.GetLogValue( point.YValues[3] );
+        /// <summary>
+        /// Draws stock chart open-close marks depending on selected style.
+        /// </summary>
+        /// <param name="graph">Chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="ser">Data point series.</param>
+        /// <param name="point">Data point to draw.</param>
+        /// <param name="xPosition">X position.</param>
+        /// <param name="width">Point width.</param>
+        virtual protected void DrawOpenCloseMarks(
+            ChartGraphics graph, 
+            ChartArea area,
+            Series ser, 
+            DataPoint point, 
+            float xPosition, 
+            float width)
+        {
+            double openY = VAxis.GetLogValue( point.YValues[2] );
+            double closeY = VAxis.GetLogValue( point.YValues[3] );
 
-			// Check if mark is inside data scaleView
-			if( (openY > VAxis.ViewMaximum ||
-				openY < VAxis.ViewMinimum) &&
-				(closeY > VAxis.ViewMaximum ||
-				closeY < VAxis.ViewMinimum) )
-			{
-				//return;
-			}
+            // Check if mark is inside data scaleView
+            if( (openY > VAxis.ViewMaximum ||
+                openY < VAxis.ViewMinimum) &&
+                (closeY > VAxis.ViewMaximum ||
+                closeY < VAxis.ViewMinimum) )
+            {
+                //return;
+            }
 
-			// Calculate open-close position
-			float	open = (float)VAxis.GetLinearPosition(openY);
-			float	close = (float)VAxis.GetLinearPosition(closeY);
-			SizeF	absSize = graph.GetAbsoluteSize(new SizeF(width, width));
-			float	height = graph.GetRelativeSize(absSize).Height;
+            // Calculate open-close position
+            float    open = (float)VAxis.GetLinearPosition(openY);
+            float    close = (float)VAxis.GetLinearPosition(closeY);
+            SizeF    absSize = graph.GetAbsoluteSize(new SizeF(width, width));
+            float    height = graph.GetRelativeSize(absSize).Height;
 
-			// Detect style
-			StockOpenCloseMarkStyle	style = openCloseStyle;
-			string	styleType = "";
-			if(point.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
-			{
-				styleType = point[CustomPropertyName.OpenCloseStyle];
-			}
-			else if(ser.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
-			{
-				styleType = ser[CustomPropertyName.OpenCloseStyle];
-			}
+            // Detect style
+            StockOpenCloseMarkStyle    style = openCloseStyle;
+            string    styleType = "";
+            if(point.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
+            {
+                styleType = point[CustomPropertyName.OpenCloseStyle];
+            }
+            else if(ser.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
+            {
+                styleType = ser[CustomPropertyName.OpenCloseStyle];
+            }
 
-			if(styleType != null && styleType.Length > 0)
-			{
-				if(String.Compare(styleType, "Candlestick", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					style = StockOpenCloseMarkStyle.Candlestick;
-				}
+            if(styleType != null && styleType.Length > 0)
+            {
+                if(String.Compare(styleType, "Candlestick", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    style = StockOpenCloseMarkStyle.Candlestick;
+                }
                 else if (String.Compare(styleType, "Triangle", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					style = StockOpenCloseMarkStyle.Triangle;
-				}
+                {
+                    style = StockOpenCloseMarkStyle.Triangle;
+                }
                 else if (String.Compare(styleType, "Line", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					style = StockOpenCloseMarkStyle.Line;
-				}
-			}
+                {
+                    style = StockOpenCloseMarkStyle.Line;
+                }
+            }
 
-			// Get attribute which controls if open/close marks are shown
-			bool	showOpen = true;
-			bool	showClose = true;
-			string	showOpenClose = "";
-			if(point.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
-			{
-				showOpenClose = point[CustomPropertyName.ShowOpenClose];
-			}
-			else if(ser.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
-			{
-				showOpenClose = ser[CustomPropertyName.ShowOpenClose];
-			}
+            // Get attribute which controls if open/close marks are shown
+            bool    showOpen = true;
+            bool    showClose = true;
+            string    showOpenClose = "";
+            if(point.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
+            {
+                showOpenClose = point[CustomPropertyName.ShowOpenClose];
+            }
+            else if(ser.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
+            {
+                showOpenClose = ser[CustomPropertyName.ShowOpenClose];
+            }
 
-			if(showOpenClose != null && showOpenClose.Length > 0)
-			{
-				if(String.Compare(showOpenClose, "Both", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					showOpen = true;
-					showClose = true;
-				}
+            if(showOpenClose != null && showOpenClose.Length > 0)
+            {
+                if(String.Compare(showOpenClose, "Both", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    showOpen = true;
+                    showClose = true;
+                }
                 else if (String.Compare(showOpenClose, "Open", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					showOpen = true;
-					showClose = false;
-				}
+                {
+                    showOpen = true;
+                    showClose = false;
+                }
                 else if (String.Compare(showOpenClose, "Close", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					showOpen = false;
-					showClose = true;
-				}
-			}
+                {
+                    showOpen = false;
+                    showClose = true;
+                }
+            }
 
-			// Check if chart is partialy in the data scaleView
-			bool	clipRegionSet = false;
-			if( style == StockOpenCloseMarkStyle.Candlestick || (xPosition - width / 2f) < area.PlotAreaPosition.X || (xPosition + width / 2f) > area.PlotAreaPosition.Right)
-			{
-				// Set clipping region for line drawing 
-				graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
-				clipRegionSet = true;
-			}
+            // Check if chart is partialy in the data scaleView
+            bool    clipRegionSet = false;
+            if( style == StockOpenCloseMarkStyle.Candlestick || (xPosition - width / 2f) < area.PlotAreaPosition.X || (xPosition + width / 2f) > area.PlotAreaPosition.Right)
+            {
+                // Set clipping region for line drawing 
+                graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
+                clipRegionSet = true;
+            }
 
-			
-			// Draw open-close marks as bar
-			if(forceCandleStick || style == StockOpenCloseMarkStyle.Candlestick)
-			{
-				// Colors used to draw bar of the open-close style
-				ColorConverter	colorConverter = new ColorConverter();
-				Color			priceUpColor = point.Color;
-				Color			priceDownColor = point.BackSecondaryColor;
+            
+            // Draw open-close marks as bar
+            if(forceCandleStick || style == StockOpenCloseMarkStyle.Candlestick)
+            {
+                // Colors used to draw bar of the open-close style
+                ColorConverter    colorConverter = new ColorConverter();
+                Color            priceUpColor = point.Color;
+                Color            priceDownColor = point.BackSecondaryColor;
 
-				// Check if special color properties are set
-				string	attrValue = point[CustomPropertyName.PriceUpColor];
-				if(attrValue != null && attrValue.Length > 0)
-				{
+                // Check if special color properties are set
+                string    attrValue = point[CustomPropertyName.PriceUpColor];
+                if(attrValue != null && attrValue.Length > 0)
+                {
                     bool failed = false;
                     try
                     {
@@ -768,11 +768,11 @@ using System.Collections.Generic;
                     {
                         priceUpColor = (Color)colorConverter.ConvertFromInvariantString(attrValue);
                     }
-				}
+                }
 
-				attrValue = point[CustomPropertyName.PriceDownColor];
-				if(attrValue != null && attrValue.Length > 0)
-				{
+                attrValue = point[CustomPropertyName.PriceDownColor];
+                if(attrValue != null && attrValue.Length > 0)
+                {
                     bool failed = false;
                     try
                     {
@@ -791,55 +791,55 @@ using System.Collections.Generic;
                     {
                         priceDownColor = (Color)colorConverter.ConvertFromInvariantString(attrValue);
                     }
-				}
+                }
 
-				// Calculate bar rectangle
-				RectangleF	rect = RectangleF.Empty;
-				rect.Y = (float)Math.Min(open, close);
-				rect.X = xPosition - width / 2f;
-				rect.Height = (float)Math.Max(open, close) - rect.Y;
-				rect.Width = width;
+                // Calculate bar rectangle
+                RectangleF    rect = RectangleF.Empty;
+                rect.Y = (float)Math.Min(open, close);
+                rect.X = xPosition - width / 2f;
+                rect.Height = (float)Math.Max(open, close) - rect.Y;
+                rect.Width = width;
 
-				// Bar and border color
-				Color	barColor = (open > close) ? priceUpColor : priceDownColor;
-				Color	barBorderColor = (point.BorderColor == Color.Empty) ? (barColor == Color.Empty) ? point.Color : barColor : point.BorderColor;
-				
-				// Get absolute height
-				SizeF sizeOfHeight = new SizeF( rect.Height, rect.Height );
-				sizeOfHeight = graph.GetAbsoluteSize( sizeOfHeight );
+                // Bar and border color
+                Color    barColor = (open > close) ? priceUpColor : priceDownColor;
+                Color    barBorderColor = (point.BorderColor == Color.Empty) ? (barColor == Color.Empty) ? point.Color : barColor : point.BorderColor;
+                
+                // Get absolute height
+                SizeF sizeOfHeight = new SizeF( rect.Height, rect.Height );
+                sizeOfHeight = graph.GetAbsoluteSize( sizeOfHeight );
 
-				// Draw open-close bar
-				if( sizeOfHeight.Height > 1 )
-				{
-					graph.FillRectangleRel( 
-						rect, 
-						barColor,
-						point.BackHatchStyle, 
-						point.BackImage, 
-						point.BackImageWrapMode, 
-						point.BackImageTransparentColor,
-						point.BackImageAlignment,
-						point.BackGradientStyle, 
-						point.BackSecondaryColor, 
-						barBorderColor, 
-						point.BorderWidth, 
-						point.BorderDashStyle, 
-						ser.ShadowColor, 
-						ser.ShadowOffset,
-						PenAlignment.Inset );
-				}
-				else
-				{
-					graph.DrawLineRel(barBorderColor, point.BorderWidth, point.BorderDashStyle, 
-						new PointF(rect.X, rect.Y), 
-						new PointF(rect.Right, rect.Y),
-						ser.ShadowColor, ser.ShadowOffset );
-				}
-			}
+                // Draw open-close bar
+                if( sizeOfHeight.Height > 1 )
+                {
+                    graph.FillRectangleRel( 
+                        rect, 
+                        barColor,
+                        point.BackHatchStyle, 
+                        point.BackImage, 
+                        point.BackImageWrapMode, 
+                        point.BackImageTransparentColor,
+                        point.BackImageAlignment,
+                        point.BackGradientStyle, 
+                        point.BackSecondaryColor, 
+                        barBorderColor, 
+                        point.BorderWidth, 
+                        point.BorderDashStyle, 
+                        ser.ShadowColor, 
+                        ser.ShadowOffset,
+                        PenAlignment.Inset );
+                }
+                else
+                {
+                    graph.DrawLineRel(barBorderColor, point.BorderWidth, point.BorderDashStyle, 
+                        new PointF(rect.X, rect.Y), 
+                        new PointF(rect.Right, rect.Y),
+                        ser.ShadowColor, ser.ShadowOffset );
+                }
+            }
 
-			// Draw open-close marks as triangals
-			else if(style == StockOpenCloseMarkStyle.Triangle)
-			{
+            // Draw open-close marks as triangals
+            else if(style == StockOpenCloseMarkStyle.Triangle)
+            {
                 using (GraphicsPath path = new GraphicsPath())
                 {
                     PointF point1 = graph.GetAbsolutePoint(new PointF(xPosition, open));
@@ -878,65 +878,65 @@ using System.Collections.Generic;
                     }
                 }
 
-			}
+            }
 
-			// Draw ope-close marks as lines
-			else
-			{
-				// Draw Open mark line
-				if(showOpen)
-				{
-					if(openY <= VAxis.ViewMaximum && openY >= VAxis.ViewMinimum)
-					{
-						graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
-							new PointF(xPosition - width/2f, open), 
-							new PointF(xPosition, open),
-							ser.ShadowColor, ser.ShadowOffset );
-					}
-				}
+            // Draw ope-close marks as lines
+            else
+            {
+                // Draw Open mark line
+                if(showOpen)
+                {
+                    if(openY <= VAxis.ViewMaximum && openY >= VAxis.ViewMinimum)
+                    {
+                        graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
+                            new PointF(xPosition - width/2f, open), 
+                            new PointF(xPosition, open),
+                            ser.ShadowColor, ser.ShadowOffset );
+                    }
+                }
 
-				// Draw Close mark line
-				if(showClose)
-				{
-					if(closeY <= VAxis.ViewMaximum && closeY >= VAxis.ViewMinimum)
-					{
-						graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
-							new PointF(xPosition, close), 
-							new PointF(xPosition + width/2f, close),
-							ser.ShadowColor, ser.ShadowOffset );
-					}
-				}
-			}
+                // Draw Close mark line
+                if(showClose)
+                {
+                    if(closeY <= VAxis.ViewMaximum && closeY >= VAxis.ViewMinimum)
+                    {
+                        graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
+                            new PointF(xPosition, close), 
+                            new PointF(xPosition + width/2f, close),
+                            ser.ShadowColor, ser.ShadowOffset );
+                    }
+                }
+            }
 
-			// Reset Clip Region
-			if(clipRegionSet)
-			{
-				graph.ResetClip();
-			}
-		}
+            // Reset Clip Region
+            if(clipRegionSet)
+            {
+                graph.ResetClip();
+            }
+        }
 
-		/// <summary>
-		/// Draws stock chart data point label.
-		/// </summary>
-		/// <param name="common">The Common elements object</param>
-		/// <param name="area">Chart area for this chart</param>
-		/// <param name="graph">Chart graphics object.</param>
-		/// <param name="ser">Data point series.</param>
-		/// <param name="point">Data point to draw.</param>
-		/// <param name="position">Label position.</param>
-		/// <param name="pointIndex">Data point index in the series.</param>
-		virtual protected void DrawLabel(
-			CommonElements common,
-			ChartArea area, 
-			ChartGraphics graph, 
-			Series ser, 
-			DataPoint point, 
-			PointF position,
-			int pointIndex)
-		{
-			if(ser.IsValueShownAsLabel || point.IsValueShownAsLabel || point.Label.Length > 0)
-			{
-				// Label text format
+        /// <summary>
+        /// Draws stock chart data point label.
+        /// </summary>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="area">Chart area for this chart</param>
+        /// <param name="graph">Chart graphics object.</param>
+        /// <param name="ser">Data point series.</param>
+        /// <param name="point">Data point to draw.</param>
+        /// <param name="position">Label position.</param>
+        /// <param name="pointIndex">Data point index in the series.</param>
+        virtual protected void DrawLabel(
+            CommonElements common,
+            ChartArea area, 
+            ChartGraphics graph, 
+            Series ser, 
+            DataPoint point, 
+            PointF position,
+            int pointIndex)
+        {
+            if(ser.IsValueShownAsLabel || point.IsValueShownAsLabel || point.Label.Length > 0)
+            {
+                // Label text format
                 using (StringFormat format = new StringFormat())
                 {
                     format.Alignment = StringAlignment.Near;
@@ -1095,277 +1095,277 @@ using System.Collections.Generic;
                         }
                     }
                 }
-			}
-		}
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing and Selection methods
+        #region 3D Drawing and Selection methods
 
-		/// <summary>
-		/// This method recalculates size of the bars. This method is used 
-		/// from Paint or Select method.
-		/// </summary>
-		/// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
-		/// <param name="graph">The Chart Graphics object.</param>
-		/// <param name="common">The Common elements object.</param>
-		/// <param name="area">Chart area for this chart.</param>
-		/// <param name="seriesToDraw">Chart series to draw.</param>
-		virtual protected void ProcessChartType3D( 
-			bool selection, 
-			ChartGraphics graph, 
-			CommonElements common, 
-			ChartArea area, 
-			Series seriesToDraw )
-		{
-			
-			// All data series from chart area which have Stock chart type
-			List<string>	typeSeries = area.GetSeriesFromChartType(this.Name);
+        /// <summary>
+        /// This method recalculates size of the bars. This method is used 
+        /// from Paint or Select method.
+        /// </summary>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual protected void ProcessChartType3D( 
+            bool selection, 
+            ChartGraphics graph, 
+            CommonElements common, 
+            ChartArea area, 
+            Series seriesToDraw )
+        {
+            
+            // All data series from chart area which have Stock chart type
+            List<string>    typeSeries = area.GetSeriesFromChartType(this.Name);
 
-			// Zero X values mode.
-			bool indexedSeries = ChartHelper.IndexedSeries(common, typeSeries.ToArray() );
+            // Zero X values mode.
+            bool indexedSeries = ChartHelper.IndexedSeries(common, typeSeries.ToArray() );
 
-			//************************************************************
-			//** Loop through all series
-			//************************************************************
-			foreach( Series ser in common.DataManager.Series )
-			{
-				// Process non empty series of the area with stock chart type
-				if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
-					|| ser.ChartArea != area.Name || !ser.IsVisible())
-				{
-					continue;
-				}
+            //************************************************************
+            //** Loop through all series
+            //************************************************************
+            foreach( Series ser in common.DataManager.Series )
+            {
+                // Process non empty series of the area with stock chart type
+                if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
+                    || ser.ChartArea != area.Name || !ser.IsVisible())
+                {
+                    continue;
+                }
 
-				// Check if drawn series is specified
-				if(seriesToDraw != null && seriesToDraw.Name != ser.Name)
-				{
-					continue;
-				}
+                // Check if drawn series is specified
+                if(seriesToDraw != null && seriesToDraw.Name != ser.Name)
+                {
+                    continue;
+                }
 
-				// Check that we have at least 4 Y values
-				if(ser.YValuesPerPoint < 4)
-				{
-					throw(new ArgumentException(SR.ExceptionChartTypeRequiresYValues("StockChart", "4" )));
-				}
+                // Check that we have at least 4 Y values
+                if(ser.YValuesPerPoint < 4)
+                {
+                    throw(new ArgumentException(SR.ExceptionChartTypeRequiresYValues("StockChart", "4" )));
+                }
 
-				// Set active horizontal/vertical axis
-				HAxis = area.GetAxis(AxisName.X, ser.XAxisType, ser.XSubAxisName);
-				VAxis = area.GetAxis(AxisName.Y, ser.YAxisType, ser.YSubAxisName);
+                // Set active horizontal/vertical axis
+                HAxis = area.GetAxis(AxisName.X, ser.XAxisType, ser.XSubAxisName);
+                VAxis = area.GetAxis(AxisName.Y, ser.YAxisType, ser.YSubAxisName);
 
-				// Get interval between points
-				double interval = (indexedSeries) ? 1 : area.GetPointsInterval( HAxis.IsLogarithmic, HAxis.logarithmBase );
+                // Get interval between points
+                double interval = (indexedSeries) ? 1 : area.GetPointsInterval( HAxis.IsLogarithmic, HAxis.logarithmBase );
 
-				// Calculates the width of the candles.
-				float width = (float)(ser.GetPointWidth(graph, HAxis, interval, 0.8));
+                // Calculates the width of the candles.
+                float width = (float)(ser.GetPointWidth(graph, HAxis, interval, 0.8));
 
-				// Call Back Paint event
-				if( !selection )
-				{
+                // Call Back Paint event
+                if( !selection )
+                {
                     common.Chart.CallOnPrePaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
-				}
+                }
 
-				//************************************************************
-				//** Get series depth and Z position
-				//************************************************************
-				float seriesDepth, seriesZPosition;
-				area.GetSeriesZPositionAndDepth(ser, out seriesDepth, out seriesZPosition);
+                //************************************************************
+                //** Get series depth and Z position
+                //************************************************************
+                float seriesDepth, seriesZPosition;
+                area.GetSeriesZPositionAndDepth(ser, out seriesDepth, out seriesZPosition);
 
-				//************************************************************
-				//** Series data points loop
-				//************************************************************
-				int	index = 1;
-				foreach( DataPoint point in ser.Points )
-				{
-					// Reset pre-calculated point position
-					point.positionRel = new PointF(float.NaN, float.NaN);
+                //************************************************************
+                //** Series data points loop
+                //************************************************************
+                int    index = 1;
+                foreach( DataPoint point in ser.Points )
+                {
+                    // Reset pre-calculated point position
+                    point.positionRel = new PointF(float.NaN, float.NaN);
 
-					// Get point X position
-					double	xValue = point.XValue;
-					if( indexedSeries )
-					{
-						xValue = (double)index;
-					}
-					float xPosition = (float)HAxis.GetPosition( xValue );
+                    // Get point X position
+                    double    xValue = point.XValue;
+                    if( indexedSeries )
+                    {
+                        xValue = (double)index;
+                    }
+                    float xPosition = (float)HAxis.GetPosition( xValue );
 
-					double yValue0 = VAxis.GetLogValue( point.YValues[0] );
-					double yValue1 = VAxis.GetLogValue( point.YValues[1] );
-					xValue = HAxis.GetLogValue(xValue);
-					
-					// Check if chart is completly out of the data scaleView
-					if(xValue < HAxis.ViewMinimum || 
-						xValue > HAxis.ViewMaximum ||
-						(yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
-						(yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
-					{
-						++index;
-						continue;
-					}
+                    double yValue0 = VAxis.GetLogValue( point.YValues[0] );
+                    double yValue1 = VAxis.GetLogValue( point.YValues[1] );
+                    xValue = HAxis.GetLogValue(xValue);
+                    
+                    // Check if chart is completly out of the data scaleView
+                    if(xValue < HAxis.ViewMinimum || 
+                        xValue > HAxis.ViewMaximum ||
+                        (yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
+                        (yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
+                    {
+                        ++index;
+                        continue;
+                    }
 
-					// Check if chart is partialy in the data scaleView
-					bool	clipRegionSet = false;
-					if(xValue == HAxis.ViewMinimum || xValue == HAxis.ViewMaximum )
-					{
-						// Set clipping region for line drawing 
-						graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
-						clipRegionSet = true;
-					}
+                    // Check if chart is partialy in the data scaleView
+                    bool    clipRegionSet = false;
+                    if(xValue == HAxis.ViewMinimum || xValue == HAxis.ViewMaximum )
+                    {
+                        // Set clipping region for line drawing 
+                        graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
+                        clipRegionSet = true;
+                    }
 
-					// Make sure High/Low values are in data scaleView range						
-					double	high = VAxis.GetLogValue( point.YValues[0] );
-					double	low = VAxis.GetLogValue( point.YValues[1] );
-					
-					if( high > VAxis.ViewMaximum )
-					{
-						high = VAxis.ViewMaximum;
-					}
-					if( high < VAxis.ViewMinimum )
-					{
-						high = VAxis.ViewMinimum;
-					}
-					high = (float)VAxis.GetLinearPosition(high);
-					
-					if( low > VAxis.ViewMaximum )
-					{
-						low = VAxis.ViewMaximum;
-					}
-					if( low < VAxis.ViewMinimum )
-					{
-						low = VAxis.ViewMinimum;
-					}
-					low = VAxis.GetLinearPosition(low);
+                    // Make sure High/Low values are in data scaleView range                        
+                    double    high = VAxis.GetLogValue( point.YValues[0] );
+                    double    low = VAxis.GetLogValue( point.YValues[1] );
+                    
+                    if( high > VAxis.ViewMaximum )
+                    {
+                        high = VAxis.ViewMaximum;
+                    }
+                    if( high < VAxis.ViewMinimum )
+                    {
+                        high = VAxis.ViewMinimum;
+                    }
+                    high = (float)VAxis.GetLinearPosition(high);
+                    
+                    if( low > VAxis.ViewMaximum )
+                    {
+                        low = VAxis.ViewMaximum;
+                    }
+                    if( low < VAxis.ViewMinimum )
+                    {
+                        low = VAxis.ViewMinimum;
+                    }
+                    low = VAxis.GetLinearPosition(low);
 
-					// Remeber pre-calculated point position
-					point.positionRel = new PointF((float)xPosition, (float)high);
+                    // Remeber pre-calculated point position
+                    point.positionRel = new PointF((float)xPosition, (float)high);
 
-					// 3D Transform coordinates
-					Point3D[] points = new Point3D[2];
-					points[0] = new Point3D(xPosition, (float)high, seriesZPosition+seriesDepth/2f);
-					points[1] = new Point3D(xPosition, (float)low, seriesZPosition+seriesDepth/2f);
-					area.matrix3D.TransformPoints(points);
+                    // 3D Transform coordinates
+                    Point3D[] points = new Point3D[2];
+                    points[0] = new Point3D(xPosition, (float)high, seriesZPosition+seriesDepth/2f);
+                    points[1] = new Point3D(xPosition, (float)low, seriesZPosition+seriesDepth/2f);
+                    area.matrix3D.TransformPoints(points);
 
-					// Start Svg Selection mode
-					graph.StartHotRegion( point );
+                    // Start Svg Selection mode
+                    graph.StartHotRegion( point );
 
-					// Draw Hi-Low line
-					graph.DrawLineRel( 
-						point.Color, 
-						point.BorderWidth, 
-						point.BorderDashStyle, 
-						points[0].PointF, 
-						points[1].PointF,
-						ser.ShadowColor, 
-						ser.ShadowOffset );
+                    // Draw Hi-Low line
+                    graph.DrawLineRel( 
+                        point.Color, 
+                        point.BorderWidth, 
+                        point.BorderDashStyle, 
+                        points[0].PointF, 
+                        points[1].PointF,
+                        ser.ShadowColor, 
+                        ser.ShadowOffset );
 
-					// Draw Open-Close marks
-					DrawOpenCloseMarks3D(graph, area, ser, point, xPosition, width, seriesZPosition, seriesDepth);
-					xPosition = points[0].X;
-					high = points[0].Y;
-					low = points[1].Y;
+                    // Draw Open-Close marks
+                    DrawOpenCloseMarks3D(graph, area, ser, point, xPosition, width, seriesZPosition, seriesDepth);
+                    xPosition = points[0].X;
+                    high = points[0].Y;
+                    low = points[1].Y;
 
-					// End Svg Selection mode
-					graph.EndHotRegion( );
+                    // End Svg Selection mode
+                    graph.EndHotRegion( );
 
-					// Reset Clip Region
-					if(clipRegionSet)
-					{
-						graph.ResetClip();
-					}
+                    // Reset Clip Region
+                    if(clipRegionSet)
+                    {
+                        graph.ResetClip();
+                    }
 
-					if( common.ProcessModeRegions )
-					{
-						// Calculate rect around the hi-lo line and open-close marks
-						RectangleF	areaRect = RectangleF.Empty;
-						areaRect.X = xPosition - width / 2f;
-						areaRect.Y = (float)Math.Min(high, low);
-						areaRect.Width = width;
-						areaRect.Height = (float)Math.Max(high, low) - areaRect.Y;
+                    if( common.ProcessModeRegions )
+                    {
+                        // Calculate rect around the hi-lo line and open-close marks
+                        RectangleF    areaRect = RectangleF.Empty;
+                        areaRect.X = xPosition - width / 2f;
+                        areaRect.Y = (float)Math.Min(high, low);
+                        areaRect.Width = width;
+                        areaRect.Height = (float)Math.Max(high, low) - areaRect.Y;
 
-						common.HotRegionsList.AddHotRegion( 
-							areaRect, 
-							point, 
-							ser.Name, 
-							index - 1 );
-					
-					}
-				
-					++index;
-				}
+                        common.HotRegionsList.AddHotRegion( 
+                            areaRect, 
+                            point, 
+                            ser.Name, 
+                            index - 1 );
+                    
+                    }
+                
+                    ++index;
+                }
 
-				//************************************************************
-				//** Second series data points loop, when markers and labels
-				//** are drawn.
-				//************************************************************
-				int markerIndex = 0;
-				index = 1;
-				foreach( DataPoint point in ser.Points )
-				{
-					// Get point X position
-					double	xValue = point.XValue;
-					if( indexedSeries )
-					{
-						xValue = (double)index;
-					}
-					float xPosition = (float)HAxis.GetPosition( xValue );
+                //************************************************************
+                //** Second series data points loop, when markers and labels
+                //** are drawn.
+                //************************************************************
+                int markerIndex = 0;
+                index = 1;
+                foreach( DataPoint point in ser.Points )
+                {
+                    // Get point X position
+                    double    xValue = point.XValue;
+                    if( indexedSeries )
+                    {
+                        xValue = (double)index;
+                    }
+                    float xPosition = (float)HAxis.GetPosition( xValue );
 
-					double yValue0 = VAxis.GetLogValue( point.YValues[0] );
-					double yValue1 = VAxis.GetLogValue( point.YValues[1] );
-					xValue = HAxis.GetLogValue(xValue);
-				
-					// Check if chart is completly out of the data scaleView
-					if(xValue < HAxis.ViewMinimum || 
-						xValue > HAxis.ViewMaximum ||
-						(yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
-						(yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
-					{
-						++index;
-						continue;
-					}
+                    double yValue0 = VAxis.GetLogValue( point.YValues[0] );
+                    double yValue1 = VAxis.GetLogValue( point.YValues[1] );
+                    xValue = HAxis.GetLogValue(xValue);
+                
+                    // Check if chart is completly out of the data scaleView
+                    if(xValue < HAxis.ViewMinimum || 
+                        xValue > HAxis.ViewMaximum ||
+                        (yValue0 < VAxis.ViewMinimum && yValue1 < VAxis.ViewMinimum) ||
+                        (yValue0 > VAxis.ViewMaximum && yValue1 > VAxis.ViewMaximum) )
+                    {
+                        ++index;
+                        continue;
+                    }
 
-					// Make sure High/Low values are in data scaleView range						
-					double	high = VAxis.GetLogValue( point.YValues[0] );
-					double	low = VAxis.GetLogValue( point.YValues[1] );
-				
-					if( high > VAxis.ViewMaximum )
-					{
-						high = VAxis.ViewMaximum;
-					}
-					if( high < VAxis.ViewMinimum )
-					{
-						high = VAxis.ViewMinimum;
-					}
-					high = (float)VAxis.GetLinearPosition(high);
-				
-					if( low > VAxis.ViewMaximum )
-					{
-						low = VAxis.ViewMaximum;
-					}
-					if( low < VAxis.ViewMinimum )
-					{
-						low = VAxis.ViewMinimum;
-					}
-					low = VAxis.GetLinearPosition(low);
+                    // Make sure High/Low values are in data scaleView range                        
+                    double    high = VAxis.GetLogValue( point.YValues[0] );
+                    double    low = VAxis.GetLogValue( point.YValues[1] );
+                
+                    if( high > VAxis.ViewMaximum )
+                    {
+                        high = VAxis.ViewMaximum;
+                    }
+                    if( high < VAxis.ViewMinimum )
+                    {
+                        high = VAxis.ViewMinimum;
+                    }
+                    high = (float)VAxis.GetLinearPosition(high);
+                
+                    if( low > VAxis.ViewMaximum )
+                    {
+                        low = VAxis.ViewMaximum;
+                    }
+                    if( low < VAxis.ViewMinimum )
+                    {
+                        low = VAxis.ViewMinimum;
+                    }
+                    low = VAxis.GetLinearPosition(low);
 
 
-					// 3D Transform coordinates
-					Point3D[] points = new Point3D[2];
-					points[0] = new Point3D(xPosition, (float)high, seriesZPosition+seriesDepth/2f);
-					points[1] = new Point3D(xPosition, (float)low, seriesZPosition+seriesDepth/2f);
-					area.matrix3D.TransformPoints(points);
-					xPosition = points[0].X;
-					high = points[0].Y;
-					low = points[1].Y;
+                    // 3D Transform coordinates
+                    Point3D[] points = new Point3D[2];
+                    points[0] = new Point3D(xPosition, (float)high, seriesZPosition+seriesDepth/2f);
+                    points[1] = new Point3D(xPosition, (float)low, seriesZPosition+seriesDepth/2f);
+                    area.matrix3D.TransformPoints(points);
+                    xPosition = points[0].X;
+                    high = points[0].Y;
+                    low = points[1].Y;
 
-					// Draw label
-					DrawLabel(common, area, graph, ser, point, new PointF(xPosition, (float)Math.Min(high, low)), index);
+                    // Draw label
+                    DrawLabel(common, area, graph, ser, point, new PointF(xPosition, (float)Math.Min(high, low)), index);
 
-					// Draw marker
-					if(point.MarkerStyle != MarkerStyle.None || point.MarkerImage.Length > 0)
-					{
-						// Get marker size
-						SizeF markerSize = SizeF.Empty;
-						markerSize.Width = point.MarkerSize;
-						markerSize.Height = point.MarkerSize;
+                    // Draw marker
+                    if(point.MarkerStyle != MarkerStyle.None || point.MarkerImage.Length > 0)
+                    {
+                        // Get marker size
+                        SizeF markerSize = SizeF.Empty;
+                        markerSize.Width = point.MarkerSize;
+                        markerSize.Height = point.MarkerSize;
                         if (graph != null && graph.Graphics != null)
                         {
                             // Marker size is in pixels and we do the mapping for higher DPIs
@@ -1375,206 +1375,206 @@ using System.Collections.Generic;
 
                         if (point.MarkerImage.Length > 0)
                             common.ImageLoader.GetAdjustedImageSize(point.MarkerImage, graph.Graphics, ref markerSize);
-						
-						// Get marker position
-						PointF markerPosition = PointF.Empty;
-						markerPosition.X = xPosition;
-						markerPosition.Y = (float)high - graph.GetRelativeSize(markerSize).Height/2f;
+                        
+                        // Get marker position
+                        PointF markerPosition = PointF.Empty;
+                        markerPosition.X = xPosition;
+                        markerPosition.Y = (float)high - graph.GetRelativeSize(markerSize).Height/2f;
 
-						// Draw marker
-						if(markerIndex == 0)
-						{
-							// Draw the marker
-							graph.DrawMarkerRel(markerPosition, 
-								point.MarkerStyle,
-								(int)markerSize.Height,
-								(point.MarkerColor == Color.Empty) ? point.Color : point.MarkerColor,
-								(point.MarkerBorderColor == Color.Empty) ? point.BorderColor : point.MarkerBorderColor,
-								point.MarkerBorderWidth,
-								point.MarkerImage,
-								point.MarkerImageTransparentColor,
-								(point.series != null) ? point.series.ShadowOffset : 0,
-								(point.series != null) ? point.series.ShadowColor : Color.Empty,
-								new RectangleF(markerPosition.X, markerPosition.Y, markerSize.Width, markerSize.Height));
+                        // Draw marker
+                        if(markerIndex == 0)
+                        {
+                            // Draw the marker
+                            graph.DrawMarkerRel(markerPosition, 
+                                point.MarkerStyle,
+                                (int)markerSize.Height,
+                                (point.MarkerColor == Color.Empty) ? point.Color : point.MarkerColor,
+                                (point.MarkerBorderColor == Color.Empty) ? point.BorderColor : point.MarkerBorderColor,
+                                point.MarkerBorderWidth,
+                                point.MarkerImage,
+                                point.MarkerImageTransparentColor,
+                                (point.series != null) ? point.series.ShadowOffset : 0,
+                                (point.series != null) ? point.series.ShadowColor : Color.Empty,
+                                new RectangleF(markerPosition.X, markerPosition.Y, markerSize.Width, markerSize.Height));
 
-							if( common.ProcessModeRegions )
-							{
-								// Get relative marker size
-								SizeF relativeMarkerSize = graph.GetRelativeSize(markerSize);
+                            if( common.ProcessModeRegions )
+                            {
+                                // Get relative marker size
+                                SizeF relativeMarkerSize = graph.GetRelativeSize(markerSize);
 
-								// Insert area just after the last custom area
-								int insertIndex = common.HotRegionsList.FindInsertIndex();
-								common.HotRegionsList.FindInsertIndex();
+                                // Insert area just after the last custom area
+                                int insertIndex = common.HotRegionsList.FindInsertIndex();
+                                common.HotRegionsList.FindInsertIndex();
 
-								// Insert circle area
-								if(point.MarkerStyle == MarkerStyle.Circle)
-								{
-									float[]	circCoord = new float[3];
-									circCoord[0] = markerPosition.X;
-									circCoord[1] = markerPosition.Y;
-									circCoord[2] = relativeMarkerSize.Width/2f;
+                                // Insert circle area
+                                if(point.MarkerStyle == MarkerStyle.Circle)
+                                {
+                                    float[]    circCoord = new float[3];
+                                    circCoord[0] = markerPosition.X;
+                                    circCoord[1] = markerPosition.Y;
+                                    circCoord[2] = relativeMarkerSize.Width/2f;
 
-									common.HotRegionsList.AddHotRegion( 
-										insertIndex, 
-										graph, 
-										circCoord[0], 
-										circCoord[1], 
-										circCoord[2], 
-										point, 
-										ser.Name, 
-										index - 1 );
-								}
-									// All other markers represented as rectangles
-								else
-								{
-									common.HotRegionsList.AddHotRegion(
-										new RectangleF(markerPosition.X - relativeMarkerSize.Width/2f, markerPosition.Y - relativeMarkerSize.Height/2f, relativeMarkerSize.Width, relativeMarkerSize.Height),
-										point,
-										ser.Name,
-										index - 1 );
-								}
-							}
-						}
-				
-						// Increase the markers counter
-						++markerIndex;
-						if(ser.MarkerStep == markerIndex)
-						{
-							markerIndex = 0;
-						}
-					}
-					++index;
-				}
-				
-				// Call Paint event
-				if( !selection )
-				{
+                                    common.HotRegionsList.AddHotRegion( 
+                                        insertIndex, 
+                                        graph, 
+                                        circCoord[0], 
+                                        circCoord[1], 
+                                        circCoord[2], 
+                                        point, 
+                                        ser.Name, 
+                                        index - 1 );
+                                }
+                                    // All other markers represented as rectangles
+                                else
+                                {
+                                    common.HotRegionsList.AddHotRegion(
+                                        new RectangleF(markerPosition.X - relativeMarkerSize.Width/2f, markerPosition.Y - relativeMarkerSize.Height/2f, relativeMarkerSize.Width, relativeMarkerSize.Height),
+                                        point,
+                                        ser.Name,
+                                        index - 1 );
+                                }
+                            }
+                        }
+                
+                        // Increase the markers counter
+                        ++markerIndex;
+                        if(ser.MarkerStep == markerIndex)
+                        {
+                            markerIndex = 0;
+                        }
+                    }
+                    ++index;
+                }
+                
+                // Call Paint event
+                if( !selection )
+                {
                     common.Chart.CallOnPostPaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
-				}
-			}
-		}
+                }
+            }
+        }
 
-		/// <summary>
-		/// Draws stock chart open-close marks depending on selected style.
-		/// </summary>
-		/// <param name="graph">Chart graphics object.</param>
-		/// <param name="area">Chart area.</param>
-		/// <param name="ser">Data point series.</param>
-		/// <param name="point">Data point to draw.</param>
-		/// <param name="xPosition">X position.</param>
-		/// <param name="width">Point width.</param>
-		/// <param name="zPosition">Series Z position.</param>
-		/// <param name="depth">Series depth.</param>
-		virtual protected void DrawOpenCloseMarks3D(
-			ChartGraphics graph, 
-			ChartArea area,
-			Series ser, 
-			DataPoint point, 
-			float xPosition, 
-			float width,
-			float zPosition,
-			float depth)
-		{
-			double openY = VAxis.GetLogValue( point.YValues[2] );
-			double closeY = VAxis.GetLogValue( point.YValues[3] );
+        /// <summary>
+        /// Draws stock chart open-close marks depending on selected style.
+        /// </summary>
+        /// <param name="graph">Chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="ser">Data point series.</param>
+        /// <param name="point">Data point to draw.</param>
+        /// <param name="xPosition">X position.</param>
+        /// <param name="width">Point width.</param>
+        /// <param name="zPosition">Series Z position.</param>
+        /// <param name="depth">Series depth.</param>
+        virtual protected void DrawOpenCloseMarks3D(
+            ChartGraphics graph, 
+            ChartArea area,
+            Series ser, 
+            DataPoint point, 
+            float xPosition, 
+            float width,
+            float zPosition,
+            float depth)
+        {
+            double openY = VAxis.GetLogValue( point.YValues[2] );
+            double closeY = VAxis.GetLogValue( point.YValues[3] );
 
-			// Check if mark is inside data scaleView
-			if( (openY > VAxis.ViewMaximum ||
-				openY < VAxis.ViewMinimum) &&
-				(closeY > VAxis.ViewMaximum ||
-				closeY < VAxis.ViewMinimum) )
-			{
-				//return;
-			}
+            // Check if mark is inside data scaleView
+            if( (openY > VAxis.ViewMaximum ||
+                openY < VAxis.ViewMinimum) &&
+                (closeY > VAxis.ViewMaximum ||
+                closeY < VAxis.ViewMinimum) )
+            {
+                //return;
+            }
 
-			// Calculate open-close position
-			float	open = (float)VAxis.GetLinearPosition(openY);
-			float	close = (float)VAxis.GetLinearPosition(closeY);
-			SizeF	absSize = graph.GetAbsoluteSize(new SizeF(width, width));
-			float	height = graph.GetRelativeSize(absSize).Height;
+            // Calculate open-close position
+            float    open = (float)VAxis.GetLinearPosition(openY);
+            float    close = (float)VAxis.GetLinearPosition(closeY);
+            SizeF    absSize = graph.GetAbsoluteSize(new SizeF(width, width));
+            float    height = graph.GetRelativeSize(absSize).Height;
 
-			// Detect style
-			StockOpenCloseMarkStyle	style = openCloseStyle;
-			string	styleType = "";
-			if(point.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
-			{
-				styleType = point[CustomPropertyName.OpenCloseStyle];
-			}
-			else if(ser.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
-			{
-				styleType = ser[CustomPropertyName.OpenCloseStyle];
-			}
+            // Detect style
+            StockOpenCloseMarkStyle    style = openCloseStyle;
+            string    styleType = "";
+            if(point.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
+            {
+                styleType = point[CustomPropertyName.OpenCloseStyle];
+            }
+            else if(ser.IsCustomPropertySet(CustomPropertyName.OpenCloseStyle))
+            {
+                styleType = ser[CustomPropertyName.OpenCloseStyle];
+            }
 
-			if(styleType != null && styleType.Length > 0)
-			{
-				if(String.Compare(styleType, "Candlestick", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					style = StockOpenCloseMarkStyle.Candlestick;
-				}
+            if(styleType != null && styleType.Length > 0)
+            {
+                if(String.Compare(styleType, "Candlestick", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    style = StockOpenCloseMarkStyle.Candlestick;
+                }
                 else if (String.Compare(styleType, "Triangle", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					style = StockOpenCloseMarkStyle.Triangle;
-				}
+                {
+                    style = StockOpenCloseMarkStyle.Triangle;
+                }
                 else if (String.Compare(styleType, "Line", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					style = StockOpenCloseMarkStyle.Line;
-				}
-			}
+                {
+                    style = StockOpenCloseMarkStyle.Line;
+                }
+            }
 
-			// Get attribute which controls if open/close marks are shown
-			bool	showOpen = true;
-			bool	showClose = true;
-			string	showOpenClose = "";
-			if(point.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
-			{
-				showOpenClose = point[CustomPropertyName.ShowOpenClose];
-			}
-			else if(ser.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
-			{
-				showOpenClose = ser[CustomPropertyName.ShowOpenClose];
-			}
+            // Get attribute which controls if open/close marks are shown
+            bool    showOpen = true;
+            bool    showClose = true;
+            string    showOpenClose = "";
+            if(point.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
+            {
+                showOpenClose = point[CustomPropertyName.ShowOpenClose];
+            }
+            else if(ser.IsCustomPropertySet(CustomPropertyName.ShowOpenClose))
+            {
+                showOpenClose = ser[CustomPropertyName.ShowOpenClose];
+            }
 
-			if(showOpenClose != null && showOpenClose.Length > 0)
-			{
-				if(String.Compare(showOpenClose, "Both", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					showOpen = true;
-					showClose = true;
-				}
+            if(showOpenClose != null && showOpenClose.Length > 0)
+            {
+                if(String.Compare(showOpenClose, "Both", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    showOpen = true;
+                    showClose = true;
+                }
                 else if (String.Compare(showOpenClose, "Open", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					showOpen = true;
-					showClose = false;
-				}
+                {
+                    showOpen = true;
+                    showClose = false;
+                }
                 else if (String.Compare(showOpenClose, "Close", StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					showOpen = false;
-					showClose = true;
-				}
-			}
+                {
+                    showOpen = false;
+                    showClose = true;
+                }
+            }
 
-			// Check if chart is partialy in the data scaleView
-			bool	clipRegionSet = false;
-			if((xPosition - width / 2f) < area.PlotAreaPosition.X || (xPosition + width / 2f) > area.PlotAreaPosition.Right)
-			{
-				// Set clipping region for line drawing 
-				graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
-				clipRegionSet = true;
-			}
+            // Check if chart is partialy in the data scaleView
+            bool    clipRegionSet = false;
+            if((xPosition - width / 2f) < area.PlotAreaPosition.X || (xPosition + width / 2f) > area.PlotAreaPosition.Right)
+            {
+                // Set clipping region for line drawing 
+                graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
+                clipRegionSet = true;
+            }
 
-			
-			// Draw open-close marks as bar
-			if(forceCandleStick || style == StockOpenCloseMarkStyle.Candlestick)
-			{
-				// Colors used to draw bar of the open-close style
-				ColorConverter	colorConverter = new ColorConverter();
-				Color			priceUpColor = point.Color;
-				Color			priceDownColor = point.BackSecondaryColor;
+            
+            // Draw open-close marks as bar
+            if(forceCandleStick || style == StockOpenCloseMarkStyle.Candlestick)
+            {
+                // Colors used to draw bar of the open-close style
+                ColorConverter    colorConverter = new ColorConverter();
+                Color            priceUpColor = point.Color;
+                Color            priceDownColor = point.BackSecondaryColor;
 
-				// Check if special color properties are set
-				string	attrValue = point[CustomPropertyName.PriceUpColor];
-				if(attrValue != null && attrValue.Length > 0)
-				{
+                // Check if special color properties are set
+                string    attrValue = point[CustomPropertyName.PriceUpColor];
+                if(attrValue != null && attrValue.Length > 0)
+                {
                     bool failed = false;
                     try
                     {
@@ -1593,11 +1593,11 @@ using System.Collections.Generic;
                     {
                         priceUpColor = (Color)colorConverter.ConvertFromInvariantString(attrValue);
                     }
-				}
+                }
 
-				attrValue = point[CustomPropertyName.PriceDownColor];
-				if(attrValue != null && attrValue.Length > 0)
-				{
+                attrValue = point[CustomPropertyName.PriceDownColor];
+                if(attrValue != null && attrValue.Length > 0)
+                {
                     bool failed = false;
                     try
                     {
@@ -1616,60 +1616,60 @@ using System.Collections.Generic;
                     {
                         priceDownColor = (Color)colorConverter.ConvertFromInvariantString(attrValue);
                     }
-				}
+                }
 
-				// Calculate bar rectangle
-				RectangleF	rect = RectangleF.Empty;
-				rect.Y = (float)Math.Min(open, close);
-				rect.X = xPosition - width / 2f;
-				rect.Height = (float)Math.Max(open, close) - rect.Y;
-				rect.Width = width;
+                // Calculate bar rectangle
+                RectangleF    rect = RectangleF.Empty;
+                rect.Y = (float)Math.Min(open, close);
+                rect.X = xPosition - width / 2f;
+                rect.Height = (float)Math.Max(open, close) - rect.Y;
+                rect.Width = width;
 
-				// Bar and border color
-				Color	barColor = (open > close) ? priceUpColor : priceDownColor;
-				Color	barBorderColor = (point.BorderColor == Color.Empty) ? (barColor == Color.Empty) ? point.Color : barColor : point.BorderColor;
+                // Bar and border color
+                Color    barColor = (open > close) ? priceUpColor : priceDownColor;
+                Color    barBorderColor = (point.BorderColor == Color.Empty) ? (barColor == Color.Empty) ? point.Color : barColor : point.BorderColor;
 
-				// Translate coordinates
-				Point3D[] points = new Point3D[2];
-				points[0] = new Point3D(rect.X, rect.Y, zPosition + depth/2f);
-				points[1] = new Point3D(rect.Right, rect.Bottom, zPosition + depth/2f);
-				area.matrix3D.TransformPoints(points);
-				rect.Location = points[0].PointF;
-				rect.Width = (float)Math.Abs(points[1].X - points[0].X);
-				rect.Height = (float)Math.Abs(points[1].Y - points[0].Y);
-				
-				// Draw open-close bar
-				if(rect.Height > 1)
-				{
-					graph.FillRectangleRel( 
-						rect, 
-						barColor,
-						point.BackHatchStyle, 
-						point.BackImage, 
-						point.BackImageWrapMode, 
-						point.BackImageTransparentColor,
-						point.BackImageAlignment,
-						point.BackGradientStyle, 
-						point.BackSecondaryColor, 
-						barBorderColor, 
-						point.BorderWidth, 
-						point.BorderDashStyle, 
-						ser.ShadowColor,
-						ser.ShadowOffset,
-						PenAlignment.Inset);
-				}
-				else
-				{
-					graph.DrawLineRel(barBorderColor, point.BorderWidth, point.BorderDashStyle, 
-						new PointF(rect.X, rect.Y), 
-						new PointF(rect.Right, rect.Y),
-						ser.ShadowColor, ser.ShadowOffset );
-				}
-			}
+                // Translate coordinates
+                Point3D[] points = new Point3D[2];
+                points[0] = new Point3D(rect.X, rect.Y, zPosition + depth/2f);
+                points[1] = new Point3D(rect.Right, rect.Bottom, zPosition + depth/2f);
+                area.matrix3D.TransformPoints(points);
+                rect.Location = points[0].PointF;
+                rect.Width = (float)Math.Abs(points[1].X - points[0].X);
+                rect.Height = (float)Math.Abs(points[1].Y - points[0].Y);
+                
+                // Draw open-close bar
+                if(rect.Height > 1)
+                {
+                    graph.FillRectangleRel( 
+                        rect, 
+                        barColor,
+                        point.BackHatchStyle, 
+                        point.BackImage, 
+                        point.BackImageWrapMode, 
+                        point.BackImageTransparentColor,
+                        point.BackImageAlignment,
+                        point.BackGradientStyle, 
+                        point.BackSecondaryColor, 
+                        barBorderColor, 
+                        point.BorderWidth, 
+                        point.BorderDashStyle, 
+                        ser.ShadowColor,
+                        ser.ShadowOffset,
+                        PenAlignment.Inset);
+                }
+                else
+                {
+                    graph.DrawLineRel(barBorderColor, point.BorderWidth, point.BorderDashStyle, 
+                        new PointF(rect.X, rect.Y), 
+                        new PointF(rect.Right, rect.Y),
+                        ser.ShadowColor, ser.ShadowOffset );
+                }
+            }
 
-				// Draw open-close marks as triangals
-			else if(style == StockOpenCloseMarkStyle.Triangle)
-			{
+                // Draw open-close marks as triangals
+            else if(style == StockOpenCloseMarkStyle.Triangle)
+            {
                 using (GraphicsPath path = new GraphicsPath())
                 {
 
@@ -1719,160 +1719,160 @@ using System.Collections.Generic;
                         }
                     }                    
                 }
-			}
+            }
 
-				// Draw ope-close marks as lines
-			else
-			{
-				// Draw Open mark line
-				if(showOpen)
-				{
-					if(openY <= VAxis.ViewMaximum && openY >= VAxis.ViewMinimum)
-					{
-						// Translate coordinates
-						Point3D[] points = new Point3D[2];
-						points[0] = new Point3D(xPosition - width/2f, open, zPosition + depth/2f);
-						points[1] = new Point3D(xPosition, open, zPosition + depth/2f);
-						area.matrix3D.TransformPoints(points);
+                // Draw ope-close marks as lines
+            else
+            {
+                // Draw Open mark line
+                if(showOpen)
+                {
+                    if(openY <= VAxis.ViewMaximum && openY >= VAxis.ViewMinimum)
+                    {
+                        // Translate coordinates
+                        Point3D[] points = new Point3D[2];
+                        points[0] = new Point3D(xPosition - width/2f, open, zPosition + depth/2f);
+                        points[1] = new Point3D(xPosition, open, zPosition + depth/2f);
+                        area.matrix3D.TransformPoints(points);
 
-						graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
-							points[0].PointF, 
-							points[1].PointF,
-							ser.ShadowColor, ser.ShadowOffset );
-					}
-				}
+                        graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
+                            points[0].PointF, 
+                            points[1].PointF,
+                            ser.ShadowColor, ser.ShadowOffset );
+                    }
+                }
 
-				// Draw Close mark line
-				if(showClose)
-				{
-					if(closeY <= VAxis.ViewMaximum && closeY >= VAxis.ViewMinimum)
-					{
-						// Translate coordinates
-						Point3D[] points = new Point3D[2];
-						points[0] = new Point3D(xPosition, close, zPosition + depth/2f);
-						points[1] = new Point3D(xPosition + width/2f, close, zPosition + depth/2f);
-						area.matrix3D.TransformPoints(points);
+                // Draw Close mark line
+                if(showClose)
+                {
+                    if(closeY <= VAxis.ViewMaximum && closeY >= VAxis.ViewMinimum)
+                    {
+                        // Translate coordinates
+                        Point3D[] points = new Point3D[2];
+                        points[0] = new Point3D(xPosition, close, zPosition + depth/2f);
+                        points[1] = new Point3D(xPosition + width/2f, close, zPosition + depth/2f);
+                        area.matrix3D.TransformPoints(points);
 
-						graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
-							points[0].PointF, 
-							points[1].PointF,
-							ser.ShadowColor, ser.ShadowOffset );
-					}
-				}
-			}
+                        graph.DrawLineRel(point.Color, point.BorderWidth, point.BorderDashStyle, 
+                            points[0].PointF, 
+                            points[1].PointF,
+                            ser.ShadowColor, ser.ShadowOffset );
+                    }
+                }
+            }
 
-			// Reset Clip Region
-			if(clipRegionSet)
-			{
-				graph.ResetClip();
-			}
-		}
+            // Reset Clip Region
+            if(clipRegionSet)
+            {
+                graph.ResetClip();
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
-		/// <summary>
-		/// Helper function, which returns the Y value of the point.
-		/// </summary>
-		/// <param name="common">Chart common elements.</param>
-		/// <param name="area">Chart area the series belongs to.</param>
-		/// <param name="series">Sereis of the point.</param>
-		/// <param name="point">Point object.</param>
-		/// <param name="pointIndex">Index of the point.</param>
-		/// <param name="yValueIndex">Index of the Y value to get.</param>
-		/// <returns>Y value of the point.</returns>
-		virtual public double GetYValue(
-			CommonElements common, 
-			ChartArea area, 
-			Series series, 
-			DataPoint point, 
-			int pointIndex, 
-			int yValueIndex)
-		{
-			return point.YValues[yValueIndex];
-		}
+        /// <summary>
+        /// Helper function, which returns the Y value of the point.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.</param>
+        /// <returns>Y value of the point.</returns>
+        virtual public double GetYValue(
+            CommonElements common, 
+            ChartArea area, 
+            Series series, 
+            DataPoint point, 
+            int pointIndex, 
+            int yValueIndex)
+        {
+            return point.YValues[yValueIndex];
+        }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
-		/// <summary>
-		/// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
-		/// </summary>
-		/// <param name="common">Common chart elements.</param>
-		/// <param name="area">Chart area.</param>
-		/// <param name="series">Series values to be used.</param>
-		/// <param name="list">List to add to.</param>
-		public void AddSmartLabelMarkerPositions(CommonElements common, ChartArea area, Series series, ArrayList list)
-		{
-			// Check if series is indexed
-			bool indexedSeries = ChartHelper.IndexedSeries(common, area.GetSeriesFromChartType(this.Name).ToArray() );
+        /// <summary>
+        /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
+        /// </summary>
+        /// <param name="common">Common chart elements.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="series">Series values to be used.</param>
+        /// <param name="list">List to add to.</param>
+        public void AddSmartLabelMarkerPositions(CommonElements common, ChartArea area, Series series, ArrayList list)
+        {
+            // Check if series is indexed
+            bool indexedSeries = ChartHelper.IndexedSeries(common, area.GetSeriesFromChartType(this.Name).ToArray() );
 
-			//************************************************************
-			//** Set active horizontal/vertical axis
-			//************************************************************
-			Axis hAxis = area.GetAxis(AxisName.X, series.XAxisType, series.XSubAxisName);
-			Axis vAxis = area.GetAxis(AxisName.Y, series.YAxisType, series.YSubAxisName);
+            //************************************************************
+            //** Set active horizontal/vertical axis
+            //************************************************************
+            Axis hAxis = area.GetAxis(AxisName.X, series.XAxisType, series.XSubAxisName);
+            Axis vAxis = area.GetAxis(AxisName.Y, series.YAxisType, series.YSubAxisName);
 
-			//************************************************************
-			//** Loop through all data points in the series
-			//************************************************************
-			int	markerIndex = 0;		// Marker index
-			int	index = 1;				// Data points loop
-			foreach( DataPoint point in series.Points )
-			{
-				//************************************************************
-				//** Check if point values are in the chart area
-				//************************************************************
+            //************************************************************
+            //** Loop through all data points in the series
+            //************************************************************
+            int    markerIndex = 0;        // Marker index
+            int    index = 1;                // Data points loop
+            foreach( DataPoint point in series.Points )
+            {
+                //************************************************************
+                //** Check if point values are in the chart area
+                //************************************************************
 
-				// Check for min/max Y values
-				double	yValue = GetYValue(common, area, series, point, index - 1, 0);
+                // Check for min/max Y values
+                double    yValue = GetYValue(common, area, series, point, index - 1, 0);
 
-				// Axis is Logarithmic
-				yValue = vAxis.GetLogValue( yValue );
-				
-				if( yValue > vAxis.ViewMaximum || yValue < vAxis.ViewMinimum)
-				{
-					index++;
-					continue;
-				}
+                // Axis is Logarithmic
+                yValue = vAxis.GetLogValue( yValue );
+                
+                if( yValue > vAxis.ViewMaximum || yValue < vAxis.ViewMinimum)
+                {
+                    index++;
+                    continue;
+                }
 
-				// Check for min/max X values
-				double xValue = (indexedSeries) ? (double)index : point.XValue;
-				xValue = hAxis.GetLogValue(xValue);
-				if(xValue > hAxis.ViewMaximum || xValue < hAxis.ViewMinimum)
-				{
-					index++;
-					continue;
-				}
+                // Check for min/max X values
+                double xValue = (indexedSeries) ? (double)index : point.XValue;
+                xValue = hAxis.GetLogValue(xValue);
+                if(xValue > hAxis.ViewMaximum || xValue < hAxis.ViewMinimum)
+                {
+                    index++;
+                    continue;
+                }
 
-				//************************************************************
-				//** Get marker position and size
-				//************************************************************
+                //************************************************************
+                //** Get marker position and size
+                //************************************************************
 
-				// Get marker position
-				PointF markerPosition = PointF.Empty;
-				markerPosition.Y = (float)vAxis.GetLinearPosition(yValue);
-				if( indexedSeries )
-				{
-					// The formula for position is based on a distance 
-					// from the grid line or nPoints position.
-					markerPosition.X = (float)hAxis.GetPosition( (double)index );
-				}
-				else
-				{
-					markerPosition.X = (float)hAxis.GetPosition( point.XValue );
-				}
+                // Get marker position
+                PointF markerPosition = PointF.Empty;
+                markerPosition.Y = (float)vAxis.GetLinearPosition(yValue);
+                if( indexedSeries )
+                {
+                    // The formula for position is based on a distance 
+                    // from the grid line or nPoints position.
+                    markerPosition.X = (float)hAxis.GetPosition( (double)index );
+                }
+                else
+                {
+                    markerPosition.X = (float)hAxis.GetPosition( point.XValue );
+                }
 
-				// Get point some point properties and save them in variables
-				string		pointMarkerImage = point.MarkerImage;
-				MarkerStyle	pointMarkerStyle = point.MarkerStyle;
+                // Get point some point properties and save them in variables
+                string        pointMarkerImage = point.MarkerImage;
+                MarkerStyle    pointMarkerStyle = point.MarkerStyle;
 
-				// Get marker size
-				SizeF markerSize = SizeF.Empty;
-				markerSize.Width = point.MarkerSize;
-				markerSize.Height = point.MarkerSize;
+                // Get marker size
+                SizeF markerSize = SizeF.Empty;
+                markerSize.Width = point.MarkerSize;
+                markerSize.Height = point.MarkerSize;
                 if (common != null && common.graph != null && common.graph.Graphics != null)
                 {
                     // Marker size is in pixels and we do the mapping for higher DPIs
@@ -1884,55 +1884,55 @@ using System.Collections.Generic;
                     if(common.graph != null)
                         common.ImageLoader.GetAdjustedImageSize(point.MarkerImage, common.graph.Graphics, ref markerSize);
                 
-				// Transform marker position in 3D space
-				if(area.Area3DStyle.Enable3D)
-				{
-					// Get series depth and Z position
-					float seriesDepth, seriesZPosition;
-					area.GetSeriesZPositionAndDepth(series, out seriesDepth, out seriesZPosition);
+                // Transform marker position in 3D space
+                if(area.Area3DStyle.Enable3D)
+                {
+                    // Get series depth and Z position
+                    float seriesDepth, seriesZPosition;
+                    area.GetSeriesZPositionAndDepth(series, out seriesDepth, out seriesZPosition);
 
-					Point3D[]	marker3DPosition = new Point3D[1];
-					marker3DPosition[0] = new Point3D(
-						markerPosition.X, 
-						markerPosition.Y, 
-						(float)(seriesZPosition + seriesDepth/2f));
+                    Point3D[]    marker3DPosition = new Point3D[1];
+                    marker3DPosition[0] = new Point3D(
+                        markerPosition.X, 
+                        markerPosition.Y, 
+                        (float)(seriesZPosition + seriesDepth/2f));
 
-					// Transform coordinates
-					area.matrix3D.TransformPoints(marker3DPosition);
-					markerPosition = marker3DPosition[0].PointF;
-				}
+                    // Transform coordinates
+                    area.matrix3D.TransformPoints(marker3DPosition);
+                    markerPosition = marker3DPosition[0].PointF;
+                }
 
-				// Check if marker visible
-				if(pointMarkerStyle != MarkerStyle.None || 
-					pointMarkerImage.Length > 0)
-				{
-					// Check marker index
-					if(markerIndex == 0)
-					{
-						markerSize = common.graph.GetRelativeSize(markerSize);
+                // Check if marker visible
+                if(pointMarkerStyle != MarkerStyle.None || 
+                    pointMarkerImage.Length > 0)
+                {
+                    // Check marker index
+                    if(markerIndex == 0)
+                    {
+                        markerSize = common.graph.GetRelativeSize(markerSize);
 
-						// Add marker position into the list
-						RectangleF	markerRect = new RectangleF(
-							markerPosition.X - markerSize.Width / 2f,
-							markerPosition.Y - markerSize.Height,
-							markerSize.Width,
-							markerSize.Height);
-						list.Add(markerRect);
-					}
-					
-					// Increase the markers counter
-					++markerIndex;
-					if(series.MarkerStep == markerIndex)
-					{
-						markerIndex = 0;
-					}
-				}
+                        // Add marker position into the list
+                        RectangleF    markerRect = new RectangleF(
+                            markerPosition.X - markerSize.Width / 2f,
+                            markerPosition.Y - markerSize.Height,
+                            markerSize.Width,
+                            markerSize.Height);
+                        list.Add(markerRect);
+                    }
+                    
+                    // Increase the markers counter
+                    ++markerIndex;
+                    if(series.MarkerStep == markerIndex)
+                    {
+                        markerIndex = 0;
+                    }
+                }
 
-				++index;
-			}
-		}
+                ++index;
+            }
+        }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>
@@ -1953,5 +1953,5 @@ using System.Collections.Generic;
             GC.SuppressFinalize(this);
         }
         #endregion
-	}
+    }
 }

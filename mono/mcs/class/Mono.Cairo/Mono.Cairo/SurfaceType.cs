@@ -31,32 +31,32 @@ using System;
 
 namespace Cairo {
 
-	[Serializable]
-	public enum SurfaceType
-	{
-		Image,
-		Pdf,
-		PS,
-		Xlib,
-		Xcb,
-		Glitz,
-		Quartz,
-		Win32,
-		BeOS,
-		DirectFB,
-		Svg,
-		OS2,
-		Win32Printing,
-		QuartzImage,
-		Script,
-		Qt,
-		Recording,
-		VG,
-		GL,
-		Drm,
-		Tee,
-		Xml,
-		Skia,
-		SubSurface
-	}
+    [Serializable]
+    public enum SurfaceType
+    {
+        Image,
+        Pdf,
+        PS,
+        Xlib,
+        Xcb,
+        Glitz,
+        Quartz,
+        Win32,
+        BeOS,
+        DirectFB,
+        Svg,
+        OS2,
+        Win32Printing,
+        QuartzImage,
+        Script,
+        Qt,
+        Recording,
+        VG,
+        GL,
+        Drm,
+        Tee,
+        Xml,
+        Skia,
+        SubSurface
+    }
 }

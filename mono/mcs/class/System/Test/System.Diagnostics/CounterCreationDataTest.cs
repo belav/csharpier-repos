@@ -35,16 +35,16 @@ using System.Diagnostics;
 
 namespace MonoTests.System.Diagnostics {
 
-	[TestFixture]
-	public class CounterCreationDataTest {
-		[Test]
-		public void CounterHelp_Empty () {
-			CounterCreationData dc = new CounterCreationData();
-			dc.CounterType = PerformanceCounterType.NumberOfItems32;
-			dc.CounterName = "Foo";
-			Assert.AreEqual (dc.CounterHelp, String.Empty);
-		}
-	}
+    [TestFixture]
+    public class CounterCreationDataTest {
+        [Test]
+        public void CounterHelp_Empty () {
+            CounterCreationData dc = new CounterCreationData();
+            dc.CounterType = PerformanceCounterType.NumberOfItems32;
+            dc.CounterName = "Foo";
+            Assert.AreEqual (dc.CounterHelp, String.Empty);
+        }
+    }
 }
 
 #endif

@@ -28,21 +28,21 @@
 
 namespace Mono.Cecil.Binary {
 
-	internal class ResourceDataEntry : ResourceNode {
+    internal class ResourceDataEntry : ResourceNode {
 
-		public RVA Data;
-		public uint Size;
-		public uint Codepage;
-		public uint Reserved = 0;
+        public RVA Data;
+        public uint Size;
+        public uint Codepage;
+        public uint Reserved = 0;
 
-		public byte [] ResourceData;
+        public byte [] ResourceData;
 
-		public ResourceDataEntry (int offset) : base (offset)
-		{
-		}
+        public ResourceDataEntry (int offset) : base (offset)
+        {
+        }
 
-		public ResourceDataEntry ()
-		{
-		}
-	}
+        public ResourceDataEntry ()
+        {
+        }
+    }
 }

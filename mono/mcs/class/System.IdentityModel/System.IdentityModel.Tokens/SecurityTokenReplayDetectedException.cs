@@ -31,22 +31,22 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SecurityTokenReplayDetectedException : SecurityTokenValidationException
-	{
-		public SecurityTokenReplayDetectedException()
-			: base("ID1070: Replay has been detected for a SecurityToken.")
-		{ }
+    public class SecurityTokenReplayDetectedException : SecurityTokenValidationException
+    {
+        public SecurityTokenReplayDetectedException()
+            : base("ID1070: Replay has been detected for a SecurityToken.")
+        { }
 
-		public SecurityTokenReplayDetectedException(string message)
-			: base(message)
-		{ }
+        public SecurityTokenReplayDetectedException(string message)
+            : base(message)
+        { }
 
-		public SecurityTokenReplayDetectedException(string message, Exception inner)
-			: base(message, inner)
-		{ }
+        public SecurityTokenReplayDetectedException(string message, Exception inner)
+            : base(message, inner)
+        { }
 
-		public SecurityTokenReplayDetectedException(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{ }
-	}
+        public SecurityTokenReplayDetectedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        { }
+    }
 }

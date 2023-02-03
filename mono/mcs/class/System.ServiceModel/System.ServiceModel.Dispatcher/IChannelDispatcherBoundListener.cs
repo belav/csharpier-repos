@@ -2,7 +2,7 @@
 // ChannelDispatcher.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc.  http://www.novell.com
 //
@@ -29,8 +29,8 @@ using System;
 
 namespace System.ServiceModel.Dispatcher
 {
-	internal interface IChannelDispatcherBoundListener
-	{
-		ChannelDispatcher ChannelDispatcher { get; set; }
-	}
+    internal interface IChannelDispatcherBoundListener
+    {
+        ChannelDispatcher ChannelDispatcher { get; set; }
+    }
 }

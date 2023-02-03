@@ -1,20 +1,20 @@
 // CS0104: `X' is an ambiguous reference between `A.X' and `B.X'
 // Line: 16
 namespace A {
-	class X {
-	}
+    class X {
+    }
 }
 
 namespace B {
-	class X {
-	}
+    class X {
+    }
 }
 
 namespace C {
-	using A;
-	using B;
-	class D : X {
+    using A;
+    using B;
+    class D : X {
 
-	static void Main () {}
-	}
+    static void Main () {}
+    }
 }

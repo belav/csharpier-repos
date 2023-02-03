@@ -7,13 +7,13 @@ using System.Linq.Expressions;
 
 class Program
 {
-	static void Main()
-	{
-		Expression<Func<Stack<int>>> e = () => new Stack<int> { 42 };		
-	}
+    static void Main()
+    {
+        Expression<Func<Stack<int>>> e = () => new Stack<int> { 42 };        
+    }
 }
 
 static class X
 {
-	public static void Add<T>(this Stack<T> s, T value) => s.Push (value);
+    public static void Add<T>(this Stack<T> s, T value) => s.Push (value);
 }

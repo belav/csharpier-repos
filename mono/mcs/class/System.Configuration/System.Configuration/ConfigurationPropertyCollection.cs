@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationPropertyCollection.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
+//    Duncan Mak (duncan@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,78 +32,78 @@ using System.Collections.Generic;
 
 namespace System.Configuration
 {
-	public class ConfigurationPropertyCollection : ICollection, IEnumerable
-	{
-		List <ConfigurationProperty> collection;
+    public class ConfigurationPropertyCollection : ICollection, IEnumerable
+    {
+        List <ConfigurationProperty> collection;
 
-		public ConfigurationPropertyCollection ()
-		{
-			collection = new List <ConfigurationProperty> ();
-		}
+        public ConfigurationPropertyCollection ()
+        {
+            collection = new List <ConfigurationProperty> ();
+        }
 
-		public int Count {
-			get { return collection.Count; }
-		}
+        public int Count {
+            get { return collection.Count; }
+        }
 
-		public ConfigurationProperty this [string name] {
-			get {
-				foreach (ConfigurationProperty cp in collection)
-					if (cp.Name == name)
-							return cp;
+        public ConfigurationProperty this [string name] {
+            get {
+                foreach (ConfigurationProperty cp in collection)
+                    if (cp.Name == name)
+                            return cp;
 
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
-		public bool IsSynchronized {
-			get {  return false; }
-		}
+        public bool IsSynchronized {
+            get {  return false; }
+        }
 
-		public object SyncRoot {
-			get { return collection; }
-		}
+        public object SyncRoot {
+            get { return collection; }
+        }
 
-		public void Add (ConfigurationProperty property)
-		{
-			if (property == null)
-				throw new ArgumentNullException ("property");
-			collection.Add (property);
-		}
+        public void Add (ConfigurationProperty property)
+        {
+            if (property == null)
+                throw new ArgumentNullException ("property");
+            collection.Add (property);
+        }
 
-		public bool Contains (string name)
-		{
-			ConfigurationProperty property = this [name];
+        public bool Contains (string name)
+        {
+            ConfigurationProperty property = this [name];
 
-			if (property == null)
-				return false;
-			
-			return collection.Contains (property);
-		}
+            if (property == null)
+                return false;
+            
+            return collection.Contains (property);
+        }
 
-		public void CopyTo (ConfigurationProperty [] array, int index)
-		{
-			collection.CopyTo (array, index);
-		}
+        public void CopyTo (ConfigurationProperty [] array, int index)
+        {
+            collection.CopyTo (array, index);
+        }
 
-		void ICollection.CopyTo (Array array, int index)
-		{
-			((ICollection) collection).CopyTo (array, index);
-		}
+        void ICollection.CopyTo (Array array, int index)
+        {
+            ((ICollection) collection).CopyTo (array, index);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return collection.GetEnumerator ();
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            return collection.GetEnumerator ();
+        }
 
-		public bool Remove (string name)
-		{
-			return collection.Remove (this [name]);
-		}
-		
-		public void Clear ()
-		{
-			collection.Clear ();
-		}
-	}
+        public bool Remove (string name)
+        {
+            return collection.Remove (this [name]);
+        }
+        
+        public void Clear ()
+        {
+            collection.Clear ();
+        }
+    }
 }
 

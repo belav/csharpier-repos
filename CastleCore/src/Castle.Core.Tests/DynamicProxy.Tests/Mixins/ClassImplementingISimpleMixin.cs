@@ -14,16 +14,16 @@
 
 namespace Castle.DynamicProxy.Tests.Mixins
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ClassImplementingISimpleMixin : ISimpleMixin
-	{
-		public int DoSomething()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public class ClassImplementingISimpleMixin : ISimpleMixin
+    {
+        public int DoSomething()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

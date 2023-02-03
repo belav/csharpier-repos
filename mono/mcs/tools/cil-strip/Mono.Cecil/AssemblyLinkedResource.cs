@@ -28,24 +28,24 @@
 
 namespace Mono.Cecil {
 
-	internal sealed class AssemblyLinkedResource : Resource {
+    internal sealed class AssemblyLinkedResource : Resource {
 
-		private AssemblyNameReference m_asmRef;
+        private AssemblyNameReference m_asmRef;
 
-		public AssemblyNameReference Assembly {
-			get { return m_asmRef; }
-			set { m_asmRef = value; }
-		}
+        public AssemblyNameReference Assembly {
+            get { return m_asmRef; }
+            set { m_asmRef = value; }
+        }
 
-		public AssemblyLinkedResource (string name, ManifestResourceAttributes flags,
-			AssemblyNameReference asmRef) : base (name, flags)
-		{
-			m_asmRef = asmRef;
-		}
+        public AssemblyLinkedResource (string name, ManifestResourceAttributes flags,
+            AssemblyNameReference asmRef) : base (name, flags)
+        {
+            m_asmRef = asmRef;
+        }
 
-		public override void Accept (IReflectionStructureVisitor visitor)
-		{
-			visitor.VisitAssemblyLinkedResource (this);
-		}
-	}
+        public override void Accept (IReflectionStructureVisitor visitor)
+        {
+            visitor.VisitAssemblyLinkedResource (this);
+        }
+    }
 }

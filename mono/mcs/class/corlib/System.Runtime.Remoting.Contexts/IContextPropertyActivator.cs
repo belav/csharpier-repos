@@ -33,13 +33,13 @@ using System.Runtime.Remoting.Activation;
 
 namespace System.Runtime.Remoting.Contexts {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IContextPropertyActivator
-	{
-		void CollectFromClientContext (IConstructionCallMessage msg);
-		void CollectFromServerContext (IConstructionReturnMessage msg);
-		bool DeliverClientContextToServerContext (IConstructionCallMessage msg);
-		bool DeliverServerContextToClientContext (IConstructionReturnMessage msg);
-		bool IsOKToActivate (IConstructionCallMessage msg);
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IContextPropertyActivator
+    {
+        void CollectFromClientContext (IConstructionCallMessage msg);
+        void CollectFromServerContext (IConstructionReturnMessage msg);
+        bool DeliverClientContextToServerContext (IConstructionCallMessage msg);
+        bool DeliverServerContextToClientContext (IConstructionReturnMessage msg);
+        bool IsOKToActivate (IConstructionCallMessage msg);
+    }
 }

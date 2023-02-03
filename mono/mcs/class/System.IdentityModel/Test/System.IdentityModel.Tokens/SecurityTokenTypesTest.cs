@@ -2,7 +2,7 @@
 // SecurityTokenTypesTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,28 +34,28 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-	[TestFixture]
-	public class SecurityTokenTypesTest
-	{
-		[Test]
-		public void Strings ()
-		{
-			Assert.AreEqual (
-				"http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Kerberos",
-				SecurityTokenTypes.Kerberos, "#1");
-			Assert.AreEqual (
-				"http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Rsa",
-				SecurityTokenTypes.Rsa, "#2");
-			Assert.AreEqual (
-				"http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Saml",
-				SecurityTokenTypes.Saml, "#3");
-			Assert.AreEqual (
-				"http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/UserName",
-				SecurityTokenTypes.UserName, "#4");
-			Assert.AreEqual (
-				"http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/X509Certificate",
-				SecurityTokenTypes.X509Certificate, "#5");
-		}
-	}
+    [TestFixture]
+    public class SecurityTokenTypesTest
+    {
+        [Test]
+        public void Strings ()
+        {
+            Assert.AreEqual (
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Kerberos",
+                SecurityTokenTypes.Kerberos, "#1");
+            Assert.AreEqual (
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Rsa",
+                SecurityTokenTypes.Rsa, "#2");
+            Assert.AreEqual (
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Saml",
+                SecurityTokenTypes.Saml, "#3");
+            Assert.AreEqual (
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/UserName",
+                SecurityTokenTypes.UserName, "#4");
+            Assert.AreEqual (
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/X509Certificate",
+                SecurityTokenTypes.X509Certificate, "#5");
+        }
+    }
 }
 #endif

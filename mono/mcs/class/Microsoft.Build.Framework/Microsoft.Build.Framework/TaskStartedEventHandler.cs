@@ -28,7 +28,7 @@
 
 
 namespace Microsoft.Build.Framework {
-	public delegate void TaskStartedEventHandler (object sender,
-						      TaskStartedEventArgs e);
+    public delegate void TaskStartedEventHandler (object sender,
+                              TaskStartedEventArgs e);
 }
 

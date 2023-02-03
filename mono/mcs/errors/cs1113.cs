@@ -6,11 +6,11 @@ delegate void D ();
 
 public class C
 {
-	static void Main ()
-	{
-		S s = new S ();
-		D d = s.Foo;
-	}
+    static void Main ()
+    {
+        S s = new S ();
+        D d = s.Foo;
+    }
 }
 
 public struct S
@@ -19,5 +19,5 @@ public struct S
 
 public static class Extension
 {
-	public static void Foo (this S s) { }
+    public static void Foo (this S s) { }
 }

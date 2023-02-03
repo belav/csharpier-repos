@@ -2,10 +2,10 @@
 // Line: 10
 
 public class MainClass {
-	struct S
-	{
-	}
-	
+    struct S
+    {
+    }
+    
         static int Main () {
                 return sizeof(S);
         }

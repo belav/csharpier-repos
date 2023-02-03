@@ -37,92 +37,92 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumnCollection_CopyTo_AI : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataColumnCollection_CopyTo_AI tc = new DataColumnCollection_CopyTo_AI();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumnCollection_CopyTo_AI");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    [Test] public void Main()
+    {
+        DataColumnCollection_CopyTo_AI tc = new DataColumnCollection_CopyTo_AI();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumnCollection_CopyTo_AI");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataColumnCollection_CopyTo_AI");
-			DataColumnCollection_CopyTo_AI1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataColumnCollection_CopyTo_AI");
+            DataColumnCollection_CopyTo_AI1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
 
-		try
-		{
-			BeginCase("DataColumnCollection_CopyTo_AI");
-			DataColumnCollection_CopyTo_AI2();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
-	private void DataColumnCollection_CopyTo_AI1()
-	{
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-		dt.Columns.Add("Temp1");
+        try
+        {
+            BeginCase("DataColumnCollection_CopyTo_AI");
+            DataColumnCollection_CopyTo_AI2();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
+    private void DataColumnCollection_CopyTo_AI1()
+    {
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+        dt.Columns.Add("Temp1");
 
-		object[] ar = new object[6];
-		
-		dt.Constraints.CopyTo(ar,0);
-		Compare(ar.Length,6);
-	}
+        object[] ar = new object[6];
+        
+        dt.Constraints.CopyTo(ar,0);
+        Compare(ar.Length,6);
+    }
 
-	private void DataColumnCollection_CopyTo_AI2()
-	{
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-		dt.Columns.Add("Temp1");
+    private void DataColumnCollection_CopyTo_AI2()
+    {
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+        dt.Columns.Add("Temp1");
 
-		object[] ar = new object[7];
-		ar[0] = "name1";
-		
-		dt.Constraints.CopyTo(ar,1);
-		Compare(ar[0].ToString() ,"name1"); //Checking that this value didn't override 
-	}
+        object[] ar = new object[7];
+        ar[0] = "name1";
+        
+        dt.Constraints.CopyTo(ar,1);
+        Compare(ar[0].ToString() ,"name1"); //Checking that this value didn't override 
+    }
 }
 }

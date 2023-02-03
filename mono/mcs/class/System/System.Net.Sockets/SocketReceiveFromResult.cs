@@ -2,7 +2,7 @@
 // SocketReceiveFromResult.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,9 +28,9 @@
 
 namespace System.Net.Sockets
 {
-	public struct SocketReceiveFromResult
-	{
-		public int ReceivedBytes;
-		public EndPoint RemoteEndPoint;
-	}
+    public struct SocketReceiveFromResult
+    {
+        public int ReceivedBytes;
+        public EndPoint RemoteEndPoint;
+    }
 }

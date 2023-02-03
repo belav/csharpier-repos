@@ -14,66 +14,66 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	using Castle.DynamicProxy.Tests.Interfaces;
+    using Castle.DynamicProxy.Tests.Interfaces;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class ProxyTypeCachingTestCase : BasePEVerifyTestCase
-	{
-		private object Proxy(ProxyKind kind, params Type[] additionalInterfacesToProxy)
-		{
-			switch (kind)
-			{
-				case ProxyKind.Class:
-					return generator.CreateClassProxy(typeof(SimpleClass), additionalInterfacesToProxy);
-				case ProxyKind.WithoutTarget:
-					return generator.CreateInterfaceProxyWithoutTarget(typeof(IEmpty), additionalInterfacesToProxy);
-				case ProxyKind.WithTarget:
-					return generator.CreateInterfaceProxyWithTarget(typeof(IEmpty), additionalInterfacesToProxy, new Empty());
-				case ProxyKind.WithTargetInterface:
-					return generator.CreateInterfaceProxyWithTarget(typeof(IEmpty), additionalInterfacesToProxy, new Empty());
-				default:
-					Assert.Fail(string.Format("Invalid proxy kind: {0}", kind));
-					return null; //to satisfy the compiler
-			}
-		}
+    [TestFixture]
+    public class ProxyTypeCachingTestCase : BasePEVerifyTestCase
+    {
+        private object Proxy(ProxyKind kind, params Type[] additionalInterfacesToProxy)
+        {
+            switch (kind)
+            {
+                case ProxyKind.Class:
+                    return generator.CreateClassProxy(typeof(SimpleClass), additionalInterfacesToProxy);
+                case ProxyKind.WithoutTarget:
+                    return generator.CreateInterfaceProxyWithoutTarget(typeof(IEmpty), additionalInterfacesToProxy);
+                case ProxyKind.WithTarget:
+                    return generator.CreateInterfaceProxyWithTarget(typeof(IEmpty), additionalInterfacesToProxy, new Empty());
+                case ProxyKind.WithTargetInterface:
+                    return generator.CreateInterfaceProxyWithTarget(typeof(IEmpty), additionalInterfacesToProxy, new Empty());
+                default:
+                    Assert.Fail(string.Format("Invalid proxy kind: {0}", kind));
+                    return null; //to satisfy the compiler
+            }
+        }
 
-		public static readonly object[] AllKinds = {
-			new object[] { ProxyKind.Class },
-			new object[] { ProxyKind.WithoutTarget },
-			new object[] { ProxyKind.WithTarget },
-			new object[] { ProxyKind.WithTargetInterface }
-		};
+        public static readonly object[] AllKinds = {
+            new object[] { ProxyKind.Class },
+            new object[] { ProxyKind.WithoutTarget },
+            new object[] { ProxyKind.WithTarget },
+            new object[] { ProxyKind.WithTargetInterface }
+        };
 
-		[Test]
-		[TestCaseSource("AllKinds")]
-		public void Duplicated_interfaces_not_significant(ProxyKind kind)
-		{
-			var first = Proxy(kind, typeof(IOne), typeof(IOne));
-			var second = Proxy(kind, typeof(IOne));
-			Assert.AreSame(first.GetType(), second.GetType());
-		}
+        [Test]
+        [TestCaseSource("AllKinds")]
+        public void Duplicated_interfaces_not_significant(ProxyKind kind)
+        {
+            var first = Proxy(kind, typeof(IOne), typeof(IOne));
+            var second = Proxy(kind, typeof(IOne));
+            Assert.AreSame(first.GetType(), second.GetType());
+        }
 
-		[Test]
-		[TestCaseSource("AllKinds")]
-		public void Explicit_inclusion_of_base_interfaces_not_significant(ProxyKind kind)
-		{
-			var first = Proxy(kind, typeof(IBase), typeof(ISub1));
-			var second = Proxy(kind, typeof(ISub1));
-			Assert.AreSame(first.GetType(), second.GetType());
-		}
+        [Test]
+        [TestCaseSource("AllKinds")]
+        public void Explicit_inclusion_of_base_interfaces_not_significant(ProxyKind kind)
+        {
+            var first = Proxy(kind, typeof(IBase), typeof(ISub1));
+            var second = Proxy(kind, typeof(ISub1));
+            Assert.AreSame(first.GetType(), second.GetType());
+        }
 
-		[Test]
-		[TestCaseSource("AllKinds")]
-		public void Order_of_additional_interfaces_not_significant(ProxyKind kind)
-		{
-			var first = Proxy(kind, typeof(IOne), typeof(ITwo));
-			var second = Proxy(kind, typeof(ITwo), typeof(IOne));
-			Assert.AreSame(first.GetType(), second.GetType());
-		}
-	}
+        [Test]
+        [TestCaseSource("AllKinds")]
+        public void Order_of_additional_interfaces_not_significant(ProxyKind kind)
+        {
+            var first = Proxy(kind, typeof(IOne), typeof(ITwo));
+            var second = Proxy(kind, typeof(ITwo), typeof(IOne));
+            Assert.AreSame(first.GetType(), second.GetType());
+        }
+    }
 }

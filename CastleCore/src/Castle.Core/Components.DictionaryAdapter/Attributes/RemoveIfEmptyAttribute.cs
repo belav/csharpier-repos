@@ -14,47 +14,47 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
-	using System.Collections;
+    using System;
+    using System.Collections;
 
-	/// <summary>
-	/// Removes a property if null or empty string, guid or collection.
-	/// </summary>
-	public class RemoveIfEmptyAttribute : RemoveIfAttribute
-	{
-		public RemoveIfEmptyAttribute()
-			: base(RemoveIfEmptyCondition.Instance)
-		{
-		}
+    /// <summary>
+    /// Removes a property if null or empty string, guid or collection.
+    /// </summary>
+    public class RemoveIfEmptyAttribute : RemoveIfAttribute
+    {
+        public RemoveIfEmptyAttribute()
+            : base(RemoveIfEmptyCondition.Instance)
+        {
+        }
 
-		private new Type Condition { get; set; }
+        private new Type Condition { get; set; }
 
-		class RemoveIfEmptyCondition : ICondition
-		{
-			public static readonly RemoveIfEmptyCondition Instance = new RemoveIfEmptyCondition();
+        class RemoveIfEmptyCondition : ICondition
+        {
+            public static readonly RemoveIfEmptyCondition Instance = new RemoveIfEmptyCondition();
 
-			public bool SatisfiedBy(object value)
-			{
-				return value == null ||
-					   IsEmptyString(value) ||
-					   IsEmptyGuid(value) ||
-					   IsEmptyCollection(value);
-			}
+            public bool SatisfiedBy(object value)
+            {
+                return value == null ||
+                       IsEmptyString(value) ||
+                       IsEmptyGuid(value) ||
+                       IsEmptyCollection(value);
+            }
 
-			private static bool IsEmptyString(object value)
-			{
-				return (value is string && ((string)value).Length == 0);
-			}
+            private static bool IsEmptyString(object value)
+            {
+                return (value is string && ((string)value).Length == 0);
+            }
 
-			private static bool IsEmptyGuid(object value)
-			{
-				return (value is Guid && ((Guid)value) == Guid.Empty);
-			}
+            private static bool IsEmptyGuid(object value)
+            {
+                return (value is Guid && ((Guid)value) == Guid.Empty);
+            }
 
-			private static bool IsEmptyCollection(object value)
-			{
-				return (value is IEnumerable && ((IEnumerable)value).GetEnumerator().MoveNext() == false);
-			}
-		}
-	}
+            private static bool IsEmptyCollection(object value)
+            {
+                return (value is IEnumerable && ((IEnumerable)value).GetEnumerator().MoveNext() == false);
+            }
+        }
+    }
 }

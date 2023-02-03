@@ -33,56 +33,56 @@ using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description
 {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class PortType :
-		NamedItem
-	{
-		#region Fields
+    [XmlFormatExtensionPoint ("Extensions")]
+    public sealed class PortType :
+        NamedItem
+    {
+        #region Fields
 
-		OperationCollection operations;
-		ServiceDescription serviceDescription;
-		ServiceDescriptionFormatExtensionCollection extensions;
+        OperationCollection operations;
+        ServiceDescription serviceDescription;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public PortType ()
-		{
-			operations = new OperationCollection (this);
-			serviceDescription = null;
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public PortType ()
+        {
+            operations = new OperationCollection (this);
+            serviceDescription = null;
+            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
 
-		[XmlElement ("operation")]
-		public OperationCollection Operations {
-			get { return operations; }
-		}
-	
-//		[XmlIgnore]
-		public ServiceDescription ServiceDescription {
-			get { return serviceDescription; }
-		}
+        [XmlElement ("operation")]
+        public OperationCollection Operations {
+            get { return operations; }
+        }
+    
+//        [XmlIgnore]
+        public ServiceDescription ServiceDescription {
+            get { return serviceDescription; }
+        }
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions {
+            get { return extensions; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		internal void SetParent (ServiceDescription serviceDescription)
-		{
-			this.serviceDescription = serviceDescription;
-		}
+        internal void SetParent (ServiceDescription serviceDescription)
+        {
+            this.serviceDescription = serviceDescription;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

@@ -30,41 +30,41 @@
 //
 
 namespace System.Web.Services.Discovery {
-	public sealed class ContractSearchPattern : DiscoverySearchPattern {
+    public sealed class ContractSearchPattern : DiscoverySearchPattern {
 
-		#region Fields
+        #region Fields
 
-		private string pattern = "*.asmx";
+        private string pattern = "*.asmx";
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ContractSearchPattern () 
-		{
-		}
-		
-		#endregion // Constructors
+        public ContractSearchPattern () 
+        {
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public override string Pattern {
-			get { return pattern; }
-		}
+        public override string Pattern {
+            get { return pattern; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public override DiscoveryReference GetDiscoveryReference (string filename)
-		{
-			ContractReference refe = new ContractReference ();
-			refe.Url = filename;
-			refe.Ref = filename;
-			refe.DocRef = filename;
-			return refe;
-		}
+        public override DiscoveryReference GetDiscoveryReference (string filename)
+        {
+            ContractReference refe = new ContractReference ();
+            refe.Url = filename;
+            refe.Ref = filename;
+            refe.DocRef = filename;
+            return refe;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

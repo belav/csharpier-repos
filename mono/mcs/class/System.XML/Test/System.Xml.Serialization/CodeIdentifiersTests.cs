@@ -2,7 +2,7 @@
 // CodeIdentifiersTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.
 //
@@ -37,19 +37,19 @@ using MonoTests.System.Xml.TestClasses;
 
 namespace MonoTests.System.XmlSerialization
 {
-	[TestFixture]
-	public class CodeIdentifiersTests
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void IgnoreCase ()
-		{
-			CodeIdentifiers c = new CodeIdentifiers (false);
-			c.Add ("test", "x");
-			c.Add ("Test", "y");
-			Assert.IsTrue ("test" != c.AddUnique ("Test", "z"), "#1");
-			Assert.IsTrue (c.IsInUse ("tEsT"), "#2");
-			Assert.AreEqual ("camelCase", c.MakeRightCase ("CAMELCASE"), "#3");
-		}
-	}
+    [TestFixture]
+    public class CodeIdentifiersTests
+    {
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void IgnoreCase ()
+        {
+            CodeIdentifiers c = new CodeIdentifiers (false);
+            c.Add ("test", "x");
+            c.Add ("Test", "y");
+            Assert.IsTrue ("test" != c.AddUnique ("Test", "z"), "#1");
+            Assert.IsTrue (c.IsInUse ("tEsT"), "#2");
+            Assert.AreEqual ("camelCase", c.MakeRightCase ("CAMELCASE"), "#3");
+        }
+    }
 }

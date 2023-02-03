@@ -2,7 +2,7 @@
 // CompatibilitySwitches.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2015 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,9 +28,9 @@
 
 namespace System
 {
-	static class CompatibilitySwitches
-	{
-		public static readonly bool IsAppEarlierThanSilverlight4 = false;
-		public static readonly bool IsAppEarlierThanWindowsPhone8 = false;
-	}
+    static class CompatibilitySwitches
+    {
+        public static readonly bool IsAppEarlierThanSilverlight4 = false;
+        public static readonly bool IsAppEarlierThanWindowsPhone8 = false;
+    }
 }

@@ -1356,7 +1356,7 @@ namespace Newtonsoft.Json.Utilities
                         }
                         if (i == numDecimalStart)
                         {
-                            // E follows decimal point		
+                            // E follows decimal point        
                             return ParseResult.Invalid;
                         }
                         i++;

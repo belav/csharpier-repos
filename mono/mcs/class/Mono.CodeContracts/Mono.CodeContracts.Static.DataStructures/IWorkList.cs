@@ -2,7 +2,7 @@
 // IWorkList.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,9 +27,9 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataStructures {
-	interface IWorkList<T> {
-		bool Add (T o);
-		bool IsEmpty ();
-		T Pull ();
-	}
+    interface IWorkList<T> {
+        bool Add (T o);
+        bool IsEmpty ();
+        T Pull ();
+    }
 }

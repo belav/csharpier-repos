@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum PowerLineStatus
-	{
-		Offline = 0,
-		Online = 1,
-		Unknown = 255
-	}
+    public enum PowerLineStatus
+    {
+        Offline = 0,
+        Online = 1,
+        Unknown = 255
+    }
 }

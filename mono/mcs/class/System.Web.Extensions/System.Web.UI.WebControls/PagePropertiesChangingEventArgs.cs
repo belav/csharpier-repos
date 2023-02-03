@@ -31,22 +31,22 @@ using System;
 
 namespace System.Web.UI.WebControls
 {
-	public class PagePropertiesChangingEventArgs : EventArgs
-	{
-		public PagePropertiesChangingEventArgs (int startRowIndex, int maximumRows)
-		{
-			MaximumRows = maximumRows;
-			StartRowIndex = startRowIndex;
-		}
-		
-		public int MaximumRows {
-			get;
-			private set;
-		}
-		
-		public int StartRowIndex {
-			get;
-			private set;
-		}
-	}
+    public class PagePropertiesChangingEventArgs : EventArgs
+    {
+        public PagePropertiesChangingEventArgs (int startRowIndex, int maximumRows)
+        {
+            MaximumRows = maximumRows;
+            StartRowIndex = startRowIndex;
+        }
+        
+        public int MaximumRows {
+            get;
+            private set;
+        }
+        
+        public int StartRowIndex {
+            get;
+            private set;
+        }
+    }
 }

@@ -3,9 +3,9 @@
 
 class Base<T>
 {
-	protected virtual void Foo<U> (U u)
-	{
-	}
+    protected virtual void Foo<U> (U u)
+    {
+    }
 }
 
 class Derived<T> : Base<int>

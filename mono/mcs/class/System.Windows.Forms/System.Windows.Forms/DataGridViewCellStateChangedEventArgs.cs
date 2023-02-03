@@ -20,31 +20,31 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewCellStateChangedEventArgs : EventArgs {
+    public class DataGridViewCellStateChangedEventArgs : EventArgs {
 
-		private DataGridViewCell dataGridViewCell;
-		private DataGridViewElementStates stateChanged;
+        private DataGridViewCell dataGridViewCell;
+        private DataGridViewElementStates stateChanged;
 
-		public DataGridViewCellStateChangedEventArgs (DataGridViewCell dataGridViewCell, DataGridViewElementStates stateChanged) {
-			this.dataGridViewCell = dataGridViewCell;
-			this.stateChanged = stateChanged;
-		}
+        public DataGridViewCellStateChangedEventArgs (DataGridViewCell dataGridViewCell, DataGridViewElementStates stateChanged) {
+            this.dataGridViewCell = dataGridViewCell;
+            this.stateChanged = stateChanged;
+        }
 
-		public DataGridViewCell Cell {
-			get { return dataGridViewCell; }
-		}
+        public DataGridViewCell Cell {
+            get { return dataGridViewCell; }
+        }
 
-		public DataGridViewElementStates StateChanged {
-			get { return stateChanged; }
-		}
+        public DataGridViewElementStates StateChanged {
+            get { return stateChanged; }
+        }
 
-	}
+    }
 
 }
 

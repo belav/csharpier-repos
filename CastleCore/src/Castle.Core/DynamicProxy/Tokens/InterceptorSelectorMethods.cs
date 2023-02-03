@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tokens
 {
-	using System.Reflection;
+    using System.Reflection;
 
-	internal static class InterceptorSelectorMethods
-	{
-		public static readonly MethodInfo SelectInterceptors = typeof(IInterceptorSelector).GetMethod("SelectInterceptors", BindingFlags.Instance | BindingFlags.Public);
-	}
+    internal static class InterceptorSelectorMethods
+    {
+        public static readonly MethodInfo SelectInterceptors = typeof(IInterceptorSelector).GetMethod("SelectInterceptors", BindingFlags.Instance | BindingFlags.Public);
+    }
 }

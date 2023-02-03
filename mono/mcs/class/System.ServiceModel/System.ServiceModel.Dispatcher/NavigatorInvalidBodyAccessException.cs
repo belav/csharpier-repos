@@ -31,13 +31,13 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Dispatcher
 {
-	[Serializable]
-	public class NavigatorInvalidBodyAccessException : InvalidBodyAccessException
-	{
-		public NavigatorInvalidBodyAccessException () : base ("Not allowed to navigate to body.") {}
-		public NavigatorInvalidBodyAccessException (string message) : base (message) {}
-		public NavigatorInvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}
-		protected NavigatorInvalidBodyAccessException (SerializationInfo info, StreamingContext context)
-			: base (info, context) {}
-	}
+    [Serializable]
+    public class NavigatorInvalidBodyAccessException : InvalidBodyAccessException
+    {
+        public NavigatorInvalidBodyAccessException () : base ("Not allowed to navigate to body.") {}
+        public NavigatorInvalidBodyAccessException (string message) : base (message) {}
+        public NavigatorInvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}
+        protected NavigatorInvalidBodyAccessException (SerializationInfo info, StreamingContext context)
+            : base (info, context) {}
+    }
 }

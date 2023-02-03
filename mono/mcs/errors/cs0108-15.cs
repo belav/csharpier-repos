@@ -4,10 +4,10 @@
 
 public abstract class A
 {
-	public void Factory (object data) { }
+    public void Factory (object data) { }
 }
 
 public class B : A
 {
-	public delegate void Factory (object data, object fail);
+    public delegate void Factory (object data, object fail);
 }

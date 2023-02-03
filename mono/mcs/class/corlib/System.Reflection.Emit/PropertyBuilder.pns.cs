@@ -30,7 +30,7 @@
 
 namespace System.Reflection.Emit
 {
-	public sealed partial class PropertyBuilder : System.Reflection.PropertyInfo
+    public sealed partial class PropertyBuilder : System.Reflection.PropertyInfo
     {
         internal PropertyBuilder() { throw new PlatformNotSupportedException (); } 
         public override System.Reflection.PropertyAttributes Attributes { get { throw new PlatformNotSupportedException (); } }

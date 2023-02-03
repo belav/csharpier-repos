@@ -4,10 +4,10 @@
 
 class X (double value)
 {
-	public static double Prop {
-		get {
-			return value;
-		}
-	}
+    public static double Prop {
+        get {
+            return value;
+        }
+    }
 }
 

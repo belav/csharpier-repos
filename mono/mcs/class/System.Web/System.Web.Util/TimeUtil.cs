@@ -33,14 +33,14 @@ using System.Globalization;
 
 namespace System.Web.Util {
 
-	internal sealed class TimeUtil 
-	{
-		TimeUtil () { }
-		
-		internal static string ToUtcTimeString (DateTime dt)
-		{
-			return dt.ToUniversalTime ().ToString ("R", DateTimeFormatInfo.InvariantInfo);
-		}
-	}
+    internal sealed class TimeUtil 
+    {
+        TimeUtil () { }
+        
+        internal static string ToUtcTimeString (DateTime dt)
+        {
+            return dt.ToUniversalTime ().ToString ("R", DateTimeFormatInfo.InvariantInfo);
+        }
+    }
 }
 

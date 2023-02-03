@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,16 +27,16 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[Flags]
-	public enum LabelAutoFitStyles
-	{
-		None = 0,
-		IncreaseFont = 1,
-		DecreaseFont = 2,
-		StaggeredLabels = 4,
-		LabelsAngleStep30 = 8,
-		LabelsAngleStep45 = 16,
-		LabelsAngleStep90 = 32,
-		WordWrap = 64
-	}
+    [Flags]
+    public enum LabelAutoFitStyles
+    {
+        None = 0,
+        IncreaseFont = 1,
+        DecreaseFont = 2,
+        StaggeredLabels = 4,
+        LabelsAngleStep30 = 8,
+        LabelsAngleStep45 = 16,
+        LabelsAngleStep90 = 32,
+        WordWrap = 64
+    }
 }

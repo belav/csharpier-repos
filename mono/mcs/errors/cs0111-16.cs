@@ -2,9 +2,9 @@
 // Line: 9
 
 partial class T {
-	T () {}
+    T () {}
 }
 
 partial class T {
-	T () {}
+    T () {}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
@@ -30,47 +30,47 @@ using System.Collections;
 using System.Globalization;
 
 namespace System.Windows.Forms {
-	public class InputLanguageCollection : ReadOnlyCollectionBase {
-		#region Private Constructor
-		internal InputLanguageCollection (InputLanguage[] data)
-		{
-			base.InnerList.AddRange (data);
-		}
-		#endregion	// Private Constructor
+    public class InputLanguageCollection : ReadOnlyCollectionBase {
+        #region Private Constructor
+        internal InputLanguageCollection (InputLanguage[] data)
+        {
+            base.InnerList.AddRange (data);
+        }
+        #endregion    // Private Constructor
 
-		#region Public Instance Methods
-		public InputLanguage this [int index] {
-			get {
-				if (index >= base.InnerList.Count) {
-					throw new ArgumentOutOfRangeException("index");
-				}
-				return base.InnerList[index] as InputLanguage;
-			}
-		}
+        #region Public Instance Methods
+        public InputLanguage this [int index] {
+            get {
+                if (index >= base.InnerList.Count) {
+                    throw new ArgumentOutOfRangeException("index");
+                }
+                return base.InnerList[index] as InputLanguage;
+            }
+        }
 
-		public bool Contains(InputLanguage value) {
-			for (int i = 0; i < base.InnerList.Count; i++) {
-				if ((this[i].Culture == value.Culture) && (this[i].LayoutName == value.LayoutName)) {
-					return true;
-				}
-			}
-			return false;
-		}
+        public bool Contains(InputLanguage value) {
+            for (int i = 0; i < base.InnerList.Count; i++) {
+                if ((this[i].Culture == value.Culture) && (this[i].LayoutName == value.LayoutName)) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-		public void CopyTo(InputLanguage[] array, int index) {
-			if (base.InnerList.Count > 0) {
-				base.InnerList.CopyTo (array, index);
-			}
-		}
+        public void CopyTo(InputLanguage[] array, int index) {
+            if (base.InnerList.Count > 0) {
+                base.InnerList.CopyTo (array, index);
+            }
+        }
 
-		public int IndexOf(InputLanguage value) {
-			for (int i = 0; i < base.InnerList.Count; i++) {
-				if ((this[i].Culture == value.Culture) && (this[i].LayoutName == value.LayoutName)) {
-					return i;
-				}
-			}
-			return -1;
-		}
-		#endregion	// Public Instance Methods
-	}
+        public int IndexOf(InputLanguage value) {
+            for (int i = 0; i < base.InnerList.Count; i++) {
+                if ((this[i].Culture == value.Culture) && (this[i].LayoutName == value.LayoutName)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        #endregion    // Public Instance Methods
+    }
 }

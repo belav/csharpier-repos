@@ -2,8 +2,8 @@
 // System.Security.Policy.UrlMembershipCondition.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Duncan Mak (duncan@ximian.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003, Ximian Inc.
 // (C) 2004 Motus Technologies Inc. (http://www.motus.com)
@@ -37,66 +37,66 @@ using Mono.Security;
 
 namespace System.Security.Policy {
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class UrlMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
+    [Serializable]
+    [ComVisible (true)]
+    public sealed class UrlMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
 
-		private readonly int version = 1;
+        private readonly int version = 1;
 
-		private Url url;
-		private string userUrl;
+        private Url url;
+        private string userUrl;
                 
                 public UrlMembershipCondition (string url)
                 {
-			if (url == null)
-				throw new ArgumentNullException ("url");
-			CheckUrl (url);
-			userUrl = url;
+            if (url == null)
+                throw new ArgumentNullException ("url");
+            CheckUrl (url);
+            userUrl = url;
                         this.url = new Url (url);
                 }
 
-		internal UrlMembershipCondition (Url url, string userUrl)
-		{
-			// as the Url object has already been validated there's no
-			// need to restart the whole process by converting to string
-			this.url = (Url) url.Copy ();
-			this.userUrl = userUrl;
-		}
+        internal UrlMembershipCondition (Url url, string userUrl)
+        {
+            // as the Url object has already been validated there's no
+            // need to restart the whole process by converting to string
+            this.url = (Url) url.Copy ();
+            this.userUrl = userUrl;
+        }
 
-		// properties
+        // properties
 
                 public string Url {
                         get {
-				if (userUrl == null)
-					userUrl = url.Value;
-				return userUrl;
-			}
-			set { url = new Url (value); }
+                if (userUrl == null)
+                    userUrl = url.Value;
+                return userUrl;
+            }
+            set { url = new Url (value); }
                 }
 
-		// methods
+        // methods
 
                 public bool Check (Evidence evidence)
                 {
-			if (evidence == null)
-				return false;
+            if (evidence == null)
+                return false;
 
-			string u = url.Value;
-			int wildcard = u.LastIndexOf ("*");	// partial match with a wildcard at the end
-			if (wildcard == -1)
-				wildcard = u.Length;		// exact match
+            string u = url.Value;
+            int wildcard = u.LastIndexOf ("*");    // partial match with a wildcard at the end
+            if (wildcard == -1)
+                wildcard = u.Length;        // exact match
 
-			IEnumerator e = evidence.GetHostEnumerator ();
-			while (e.MoveNext ()) {
-				if (e.Current is Url) {
-					// note: there shouldn't be more than one Url evidence
-					if (String.Compare (u, 0, (e.Current as Url).Value, 0, wildcard,
-						true, CultureInfo.InvariantCulture) == 0) {
-						return true;
-					}
-					// but we must check for all of them!
-				}
-			}
+            IEnumerator e = evidence.GetHostEnumerator ();
+            while (e.MoveNext ()) {
+                if (e.Current is Url) {
+                    // note: there shouldn't be more than one Url evidence
+                    if (String.Compare (u, 0, (e.Current as Url).Value, 0, wildcard,
+                        true, CultureInfo.InvariantCulture) == 0) {
+                        return true;
+                    }
+                    // but we must check for all of them!
+                }
+            }
                         return false;
                 }
 
@@ -105,44 +105,44 @@ namespace System.Security.Policy {
                         return new UrlMembershipCondition (url, userUrl);
                 }
 
-		public override bool Equals (object o)
-		{
-			UrlMembershipCondition umc = (o as UrlMembershipCondition);
-			if (o == null)
-				return false;
+        public override bool Equals (object o)
+        {
+            UrlMembershipCondition umc = (o as UrlMembershipCondition);
+            if (o == null)
+                return false;
 
-			string u = url.Value;
-			int length = u.Length; // exact match
+            string u = url.Value;
+            int length = u.Length; // exact match
 
-			// partial match with a wildcard at the end
-			if (u [length - 1] == '*') {
-				length--;
-				// in this case the last / could be ommited
-				if (u [length - 1] == '/')
-					length--;
-			}
+            // partial match with a wildcard at the end
+            if (u [length - 1] == '*') {
+                length--;
+                // in this case the last / could be ommited
+                if (u [length - 1] == '/')
+                    length--;
+            }
 
-			return (String.Compare (u, 0, umc.Url, 0, length, true, CultureInfo.InvariantCulture) == 0);
-		}
+            return (String.Compare (u, 0, umc.Url, 0, length, true, CultureInfo.InvariantCulture) == 0);
+        }
 
                 public void FromXml (SecurityElement e)
                 {
                         FromXml (e, null);
                 }
 
-		public void FromXml (SecurityElement e, PolicyLevel level)
-		{
-			MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-			
-			string u = e.Attribute ("Url");
-			if (u != null) {
-				CheckUrl (u);
-				url = new Url (u);
-			} else {
-				url = null;
-			}
-			userUrl = u;
-		}
+        public void FromXml (SecurityElement e, PolicyLevel level)
+        {
+            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
+            
+            string u = e.Attribute ("Url");
+            if (u != null) {
+                CheckUrl (u);
+                url = new Url (u);
+            } else {
+                url = null;
+            }
+            userUrl = u;
+        }
 
                 public override int GetHashCode ()
                 {
@@ -161,28 +161,28 @@ namespace System.Security.Policy {
 
                 public SecurityElement ToXml (PolicyLevel level)
                 {
-			// PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-			SecurityElement se = MembershipConditionHelper.Element (typeof (UrlMembershipCondition), version);
+            // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
+            SecurityElement se = MembershipConditionHelper.Element (typeof (UrlMembershipCondition), version);
                         se.AddAttribute ("Url", userUrl);
                         return se;
                 }
 
-		// internal stuff
+        // internal stuff
 
-		internal void CheckUrl (string url)
-		{
-			// In .NET 1.x Url class checked the validity of the 
-			// URL but that's no more the case in 2.x - but we 
-			// still need the check done here
-			int protocolPos = url.IndexOf (Uri.SchemeDelimiter);
-			string u = (protocolPos < 0) ? "file://" + url : url;
+        internal void CheckUrl (string url)
+        {
+            // In .NET 1.x Url class checked the validity of the 
+            // URL but that's no more the case in 2.x - but we 
+            // still need the check done here
+            int protocolPos = url.IndexOf (Uri.SchemeDelimiter);
+            string u = (protocolPos < 0) ? "file://" + url : url;
 
-			Uri uri = new Uri (u, false, false);
-			// no * except for the "lone star" case
-			if (uri.Host.IndexOf ('*') >= 1) {
-				string msg = Locale.GetText ("Invalid * character in url");
-				throw new ArgumentException (msg, "name");
-			}
-		}
+            Uri uri = new Uri (u, false, false);
+            // no * except for the "lone star" case
+            if (uri.Host.IndexOf ('*') >= 1) {
+                string msg = Locale.GetText ("Invalid * character in url");
+                throw new ArgumentException (msg, "name");
+            }
+        }
         }
 }

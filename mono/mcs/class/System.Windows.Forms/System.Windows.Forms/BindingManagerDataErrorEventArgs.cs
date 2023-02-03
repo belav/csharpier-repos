@@ -23,27 +23,27 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public class BindingManagerDataErrorEventArgs : EventArgs
-	{
+    public class BindingManagerDataErrorEventArgs : EventArgs
+    {
 
-		private Exception exception;
+        private Exception exception;
 
-		#region Public Constructors
-		public BindingManagerDataErrorEventArgs(Exception exception) : base ()
-		{
-			this.exception = exception;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public BindingManagerDataErrorEventArgs(Exception exception) : base ()
+        {
+            this.exception = exception;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public Exception Exception {
-			get { return this.exception; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public Exception Exception {
+            get { return this.exception; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

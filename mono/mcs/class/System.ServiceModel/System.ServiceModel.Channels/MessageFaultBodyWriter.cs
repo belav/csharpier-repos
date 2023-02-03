@@ -2,7 +2,7 @@
 // MessageFaultBodyWriter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,29 +32,29 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO ("Check how isBuffered works.")]
-	internal class MessageFaultBodyWriter : BodyWriter
-	{
-		MessageFault fault;
-		MessageVersion version;
+    [MonoTODO ("Check how isBuffered works.")]
+    internal class MessageFaultBodyWriter : BodyWriter
+    {
+        MessageFault fault;
+        MessageVersion version;
 
-		public MessageFaultBodyWriter (MessageFault fault, MessageVersion version)
-			: base (true)
-		{
-			this.fault = fault;
-			this.version = version;
-		}
+        public MessageFaultBodyWriter (MessageFault fault, MessageVersion version)
+            : base (true)
+        {
+            this.fault = fault;
+            this.version = version;
+        }
 
-		protected override BodyWriter OnCreateBufferedCopy (
-			int maxBufferSize)
-		{
-			return new MessageFaultBodyWriter (fault, version);
-		}
+        protected override BodyWriter OnCreateBufferedCopy (
+            int maxBufferSize)
+        {
+            return new MessageFaultBodyWriter (fault, version);
+        }
 
-		protected override void OnWriteBodyContents (
-			XmlDictionaryWriter writer)
-		{
-			fault.WriteTo (writer, version.Envelope);
-		}
-	}
+        protected override void OnWriteBodyContents (
+            XmlDictionaryWriter writer)
+        {
+            fault.WriteTo (writer, version.Envelope);
+        }
+    }
 }

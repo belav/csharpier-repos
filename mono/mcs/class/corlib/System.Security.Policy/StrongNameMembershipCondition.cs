@@ -3,7 +3,7 @@
 //
 // Author:
 //      Duncan Mak (duncan@ximian.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Duncan Mak, Ximian Inc.
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -36,15 +36,15 @@ using System.Text;
 
 namespace System.Security.Policy {
 
-	[Serializable]
-	[ComVisible (true)]
+    [Serializable]
+    [ComVisible (true)]
         public sealed class StrongNameMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
 
-		private readonly int version = 1;
+        private readonly int version = 1;
 
-		private StrongNamePublicKeyBlob blob;
-		private string name;
-		private Version assemblyVersion;
+        private StrongNamePublicKeyBlob blob;
+        private string name;
+        private Version assemblyVersion;
                 
                 public StrongNameMembershipCondition (StrongNamePublicKeyBlob blob, string name, Version version)
                 {
@@ -53,22 +53,22 @@ namespace System.Security.Policy {
 
                         this.blob = blob;
                         this.name = name;
-			if (version != null)
-	                        assemblyVersion = (Version) version.Clone ();
+            if (version != null)
+                            assemblyVersion = (Version) version.Clone ();
                 }
 
-		// for PolicyLevel (to avoid validation duplication)
-		internal StrongNameMembershipCondition (SecurityElement e)
-		{
-			FromXml (e);
-		}
+        // for PolicyLevel (to avoid validation duplication)
+        internal StrongNameMembershipCondition (SecurityElement e)
+        {
+            FromXml (e);
+        }
 
-		// so System.Activator.CreateInstance can create an instance...
-		internal StrongNameMembershipCondition ()
-		{
-		}
+        // so System.Activator.CreateInstance can create an instance...
+        internal StrongNameMembershipCondition ()
+        {
+        }
 
-		// properties
+        // properties
 
                 public string Name {
                         get { return name; }
@@ -85,83 +85,83 @@ namespace System.Security.Policy {
                         set {
                                 if (value == null)
                                         throw new ArgumentNullException ("PublicKey");
-				blob = value;
-			}
-		}
+                blob = value;
+            }
+        }
 
-		public bool Check (Evidence evidence)
-		{
-			if (evidence == null)
-				return false;
+        public bool Check (Evidence evidence)
+        {
+            if (evidence == null)
+                return false;
 
-			IEnumerator e = evidence.GetHostEnumerator ();
-			while (e.MoveNext ()) {
-				StrongName sn = (e.Current as StrongName);
-				if (sn != null) {
-					if (!sn.PublicKey.Equals (blob))
-						return false;
-					if ((name != null) && (name != sn.Name))
-						return false;
-					if ((assemblyVersion != null) && !assemblyVersion.Equals (sn.Version))
-						return false;
-					return true;
-				}
-			}
-			return false;
-		}
+            IEnumerator e = evidence.GetHostEnumerator ();
+            while (e.MoveNext ()) {
+                StrongName sn = (e.Current as StrongName);
+                if (sn != null) {
+                    if (!sn.PublicKey.Equals (blob))
+                        return false;
+                    if ((name != null) && (name != sn.Name))
+                        return false;
+                    if ((assemblyVersion != null) && !assemblyVersion.Equals (sn.Version))
+                        return false;
+                    return true;
+                }
+            }
+            return false;
+        }
 
-		public IMembershipCondition Copy ()
-		{
-			return new StrongNameMembershipCondition (blob, name, assemblyVersion);
-		}
+        public IMembershipCondition Copy ()
+        {
+            return new StrongNameMembershipCondition (blob, name, assemblyVersion);
+        }
 
-		public override bool Equals (object o)
-		{
-			StrongNameMembershipCondition snmc = (o as StrongNameMembershipCondition);
-			if (snmc == null)
-				return false;
-			if (!snmc.PublicKey.Equals (PublicKey))
-				return false;
-			if (name != snmc.Name)
-				return false;
-			if (assemblyVersion != null)
-			 	return assemblyVersion.Equals (snmc.Version);
-			return (snmc.Version == null);
-		}
+        public override bool Equals (object o)
+        {
+            StrongNameMembershipCondition snmc = (o as StrongNameMembershipCondition);
+            if (snmc == null)
+                return false;
+            if (!snmc.PublicKey.Equals (PublicKey))
+                return false;
+            if (name != snmc.Name)
+                return false;
+            if (assemblyVersion != null)
+                 return assemblyVersion.Equals (snmc.Version);
+            return (snmc.Version == null);
+        }
 
-		public override int GetHashCode ()
-		{
-			// name and version aren't part of the calculation
-			return blob.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            // name and version aren't part of the calculation
+            return blob.GetHashCode ();
+        }
 
-		public void FromXml (SecurityElement e)
-		{
-			FromXml (e, null);
-		}
+        public void FromXml (SecurityElement e)
+        {
+            FromXml (e, null);
+        }
 
-		public void FromXml (SecurityElement e, PolicyLevel level)
-		{
-			MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
+        public void FromXml (SecurityElement e, PolicyLevel level)
+        {
+            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
 
-			blob = StrongNamePublicKeyBlob.FromString (e.Attribute ("PublicKeyBlob"));
-			name = e.Attribute ("Name");
-			string v = (string) e.Attribute ("AssemblyVersion");
-			if (v == null)
-				assemblyVersion = null;
-			else
-				assemblyVersion = new Version (v);
-		}
+            blob = StrongNamePublicKeyBlob.FromString (e.Attribute ("PublicKeyBlob"));
+            name = e.Attribute ("Name");
+            string v = (string) e.Attribute ("AssemblyVersion");
+            if (v == null)
+                assemblyVersion = null;
+            else
+                assemblyVersion = new Version (v);
+        }
 
                 public override string ToString ()
                 {
-			StringBuilder sb = new StringBuilder ("StrongName - ");
-			sb.Append (blob);
-			if (name != null)
-				sb.AppendFormat (" name = {0}", name);
-			if (assemblyVersion != null)
-				sb.AppendFormat (" version = {0}", assemblyVersion);
-			return sb.ToString ();
+            StringBuilder sb = new StringBuilder ("StrongName - ");
+            sb.Append (blob);
+            if (name != null)
+                sb.AppendFormat (" name = {0}", name);
+            if (assemblyVersion != null)
+                sb.AppendFormat (" version = {0}", assemblyVersion);
+            return sb.ToString ();
                 }
 
                 public SecurityElement ToXml ()
@@ -171,19 +171,19 @@ namespace System.Security.Policy {
 
                 public SecurityElement ToXml (PolicyLevel level)
                 {
-			// PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-			SecurityElement se = MembershipConditionHelper.Element (typeof (StrongNameMembershipCondition), version);
+            // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
+            SecurityElement se = MembershipConditionHelper.Element (typeof (StrongNameMembershipCondition), version);
 
-			if (blob != null)
-	                        se.AddAttribute ("PublicKeyBlob", blob.ToString ());
-			if (name != null)
-	                        se.AddAttribute ("Name", name);
-			if (assemblyVersion != null) {
-				string v = assemblyVersion.ToString ();
-				if (v != "0.0")
-					se.AddAttribute ("AssemblyVersion", v);
-			}
-			return se;
+            if (blob != null)
+                            se.AddAttribute ("PublicKeyBlob", blob.ToString ());
+            if (name != null)
+                            se.AddAttribute ("Name", name);
+            if (assemblyVersion != null) {
+                string v = assemblyVersion.ToString ();
+                if (v != "0.0")
+                    se.AddAttribute ("AssemblyVersion", v);
+            }
+            return se;
                 }
         }
 }

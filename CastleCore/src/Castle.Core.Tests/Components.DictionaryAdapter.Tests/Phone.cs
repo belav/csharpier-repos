@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,31 +14,31 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	public class Phone : InfrastructureStub, IPhone
-	{
-		private string number;
-		private string extension;
+    public class Phone : InfrastructureStub, IPhone
+    {
+        private string number;
+        private string extension;
 
-		public Phone()
-		{
-		}
+        public Phone()
+        {
+        }
 
-		public Phone(string number, string extension)
-		{
-			this.number = number;
-			this.extension = extension;
-		}
+        public Phone(string number, string extension)
+        {
+            this.number = number;
+            this.extension = extension;
+        }
 
-		public string Extension
-		{
-			get { return extension; }
-			set { extension = value; }
-		}
+        public string Extension
+        {
+            get { return extension; }
+            set { extension = value; }
+        }
 
-		public string Number
-		{
-			get { return number; }
-			set { number = value; }
-		}
-	}
+        public string Number
+        {
+            get { return number; }
+            set { number = value; }
+        }
+    }
 }

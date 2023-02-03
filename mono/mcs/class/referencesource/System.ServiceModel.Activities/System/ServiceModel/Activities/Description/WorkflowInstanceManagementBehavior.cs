@@ -1,4 +1,4 @@
-﻿namespace System.ServiceModel.Activities.Description
+namespace System.ServiceModel.Activities.Description
 {
     using System.Collections.ObjectModel;
     using System.Linq;

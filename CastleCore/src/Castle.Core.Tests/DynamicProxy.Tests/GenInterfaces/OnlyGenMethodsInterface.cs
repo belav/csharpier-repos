@@ -14,16 +14,16 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	public interface OnlyGenMethodsInterface
-	{
-		Z DoSomething<Z>(Z z) where Z : new();
-	}
+    public interface OnlyGenMethodsInterface
+    {
+        Z DoSomething<Z>(Z z) where Z : new();
+    }
 
-	public class OnlyGenMethodsInterfaceImpl : OnlyGenMethodsInterface
-	{
-		public Z DoSomething<Z>(Z z) where Z : new()
-		{
-			return z;
-		}
-	}
+    public class OnlyGenMethodsInterfaceImpl : OnlyGenMethodsInterface
+    {
+        public Z DoSomething<Z>(Z z) where Z : new()
+        {
+            return z;
+        }
+    }
 }

@@ -29,152 +29,152 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlDirective : XamlMember
-	{
-		class DirectiveMemberInvoker : XamlMemberInvoker
-		{
-			public DirectiveMemberInvoker (XamlDirective directive)
-				: base (directive)
-			{
-			}
-		}
+    public class XamlDirective : XamlMember
+    {
+        class DirectiveMemberInvoker : XamlMemberInvoker
+        {
+            public DirectiveMemberInvoker (XamlDirective directive)
+                : base (directive)
+            {
+            }
+        }
 
-		public XamlDirective (string xamlNamespace, string name)
-			: this (new string [] {xamlNamespace}, name, new XamlType (typeof (object), new XamlSchemaContext (new XamlSchemaContextSettings ())), null, AllowedMemberLocations.Any)
-		{
-			if (xamlNamespace == null)
-				throw new ArgumentNullException ("xamlNamespace");
-			is_unknown = true;
-		}
+        public XamlDirective (string xamlNamespace, string name)
+            : this (new string [] {xamlNamespace}, name, new XamlType (typeof (object), new XamlSchemaContext (new XamlSchemaContextSettings ())), null, AllowedMemberLocations.Any)
+        {
+            if (xamlNamespace == null)
+                throw new ArgumentNullException ("xamlNamespace");
+            is_unknown = true;
+        }
 
-		public XamlDirective (IEnumerable<string> xamlNamespaces, string name, XamlType xamlType, XamlValueConverter<TypeConverter> typeConverter, AllowedMemberLocations allowedLocation)
-			: base (true, xamlNamespaces != null ? xamlNamespaces.FirstOrDefault () : null, name)
-		{
-			if (xamlNamespaces == null)
-				throw new ArgumentNullException ("xamlNamespaces");
-			if (xamlType == null)
-				throw new ArgumentNullException ("xamlType");
+        public XamlDirective (IEnumerable<string> xamlNamespaces, string name, XamlType xamlType, XamlValueConverter<TypeConverter> typeConverter, AllowedMemberLocations allowedLocation)
+            : base (true, xamlNamespaces != null ? xamlNamespaces.FirstOrDefault () : null, name)
+        {
+            if (xamlNamespaces == null)
+                throw new ArgumentNullException ("xamlNamespaces");
+            if (xamlType == null)
+                throw new ArgumentNullException ("xamlType");
 
-			type = xamlType;
-			xaml_namespaces = new List<string> (xamlNamespaces);
-			AllowedLocation = allowedLocation;
-			type_converter = typeConverter;
-			
-			invoker = new DirectiveMemberInvoker (this);
-		}
+            type = xamlType;
+            xaml_namespaces = new List<string> (xamlNamespaces);
+            AllowedLocation = allowedLocation;
+            type_converter = typeConverter;
+            
+            invoker = new DirectiveMemberInvoker (this);
+        }
 
-		public AllowedMemberLocations AllowedLocation { get; private set; }
-		XamlValueConverter<TypeConverter> type_converter;
-		XamlType type;
-		XamlMemberInvoker invoker;
-		bool is_unknown;
-		IList<string> xaml_namespaces;
+        public AllowedMemberLocations AllowedLocation { get; private set; }
+        XamlValueConverter<TypeConverter> type_converter;
+        XamlType type;
+        XamlMemberInvoker invoker;
+        bool is_unknown;
+        IList<string> xaml_namespaces;
 
-		// this is for XamlLanguage.UnknownContent
-		internal bool InternalIsUnknown {
-			set { is_unknown = value; }
-		}
+        // this is for XamlLanguage.UnknownContent
+        internal bool InternalIsUnknown {
+            set { is_unknown = value; }
+        }
 
-		public override int GetHashCode ()
-		{
-			return ToString ().GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            return ToString ().GetHashCode ();
+        }
 
-		public override IList<string> GetXamlNamespaces ()
-		{
-			return xaml_namespaces;
-		}
+        public override IList<string> GetXamlNamespaces ()
+        {
+            return xaml_namespaces;
+        }
 
-		protected override sealed ICustomAttributeProvider LookupCustomAttributeProvider ()
-		{
-			return null; // as documented.
-		}
+        protected override sealed ICustomAttributeProvider LookupCustomAttributeProvider ()
+        {
+            return null; // as documented.
+        }
 
-		protected override sealed XamlValueConverter<XamlDeferringLoader> LookupDeferringLoader ()
-		{
-			return null; // as documented.
-		}
+        protected override sealed XamlValueConverter<XamlDeferringLoader> LookupDeferringLoader ()
+        {
+            return null; // as documented.
+        }
 
-		protected override sealed IList<XamlMember> LookupDependsOn ()
-		{
-			return null; // as documented.
-		}
+        protected override sealed IList<XamlMember> LookupDependsOn ()
+        {
+            return null; // as documented.
+        }
 
-		protected override sealed XamlMemberInvoker LookupInvoker ()
-		{
-			return invoker;
-		}
+        protected override sealed XamlMemberInvoker LookupInvoker ()
+        {
+            return invoker;
+        }
 
-		protected override sealed bool LookupIsAmbient ()
-		{
-			return false;
-		}
+        protected override sealed bool LookupIsAmbient ()
+        {
+            return false;
+        }
 
-		protected override sealed bool LookupIsEvent ()
-		{
-			return false;
-		}
+        protected override sealed bool LookupIsEvent ()
+        {
+            return false;
+        }
 
-		protected override sealed bool LookupIsReadOnly ()
-		{
-			return false;
-		}
+        protected override sealed bool LookupIsReadOnly ()
+        {
+            return false;
+        }
 
-		protected override sealed bool LookupIsReadPublic ()
-		{
-			return true;
-		}
+        protected override sealed bool LookupIsReadPublic ()
+        {
+            return true;
+        }
 
-		protected override sealed bool LookupIsUnknown ()
-		{
-			return is_unknown;
-		}
+        protected override sealed bool LookupIsUnknown ()
+        {
+            return is_unknown;
+        }
 
-		protected override sealed bool LookupIsWriteOnly ()
-		{
-			return false;
-		}
+        protected override sealed bool LookupIsWriteOnly ()
+        {
+            return false;
+        }
 
-		protected override sealed bool LookupIsWritePublic ()
-		{
-			return true;
-		}
+        protected override sealed bool LookupIsWritePublic ()
+        {
+            return true;
+        }
 
-		protected override sealed XamlType LookupTargetType ()
-		{
-			return null;
-		}
+        protected override sealed XamlType LookupTargetType ()
+        {
+            return null;
+        }
 
-		protected override sealed XamlType LookupType ()
-		{
-			return type;
-		}
+        protected override sealed XamlType LookupType ()
+        {
+            return type;
+        }
 
-		protected override sealed XamlValueConverter<TypeConverter> LookupTypeConverter ()
-		{
-			if (type_converter == null)
-				type_converter = base.LookupTypeConverter ();
-			return type_converter;
-		}
+        protected override sealed XamlValueConverter<TypeConverter> LookupTypeConverter ()
+        {
+            if (type_converter == null)
+                type_converter = base.LookupTypeConverter ();
+            return type_converter;
+        }
 
-		protected override sealed MethodInfo LookupUnderlyingGetter ()
-		{
-			return null;
-		}
+        protected override sealed MethodInfo LookupUnderlyingGetter ()
+        {
+            return null;
+        }
 
-		protected override sealed MemberInfo LookupUnderlyingMember ()
-		{
-			return null;
-		}
+        protected override sealed MemberInfo LookupUnderlyingMember ()
+        {
+            return null;
+        }
 
-		protected override sealed MethodInfo LookupUnderlyingSetter ()
-		{
-			return null;
-		}
+        protected override sealed MethodInfo LookupUnderlyingSetter ()
+        {
+            return null;
+        }
 
-		public override string ToString ()
-		{
-			return String.IsNullOrEmpty (PreferredXamlNamespace) ? Name : String.Concat ("{", PreferredXamlNamespace, "}", Name);
-		}
-	}
+        public override string ToString ()
+        {
+            return String.IsNullOrEmpty (PreferredXamlNamespace) ? Name : String.Concat ("{", PreferredXamlNamespace, "}", Name);
+        }
+    }
 }

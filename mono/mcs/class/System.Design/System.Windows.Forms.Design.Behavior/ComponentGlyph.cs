@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.ComponentGlyph
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,37 +36,37 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public class ComponentGlyph : Glyph
-	{
-		IComponent component;
+    public class ComponentGlyph : Glyph
+    {
+        IComponent component;
 
-		public ComponentGlyph (IComponent relatedComponent)
-			: this (relatedComponent, null)
-		{
-		}
+        public ComponentGlyph (IComponent relatedComponent)
+            : this (relatedComponent, null)
+        {
+        }
 
-		public ComponentGlyph (IComponent relatedComponent, Behavior behavior)
-			: base (behavior)
-		{
-			this.component = relatedComponent;
-		}
+        public ComponentGlyph (IComponent relatedComponent, Behavior behavior)
+            : base (behavior)
+        {
+            this.component = relatedComponent;
+        }
 
-		[MonoTODO]
-		public IComponent RelatedComponent {
-			get { return component; }
-		}
+        [MonoTODO]
+        public IComponent RelatedComponent {
+            get { return component; }
+        }
 
-		[MonoTODO]
-		public override Cursor GetHitTest (Point p)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override Cursor GetHitTest (Point p)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override void Paint (PaintEventArgs pe)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override void Paint (PaintEventArgs pe)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

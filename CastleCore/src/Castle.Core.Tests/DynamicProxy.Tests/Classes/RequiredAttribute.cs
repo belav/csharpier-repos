@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,34 +14,34 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public class RequiredAttribute : Attribute
-	{
-		private readonly object defaultValue;
-		private readonly bool hasDefault;
-		public object BadValue;
+    public class RequiredAttribute : Attribute
+    {
+        private readonly object defaultValue;
+        private readonly bool hasDefault;
+        public object BadValue;
 
-		public RequiredAttribute()
-		{
-		}
+        public RequiredAttribute()
+        {
+        }
 
-		public RequiredAttribute(object defaultValue)
-		{
-			hasDefault = true;
-			this.defaultValue = defaultValue;
-		}
+        public RequiredAttribute(object defaultValue)
+        {
+            hasDefault = true;
+            this.defaultValue = defaultValue;
+        }
 
-		public object DefaultValue
-		{
-			get
-			{
-				if (!hasDefault)
-				{
-					throw new ArgumentException("No default value for argument");
-				}
-				return defaultValue;
-			}
-		}
-	}
+        public object DefaultValue
+        {
+            get
+            {
+                if (!hasDefault)
+                {
+                    throw new ArgumentException("No default value for argument");
+                }
+                return defaultValue;
+            }
+        }
+    }
 }

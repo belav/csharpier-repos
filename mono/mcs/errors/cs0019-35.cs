@@ -5,10 +5,10 @@ using System;
 
 class Test {
 
-	static void Main ()
-	{
-		object o = 2;
-		if (o == 42)
-			Console.WriteLine (o);
-	}
+    static void Main ()
+    {
+        object o = 2;
+        if (o == 42)
+            Console.WriteLine (o);
+    }
 }

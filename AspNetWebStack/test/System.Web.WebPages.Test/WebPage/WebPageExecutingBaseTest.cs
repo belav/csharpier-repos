@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.IO;
@@ -176,7 +176,7 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void WriteAttributeWithRawHtmlString()
         {
-            string alreadyEncoded = "Show Size 6½-8";
+            string alreadyEncoded = "Show Size 6�-8";
             WriteAttributeTest(
                 name: "alt",
                 prefix: new PositionTagged<string>(" cool=\"", 33),

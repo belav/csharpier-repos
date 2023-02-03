@@ -10,13 +10,13 @@ namespace Baz
         public string Bar()
         {
             return "Hello, World!";
-		}
+        }
 
         public string Bar(string who)
         {
             return "Hello, " + who + "!";
         }
-	}
+    }
 
     class Goo
     {

@@ -9,5 +9,5 @@ using System.Security.Permissions;
 
 class Test
 {
-	static void Main () {}
+    static void Main () {}
 }

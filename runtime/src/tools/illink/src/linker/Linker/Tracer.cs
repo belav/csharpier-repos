@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 //
@@ -35,49 +35,49 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Mono.Linker
 {
-	public class Tracer
-	{
-		protected readonly LinkContext context;
+    public class Tracer
+    {
+        protected readonly LinkContext context;
 
-		List<IDependencyRecorder>? recorders;
+        List<IDependencyRecorder>? recorders;
 
-		public Tracer (LinkContext context)
-		{
-			this.context = context;
-		}
+        public Tracer (LinkContext context)
+        {
+            this.context = context;
+        }
 
-		public void Finish ()
-		{
-			if (recorders != null) {
-				foreach (var recorder in recorders) {
-					recorder.FinishRecording ();
-					if (recorder is IDisposable disposableRecorder)
-						disposableRecorder.Dispose ();
-				}
-			}
+        public void Finish ()
+        {
+            if (recorders != null) {
+                foreach (var recorder in recorders) {
+                    recorder.FinishRecording ();
+                    if (recorder is IDisposable disposableRecorder)
+                        disposableRecorder.Dispose ();
+                }
+            }
 
-			recorders = null;
-		}
+            recorders = null;
+        }
 
-		public void AddRecorder (IDependencyRecorder recorder)
-		{
-			recorders ??= new List<IDependencyRecorder> ();
+        public void AddRecorder (IDependencyRecorder recorder)
+        {
+            recorders ??= new List<IDependencyRecorder> ();
 
-			recorders.Add (recorder);
-		}
+            recorders.Add (recorder);
+        }
 
-		[MemberNotNullWhen (true, "recorders")]
-		bool IsRecordingEnabled ()
-		{
-			return recorders != null;
-		}
+        [MemberNotNullWhen (true, "recorders")]
+        bool IsRecordingEnabled ()
+        {
+            return recorders != null;
+        }
 
-		public void AddDirectDependency (object target, in DependencyInfo reason, bool marked)
-		{
-			if (IsRecordingEnabled ()) {
-				foreach (IDependencyRecorder recorder in recorders)
-					recorder.RecordDependency (target, reason, marked);
-			}
-		}
-	}
+        public void AddDirectDependency (object target, in DependencyInfo reason, bool marked)
+        {
+            if (IsRecordingEnabled ()) {
+                foreach (IDependencyRecorder recorder in recorders)
+                    recorder.RecordDependency (target, reason, marked);
+            }
+        }
+    }
 }

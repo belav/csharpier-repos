@@ -2,16 +2,16 @@
 
 public class C
 {
-	public int Finalize;
-	
-	public static void Main ()
-	{
-	}
+    public int Finalize;
+    
+    public static void Main ()
+    {
+    }
 }
 
 public class D : C
 {
-	~D ()
-	{
-	}
+    ~D ()
+    {
+    }
 }

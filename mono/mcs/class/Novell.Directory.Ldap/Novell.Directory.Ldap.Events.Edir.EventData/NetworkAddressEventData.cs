@@ -45,7 +45,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return nType;
+    return nType;
       }
     }
 
@@ -54,7 +54,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return strData;
+    return strData;
       }
     }
 

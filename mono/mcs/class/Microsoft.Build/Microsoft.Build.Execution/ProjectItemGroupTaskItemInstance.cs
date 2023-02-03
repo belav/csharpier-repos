@@ -31,61 +31,61 @@ using System.Linq;
 
 namespace Microsoft.Build.Execution
 {
-	public class ProjectItemGroupTaskItemInstance
-	{
-		internal ProjectItemGroupTaskItemInstance (ProjectItemElement xml)
-		{
-			Condition = xml.Condition;
-			Exclude = xml.Exclude;
-			Include = xml.Include;
-			ItemType = xml.ItemType;
-			Metadata = xml.Metadata.Select (m => new ProjectItemGroupTaskMetadataInstance (m)).ToArray ();
-			Remove = xml.Remove;
-			KeepDuplicates = xml.KeepDuplicates;
-			KeepMetadata = xml.KeepMetadata;
-			RemoveMetadata = xml.RemoveMetadata;
-			
-			ConditionLocation = xml.ConditionLocation;
-			ExcludeLocation = xml.ExcludeLocation;
-			IncludeLocation = xml.IncludeLocation;
-			Location = xml.Location;
-			KeepDuplicatesLocation = xml.KeepDuplicatesLocation;
-			RemoveLocation = xml.RemoveLocation;
-			RemoveMetadataLocation = xml.RemoveMetadataLocation;			
-		}
-		
-		public string Condition { get; private set; }
+    public class ProjectItemGroupTaskItemInstance
+    {
+        internal ProjectItemGroupTaskItemInstance (ProjectItemElement xml)
+        {
+            Condition = xml.Condition;
+            Exclude = xml.Exclude;
+            Include = xml.Include;
+            ItemType = xml.ItemType;
+            Metadata = xml.Metadata.Select (m => new ProjectItemGroupTaskMetadataInstance (m)).ToArray ();
+            Remove = xml.Remove;
+            KeepDuplicates = xml.KeepDuplicates;
+            KeepMetadata = xml.KeepMetadata;
+            RemoveMetadata = xml.RemoveMetadata;
+            
+            ConditionLocation = xml.ConditionLocation;
+            ExcludeLocation = xml.ExcludeLocation;
+            IncludeLocation = xml.IncludeLocation;
+            Location = xml.Location;
+            KeepDuplicatesLocation = xml.KeepDuplicatesLocation;
+            RemoveLocation = xml.RemoveLocation;
+            RemoveMetadataLocation = xml.RemoveMetadataLocation;            
+        }
+        
+        public string Condition { get; private set; }
 
-		public string Exclude { get; private set; }
+        public string Exclude { get; private set; }
 
-		public string Include { get; private set; }
+        public string Include { get; private set; }
 
-		public string ItemType { get; private set; }
+        public string ItemType { get; private set; }
 
-		public string KeepDuplicates { get; private set; }
+        public string KeepDuplicates { get; private set; }
 
-		public string KeepMetadata { get; private set; }
+        public string KeepMetadata { get; private set; }
 
-		public ICollection<ProjectItemGroupTaskMetadataInstance> Metadata { get; private set; }
+        public ICollection<ProjectItemGroupTaskMetadataInstance> Metadata { get; private set; }
 
-		public string Remove { get; private set; }
+        public string Remove { get; private set; }
 
-		public string RemoveMetadata { get; private set; }
-		public ElementLocation ConditionLocation { get; private set; }
+        public string RemoveMetadata { get; private set; }
+        public ElementLocation ConditionLocation { get; private set; }
 
-		public ElementLocation ExcludeLocation { get; private set; }
+        public ElementLocation ExcludeLocation { get; private set; }
 
-		public ElementLocation IncludeLocation { get; private set; }
+        public ElementLocation IncludeLocation { get; private set; }
 
-		public ElementLocation KeepDuplicatesLocation { get; private set; }
+        public ElementLocation KeepDuplicatesLocation { get; private set; }
 
-		public ElementLocation KeepMetadataLocation { get; private set; }
+        public ElementLocation KeepMetadataLocation { get; private set; }
 
-		public ElementLocation Location { get; private set; }
+        public ElementLocation Location { get; private set; }
 
-		public ElementLocation RemoveLocation { get; private set; }
+        public ElementLocation RemoveLocation { get; private set; }
 
-		public ElementLocation RemoveMetadataLocation { get; private set; }
-	}
+        public ElementLocation RemoveMetadataLocation { get; private set; }
+    }
 }
 

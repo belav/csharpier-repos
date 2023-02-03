@@ -3,8 +3,8 @@
 
 static class X
 {
-	public static void Main ()
-	{
-		var v = null is X;
-	}
+    public static void Main ()
+    {
+        var v = null is X;
+    }
 }

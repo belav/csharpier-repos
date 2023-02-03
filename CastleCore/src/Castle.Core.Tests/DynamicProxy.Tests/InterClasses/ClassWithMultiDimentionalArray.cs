@@ -14,22 +14,22 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	public class ClassWithMultiDimentionalArray : IClassWithMultiDimentionalArray
-	{
-		public virtual void Do(int[] args)
-		{
-		}
+    public class ClassWithMultiDimentionalArray : IClassWithMultiDimentionalArray
+    {
+        public virtual void Do(int[] args)
+        {
+        }
 
-		public virtual void Do2(int[,] args)
-		{
-		}
+        public virtual void Do2(int[,] args)
+        {
+        }
 
-		public virtual void Do3(string[] args)
-		{
-		}
+        public virtual void Do3(string[] args)
+        {
+        }
 
-		public virtual void Do4(string[,] args)
-		{
-		}
-	}
+        public virtual void Do4(string[,] args)
+        {
+        }
+    }
 }

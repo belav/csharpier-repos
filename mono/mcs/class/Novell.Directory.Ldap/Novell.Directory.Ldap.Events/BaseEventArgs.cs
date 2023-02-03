@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events
     {
       get
       {
-	return ldap_message;
+    return ldap_message;
       }
     }
 

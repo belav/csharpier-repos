@@ -2,7 +2,7 @@
 // SecureConversationServiceElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,47 +54,47 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class SecureConversationServiceElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty security_state_encoder_type;
+    [MonoTODO]
+    public sealed partial class SecureConversationServiceElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty security_state_encoder_type;
 
-		static SecureConversationServiceElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			security_state_encoder_type = new ConfigurationProperty ("securityStateEncoderType",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static SecureConversationServiceElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            security_state_encoder_type = new ConfigurationProperty ("securityStateEncoderType",
+                typeof (string), "", new StringConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (security_state_encoder_type);
-		}
+            properties.Add (security_state_encoder_type);
+        }
 
-		public SecureConversationServiceElement ()
-		{
-		}
-
-
-		// Properties
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("securityStateEncoderType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		public string SecurityStateEncoderType {
-			get { return (string) base [security_state_encoder_type]; }
-			set { base [security_state_encoder_type] = value; }
-		}
+        public SecureConversationServiceElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("securityStateEncoderType",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "")]
+        public string SecurityStateEncoderType {
+            get { return (string) base [security_state_encoder_type]; }
+            set { base [security_state_encoder_type] = value; }
+        }
+
+
+    }
 
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlTableRowCollection.cs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,70 +31,70 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls {
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HtmlTableRowCollection : ICollection, IEnumerable 
-	{
-		ControlCollection cc;
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HtmlTableRowCollection : ICollection, IEnumerable 
+    {
+        ControlCollection cc;
 
-		internal HtmlTableRowCollection (HtmlTable table)
-		{
-			cc = table.Controls;
-		}
+        internal HtmlTableRowCollection (HtmlTable table)
+        {
+            cc = table.Controls;
+        }
 
-		public int Count {
-			get { return cc.Count; }
-		}
+        public int Count {
+            get { return cc.Count; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }	// documented as always false
-		}
+        public bool IsReadOnly {
+            get { return false; }    // documented as always false
+        }
 
-		public bool IsSynchronized {
-			get { return false; }	// documented as always false
-		}
+        public bool IsSynchronized {
+            get { return false; }    // documented as always false
+        }
 
-		public HtmlTableRow this [int index] {
-			get { return (HtmlTableRow) cc [index]; }
-		}
+        public HtmlTableRow this [int index] {
+            get { return (HtmlTableRow) cc [index]; }
+        }
 
-		public object SyncRoot {
-			get { return this; }	// as documented
-		}
+        public object SyncRoot {
+            get { return this; }    // as documented
+        }
 
-		public void Add (HtmlTableRow row)
-		{
-			cc.Add (row);
-		}
+        public void Add (HtmlTableRow row)
+        {
+            cc.Add (row);
+        }
 
-		public void Clear ()
-		{
-			cc.Clear ();
-		}
+        public void Clear ()
+        {
+            cc.Clear ();
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			cc.CopyTo (array, index);
-		}
+        public void CopyTo (Array array, int index)
+        {
+            cc.CopyTo (array, index);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return cc.GetEnumerator ();
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            return cc.GetEnumerator ();
+        }
 
-		public void Insert (int index, HtmlTableRow row)
-		{
-			cc.AddAt (index, row);
-		}
+        public void Insert (int index, HtmlTableRow row)
+        {
+            cc.AddAt (index, row);
+        }
 
-		public void Remove (HtmlTableRow row)
-		{
-			cc.Remove (row);
-		}
+        public void Remove (HtmlTableRow row)
+        {
+            cc.Remove (row);
+        }
 
-		public void RemoveAt (int index)
-		{
-			cc.RemoveAt (index);
-		}
-	}
+        public void RemoveAt (int index)
+        {
+            cc.RemoveAt (index);
+        }
+    }
 }

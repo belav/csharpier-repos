@@ -28,8 +28,8 @@
 
 namespace Mono.Cecil.Cil {
 
-	internal interface IVariableDefinitionProvider {
+    internal interface IVariableDefinitionProvider {
 
-		VariableDefinitionCollection Variables { get; }
-	}
+        VariableDefinitionCollection Variables { get; }
+    }
 }

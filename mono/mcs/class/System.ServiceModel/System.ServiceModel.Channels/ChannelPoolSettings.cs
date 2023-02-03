@@ -2,7 +2,7 @@
 // ChannelPoolSettings.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,39 +33,39 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Channels
 {
-	public class ChannelPoolSettings
-	{
-		[MonoTODO]
-		public ChannelPoolSettings ()
-		{
-		}
+    public class ChannelPoolSettings
+    {
+        [MonoTODO]
+        public ChannelPoolSettings ()
+        {
+        }
 
-		internal ChannelPoolSettings (ChannelPoolSettings other)
-		{
-			IdleTimeout = other.IdleTimeout;
-			LeaseTimeout = other.LeaseTimeout;
-			MaxOutboundChannelsPerEndpoint = other.MaxOutboundChannelsPerEndpoint;
-		}
+        internal ChannelPoolSettings (ChannelPoolSettings other)
+        {
+            IdleTimeout = other.IdleTimeout;
+            LeaseTimeout = other.LeaseTimeout;
+            MaxOutboundChannelsPerEndpoint = other.MaxOutboundChannelsPerEndpoint;
+        }
 
-		TimeSpan idle_timeout, lease_timeout;
-		int max_outbound;
+        TimeSpan idle_timeout, lease_timeout;
+        int max_outbound;
 
-		[MonoTODO]
-		public TimeSpan IdleTimeout {
-			get { return idle_timeout; }
-			set { idle_timeout = value; }
-		}
+        [MonoTODO]
+        public TimeSpan IdleTimeout {
+            get { return idle_timeout; }
+            set { idle_timeout = value; }
+        }
 
-		[MonoTODO]
-		public TimeSpan LeaseTimeout {
-			get { return lease_timeout; }
-			set { lease_timeout = value; }
-		}
+        [MonoTODO]
+        public TimeSpan LeaseTimeout {
+            get { return lease_timeout; }
+            set { lease_timeout = value; }
+        }
 
-		[MonoTODO]
-		public int MaxOutboundChannelsPerEndpoint {
-			get { return max_outbound; }
-			set { max_outbound = value; }
-		}
-	}
+        [MonoTODO]
+        public int MaxOutboundChannelsPerEndpoint {
+            get { return max_outbound; }
+            set { max_outbound = value; }
+        }
+    }
 }

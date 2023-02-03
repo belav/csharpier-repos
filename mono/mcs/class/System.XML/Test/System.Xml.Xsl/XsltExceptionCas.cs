@@ -2,7 +2,7 @@
 // XsltExceptionCas.cs - CAS unit tests for System.Xml.Xsl.XsltException
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,47 +37,47 @@ using System.Xml.Xsl;
 
 namespace MonoCasTests.System.Xml.Xsl {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XsltExceptionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class XsltExceptionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityException))]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		public void DenySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XsltException xe = new XsltException (String.Empty, null);
-			xe.GetObjectData (null, sc);
-		}
+        [Test]
+        [ExpectedException (typeof (SecurityException))]
+        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+        public void DenySerializationFormatter_GetObjectData ()
+        {
+            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+            XsltException xe = new XsltException (String.Empty, null);
+            xe.GetObjectData (null, sc);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-		public void PermitOnlySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XsltException xe = new XsltException (String.Empty, null);
-			xe.GetObjectData (null, sc);
-		}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+        public void PermitOnlySerializationFormatter_GetObjectData ()
+        {
+            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+            XsltException xe = new XsltException (String.Empty, null);
+            xe.GetObjectData (null, sc);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void DenyUnrestricted ()
-		{
-			// can we call everything without a SecurityException ?
-			XsltException xe = new XsltException (String.Empty, null);
-			Assert.AreEqual (0, xe.LineNumber, "LineNumber");
-			Assert.AreEqual (0, xe.LinePosition, "LinePosition");
-			Assert.IsNotNull (xe.Message, "Message");
-			Assert.IsNull (xe.SourceUri, "SourceUri");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void DenyUnrestricted ()
+        {
+            // can we call everything without a SecurityException ?
+            XsltException xe = new XsltException (String.Empty, null);
+            Assert.AreEqual (0, xe.LineNumber, "LineNumber");
+            Assert.AreEqual (0, xe.LinePosition, "LinePosition");
+            Assert.IsNotNull (xe.Message, "Message");
+            Assert.IsNull (xe.SourceUri, "SourceUri");
+        }
+    }
 }

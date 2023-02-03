@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ContentDefinition
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,10 +33,10 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-	public enum ContentDesignerState
-	{
-		ShowDefaultContent,
-		ShowUserContent
-	}
+    public enum ContentDesignerState
+    {
+        ShowDefaultContent,
+        ShowUserContent
+    }
 }
 

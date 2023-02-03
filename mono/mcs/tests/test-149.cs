@@ -4,97 +4,97 @@ public delegate long MyDelegate (int a);
 
 public interface X
 {
-	event EventHandler Foo;
+    event EventHandler Foo;
 
-	event MyDelegate TestEvent;
+    event MyDelegate TestEvent;
 }
 
 public class Y : X
 {
-	static int a = 0;
+    static int a = 0;
 
-	event EventHandler X.Foo {
-		add {
-		}
+    event EventHandler X.Foo {
+        add {
+        }
 
-		remove {
-		}
-	}
+        remove {
+        }
+    }
 
-	public event EventHandler Foo;
+    public event EventHandler Foo;
 
-	public event MyDelegate TestEvent;
+    public event MyDelegate TestEvent;
 
-	public int Test ()
-	{
-		X x = this;
+    public int Test ()
+    {
+        X x = this;
 
-		Foo += new EventHandler (callback1);
-		TestEvent += new MyDelegate (callback2);
+        Foo += new EventHandler (callback1);
+        TestEvent += new MyDelegate (callback2);
 
-		x.Foo += new EventHandler (callback3);
+        x.Foo += new EventHandler (callback3);
 
-		if (a != 0)
-			return 1;
+        if (a != 0)
+            return 1;
 
-		Foo (this, new EventArgs ());
-		if (a != 1)
-			return 2;
+        Foo (this, new EventArgs ());
+        if (a != 1)
+            return 2;
 
-		if (TestEvent (2) != 4)
-			return 3;
+        if (TestEvent (2) != 4)
+            return 3;
 
-		if (a != 2)
-			return 4;
+        if (a != 2)
+            return 4;
 
-		return 0;
-	}
+        return 0;
+    }
 
 
-	private static void callback1 (object sender, EventArgs e)
-	{
-		a = 1;
-	}
+    private static void callback1 (object sender, EventArgs e)
+    {
+        a = 1;
+    }
 
-	private static long callback2 (int b)
-	{
-		a = b;
-		return a * a;
-	}
+    private static long callback2 (int b)
+    {
+        a = b;
+        return a * a;
+    }
 
-	private static void callback3 (object sender, EventArgs e)
-	{
-		a = 3;
-	}
+    private static void callback3 (object sender, EventArgs e)
+    {
+        a = 3;
+    }
 }
 
 public class Z : Y
 {
-	public delegate int SomeEventHandler();
+    public delegate int SomeEventHandler();
         public static event SomeEventHandler BuildStarted;
 
-	static int a ()
-	{
-		return 1;
-	}
-	public static int Main ()
-	{
-		Z z = new Z ();
+    static int a ()
+    {
+        return 1;
+    }
+    public static int Main ()
+    {
+        Z z = new Z ();
 
-		int result = z.Test ();
+        int result = z.Test ();
 
-		if (result != 0)
-			return result;
+        if (result != 0)
+            return result;
 
-         	if (BuildStarted != null) {
-             		BuildStarted();
-         	}
-		BuildStarted = new SomeEventHandler (a);
-		if (BuildStarted () != 1)
-			return 50; 
+             if (BuildStarted != null) {
+                     BuildStarted();
+             }
+        BuildStarted = new SomeEventHandler (a);
+        if (BuildStarted () != 1)
+            return 50; 
 
-		return 0;
-	}
+        return 0;
+    }
 }
 
 //
@@ -102,11 +102,11 @@ public class Z : Y
 // when accessing a static event, from an instance method.
 //
 public class Static {
-	public static event EventHandler Test;
-			
-	public void Fire()
-	{
-		if ( Test != null )
-			Test (null, null);
-	}
+    public static event EventHandler Test;
+            
+    public void Fire()
+    {
+        if ( Test != null )
+            Test (null, null);
+    }
 }

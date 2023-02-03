@@ -6,13 +6,13 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// description for class Test
-	/// </summary>
-	public class Test
-	{
-		public string PublicProperty {
-			get { return null; }
-		}
-	}
+    /// <summary>
+    /// description for class Test
+    /// </summary>
+    public class Test
+    {
+        public string PublicProperty {
+            get { return null; }
+        }
+    }
 }

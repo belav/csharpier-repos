@@ -4,13 +4,13 @@
 
 class C
 {
-	static void Foo<T> (T t)
-	{
-	}
+    static void Foo<T> (T t)
+    {
+    }
 
-	unsafe static void Test ()
-	{
-		int* i = null;
-		Foo (i);
-	}
+    unsafe static void Test ()
+    {
+        int* i = null;
+        Foo (i);
+    }
 }

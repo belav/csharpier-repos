@@ -850,7 +850,7 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void StringFunctionsTest2446(Utils.NavigatorKind kind)
         {
             var xml = "books.xml";
-            var testExpression = @"normalize-space('			abc			')";
+            var testExpression = @"normalize-space('            abc            ')";
             var expected = @"abc";
 
             Utils.XPathStringTest(kind, xml, testExpression, expected);
@@ -867,7 +867,7 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void StringFunctionsTest2447(Utils.NavigatorKind kind)
         {
             var xml = "books.xml";
-            var testExpression = @"normalize-space('a	bc')";
+            var testExpression = @"normalize-space('a    bc')";
             var expected = @"a bc";
 
             Utils.XPathStringTest(kind, xml, testExpression, expected);
@@ -884,7 +884,7 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void StringFunctionsTest2448(Utils.NavigatorKind kind)
         {
             var xml = "books.xml";
-            var testExpression = @"normalize-space('a			bc')";
+            var testExpression = @"normalize-space('a            bc')";
             var expected = @"a bc";
 
             Utils.XPathStringTest(kind, xml, testExpression, expected);
@@ -901,7 +901,7 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void StringFunctionsTest2449(Utils.NavigatorKind kind)
         {
             var xml = "books.xml";
-            var testExpression = @"normalize-space('a	bc')";
+            var testExpression = @"normalize-space('a    bc')";
             var expected = @"a bc";
 
             Utils.XPathStringTest(kind, xml, testExpression, expected);

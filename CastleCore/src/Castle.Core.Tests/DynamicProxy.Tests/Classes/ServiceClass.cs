@@ -14,101 +14,101 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public class ServiceClass
-	{
-		public virtual int Sum(int b1, int b2)
-		{
-			return b1 + b2;
-		}
+    public class ServiceClass
+    {
+        public virtual int Sum(int b1, int b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual byte Sum(byte b1, byte b2)
-		{
-			return Convert.ToByte(b1 + b2);
-		}
+        public virtual byte Sum(byte b1, byte b2)
+        {
+            return Convert.ToByte(b1 + b2);
+        }
 
-		public virtual long Sum(long b1, long b2)
-		{
-			return b1 + b2;
-		}
+        public virtual long Sum(long b1, long b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual short Sum(short b1, short b2)
-		{
-			return (short) (b1 + b2);
-		}
+        public virtual short Sum(short b1, short b2)
+        {
+            return (short) (b1 + b2);
+        }
 
-		public virtual float Sum(float b1, float b2)
-		{
-			return b1 + b2;
-		}
+        public virtual float Sum(float b1, float b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual double Sum(double b1, double b2)
-		{
-			return b1 + b2;
-		}
+        public virtual double Sum(double b1, double b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual UInt16 Sum(UInt16 b1, UInt16 b2)
-		{
-			return (UInt16) (b1 + b2);
-		}
+        public virtual UInt16 Sum(UInt16 b1, UInt16 b2)
+        {
+            return (UInt16) (b1 + b2);
+        }
 
-		public virtual UInt32 Sum(UInt32 b1, UInt32 b2)
-		{
-			return b1 + b2;
-		}
+        public virtual UInt32 Sum(UInt32 b1, UInt32 b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual UInt64 Sum(UInt64 b1, UInt64 b2)
-		{
-			return b1 + b2;
-		}
+        public virtual UInt64 Sum(UInt64 b1, UInt64 b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual bool Valid
-		{
-			get { return false; }
-		}
+        public virtual bool Valid
+        {
+            get { return false; }
+        }
 
-		public void NonVirtualMethod()
-		{
-		}
+        public void NonVirtualMethod()
+        {
+        }
 
-		public bool NonVirtualProp
-		{
-			get { return false; }
-		}
+        public bool NonVirtualProp
+        {
+            get { return false; }
+        }
 
-		public class InernalClass
-		{
-		}
-	}
+        public class InernalClass
+        {
+        }
+    }
 
-	public class ServiceClass2
-	{
-		public void DoSomething()
-		{
-			DoOtherThing();
-		}
+    public class ServiceClass2
+    {
+        public void DoSomething()
+        {
+            DoOtherThing();
+        }
 
-		public virtual void DoOtherThing()
-		{
-			DoSomethingElse();
-		}
+        public virtual void DoOtherThing()
+        {
+            DoSomethingElse();
+        }
 
-		public virtual void DoSomethingElse()
-		{
-		}
-	}
+        public virtual void DoSomethingElse()
+        {
+        }
+    }
 
-	public class ExtendedServiceClass : ServiceClass
-	{
-		public virtual UInt64 Sum2(UInt64 b1, UInt64 b2)
-		{
-			return b1 + b2;
-		}
+    public class ExtendedServiceClass : ServiceClass
+    {
+        public virtual UInt64 Sum2(UInt64 b1, UInt64 b2)
+        {
+            return b1 + b2;
+        }
 
-		public virtual bool Valid2
-		{
-			get { return false; }
-		}
-	}
+        public virtual bool Valid2
+        {
+            get { return false; }
+        }
+    }
 }

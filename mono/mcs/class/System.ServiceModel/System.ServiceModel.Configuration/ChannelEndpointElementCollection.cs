@@ -2,7 +2,7 @@
 // ChannelEndpointElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,25 +54,25 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ChannelEndpointElement),
-		 AddItemName = "endpoint",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	[MonoTODO]
-	public sealed partial class ChannelEndpointElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>,  ICollection,  IEnumerable
-	{
+    [ConfigurationCollection (typeof (ChannelEndpointElement),
+         AddItemName = "endpoint",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [MonoTODO]
+    public sealed partial class ChannelEndpointElementCollection
+         : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>,  ICollection,  IEnumerable
+    {
 
-		public ChannelEndpointElementCollection ()
-		{
-			AddElementName = "endpoint";
-		}
-
-
-		// Properties
+        public ChannelEndpointElementCollection ()
+        {
+            AddElementName = "endpoint";
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

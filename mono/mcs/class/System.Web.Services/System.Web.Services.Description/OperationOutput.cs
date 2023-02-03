@@ -33,20 +33,20 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class OperationOutput : OperationMessage {
+    [XmlFormatExtensionPoint ("Extensions")]
+    public sealed class OperationOutput : OperationMessage {
 
-		ServiceDescriptionFormatExtensionCollection extensions;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		public OperationOutput ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        public OperationOutput ()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+        }
+        
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions {
+            get { return extensions; }
+        }
 
-	}
+    }
 }

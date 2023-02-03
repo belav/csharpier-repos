@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
@@ -62,9 +62,9 @@ namespace System.Runtime.Diagnostics
         protected DiagnosticsEventProvider(Guid providerGuid)
         {
             this.providerId = providerGuid;
-	    var p = (int) Environment.OSVersion.Platform;
-	    if (p == 4 || p == 128)
-		    return;
+        var p = (int) Environment.OSVersion.Platform;
+        if (p == 4 || p == 128)
+            return;
             EtwRegister();
         }
 

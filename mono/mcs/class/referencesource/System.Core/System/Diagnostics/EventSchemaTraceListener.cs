@@ -86,7 +86,7 @@ public class EventSchemaTraceListener : TextWriterTraceListener {
         this.fileName = fileName; 
 
         if (!String.IsNullOrEmpty(this.fileName) && (fileName[0] != Path.DirectorySeparatorChar) && (fileName[0] != Path.AltDirectorySeparatorChar) && !Path.IsPathRooted(fileName)) {
-		this.fileName = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile), this.fileName);
+        this.fileName = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile), this.fileName);
         }
 
         this._retention = logRetentionOption;

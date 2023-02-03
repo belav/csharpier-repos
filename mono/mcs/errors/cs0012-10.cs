@@ -4,5 +4,5 @@
 
 class Test
 {
-	event D<Test> e;
+    event D<Test> e;
 }

@@ -1274,10 +1274,10 @@ namespace CoreXml.Test.XLinq
                             strxml = "<root><!-- comment --></root>";
                             break;
                         case "SignificantWhitespace":
-                            strxml = "<root xml:space=\"preserve\">			 </root>";
+                            strxml = "<root xml:space=\"preserve\">             </root>";
                             break;
                         case "Whitespace":
-                            strxml = "<root>			 </root>";
+                            strxml = "<root>             </root>";
                             break;
                     }
 

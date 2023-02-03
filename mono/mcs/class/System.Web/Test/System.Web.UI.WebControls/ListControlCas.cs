@@ -1,9 +1,9 @@
 //
 // ListControlCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.ListControl
+//    - CAS unit tests for System.Web.UI.WebControls.ListControl
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,36 +39,36 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ListControlCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ListControlCas {
 
-		// note: we do not inherit from AspNetHostingMinimal because
-		// ListControl is an abstract class
+        // note: we do not inherit from AspNetHostingMinimal because
+        // ListControl is an abstract class
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ListControlTest unit = new ListControlTest ();
-			unit.DefaultProperties ();
-			unit.CleanProperties ();
-			unit.NullProperties ();
-			unit.ClearSelection ();
-			unit.ViewState ();
-			unit.ViewStateContents ();
-			unit.SelectedIndex ();
-			unit.Render ();
-			unit.ItemsOk ();
-			unit.ControlState ();
-			unit.ItemsTooHigh ();
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            ListControlTest unit = new ListControlTest ();
+            unit.DefaultProperties ();
+            unit.CleanProperties ();
+            unit.NullProperties ();
+            unit.ClearSelection ();
+            unit.ViewState ();
+            unit.ViewStateContents ();
+            unit.SelectedIndex ();
+            unit.Render ();
+            unit.ItemsOk ();
+            unit.ControlState ();
+            unit.ItemsTooHigh ();
+        }
+    }
 }

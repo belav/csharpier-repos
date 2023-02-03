@@ -30,39 +30,39 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-	public sealed class MsmqTransportSecurity
-	{
-		MsmqAuthenticationMode auth = MsmqAuthenticationMode.WindowsDomain;
-		MsmqEncryptionAlgorithm enc;
-		MsmqSecureHashAlgorithm hash = MsmqSecureHashAlgorithm.Sha1;
-		ProtectionLevel protection_level = ProtectionLevel.Sign;
+    public sealed class MsmqTransportSecurity
+    {
+        MsmqAuthenticationMode auth = MsmqAuthenticationMode.WindowsDomain;
+        MsmqEncryptionAlgorithm enc;
+        MsmqSecureHashAlgorithm hash = MsmqSecureHashAlgorithm.Sha1;
+        ProtectionLevel protection_level = ProtectionLevel.Sign;
 
-		public MsmqTransportSecurity ()
-		{
-		}
+        public MsmqTransportSecurity ()
+        {
+        }
 
-		public MsmqTransportSecurity (MsmqTransportSecurity other)
-		{
-		}
+        public MsmqTransportSecurity (MsmqTransportSecurity other)
+        {
+        }
 
-		public MsmqAuthenticationMode MsmqAuthenticationMode {
-			get { return auth; }
-			set { auth = value; }
-		}
+        public MsmqAuthenticationMode MsmqAuthenticationMode {
+            get { return auth; }
+            set { auth = value; }
+        }
 
-		public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm {
-			get { return enc; }
-			set { enc = value; }
-		}
+        public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm {
+            get { return enc; }
+            set { enc = value; }
+        }
 
-		public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm {
-			get { return hash; }
-			set { hash = value; }
-		}
+        public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm {
+            get { return hash; }
+            set { hash = value; }
+        }
 
-		public ProtectionLevel MsmqProtectionLevel {
-			get { return protection_level; }
-			set { protection_level = value; }
-		}
-	}
+        public ProtectionLevel MsmqProtectionLevel {
+            get { return protection_level; }
+            set { protection_level = value; }
+        }
+    }
 }

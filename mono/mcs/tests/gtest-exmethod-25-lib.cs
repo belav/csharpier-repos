@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 
 namespace lib1
 {
-	static class Foo
-	{
-		internal static void Extend (this string aString)
-		{
-		}
-	}
+    static class Foo
+    {
+        internal static void Extend (this string aString)
+        {
+        }
+    }
 }

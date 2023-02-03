@@ -2,7 +2,7 @@
 // ServiceHostFactory.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,21 +28,21 @@
 
 namespace System.ServiceModel.Activation
 {
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblySystemServiceModel_3_0)]
-	public class ServiceHostFactory : ServiceHostFactoryBase
-	{
-		[MonoTODO]
-		public override ServiceHostBase CreateServiceHost (
-			string constructorString, Uri [] baseAddresses)
-		{
-			throw new NotImplementedException ();
-		}
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblySystemServiceModel_3_0)]
+    public class ServiceHostFactory : ServiceHostFactoryBase
+    {
+        [MonoTODO]
+        public override ServiceHostBase CreateServiceHost (
+            string constructorString, Uri [] baseAddresses)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO ("untested")]
-		protected virtual ServiceHost CreateServiceHost (
-			Type serviceType, Uri [] baseAddresses)
-		{
-			return new ServiceHost (serviceType, baseAddresses);
-		}
-	}
+        [MonoTODO ("untested")]
+        protected virtual ServiceHost CreateServiceHost (
+            Type serviceType, Uri [] baseAddresses)
+        {
+            return new ServiceHost (serviceType, baseAddresses);
+        }
+    }
 }

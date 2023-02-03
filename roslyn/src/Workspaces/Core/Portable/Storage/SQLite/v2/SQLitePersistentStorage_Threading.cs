@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             // avoiding ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone
             // data set by CallContext.LogicalSetData at each yielding await in the task tree.
             //
-            // ⚠ DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
+            // ? DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
             // same thread where SuppressFlow was originally run.
             using var _ = FlowControlHelper.TrySuppressFlow();
             return PerformTaskAsync(func, arg, _connectionPoolService.Scheduler.ConcurrentScheduler, cancellationToken);
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             // avoiding ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone
             // data set by CallContext.LogicalSetData at each yielding await in the task tree.
             //
-            // ⚠ DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
+            // ? DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
             // same thread where SuppressFlow was originally run.
             using var _ = FlowControlHelper.TrySuppressFlow();
             return PerformTaskAsync(func, arg, _connectionPoolService.Scheduler.ExclusiveScheduler, cancellationToken);

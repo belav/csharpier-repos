@@ -2,7 +2,7 @@
 // Mono.Net.Dns.DnsResourceRecordIPAddress
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -24,26 +24,26 @@ using System.Net;
 using System.Text;
 
 namespace Mono.Net.Dns {
-	abstract class DnsResourceRecordIPAddress : DnsResourceRecord {
-		IPAddress address;
+    abstract class DnsResourceRecordIPAddress : DnsResourceRecord {
+        IPAddress address;
 
-		internal DnsResourceRecordIPAddress (DnsResourceRecord rr, int address_size)
-		{
-			CopyFrom (rr);
-			ArraySegment<byte> segment = rr.Data;
-			byte [] bytes = new byte [address_size];
-			Buffer.BlockCopy (segment.Array, segment.Offset, bytes, 0, address_size);
-			address = new IPAddress (bytes);
-		}
+        internal DnsResourceRecordIPAddress (DnsResourceRecord rr, int address_size)
+        {
+            CopyFrom (rr);
+            ArraySegment<byte> segment = rr.Data;
+            byte [] bytes = new byte [address_size];
+            Buffer.BlockCopy (segment.Array, segment.Offset, bytes, 0, address_size);
+            address = new IPAddress (bytes);
+        }
 
-		public override string ToString ()
-		{
-			return base.ToString() + " Address: " + address;
-		}
+        public override string ToString ()
+        {
+            return base.ToString() + " Address: " + address;
+        }
 
-		public IPAddress Address {
-			get { return address; }
-		}
-	}
+        public IPAddress Address {
+            get { return address; }
+        }
+    }
 }
 

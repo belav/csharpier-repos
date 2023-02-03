@@ -33,49 +33,49 @@ using System.Reflection;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlChoiceIdentifierAttribute.
-	/// </summary>
-	[AttributeUsageAttribute(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple=false)]
-	public class XmlChoiceIdentifierAttribute : Attribute
-	{
-		private string memberName;
+    /// <summary>
+    /// Summary description for XmlChoiceIdentifierAttribute.
+    /// </summary>
+    [AttributeUsageAttribute(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple=false)]
+    public class XmlChoiceIdentifierAttribute : Attribute
+    {
+        private string memberName;
 
-		public XmlChoiceIdentifierAttribute ()
-		{
-		}
-		public XmlChoiceIdentifierAttribute (string name)
-		{
-			memberName = name;
-		}
+        public XmlChoiceIdentifierAttribute ()
+        {
+        }
+        public XmlChoiceIdentifierAttribute (string name)
+        {
+            memberName = name;
+        }
 
-		public string MemberName {
-			get {
-				if (memberName == null) {
-					return string.Empty;
-				}
-				return memberName;
-			}
-			set { memberName = value; }
-		}
+        public string MemberName {
+            get {
+                if (memberName == null) {
+                    return string.Empty;
+                }
+                return memberName;
+            }
+            set { memberName = value; }
+        }
 
 #if MOBILE
-		MemberInfo member;
-		// It is used only in 2.1 S.X.Serialization.dll in MS SDK.
-		internal MemberInfo MemberInfo {
-			get { return member; }
-			set {
-				MemberName = value != null ? value.Name : null;
-				member = value;
-			}
-		}
+        MemberInfo member;
+        // It is used only in 2.1 S.X.Serialization.dll in MS SDK.
+        internal MemberInfo MemberInfo {
+            get { return member; }
+            set {
+                MemberName = value != null ? value.Name : null;
+                member = value;
+            }
+        }
 #endif
 
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("XCA ");
-			KeyHelper.AddField (sb, 1, memberName);
-			sb.Append ('|');
-		}
-	}
+        internal void AddKeyHash (System.Text.StringBuilder sb)
+        {
+            sb.Append ("XCA ");
+            KeyHelper.AddField (sb, 1, memberName);
+            sb.Append ('|');
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions;

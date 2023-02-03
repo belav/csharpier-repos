@@ -39,72 +39,72 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_GetChanges : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataSet_GetChanges tc = new DataSet_GetChanges();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataSet_GetChanges");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataSet_GetChanges tc = new DataSet_GetChanges();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataSet_GetChanges");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-	
-		DataSet ds = new DataSet();
-		ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+    public void run()
+    {
+        Exception exp = null;
+    
+        DataSet ds = new DataSet();
+        ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
 
-		try
-		{
-			BeginCase("GetChanges 1");
-			Compare(ds.GetChanges(),null );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-		DataRow dr = ds.Tables[0].NewRow();
-		dr[0] = 9;
-		ds.Tables[0].Rows.Add(dr);
-		
-		try
-		{
-			BeginCase("GetChanges 2");
-			Compare(ds.GetChanges()!=null,true );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("GetChanges 1");
+            Compare(ds.GetChanges(),null );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        DataRow dr = ds.Tables[0].NewRow();
+        dr[0] = 9;
+        ds.Tables[0].Rows.Add(dr);
+        
+        try
+        {
+            BeginCase("GetChanges 2");
+            Compare(ds.GetChanges()!=null,true );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
         
-		try
-		{
-			BeginCase("GetChanges 3");
-			Compare(ds.GetChanges().Tables[0].Rows[0].ItemArray  ,dr.ItemArray);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}
+        try
+        {
+            BeginCase("GetChanges 3");
+            Compare(ds.GetChanges().Tables[0].Rows[0].ItemArray  ,dr.ItemArray);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }
 }
 }

@@ -185,8 +185,8 @@ namespace System.CodeDom.Compiler {
 
         private void ValidateTypeMembers(CodeTypeDeclaration e) {
             foreach (CodeTypeMember currentMember in e.Members) {
-		        ValidateTypeMember(currentMember);
-	        }
+                ValidateTypeMember(currentMember);
+            }
        }
 
         private void ValidateTypeParameters(CodeTypeParameterCollection parameters) {

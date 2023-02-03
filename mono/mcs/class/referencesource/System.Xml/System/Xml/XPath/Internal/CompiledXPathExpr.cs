@@ -45,12 +45,12 @@ namespace MS.Internal.Xml.XPath {
         public override void AddSort(object expr, IComparer comparer) {
             // sort makes sense only when we are dealing with a query that
             // returns a nodeset.
-	        Query evalExpr;
+            Query evalExpr;
             if (expr is string) {
                 evalExpr = new QueryBuilder().Build((string)expr, out needContext); // this will throw if expr is invalid
             } else if (expr is CompiledXpathExpr) {
                 evalExpr = ((CompiledXpathExpr)expr).QueryTree;
-	        } else {
+            } else {
                 throw XPathException.Create(Res.Xp_BadQueryObject);
             }
             SortQuery sortQuery = query as SortQuery;
@@ -138,7 +138,7 @@ namespace MS.Internal.Xml.XPath {
                 }
                 catch (System.ArgumentException) {
                     throw;  // Throwing an XsltException would be a breaking change
-				}
+                }
             }
 
             if (order == XmlSortOrder.Descending) {

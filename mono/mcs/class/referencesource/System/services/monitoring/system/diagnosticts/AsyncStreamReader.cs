@@ -365,7 +365,7 @@ retry_dispose:
                             if (!cancelOperation)
                             {
                                 userCallBack(s);
-                            }							
+                            }                            
                         }
                     }
                 }

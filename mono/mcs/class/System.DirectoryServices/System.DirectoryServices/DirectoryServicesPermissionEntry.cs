@@ -27,39 +27,39 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 // Authors
-//	Raja R Harinath <rharinath@novell.com>
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Raja R Harinath <rharinath@novell.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 
 using System.Security.Permissions;
 
 namespace System.DirectoryServices {
 
-	[Serializable]
-	public class DirectoryServicesPermissionEntry {
+    [Serializable]
+    public class DirectoryServicesPermissionEntry {
 
-		DirectoryServicesPermissionAccess permissionAccess;
-		string path;
+        DirectoryServicesPermissionAccess permissionAccess;
+        string path;
 
-		public DirectoryServicesPermissionEntry (DirectoryServicesPermissionAccess permissionAccess, string path)
-		{
-			this.permissionAccess = permissionAccess;
-			this.path = path;
-		}
+        public DirectoryServicesPermissionEntry (DirectoryServicesPermissionAccess permissionAccess, string path)
+        {
+            this.permissionAccess = permissionAccess;
+            this.path = path;
+        }
 
-		public string Path {
-			get { return path; }
-		}
+        public string Path {
+            get { return path; }
+        }
 
-		public DirectoryServicesPermissionAccess PermissionAccess {
-			get { return permissionAccess; }
-		}
+        public DirectoryServicesPermissionAccess PermissionAccess {
+            get { return permissionAccess; }
+        }
 
-		// look at MSDN library ResourcePermissionBaseEntry sample for the "design"
+        // look at MSDN library ResourcePermissionBaseEntry sample for the "design"
 
-		internal ResourcePermissionBaseEntry GetBaseEntry ()
-		{
-			return new ResourcePermissionBaseEntry ((int)permissionAccess, new string [1] { path });
-		}
-	}
+        internal ResourcePermissionBaseEntry GetBaseEntry ()
+        {
+            return new ResourcePermissionBaseEntry ((int)permissionAccess, new string [1] { path });
+        }
+    }
 }

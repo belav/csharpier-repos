@@ -30,31 +30,31 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class XmlDesigner : ControlDesigner
-	{
-		public XmlDesigner ()
-			: base ()
-		{
-		}
+    public class XmlDesigner : ControlDesigner
+    {
+        public XmlDesigner ()
+            : base ()
+        {
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override void Dispose (bool disposing)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override string GetEmptyDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected override string GetEmptyDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public override void Initialize (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override void Initialize (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

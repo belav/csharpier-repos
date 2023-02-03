@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:2
 
 class Base {
-	public bool Method () { return false; }
+    public bool Method () { return false; }
         public void Method (int a) {}
 }
 

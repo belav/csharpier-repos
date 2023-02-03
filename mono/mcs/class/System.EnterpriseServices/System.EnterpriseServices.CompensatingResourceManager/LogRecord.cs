@@ -33,60 +33,60 @@ using System.EnterpriseServices;
 
 namespace System.EnterpriseServices.CompensatingResourceManager {
 
-	public sealed class LogRecord {
+    public sealed class LogRecord {
 
-		#region Fields
+        #region Fields
 
-		LogRecordFlags flags;
-		object record;
-		int sequence;
+        LogRecordFlags flags;
+        object record;
+        int sequence;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		[MonoTODO]
-		internal LogRecord ()
-		{
-		}
+        [MonoTODO]
+        internal LogRecord ()
+        {
+        }
 
-		[MonoTODO]
-		internal LogRecord (_LogRecord logRecord)
-		{
-			flags = (LogRecordFlags) logRecord.dwCrmFlags;
-			sequence = logRecord.dwSequenceNumber;
-			record = logRecord.blobUserData;
-		}
+        [MonoTODO]
+        internal LogRecord (_LogRecord logRecord)
+        {
+            flags = (LogRecordFlags) logRecord.dwCrmFlags;
+            sequence = logRecord.dwSequenceNumber;
+            record = logRecord.blobUserData;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public LogRecordFlags Flags {
-			get { return flags; }
-		}
+        public LogRecordFlags Flags {
+            get { return flags; }
+        }
 
-		public object Record {
-			get { return record; }
-		}
+        public object Record {
+            get { return record; }
+        }
 
-		public int Sequence {
-			get { return sequence; }
-		}
+        public int Sequence {
+            get { return sequence; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 
 #pragma warning disable 649
-	internal struct _LogRecord {
-		
-		#region Fields
+    internal struct _LogRecord {
+        
+        #region Fields
 
-		public int dwCrmFlags;
-		public int dwSequenceNumber;
-		public object blobUserData; // FIXME: This is not the correct type
+        public int dwCrmFlags;
+        public int dwSequenceNumber;
+        public object blobUserData; // FIXME: This is not the correct type
 
-		#endregion // Fields
-	}
+        #endregion // Fields
+    }
 #pragma warning restore 649
 }

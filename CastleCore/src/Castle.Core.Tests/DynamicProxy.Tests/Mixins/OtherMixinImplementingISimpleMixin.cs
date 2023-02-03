@@ -14,13 +14,13 @@
 
 namespace Castle.DynamicProxy.Tests.Mixins
 {
-	using System;
+    using System;
 
-	public class OtherMixinImplementingISimpleMixin : ISimpleMixin
-	{
-		public int DoSomething()
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public class OtherMixinImplementingISimpleMixin : ISimpleMixin
+    {
+        public int DoSomething()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

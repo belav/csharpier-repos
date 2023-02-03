@@ -2,7 +2,7 @@
 // ExprLoadConstant.cs
 //
 // Authors:
-//	Chris Bacon (chrisbacon76@gmail.com)
+//    Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -33,32 +33,32 @@ using System.Text;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprLoadConstant : Expr {
+    class ExprLoadConstant : Expr {
 
-		public ExprLoadConstant (MethodInfo methodInfo, object value)
-			: base (methodInfo)
-		{
-			this.Value = value;
+        public ExprLoadConstant (MethodInfo methodInfo, object value)
+            : base (methodInfo)
+        {
+            this.Value = value;
 
-			if (value == null) {
-				this.returnType = methodInfo.TypeObject;
-			} else {
-				Type type = value.GetType();
-				this.returnType = methodInfo.Module.Import (type);
-			}
-		}
+            if (value == null) {
+                this.returnType = methodInfo.TypeObject;
+            } else {
+                Type type = value.GetType();
+                this.returnType = methodInfo.Module.Import (type);
+            }
+        }
 
-		private TypeReference returnType;
+        private TypeReference returnType;
 
-		public object Value { get; private set; }
+        public object Value { get; private set; }
 
-		public override ExprType ExprType {
-			get { return ExprType.LoadConstant; }
-		}
+        public override ExprType ExprType {
+            get { return ExprType.LoadConstant; }
+        }
 
-		public override TypeReference ReturnType {
-			get { return this.returnType; }
-		}
+        public override TypeReference ReturnType {
+            get { return this.returnType; }
+        }
 
-	}
+    }
 }

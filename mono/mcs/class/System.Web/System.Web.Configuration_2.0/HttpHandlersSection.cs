@@ -2,7 +2,7 @@
 // System.Web.Configuration.HttpHandlersSection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,68 +34,68 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class HttpHandlersSection: ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty handlersProp;
+    public sealed class HttpHandlersSection: ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty handlersProp;
 
-		static HttpHandlersSection ()
-		{
-			handlersProp = new ConfigurationProperty ("", typeof (HttpHandlerActionCollection), null,
-								  null, PropertyHelper.DefaultValidator,
-								  ConfigurationPropertyOptions.IsDefaultCollection);
+        static HttpHandlersSection ()
+        {
+            handlersProp = new ConfigurationProperty ("", typeof (HttpHandlerActionCollection), null,
+                                  null, PropertyHelper.DefaultValidator,
+                                  ConfigurationPropertyOptions.IsDefaultCollection);
 
 
-			properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection ();
 
-			properties.Add (handlersProp);
-		}
+            properties.Add (handlersProp);
+        }
 
-		public HttpHandlersSection ()
-		{
-		}
+        public HttpHandlersSection ()
+        {
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public HttpHandlerActionCollection Handlers {
-			get { return (HttpHandlerActionCollection) base[handlersProp]; }
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public HttpHandlerActionCollection Handlers {
+            get { return (HttpHandlerActionCollection) base[handlersProp]; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
 #region CompatabilityCode
-		internal object LocateHandler (string verb, string filepath, out bool allowCache)
-		{
-			int top = Handlers.Count;
-			
-			for (int i = 0; i < top; i++){
-				HttpHandlerAction handler = (HttpHandlerAction) Handlers [i];
+        internal object LocateHandler (string verb, string filepath, out bool allowCache)
+        {
+            int top = Handlers.Count;
+            
+            for (int i = 0; i < top; i++){
+                HttpHandlerAction handler = (HttpHandlerAction) Handlers [i];
 
-				string[] verbs = handler.Verbs;
-				if (verbs == null){
-					if (handler.PathMatches (filepath)) {
-						allowCache = handler.Path != "*";
-						return handler.GetHandlerInstance ();
-					}
-					continue;
-				}
+                string[] verbs = handler.Verbs;
+                if (verbs == null){
+                    if (handler.PathMatches (filepath)) {
+                        allowCache = handler.Path != "*";
+                        return handler.GetHandlerInstance ();
+                    }
+                    continue;
+                }
 
-				for (int j = verbs.Length; j > 0; ){
-					j--;
-					if (verbs [j] != verb)
-						continue;
-					if (handler.PathMatches (filepath)) {
-						allowCache = handler.Path != "*";
-						return handler.GetHandlerInstance ();
-					}
-				}
-			}
+                for (int j = verbs.Length; j > 0; ){
+                    j--;
+                    if (verbs [j] != verb)
+                        continue;
+                    if (handler.PathMatches (filepath)) {
+                        allowCache = handler.Path != "*";
+                        return handler.GetHandlerInstance ();
+                    }
+                }
+            }
 
-			allowCache = false;
-			return null;
-		}
+            allowCache = false;
+            return null;
+        }
 #endregion
-	}
+    }
 }
 

@@ -2,7 +2,7 @@
 // AttributesTest.cs
 //
 // Author:
-//	Eyal Alaluf <mainsoft.com>
+//    Eyal Alaluf <mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft.co http://www.mainsoft.com
 
@@ -43,33 +43,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class AttributesTest
-	{
-		[Test]
-		public void TestContractNamespaceAttribute ()
-		{
-			ContractNamespaceAttribute x = new ContractNamespaceAttribute ("test");
-			Assert.AreEqual (null, x.ClrNamespace, "#01");
-			Assert.AreEqual ("test", x.ContractNamespace, "#02");
-		}
+    [TestFixture]
+    public class AttributesTest
+    {
+        [Test]
+        public void TestContractNamespaceAttribute ()
+        {
+            ContractNamespaceAttribute x = new ContractNamespaceAttribute ("test");
+            Assert.AreEqual (null, x.ClrNamespace, "#01");
+            Assert.AreEqual ("test", x.ContractNamespace, "#02");
+        }
 
-		[Test]
-		public void TestDataContractAttribute ()
-		{
-			DataContractAttribute x = new DataContractAttribute ();
-			Assert.AreEqual (null, x.Name, "#01");
-			Assert.AreEqual (null, x.Namespace, "#02");
-		}
+        [Test]
+        public void TestDataContractAttribute ()
+        {
+            DataContractAttribute x = new DataContractAttribute ();
+            Assert.AreEqual (null, x.Name, "#01");
+            Assert.AreEqual (null, x.Namespace, "#02");
+        }
 
-		[Test]
-		public void TestDataMemberAttribute ()
-		{
-			DataMemberAttribute x = new DataMemberAttribute ();
-			Assert.AreEqual (null, x.Name, "#01");
-			Assert.AreEqual (-1, x.Order, "#02");
-			Assert.AreEqual (true, x.EmitDefaultValue, "#02");
-			Assert.AreEqual (false, x.IsRequired, "#02");
-		}
-	}
+        [Test]
+        public void TestDataMemberAttribute ()
+        {
+            DataMemberAttribute x = new DataMemberAttribute ();
+            Assert.AreEqual (null, x.Name, "#01");
+            Assert.AreEqual (-1, x.Order, "#02");
+            Assert.AreEqual (true, x.EmitDefaultValue, "#02");
+            Assert.AreEqual (false, x.IsRequired, "#02");
+        }
+    }
 }

@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.Serialization.PrimitiveCodeDomSerializer
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -36,12 +36,12 @@ using System.CodeDom;
 
 namespace System.ComponentModel.Design.Serialization
 {
-	internal class PrimitiveCodeDomSerializer : CodeDomSerializer
-	{
+    internal class PrimitiveCodeDomSerializer : CodeDomSerializer
+    {
 
-		public override object Serialize (IDesignerSerializationManager manager, object value) 
-		{
-			return new CodePrimitiveExpression (value);
-		}
-	}
+        public override object Serialize (IDesignerSerializationManager manager, object value) 
+        {
+            return new CodePrimitiveExpression (value);
+        }
+    }
 }

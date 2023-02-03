@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xunit;
 using Shouldly;
 using AutoMapper.QueryableExtensions.Impl;

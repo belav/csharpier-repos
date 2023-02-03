@@ -28,48 +28,48 @@ using System.Xaml;
 
 namespace System.Xaml.Permissions
 {
-	[SerializableAttribute]
-	public class XamlAccessLevel
-	{
-		public static XamlAccessLevel AssemblyAccessTo (Assembly assembly)
-		{
-			if (assembly == null)
-				throw new ArgumentNullException ("assembly");
+    [SerializableAttribute]
+    public class XamlAccessLevel
+    {
+        public static XamlAccessLevel AssemblyAccessTo (Assembly assembly)
+        {
+            if (assembly == null)
+                throw new ArgumentNullException ("assembly");
 
-			return new XamlAccessLevel (assembly.GetName ());
-		}
-		public static XamlAccessLevel AssemblyAccessTo (AssemblyName assemblyName)
-		{
-			if (assemblyName == null)
-				throw new ArgumentNullException ("assemblyName");
-			return new XamlAccessLevel (assemblyName);
-		}
+            return new XamlAccessLevel (assembly.GetName ());
+        }
+        public static XamlAccessLevel AssemblyAccessTo (AssemblyName assemblyName)
+        {
+            if (assemblyName == null)
+                throw new ArgumentNullException ("assemblyName");
+            return new XamlAccessLevel (assemblyName);
+        }
 
-		public static XamlAccessLevel PrivateAccessTo (string assemblyQualifiedTypeName)
-		{
-			if (assemblyQualifiedTypeName == null)
-				throw new ArgumentNullException ("assemblyQualifiedTypeName");
-			return new XamlAccessLevel (assemblyQualifiedTypeName);
-		}
+        public static XamlAccessLevel PrivateAccessTo (string assemblyQualifiedTypeName)
+        {
+            if (assemblyQualifiedTypeName == null)
+                throw new ArgumentNullException ("assemblyQualifiedTypeName");
+            return new XamlAccessLevel (assemblyQualifiedTypeName);
+        }
 
-		public static XamlAccessLevel PrivateAccessTo (Type type)
-		{
-			if (type == null)
-				throw new ArgumentNullException ("type");
-			return new XamlAccessLevel (type.AssemblyQualifiedName);
-		}
+        public static XamlAccessLevel PrivateAccessTo (Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException ("type");
+            return new XamlAccessLevel (type.AssemblyQualifiedName);
+        }
 
-		internal XamlAccessLevel (AssemblyName assemblyAccessToAssemblyName)
-		{
-			AssemblyAccessToAssemblyName = assemblyAccessToAssemblyName;
-		}
+        internal XamlAccessLevel (AssemblyName assemblyAccessToAssemblyName)
+        {
+            AssemblyAccessToAssemblyName = assemblyAccessToAssemblyName;
+        }
 
-		internal XamlAccessLevel (string privateAccessToTypeName)
-		{
-			PrivateAccessToTypeName = privateAccessToTypeName;
-		}
+        internal XamlAccessLevel (string privateAccessToTypeName)
+        {
+            PrivateAccessToTypeName = privateAccessToTypeName;
+        }
 
-		public AssemblyName AssemblyAccessToAssemblyName { get; private set; }
-		public string PrivateAccessToTypeName { get; private set; }
-	}
+        public AssemblyName AssemblyAccessToAssemblyName { get; private set; }
+        public string PrivateAccessToTypeName { get; private set; }
+    }
 }

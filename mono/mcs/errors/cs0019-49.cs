@@ -3,10 +3,10 @@
 
 class C
 {
-	static void Test (ulong? x, int y)
-	{
-		if (x != y)
-		{
-		}
-	}
+    static void Test (ulong? x, int y)
+    {
+        if (x != y)
+        {
+        }
+    }
 }

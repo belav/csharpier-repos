@@ -2,7 +2,7 @@
 // System.Web.Compilation.BuildDependencySet
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,26 +35,26 @@ using System.Collections;
 
 namespace System.Web.Compilation {
 
-	public sealed class BuildDependencySet {
+    public sealed class BuildDependencySet {
 
-		internal BuildDependencySet ()
-		{
-		}
+        internal BuildDependencySet ()
+        {
+        }
 
-		[MonoTODO ("Not implemented")]
-		public string HashCode {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO ("Not implemented")]
+        public string HashCode {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
 
-		[MonoTODO ("Not implemented")]
-		public IEnumerable VirtualPaths {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        [MonoTODO ("Not implemented")]
+        public IEnumerable VirtualPaths {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
+    }
 
 }
 

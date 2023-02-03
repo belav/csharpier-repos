@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace System.Data.Linq
 {
-	public interface ISingleResult<T> : IEnumerable<T>, IEnumerable, IFunctionResult, IDisposable
-	{
-	}
+    public interface ISingleResult<T> : IEnumerable<T>, IEnumerable, IFunctionResult, IDisposable
+    {
+    }
 }

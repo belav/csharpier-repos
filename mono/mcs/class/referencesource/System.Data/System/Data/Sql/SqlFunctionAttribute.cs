@@ -104,11 +104,11 @@ namespace Microsoft.SqlServer.Server {
                 m_fTableDefinition = value;
             }
         }
-	public string FillRowMethodName {
+    public string FillRowMethodName {
             get {
                 return m_FillRowMethodName;
             }
-            set	{
+            set    {
                 m_FillRowMethodName = value;
             }
         } 

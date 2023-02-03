@@ -1,4 +1,4 @@
-﻿#if !FULL_AOT_RUNTIME
+#if !FULL_AOT_RUNTIME
 // -----------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------

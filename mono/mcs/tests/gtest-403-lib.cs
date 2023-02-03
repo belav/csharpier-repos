@@ -2,7 +2,7 @@
 
 public struct ExS<T>
 {
-	public void Bar ()
-	{
-	}
+    public void Bar ()
+    {
+    }
 }

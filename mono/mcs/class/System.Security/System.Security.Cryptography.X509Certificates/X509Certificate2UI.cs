@@ -2,7 +2,7 @@
 // System.Security.Cryptography.X509Certificate2UI class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005, 2006 Novell Inc. (http://www.novell.com)
 //
@@ -46,49 +46,49 @@ using Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates {
 
-	public static class X509Certificate2UI {
+    public static class X509Certificate2UI {
 
-		[MonoTODO]
-		public static void DisplayCertificate (X509Certificate2 certificate)
-		{
-			// note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
-			DisplayCertificate (certificate, IntPtr.Zero);
-		}
+        [MonoTODO]
+        public static void DisplayCertificate (X509Certificate2 certificate)
+        {
+            // note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
+            DisplayCertificate (certificate, IntPtr.Zero);
+        }
 
-		[MonoTODO]
-		[UIPermission (SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-		public static void DisplayCertificate (X509Certificate2 certificate, IntPtr hwndParent) 
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
+        [MonoTODO]
+        [UIPermission (SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
+        [SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
+        public static void DisplayCertificate (X509Certificate2 certificate, IntPtr hwndParent) 
+        {
+            if (certificate == null)
+                throw new ArgumentNullException ("certificate");
 
-			/*byte[] raw = */ certificate.GetRawCertData ();
-			throw new NotImplementedException ();
-		}
+            /*byte[] raw = */ certificate.GetRawCertData ();
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static X509Certificate2Collection SelectFromCollection (X509Certificate2Collection certificates, 
-			string title, string message, X509SelectionFlag selectionFlag)
-		{
-			// note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
-			return SelectFromCollection (certificates, title, message, selectionFlag, IntPtr.Zero);
-		}
+        [MonoTODO]
+        public static X509Certificate2Collection SelectFromCollection (X509Certificate2Collection certificates, 
+            string title, string message, X509SelectionFlag selectionFlag)
+        {
+            // note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
+            return SelectFromCollection (certificates, title, message, selectionFlag, IntPtr.Zero);
+        }
 
-		[MonoTODO]
-		[UIPermission (SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-		public static X509Certificate2Collection SelectFromCollection (X509Certificate2Collection certificates, 
-			string title, string message, X509SelectionFlag selectionFlag, IntPtr hwndParent)
-		{
-			if (certificates == null)
-				throw new ArgumentNullException ("certificates");
-			if ((selectionFlag < X509SelectionFlag.SingleSelection) || (selectionFlag > X509SelectionFlag.MultiSelection))
-				throw new ArgumentException ("selectionFlag");
+        [MonoTODO]
+        [UIPermission (SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
+        [SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
+        public static X509Certificate2Collection SelectFromCollection (X509Certificate2Collection certificates, 
+            string title, string message, X509SelectionFlag selectionFlag, IntPtr hwndParent)
+        {
+            if (certificates == null)
+                throw new ArgumentNullException ("certificates");
+            if ((selectionFlag < X509SelectionFlag.SingleSelection) || (selectionFlag > X509SelectionFlag.MultiSelection))
+                throw new ArgumentException ("selectionFlag");
 
-			throw new NotImplementedException ();
-		}
-	}
+            throw new NotImplementedException ();
+        }
+    }
 }
 
 #endif

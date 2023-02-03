@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
@@ -32,40 +32,40 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	public class PopupEventArgs : CancelEventArgs
-	{
-		private Control associated_control;
-		private IWin32Window associated_window;
-		private bool is_balloon;
-		private Size tool_tip_size;
+    public class PopupEventArgs : CancelEventArgs
+    {
+        private Control associated_control;
+        private IWin32Window associated_window;
+        private bool is_balloon;
+        private Size tool_tip_size;
 
-		#region Public Constructors
-		public PopupEventArgs (IWin32Window associatedWindow, Control associatedControl, bool isBalloon, Size size) : base ()
-		{
-			this.associated_window = associatedWindow;
-			this.associated_control = associatedControl;
-			this.is_balloon = isBalloon;
-			this.tool_tip_size = size;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public PopupEventArgs (IWin32Window associatedWindow, Control associatedControl, bool isBalloon, Size size) : base ()
+        {
+            this.associated_window = associatedWindow;
+            this.associated_control = associatedControl;
+            this.is_balloon = isBalloon;
+            this.tool_tip_size = size;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public Control AssociatedControl {
-			get { return this.associated_control; }
-		}
+        #region Public Instance Properties
+        public Control AssociatedControl {
+            get { return this.associated_control; }
+        }
 
-		public IWin32Window AssociatedWindow {
-			get { return this.associated_window; }
-		}
-		
-		public bool IsBalloon {
-			get { return this.is_balloon; }
-		}
-		
-		public Size ToolTipSize {
-			get { return this.tool_tip_size; }
-			set { this.tool_tip_size = value; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        public IWin32Window AssociatedWindow {
+            get { return this.associated_window; }
+        }
+        
+        public bool IsBalloon {
+            get { return this.is_balloon; }
+        }
+        
+        public Size ToolTipSize {
+            get { return this.tool_tip_size; }
+            set { this.tool_tip_size = value; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

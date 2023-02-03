@@ -2,7 +2,7 @@
 // IIndexable.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,10 +29,10 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-	interface IIndexable<out T> {
-		int Count { get; }
-		T this [int index] { get; }
-	}
+    interface IIndexable<out T> {
+        int Count { get; }
+        T this [int index] { get; }
+    }
 
         static class IndexableExtensions {
                 public static IEnumerable<T> AsEnumerable<T>(this IIndexable<T> indexable)

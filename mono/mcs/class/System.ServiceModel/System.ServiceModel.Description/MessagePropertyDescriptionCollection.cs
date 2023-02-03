@@ -2,7 +2,7 @@
 // MessagePropertyDescriptionCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,15 +32,15 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Description
 {
-	public class MessagePropertyDescriptionCollection : KeyedCollection<string, MessagePropertyDescription>
-	{
-		internal MessagePropertyDescriptionCollection ()
-		{
-		}
+    public class MessagePropertyDescriptionCollection : KeyedCollection<string, MessagePropertyDescription>
+    {
+        internal MessagePropertyDescriptionCollection ()
+        {
+        }
 
-		protected override string GetKeyForItem (MessagePropertyDescription item)
-		{
-			return item.Name;
-		}
-	}
+        protected override string GetKeyForItem (MessagePropertyDescription item)
+        {
+            return item.Name;
+        }
+    }
 }

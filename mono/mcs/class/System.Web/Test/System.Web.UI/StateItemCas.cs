@@ -2,7 +2,7 @@
 // StateItemCas.cs - CAS unit tests for System.Web.UI.StateItem
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,39 +36,39 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StateItemCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class StateItemCas : AspNetHostingMinimal {
 
-		private StateItem item;
+        private StateItem item;
 
-		[TestFixtureSetUp]
-		public void FixtureSetup ()
-		{
-			item = new StateBag ().Add ("key", "value");
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetup ()
+        {
+            item = new StateBag ().Add ("key", "value");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Assert.IsFalse (item.IsDirty, "IsDirty");
-			item.IsDirty = true;
-			Assert.AreEqual ("value", item.Value);
-			item.Value = null;
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            Assert.IsFalse (item.IsDirty, "IsDirty");
+            item.IsDirty = true;
+            Assert.AreEqual ("value", item.Value);
+            item.Value = null;
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			MethodInfo mi = this.Type.GetProperty ("IsDirty").GetGetMethod ();
-			Assert.IsNotNull (mi, ".ctor(TemplateParser)");
-			return mi.Invoke (item, null);
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            MethodInfo mi = this.Type.GetProperty ("IsDirty").GetGetMethod ();
+            Assert.IsNotNull (mi, ".ctor(TemplateParser)");
+            return mi.Invoke (item, null);
+        }
 
-		public override Type Type {
-			get { return typeof (StateItem); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (StateItem); }
+        }
+    }
 }

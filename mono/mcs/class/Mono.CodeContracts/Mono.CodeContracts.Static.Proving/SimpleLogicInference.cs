@@ -2,7 +2,7 @@
 // SimpleLogicInference.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,80 +34,80 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Proving {
-	class SimpleLogicInference<Expression, Variable> : BasicFacts<Expression, Variable> {
-		public SimpleLogicInference (IExpressionContextProvider<Expression, Variable> contextProvider, IFactBase<Variable> factBase, Predicate<APC> isUnreachable)
-			: base (contextProvider, factBase, isUnreachable)
-		{
-		}
+    class SimpleLogicInference<Expression, Variable> : BasicFacts<Expression, Variable> {
+        public SimpleLogicInference (IExpressionContextProvider<Expression, Variable> contextProvider, IFactBase<Variable> factBase, Predicate<APC> isUnreachable)
+            : base (contextProvider, factBase, isUnreachable)
+        {
+        }
 
         public override FlatDomain<bool> IsNull(APC pc, BoxedExpression expr)
-		{
-			Variable v;
-			if (TryVariable (expr, out v)) {
+        {
+            Variable v;
+            if (TryVariable (expr, out v)) {
                 FlatDomain<bool> proofOutcome = this.FactBase.IsNull(pc, v);
-				if (!proofOutcome.IsTop)
-					return proofOutcome;
-			}
+                if (!proofOutcome.IsTop)
+                    return proofOutcome;
+            }
 
-			if (expr.IsConstant) {
-				object constant = expr.Constant;
-				if (constant == null)
-					return ProofOutcome.True;
-				if (constant is string)
-					return ProofOutcome.False;
+            if (expr.IsConstant) {
+                object constant = expr.Constant;
+                if (constant == null)
+                    return ProofOutcome.True;
+                if (constant is string)
+                    return ProofOutcome.False;
 
-			    long? longValue = constant.ConvertToLong ();
+                long? longValue = constant.ConvertToLong ();
                 if (longValue.HasValue)
                     return longValue == 0 ? ProofOutcome.True : ProofOutcome.False;
                 
                 return ProofOutcome.Top;
-			}
+            }
 
-			BinaryOperator op;
-			BoxedExpression left;
-			BoxedExpression right;
-			if (expr.IsBinaryExpression (out op, out left, out right)) {
-				if ((op == BinaryOperator.Ceq || op == BinaryOperator.Cobjeq) && IsNull (pc, right).IsTrue ())
-					return IsNonNull (pc, left);
-				if (op == BinaryOperator.Cne_Un && IsNull (pc, right).IsTrue ())
-					return IsNull (pc, left);
-			}
-			return ProofOutcome.Top;
-		}
+            BinaryOperator op;
+            BoxedExpression left;
+            BoxedExpression right;
+            if (expr.IsBinaryExpression (out op, out left, out right)) {
+                if ((op == BinaryOperator.Ceq || op == BinaryOperator.Cobjeq) && IsNull (pc, right).IsTrue ())
+                    return IsNonNull (pc, left);
+                if (op == BinaryOperator.Cne_Un && IsNull (pc, right).IsTrue ())
+                    return IsNull (pc, left);
+            }
+            return ProofOutcome.Top;
+        }
 
         public override FlatDomain<bool> IsNonNull(APC pc, BoxedExpression expr)
-		{
-			Variable v;
-			if (TryVariable (expr, out v)) {
+        {
+            Variable v;
+            if (TryVariable (expr, out v)) {
                 FlatDomain<bool> proofOutcome = this.FactBase.IsNonNull(pc, v);
-				if (!proofOutcome.IsTop)
-					return proofOutcome;
-			}
+                if (!proofOutcome.IsTop)
+                    return proofOutcome;
+            }
 
-			if (expr.IsConstant) {
-				object constant = expr.Constant;
-				if (constant == null)
-					return ProofOutcome.False;
-				if (constant is string)
-					return ProofOutcome.True;
+            if (expr.IsConstant) {
+                object constant = expr.Constant;
+                if (constant == null)
+                    return ProofOutcome.False;
+                if (constant is string)
+                    return ProofOutcome.True;
                 
                 long? longValue = constant.ConvertToLong();
                 if (longValue.HasValue)
                     return longValue != 0 ? ProofOutcome.True : ProofOutcome.False;
-				
+                
                 return ProofOutcome.Top;
-			}
+            }
 
-			BinaryOperator op;
-			BoxedExpression left;
-			BoxedExpression right;
-			if (expr.IsBinaryExpression (out op, out left, out right)) {
-				if ((op == BinaryOperator.Ceq || op == BinaryOperator.Cobjeq) && IsNull (pc, right).IsTrue ())
-					return IsNull (pc, left);
-				if (op == BinaryOperator.Cne_Un && IsNull (pc, right).IsTrue ())
-					return IsNonNull (pc, left);
-			}
-			return ProofOutcome.Top;
-		}
-	}
+            BinaryOperator op;
+            BoxedExpression left;
+            BoxedExpression right;
+            if (expr.IsBinaryExpression (out op, out left, out right)) {
+                if ((op == BinaryOperator.Ceq || op == BinaryOperator.Cobjeq) && IsNull (pc, right).IsTrue ())
+                    return IsNull (pc, left);
+                if (op == BinaryOperator.Cne_Un && IsNull (pc, right).IsTrue ())
+                    return IsNonNull (pc, left);
+            }
+            return ProofOutcome.Top;
+        }
+    }
 }

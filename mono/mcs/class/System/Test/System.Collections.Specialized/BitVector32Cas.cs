@@ -1,9 +1,9 @@
 //
 // BitVector32Cas.cs 
-//	- CAS unit tests for System.Collections.Specialized.BitVector32
+//    - CAS unit tests for System.Collections.Specialized.BitVector32
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,40 +39,40 @@ using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class BitVector32Cas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class BitVector32Cas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			BitVector32Test unit = new BitVector32Test ();
-			unit.Constructors ();
-			unit.Constructors_MaxValue ();
-			unit.Constructors_MinValue ();
-			unit.Indexers ();
-			unit.CreateMask ();
-			unit.CreateSection ();
-			unit.Section ();
-			unit.TestSectionIndexer ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            BitVector32Test unit = new BitVector32Test ();
+            unit.Constructors ();
+            unit.Constructors_MaxValue ();
+            unit.Constructors_MinValue ();
+            unit.Indexers ();
+            unit.CreateMask ();
+            unit.CreateSection ();
+            unit.Section ();
+            unit.TestSectionIndexer ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (int) };
-			ConstructorInfo ci = typeof (BitVector32).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(int)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { 1 }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[1] { typeof (int) };
+            ConstructorInfo ci = typeof (BitVector32).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(int)");
+            Assert.IsNotNull (ci.Invoke (new object[1] { 1 }), "invoke");
+        }
+    }
 }

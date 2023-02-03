@@ -1,9 +1,9 @@
 //
 // CodeDomProviderCas.cs 
-//	- CAS unit tests for System.CodeDom.Compiler.CodeDomProvider
+//    - CAS unit tests for System.CodeDom.Compiler.CodeDomProvider
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,303 +40,303 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-	class CodeDomProviderTest: CodeDomProvider {
+    class CodeDomProviderTest: CodeDomProvider {
 
-		public CodeDomProviderTest ()
-		{
-		}
+        public CodeDomProviderTest ()
+        {
+        }
 
-		public override ICodeCompiler CreateCompiler ()
-		{
-			return null;
-		}
+        public override ICodeCompiler CreateCompiler ()
+        {
+            return null;
+        }
 
-		public override ICodeGenerator CreateGenerator ()
-		{
-			return null;
-		}
-	}
+        public override ICodeGenerator CreateGenerator ()
+        {
+            return null;
+        }
+    }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeDomProviderCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeDomProviderCas {
 
-		private StringWriter writer;
-		private CodeDomProviderTest cdp;
+        private StringWriter writer;
+        private CodeDomProviderTest cdp;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// at full trust
-			writer = new StringWriter ();
-			cdp = new CodeDomProviderTest ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            // at full trust
+            writer = new StringWriter ();
+            cdp = new CodeDomProviderTest ();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Defaults ()
-		{
-			cdp = new CodeDomProviderTest (); // execute ctor not a full trust
-			Assert.AreEqual (String.Empty, cdp.FileExtension, "FileExtension");
-			Assert.AreEqual (LanguageOptions.None, cdp.LanguageOptions, "LanguageOptions");
-			Assert.IsNull (cdp.CreateCompiler (), "CreateCompiler");
-			Assert.IsNull (cdp.CreateGenerator (), "CreateGenerator");
-			Assert.IsNull (cdp.CreateGenerator (String.Empty), "CreateGenerator(string)");
-			Assert.IsNull (cdp.CreateGenerator (writer), "CreateGenerator(TextWriter)");
-			Assert.IsNull (cdp.CreateParser (), "CreateParser()");
-			Assert.IsNotNull (cdp.GetConverter (typeof (string)), "GetConverter");
-			Assert.IsNotNull (CodeDomProvider.GetAllCompilerInfo (), "GetAllCompilerInfo");
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Defaults ()
+        {
+            cdp = new CodeDomProviderTest (); // execute ctor not a full trust
+            Assert.AreEqual (String.Empty, cdp.FileExtension, "FileExtension");
+            Assert.AreEqual (LanguageOptions.None, cdp.LanguageOptions, "LanguageOptions");
+            Assert.IsNull (cdp.CreateCompiler (), "CreateCompiler");
+            Assert.IsNull (cdp.CreateGenerator (), "CreateGenerator");
+            Assert.IsNull (cdp.CreateGenerator (String.Empty), "CreateGenerator(string)");
+            Assert.IsNull (cdp.CreateGenerator (writer), "CreateGenerator(TextWriter)");
+            Assert.IsNull (cdp.CreateParser (), "CreateParser()");
+            Assert.IsNotNull (cdp.GetConverter (typeof (string)), "GetConverter");
+            Assert.IsNotNull (CodeDomProvider.GetAllCompilerInfo (), "GetAllCompilerInfo");
 
-			// mono returns null (missing config?)
-			CodeDomProvider.GetCompilerInfo ("cs"); 
-			CodeDomProvider.GetLanguageFromExtension ("cs");
+            // mono returns null (missing config?)
+            CodeDomProvider.GetCompilerInfo ("cs"); 
+            CodeDomProvider.GetLanguageFromExtension ("cs");
 
-			Assert.IsFalse (CodeDomProvider.IsDefinedExtension (String.Empty), "String.Empty");
-			Assert.IsFalse (CodeDomProvider.IsDefinedLanguage (String.Empty), "String.Empty");
-		}
+            Assert.IsFalse (CodeDomProvider.IsDefinedExtension (String.Empty), "String.Empty");
+            Assert.IsFalse (CodeDomProvider.IsDefinedLanguage (String.Empty), "String.Empty");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void CompileAssemblyFromDom_Deny_Unrestricted ()
-		{
-			cdp.CompileAssemblyFromDom (null, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void CompileAssemblyFromDom_Deny_Unrestricted ()
+        {
+            cdp.CompileAssemblyFromDom (null, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void CompileAssemblyFromFile_Deny_Unrestricted ()
-		{
-			cdp.CompileAssemblyFromFile (null, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void CompileAssemblyFromFile_Deny_Unrestricted ()
+        {
+            cdp.CompileAssemblyFromFile (null, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void CompileAssemblyFromSource_Deny_Unrestricted ()
-		{
-			cdp.CompileAssemblyFromSource (null, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void CompileAssemblyFromSource_Deny_Unrestricted ()
+        {
+            cdp.CompileAssemblyFromSource (null, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void CreateEscapedIdentifier_Deny_Unrestricted ()
-		{
-			cdp.CreateEscapedIdentifier (null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void CreateEscapedIdentifier_Deny_Unrestricted ()
+        {
+            cdp.CreateEscapedIdentifier (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void CreateValidIdentifier_Deny_Unrestricted ()
-		{
-			cdp.CreateValidIdentifier (null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void CreateValidIdentifier_Deny_Unrestricted ()
+        {
+            cdp.CreateValidIdentifier (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GenerateCodeFromCompileUnit_Deny_Unrestricted ()
-		{
-			cdp.GenerateCodeFromCompileUnit (null, writer, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GenerateCodeFromCompileUnit_Deny_Unrestricted ()
+        {
+            cdp.GenerateCodeFromCompileUnit (null, writer, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GenerateCodeFromExpression_Deny_Unrestricted ()
-		{
-			cdp.GenerateCodeFromExpression (null, writer, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GenerateCodeFromExpression_Deny_Unrestricted ()
+        {
+            cdp.GenerateCodeFromExpression (null, writer, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GenerateCodeFromMember_Deny_Unrestricted ()
-		{
-			cdp.GenerateCodeFromMember (null, writer, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GenerateCodeFromMember_Deny_Unrestricted ()
+        {
+            cdp.GenerateCodeFromMember (null, writer, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GenerateCodeFromNamespace_Deny_Unrestricted ()
-		{
-			cdp.GenerateCodeFromNamespace (null, writer, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GenerateCodeFromNamespace_Deny_Unrestricted ()
+        {
+            cdp.GenerateCodeFromNamespace (null, writer, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GenerateCodeFromStatement_Deny_Unrestricted ()
-		{
-			cdp.GenerateCodeFromStatement (null, writer, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GenerateCodeFromStatement_Deny_Unrestricted ()
+        {
+            cdp.GenerateCodeFromStatement (null, writer, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GenerateCodeFromType_Deny_Unrestricted ()
-		{
-			cdp.GenerateCodeFromType (null, writer, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GenerateCodeFromType_Deny_Unrestricted ()
+        {
+            cdp.GenerateCodeFromType (null, writer, null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void GetTypeOutput_Deny_Unrestricted ()
-		{
-			cdp.GetTypeOutput (new CodeTypeReference ());
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void GetTypeOutput_Deny_Unrestricted ()
+        {
+            cdp.GetTypeOutput (new CodeTypeReference ());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void IsValidIdentifier_Deny_Unrestricted ()
-		{
-			cdp.IsValidIdentifier (null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void IsValidIdentifier_Deny_Unrestricted ()
+        {
+            cdp.IsValidIdentifier (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void Parse_Deny_Unrestricted ()
-		{
-			cdp.Parse (null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void Parse_Deny_Unrestricted ()
+        {
+            cdp.Parse (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void Supports_Deny_Unrestricted ()
-		{
-			cdp.Supports (GeneratorSupport.ArraysOfArrays);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NotImplementedException))]
+        public void Supports_Deny_Unrestricted ()
+        {
+            cdp.Supports (GeneratorSupport.ArraysOfArrays);
+        }
 
-		// static methods
+        // static methods
 
-		[Test]
-		public void CreateProvider_Allow_Everything ()
-		{
-			CodeDomProvider.CreateProvider ("cs");
-			// returns null on mono (missing config?)
-		}
+        [Test]
+        public void CreateProvider_Allow_Everything ()
+        {
+            CodeDomProvider.CreateProvider ("cs");
+            // returns null on mono (missing config?)
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		[Category ("NotWorking")] // mono returns null not an instance
-		public void CreateProvider_Deny_Anything ()
-		{
-			CodeDomProvider cdp = CodeDomProvider.CreateProvider ("cs");
-			// requires full trust (i.e. unrestricted permission set)
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        [Category ("NotWorking")] // mono returns null not an instance
+        public void CreateProvider_Deny_Anything ()
+        {
+            CodeDomProvider cdp = CodeDomProvider.CreateProvider ("cs");
+            // requires full trust (i.e. unrestricted permission set)
+        }
 
-		[Test]
-		public void LinkDemand_StaticMethods_Allow_Everything ()
-		{
-			object[] language = new object[1] { "cs" };
-			object[] empty = new object[1] { String.Empty };
+        [Test]
+        public void LinkDemand_StaticMethods_Allow_Everything ()
+        {
+            object[] language = new object[1] { "cs" };
+            object[] empty = new object[1] { String.Empty };
 
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("CreateProvider");
-			mi.Invoke (null, language); // returns null on mono (missing config?)
-			
-			mi = typeof (CodeDomProvider).GetMethod ("GetAllCompilerInfo");
-			Assert.IsNotNull (mi.Invoke (null, null), "GetAllCompilerInfo()");
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("CreateProvider");
+            mi.Invoke (null, language); // returns null on mono (missing config?)
+            
+            mi = typeof (CodeDomProvider).GetMethod ("GetAllCompilerInfo");
+            Assert.IsNotNull (mi.Invoke (null, null), "GetAllCompilerInfo()");
 
-			mi = typeof (CodeDomProvider).GetMethod ("GetCompilerInfo");
-			mi.Invoke (null, language); // returns null on mono (missing config?)
+            mi = typeof (CodeDomProvider).GetMethod ("GetCompilerInfo");
+            mi.Invoke (null, language); // returns null on mono (missing config?)
 
-			mi = typeof (CodeDomProvider).GetMethod ("GetLanguageFromExtension");
-			mi.Invoke (null, language); // returns null on mono (missing config?)
+            mi = typeof (CodeDomProvider).GetMethod ("GetLanguageFromExtension");
+            mi.Invoke (null, language); // returns null on mono (missing config?)
 
-			mi = typeof (CodeDomProvider).GetMethod ("IsDefinedExtension");
-			Assert.IsFalse ((bool)mi.Invoke (null, empty), "IsDefinedExtension('')");
+            mi = typeof (CodeDomProvider).GetMethod ("IsDefinedExtension");
+            Assert.IsFalse ((bool)mi.Invoke (null, empty), "IsDefinedExtension('')");
 
-			mi = typeof (CodeDomProvider).GetMethod ("IsDefinedLanguage");
-			Assert.IsFalse ((bool)mi.Invoke (null, empty), "IsDefinedLanguage('')");
-		}
+            mi = typeof (CodeDomProvider).GetMethod ("IsDefinedLanguage");
+            Assert.IsFalse ((bool)mi.Invoke (null, empty), "IsDefinedLanguage('')");
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_CreateProvider_Deny_Anything ()
-		{
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("CreateProvider");
-			Assert.IsNotNull (mi, "CreateProvider");
-			Assert.IsNotNull (mi.Invoke (null, new object[1] { "cs" }), "CreateProvider(cs)");
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_CreateProvider_Deny_Anything ()
+        {
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("CreateProvider");
+            Assert.IsNotNull (mi, "CreateProvider");
+            Assert.IsNotNull (mi.Invoke (null, new object[1] { "cs" }), "CreateProvider(cs)");
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_GetAllCompilerInfo_Deny_Anything ()
-		{
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("GetAllCompilerInfo");
-			Assert.IsNotNull (mi, "GetAllCompilerInfo");
-			Assert.IsNotNull (mi.Invoke (null, null), "GetAllCompilerInfo()");
-			// requires full trust (i.e. unrestricted permission set)
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_GetAllCompilerInfo_Deny_Anything ()
+        {
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("GetAllCompilerInfo");
+            Assert.IsNotNull (mi, "GetAllCompilerInfo");
+            Assert.IsNotNull (mi.Invoke (null, null), "GetAllCompilerInfo()");
+            // requires full trust (i.e. unrestricted permission set)
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_GetCompilerInfo_Deny_Anything ()
-		{
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("GetCompilerInfo");
-			Assert.IsNotNull (mi, "GetCompilerInfo");
-			Assert.IsNotNull (mi.Invoke (null, new object[1] { "cs" }), "GetCompilerInfo(cs)");
-			// requires full trust (i.e. unrestricted permission set)
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_GetCompilerInfo_Deny_Anything ()
+        {
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("GetCompilerInfo");
+            Assert.IsNotNull (mi, "GetCompilerInfo");
+            Assert.IsNotNull (mi.Invoke (null, new object[1] { "cs" }), "GetCompilerInfo(cs)");
+            // requires full trust (i.e. unrestricted permission set)
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_GetLanguageFromExtension_Deny_Anything ()
-		{
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("GetLanguageFromExtension");
-			Assert.IsNotNull (mi, "GetLanguageFromExtension");
-			Assert.IsNotNull (mi.Invoke (null, new object[1] { null }), "invoke (null)");
-			// requires full trust (i.e. unrestricted permission set)
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_GetLanguageFromExtension_Deny_Anything ()
+        {
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("GetLanguageFromExtension");
+            Assert.IsNotNull (mi, "GetLanguageFromExtension");
+            Assert.IsNotNull (mi.Invoke (null, new object[1] { null }), "invoke (null)");
+            // requires full trust (i.e. unrestricted permission set)
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_IsDefinedExtension_Deny_Anything ()
-		{
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("IsDefinedExtension");
-			Assert.IsNotNull (mi, "IsDefinedExtension");
-			Assert.IsFalse ((bool) mi.Invoke (null, new object[1] { String.Empty }), "IsDefinedExtension('')");
-			// requires full trust (i.e. unrestricted permission set)
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_IsDefinedExtension_Deny_Anything ()
+        {
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("IsDefinedExtension");
+            Assert.IsNotNull (mi, "IsDefinedExtension");
+            Assert.IsFalse ((bool) mi.Invoke (null, new object[1] { String.Empty }), "IsDefinedExtension('')");
+            // requires full trust (i.e. unrestricted permission set)
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_IsDefinedLanguage_Deny_Anything ()
-		{
-			MethodInfo mi = typeof (CodeDomProvider).GetMethod ("IsDefinedLanguage");
-			Assert.IsNotNull (mi, "IsDefinedLanguage");
-			Assert.IsFalse ((bool) mi.Invoke (null, new object[1] { String.Empty }), "IsDefinedLanguage('')");
-			// requires full trust (i.e. unrestricted permission set)
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeDomProviderTest).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_IsDefinedLanguage_Deny_Anything ()
+        {
+            MethodInfo mi = typeof (CodeDomProvider).GetMethod ("IsDefinedLanguage");
+            Assert.IsNotNull (mi, "IsDefinedLanguage");
+            Assert.IsFalse ((bool) mi.Invoke (null, new object[1] { String.Empty }), "IsDefinedLanguage('')");
+            // requires full trust (i.e. unrestricted permission set)
+        }
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeDomProviderTest).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

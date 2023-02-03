@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 // COMPLETE
@@ -30,21 +30,21 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class ItemChangedEventArgs : EventArgs
-	{
-		private int index;
+    public class ItemChangedEventArgs : EventArgs
+    {
+        private int index;
 
-		#region Internal Constructors
-		internal ItemChangedEventArgs (int index)
-		{
-			this.index = index;
-		}
-		#endregion	// Internal Constructors
+        #region Internal Constructors
+        internal ItemChangedEventArgs (int index)
+        {
+            this.index = index;
+        }
+        #endregion    // Internal Constructors
 
-		#region Public Instance Properties
-		public int Index {
-			get { return index; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public int Index {
+            get { return index; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

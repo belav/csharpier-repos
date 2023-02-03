@@ -1,4 +1,4 @@
-﻿namespace System.Web.Http.Cors
+namespace System.Web.Http.Cors
 {
     [EnableCors("*", "*", "*")]
     public class ThrowingController : ApiController

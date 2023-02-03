@@ -2,7 +2,7 @@
 // TemplateControlCas.cs - CAS unit tests for System.Web.UI.TemplateControl
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,104 +37,104 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	class NonAbstractTemplateControl : TemplateControl {
+    class NonAbstractTemplateControl : TemplateControl {
 
-		public NonAbstractTemplateControl ()
-		{
-		}
-	}
+        public NonAbstractTemplateControl ()
+        {
+        }
+    }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TemplateControlCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class TemplateControlCas {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void LoadControl_Deny_Unrestricted ()
-		{
-			NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
-			tc.LoadControl (null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void LoadControl_Deny_Unrestricted ()
+        {
+            NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
+            tc.LoadControl (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void LoadTemplate_Deny_Unrestricted ()
-		{
-			NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
-			tc.LoadTemplate (null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void LoadTemplate_Deny_Unrestricted ()
+        {
+            NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
+            tc.LoadTemplate (null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ParseControl_Deny_Unrestricted ()
-		{
-			NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
-			try {
-				tc.ParseControl (null);
-			}
-			catch (NullReferenceException) {
-				throw;
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ParseControl_Deny_Unrestricted ()
+        {
+            NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
+            try {
+                tc.ParseControl (null);
+            }
+            catch (NullReferenceException) {
+                throw;
+            }
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ReadStringResource_Deny_Unrestricted ()
-		{
-			try {
-				TemplateControl.ReadStringResource (null);
-			}
-			catch (TypeInitializationException) {
-				Assert.Ignore ("exception during initialization");
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ReadStringResource_Deny_Unrestricted ()
+        {
+            try {
+                TemplateControl.ReadStringResource (null);
+            }
+            catch (TypeInitializationException) {
+                Assert.Ignore ("exception during initialization");
+            }
+        }
 
-		private void Handler (object sender, EventArgs e)
-		{
-		}
+        private void Handler (object sender, EventArgs e)
+        {
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Events_Deny_Unrestricted ()
-		{
-			NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
-			tc.AbortTransaction += new EventHandler (Handler);
-			tc.CommitTransaction += new EventHandler (Handler);
-			tc.Error += new EventHandler (Handler);
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Events_Deny_Unrestricted ()
+        {
+            NonAbstractTemplateControl tc = new NonAbstractTemplateControl ();
+            tc.AbortTransaction += new EventHandler (Handler);
+            tc.CommitTransaction += new EventHandler (Handler);
+            tc.Error += new EventHandler (Handler);
 
-			tc.AbortTransaction -= new EventHandler (Handler);
-			tc.CommitTransaction -= new EventHandler (Handler);
-			tc.Error -= new EventHandler (Handler);
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (TypeInitializationException))]
-		public void IFilterResolutionService_Deny_Unrestricted ()
-		{
-			IFilterResolutionService frs = new NonAbstractTemplateControl ();
-			try {
-				Assert.AreEqual (0, frs.CompareFilters (String.Empty, String.Empty), "CompareFilters");
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-			try {
-				Assert.IsFalse (frs.EvaluateFilter (String.Empty), "EvaluateFilter");
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-		}
-	}
+            tc.AbortTransaction -= new EventHandler (Handler);
+            tc.CommitTransaction -= new EventHandler (Handler);
+            tc.Error -= new EventHandler (Handler);
+        }
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (TypeInitializationException))]
+        public void IFilterResolutionService_Deny_Unrestricted ()
+        {
+            IFilterResolutionService frs = new NonAbstractTemplateControl ();
+            try {
+                Assert.AreEqual (0, frs.CompareFilters (String.Empty, String.Empty), "CompareFilters");
+            }
+            catch (NotImplementedException) {
+                // mono
+            }
+            try {
+                Assert.IsFalse (frs.EvaluateFilter (String.Empty), "EvaluateFilter");
+            }
+            catch (NotImplementedException) {
+                // mono
+            }
+        }
+    }
 }

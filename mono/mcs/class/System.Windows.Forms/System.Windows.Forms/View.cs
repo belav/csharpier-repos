@@ -20,18 +20,18 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum View
-	{
-		LargeIcon = 0,
-		Details = 1,
-		SmallIcon = 2,
-		List = 3,
-		Tile = 4
-	}
+    public enum View
+    {
+        LargeIcon = 0,
+        Details = 1,
+        SmallIcon = 2,
+        List = 3,
+        Tile = 4
+    }
 }

@@ -2,7 +2,7 @@
 // UnaryExpr.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,60 +33,60 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions {
-	class UnaryExpr<TSymbolicValue> : Expr<TSymbolicValue> where TSymbolicValue : IEquatable<TSymbolicValue> {
-		public readonly UnaryOperator Operator;
-		public readonly TSymbolicValue Source;
-		public readonly bool Unsigned;
+    class UnaryExpr<TSymbolicValue> : Expr<TSymbolicValue> where TSymbolicValue : IEquatable<TSymbolicValue> {
+        public readonly UnaryOperator Operator;
+        public readonly TSymbolicValue Source;
+        public readonly bool Unsigned;
 
-		public UnaryExpr (TSymbolicValue source, UnaryOperator op, bool unsigned)
-		{
-			this.Source = source;
-			this.Operator = op;
-			this.Unsigned = unsigned;
-		}
+        public UnaryExpr (TSymbolicValue source, UnaryOperator op, bool unsigned)
+        {
+            this.Source = source;
+            this.Operator = op;
+            this.Unsigned = unsigned;
+        }
 
-		#region Overrides of Expression
-		public override IEnumerable<TSymbolicValue> Variables
-		{
-			get { yield return this.Source; }
-		}
+        #region Overrides of Expression
+        public override IEnumerable<TSymbolicValue> Variables
+        {
+            get { yield return this.Source; }
+        }
 
-		public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
-		{
-			return visitor.Unary (pc, this.Operator, this.Unsigned, dest, this.Source, data);
-		}
+        public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
+        {
+            return visitor.Unary (pc, this.Operator, this.Unsigned, dest, this.Source, data);
+        }
 
-		public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
-		{
-			if (substitutions.ContainsKey (this.Source))
-				return new UnaryExpr<TSymbolicValue> (substitutions [this.Source].Head, this.Operator, this.Unsigned);
-			
-			return null;
-		}
+        public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
+        {
+            if (substitutions.ContainsKey (this.Source))
+                return new UnaryExpr<TSymbolicValue> (substitutions [this.Source].Head, this.Operator, this.Unsigned);
+            
+            return null;
+        }
 
-		public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
-		{
-			return candidates.Contains (this.Source);
-		}
+        public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
+        {
+            return candidates.Contains (this.Source);
+        }
 
-		public override bool Contains (TSymbolicValue symbol)
-		{
-			return symbol.Equals (this.Source);
-		}
+        public override bool Contains (TSymbolicValue symbol)
+        {
+            return symbol.Equals (this.Source);
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("Unary({0} {1})", this.Operator, this.Source);
-		}
+        public override string ToString ()
+        {
+            return String.Format ("Unary({0} {1})", this.Operator, this.Source);
+        }
 
-		public override bool Equals (Expr<TSymbolicValue> other)
-		{
-			var unary = other as UnaryExpr<TSymbolicValue>;
-			if (unary == null || unary.Operator != this.Operator || unary.Unsigned != this.Unsigned)
-				return false;
+        public override bool Equals (Expr<TSymbolicValue> other)
+        {
+            var unary = other as UnaryExpr<TSymbolicValue>;
+            if (unary == null || unary.Operator != this.Operator || unary.Unsigned != this.Unsigned)
+                return false;
 
-			return unary.Source.Equals (this.Source);
-		}
-		#endregion
-	}
+            return unary.Source.Equals (this.Source);
+        }
+        #endregion
+    }
 }

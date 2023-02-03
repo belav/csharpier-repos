@@ -37,72 +37,72 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ConstraintCollection_IndexOf_C : GHTBase
 {
-	[Test] public void Main()
-	{
-		ConstraintCollection_IndexOf_C tc = new ConstraintCollection_IndexOf_C();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("ConstraintCollection_IndexOf_C");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    [Test] public void Main()
+    {
+        ConstraintCollection_IndexOf_C tc = new ConstraintCollection_IndexOf_C();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("ConstraintCollection_IndexOf_C");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("ConstraintCollection_IndexOf_C");
-			ConstraintCollection_IndexOf_C1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
-	private void ConstraintCollection_IndexOf_C1()
-	{
-		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-		Compare(dt.Constraints.IndexOf(dt.Constraints[0]),0);
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("ConstraintCollection_IndexOf_C");
+            ConstraintCollection_IndexOf_C1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
+    private void ConstraintCollection_IndexOf_C1()
+    {
+        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+        Compare(dt.Constraints.IndexOf(dt.Constraints[0]),0);
 
-		//Add new constraint
-		Constraint con = new UniqueConstraint(dt.Columns["String1"],false);
+        //Add new constraint
+        Constraint con = new UniqueConstraint(dt.Columns["String1"],false);
 
-		dt.Constraints.Add(con);
-		Compare(dt.Constraints.IndexOf(con),1);
+        dt.Constraints.Add(con);
+        Compare(dt.Constraints.IndexOf(con),1);
 
-		//Remove it and try to look for it 
+        //Remove it and try to look for it 
 
-		dt.Constraints.Remove(con);
-		Compare(dt.Constraints.IndexOf(con),-1);
+        dt.Constraints.Remove(con);
+        Compare(dt.Constraints.IndexOf(con),-1);
 
-	}
+    }
 }
 }

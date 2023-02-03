@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -28,33 +28,33 @@ using System.Reflection;
 
 namespace Mono.WebBrowser
 {
-	public sealed class Manager
-	{
-		public static IWebBrowser GetNewInstance ()
-		{
-			return Manager.GetNewInstance (Platform.Winforms);
-		}
+    public sealed class Manager
+    {
+        public static IWebBrowser GetNewInstance ()
+        {
+            return Manager.GetNewInstance (Platform.Winforms);
+        }
 
-		public static IWebBrowser GetNewInstance (Platform platform)
-		{
-			string browserEngine = Environment.GetEnvironmentVariable ("MONO_BROWSER_ENGINE");
+        public static IWebBrowser GetNewInstance (Platform platform)
+        {
+            string browserEngine = Environment.GetEnvironmentVariable ("MONO_BROWSER_ENGINE");
 
-			if (browserEngine == "webkit") {
-				Assembly ass;
-				try {
-					ass = Assembly.LoadWithPartialName ("mono-webkit");
-					IWebBrowser ret = (IWebBrowser) ass.CreateInstance ("Mono.WebKit.WebBrowser");
-					return ret;
-				} catch {
-					//throw new Exception (Mono.WebBrowser.Exception.ErrorCodes.EngineNotSupported, browserEngine);
-					browserEngine = null;
-				}
-			}
-			if (browserEngine == null || browserEngine == "mozilla")
-				return new Mono.Mozilla.WebBrowser (platform);
-			throw new Exception (Mono.WebBrowser.Exception.ErrorCodes.EngineNotSupported, browserEngine);
-		}
+            if (browserEngine == "webkit") {
+                Assembly ass;
+                try {
+                    ass = Assembly.LoadWithPartialName ("mono-webkit");
+                    IWebBrowser ret = (IWebBrowser) ass.CreateInstance ("Mono.WebKit.WebBrowser");
+                    return ret;
+                } catch {
+                    //throw new Exception (Mono.WebBrowser.Exception.ErrorCodes.EngineNotSupported, browserEngine);
+                    browserEngine = null;
+                }
+            }
+            if (browserEngine == null || browserEngine == "mozilla")
+                return new Mono.Mozilla.WebBrowser (platform);
+            throw new Exception (Mono.WebBrowser.Exception.ErrorCodes.EngineNotSupported, browserEngine);
+        }
 
-		
-	}
+        
+    }
 }

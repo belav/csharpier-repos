@@ -1,4 +1,4 @@
-﻿using OmmitedDatabaseModel3WithCollections;
+using OmmitedDatabaseModel3WithCollections;
 using OmmitedDTOModel3WithCollections;
 
 namespace AutoMapper.UnitTests;

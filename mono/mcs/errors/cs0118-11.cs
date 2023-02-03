@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		int i = (C) +1;
-	}
+    public static void Main ()
+    {
+        int i = (C) +1;
+    }
 }

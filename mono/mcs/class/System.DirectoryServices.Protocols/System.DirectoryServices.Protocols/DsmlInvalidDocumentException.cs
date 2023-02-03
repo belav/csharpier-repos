@@ -33,27 +33,27 @@ using System.Runtime.Serialization;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	public class DsmlInvalidDocumentException : DirectoryException
-	{
-		public DsmlInvalidDocumentException()
-			: this ("invalid DSML document error")
-		{
-		}
+    [Serializable]
+    public class DsmlInvalidDocumentException : DirectoryException
+    {
+        public DsmlInvalidDocumentException()
+            : this ("invalid DSML document error")
+        {
+        }
 
-		public DsmlInvalidDocumentException (string message)
-			: base (message)
-		{
-		}
+        public DsmlInvalidDocumentException (string message)
+            : base (message)
+        {
+        }
 
-		public DsmlInvalidDocumentException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public DsmlInvalidDocumentException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		protected DsmlInvalidDocumentException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected DsmlInvalidDocumentException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+        }
+    }
 }

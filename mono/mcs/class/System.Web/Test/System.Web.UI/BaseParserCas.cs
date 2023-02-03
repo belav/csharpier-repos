@@ -2,7 +2,7 @@
 // BaseParserCas.cs - CAS unit tests for System.Web.UI.BaseParser
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,21 +35,21 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class BaseParserCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class BaseParserCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			new BaseParser ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            new BaseParser ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (BaseParser); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (BaseParser); }
+        }
+    }
 }

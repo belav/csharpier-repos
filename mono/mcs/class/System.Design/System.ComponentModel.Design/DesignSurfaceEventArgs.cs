@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.DesignSurfaceEventArgs
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -33,22 +33,22 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	
-	public class DesignSurfaceEventArgs : EventArgs
-	{
+    
+    public class DesignSurfaceEventArgs : EventArgs
+    {
 
-		private DesignSurface _surface;
+        private DesignSurface _surface;
 
-		public DesignSurface Surface {
-			get { return _surface; }
-		}
-		
-		public DesignSurfaceEventArgs (DesignSurface surface)
-		{
-			_surface = surface;
-		}
-			
-	}
-	
+        public DesignSurface Surface {
+            get { return _surface; }
+        }
+        
+        public DesignSurfaceEventArgs (DesignSurface surface)
+        {
+            _surface = surface;
+        }
+            
+    }
+    
 }
 

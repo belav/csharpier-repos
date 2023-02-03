@@ -20,24 +20,24 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public enum DataGridViewCellBorderStyle {
-		Custom = 0,
-		Single = 1,
-		Raised = 2,
-		Sunken = 3,
-		None = 4,
-		SingleVertical = 5,
-		RaisedVertical = 6,
-		SunkenVertical = 7,
-		SingleHorizontal = 8,
-		RaisedHorizontal = 9,
-		SunkenHorizontal = 10
-	}
+    public enum DataGridViewCellBorderStyle {
+        Custom = 0,
+        Single = 1,
+        Raised = 2,
+        Sunken = 3,
+        None = 4,
+        SingleVertical = 5,
+        RaisedVertical = 6,
+        SunkenVertical = 7,
+        SingleHorizontal = 8,
+        RaisedHorizontal = 9,
+        SunkenHorizontal = 10
+    }
 
 }

@@ -6,10 +6,10 @@ using System;
 /// <seealso cref="explicit operator intp (Test)"/>
 public class Test
 {
-	/// operator.
-	public static explicit operator int (Test t)
-	{
-		return 0;
-	}
+    /// operator.
+    public static explicit operator int (Test t)
+    {
+        return 0;
+    }
 }
 

@@ -24,7 +24,7 @@ public class CLSClass {
         internal ulong X_2;
 
         public static void Main() {
-	}
+    }
 }
 public class InnerTypeClasss {
     public struct Struct {

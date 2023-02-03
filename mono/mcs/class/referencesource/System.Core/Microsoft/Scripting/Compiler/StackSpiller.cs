@@ -1,4 +1,4 @@
-﻿/* ****************************************************************************
+/* ****************************************************************************
  *
  * Copyright (c) Microsoft Corporation. 
  *
@@ -217,9 +217,9 @@ namespace System.Linq.Expressions.Compiler {
             RewriteAction action = left.Action | right.Action | conversion.Action;
             if (action != RewriteAction.None) {
             
-	            // We don't have to worry about byref parameters here, because the
-	            // factory doesn't allow it (it requires identical parameters and
-	            // return type from the AndAlso/OrElse method)
+                // We don't have to worry about byref parameters here, because the
+                // factory doesn't allow it (it requires identical parameters and
+                // return type from the AndAlso/OrElse method)
 
                 expr = BinaryExpression.Create(
                     node.NodeType,

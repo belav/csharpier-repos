@@ -2,7 +2,7 @@
 // MetadataSetTest.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2011 Novell, Inc.  http://www.novell.com
 //
@@ -41,25 +41,25 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class MetadataSetTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ReadFromNull ()
-		{
-			MetadataSet.ReadFrom (null);
-		}
+    [TestFixture]
+    public class MetadataSetTest
+    {
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void ReadFromNull ()
+        {
+            MetadataSet.ReadFrom (null);
+        }
 
-		[Test]
-		public void ReadFrom ()
-		{
-			XmlReader xr = XmlTextReader.Create (TestResourceHelper.GetFullPathOfResource ("Test/Resources/one.xml"));
-			var metadata = MetadataSet.ReadFrom (xr);
-			Assert.AreEqual (5, metadata.MetadataSections.Count, "#1");
-			Assert.AreEqual (2, metadata.MetadataSections.Where (m => m.Dialect == MetadataSection.ServiceDescriptionDialect).Count (), "#2");
-			Assert.AreEqual (3, metadata.MetadataSections.Where (m => m.Dialect == MetadataSection.XmlSchemaDialect).Count (), "#3");
-		}
-	}
+        [Test]
+        public void ReadFrom ()
+        {
+            XmlReader xr = XmlTextReader.Create (TestResourceHelper.GetFullPathOfResource ("Test/Resources/one.xml"));
+            var metadata = MetadataSet.ReadFrom (xr);
+            Assert.AreEqual (5, metadata.MetadataSections.Count, "#1");
+            Assert.AreEqual (2, metadata.MetadataSections.Where (m => m.Dialect == MetadataSection.ServiceDescriptionDialect).Count (), "#2");
+            Assert.AreEqual (3, metadata.MetadataSections.Where (m => m.Dialect == MetadataSection.XmlSchemaDialect).Count (), "#3");
+        }
+    }
 }
 #endif

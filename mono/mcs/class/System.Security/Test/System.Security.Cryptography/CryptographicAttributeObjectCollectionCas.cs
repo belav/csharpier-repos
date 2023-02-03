@@ -1,9 +1,9 @@
 //
 // CryptographicAttributeObjectCollectionCas.cs - CAS unit tests for 
-//	System.Security.Cryptography.CryptographicAttributeObjectCollection
+//    System.Security.Cryptography.CryptographicAttributeObjectCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,38 +40,38 @@ using MonoTests.System.Security.Cryptography;
 
 namespace MonoCasTests.System.Security.Cryptography {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CryptographicAttributeObjectCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CryptographicAttributeObjectCollectionCas {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void UnitTestReuse ()
-		{
-			CryptographicAttributeObjectCollectionTest unit = new CryptographicAttributeObjectCollectionTest ();
-			unit.Constructor_Empty ();
-			unit.Constructor_CryptographicAttributeObject ();
-			unit.Add_MultipleSameOid ();
-			unit.Remove_MultipleSameOid_First ();
-			unit.Remove_MultipleSameOid_Last ();
-			unit.Remove_WithDifferentInstance ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void UnitTestReuse ()
+        {
+            CryptographicAttributeObjectCollectionTest unit = new CryptographicAttributeObjectCollectionTest ();
+            unit.Constructor_Empty ();
+            unit.Constructor_CryptographicAttributeObject ();
+            unit.Add_MultipleSameOid ();
+            unit.Remove_MultipleSameOid_First ();
+            unit.Remove_MultipleSameOid_Last ();
+            unit.Remove_WithDifferentInstance ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CryptographicAttributeObjectCollection).GetConstructor (new Type [0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CryptographicAttributeObjectCollection).GetConstructor (new Type [0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }
 

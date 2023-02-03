@@ -20,47 +20,47 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewCellFormattingEventArgs : ConvertEventArgs {
+    public class DataGridViewCellFormattingEventArgs : ConvertEventArgs {
 
-		private int columnIndex;
-		private DataGridViewCellStyle cellStyle;
-		private bool formattingApplied = false;
-		private int rowIndex;
+        private int columnIndex;
+        private DataGridViewCellStyle cellStyle;
+        private bool formattingApplied = false;
+        private int rowIndex;
 
-		public DataGridViewCellFormattingEventArgs (int columnIndex, int rowIndex, object value, Type desiredType, DataGridViewCellStyle cellStyle) : base (value, desiredType) {
-			this.columnIndex = columnIndex;
-			this.rowIndex = rowIndex;
-			this.cellStyle = cellStyle;
-		}
+        public DataGridViewCellFormattingEventArgs (int columnIndex, int rowIndex, object value, Type desiredType, DataGridViewCellStyle cellStyle) : base (value, desiredType) {
+            this.columnIndex = columnIndex;
+            this.rowIndex = rowIndex;
+            this.cellStyle = cellStyle;
+        }
 
-		public DataGridViewCellStyle CellStyle {
-			get { return cellStyle; }
-			set {
-				cellStyle = value;
-			}
-		}
+        public DataGridViewCellStyle CellStyle {
+            get { return cellStyle; }
+            set {
+                cellStyle = value;
+            }
+        }
 
-		public int ColumnIndex {
-			get { return columnIndex; }
-		}
+        public int ColumnIndex {
+            get { return columnIndex; }
+        }
 
-		////////////////////////////////////////////////
-		public bool FormattingApplied {
-			get { return formattingApplied; }
-			set { formattingApplied = value; }
-		}
+        ////////////////////////////////////////////////
+        public bool FormattingApplied {
+            get { return formattingApplied; }
+            set { formattingApplied = value; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-	}
+    }
 
 }
 

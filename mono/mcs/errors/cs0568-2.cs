@@ -2,8 +2,8 @@
 // Line: 5
 
 struct Sample {
-	public Sample ()
-		: this ()
-	{
-	}
+    public Sample ()
+        : this ()
+    {
+    }
 }

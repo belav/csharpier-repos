@@ -4,11 +4,11 @@
 
 public static class C
 {
-	static  void Foo (this string eType)
-	{
-	}
-	
-	static  void Foo (string value)
-	{
-	}
+    static  void Foo (this string eType)
+    {
+    }
+    
+    static  void Foo (string value)
+    {
+    }
 }

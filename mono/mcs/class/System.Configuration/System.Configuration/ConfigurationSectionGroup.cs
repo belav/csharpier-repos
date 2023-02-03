@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationSection.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
+//    Duncan Mak (duncan@ximian.com)
 //  Lluis Sanchez Gual (lluis@novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -31,92 +31,92 @@ using System;
 
 namespace System.Configuration
 {
-	public class ConfigurationSectionGroup
-	{
-		bool require_declaration;
-		string name, type_name;
+    public class ConfigurationSectionGroup
+    {
+        bool require_declaration;
+        string name, type_name;
 
-		ConfigurationSectionCollection sections;
-		ConfigurationSectionGroupCollection groups;
-		Configuration config;
-		SectionGroupInfo group;
-		
-		public ConfigurationSectionGroup ()
-		{
-		}
+        ConfigurationSectionCollection sections;
+        ConfigurationSectionGroupCollection groups;
+        Configuration config;
+        SectionGroupInfo group;
+        
+        public ConfigurationSectionGroup ()
+        {
+        }
 
-		Configuration Config {
-			get {
-				if (config == null)
-					throw new InvalidOperationException ("ConfigurationSectionGroup cannot be edited until it is added to a Configuration instance as its descendant");
-				return config;
-			}
-		}
+        Configuration Config {
+            get {
+                if (config == null)
+                    throw new InvalidOperationException ("ConfigurationSectionGroup cannot be edited until it is added to a Configuration instance as its descendant");
+                return config;
+            }
+        }
 
-		bool initialized;
+        bool initialized;
 
-		internal void Initialize (Configuration config, SectionGroupInfo group)
-		{
-			if (initialized)
-				throw new SystemException ("INTERNAL ERROR: this configuration section is being initialized twice: " + GetType ());
-			initialized = true;
-			this.config = config;
-			this.group = group;
-		}
-		
-		internal void SetName (string name)
-		{
-			this.name = name;
-		}
+        internal void Initialize (Configuration config, SectionGroupInfo group)
+        {
+            if (initialized)
+                throw new SystemException ("INTERNAL ERROR: this configuration section is being initialized twice: " + GetType ());
+            initialized = true;
+            this.config = config;
+            this.group = group;
+        }
+        
+        internal void SetName (string name)
+        {
+            this.name = name;
+        }
 
-		[MonoTODO]
-		public void ForceDeclaration (bool force)
-		{
-			this.require_declaration = force;
-		}
+        [MonoTODO]
+        public void ForceDeclaration (bool force)
+        {
+            this.require_declaration = force;
+        }
 
-		public void ForceDeclaration ()
-		{
-			ForceDeclaration (true);
-		}
-		
-		[MonoTODO]
-		public bool IsDeclared {
-			get { return false; }
-		}
+        public void ForceDeclaration ()
+        {
+            ForceDeclaration (true);
+        }
+        
+        [MonoTODO]
+        public bool IsDeclared {
+            get { return false; }
+        }
 
-		[MonoTODO]
-		public bool IsDeclarationRequired {
-			get { return require_declaration; }
-		}
+        [MonoTODO]
+        public bool IsDeclarationRequired {
+            get { return require_declaration; }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name {
+            get { return name; }
+        }
 
-		[MonoInternalNote ("Check if this is correct")]
-		public string SectionGroupName {
-			get { return group.XPath; }
-		}
+        [MonoInternalNote ("Check if this is correct")]
+        public string SectionGroupName {
+            get { return group.XPath; }
+        }
 
-		public ConfigurationSectionGroupCollection SectionGroups {
-			get {
-				if (groups == null) groups = new ConfigurationSectionGroupCollection (Config, group);
-				return groups;
-			}
-		}
+        public ConfigurationSectionGroupCollection SectionGroups {
+            get {
+                if (groups == null) groups = new ConfigurationSectionGroupCollection (Config, group);
+                return groups;
+            }
+        }
 
-		public ConfigurationSectionCollection Sections {
-			get {
-				if (sections == null) sections = new ConfigurationSectionCollection (Config, group);
-				return sections;
-			}
-		}
+        public ConfigurationSectionCollection Sections {
+            get {
+                if (sections == null) sections = new ConfigurationSectionCollection (Config, group);
+                return sections;
+            }
+        }
 
-		public string Type {
-			get { return type_name;}
-			set { type_name = value; }
-		}
-	}
+        public string Type {
+            get { return type_name;}
+            set { type_name = value; }
+        }
+    }
 }
 

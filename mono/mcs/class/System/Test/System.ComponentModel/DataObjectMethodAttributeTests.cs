@@ -2,7 +2,7 @@
 // (C) 2006 Mainsoft Corporation (http://www.mainsoft.com)
 //
 // Authors:
-//	Konstantin Triger <kostat@mainsoft.com>
+//    Konstantin Triger <kostat@mainsoft.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,39 +33,39 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel
 {
-	[TestFixture]
-	public class DataObjectMethodAttributeTests
-	{
-		[Test]
-		public void Ctor () {
-			DataObjectMethodAttribute attr = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
-			Assert.IsFalse (attr.IsDefault);
-		}
+    [TestFixture]
+    public class DataObjectMethodAttributeTests
+    {
+        [Test]
+        public void Ctor () {
+            DataObjectMethodAttribute attr = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
+            Assert.IsFalse (attr.IsDefault);
+        }
 
-		[Test]
-		public void MatchTest () {
-			DataObjectMethodAttribute a1 = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
-			DataObjectMethodAttribute a2 = new DataObjectMethodAttribute (DataObjectMethodType.Delete, true);
+        [Test]
+        public void MatchTest () {
+            DataObjectMethodAttribute a1 = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
+            DataObjectMethodAttribute a2 = new DataObjectMethodAttribute (DataObjectMethodType.Delete, true);
 
-			Assert.IsFalse (a1.Match (a2), "#1");
+            Assert.IsFalse (a1.Match (a2), "#1");
 
-			DataObjectMethodAttribute a3 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
+            DataObjectMethodAttribute a3 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
 
-			Assert.IsTrue (a2.Match (a3), "#2");
-		}
+            Assert.IsTrue (a2.Match (a3), "#2");
+        }
 
-		[Test]
-		public void EqualsTest () {
-			DataObjectMethodAttribute a1 = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
-			DataObjectMethodAttribute a2 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
+        [Test]
+        public void EqualsTest () {
+            DataObjectMethodAttribute a1 = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
+            DataObjectMethodAttribute a2 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
 
-			Assert.IsFalse (a1.Equals (a2), "#1");
+            Assert.IsFalse (a1.Equals (a2), "#1");
 
-			DataObjectMethodAttribute a3 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
+            DataObjectMethodAttribute a3 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
 
-			Assert.IsTrue (a2.Equals (a3), "#2");
-		}
-	}
+            Assert.IsTrue (a2.Equals (a3), "#2");
+        }
+    }
 }
 
 #endif

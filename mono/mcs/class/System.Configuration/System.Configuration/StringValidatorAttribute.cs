@@ -28,36 +28,36 @@
 
 namespace System.Configuration
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class StringValidatorAttribute: ConfigurationValidatorAttribute
-	{
-		string invalidCharacters;
-		int maxLength = int.MaxValue;
-		int minLength = 0;
-		ConfigurationValidatorBase instance;
-		
-		public string InvalidCharacters {
-			get { return invalidCharacters; }
-			set { invalidCharacters = value; instance = null; }
-		}
-		
-		public int MaxLength {
-			get { return maxLength; }
-			set { maxLength = value; instance = null; }
-		}
-		
-		public int MinLength {
-			get { return minLength; }
-			set { minLength = value; instance = null; }
-		}
-		
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
-				if (instance == null)
-					instance = new StringValidator (minLength, maxLength, invalidCharacters);
-				return instance;
-			}
-		}
-	}
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class StringValidatorAttribute: ConfigurationValidatorAttribute
+    {
+        string invalidCharacters;
+        int maxLength = int.MaxValue;
+        int minLength = 0;
+        ConfigurationValidatorBase instance;
+        
+        public string InvalidCharacters {
+            get { return invalidCharacters; }
+            set { invalidCharacters = value; instance = null; }
+        }
+        
+        public int MaxLength {
+            get { return maxLength; }
+            set { maxLength = value; instance = null; }
+        }
+        
+        public int MinLength {
+            get { return minLength; }
+            set { minLength = value; instance = null; }
+        }
+        
+        public override ConfigurationValidatorBase ValidatorInstance {
+            get {
+                if (instance == null)
+                    instance = new StringValidator (minLength, maxLength, invalidCharacters);
+                return instance;
+            }
+        }
+    }
 }
 

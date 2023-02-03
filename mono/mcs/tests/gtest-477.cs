@@ -2,9 +2,9 @@ using System;
 
 class B<T> : A<T>
 {
-	protected class BNested : ANested
-	{
-	}
+    protected class BNested : ANested
+    {
+    }
 }
 
 class A<T> : AA<T>
@@ -13,14 +13,14 @@ class A<T> : AA<T>
 
 class AA<T>
 {
-	protected class ANested
-	{
-	}
+    protected class ANested
+    {
+    }
 }
 
 class M
 {
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

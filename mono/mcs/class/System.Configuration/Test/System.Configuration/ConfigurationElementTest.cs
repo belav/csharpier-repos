@@ -3,7 +3,7 @@
 // for System.Configuration.ConfigurationElement.
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,18 +33,18 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class ConfigurationElementTest
-	{
-		[Test]
-		public void ElementInformation_validator () {
-			/* pick a Configuration class that doesn't
-			 * specify an ElementInformation override */
-			DefaultSection sect = new DefaultSection();
-			ElementInformation info = sect.ElementInformation;
+    [TestFixture]
+    public class ConfigurationElementTest
+    {
+        [Test]
+        public void ElementInformation_validator () {
+            /* pick a Configuration class that doesn't
+             * specify an ElementInformation override */
+            DefaultSection sect = new DefaultSection();
+            ElementInformation info = sect.ElementInformation;
 
-			Assert.AreEqual (typeof (DefaultValidator), info.Validator.GetType(), "A1");
-		}
-	}
+            Assert.AreEqual (typeof (DefaultValidator), info.Validator.GetType(), "A1");
+        }
+    }
 }
 

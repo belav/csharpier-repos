@@ -28,8 +28,8 @@
 
 namespace System.Web.UI 
 {
-	public class MasterPageControlBuilder : UserControlControlBuilder
-	{
-	}
+    public class MasterPageControlBuilder : UserControlControlBuilder
+    {
+    }
 
 }

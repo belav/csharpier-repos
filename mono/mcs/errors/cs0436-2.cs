@@ -6,19 +6,19 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.CompilerServices
 {
-	public class RuntimeHelpers
-	{
-		public static void SomeMethod ()
-		{
-		}
-	}
+    public class RuntimeHelpers
+    {
+        public static void SomeMethod ()
+        {
+        }
+    }
 }
 
 
 class C
 {
-	public static void Main ()
-	{
-		RuntimeHelpers.SomeMethod (null);
-	}
+    public static void Main ()
+    {
+        RuntimeHelpers.SomeMethod (null);
+    }
 }

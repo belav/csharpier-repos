@@ -3,12 +3,12 @@
 
 class C
 {
-	delegate void D ();
+    delegate void D ();
 
-	static void Main ()
-	{
-		D d = checked (delegate {
-			const ushort s = (ushort) -3;
-		});
-	}
+    static void Main ()
+    {
+        D d = checked (delegate {
+            const ushort s = (ushort) -3;
+        });
+    }
 }

@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.WizardStepTest.cs
 //
 // Author:
-//	Yoni Klein (yonik@mainsoft.com)
+//    Yoni Klein (yonik@mainsoft.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -33,13 +33,13 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	
-	[TestFixture]
-	public class WizardStepTest
-	{
-		// Represents a basic step that is displayed in a Wizard control. 
-		// This class cannot be inherited.
-		// All Public Properties ,Public Methods ,Public Events ,Protected Methods 
-		// are inherited from base and tested on base classes.
-	}
+    
+    [TestFixture]
+    public class WizardStepTest
+    {
+        // Represents a basic step that is displayed in a Wizard control. 
+        // This class cannot be inherited.
+        // All Public Properties ,Public Methods ,Public Events ,Protected Methods 
+        // are inherited from base and tested on base classes.
+    }
 }

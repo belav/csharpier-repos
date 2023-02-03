@@ -28,8 +28,8 @@
 
 namespace Mono.Cecil.Signatures {
 
-	internal interface ISignatureVisitable {
+    internal interface ISignatureVisitable {
 
-		void Accept (ISignatureVisitor visitor);
-	}
+        void Accept (ISignatureVisitor visitor);
+    }
 }

@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//	  Michael Barker (mike@middlesoft.co.uk)
+//      Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -32,19 +32,19 @@ using System;
 
 namespace Mono.Messaging
 {
-	public class CompletedEventArgs : EventArgs 
-	{
-		private IAsyncResult _result;
+    public class CompletedEventArgs : EventArgs 
+    {
+        private IAsyncResult _result;
 
-		public CompletedEventArgs(IAsyncResult result)
-		{
-			_result = result;
-		}
+        public CompletedEventArgs(IAsyncResult result)
+        {
+            _result = result;
+        }
 
-		public IAsyncResult AsyncResult
-		{
-			get { return _result; }
-			set { _result = value; }
-		}
-	}
+        public IAsyncResult AsyncResult
+        {
+            get { return _result; }
+            set { _result = value; }
+        }
+    }
 }

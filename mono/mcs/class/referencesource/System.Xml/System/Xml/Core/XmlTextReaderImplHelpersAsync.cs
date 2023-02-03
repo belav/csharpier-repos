@@ -33,7 +33,7 @@ namespace System.Xml {
         internal partial class DtdParserProxy : IDtdParserAdapterV1 {
 #endif
 
-			Task< int > IDtdParserAdapter.ReadDataAsync() { 
+            Task< int > IDtdParserAdapter.ReadDataAsync() { 
                 return reader.DtdParserProxy_ReadDataAsync(); 
             }
 

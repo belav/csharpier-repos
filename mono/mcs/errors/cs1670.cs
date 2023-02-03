@@ -8,7 +8,7 @@ class C
    public void Test ()
    {
       D d = delegate (params object[] args) {
-		return this;
-	  };
+        return this;
+      };
    }
 }

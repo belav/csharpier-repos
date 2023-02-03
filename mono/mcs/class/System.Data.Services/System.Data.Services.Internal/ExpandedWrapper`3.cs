@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ExpandedWrapper`3.cs
 //  
 // Author:
@@ -32,25 +32,25 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Internal
 {
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public sealed class ExpandedWrapper <TExpandedElement, TProperty0, TProperty1> : ExpandedWrapper <TExpandedElement>
-	{
-		public TProperty0 ProjectedProperty0 {
-			get; set;
-		}
+    [EditorBrowsable (EditorBrowsableState.Never)]
+    public sealed class ExpandedWrapper <TExpandedElement, TProperty0, TProperty1> : ExpandedWrapper <TExpandedElement>
+    {
+        public TProperty0 ProjectedProperty0 {
+            get; set;
+        }
 
-		public TProperty1 ProjectedProperty1 {
-			get; set;
-		}
+        public TProperty1 ProjectedProperty1 {
+            get; set;
+        }
 
-		protected override object InternalGetExpandedPropertyValue (int nameIndex)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override object InternalGetExpandedPropertyValue (int nameIndex)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public ExpandedWrapper ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public ExpandedWrapper ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

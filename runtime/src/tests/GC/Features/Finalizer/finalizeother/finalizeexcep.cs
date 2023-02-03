@@ -22,7 +22,7 @@ public class Test_finalizeexcep {
             try {
                 Console.WriteLine(lst.next.val);    // should throw nullreference exception
             } catch(NullReferenceException) {
-                Console.WriteLine("Caught NullReferenceException in Finalize()");				
+                Console.WriteLine("Caught NullReferenceException in Finalize()");                
                 visited=true;
             }
         }

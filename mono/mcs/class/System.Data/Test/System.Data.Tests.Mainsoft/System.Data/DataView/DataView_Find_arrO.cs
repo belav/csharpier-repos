@@ -37,103 +37,103 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_Find_arrO : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataView_Find_arrO tc = new DataView_Find_arrO();
-		Exception exp = null;
-		try
-		{
-			// Every Test must begin with BeginTest
-			tc.BeginTest("NoName");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			// Every Test must End with EndTest
-			tc.EndTest(exp);
-		}
-		// After test is ready, remove this line
-	}
+    [Test] public void Main()
+    {
+        DataView_Find_arrO tc = new DataView_Find_arrO();
+        Exception exp = null;
+        try
+        {
+            // Every Test must begin with BeginTest
+            tc.BeginTest("NoName");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            // Every Test must End with EndTest
+            tc.EndTest(exp);
+        }
+        // After test is ready, remove this line
+    }
 
-	public void run()
-	{
-		Exception exp = null;
-		
-		int FindResult,ExpectedResult=-1;
+    public void run()
+    {
+        Exception exp = null;
+        
+        int FindResult,ExpectedResult=-1;
 
-		//create the source datatable
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+        //create the source datatable
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
 
-		//create the dataview for the table
-		DataView dv = new DataView(dt);
+        //create the dataview for the table
+        DataView dv = new DataView(dt);
 
 
-		for (int i=0; i<dt.Rows.Count ; i++)
-		{
-			if ((int)dt.Rows[i]["ParentId"] == 3 && dt.Rows[i]["String1"].ToString() == "3-String1")
-			{
-				ExpectedResult = i;
-				break;
-			}
-		}
+        for (int i=0; i<dt.Rows.Count ; i++)
+        {
+            if ((int)dt.Rows[i]["ParentId"] == 3 && dt.Rows[i]["String1"].ToString() == "3-String1")
+            {
+                ExpectedResult = i;
+                break;
+            }
+        }
 
-		
-		try
-		{
-			BeginCase("Find ,no sort - exception");
-			try
-			{
-				FindResult = dv.Find(new object[] {"3","3-String1"});
-			}
-			catch (System.ArgumentException ex)
-			{
-				exp = ex;
-			}
-			Compare(exp.GetType().FullName,typeof(System.ArgumentException).FullName);
-			exp=null;
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	
+        
+        try
+        {
+            BeginCase("Find ,no sort - exception");
+            try
+            {
+                FindResult = dv.Find(new object[] {"3","3-String1"});
+            }
+            catch (System.ArgumentException ex)
+            {
+                exp = ex;
+            }
+            Compare(exp.GetType().FullName,typeof(System.ArgumentException).FullName);
+            exp=null;
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    
 
-		dv.Sort = "String1,ParentId";
-		try
-		{
-			BeginCase("Find = wrong sort, can not find");
-			FindResult = dv.Find(new object[] {"3","3-String1"});
-			Compare(FindResult ,-1);
-			exp=null;
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        dv.Sort = "String1,ParentId";
+        try
+        {
+            BeginCase("Find = wrong sort, can not find");
+            FindResult = dv.Find(new object[] {"3","3-String1"});
+            Compare(FindResult ,-1);
+            exp=null;
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-		dv.Sort = "ParentId,String1";
-		try
-		{
-			BeginCase("Find ");
-			FindResult = dv.Find(new object[] {"3","3-String1"});
-			Compare(FindResult ,ExpectedResult);
-			exp=null;
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        dv.Sort = "ParentId,String1";
+        try
+        {
+            BeginCase("Find ");
+            FindResult = dv.Find(new object[] {"3","3-String1"});
+            Compare(FindResult ,ExpectedResult);
+            exp=null;
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
 
-	}
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

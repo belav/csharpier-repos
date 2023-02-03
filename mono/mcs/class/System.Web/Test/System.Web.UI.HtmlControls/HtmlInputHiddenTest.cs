@@ -22,7 +22,7 @@
 // System.Web.UI.HtmlControls.HtmlInputHidden.cs
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 //
 // (C) 2005 Novell, Inc.
 
@@ -37,80 +37,80 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-	public class HtmlInputHiddenPoker : HtmlInputHidden {
+    public class HtmlInputHiddenPoker : HtmlInputHidden {
 
-		public string Render ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
-			base.Render (tw);
+        public string Render ()
+        {
+            StringWriter sw = new StringWriter ();
+            HtmlTextWriter tw = new HtmlTextWriter (sw);
+            base.Render (tw);
 
-			return sw.ToString ();
-		}
-	}
+            return sw.ToString ();
+        }
+    }
 
-	[TestFixture]
-	public class HtmlInputHiddenTest {
+    [TestFixture]
+    public class HtmlInputHiddenTest {
 
-		[Test]
-		public void Defaults ()
-		{
-			HtmlInputHidden h = new HtmlInputHidden ();
+        [Test]
+        public void Defaults ()
+        {
+            HtmlInputHidden h = new HtmlInputHidden ();
 
-			Assert.AreEqual (h.Type, "hidden", "A1");
-			Assert.AreEqual (h.Value, String.Empty, "A2");
-		}
+            Assert.AreEqual (h.Type, "hidden", "A1");
+            Assert.AreEqual (h.Value, String.Empty, "A2");
+        }
 
-		[Test]
-		public void PropertiesNull ()
-		{
-			HtmlInputHidden h = new HtmlInputHidden ();
+        [Test]
+        public void PropertiesNull ()
+        {
+            HtmlInputHidden h = new HtmlInputHidden ();
 
-			h.Value = null;
-			Assert.AreEqual (h.Value, String.Empty, "A1");
-		}
+            h.Value = null;
+            Assert.AreEqual (h.Value, String.Empty, "A1");
+        }
 
-		[Test]
-		public void Postback ()
-		{
-			HtmlInputHidden h = new HtmlInputHidden ();
-			IPostBackDataHandler p = (IPostBackDataHandler) h;
-			NameValueCollection collection = new NameValueCollection ();
-			string key = "key";
-			string value = "Hi i am a value";
-			
-			collection [key] = value;
-			p.LoadPostData (key, collection);
+        [Test]
+        public void Postback ()
+        {
+            HtmlInputHidden h = new HtmlInputHidden ();
+            IPostBackDataHandler p = (IPostBackDataHandler) h;
+            NameValueCollection collection = new NameValueCollection ();
+            string key = "key";
+            string value = "Hi i am a value";
+            
+            collection [key] = value;
+            p.LoadPostData (key, collection);
 
-			Assert.AreEqual (h.Value, value, "A1");
-		}
+            Assert.AreEqual (h.Value, value, "A1");
+        }
 
-		[Test]
-		public void TestPostbackHandling ()
-		{
-			HtmlInputHidden h = new HtmlInputHidden ();
-			IPostBackDataHandler p = (IPostBackDataHandler) h;
-			NameValueCollection collection = new NameValueCollection ();
-			string key = "key";
-			string value = "Hi i am a value";
-			
-			collection [key] = value;
-			Assert.IsTrue(p.LoadPostData (key, collection));
-			Assert.IsFalse (p.LoadPostData (key, collection));
-			Assert.AreEqual (h.Value, value);
-		}
-		
-		[Test]
-		public void Render ()
-		{
-			HtmlInputHiddenPoker p = new HtmlInputHiddenPoker ();
+        [Test]
+        public void TestPostbackHandling ()
+        {
+            HtmlInputHidden h = new HtmlInputHidden ();
+            IPostBackDataHandler p = (IPostBackDataHandler) h;
+            NameValueCollection collection = new NameValueCollection ();
+            string key = "key";
+            string value = "Hi i am a value";
+            
+            collection [key] = value;
+            Assert.IsTrue(p.LoadPostData (key, collection));
+            Assert.IsFalse (p.LoadPostData (key, collection));
+            Assert.AreEqual (h.Value, value);
+        }
+        
+        [Test]
+        public void Render ()
+        {
+            HtmlInputHiddenPoker p = new HtmlInputHiddenPoker ();
 
-			Assert.AreEqual (p.Render (), "<input name type=\"hidden\" />");
+            Assert.AreEqual (p.Render (), "<input name type=\"hidden\" />");
 
-			p.Value = "foobar";
-			Assert.AreEqual (p.Render (), "<input name type=\"hidden\" " +
-					"value=\"foobar\" />");
-		}
-	}
+            p.Value = "foobar";
+            Assert.AreEqual (p.Render (), "<input name type=\"hidden\" " +
+                    "value=\"foobar\" />");
+        }
+    }
 }
 

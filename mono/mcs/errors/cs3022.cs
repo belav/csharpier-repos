@@ -6,6 +6,6 @@ using System;
 [assembly: CLSCompliant (true)]
 
 public class Class {
-	public void Test ([CLSCompliant(false)] uint u) {
-	}
+    public void Test ([CLSCompliant(false)] uint u) {
+    }
 }

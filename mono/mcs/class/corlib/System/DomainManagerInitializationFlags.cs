@@ -2,7 +2,7 @@
 // System.AppDomainManagerInitializationOptions flags
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,10 +30,10 @@ using System.Runtime.InteropServices;
 
 namespace System {
 
-	[Flags]
-	[ComVisible (true)]
-	public enum AppDomainManagerInitializationOptions {
-		None = 0,
-		RegisterWithHost = 1,
-	}
+    [Flags]
+    [ComVisible (true)]
+    public enum AppDomainManagerInitializationOptions {
+        None = 0,
+        RegisterWithHost = 1,
+    }
 }

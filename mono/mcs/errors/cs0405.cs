@@ -4,6 +4,6 @@
 interface I { }
 
 class Foo<T>
-	where T : I, I
+    where T : I, I
 {
 }

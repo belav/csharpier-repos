@@ -31,48 +31,48 @@
 
 namespace Mono.Cecil.Metadata {
 
-	internal sealed class FieldPtrTable : IMetadataTable {
+    internal sealed class FieldPtrTable : IMetadataTable {
 
-		public const int RId = 0x03;
+        public const int RId = 0x03;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public FieldPtrRow this [int index] {
-			get { return m_rows [index] as FieldPtrRow; }
-			set { m_rows [index] = value; }
-		}
+        public FieldPtrRow this [int index] {
+            get { return m_rows [index] as FieldPtrRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal FieldPtrTable ()
-		{
-		}
+        internal FieldPtrTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitFieldPtrTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitFieldPtrTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class FieldPtrRow : IMetadataRow {
+    internal sealed class FieldPtrRow : IMetadataRow {
 
-		public uint Field;
+        public uint Field;
 
-		internal FieldPtrRow ()
-		{
-		}
+        internal FieldPtrRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitFieldPtrRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitFieldPtrRow (this);
+        }
+    }
 }

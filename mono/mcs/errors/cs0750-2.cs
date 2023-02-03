@@ -3,5 +3,5 @@
 
 static partial class C
 {
-	public partial void Test<T> ();
+    public partial void Test<T> ();
 }

@@ -31,19 +31,19 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class StreamSecurityUpgradeProvider
-		: StreamUpgradeProvider
-	{
-		protected StreamSecurityUpgradeProvider ()
-			: base ()
-		{
-		}
+    public abstract class StreamSecurityUpgradeProvider
+        : StreamUpgradeProvider
+    {
+        protected StreamSecurityUpgradeProvider ()
+            : base ()
+        {
+        }
 
-		protected StreamSecurityUpgradeProvider (IDefaultCommunicationTimeouts timeouts)
-			: base (timeouts)
-		{
-		}
+        protected StreamSecurityUpgradeProvider (IDefaultCommunicationTimeouts timeouts)
+            : base (timeouts)
+        {
+        }
 
-		public abstract EndpointIdentity Identity { get; }
-	}
+        public abstract EndpointIdentity Identity { get; }
+    }
 }

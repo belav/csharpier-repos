@@ -28,25 +28,25 @@
 
 namespace Mono.Cecil {
 
-	internal abstract class EventReference : MemberReference {
+    internal abstract class EventReference : MemberReference {
 
-		TypeReference m_eventType;
+        TypeReference m_eventType;
 
-		public TypeReference EventType {
-			get { return m_eventType; }
-			set { m_eventType = value; }
-		}
+        public TypeReference EventType {
+            get { return m_eventType; }
+            set { m_eventType = value; }
+        }
 
-		public EventReference (string name, TypeReference eventType) : base (name)
-		{
-			m_eventType = eventType;
-		}
+        public EventReference (string name, TypeReference eventType) : base (name)
+        {
+            m_eventType = eventType;
+        }
 
-		public abstract EventDefinition Resolve ();
+        public abstract EventDefinition Resolve ();
 
-		public override string ToString ()
-		{
-			return string.Concat (m_eventType.FullName, " ", base.ToString ());
-		}
-	}
+        public override string ToString ()
+        {
+            return string.Concat (m_eventType.FullName, " ", base.ToString ());
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -238,7 +238,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 }
 
                 // Throw away the undo stack etc.
-                // It is important to "zombify" the undo manager when the owning object is shutting down.
+                // It is important to "zombify"� the undo manager when the owning object is shutting down.
                 // This is done by calling IVsLifetimeControlledObject.SeverReferencesToOwner on the undoManager.
                 // This call will clear the undo and redo stacks. This is particularly important to do if
                 // your undo units hold references back to your object. It is also important if you use

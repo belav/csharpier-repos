@@ -45,46 +45,46 @@ namespace MultiDictionary1 {
   class TestIt {
     public static void Run() { 
       {
-	MultiHashDictionary<int,String> mdict 
-	  = new MultiHashDictionary<int,String>();
-	mdict.Add(2, "to");
-	mdict.Add(2, "deux");
-	mdict.Add(2, "two");
-	mdict.Add(20, "tyve");
-	mdict.Add(20, "twenty");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("mdict.Count (keys) is {0}", 
-			  ((IDictionary<int,ICollection<String>>)mdict).Count);
-	Console.WriteLine("mdict[2].Count is {0}", mdict[2].Count);
-	mdict.Remove(20, "tyve");
-	mdict.Remove(20, "twenty");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	ICollection<String> zwei = new HashSet<String>();
-	zwei.Add("zwei");
-	mdict[2] = zwei;
-	mdict[-2] = zwei;
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Add("kaksi");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	ICollection<String> empty = new HashSet<String>();
-	mdict[0] = empty;
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("mdict contains key 0: {0}", mdict.Contains(0));
-	mdict.Remove(-2);
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Remove("kaksi");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Clear();
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("------------------------------");
+    MultiHashDictionary<int,String> mdict 
+      = new MultiHashDictionary<int,String>();
+    mdict.Add(2, "to");
+    mdict.Add(2, "deux");
+    mdict.Add(2, "two");
+    mdict.Add(20, "tyve");
+    mdict.Add(20, "twenty");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("mdict.Count (keys) is {0}", 
+              ((IDictionary<int,ICollection<String>>)mdict).Count);
+    Console.WriteLine("mdict[2].Count is {0}", mdict[2].Count);
+    mdict.Remove(20, "tyve");
+    mdict.Remove(20, "twenty");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    ICollection<String> zwei = new HashSet<String>();
+    zwei.Add("zwei");
+    mdict[2] = zwei;
+    mdict[-2] = zwei;
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Add("kaksi");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    ICollection<String> empty = new HashSet<String>();
+    mdict[0] = empty;
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("mdict contains key 0: {0}", mdict.Contains(0));
+    mdict.Remove(-2);
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Remove("kaksi");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Clear();
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("------------------------------");
       }
     }
   }
@@ -203,88 +203,88 @@ namespace MultiDictionary2 {
   class TestIt {
     public static void Run() {
       {
-	MultiHashDictionary<int,String> mdict 
-	  = new MultiHashDictionary<int,String>();
-	mdict.Add(2, "to");
-	mdict.Add(2, "deux");
-	mdict.Add(2, "two");
-	mdict.Add(20, "tyve");
-	mdict.Add(20, "twenty");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("mdict.Count (keys) is {0}", 
-			  ((IDictionary<int,ICollection<String>>)mdict).Count);
-	Console.WriteLine("mdict[2].Count is {0}", mdict[2].Count);
-	mdict.Remove(20, "tyve");
-	mdict.Remove(20, "twenty");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	ICollection<String> zwei = new HashSet<String>();
-	zwei.Add("zwei");
-	mdict[2] = zwei;
-	mdict[-2] = zwei;
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Add("kaksi");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	ICollection<String> empty = new HashSet<String>();
-	mdict[0] = empty;
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("mdict contains key 0: {0}", mdict.Contains(0));
-	mdict.Remove(-2);
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Remove("kaksi");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Clear();
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("------------------------------");
+    MultiHashDictionary<int,String> mdict 
+      = new MultiHashDictionary<int,String>();
+    mdict.Add(2, "to");
+    mdict.Add(2, "deux");
+    mdict.Add(2, "two");
+    mdict.Add(20, "tyve");
+    mdict.Add(20, "twenty");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("mdict.Count (keys) is {0}", 
+              ((IDictionary<int,ICollection<String>>)mdict).Count);
+    Console.WriteLine("mdict[2].Count is {0}", mdict[2].Count);
+    mdict.Remove(20, "tyve");
+    mdict.Remove(20, "twenty");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    ICollection<String> zwei = new HashSet<String>();
+    zwei.Add("zwei");
+    mdict[2] = zwei;
+    mdict[-2] = zwei;
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Add("kaksi");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    ICollection<String> empty = new HashSet<String>();
+    mdict[0] = empty;
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("mdict contains key 0: {0}", mdict.Contains(0));
+    mdict.Remove(-2);
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Remove("kaksi");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Clear();
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("------------------------------");
       }
       {
-	MultiHashDictionary<int,String,HashSet<String>> mdict 
-	  = new MultiHashDictionary<int,String,HashSet<String>>();
-	mdict.Add(2, "to");
-	mdict.Add(2, "deux");
-	mdict.Add(2, "two");
-	mdict.Add(20, "tyve");
-	mdict.Add(20, "twenty");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("mdict.Count (keys) is {0}", 
-			  ((IDictionary<int,HashSet<String>>)mdict).Count);
-	Console.WriteLine("mdict[2].Count is {0}", mdict[2].Count);
-	mdict.Remove(20, "tyve");
-	mdict.Remove(20, "twenty");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	HashSet<String> zwei = new HashSet<String>();
-	zwei.Add("zwei");
-	mdict[2] = zwei;
-	mdict[-2] = zwei;
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Add("kaksi");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	HashSet<String> empty = new HashSet<String>();
-	mdict[0] = empty;
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("mdict contains key 0: {0}", mdict.Contains(0));
-	mdict.Remove(-2);
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Remove("kaksi");
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	zwei.Clear();
-	Console.WriteLine(mdict);
-	Console.WriteLine("mdict.Count is {0}", mdict.Count);
-	Console.WriteLine("------------------------------");
+    MultiHashDictionary<int,String,HashSet<String>> mdict 
+      = new MultiHashDictionary<int,String,HashSet<String>>();
+    mdict.Add(2, "to");
+    mdict.Add(2, "deux");
+    mdict.Add(2, "two");
+    mdict.Add(20, "tyve");
+    mdict.Add(20, "twenty");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("mdict.Count (keys) is {0}", 
+              ((IDictionary<int,HashSet<String>>)mdict).Count);
+    Console.WriteLine("mdict[2].Count is {0}", mdict[2].Count);
+    mdict.Remove(20, "tyve");
+    mdict.Remove(20, "twenty");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    HashSet<String> zwei = new HashSet<String>();
+    zwei.Add("zwei");
+    mdict[2] = zwei;
+    mdict[-2] = zwei;
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Add("kaksi");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    HashSet<String> empty = new HashSet<String>();
+    mdict[0] = empty;
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("mdict contains key 0: {0}", mdict.Contains(0));
+    mdict.Remove(-2);
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Remove("kaksi");
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    zwei.Clear();
+    Console.WriteLine(mdict);
+    Console.WriteLine("mdict.Count is {0}", mdict.Count);
+    Console.WriteLine("------------------------------");
       }
     }
   }
@@ -536,12 +536,12 @@ namespace MultiDictionary2 {
 
     public override void Clear() { 
       foreach (VC values in Values) 
-	if (values != null) {
-	  count -= values.Count;
-	  values.ItemsAdded -= IncrementCount;
-	  values.ItemsRemoved -= DecrementCount;
-	  values.CollectionCleared -= ClearedCount;
-	}
+    if (values != null) {
+      count -= values.Count;
+      values.ItemsAdded -= IncrementCount;
+      values.ItemsRemoved -= DecrementCount;
+      values.CollectionCleared -= ClearedCount;
+    }
       base.Clear();
     }
   }

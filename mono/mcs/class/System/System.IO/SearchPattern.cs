@@ -33,189 +33,189 @@ using System;
 
 namespace System.IO {
 
-	// FIXME: there's a complication with this algorithm under windows.
-	// the pattern '*.*' matches all files (i think . matches the extension),
-	// whereas under UNIX it should only match files containing the '.' character.
+    // FIXME: there's a complication with this algorithm under windows.
+    // the pattern '*.*' matches all files (i think . matches the extension),
+    // whereas under UNIX it should only match files containing the '.' character.
 
-	class SearchPattern2 {
-		public SearchPattern2 (string pattern) : this (pattern, false) { }
+    class SearchPattern2 {
+        public SearchPattern2 (string pattern) : this (pattern, false) { }
 
-		public SearchPattern2 (string pattern, bool ignore)
-		{
-			this.ignore = ignore;
-			this.pattern = pattern;
-			Compile (pattern);
-		}
+        public SearchPattern2 (string pattern, bool ignore)
+        {
+            this.ignore = ignore;
+            this.pattern = pattern;
+            Compile (pattern);
+        }
 
-		// OSX has a case-insensitive yet case-aware filesystem
-		// so we need a overload in here for the Kqueue watcher
-		public bool IsMatch (string text, bool ignorecase)
-		{
-			if (!hasWildcard) {
-				bool match = String.Compare (pattern, text, ignorecase) == 0;
-				if (match)
-					return true;
-			}
-				
-			// This is a special case for FSW. It needs to match e.g. subdir/file.txt
-			// when the pattern is "file.txt"
-			var fileName = Path.GetFileName (text);
-			
-			if (!hasWildcard)
-				return (String.Compare (pattern, fileName, ignorecase) == 0);
-			
-			
-			return Match (ops, fileName, 0);
-		}
+        // OSX has a case-insensitive yet case-aware filesystem
+        // so we need a overload in here for the Kqueue watcher
+        public bool IsMatch (string text, bool ignorecase)
+        {
+            if (!hasWildcard) {
+                bool match = String.Compare (pattern, text, ignorecase) == 0;
+                if (match)
+                    return true;
+            }
+                
+            // This is a special case for FSW. It needs to match e.g. subdir/file.txt
+            // when the pattern is "file.txt"
+            var fileName = Path.GetFileName (text);
+            
+            if (!hasWildcard)
+                return (String.Compare (pattern, fileName, ignorecase) == 0);
+            
+            
+            return Match (ops, fileName, 0);
+        }
 
-		public bool IsMatch (string text)
-		{
-			return IsMatch (text, ignore);
-		}
+        public bool IsMatch (string text)
+        {
+            return IsMatch (text, ignore);
+        }
 
-		public bool HasWildcard {
-			get { return hasWildcard; }
-		}
-		// private
+        public bool HasWildcard {
+            get { return hasWildcard; }
+        }
+        // private
 
-		Op ops;		// the compiled pattern
-		bool ignore;	// ignore case
-		bool hasWildcard;
-		string pattern;
+        Op ops;        // the compiled pattern
+        bool ignore;    // ignore case
+        bool hasWildcard;
+        string pattern;
 
-		private void Compile (string pattern)
-		{
-			if (pattern == null || pattern.IndexOfAny (InvalidChars) >= 0)
-				throw new ArgumentException ("Invalid search pattern: '" + pattern + "'");
+        private void Compile (string pattern)
+        {
+            if (pattern == null || pattern.IndexOfAny (InvalidChars) >= 0)
+                throw new ArgumentException ("Invalid search pattern: '" + pattern + "'");
 
-			if (pattern == "*") {	// common case
-				ops = new Op (OpCode.True);
-				hasWildcard = true;
-				return;
-			}
+            if (pattern == "*") {    // common case
+                ops = new Op (OpCode.True);
+                hasWildcard = true;
+                return;
+            }
 
-			ops = null;
+            ops = null;
 
-			int ptr = 0;
-			Op last_op = null;
-			while (ptr < pattern.Length) {
-				Op op;
-			
-				switch (pattern [ptr]) {
-				case '?':
-					op = new Op (OpCode.AnyChar);
-					++ ptr;
-					hasWildcard = true;
-					break;
+            int ptr = 0;
+            Op last_op = null;
+            while (ptr < pattern.Length) {
+                Op op;
+            
+                switch (pattern [ptr]) {
+                case '?':
+                    op = new Op (OpCode.AnyChar);
+                    ++ ptr;
+                    hasWildcard = true;
+                    break;
 
-				case '*':
-					op = new Op (OpCode.AnyString);
-					++ ptr;
-					hasWildcard = true;
-					break;
-					
-				default:
-					op = new Op (OpCode.ExactString);
-					int end = pattern.IndexOfAny (WildcardChars, ptr);
-					if (end < 0)
-						end = pattern.Length;
+                case '*':
+                    op = new Op (OpCode.AnyString);
+                    ++ ptr;
+                    hasWildcard = true;
+                    break;
+                    
+                default:
+                    op = new Op (OpCode.ExactString);
+                    int end = pattern.IndexOfAny (WildcardChars, ptr);
+                    if (end < 0)
+                        end = pattern.Length;
 
-					op.Argument = pattern.Substring (ptr, end - ptr);
-					if (ignore)
-						op.Argument = op.Argument.ToLower ();
+                    op.Argument = pattern.Substring (ptr, end - ptr);
+                    if (ignore)
+                        op.Argument = op.Argument.ToLower ();
 
-					ptr = end;
-					break;
-				}
+                    ptr = end;
+                    break;
+                }
 
-				if (last_op == null)
-					ops = op;
-				else
-					last_op.Next = op;
+                if (last_op == null)
+                    ops = op;
+                else
+                    last_op.Next = op;
 
-				last_op = op;
-			}
+                last_op = op;
+            }
 
-			if (last_op == null)
-				ops = new Op (OpCode.End);
-			else
-				last_op.Next = new Op (OpCode.End);
-		}
+            if (last_op == null)
+                ops = new Op (OpCode.End);
+            else
+                last_op.Next = new Op (OpCode.End);
+        }
 
-		private bool Match (Op op, string text, int ptr)
-		{
-			while (op != null) {
-				switch (op.Code) {
-				case OpCode.True:
-					return true;
+        private bool Match (Op op, string text, int ptr)
+        {
+            while (op != null) {
+                switch (op.Code) {
+                case OpCode.True:
+                    return true;
 
-				case OpCode.End:
-					if (ptr == text.Length)
-						return true;
+                case OpCode.End:
+                    if (ptr == text.Length)
+                        return true;
 
-					return false;
-				
-				case OpCode.ExactString:
-					int length = op.Argument.Length;
-					if (ptr + length > text.Length)
-						return false;
+                    return false;
+                
+                case OpCode.ExactString:
+                    int length = op.Argument.Length;
+                    if (ptr + length > text.Length)
+                        return false;
 
-					string str = text.Substring (ptr, length);
-					if (ignore)
-						str = str.ToLower ();
+                    string str = text.Substring (ptr, length);
+                    if (ignore)
+                        str = str.ToLower ();
 
-					if (str != op.Argument)
-						return false;
+                    if (str != op.Argument)
+                        return false;
 
-					ptr += length;
-					break;
+                    ptr += length;
+                    break;
 
-				case OpCode.AnyChar:
-					if (++ ptr > text.Length)
-						return false;
-					break;
+                case OpCode.AnyChar:
+                    if (++ ptr > text.Length)
+                        return false;
+                    break;
 
-				case OpCode.AnyString:
-					while (ptr <= text.Length) {
-						if (Match (op.Next, text, ptr))
-							return true;
+                case OpCode.AnyString:
+                    while (ptr <= text.Length) {
+                        if (Match (op.Next, text, ptr))
+                            return true;
 
-						++ ptr;
-					}
+                        ++ ptr;
+                    }
 
-					return false;
-				}
+                    return false;
+                }
 
-				op = op.Next;
-			}
+                op = op.Next;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		// private static
+        // private static
 
-		internal static readonly char [] WildcardChars = { '*', '?' };
-		internal static readonly char [] InvalidChars = { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+        internal static readonly char [] WildcardChars = { '*', '?' };
+        internal static readonly char [] InvalidChars = { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
 
-		private class Op {
-			public Op (OpCode code)
-			{
-				this.Code = code;
-				this.Argument = null;
-				this.Next = null;
-			}
-		
-			public OpCode Code;
-			public string Argument;
-			public Op Next;
-		}
+        private class Op {
+            public Op (OpCode code)
+            {
+                this.Code = code;
+                this.Argument = null;
+                this.Next = null;
+            }
+        
+            public OpCode Code;
+            public string Argument;
+            public Op Next;
+        }
 
-		private enum OpCode {
-			ExactString,		// literal
-			AnyChar,		// ?
-			AnyString,		// *
-			End,			// end of pattern
-			True			// always succeeds
-		};
-	}
+        private enum OpCode {
+            ExactString,        // literal
+            AnyChar,        // ?
+            AnyString,        // *
+            End,            // end of pattern
+            True            // always succeeds
+        };
+    }
 }

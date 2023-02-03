@@ -2,7 +2,7 @@
 // SubroutineFactory.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,46 +31,46 @@ using Mono.CodeContracts.Static.AST.Visitors;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders {
-	abstract class SubroutineFactory<Key, Data> : ICodeConsumer<Data, Subroutine> {
-		protected readonly SubroutineFacade SubroutineFacade;
-		private readonly Dictionary<Key, Subroutine> cache = new Dictionary<Key, Subroutine> ();
+    abstract class SubroutineFactory<Key, Data> : ICodeConsumer<Data, Subroutine> {
+        protected readonly SubroutineFacade SubroutineFacade;
+        private readonly Dictionary<Key, Subroutine> cache = new Dictionary<Key, Subroutine> ();
 
-		protected SubroutineFactory (SubroutineFacade subroutineFacade)
-		{
-			this.SubroutineFacade = subroutineFacade;
-		}
+        protected SubroutineFactory (SubroutineFacade subroutineFacade)
+        {
+            this.SubroutineFacade = subroutineFacade;
+        }
 
-		protected IContractProvider ContractProvider
-		{
-			get { return this.SubroutineFacade.ContractProvider; }
-		}
+        protected IContractProvider ContractProvider
+        {
+            get { return this.SubroutineFacade.ContractProvider; }
+        }
 
-		protected IMetaDataProvider MetaDataProvider
-		{
-			get { return this.SubroutineFacade.MetaDataProvider; }
-		}
+        protected IMetaDataProvider MetaDataProvider
+        {
+            get { return this.SubroutineFacade.MetaDataProvider; }
+        }
 
-		#region ICodeConsumer<Data,Subroutine> Members
-		public Subroutine Accept<Label> (ICodeProvider<Label> codeProvider, Label entryPoint, Data data)
-		{
-			return Factory (new SimpleSubroutineBuilder<Label> (codeProvider, this.SubroutineFacade, entryPoint), entryPoint, data);
-		}
-		#endregion
+        #region ICodeConsumer<Data,Subroutine> Members
+        public Subroutine Accept<Label> (ICodeProvider<Label> codeProvider, Label entryPoint, Data data)
+        {
+            return Factory (new SimpleSubroutineBuilder<Label> (codeProvider, this.SubroutineFacade, entryPoint), entryPoint, data);
+        }
+        #endregion
 
-		public Subroutine Get (Key key)
-		{
-			if (this.cache.ContainsKey (key))
-				return this.cache [key];
+        public Subroutine Get (Key key)
+        {
+            if (this.cache.ContainsKey (key))
+                return this.cache [key];
 
-			Subroutine sub = BuildNewSubroutine (key);
-			this.cache.Add (key, sub);
-			if (sub != null)
-			        sub.Initialize ();
+            Subroutine sub = BuildNewSubroutine (key);
+            this.cache.Add (key, sub);
+            if (sub != null)
+                    sub.Initialize ();
 
-			return sub;
-		}
+            return sub;
+        }
 
-		protected abstract Subroutine BuildNewSubroutine (Key key);
-		protected abstract Subroutine Factory<Label> (SimpleSubroutineBuilder<Label> builder, Label entry, Data data);
-	}
+        protected abstract Subroutine BuildNewSubroutine (Key key);
+        protected abstract Subroutine Factory<Label> (SimpleSubroutineBuilder<Label> builder, Label entry, Data data);
+    }
 }

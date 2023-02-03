@@ -1,9 +1,9 @@
 //
 // System.Web.HttpServerUtilityTest.cs 
-//	- Unit tests for System.Web.HttpServerUtility
+//    - Unit tests for System.Web.HttpServerUtility
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,61 +34,61 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web {
 
-	[TestFixture]
-	public class HttpServerUtilityTest {
+    [TestFixture]
+    public class HttpServerUtilityTest {
 
-		private HttpApplication _app;
+        private HttpApplication _app;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			_app = new HttpApplication ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            _app = new HttpApplication ();
+        }
 
-		public HttpServerUtility Server {
-			get { return _app.Server; }
-		}
+        public HttpServerUtility Server {
+            get { return _app.Server; }
+        }
 
-		[Test]
-		public void HtmlEncode_LtGt ()
-		{
-			Assert.AreEqual ("&lt;script&gt;", Server.HtmlEncode ("<script>"));
-		}
+        [Test]
+        public void HtmlEncode_LtGt ()
+        {
+            Assert.AreEqual ("&lt;script&gt;", Server.HtmlEncode ("<script>"));
+        }
 
-		// Notes:
-		// * this is to avoid a regression that would cause Mono to 
-		//   fail item #3 of the XSS vulnerabilities listed at:
-		//   http://it-project.ru/andir/docs/aspxvuln/aspxvuln.en.xml
-		//   we didn't fall the first time so let's ensure we never will
-		// * The author notes that Microsoft has decided not to fix 
-		//   this issue (hence the NotDotNet category).
+        // Notes:
+        // * this is to avoid a regression that would cause Mono to 
+        //   fail item #3 of the XSS vulnerabilities listed at:
+        //   http://it-project.ru/andir/docs/aspxvuln/aspxvuln.en.xml
+        //   we didn't fall the first time so let's ensure we never will
+        // * The author notes that Microsoft has decided not to fix 
+        //   this issue (hence the NotDotNet category).
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void HtmlEncode_XSS ()
-		{
-			string problem = "\xff1cscript\xff1e";  // unicode looks alike <script>
-			byte[] utf8data = Encoding.UTF8.GetBytes (problem);
-			Encoding win1251 = Encoding.GetEncoding ("windows-1251");
-			byte[] windata = Encoding.Convert (Encoding.UTF8, win1251, utf8data);
-			// now it's a real problem
-			Assert.AreEqual ("<script>", Encoding.ASCII.GetString (windata), "<script>");
+        [Test]
+        [Category ("NotDotNet")]
+        public void HtmlEncode_XSS ()
+        {
+            string problem = "\xff1cscript\xff1e";  // unicode looks alike <script>
+            byte[] utf8data = Encoding.UTF8.GetBytes (problem);
+            Encoding win1251 = Encoding.GetEncoding ("windows-1251");
+            byte[] windata = Encoding.Convert (Encoding.UTF8, win1251, utf8data);
+            // now it's a real problem
+            Assert.AreEqual ("<script>", Encoding.ASCII.GetString (windata), "<script>");
 
-			string encoded = Server.HtmlEncode (problem);
-			Assert.AreEqual ("&#65308;script&#65310;", encoded, "&#65308;script&#65310;");
-			
-			utf8data = Encoding.UTF8.GetBytes (encoded);
-			windata = Encoding.Convert (Encoding.UTF8, win1251, utf8data);
-			Assert.AreEqual ("&#65308;script&#65310;", Encoding.ASCII.GetString (windata), "ok");
-		}
+            string encoded = Server.HtmlEncode (problem);
+            Assert.AreEqual ("&#65308;script&#65310;", encoded, "&#65308;script&#65310;");
+            
+            utf8data = Encoding.UTF8.GetBytes (encoded);
+            windata = Encoding.Convert (Encoding.UTF8, win1251, utf8data);
+            Assert.AreEqual ("&#65308;script&#65310;", Encoding.ASCII.GetString (windata), "ok");
+        }
 
-		[Test]
-		public void UrlPathEncode2()
-		{
-			string s = "default.xxx?sdsd=sds";
-			string s2 = Server.UrlPathEncode(s);
-			Assert.AreEqual(s, s2, "UrlPathEncode " + s);
-		}		
+        [Test]
+        public void UrlPathEncode2()
+        {
+            string s = "default.xxx?sdsd=sds";
+            string s2 = Server.UrlPathEncode(s);
+            Assert.AreEqual(s, s2, "UrlPathEncode " + s);
+        }        
 
-	}
+    }
 }

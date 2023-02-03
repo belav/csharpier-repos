@@ -23,7 +23,7 @@
 // Copyright (c) Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
@@ -32,50 +32,50 @@ using System.Text;
 
 namespace System.Windows.Forms.Design
 {
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class ToolStripItemDesignerAvailabilityAttribute : Attribute
-	{
-		private ToolStripItemDesignerAvailability visibility;
-		public static readonly ToolStripItemDesignerAvailabilityAttribute Default = new ToolStripItemDesignerAvailabilityAttribute ();
+    [AttributeUsage (AttributeTargets.Class)]
+    public sealed class ToolStripItemDesignerAvailabilityAttribute : Attribute
+    {
+        private ToolStripItemDesignerAvailability visibility;
+        public static readonly ToolStripItemDesignerAvailabilityAttribute Default = new ToolStripItemDesignerAvailabilityAttribute ();
 
-		#region Public Constructors
-		public ToolStripItemDesignerAvailabilityAttribute ()
-			: base ()
-		{
-			this.visibility = ToolStripItemDesignerAvailability.None;
-		}
+        #region Public Constructors
+        public ToolStripItemDesignerAvailabilityAttribute ()
+            : base ()
+        {
+            this.visibility = ToolStripItemDesignerAvailability.None;
+        }
 
-		public ToolStripItemDesignerAvailabilityAttribute (ToolStripItemDesignerAvailability visibility)
-			: base ()
-		{
-			this.visibility = visibility;
-		}
-		#endregion
+        public ToolStripItemDesignerAvailabilityAttribute (ToolStripItemDesignerAvailability visibility)
+            : base ()
+        {
+            this.visibility = visibility;
+        }
+        #endregion
 
-		#region Public Properties
-		public ToolStripItemDesignerAvailability ItemAdditionVisibility {
-			get { return this.visibility; }
-		}
-		#endregion
+        #region Public Properties
+        public ToolStripItemDesignerAvailability ItemAdditionVisibility {
+            get { return this.visibility; }
+        }
+        #endregion
 
-		#region Public Methods
-		public override bool Equals (object obj)
-		{
-			if (!(obj is ToolStripItemDesignerAvailabilityAttribute))
-				return false;
+        #region Public Methods
+        public override bool Equals (object obj)
+        {
+            if (!(obj is ToolStripItemDesignerAvailabilityAttribute))
+                return false;
 
-			return this.ItemAdditionVisibility == (obj as ToolStripItemDesignerAvailabilityAttribute).ItemAdditionVisibility;
-		}
+            return this.ItemAdditionVisibility == (obj as ToolStripItemDesignerAvailabilityAttribute).ItemAdditionVisibility;
+        }
 
-		public override int GetHashCode ()
-		{
-			return (int)this.visibility;
-		}
+        public override int GetHashCode ()
+        {
+            return (int)this.visibility;
+        }
 
-		public override bool IsDefaultAttribute ()
-		{
-			return this.visibility == ToolStripItemDesignerAvailability.None;
-		}
-		#endregion
-	}
+        public override bool IsDefaultAttribute ()
+        {
+            return this.visibility == ToolStripItemDesignerAvailability.None;
+        }
+        #endregion
+    }
 }

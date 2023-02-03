@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return ds_time;
+    return ds_time;
       }
     }
 
@@ -55,7 +55,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return milli_seconds;
+    return milli_seconds;
       }
     }
 
@@ -64,7 +64,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return nVerb;
+    return nVerb;
       }
     }
 
@@ -73,7 +73,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return current_process;
+    return current_process;
       }
     }
 
@@ -82,7 +82,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get 
       {
-	return strPerpetratorDN;
+    return strPerpetratorDN;
       }
     }
 
@@ -91,7 +91,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-	return integer_values;
+    return integer_values;
       }
     }
 
@@ -100,7 +100,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get 
       {
-	return string_values;
+    return string_values;
       }
     }
 
@@ -133,43 +133,43 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       if (temptaggedvalue.getIdentifier().Tag
             == (int) GeneralEventField.EVT_TAG_GEN_INTEGERS) 
       {
-	//Integer List.
-	Asn1Sequence inteseq = getTaggedSequence(temptaggedvalue, GeneralEventField.EVT_TAG_GEN_INTEGERS);
-	Asn1Object[] intobject = inteseq.toArray();
-	integer_values = new int[intobject.Length];
+    //Integer List.
+    Asn1Sequence inteseq = getTaggedSequence(temptaggedvalue, GeneralEventField.EVT_TAG_GEN_INTEGERS);
+    Asn1Object[] intobject = inteseq.toArray();
+    integer_values = new int[intobject.Length];
 
-	for (int i = 0; i < intobject.Length; i++) 
-	{
-	  integer_values[i] = ((Asn1Integer) intobject[i]).intValue();
-	}
+    for (int i = 0; i < intobject.Length; i++) 
+    {
+      integer_values[i] = ((Asn1Integer) intobject[i]).intValue();
+    }
 
-	//second decoding for Strings.
-	temptaggedvalue = ((Asn1Tagged) decoder.decode(decodedData, length));
+    //second decoding for Strings.
+    temptaggedvalue = ((Asn1Tagged) decoder.decode(decodedData, length));
       } 
       else 
       {
-	integer_values = null;
+    integer_values = null;
       }
       
       if ((temptaggedvalue.getIdentifier().Tag
             == (int) GeneralEventField.EVT_TAG_GEN_STRINGS)
             && (temptaggedvalue.getIdentifier().Constructed)) 
       {
-	//String values.
-	Asn1Sequence inteseq =
+    //String values.
+    Asn1Sequence inteseq =
                 getTaggedSequence(temptaggedvalue, GeneralEventField.EVT_TAG_GEN_STRINGS);
-	Asn1Object[] stringobject = inteseq.toArray();
-	string_values = new string[stringobject.Length];
+    Asn1Object[] stringobject = inteseq.toArray();
+    string_values = new string[stringobject.Length];
 
-	for (int i = 0; i < stringobject.Length; i++) 
-	{
-	  string_values[i] =
+    for (int i = 0; i < stringobject.Length; i++) 
+    {
+      string_values[i] =
                     ((Asn1OctetString) stringobject[i]).stringValue();
-	}
+    }
       } 
       else 
       {
-	string_values = null;
+    string_values = null;
       }
 
       DataInitDone();
@@ -181,7 +181,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
 
       if ((int)tagid != tagvalue.getIdentifier().Tag) 
       {
-	throw new IOException("Unknown Tagged Data");
+    throw new IOException("Unknown Tagged Data");
       }
 
       byte[] dbytes = SupportClass.ToByteArray(((Asn1OctetString) obj).byteValue());
@@ -200,7 +200,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
 
       if ((int)tagid != tagvalue.getIdentifier().Tag) 
       {
-	throw new IOException("Unknown Tagged Data");
+    throw new IOException("Unknown Tagged Data");
       }
 
       byte[] dbytes = SupportClass.ToByteArray(((Asn1OctetString) obj).byteValue());
@@ -219,7 +219,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
 
       if ((int)tagid != tagvalue.getIdentifier().Tag) 
       {
-	throw new IOException("Unknown Tagged Data");
+    throw new IOException("Unknown Tagged Data");
       }
 
       byte[] dbytes = SupportClass.ToByteArray(((Asn1OctetString) obj).byteValue());

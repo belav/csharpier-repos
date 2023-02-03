@@ -2,8 +2,8 @@
 // System.Security.Policy.Url.cs
 //
 // Author
-//	Duncan Mak (duncan@ximian.com)
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Duncan Mak (duncan@ximian.com)
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 // (C) 2004 Motus Technologies Inc. (http://www.motus.com)
@@ -37,29 +37,29 @@ using Mono.Security;
 
 namespace System.Security.Policy {
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class Url :
-		EvidenceBase,
-		IIdentityPermissionFactory, IBuiltInEvidence {
+    [Serializable]
+    [ComVisible (true)]
+    public sealed class Url :
+        EvidenceBase,
+        IIdentityPermissionFactory, IBuiltInEvidence {
 
                 private string origin_url;
                 
                 public Url (string name)
-			: this (name, false)
+            : this (name, false)
                 {
                 }
 
-		internal Url (string name, bool validated) 
-		{
-			origin_url = validated ? name : Prepare (name);
-		}
+        internal Url (string name, bool validated) 
+        {
+            origin_url = validated ? name : Prepare (name);
+        }
 
-		// methods
+        // methods
 
                 public object Copy ()
                 {
-			// dont re-validate the Url
+            // dont re-validate the Url
                         return new Url (origin_url, true);
                 }
 
@@ -70,82 +70,82 @@ namespace System.Security.Policy {
 
                 public override bool Equals (object o)
                 {
-			Url u = (o as System.Security.Policy.Url);
-			if (u == null)
-				return false;
+            Url u = (o as System.Security.Policy.Url);
+            if (u == null)
+                return false;
 
-			string url1 = u.Value;
-			string url2 = origin_url;
-			if (url1.IndexOf (Uri.SchemeDelimiter) < 0)
-				url1 = "file://" + url1;
-			if (url2.IndexOf (Uri.SchemeDelimiter) < 0)
-				url2 = "file://" + url2;
-			return (String.Compare (url1, url2, true, CultureInfo.InvariantCulture) == 0);
+            string url1 = u.Value;
+            string url2 = origin_url;
+            if (url1.IndexOf (Uri.SchemeDelimiter) < 0)
+                url1 = "file://" + url1;
+            if (url2.IndexOf (Uri.SchemeDelimiter) < 0)
+                url2 = "file://" + url2;
+            return (String.Compare (url1, url2, true, CultureInfo.InvariantCulture) == 0);
                 }
 
                 public override int GetHashCode ()
                 {
-			string s = origin_url;
-			if (s.IndexOf (Uri.SchemeDelimiter) < 0)
-				s = "file://" + s;
+            string s = origin_url;
+            if (s.IndexOf (Uri.SchemeDelimiter) < 0)
+                s = "file://" + s;
                         return s.GetHashCode ();
                 }
 
                 public override string ToString ()
                 {
-			SecurityElement element = new SecurityElement ("System.Security.Policy.Url");
-			element.AddAttribute ("version", "1");
-			element.AddChild (new SecurityElement ("Url", origin_url));
-			return element.ToString ();
+            SecurityElement element = new SecurityElement ("System.Security.Policy.Url");
+            element.AddAttribute ("version", "1");
+            element.AddChild (new SecurityElement ("Url", origin_url));
+            return element.ToString ();
                 }
 
                 public string Value {
-			get { return origin_url; }
+            get { return origin_url; }
                 }
 
-		// interface IBuiltInEvidence
+        // interface IBuiltInEvidence
 
-		int IBuiltInEvidence.GetRequiredSize (bool verbose) 
-		{
-			return (verbose ? 3 : 1) + origin_url.Length;
-		}
+        int IBuiltInEvidence.GetRequiredSize (bool verbose) 
+        {
+            return (verbose ? 3 : 1) + origin_url.Length;
+        }
 
-		[MonoTODO ("IBuiltInEvidence")]
-		int IBuiltInEvidence.InitFromBuffer (char [] buffer, int position) 
-		{
-			return 0;
-		}
+        [MonoTODO ("IBuiltInEvidence")]
+        int IBuiltInEvidence.InitFromBuffer (char [] buffer, int position) 
+        {
+            return 0;
+        }
 
-		[MonoTODO ("IBuiltInEvidence")]
-		int IBuiltInEvidence.OutputToBuffer (char [] buffer, int position, bool verbose) 
-		{
-			return 0;
-		}
+        [MonoTODO ("IBuiltInEvidence")]
+        int IBuiltInEvidence.OutputToBuffer (char [] buffer, int position, bool verbose) 
+        {
+            return 0;
+        }
 
-		// internal
-		private string Prepare (string url) 
-		{
-			if (url == null)
-				throw new ArgumentNullException ("Url");
-			if (url == String.Empty)
-				throw new FormatException (Locale.GetText ("Invalid (empty) Url"));
+        // internal
+        private string Prepare (string url) 
+        {
+            if (url == null)
+                throw new ArgumentNullException ("Url");
+            if (url == String.Empty)
+                throw new FormatException (Locale.GetText ("Invalid (empty) Url"));
 
-			int protocolPos = url.IndexOf (Uri.SchemeDelimiter);	// '://'
-			if (protocolPos > 0) {
-				if (url.StartsWith ("file://")) {
-					// convert file url into uppercase
-					url = "file://" + url.Substring (7);
-				}
-				// don't escape and don't reduce (e.g. '.' and '..')
-				Uri uri = new Uri (url, false, false);
-				url = uri.ToString ();
-			}
+            int protocolPos = url.IndexOf (Uri.SchemeDelimiter);    // '://'
+            if (protocolPos > 0) {
+                if (url.StartsWith ("file://")) {
+                    // convert file url into uppercase
+                    url = "file://" + url.Substring (7);
+                }
+                // don't escape and don't reduce (e.g. '.' and '..')
+                Uri uri = new Uri (url, false, false);
+                url = uri.ToString ();
+            }
 
-			int lastpos = url.Length - 1;
-			if (url [lastpos] == '/')
-				url = url.Substring (0, lastpos);
+            int lastpos = url.Length - 1;
+            if (url [lastpos] == '/')
+                url = url.Substring (0, lastpos);
 
-			return url;
-		}
+            return url;
+        }
        }
 }

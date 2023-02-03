@@ -4,9 +4,9 @@
 
 class B
 {
-	static void Foo ()
-	{
-		if (1 is B) {
-		}
-	}
+    static void Foo ()
+    {
+        if (1 is B) {
+        }
+    }
 }

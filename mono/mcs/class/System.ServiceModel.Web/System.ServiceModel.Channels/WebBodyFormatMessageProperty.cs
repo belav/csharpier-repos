@@ -2,7 +2,7 @@
 // WebBodyFormatMessageProperty.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -29,29 +29,29 @@ using System;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class WebBodyFormatMessageProperty : IMessageProperty
-	{
-		WebContentFormat format;
+    public sealed class WebBodyFormatMessageProperty : IMessageProperty
+    {
+        WebContentFormat format;
 
-		public WebBodyFormatMessageProperty (WebContentFormat format)
-		{
-			this.format = format;
-		}
+        public WebBodyFormatMessageProperty (WebContentFormat format)
+        {
+            this.format = format;
+        }
 
-		public const string Name = "WebBodyFormatMessageProperty";
+        public const string Name = "WebBodyFormatMessageProperty";
 
-		public WebContentFormat Format {
-			get { return format; }
-		}
+        public WebContentFormat Format {
+            get { return format; }
+        }
 
-		public IMessageProperty CreateCopy ()
-		{
-			return (IMessageProperty) MemberwiseClone ();
-		}
+        public IMessageProperty CreateCopy ()
+        {
+            return (IMessageProperty) MemberwiseClone ();
+        }
 
-		public override string ToString ()
-		{
-			return String.Concat (Name, ": WebContentFormat=", format.ToString ());
-		}
-	}
+        public override string ToString ()
+        {
+            return String.Concat (Name, ": WebContentFormat=", format.ToString ());
+        }
+    }
 }

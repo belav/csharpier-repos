@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3336,16 +3336,16 @@ class C
 
             verifier.VerifyTypeIL("<PrivateImplementationDetails>", @"
 .class private auto ansi sealed '<PrivateImplementationDetails>'
-	extends [System.Runtime]System.Object
+    extends [System.Runtime]System.Object
 {
-	.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-		01 00 00 00
-	)
-	// Fields
-	.field assembly static initonly int32 F3D4280708A6C4BEA1BAEB5AD5A4B659E705A90BDD448840276EA20CB151BE57 at " + blobId + @"
-	.data cil " + blobId + @" = bytearray (
-		63 61 74 00
-	)
+    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+        01 00 00 00
+    )
+    // Fields
+    .field assembly static initonly int32 F3D4280708A6C4BEA1BAEB5AD5A4B659E705A90BDD448840276EA20CB151BE57 at " + blobId + @"
+    .data cil " + blobId + @" = bytearray (
+        63 61 74 00
+    )
 } // end of class <PrivateImplementationDetails>
 ");
         }
@@ -3382,15 +3382,15 @@ class C
 
             verifier.VerifyTypeIL("<PrivateImplementationDetails>", @"
 .class private auto ansi sealed '<PrivateImplementationDetails>'
-	extends [System.Runtime]System.Object
+    extends [System.Runtime]System.Object
 {
-	.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-		01 00 00 00
-	)
-	// Fields
-	.field assembly static initonly uint8 '6E340B9CFFB37A989CA544E6BB780A2C78901D3FB33738768511A30617AFA01D' at " + blobId + @"
-	.data cil " + blobId + @" = bytearray ( 00
-	)
+    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+        01 00 00 00
+    )
+    // Fields
+    .field assembly static initonly uint8 '6E340B9CFFB37A989CA544E6BB780A2C78901D3FB33738768511A30617AFA01D' at " + blobId + @"
+    .data cil " + blobId + @" = bytearray ( 00
+    )
 } // end of class <PrivateImplementationDetails>
 ");
         }

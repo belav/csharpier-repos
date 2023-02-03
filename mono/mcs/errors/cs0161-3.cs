@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 class A
 {
-	static async Task<string> Test ()
-	{
-		await CallAsync ();
-	}
-	
-	static Task<string> CallAsync ()
-	{
-		return null;
-	}
+    static async Task<string> Test ()
+    {
+        await CallAsync ();
+    }
+    
+    static Task<string> CallAsync ()
+    {
+        return null;
+    }
 }

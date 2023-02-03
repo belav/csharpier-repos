@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,27 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public class CustomGetter : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
-	{
-		private List<string> propertiesFetched = new List<string>();
+    public class CustomGetter : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
+    {
+        private List<string> propertiesFetched = new List<string>();
 
-		public IList<string> PropertiesFetched
-		{
-			get { return propertiesFetched; }
-		}
+        public IList<string> PropertiesFetched
+        {
+            get { return propertiesFetched; }
+        }
 
-		public void Reset()
-		{
-			propertiesFetched.Clear();
-		}
+        public void Reset()
+        {
+            propertiesFetched.Clear();
+        }
 
-		public object GetPropertyValue(IDictionaryAdapter dictionaryAdapter, string key,
-		                               object storedValue, PropertyDescriptor property, bool ifExists)
-		{
-			propertiesFetched.Add(key);
-			return storedValue;
-		}
-	}
+        public object GetPropertyValue(IDictionaryAdapter dictionaryAdapter, string key,
+                                       object storedValue, PropertyDescriptor property, bool ifExists)
+        {
+            propertiesFetched.Add(key);
+            return storedValue;
+        }
+    }
 }

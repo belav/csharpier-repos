@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 
 public class FriendClass
 {
-	internal static void MyMethod ()
-	{
-	}
+    internal static void MyMethod ()
+    {
+    }
 }
 

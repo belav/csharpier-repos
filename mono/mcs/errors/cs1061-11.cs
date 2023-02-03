@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public class C
 {
-	void M (IEnumerable<KeyValuePair<string, dynamic>> arg)
-	{
-		foreach (KeyValuePair<string, object> o in arg)
-		{
-			o.Value.Foo ();
-		}
-	}
+    void M (IEnumerable<KeyValuePair<string, dynamic>> arg)
+    {
+        foreach (KeyValuePair<string, object> o in arg)
+        {
+            o.Value.Foo ();
+        }
+    }
 }

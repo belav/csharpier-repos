@@ -1,8 +1,8 @@
-﻿// 
+// 
 // Checker.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -38,104 +38,104 @@ using Mono.CodeContracts.Static.Providers;
 using Mono.CodeContracts.Static.Proving;
 
 namespace Mono.CodeContracts.Static {
-	public class Checker {
-		private readonly CheckOptions options;
-		private CodeContractsAnalysisDriver<IMethodResult<SymbolicValue>> analysis_driver;
-		private Dictionary<string, IMethodAnalysis> analyzers;
+    public class Checker {
+        private readonly CheckOptions options;
+        private CodeContractsAnalysisDriver<IMethodResult<SymbolicValue>> analysis_driver;
+        private Dictionary<string, IMethodAnalysis> analyzers;
 
-		private Checker (CheckOptions options)
-		{
-			this.options = options;
-		}
+        private Checker (CheckOptions options)
+        {
+            this.options = options;
+        }
 
-		public static CheckResults Check (CheckOptions options)
-		{
-			var checker = new Checker (options);
-			return checker.Analyze ();
-		}
+        public static CheckResults Check (CheckOptions options)
+        {
+            var checker = new Checker (options);
+            return checker.Analyze ();
+        }
 
-		private CheckResults Analyze ()
-		{
-			if (this.options.Assembly == null)
-				return CheckResults.Error ("No assembly given to check");
+        private CheckResults Analyze ()
+        {
+            if (this.options.Assembly == null)
+                return CheckResults.Error ("No assembly given to check");
 
-			DebugOptions.Debug = this.options.ShowDebug;
+            DebugOptions.Debug = this.options.ShowDebug;
 
-		        this.analyzers = new Dictionary<string, IMethodAnalysis> {
-		                {"non-null", new NonNullAnalysisFacade ()},
-		                {"arithmetic", new Analysers.Arithmetic ()}
-		        };
+                this.analyzers = new Dictionary<string, IMethodAnalysis> {
+                        {"non-null", new NonNullAnalysisFacade ()},
+                        {"arithmetic", new Analysers.Arithmetic ()}
+                };
 
-			this.analysis_driver = new CodeContractsAnalysisDriver<IMethodResult<SymbolicValue>> (
-				new BasicAnalysisDriver (MetaDataProvider.Instance, CodeContractDecoder.Instance));
+            this.analysis_driver = new CodeContractsAnalysisDriver<IMethodResult<SymbolicValue>> (
+                new BasicAnalysisDriver (MetaDataProvider.Instance, CodeContractDecoder.Instance));
 
-			return AnalyzeAssembly (this.options.Assembly);
-		}
+            return AnalyzeAssembly (this.options.Assembly);
+        }
 
-		private CheckResults AnalyzeAssembly (string assemblyPath)
-		{
-			IMetaDataProvider metadataDecoder = this.analysis_driver.MetaDataProvider;
-			AssemblyNode assembly;
-			string reason;
-			if (!metadataDecoder.TryLoadAssembly (assemblyPath, out assembly, out reason))
-				return CheckResults.Error (string.Format ("Cannot load assembly: {0}", reason));
+        private CheckResults AnalyzeAssembly (string assemblyPath)
+        {
+            IMetaDataProvider metadataDecoder = this.analysis_driver.MetaDataProvider;
+            AssemblyNode assembly;
+            string reason;
+            if (!metadataDecoder.TryLoadAssembly (assemblyPath, out assembly, out reason))
+                return CheckResults.Error (string.Format ("Cannot load assembly: {0}", reason));
 
-			var proofResults = new Dictionary<string, ICollection<string>> ();
-			foreach (Method method in metadataDecoder.Methods (assembly))
-				AnalyzeMethod (method, proofResults);
-			if (proofResults.Count == 0)
-				return CheckResults.Error ("No methods found.");
+            var proofResults = new Dictionary<string, ICollection<string>> ();
+            foreach (Method method in metadataDecoder.Methods (assembly))
+                AnalyzeMethod (method, proofResults);
+            if (proofResults.Count == 0)
+                return CheckResults.Error ("No methods found.");
 
-			return new CheckResults (null, null, proofResults);
-		}
+            return new CheckResults (null, null, proofResults);
+        }
 
-		private void AnalyzeMethod (Method method, Dictionary<string, ICollection<string>> proofResults)
-		{
-			IMetaDataProvider metadataDecoder = this.analysis_driver.MetaDataProvider;
-			if (!metadataDecoder.HasBody (method))
-				return;
-			if (this.options.Method != null && !metadataDecoder.FullName (method).Contains (this.options.Method))
-				return;
+        private void AnalyzeMethod (Method method, Dictionary<string, ICollection<string>> proofResults)
+        {
+            IMetaDataProvider metadataDecoder = this.analysis_driver.MetaDataProvider;
+            if (!metadataDecoder.HasBody (method))
+                return;
+            if (this.options.Method != null && !metadataDecoder.FullName (method).Contains (this.options.Method))
+                return;
 
-			var results = new List<string> ();
-			proofResults.Add (method.FullName, results);
-			try {
-				AnalyzeMethodInternal (method, results);
-			} catch (Exception e) {
-				results.Add ("Exception: " + e.Message);
-				return;
-			}
+            var results = new List<string> ();
+            proofResults.Add (method.FullName, results);
+            try {
+                AnalyzeMethodInternal (method, results);
+            } catch (Exception e) {
+                results.Add ("Exception: " + e.Message);
+                return;
+            }
 
-			results.Add (string.Format ("Checked {0} assertions", results.Count));
-		}
+            results.Add (string.Format ("Checked {0} assertions", results.Count));
+        }
 
-		private void AnalyzeMethodInternal (Method method, List<string> proofResults)
-		{
-			string fullMethodName = method.FullName;
-			IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> methodDriver = this.analysis_driver.CreateMethodDriver (method);
+        private void AnalyzeMethodInternal (Method method, List<string> proofResults)
+        {
+            string fullMethodName = method.FullName;
+            IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue> methodDriver = this.analysis_driver.CreateMethodDriver (method);
 
-			methodDriver.RunHeapAndExpressionAnalyses ();
+            methodDriver.RunHeapAndExpressionAnalyses ();
 
-			var results = new List<IMethodResult<SymbolicValue>> (this.analyzers.Values.Count);
-			foreach (IMethodAnalysis analysis in this.analyzers.Values) {
-				IMethodResult<SymbolicValue> result = analysis.Analyze (fullMethodName, methodDriver);
-				results.Add (result);
-			}
+            var results = new List<IMethodResult<SymbolicValue>> (this.analyzers.Values.Count);
+            foreach (IMethodAnalysis analysis in this.analyzers.Values) {
+                IMethodResult<SymbolicValue> result = analysis.Analyze (fullMethodName, methodDriver);
+                results.Add (result);
+            }
 
-			ComposedFactQuery<SymbolicValue> facts = CreateFactQuery (methodDriver.BasicFacts.IsUnreachable, results);
-			foreach (var methodResult in results)
-				methodResult.ValidateImplicitAssertions (facts, proofResults);
+            ComposedFactQuery<SymbolicValue> facts = CreateFactQuery (methodDriver.BasicFacts.IsUnreachable, results);
+            foreach (var methodResult in results)
+                methodResult.ValidateImplicitAssertions (facts, proofResults);
 
-			AssertionFinder.ValidateAssertions (facts, methodDriver, proofResults);
-		}
+            AssertionFinder.ValidateAssertions (facts, methodDriver, proofResults);
+        }
 
-		private ComposedFactQuery<Variable> CreateFactQuery<Variable> (Predicate<APC> isUnreachable, IEnumerable<IMethodResult<Variable>> results)
-		{
-			var res = new ComposedFactQuery<Variable> (isUnreachable);
-			res.Add (new ConstantPropagationFactQuery<Variable> ());
-			foreach (var methodResult in results)
-				res.Add (methodResult.FactQuery);
-			return res;
-		}
-	}
+        private ComposedFactQuery<Variable> CreateFactQuery<Variable> (Predicate<APC> isUnreachable, IEnumerable<IMethodResult<Variable>> results)
+        {
+            var res = new ComposedFactQuery<Variable> (isUnreachable);
+            res.Add (new ConstantPropagationFactQuery<Variable> ());
+            foreach (var methodResult in results)
+                res.Add (methodResult.FactQuery);
+            return res;
+        }
+    }
 }

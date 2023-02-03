@@ -2,7 +2,7 @@
 // SettingsDescriptionAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,18 +30,18 @@ using System.Collections;
 
 namespace System.Configuration
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class SettingsDescriptionAttribute : Attribute
-	{
-		string desc;
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class SettingsDescriptionAttribute : Attribute
+    {
+        string desc;
 
-		public SettingsDescriptionAttribute (string description)
-		{
-			desc = description;
-		}
+        public SettingsDescriptionAttribute (string description)
+        {
+            desc = description;
+        }
 
-		public string Description {
-			get { return desc; }
-		}
-	}
+        public string Description {
+            get { return desc; }
+        }
+    }
 }

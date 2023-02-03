@@ -4,8 +4,8 @@
 using System;
 
 class X {
-	static void Main ()
-	{
-		object o = () => true;
-	}
+    static void Main ()
+    {
+        object o = () => true;
+    }
 }

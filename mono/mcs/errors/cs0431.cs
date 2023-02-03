@@ -4,12 +4,12 @@
 using foo = A;
 
 class A {
-	public class B { }
+    public class B { }
 }
 
 class X {
-	static void Main ()
-	{
-		foo::B b = new A.B ();
-	}
+    static void Main ()
+    {
+        foo::B b = new A.B ();
+    }
 }

@@ -32,31 +32,31 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class MimePart : ServiceDescriptionFormatExtension {
+    [XmlFormatExtensionPoint ("Extensions")]
+    public sealed class MimePart : ServiceDescriptionFormatExtension {
 
-		#region Fields
+        #region Fields
 
-		ServiceDescriptionFormatExtensionCollection extensions;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public MimePart ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public MimePart ()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[XmlIgnore]	
-		public ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        [XmlIgnore]    
+        public ServiceDescriptionFormatExtensionCollection Extensions {
+            get { return extensions; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

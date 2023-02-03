@@ -32,29 +32,29 @@
 
 namespace System.DirectoryServices
 {
-	
-	/// <summary>
-	/// Specifies the types of authentication used in 
-	/// System.DirectoryServices
-	/// This enumeration has a FlagsAttribute attribute
-	///  that allows a bitwise combination of its member values.
-	/// </summary>
-	[Flags]
-	[Serializable]
-	public enum AuthenticationTypes
-	{
-		Anonymous = 16,
-		Delegation = 256,
-	    Encryption = 2,
-	    FastBind = 32,
-	    None = 0,
-	    ReadonlyServer = 4,
-	    Sealing = 128,
-	    Secure = 1,
-	    SecureSocketsLayer = 2,
-	    ServerBind = 512,
-	    Signing = 64
-	}
+    
+    /// <summary>
+    /// Specifies the types of authentication used in 
+    /// System.DirectoryServices
+    /// This enumeration has a FlagsAttribute attribute
+    ///  that allows a bitwise combination of its member values.
+    /// </summary>
+    [Flags]
+    [Serializable]
+    public enum AuthenticationTypes
+    {
+        Anonymous = 16,
+        Delegation = 256,
+        Encryption = 2,
+        FastBind = 32,
+        None = 0,
+        ReadonlyServer = 4,
+        Sealing = 128,
+        Secure = 1,
+        SecureSocketsLayer = 2,
+        ServerBind = 512,
+        Signing = 64
+    }
 
 }
 

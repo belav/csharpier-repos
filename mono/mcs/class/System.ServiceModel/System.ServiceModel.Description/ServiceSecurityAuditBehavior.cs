@@ -2,7 +2,7 @@
 // ServiceSecurityAuditBehavior.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,53 +33,53 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public sealed class ServiceSecurityAuditBehavior : IServiceBehavior
-	{
-		AuditLogLocation audit_log_loc;
-		bool suppress_failure;
-		AuditLevel msg_audit_level, svc_audit_level;
+    public sealed class ServiceSecurityAuditBehavior : IServiceBehavior
+    {
+        AuditLogLocation audit_log_loc;
+        bool suppress_failure;
+        AuditLevel msg_audit_level, svc_audit_level;
 
-		public AuditLogLocation AuditLogLocation {
-			get { return audit_log_loc; }
-			set { audit_log_loc = value; }
-		}
+        public AuditLogLocation AuditLogLocation {
+            get { return audit_log_loc; }
+            set { audit_log_loc = value; }
+        }
 
-		public AuditLevel MessageAuthenticationAuditLevel {
-			get { return msg_audit_level; }
-			set { msg_audit_level = value; }
-		}
+        public AuditLevel MessageAuthenticationAuditLevel {
+            get { return msg_audit_level; }
+            set { msg_audit_level = value; }
+        }
 
-		public AuditLevel ServiceAuthorizationAuditLevel {
-			get { return svc_audit_level; }
-			set { svc_audit_level = value; }
-		}
+        public AuditLevel ServiceAuthorizationAuditLevel {
+            get { return svc_audit_level; }
+            set { svc_audit_level = value; }
+        }
 
-		public bool SuppressAuditFailure {
-			get { return suppress_failure; }
-			set { suppress_failure = value; }
-		}
+        public bool SuppressAuditFailure {
+            get { return suppress_failure; }
+            set { suppress_failure = value; }
+        }
 
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IServiceBehavior.AddBindingParameters (
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			throw new NotImplementedException ();
-		}
+        void IServiceBehavior.ApplyDispatchBehavior (
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase)
+        {
+            throw new NotImplementedException ();
+        }
 
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void IServiceBehavior.Validate (
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

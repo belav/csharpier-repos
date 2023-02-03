@@ -32,31 +32,31 @@ using System;
 using System.Runtime.Serialization;
 
 namespace System.IO {
-	[Serializable]
-	public class InternalBufferOverflowException : SystemException {
+    [Serializable]
+    public class InternalBufferOverflowException : SystemException {
 
-		#region Constructors
+        #region Constructors
 
-		public InternalBufferOverflowException ()
-			: base ("Internal buffer overflow occurred.")
-		{
-		}
+        public InternalBufferOverflowException ()
+            : base ("Internal buffer overflow occurred.")
+        {
+        }
 
-		public InternalBufferOverflowException (string message)
-			: base (message)
-		{
-		}
+        public InternalBufferOverflowException (string message)
+            : base (message)
+        {
+        }
 
-		protected InternalBufferOverflowException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected InternalBufferOverflowException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+        }
 
-		public InternalBufferOverflowException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public InternalBufferOverflowException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		#endregion // Constructors
-	}
+        #endregion // Constructors
+    }
 }

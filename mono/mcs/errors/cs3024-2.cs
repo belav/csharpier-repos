@@ -12,8 +12,8 @@ public abstract class A
 
 public class C
 {
-	public static void Foo<T>() where T : A
-	{
-	}
+    public static void Foo<T>() where T : A
+    {
+    }
 }
 

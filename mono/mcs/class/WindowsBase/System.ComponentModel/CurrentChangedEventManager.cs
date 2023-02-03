@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,32 +28,32 @@ using System.Windows;
 
 namespace System.ComponentModel {
 
-	public class CurrentChangedEventManager : WeakEventManager
-	{
-		internal CurrentChangedEventManager ()
-		{
-		}
+    public class CurrentChangedEventManager : WeakEventManager
+    {
+        internal CurrentChangedEventManager ()
+        {
+        }
 
-		public static void AddListener (ICollectionView source, IWeakEventListener listener)
-		{
-			throw new NotImplementedException ();
-		}
+        public static void AddListener (ICollectionView source, IWeakEventListener listener)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public static void RemoveListener (ICollectionView source, IWeakEventListener listener)
-		{
-			throw new NotImplementedException ();
-		}
+        public static void RemoveListener (ICollectionView source, IWeakEventListener listener)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void StartListening (object source)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override void StartListening (object source)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void StopListening (object source)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void StopListening (object source)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 

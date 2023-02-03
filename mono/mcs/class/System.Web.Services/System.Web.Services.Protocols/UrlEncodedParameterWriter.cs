@@ -36,67 +36,67 @@ using System.Web;
 using System.Reflection;
 
 namespace System.Web.Services.Protocols {
-	public abstract class UrlEncodedParameterWriter : MimeParameterWriter {
+    public abstract class UrlEncodedParameterWriter : MimeParameterWriter {
 
-		Encoding requestEncoding;
-		ParameterInfo[] parameters;
-		
-		#region Constructors
+        Encoding requestEncoding;
+        ParameterInfo[] parameters;
+        
+        #region Constructors
 
-		protected UrlEncodedParameterWriter () 
-		{
-		}
-		
-		#endregion // Constructors
+        protected UrlEncodedParameterWriter () 
+        {
+        }
+        
+        #endregion // Constructors
 
-		#region Properties 
+        #region Properties 
 
-		public override Encoding RequestEncoding {
-			get { return requestEncoding; }
-			set { requestEncoding = value; }
-		}
+        public override Encoding RequestEncoding {
+            get { return requestEncoding; }
+            set { requestEncoding = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		protected void Encode (TextWriter writer, object[] values)
-		{
-			for (int n=0; n<values.Length; n++)
-			{
-				if (n>0) writer.Write ("&");
-				Encode (writer, parameters[n].Name, values[n]);
-			}
-		}
+        protected void Encode (TextWriter writer, object[] values)
+        {
+            for (int n=0; n<values.Length; n++)
+            {
+                if (n>0) writer.Write ("&");
+                Encode (writer, parameters[n].Name, values[n]);
+            }
+        }
 
-		protected void Encode (TextWriter writer, string name, object value)
-		{
-			if (requestEncoding != null)
-			{
-				writer.Write (HttpUtility.UrlEncode (name, requestEncoding));
-				writer.Write ("=");
-				writer.Write (HttpUtility.UrlEncode (ObjToString (value), requestEncoding));
-			}
-			else
-			{
-				writer.Write (HttpUtility.UrlEncode (name));
-				writer.Write ("=");
-				writer.Write (HttpUtility.UrlEncode (ObjToString (value)));
-			}
-				
-		}
+        protected void Encode (TextWriter writer, string name, object value)
+        {
+            if (requestEncoding != null)
+            {
+                writer.Write (HttpUtility.UrlEncode (name, requestEncoding));
+                writer.Write ("=");
+                writer.Write (HttpUtility.UrlEncode (ObjToString (value), requestEncoding));
+            }
+            else
+            {
+                writer.Write (HttpUtility.UrlEncode (name));
+                writer.Write ("=");
+                writer.Write (HttpUtility.UrlEncode (ObjToString (value)));
+            }
+                
+        }
 
-		public override object GetInitializer (LogicalMethodInfo methodInfo)
-		{
-			if (methodInfo.OutParameters.Length > 0) return null;
-			else return methodInfo.Parameters;
-		}
+        public override object GetInitializer (LogicalMethodInfo methodInfo)
+        {
+            if (methodInfo.OutParameters.Length > 0) return null;
+            else return methodInfo.Parameters;
+        }
 
-		public override void Initialize (object initializer)
-		{
-			parameters = (ParameterInfo[]) initializer;
-		}
+        public override void Initialize (object initializer)
+        {
+            parameters = (ParameterInfo[]) initializer;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

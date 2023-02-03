@@ -34,7 +34,7 @@ using System.Collections;
 
 namespace System.Web.UI
 {
-	interface ITagNameToTypeMapper
+    interface ITagNameToTypeMapper
         {
                 Type GetControlType(string tagName, IDictionary attribs);
         }

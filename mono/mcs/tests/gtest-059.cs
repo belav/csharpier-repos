@@ -1,9 +1,9 @@
 namespace N {
-	interface A <T> {
-	}
+    interface A <T> {
+    }
 }
 class X <T> : N.A <T> {
 }
 class Foo {
-	public static void Main () {}
+    public static void Main () {}
 }

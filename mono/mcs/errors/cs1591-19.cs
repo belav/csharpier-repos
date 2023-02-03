@@ -3,9 +3,9 @@
 // Compiler options: -doc:dummy.xml -warnaserror -warn:4
 /// <summary>test</summary>
 public class EntryPoint {
-	protected void Create (bool test) {
-	}
+    protected void Create (bool test) {
+    }
 
-	protected void Remove () {
-	}
+    protected void Remove () {
+    }
 }

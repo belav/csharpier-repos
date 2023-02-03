@@ -4,12 +4,12 @@
 
 class A
 {
-	public abstract class Adapter
-	{
-	}
+    public abstract class Adapter
+    {
+    }
 }
 
 class B : A
 {
-	public int Adapter { get; set; }
+    public int Adapter { get; set; }
 }

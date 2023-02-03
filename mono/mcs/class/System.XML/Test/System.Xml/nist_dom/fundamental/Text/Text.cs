@@ -52,7 +52,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0001T()
+    public void core0001T()
         {
             string computedValue = "";
             string expectedValue = "Roger\n Jones";
@@ -109,7 +109,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0002T()
+    public void core0002T()
         {
             string computedValue = "";
             string expectedValue = "1900 Dallas Road Dallas, Texas\n 98554";
@@ -176,7 +176,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0003T()
+    public void core0003T()
         {
             string computedValue = "";
             string expectedValue = "Jones";
@@ -236,7 +236,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0004T()
+    public void core0004T()
         {
             string computedValue = "";
             string expectedValue = "Roger";
@@ -297,7 +297,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0005T()
+    public void core0005T()
         {
             string computedValue = "";
             string expectedValue = " Jones";
@@ -358,7 +358,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0006T()
+    public void core0006T()
         {
             string computedValue = "";
             string expectedValue = "98551";
@@ -414,7 +414,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	public void core0007T()
+    public void core0007T()
         {
             string computedValue = "";
             System.Xml.XmlText oldTextNode = null;
@@ -464,7 +464,7 @@ namespace nist_dom.fundamental
         //-------------------------- test case core-0008T ----------------------------
         //
         // Testing feature -  The "splitText(offset)" method raises an 
-		//                    ArgumentOutOfRangeException if the specified offset is greater than the 
+        //                    ArgumentOutOfRangeException if the specified offset is greater than the 
         //                    number of 16-bit units in the Text node.
         //
         // Testing approach - Retrieve the textual data from the second child of
@@ -478,7 +478,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
             [Test]
-	public void core0008T()
+    public void core0008T()
             {
                 string computedValue = "";
                 System.Xml.XmlText oldTextNode = null;
@@ -541,8 +541,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-	public void core0009T()
+    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+    public void core0009T()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;

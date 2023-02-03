@@ -28,118 +28,118 @@
 
 namespace Mono.Cecil.Binary {
 
-	using System;
-	using System.IO;
-	using System.Text;
+    using System;
+    using System.IO;
+    using System.Text;
 
-	sealed class ResourceReader {
+    sealed class ResourceReader {
 
-		Image m_img;
-		Section m_rsrc;
-		BinaryReader m_reader;
+        Image m_img;
+        Section m_rsrc;
+        BinaryReader m_reader;
 
-		public ResourceReader (Image img)
-		{
-			m_img = img;
-		}
+        public ResourceReader (Image img)
+        {
+            m_img = img;
+        }
 
-		public ResourceDirectoryTable Read ()
-		{
-			m_rsrc = GetResourceSection ();
-			if (m_rsrc == null)
-				return null;
+        public ResourceDirectoryTable Read ()
+        {
+            m_rsrc = GetResourceSection ();
+            if (m_rsrc == null)
+                return null;
 
-			m_reader = new BinaryReader (new MemoryStream (m_rsrc.Data));
-			return ReadDirectoryTable ();
-		}
+            m_reader = new BinaryReader (new MemoryStream (m_rsrc.Data));
+            return ReadDirectoryTable ();
+        }
 
-		Section GetResourceSection ()
-		{
-			foreach (Section s in m_img.Sections)
-				if (s.Name == Section.Resources)
-					return s;
+        Section GetResourceSection ()
+        {
+            foreach (Section s in m_img.Sections)
+                if (s.Name == Section.Resources)
+                    return s;
 
-			return null;
-		}
+            return null;
+        }
 
-		int GetOffset ()
-		{
-			return (int) m_reader.BaseStream.Position;
-		}
+        int GetOffset ()
+        {
+            return (int) m_reader.BaseStream.Position;
+        }
 
-		ResourceDirectoryTable ReadDirectoryTable ()
-		{
-			ResourceDirectoryTable rdt = new ResourceDirectoryTable (GetOffset ());
-			rdt.Characteristics = m_reader.ReadUInt32 ();
-			rdt.TimeDateStamp = m_reader.ReadUInt32 ();
-			rdt.MajorVersion = m_reader.ReadUInt16 ();
-			rdt.MinorVersion = m_reader.ReadUInt16 ();
-			ushort nameEntries = m_reader.ReadUInt16 ();
-			ushort idEntries = m_reader.ReadUInt16 ();
+        ResourceDirectoryTable ReadDirectoryTable ()
+        {
+            ResourceDirectoryTable rdt = new ResourceDirectoryTable (GetOffset ());
+            rdt.Characteristics = m_reader.ReadUInt32 ();
+            rdt.TimeDateStamp = m_reader.ReadUInt32 ();
+            rdt.MajorVersion = m_reader.ReadUInt16 ();
+            rdt.MinorVersion = m_reader.ReadUInt16 ();
+            ushort nameEntries = m_reader.ReadUInt16 ();
+            ushort idEntries = m_reader.ReadUInt16 ();
 
-			for (int i = 0; i < nameEntries; i++)
-				rdt.Entries.Add (ReadDirectoryEntry ());
+            for (int i = 0; i < nameEntries; i++)
+                rdt.Entries.Add (ReadDirectoryEntry ());
 
-			for (int i = 0; i < idEntries; i++)
-				rdt.Entries.Add (ReadDirectoryEntry ());
+            for (int i = 0; i < idEntries; i++)
+                rdt.Entries.Add (ReadDirectoryEntry ());
 
-			return rdt;
-		}
+            return rdt;
+        }
 
-		ResourceDirectoryEntry ReadDirectoryEntry ()
-		{
-			uint name = m_reader.ReadUInt32 ();
-			uint child = m_reader.ReadUInt32 ();
+        ResourceDirectoryEntry ReadDirectoryEntry ()
+        {
+            uint name = m_reader.ReadUInt32 ();
+            uint child = m_reader.ReadUInt32 ();
 
-			ResourceDirectoryEntry rde;
-			if ((name & 0x80000000) != 0)
-				rde = new ResourceDirectoryEntry (ReadDirectoryString ((int) name & 0x7fffffff), GetOffset ());
-			else
-				rde = new ResourceDirectoryEntry ((int) name & 0x7fffffff, GetOffset ());
+            ResourceDirectoryEntry rde;
+            if ((name & 0x80000000) != 0)
+                rde = new ResourceDirectoryEntry (ReadDirectoryString ((int) name & 0x7fffffff), GetOffset ());
+            else
+                rde = new ResourceDirectoryEntry ((int) name & 0x7fffffff, GetOffset ());
 
-			long pos = m_reader.BaseStream.Position;
-			m_reader.BaseStream.Position = child & 0x7fffffff;
+            long pos = m_reader.BaseStream.Position;
+            m_reader.BaseStream.Position = child & 0x7fffffff;
 
-			if ((child & 0x80000000) != 0)
-				rde.Child = ReadDirectoryTable ();
-			else
-				rde.Child = ReadDataEntry ();
+            if ((child & 0x80000000) != 0)
+                rde.Child = ReadDirectoryTable ();
+            else
+                rde.Child = ReadDataEntry ();
 
-			m_reader.BaseStream.Position = pos;
+            m_reader.BaseStream.Position = pos;
 
-			return rde;
-		}
+            return rde;
+        }
 
-		ResourceDirectoryString ReadDirectoryString (int offset)
-		{
-			long pos = m_reader.BaseStream.Position;
-			m_reader.BaseStream.Position = offset;
+        ResourceDirectoryString ReadDirectoryString (int offset)
+        {
+            long pos = m_reader.BaseStream.Position;
+            m_reader.BaseStream.Position = offset;
 
-			byte [] str = m_reader.ReadBytes (m_reader.ReadUInt16 ());
+            byte [] str = m_reader.ReadBytes (m_reader.ReadUInt16 ());
 
-			ResourceDirectoryString rds = new ResourceDirectoryString (
-				Encoding.Unicode.GetString (str, 0, str.Length),
-				GetOffset ());
+            ResourceDirectoryString rds = new ResourceDirectoryString (
+                Encoding.Unicode.GetString (str, 0, str.Length),
+                GetOffset ());
 
-			m_reader.BaseStream.Position = pos;
+            m_reader.BaseStream.Position = pos;
 
-			return rds;
-		}
+            return rds;
+        }
 
-		ResourceNode ReadDataEntry ()
-		{
-			ResourceDataEntry rde = new ResourceDataEntry (GetOffset ());
-			rde.Data = m_reader.ReadUInt32 ();
-			rde.Size = m_reader.ReadUInt32 ();
-			rde.Codepage = m_reader.ReadUInt32 ();
-			rde.Reserved = m_reader.ReadUInt32 ();
+        ResourceNode ReadDataEntry ()
+        {
+            ResourceDataEntry rde = new ResourceDataEntry (GetOffset ());
+            rde.Data = m_reader.ReadUInt32 ();
+            rde.Size = m_reader.ReadUInt32 ();
+            rde.Codepage = m_reader.ReadUInt32 ();
+            rde.Reserved = m_reader.ReadUInt32 ();
 
-			Section sect = m_img.GetSectionAtVirtualAddress (rde.Data);
-			byte [] data = new byte [rde.Size];
-			Buffer.BlockCopy (sect.Data, (int)(long)(rde.Data - sect.VirtualAddress), data, 0, (int)rde.Size);
-			rde.ResourceData = data;
+            Section sect = m_img.GetSectionAtVirtualAddress (rde.Data);
+            byte [] data = new byte [rde.Size];
+            Buffer.BlockCopy (sect.Data, (int)(long)(rde.Data - sect.VirtualAddress), data, 0, (int)rde.Size);
+            rde.ResourceData = data;
 
-			return rde;
-		}
-	}
+            return rde;
+        }
+    }
 }

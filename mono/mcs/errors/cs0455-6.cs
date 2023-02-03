@@ -10,9 +10,9 @@ class Y
 }
 
 class C<T1, T2, T3, T4>
-	where T1 : X
-	where T2 : T1
-	where T3 : Y, T4
-	where T4 : T2
+    where T1 : X
+    where T2 : T1
+    where T3 : Y, T4
+    where T4 : T2
 {
 }

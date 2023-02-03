@@ -32,21 +32,21 @@ using System.Reflection;
 
 namespace System.Data.Linq
 {
-	public struct ModifiedMemberInfo
-	{
-		[MonoTODO]
-		public object CurrentValue {
-			get { throw new NotImplementedException (); }
-		}
+    public struct ModifiedMemberInfo
+    {
+        [MonoTODO]
+        public object CurrentValue {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public MemberInfo Member {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public MemberInfo Member {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public object OriginalValue {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public object OriginalValue {
+            get { throw new NotImplementedException (); }
+        }
+    }
 }

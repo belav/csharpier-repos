@@ -22,53 +22,53 @@ public class Test : MarshalByRefObject {
     public String str;
 
     public void setThread () {
-	Console.WriteLine ("setting thread");
-	thread = Thread.CurrentThread;
-	thread.Name = "foo";
+    Console.WriteLine ("setting thread");
+    thread = Thread.CurrentThread;
+    thread.Name = "foo";
     }
 
     public void setStr (string s) {
-	Console.WriteLine ("setting str");
-	str = s;
+    Console.WriteLine ("setting str");
+    str = s;
     }
 
     public void callSetThread (Test t) {
-	Thread thread = new Thread (new ThreadStart (t.setThread));
+    Thread thread = new Thread (new ThreadStart (t.setThread));
 
-	thread.Start ();
-	thread.Join ();
+    thread.Start ();
+    thread.Join ();
 
-	t.setStr ("a" + "b");
+    t.setStr ("a" + "b");
     }
 }
 
 public class main {
     public static int Main (string [] args) {
-	AppDomain domain = AppDomain.CreateDomain ("newdomain");
-	Test myTest = new Test ();
-	Test otherTest = (Test) domain.CreateInstanceAndUnwrap (typeof (Test).Assembly.FullName, typeof (Test).FullName);
+    AppDomain domain = AppDomain.CreateDomain ("newdomain");
+    Test myTest = new Test ();
+    Test otherTest = (Test) domain.CreateInstanceAndUnwrap (typeof (Test).Assembly.FullName, typeof (Test).FullName);
 
-	otherTest.callSetThread (myTest);
+    otherTest.callSetThread (myTest);
 
-	if (myTest.thread.GetType () == Thread.CurrentThread.GetType ())
-		Console.WriteLine ("same type");
-	else {
-		Console.WriteLine ("different type");
-		return 1;
-	}
+    if (myTest.thread.GetType () == Thread.CurrentThread.GetType ())
+        Console.WriteLine ("same type");
+    else {
+        Console.WriteLine ("different type");
+        return 1;
+    }
 
-	AppDomain.Unload (domain);
+    AppDomain.Unload (domain);
 
-	GC.Collect ();
-	GC.WaitForPendingFinalizers ();
+    GC.Collect ();
+    GC.WaitForPendingFinalizers ();
 
-	Console.WriteLine ("thread " + myTest.thread);
+    Console.WriteLine ("thread " + myTest.thread);
 
-	Console.WriteLine ("str " + myTest.str);
+    Console.WriteLine ("str " + myTest.str);
 
-	if (!myTest.thread.Name.Equals("foo"))
-		return 1;
+    if (!myTest.thread.Name.Equals("foo"))
+        return 1;
 
-	return 0;
+    return 0;
     }
 }

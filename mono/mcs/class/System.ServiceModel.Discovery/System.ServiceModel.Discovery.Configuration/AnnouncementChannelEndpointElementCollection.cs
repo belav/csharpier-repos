@@ -29,17 +29,17 @@ using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel.Discovery.Configuration
 {
-	[ConfigurationCollection (typeof (ChannelEndpointElement), AddItemName = "endpoint")]
-	public sealed class AnnouncementChannelEndpointElementCollection : ServiceModelConfigurationElementCollection<ChannelEndpointElement>
-	{
-		public AnnouncementChannelEndpointElementCollection ()
-		{
-		}
-		
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((ChannelEndpointElement) element).Name;
-		}
-	}
+    [ConfigurationCollection (typeof (ChannelEndpointElement), AddItemName = "endpoint")]
+    public sealed class AnnouncementChannelEndpointElementCollection : ServiceModelConfigurationElementCollection<ChannelEndpointElement>
+    {
+        public AnnouncementChannelEndpointElementCollection ()
+        {
+        }
+        
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            return ((ChannelEndpointElement) element).Name;
+        }
+    }
 }
 

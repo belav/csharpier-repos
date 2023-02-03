@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests;
+namespace AutoMapper.UnitTests;
 
 public static class AssertionExtensions
 {

@@ -10,8 +10,8 @@ public class IgnoreAttribute : Attribute {
 
 class C {
         
-	[Ignore]
-	public void Method ()
-	{
-	}
+    [Ignore]
+    public void Method ()
+    {
+    }
 }

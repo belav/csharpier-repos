@@ -1,4 +1,4 @@
-﻿//
+//
 // UpdatePanelControlTrigger.cs
 //
 // Author:
@@ -34,42 +34,42 @@ using System.ComponentModel;
 
 namespace System.Web.UI
 {
-	public abstract class UpdatePanelControlTrigger : UpdatePanelTrigger
-	{
-		string _controlID;
+    public abstract class UpdatePanelControlTrigger : UpdatePanelTrigger
+    {
+        string _controlID;
 
-		protected UpdatePanelControlTrigger () { }
+        protected UpdatePanelControlTrigger () { }
 
-		[IDReferenceProperty]
-		[DefaultValue ("")]
-		[Category ("Behavior")]
-		public string ControlID {
-			get {
-				if(_controlID==null)
-					return String.Empty;
-				return _controlID;
-			}
-			set {
-				_controlID = value;
-			}
-		}
+        [IDReferenceProperty]
+        [DefaultValue ("")]
+        [Category ("Behavior")]
+        public string ControlID {
+            get {
+                if(_controlID==null)
+                    return String.Empty;
+                return _controlID;
+            }
+            set {
+                _controlID = value;
+            }
+        }
 
-		protected Control FindTargetControl (bool searchNamingContainers) {
-			if (String.IsNullOrEmpty (ControlID))
-				throw new InvalidOperationException ();
+        protected Control FindTargetControl (bool searchNamingContainers) {
+            if (String.IsNullOrEmpty (ControlID))
+                throw new InvalidOperationException ();
 
-			Control nc = Owner.NamingContainer;
-			Control c = null;
-			do {
-				c = nc.FindControl (ControlID);
-				nc = nc.NamingContainer;
-			}
-			while (searchNamingContainers && c == null && nc != null);
+            Control nc = Owner.NamingContainer;
+            Control c = null;
+            do {
+                c = nc.FindControl (ControlID);
+                nc = nc.NamingContainer;
+            }
+            while (searchNamingContainers && c == null && nc != null);
 
-			if (c == null)
-				throw new InvalidOperationException ();
+            if (c == null)
+                throw new InvalidOperationException ();
 
-			return c;
-		}
-	}
+            return c;
+        }
+    }
 }

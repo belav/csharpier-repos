@@ -2,7 +2,7 @@
 // System.Security.Policy.ApplicationVersionMatch enumeration
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,10 +31,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-	[ComVisible (true)]
-	public enum ApplicationVersionMatch {
-		MatchExactVersion,
-		MatchAllVersions
-	}
+    [ComVisible (true)]
+    public enum ApplicationVersionMatch {
+        MatchExactVersion,
+        MatchAllVersions
+    }
 }
 

@@ -2,7 +2,7 @@
 // ComContractsSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,43 +54,43 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class ComContractsSection
-		 : ConfigurationSection
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty com_contracts;
+    [MonoTODO]
+    public sealed partial class ComContractsSection
+         : ConfigurationSection
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty com_contracts;
 
-		static ComContractsSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			com_contracts = new ConfigurationProperty ("",
-				typeof (ComContractElementCollection), null, null/* FIXME: get converter for ComContractElementCollection*/, null,
-				ConfigurationPropertyOptions.IsDefaultCollection);
+        static ComContractsSection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            com_contracts = new ConfigurationProperty ("",
+                typeof (ComContractElementCollection), null, null/* FIXME: get converter for ComContractElementCollection*/, null,
+                ConfigurationPropertyOptions.IsDefaultCollection);
 
-			properties.Add (com_contracts);
-		}
+            properties.Add (com_contracts);
+        }
 
-		public ComContractsSection ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public ComContractElementCollection ComContracts {
-			get { return (ComContractElementCollection) base [com_contracts]; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public ComContractsSection ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("",
+             Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true)]
+        public ComContractElementCollection ComContracts {
+            get { return (ComContractElementCollection) base [com_contracts]; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

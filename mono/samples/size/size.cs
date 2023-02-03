@@ -30,9 +30,9 @@ using System.Threading;
 
 namespace Mono.ObjectServices {
 
-	public class ObjectInspector {
+    public class ObjectInspector {
     
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public extern static int GetMemoryUsage (object x);
-	}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static int GetMemoryUsage (object x);
+    }
 }

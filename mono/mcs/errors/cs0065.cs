@@ -10,5 +10,5 @@ public class EventClass {
 }
 
 public class MainClass {
-	public static void Main () {}
+    public static void Main () {}
 }

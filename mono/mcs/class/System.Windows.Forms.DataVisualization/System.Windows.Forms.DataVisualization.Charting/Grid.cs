@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -28,31 +28,31 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class Grid
-	{
-		#region Constructos
-		public Grid ()
-		{
-			Enabled = true;
-			Interval = 0d;
-			IntervalOffset = 0d;
-			IntervalOffsetType = DateTimeIntervalType.Auto;
-			IntervalType = DateTimeIntervalType.Auto;
-			LineColor = Color.Black;
-			LineDashStyle = ChartDashStyle.Solid;
-			LineWidth = 1;
-		}
-		#endregion
+    public class Grid
+    {
+        #region Constructos
+        public Grid ()
+        {
+            Enabled = true;
+            Interval = 0d;
+            IntervalOffset = 0d;
+            IntervalOffsetType = DateTimeIntervalType.Auto;
+            IntervalType = DateTimeIntervalType.Auto;
+            LineColor = Color.Black;
+            LineDashStyle = ChartDashStyle.Solid;
+            LineWidth = 1;
+        }
+        #endregion
 
-		#region Public Properties
-		public bool Enabled { get; set; }
-		public double Interval { get; set; }
-		public double IntervalOffset { get; set; }
-		public DateTimeIntervalType IntervalOffsetType { get; set; }
-		public DateTimeIntervalType IntervalType { get; set; }
-		public Color LineColor { get; set; }
-		public ChartDashStyle LineDashStyle { get; set; }
-		public int LineWidth { get; set; }
-		#endregion
-	}
+        #region Public Properties
+        public bool Enabled { get; set; }
+        public double Interval { get; set; }
+        public double IntervalOffset { get; set; }
+        public DateTimeIntervalType IntervalOffsetType { get; set; }
+        public DateTimeIntervalType IntervalType { get; set; }
+        public Color LineColor { get; set; }
+        public ChartDashStyle LineDashStyle { get; set; }
+        public int LineWidth { get; set; }
+        #endregion
+    }
 }

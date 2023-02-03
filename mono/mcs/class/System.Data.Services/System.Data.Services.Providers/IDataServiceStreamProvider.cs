@@ -1,4 +1,4 @@
-﻿// 
+// 
 // IDataServiceStreamProvider.cs
 //  
 // Author:
@@ -31,15 +31,15 @@ using System.IO;
 
 namespace System.Data.Services.Providers
 {
-	public interface IDataServiceStreamProvider
-	{
-		int StreamBufferSize { get; }
-		Stream GetReadStream (object entity, string etag, bool? checkETagForEquality, DataServiceOperationContext operationContext);
-		Stream GetWriteStream (object entity, string etag, bool? checkETagForEquality, DataServiceOperationContext operationContext);
-		void DeleteStream (object entity, DataServiceOperationContext operationContext);
-		string GetStreamContentType (object entity, DataServiceOperationContext operationContext);
-		Uri GetReadStreamUri (object entity, DataServiceOperationContext operationContext);
-		string GetStreamETag (object entity, DataServiceOperationContext operationContext);
-		string ResolveType (string entitySetName, DataServiceOperationContext operationContext);
-	}
+    public interface IDataServiceStreamProvider
+    {
+        int StreamBufferSize { get; }
+        Stream GetReadStream (object entity, string etag, bool? checkETagForEquality, DataServiceOperationContext operationContext);
+        Stream GetWriteStream (object entity, string etag, bool? checkETagForEquality, DataServiceOperationContext operationContext);
+        void DeleteStream (object entity, DataServiceOperationContext operationContext);
+        string GetStreamContentType (object entity, DataServiceOperationContext operationContext);
+        Uri GetReadStreamUri (object entity, DataServiceOperationContext operationContext);
+        string GetStreamETag (object entity, DataServiceOperationContext operationContext);
+        string ResolveType (string entitySetName, DataServiceOperationContext operationContext);
+    }
 }

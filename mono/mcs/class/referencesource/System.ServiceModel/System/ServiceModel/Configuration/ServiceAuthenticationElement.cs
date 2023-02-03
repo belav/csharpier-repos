@@ -1,4 +1,4 @@
-﻿
+
 namespace System.ServiceModel.Configuration
 {
     using System.Collections.Generic;

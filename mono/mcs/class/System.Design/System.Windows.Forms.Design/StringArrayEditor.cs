@@ -35,37 +35,37 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	internal class StringArrayEditor : StringCollectionEditor
-	{
+    internal class StringArrayEditor : StringCollectionEditor
+    {
 
-		public StringArrayEditor (Type type) : base (type)
-		{
-		}
+        public StringArrayEditor (Type type) : base (type)
+        {
+        }
 
-		protected override object[] GetItems (object editValue)
-		{
-			Array array = editValue as Array;
-			if (array == null)
-				return new object[0];
+        protected override object[] GetItems (object editValue)
+        {
+            Array array = editValue as Array;
+            if (array == null)
+                return new object[0];
 
-			object[] objectArray = new object[array.GetLength (0)];
-			Array.Copy (array, objectArray, objectArray.Length);
-			return objectArray;
-		}
+            object[] objectArray = new object[array.GetLength (0)];
+            Array.Copy (array, objectArray, objectArray.Length);
+            return objectArray;
+        }
 
-		protected override object SetItems (object editValue, object[] value)
-		{
-			if (!(editValue is Array))
-				return editValue;
+        protected override object SetItems (object editValue, object[] value)
+        {
+            if (!(editValue is Array))
+                return editValue;
 
-			Array typeArray = Array.CreateInstance (base.CollectionItemType, value.Length);
-			Array.Copy (value, typeArray, value.Length);
-			return typeArray;
-		}
+            Array typeArray = Array.CreateInstance (base.CollectionItemType, value.Length);
+            Array.Copy (value, typeArray, value.Length);
+            return typeArray;
+        }
 
-		protected override Type CreateCollectionItemType ()
-		{
-			return base.CollectionType.GetElementType ();
-		}
-	}
+        protected override Type CreateCollectionItemType ()
+        {
+            return base.CollectionType.GetElementType ();
+        }
+    }
 }

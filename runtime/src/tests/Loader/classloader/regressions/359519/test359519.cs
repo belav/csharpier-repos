@@ -21,28 +21,28 @@ class MainClass
     [StructLayout(LayoutKind.Explicit, Size=2, Pack=1, CharSet=CharSet.Unicode)] 
     public struct Root 
     { 
- 	 public static byte byte1; 
+      public static byte byte1; 
         [FieldOffset(8)] 
         public Variable var1; 
     } 
 
     public static int Main() 
     { 
-    	try
-    	{
-		Root r = new Root();
+        try
+        {
+        Root r = new Root();
 
-		// to remove compiler warning
-		// warning CS0219: The variable 'r' is assigned but its value is never used
+        // to remove compiler warning
+        // warning CS0219: The variable 'r' is assigned but its value is never used
 
-		r.ToString();
-		Console.WriteLine("PASS");
-		return 100;
-    	}
-	catch (Exception e)
-	{
-		Console.WriteLine("FAIL: Caught unexpected exception - " + e);
-		return 101;
-	}
+        r.ToString();
+        Console.WriteLine("PASS");
+        return 100;
+        }
+    catch (Exception e)
+    {
+        Console.WriteLine("FAIL: Caught unexpected exception - " + e);
+        return 101;
+    }
     } 
 }

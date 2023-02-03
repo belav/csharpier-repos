@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,9 +29,9 @@
 using System.IO;
 
 namespace System.Windows.Forms {
-	public interface IFileReaderService {
-		#region Public Instance Methods
-		Stream OpenFileFromSource(string relativePath);
-		#endregion	// Public Instance Methods
-	}
+    public interface IFileReaderService {
+        #region Public Instance Methods
+        Stream OpenFileFromSource(string relativePath);
+        #endregion    // Public Instance Methods
+    }
 }

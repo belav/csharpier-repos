@@ -19,14 +19,14 @@ namespace Mono.ILASM {
                 private IFieldRef operand;
 
                 public FieldInstr (PEAPI.FieldOp op, IFieldRef operand, Location loc)
-			: base (loc)
+            : base (loc)
                 {
                         this.op = op;
                         this.operand = operand;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-					   PEAPI.CILInstructions cil)
+                       PEAPI.CILInstructions cil)
                 {
                         operand.Resolve (code_gen);
                         cil.FieldInst (op, operand.PeapiField);

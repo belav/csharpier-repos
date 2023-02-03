@@ -34,77 +34,77 @@ using System.ComponentModel;
 namespace System.Web.UI.WebControls.WebParts
 {
 
-	[BindableAttribute(false)]
-	[Designer ("System.Web.UI.Design.WebControls.WebParts.EditorPartDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public abstract class EditorPart : Part
-	{	
-		bool				display = true;
+    [BindableAttribute(false)]
+    [Designer ("System.Web.UI.Design.WebControls.WebParts.EditorPartDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    public abstract class EditorPart : Part
+    {    
+        bool                display = true;
 #pragma warning disable 0649
-		WebPart				webPartToEdit;
+        WebPart                webPartToEdit;
 #if false
-		WebPartManager		manager;
-		EditorZoneBase		zone;
+        WebPartManager        manager;
+        EditorZoneBase        zone;
 #endif
-		object zone;
-		string				displayTitle;
+        object zone;
+        string                displayTitle;
 #pragma warning restore 0649
 
-		protected EditorPart() {}
+        protected EditorPart() {}
 
-		public abstract bool ApplyChanges ();
+        public abstract bool ApplyChanges ();
 
-		protected override IDictionary GetDesignModeState ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected override IDictionary GetDesignModeState ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			if(zone ==  null)
-				throw new InvalidOperationException();
-			base.OnPreRender(e);
-			if(!Display)
-				Visible = false;
-		}
+        protected internal override void OnPreRender (EventArgs e)
+        {
+            if(zone ==  null)
+                throw new InvalidOperationException();
+            base.OnPreRender(e);
+            if(!Display)
+                Visible = false;
+        }
 #if false
-		protected override void SetDesignModeState (IDictionary data)
-		{
-			EditorZoneBase stateZone = data["Zone"] as EditorZoneBase;
-			if(stateZone != null)
-				zone = stateZone;
-		}
+        protected override void SetDesignModeState (IDictionary data)
+        {
+            EditorZoneBase stateZone = data["Zone"] as EditorZoneBase;
+            if(stateZone != null)
+                zone = stateZone;
+        }
 #endif
-		public abstract void SyncChanges ();
+        public abstract void SyncChanges ();
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual bool Display {
-			get { 
-				return display;
-			}
-		}
+        [Browsable (false)]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public virtual bool Display {
+            get { 
+                return display;
+            }
+        }
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public string DisplayTitle {
-			get { return displayTitle; }
-		}
-
-#if false
-		protected WebPartManager WebPartManager {
-			get { throw new NotImplementedException (); }
-		}
-#endif
-
-		protected WebPart WebPartToEdit {
-			get { return webPartToEdit; }
-		}
+        [Browsable (false)]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public string DisplayTitle {
+            get { return displayTitle; }
+        }
 
 #if false
-		protected EditorZoneBase Zone {
-			get { throw new NotImplementedException (); }
-		}
+        protected WebPartManager WebPartManager {
+            get { throw new NotImplementedException (); }
+        }
 #endif
-	}
+
+        protected WebPart WebPartToEdit {
+            get { return webPartToEdit; }
+        }
+
+#if false
+        protected EditorZoneBase Zone {
+            get { throw new NotImplementedException (); }
+        }
+#endif
+    }
 }
 

@@ -31,19 +31,19 @@ using System;
 
 namespace System.Data.Linq
 {
-	public static class DBConvert
-	{
+    public static class DBConvert
+    {
 
-		[MonoTODO]
-		public static T ChangeType<T> (object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static T ChangeType<T> (object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public static object ChangeType (object value, Type type)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public static object ChangeType (object value, Type type)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

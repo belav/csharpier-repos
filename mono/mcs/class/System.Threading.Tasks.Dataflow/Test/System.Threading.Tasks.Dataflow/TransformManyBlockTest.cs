@@ -35,99 +35,99 @@ using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-	[TestFixture]
-	public class TransformManyBlockTest {
-		[Test]
-		public void BasicUsageTest ()
-		{
-			int insIndex = -1;
-			int[] array = new int[5 + 3];
-			var evt = new CountdownEvent (array.Length);
+    [TestFixture]
+    public class TransformManyBlockTest {
+        [Test]
+        public void BasicUsageTest ()
+        {
+            int insIndex = -1;
+            int[] array = new int[5 + 3];
+            var evt = new CountdownEvent (array.Length);
 
-			var block = new ActionBlock<int> (i => { array[Interlocked.Increment (ref insIndex)] = i; evt.Signal (); });
-			var trsm = new TransformManyBlock<int, int> (i => Enumerable.Range (0, i));
-			trsm.LinkTo (block);
+            var block = new ActionBlock<int> (i => { array[Interlocked.Increment (ref insIndex)] = i; evt.Signal (); });
+            var trsm = new TransformManyBlock<int, int> (i => Enumerable.Range (0, i));
+            trsm.LinkTo (block);
 
-			trsm.Post (5);
-			trsm.Post (3);
+            trsm.Post (5);
+            trsm.Post (3);
 
-			evt.Wait ();
-			
-			CollectionAssert.AreEquivalent (new int[] { 0, 1, 2, 3, 4, 0, 1, 2 }, array);
-		}
+            evt.Wait ();
+            
+            CollectionAssert.AreEquivalent (new int[] { 0, 1, 2, 3, 4, 0, 1, 2 }, array);
+        }
 
-		[Test]
-		public void DeferredUsageTest ()
-		{
-			int insIndex = -1;
-			int[] array = new int[5 + 3];
-			var evt = new CountdownEvent (array.Length);
+        [Test]
+        public void DeferredUsageTest ()
+        {
+            int insIndex = -1;
+            int[] array = new int[5 + 3];
+            var evt = new CountdownEvent (array.Length);
 
-			var block = new ActionBlock<int> (i => { array[Interlocked.Increment (ref insIndex)] = i; evt.Signal (); });
-			var trsm = new TransformManyBlock<int, int> (i => Enumerable.Range (0, i));
+            var block = new ActionBlock<int> (i => { array[Interlocked.Increment (ref insIndex)] = i; evt.Signal (); });
+            var trsm = new TransformManyBlock<int, int> (i => Enumerable.Range (0, i));
 
-			trsm.Post (5);
-			trsm.Post (3);
+            trsm.Post (5);
+            trsm.Post (3);
 
-			trsm.LinkTo (block);
-			evt.Wait ();
+            trsm.LinkTo (block);
+            evt.Wait ();
 
-			CollectionAssert.AreEquivalent (new int[] { 0, 1, 2, 3, 4, 0, 1, 2 }, array);
-		}
+            CollectionAssert.AreEquivalent (new int[] { 0, 1, 2, 3, 4, 0, 1, 2 }, array);
+        }
 
-		[Test]
-		public void NullResultTest ()
-		{
-			bool received = false;
+        [Test]
+        public void NullResultTest ()
+        {
+            bool received = false;
 
-			var transformMany =
-				new TransformManyBlock<int, int> (i => (IEnumerable<int>)null);
-			var action = new ActionBlock<int> (i => received = true);
-			transformMany.LinkTo (action);
+            var transformMany =
+                new TransformManyBlock<int, int> (i => (IEnumerable<int>)null);
+            var action = new ActionBlock<int> (i => received = true);
+            transformMany.LinkTo (action);
 
-			Assert.IsTrue (transformMany.Post (1), "#1");
+            Assert.IsTrue (transformMany.Post (1), "#1");
 
-			transformMany.Complete ();
-			Assert.IsTrue (transformMany.Completion.Wait (1000), "#2");
-			Assert.IsFalse (received, "#3");
-		}
+            transformMany.Complete ();
+            Assert.IsTrue (transformMany.Completion.Wait (1000), "#2");
+            Assert.IsFalse (received, "#3");
+        }
 
-		[Test]
-		public void AsyncNullTest ()
-		{
-			var scheduler = new TestScheduler ();
-			var block = new TransformManyBlock<int, int> (
-				i => (Task<IEnumerable<int>>)null,
-				new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+        [Test]
+        public void AsyncNullTest ()
+        {
+            var scheduler = new TestScheduler ();
+            var block = new TransformManyBlock<int, int> (
+                i => (Task<IEnumerable<int>>)null,
+                new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
 
-			Assert.IsTrue (block.Post (1));
+            Assert.IsTrue (block.Post (1));
 
-			scheduler.ExecuteAll ();
+            scheduler.ExecuteAll ();
 
-			Assert.IsFalse (block.Completion.Wait (100));
+            Assert.IsFalse (block.Completion.Wait (100));
 
-			block.Complete ();
+            block.Complete ();
 
-			Assert.IsTrue (block.Completion.Wait (1000));
-		}
+            Assert.IsTrue (block.Completion.Wait (1000));
+        }
 
-		[Test]
-		public void AsyncCancelledTest ()
-		{
-			var scheduler = new TestScheduler ();
-			var block = new TransformManyBlock<int, int> (
-				i =>
-				{
-					var tcs = new TaskCompletionSource<IEnumerable<int>> ();
-					tcs.SetCanceled ();
-					return tcs.Task;
-				}, new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+        [Test]
+        public void AsyncCancelledTest ()
+        {
+            var scheduler = new TestScheduler ();
+            var block = new TransformManyBlock<int, int> (
+                i =>
+                {
+                    var tcs = new TaskCompletionSource<IEnumerable<int>> ();
+                    tcs.SetCanceled ();
+                    return tcs.Task;
+                }, new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
 
-			Assert.IsTrue (block.Post (1));
+            Assert.IsTrue (block.Post (1));
 
-			scheduler.ExecuteAll ();
+            scheduler.ExecuteAll ();
 
-			Assert.IsFalse (block.Completion.Wait (100));
-		}
-	}
+            Assert.IsFalse (block.Completion.Wait (100));
+        }
+    }
 }

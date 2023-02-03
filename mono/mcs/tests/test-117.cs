@@ -7,22 +7,22 @@ public interface IFoo {
 
 public class Blah : IFoo {
 
-	Hashtable table;
+    Hashtable table;
 
-	public Blah ()
-	{
-		table = new Hashtable ();
-	}
+    public Blah ()
+    {
+        table = new Hashtable ();
+    }
 
-	public static int Main ()
-	{
-		Blah b = new Blah ();
+    public static int Main ()
+    {
+        Blah b = new Blah ();
 
-		b.table.Add ("Ravi", (IFoo) b);
+        b.table.Add ("Ravi", (IFoo) b);
 
-		return 0;
-	}
-		
-	
+        return 0;
+    }
+        
+    
 
 }

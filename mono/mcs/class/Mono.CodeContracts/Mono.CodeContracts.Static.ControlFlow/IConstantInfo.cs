@@ -2,7 +2,7 @@
 // IConstantInfo.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-	interface IEdgeSubroutineAdaptor {
-		Sequence<Pair<EdgeTag, Subroutine>> GetOrdinaryEdgeSubroutinesInternal (CFGBlock @from, CFGBlock to, Sequence<Edge<CFGBlock, EdgeTag>> context);
-	}
+    interface IEdgeSubroutineAdaptor {
+        Sequence<Pair<EdgeTag, Subroutine>> GetOrdinaryEdgeSubroutinesInternal (CFGBlock @from, CFGBlock to, Sequence<Edge<CFGBlock, EdgeTag>> context);
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -8701,9 +8701,9 @@ class C
 using System;
 namespace ConsoleApp
 {
-	public static class ConsoleApp
+    public static class ConsoleApp
     {
-		public static void Main(string[] args)
+        public static void Main(string[] args)
         {
             {|FixAllInDocument:Foo(() => { Bar(); return true; })|};
         }
@@ -8717,15 +8717,15 @@ namespace ConsoleApp
         {
             return true;
         }
-	}
+    }
 }";
             var expected = @"
 using System;
 namespace ConsoleApp
 {
-	public static class ConsoleApp
+    public static class ConsoleApp
     {
-		public static void Main(string[] args)
+        public static void Main(string[] args)
         {
             _ = Foo(() => { _ = Bar(); return true; });
         }
@@ -8739,7 +8739,7 @@ namespace ConsoleApp
         {
             return true;
         }
-	}
+    }
 }";
             await TestInRegularAndScriptAsync(source, expected, options: PreferDiscard).ConfigureAwait(false);
         }

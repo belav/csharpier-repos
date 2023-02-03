@@ -34,51 +34,51 @@ using Novell.Directory.Ldap.Rfc2251;
 
 namespace Novell.Directory.Ldap
 {
-	
-	/// <summary> Represents a request to delete an entry.
-	/// 
-	/// </summary>
-	/// <seealso cref="LdapConnection.SendRequest">
-	/// </seealso>
+    
+    /// <summary> Represents a request to delete an entry.
+    /// 
+    /// </summary>
+    /// <seealso cref="LdapConnection.SendRequest">
+    /// </seealso>
    /*
-	*       DelRequest ::= [APPLICATION 10] LdapDN
-	*/
-	public class LdapDeleteRequest:LdapMessage
-	{
-		/// <summary> Returns of the dn of the entry to delete from the directory
-		/// 
-		/// </summary>
-		/// <returns> the dn of the entry to delete
-		/// </returns>
-		virtual public System.String DN
-		{
-			get
-			{
-				return Asn1Object.RequestDN;
-			}
-			
-		}
-		/// <summary> Constructs a request to delete an entry from the directory
-		/// 
-		/// </summary>
-		/// <param name="dn">the dn of the entry to delete.
-		/// 
-		/// </param>
-		/// <param name="cont">Any controls that apply to the abandon request
-		/// or null if none.
-		/// </param>
-		public LdapDeleteRequest(System.String dn, LdapControl[] cont):base(LdapMessage.DEL_REQUEST, new RfcDelRequest(dn), cont)
-		{
-			return ;
-		}
-		
-		/// <summary> Return an Asn1 representation of this delete request
-		/// 
-		/// #return an Asn1 representation of this object
-		/// </summary>
-		public override System.String ToString()
-		{
-			return Asn1Object.ToString();
-		}
-	}
+    *       DelRequest ::= [APPLICATION 10] LdapDN
+    */
+    public class LdapDeleteRequest:LdapMessage
+    {
+        /// <summary> Returns of the dn of the entry to delete from the directory
+        /// 
+        /// </summary>
+        /// <returns> the dn of the entry to delete
+        /// </returns>
+        virtual public System.String DN
+        {
+            get
+            {
+                return Asn1Object.RequestDN;
+            }
+            
+        }
+        /// <summary> Constructs a request to delete an entry from the directory
+        /// 
+        /// </summary>
+        /// <param name="dn">the dn of the entry to delete.
+        /// 
+        /// </param>
+        /// <param name="cont">Any controls that apply to the abandon request
+        /// or null if none.
+        /// </param>
+        public LdapDeleteRequest(System.String dn, LdapControl[] cont):base(LdapMessage.DEL_REQUEST, new RfcDelRequest(dn), cont)
+        {
+            return ;
+        }
+        
+        /// <summary> Return an Asn1 representation of this delete request
+        /// 
+        /// #return an Asn1 representation of this object
+        /// </summary>
+        public override System.String ToString()
+        {
+            return Asn1Object.ToString();
+        }
+    }
 }

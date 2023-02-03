@@ -31,49 +31,49 @@
 
 namespace Mono.Cecil.Metadata {
 
-	internal sealed class NestedClassTable : IMetadataTable {
+    internal sealed class NestedClassTable : IMetadataTable {
 
-		public const int RId = 0x29;
+        public const int RId = 0x29;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public NestedClassRow this [int index] {
-			get { return m_rows [index] as NestedClassRow; }
-			set { m_rows [index] = value; }
-		}
+        public NestedClassRow this [int index] {
+            get { return m_rows [index] as NestedClassRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal NestedClassTable ()
-		{
-		}
+        internal NestedClassTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitNestedClassTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitNestedClassTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class NestedClassRow : IMetadataRow {
+    internal sealed class NestedClassRow : IMetadataRow {
 
-		public uint NestedClass;
-		public uint EnclosingClass;
+        public uint NestedClass;
+        public uint EnclosingClass;
 
-		internal NestedClassRow ()
-		{
-		}
+        internal NestedClassRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitNestedClassRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitNestedClassRow (this);
+        }
+    }
 }

@@ -29,43 +29,43 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit {
 
-	/// <summary>
-	///  Specifies the packing size (data alignment) of a type.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public enum PackingSize {
+    /// <summary>
+    ///  Specifies the packing size (data alignment) of a type.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public enum PackingSize {
 
-		/// <summary>
-		///  The packing size is unspecified.
-		/// </summary>
-		Unspecified = 0,
+        /// <summary>
+        ///  The packing size is unspecified.
+        /// </summary>
+        Unspecified = 0,
 
-		/// <summary>
-		/// </summary>
-		Size1 = 1,
+        /// <summary>
+        /// </summary>
+        Size1 = 1,
 
-		/// <summary>
-		/// </summary>
-		Size2 = 2,
+        /// <summary>
+        /// </summary>
+        Size2 = 2,
 
-		/// <summary>
-		/// </summary>
-		Size4 = 4,
+        /// <summary>
+        /// </summary>
+        Size4 = 4,
 
-		/// <summary>
-		/// </summary>
-		Size8 = 8,
+        /// <summary>
+        /// </summary>
+        Size8 = 8,
 
-		/// <summary>
-		/// </summary>
-		Size16 = 16,
+        /// <summary>
+        /// </summary>
+        Size16 = 16,
 
-		Size32 = 32,
+        Size32 = 32,
 
-		Size64 = 64,
+        Size64 = 64,
 
-		Size128 = 128
-	}
+        Size128 = 128
+    }
 
 }

@@ -4,7 +4,7 @@
 using System.Runtime.InteropServices;
 
 class Test {
-	void f ([DefaultParameterValue (typeof (object))] object x)
-	{
-	}
+    void f ([DefaultParameterValue (typeof (object))] object x)
+    {
+    }
 }

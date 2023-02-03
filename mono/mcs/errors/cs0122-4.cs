@@ -5,11 +5,11 @@
 using System;
 
 public sealed class FooAttribute : Attribute {
-	int Foo;
+    int Foo;
 }
 
 [Foo (Foo = 1)]
 public class Tests {
-	public static void Main () {
-	}
+    public static void Main () {
+    }
 }

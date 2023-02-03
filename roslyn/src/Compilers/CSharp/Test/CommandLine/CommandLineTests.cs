@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -352,7 +352,7 @@ dotnet_diagnostic.cs0169.severity = suppress";
 
             var result = ProcessUtilities.Run(Path.Combine(dir.Path, "sjis.exe"), arguments: "", workingDirectory: dir.Path);
             Assert.Equal(0, result.ExitCode);
-            Assert.Equal("星野 八郎太", File.ReadAllText(Path.Combine(dir.Path, "output.txt"), Encoding.GetEncoding(932)));
+            Assert.Equal("?? ???", File.ReadAllText(Path.Combine(dir.Path, "output.txt"), Encoding.GetEncoding(932)));
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30321")]
@@ -372,7 +372,7 @@ dotnet_diagnostic.cs0169.severity = suppress";
 
             var result = ProcessUtilities.Run(Path.Combine(dir.Path, "sjis.exe"), arguments: "", workingDirectory: dir.Path);
             Assert.Equal(0, result.ExitCode);
-            Assert.Equal("星野 八郎太", File.ReadAllText(Path.Combine(dir.Path, "output.txt"), Encoding.GetEncoding(932)));
+            Assert.Equal("?? ???", File.ReadAllText(Path.Combine(dir.Path, "output.txt"), Encoding.GetEncoding(932)));
         }
 
         [WorkItem(946954, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/946954")]
@@ -588,9 +588,9 @@ class C
             Assert.Equal("Test.Class1", args.CompilationOptions.MainTypeName);
 
             // Use of Cyrillic namespace
-            args = DefaultParse(new[] { "/m:\"решения.Class1\"", "a.cs" }, folder.Path);
+            args = DefaultParse(new[] { "/m:\"???????.Class1\"", "a.cs" }, folder.Path);
             args.Errors.Verify();
-            Assert.Equal("решения.Class1", args.CompilationOptions.MainTypeName);
+            Assert.Equal("???????.Class1", args.CompilationOptions.MainTypeName);
         }
 
         [Fact]
@@ -3444,11 +3444,11 @@ class C
 #line 70 ""C:\x.cs""
             Goo(7);
 #line 90 ""      ""
-		    Goo(9);
+            Goo(9);
 #line 100 ""C:\*.cs""
-		    Goo(10);
+            Goo(10);
 #line 110 """"
-		    Goo(11);
+            Goo(11);
 #line hidden
             Goo(12);
 #line default
@@ -5939,7 +5939,7 @@ class A                                                               \
 
             var output = ProcessUtilities.RunAndGetOutput("cmd", "/C \"" + s_CSharpCompilerExecutable + "\" /utf8output /nologo /preferreduilang:en /t:library " + srcFile + " > " + tempOut.Path, expectedRetCode: 1);
             Assert.Equal("", output.Trim());
-            Assert.Equal("SRC.CS(1,1): error CS1056: Unexpected character '♚'", tempOut.ReadAllText().Trim().Replace(srcFile, "SRC.CS"));
+            Assert.Equal("SRC.CS(1,1): error CS1056: Unexpected character '?'", tempOut.ReadAllText().Trim().Replace(srcFile, "SRC.CS"));
 
             CleanupAllGeneratedFiles(srcFile);
             CleanupAllGeneratedFiles(tempOut.Path);
@@ -6754,7 +6754,7 @@ class C
             int exitCode = csc.Run(outWriter);
             Assert.NotEqual(0, exitCode);
 
-            // If "error" was localized, below assert will fail on PLOC builds. The output would be something like: "!pTCvB!vbc : !FLxft!error 表! CS5001:"
+            // If "error" was localized, below assert will fail on PLOC builds. The output would be something like: "!pTCvB!vbc : !FLxft!error ?! CS5001:"
             Assert.Contains("error CS5001:", outWriter.ToString().Trim());
 
             CleanupAllGeneratedFiles(file.Path);
@@ -13346,8 +13346,8 @@ class C
 <symbols>
   <files>
     <file id=""1"" name=""{src.Path}"" language=""C#"" checksumAlgorithm=""SHA256"" checksum=""A0-78-BB-A8-E8-B1-E1-3B-E8-63-80-7D-CE-CC-4B-0D-14-EF-06-D3-9B-14-52-E1-95-C6-64-D1-36-EC-7C-25"" />
-    <file id=""2"" name=""{genPath1}"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""D8-87-89-A3-FE-EA-FD-AB-49-31-5A-25-B0-05-6B-6F-00-00-C2-DD""><![CDATA[﻿class G1 {{ void F() {{}} }}]]></file>
-    <file id=""3"" name=""{genPath2}"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""F1-D0-FD-F0-08-9F-1B-32-9F-EF-41-A1-58-A3-14-FF-E8-06-A8-38""><![CDATA[﻿class G2 {{ void F() {{}} }}]]></file>
+    <file id=""2"" name=""{genPath1}"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""D8-87-89-A3-FE-EA-FD-AB-49-31-5A-25-B0-05-6B-6F-00-00-C2-DD""><![CDATA[?class G1 {{ void F() {{}} }}]]></file>
+    <file id=""3"" name=""{genPath2}"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""F1-D0-FD-F0-08-9F-1B-32-9F-EF-41-A1-58-A3-14-FF-E8-06-A8-38""><![CDATA[?class G2 {{ void F() {{}} }}]]></file>
   </files>
 </symbols>", PdbValidationOptions.ExcludeMethods);
             }

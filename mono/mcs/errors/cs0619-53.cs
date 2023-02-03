@@ -5,15 +5,15 @@ using System;
 
 class C
 {
-	[Obsolete ("gg", true)]
-	public static explicit operator byte (C x)
-	{
-		return 1;
-	}
+    [Obsolete ("gg", true)]
+    public static explicit operator byte (C x)
+    {
+        return 1;
+    }
 
-	static void Main ()
-	{
-		C x = null;
-		var y = (int) x;
-	}
+    static void Main ()
+    {
+        C x = null;
+        var y = (int) x;
+    }
 }

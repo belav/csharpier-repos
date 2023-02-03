@@ -30,41 +30,41 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class XamlXmlReaderSettingsTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var s = new XamlXmlReaderSettings ();
-			Assert.IsFalse (s.CloseInput, "#1");
-			Assert.IsFalse (s.SkipXmlCompatibilityProcessing, "#2");
-			Assert.IsNull (s.XmlLang, "#3");
-			Assert.IsFalse (s.XmlSpacePreserve, "#4");
-		}
+    [TestFixture]
+    public class XamlXmlReaderSettingsTest
+    {
+        [Test]
+        public void DefaultValues ()
+        {
+            var s = new XamlXmlReaderSettings ();
+            Assert.IsFalse (s.CloseInput, "#1");
+            Assert.IsFalse (s.SkipXmlCompatibilityProcessing, "#2");
+            Assert.IsNull (s.XmlLang, "#3");
+            Assert.IsFalse (s.XmlSpacePreserve, "#4");
+        }
 
-		[Test]
-		public void CopyConstructorNull ()
-		{
-			new XamlXmlReaderSettings (null);
-		}
+        [Test]
+        public void CopyConstructorNull ()
+        {
+            new XamlXmlReaderSettings (null);
+        }
 
-		[Test]
-		public void CopyConstructor ()
-		{
-			var s = new XamlXmlReaderSettings ();
-			s.CloseInput = true;
-			s.SkipXmlCompatibilityProcessing = true;
-			s.XmlLang = "ja-JP";
-			s.XmlSpacePreserve = true;
+        [Test]
+        public void CopyConstructor ()
+        {
+            var s = new XamlXmlReaderSettings ();
+            s.CloseInput = true;
+            s.SkipXmlCompatibilityProcessing = true;
+            s.XmlLang = "ja-JP";
+            s.XmlSpacePreserve = true;
 
-			s = new XamlXmlReaderSettings (s);
+            s = new XamlXmlReaderSettings (s);
 
-			// .NET fails to copy this value.
-			//Assert.IsTrue (s.CloseInput, "#1");
-			Assert.IsTrue (s.SkipXmlCompatibilityProcessing, "#2");
-			Assert.AreEqual ("ja-JP", s.XmlLang, "#3");
-			Assert.IsTrue (s.XmlSpacePreserve, "#4");
-		}
-	}
+            // .NET fails to copy this value.
+            //Assert.IsTrue (s.CloseInput, "#1");
+            Assert.IsTrue (s.SkipXmlCompatibilityProcessing, "#2");
+            Assert.AreEqual ("ja-JP", s.XmlLang, "#3");
+            Assert.IsTrue (s.XmlSpacePreserve, "#4");
+        }
+    }
 }

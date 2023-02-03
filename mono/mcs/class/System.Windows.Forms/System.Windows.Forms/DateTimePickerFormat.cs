@@ -20,14 +20,14 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	John BouAntoun	jba-mono@optusnet.com.au
+//    John BouAntoun    jba-mono@optusnet.com.au
 //
 
 namespace System.Windows.Forms {
-	public enum DateTimePickerFormat {
-		Custom	= 8,
-		Long	= 1,
-		Short	= 2,
-		Time	= 4
-	}
+    public enum DateTimePickerFormat {
+        Custom    = 8,
+        Long    = 1,
+        Short    = 2,
+        Time    = 4
+    }
 }

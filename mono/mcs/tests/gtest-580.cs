@@ -2,17 +2,17 @@
 
 namespace WhereProblems
 {
-	class MyClass<where> { }
-	interface MyInterface<where> { }
-	struct MyStruct<where> { }
+    class MyClass<where> { }
+    interface MyInterface<where> { }
+    struct MyStruct<where> { }
 
-	class Classes
-	{
-		class where { }
-		class DER17 : where { }
+    class Classes
+    {
+        class where { }
+        class DER17 : where { }
 
-		public static void Main ()
-		{
-		}
-	}
+        public static void Main ()
+        {
+        }
+    }
 }

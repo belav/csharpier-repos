@@ -3,15 +3,15 @@
 
 class A
 {
-	public static implicit operator sbyte (A mask)
-	{
-		return 1;
-	}
+    public static implicit operator sbyte (A mask)
+    {
+        return 1;
+    }
 
-	public static implicit operator byte (A mask)
-	{
-		return 2;
-	}
+    public static implicit operator byte (A mask)
+    {
+        return 2;
+    }
 }
 
 class X

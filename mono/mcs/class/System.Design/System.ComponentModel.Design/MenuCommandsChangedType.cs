@@ -30,11 +30,11 @@
 
 namespace System.ComponentModel.Design
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public enum MenuCommandsChangedType
-	{
-		CommandAdded,
-		CommandRemoved,
-		CommandChanged
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public enum MenuCommandsChangedType
+    {
+        CommandAdded,
+        CommandRemoved,
+        CommandChanged
+    }
 }

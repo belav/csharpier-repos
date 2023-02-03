@@ -2,7 +2,7 @@
 // NullExpr.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,48 +32,48 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions {
-	sealed class NullExpr<TSymbolicValue> : Expr<TSymbolicValue> where TSymbolicValue : IEquatable<TSymbolicValue> {
-		public static readonly Expr<TSymbolicValue> Instance = new NullExpr<TSymbolicValue> ();
+    sealed class NullExpr<TSymbolicValue> : Expr<TSymbolicValue> where TSymbolicValue : IEquatable<TSymbolicValue> {
+        public static readonly Expr<TSymbolicValue> Instance = new NullExpr<TSymbolicValue> ();
 
-		private NullExpr ()
-		{
-		}
+        private NullExpr ()
+        {
+        }
 
-		#region Overrides of Expression
-		public override IEnumerable<TSymbolicValue> Variables
-		{
-			get { yield break; }
-		}
+        #region Overrides of Expression
+        public override IEnumerable<TSymbolicValue> Variables
+        {
+            get { yield break; }
+        }
 
-		public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
-		{
-			return visitor.LoadNull (pc, dest, data);
-		}
+        public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
+        {
+            return visitor.LoadNull (pc, dest, data);
+        }
 
-		public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
-		{
-			return this;
-		}
+        public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
+        {
+            return this;
+        }
 
-		public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
-		{
-			return false;
-		}
+        public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
+        {
+            return false;
+        }
 
-		public override bool Contains (TSymbolicValue symbol)
-		{
-			return false;
-		}
+        public override bool Contains (TSymbolicValue symbol)
+        {
+            return false;
+        }
 
-		public override string ToString ()
-		{
-			return "Null()";
-		}
+        public override string ToString ()
+        {
+            return "Null()";
+        }
 
-		public override bool Equals (Expr<TSymbolicValue> other)
-		{
-			return other == this;
-		}
-		#endregion
-	}
+        public override bool Equals (Expr<TSymbolicValue> other)
+        {
+            return other == this;
+        }
+        #endregion
+    }
 }

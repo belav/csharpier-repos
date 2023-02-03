@@ -28,14 +28,14 @@
 
 namespace Mono.Cecil.Signatures {
 
-	sealed class GenericArg {
+    sealed class GenericArg {
 
-		public CustomMod [] CustomMods;
-		public SigType Type;
+        public CustomMod [] CustomMods;
+        public SigType Type;
 
-		public GenericArg (SigType type)
-		{
-			Type = type;
-		}
-	}
+        public GenericArg (SigType type)
+        {
+            Type = type;
+        }
+    }
 }

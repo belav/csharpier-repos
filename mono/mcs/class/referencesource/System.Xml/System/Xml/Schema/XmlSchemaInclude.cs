@@ -16,7 +16,7 @@ namespace System.Xml.Schema {
     public class XmlSchemaInclude : XmlSchemaExternal {
         XmlSchemaAnnotation annotation;
         
-		/// <include file='doc\XmlSchemaInclude.uex' path='docs/doc[@for="XmlSchemaInclude.XmlSchemaInclude"]/*' />
+        /// <include file='doc\XmlSchemaInclude.uex' path='docs/doc[@for="XmlSchemaInclude.XmlSchemaInclude"]/*' />
         public XmlSchemaInclude() {
             Compositor = Compositor.Include;
         }

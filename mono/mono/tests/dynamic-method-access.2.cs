@@ -25,8 +25,8 @@ BindingFlags.NonPublic));
                 Getter g = (Getter) method.CreateDelegate (typeof (Getter));
 
                 Console.WriteLine (g ());
-		if (g () == 42)
-			return 0;
-		return 1;
+        if (g () == 42)
+            return 0;
+        return 1;
         }
 }

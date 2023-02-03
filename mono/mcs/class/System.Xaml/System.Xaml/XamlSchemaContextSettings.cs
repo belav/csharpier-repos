@@ -29,24 +29,24 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlSchemaContextSettings
-	{
-		public XamlSchemaContextSettings ()
-		{
-		}
+    public class XamlSchemaContextSettings
+    {
+        public XamlSchemaContextSettings ()
+        {
+        }
 
-		public XamlSchemaContextSettings (XamlSchemaContextSettings settings)
-		{
-			// null is allowed.
-			var s = settings;
-			if (s == null)
-				return;
-			FullyQualifyAssemblyNamesInClrNamespaces = s.FullyQualifyAssemblyNamesInClrNamespaces;
-			SupportMarkupExtensionsWithDuplicateArity = s.SupportMarkupExtensionsWithDuplicateArity;
-		}
+        public XamlSchemaContextSettings (XamlSchemaContextSettings settings)
+        {
+            // null is allowed.
+            var s = settings;
+            if (s == null)
+                return;
+            FullyQualifyAssemblyNamesInClrNamespaces = s.FullyQualifyAssemblyNamesInClrNamespaces;
+            SupportMarkupExtensionsWithDuplicateArity = s.SupportMarkupExtensionsWithDuplicateArity;
+        }
 
-		public bool FullyQualifyAssemblyNamesInClrNamespaces { get; set; }
-		public bool SupportMarkupExtensionsWithDuplicateArity { get; set; }
+        public bool FullyQualifyAssemblyNamesInClrNamespaces { get; set; }
+        public bool SupportMarkupExtensionsWithDuplicateArity { get; set; }
 
-	}
+    }
 }

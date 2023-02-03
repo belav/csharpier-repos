@@ -33,15 +33,15 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.SymbolStore
 {
-	[ComVisible (true)]
-	public class SymDocumentType
-	{
-		// Constructors
-		public SymDocumentType ()
-		{
-		}
+    [ComVisible (true)]
+    public class SymDocumentType
+    {
+        // Constructors
+        public SymDocumentType ()
+        {
+        }
 
-		// Fields
-		public static readonly Guid Text;
-	}
+        // Fields
+        public static readonly Guid Text;
+    }
 }

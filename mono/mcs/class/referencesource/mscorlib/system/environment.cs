@@ -1286,7 +1286,7 @@ namespace System {
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static String GetResourceFromDefault(String key);           
-#endif	
+#endif    
 
         // Looks up the resource string value for key.
         // 

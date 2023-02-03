@@ -20,24 +20,24 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Threading {
 
-	public class DispatcherEventArgs : EventArgs
-	{
-		Dispatcher dispatcher;
+    public class DispatcherEventArgs : EventArgs
+    {
+        Dispatcher dispatcher;
 
-		internal DispatcherEventArgs (Dispatcher dispatcher)
-		{
-			this.dispatcher = dispatcher;
-		}
+        internal DispatcherEventArgs (Dispatcher dispatcher)
+        {
+            this.dispatcher = dispatcher;
+        }
 
-		public Dispatcher Dispatcher {
-			get { return dispatcher; }
-		}
-	}
+        public Dispatcher Dispatcher {
+            get { return dispatcher; }
+        }
+    }
 }

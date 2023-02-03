@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlAnchor.cs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,184 +31,184 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls {
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEvent ("ServerClick")]
-	[SupportsEventValidation]
-	public class HtmlAnchor : HtmlContainerControl, IPostBackEventHandler 
-	{
-		static readonly object serverClickEvent = new object ();
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // attributes
+    [DefaultEvent ("ServerClick")]
+    [SupportsEventValidation]
+    public class HtmlAnchor : HtmlContainerControl, IPostBackEventHandler 
+    {
+        static readonly object serverClickEvent = new object ();
 
-		public HtmlAnchor ()
-			: base ("a")
-		{
-		}
+        public HtmlAnchor ()
+            : base ("a")
+        {
+        }
 
-		[DefaultValue ("")]
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[UrlProperty]
-		public string HRef {
-			get {
-				string s = Attributes ["href"];
-				return (s == null) ? String.Empty : s;
-			}
-			set {
-				if (value == null || value.Length == 0) {
-					Attributes.Remove ("href");
-				} else {
-					Attributes ["href"] = value;
-				}
-			}
-		}
+        [DefaultValue ("")]
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [UrlProperty]
+        public string HRef {
+            get {
+                string s = Attributes ["href"];
+                return (s == null) ? String.Empty : s;
+            }
+            set {
+                if (value == null || value.Length == 0) {
+                    Attributes.Remove ("href");
+                } else {
+                    Attributes ["href"] = value;
+                }
+            }
+        }
 
-		[DefaultValue ("")]
-		[WebSysDescription("")]
-		[WebCategory("Navigation")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public string Name {
-			get {
-				string s = Attributes ["name"];
-				return (s == null) ? String.Empty : s;
-			}
-			set {
-				if (value == null || value.Length == 0)
-					Attributes.Remove ("name");
-				else
-					Attributes ["name"] = value;
-			}
-		}
+        [DefaultValue ("")]
+        [WebSysDescription("")]
+        [WebCategory("Navigation")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public string Name {
+            get {
+                string s = Attributes ["name"];
+                return (s == null) ? String.Empty : s;
+            }
+            set {
+                if (value == null || value.Length == 0)
+                    Attributes.Remove ("name");
+                else
+                    Attributes ["name"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[WebSysDescription("")]
-		[WebCategory("Navigation")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public string Target {
-			get {
-				string s = Attributes ["target"];
-				return (s == null) ? String.Empty : s;
-			}
-			set {
-				if (value == null || value.Length == 0)
-					Attributes.Remove ("target");
-				else
-					Attributes ["target"] = value;
-			}
-		}
+        [DefaultValue ("")]
+        [WebSysDescription("")]
+        [WebCategory("Navigation")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public string Target {
+            get {
+                string s = Attributes ["target"];
+                return (s == null) ? String.Empty : s;
+            }
+            set {
+                if (value == null || value.Length == 0)
+                    Attributes.Remove ("target");
+                else
+                    Attributes ["target"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[WebSysDescription("")]
-		[WebCategory("Appearance")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Localizable (true)]
-		public string Title {
-			get {
-				string s = Attributes ["title"];
-				return (s == null) ? String.Empty : s;
-			}
-			set {
-				if (value == null || value.Length == 0)
-					Attributes.Remove ("title");
-				else
-					Attributes ["title"] = value;
-			}
-		}
+        [DefaultValue ("")]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [Localizable (true)]
+        public string Title {
+            get {
+                string s = Attributes ["title"];
+                return (s == null) ? String.Empty : s;
+            }
+            set {
+                if (value == null || value.Length == 0)
+                    Attributes.Remove ("title");
+                else
+                    Attributes ["title"] = value;
+            }
+        }
 
-		[DefaultValue (true)]
-		public virtual bool CausesValidation {
-			get {
-				return ViewState.GetBool ("CausesValidation", true);
-			}
-			set {
-				ViewState ["CausesValidation"] = value;
-			}
-		}
+        [DefaultValue (true)]
+        public virtual bool CausesValidation {
+            get {
+                return ViewState.GetBool ("CausesValidation", true);
+            }
+            set {
+                ViewState ["CausesValidation"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		public virtual string ValidationGroup {
-			get {
-				return ViewState.GetString ("ValidationGroup", String.Empty);
-			}
-			set {
-				ViewState ["ValidationGroup"] = value;
-			}
-		}
+        [DefaultValue ("")]
+        public virtual string ValidationGroup {
+            get {
+                return ViewState.GetString ("ValidationGroup", String.Empty);
+            }
+            set {
+                ViewState ["ValidationGroup"] = value;
+            }
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
-		}
+        protected internal override void OnPreRender (EventArgs e)
+        {
+            base.OnPreRender (e);
+        }
 
-		protected virtual void OnServerClick (EventArgs e)
-		{
-			EventHandler serverClick = (EventHandler) Events [serverClickEvent];
-			if (serverClick != null)
-				serverClick (this, e);
-		}
+        protected virtual void OnServerClick (EventArgs e)
+        {
+            EventHandler serverClick = (EventHandler) Events [serverClickEvent];
+            if (serverClick != null)
+                serverClick (this, e);
+        }
 
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			// we don't want to render the "user" URL, so we either render:
-			EventHandler serverClick = (EventHandler) Events [serverClickEvent];
-			if (serverClick != null) {
-				ClientScriptManager csm;
+        protected override void RenderAttributes (HtmlTextWriter writer)
+        {
+            // we don't want to render the "user" URL, so we either render:
+            EventHandler serverClick = (EventHandler) Events [serverClickEvent];
+            if (serverClick != null) {
+                ClientScriptManager csm;
 
-				// a script
-				PostBackOptions options = GetPostBackOptions ();
-				csm = Page.ClientScript;
-				csm.RegisterForEventValidation (options);
-				Attributes ["href"] = csm.GetPostBackEventReference (options, true);
-			} else {
-				string hr = HRef;
-				if (hr != string.Empty)
-					HRef = ResolveClientUrl (hr);
-			}
+                // a script
+                PostBackOptions options = GetPostBackOptions ();
+                csm = Page.ClientScript;
+                csm.RegisterForEventValidation (options);
+                Attributes ["href"] = csm.GetPostBackEventReference (options, true);
+            } else {
+                string hr = HRef;
+                if (hr != string.Empty)
+                    HRef = ResolveClientUrl (hr);
+            }
 
-			base.RenderAttributes (writer);
+            base.RenderAttributes (writer);
 
-			// but we never set back the href attribute after the rendering
-			// nor is the property available after rendering
-			Attributes.Remove ("href");
-		}
+            // but we never set back the href attribute after the rendering
+            // nor is the property available after rendering
+            Attributes.Remove ("href");
+        }
 
-		protected virtual void RaisePostBackEvent (string eventArgument)
-		{
-			ValidateEvent (UniqueID, eventArgument);
-			if (CausesValidation)
-				Page.Validate (ValidationGroup);
-			
-			OnServerClick (EventArgs.Empty);
-		}
-	
-		PostBackOptions GetPostBackOptions ()
-		{
-			Page page = Page;
-			PostBackOptions options = new PostBackOptions (this);
-			options.ValidationGroup = null;
-			options.ActionUrl = null;
-			options.Argument = String.Empty;
-			options.RequiresJavaScriptProtocol = true;
-			options.ClientSubmit = true;
-			options.PerformValidation = CausesValidation && page != null && page.AreValidatorsUplevel (ValidationGroup);
-			if (options.PerformValidation)
-				options.ValidationGroup = ValidationGroup;
+        protected virtual void RaisePostBackEvent (string eventArgument)
+        {
+            ValidateEvent (UniqueID, eventArgument);
+            if (CausesValidation)
+                Page.Validate (ValidationGroup);
+            
+            OnServerClick (EventArgs.Empty);
+        }
+    
+        PostBackOptions GetPostBackOptions ()
+        {
+            Page page = Page;
+            PostBackOptions options = new PostBackOptions (this);
+            options.ValidationGroup = null;
+            options.ActionUrl = null;
+            options.Argument = String.Empty;
+            options.RequiresJavaScriptProtocol = true;
+            options.ClientSubmit = true;
+            options.PerformValidation = CausesValidation && page != null && page.AreValidatorsUplevel (ValidationGroup);
+            if (options.PerformValidation)
+                options.ValidationGroup = ValidationGroup;
 
-			return options;
-		}
+            return options;
+        }
 
-		void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
-		{
-			RaisePostBackEvent (eventArgument);
-		}
+        void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
+        {
+            RaisePostBackEvent (eventArgument);
+        }
 
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		public event EventHandler ServerClick {
-			add { Events.AddHandler (serverClickEvent, value); }
-			remove { Events.RemoveHandler (serverClickEvent, value); }
-		}
-	}
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event EventHandler ServerClick {
+            add { Events.AddHandler (serverClickEvent, value); }
+            remove { Events.RemoveHandler (serverClickEvent, value); }
+        }
+    }
 }

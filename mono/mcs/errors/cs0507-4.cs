@@ -3,20 +3,20 @@
 
 class BaseClass {
         public virtual string Message {
-		get {
-			return "";
-		}
-		set {}
-	}
+        get {
+            return "";
+        }
+        set {}
+    }
 }
 
 class DerivedClass : BaseClass {
-		public override string Message {
-		get {
-			return "";
-		}
-		
-		private set {}
-	}
+        public override string Message {
+        get {
+            return "";
+        }
+        
+        private set {}
+    }
 }
 

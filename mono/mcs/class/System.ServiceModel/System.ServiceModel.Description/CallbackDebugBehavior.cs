@@ -2,7 +2,7 @@
 // CallbackDebugBehavior.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -31,38 +31,38 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public class CallbackDebugBehavior : IEndpointBehavior
-	{
-		bool include_exception;
+    public class CallbackDebugBehavior : IEndpointBehavior
+    {
+        bool include_exception;
 
-		public CallbackDebugBehavior (bool includeExceptionDetailInFaults)
-		{
-			this.include_exception = includeExceptionDetailInFaults;
-		}
+        public CallbackDebugBehavior (bool includeExceptionDetailInFaults)
+        {
+            this.include_exception = includeExceptionDetailInFaults;
+        }
 
-		public bool IncludeExceptionDetailInFaults {
-			get { return include_exception; }
-			set { include_exception = value; }
-		}
+        public bool IncludeExceptionDetailInFaults {
+            get { return include_exception; }
+            set { include_exception = value; }
+        }
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection parameters)
-		{
-		}
+        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
+            BindingParameterCollection parameters)
+        {
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
-			EndpointDispatcher dispatcher)
-		{
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
+            EndpointDispatcher dispatcher)
+        {
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (
-			ServiceEndpoint endpoint, ClientRuntime behavior)
-		{
-			behavior.CallbackDispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults = IncludeExceptionDetailInFaults;
-		}
+        void IEndpointBehavior.ApplyClientBehavior (
+            ServiceEndpoint endpoint, ClientRuntime behavior)
+        {
+            behavior.CallbackDispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults = IncludeExceptionDetailInFaults;
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-		{
-		}
-	}
+        void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
+        {
+        }
+    }
 }

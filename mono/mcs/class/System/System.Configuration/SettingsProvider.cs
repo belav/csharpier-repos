@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsProvider.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,23 +34,23 @@ using System.Configuration.Provider;
 
 namespace System.Configuration
 {
-	public abstract class SettingsProvider
+    public abstract class SettingsProvider
 #if (CONFIGURATION_DEP)
-		: ProviderBase
+        : ProviderBase
 #endif
-	{
-		protected SettingsProvider ()
-		{
-		}
+    {
+        protected SettingsProvider ()
+        {
+        }
 
-		public abstract SettingsPropertyValueCollection GetPropertyValues (SettingsContext context,
-										   SettingsPropertyCollection collection);
+        public abstract SettingsPropertyValueCollection GetPropertyValues (SettingsContext context,
+                                           SettingsPropertyCollection collection);
 
-		public abstract void SetPropertyValues (SettingsContext context,
-							SettingsPropertyValueCollection collection);
+        public abstract void SetPropertyValues (SettingsContext context,
+                            SettingsPropertyValueCollection collection);
 
-		public abstract string ApplicationName { get; set; }
-	}
+        public abstract string ApplicationName { get; set; }
+    }
 
 }
 

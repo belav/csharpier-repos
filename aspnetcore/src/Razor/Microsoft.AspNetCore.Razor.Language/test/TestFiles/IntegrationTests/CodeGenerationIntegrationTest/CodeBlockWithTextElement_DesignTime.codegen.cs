@@ -25,8 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles
 #nullable disable
 #nullable restore
 #line 2 "TestFiles/IntegrationTests/CodeGenerationIntegrationTest/CodeBlockWithTextElement.cshtml"
-                                		
-    var b = 1;			
+                                        
+    var b = 1;            
 
 #line default
 #line hidden

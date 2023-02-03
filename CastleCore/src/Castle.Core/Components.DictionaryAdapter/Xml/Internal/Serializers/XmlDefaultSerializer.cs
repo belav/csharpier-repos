@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,42 +14,42 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Xml.Serialization;
+    using System;
+    using System.Xml.Serialization;
 
-	public class XmlDefaultSerializer : XmlTypeSerializer
-	{
-		private readonly XmlSerializer serializer;
+    public class XmlDefaultSerializer : XmlTypeSerializer
+    {
+        private readonly XmlSerializer serializer;
 
-		public XmlDefaultSerializer(Type type)
-		{
-			serializer = new XmlSerializer(type, Root);
-		}
+        public XmlDefaultSerializer(Type type)
+        {
+            serializer = new XmlSerializer(type, Root);
+        }
 
-		public override XmlTypeKind Kind
-		{
-			get { return XmlTypeKind.Complex; }
-		}
+        public override XmlTypeKind Kind
+        {
+            get { return XmlTypeKind.Complex; }
+        }
 
-		public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
-		{
+        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        {
             using (var reader = new XmlSubtreeReader(node, Root))
                 return serializer.CanDeserialize(reader)
                     ? serializer.Deserialize(reader)
                     : null;
-		}
+        }
 
-		public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
-		{
-		    using (var writer = new XmlSubtreeWriter(node))
-		        serializer.Serialize(writer, value);
-		}
+        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        {
+            using (var writer = new XmlSubtreeWriter(node))
+                serializer.Serialize(writer, value);
+        }
 
-		public static readonly XmlRootAttribute
-			Root = new XmlRootAttribute
-		{
-			ElementName = "Root",
-			Namespace   = string.Empty
-		};
-	}
+        public static readonly XmlRootAttribute
+            Root = new XmlRootAttribute
+        {
+            ElementName = "Root",
+            Namespace   = string.Empty
+        };
+    }
 }

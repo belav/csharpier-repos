@@ -4,8 +4,8 @@
 
 class M
 {
-	public static void Main ()
-	{
-		var a = 1;
-	}
+    public static void Main ()
+    {
+        var a = 1;
+    }
 }

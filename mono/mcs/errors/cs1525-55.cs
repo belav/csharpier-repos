@@ -3,15 +3,15 @@
 
 namespace CompilerCrashWithAttributes
 {
-	public class Main
-	{
-		[MyAttribute1, MyAttribute1)]
-		public Main ()
-		{
-		}
-	}
+    public class Main
+    {
+        [MyAttribute1, MyAttribute1)]
+        public Main ()
+        {
+        }
+    }
 
-	public class MyAttribute1 : Attribute
-	{
-	}
+    public class MyAttribute1 : Attribute
+    {
+    }
 }

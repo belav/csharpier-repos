@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ClientScriptItemCollection
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,14 +33,14 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-	public sealed class ClientScriptItemCollection : ReadOnlyCollectionBase
-	{
-		public ClientScriptItemCollection (ClientScriptItem [] clientScriptItems)
-		{
-			if (clientScriptItems == null)
-				throw new ArgumentNullException ("clientScriptItems");
-			InnerList.AddRange (clientScriptItems);
-		}
-	}
+    public sealed class ClientScriptItemCollection : ReadOnlyCollectionBase
+    {
+        public ClientScriptItemCollection (ClientScriptItem [] clientScriptItems)
+        {
+            if (clientScriptItems == null)
+                throw new ArgumentNullException ("clientScriptItems");
+            InnerList.AddRange (clientScriptItems);
+        }
+    }
 }
 

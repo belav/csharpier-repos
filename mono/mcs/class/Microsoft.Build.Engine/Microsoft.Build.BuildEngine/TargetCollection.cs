@@ -32,97 +32,97 @@ using System.Reflection;
 using System.Xml;
 
 namespace Microsoft.Build.BuildEngine {
-	public class TargetCollection : ICollection, IEnumerable {
-		
-		Dictionary <string, Target>	targetsByName;
-		Project				parentProject;
-	
-		internal TargetCollection (Project project)
-		{
-			this.targetsByName = new Dictionary <string, Target> (StringComparer.OrdinalIgnoreCase);
-			this.parentProject = project;
-		}
+    public class TargetCollection : ICollection, IEnumerable {
+        
+        Dictionary <string, Target>    targetsByName;
+        Project                parentProject;
+    
+        internal TargetCollection (Project project)
+        {
+            this.targetsByName = new Dictionary <string, Target> (StringComparer.OrdinalIgnoreCase);
+            this.parentProject = project;
+        }
 
-		[MonoTODO]
-		public Target AddNewTarget (string targetName)
-		{
-			if (targetName == null)
-				throw new InvalidProjectFileException (
-					"The required attribute \"Name\" is missing from element <Target>.");
-		
-			XmlElement targetElement = parentProject.XmlDocument.CreateElement ("Target", Project.XmlNamespace);
-			parentProject.XmlDocument.DocumentElement.AppendChild (targetElement);
-			targetElement.SetAttribute ("Name", targetName);
-			
-			Target t = new Target (targetElement, parentProject, null);
-			
-			AddTarget (t);
-			
-			return t;
-		}
+        [MonoTODO]
+        public Target AddNewTarget (string targetName)
+        {
+            if (targetName == null)
+                throw new InvalidProjectFileException (
+                    "The required attribute \"Name\" is missing from element <Target>.");
+        
+            XmlElement targetElement = parentProject.XmlDocument.CreateElement ("Target", Project.XmlNamespace);
+            parentProject.XmlDocument.DocumentElement.AppendChild (targetElement);
+            targetElement.SetAttribute ("Name", targetName);
+            
+            Target t = new Target (targetElement, parentProject, null);
+            
+            AddTarget (t);
+            
+            return t;
+        }
 
-		internal void AddTarget (Target target)
-		{
-			if (targetsByName.ContainsKey (target.Name))
-				targetsByName.Remove (target.Name);
-			targetsByName.Add (target.Name, target);
-		}
+        internal void AddTarget (Target target)
+        {
+            if (targetsByName.ContainsKey (target.Name))
+                targetsByName.Remove (target.Name);
+            targetsByName.Add (target.Name, target);
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			targetsByName.Values.CopyTo ((Target[]) array, index);
-		}
+        public void CopyTo (Array array, int index)
+        {
+            targetsByName.Values.CopyTo ((Target[]) array, index);
+        }
 
-		public bool Exists (string targetName)
-		{
-			return targetsByName.ContainsKey (targetName);
-		}
+        public bool Exists (string targetName)
+        {
+            return targetsByName.ContainsKey (targetName);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			foreach (KeyValuePair <string, Target> kvp in targetsByName)
-				yield return kvp.Value;
-		}
+        public IEnumerator GetEnumerator ()
+        {
+            foreach (KeyValuePair <string, Target> kvp in targetsByName)
+                yield return kvp.Value;
+        }
 
-		internal IEnumerable<Target> AsIEnumerable ()
-		{
-			foreach (KeyValuePair <string, Target> kvp in targetsByName)
-				yield return kvp.Value;
-		}
+        internal IEnumerable<Target> AsIEnumerable ()
+        {
+            foreach (KeyValuePair <string, Target> kvp in targetsByName)
+                yield return kvp.Value;
+        }
 
-		public void RemoveTarget (Target targetToRemove)
-		{
-			if (targetToRemove == null)
-				throw new ArgumentNullException ();
-			
-			targetsByName.Remove (targetToRemove.Name);
-		}
+        public void RemoveTarget (Target targetToRemove)
+        {
+            if (targetToRemove == null)
+                throw new ArgumentNullException ();
+            
+            targetsByName.Remove (targetToRemove.Name);
+        }
 
-		public int Count {
-			get {
-				return targetsByName.Count;
-			}
-		}
+        public int Count {
+            get {
+                return targetsByName.Count;
+            }
+        }
 
-		public bool IsSynchronized {
-			get {
-				return false;
-			}
-		}
+        public bool IsSynchronized {
+            get {
+                return false;
+            }
+        }
 
-		public object SyncRoot {
-			get {
-				return this;
-			}
-		}
+        public object SyncRoot {
+            get {
+                return this;
+            }
+        }
 
-		public Target this [string index] {
-			get {
-				if (targetsByName.ContainsKey (index))
-					return targetsByName [index];
-				else
-					return null;
-			}
-		}
-	}
+        public Target this [string index] {
+            get {
+                if (targetsByName.ContainsKey (index))
+                    return targetsByName [index];
+                else
+                    return null;
+            }
+        }
+    }
 }

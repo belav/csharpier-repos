@@ -2,7 +2,7 @@
 // IImmutableSet.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,18 +31,18 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-	interface IImmutableSet<T> {
-		T Any { get; }
-		int Count { get; }
-		IEnumerable<T> Elements { get; }
-		IImmutableSet<T> Add (T item);
+    interface IImmutableSet<T> {
+        T Any { get; }
+        int Count { get; }
+        IEnumerable<T> Elements { get; }
+        IImmutableSet<T> Add (T item);
         IImmutableSet<T> AddRange (IEnumerable<T> item);
-		IImmutableSet<T> Remove (T item);
-		bool Contains (T item);
-		bool IsContainedIn (IImmutableSet<T> that);
-		IImmutableSet<T> Intersect (IImmutableSet<T> that);
-		IImmutableSet<T> Union (IImmutableSet<T> that);
-		void Visit (Action<T> visitor);
-		void Dump (TextWriter tw);
-	}
+        IImmutableSet<T> Remove (T item);
+        bool Contains (T item);
+        bool IsContainedIn (IImmutableSet<T> that);
+        IImmutableSet<T> Intersect (IImmutableSet<T> that);
+        IImmutableSet<T> Union (IImmutableSet<T> that);
+        void Visit (Action<T> visitor);
+        void Dump (TextWriter tw);
+    }
 }

@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptingAuthenticationServiceSection.cs
 //
 // Author:
@@ -34,26 +34,26 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingAuthenticationServiceSection : ConfigurationSection
-	{
-		[ConfigurationPropertyAttribute ("enabled", DefaultValue = false)]
-		public bool Enabled {
-			get {
-				return (bool) this ["enabled"];
-			}
-			set {
-				this ["enabled"] = value;
-			}
-		}
+    public sealed class ScriptingAuthenticationServiceSection : ConfigurationSection
+    {
+        [ConfigurationPropertyAttribute ("enabled", DefaultValue = false)]
+        public bool Enabled {
+            get {
+                return (bool) this ["enabled"];
+            }
+            set {
+                this ["enabled"] = value;
+            }
+        }
 
-		[ConfigurationPropertyAttribute ("requireSSL", DefaultValue = false)]
-		public bool RequireSSL {
-			get {
-				return (bool) this ["requireSSL"];
-			}
-			set {
-				this ["requireSSL"] = value;
-			}
-		}
-	}
+        [ConfigurationPropertyAttribute ("requireSSL", DefaultValue = false)]
+        public bool RequireSSL {
+            get {
+                return (bool) this ["requireSSL"];
+            }
+            set {
+                this ["requireSSL"] = value;
+            }
+        }
+    }
 }

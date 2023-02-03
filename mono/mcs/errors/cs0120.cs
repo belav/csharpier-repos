@@ -3,12 +3,12 @@
 
 class test {
 
-	void method ()
-	{
-	}
+    void method ()
+    {
+    }
        
-	public static int Main (string [] args){
-		method ();
-		return 1;
-	}
+    public static int Main (string [] args){
+        method ();
+        return 1;
+    }
 }

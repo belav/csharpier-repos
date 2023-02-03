@@ -2,7 +2,7 @@
 // X509ExtensionEnumerator.cs - System.Security.Cryptography.X509ExtensionEnumerator
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2006 Novell Inc. (http://www.novell.com)
@@ -33,37 +33,37 @@ using System.Collections;
 
 namespace System.Security.Cryptography.X509Certificates {
 
-	public sealed class X509ExtensionEnumerator : IEnumerator {
+    public sealed class X509ExtensionEnumerator : IEnumerator {
 
-		private IEnumerator enumerator;
+        private IEnumerator enumerator;
 
-		internal X509ExtensionEnumerator (ArrayList list)
-		{
-			enumerator = list.GetEnumerator ();
-		}
+        internal X509ExtensionEnumerator (ArrayList list)
+        {
+            enumerator = list.GetEnumerator ();
+        }
 
-		// properties
+        // properties
 
-		public X509Extension Current {
-			get { return (X509Extension) enumerator.Current; }
-		}
+        public X509Extension Current {
+            get { return (X509Extension) enumerator.Current; }
+        }
 
-		object IEnumerator.Current {
-			get { return enumerator.Current; }
-		}
+        object IEnumerator.Current {
+            get { return enumerator.Current; }
+        }
 
-		// methods
+        // methods
 
-		public bool MoveNext () 
-		{
-			return enumerator.MoveNext ();
-		}
+        public bool MoveNext () 
+        {
+            return enumerator.MoveNext ();
+        }
 
-		public void Reset ()
-		{
-			enumerator.Reset ();
-		}
-	}
+        public void Reset ()
+        {
+            enumerator.Reset ();
+        }
+    }
 }
 
 #endif

@@ -20,14 +20,14 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//	Geoff Norton  <gnorton@novell.com>
+//    Geoff Norton  <gnorton@novell.com>
 //
 //
 
 using System;
 
 namespace System.Windows.Forms.CarbonInternal {
-	internal interface IEventHandler {
-		bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg);
-	}
+    internal interface IEventHandler {
+        bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg);
+    }
 }

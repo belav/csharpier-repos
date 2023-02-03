@@ -33,41 +33,41 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class GridViewUpdateEventArgs : CancelEventArgs
-	{
-		int rowIndex;
-		IOrderedDictionary keys;
-		IOrderedDictionary newValues;
-		IOrderedDictionary oldValues;
-		
-		public GridViewUpdateEventArgs (int rowIndex)
-		{
-			this.rowIndex = rowIndex;
-		}
-		
-		internal GridViewUpdateEventArgs (int rowIndex, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
-		{
-			this.rowIndex = rowIndex;
-			this.keys = keys;
-			this.newValues = newValues;
-			this.oldValues = oldValues;
-		}
-		
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+    public class GridViewUpdateEventArgs : CancelEventArgs
+    {
+        int rowIndex;
+        IOrderedDictionary keys;
+        IOrderedDictionary newValues;
+        IOrderedDictionary oldValues;
+        
+        public GridViewUpdateEventArgs (int rowIndex)
+        {
+            this.rowIndex = rowIndex;
+        }
+        
+        internal GridViewUpdateEventArgs (int rowIndex, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
+        {
+            this.rowIndex = rowIndex;
+            this.keys = keys;
+            this.newValues = newValues;
+            this.oldValues = oldValues;
+        }
+        
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-		public IOrderedDictionary Keys {
-			get { return keys; }
-		}
+        public IOrderedDictionary Keys {
+            get { return keys; }
+        }
 
-		public IOrderedDictionary NewValues {
-			get { return newValues; }
-		}
+        public IOrderedDictionary NewValues {
+            get { return newValues; }
+        }
 
-		public IOrderedDictionary OldValues {
-			get { return oldValues; }
-		}
-	}
+        public IOrderedDictionary OldValues {
+            get { return oldValues; }
+        }
+    }
 }
 

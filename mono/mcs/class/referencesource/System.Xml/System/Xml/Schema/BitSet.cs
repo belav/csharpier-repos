@@ -17,8 +17,8 @@ namespace System.Xml.Schema {
         private int      count;
         private uint[]    bits;
 
-    	private BitSet() {
-    	}
+        private BitSet() {
+        }
 
         public BitSet(int count) {
             this.count = count;

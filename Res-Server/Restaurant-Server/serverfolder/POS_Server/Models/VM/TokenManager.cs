@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using POS_Server.Controllers;
 using System;

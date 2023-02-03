@@ -33,66 +33,66 @@ using System.Text;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for SoapAttributeAttribute.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field
-		 | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-	public class SoapAttributeAttribute : Attribute
-	{
-		private string attrName;
-		private string dataType;
-		private string ns;
+    /// <summary>
+    /// Summary description for SoapAttributeAttribute.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field
+         | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    public class SoapAttributeAttribute : Attribute
+    {
+        private string attrName;
+        private string dataType;
+        private string ns;
 
-		public SoapAttributeAttribute ()
-		{
-		}
+        public SoapAttributeAttribute ()
+        {
+        }
 
-		public SoapAttributeAttribute (string attributeName) 
-		{
-			this.attrName = attributeName;
-		}
+        public SoapAttributeAttribute (string attributeName) 
+        {
+            this.attrName = attributeName;
+        }
 
-		public string AttributeName {
-			get {
-				if (attrName == null) {
-					return string.Empty;
-				}
-				return attrName;
-			} 
-			set {
-				attrName = value;
-			}
-		}
+        public string AttributeName {
+            get {
+                if (attrName == null) {
+                    return string.Empty;
+                }
+                return attrName;
+            } 
+            set {
+                attrName = value;
+            }
+        }
 
-		public string DataType {
-			get {
-				if (dataType == null) {
-					return string.Empty;
-				}
-				return dataType;
-			} 
-			set {
-				dataType = value;
-			}
-		}
+        public string DataType {
+            get {
+                if (dataType == null) {
+                    return string.Empty;
+                }
+                return dataType;
+            } 
+            set {
+                dataType = value;
+            }
+        }
 
-		public string Namespace {
-			get {
-				return ns;
-			} 
-			set {
-				ns = value;
-			}
-		}
-		
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("SAA ");
-			KeyHelper.AddField (sb, 1, attrName);
-			KeyHelper.AddField (sb, 2, dataType);
-			KeyHelper.AddField (sb, 3, ns);
-			sb.Append ("|");
-		}
-	}
+        public string Namespace {
+            get {
+                return ns;
+            } 
+            set {
+                ns = value;
+            }
+        }
+        
+        internal void AddKeyHash (System.Text.StringBuilder sb)
+        {
+            sb.Append ("SAA ");
+            KeyHelper.AddField (sb, 1, attrName);
+            KeyHelper.AddField (sb, 2, dataType);
+            KeyHelper.AddField (sb, 3, ns);
+            sb.Append ("|");
+        }
+    }
 }

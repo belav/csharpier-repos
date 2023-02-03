@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.TableViewPagerRow class
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2007 Mainsoft, Corp (http://mainsoft.com)
 //
@@ -32,12 +32,12 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-	public class FormViewPagerRow : FormViewRow, INamingContainer, INonBindingContainer
-	{
-		public FormViewPagerRow (int rowIndex, DataControlRowType rowType, DataControlRowState rowState)
-			:base (rowIndex, rowType, rowState)
-		{
-		}
-	}
+    public class FormViewPagerRow : FormViewRow, INamingContainer, INonBindingContainer
+    {
+        public FormViewPagerRow (int rowIndex, DataControlRowType rowType, DataControlRowState rowState)
+            :base (rowIndex, rowType, rowState)
+        {
+        }
+    }
 }
 

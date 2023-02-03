@@ -2,7 +2,7 @@
 // System.Web.UI.ObjectConverter
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (C) 2003,2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,17 +30,17 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-	[Obsolete ("The recommended alternative is System.Convert and String.Format. http://go.microsoft.com/fwlink/?linkid=14202")]
-	// CAS - no InheritanceDemand here as the class is sealed
-	public sealed class ObjectConverter
-	{
-		public ObjectConverter ()
-		{
-		}
+    [Obsolete ("The recommended alternative is System.Convert and String.Format. http://go.microsoft.com/fwlink/?linkid=14202")]
+    // CAS - no InheritanceDemand here as the class is sealed
+    public sealed class ObjectConverter
+    {
+        public ObjectConverter ()
+        {
+        }
 
-		public static object ConvertValue (object value, Type toType, string formatString)
-		{
-			throw new NotImplementedException ("Not implemented and [Obsolete]");
-		}
-	}
+        public static object ConvertValue (object value, Type toType, string formatString)
+        {
+            throw new NotImplementedException ("Not implemented and [Obsolete]");
+        }
+    }
 }

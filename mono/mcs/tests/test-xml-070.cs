@@ -9,10 +9,10 @@ interface I
 
 class X
 {
-	/// <returns>
-	/// <see cref="void"/>
-	/// </returns>
-	public static void Main ()
-	{
-	}
+    /// <returns>
+    /// <see cref="void"/>
+    /// </returns>
+    public static void Main ()
+    {
+    }
 }

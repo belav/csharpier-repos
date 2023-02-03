@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc.Html {
+namespace System.Web.Mvc.Html {
     using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Web.UI.WebControls;

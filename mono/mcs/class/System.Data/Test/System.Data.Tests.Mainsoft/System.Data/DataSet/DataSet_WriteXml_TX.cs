@@ -39,55 +39,55 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_WriteXml_TX : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataSet_WriteXml_TX tc = new DataSet_WriteXml_TX();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataSet_WriteXml_TX");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataSet_WriteXml_TX tc = new DataSet_WriteXml_TX();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataSet_WriteXml_TX");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
 
-	public void run()
-	{
-		Exception exp = null;
-		System.IO.StringReader sr = null;
-		System.IO.StringWriter sw = null;
+    public void run()
+    {
+        Exception exp = null;
+        System.IO.StringReader sr = null;
+        System.IO.StringWriter sw = null;
 
-		try
-		{
-			BeginCase("ReadXml - DataSetOut");
+        try
+        {
+            BeginCase("ReadXml - DataSetOut");
 
-			DataSet oDataset = new DataSet("DataSetOut");
-			sw = new System.IO.StringWriter();
-			oDataset.WriteXml(sw,System.Data.XmlWriteMode.WriteSchema);
-			
-			sr = new System.IO.StringReader(sw.GetStringBuilder().ToString());
-			oDataset = new DataSet("DataSetOut");
+            DataSet oDataset = new DataSet("DataSetOut");
+            sw = new System.IO.StringWriter();
+            oDataset.WriteXml(sw,System.Data.XmlWriteMode.WriteSchema);
+            
+            sr = new System.IO.StringReader(sw.GetStringBuilder().ToString());
+            oDataset = new DataSet("DataSetOut");
 
-			oDataset.ReadXml(sr);
-			Compare(oDataset.Tables.Count ,0);
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	
-		{
-			EndCase(exp);
-			exp = null;
-			sw.Close();
-		}
+            oDataset.ReadXml(sr);
+            Compare(oDataset.Tables.Count ,0);
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    
+        {
+            EndCase(exp);
+            exp = null;
+            sw.Close();
+        }
 
-	
-	}
+    
+    }
 }
 }

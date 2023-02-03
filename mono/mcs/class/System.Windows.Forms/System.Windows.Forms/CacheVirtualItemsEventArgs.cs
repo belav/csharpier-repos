@@ -23,33 +23,33 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-	public class CacheVirtualItemsEventArgs : EventArgs
-	{
+    public class CacheVirtualItemsEventArgs : EventArgs
+    {
 
-		private int start_index;
-		private int end_index;
+        private int start_index;
+        private int end_index;
 
-		#region Public Constructors
-		public CacheVirtualItemsEventArgs(int startIndex, int endIndex) : base ()
-		{
-			this.start_index = startIndex;
-			this.end_index = endIndex;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public CacheVirtualItemsEventArgs(int startIndex, int endIndex) : base ()
+        {
+            this.start_index = startIndex;
+            this.end_index = endIndex;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public int StartIndex {
-			get { return this.start_index; }
-		}
+        #region Public Instance Properties
+        public int StartIndex {
+            get { return this.start_index; }
+        }
 
-		public int EndIndex {
-			get { return this.end_index; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        public int EndIndex {
+            get { return this.end_index; }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

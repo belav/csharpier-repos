@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Web.Mvc.ExpressionUtil;
 using System.Web.Razor.Generator;
 

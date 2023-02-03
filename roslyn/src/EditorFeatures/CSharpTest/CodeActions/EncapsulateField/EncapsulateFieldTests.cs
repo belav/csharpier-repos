@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1181,22 +1181,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|ırak|];
+    int [|irak|];
 }",
 @"class C
 {
-    int ırak;
+    int irak;
 
     public int Irak
     {
         get
         {
-            return ırak;
+            return irak;
         }
 
         set
         {
-            ırak = value;
+            irak = value;
         }
     }
 }");
@@ -1211,22 +1211,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|بيت|];
+    int [|???|];
 }",
 @"class C
 {
-    int بيت;
+    int ???;
 
-    public int بيت1
+    public int ???1
     {
         get
         {
-            return بيت;
+            return ???;
         }
 
         set
         {
-            بيت = value;
+            ??? = value;
         }
     }
 }");
@@ -1241,22 +1241,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|árbol|];
+    int [|�rbol|];
 }",
 @"class C
 {
-    int árbol;
+    int �rbol;
 
-    public int Árbol
+    public int �rbol
     {
         get
         {
-            return árbol;
+            return �rbol;
         }
 
         set
         {
-            árbol = value;
+            �rbol = value;
         }
     }
 }");
@@ -1271,22 +1271,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|σκύλος|];
+    int [|s?????|];
 }",
 @"class C
 {
-    int σκύλος;
+    int s?????;
 
-    public int Σκύλος
+    public int S?????
     {
         get
         {
-            return σκύλος;
+            return s?????;
         }
 
         set
         {
-            σκύλος = value;
+            s????? = value;
         }
     }
 }");

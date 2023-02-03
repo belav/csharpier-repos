@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -33,42 +33,42 @@ using System.Globalization;
 using System.Text;
 
 namespace System.Windows.Forms {
-	public class OpacityConverter : TypeConverter {
-		#region Public Constructors
-		public OpacityConverter() {
-		}
-		#endregion	// Public Constructors
+    public class OpacityConverter : TypeConverter {
+        #region Public Constructors
+        public OpacityConverter() {
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Methods
-		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-			if (sourceType == typeof(string)) {
-				return true;
-			}
-			return false;
-		}
+        #region Public Instance Methods
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
+            if (sourceType == typeof(string)) {
+                return true;
+            }
+            return false;
+        }
 
-		public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-			if (value is string) {
-				string	s;
-	
-				s = (string)value;
-				if (s.EndsWith("%")) {
-					s = ((string)value).Substring(0, ((string)value).Length - 1);
-				}
-				return Double.Parse(s, NumberStyles.Any, culture) / 100;
-			}
-			return base.ConvertFrom (context, culture, value);
-		}
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+            if (value is string) {
+                string    s;
+    
+                s = (string)value;
+                if (s.EndsWith("%")) {
+                    s = ((string)value).Substring(0, ((string)value).Length - 1);
+                }
+                return Double.Parse(s, NumberStyles.Any, culture) / 100;
+            }
+            return base.ConvertFrom (context, culture, value);
+        }
 
-		public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-			if (destinationType == typeof(string)) {
-				double	v;
+        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+            if (destinationType == typeof(string)) {
+                double    v;
 
-				v = ((double)value) * 100;
-				return v.ToString() + "%";
-			}
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
-		#endregion	// Public Instance Methods
-	}
+                v = ((double)value) * 100;
+                return v.ToString() + "%";
+            }
+            return base.ConvertTo (context, culture, value, destinationType);
+        }
+        #endregion    // Public Instance Methods
+    }
 }

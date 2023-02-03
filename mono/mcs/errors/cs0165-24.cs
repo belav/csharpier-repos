@@ -3,16 +3,16 @@
 
 class X
 {
-	public static void Main ()
-	{
-		int i = 3;
-		switch (i) {
-		case 1:
-			float a = 7.0f;
-			break;
-		default:
-			float b = a + 99.0f;
-			break;
-		}
-	}
+    public static void Main ()
+    {
+        int i = 3;
+        switch (i) {
+        case 1:
+            float a = 7.0f;
+            break;
+        default:
+            float b = a + 99.0f;
+            break;
+        }
+    }
 }

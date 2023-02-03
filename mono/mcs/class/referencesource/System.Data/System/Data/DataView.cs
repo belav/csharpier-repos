@@ -747,7 +747,7 @@ namespace System.Data {
 
         protected override void Dispose(bool disposing) {
             if (disposing) {
-            	Close();
+                Close();
             }
             base.Dispose(disposing);
         }

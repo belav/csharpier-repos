@@ -2,5 +2,5 @@
 // Line: 5
 
 class Foo : Foo.Bar {
-	public class Bar {}
+    public class Bar {}
 }

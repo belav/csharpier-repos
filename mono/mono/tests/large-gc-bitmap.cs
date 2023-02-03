@@ -10,6 +10,6 @@ public class main {
     static Nester<Nester<Nester<Nester<Nester<Nester<Nester<Nester<object>>>>>>>> nester;
 
     public static int Main (string [] args) {
-	return 0;
+    return 0;
     }
 }

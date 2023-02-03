@@ -25,9 +25,9 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public interface IXamlLineInfoConsumer
-	{
-		bool ShouldProvideLineInfo { get; }
-		void SetLineInfo (int lineNumber, int linePosition);
-	}
+    public interface IXamlLineInfoConsumer
+    {
+        bool ShouldProvideLineInfo { get; }
+        void SetLineInfo (int lineNumber, int linePosition);
+    }
 }

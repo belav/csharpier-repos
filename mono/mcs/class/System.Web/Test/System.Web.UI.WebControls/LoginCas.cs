@@ -2,7 +2,7 @@
 // LoginCas.cs - CAS unit tests for System.Web.UI.WebControls.Login
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,80 +39,80 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class LoginCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class LoginCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			LoginTest unit = new LoginTest ();
-			unit.ReadOnlyFields ();
-			unit.DefaultProperties ();
-			unit.AssignToDefaultProperties ();
-			unit.NullProperties ();
-			unit.BorderPadding ();
-			unit.FailureAction_All ();
-			unit.LoginButtonType_All ();
-			unit.Orientation_All ();
-			unit.TextLayout_All ();
-			unit.SaveViewState ();
-			unit.OnBubbleEvent_Cancel_OnLoggingIn ();
-			unit.OnLoggingIn_False ();
-			unit.OnLoggingIn_True ();
-			unit.OnLoginError ();
-			unit.OnLoggedIn ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            LoginTest unit = new LoginTest ();
+            unit.ReadOnlyFields ();
+            unit.DefaultProperties ();
+            unit.AssignToDefaultProperties ();
+            unit.NullProperties ();
+            unit.BorderPadding ();
+            unit.FailureAction_All ();
+            unit.LoginButtonType_All ();
+            unit.Orientation_All ();
+            unit.TextLayout_All ();
+            unit.SaveViewState ();
+            unit.OnBubbleEvent_Cancel_OnLoggingIn ();
+            unit.OnLoggingIn_False ();
+            unit.OnLoggingIn_True ();
+            unit.OnLoginError ();
+            unit.OnLoggedIn ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void OnAuthenticate_True_Deny_Unrestricted ()
-		{
-			LoginTest unit = new LoginTest ();
-			try {
-				unit.OnAuthenticate_True ();
-			}
-			catch (TypeInitializationException) {
-				// ms 2.0 - depending on the test run-order the HttpRuntime may throw
-			}
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void OnAuthenticate_True_Deny_Unrestricted ()
+        {
+            LoginTest unit = new LoginTest ();
+            try {
+                unit.OnAuthenticate_True ();
+            }
+            catch (TypeInitializationException) {
+                // ms 2.0 - depending on the test run-order the HttpRuntime may throw
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPrincipal = true)]
-		public void PermitOnly_ControlPrincipal ()
-		{
-			LoginTest unit = new LoginTest ();
-			try {
-				unit.OnBubbleEvent ();
-				unit.OnAuthenticate_False ();
-			}
-			catch (TypeInitializationException) {
-				// ms 2.0 - depending on the test run-order the HttpRuntime may throw
-			}
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, ControlPrincipal = true)]
+        public void PermitOnly_ControlPrincipal ()
+        {
+            LoginTest unit = new LoginTest ();
+            try {
+                unit.OnBubbleEvent ();
+                unit.OnAuthenticate_False ();
+            }
+            catch (TypeInitializationException) {
+                // ms 2.0 - depending on the test run-order the HttpRuntime may throw
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPrincipal = true)]
-		public void OnBubbleEvent_Deny_ControlPrincipal ()
-		{
-			LoginTest unit = new LoginTest ();
-			unit.OnBubbleEvent ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, ControlPrincipal = true)]
+        public void OnBubbleEvent_Deny_ControlPrincipal ()
+        {
+            LoginTest unit = new LoginTest ();
+            unit.OnBubbleEvent ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPrincipal = true)]
-		public void OnAuthenticate_False_Deny_ControlPrincipal ()
-		{
-			LoginTest unit = new LoginTest ();
-			unit.OnAuthenticate_False ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, ControlPrincipal = true)]
+        public void OnAuthenticate_False_Deny_ControlPrincipal ()
+        {
+            LoginTest unit = new LoginTest ();
+            unit.OnAuthenticate_False ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (Login); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (Login); }
+        }
+    }
 }
 

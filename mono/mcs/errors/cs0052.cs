@@ -5,5 +5,5 @@ class InternalClass {
 }
 
 public class PublicClass {
-	public InternalClass member;
+    public InternalClass member;
 }

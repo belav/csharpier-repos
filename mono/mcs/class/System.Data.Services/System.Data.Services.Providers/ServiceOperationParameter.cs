@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ServiceOperationParameter.cs
 //  
 // Author:
@@ -32,34 +32,34 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Providers
 {
-	[DebuggerVisualizer ("ServiceOperationParameter={Name}")]
-	public class ServiceOperationParameter
-	{
-		public string Name {
-			get; private set;
-		}
+    [DebuggerVisualizer ("ServiceOperationParameter={Name}")]
+    public class ServiceOperationParameter
+    {
+        public string Name {
+            get; private set;
+        }
 
-		public ResourceType ParameterType {
-			get; private set;
-		}
+        public ResourceType ParameterType {
+            get; private set;
+        }
 
-		public object CustomState {
-			get; set;
-		}
+        public object CustomState {
+            get; set;
+        }
 
-		public bool IsReadOnly {
-			get; private set;
-		}
+        public bool IsReadOnly {
+            get; private set;
+        }
 
-		public ServiceOperationParameter (string name, ResourceType parameterType)
-		{
-			this.Name = name;
-			this.ParameterType = parameterType;
-		}
+        public ServiceOperationParameter (string name, ResourceType parameterType)
+        {
+            this.Name = name;
+            this.ParameterType = parameterType;
+        }
 
-		public void SetReadOnly ()
-		{
-			IsReadOnly = true;
-		}
-	}
+        public void SetReadOnly ()
+        {
+            IsReadOnly = true;
+        }
+    }
 }

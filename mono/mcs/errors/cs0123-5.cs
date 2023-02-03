@@ -7,12 +7,12 @@ public delegate void EventHandler (params int[] args);
 
 public class C
 {
-	public void Connect ()
-	{
-		EventHandler Click = new EventHandler (Button1_Click);
-	}
+    public void Connect ()
+    {
+        EventHandler Click = new EventHandler (Button1_Click);
+    }
 
-	public void Button1_Click (params object[] i)
-	{
-	}
+    public void Button1_Click (params object[] i)
+    {
+    }
 }

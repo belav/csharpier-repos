@@ -28,8 +28,8 @@
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.BuildEngine {
-	interface IReference {
-		string ConvertToString (Project project, ExpressionOptions options);
-		ITaskItem[] ConvertToITaskItemArray (Project project, ExpressionOptions options);
-	}
+    interface IReference {
+        string ConvertToString (Project project, ExpressionOptions options);
+        ITaskItem[] ConvertToITaskItemArray (Project project, ExpressionOptions options);
+    }
 }

@@ -2,7 +2,7 @@
 // System.Web.HttpContext.cs - Unit tests for System.Web.HttpContext
 //
 // Author:
-//	Miguel de Icaza  <miguel@novell.com.com>
+//    Miguel de Icaza  <miguel@novell.com.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,114 +36,114 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web {
 
-	[TestFixture]
-	public class Test_HttpContext {
+    [TestFixture]
+    public class Test_HttpContext {
 
-		HttpContext Cook (int re)
-		{
-			FakeHttpWorkerRequest2 f = new FakeHttpWorkerRequest2 (re);
-			HttpContext c = new HttpContext (f);
+        HttpContext Cook (int re)
+        {
+            FakeHttpWorkerRequest2 f = new FakeHttpWorkerRequest2 (re);
+            HttpContext c = new HttpContext (f);
 
-			return c;
-		}
-		
-		
-		[Test]
-		[Category ("NotDotNet")] // Cannot be runned on .net with no web context
-		public void Properties ()
-		{
-			HttpContext c;
+            return c;
+        }
+        
+        
+        [Test]
+        [Category ("NotDotNet")] // Cannot be runned on .net with no web context
+        public void Properties ()
+        {
+            HttpContext c;
 
-			c = Cook (10);
-			Assert.AreEqual (null, c.AllErrors, "P1");
-		}
+            c = Cook (10);
+            Assert.AreEqual (null, c.AllErrors, "P1");
+        }
 
-		
-		[Test]
-		[Category ("NotDotNet")] // Cannot be runned on .net with no web context
-		public void Validation_Test_Cookies ()
-		{
-			HttpContext c;
+        
+        [Test]
+        [Category ("NotDotNet")] // Cannot be runned on .net with no web context
+        public void Validation_Test_Cookies ()
+        {
+            HttpContext c;
 
-			c = Cook (10);
-			
-		}
+            c = Cook (10);
+            
+        }
 
-		
-		[Test]
-		[Category ("NotDotNet")] // Cannot be runned on .net with no web context
-		public void Items ()
-		{
-			HttpContext c = Cook (10);
+        
+        [Test]
+        [Category ("NotDotNet")] // Cannot be runned on .net with no web context
+        public void Items ()
+        {
+            HttpContext c = Cook (10);
 
-			Console.WriteLine ("TTTTTTTTTTT: " + c.Items.GetType ().ToString ());
-			Assert.AreEqual (false, c.Items.IsReadOnly, "it1");
-			Assert.AreEqual (false, c.Items.IsFixedSize, "it1");
-		}
+            Console.WriteLine ("TTTTTTTTTTT: " + c.Items.GetType ().ToString ());
+            Assert.AreEqual (false, c.Items.IsReadOnly, "it1");
+            Assert.AreEqual (false, c.Items.IsFixedSize, "it1");
+        }
 
-		[Test]
-		[Category ("NotDotNet")] // Cannot be runned on .net with no web context
-		public void NullConstructor ()
-		{
-			HttpContext ctx = new HttpContext (null);
-			Assert.IsNotNull (ctx.Request, "Request");
-			Assert.IsNotNull (ctx.Response, "Response");
-		}
+        [Test]
+        [Category ("NotDotNet")] // Cannot be runned on .net with no web context
+        public void NullConstructor ()
+        {
+            HttpContext ctx = new HttpContext (null);
+            Assert.IsNotNull (ctx.Request, "Request");
+            Assert.IsNotNull (ctx.Response, "Response");
+        }
 
-		[Test]
-		public void RewritePath ()
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnInit (RewritePath_OnInit));
-			string html = t.Run ();
-		}
+        [Test]
+        public void RewritePath ()
+        {
+            WebTest t = new WebTest (PageInvoker.CreateOnInit (RewritePath_OnInit));
+            string html = t.Run ();
+        }
 
-		protected static void RewritePath_OnInit (Page p)
-		{
-			HttpContext ctx = HttpContext.Current;
-			HttpRequest req = p.Request;
-			string origPath = req.FilePath;
+        protected static void RewritePath_OnInit (Page p)
+        {
+            HttpContext ctx = HttpContext.Current;
+            HttpRequest req = p.Request;
+            string origPath = req.FilePath;
 
-			ctx.RewritePath ("/NunitWeb/file.html", null, null, true);
-			Assert.AreEqual ("/NunitWeb/file.html", req.FilePath, "#A1");
-			ctx.RewritePath (origPath, null, null, true);
+            ctx.RewritePath ("/NunitWeb/file.html", null, null, true);
+            Assert.AreEqual ("/NunitWeb/file.html", req.FilePath, "#A1");
+            ctx.RewritePath (origPath, null, null, true);
 
-			ctx.RewritePath ("~/file.html", null, null, true);
-			Assert.AreEqual ("/NunitWeb/file.html", req.FilePath, "#A2");
-			ctx.RewritePath (origPath, null, null, true);
+            ctx.RewritePath ("~/file.html", null, null, true);
+            Assert.AreEqual ("/NunitWeb/file.html", req.FilePath, "#A2");
+            ctx.RewritePath (origPath, null, null, true);
 
-			ctx.RewritePath ("file.html", null, null, true);
-			Assert.AreEqual ("/NunitWeb/file.html", req.FilePath, "#A3");
-			ctx.RewritePath (origPath, null, null, true);
+            ctx.RewritePath ("file.html", null, null, true);
+            Assert.AreEqual ("/NunitWeb/file.html", req.FilePath, "#A3");
+            ctx.RewritePath (origPath, null, null, true);
 
-			try {
-				ctx.RewritePath ("/file.html", null, null, true);
-				Assert.Fail ("#A4");
-			} catch (HttpException ex) {
-				// The virtual path '/file.html' maps to another application.
-				//
-				// success
-			}
-			
-			ctx.RewritePath ("/NunitWeb/sub/file.html", null, null, true);
-			Assert.AreEqual ("/NunitWeb/sub/file.html", req.FilePath, "#B1");
-			ctx.RewritePath (origPath, null, null, true);
+            try {
+                ctx.RewritePath ("/file.html", null, null, true);
+                Assert.Fail ("#A4");
+            } catch (HttpException ex) {
+                // The virtual path '/file.html' maps to another application.
+                //
+                // success
+            }
+            
+            ctx.RewritePath ("/NunitWeb/sub/file.html", null, null, true);
+            Assert.AreEqual ("/NunitWeb/sub/file.html", req.FilePath, "#B1");
+            ctx.RewritePath (origPath, null, null, true);
 
-			ctx.RewritePath ("~/sub/file.html", null, null, true);
-			Assert.AreEqual ("/NunitWeb/sub/file.html", req.FilePath, "#B2");
-			ctx.RewritePath (origPath, null, null, true);
+            ctx.RewritePath ("~/sub/file.html", null, null, true);
+            Assert.AreEqual ("/NunitWeb/sub/file.html", req.FilePath, "#B2");
+            ctx.RewritePath (origPath, null, null, true);
 
-			ctx.RewritePath ("sub/file.html", null, null, true);
-			Assert.AreEqual ("/NunitWeb/sub/file.html", req.FilePath, "#B3");
-			ctx.RewritePath (origPath, null, null, true);
+            ctx.RewritePath ("sub/file.html", null, null, true);
+            Assert.AreEqual ("/NunitWeb/sub/file.html", req.FilePath, "#B3");
+            ctx.RewritePath (origPath, null, null, true);
 
-			try {
-				ctx.RewritePath ("/sub/file.html", null, null, true);
-				Assert.Fail ("#B4");
-			} catch (HttpException ex) {
-				// The virtual path '/file.html' maps to another application.
-				//
-				// success
-			}
-		}
-	}
+            try {
+                ctx.RewritePath ("/sub/file.html", null, null, true);
+                Assert.Fail ("#B4");
+            } catch (HttpException ex) {
+                // The virtual path '/file.html' maps to another application.
+                //
+                // success
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿using LinqKit;
+using LinqKit;
 using Newtonsoft.Json;
 using POS_Server.Models;
 using System;
@@ -172,14 +172,14 @@ namespace POS_Server.Controllers
                 {
                     amount += (int)itemInLocs[i].quantity;
                 }
-                //amount  الكمية في الفرع لعنصر ووحدة قياس واحدة
-                // جلب معرف الوحدة ومعرف العنصر
+                //amount  ?????? ?? ????? ????? ????? ???? ?????
+                // ??? ???? ?????? ????? ??????
                 var unit = entity.itemsUnits.Where(x => x.itemUnitId == itemUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                //جلب الوحدة الاعلى معرف الوحدة الاعلى وقيمتها بالنسبة للوحدة الادنى 
+                //??? ?????? ?????? ???? ?????? ?????? ??????? ??????? ?????? ?????? 
                 var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
 
                 if (upperUnit != null)
-                    //جلب الكمية للوحدة الاعلى في الفرع وضربها بقيمة الوحدة
+                    //??? ?????? ?????? ?????? ?? ????? ?????? ????? ??????
                     amount += (int)upperUnit.unitValue * getItemUnitAmount(upperUnit.itemUnitId, branchId);
                 return amount;
             }
@@ -343,7 +343,7 @@ namespace POS_Server.Controllers
         //        }
 
         // for report 
-        //  فواتير المشتريات بكل انواعها بكل فرع
+        //  ?????? ????????? ??? ??????? ??? ???
 
         #region Purchase
         [HttpPost]
@@ -617,7 +617,7 @@ namespace POS_Server.Controllers
 
         }
 
-        // العناصر في الفواتير
+        // ??????? ?? ????????
 
         [HttpPost]
         [Route("GetPuritem")]
@@ -952,7 +952,7 @@ namespace POS_Server.Controllers
                 //            return NotFound();
             }
         }
-        //عدد العناصر في كل فاتورة
+        //??? ??????? ?? ?? ??????
         [HttpPost]
         [Route("GetPuritemcount")]
         public string GetPuritemcount(string token)
@@ -1093,7 +1093,7 @@ namespace POS_Server.Controllers
 
         }
 
-        // تكاليف شراء العناصر
+        // ?????? ???? ???????
         [HttpPost]
         [Route("GetItemUnitCost")]
         public string GetItemUnitCost(string token)
@@ -1273,7 +1273,7 @@ namespace POS_Server.Controllers
 
         }
         #endregion
-        // عدد العناصر في كل فاتورة
+        // ??? ??????? ?? ?? ??????
 
 
         //        [HttpPost]
@@ -1448,7 +1448,7 @@ namespace POS_Server.Controllers
 
 
         // item quantity in location GetItemQtyInBranches()
-        // عدد الفواتير في كل فرع
+        // ??? ???????? ?? ?? ???
         //[HttpPost]
         //[Route("GetinvInBranch")]
         //public IHttpActionResult GetinvInBranch()
@@ -1534,7 +1534,7 @@ namespace POS_Server.Controllers
 
 
 
-        //  الفواتير بكل نقطة عددPOs
+        //  ???????? ??? ???? ???POs
         // 
         //        [HttpPost]
         //        [Route("GetPoswithInvCount")]
@@ -1663,7 +1663,7 @@ namespace POS_Server.Controllers
         //            return NotFound();
         //        }
 
-        // الفواتير في كل نقطة
+        // ???????? ?? ?? ????
 
         //        [HttpPost]
         //        [Route("GetPoswithInv")]
@@ -1794,7 +1794,7 @@ namespace POS_Server.Controllers
         //        }
 
 
-        // عدد فواتير المشتريات ومرتجع المشتريات ومسودات كل فرع
+        // ??? ?????? ????????? ?????? ????????? ??????? ?? ???
         //        [HttpPost]
         //        [Route("GetinvCountByBranch")]
         //        public IHttpActionResult GetinvCountByBranch()
@@ -1883,7 +1883,7 @@ namespace POS_Server.Controllers
 
 
         /*
-        //  فواتير المشتريات ومرتجع المشتريات ومسودات كل فرع
+        //  ?????? ????????? ?????? ????????? ??????? ?? ???
         [HttpPost]
         [Route("GetinvTypeByBranch")]
         public IHttpActionResult GetinvTypeByBranch()
@@ -1969,9 +1969,9 @@ else
         }
         */
         // getinv in branch
-        // المبيعات
+        // ????????
         #region sales
-        //  فواتير المبيعات بكل انواعها بكل فرع
+        //  ?????? ???????? ??? ??????? ??? ???
         //[HttpPost]
         //[Route("GetSaleinv")]
         //public IHttpActionResult GetSaleinv()
@@ -2073,7 +2073,7 @@ else
         //}
 
 
-        // فواتير المبيعات مع العناصر
+        // ?????? ???????? ?? ???????
         [HttpPost]
         [Route("GetSaleitem")]
         public string GetSaleitem(string token)
@@ -2377,7 +2377,7 @@ else
             //return NotFound();
         }
 
-        //عدد العناصر في كل فاتورة
+        //??? ??????? ?? ?? ??????
         [HttpPost]
         [Route("GetSaleitemcount")]
         public string GetSaleitemcount(string token)
@@ -2652,7 +2652,7 @@ else
         }
 
 
-        // عدد العناصر في فواتير الطلبات
+        // ??? ??????? ?? ?????? ???????
 
         [HttpPost]
         [Route("Getorderitemcount")]
@@ -2926,7 +2926,7 @@ else
             //return NotFound();
         }
 
-        // عدد العناصر في فواتير الطلبات
+        // ??? ??????? ?? ?????? ???????
 
         [HttpPost]
         [Route("GetPurorderitemcount")]
@@ -3202,7 +3202,7 @@ else
 
 
 
-        // عدد العناصر في فواتير عرض السعر
+        // ??? ??????? ?? ?????? ??? ?????
 
 
         [HttpPost]
@@ -3480,7 +3480,7 @@ else
 
 
         //
-        //الفواتير التي فيها كوبون
+        //???????? ???? ???? ?????
         //  join IC in entity.couponsInvoices on I.invoiceId equals IC.InvoiceId 
         //  join C in entity.coupons on IC.couponId equals C.cId
         //  CopName=   C.name,
@@ -3778,7 +3778,7 @@ else
         }
 
 
-        // فواتير المبيعات مع العناصر
+        // ?????? ???????? ?? ???????
         [HttpPost]
         [Route("GetSaleOffer")]
         public string GetSaleOffer(string token)
@@ -4190,7 +4190,7 @@ else
         }
 
         //
-        // فواتير المبيعات مع العناصر التي فيها offer
+        // ?????? ???????? ?? ??????? ???? ???? offer
         [HttpPost]
         [Route("GetPromoOffer")]
         public string GetPromoOffer(string token)
@@ -4373,8 +4373,8 @@ else
         }
 
 
-        // الاشتراكات
-        //الاشتراكات في كل فاتورة
+        // ??????????
+        //?????????? ?? ?? ??????
         [HttpPost]
         [Route("GetSaleMembership")]
         public string GetSaleMembership(string token)
@@ -4805,10 +4805,10 @@ else
 
         #endregion
 
-        // التخزين
+        // ???????
         #region storage
 
-        // عرض الاصناف واماكن تخزينها
+        // ??? ??????? ?????? ???????
         [HttpPost]
         [Route("GetStorage")]
         public string GetStorage(string token)
@@ -4978,7 +4978,7 @@ else
 
 
 
-        // حركة الاصناف الخارجية -مع الموردين
+        // ???? ??????? ???????? -?? ????????
         [HttpPost]
         [Route("GetExternalMov")]
         public string GetExternalMov(string token)
@@ -5311,7 +5311,7 @@ else
 
         }
 
-        // حركة الاصناف الداخلية -بين الفروع والمخازن
+        // ???? ??????? ???????? -??? ?????? ????????
         [HttpPost]
         [Route("GetInternalMov")]
         public string GetInternalMov(string token)
@@ -5539,7 +5539,7 @@ else
 
         }
 
-        //فواتير الصرف المنفذة من المخزن الى المطبخ 
+        //?????? ????? ??????? ?? ?????? ??? ?????? 
         [HttpPost]
         [Route("GetSpendingStorage")]
         public string GetSpendingStorage(string token)
@@ -5673,9 +5673,9 @@ else
 
         #endregion
 
-        // الجرد
+        // ?????
         #region
-        // عناصر الجرد
+        // ????? ?????
         [HttpPost]
         [Route("GetInventory")]
         public string GetInventory(string token)
@@ -5986,7 +5986,7 @@ else
         }
 
 
-        // العناصر التالفة
+        // ??????? ???????
         [HttpPost]
         [Route("GetDesItems")]
         public string GetDesItems(string token)
@@ -6137,7 +6137,7 @@ else
 
         }
 
-        // العناصر الناقصة
+        // ??????? ???????
         [HttpPost]
         [Route("GetFallsItems")]
         public string GetFallsItems(string token)
@@ -6294,9 +6294,9 @@ else
 
         #endregion
 
-        // المحاسبة
+        // ????????
         #region
-        //المدفوعات
+        //?????????
         [HttpPost]
         [Route("GetPayments")]
         public string GetPayments(string token)
@@ -6599,7 +6599,7 @@ else
 
 
         }
-        // المقبوضات
+        // ?????????
         [HttpPost]
         [Route("GetReceipt")]
         public string GetReceipt(string token)
@@ -7027,7 +7027,7 @@ else
 
         }
 
-        // حركات ال POS
+        // ????? ?? POS
         [HttpPost]
         [Route("GetBytypeAndSideForPos")]
         public string GetBytypeAndSideForPos(string token)
@@ -7181,7 +7181,7 @@ else
 
         }
 
-        //كشف حساب
+        //??? ????
         [HttpPost]
         [Route("GetStatement")]
         public string GetStatement(string token)
@@ -7967,7 +7967,7 @@ else
             }
 
 
-// يومية الصندوق
+// ????? ???????
         [HttpPost]
         [Route("GetBalance")]
         public string GetBalance(string token)
@@ -8054,8 +8054,8 @@ else
         }
 
 
-        //  الضريبة
-        //  الضريبة حساب ضريبة العناصر والفواتير
+        //  ???????
+        //  ??????? ???? ????? ??????? ?????????
         [HttpPost]
         [Route("GetInvItemTax")]
         public string GetInvItemTax(string token)
@@ -8242,11 +8242,11 @@ else
 
                             //item tax
                             row.OneItemPriceNoTax = row.itemUnitPrice - row.OneItemOfferVal;
-                            row.OneitemUnitTax = calc.percentValue(row.OneItemPriceNoTax, row.ItemTaxes);//قيمة الضريبة للعنصر الواحد
+                            row.OneitemUnitTax = calc.percentValue(row.OneItemPriceNoTax, row.ItemTaxes);//???? ??????? ?????? ??????
                             row.OneItemPricewithTax = row.OneItemPriceNoTax + row.OneitemUnitTax;
 
                             row.itemUnitTaxwithQTY = row.OneitemUnitTax * row.ITquantity;
-                            row.subTotalNotax = row.OneItemPriceNoTax * row.ITquantity;//قبل الضريبة
+                            row.subTotalNotax = row.OneItemPriceNoTax * row.ITquantity;//??? ???????
                                                                                        // row.subTotalTax = row.OneItemPricewithTax * row.ITquantity;//
                             row.subTotalTax = row.ITprice * row.ITquantity;//
                             row.itemsRowsCount = invListm.Where(x => x.invoiceId == row.invoiceId).ToList().Count();
@@ -8293,7 +8293,7 @@ else
         }
 
 
-        //عمليات الفتح والاغلاق للصندوق
+        //?????? ????? ???????? ???????
         [HttpPost]
         [Route("GetPosCashOpenClose")]
         public string GetPosCashOpenClose(string token)
@@ -8420,7 +8420,7 @@ else
         }
 
 
-        //العمليات المنفذة بين تاريخ الفتح والاغلاق
+        //???????? ??????? ??? ????? ????? ????????
         [HttpPost]
         [Route("GetTransBetweenOpenClose")]
         public string GetTransBetweenOpenClose(string token)
@@ -8594,7 +8594,7 @@ else
 
         }
 
-        //العمليات المنفذةبعد تاريخ الفتح
+        //???????? ?????????? ????? ?????
         [HttpPost]
         [Route("GetTransfromOpen")]
         public string GetTransfromOpen(string token)
@@ -8821,9 +8821,9 @@ else
 
         #endregion
 
-        //اليومية
+        //???????
         #region
-        //  يومية الفواتير العامة
+        //  ????? ???????? ??????
 
 
 
@@ -9048,7 +9048,7 @@ else
 
         }
 
-        // يومية فواتير المشتريات العامة في قسم التقارير
+        // ????? ?????? ????????? ?????? ?? ??? ????????
         [HttpPost]
         [Route("GetPurdailyinvoice")]
         public string GetPurdailyinvoice(string token)//,DateTime? date
@@ -9212,7 +9212,7 @@ else
 
         }
 
-        //  يومية الفواتير الخاصة بمستخدم
+        //  ????? ???????? ?????? ???????
         [HttpPost]
         [Route("GetUserdailyinvoice")]
         public string GetUserdailyinvoice(string token)
@@ -9414,7 +9414,7 @@ else
 
         }
 
-        // يومية الصندوق
+        // ????? ???????
         [HttpPost]
         [Route("GetDailyStatement")]
         public string GetDailyStatement(string token)
@@ -9579,7 +9579,7 @@ else
         }
 
 
-        // يومية الصندوق الخاصة بالمستخدم
+        // ????? ??????? ?????? ?????????
         [HttpPost]
         [Route("GetUserDailyStatement")]
         public string GetUserDailyStatement(string token)
@@ -9748,7 +9748,7 @@ else
 
         }
 
-        // الارباح
+        // ???????
 
 
         [HttpPost]
@@ -10172,7 +10172,7 @@ else
                             //ITunitId = IU.unitId,
                             ITquantity = G.Sum(q => q.ITquantity),
                             //avgPurchasePrice = ITEM.avgPurchasePrice,
-                            purchasePrice = G.Sum(q => q.purchasePrice),//مجموع اسعار الشراء للعناصر
+                            purchasePrice = G.Sum(q => q.purchasePrice),//????? ????? ?????? ???????
 
                             //ITupdateDate = IT.updateDate,
 
@@ -10733,7 +10733,7 @@ else
                             //ITunitId = IU.unitId,
                             //ITquantity = G.Sum(q => q.ITquantity),
                             //avgPurchasePrice = ITEM.avgPurchasePrice,
-                            purchasePrice = G.Sum(q => q.purchasePrice),//مجموع اسعار الشراء للعناصر
+                            purchasePrice = G.Sum(q => q.purchasePrice),//????? ????? ?????? ???????
 
                             //ITupdateDate = IT.updateDate,
 
@@ -11068,7 +11068,7 @@ else
         }
 
 
-        //فواتير الصرف من المخزن الى المطبخ 
+        //?????? ????? ?? ?????? ??? ?????? 
         [HttpPost]
         [Route("GetSpendingRequest")]
         public string GetSpendingRequest(string token)
@@ -11200,7 +11200,7 @@ else
 
         }
 
-        //عناصر فواتير الصرف
+        //????? ?????? ?????
         [HttpPost]
         [Route("GetSpendingItems")]
         public string GetSpendingItems(string token)
@@ -11351,8 +11351,8 @@ else
         }
 
 
-        // consumption الاستهلاك
-        //فواتير الاستهلاك 
+        // consumption ?????????
+        //?????? ????????? 
         [HttpPost]
         [Route("GetConsumption")]
         public string GetConsumption(string token)
@@ -11484,7 +11484,7 @@ else
 
         }
 
-        //عناصر فواتير الاستهلاك
+        //????? ?????? ?????????
         [HttpPost]
         [Route("GetConsumptionItems")]
         public string GetConsumptionItems(string token)

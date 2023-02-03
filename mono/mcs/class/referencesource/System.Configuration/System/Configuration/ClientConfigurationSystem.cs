@@ -29,7 +29,7 @@ namespace System.Configuration {
         private Exception               _initError;    
         private bool                    _isInitInProgress;      
         private bool                    _isMachineConfigInited; 
-        private bool                	_isUserConfigInited;
+        private bool                    _isUserConfigInited;
         private bool                    _isAppConfigHttp;       
         
 

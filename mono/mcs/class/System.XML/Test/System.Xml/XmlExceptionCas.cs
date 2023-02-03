@@ -2,7 +2,7 @@
 // XmlExceptionCas.cs - CAS unit tests for System.Xml.XmlException
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,35 +37,35 @@ using System.Xml;
 
 namespace MonoCasTests.System.Xml {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XmlExceptionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class XmlExceptionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityException))]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		public void DenySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XmlException xe = new XmlException ();
-			xe.GetObjectData (null, sc);
-		}
+        [Test]
+        [ExpectedException (typeof (SecurityException))]
+        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+        public void DenySerializationFormatter_GetObjectData ()
+        {
+            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+            XmlException xe = new XmlException ();
+            xe.GetObjectData (null, sc);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-		public void PermitOnlySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XmlException xe = new XmlException ();
-			xe.GetObjectData (null, sc);
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (ArgumentNullException))]
+        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+        public void PermitOnlySerializationFormatter_GetObjectData ()
+        {
+            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+            XmlException xe = new XmlException ();
+            xe.GetObjectData (null, sc);
+        }
+    }
 }

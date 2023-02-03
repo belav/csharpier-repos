@@ -1,9 +1,9 @@
 //
 // X509ExtensionCas.cs - CAS unit tests for 
-//	System.Security.Cryptography.X509Certificates.X509Extension
+//    System.Security.Cryptography.X509Certificates.X509Extension
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,40 +41,40 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class X509ExtensionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class X509ExtensionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			X509ExtensionTest unit = new X509ExtensionTest ();
-			unit.ConstructorEmpty ();
-			unit.ConstructorAsnEncodedData ();
-			unit.ConstructorAsnEncodedData_BadAsn ();
-			unit.ConstructorAsnEncodedData_BadAsnTag ();
-			unit.ConstructorAsnEncodedData_BadAsnLength ();
-			unit.Build_NetscapeCertTypeExtension ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            X509ExtensionTest unit = new X509ExtensionTest ();
+            unit.ConstructorEmpty ();
+            unit.ConstructorAsnEncodedData ();
+            unit.ConstructorAsnEncodedData_BadAsn ();
+            unit.ConstructorAsnEncodedData_BadAsnTag ();
+            unit.ConstructorAsnEncodedData_BadAsnLength ();
+            unit.Build_NetscapeCertTypeExtension ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[2] { typeof (AsnEncodedData), typeof (bool) };
-			ConstructorInfo ci = typeof (X509Extension).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(AsnEncodedData,bool)");
-			AsnEncodedData aed = new AsnEncodedData (new Oid ("2.5.29.37"), new byte[] { 0x30, 0x05, 0x06, 0x03, 0x2A, 0x03, 0x04 });
-			Assert.IsNotNull (ci.Invoke (new object [2] { aed, false }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[2] { typeof (AsnEncodedData), typeof (bool) };
+            ConstructorInfo ci = typeof (X509Extension).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(AsnEncodedData,bool)");
+            AsnEncodedData aed = new AsnEncodedData (new Oid ("2.5.29.37"), new byte[] { 0x30, 0x05, 0x06, 0x03, 0x2A, 0x03, 0x04 });
+            Assert.IsNotNull (ci.Invoke (new object [2] { aed, false }), "invoke");
+        }
+    }
 }
 

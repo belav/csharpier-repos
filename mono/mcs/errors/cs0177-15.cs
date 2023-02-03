@@ -3,19 +3,19 @@
 
 public class GotoWithOut
 {
-	public static void Test (bool cond, out int x)
-	{
-		if (cond)
-		{
-			goto Label2;
-		}
-		else
-		{
-			goto Label;
-		}
-		Label:
-		x = 0;
-		Label2:
-		return;
-	}
+    public static void Test (bool cond, out int x)
+    {
+        if (cond)
+        {
+            goto Label2;
+        }
+        else
+        {
+            goto Label;
+        }
+        Label:
+        x = 0;
+        Label2:
+        return;
+    }
 }

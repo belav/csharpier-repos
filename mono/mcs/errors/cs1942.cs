@@ -6,9 +6,9 @@ using System.Linq;
 
 class C
 {
-	public static void Main ()
-	{
-		var e = from values in "abcd"
-			select null;
-	}
+    public static void Main ()
+    {
+        var e = from values in "abcd"
+            select null;
+    }
 }

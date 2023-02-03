@@ -7,9 +7,9 @@ class TestGoto
   public static void Main(string[] args)
     {
       foreach (bool b in test())
-	;
+    ;
       if (x != 0)
-	throw new System.Exception ();
+    throw new System.Exception ();
     }
 
   static IEnumerable<bool> setX()

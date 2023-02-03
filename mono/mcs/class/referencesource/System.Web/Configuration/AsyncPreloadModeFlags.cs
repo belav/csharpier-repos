@@ -20,6 +20,6 @@ namespace System.Web.Configuration {
         FormMultiPart   = 0x02,
         NonForm         = 0x04,
         AllFormTypes    = Form | FormMultiPart,
-	    All             = AllFormTypes | NonForm
+        All             = AllFormTypes | NonForm
     }
 }

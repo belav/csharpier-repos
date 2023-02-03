@@ -4,14 +4,14 @@
 
 public class MyClass2
 {
-	static public bool b;
+    static public bool b;
         static public void Main ()
         {
                 object o;
                 switch (b) {
-		case true:
-			o = "yo";
-			break;
+        case true:
+            o = "yo";
+            break;
                 }
         }
 }

@@ -2,7 +2,7 @@
 // IFixPointInfo.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,8 +27,8 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-	interface IFixPointInfo<Label, AState> {
-		bool PreStateLookup (Label pc, out AState state);
-		bool PostStateLookup (Label pc, out AState state);
-	}
+    interface IFixPointInfo<Label, AState> {
+        bool PreStateLookup (Label pc, out AState state);
+        bool PostStateLookup (Label pc, out AState state);
+    }
 }

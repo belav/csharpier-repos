@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jordi Mas i Hernandez, jordi@ximian.com
+//    Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 
 namespace System.Windows.Forms 
 {
-	public enum DrawMode 
-	{
-		Normal = 0,
-		OwnerDrawFixed = 1,
-		OwnerDrawVariable = 2,
-	}
+    public enum DrawMode 
+    {
+        Normal = 0,
+        OwnerDrawFixed = 1,
+        OwnerDrawVariable = 2,
+    }
 }
 

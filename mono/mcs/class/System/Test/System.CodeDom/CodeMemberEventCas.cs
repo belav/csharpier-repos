@@ -1,9 +1,9 @@
 //
 // CodeMemberEventCas.cs
-//	- CAS unit tests for System.CodeDom.CodeMemberEvent
+//    - CAS unit tests for System.CodeDom.CodeMemberEvent
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,36 +37,36 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeMemberEventCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeMemberEventCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeMemberEvent cme = new CodeMemberEvent ();
-			Assert.AreEqual (0, cme.ImplementationTypes.Count, "ImplementationTypes");
-			Assert.IsNull (cme.PrivateImplementationType, "PrivateImplementationType");
-			cme.PrivateImplementationType = new CodeTypeReference ("System.Int32");
-			Assert.AreEqual ("System.Void", cme.Type.BaseType, "Type");
-			cme.Type = new CodeTypeReference ("System.Void");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeMemberEvent cme = new CodeMemberEvent ();
+            Assert.AreEqual (0, cme.ImplementationTypes.Count, "ImplementationTypes");
+            Assert.IsNull (cme.PrivateImplementationType, "PrivateImplementationType");
+            cme.PrivateImplementationType = new CodeTypeReference ("System.Int32");
+            Assert.AreEqual ("System.Void", cme.Type.BaseType, "Type");
+            cme.Type = new CodeTypeReference ("System.Void");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeMemberEvent).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeMemberEvent).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

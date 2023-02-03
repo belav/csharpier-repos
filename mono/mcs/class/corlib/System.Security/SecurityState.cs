@@ -2,7 +2,7 @@
 // System.Security.SecurityState
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008-2009 Novell, Inc (http://www.novell.com)
 //
@@ -28,31 +28,31 @@
 
 namespace System.Security {
 
-	// available in FX2.0 with service pack 1, including the 2.0 shipped as part of FX3.5
-	public abstract class SecurityState {
+    // available in FX2.0 with service pack 1, including the 2.0 shipped as part of FX3.5
+    public abstract class SecurityState {
 
-		protected SecurityState ()
-		{
-		}
+        protected SecurityState ()
+        {
+        }
 
-		public abstract void EnsureState ();
+        public abstract void EnsureState ();
 
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-		public bool IsStateAvailable ()
-		{
-			AppDomainManager adm = AppDomain.CurrentDomain.DomainManager;
-			if (adm == null)
-				return false;
-			return adm.CheckSecuritySettings (this);
-		}
+        public bool IsStateAvailable ()
+        {
+            AppDomainManager adm = AppDomain.CurrentDomain.DomainManager;
+            if (adm == null)
+                return false;
+            return adm.CheckSecuritySettings (this);
+        }
 #else
-		[Obsolete ("SecurityState.IsStateAvailable is not supported on this platform.", true)]
-		public bool IsStateAvailable ()
-		{
-			throw new PlatformNotSupportedException ("SecurityState.IsStateAvailable is not supported on this platform.");
-		}
+        [Obsolete ("SecurityState.IsStateAvailable is not supported on this platform.", true)]
+        public bool IsStateAvailable ()
+        {
+            throw new PlatformNotSupportedException ("SecurityState.IsStateAvailable is not supported on this platform.");
+        }
 #endif // MONO_FEATURE_MULTIPLE_APPDOMAINS
-	}
+    }
 }
 
 

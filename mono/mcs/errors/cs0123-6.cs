@@ -3,10 +3,10 @@
 
 class A<T, U> where T : U
 {
-	delegate void D (U u);
+    delegate void D (U u);
 
-	static void M (T t)
-	{
-		D d = M;
-	}
+    static void M (T t)
+    {
+        D d = M;
+    }
 }

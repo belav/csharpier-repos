@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ChildTable.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -33,20 +33,20 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	internal class ChildTable : Table
-	{
-		Control parent;
+    internal class ChildTable : Table
+    {
+        Control parent;
 
-		public ChildTable (Control parent)
-		{
-			this.parent = parent;
-		}
+        public ChildTable (Control parent)
+        {
+            this.parent = parent;
+        }
 
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			base.AddAttributesToRender (writer);
-			if (ID == null)
-				writer.AddAttribute ("id", parent.ClientID);
-		}
-	}
+        protected override void AddAttributesToRender (HtmlTextWriter writer)
+        {
+            base.AddAttributesToRender (writer);
+            if (ID == null)
+                writer.AddAttribute ("id", parent.ClientID);
+        }
+    }
 }

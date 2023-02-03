@@ -33,11 +33,11 @@
 
 namespace System.Runtime.Remoting.Contexts {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IDynamicProperty {
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IDynamicProperty {
 
-		string Name {
-			get;
-		}
-	}
+        string Name {
+            get;
+        }
+    }
 }

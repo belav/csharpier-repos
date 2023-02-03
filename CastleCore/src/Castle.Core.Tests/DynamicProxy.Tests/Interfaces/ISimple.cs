@@ -14,23 +14,23 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	public interface ISimple
-	{
-		void Method();
-	}
+    public interface ISimple
+    {
+        void Method();
+    }
 
-	public class Simple : ISimple
-	{
-		private int count;
+    public class Simple : ISimple
+    {
+        private int count;
 
-		public int Count
-		{
-			get { return count; }
-		}
+        public int Count
+        {
+            get { return count; }
+        }
 
-		public void Method()
-		{
-			count++;
-		}
-	}
+        public void Method()
+        {
+            count++;
+        }
+    }
 }

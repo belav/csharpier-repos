@@ -2,7 +2,7 @@
 // Program.cs
 //
 // Author:
-//	Alexander Köplinger (alexander.koeplinger@xamarin.com)
+//    Alexander Köplinger (alexander.koeplinger@xamarin.com)
 // 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -26,14 +26,14 @@
 //
 
 namespace SimpleTest {
-	public static class Program {
-		public static int Main ()
-		{
-			// use the simplest WinForms code that invokes the XplatUI
-			// and causes the X connection to be established, if this fails
-			// then something is seriously wrong
-			System.Windows.Forms.Application.Idle += null;
-			return 0;
-		}
-	}
+    public static class Program {
+        public static int Main ()
+        {
+            // use the simplest WinForms code that invokes the XplatUI
+            // and causes the X connection to be established, if this fails
+            // then something is seriously wrong
+            System.Windows.Forms.Application.Idle += null;
+            return 0;
+        }
+    }
 }

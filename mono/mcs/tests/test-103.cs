@@ -8,20 +8,20 @@ abstract class A {
 
 class B : A {
         protected override int Foo ()
-	{
-		return 0;
-	}
+    {
+        return 0;
+    }
 
-	public int M ()
-	{
-		return Foo ();
-	}
+    public int M ()
+    {
+        return Foo ();
+    }
 }
 
 class Test {
         public static int Main ()
-	{
-		return new B ().M ();
+    {
+        return new B ().M ();
         }
 }
 

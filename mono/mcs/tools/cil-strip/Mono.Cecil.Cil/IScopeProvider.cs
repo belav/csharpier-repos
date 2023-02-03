@@ -28,8 +28,8 @@
 
 namespace Mono.Cecil.Cil {
 
-	internal interface IScopeProvider {
+    internal interface IScopeProvider {
 
-		ScopeCollection Scopes { get; }
-	}
+        ScopeCollection Scopes { get; }
+    }
 }

@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.SnapLineType
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,15 +31,15 @@
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public enum SnapLineType
-	{
-		Top,
-		Bottom,
-		Left,
-		Right,
-		Horizontal,
-		Vertical,
-		Baseline
-	}
+    public enum SnapLineType
+    {
+        Top,
+        Bottom,
+        Left,
+        Right,
+        Horizontal,
+        Vertical,
+        Baseline
+    }
 }
 

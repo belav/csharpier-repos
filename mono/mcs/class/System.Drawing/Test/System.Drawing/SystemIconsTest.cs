@@ -2,7 +2,7 @@
 // Tests for System.Drawing.SystemIconsTest.cs 
 //
 // Authors:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,42 +33,42 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing {
 
-	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-	public class SystemIconsTest {
+    [TestFixture]
+    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+    public class SystemIconsTest {
 
-		[Test]
-		public void Same ()
-		{
-			// SystemIcons always return the same icon
-			Assert.IsTrue (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application), "Same");
-		}
+        [Test]
+        public void Same ()
+        {
+            // SystemIcons always return the same icon
+            Assert.IsTrue (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application), "Same");
+        }
 
-		[Test]
-		public void Dispose_SystemIcons ()
-		{
-			// SystemIcons icon's can't be disposed
-			SystemIcons.Application.Dispose ();
-			Assert.IsNotNull (SystemIcons.Application.ToBitmap ());
-		}
+        [Test]
+        public void Dispose_SystemIcons ()
+        {
+            // SystemIcons icon's can't be disposed
+            SystemIcons.Application.Dispose ();
+            Assert.IsNotNull (SystemIcons.Application.ToBitmap ());
+        }
 
-		[Test]
-		public void Dispose_Indirect ()
-		{
-			// SystemIcons icon's can't be disposed
-			Icon app = SystemIcons.Application;
-			app.Dispose ();
-			Assert.IsNotNull (app.ToBitmap ());
-		}
+        [Test]
+        public void Dispose_Indirect ()
+        {
+            // SystemIcons icon's can't be disposed
+            Icon app = SystemIcons.Application;
+            app.Dispose ();
+            Assert.IsNotNull (app.ToBitmap ());
+        }
 
-		[Test]
-		public void Clone_Dispose ()
-		{
-			// Clones of SystemIcons icon's can be disposed
-			Icon app = SystemIcons.Application;
-			Icon clone = (Icon) app.Clone ();
-			clone.Dispose ();
-			Assert.Throws<ObjectDisposedException> (() => clone.ToBitmap ());
-		}
-	}
+        [Test]
+        public void Clone_Dispose ()
+        {
+            // Clones of SystemIcons icon's can be disposed
+            Icon app = SystemIcons.Application;
+            Icon clone = (Icon) app.Clone ();
+            clone.Dispose ();
+            Assert.Throws<ObjectDisposedException> (() => clone.ToBitmap ());
+        }
+    }
 }

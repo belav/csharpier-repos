@@ -12,7 +12,7 @@ using System.Collections;
 public interface ISudokuBoard<T>
 
 {
-    int Dimension{get;} //Returns the Board dimension (since its always sq., only one value is returned)	                    
+    int Dimension{get;} //Returns the Board dimension (since its always sq., only one value is returned)                        
     IEnumerable Tracer{get;}  //Trace functionality for debugging
     bool PopulateBoard(T[,] rawData);  //Populates the Board with generated puzzle                     
     T[]  GetRow(int xcoord); //Returns the Row values for given co-ords

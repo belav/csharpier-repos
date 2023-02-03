@@ -15,8 +15,8 @@ namespace System.Net.Sockets {
     /// </devdoc>
     public class LingerOption {
 #if MONO
-		// Don't change the names of these fields without also
-		// changing socket-io.c in the runtime
+        // Don't change the names of these fields without also
+        // changing socket-io.c in the runtime
 #endif
         bool enabled;
         int lingerTime;

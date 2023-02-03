@@ -2,7 +2,7 @@
 // APCMap.cs
 // 
 // Authors:
-//	Alexander Chebaturkin (chebaturkin@gmail.com)
+//    Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,62 +31,62 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.StackAnalysis {
-	class APCMap<T> {
-		private readonly Dictionary<int, T>[] block_map;
-		private IImmutableIntMap<bool> call_on_this_map;
+    class APCMap<T> {
+        private readonly Dictionary<int, T>[] block_map;
+        private IImmutableIntMap<bool> call_on_this_map;
 
-		public APCMap (Subroutine parent)
-		{
-			this.block_map = new Dictionary<int, T>[parent.BlockCount];
-			this.call_on_this_map = ImmutableIntMap<bool>.Empty;
-		}
+        public APCMap (Subroutine parent)
+        {
+            this.block_map = new Dictionary<int, T>[parent.BlockCount];
+            this.call_on_this_map = ImmutableIntMap<bool>.Empty;
+        }
 
-		public T this [APC key]
-		{
-			get
-			{
-				T value;
-				if (!TryGetValue (key, out value))
-					throw new KeyNotFoundException ();
-				return value;
-			}
-		}
+        public T this [APC key]
+        {
+            get
+            {
+                T value;
+                if (!TryGetValue (key, out value))
+                    throw new KeyNotFoundException ();
+                return value;
+            }
+        }
 
-		public void Add (APC pc, T value)
-		{
-			Dictionary<int, T> pcBlockMap = this.block_map [pc.Block.Index];
-			if (pcBlockMap == null)
-				this.block_map [pc.Block.Index] = pcBlockMap = new Dictionary<int, T> ();
+        public void Add (APC pc, T value)
+        {
+            Dictionary<int, T> pcBlockMap = this.block_map [pc.Block.Index];
+            if (pcBlockMap == null)
+                this.block_map [pc.Block.Index] = pcBlockMap = new Dictionary<int, T> ();
 
-			pcBlockMap.Add (pc.Index, value);
-		}
+            pcBlockMap.Add (pc.Index, value);
+        }
 
-		public bool TryGetValue (APC pc, out T obj)
-		{
-			Dictionary<int, T> dictionary = this.block_map [pc.Block.Index];
-			if (dictionary != null)
-				return dictionary.TryGetValue (pc.Index, out obj);
+        public bool TryGetValue (APC pc, out T obj)
+        {
+            Dictionary<int, T> dictionary = this.block_map [pc.Block.Index];
+            if (dictionary != null)
+                return dictionary.TryGetValue (pc.Index, out obj);
 
-			obj = default(T);
-			return false;
-		}
+            obj = default(T);
+            return false;
+        }
 
-		public bool ContainsKey (APC pc)
-		{
-			Dictionary<int, T> dictionary = this.block_map [pc.Block.Index];
-			if (dictionary == null)
-				return false;
-			return dictionary.ContainsKey (pc.Index);
-		}
+        public bool ContainsKey (APC pc)
+        {
+            Dictionary<int, T> dictionary = this.block_map [pc.Block.Index];
+            if (dictionary == null)
+                return false;
+            return dictionary.ContainsKey (pc.Index);
+        }
 
-		public bool IsCallOnThis (APC key)
-		{
-			return this.call_on_this_map [key.Block.Index];
-		}
+        public bool IsCallOnThis (APC key)
+        {
+            return this.call_on_this_map [key.Block.Index];
+        }
 
-		public void AddCallOnThis (APC pc)
-		{
-			this.call_on_this_map = this.call_on_this_map.Add (pc.Block.Index, true);
-		}
-	}
+        public void AddCallOnThis (APC pc)
+        {
+            this.call_on_this_map = this.call_on_this_map.Add (pc.Block.Index, true);
+        }
+    }
 }

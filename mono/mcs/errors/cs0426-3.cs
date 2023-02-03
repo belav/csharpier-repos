@@ -3,9 +3,9 @@
 
 public abstract class B<T>
 {
-	public class Foo
-	{
-	}
+    public class Foo
+    {
+    }
 }
 
 public class C<T> : B<C<int>.Foo>

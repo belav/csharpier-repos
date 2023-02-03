@@ -2,7 +2,7 @@
 // System.Security.AccessControl.MutexRights enum
 //
 // Author:
-//	Dick Porter  <dick@ximian.com>
+//    Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,15 +28,15 @@
 
 namespace System.Security.AccessControl {
 
-	[Flags]
-	public enum MutexRights {
-		Modify			= 0x000001,
-		Delete			= 0x010000,
-		ReadPermissions		= 0x020000,
-		ChangePermissions	= 0x040000,
-		TakeOwnership		= 0x080000,
-		Synchronize		= 0x100000,
-		FullControl		= 0x1F0001
-	}
+    [Flags]
+    public enum MutexRights {
+        Modify            = 0x000001,
+        Delete            = 0x010000,
+        ReadPermissions        = 0x020000,
+        ChangePermissions    = 0x040000,
+        TakeOwnership        = 0x080000,
+        Synchronize        = 0x100000,
+        FullControl        = 0x1F0001
+    }
 }
 

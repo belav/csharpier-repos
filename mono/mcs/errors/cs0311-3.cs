@@ -3,37 +3,37 @@
 using System;
 
 public class Foo<T>
-	where T : A
+    where T : A
 {
-	public void Test (T t)
-	{
-		Console.WriteLine (t);
-		Console.WriteLine (t.GetType ());
-		t.Hello ();
-	}
+    public void Test (T t)
+    {
+        Console.WriteLine (t);
+        Console.WriteLine (t.GetType ());
+        t.Hello ();
+    }
 }
 
 public class A
 {
-	public void Hello ()
-	{
-		Console.WriteLine ("Hello World");
-	}
+    public void Hello ()
+    {
+        Console.WriteLine ("Hello World");
+    }
 }
 
 public class B
 {
-	public static implicit operator A (B b)
-	{
-		return new A ();
-	}
+    public static implicit operator A (B b)
+    {
+        return new A ();
+    }
 }
 
 class X
 {
-	Foo<B> b;
+    Foo<B> b;
 
-	static void Main ()
-	{
-	}
+    static void Main ()
+    {
+    }
 }

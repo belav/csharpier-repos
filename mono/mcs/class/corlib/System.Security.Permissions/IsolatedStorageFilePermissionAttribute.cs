@@ -2,10 +2,10 @@
 // System.Security.Permissions.IsolatedStorageFilePermissionAttribute.cs
 //
 // Authors
-//	Duncan Mak <duncan@ximian.com>
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Duncan Mak <duncan@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
-// (C) 2002 Ximian, Inc.			http://www.ximian.com
+// (C) 2002 Ximian, Inc.            http://www.ximian.com
 // Portions (C) 2002 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,31 +33,31 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-	[ComVisible (true)]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-			 AttributeTargets.Struct | AttributeTargets.Constructor |
-			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public sealed class IsolatedStorageFilePermissionAttribute : IsolatedStoragePermissionAttribute
-	{
-		// Constructor
-		public IsolatedStorageFilePermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-		}
+    [ComVisible (true)]
+    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
+             AttributeTargets.Struct | AttributeTargets.Constructor |
+             AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+    [Serializable]
+    public sealed class IsolatedStorageFilePermissionAttribute : IsolatedStoragePermissionAttribute
+    {
+        // Constructor
+        public IsolatedStorageFilePermissionAttribute (SecurityAction action)
+            : base (action)
+        {
+        }
 
-		// Methods
-		public override IPermission CreatePermission ()
-		{
-			IsolatedStorageFilePermission perm = null;
-			if (this.Unrestricted)
-				perm = new IsolatedStorageFilePermission (PermissionState.Unrestricted);
-			else {
-				perm = new IsolatedStorageFilePermission (PermissionState.None);
-				perm.UsageAllowed = this.UsageAllowed;
-				perm.UserQuota = this.UserQuota;
-			}
-			return perm;
-		}
-	}
+        // Methods
+        public override IPermission CreatePermission ()
+        {
+            IsolatedStorageFilePermission perm = null;
+            if (this.Unrestricted)
+                perm = new IsolatedStorageFilePermission (PermissionState.Unrestricted);
+            else {
+                perm = new IsolatedStorageFilePermission (PermissionState.None);
+                perm.UsageAllowed = this.UsageAllowed;
+                perm.UserQuota = this.UserQuota;
+            }
+            return perm;
+        }
+    }
 }

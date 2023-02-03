@@ -44,78 +44,78 @@ using System.Security.Authentication;
 
 namespace Mono.Net.Security
 {
-	sealed class MonoSslServerAuthenticationOptions : MonoSslAuthenticationOptions, IMonoSslServerAuthenticationOptions
-	{
-		public SslServerAuthenticationOptions Options {
-			get;
-		}
+    sealed class MonoSslServerAuthenticationOptions : MonoSslAuthenticationOptions, IMonoSslServerAuthenticationOptions
+    {
+        public SslServerAuthenticationOptions Options {
+            get;
+        }
 
-		public override bool ServerMode => true;
+        public override bool ServerMode => true;
 
-		public MonoSslServerAuthenticationOptions (SslServerAuthenticationOptions options)
-		{
-			Options = options;
-		}
+        public MonoSslServerAuthenticationOptions (SslServerAuthenticationOptions options)
+        {
+            Options = options;
+        }
 
-		public MonoSslServerAuthenticationOptions ()
-		{
-			Options = new SslServerAuthenticationOptions ();
-		}
+        public MonoSslServerAuthenticationOptions ()
+        {
+            Options = new SslServerAuthenticationOptions ();
+        }
 
-		public override bool AllowRenegotiation {
-			get => Options.AllowRenegotiation;
-			set => Options.AllowRenegotiation = value;
-		}
+        public override bool AllowRenegotiation {
+            get => Options.AllowRenegotiation;
+            set => Options.AllowRenegotiation = value;
+        }
 
-		public override RemoteCertificateValidationCallback RemoteCertificateValidationCallback {
-			get => Options.RemoteCertificateValidationCallback;
-			set => Options.RemoteCertificateValidationCallback = value;
-		}
+        public override RemoteCertificateValidationCallback RemoteCertificateValidationCallback {
+            get => Options.RemoteCertificateValidationCallback;
+            set => Options.RemoteCertificateValidationCallback = value;
+        }
 
 
-		public override X509RevocationMode CertificateRevocationCheckMode {
-			get => Options.CertificateRevocationCheckMode;
-			set => Options.CertificateRevocationCheckMode = value;
-		}
+        public override X509RevocationMode CertificateRevocationCheckMode {
+            get => Options.CertificateRevocationCheckMode;
+            set => Options.CertificateRevocationCheckMode = value;
+        }
 
-		public override EncryptionPolicy EncryptionPolicy {
-			get => Options.EncryptionPolicy;
-			set => Options.EncryptionPolicy = value;
-		}
+        public override EncryptionPolicy EncryptionPolicy {
+            get => Options.EncryptionPolicy;
+            set => Options.EncryptionPolicy = value;
+        }
 
-		public override SslProtocols EnabledSslProtocols {
-			get => Options.EnabledSslProtocols;
-			set => Options.EnabledSslProtocols = value;
-		}
+        public override SslProtocols EnabledSslProtocols {
+            get => Options.EnabledSslProtocols;
+            set => Options.EnabledSslProtocols = value;
+        }
 
-		public override bool ClientCertificateRequired {
-			get => Options.ClientCertificateRequired;
-			set => Options.ClientCertificateRequired = value;
-		}
+        public override bool ClientCertificateRequired {
+            get => Options.ClientCertificateRequired;
+            set => Options.ClientCertificateRequired = value;
+        }
 
-		public ServerCertificateSelectionCallback ServerCertificateSelectionCallback {
-			get => Options.ServerCertificateSelectionCallback;
-			set => Options.ServerCertificateSelectionCallback = value;
-		}
+        public ServerCertificateSelectionCallback ServerCertificateSelectionCallback {
+            get => Options.ServerCertificateSelectionCallback;
+            set => Options.ServerCertificateSelectionCallback = value;
+        }
 
-		MonoServerCertificateSelectionCallback IMonoSslServerAuthenticationOptions.ServerCertificateSelectionCallback {
-			get => Private.CallbackHelpers.PublicToMono (ServerCertificateSelectionCallback);
-			set => ServerCertificateSelectionCallback = Private.CallbackHelpers.MonoToPublic (value);
-		}
+        MonoServerCertificateSelectionCallback IMonoSslServerAuthenticationOptions.ServerCertificateSelectionCallback {
+            get => Private.CallbackHelpers.PublicToMono (ServerCertificateSelectionCallback);
+            set => ServerCertificateSelectionCallback = Private.CallbackHelpers.MonoToPublic (value);
+        }
 
-		public override string TargetHost {
-			get => throw new NotSupportedException ();
-			set => throw new NotSupportedException ();
-		}
+        public override string TargetHost {
+            get => throw new NotSupportedException ();
+            set => throw new NotSupportedException ();
+        }
 
-		public override X509Certificate ServerCertificate {
-			get => Options.ServerCertificate;
-			set => Options.ServerCertificate = value;
-		}
+        public override X509Certificate ServerCertificate {
+            get => Options.ServerCertificate;
+            set => Options.ServerCertificate = value;
+        }
 
-		public override X509CertificateCollection ClientCertificates {
-			get => throw new NotSupportedException ();
-			set => throw new NotSupportedException ();
-		}
-	}
+        public override X509CertificateCollection ClientCertificates {
+            get => throw new NotSupportedException ();
+            set => throw new NotSupportedException ();
+        }
+    }
 }

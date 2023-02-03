@@ -2,17 +2,17 @@
 // Line: 12
 
 class A {
-	protected int n = 0;
+    protected int n = 0;
 }
 
 class B : A { }
 
 class C : B {
-	class N {
-		internal int foo () { return n; }
-	}
-	public static int Main () {
-		N a = new N ();
-		return a.foo ();
-	}
+    class N {
+        internal int foo () { return n; }
+    }
+    public static int Main () {
+        N a = new N ();
+        return a.foo ();
+    }
 }

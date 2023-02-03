@@ -14,27 +14,27 @@
 
 namespace Castle.Services.Logging.Log4netIntegration
 {
-	using Castle.Core.Logging;
+    using Castle.Core.Logging;
 
-	using log4net;
+    using log4net;
 
-	public class ThreadContextProperties : IContextProperties
-	{
-		/// <summary>
-		///   Gets or sets the value of a property
-		/// </summary>
-		/// <value>
-		///   The value for the property with the specified key
-		/// </value>
-		/// <remarks>
-		///   <para>
-		///     Gets or sets the value of a property
-		///   </para>
-		/// </remarks>
-		public object this[string key]
-		{
-			get { return ThreadContext.Properties[key]; }
-			set { ThreadContext.Properties[key] = value; }
-		}
-	}
+    public class ThreadContextProperties : IContextProperties
+    {
+        /// <summary>
+        ///   Gets or sets the value of a property
+        /// </summary>
+        /// <value>
+        ///   The value for the property with the specified key
+        /// </value>
+        /// <remarks>
+        ///   <para>
+        ///     Gets or sets the value of a property
+        ///   </para>
+        /// </remarks>
+        public object this[string key]
+        {
+            get { return ThreadContext.Properties[key]; }
+            set { ThreadContext.Properties[key] = value; }
+        }
+    }
 }

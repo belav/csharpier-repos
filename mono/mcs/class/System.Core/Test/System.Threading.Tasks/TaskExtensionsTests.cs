@@ -33,26 +33,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks
 {
-	[TestFixture]
-	public class TaskExtensionsTests
-	{	
-		[Test]
-		[Category ("MultiThreaded")]
-		public void TaskUnwrapingBehavioralTest ()
-		{
-			Task<int> t2 = Increment(4)
-				.ContinueWith((t) => Increment(t.Result))
-				.Unwrap().ContinueWith((t) => Increment(t.Result))
-				.Unwrap().ContinueWith((t) => Increment(t.Result))
+    [TestFixture]
+    public class TaskExtensionsTests
+    {    
+        [Test]
+        [Category ("MultiThreaded")]
+        public void TaskUnwrapingBehavioralTest ()
+        {
+            Task<int> t2 = Increment(4)
+                .ContinueWith((t) => Increment(t.Result))
+                .Unwrap().ContinueWith((t) => Increment(t.Result))
+                .Unwrap().ContinueWith((t) => Increment(t.Result))
                 .Unwrap();
 
-			t2.Wait ();
-			Assert.AreEqual (8, t2.Result);
-		}
+            t2.Wait ();
+            Assert.AreEqual (8, t2.Result);
+        }
 
-		static Task<int> Increment (int num)
-		{
-			return Task<int>.Factory.StartNew (() => num + 1);
-		}
-	}
+        static Task<int> Increment (int num)
+        {
+            return Task<int>.Factory.StartNew (() => num + 1);
+        }
+    }
 }

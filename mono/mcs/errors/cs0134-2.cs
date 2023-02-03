@@ -3,8 +3,8 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		const object o = 1; 
-	}
+    public static void Main ()
+    {
+        const object o = 1; 
+    }
 }

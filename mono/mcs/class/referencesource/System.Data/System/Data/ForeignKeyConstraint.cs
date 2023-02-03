@@ -184,7 +184,7 @@ namespace System.Data {
 
         internal bool IsKeyNull( object[] values ) {
             for (int i = 0; i < values.Length; i++) {
-            	if (! DataStorage.IsObjectNull(values[i]))
+                if (! DataStorage.IsObjectNull(values[i]))
                     return false;
             }
 
@@ -334,7 +334,7 @@ namespace System.Data {
                 }
             default: {
                     Debug.Assert(false, "Unknown Rule value");
-			break;
+            break;
                 }
             }
         }
@@ -443,7 +443,7 @@ namespace System.Data {
                 }
             default: {
                     Debug.Assert(false, "Unknown Rule value");
-		    break;
+            break;
                 }
             }
         }

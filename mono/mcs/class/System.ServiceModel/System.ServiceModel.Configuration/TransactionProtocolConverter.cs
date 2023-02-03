@@ -1,8 +1,8 @@
-﻿//
+//
 // EncodingConverter.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -34,30 +34,30 @@ using System.Globalization;
 
 namespace System.ServiceModel.Configuration
 {
-	sealed class TransactionProtocolConverter : TypeConverter
-	{
-		static TransactionProtocolConverter _instance = new TransactionProtocolConverter ();
+    sealed class TransactionProtocolConverter : TypeConverter
+    {
+        static TransactionProtocolConverter _instance = new TransactionProtocolConverter ();
 
-		public static TransactionProtocolConverter Instance {
-			get { return _instance; }
-		}
+        public static TransactionProtocolConverter Instance {
+            get { return _instance; }
+        }
 
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-			return sourceType == typeof (string);
-		}
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
+            return sourceType == typeof (string);
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value) {
-			string valueString = (string) value;
+        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value) {
+            string valueString = (string) value;
 
-			switch (valueString.ToLower (CultureInfo.InvariantCulture)) {
-			case "default":
-				return TransactionProtocol.Default;
-			case "oletransactions":
-				return TransactionProtocol.OleTransactions;
-			case "wsatomictransactionoctober2004":
-				return TransactionProtocol.WSAtomicTransactionOctober2004;
-			}
-			throw new NotSupportedException ();
-		}
-	}
+            switch (valueString.ToLower (CultureInfo.InvariantCulture)) {
+            case "default":
+                return TransactionProtocol.Default;
+            case "oletransactions":
+                return TransactionProtocol.OleTransactions;
+            case "wsatomictransactionoctober2004":
+                return TransactionProtocol.WSAtomicTransactionOctober2004;
+            }
+            throw new NotSupportedException ();
+        }
+    }
 }

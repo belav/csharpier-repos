@@ -3,9 +3,9 @@
 // Compiler options: -warnaserror -warn:3
 
 class X {
-	int i = 3;
-	
-	public void Y ()
-	{
-	}
+    int i = 3;
+    
+    public void Y ()
+    {
+    }
 }

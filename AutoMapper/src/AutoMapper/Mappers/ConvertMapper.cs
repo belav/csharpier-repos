@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.Internal.Mappers;
+namespace AutoMapper.Internal.Mappers;
 public class ConvertMapper : IObjectMapper
 {
     public static bool IsPrimitive(Type type) => type.IsPrimitive || type == typeof(string) || type == typeof(decimal);

@@ -31,23 +31,23 @@ using System.Xml.XPath;
 
 namespace Mono.MonoConfig
 {
-	public class FeatureBlock
-	{
-		string name;
-		FeatureTarget target;
-		
-		public string Name {
-			get { return name; }
-		}
+    public class FeatureBlock
+    {
+        string name;
+        FeatureTarget target;
+        
+        public string Name {
+            get { return name; }
+        }
 
-		public FeatureTarget Target {
-			get { return target; }
-		}
-		
-		public FeatureBlock (XPathNavigator node, FeatureTarget target)
-		{
-			this.name = Helpers.GetRequiredNonEmptyAttribute (node, "name");
-			this.target = target;
-		}
-	}
+        public FeatureTarget Target {
+            get { return target; }
+        }
+        
+        public FeatureBlock (XPathNavigator node, FeatureTarget target)
+        {
+            this.name = Helpers.GetRequiredNonEmptyAttribute (node, "name");
+            this.target = target;
+        }
+    }
 }

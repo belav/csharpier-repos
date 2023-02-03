@@ -1,4 +1,4 @@
-﻿//
+//
 // IScriptControl.cs
 //
 // Author:
@@ -33,9 +33,9 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public interface IScriptControl
-	{
-		IEnumerable<ScriptDescriptor> GetScriptDescriptors ();
-		IEnumerable<ScriptReference> GetScriptReferences ();
-	}
+    public interface IScriptControl
+    {
+        IEnumerable<ScriptDescriptor> GetScriptDescriptors ();
+        IEnumerable<ScriptReference> GetScriptReferences ();
+    }
 }

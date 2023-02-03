@@ -1,9 +1,9 @@
 //
 // WindowsAuthenticationModuleCas.cs 
-//	- CAS unit tests for System.Web.Security.WindowsAuthenticationModule
+//    - CAS unit tests for System.Web.Security.WindowsAuthenticationModule
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,65 +38,65 @@ using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class WindowsAuthenticationModuleCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class WindowsAuthenticationModuleCas : AspNetHostingMinimal {
 
-		private HttpApplication app;
-		private WindowsAuthenticationModule module;
+        private HttpApplication app;
+        private WindowsAuthenticationModule module;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			app = new HttpApplication ();
-			module = new WindowsAuthenticationModule ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            app = new HttpApplication ();
+            module = new WindowsAuthenticationModule ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_UnmanagedCode ()
-		{
-			new WindowsAuthenticationModule ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Constructor_Deny_UnmanagedCode ()
+        {
+            new WindowsAuthenticationModule ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Constructor_PermitOnly_UnmanagedCode ()
-		{
-			new WindowsAuthenticationModule ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Constructor_PermitOnly_UnmanagedCode ()
+        {
+            new WindowsAuthenticationModule ();
+        }
 
-		private void Authenticate (object sender, WindowsAuthenticationEventArgs e)
-		{
-		}
+        private void Authenticate (object sender, WindowsAuthenticationEventArgs e)
+        {
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Module ()
-		{
-			// only the ctor requires UnmanagedCode
-			try {
-				module.Init (app);
-			}
-			catch (NotImplementedException) {
-				// Mono
-			}
-			module.Authenticate += new WindowsAuthenticationEventHandler (Authenticate);
-			module.Authenticate -= new WindowsAuthenticationEventHandler (Authenticate);
-			module.Dispose (); // but doesn't implement IDisposable
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Module ()
+        {
+            // only the ctor requires UnmanagedCode
+            try {
+                module.Init (app);
+            }
+            catch (NotImplementedException) {
+                // Mono
+            }
+            module.Authenticate += new WindowsAuthenticationEventHandler (Authenticate);
+            module.Authenticate -= new WindowsAuthenticationEventHandler (Authenticate);
+            module.Dispose (); // but doesn't implement IDisposable
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			return base.CreateControl (action, level);
-		}
+        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            return base.CreateControl (action, level);
+        }
 
-		public override Type Type {
-			get { return typeof (WindowsAuthenticationModule); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (WindowsAuthenticationModule); }
+        }
+    }
 }

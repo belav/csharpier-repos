@@ -2,8 +2,8 @@
 // System.Net.Configuration.Ipv6Element.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Tim Coleman (tim@timcoleman.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,44 +36,44 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-	public sealed class Ipv6Element : ConfigurationElement
-	{
-		#region Fields
+    public sealed class Ipv6Element : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty enabledProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty enabledProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static Ipv6Element ()
-		{
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), false);
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (enabledProp);
-		}
+        static Ipv6Element ()
+        {
+            enabledProp = new ConfigurationProperty ("enabled", typeof (bool), false);
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (enabledProp);
+        }
 
-		public Ipv6Element ()
-		{
-		}
+        public Ipv6Element ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[ConfigurationProperty ("enabled", DefaultValue = "False")]
-		public bool Enabled {
-			get { return (bool) base [enabledProp]; }
-			set { base [enabledProp] = value; }
-		}
+        [ConfigurationProperty ("enabled", DefaultValue = "False")]
+        public bool Enabled {
+            get { return (bool) base [enabledProp]; }
+            set { base [enabledProp] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

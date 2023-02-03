@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,19 +14,19 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
+    using System;
 
-	public interface IXmlAccessor
-	{
-		Type ClrType { get; }
-		XmlTypeSerializer Serializer { get; }
-		IXmlContext Context { get; }
-		bool IsNillable { get; }
-		bool IsReference { get; }
+    public interface IXmlAccessor
+    {
+        Type ClrType { get; }
+        XmlTypeSerializer Serializer { get; }
+        IXmlContext Context { get; }
+        bool IsNillable { get; }
+        bool IsReference { get; }
 
-		object GetValue(IXmlNode   node,   IDictionaryAdapter parentObject, XmlReferenceManager references, bool nodeExists, bool orStub);
-		void   SetValue(IXmlCursor cursor, IDictionaryAdapter parentObject, XmlReferenceManager references, bool hasCurrent, object oldValue, ref object newValue);
+        object GetValue(IXmlNode   node,   IDictionaryAdapter parentObject, XmlReferenceManager references, bool nodeExists, bool orStub);
+        void   SetValue(IXmlCursor cursor, IDictionaryAdapter parentObject, XmlReferenceManager references, bool hasCurrent, object oldValue, ref object newValue);
 
-		IXmlCollectionAccessor GetCollectionAccessor(Type itemType);
-	}
+        IXmlCollectionAccessor GetCollectionAccessor(Type itemType);
+    }
 }

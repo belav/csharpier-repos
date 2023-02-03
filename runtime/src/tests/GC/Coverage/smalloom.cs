@@ -8,8 +8,8 @@ using System.Runtime;
 
 class TestClass
 {
-	public static int Main()
-	{
+    public static int Main()
+    {
         ByteArrayList list = new ByteArrayList();
 
 
@@ -27,7 +27,7 @@ class TestClass
         Console.Write("NodesAllocated: ");
         Console.WriteLine(list.NodeCount);
         return 100;
-	}
+    }
 
     class ByteArrayList
     {
@@ -68,4 +68,4 @@ class TestClass
         }
     }
 
-}			
+}            

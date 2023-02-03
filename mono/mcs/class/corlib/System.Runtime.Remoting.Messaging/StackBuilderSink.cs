@@ -36,78 +36,78 @@ using System.Runtime.Remoting.Proxies;
 
 namespace System.Runtime.Remoting.Messaging
 {
-	// Sink that calls the real method of the object
+    // Sink that calls the real method of the object
 
-	internal class StackBuilderSink: IMessageSink
-	{
-		MarshalByRefObject _target;
-		RealProxy _rp;
+    internal class StackBuilderSink: IMessageSink
+    {
+        MarshalByRefObject _target;
+        RealProxy _rp;
 
-		public StackBuilderSink (MarshalByRefObject obj, bool forceInternalExecute)
-		{
-			_target = obj;
-			if (!forceInternalExecute && RemotingServices.IsTransparentProxy (obj))
-				_rp = RemotingServices.GetRealProxy (obj);
-		}
+        public StackBuilderSink (MarshalByRefObject obj, bool forceInternalExecute)
+        {
+            _target = obj;
+            if (!forceInternalExecute && RemotingServices.IsTransparentProxy (obj))
+                _rp = RemotingServices.GetRealProxy (obj);
+        }
 
-		public IMessage SyncProcessMessage (IMessage msg)
-		{
-			CheckParameters (msg);
+        public IMessage SyncProcessMessage (IMessage msg)
+        {
+            CheckParameters (msg);
 
-			// Makes the real call to the object
-			if (_rp != null) return _rp.Invoke (msg);
-			else return RemotingServices.InternalExecuteMessage (_target, (IMethodCallMessage)msg);
-		}
+            // Makes the real call to the object
+            if (_rp != null) return _rp.Invoke (msg);
+            else return RemotingServices.InternalExecuteMessage (_target, (IMethodCallMessage)msg);
+        }
 
-		public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
-		{
-			object[] parms = new object[] {msg, replySink};
-			ThreadPool.QueueUserWorkItem (new WaitCallback ((data) => {
-				try {
-					ExecuteAsyncMessage (data);
-				} catch {}
-				}
-				), parms);
-			return null;
-		}
-		
-		void ExecuteAsyncMessage (object ob)
-		{
-			object[] parms = (object[]) ob;
-			IMethodCallMessage msg = (IMethodCallMessage) parms[0];
-			IMessageSink replySink = (IMessageSink)parms[1];
-			
-			CheckParameters (msg);
-			
-			IMessage res;
-			if (_rp != null) res = _rp.Invoke (msg);
-			else res = RemotingServices.InternalExecuteMessage (_target, msg);
-			
-			replySink.SyncProcessMessage (res);
-		}
+        public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
+        {
+            object[] parms = new object[] {msg, replySink};
+            ThreadPool.QueueUserWorkItem (new WaitCallback ((data) => {
+                try {
+                    ExecuteAsyncMessage (data);
+                } catch {}
+                }
+                ), parms);
+            return null;
+        }
+        
+        void ExecuteAsyncMessage (object ob)
+        {
+            object[] parms = (object[]) ob;
+            IMethodCallMessage msg = (IMethodCallMessage) parms[0];
+            IMessageSink replySink = (IMessageSink)parms[1];
+            
+            CheckParameters (msg);
+            
+            IMessage res;
+            if (_rp != null) res = _rp.Invoke (msg);
+            else res = RemotingServices.InternalExecuteMessage (_target, msg);
+            
+            replySink.SyncProcessMessage (res);
+        }
 
-		public IMessageSink NextSink 
-		{ 
-			get { return null; }
-		}
+        public IMessageSink NextSink 
+        { 
+            get { return null; }
+        }
 
-		void CheckParameters (IMessage msg)
-		{
-			IMethodCallMessage mcm = (IMethodCallMessage) msg;
-			
-			ParameterInfo[] parameters = mcm.MethodBase.GetParameters();
-			int narg = 0;
+        void CheckParameters (IMessage msg)
+        {
+            IMethodCallMessage mcm = (IMethodCallMessage) msg;
+            
+            ParameterInfo[] parameters = mcm.MethodBase.GetParameters();
+            int narg = 0;
 
-			foreach (ParameterInfo pi in parameters)
-			{
-				object pval = mcm.GetArg (narg++);
-				Type pt = pi.ParameterType;
-				if (pt.IsByRef) pt = pt.GetElementType ();
-				
-				if (pval != null && !pt.IsInstanceOfType (pval))
-					throw new RemotingException ("Cannot cast argument " + pi.Position + " of type '" + pval.GetType().AssemblyQualifiedName +
-						"' to type '" + pt.AssemblyQualifiedName + "'");
-			}
-		}
-	}
+            foreach (ParameterInfo pi in parameters)
+            {
+                object pval = mcm.GetArg (narg++);
+                Type pt = pi.ParameterType;
+                if (pt.IsByRef) pt = pt.GetElementType ();
+                
+                if (pval != null && !pt.IsInstanceOfType (pval))
+                    throw new RemotingException ("Cannot cast argument " + pi.Position + " of type '" + pval.GetType().AssemblyQualifiedName +
+                        "' to type '" + pt.AssemblyQualifiedName + "'");
+            }
+        }
+    }
 }

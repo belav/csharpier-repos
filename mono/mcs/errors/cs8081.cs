@@ -3,8 +3,8 @@
 
 class C
 {
-	static void Main ()
-	{
-		string s = nameof (Main ());
-	}
+    static void Main ()
+    {
+        string s = nameof (Main ());
+    }
 }

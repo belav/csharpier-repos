@@ -1,9 +1,9 @@
 //
 // Pkits_4_11_InhibitPolicyMapping.cs -
-//	NUnit tests for Pkits 4.11 : Inhibit Policy Mapping
+//    NUnit tests for Pkits 4.11 : Inhibit Policy Mapping
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,15 +35,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates {
 
-	/*
-	 * See PkitsTest.cs for more details
-	 */
+    /*
+     * See PkitsTest.cs for more details
+     */
 
-	[TestFixture]
-	[Category ("PKITS")]
-	public class Pkits_4_11_InhibitPolicyMapping : PkitsTest {
+    [TestFixture]
+    [Category ("PKITS")]
+    public class Pkits_4_11_InhibitPolicyMapping : PkitsTest {
 
-		// TODO - incomplete
-	}
+        // TODO - incomplete
+    }
 }
 

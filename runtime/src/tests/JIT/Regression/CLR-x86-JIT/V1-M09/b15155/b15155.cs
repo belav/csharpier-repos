@@ -35,8 +35,8 @@ namespace DefaultNamespace
         }
 
 
-        //	public override Boolean Equals(Object o) { return (o instanceof V3); }
-        //	public override int GetHashCode() { return 0; }
+        //    public override Boolean Equals(Object o) { return (o instanceof V3); }
+        //    public override int GetHashCode() { return 0; }
     }
 
 

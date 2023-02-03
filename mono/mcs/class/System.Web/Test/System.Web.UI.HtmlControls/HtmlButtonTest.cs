@@ -1,9 +1,9 @@
 //
 // HtmlButtonTest.cs
-//	- Unit tests for System.Web.UI.HtmlControls.HtmlButton
+//    - Unit tests for System.Web.UI.HtmlControls.HtmlButton
 //
 // Author:
-//	Jackson Harper	(jackson@ximian.com)
+//    Jackson Harper    (jackson@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,94 +36,94 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-	public class HtmlButtonPoker : HtmlButton {
+    public class HtmlButtonPoker : HtmlButton {
 
-		public HtmlButtonPoker ()
-		{
-			TrackViewState ();
-		}
+        public HtmlButtonPoker ()
+        {
+            TrackViewState ();
+        }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+        public object SaveState ()
+        {
+            return SaveViewState ();
+        }
 
-		public void LoadState (object state)
-		{
-			LoadViewState (state);
-		}
+        public void LoadState (object state)
+        {
+            LoadViewState (state);
+        }
 
-		public void DoRenderAttributes (HtmlTextWriter writer)
-		{
-			RenderAttributes (writer);
-		}
-	}
+        public void DoRenderAttributes (HtmlTextWriter writer)
+        {
+            RenderAttributes (writer);
+        }
+    }
 
-	[TestFixture]
-	public class HtmlButtonTest {
+    [TestFixture]
+    public class HtmlButtonTest {
 
-		[Test]
-		public void Defaults ()
-		{
-			HtmlButtonPoker p = new HtmlButtonPoker ();
+        [Test]
+        public void Defaults ()
+        {
+            HtmlButtonPoker p = new HtmlButtonPoker ();
 
-			Assert.IsTrue (p.CausesValidation, "A1");
-			Assert.AreEqual ("", p.ValidationGroup, "A2");
-		}
+            Assert.IsTrue (p.CausesValidation, "A1");
+            Assert.AreEqual ("", p.ValidationGroup, "A2");
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlButtonPoker p = new HtmlButtonPoker ();
+        [Test]
+        public void CleanProperties ()
+        {
+            HtmlButtonPoker p = new HtmlButtonPoker ();
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A1");
+            p.CausesValidation = false;
+            Assert.IsFalse (p.CausesValidation, "A1");
 
-			p.CausesValidation = true;
-			Assert.IsTrue (p.CausesValidation, "A2");
+            p.CausesValidation = true;
+            Assert.IsTrue (p.CausesValidation, "A2");
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A3");
-		}
+            p.CausesValidation = false;
+            Assert.IsFalse (p.CausesValidation, "A3");
+        }
 
-		[Test]
-		public void ViewState ()
-		{
-			HtmlButtonPoker p = new HtmlButtonPoker ();
-			p.CausesValidation = true;
-			p.ValidationGroup = "VG";
-			object state = p.SaveState();
+        [Test]
+        public void ViewState ()
+        {
+            HtmlButtonPoker p = new HtmlButtonPoker ();
+            p.CausesValidation = true;
+            p.ValidationGroup = "VG";
+            object state = p.SaveState();
 
-			HtmlButtonPoker copy = new HtmlButtonPoker ();
-			copy.LoadState (state);
-			Assert.AreEqual ("VG", copy.ValidationGroup, "A1");
-			Assert.IsTrue (copy.CausesValidation, "A2");
-		}
+            HtmlButtonPoker copy = new HtmlButtonPoker ();
+            copy.LoadState (state);
+            Assert.AreEqual ("VG", copy.ValidationGroup, "A1");
+            Assert.IsTrue (copy.CausesValidation, "A2");
+        }
 
-		[Test]
-		public void RenderAttributes ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
+        [Test]
+        public void RenderAttributes ()
+        {
+            StringWriter sw = new StringWriter ();
+            HtmlTextWriter tw = new HtmlTextWriter (sw);
 
-			HtmlButtonPoker p = new HtmlButtonPoker ();
+            HtmlButtonPoker p = new HtmlButtonPoker ();
 
-			Assert.AreEqual (p.Attributes.Count, 0, "A1");
+            Assert.AreEqual (p.Attributes.Count, 0, "A1");
 
-			p.DoRenderAttributes (tw);
-			Assert.AreEqual (sw.ToString (), String.Empty, "A2");
+            p.DoRenderAttributes (tw);
+            Assert.AreEqual (sw.ToString (), String.Empty, "A2");
 
-			p.ServerClick += new EventHandler (EmptyHandler);
+            p.ServerClick += new EventHandler (EmptyHandler);
 
-			p.DoRenderAttributes (tw);
-			// This is empty because the control doesn't have
-			// its Page property initialized
-			Assert.AreEqual (sw.ToString (), String.Empty, "A3");
-		}
+            p.DoRenderAttributes (tw);
+            // This is empty because the control doesn't have
+            // its Page property initialized
+            Assert.AreEqual (sw.ToString (), String.Empty, "A3");
+        }
 
-		private static void EmptyHandler (object sender, EventArgs e)
-		{
-		}
-	}	
+        private static void EmptyHandler (object sender, EventArgs e)
+        {
+        }
+    }    
 }
 

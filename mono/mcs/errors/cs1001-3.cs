@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		object o = (int) => null;
-	}
+    public static void Main ()
+    {
+        object o = (int) => null;
+    }
 }

@@ -30,17 +30,17 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel {
 
-	public sealed class UnknownMessageReceivedEventArgs : EventArgs
-	{
-		Message message;
-		
-		internal UnknownMessageReceivedEventArgs (Message message)
-		{
-			this.message = message;
-		}
+    public sealed class UnknownMessageReceivedEventArgs : EventArgs
+    {
+        Message message;
+        
+        internal UnknownMessageReceivedEventArgs (Message message)
+        {
+            this.message = message;
+        }
 
-		public Message Message {
-			get { return message; }
-		}
-	}
+        public Message Message {
+            get { return message; }
+        }
+    }
 }

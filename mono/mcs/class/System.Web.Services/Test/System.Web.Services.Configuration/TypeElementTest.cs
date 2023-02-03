@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.TypeElement
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,37 +33,37 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Configuration {
-	[TestFixture]
-	public class TypeElementTest
-	{
-		[Test]
-		[Ignore ("causes NRE on .NET")]
-		public void Ctors1 ()
-		{
-			TypeElement el = new TypeElement ();
-			Assert.IsNull (el.Type, "A1");
-		}
+    [TestFixture]
+    public class TypeElementTest
+    {
+        [Test]
+        [Ignore ("causes NRE on .NET")]
+        public void Ctors1 ()
+        {
+            TypeElement el = new TypeElement ();
+            Assert.IsNull (el.Type, "A1");
+        }
 
-		[Test]
-		public void Ctors2 ()
-		{
-			TypeElement el;
+        [Test]
+        public void Ctors2 ()
+        {
+            TypeElement el;
 
-			el = new TypeElement (typeof (string));
-			Assert.AreEqual (typeof (string), el.Type, "A2");
+            el = new TypeElement (typeof (string));
+            Assert.AreEqual (typeof (string), el.Type, "A2");
 
-			el = new TypeElement ("System.String");
-			Assert.AreEqual (typeof (string), el.Type, "A3");
-		}
+            el = new TypeElement ("System.String");
+            Assert.AreEqual (typeof (string), el.Type, "A3");
+        }
 
-		[Test]
-		public void GetSet ()
-		{
-			TypeElement el = new TypeElement ();
+        [Test]
+        public void GetSet ()
+        {
+            TypeElement el = new TypeElement ();
 
-			el.Type = typeof (string);
-			Assert.AreEqual (typeof (string), el.Type, "A1");
-		}
-	}
+            el.Type = typeof (string);
+            Assert.AreEqual (typeof (string), el.Type, "A1");
+        }
+    }
 }
 

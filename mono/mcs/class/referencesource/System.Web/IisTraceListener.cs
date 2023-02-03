@@ -78,7 +78,7 @@ namespace System.Web {
             }
         }
 
-    	public override void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, object data) {
+        public override void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, object data) {
             if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null)) 
                 return;
             HttpContext context = HttpContext.Current;
@@ -91,7 +91,7 @@ namespace System.Web {
             }
         }
 
-    	public override void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, params object[] data) {
+        public override void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, params object[] data) {
             HttpContext context = HttpContext.Current;
             if (context == null)
                 return;

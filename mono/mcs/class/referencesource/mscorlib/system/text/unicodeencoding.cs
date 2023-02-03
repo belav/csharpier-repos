@@ -29,7 +29,7 @@ namespace System.Text
         // Unicode version 2.0 character size in bytes
         public const int CharSize = 2;
 
-		// endianness-based bit pattern mask. 
+        // endianness-based bit pattern mask. 
         static readonly ulong highLowPatternMask = ((ulong) 0xd800d800d800d800 | (BitConverter.IsLittleEndian ? (ulong) 0x0400000004000000 : (ulong) 0x0000040000000400));
 
 
@@ -497,7 +497,7 @@ namespace System.Text
                 {
                     // No fallback, maybe we can do it fast
 #if !NO_FAST_UNICODE_LOOP
-					// If endianess is backwards then each pair of bytes would be backwards.
+                    // If endianess is backwards then each pair of bytes would be backwards.
                     if ( (bigEndian ^ BitConverter.IsLittleEndian) &&
 
 #if WIN64           // 64 bit CPU needs to be long aligned for this to work.
@@ -774,7 +774,7 @@ namespace System.Text
                 {
                     // No fallback, maybe we can do it fast
 #if !NO_FAST_UNICODE_LOOP
-					// If endianess is backwards then each pair of bytes would be backwards.
+                    // If endianess is backwards then each pair of bytes would be backwards.
                     if ( (bigEndian ^ BitConverter.IsLittleEndian) &&
 #if WIN64           // 64 bit CPU needs to be long aligned for this to work, 32 bit CPU needs to be 32 bit aligned
                         (unchecked((long)chars) & 7) == 0 && (unchecked((long)bytes) & 7) == 0 &&

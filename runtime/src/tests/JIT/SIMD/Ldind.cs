@@ -12,21 +12,21 @@ namespace Test
         static int Main()
         {
             Point x = new Point(1);
-			Point y, z;
+            Point y, z;
             unsafe
             {
                 Do1(&x, &y);
                 Do2(&y, &z);
             }
-			if (((int)y.X) != 1)
-			{
-				return 0;
-			}
-			if (((int)z.X) != 1)
-			{
-				return 0;
-			}
-			return 100;
+            if (((int)y.X) != 1)
+            {
+                return 0;
+            }
+            if (((int)z.X) != 1)
+            {
+                return 0;
+            }
+            return 100;
         }
 
         // Disable inlining to permit easier identification of the code

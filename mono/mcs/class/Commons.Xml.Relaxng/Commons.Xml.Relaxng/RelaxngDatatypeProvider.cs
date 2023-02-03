@@ -2,7 +2,7 @@
 // RelaxngDatatypeProvider.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (c) 2004 Novell Inc.
 // All rights reserved
@@ -35,42 +35,42 @@ using System.Xml.Schema;
 
 namespace Commons.Xml.Relaxng
 {
-	public abstract class RelaxngDatatypeProvider
-	{
-		public abstract RelaxngDatatype GetDatatype (string name, string ns, RelaxngParamList parameters);
-	}
+    public abstract class RelaxngDatatypeProvider
+    {
+        public abstract RelaxngDatatype GetDatatype (string name, string ns, RelaxngParamList parameters);
+    }
 
-	internal class RelaxngNamespaceDatatypeProvider : RelaxngDatatypeProvider
-	{
-		static RelaxngNamespaceDatatypeProvider instance;
-		static RelaxngDatatype stringType = RelaxngString.Instance;
-		static RelaxngDatatype tokenType = RelaxngToken.Instance;
+    internal class RelaxngNamespaceDatatypeProvider : RelaxngDatatypeProvider
+    {
+        static RelaxngNamespaceDatatypeProvider instance;
+        static RelaxngDatatype stringType = RelaxngString.Instance;
+        static RelaxngDatatype tokenType = RelaxngToken.Instance;
 
-		static RelaxngNamespaceDatatypeProvider ()
-		{
-			instance = new RelaxngNamespaceDatatypeProvider ();
-		}
+        static RelaxngNamespaceDatatypeProvider ()
+        {
+            instance = new RelaxngNamespaceDatatypeProvider ();
+        }
 
-		public static RelaxngNamespaceDatatypeProvider Instance {
-			get { return instance; }
-		}
+        public static RelaxngNamespaceDatatypeProvider Instance {
+            get { return instance; }
+        }
 
-		private RelaxngNamespaceDatatypeProvider () {}
+        private RelaxngNamespaceDatatypeProvider () {}
 
-		public override RelaxngDatatype GetDatatype (string name, string ns, RelaxngParamList parameters)
-		{
-			if (ns != String.Empty)
-				throw new RelaxngException ("Not supported data type URI");
-			if (parameters != null && parameters.Count > 0)
-				throw new RelaxngException ("Parameter is not allowed for this datatype: " + name);
+        public override RelaxngDatatype GetDatatype (string name, string ns, RelaxngParamList parameters)
+        {
+            if (ns != String.Empty)
+                throw new RelaxngException ("Not supported data type URI");
+            if (parameters != null && parameters.Count > 0)
+                throw new RelaxngException ("Parameter is not allowed for this datatype: " + name);
 
-			switch (name) {
-			case "string":
-				return stringType;
-			case "token":
-				return tokenType;
-			}
-			return null;
-		}
-	}
+            switch (name) {
+            case "string":
+                return stringType;
+            case "token":
+                return tokenType;
+            }
+            return null;
+        }
+    }
 }

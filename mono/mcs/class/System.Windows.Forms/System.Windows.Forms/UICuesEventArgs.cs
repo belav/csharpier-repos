@@ -20,68 +20,68 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public class UICuesEventArgs : EventArgs {
-		private UICues	cues;
+    public class UICuesEventArgs : EventArgs {
+        private UICues    cues;
 
-		#region Public Constructors
-		public UICuesEventArgs(UICues uicues) {
-			this.cues = uicues;
-		}
-		#endregion
+        #region Public Constructors
+        public UICuesEventArgs(UICues uicues) {
+            this.cues = uicues;
+        }
+        #endregion
 
-		#region Public Instance Properties
-		public UICues Changed {
-			get {
-				return (cues & UICues.Changed);
-			}
-		}
+        #region Public Instance Properties
+        public UICues Changed {
+            get {
+                return (cues & UICues.Changed);
+            }
+        }
 
-		public bool ChangeFocus {
-			get {
-				if ((cues & UICues.ChangeFocus)==0) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-		}
+        public bool ChangeFocus {
+            get {
+                if ((cues & UICues.ChangeFocus)==0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
 
-		public bool ChangeKeyboard {
-			get {
-				if ((cues & UICues.ChangeKeyboard)==0) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-		}
+        public bool ChangeKeyboard {
+            get {
+                if ((cues & UICues.ChangeKeyboard)==0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
 
-		public bool ShowFocus {
-			get {
-				if ((cues & UICues.ShowFocus)==0) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-		}
+        public bool ShowFocus {
+            get {
+                if ((cues & UICues.ShowFocus)==0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
 
-		public bool ShowKeyboard {
-			get {
-				if ((cues & UICues.ShowKeyboard)==0) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public bool ShowKeyboard {
+            get {
+                if ((cues & UICues.ShowKeyboard)==0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

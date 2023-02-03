@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
@@ -29,24 +29,24 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class NavigateEventArgs : EventArgs {
-		#region Local Variables
-		private bool	forward;
-		#endregion	// Local Variables
+    [ComVisible(true)]
+    public class NavigateEventArgs : EventArgs {
+        #region Local Variables
+        private bool    forward;
+        #endregion    // Local Variables
 
-		#region Public Constructors
-		public NavigateEventArgs(bool isForward) {
-			forward = isForward;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public NavigateEventArgs(bool isForward) {
+            forward = isForward;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public bool Forward {
-			get {
-				return forward;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public bool Forward {
+            get {
+                return forward;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

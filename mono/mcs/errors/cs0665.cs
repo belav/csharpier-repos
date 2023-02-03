@@ -4,11 +4,11 @@
 
 class Test
 {
-	public void Foo (bool x)
-	{
-		bool b;
-		if (b = true)
-			System.Console.WriteLine (b);
-	}
+    public void Foo (bool x)
+    {
+        bool b;
+        if (b = true)
+            System.Console.WriteLine (b);
+    }
 }
 

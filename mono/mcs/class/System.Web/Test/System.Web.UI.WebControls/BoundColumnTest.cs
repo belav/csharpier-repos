@@ -2,7 +2,7 @@
 // BoundColumnTest.cs
 //
 // Author:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,47 +34,47 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-	public class BoundColumnPoker : BoundColumn {
+    public class BoundColumnPoker : BoundColumn {
 
-		public string FormatData (object data)
-		{
-			return FormatDataValue (data);
-		}
-	}
+        public string FormatData (object data)
+        {
+            return FormatDataValue (data);
+        }
+    }
 
-	[TestFixture]
-	public class BoundColumnTest {
+    [TestFixture]
+    public class BoundColumnTest {
 
-		[Test]
-		public void FormatDataValue ()
-		{
-			BoundColumnPoker p = new BoundColumnPoker ();
+        [Test]
+        public void FormatDataValue ()
+        {
+            BoundColumnPoker p = new BoundColumnPoker ();
 
-			p.DataFormatString = String.Empty;
-			p.Initialize ();
-			Assert.AreEqual ("test", p.FormatData ("test"), "A1");
-			
-			p.DataFormatString = "{0} hello";
-			p.Initialize ();
-			Assert.AreEqual ("test hello", p.FormatData ("test"), "A2");
-			
-			p.DataFormatString = "{0}";
-			p.Initialize ();
-			Assert.AreEqual ("test", p.FormatData ("test"), "A3");
-			
-			p.DataFormatString = "{0}";
-			p.Initialize ();
-			Assert.AreEqual (String.Empty, p.FormatData (String.Empty), "A4");
+            p.DataFormatString = String.Empty;
+            p.Initialize ();
+            Assert.AreEqual ("test", p.FormatData ("test"), "A1");
+            
+            p.DataFormatString = "{0} hello";
+            p.Initialize ();
+            Assert.AreEqual ("test hello", p.FormatData ("test"), "A2");
+            
+            p.DataFormatString = "{0}";
+            p.Initialize ();
+            Assert.AreEqual ("test", p.FormatData ("test"), "A3");
+            
+            p.DataFormatString = "{0}";
+            p.Initialize ();
+            Assert.AreEqual (String.Empty, p.FormatData (String.Empty), "A4");
 
-			p.DataFormatString = "{0}";
-			p.Initialize ();
-			p.DataFormatString = "i am bad";
-			Assert.AreEqual ("foo", p.FormatData ("foo"), "A5");
+            p.DataFormatString = "{0}";
+            p.Initialize ();
+            p.DataFormatString = "i am bad";
+            Assert.AreEqual ("foo", p.FormatData ("foo"), "A5");
 
-			p.DataFormatString = "{0}";
-			p.Initialize ();
-			Assert.AreEqual (String.Empty, p.FormatData (null), "A6");
-		}
-	}
+            p.DataFormatString = "{0}";
+            p.Initialize ();
+            Assert.AreEqual (String.Empty, p.FormatData (null), "A6");
+        }
+    }
 }
 

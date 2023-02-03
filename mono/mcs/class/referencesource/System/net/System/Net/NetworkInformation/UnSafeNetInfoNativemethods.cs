@@ -568,7 +568,7 @@ namespace System.Net.NetworkInformation {
         internal byte[] Address;    // Replying address.
         internal uint ScopeID;
     }
-		
+        
     [StructLayout(LayoutKind.Sequential)]
      internal struct Icmp6EchoReply {
         internal Ipv6Address Address;

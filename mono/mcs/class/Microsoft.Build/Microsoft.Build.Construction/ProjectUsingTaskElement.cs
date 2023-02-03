@@ -1,4 +1,4 @@
-﻿//
+//
 // ProjectUsingTaskElement.cs
 //
 // Author:

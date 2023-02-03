@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,53 +32,53 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("3b07f591-e8e1-11d4-9882-00c04fa02f40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsISHistoryListener {
+    [Guid ("3b07f591-e8e1-11d4-9882-00c04fa02f40")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsISHistoryListener {
 
 #region nsISHistoryListener
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryNewEntry (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aNewURI);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryNewEntry (
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aNewURI);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryGoBack (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBackURI, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryGoBack (
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aBackURI, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryGoForward (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aForwardURI, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryGoForward (
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aForwardURI, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryReload (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aReloadURI,
-				   uint aReloadFlags, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryReload (
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aReloadURI,
+                   uint aReloadFlags, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryGotoIndex (
-				   int aIndex,
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aGotoURI, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryGotoIndex (
+                   int aIndex,
+                [MarshalAs (UnmanagedType.Interface)]   nsIURI aGotoURI, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int OnHistoryPurge (
-				   int aNumEntries, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int OnHistoryPurge (
+                   int aNumEntries, out bool ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsSHistoryListener {
-		public static nsISHistoryListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsISHistoryListener obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsISHistoryListener).GUID, obj);
-			return o as nsISHistoryListener;
-		}
-	}
+    internal class nsSHistoryListener {
+        public static nsISHistoryListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsISHistoryListener obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsISHistoryListener).GUID, obj);
+            return o as nsISHistoryListener;
+        }
+    }
 }

@@ -2,9 +2,9 @@
 // System.Security.AccessControl.MutexSecurity implementation
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
-//	James Bellinger  <jfb@zer7.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
+//    James Bellinger  <jfb@zer7.com>
 //
 // Copyright (C) 2005-2007 Novell, Inc (http://www.novell.com)
 // Copyright (C) 2012      James Bellinger
@@ -35,117 +35,117 @@ using System.Threading;
 
 namespace System.Security.AccessControl
 {
-	public sealed class MutexSecurity : NativeObjectSecurity
-	{
-		public MutexSecurity ()
-			: base (false, ResourceType.KernelObject)
-		{
-		}
+    public sealed class MutexSecurity : NativeObjectSecurity
+    {
+        public MutexSecurity ()
+            : base (false, ResourceType.KernelObject)
+        {
+        }
 
-		public MutexSecurity (string name,
-				      AccessControlSections includeSections)
-			: base (false, ResourceType.KernelObject, name, includeSections,
-				MutexExceptionFromErrorCode, null)
-		{
-		}
-		
-		internal MutexSecurity (SafeHandle handle,
-					AccessControlSections includeSections)
-			: base (false, ResourceType.KernelObject, handle, includeSections,
-				MutexExceptionFromErrorCode, null)
-		{
-		}
+        public MutexSecurity (string name,
+                      AccessControlSections includeSections)
+            : base (false, ResourceType.KernelObject, name, includeSections,
+                MutexExceptionFromErrorCode, null)
+        {
+        }
+        
+        internal MutexSecurity (SafeHandle handle,
+                    AccessControlSections includeSections)
+            : base (false, ResourceType.KernelObject, handle, includeSections,
+                MutexExceptionFromErrorCode, null)
+        {
+        }
 
-		public override Type AccessRightType {
-			get { return typeof (MutexRights); }
-		}
-			
-		public override Type AccessRuleType {
-			get { return typeof (MutexAccessRule); }
-		}
-			
-		public override Type AuditRuleType {
-			get { return typeof (MutexAuditRule); }
-		}
-		
-		public override AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask,
-							      bool isInherited, InheritanceFlags inheritanceFlags,
-							      PropagationFlags propagationFlags, AccessControlType type)
-		{
-			return new MutexAccessRule (identityReference, (MutexRights) accessMask, type);
-		}
-		
-		public void AddAccessRule (MutexAccessRule rule)
-		{
-			AddAccessRule ((AccessRule)rule);
-		}
-		
-		public bool RemoveAccessRule (MutexAccessRule rule)
-		{
-			return RemoveAccessRule ((AccessRule)rule);
-		}
-		
-		public void RemoveAccessRuleAll (MutexAccessRule rule)
-		{
-			RemoveAccessRuleAll ((AccessRule)rule);
-		}
-		
-		public void RemoveAccessRuleSpecific (MutexAccessRule rule)
-		{
-			RemoveAccessRuleSpecific ((AccessRule)rule);
-		}
-		
-		public void ResetAccessRule (MutexAccessRule rule)
-		{
-			ResetAccessRule ((AccessRule)rule);
-		}
-		
-		public void SetAccessRule (MutexAccessRule rule)
-		{
-			SetAccessRule ((AccessRule)rule);
-		}
+        public override Type AccessRightType {
+            get { return typeof (MutexRights); }
+        }
+            
+        public override Type AccessRuleType {
+            get { return typeof (MutexAccessRule); }
+        }
+            
+        public override Type AuditRuleType {
+            get { return typeof (MutexAuditRule); }
+        }
+        
+        public override AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask,
+                                  bool isInherited, InheritanceFlags inheritanceFlags,
+                                  PropagationFlags propagationFlags, AccessControlType type)
+        {
+            return new MutexAccessRule (identityReference, (MutexRights) accessMask, type);
+        }
+        
+        public void AddAccessRule (MutexAccessRule rule)
+        {
+            AddAccessRule ((AccessRule)rule);
+        }
+        
+        public bool RemoveAccessRule (MutexAccessRule rule)
+        {
+            return RemoveAccessRule ((AccessRule)rule);
+        }
+        
+        public void RemoveAccessRuleAll (MutexAccessRule rule)
+        {
+            RemoveAccessRuleAll ((AccessRule)rule);
+        }
+        
+        public void RemoveAccessRuleSpecific (MutexAccessRule rule)
+        {
+            RemoveAccessRuleSpecific ((AccessRule)rule);
+        }
+        
+        public void ResetAccessRule (MutexAccessRule rule)
+        {
+            ResetAccessRule ((AccessRule)rule);
+        }
+        
+        public void SetAccessRule (MutexAccessRule rule)
+        {
+            SetAccessRule ((AccessRule)rule);
+        }
 
-		public override AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask,
-							    bool isInherited, InheritanceFlags inheritanceFlags,
-							    PropagationFlags propagationFlags, AuditFlags flags)
-		{
-			return new MutexAuditRule (identityReference, (MutexRights) accessMask, flags);
-		}
-		
-		public void AddAuditRule (MutexAuditRule rule)
-		{
-			AddAuditRule ((AuditRule)rule);
-		}
-		
-		public bool RemoveAuditRule (MutexAuditRule rule)
-		{
-			return RemoveAuditRule((AuditRule)rule);
-		}
-		
-		public void RemoveAuditRuleAll (MutexAuditRule rule)
-		{
-			RemoveAuditRuleAll((AuditRule)rule);
-		}
-		
-		public void RemoveAuditRuleSpecific (MutexAuditRule rule)
-		{
-			RemoveAuditRuleSpecific((AuditRule)rule);
-		}
-		
-		public void SetAuditRule (MutexAuditRule rule)
-		{
-			SetAuditRule((AuditRule)rule);
-		}
-		
-		static Exception MutexExceptionFromErrorCode (int errorCode,
-							      string name, SafeHandle handle,
-							      object context)
-		{
-			switch (errorCode) {
-				case 2: return new WaitHandleCannotBeOpenedException ();
-				default: return DefaultExceptionFromErrorCode (errorCode, name, handle, context);
-			}
-		}
-	}
+        public override AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask,
+                                bool isInherited, InheritanceFlags inheritanceFlags,
+                                PropagationFlags propagationFlags, AuditFlags flags)
+        {
+            return new MutexAuditRule (identityReference, (MutexRights) accessMask, flags);
+        }
+        
+        public void AddAuditRule (MutexAuditRule rule)
+        {
+            AddAuditRule ((AuditRule)rule);
+        }
+        
+        public bool RemoveAuditRule (MutexAuditRule rule)
+        {
+            return RemoveAuditRule((AuditRule)rule);
+        }
+        
+        public void RemoveAuditRuleAll (MutexAuditRule rule)
+        {
+            RemoveAuditRuleAll((AuditRule)rule);
+        }
+        
+        public void RemoveAuditRuleSpecific (MutexAuditRule rule)
+        {
+            RemoveAuditRuleSpecific((AuditRule)rule);
+        }
+        
+        public void SetAuditRule (MutexAuditRule rule)
+        {
+            SetAuditRule((AuditRule)rule);
+        }
+        
+        static Exception MutexExceptionFromErrorCode (int errorCode,
+                                  string name, SafeHandle handle,
+                                  object context)
+        {
+            switch (errorCode) {
+                case 2: return new WaitHandleCannotBeOpenedException ();
+                default: return DefaultExceptionFromErrorCode (errorCode, name, handle, context);
+            }
+        }
+    }
 }
 

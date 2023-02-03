@@ -4,17 +4,17 @@ using System;
 
 class Test {
 
-	enum Zub :byte {
-		Foo = 99,
-		Bar,
-		Baz
-	}
-	
+    enum Zub :byte {
+        Foo = 99,
+        Bar,
+        Baz
+    }
+    
 
-	static void Main ()
-	{
-		int v = 1;
-		object foo = (v + Zub.Foo);
-	}
+    static void Main ()
+    {
+        int v = 1;
+        object foo = (v + Zub.Foo);
+    }
 }
-	
+    

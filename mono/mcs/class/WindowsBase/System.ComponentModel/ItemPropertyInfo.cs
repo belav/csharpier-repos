@@ -20,33 +20,33 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.ComponentModel {
 
-	public class ItemPropertyInfo {
-		public ItemPropertyInfo (string name, Type type, object descriptor)
-		{
-			Name = name;
-			PropertyType = type;
-			Descriptor = descriptor;
-		}
+    public class ItemPropertyInfo {
+        public ItemPropertyInfo (string name, Type type, object descriptor)
+        {
+            Name = name;
+            PropertyType = type;
+            Descriptor = descriptor;
+        }
 
-		public string Name {
-			get;
-			private set;
-		}
+        public string Name {
+            get;
+            private set;
+        }
 
-		public Type PropertyType {
-			get;
-			private set;
-		}
+        public Type PropertyType {
+            get;
+            private set;
+        }
 
-		public object Descriptor {
-			get;
-			private set;
-		}
-	}
+        public object Descriptor {
+            get;
+            private set;
+        }
+    }
 
 }

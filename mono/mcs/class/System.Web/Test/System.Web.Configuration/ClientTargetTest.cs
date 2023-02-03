@@ -1,9 +1,9 @@
 //
 // ClientTargetTest.cs 
-//	- unit tests for System.Web.Configuration.ClientTarget
+//    - unit tests for System.Web.Configuration.ClientTarget
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,35 +41,35 @@ using System.Reflection;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class ClientTargetTest  {
+    [TestFixture]
+    public class ClientTargetTest  {
 
-		[Test]
-		public void EqualsAndHashCode ()
-		{
-			ClientTarget c1, c2;
+        [Test]
+        public void EqualsAndHashCode ()
+        {
+            ClientTarget c1, c2;
 
-			c1 = new ClientTarget ("alias", "userAgent");
-			c2 = new ClientTarget ("alias", "userAgent");
+            c1 = new ClientTarget ("alias", "userAgent");
+            c2 = new ClientTarget ("alias", "userAgent");
 
-			Assert.IsTrue (c1.Equals (c2), "A1");
-			Assert.AreEqual (c1.GetHashCode (), c2.GetHashCode (), "A2");
-		}
+            Assert.IsTrue (c1.Equals (c2), "A1");
+            Assert.AreEqual (c1.GetHashCode (), c2.GetHashCode (), "A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void ctor_validationFailure1 ()
-		{
-			ClientTarget c = new ClientTarget ("", "hi");
-		}
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void ctor_validationFailure1 ()
+        {
+            ClientTarget c = new ClientTarget ("", "hi");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void ctor_validationFailure2 ()
-		{
-			ClientTarget c = new ClientTarget ("hi", "");
-		}
-	}
+        [Test]
+        [ExpectedException (typeof (ConfigurationErrorsException))]
+        public void ctor_validationFailure2 ()
+        {
+            ClientTarget c = new ClientTarget ("hi", "");
+        }
+    }
 
 }
 

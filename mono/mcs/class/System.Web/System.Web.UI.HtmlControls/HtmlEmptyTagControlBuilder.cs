@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder.cs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -30,20 +30,20 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls {
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HtmlEmptyTagControlBuilder : ControlBuilder
-	{
-		public HtmlEmptyTagControlBuilder ()
-		{
-		}
+    // CAS
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public sealed class HtmlEmptyTagControlBuilder : ControlBuilder
+    {
+        public HtmlEmptyTagControlBuilder ()
+        {
+        }
 
 
-		public override bool HasBody ()
-		{
-			return false;	// always
-		}
-	}
+        public override bool HasBody ()
+        {
+            return false;    // always
+        }
+    }
 }
 

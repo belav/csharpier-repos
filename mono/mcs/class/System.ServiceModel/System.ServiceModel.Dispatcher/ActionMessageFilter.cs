@@ -33,55 +33,55 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher {
-	[DataContract]
-	public class ActionMessageFilter : MessageFilter
-	{
-		ReadOnlyCollection<string> actions;
+    [DataContract]
+    public class ActionMessageFilter : MessageFilter
+    {
+        ReadOnlyCollection<string> actions;
 
-		public ActionMessageFilter (params string [] actions)
-		{
-			if (actions == null)
-				throw new ArgumentNullException ("actions");
+        public ActionMessageFilter (params string [] actions)
+        {
+            if (actions == null)
+                throw new ArgumentNullException ("actions");
 
-			// remove duplicates
-			List<string> l = new List<string> ();
+            // remove duplicates
+            List<string> l = new List<string> ();
 
-			foreach (string action in actions) {
-				if (action == null)
-					throw new ArgumentNullException ("actions");
-				if (l.Contains (action) == false)
-					l.Add (action);
-			}
+            foreach (string action in actions) {
+                if (action == null)
+                    throw new ArgumentNullException ("actions");
+                if (l.Contains (action) == false)
+                    l.Add (action);
+            }
 
-			this.actions = new ReadOnlyCollection<string> (l);
-		}
+            this.actions = new ReadOnlyCollection<string> (l);
+        }
 
-		protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData> ()
-		{
-			return new ActionMessageFilterTable<FilterData> ();
-		}
+        protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData> ()
+        {
+            return new ActionMessageFilterTable<FilterData> ();
+        }
 
-		public override bool Match (Message message)
-		{
- 			foreach (string action in actions)
- 				if (message.Headers.Action == action || action == "*")
- 					return true;
+        public override bool Match (Message message)
+        {
+             foreach (string action in actions)
+                 if (message.Headers.Action == action || action == "*")
+                     return true;
 
-			return false;
-		}
+            return false;
+        }
 
-		public override bool Match (MessageBuffer messageBuffer)
-		{
-			bool retval;
-			Message m = messageBuffer.CreateMessage ();
-			retval = Match (m);
-			m.Close ();
-			
-			return retval;
-		}
+        public override bool Match (MessageBuffer messageBuffer)
+        {
+            bool retval;
+            Message m = messageBuffer.CreateMessage ();
+            retval = Match (m);
+            m.Close ();
+            
+            return retval;
+        }
 
-		public ReadOnlyCollection<string> Actions {
-			get { return actions; }
-		}
-	}
+        public ReadOnlyCollection<string> Actions {
+            get { return actions; }
+        }
+    }
 }

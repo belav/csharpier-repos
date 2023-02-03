@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DefaultValueSettingAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,22 +31,22 @@ using System;
 namespace System.Configuration
 {
 
-	[AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Property)]
-	public sealed class SettingsSerializeAsAttribute : Attribute
-	{
-		SettingsSerializeAs serializeAs;
+    [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Property)]
+    public sealed class SettingsSerializeAsAttribute : Attribute
+    {
+        SettingsSerializeAs serializeAs;
 
-		public SettingsSerializeAsAttribute (SettingsSerializeAs serializeAs)
-		{
-			this.serializeAs = serializeAs;
-		}
+        public SettingsSerializeAsAttribute (SettingsSerializeAs serializeAs)
+        {
+            this.serializeAs = serializeAs;
+        }
 
-		public SettingsSerializeAs SerializeAs {
-			get {
-				return serializeAs;
-			}
-		}
-	}
+        public SettingsSerializeAs SerializeAs {
+            get {
+                return serializeAs;
+            }
+        }
+    }
 
 }
 

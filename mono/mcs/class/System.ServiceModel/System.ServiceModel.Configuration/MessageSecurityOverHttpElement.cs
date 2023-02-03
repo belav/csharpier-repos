@@ -2,7 +2,7 @@
 // MessageSecurityOverHttpElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,41 +54,41 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class MessageSecurityOverHttpElement
-		 : ConfigurationElement
-	{
-		// Properties
+    public partial class MessageSecurityOverHttpElement
+         : ConfigurationElement
+    {
+        // Properties
 
-		[TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
-		[ConfigurationProperty ("algorithmSuite",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Default")]
-		public SecurityAlgorithmSuite AlgorithmSuite {
-			get { return (SecurityAlgorithmSuite) base ["algorithmSuite"]; }
-			set { base ["algorithmSuite"] = value; }
-		}
+        [TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
+        [ConfigurationProperty ("algorithmSuite",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "Default")]
+        public SecurityAlgorithmSuite AlgorithmSuite {
+            get { return (SecurityAlgorithmSuite) base ["algorithmSuite"]; }
+            set { base ["algorithmSuite"] = value; }
+        }
 
-		[ConfigurationProperty ("clientCredentialType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Windows")]
-		public MessageCredentialType ClientCredentialType {
-			get { return (MessageCredentialType) base ["clientCredentialType"]; }
-			set { base ["clientCredentialType"] = value; }
-		}
+        [ConfigurationProperty ("clientCredentialType",
+             Options = ConfigurationPropertyOptions.None,
+             DefaultValue = "Windows")]
+        public MessageCredentialType ClientCredentialType {
+            get { return (MessageCredentialType) base ["clientCredentialType"]; }
+            set { base ["clientCredentialType"] = value; }
+        }
 
-		[ConfigurationProperty ("negotiateServiceCredential",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = true)]
-		public bool NegotiateServiceCredential {
-			get { return (bool) base ["negotiateServiceCredential"]; }
-			set { base ["negotiateServiceCredential"] = value; }
-		}
+        [ConfigurationProperty ("negotiateServiceCredential",
+             Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true)]
+        public bool NegotiateServiceCredential {
+            get { return (bool) base ["negotiateServiceCredential"]; }
+            set { base ["negotiateServiceCredential"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
 
-	}
+    }
 
 }

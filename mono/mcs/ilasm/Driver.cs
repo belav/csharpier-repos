@@ -30,7 +30,7 @@ namespace Mono.ILASM {
                 public static int Main (string[] args)
                 {
                         // Do everything in Invariant
-			System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 
                         DriverMain driver = new DriverMain (args);
                         if (!driver.Run ())
@@ -50,12 +50,12 @@ namespace Mono.ILASM {
 //                        private bool show_method_ref = false;
                         private bool show_parser = false;
                         private bool scan_only = false;
-			private bool debugging_info = false;
+            private bool debugging_info = false;
                         private CodeGen codegen;
-			private bool keycontainer = false;
-			private string keyname;
+            private bool keycontainer = false;
+            private string keyname;
 #if HAS_MONO_SECURITY
-			private StrongName sn;
+            private StrongName sn;
 #endif
                         bool noautoinherit;
 
@@ -86,16 +86,16 @@ namespace Mono.ILASM {
                                         if (target != Target.Dll && !codegen.HasEntryPoint)
                                                 Report.Error ("No entry point found.");
 
-					// if we have a key and aren't assembling a netmodule
-					if ((keyname != null) && !codegen.IsThisAssembly (null)) {
+                    // if we have a key and aren't assembling a netmodule
+                    if ((keyname != null) && !codegen.IsThisAssembly (null)) {
 #if HAS_MONO_SECURITY
-						LoadKey ();
-						// this overrides any attribute or .publickey directive in the source
-						codegen.ThisAssembly.SetPublicKey (sn.PublicKey);
+                        LoadKey ();
+                        // this overrides any attribute or .publickey directive in the source
+                        codegen.ThisAssembly.SetPublicKey (sn.PublicKey);
 #else
                                                 throw new NotSupportedException ();
 #endif
-					}
+                    }
 
                                         try {
                                                 codegen.Write ();
@@ -113,10 +113,10 @@ namespace Mono.ILASM {
 
 #if HAS_MONO_SECURITY
                                 try {
-					if (sn != null) {
-						Report.Message ("Signing assembly with the specified strongname keypair");
-						return Sign (output_file);
-					}
+                    if (sn != null) {
+                        Report.Message ("Signing assembly with the specified strongname keypair");
+                        return Sign (output_file);
+                    }
                                 } catch {
                                         return false;
                                 }
@@ -132,31 +132,31 @@ namespace Mono.ILASM {
                         }
 
 #if HAS_MONO_SECURITY
-			private void LoadKey ()
-			{
-				if (keycontainer) {
-					CspParameters csp = new CspParameters ();
-					csp.KeyContainerName = keyname;
-					RSACryptoServiceProvider rsa = new RSACryptoServiceProvider (csp);
-					sn = new StrongName (rsa);
-				} else {
-					byte[] data = null;
-					using (FileStream fs = File.OpenRead (keyname)) {
-						data = new byte [fs.Length];
-						fs.Read (data, 0, data.Length);
-						fs.Close ();
-					}
-					sn = new StrongName (data);
-				}
-			}
+            private void LoadKey ()
+            {
+                if (keycontainer) {
+                    CspParameters csp = new CspParameters ();
+                    csp.KeyContainerName = keyname;
+                    RSACryptoServiceProvider rsa = new RSACryptoServiceProvider (csp);
+                    sn = new StrongName (rsa);
+                } else {
+                    byte[] data = null;
+                    using (FileStream fs = File.OpenRead (keyname)) {
+                        data = new byte [fs.Length];
+                        fs.Read (data, 0, data.Length);
+                        fs.Close ();
+                    }
+                    sn = new StrongName (data);
+                }
+            }
 
-			private bool Sign (string filename)
-			{
-				// note: if the file cannot be signed (no public key in it) then
-				// we do not show an error, or a warning, if the key file doesn't 
-				// exists
-				return sn.Sign (filename);
-			}
+            private bool Sign (string filename)
+            {
+                // note: if the file cannot be signed (no public key in it) then
+                // we do not show an error, or a warning, if the key file doesn't 
+                // exists
+                return sn.Sign (filename);
+            }
 #endif
 
                         private void ProcessFile (string file_path)
@@ -187,7 +187,7 @@ namespace Mono.ILASM {
                                 }
 
                                 ILParser parser = new ILParser (codegen, scanner);
-				codegen.BeginSourceFile (file_path);
+                codegen.BeginSourceFile (file_path);
                                 try {
                                         if (show_parser)
                                                 parser.yyparse (new ScannerAdapter (scanner),
@@ -206,8 +206,8 @@ namespace Mono.ILASM {
                                         Console.Write ("{0} ({1}, {2}): ",file_path, scanner.Reader.Location.line, scanner.Reader.Location.column);
                                         throw;
                                 } finally {
-					codegen.EndSourceFile ();
-				}
+                    codegen.EndSourceFile ();
+                }
                         }
 
                         public void ShowToken (object sender, NewTokenEventArgs args)
@@ -262,8 +262,8 @@ namespace Mono.ILASM {
                                                 break;
                                         case "debug":
                                         case "deb":
-						debugging_info = true;
-						break;
+                        debugging_info = true;
+                        break;
                                         // Stubs to stay commandline compatible with MS 
                                         case "listing":
                                         case "nologo":
@@ -276,13 +276,13 @@ namespace Mono.ILASM {
                                         case "resource":
                                                 break;
                                         case "key":
-						if (command_arg.Length > 0)
-							keycontainer = (command_arg [0] == '@');
-						if (keycontainer)
-							keyname = command_arg.Substring (1);
-						else
-							keyname = command_arg;
-						break;
+                        if (command_arg.Length > 0)
+                            keycontainer = (command_arg [0] == '@');
+                        if (keycontainer)
+                            keyname = command_arg.Substring (1);
+                        else
+                            keyname = command_arg;
+                        break;
                                         case "noautoinherit":
                                                 noautoinherit = true;
                                                 break;
@@ -360,8 +360,8 @@ namespace Mono.ILASM {
                                         "   /exe               Compile to executable.\n" +
                                         "   /dll               Compile to library.\n" +
                                         "   /debug             Include debug information.\n" +
-					"   /key:keyfile       Strongname using the specified key file\n" +
-					"   /key:@container    Strongname using the specified key container\n" +
+                    "   /key:keyfile       Strongname using the specified key file\n" +
+                    "   /key:@container    Strongname using the specified key container\n" +
                                         "   /noautoinherit     Disable inheriting from System.Object by default\n" +
                                         "Options can be of the form -option or /option\n");
                                 Environment.Exit (1);

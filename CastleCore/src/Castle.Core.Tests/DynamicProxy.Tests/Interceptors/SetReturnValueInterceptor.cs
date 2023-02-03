@@ -14,7 +14,7 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	public class SetReturnValueInterceptor : IInterceptor
+    public class SetReturnValueInterceptor : IInterceptor
     {
         private object value;
 

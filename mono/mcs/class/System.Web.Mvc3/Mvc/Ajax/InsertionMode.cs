@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc.Ajax {
+namespace System.Web.Mvc.Ajax {
     public enum InsertionMode {
         Replace = 0,
         InsertBefore = 1,

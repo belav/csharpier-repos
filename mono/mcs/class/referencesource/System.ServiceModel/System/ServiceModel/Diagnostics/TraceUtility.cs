@@ -812,7 +812,7 @@ namespace System.ServiceModel.Diagnostics
 #if !MONO
             return LegacyDiagnosticTrace.GenerateMsdnTraceCode(terminatorUri, traceCodes[traceCode]);
 #else
-		return "";
+        return "";
 #endif
         }
 

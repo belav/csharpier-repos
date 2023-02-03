@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Web;
@@ -13,7 +13,7 @@ using System.Web;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("Test_08")]
-[assembly: AssemblyCopyright ("Copyright ©  2010")]
+[assembly: AssemblyCopyright ("Copyright �  2010")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

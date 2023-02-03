@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -105,7 +105,7 @@ class Class
         [Fact, WorkItem(28511, "https://github.com/dotnet/roslyn/issues/28511")]
         public async Task TestNullable1()
         {
-            // ⚠ The expected outcome of this test should not change.
+            // ? The expected outcome of this test should not change.
             await TestMissingInRegularAndScriptAsync(
 @"class Class
 {
@@ -2330,13 +2330,13 @@ namespace RoslynSandbox
             await TestInRegularAndScript1Async(
 @"public class Foo
 {
-	private readonly object o;
+    private readonly object o;
 
-	[||]public object O => o;
+    [||]public object O => o;
 }",
 @"public class Foo
 {
-	public object O { get; }
+    public object O { get; }
 }", new TestParameters(options: Option(FormattingOptions2.UseTabs, true)));
         }
 
@@ -2346,9 +2346,9 @@ namespace RoslynSandbox
             await TestInRegularAndScript1Async(
 @"public class Foo
 {
-	private readonly object o;
+    private readonly object o;
 
-	[||]public object O => o;
+    [||]public object O => o;
 }",
 @"public class Foo
 {
@@ -2365,9 +2365,9 @@ namespace RoslynSandbox
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
 {
-	private readonly object o;
+    private readonly object o;
 
-	[||]public object O => o;
+    [||]public object O => o;
 }
         </Document>
         <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">
@@ -2381,7 +2381,7 @@ indent_style = tab
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
 {
-	public object O { get; }
+    public object O { get; }
 }
         </Document>
         <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">
@@ -2401,9 +2401,9 @@ indent_style = tab
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
 {
-	private readonly object o;
+    private readonly object o;
 
-	[||]public object O => o;
+    [||]public object O => o;
 }
         </Document>
         <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">

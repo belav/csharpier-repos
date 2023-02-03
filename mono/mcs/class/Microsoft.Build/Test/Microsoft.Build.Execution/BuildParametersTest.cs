@@ -35,32 +35,32 @@ using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Execution
 {
-	[TestFixture]
-	public class BuildParametersTest
-	{
-		[Test]
-		public void GetToolset ()
-		{
-			var bp = new BuildParameters (ProjectCollection.GlobalProjectCollection);
-			Assert.IsNull (bp.GetToolset ("0.1"), "#1");
-			var ts = bp.GetToolset ("2.0");
-			// They are equal
-			Assert.AreEqual (ProjectCollection.GlobalProjectCollection.Toolsets.First (t => t.ToolsVersion == "2.0"), ts, "#2");
+    [TestFixture]
+    public class BuildParametersTest
+    {
+        [Test]
+        public void GetToolset ()
+        {
+            var bp = new BuildParameters (ProjectCollection.GlobalProjectCollection);
+            Assert.IsNull (bp.GetToolset ("0.1"), "#1");
+            var ts = bp.GetToolset ("2.0");
+            // They are equal
+            Assert.AreEqual (ProjectCollection.GlobalProjectCollection.Toolsets.First (t => t.ToolsVersion == "2.0"), ts, "#2");
 
-			bp = new BuildParameters ();
-			Assert.IsNull (bp.GetToolset ("0.1"), "#1");
-			ts = bp.GetToolset ("2.0");
-			// They are NOT equal, because ProjectCollection seems to be different.
-			Assert.AreNotEqual (ProjectCollection.GlobalProjectCollection.Toolsets.First (t => t.ToolsVersion == "2.0"), ts, "#2");			
-		}
-		
-		[Test]
-		public void PropertiesDefault ()
-		{
-			var bp = new BuildParameters ();
-			Assert.IsTrue (bp.EnableNodeReuse, "#1");
-			Assert.IsTrue (bp.EnvironmentProperties.Count > 0, "#2");
-			Assert.AreEqual (CultureInfo.CurrentCulture, bp.Culture, "#3");
-		}
-	}
+            bp = new BuildParameters ();
+            Assert.IsNull (bp.GetToolset ("0.1"), "#1");
+            ts = bp.GetToolset ("2.0");
+            // They are NOT equal, because ProjectCollection seems to be different.
+            Assert.AreNotEqual (ProjectCollection.GlobalProjectCollection.Toolsets.First (t => t.ToolsVersion == "2.0"), ts, "#2");            
+        }
+        
+        [Test]
+        public void PropertiesDefault ()
+        {
+            var bp = new BuildParameters ();
+            Assert.IsTrue (bp.EnableNodeReuse, "#1");
+            Assert.IsTrue (bp.EnvironmentProperties.Count > 0, "#2");
+            Assert.AreEqual (CultureInfo.CurrentCulture, bp.Culture, "#3");
+        }
+    }
 }

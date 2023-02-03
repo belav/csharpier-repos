@@ -2,7 +2,7 @@
 // SspiSecurityTokenParameters.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,74 +33,74 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public class SspiSecurityTokenParameters : SecurityTokenParameters
-	{
-		bool cancel;
+    public class SspiSecurityTokenParameters : SecurityTokenParameters
+    {
+        bool cancel;
 
-		public SspiSecurityTokenParameters ()
-			: this (false)
-		{
-		}
+        public SspiSecurityTokenParameters ()
+            : this (false)
+        {
+        }
 
-		public SspiSecurityTokenParameters (bool requireCancellation)
-		{
-			this.cancel = requireCancellation;
-		}
+        public SspiSecurityTokenParameters (bool requireCancellation)
+        {
+            this.cancel = requireCancellation;
+        }
 
-		protected SspiSecurityTokenParameters (SspiSecurityTokenParameters other)
-			: base (other)
-		{
-			this.cancel = other.cancel;
-		}
+        protected SspiSecurityTokenParameters (SspiSecurityTokenParameters other)
+            : base (other)
+        {
+            this.cancel = other.cancel;
+        }
 
-		public bool RequireCancellation {
-			get { return cancel; }
-			set { cancel = value; }
-		}
+        public bool RequireCancellation {
+            get { return cancel; }
+            set { cancel = value; }
+        }
 
-		protected override bool HasAsymmetricKey {
-			get { return false; }
-		}
+        protected override bool HasAsymmetricKey {
+            get { return false; }
+        }
 
-		protected override bool SupportsClientAuthentication {
-			get { return true; }
-		}
+        protected override bool SupportsClientAuthentication {
+            get { return true; }
+        }
 
-		protected override bool SupportsClientWindowsIdentity {
-			get { return true; }
-		}
+        protected override bool SupportsClientWindowsIdentity {
+            get { return true; }
+        }
 
-		protected override bool SupportsServerAuthentication {
-			get { return true; }
-		}
+        protected override bool SupportsServerAuthentication {
+            get { return true; }
+        }
 
-		protected override SecurityTokenParameters CloneCore ()
-		{
-			return new SspiSecurityTokenParameters (this);
-		}
+        protected override SecurityTokenParameters CloneCore ()
+        {
+            return new SspiSecurityTokenParameters (this);
+        }
 
-		[MonoTODO]
-		protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-			SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
+            SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
-		{
-			if (requirement == null)
-				throw new ArgumentNullException ();
-			requirement.TokenType = ServiceModelSecurityTokenTypes.Spnego;
-			requirement.RequireCryptographicToken = true;
-			requirement.Properties [ReqType.SupportSecurityContextCancellationProperty] = RequireCancellation;
-			requirement.Properties [ReqType.IssuedSecurityTokenParametersProperty] = this.Clone ();
-			requirement.KeyType = SecurityKeyType.SymmetricKey;
-		}
+        [MonoTODO]
+        protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
+        {
+            if (requirement == null)
+                throw new ArgumentNullException ();
+            requirement.TokenType = ServiceModelSecurityTokenTypes.Spnego;
+            requirement.RequireCryptographicToken = true;
+            requirement.Properties [ReqType.SupportSecurityContextCancellationProperty] = RequireCancellation;
+            requirement.Properties [ReqType.IssuedSecurityTokenParametersProperty] = this.Clone ();
+            requirement.KeyType = SecurityKeyType.SymmetricKey;
+        }
 
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        public override string ToString ()
+        {
+            return base.ToString ();
+        }
+    }
 }

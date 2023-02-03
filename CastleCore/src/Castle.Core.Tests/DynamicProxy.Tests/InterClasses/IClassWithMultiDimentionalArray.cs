@@ -14,14 +14,14 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	public interface IClassWithMultiDimentionalArray
-	{
-		void Do(int[] args);
+    public interface IClassWithMultiDimentionalArray
+    {
+        void Do(int[] args);
 
-		void Do2(int[,] args);
+        void Do2(int[,] args);
 
-		void Do3(string[] args);
+        void Do3(string[] args);
 
-		void Do4(string[,] args);
-	}
+        void Do4(string[,] args);
+    }
 }

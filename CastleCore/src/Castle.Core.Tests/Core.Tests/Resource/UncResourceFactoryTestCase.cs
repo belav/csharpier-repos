@@ -14,60 +14,60 @@
 
 namespace Castle.Core.Resource.Tests
 {
-	using System;
+    using System;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class UncResourceFactoryTestCase
-	{
-		private UncResourceFactory resFactory;
+    [TestFixture]
+    public class UncResourceFactoryTestCase
+    {
+        private UncResourceFactory resFactory;
 
-		[SetUp]
-		public void SetUp()
-		{
-			resFactory = new UncResourceFactory();
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            resFactory = new UncResourceFactory();
+        }
 
-		[Test]
-		public void Accept()
-		{
-			Assert.IsTrue( resFactory.Accept( new CustomUri(@"\\server\something") ) );
-			Assert.IsFalse( resFactory.Accept( new CustomUri("http://www.castleproject.org") ) );
-		}
+        [Test]
+        public void Accept()
+        {
+            Assert.IsTrue( resFactory.Accept( new CustomUri(@"\\server\something") ) );
+            Assert.IsFalse( resFactory.Accept( new CustomUri("http://www.castleproject.org") ) );
+        }
 
-		[Test, Ignore("Relies on external network shares")]
-		public void CreateWithAbsolutePath()
-		{
-			CustomUri uri = new CustomUri(@"\\hammet\C$\file.txt");
+        [Test, Ignore("Relies on external network shares")]
+        public void CreateWithAbsolutePath()
+        {
+            CustomUri uri = new CustomUri(@"\\hammet\C$\file.txt");
 
-			IResource resource = resFactory.Create(uri, null);
+            IResource resource = resFactory.Create(uri, null);
 
-			Assert.IsNotNull(resource);
-			string line = resource.GetStreamReader().ReadLine();
-			Assert.AreEqual("The long and winding road", line);
-		}
+            Assert.IsNotNull(resource);
+            string line = resource.GetStreamReader().ReadLine();
+            Assert.AreEqual("The long and winding road", line);
+        }
 
-		[Test, Ignore("Relies on external network shares")]
-		public void CreateRelative()
-		{
-			CustomUri uri = new CustomUri(@"\\hammet\C$\file.txt");
+        [Test, Ignore("Relies on external network shares")]
+        public void CreateRelative()
+        {
+            CustomUri uri = new CustomUri(@"\\hammet\C$\file.txt");
 
-			IResource resource = resFactory.Create( uri, null );
+            IResource resource = resFactory.Create( uri, null );
 
-			resource = resource.CreateRelative("file2.txt");
+            resource = resource.CreateRelative("file2.txt");
 
-			Assert.IsNotNull(resource);
-			string line = resource.GetStreamReader().ReadLine();
-			Assert.AreEqual("Something", line);
-		}
+            Assert.IsNotNull(resource);
+            string line = resource.GetStreamReader().ReadLine();
+            Assert.AreEqual("Something", line);
+        }
 
-		[Test, Ignore("Relies on external network shares")]
-		public void NonExistingResource()
-		{
-			IResource resource = resFactory.Create(new CustomUri(@"\\hammettz\C$\file1.txt"));
+        [Test, Ignore("Relies on external network shares")]
+        public void NonExistingResource()
+        {
+            IResource resource = resFactory.Create(new CustomUri(@"\\hammettz\C$\file1.txt"));
 
-			Assert.Throws<ResourceException>(() => resource.GetStreamReader());
-		}
-	}
+            Assert.Throws<ResourceException>(() => resource.GetStreamReader());
+        }
+    }
 }

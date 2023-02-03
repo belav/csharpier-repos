@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Jonathan Chambers (jonathan.chambers@ansys.com)
+//    Jonathan Chambers (jonathan.chambers@ansys.com)
 //
 
 // COMPLETE
@@ -29,12 +29,12 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	[ComVisible(true)]
-	public enum PropertySort
-	{
-		NoSort			= 0,
-		Alphabetical		= 1,
-		Categorized		= 2,
-		CategorizedAlphabetical	= 3
-	}
+    [ComVisible(true)]
+    public enum PropertySort
+    {
+        NoSort            = 0,
+        Alphabetical        = 1,
+        Categorized        = 2,
+        CategorizedAlphabetical    = 3
+    }
 }

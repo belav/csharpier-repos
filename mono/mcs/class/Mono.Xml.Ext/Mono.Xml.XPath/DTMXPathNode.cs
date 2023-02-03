@@ -2,7 +2,7 @@
 // Mono.Xml.XPath.DTMXPathNode.cs
 //
 // Author:
-//	Atsushi Enomoto (ginga@kit.hi-ho.ne.jp)
+//    Atsushi Enomoto (ginga@kit.hi-ho.ne.jp)
 //
 // (C) 2003 Atsushi Enomoto
 //
@@ -37,71 +37,71 @@ using System.Xml.XPath;
 namespace Mono.Xml.XPath
 {
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathLinkedNode
+        class DTMXPathLinkedNode
 #else
-		struct DTMXPathLinkedNode
+        struct DTMXPathLinkedNode
 #endif
-	{
-		public int FirstChild;
-		public int Parent;
-		public int PreviousSibling;
-		public int NextSibling;
-		public int FirstAttribute;
-		public int FirstNamespace;
-		public int Depth;
-		public XPathNodeType NodeType;
-		public string BaseURI;
-		public bool IsEmptyElement;
-		public string LocalName;
-		public string NamespaceURI;
-		public string Prefix;
-		public string Value;
-		public string XmlLang;
-		public int LineNumber;
-		public int LinePosition;
-	}
+    {
+        public int FirstChild;
+        public int Parent;
+        public int PreviousSibling;
+        public int NextSibling;
+        public int FirstAttribute;
+        public int FirstNamespace;
+        public int Depth;
+        public XPathNodeType NodeType;
+        public string BaseURI;
+        public bool IsEmptyElement;
+        public string LocalName;
+        public string NamespaceURI;
+        public string Prefix;
+        public string Value;
+        public string XmlLang;
+        public int LineNumber;
+        public int LinePosition;
+    }
 
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathAttributeNode
+        class DTMXPathAttributeNode
 #else
-		struct DTMXPathAttributeNode
+        struct DTMXPathAttributeNode
 #endif
-	{
-		public int OwnerElement;
-		public int NextAttribute;
-		public string LocalName;
-		public string NamespaceURI;
-		public string Prefix;
-		public string Value;
-		public object SchemaType;
-		public int LineNumber;
-		public int LinePosition;
-	}
+    {
+        public int OwnerElement;
+        public int NextAttribute;
+        public string LocalName;
+        public string NamespaceURI;
+        public string Prefix;
+        public string Value;
+        public object SchemaType;
+        public int LineNumber;
+        public int LinePosition;
+    }
 
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathNamespaceNode
+        class DTMXPathNamespaceNode
 #else
-		struct DTMXPathNamespaceNode
+        struct DTMXPathNamespaceNode
 #endif
-	{
-		public int DeclaredElement;
-		public int NextNamespace;
-		public string Name;
-		public string Namespace;
-	}
+    {
+        public int DeclaredElement;
+        public int NextNamespace;
+        public string Name;
+        public string Namespace;
+    }
 }

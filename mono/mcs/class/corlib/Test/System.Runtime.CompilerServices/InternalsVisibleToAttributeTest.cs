@@ -3,7 +3,7 @@
 // System.Runtime.CompilerServices.InternalsVisibleToAttribute
 //
 // Author:
-//	Gert Driesen <drieseng@users.sourceforge.net>
+//    Gert Driesen <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -33,48 +33,48 @@ using System.Runtime.CompilerServices;
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices {
-	[TestFixture]
-	public class InternalsVisibleToAttributeTest {
-		[Test] // .ctor (String)
-		public void Constructor1 ()
-		{
-			InternalsVisibleToAttribute ivt;
-			string aname;
+    [TestFixture]
+    public class InternalsVisibleToAttributeTest {
+        [Test] // .ctor (String)
+        public void Constructor1 ()
+        {
+            InternalsVisibleToAttribute ivt;
+            string aname;
 
-			aname = "Mono";
-			ivt = new InternalsVisibleToAttribute (aname);
-			Assert.IsTrue (ivt.AllInternalsVisible, "#A:AllInternalsVisible");
-			Assert.AreSame (aname, ivt.AssemblyName, "#A:AssemblyName");
-			Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#A:TypeId");
+            aname = "Mono";
+            ivt = new InternalsVisibleToAttribute (aname);
+            Assert.IsTrue (ivt.AllInternalsVisible, "#A:AllInternalsVisible");
+            Assert.AreSame (aname, ivt.AssemblyName, "#A:AssemblyName");
+            Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#A:TypeId");
 
-			aname = typeof (int).Assembly.FullName;
-			ivt = new InternalsVisibleToAttribute (aname);
-			Assert.IsTrue (ivt.AllInternalsVisible, "#B:AllInternalsVisible");
-			Assert.AreSame (aname, ivt.AssemblyName, "#B:AssemblyName");
-			Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#B:TypeId");
+            aname = typeof (int).Assembly.FullName;
+            ivt = new InternalsVisibleToAttribute (aname);
+            Assert.IsTrue (ivt.AllInternalsVisible, "#B:AllInternalsVisible");
+            Assert.AreSame (aname, ivt.AssemblyName, "#B:AssemblyName");
+            Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#B:TypeId");
 
-			aname = string.Empty;
-			ivt = new InternalsVisibleToAttribute (aname);
-			Assert.IsTrue (ivt.AllInternalsVisible, "#C:AllInternalsVisible");
-			Assert.AreSame (aname, ivt.AssemblyName, "#C:AssemblyName");
-			Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#C:TypeId");
+            aname = string.Empty;
+            ivt = new InternalsVisibleToAttribute (aname);
+            Assert.IsTrue (ivt.AllInternalsVisible, "#C:AllInternalsVisible");
+            Assert.AreSame (aname, ivt.AssemblyName, "#C:AssemblyName");
+            Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#C:TypeId");
 
-			aname = null;
-			ivt = new InternalsVisibleToAttribute (aname);
-			Assert.IsTrue (ivt.AllInternalsVisible, "#D:AllInternalsVisible");
-			Assert.IsNull (ivt.AssemblyName, "#D:AssemblyName");
-			Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#D:TypeId");
-		}
+            aname = null;
+            ivt = new InternalsVisibleToAttribute (aname);
+            Assert.IsTrue (ivt.AllInternalsVisible, "#D:AllInternalsVisible");
+            Assert.IsNull (ivt.AssemblyName, "#D:AssemblyName");
+            Assert.AreEqual (ivt.GetType (), ivt.TypeId, "#D:TypeId");
+        }
 
-		[Test]
-		public void AllInternalsVisible ()
-		{
-			InternalsVisibleToAttribute ivt = new InternalsVisibleToAttribute ("Mono");
-			ivt.AllInternalsVisible = false;
-			Assert.IsFalse (ivt.AllInternalsVisible, "#1");
-			ivt.AllInternalsVisible = true;
-			Assert.IsTrue (ivt.AllInternalsVisible, "#2");
-		}
-	}
+        [Test]
+        public void AllInternalsVisible ()
+        {
+            InternalsVisibleToAttribute ivt = new InternalsVisibleToAttribute ("Mono");
+            ivt.AllInternalsVisible = false;
+            Assert.IsFalse (ivt.AllInternalsVisible, "#1");
+            ivt.AllInternalsVisible = true;
+            Assert.IsTrue (ivt.AllInternalsVisible, "#2");
+        }
+    }
 }
 

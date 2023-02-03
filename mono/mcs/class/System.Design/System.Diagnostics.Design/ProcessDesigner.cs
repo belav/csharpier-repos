@@ -33,16 +33,16 @@ using System.ComponentModel.Design;
 
 namespace System.Diagnostics.Design
 {
-	public class ProcessDesigner : ComponentDesigner
-	{
-		public ProcessDesigner ()
-		{
-		}
+    public class ProcessDesigner : ComponentDesigner
+    {
+        public ProcessDesigner ()
+        {
+        }
 
-		[MonoTODO]
-		protected override void PreFilterProperties (IDictionary properties)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override void PreFilterProperties (IDictionary properties)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

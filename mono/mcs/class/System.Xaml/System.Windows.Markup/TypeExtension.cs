@@ -28,54 +28,54 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[MarkupExtensionReturnType (typeof (Type))]
-	[TypeConverter (typeof (TypeExtensionConverter))]
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyPresentationFramework_3_5)]
-	public class TypeExtension : MarkupExtension
-	{
-		public TypeExtension ()
-		{
-		}
+    [MarkupExtensionReturnType (typeof (Type))]
+    [TypeConverter (typeof (TypeExtensionConverter))]
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyPresentationFramework_3_5)]
+    public class TypeExtension : MarkupExtension
+    {
+        public TypeExtension ()
+        {
+        }
 
-		public TypeExtension (string typeName)
-		{
-			if (typeName == null)
-				throw new ArgumentNullException ("typeName");
-			TypeName = typeName;
-		}
+        public TypeExtension (string typeName)
+        {
+            if (typeName == null)
+                throw new ArgumentNullException ("typeName");
+            TypeName = typeName;
+        }
 
-		public TypeExtension (Type type)
-		{
-			if (type == null)
-				throw new ArgumentNullException ("type");
-			Type = type;
-		}
+        public TypeExtension (Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException ("type");
+            Type = type;
+        }
 
-		[ConstructorArgument ("type")]
-		[DefaultValue (null)]
-		public Type Type { get; set; }
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public string TypeName { get; set; }
+        [ConstructorArgument ("type")]
+        [DefaultValue (null)]
+        public Type Type { get; set; }
+        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public string TypeName { get; set; }
 
-		public override object ProvideValue (IServiceProvider serviceProvider)
-		{
-			if (Type != null)
-				return Type;
+        public override object ProvideValue (IServiceProvider serviceProvider)
+        {
+            if (Type != null)
+                return Type;
 
-			if (TypeName == null)
-				throw new InvalidOperationException ("Either TypeName or Type must be filled before calling ProvideValue method");
+            if (TypeName == null)
+                throw new InvalidOperationException ("Either TypeName or Type must be filled before calling ProvideValue method");
 
-			if (serviceProvider == null) // it can be null when Type is supplied.
-				throw new ArgumentNullException ("serviceProvider");
+            if (serviceProvider == null) // it can be null when Type is supplied.
+                throw new ArgumentNullException ("serviceProvider");
 
-			var p = serviceProvider.GetService (typeof (IXamlTypeResolver)) as IXamlTypeResolver;
-			if (p == null)
-				throw new InvalidOperationException ("serviceProvider does not provide IXamlTypeResolver service.");
+            var p = serviceProvider.GetService (typeof (IXamlTypeResolver)) as IXamlTypeResolver;
+            if (p == null)
+                throw new InvalidOperationException ("serviceProvider does not provide IXamlTypeResolver service.");
 
-			var ret = p.Resolve (TypeName);
-			if (ret == null)
-				throw new InvalidOperationException (String.Format ("Type '{0}' is not resolved as a valid type by the type resolver '{1}'.", TypeName, p.GetType ()));
-			return ret;
-		}
-	}
+            var ret = p.Resolve (TypeName);
+            if (ret == null)
+                throw new InvalidOperationException (String.Format ("Type '{0}' is not resolved as a valid type by the type resolver '{1}'.", TypeName, p.GetType ()));
+            return ret;
+        }
+    }
 }

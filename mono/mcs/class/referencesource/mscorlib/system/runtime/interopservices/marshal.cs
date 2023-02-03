@@ -1305,7 +1305,7 @@ namespace System.Runtime.InteropServices
 
 #if FEATURE_COMINTEROP
 
-		internal static readonly Guid ManagedNameGuid = new Guid("{0F21F359-AB84-41E8-9A78-36D110E6D2F9}"); 
+        internal static readonly Guid ManagedNameGuid = new Guid("{0F21F359-AB84-41E8-9A78-36D110E6D2F9}"); 
        
         //====================================================================
         // Given a managed object that wraps a UCOMITypeLib, return its name
@@ -1376,7 +1376,7 @@ namespace System.Runtime.InteropServices
                     return customManagedNamespace;
                 }
             }
-			
+            
             return GetTypeLibName(typelib);
         }
         

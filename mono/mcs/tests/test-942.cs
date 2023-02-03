@@ -4,36 +4,36 @@ using System.Diagnostics;
 
 namespace ConditionalAttributeTesting
 {
-	class MainClass
-	{
-		public static int Main ()
-		{
-			return HelloWorld ();
-		}
+    class MainClass
+    {
+        public static int Main ()
+        {
+            return HelloWorld ();
+        }
 
-		[Some ("Test")]
-		public static int HelloWorld ()
-		{
-			var methodInfo = MethodBase.GetCurrentMethod ();
-			SomeAttribute someAttribute = Attribute.GetCustomAttribute (methodInfo, typeof (SomeAttribute)) as SomeAttribute;
-			if (someAttribute != null) {
-				return 1;
-			}
+        [Some ("Test")]
+        public static int HelloWorld ()
+        {
+            var methodInfo = MethodBase.GetCurrentMethod ();
+            SomeAttribute someAttribute = Attribute.GetCustomAttribute (methodInfo, typeof (SomeAttribute)) as SomeAttribute;
+            if (someAttribute != null) {
+                return 1;
+            }
 
-			return 0;
-		}
-	}
+            return 0;
+        }
+    }
 
-	[AttributeUsage (AttributeTargets.All)]
-	[Conditional ("NOT_DEFINED")]
-	public abstract class BaseAttribute : Attribute
-	{
-	}
+    [AttributeUsage (AttributeTargets.All)]
+    [Conditional ("NOT_DEFINED")]
+    public abstract class BaseAttribute : Attribute
+    {
+    }
 
-	public class SomeAttribute : BaseAttribute
-	{
-		public SomeAttribute (string someText)
-		{
-		}
-	}
+    public class SomeAttribute : BaseAttribute
+    {
+        public SomeAttribute (string someText)
+        {
+        }
+    }
 }

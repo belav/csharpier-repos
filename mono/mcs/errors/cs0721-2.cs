@@ -4,7 +4,7 @@
 
 static class C
 {
-	static void Foo (this C c)
-	{
-	}
+    static void Foo (this C c)
+    {
+    }
 }

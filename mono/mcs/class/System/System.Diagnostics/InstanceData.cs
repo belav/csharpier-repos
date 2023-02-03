@@ -33,28 +33,28 @@ using System.Diagnostics;
 
 namespace System.Diagnostics {
 
-	public class InstanceData {
+    public class InstanceData {
 
-		private string instanceName;
-		private CounterSample sample;
+        private string instanceName;
+        private CounterSample sample;
 
-		public InstanceData (string instanceName, CounterSample sample)
-		{
-			this.instanceName = instanceName;
-			this.sample = sample;
-		}
+        public InstanceData (string instanceName, CounterSample sample)
+        {
+            this.instanceName = instanceName;
+            this.sample = sample;
+        }
 
-		public string InstanceName {
-			get {return instanceName;}
-		}
+        public string InstanceName {
+            get {return instanceName;}
+        }
 
-		public long RawValue {
-			get {return sample.RawValue;}
-		}
+        public long RawValue {
+            get {return sample.RawValue;}
+        }
 
-		public CounterSample Sample {
-			get {return sample;}
-		}
-	}
+        public CounterSample Sample {
+            get {return sample;}
+        }
+    }
 }
 

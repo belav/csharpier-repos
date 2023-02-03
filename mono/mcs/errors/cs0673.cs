@@ -3,8 +3,8 @@
 
 public class X
 {
-	public static void Main()
-	{
-		System.Type t = typeof (System.Void);
-	}
+    public static void Main()
+    {
+        System.Type t = typeof (System.Void);
+    }
 }

@@ -36,12 +36,12 @@ namespace System.Threading.Tasks
 #endif
 {
 #if INSIDE_MONO_PARALLEL
-	public
+    public
 #endif
-	enum PopResult	{
-		Succeed,
-		Empty,
-		Abort
-	}
+    enum PopResult    {
+        Succeed,
+        Empty,
+        Abort
+    }
 }
 

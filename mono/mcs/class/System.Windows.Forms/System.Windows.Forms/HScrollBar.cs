@@ -23,7 +23,7 @@
 // Copyright (C) 2004, Novell, Inc.
 //
 // Authors:
-//	Jordi Mas i Hernandez	jordi@ximian.com
+//    Jordi Mas i Hernandez    jordi@ximian.com
 //
 
 
@@ -32,21 +32,21 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms 
 {
-	[ClassInterface (ClassInterfaceType.AutoDispatch)]
-	[ComVisible (true)]
-	public class HScrollBar : ScrollBar 
-	{
-		public HScrollBar() 
-		{			
-			vert = false; 
-		}
+    [ClassInterface (ClassInterfaceType.AutoDispatch)]
+    [ComVisible (true)]
+    public class HScrollBar : ScrollBar 
+    {
+        public HScrollBar() 
+        {            
+            vert = false; 
+        }
 
-		protected override  Size DefaultSize {
-			get { return ThemeEngine.Current.HScrollBarDefaultSize;}
-		}
+        protected override  Size DefaultSize {
+            get { return ThemeEngine.Current.HScrollBarDefaultSize;}
+        }
 
-		protected override CreateParams CreateParams {
-			get { return base.CreateParams; }
-		}
-	}
+        protected override CreateParams CreateParams {
+            get { return base.CreateParams; }
+        }
+    }
 }

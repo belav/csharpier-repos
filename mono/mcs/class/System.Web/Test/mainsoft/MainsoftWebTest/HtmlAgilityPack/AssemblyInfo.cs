@@ -21,7 +21,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("Html Agility Pack")]
 [assembly: AssemblyCopyright("Simon Mourier")] 
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]		
+[assembly: AssemblyCulture("")]        
 
 //
 // Version information for an assembly consists of the following four values:

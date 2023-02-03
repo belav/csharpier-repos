@@ -3,9 +3,9 @@
 
 class DerivedClass
 {
-	public DerivedClass ()
-	{
-		base = null;
-	}
+    public DerivedClass ()
+    {
+        base = null;
+    }
 }
 

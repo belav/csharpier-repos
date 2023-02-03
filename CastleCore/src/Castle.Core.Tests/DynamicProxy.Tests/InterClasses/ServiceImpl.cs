@@ -14,65 +14,65 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ServiceImpl : IService, IExtendedService
-	{
-		public int Sum(int b1, int b2)
-		{
-			return b1 + b2;
-		}
+    public class ServiceImpl : IService, IExtendedService
+    {
+        public int Sum(int b1, int b2)
+        {
+            return b1 + b2;
+        }
 
-		public byte Sum(byte b1, byte b2)
-		{
-			return Convert.ToByte(b1 + b2);
-		}
+        public byte Sum(byte b1, byte b2)
+        {
+            return Convert.ToByte(b1 + b2);
+        }
 
-		public long Sum(long b1, long b2)
-		{
-			return b1 + b2;
-		}
+        public long Sum(long b1, long b2)
+        {
+            return b1 + b2;
+        }
 
-		public short Sum(short b1, short b2)
-		{
-			return (short) (b1 + b2);
-		}
+        public short Sum(short b1, short b2)
+        {
+            return (short) (b1 + b2);
+        }
 
-		public float Sum(float b1, float b2)
-		{
-			return b1 + b2;
-		}
+        public float Sum(float b1, float b2)
+        {
+            return b1 + b2;
+        }
 
-		public double Sum(double b1, double b2)
-		{
-			return b1 + b2;
-		}
+        public double Sum(double b1, double b2)
+        {
+            return b1 + b2;
+        }
 
-		public UInt16 Sum(UInt16 b1, UInt16 b2)
-		{
-			return (UInt16) (b1 + b2);
-		}
+        public UInt16 Sum(UInt16 b1, UInt16 b2)
+        {
+            return (UInt16) (b1 + b2);
+        }
 
-		public UInt32 Sum(UInt32 b1, UInt32 b2)
-		{
-			return b1 + b2;
-		}
+        public UInt32 Sum(UInt32 b1, UInt32 b2)
+        {
+            return b1 + b2;
+        }
 
-		public UInt64 Sum(UInt64 b1, UInt64 b2)
-		{
-			return b1 + b2;
-		}
+        public UInt64 Sum(UInt64 b1, UInt64 b2)
+        {
+            return b1 + b2;
+        }
 
-		public bool Valid
-		{
-			get { return false; }
-		}
+        public bool Valid
+        {
+            get { return false; }
+        }
 
-		public void DoSomething()
-		{
-		}
-	}
+        public void DoSomething()
+        {
+        }
+    }
 }

@@ -34,15 +34,15 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public interface IPageableItemContainer
-	{
-		void SetPageProperties(int startRowIndex, int maximumRows, bool databind);
+    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public interface IPageableItemContainer
+    {
+        void SetPageProperties(int startRowIndex, int maximumRows, bool databind);
 
-		int MaximumRows { get; }
-		int StartRowIndex { get; }
+        int MaximumRows { get; }
+        int StartRowIndex { get; }
 
-		event EventHandler<PageEventArgs> TotalRowCountAvailable;
-	}
+        event EventHandler<PageEventArgs> TotalRowCountAvailable;
+    }
 }

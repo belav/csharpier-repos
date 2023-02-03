@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ButtonFieldBase.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -36,62 +36,62 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public abstract class ButtonFieldBase : DataControlField
-	{
-		[DefaultValueAttribute (ButtonType.Link)]
-		[WebSysDescription ("")]
-		[WebCategoryAttribute ("Appearance")]
-		public virtual ButtonType ButtonType {
-			get { return (ButtonType) ViewState.GetInt ("ButtonType", (int) ButtonType.Link); }
-			set {
-				ViewState ["ButtonType"] = value;
-				OnFieldChanged ();
-			}
-		}
+    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public abstract class ButtonFieldBase : DataControlField
+    {
+        [DefaultValueAttribute (ButtonType.Link)]
+        [WebSysDescription ("")]
+        [WebCategoryAttribute ("Appearance")]
+        public virtual ButtonType ButtonType {
+            get { return (ButtonType) ViewState.GetInt ("ButtonType", (int) ButtonType.Link); }
+            set {
+                ViewState ["ButtonType"] = value;
+                OnFieldChanged ();
+            }
+        }
 
-		[DefaultValueAttribute (false)]
-		[WebSysDescription ("")]
-		[WebCategoryAttribute ("Behavior")]
-		public virtual bool CausesValidation {
-			get { return ViewState.GetBool ("CausesValidation", false); }
-			set {
-				ViewState ["CausesValidation"] = value;
-				OnFieldChanged ();
-			}
-		}
+        [DefaultValueAttribute (false)]
+        [WebSysDescription ("")]
+        [WebCategoryAttribute ("Behavior")]
+        public virtual bool CausesValidation {
+            get { return ViewState.GetBool ("CausesValidation", false); }
+            set {
+                ViewState ["CausesValidation"] = value;
+                OnFieldChanged ();
+            }
+        }
 
-		[DefaultValueAttribute (false)]
-		[WebSysDescription ("")]
-		[WebCategoryAttribute ("Behavior")]
-		public override bool ShowHeader {
-			get { return ViewState.GetBool ("showHeader", false); }
-			set { 
-				ViewState ["showHeader"] = value;
-				OnFieldChanged ();
-			}
-		}
+        [DefaultValueAttribute (false)]
+        [WebSysDescription ("")]
+        [WebCategoryAttribute ("Behavior")]
+        public override bool ShowHeader {
+            get { return ViewState.GetBool ("showHeader", false); }
+            set { 
+                ViewState ["showHeader"] = value;
+                OnFieldChanged ();
+            }
+        }
 
-		[DefaultValueAttribute ("")]
-		[WebSysDescription ("")]
-		[WebCategoryAttribute ("Behavior")]
-		public virtual string ValidationGroup {
-			get { return ViewState.GetString ("ValidationGroup", String.Empty); }
-			set {
-				ViewState ["ValidationGroup"] = value;
-				OnFieldChanged ();
-			}
-		}
-		
-		protected override void CopyProperties (DataControlField newField)
-		{
-			base.CopyProperties (newField);
-			ButtonFieldBase field = (ButtonFieldBase) newField;
-			field.ButtonType = ButtonType;
-			field.CausesValidation = CausesValidation;
-			field.ShowHeader = ShowHeader;
-			field.ValidationGroup = ValidationGroup;
-		}
-	}
+        [DefaultValueAttribute ("")]
+        [WebSysDescription ("")]
+        [WebCategoryAttribute ("Behavior")]
+        public virtual string ValidationGroup {
+            get { return ViewState.GetString ("ValidationGroup", String.Empty); }
+            set {
+                ViewState ["ValidationGroup"] = value;
+                OnFieldChanged ();
+            }
+        }
+        
+        protected override void CopyProperties (DataControlField newField)
+        {
+            base.CopyProperties (newField);
+            ButtonFieldBase field = (ButtonFieldBase) newField;
+            field.ButtonType = ButtonType;
+            field.CausesValidation = CausesValidation;
+            field.ShowHeader = ShowHeader;
+            field.ValidationGroup = ValidationGroup;
+        }
+    }
 }

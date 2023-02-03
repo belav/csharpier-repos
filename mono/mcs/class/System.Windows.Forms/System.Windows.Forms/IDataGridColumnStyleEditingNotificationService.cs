@@ -20,16 +20,16 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public interface IDataGridColumnStyleEditingNotificationService {
-		#region Public Instance Methods
-		void ColumnStartedEditing(Control editingControl);
-		#endregion	// Public Instance Methods
-	}
+    public interface IDataGridColumnStyleEditingNotificationService {
+        #region Public Instance Methods
+        void ColumnStartedEditing(Control editingControl);
+        #endregion    // Public Instance Methods
+    }
 }

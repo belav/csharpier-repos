@@ -1,9 +1,9 @@
 //
 // CodeParameterDeclarationExpressionCollectionCas.cs - CAS unit tests for
-//	System.CodeDom.CodeParameterDeclarationExpressionCollection
+//    System.CodeDom.CodeParameterDeclarationExpressionCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,83 +37,83 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeParameterDeclarationExpressionCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeParameterDeclarationExpressionCollectionCas {
 
-		private CodeParameterDeclarationExpression cpde;
-		private CodeParameterDeclarationExpression[] array;
+        private CodeParameterDeclarationExpression cpde;
+        private CodeParameterDeclarationExpression[] array;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			cpde = new CodeParameterDeclarationExpression ();
-			array = new CodeParameterDeclarationExpression[1] { cpde };
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            cpde = new CodeParameterDeclarationExpression ();
+            array = new CodeParameterDeclarationExpression[1] { cpde };
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeParameterDeclarationExpressionCollection coll = new CodeParameterDeclarationExpressionCollection ();
-			Assert.AreEqual (0, coll.Add (cpde), "Add");
-			Assert.AreSame (cpde, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cpde), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cpde), "IndexOf");
-			coll.Insert (0, cpde);
-			coll.Remove (cpde);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeParameterDeclarationExpressionCollection coll = new CodeParameterDeclarationExpressionCollection ();
+            Assert.AreEqual (0, coll.Add (cpde), "Add");
+            Assert.AreSame (cpde, coll[0], "this[int]");
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (cpde), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (cpde), "IndexOf");
+            coll.Insert (0, cpde);
+            coll.Remove (cpde);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeParameterDeclarationExpressionCollection coll = new CodeParameterDeclarationExpressionCollection (array);
-			coll.CopyTo (array, 0);
-			Assert.AreEqual (1, coll.Add (cpde), "Add");
-			Assert.AreSame (cpde, coll[0], "this[int]");
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cpde), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cpde), "IndexOf");
-			coll.Insert (0, cpde);
-			coll.Remove (cpde);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeParameterDeclarationExpressionCollection coll = new CodeParameterDeclarationExpressionCollection (array);
+            coll.CopyTo (array, 0);
+            Assert.AreEqual (1, coll.Add (cpde), "Add");
+            Assert.AreSame (cpde, coll[0], "this[int]");
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (cpde), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (cpde), "IndexOf");
+            coll.Insert (0, cpde);
+            coll.Remove (cpde);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeParameterDeclarationExpressionCollection c = new CodeParameterDeclarationExpressionCollection ();
-			CodeParameterDeclarationExpressionCollection coll = new CodeParameterDeclarationExpressionCollection (c);
-			Assert.AreEqual (0, coll.Add (cpde), "Add");
-			Assert.AreSame (cpde, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cpde), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cpde), "IndexOf");
-			coll.Insert (0, cpde);
-			coll.Remove (cpde);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeParameterDeclarationExpressionCollection c = new CodeParameterDeclarationExpressionCollection ();
+            CodeParameterDeclarationExpressionCollection coll = new CodeParameterDeclarationExpressionCollection (c);
+            Assert.AreEqual (0, coll.Add (cpde), "Add");
+            Assert.AreSame (cpde, coll[0], "this[int]");
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (cpde), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (cpde), "IndexOf");
+            coll.Insert (0, cpde);
+            coll.Remove (cpde);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeCommentStatementCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeCommentStatementCollection).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

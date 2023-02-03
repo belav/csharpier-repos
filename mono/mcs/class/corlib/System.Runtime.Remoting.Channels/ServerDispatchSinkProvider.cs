@@ -33,36 +33,36 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-	internal class ServerDispatchSinkProvider :
-		IServerFormatterSinkProvider, IServerChannelSinkProvider
-	{
-		public ServerDispatchSinkProvider ()
-		{
-		}
+    internal class ServerDispatchSinkProvider :
+        IServerFormatterSinkProvider, IServerChannelSinkProvider
+    {
+        public ServerDispatchSinkProvider ()
+        {
+        }
 
-		public ServerDispatchSinkProvider (IDictionary properties, ICollection providerData)
-	    {
-		}
+        public ServerDispatchSinkProvider (IDictionary properties, ICollection providerData)
+        {
+        }
 
-		public IServerChannelSinkProvider Next
-		{
-			get {
-				return null;
-			}
+        public IServerChannelSinkProvider Next
+        {
+            get {
+                return null;
+            }
 
-			set {
-				throw new NotSupportedException ();
-			}
-		}
+            set {
+                throw new NotSupportedException ();
+            }
+        }
 
-		public IServerChannelSink CreateSink (IChannelReceiver channel)
-		{
-			return new ServerDispatchSink ();
-		}
+        public IServerChannelSink CreateSink (IChannelReceiver channel)
+        {
+            return new ServerDispatchSink ();
+        }
 
-		public void GetChannelData (IChannelDataStore channelData)
-		{
-			// no idea why we need this
-		}
-	}
+        public void GetChannelData (IChannelDataStore channelData)
+        {
+            // no idea why we need this
+        }
+    }
 }

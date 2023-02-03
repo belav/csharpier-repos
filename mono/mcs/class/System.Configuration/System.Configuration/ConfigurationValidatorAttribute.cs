@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationValidatorAttribute.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,32 +30,32 @@ using System;
 
 namespace System.Configuration
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public class ConfigurationValidatorAttribute : Attribute
-	{
-		Type validatorType;
-		ConfigurationValidatorBase instance;
-		
-		protected ConfigurationValidatorAttribute ()
-		{
-		}
+    [AttributeUsage (AttributeTargets.Property)]
+    public class ConfigurationValidatorAttribute : Attribute
+    {
+        Type validatorType;
+        ConfigurationValidatorBase instance;
+        
+        protected ConfigurationValidatorAttribute ()
+        {
+        }
 
-		public ConfigurationValidatorAttribute (Type validator)
-		{
-			validatorType = validator;
-		}
+        public ConfigurationValidatorAttribute (Type validator)
+        {
+            validatorType = validator;
+        }
 
-		public virtual ConfigurationValidatorBase ValidatorInstance {
-			get {
-				if (instance == null)
-					instance = (ConfigurationValidatorBase) Activator.CreateInstance (validatorType);
-				return instance;
-			}
-		}
-		
-		public Type ValidatorType {
-			get { return validatorType; }
-		}
-	}
+        public virtual ConfigurationValidatorBase ValidatorInstance {
+            get {
+                if (instance == null)
+                    instance = (ConfigurationValidatorBase) Activator.CreateInstance (validatorType);
+                return instance;
+            }
+        }
+        
+        public Type ValidatorType {
+            get { return validatorType; }
+        }
+    }
 }
 

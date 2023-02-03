@@ -2,7 +2,7 @@
 // WebScriptServiceHostFactory.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008,2009 Novell, Inc (http://www.novell.com)
 //
@@ -34,92 +34,92 @@ using System.Text;
 
 namespace System.ServiceModel.Activation
 {
-	public class WebScriptServiceHostFactory : ServiceHostFactory
-	{
-		public WebScriptServiceHostFactory ()
-		{
-			ContractDescriptionGenerator.RegisterGetOperationContractAttributeExtender (WebAttributesOCEExtender);
-		}
+    public class WebScriptServiceHostFactory : ServiceHostFactory
+    {
+        public WebScriptServiceHostFactory ()
+        {
+            ContractDescriptionGenerator.RegisterGetOperationContractAttributeExtender (WebAttributesOCEExtender);
+        }
 
-		static bool WebAttributesOCEExtender (MethodBase method, object[] customAttributes, ref OperationContractAttribute oca)
-		{
-			int caLength = customAttributes == null ? 0 : customAttributes.Length;
-			if (method == null && caLength == 0)
-				return false;
+        static bool WebAttributesOCEExtender (MethodBase method, object[] customAttributes, ref OperationContractAttribute oca)
+        {
+            int caLength = customAttributes == null ? 0 : customAttributes.Length;
+            if (method == null && caLength == 0)
+                return false;
 
-			if (caLength == 0) {
-				customAttributes = method.GetCustomAttributes (false);
+            if (caLength == 0) {
+                customAttributes = method.GetCustomAttributes (false);
 
-				if (customAttributes.Length == 0)
-					return false;
-			}
+                if (customAttributes.Length == 0)
+                    return false;
+            }
 
-			bool foundWebAttribute = false;
-			foreach (object o in customAttributes) {
-				if (o is WebInvokeAttribute || o is WebGetAttribute) {
-					foundWebAttribute = true;
-					break;
-				}
-			}
+            bool foundWebAttribute = false;
+            foreach (object o in customAttributes) {
+                if (o is WebInvokeAttribute || o is WebGetAttribute) {
+                    foundWebAttribute = true;
+                    break;
+                }
+            }
 
-			if (!foundWebAttribute)
-				return false;
+            if (!foundWebAttribute)
+                return false;
 
-			// LAMESPEC: .NET allows for contract methods decorated only with
-			// Web{Get,Invoke}Attribute and _without_ the OperationContractAttribute.
-			if (oca == null)
-				oca = new OperationContractAttribute ();
-			
-			return true;
-		}
-		
-		protected override ServiceHost CreateServiceHost (Type serviceType, Uri [] baseAddresses)
-		{
-			if (serviceType == null)
-				throw new ArgumentNullException ("serviceType");
-			return new WebScriptServiceHost (serviceType, baseAddresses);
-		}
+            // LAMESPEC: .NET allows for contract methods decorated only with
+            // Web{Get,Invoke}Attribute and _without_ the OperationContractAttribute.
+            if (oca == null)
+                oca = new OperationContractAttribute ();
+            
+            return true;
+        }
+        
+        protected override ServiceHost CreateServiceHost (Type serviceType, Uri [] baseAddresses)
+        {
+            if (serviceType == null)
+                throw new ArgumentNullException ("serviceType");
+            return new WebScriptServiceHost (serviceType, baseAddresses);
+        }
 
-		class WebScriptServiceHost : ServiceHost
-		{
-			public WebScriptServiceHost (Type serviceType, params Uri [] baseAddresses)
-				: base (serviceType, baseAddresses)
-			{
-				if (serviceType == null)
-					throw new ArgumentNullException ("serviceType");
-			}
+        class WebScriptServiceHost : ServiceHost
+        {
+            public WebScriptServiceHost (Type serviceType, params Uri [] baseAddresses)
+                : base (serviceType, baseAddresses)
+            {
+                if (serviceType == null)
+                    throw new ArgumentNullException ("serviceType");
+            }
 
 #if false
-			protected override void ApplyConfiguration ()
-			{
-				base.ApplyConfiguration ();
+            protected override void ApplyConfiguration ()
+            {
+                base.ApplyConfiguration ();
 
-				if (Description.Endpoints.Count > 1)
-					throw new InvalidOperationException ("This service host factory does not allow custom endpoint configuration");
+                if (Description.Endpoints.Count > 1)
+                    throw new InvalidOperationException ("This service host factory does not allow custom endpoint configuration");
 
-				if (ServiceHostingEnvironment.AspNetCompatibilityEnabled) {
-					foreach (Type iface in Description.ServiceType.GetInterfaces ())
-						if (iface.GetCustomAttributes (typeof (ServiceContractAttribute), true).Length > 0)
-							AddServiceEndpoint (iface, new WebHttpBinding (), new Uri (String.Empty, UriKind.Relative));
-				}
-			}
+                if (ServiceHostingEnvironment.AspNetCompatibilityEnabled) {
+                    foreach (Type iface in Description.ServiceType.GetInterfaces ())
+                        if (iface.GetCustomAttributes (typeof (ServiceContractAttribute), true).Length > 0)
+                            AddServiceEndpoint (iface, new WebHttpBinding (), new Uri (String.Empty, UriKind.Relative));
+                }
+            }
 #endif
 
-			protected override void OnOpening ()
-			{
-				base.OnOpening ();
+            protected override void OnOpening ()
+            {
+                base.OnOpening ();
 
-				if (Description.Endpoints.Count == 0) {
-					if (ImplementedContracts.Count > 1)
-						throw new InvalidOperationException ("WebScriptServiceHostFactory does not allow more than one service contract in the service type");
-					foreach (var pair in ImplementedContracts) // actually one
-						AddServiceEndpoint (pair.Key, new WebHttpBinding (), new Uri (String.Empty, UriKind.Relative));
-				}
+                if (Description.Endpoints.Count == 0) {
+                    if (ImplementedContracts.Count > 1)
+                        throw new InvalidOperationException ("WebScriptServiceHostFactory does not allow more than one service contract in the service type");
+                    foreach (var pair in ImplementedContracts) // actually one
+                        AddServiceEndpoint (pair.Key, new WebHttpBinding (), new Uri (String.Empty, UriKind.Relative));
+                }
 
-				foreach (ServiceEndpoint se in Description.Endpoints)
-					if (se.Behaviors.Find<WebHttpBehavior> () == null)
-						se.Behaviors.Insert (0, new WebScriptEnablingBehavior ());
-			}
-		}
-	}
+                foreach (ServiceEndpoint se in Description.Endpoints)
+                    if (se.Behaviors.Find<WebHttpBehavior> () == null)
+                        se.Behaviors.Insert (0, new WebScriptEnablingBehavior ());
+            }
+        }
+    }
 }

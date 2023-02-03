@@ -3,11 +3,11 @@
 
 class X {
 
-	static void Main ()
-	{
-		foreach (int i in new int[] { 2, 3 }) {
-		    i = 4;
-		}
-	}
+    static void Main ()
+    {
+        foreach (int i in new int[] { 2, 3 }) {
+            i = 4;
+        }
+    }
 }
-	
+    

@@ -2,7 +2,7 @@
 // System.Web.Configuration.WebContext
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,43 +34,43 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public sealed class WebContext
-	{
-		WebApplicationLevel pathLevel;
-		string site;
-		string applicationPath;
-		string path;
-		string locationSubPath;
+    public sealed class WebContext
+    {
+        WebApplicationLevel pathLevel;
+        string site;
+        string applicationPath;
+        string path;
+        string locationSubPath;
 
-		public WebContext (WebApplicationLevel pathLevel, string site, string applicationPath, string path, string locationSubPath)
-		{
-			this.pathLevel = pathLevel;
-			this.site = site;
-			this.applicationPath = applicationPath;
-			this.path = path;
-			this.locationSubPath = locationSubPath;
-		}
+        public WebContext (WebApplicationLevel pathLevel, string site, string applicationPath, string path, string locationSubPath)
+        {
+            this.pathLevel = pathLevel;
+            this.site = site;
+            this.applicationPath = applicationPath;
+            this.path = path;
+            this.locationSubPath = locationSubPath;
+        }
 
-		public WebApplicationLevel ApplicationLevel {
-			get { return pathLevel; }
-		}
+        public WebApplicationLevel ApplicationLevel {
+            get { return pathLevel; }
+        }
 
-		public string ApplicationPath {
-			get { return applicationPath; }
-		}
+        public string ApplicationPath {
+            get { return applicationPath; }
+        }
 
-		public string LocationSubPath {
-			get { return locationSubPath; }
-		}
+        public string LocationSubPath {
+            get { return locationSubPath; }
+        }
 
-		public string Path {
-			get { return path; }
-		}
+        public string Path {
+            get { return path; }
+        }
 
-		public string Site {
-			get { return site; }
-		}
-	}
+        public string Site {
+            get { return site; }
+        }
+    }
 }
 
 

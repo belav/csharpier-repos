@@ -1,6 +1,6 @@
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2011 Novell, Inc.  http://www.novell.com
 //
@@ -52,61 +52,61 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class EndToEndTracingElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty activity_tracing;
-		static ConfigurationProperty message_flow_tracing;
-		static ConfigurationProperty propagate_activity;
+    public sealed class EndToEndTracingElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty activity_tracing;
+        static ConfigurationProperty message_flow_tracing;
+        static ConfigurationProperty propagate_activity;
 
 
-		static EndToEndTracingElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
+        static EndToEndTracingElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
 
-			activity_tracing = new ConfigurationProperty ("acticityTracing", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
+            activity_tracing = new ConfigurationProperty ("acticityTracing", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
 
-			message_flow_tracing = new ConfigurationProperty ("messageFlowTracing", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
+            message_flow_tracing = new ConfigurationProperty ("messageFlowTracing", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
 
-			propagate_activity = new ConfigurationProperty ("propagateActivity", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
+            propagate_activity = new ConfigurationProperty ("propagateActivity", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
 
-			properties.Add (activity_tracing);
-			properties.Add (message_flow_tracing);
-			properties.Add (propagate_activity);
-		}
+            properties.Add (activity_tracing);
+            properties.Add (message_flow_tracing);
+            properties.Add (propagate_activity);
+        }
 
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("activityTracing",
-			 DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool ActivityTracing {
-			get { return (bool) base [activity_tracing]; }
-			set { base [activity_tracing] = value; }
-		}
+        [ConfigurationProperty ("activityTracing",
+             DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool ActivityTracing {
+            get { return (bool) base [activity_tracing]; }
+            set { base [activity_tracing] = value; }
+        }
 
-		[ConfigurationProperty ("messageFlowTracing",
-			 DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool MessageFlowTracing {
-			get { return (bool) base [message_flow_tracing]; }
-			set { base [message_flow_tracing] = value; }
-		}
+        [ConfigurationProperty ("messageFlowTracing",
+             DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool MessageFlowTracing {
+            get { return (bool) base [message_flow_tracing]; }
+            set { base [message_flow_tracing] = value; }
+        }
 
-		[ConfigurationProperty ("propagateActivity",
-			 DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool PropagateActivity {
-			get { return (bool) base [propagate_activity]; }
-			set { base [propagate_activity] = value; }
-		}
+        [ConfigurationProperty ("propagateActivity",
+             DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool PropagateActivity {
+            get { return (bool) base [propagate_activity]; }
+            set { base [propagate_activity] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
-	}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
+    }
 
 }

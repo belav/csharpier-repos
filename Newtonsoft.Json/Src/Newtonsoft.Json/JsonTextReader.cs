@@ -2619,7 +2619,7 @@ namespace Newtonsoft.Json
         /// Gets a value indicating whether the class can return line information.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if <see cref="JsonTextReader.LineNumber"/> and <see cref="JsonTextReader.LinePosition"/> can be provided; otherwise, <c>false</c>.
+        ///     <c>true</c> if <see cref="JsonTextReader.LineNumber"/> and <see cref="JsonTextReader.LinePosition"/> can be provided; otherwise, <c>false</c>.
         /// </returns>
         public bool HasLineInfo()
         {

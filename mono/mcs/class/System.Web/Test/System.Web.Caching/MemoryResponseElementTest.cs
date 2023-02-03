@@ -1,4 +1,4 @@
-﻿//
+//
 // MemoryResponseElementTest.cs
 //
 // Authors:
@@ -37,39 +37,39 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {
-	[TestFixture]
-	public class MemoryResponseElementTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			MemoryResponseElement mre;
+    [TestFixture]
+    public class MemoryResponseElementTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            MemoryResponseElement mre;
 
-			Assert.Throws<ArgumentNullException> (() => {
-				mre = new MemoryResponseElement (null, 0);
-			}, "#A1");
+            Assert.Throws<ArgumentNullException> (() => {
+                mre = new MemoryResponseElement (null, 0);
+            }, "#A1");
 
-			Assert.Throws<ArgumentOutOfRangeException> (() => {
-				mre = new MemoryResponseElement (new byte[1], -1);
-			}, "#A2");
+            Assert.Throws<ArgumentOutOfRangeException> (() => {
+                mre = new MemoryResponseElement (new byte[1], -1);
+            }, "#A2");
 
-			Assert.Throws<ArgumentOutOfRangeException> (() => {
-				mre = new MemoryResponseElement (new byte[1], 2);
-			}, "#A2");
+            Assert.Throws<ArgumentOutOfRangeException> (() => {
+                mre = new MemoryResponseElement (new byte[1], 2);
+            }, "#A2");
 
-			var b = new byte[0];
-			mre = new MemoryResponseElement (b, 0);
-			Assert.AreEqual (b, mre.Buffer, "#B1-1");
-			Assert.AreEqual (0, mre.Length, "#B1-2");
+            var b = new byte[0];
+            mre = new MemoryResponseElement (b, 0);
+            Assert.AreEqual (b, mre.Buffer, "#B1-1");
+            Assert.AreEqual (0, mre.Length, "#B1-2");
 
-			b = new byte[10];
-			mre = new MemoryResponseElement (b, 10);
-			Assert.AreEqual (b, mre.Buffer, "#C1-1");
-			Assert.AreEqual (10, mre.Length, "#C1-2");
+            b = new byte[10];
+            mre = new MemoryResponseElement (b, 10);
+            Assert.AreEqual (b, mre.Buffer, "#C1-1");
+            Assert.AreEqual (10, mre.Length, "#C1-2");
 
-			mre = new MemoryResponseElement (b, 5);
-			Assert.AreEqual (b, mre.Buffer, "#D1-1");
-			Assert.AreEqual (5, mre.Length, "#D1-2");
-		}
-	}
+            mre = new MemoryResponseElement (b, 5);
+            Assert.AreEqual (b, mre.Buffer, "#D1-1");
+            Assert.AreEqual (5, mre.Length, "#D1-2");
+        }
+    }
 }

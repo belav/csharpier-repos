@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace System.CommandLine.Rendering
@@ -69,6 +69,6 @@ namespace System.CommandLine.Rendering
 
         public bool IsOverwrittenOnRender { get; }
 
-        public override string ToString() => $" {Width}w × {Height}h @ {Left}x, {Top}y";
+        public override string ToString() => $" {Width}w � {Height}h @ {Left}x, {Top}y";
     }
 }

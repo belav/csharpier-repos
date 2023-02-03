@@ -30,14 +30,14 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public sealed class ReferralCallback
-	{
-		public ReferralCallback ()
-		{
-		}
+    public sealed class ReferralCallback
+    {
+        public ReferralCallback ()
+        {
+        }
 
-		public DereferenceConnectionCallback DereferenceConnection { get; set; }
-		public NotifyOfNewConnectionCallback NotifyNewConnection { get; set; }
-		public QueryForConnectionCallback QueryForConnection { get; set; }
-	}
+        public DereferenceConnectionCallback DereferenceConnection { get; set; }
+        public NotifyOfNewConnectionCallback NotifyNewConnection { get; set; }
+        public QueryForConnectionCallback QueryForConnection { get; set; }
+    }
 }

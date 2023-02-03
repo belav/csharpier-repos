@@ -2,7 +2,7 @@
 // X509CertificateValidatorTest.cs
 //
 // Author:
-//	Alexander Köplinger <alkpli@microsoft.com>
+//    Alexander Köplinger <alkpli@microsoft.com>
 //
 // Copyright (C) 2017 Microsoft
 //
@@ -32,14 +32,14 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class X509CertificateValidatorTest
-	{
-		[Test]
-		public void ConstructorTest ()
-		{
-			Assert.NotNull (X509CertificateValidator.CreateChainTrustValidator (false, new X509ChainPolicy ()));
-			Assert.NotNull (X509CertificateValidator.CreatePeerOrChainTrustValidator (false, new X509ChainPolicy ()));
-		}
-	}
+    [TestFixture]
+    public class X509CertificateValidatorTest
+    {
+        [Test]
+        public void ConstructorTest ()
+        {
+            Assert.NotNull (X509CertificateValidator.CreateChainTrustValidator (false, new X509ChainPolicy ()));
+            Assert.NotNull (X509CertificateValidator.CreatePeerOrChainTrustValidator (false, new X509ChainPolicy ()));
+        }
+    }
 }

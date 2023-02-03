@@ -2,7 +2,7 @@
 // PolicyValidationException.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,28 +30,28 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-	[Serializable]
-	public class PolicyValidationException : Exception
-	{
-		public PolicyValidationException ()
-			: this ("PolicyValidation exception.")
-		{
-		}
+    [Serializable]
+    public class PolicyValidationException : Exception
+    {
+        public PolicyValidationException ()
+            : this ("PolicyValidation exception.")
+        {
+        }
 
-		public PolicyValidationException (string message)
-			: this (message, null)
-		{
-		}
+        public PolicyValidationException (string message)
+            : this (message, null)
+        {
+        }
 
-		protected PolicyValidationException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected PolicyValidationException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
 
-		public PolicyValidationException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-	}
+        public PolicyValidationException (string message, Exception innerException)
+            : base (message, innerException)
+        {
+        }
+    }
 }

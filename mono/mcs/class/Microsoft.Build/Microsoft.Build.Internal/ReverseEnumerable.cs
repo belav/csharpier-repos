@@ -1,4 +1,4 @@
-﻿//
+//
 // ReverseEnumerable.cs
 //
 // Author:

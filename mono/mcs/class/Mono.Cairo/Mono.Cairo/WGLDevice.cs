@@ -1,12 +1,12 @@
-ï»¿//
+//
 // Mono.Cairo.Device.cs
 //
 // Authors:
-//			JP BruyÃ¨re (jp_bruyere@hotmail.com)
+//            JP Bruyère (jp_bruyere@hotmail.com)
 //
 // This is an OO wrapper API for the Cairo API
 //
-// Copyright (C) 2016 JP BruyÃ¨re
+// Copyright (C) 2016 JP Bruyère
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,15 +31,15 @@ using System;
 
 namespace Cairo
 {
-	public class WGLDevice : Device
-	{
-		public WGLDevice (IntPtr hglrc) : base (NativeMethods.cairo_wgl_device_create (hglrc), true)
-		{
-		}
+    public class WGLDevice : Device
+    {
+        public WGLDevice (IntPtr hglrc) : base (NativeMethods.cairo_wgl_device_create (hglrc), true)
+        {
+        }
 
-		public IntPtr Context {
-			get { return NativeMethods.cairo_wgl_device_get_context (Handle); }
-		}
-	}
+        public IntPtr Context {
+            get { return NativeMethods.cairo_wgl_device_get_context (Handle); }
+        }
+    }
 }
 

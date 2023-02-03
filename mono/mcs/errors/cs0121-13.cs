@@ -3,17 +3,17 @@
 
 class C
 {
-	public static void Main ()
-	{
-		var d = new C ();
-		d.Foo (b: 1, x: "", a : 2);
-	}
+    public static void Main ()
+    {
+        var d = new C ();
+        d.Foo (b: 1, x: "", a : 2);
+    }
 
-	public void Foo (int a, long b, params string[] x)
-	{
-	}
+    public void Foo (int a, long b, params string[] x)
+    {
+    }
 
-	public void Foo (long b, int a, params string[] x)
-	{
-	}
+    public void Foo (long b, int a, params string[] x)
+    {
+    }
 }

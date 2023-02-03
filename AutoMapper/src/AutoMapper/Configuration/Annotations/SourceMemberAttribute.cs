@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.Configuration.Annotations;
+namespace AutoMapper.Configuration.Annotations;
 
 /// <summary>
 /// Specify the source member to map from. Can only reference a member on the <see cref="AutoMapAttribute.SourceType" /> type

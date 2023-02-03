@@ -33,7 +33,7 @@
 
 using System;
 using System.IO;                        // StreamReader, TextReader
-using System.Text;			// Encoding
+using System.Text;            // Encoding
 using System.Text.RegularExpressions;   // Regex
 using C5;
 using SCG = System.Collections.Generic;

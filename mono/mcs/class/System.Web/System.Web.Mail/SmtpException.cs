@@ -32,7 +32,7 @@ namespace System.Web.Mail {
 
     // an exception thrown when an smtp exception occurs
     internal class SmtpException : IOException {
-	public SmtpException( string message ) : base( message ) {}
+    public SmtpException( string message ) : base( message ) {}
     }
 
 }

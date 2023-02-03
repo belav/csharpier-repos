@@ -2,7 +2,7 @@
 // SafeX509ChainHandle.cs
 //
 // Authors:
-//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -34,20 +34,20 @@ using System.Security;
 
 namespace Microsoft.Win32.SafeHandles
 {
-	public sealed class SafeX509ChainHandle : SafeHandleZeroOrMinusOneIsInvalid
-	{
-		internal SafeX509ChainHandle (IntPtr handle)
-			: base (true)
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class SafeX509ChainHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        internal SafeX509ChainHandle (IntPtr handle)
+            : base (true)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected override bool ReleaseHandle ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override bool ReleaseHandle ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 
 #endif

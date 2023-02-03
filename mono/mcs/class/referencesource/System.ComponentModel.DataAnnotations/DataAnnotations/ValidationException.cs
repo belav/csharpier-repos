@@ -1,4 +1,4 @@
-﻿#if !SILVERLIGHT
+#if !SILVERLIGHT
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Security;

@@ -29,11 +29,11 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	sealed class WizardLayoutContainer : WebControl
-	{
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			RenderChildren (writer);
-		}
-	}
+    sealed class WizardLayoutContainer : WebControl
+    {
+        protected internal override void Render (HtmlTextWriter writer)
+        {
+            RenderChildren (writer);
+        }
+    }
 }

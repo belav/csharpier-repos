@@ -40,25 +40,25 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting {
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ObjectHandle : MarshalByRefObject, IObjectHandle {
-		private object _wrapped;
-		
-		public ObjectHandle (object o)
-		{
-			_wrapped = o;
-		}
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class ObjectHandle : MarshalByRefObject, IObjectHandle {
+        private object _wrapped;
+        
+        public ObjectHandle (object o)
+        {
+            _wrapped = o;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return base.InitializeLifetimeService ();
-		}
+        public override object InitializeLifetimeService ()
+        {
+            return base.InitializeLifetimeService ();
+        }
 
-		public object Unwrap ()
-		{
-			return _wrapped;
-		}
-	}
+        public object Unwrap ()
+        {
+            return _wrapped;
+        }
+    }
 }
 

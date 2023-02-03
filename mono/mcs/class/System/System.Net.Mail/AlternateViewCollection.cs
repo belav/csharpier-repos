@@ -2,7 +2,7 @@
 // System.Net.Mail.AlternateViewCollection.cs
 //
 // Author:
-//	John Luke (john.luke@gmail.com)
+//    John Luke (john.luke@gmail.com)
 //
 // Copyright (C) John Luke, 2005
 //
@@ -32,51 +32,51 @@ using System.Collections.ObjectModel;
 using System.Net.Mime;
 
 namespace System.Net.Mail {
-	public sealed class AlternateViewCollection : Collection<AlternateView>, IDisposable
-	{
-		#region Fields
-		
-		#endregion // Fields
+    public sealed class AlternateViewCollection : Collection<AlternateView>, IDisposable
+    {
+        #region Fields
+        
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		internal AlternateViewCollection ()
-		{
-		}
+        internal AlternateViewCollection ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public void Dispose ()
-		{
-		}
+        public void Dispose ()
+        {
+        }
 
-		protected override void ClearItems ()
-		{
-			base.ClearItems ();
-		}
+        protected override void ClearItems ()
+        {
+            base.ClearItems ();
+        }
 
-		protected override void InsertItem (int index, AlternateView item)
-		{
-			base.InsertItem (index, item);
-		}
+        protected override void InsertItem (int index, AlternateView item)
+        {
+            base.InsertItem (index, item);
+        }
 
-		protected override void RemoveItem (int index)
-		{
-			base.RemoveItem (index);
-		}
+        protected override void RemoveItem (int index)
+        {
+            base.RemoveItem (index);
+        }
 
-		protected override void SetItem (int index, AlternateView item)
-		{
-			base.SetItem (index, item);
-		}
+        protected override void SetItem (int index, AlternateView item)
+        {
+            base.SetItem (index, item);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 

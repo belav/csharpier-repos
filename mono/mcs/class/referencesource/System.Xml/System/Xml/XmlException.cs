@@ -98,7 +98,7 @@ namespace System.Xml {
         public XmlException(String message, Exception innerException) : this (message, innerException, 0, 0) {
         } 
 
-	//provided to meet ECMA standards
+    //provided to meet ECMA standards
         public XmlException(String message, Exception innerException, int lineNumber, int linePosition) : 
             this( message, innerException, lineNumber, linePosition, null ) {
         }

@@ -3,12 +3,12 @@
 
 namespace OtherTest
 {
-	public static class Program
-	{
-		static void MainD (object p)
-		{
-			if (p is String)
-				(void)((string) p).ToString ();
-		}
-	}
+    public static class Program
+    {
+        static void MainD (object p)
+        {
+            if (p is String)
+                (void)((string) p).ToString ();
+        }
+    }
 }

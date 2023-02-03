@@ -31,7 +31,7 @@
 using System;
 
 namespace System.Xml.Serialization {
-	
-	public delegate void XmlSerializationCollectionFixupCallback (object collection, object collectionItems);
+    
+    public delegate void XmlSerializationCollectionFixupCallback (object collection, object collectionItems);
 }
 

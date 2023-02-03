@@ -2,7 +2,7 @@
 // IssuedTokenClientCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,69 +35,69 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public sealed class IssuedTokenClientCredential
-	{
-		internal IssuedTokenClientCredential ()
-		{
-		}
+    [MonoTODO]
+    public sealed class IssuedTokenClientCredential
+    {
+        internal IssuedTokenClientCredential ()
+        {
+        }
 
-		bool cache = true;
-		Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> behaviors =
-			new Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> ();
-		SecurityKeyEntropyMode entropy = SecurityKeyEntropyMode.CombinedEntropy;
-		KeyedByTypeCollection<IEndpointBehavior> local_behaviors =
-			new KeyedByTypeCollection<IEndpointBehavior> ();
-		EndpointAddress local_issuer_address;
-		Binding local_issuer_binding;
-		TimeSpan max_cache_time = TimeSpan.MaxValue;
-		// FIXME: could be related to LocalClientSecuritysettings.CookieRenewalThresholdPercentage ?
-		int renewal_threshold = 60;
+        bool cache = true;
+        Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> behaviors =
+            new Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> ();
+        SecurityKeyEntropyMode entropy = SecurityKeyEntropyMode.CombinedEntropy;
+        KeyedByTypeCollection<IEndpointBehavior> local_behaviors =
+            new KeyedByTypeCollection<IEndpointBehavior> ();
+        EndpointAddress local_issuer_address;
+        Binding local_issuer_binding;
+        TimeSpan max_cache_time = TimeSpan.MaxValue;
+        // FIXME: could be related to LocalClientSecuritysettings.CookieRenewalThresholdPercentage ?
+        int renewal_threshold = 60;
 
-		internal IssuedTokenClientCredential Clone ()
-		{
-			var ret = (IssuedTokenClientCredential) MemberwiseClone ();
-			ret.local_behaviors = new KeyedByTypeCollection<IEndpointBehavior> (local_behaviors);
-			ret.behaviors = new Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> (behaviors);
-			return ret;
-		}
+        internal IssuedTokenClientCredential Clone ()
+        {
+            var ret = (IssuedTokenClientCredential) MemberwiseClone ();
+            ret.local_behaviors = new KeyedByTypeCollection<IEndpointBehavior> (local_behaviors);
+            ret.behaviors = new Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> (behaviors);
+            return ret;
+        }
 
-		public bool CacheIssuedTokens {
-			get { return cache; }
-			set { cache = value; }
-		}
+        public bool CacheIssuedTokens {
+            get { return cache; }
+            set { cache = value; }
+        }
 
-		public int IssuedTokenRenewalThresholdPercentage {
-			get { return renewal_threshold; }
-			set { renewal_threshold = value; }
-		}
+        public int IssuedTokenRenewalThresholdPercentage {
+            get { return renewal_threshold; }
+            set { renewal_threshold = value; }
+        }
 
-		public Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> IssuerChannelBehaviors {
-			get { return behaviors; }
-		}
+        public Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> IssuerChannelBehaviors {
+            get { return behaviors; }
+        }
 
-		public SecurityKeyEntropyMode DefaultKeyEntropyMode {
-			get { return entropy; }
-			set { entropy = value; }
-		}
+        public SecurityKeyEntropyMode DefaultKeyEntropyMode {
+            get { return entropy; }
+            set { entropy = value; }
+        }
 
-		public KeyedByTypeCollection<IEndpointBehavior> LocalIssuerChannelBehaviors { 
-			get { return local_behaviors; }
-		}
+        public KeyedByTypeCollection<IEndpointBehavior> LocalIssuerChannelBehaviors { 
+            get { return local_behaviors; }
+        }
 
-		public EndpointAddress LocalIssuerAddress {
-			get { return local_issuer_address; }
-			set { local_issuer_address = value; }
-		}
+        public EndpointAddress LocalIssuerAddress {
+            get { return local_issuer_address; }
+            set { local_issuer_address = value; }
+        }
 
-		public Binding LocalIssuerBinding {
-			get { return local_issuer_binding; }
-			set { local_issuer_binding = value; }
-		}
+        public Binding LocalIssuerBinding {
+            get { return local_issuer_binding; }
+            set { local_issuer_binding = value; }
+        }
 
-		public TimeSpan MaxIssuedTokenCachingTime {
-			get { return max_cache_time; }
-			set { max_cache_time = value; }
-		}
-	}
+        public TimeSpan MaxIssuedTokenCachingTime {
+            get { return max_cache_time; }
+            set { max_cache_time = value; }
+        }
+    }
 }

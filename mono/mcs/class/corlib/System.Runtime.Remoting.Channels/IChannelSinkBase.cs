@@ -33,9 +33,9 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IChannelSinkBase
-	{
-		IDictionary Properties { get; }
-	}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IChannelSinkBase
+    {
+        IDictionary Properties { get; }
+    }
 }

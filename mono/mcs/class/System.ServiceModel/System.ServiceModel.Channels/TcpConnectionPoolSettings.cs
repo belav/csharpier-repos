@@ -2,7 +2,7 @@
 // TcpConnectionPoolSettings.cs
 //
 // Authors:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -34,47 +34,47 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class TcpConnectionPoolSettings
-	{
-		internal TcpConnectionPoolSettings ()
-		{
-		}
+    public sealed class TcpConnectionPoolSettings
+    {
+        internal TcpConnectionPoolSettings ()
+        {
+        }
 
-		string group_name = "default";
-		TimeSpan idle_timeout = TimeSpan.FromSeconds (120);
-		TimeSpan lease_timeout = TimeSpan.FromSeconds (300);
-		int max_conn = 10;
+        string group_name = "default";
+        TimeSpan idle_timeout = TimeSpan.FromSeconds (120);
+        TimeSpan lease_timeout = TimeSpan.FromSeconds (300);
+        int max_conn = 10;
 
-		internal void CopyPropertiesFrom (TcpConnectionPoolSettings other)
-		{
-			group_name = other.group_name;
-			idle_timeout = other.idle_timeout;
-			lease_timeout = other.lease_timeout;
-			max_conn = other.max_conn;
-		}
+        internal void CopyPropertiesFrom (TcpConnectionPoolSettings other)
+        {
+            group_name = other.group_name;
+            idle_timeout = other.idle_timeout;
+            lease_timeout = other.lease_timeout;
+            max_conn = other.max_conn;
+        }
 
-		[MonoTODO]
-		public string GroupName {
-			get { return group_name; }
-			set { group_name = value; }
-		}
+        [MonoTODO]
+        public string GroupName {
+            get { return group_name; }
+            set { group_name = value; }
+        }
 
-		[MonoTODO]
-		public TimeSpan IdleTimeout {
-			get { return idle_timeout; }
-			set { idle_timeout = value; }
-		}
+        [MonoTODO]
+        public TimeSpan IdleTimeout {
+            get { return idle_timeout; }
+            set { idle_timeout = value; }
+        }
 
-		[MonoTODO]
-		public TimeSpan LeaseTimeout {
-			get { return lease_timeout; }
-			set { lease_timeout = value; }
-		}
+        [MonoTODO]
+        public TimeSpan LeaseTimeout {
+            get { return lease_timeout; }
+            set { lease_timeout = value; }
+        }
 
-		[MonoTODO]
-		public int MaxOutboundConnectionsPerEndpoint {
-			get { return max_conn; }
-			set { max_conn = value; }
-		}
-	}
+        [MonoTODO]
+        public int MaxOutboundConnectionsPerEndpoint {
+            get { return max_conn; }
+            set { max_conn = value; }
+        }
+    }
 }

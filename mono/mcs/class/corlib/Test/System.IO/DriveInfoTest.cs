@@ -2,7 +2,7 @@
 // DriveInfoTest.cs - NUnit Test Cases for System.IO.DriveInfo class
 //
 // Authors
-//	Alexander Köplinger <alkpli@microsoft.com>
+//    Alexander Köplinger <alkpli@microsoft.com>
 // 
 // Copyright (c) 2017 Xamarin, Inc.
 //
@@ -38,75 +38,75 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IO
 {
-	[TestFixture]
-	public class DriveInfoTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			if (!RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
-				Assert.Ignore ("The Jenkins builders don't have '/' mounted, just testing Windows for now.");
+    [TestFixture]
+    public class DriveInfoTest
+    {
+        [Test]
+        public void Constructor ()
+        {
+            if (!RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
+                Assert.Ignore ("The Jenkins builders don't have '/' mounted, just testing Windows for now.");
 
-			var drive = new DriveInfo ("C:\\");
-			ValidateDriveInfo (drive);
-			Assert.AreEqual (DriveType.Fixed, drive.DriveType);
-		}
+            var drive = new DriveInfo ("C:\\");
+            ValidateDriveInfo (drive);
+            Assert.AreEqual (DriveType.Fixed, drive.DriveType);
+        }
 
-		[Test]
-		public void ConstructorThrowsOnNonExistingDrive ()
-		{
-			Assert.Throws<ArgumentException> (() => new DriveInfo ("monodriveinfotest"));
-		}
+        [Test]
+        public void ConstructorThrowsOnNonExistingDrive ()
+        {
+            Assert.Throws<ArgumentException> (() => new DriveInfo ("monodriveinfotest"));
+        }
 
-		[Test]
-		[Category ("NotWasm")] // it doesn't know about 'memfs' drive format
-		public void ConstructorGetsValidDriveFromNonDriveString ()
-		{
-			if (!RuntimeInformation.IsOSPlatform (OSPlatform.Windows) && !RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
-				Assert.Ignore ("Some Linux-hosted CI builders don't have '/' mounted, just testing Windows and MacOS for now.");
-			
-			var tempPath = Path.GetTempPath ();
-			var drive = new DriveInfo (tempPath);
-			ValidateDriveInfo (drive);
+        [Test]
+        [Category ("NotWasm")] // it doesn't know about 'memfs' drive format
+        public void ConstructorGetsValidDriveFromNonDriveString ()
+        {
+            if (!RuntimeInformation.IsOSPlatform (OSPlatform.Windows) && !RuntimeInformation.IsOSPlatform (OSPlatform.OSX))
+                Assert.Ignore ("Some Linux-hosted CI builders don't have '/' mounted, just testing Windows and MacOS for now.");
+            
+            var tempPath = Path.GetTempPath ();
+            var drive = new DriveInfo (tempPath);
+            ValidateDriveInfo (drive);
 
-			drive = new DriveInfo (tempPath.ToUpper());
-			ValidateDriveInfo (drive);
-		}
+            drive = new DriveInfo (tempPath.ToUpper());
+            ValidateDriveInfo (drive);
+        }
 
-		[Test]
-		public void GetDrivesNotEmpty ()
-		{
-			var drives = DriveInfo.GetDrives ();
-			CollectionAssert.IsNotEmpty (drives);
-		}
+        [Test]
+        public void GetDrivesNotEmpty ()
+        {
+            var drives = DriveInfo.GetDrives ();
+            CollectionAssert.IsNotEmpty (drives);
+        }
 
-		[Test]
-		[Category ("NotWasm")]
-		public void GetDrivesValidInfo ()
-		{
-			var drives = DriveInfo.GetDrives ();
+        [Test]
+        [Category ("NotWasm")]
+        public void GetDrivesValidInfo ()
+        {
+            var drives = DriveInfo.GetDrives ();
 
-			foreach (var d in drives) {
-				ValidateDriveInfo (d);
-			}
-		}
+            foreach (var d in drives) {
+                ValidateDriveInfo (d);
+            }
+        }
 
-		void ValidateDriveInfo (DriveInfo d)
-		{
-			AssertHelper.IsNotEmpty (d.Name);
-			AssertHelper.IsNotEmpty (d.VolumeLabel);
-			Assert.NotNull (d.RootDirectory);
+        void ValidateDriveInfo (DriveInfo d)
+        {
+            AssertHelper.IsNotEmpty (d.Name);
+            AssertHelper.IsNotEmpty (d.VolumeLabel);
+            Assert.NotNull (d.RootDirectory);
 
-			if (d.DriveFormat != null) {
-				Assert.AreNotEqual ("", d.DriveFormat);
-				Assert.AreNotEqual (DriveType.Unknown, d.DriveType, "DriveFormat=" + d.DriveFormat);
-			}
+            if (d.DriveFormat != null) {
+                Assert.AreNotEqual ("", d.DriveFormat);
+                Assert.AreNotEqual (DriveType.Unknown, d.DriveType, "DriveFormat=" + d.DriveFormat);
+            }
 
-			if (d.DriveType == DriveType.Fixed) { // just consider fixed drives for now
-				AssertHelper.GreaterOrEqual (d.AvailableFreeSpace, 0);
-				AssertHelper.GreaterOrEqual (d.TotalFreeSpace, 0);
-				AssertHelper.GreaterOrEqual (d.TotalSize, 0);
-			}
-		}
-	}
+            if (d.DriveType == DriveType.Fixed) { // just consider fixed drives for now
+                AssertHelper.GreaterOrEqual (d.AvailableFreeSpace, 0);
+                AssertHelper.GreaterOrEqual (d.TotalFreeSpace, 0);
+                AssertHelper.GreaterOrEqual (d.TotalSize, 0);
+            }
+        }
+    }
 }

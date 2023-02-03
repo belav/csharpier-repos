@@ -33,57 +33,57 @@ namespace MyHashCodesTest {
     public static void Main(String[] args) {
       int count = int.Parse(args[0]); 
       {
-	Console.Write("Good hash function: ");
-	Timer t = new Timer();
-	HashSet<int> good 
-	  = MakeRandom(count, new GoodIntegerEqualityComparer());
-	Console.WriteLine("({0} sec, {1} items)", t.Check(), good.Count);
-	ISortedDictionary<int,int> bcd = good.BucketCostDistribution();
-	foreach (KeyValuePair<int,int> entry in bcd) 
-	  Console.WriteLine("{0,7} bucket(s) with cost {1,5}", 
-			    entry.Value, entry.Key);
+    Console.Write("Good hash function: ");
+    Timer t = new Timer();
+    HashSet<int> good 
+      = MakeRandom(count, new GoodIntegerEqualityComparer());
+    Console.WriteLine("({0} sec, {1} items)", t.Check(), good.Count);
+    ISortedDictionary<int,int> bcd = good.BucketCostDistribution();
+    foreach (KeyValuePair<int,int> entry in bcd) 
+      Console.WriteLine("{0,7} bucket(s) with cost {1,5}", 
+                entry.Value, entry.Key);
       }
       {
-	Console.Write("Bad hash function:  ");
-	Timer t = new Timer();
-	HashSet<int> bad = MakeRandom(count, new BadIntegerEqualityComparer());
-	Console.WriteLine("({0} sec, {1} items)", t.Check(), bad.Count);
-	ISortedDictionary<int,int> bcd = bad.BucketCostDistribution();
-	foreach (KeyValuePair<int,int> entry in bcd) 
-	  Console.WriteLine("{0,7} bucket(s) with cost {1,5}", 
-			    entry.Value, entry.Key);
+    Console.Write("Bad hash function:  ");
+    Timer t = new Timer();
+    HashSet<int> bad = MakeRandom(count, new BadIntegerEqualityComparer());
+    Console.WriteLine("({0} sec, {1} items)", t.Check(), bad.Count);
+    ISortedDictionary<int,int> bcd = bad.BucketCostDistribution();
+    foreach (KeyValuePair<int,int> entry in bcd) 
+      Console.WriteLine("{0,7} bucket(s) with cost {1,5}", 
+                entry.Value, entry.Key);
       }
     }
 
     private static readonly C5Random rnd = new C5Random();
     
     public static HashSet<int> MakeRandom(int count, 
-					  SCG.IEqualityComparer<int> eqc) {
+                      SCG.IEqualityComparer<int> eqc) {
       HashSet<int> res;
       if (eqc == null) 
-	res = new HashSet<int>();
+    res = new HashSet<int>();
       else
-	res = new HashSet<int>(eqc);
+    res = new HashSet<int>(eqc);
       for (int i=0; i<count; i++)
-	res.Add(rnd.Next(1000000));    
+    res.Add(rnd.Next(1000000));    
       return res;
     }
 
     private class BadIntegerEqualityComparer : SCG.IEqualityComparer<int> {
       public bool Equals(int i1, int i2) {
-	return i1 == i2;
+    return i1 == i2;
       }
       public int GetHashCode(int i) {
-	return i % 7;
+    return i % 7;
       }
     }
 
     private class GoodIntegerEqualityComparer : SCG.IEqualityComparer<int> {
       public bool Equals(int i1, int i2) {
-	return i1 == i2;
+    return i1 == i2;
       }
       public int GetHashCode(int i) {
-	return i;
+    return i;
       }
     }
   }

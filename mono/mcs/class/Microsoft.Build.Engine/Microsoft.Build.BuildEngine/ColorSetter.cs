@@ -33,5 +33,5 @@ namespace Microsoft.Build.Logging
 namespace Microsoft.Build.BuildEngine
 #endif
 {
-	public delegate void ColorSetter (ConsoleColor color);
+    public delegate void ColorSetter (ConsoleColor color);
 }

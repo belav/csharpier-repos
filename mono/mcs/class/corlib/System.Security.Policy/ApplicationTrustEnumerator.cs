@@ -2,7 +2,7 @@
 // System.Security.Policy.ApplicationTrustEnumerator class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,28 +32,28 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-	[ComVisible (true)]
-	public sealed class ApplicationTrustEnumerator : IEnumerator {
+    [ComVisible (true)]
+    public sealed class ApplicationTrustEnumerator : IEnumerator {
 
-		ApplicationTrustCollection trusts;
-		int current;
+        ApplicationTrustCollection trusts;
+        int current;
 
-		internal ApplicationTrustEnumerator (ApplicationTrustCollection atc) {
-			trusts = atc;
-			current = -1;
-		}
+        internal ApplicationTrustEnumerator (ApplicationTrustCollection atc) {
+            trusts = atc;
+            current = -1;
+        }
 
-		public ApplicationTrust Current => trusts [current];
+        public ApplicationTrust Current => trusts [current];
 
-		object IEnumerator.Current => (object) trusts [current];
+        object IEnumerator.Current => (object) trusts [current];
 
-		public void Reset () => current = -1;
+        public void Reset () => current = -1;
 
-		public bool MoveNext () {
-			if (current == ((int) trusts.Count - 1))
-				return false;
-			current++;
-			return true;
-		}
-	}
+        public bool MoveNext () {
+            if (current == ((int) trusts.Count - 1))
+                return false;
+            current++;
+            return true;
+        }
+    }
 }

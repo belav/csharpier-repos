@@ -1,8 +1,8 @@
-﻿//
+//
 // MexBindingElementTest.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -35,25 +35,25 @@ using System.ServiceModel.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class MexBindingElementTest
-	{
-		class Poker<TStandardBinding> : MexBindingElement<TStandardBinding> where TStandardBinding : Binding
-		{
-			public Poker (string name)
-				: base (name) {
-			}
+    [TestFixture]
+    public class MexBindingElementTest
+    {
+        class Poker<TStandardBinding> : MexBindingElement<TStandardBinding> where TStandardBinding : Binding
+        {
+            public Poker (string name)
+                : base (name) {
+            }
 
-			public Type GetBindingElementType () {
-				return BindingElementType;
-			}
-		}
+            public Type GetBindingElementType () {
+                return BindingElementType;
+            }
+        }
 
-		[Test]
-		public void BindingElementType () {
-			Poker<CustomBinding> poker = new Poker<CustomBinding> ("kuku");
-			Assert.AreEqual (typeof (CustomBinding), poker.GetBindingElementType (), "BindingElementType");
-		}
-	}
+        [Test]
+        public void BindingElementType () {
+            Poker<CustomBinding> poker = new Poker<CustomBinding> ("kuku");
+            Assert.AreEqual (typeof (CustomBinding), poker.GetBindingElementType (), "BindingElementType");
+        }
+    }
 }
 #endif

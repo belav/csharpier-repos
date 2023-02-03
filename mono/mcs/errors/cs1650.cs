@@ -4,15 +4,15 @@
 using System;
 
 struct S {
-	public int x;
+    public int x;
 }
 
 class C {
-	static readonly S s;
+    static readonly S s;
 
-	public static void Main(String[] args) {
-		s.x = 42;
-		Console.WriteLine(s.x);
-	}
+    public static void Main(String[] args) {
+        s.x = 42;
+        Console.WriteLine(s.x);
+    }
 }
 

@@ -1,9 +1,9 @@
 //
 // X500DistinguishedNameCas.cs - CAS unit tests for 
-//	System.Security.Cryptography.X509Certificates.X500DistinguishedName
+//    System.Security.Cryptography.X509Certificates.X500DistinguishedName
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,45 +41,45 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class X500DistinguishedNameCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class X500DistinguishedNameCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[Category ("NotWorking")]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			X500DistinguishedNameTest unit = new X500DistinguishedNameTest ();
-			unit.FixtureSetUp ();
-			unit.Constructor_AsnEncodedData_Empty ();
-			unit.Constructor_AsnEncodedData ();
-			unit.Constructor_ByteArray_Empty ();
-			unit.Constructor_ByteArray ();
-			unit.Constructor_String_Empty ();
-			unit.Constructor_String ();
-			unit.Constructor_String_Empty_Flags ();
-			unit.Constructor_String_Flags_None ();
-			unit.Constructor_String_Flags_Reversed ();
-			unit.Constructor_X500DistinguishedName ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [Category ("NotWorking")]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            X500DistinguishedNameTest unit = new X500DistinguishedNameTest ();
+            unit.FixtureSetUp ();
+            unit.Constructor_AsnEncodedData_Empty ();
+            unit.Constructor_AsnEncodedData ();
+            unit.Constructor_ByteArray_Empty ();
+            unit.Constructor_ByteArray ();
+            unit.Constructor_String_Empty ();
+            unit.Constructor_String ();
+            unit.Constructor_String_Empty_Flags ();
+            unit.Constructor_String_Flags_None ();
+            unit.Constructor_String_Flags_Reversed ();
+            unit.Constructor_X500DistinguishedName ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (AsnEncodedData) };
-			ConstructorInfo ci = typeof (X500DistinguishedName).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(AsnEncodedData)");
-			Assert.IsNotNull (ci.Invoke (new object [1] { new AsnEncodedData (new byte[0]) }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Type[] types = new Type[1] { typeof (AsnEncodedData) };
+            ConstructorInfo ci = typeof (X500DistinguishedName).GetConstructor (types);
+            Assert.IsNotNull (ci, ".ctor(AsnEncodedData)");
+            Assert.IsNotNull (ci.Invoke (new object [1] { new AsnEncodedData (new byte[0]) }), "invoke");
+        }
+    }
 }
 

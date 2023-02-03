@@ -1,4 +1,4 @@
-﻿namespace AutoMapper;
+namespace AutoMapper;
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class ConstructorMap
 {

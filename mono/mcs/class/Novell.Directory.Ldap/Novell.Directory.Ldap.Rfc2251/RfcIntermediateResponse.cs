@@ -62,7 +62,7 @@ namespace Novell.Directory.Ldap.Rfc2251
     private int m_referralIndex;
     private int m_responseNameIndex;
     private int m_responseValueIndex;
-	
+    
 
     //*************************************************************************
     // Constructors for ExtendedResponse
@@ -101,11 +101,11 @@ namespace Novell.Directory.Ldap.Rfc2251
      */
     [CLSCompliantAttribute(false)]
     public RfcIntermediateResponse(Asn1Decoder dec, System.IO.Stream in_Renamed, int len) : base(dec, in_Renamed, len)
-      //		throws IOException
+      //        throws IOException
     {
-      //		super(dec, in, len);
+      //        super(dec, in, len);
         
-      int i=0;		
+      int i=0;        
       m_responseNameIndex = m_responseValueIndex = 0;
 
       // decode optional tagged elements. The parent class constructor will
@@ -113,27 +113,27 @@ namespace Novell.Directory.Ldap.Rfc2251
       // stored as an ASN1OctectString object.
 
       if(size() >= 3) //the incorrectly encoded case, LDAPResult contains 
-	i = 3;        //at least 3 components
+    i = 3;        //at least 3 components
       else
-	i = 0; //correctly encoded case, can have zero components
+    i = 0; //correctly encoded case, can have zero components
 
       for(; i<size(); i++) 
-      {		
-	Asn1Tagged obj = (Asn1Tagged)get_Renamed(i);
-	Asn1Identifier id = obj.getIdentifier();
-	switch(id.Tag) 
-	{
-	case TAG_RESPONSE_NAME:
-	  set_Renamed(i, new RfcLdapOID(
-					((Asn1OctetString)obj.taggedValue()).byteValue()));
-	  m_responseNameIndex = i;
-	  break;
+      {        
+    Asn1Tagged obj = (Asn1Tagged)get_Renamed(i);
+    Asn1Identifier id = obj.getIdentifier();
+    switch(id.Tag) 
+    {
+    case TAG_RESPONSE_NAME:
+      set_Renamed(i, new RfcLdapOID(
+                    ((Asn1OctetString)obj.taggedValue()).byteValue()));
+      m_responseNameIndex = i;
+      break;
 
-	case TAG_RESPONSE:
-	  set_Renamed(i, obj.taggedValue());
-	  m_responseValueIndex = i;
-	  break;
-	}
+    case TAG_RESPONSE:
+      set_Renamed(i, obj.taggedValue());
+      m_responseValueIndex = i;
+      break;
+    }
       }
     }
 

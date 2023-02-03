@@ -1,4 +1,4 @@
-﻿//
+//
 // ProjectExtensionsElement.cs
 //
 // Author:

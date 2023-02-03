@@ -7,8 +7,8 @@ interface I
 
 class Program
 {
-	bool Test<T, U> (T t, U u) where T : I where U : I
-	{
-		return t == u;
-	}
+    bool Test<T, U> (T t, U u) where T : I where U : I
+    {
+        return t == u;
+    }
 }

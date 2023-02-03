@@ -34,29 +34,29 @@ using System.Resources;
 
 public sealed class Strings
 {
-	// Cached copy of the resources for this assembly.
-	// private static ResourceManager resources = null;
+    // Cached copy of the resources for this assembly.
+    // private static ResourceManager resources = null;
 
-	// Helper for obtaining string resources for this assembly.
-	public static String GetString(String tag)
-	{
-		switch (tag) {
-		case "ArgRange_Array":
-			return "Argument index is out of array range.";
-		case "Arg_InsufficientSpace":
-			return "Insufficient space in the argument array.";
-		case "ArgRange_NonNegative":
-			return "Non-negative value is expected.";
-		case "NotSupp_MissingCodeTable":
-			return "This encoding is not supported. Code table is missing.";
-		case "ArgRange_StringIndex":
-			return "String index is out of range.";
-		case "ArgRange_StringRange":
-			return "String length is out of range.";
-		default:
-			throw new ArgumentException (String.Format ("Unexpected error tag name:  {0}", tag));
-		}
-	}
+    // Helper for obtaining string resources for this assembly.
+    public static String GetString(String tag)
+    {
+        switch (tag) {
+        case "ArgRange_Array":
+            return "Argument index is out of array range.";
+        case "Arg_InsufficientSpace":
+            return "Insufficient space in the argument array.";
+        case "ArgRange_NonNegative":
+            return "Non-negative value is expected.";
+        case "NotSupp_MissingCodeTable":
+            return "This encoding is not supported. Code table is missing.";
+        case "ArgRange_StringIndex":
+            return "String index is out of range.";
+        case "ArgRange_StringRange":
+            return "String length is out of range.";
+        default:
+            throw new ArgumentException (String.Format ("Unexpected error tag name:  {0}", tag));
+        }
+    }
 
 }; // class Strings
 

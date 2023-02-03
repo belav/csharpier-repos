@@ -2,7 +2,7 @@
 // ConsoleCas.cs - CAS unit tests for System.Console
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,106 +35,106 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ConsoleCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ConsoleCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		// Partial Trust Tests - i.e. call "normal" unit with reduced privileges
+        // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_DenyUnrestricted_Success ()
-		{
-			MonoTests.System.ConsoleTest ct = new MonoTests.System.ConsoleTest ();
-			// call most unit tests from ConsoleTest
-			ct.TestError ();
-			ct.TestIn ();
-			ct.TestOut ();
-			ct.TestOpenStandardError ();
-			ct.TestOpenStandardInput ();
-			ct.TestOpenStandardOutput ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted_Success ()
+        {
+            MonoTests.System.ConsoleTest ct = new MonoTests.System.ConsoleTest ();
+            // call most unit tests from ConsoleTest
+            ct.TestError ();
+            ct.TestIn ();
+            ct.TestOut ();
+            ct.TestOpenStandardError ();
+            ct.TestOpenStandardInput ();
+            ct.TestOpenStandardOutput ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void PartialTrust_PermitOnly_UnmanagedCode ()
-		{
-			MonoTests.System.ConsoleTest ct = new MonoTests.System.ConsoleTest ();
-			// call unit tests from ConsoleTest that requires UnmanagedCode to work
-			ct.TestSetError ();
-			ct.TestSetIn ();
-			ct.TestSetOut ();
-			ct.TestRead ();
-			ct.TestReadLine ();
-			ct.TestWrite ();
-			ct.TestWriteLine ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void PartialTrust_PermitOnly_UnmanagedCode ()
+        {
+            MonoTests.System.ConsoleTest ct = new MonoTests.System.ConsoleTest ();
+            // call unit tests from ConsoleTest that requires UnmanagedCode to work
+            ct.TestSetError ();
+            ct.TestSetIn ();
+            ct.TestSetOut ();
+            ct.TestRead ();
+            ct.TestReadLine ();
+            ct.TestWrite ();
+            ct.TestWriteLine ();
+        }
 
-		// Console is using restricted stuff (like opening FileStream 
-		// with handles) but isn't restricted itself - so we must 
-		// assert the required permission in Console
+        // Console is using restricted stuff (like opening FileStream 
+        // with handles) but isn't restricted itself - so we must 
+        // assert the required permission in Console
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void OpenStandardError ()
-		{
-			Stream s = Console.OpenStandardError ();
-			Assert.IsNotNull (s, "1");
-			s = Console.OpenStandardError (1024);
-			Assert.IsNotNull (s, "2");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void OpenStandardError ()
+        {
+            Stream s = Console.OpenStandardError ();
+            Assert.IsNotNull (s, "1");
+            s = Console.OpenStandardError (1024);
+            Assert.IsNotNull (s, "2");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void OpenStandardInput ()
-		{
-			Stream s = Console.OpenStandardInput ();
-			Assert.IsNotNull (s, "1");
-			s = Console.OpenStandardInput (1024);
-			Assert.IsNotNull (s, "2");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void OpenStandardInput ()
+        {
+            Stream s = Console.OpenStandardInput ();
+            Assert.IsNotNull (s, "1");
+            s = Console.OpenStandardInput (1024);
+            Assert.IsNotNull (s, "2");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void OpenStandardOutput ()
-		{
-			Stream s = Console.OpenStandardOutput ();
-			Assert.IsNotNull (s, "1");
-			s = Console.OpenStandardOutput (1024);
-			Assert.IsNotNull (s, "2");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void OpenStandardOutput ()
+        {
+            Stream s = Console.OpenStandardOutput ();
+            Assert.IsNotNull (s, "1");
+            s = Console.OpenStandardOutput (1024);
+            Assert.IsNotNull (s, "2");
+        }
 
-		// Unmanaged code is required to call Console.Set* methods
+        // Unmanaged code is required to call Console.Set* methods
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void SetError ()
-		{
-			Console.SetError (new StreamWriter (Console.OpenStandardError ()));
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void SetError ()
+        {
+            Console.SetError (new StreamWriter (Console.OpenStandardError ()));
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void SetIn ()
-		{
-			Console.SetIn (new StreamReader (Console.OpenStandardInput ()));
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void SetIn ()
+        {
+            Console.SetIn (new StreamReader (Console.OpenStandardInput ()));
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void SetOut ()
-		{
-			Console.SetOut (new StreamWriter (Console.OpenStandardOutput ()));
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void SetOut ()
+        {
+            Console.SetOut (new StreamWriter (Console.OpenStandardOutput ()));
+        }
+    }
 }

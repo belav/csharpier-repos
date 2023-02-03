@@ -1,9 +1,9 @@
 //
 // HtmlInputImageCas.cs 
-//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputImage
+//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputImage
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,12 +34,12 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlInputImageCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlInputImageCas : AspNetHostingMinimal {
 
-		public override Type Type {
-			get { return typeof (HtmlInputImage); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlInputImage); }
+        }
+    }
 }

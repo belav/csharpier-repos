@@ -14,25 +14,25 @@ using System.Web.Services.Description;
 
 namespace MonoTests.System.Web.Services.Description
 {
-	[TestFixture]
-	public class SoapOperationBindingTest
-	{
-		SoapOperationBinding sob;
+    [TestFixture]
+    public class SoapOperationBindingTest
+    {
+        SoapOperationBinding sob;
 
-		[SetUp]
-		public void InitializeSoapOperationBinding()
-		{
-			sob = new SoapOperationBinding();
-		}
+        [SetUp]
+        public void InitializeSoapOperationBinding()
+        {
+            sob = new SoapOperationBinding();
+        }
 
-		[Test]
-		public void TestDefaultProperties()
-		{
-			Assert.AreEqual (String.Empty, sob.SoapAction);
-			Assert.AreEqual (SoapBindingStyle.Default, sob.Style);
-			Assert.AreEqual (false, sob.Required);
-			Assert.IsNull (sob.Parent);
-			Assert.AreEqual (false, sob.Handled);
-		}
-	}
+        [Test]
+        public void TestDefaultProperties()
+        {
+            Assert.AreEqual (String.Empty, sob.SoapAction);
+            Assert.AreEqual (SoapBindingStyle.Default, sob.Style);
+            Assert.AreEqual (false, sob.Required);
+            Assert.IsNull (sob.Parent);
+            Assert.AreEqual (false, sob.Handled);
+        }
+    }
 }

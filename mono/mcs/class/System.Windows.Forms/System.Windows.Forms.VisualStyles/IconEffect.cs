@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum IconEffect
-	{
-		None = 0,
-		Glow = 1,
-		Shadow = 2,
-		Pulse = 3,
-		Alpha = 4
-	}
+    public enum IconEffect
+    {
+        None = 0,
+        Glow = 1,
+        Shadow = 2,
+        Pulse = 3,
+        Alpha = 4
+    }
 }

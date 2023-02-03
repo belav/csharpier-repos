@@ -2,7 +2,7 @@
 // InvalidChannelBindingException.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,30 +33,30 @@ using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel.Channels
 {
-	[Serializable]
-	public class InvalidChannelBindingException : Exception
-	{
-		[MonoTODO]
-		public InvalidChannelBindingException ()
-			: this ("Invalid settings.")
-		{
-		}
+    [Serializable]
+    public class InvalidChannelBindingException : Exception
+    {
+        [MonoTODO]
+        public InvalidChannelBindingException ()
+            : this ("Invalid settings.")
+        {
+        }
 
-		public InvalidChannelBindingException (string message)
-			: base (message)
-		{
-		}
+        public InvalidChannelBindingException (string message)
+            : base (message)
+        {
+        }
 
-		public InvalidChannelBindingException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        public InvalidChannelBindingException (SerializationInfo info,
+            StreamingContext context)
+            : base (info, context)
+        {
+        }
 
-		public InvalidChannelBindingException (string message,
-			Exception innerException)
-			: base (message, innerException)
-		{
-		}
-	}
+        public InvalidChannelBindingException (string message,
+            Exception innerException)
+            : base (message, innerException)
+        {
+        }
+    }
 }

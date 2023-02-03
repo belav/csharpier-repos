@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -7363,28 +7363,28 @@ class Program
 
             comp.VerifyIL("Program.Main", @"
 {
-	// Code size       47 (0x2f)
-	.maxstack  2
-	.locals init (System.Guid? V_0,
-	            System.Guid V_1)
-	IL_0000:  nop
-	IL_0001:  ldsfld     ""System.Guid? Program.g""
-	IL_0006:  stloc.0
-	IL_0007:  ldloca.s   V_0
-	IL_0009:  dup
-	IL_000a:  call       ""bool System.Guid?.HasValue.get""
-	IL_000f:  brtrue.s   IL_0015
-	IL_0011:  pop
-	IL_0012:  ldnull
-	IL_0013:  br.s       IL_0028
-	IL_0015:  call       ""System.Guid System.Guid?.GetValueOrDefault()""
-	IL_001a:  stloc.1
-	IL_001b:  ldloca.s   V_1
-	IL_001d:  constrained. ""System.Guid""
-	IL_0023:  callvirt   ""string object.ToString()""
-	IL_0028:  call       ""void System.Console.WriteLine(string)""
-	IL_002d:  nop
-	IL_002e:  ret
+    // Code size       47 (0x2f)
+    .maxstack  2
+    .locals init (System.Guid? V_0,
+                System.Guid V_1)
+    IL_0000:  nop
+    IL_0001:  ldsfld     ""System.Guid? Program.g""
+    IL_0006:  stloc.0
+    IL_0007:  ldloca.s   V_0
+    IL_0009:  dup
+    IL_000a:  call       ""bool System.Guid?.HasValue.get""
+    IL_000f:  brtrue.s   IL_0015
+    IL_0011:  pop
+    IL_0012:  ldnull
+    IL_0013:  br.s       IL_0028
+    IL_0015:  call       ""System.Guid System.Guid?.GetValueOrDefault()""
+    IL_001a:  stloc.1
+    IL_001b:  ldloca.s   V_1
+    IL_001d:  constrained. ""System.Guid""
+    IL_0023:  callvirt   ""string object.ToString()""
+    IL_0028:  call       ""void System.Console.WriteLine(string)""
+    IL_002d:  nop
+    IL_002e:  ret
 }");
         }
 

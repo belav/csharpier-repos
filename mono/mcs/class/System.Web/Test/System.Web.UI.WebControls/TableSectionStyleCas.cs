@@ -1,9 +1,9 @@
 //
 // TableSectionStyleCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.TableSectionStyle
+//    - CAS unit tests for System.Web.UI.WebControls.TableSectionStyle
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,32 +39,32 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TableSectionStyleCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class TableSectionStyleCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TableSectionStyleTest unit = new TableSectionStyleTest ();
-			unit.Constructor_Default ();
-			unit.CopyFrom_Null ();
-			unit.CopyFrom_Self ();
-			unit.CopyFrom_Empty ();
-			unit.CopyFrom_IsEmpty ();
-			unit.CopyFrom ();
-			unit.MergeWith_Null ();
-			unit.MergeWith_Self ();
-			unit.MergeWith_Empty ();
-			unit.MergeWith ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            TableSectionStyleTest unit = new TableSectionStyleTest ();
+            unit.Constructor_Default ();
+            unit.CopyFrom_Null ();
+            unit.CopyFrom_Self ();
+            unit.CopyFrom_Empty ();
+            unit.CopyFrom_IsEmpty ();
+            unit.CopyFrom ();
+            unit.MergeWith_Null ();
+            unit.MergeWith_Self ();
+            unit.MergeWith_Empty ();
+            unit.MergeWith ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (TableSectionStyle); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (TableSectionStyle); }
+        }
+    }
 }
 

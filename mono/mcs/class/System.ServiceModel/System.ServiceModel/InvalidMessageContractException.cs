@@ -30,13 +30,13 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-	[Serializable]
-	public class InvalidMessageContractException : SystemException
-	{
-		public InvalidMessageContractException () : base () {}
-		public InvalidMessageContractException (string message) : base (message) {}
-		public InvalidMessageContractException (string message, Exception innerException) : base (message, innerException) {}
-		protected InvalidMessageContractException (SerializationInfo info, StreamingContext context) :
-			base (info, context) {}
-	}
+    [Serializable]
+    public class InvalidMessageContractException : SystemException
+    {
+        public InvalidMessageContractException () : base () {}
+        public InvalidMessageContractException (string message) : base (message) {}
+        public InvalidMessageContractException (string message, Exception innerException) : base (message, innerException) {}
+        protected InvalidMessageContractException (SerializationInfo info, StreamingContext context) :
+            base (info, context) {}
+    }
 }

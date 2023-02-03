@@ -7,26 +7,26 @@ using System.Threading;
 
 public class Test_simple {
 
-	public static int Main(){
+    public static int Main(){
 
-		int rValue = 100;
-		Timer[] tArray = new Timer[100];
-		int val = 0;
-		while(val < 10){
-			Interlocked.Increment(ref val);
-			Console.WriteLine("Loop {0}",val);
-			for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,1000000);		
+        int rValue = 100;
+        Timer[] tArray = new Timer[100];
+        int val = 0;
+        while(val < 10){
+            Interlocked.Increment(ref val);
+            Console.WriteLine("Loop {0}",val);
+            for(int i = 0;i<tArray.Length;i++)
+                tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,1000000);        
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		}		
-		return rValue;
-	}
+            Thread.Sleep(1000);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }        
+        return rValue;
+    }
 
-	public static void TFunc(Object o)
-	{
-		Thread.Sleep(1);
-	}
+    public static void TFunc(Object o)
+    {
+        Thread.Sleep(1);
+    }
 }

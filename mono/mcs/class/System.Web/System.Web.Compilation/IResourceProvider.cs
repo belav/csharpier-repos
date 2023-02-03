@@ -2,7 +2,7 @@
 // System.Web.Compilation.IResourceProvider.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
+//    Duncan Mak (duncan@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,7 +33,7 @@ namespace System.Web.Compilation
 {
         public interface IResourceProvider
         {
-		object GetObject (string resourceKey, CultureInfo culture);
+        object GetObject (string resourceKey, CultureInfo culture);
                 IResourceReader ResourceReader { get; }
         }
 }

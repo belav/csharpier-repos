@@ -96,7 +96,7 @@ namespace System.Data.Services.Client
 
         internal override bool HasQueryOptions
         {
-	        get 
+            get 
             { 
                 return this.sequenceQueryOptions.Count > 0 ||
                     this.ExpandPaths.Count > 0 ||

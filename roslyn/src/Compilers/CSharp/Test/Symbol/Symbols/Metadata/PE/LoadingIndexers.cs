@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -413,35 +413,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
           instance int32  get_Item(int64 x) cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
           instance void  set_Item(int64 x, int32 'value') cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
           static int32  get_Item(int64 x) cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
           static void  set_Item(int64 x, int32 'value') cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .property instance int32 Instance(int64)
@@ -476,35 +476,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
           instance !T  get_Item(!U u) cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
           instance void  set_Item(!U u, !T 'value') cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
           static !T  get_Item(!U u) cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
           static void  set_Item(!U u, !T 'value') cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .property instance !T Instance(!U)
@@ -540,7 +540,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
           get_Item(class [mscorlib]System.Action`1<int16> u) cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
@@ -548,7 +548,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                                   class [mscorlib]System.Collections.Generic.List`1<int32> 'value') cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
@@ -556,7 +556,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
           get_Item(class [mscorlib]System.Action`1<int16> u) cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig newslot specialname virtual 
@@ -564,14 +564,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                                   class [mscorlib]System.Collections.Generic.List`1<int32> 'value') cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     ldnull
-	throw
+    throw
   }
 
   .property instance class [mscorlib]System.Collections.Generic.List`1<int32>

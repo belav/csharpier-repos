@@ -7,5 +7,5 @@ class G<T>
 
 class C
 {
-	const string f = nameof (G<>);
+    const string f = nameof (G<>);
 }

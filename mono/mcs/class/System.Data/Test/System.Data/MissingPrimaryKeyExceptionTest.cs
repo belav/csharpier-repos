@@ -34,27 +34,27 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture]
-	class MissingPrimaryKeyExceptionTest
-	{
-		[Test]
-		[ExpectedException(typeof(MissingPrimaryKeyException))]
-		public void Generate1()
-		{
-			DataTable tbl = DataProvider.CreateParentDataTable();
-			//can't invoke Find method with no primary key
+    [TestFixture]
+    class MissingPrimaryKeyExceptionTest
+    {
+        [Test]
+        [ExpectedException(typeof(MissingPrimaryKeyException))]
+        public void Generate1()
+        {
+            DataTable tbl = DataProvider.CreateParentDataTable();
+            //can't invoke Find method with no primary key
 
-			tbl.Rows.Find("Something");
-		}
+            tbl.Rows.Find("Something");
+        }
 
-		[Test]
-		[ExpectedException(typeof(MissingPrimaryKeyException))]
-		public void Generate2()
-		{
-			DataTable tbl = DataProvider.CreateParentDataTable();	
-			//can't invoke Contains method with no primary key
+        [Test]
+        [ExpectedException(typeof(MissingPrimaryKeyException))]
+        public void Generate2()
+        {
+            DataTable tbl = DataProvider.CreateParentDataTable();    
+            //can't invoke Contains method with no primary key
 
-			tbl.Rows.Contains("Something");
-		}
-	}
+            tbl.Rows.Contains("Something");
+        }
+    }
 }

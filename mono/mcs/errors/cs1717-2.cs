@@ -6,7 +6,7 @@ class A
 {    
     void B ()
     {
-	int l = 3;
-	l = l;
+    int l = 3;
+    l = l;
     }
 }

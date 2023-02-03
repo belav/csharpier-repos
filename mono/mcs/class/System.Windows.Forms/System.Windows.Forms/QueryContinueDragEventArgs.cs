@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -30,42 +30,42 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class QueryContinueDragEventArgs : EventArgs {
-		internal int		key_state;
-		internal bool		escape_pressed;
-		internal DragAction	drag_action;
+    [ComVisible(true)]
+    public class QueryContinueDragEventArgs : EventArgs {
+        internal int        key_state;
+        internal bool        escape_pressed;
+        internal DragAction    drag_action;
 
-		#region Public Constructors
-		public QueryContinueDragEventArgs(int keyState, bool escapePressed, DragAction action) {
-			this.key_state = keyState;
-			this.escape_pressed = escapePressed;
-			this.drag_action = action;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public QueryContinueDragEventArgs(int keyState, bool escapePressed, DragAction action) {
+            this.key_state = keyState;
+            this.escape_pressed = escapePressed;
+            this.drag_action = action;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public DragAction Action {
-			get {
-				return this.drag_action;
-			}
+        #region Public Instance Properties
+        public DragAction Action {
+            get {
+                return this.drag_action;
+            }
 
-			set {
-				this.drag_action=value;
-			}
-		}
+            set {
+                this.drag_action=value;
+            }
+        }
 
-		public bool EscapePressed {
-			get {
-				return this.escape_pressed;
-			}
-		}
+        public bool EscapePressed {
+            get {
+                return this.escape_pressed;
+            }
+        }
 
-		public int KeyState {
-			get {
-				return this.key_state;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public int KeyState {
+            get {
+                return this.key_state;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

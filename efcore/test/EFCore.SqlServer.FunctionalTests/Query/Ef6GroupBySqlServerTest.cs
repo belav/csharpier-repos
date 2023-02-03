@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Query;
@@ -51,10 +51,10 @@ GROUP BY [a].[FirstName]
         // @"SELECT
         // [GroupBy1].[A1] AS [C1]
         // FROM ( SELECT
-        // 	[Extent1].[FirstName] AS [K1],
-        // 	COUNT(1) AS [A1]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	GROUP BY [Extent1].[FirstName]
+        //     [Extent1].[FirstName] AS [K1],
+        //     COUNT(1) AS [A1]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     GROUP BY [Extent1].[FirstName]
         // )  AS [GroupBy1]";
     }
 
@@ -90,10 +90,10 @@ GROUP BY [a].[FirstName]
         // @"SELECT
         // [GroupBy1].[A1] AS [C1]
         // FROM ( SELECT
-        // 	[Extent1].[FirstName] AS [K1],
-        // 	MAX([Extent1].[Id]) AS [A1]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	GROUP BY [Extent1].[FirstName]
+        //     [Extent1].[FirstName] AS [K1],
+        //     MAX([Extent1].[Id]) AS [A1]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     GROUP BY [Extent1].[FirstName]
         // )  AS [GroupBy1]";
     }
 
@@ -114,10 +114,10 @@ GROUP BY [a].[FirstName]
         // [GroupBy1].[K1] AS [FirstName],
         // [GroupBy1].[A1] AS [C2]
         // FROM ( SELECT
-        // 	[Extent1].[FirstName] AS [K1],
-        // 	MAX([Extent1].[Id]) AS [A1]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	GROUP BY [Extent1].[FirstName]
+        //     [Extent1].[FirstName] AS [K1],
+        //     MAX([Extent1].[Id]) AS [A1]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     GROUP BY [Extent1].[FirstName]
         // )  AS [GroupBy1]";
     }
 
@@ -140,16 +140,16 @@ GROUP BY [a].[FirstName]
         // [GroupBy1].[A1] AS [C2],
         // [GroupBy1].[A2] AS [C3]
         // FROM ( SELECT
-        // 	[Extent1].[K1] AS [K1],
-        // 	MAX([Extent1].[A1_0]) AS [A1],
-        // 	MIN([Extent1].[A2_0]) AS [A2]
-        // 	FROM ( SELECT
-        // 		[Extent1].[FirstName] AS [K1],
-        // 		[Extent1].[Id] AS [A1_0],
-        // 		[Extent1].[Id] + 2 AS [A2_0]
-        // 		FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	)  AS [Extent1]
-        // 	GROUP BY [K1]
+        //     [Extent1].[K1] AS [K1],
+        //     MAX([Extent1].[A1_0]) AS [A1],
+        //     MIN([Extent1].[A2_0]) AS [A2]
+        //     FROM ( SELECT
+        //         [Extent1].[FirstName] AS [K1],
+        //         [Extent1].[Id] AS [A1_0],
+        //         [Extent1].[Id] + 2 AS [A2_0]
+        //         FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     )  AS [Extent1]
+        //     GROUP BY [K1]
         // )  AS [GroupBy1]";
     }
 
@@ -175,8 +175,8 @@ GROUP BY [a].[FirstName]
         // CASE WHEN ([Distinct1].[FirstName] IS NULL) THEN N'is null' ELSE N'not null' END AS [C2],
         // CASE WHEN (((@p__linq__0 = 1) AND (@p__linq__1 = 1)) OR ((@p__linq__2 = 1) AND (@p__linq__3 = 1))) THEN cast(1 as bit) WHEN ( NOT (((@p__linq__0 = 1) AND (@p__linq__1 = 1)) OR ((@p__linq__2 = 1) AND (@p__linq__3 = 1)))) THEN cast(0 as bit) END AS [C3]
         // FROM ( SELECT DISTINCT
-        // 	[Extent1].[FirstName] AS [FirstName]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     [Extent1].[FirstName] AS [FirstName]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
         // )  AS [Distinct1]";
     }
 
@@ -199,11 +199,11 @@ GROUP BY [a].[FirstName]
         // [GroupBy1].[K1] AS [FirstName],
         // [GroupBy1].[A1] AS [C2]
         // FROM ( SELECT
-        // 	[Extent1].[FirstName] AS [K1],
-        // 	AVG( CAST( [Extent1].[Id] AS float)) AS [A1]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	WHERE [Extent1].[Id] > 5
-        // 	GROUP BY [Extent1].[FirstName]
+        //     [Extent1].[FirstName] AS [K1],
+        //     AVG( CAST( [Extent1].[Id] AS float)) AS [A1]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     WHERE [Extent1].[Id] > 5
+        //     GROUP BY [Extent1].[FirstName]
         // )  AS [GroupBy1]";
     }
 
@@ -222,14 +222,14 @@ GROUP BY [a].[FirstName]
         // @"SELECT
         // [GroupBy1].[A1] AS [C1]
         // FROM ( SELECT
-        // 	[Extent1].[K1] AS [K1],
-        // 	MAX([Extent1].[A1_0]) AS [A1]
-        // 	FROM ( SELECT
-        // 		[Extent1].[FirstName] AS [K1],
-        // 		[Extent1].[Id] * 2 AS [A1_0]
-        // 		FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	)  AS [Extent1]
-        // 	GROUP BY [K1]
+        //     [Extent1].[K1] AS [K1],
+        //     MAX([Extent1].[A1_0]) AS [A1]
+        //     FROM ( SELECT
+        //         [Extent1].[FirstName] AS [K1],
+        //         [Extent1].[Id] * 2 AS [A1_0]
+        //         FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     )  AS [Extent1]
+        //     GROUP BY [K1]
         // )  AS [GroupBy1]";
     }
 
@@ -249,11 +249,11 @@ GROUP BY [a].[FirstName]
         // 1 AS [C1],
         // [GroupBy1].[A1] - [GroupBy1].[A2] AS [C2]
         // FROM ( SELECT
-        // 	[Extent1].[FirstName] AS [K1],
-        // 	MAX([Extent1].[Id]) AS [A1],
-        // 	MIN([Extent1].[Id]) AS [A2]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	GROUP BY [Extent1].[FirstName]
+        //     [Extent1].[FirstName] AS [K1],
+        //     MAX([Extent1].[Id]) AS [A1],
+        //     MIN([Extent1].[Id]) AS [A2]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     GROUP BY [Extent1].[FirstName]
         // )  AS [GroupBy1]";
     }
 
@@ -273,9 +273,9 @@ GROUP BY [a].[FirstName]
         // @"SELECT
         // [Distinct1].[FirstName] AS [FirstName]
         // FROM ( SELECT DISTINCT
-        // 	[Extent1].[FirstName] AS [FirstName]
-        // 	FROM [dbo].[ArubaOwners] AS [Extent1]
-        // 	WHERE [Extent1].[Id] < 4
+        //     [Extent1].[FirstName] AS [FirstName]
+        //     FROM [dbo].[ArubaOwners] AS [Extent1]
+        //     WHERE [Extent1].[Id] < 4
         // )  AS [Distinct1]";
     }
 

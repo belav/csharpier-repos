@@ -19,10 +19,10 @@ namespace Mono.ILASM {
                 private ArrayList clause_list;
 
                 public TryBlock (HandlerBlock block, Location loc)
-			: base (loc)
+            : base (loc)
                 {
-			this.block = block;
-			clause_list = new ArrayList ();
+            this.block = block;
+            clause_list = new ArrayList ();
                 }
 
                 public void AddSehClause (ISehClause clause)
@@ -31,7 +31,7 @@ namespace Mono.ILASM {
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-					   PEAPI.CILInstructions cil)
+                       PEAPI.CILInstructions cil)
                 {
                         PEAPI.CILLabel from = block.GetFromLabel (code_gen, meth);
                         PEAPI.CILLabel to = block.GetToLabel (code_gen, meth);
@@ -39,7 +39,7 @@ namespace Mono.ILASM {
 
                         foreach (ISehClause clause in clause_list)
                                 try_block.AddHandler (clause.Resolve (code_gen, meth));
-			
+            
                         cil.AddTryBlock (try_block);
                 }
 

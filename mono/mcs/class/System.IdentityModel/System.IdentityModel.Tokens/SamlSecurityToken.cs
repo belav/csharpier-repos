@@ -2,7 +2,7 @@
 // SamlSecurityToken.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,69 +33,69 @@ using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SamlSecurityToken : SecurityToken
-	{
-		[MonoTODO]
-		protected SamlSecurityToken ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class SamlSecurityToken : SecurityToken
+    {
+        [MonoTODO]
+        protected SamlSecurityToken ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public SamlSecurityToken (SamlAssertion assertion)
-		{
-			this.assertion = assertion;
-			Initialize (assertion);
-		}
+        public SamlSecurityToken (SamlAssertion assertion)
+        {
+            this.assertion = assertion;
+            Initialize (assertion);
+        }
 
-		SamlAssertion assertion;
+        SamlAssertion assertion;
 
-		public SamlAssertion Assertion {
-			get { return assertion; }
-		}
+        public SamlAssertion Assertion {
+            get { return assertion; }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidFrom {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override DateTime ValidFrom {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidTo {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override DateTime ValidTo {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override string Id {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override string Id {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+            get { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public override bool CanCreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanCreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override T CreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override T CreateKeyIdentifierClause<T> ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool MatchesKeyIdentifierClause (
+            SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		protected void Initialize (SamlAssertion assertion)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected void Initialize (SamlAssertion assertion)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

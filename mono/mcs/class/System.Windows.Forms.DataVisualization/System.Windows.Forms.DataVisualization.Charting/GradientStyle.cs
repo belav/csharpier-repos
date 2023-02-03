@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,15 +27,15 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum GradientStyle
-	{
-		None = 0,
-		LeftRight = 1,
-		TopBottom = 2,
-		Center = 3,
-		DiagonalLeft = 4,
-		DiagonalRight = 5,
-		HorizontalCenter = 6,
-		VerticalCenter = 7
-	}
+    public enum GradientStyle
+    {
+        None = 0,
+        LeftRight = 1,
+        TopBottom = 2,
+        Center = 3,
+        DiagonalLeft = 4,
+        DiagonalRight = 5,
+        HorizontalCenter = 6,
+        VerticalCenter = 7
+    }
 }

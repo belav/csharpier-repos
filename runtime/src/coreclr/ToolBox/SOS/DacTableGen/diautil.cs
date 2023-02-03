@@ -416,17 +416,17 @@ public class DiaFile
 
     // Get the DiaSourceClass from the msdia140.dll in the app directory without using COM activation
     static IDiaDataSource GetDiaSourceClass() {
-	    // This is Class ID for the DiaSourceClass used by msdia140.
-	    var diaSourceClassGuid = new Guid("{e6756135-1e65-4d17-8576-610761398c3c}");
-	    var comClassFactory = (IClassFactory)DllGetClassObject(diaSourceClassGuid, typeof(IClassFactory).GUID);
+        // This is Class ID for the DiaSourceClass used by msdia140.
+        var diaSourceClassGuid = new Guid("{e6756135-1e65-4d17-8576-610761398c3c}");
+        var comClassFactory = (IClassFactory)DllGetClassObject(diaSourceClassGuid, typeof(IClassFactory).GUID);
 
-	    // As the DLL to create a new instance of it
-	    object comObject = null;
-	    Guid iDiaDataSourceGuid = typeof(IDiaDataSource).GUID;
-	    comClassFactory.CreateInstance(null, ref iDiaDataSourceGuid, out comObject);
+        // As the DLL to create a new instance of it
+        object comObject = null;
+        Guid iDiaDataSourceGuid = typeof(IDiaDataSource).GUID;
+        comClassFactory.CreateInstance(null, ref iDiaDataSourceGuid, out comObject);
 
-	    // And return it as the type we expect
-	    return (comObject as IDiaDataSource);
+        // And return it as the type we expect
+        return (comObject as IDiaDataSource);
     }
 
     [return: MarshalAs(UnmanagedType.Interface)]
@@ -439,10 +439,10 @@ public class DiaFile
      InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     private interface IClassFactory
     {
-	    void CreateInstance([MarshalAs(UnmanagedType.Interface)] object aggregator,
-		    ref Guid refiid,
-	        [MarshalAs(UnmanagedType.Interface)] out object createdObject);
-	    void LockServer(bool incrementRefCount);
+        void CreateInstance([MarshalAs(UnmanagedType.Interface)] object aggregator,
+            ref Guid refiid,
+            [MarshalAs(UnmanagedType.Interface)] out object createdObject);
+        void LockServer(bool incrementRefCount);
     }
 }
 

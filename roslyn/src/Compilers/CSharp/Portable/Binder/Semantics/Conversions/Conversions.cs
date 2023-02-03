@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -369,7 +369,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // NOTE: Section 6.6 will be slightly updated:
             //
             //   - The candidate methods considered are only those methods that are applicable in their
-            //     normal form (§7.5.3.1), and do not omit any optional parameters. Thus, candidate methods
+            //     normal form (�7.5.3.1), and do not omit any optional parameters. Thus, candidate methods
             //     are ignored if they are applicable only in their expanded form, or if one or more of their
             //     optional parameters do not have a corresponding parameter in the targeted delegate type.
             //   

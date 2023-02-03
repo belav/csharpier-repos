@@ -2,7 +2,7 @@
 // MySecurityTokenSerializer.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,65 +37,65 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Common
 {
-	public class MySecurityTokenSerializer : SecurityTokenSerializer
-	{
-		protected override bool CanReadKeyIdentifierClauseCore (XmlReader reader)
-		{
-			return false;
-		}
+    public class MySecurityTokenSerializer : SecurityTokenSerializer
+    {
+        protected override bool CanReadKeyIdentifierClauseCore (XmlReader reader)
+        {
+            return false;
+        }
 
-		protected override bool CanReadKeyIdentifierCore (XmlReader reader)
-		{
-			return false;
-		}
+        protected override bool CanReadKeyIdentifierCore (XmlReader reader)
+        {
+            return false;
+        }
 
-		protected override bool CanReadTokenCore (XmlReader reader)
-		{
-			return false;
-		}
+        protected override bool CanReadTokenCore (XmlReader reader)
+        {
+            return false;
+        }
 
-		protected override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore (XmlReader reader)
-		{
-			throw new NotSupportedException ();
-		}
+        protected override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore (XmlReader reader)
+        {
+            throw new NotSupportedException ();
+        }
 
-		protected override SecurityKeyIdentifier ReadKeyIdentifierCore (XmlReader reader)
-		{
-			throw new NotSupportedException ();
-		}
+        protected override SecurityKeyIdentifier ReadKeyIdentifierCore (XmlReader reader)
+        {
+            throw new NotSupportedException ();
+        }
 
-		protected override SecurityToken ReadTokenCore (XmlReader reader, SecurityTokenResolver resolver)
-		{
-			throw new NotSupportedException ();
-		}
+        protected override SecurityToken ReadTokenCore (XmlReader reader, SecurityTokenResolver resolver)
+        {
+            throw new NotSupportedException ();
+        }
 
-		protected override bool CanWriteKeyIdentifierClauseCore (SecurityKeyIdentifierClause clause)
-		{
-			return false;
-		}
+        protected override bool CanWriteKeyIdentifierClauseCore (SecurityKeyIdentifierClause clause)
+        {
+            return false;
+        }
 
-		protected override bool CanWriteKeyIdentifierCore (SecurityKeyIdentifier ident)
-		{
-			return false;
-		}
-		protected override bool CanWriteTokenCore (SecurityToken token)
-		{
-			return false;
-		}
+        protected override bool CanWriteKeyIdentifierCore (SecurityKeyIdentifier ident)
+        {
+            return false;
+        }
+        protected override bool CanWriteTokenCore (SecurityToken token)
+        {
+            return false;
+        }
 
-		protected override void WriteKeyIdentifierClauseCore (XmlWriter writer, SecurityKeyIdentifierClause clause)
-		{
-			throw new NotSupportedException ();
-		}
+        protected override void WriteKeyIdentifierClauseCore (XmlWriter writer, SecurityKeyIdentifierClause clause)
+        {
+            throw new NotSupportedException ();
+        }
 
-		protected override void WriteKeyIdentifierCore (XmlWriter writer, SecurityKeyIdentifier ident)
-		{
-			throw new NotSupportedException ();
-		}
-		protected override void WriteTokenCore (XmlWriter writer, SecurityToken token)
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        protected override void WriteKeyIdentifierCore (XmlWriter writer, SecurityKeyIdentifier ident)
+        {
+            throw new NotSupportedException ();
+        }
+        protected override void WriteTokenCore (XmlWriter writer, SecurityToken token)
+        {
+            throw new NotSupportedException ();
+        }
+    }
 }
 #endif

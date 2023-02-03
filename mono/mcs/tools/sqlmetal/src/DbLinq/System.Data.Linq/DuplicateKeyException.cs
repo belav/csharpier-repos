@@ -31,28 +31,28 @@ using System;
 
 namespace System.Data.Linq
 {
-	public class DuplicateKeyException : InvalidOperationException
-	{
-		public DuplicateKeyException (object duplicate)
-			: this (duplicate, "Duplicate key was found")
-		{
-		}
+    public class DuplicateKeyException : InvalidOperationException
+    {
+        public DuplicateKeyException (object duplicate)
+            : this (duplicate, "Duplicate key was found")
+        {
+        }
 
-		public DuplicateKeyException (object duplicate, string message)
-			: this (duplicate, message, null)
-		{
-		}
+        public DuplicateKeyException (object duplicate, string message)
+            : this (duplicate, message, null)
+        {
+        }
 
-		public DuplicateKeyException (object duplicate, string message, Exception innerException)
-			: base (message, innerException)
-		{
-			this.duplicate = duplicate;
-		}
+        public DuplicateKeyException (object duplicate, string message, Exception innerException)
+            : base (message, innerException)
+        {
+            this.duplicate = duplicate;
+        }
 
-		object duplicate;
+        object duplicate;
 
-		public object Object {
-			get { return duplicate; }
-		}
-	}
+        public object Object {
+            get { return duplicate; }
+        }
+    }
 }

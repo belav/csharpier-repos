@@ -2,7 +2,7 @@
 // System.Data.SqlClient.SQLDebugging.cs
 //
 // Authors:
-// 	Umadevi S (sumadevi@novell.com)
+//     Umadevi S (sumadevi@novell.com)
 
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -32,17 +32,17 @@ using System.Runtime.InteropServices;
 
 namespace System.Data.SqlClient
 {
-	[ComVisible (true)]
-	[GuidAttribute ("afef65ad-4577-447a-a148-83acadd3d4b9")]
-	[ClassInterface (ClassInterfaceType.None)]
-	public
-	sealed
-	class SQLDebugging
-	{
-		[MonoTODO]
-		public SQLDebugging ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    [ComVisible (true)]
+    [GuidAttribute ("afef65ad-4577-447a-a148-83acadd3d4b9")]
+    [ClassInterface (ClassInterfaceType.None)]
+    public
+    sealed
+    class SQLDebugging
+    {
+        [MonoTODO]
+        public SQLDebugging ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

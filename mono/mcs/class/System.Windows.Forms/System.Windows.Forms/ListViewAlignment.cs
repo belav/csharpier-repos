@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Ravindra (rkumar@novell.com)
+//    Ravindra (rkumar@novell.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum ListViewAlignment
-	{
-		Default = 0,
-		Left = 1,
-		Top = 2,
-		SnapToGrid = 5
-	}
+    public enum ListViewAlignment
+    {
+        Default = 0,
+        Left = 1,
+        Top = 2,
+        SnapToGrid = 5
+    }
 }

@@ -31,22 +31,22 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SecurityTokenNotYetValidException : SecurityTokenValidationException
-	{
-		public SecurityTokenNotYetValidException()
-			: base("ID4182: The security token is not valid yet.")
-		{ }
+    public class SecurityTokenNotYetValidException : SecurityTokenValidationException
+    {
+        public SecurityTokenNotYetValidException()
+            : base("ID4182: The security token is not valid yet.")
+        { }
 
-		public SecurityTokenNotYetValidException(string message)
-			: base(message)
-		{ }
+        public SecurityTokenNotYetValidException(string message)
+            : base(message)
+        { }
 
-		public SecurityTokenNotYetValidException(string message, Exception inner)
-			: base(message, inner)
-		{ }
+        public SecurityTokenNotYetValidException(string message, Exception inner)
+            : base(message, inner)
+        { }
 
-		public SecurityTokenNotYetValidException(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{ }
-	}
+        public SecurityTokenNotYetValidException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        { }
+    }
 }

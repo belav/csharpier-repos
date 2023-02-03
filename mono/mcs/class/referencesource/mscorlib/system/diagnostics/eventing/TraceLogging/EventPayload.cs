@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections;
 
 #if !ES_BUILD_AGAINST_DOTNET_V35

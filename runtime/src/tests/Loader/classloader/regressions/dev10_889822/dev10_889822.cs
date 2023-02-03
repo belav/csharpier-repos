@@ -9,18 +9,18 @@ interface IFoo {
 }
 
 class My {
-	static int Main()
-	{
-		try {
-		   IFoo s = null;
-		   s.foo();		   
-		}
-		catch (NullReferenceException) {
-			Console.WriteLine("Successfully caught a null reference exception.");
-			return 100;
-		}
-		
-		Console.WriteLine("Failed!!");
-		return -1;
-	}
+    static int Main()
+    {
+        try {
+           IFoo s = null;
+           s.foo();           
+        }
+        catch (NullReferenceException) {
+            Console.WriteLine("Successfully caught a null reference exception.");
+            return 100;
+        }
+        
+        Console.WriteLine("Failed!!");
+        return -1;
+    }
 }

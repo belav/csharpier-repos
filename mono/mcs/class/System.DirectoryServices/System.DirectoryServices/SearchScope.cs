@@ -32,17 +32,17 @@
 
 namespace System.DirectoryServices
 {
-	
-	/// <summary>
-	/// Specifies the possible scopes for a directory search.
-	/// </summary>
-	[Serializable]
-	public enum SearchScope
-	{
-		Base,
-		OneLevel,
-	    Subtree
-	}
+    
+    /// <summary>
+    /// Specifies the possible scopes for a directory search.
+    /// </summary>
+    [Serializable]
+    public enum SearchScope
+    {
+        Base,
+        OneLevel,
+        Subtree
+    }
 
 }
 

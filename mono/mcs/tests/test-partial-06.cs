@@ -2,8 +2,8 @@
 
 partial class Foo
 {
-	~Foo ()
-	{ }
+    ~Foo ()
+    { }
 }
 
 partial class Foo

@@ -2,6 +2,6 @@
 // Line: 6
 
 public class SampleClass {
-	public delegate void EE ();
-	public event EE EE;
+    public delegate void EE ();
+    public event EE EE;
 }

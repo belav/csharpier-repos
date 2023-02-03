@@ -28,6 +28,6 @@
 namespace System.Web.UI.WebControls.WebParts {
         public enum ConnectionPointType {
                 Consumer = 0,
-		Provider = 1		
+        Provider = 1        
         }
 }

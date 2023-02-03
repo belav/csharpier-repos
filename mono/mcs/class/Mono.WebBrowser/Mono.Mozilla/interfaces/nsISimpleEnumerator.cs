@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,29 +32,29 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("D1899240-F9D2-11D2-BDD6-000064657374")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsISimpleEnumerator {
+    [Guid ("D1899240-F9D2-11D2-BDD6-000064657374")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsISimpleEnumerator {
 
 #region nsISimpleEnumerator
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int hasMoreElements ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int hasMoreElements ( out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNext ( out IntPtr ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNext ( out IntPtr ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsSimpleEnumerator {
-		public static nsISimpleEnumerator GetProxy (Mono.WebBrowser.IWebBrowser control, nsISimpleEnumerator obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsISimpleEnumerator).GUID, obj);
-			return o as nsISimpleEnumerator;
-		}
-	}
+    internal class nsSimpleEnumerator {
+        public static nsISimpleEnumerator GetProxy (Mono.WebBrowser.IWebBrowser control, nsISimpleEnumerator obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsISimpleEnumerator).GUID, obj);
+            return o as nsISimpleEnumerator;
+        }
+    }
 }

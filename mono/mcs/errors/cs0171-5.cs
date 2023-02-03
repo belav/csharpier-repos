@@ -3,20 +3,20 @@
 
 public struct V
 {
-	public int x;
+    public int x;
 }
 
 struct Test
 {
-	public V v1;
-	public V v2;
+    public V v1;
+    public V v2;
 
-	public Test (int mm)
-	{
-		v1 = new V ();
-	}
+    public Test (int mm)
+    {
+        v1 = new V ();
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

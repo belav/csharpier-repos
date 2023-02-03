@@ -37,51 +37,51 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TemplateColumn_ctor_
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class TemplateColumn_ctor_
+        : GHTBaseWeb 
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e) 
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+        
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() 
+        {    
+            this.Load += new System.EventHandler(this.Page_Load);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        private void Page_Load(object sender, System.EventArgs e) 
+        {
+            //Put user code to initialize the page here
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
-				DataGrid1.DataBind();;
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try 
+            {
+                DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
+                DataGrid1.DataBind();;
+            }
+            catch (Exception ex) 
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
-	}
+            GHTTestEnd();
+        }
+    }
 }

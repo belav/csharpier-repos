@@ -2,8 +2,8 @@
 // MetadataSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
-//	Ankit Jain <jankit@novell.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
+//    Ankit Jain <jankit@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -42,96 +42,96 @@ using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 
 namespace System.ServiceModel.Description
 {
-	[XmlRoot ("MetadataSection", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex")]
-	public class MetadataSection
-	{
-		string dialect;
-		string identifier;
-		object metadata;
-		Collection<XmlAttribute> attributes;
-		static MetadataSectionSerializer serializer;
+    [XmlRoot ("MetadataSection", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex")]
+    public class MetadataSection
+    {
+        string dialect;
+        string identifier;
+        object metadata;
+        Collection<XmlAttribute> attributes;
+        static MetadataSectionSerializer serializer;
 
-		static MetadataSection ()
-		{
-			serializer = new MetadataSectionSerializer ();
-		}
-		
-		public MetadataSection ()
-			: this (null, null, null)
-		{
-		}
+        static MetadataSection ()
+        {
+            serializer = new MetadataSectionSerializer ();
+        }
+        
+        public MetadataSection ()
+            : this (null, null, null)
+        {
+        }
 
-		public MetadataSection (string dialect, string identifier, object metadata)
-		{
-			this.dialect = dialect;
-			this.identifier = identifier;
-			this.metadata = metadata;
+        public MetadataSection (string dialect, string identifier, object metadata)
+        {
+            this.dialect = dialect;
+            this.identifier = identifier;
+            this.metadata = metadata;
 
-			attributes = new Collection<XmlAttribute> ();
-		}
+            attributes = new Collection<XmlAttribute> ();
+        }
 
-		public static string MetadataExchangeDialect {
-			get { return "http://schemas.xmlsoap.org/ws/2004/09/mex"; }
-		}
+        public static string MetadataExchangeDialect {
+            get { return "http://schemas.xmlsoap.org/ws/2004/09/mex"; }
+        }
 
-		public static string PolicyDialect {
-			get { return "http://schemas.xmlsoap.org/ws/2004/09/policy"; }
-		}
+        public static string PolicyDialect {
+            get { return "http://schemas.xmlsoap.org/ws/2004/09/policy"; }
+        }
 
-		public static string ServiceDescriptionDialect {
-			get { return "http://schemas.xmlsoap.org/wsdl/"; }
-		}
+        public static string ServiceDescriptionDialect {
+            get { return "http://schemas.xmlsoap.org/wsdl/"; }
+        }
 
-		public static string XmlSchemaDialect {
-			get { return "http://www.w3.org/2001/XMLSchema"; }
-		}
+        public static string XmlSchemaDialect {
+            get { return "http://www.w3.org/2001/XMLSchema"; }
+        }
 
-		[XmlAttribute]
-		public string Dialect {
-			get { return dialect; }
-			set { dialect = value; }
-		}
+        [XmlAttribute]
+        public string Dialect {
+            get { return dialect; }
+            set { dialect = value; }
+        }
 
-		[XmlAttribute]
-		public string Identifier {
-			get { return identifier; }
-			set { identifier = value; }
-		}
+        [XmlAttribute]
+        public string Identifier {
+            get { return identifier; }
+            set { identifier = value; }
+        }
 
-		[XmlElement ("Location", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex", Type = typeof (MetadataLocation), IsNullable = false)]
-		[XmlElement ("Metadata", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex", Type = typeof (MetadataSet), IsNullable = false)]
-		[XmlElement ("schema", Namespace = "http://www.w3.org/2001/XMLSchema", Type = typeof (XmlSchema), IsNullable = false)]
-		[XmlElement ("definitions", Namespace = "http://schemas.xmlsoap.org/wsdl/", Type = typeof (System.Web.Services.Description.ServiceDescription), IsNullable = false)]
-		[XmlElement ("MetadataReference", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex", Type = typeof (MetadataReference), IsNullable = false)]
-		[XmlAnyElement]
-		public object Metadata {
-			get { return metadata; }
-			set { metadata = value; }
-		}
+        [XmlElement ("Location", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex", Type = typeof (MetadataLocation), IsNullable = false)]
+        [XmlElement ("Metadata", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex", Type = typeof (MetadataSet), IsNullable = false)]
+        [XmlElement ("schema", Namespace = "http://www.w3.org/2001/XMLSchema", Type = typeof (XmlSchema), IsNullable = false)]
+        [XmlElement ("definitions", Namespace = "http://schemas.xmlsoap.org/wsdl/", Type = typeof (System.Web.Services.Description.ServiceDescription), IsNullable = false)]
+        [XmlElement ("MetadataReference", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex", Type = typeof (MetadataReference), IsNullable = false)]
+        [XmlAnyElement]
+        public object Metadata {
+            get { return metadata; }
+            set { metadata = value; }
+        }
 
-		[XmlAnyAttribute]
-		public Collection<XmlAttribute> Attributes {
-			get { return attributes; }
-		}
+        [XmlAnyAttribute]
+        public Collection<XmlAttribute> Attributes {
+            get { return attributes; }
+        }
 
-		internal static XmlSerializer Serializer {
-			get { return serializer; }
-		}
+        internal static XmlSerializer Serializer {
+            get { return serializer; }
+        }
 
-		public static MetadataSection CreateFromSchema (XmlSchema schema)
-		{
-			return new MetadataSection (
-				MetadataSection.XmlSchemaDialect,
-				schema.TargetNamespace, schema);
-		}
+        public static MetadataSection CreateFromSchema (XmlSchema schema)
+        {
+            return new MetadataSection (
+                MetadataSection.XmlSchemaDialect,
+                schema.TargetNamespace, schema);
+        }
 
-		public static MetadataSection CreateFromServiceDescription (
-			WSServiceDescription serviceDescription)
-		{
-			return new MetadataSection (
-				MetadataSection.ServiceDescriptionDialect,
-				serviceDescription.TargetNamespace, serviceDescription);
-		}
-	}
+        public static MetadataSection CreateFromServiceDescription (
+            WSServiceDescription serviceDescription)
+        {
+            return new MetadataSection (
+                MetadataSection.ServiceDescriptionDialect,
+                serviceDescription.TargetNamespace, serviceDescription);
+        }
+    }
 
 }

@@ -465,7 +465,7 @@ namespace System.Text.Json.Serialization.Tests
         public class TestClassWithDictionary
         {
            public Dictionary<string, CustomClass> Data { get; set; }
-		}
+        }
 
         [Fact]
         public async Task CamelCaseSerialize_ForClassWithDictionaryProperty_ApplyDictionaryKeyPolicy()

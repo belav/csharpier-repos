@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
@@ -30,60 +30,60 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class MouseEventArgs : EventArgs {
-		private MouseButtons	buttons;
-		private int		clicks;
-		private int		delta;
-		private int		x;
-		private int		y;
+    [ComVisible(true)]
+    public class MouseEventArgs : EventArgs {
+        private MouseButtons    buttons;
+        private int        clicks;
+        private int        delta;
+        private int        x;
+        private int        y;
 
-		#region Public Constructors
-		public MouseEventArgs(MouseButtons button, int clicks, int x, int y, int delta) {
-			this.buttons=button;
-			this.clicks=clicks;
-			this.delta=delta;
-			this.x=x;
-			this.y=y;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public MouseEventArgs(MouseButtons button, int clicks, int x, int y, int delta) {
+            this.buttons=button;
+            this.clicks=clicks;
+            this.delta=delta;
+            this.x=x;
+            this.y=y;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public MouseButtons Button {
-			get {
-				return this.buttons;
-			}
-		}
+        #region Public Instance Properties
+        public MouseButtons Button {
+            get {
+                return this.buttons;
+            }
+        }
 
-		public int Clicks {
-			get {
-				return this.clicks;
-			}
-		}
+        public int Clicks {
+            get {
+                return this.clicks;
+            }
+        }
 
-		public int Delta {
-			get {
-				return this.delta;
-			}
-		}
+        public int Delta {
+            get {
+                return this.delta;
+            }
+        }
 
-		public int X {
-			get {
-				return this.x;
-			}
-		}
+        public int X {
+            get {
+                return this.x;
+            }
+        }
 
-		public int Y {
-			get {
-				return this.y;
-			}
-		}
+        public int Y {
+            get {
+                return this.y;
+            }
+        }
 
-		public Point Location {
-			get {
-				return new Point (this.x, this.y);
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public Point Location {
+            get {
+                return new Point (this.x, this.y);
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

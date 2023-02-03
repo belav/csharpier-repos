@@ -20,18 +20,18 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.IO.Packaging {
 
-	public enum CompressionOption {
-		NotCompressed = -1,
-		Normal,
-		Maximum,
-		Fast,
-		SuperFast,
-	}
+    public enum CompressionOption {
+        NotCompressed = -1,
+        Normal,
+        Maximum,
+        Fast,
+        SuperFast,
+    }
 
 }
 

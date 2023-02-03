@@ -2,7 +2,7 @@
 // InternalEncryptedKeyIdentifierClause.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -33,19 +33,19 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	internal class InternalEncryptedKeyIdentifierClause : BinaryKeyIdentifierClause
-	{
-		public InternalEncryptedKeyIdentifierClause (byte [] hash)
-			: base (null, hash, false)
-		{
-		}
+    internal class InternalEncryptedKeyIdentifierClause : BinaryKeyIdentifierClause
+    {
+        public InternalEncryptedKeyIdentifierClause (byte [] hash)
+            : base (null, hash, false)
+        {
+        }
 
-		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			InternalEncryptedKeyIdentifierClause kic = keyIdentifierClause as InternalEncryptedKeyIdentifierClause;
-			if (kic == null)
-				return false;
-			return Matches (kic.GetRawBuffer ());
-		}
-	}
+        public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            InternalEncryptedKeyIdentifierClause kic = keyIdentifierClause as InternalEncryptedKeyIdentifierClause;
+            if (kic == null)
+                return false;
+            return Matches (kic.GetRawBuffer ());
+        }
+    }
 }

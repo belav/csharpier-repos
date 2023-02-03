@@ -32,18 +32,18 @@ using System.Runtime.CompilerServices;
 
 namespace Mono.Threading
 {
-	public class SpinLockWrapper
-	{
-		public SpinLock Lock;
+    public class SpinLockWrapper
+    {
+        public SpinLock Lock;
 
-		public SpinLockWrapper () : this (false)
-		{
+        public SpinLockWrapper () : this (false)
+        {
 
-		}
+        }
 
-		public SpinLockWrapper (bool enableTracking)
-		{
-			Lock = new SpinLock (enableTracking);
-		}
-	}
+        public SpinLockWrapper (bool enableTracking)
+        {
+            Lock = new SpinLock (enableTracking);
+        }
+    }
 }

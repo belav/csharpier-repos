@@ -2,7 +2,7 @@
 // System.Security.Permissions.KeyContainerPermissionFlags flags
 //
 // Author
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,21 +30,21 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-	[Flags]
-	[Serializable]
-	[ComVisible (true)]
-	public enum KeyContainerPermissionFlags {
-		NoFlags = 0,
-		Create = 1,
-		Open = 2,
-		Delete = 4,
-		Import = 16,
-		Export = 32,
-		Sign = 256,
-		Decrypt = 512,
-		ViewAcl = 4096,
-		ChangeAcl = 8192,
-		AllFlags = Create | Decrypt | Delete | Export | Import | Open | Sign | ViewAcl | ChangeAcl
-	}
+    [Flags]
+    [Serializable]
+    [ComVisible (true)]
+    public enum KeyContainerPermissionFlags {
+        NoFlags = 0,
+        Create = 1,
+        Open = 2,
+        Delete = 4,
+        Import = 16,
+        Export = 32,
+        Sign = 256,
+        Decrypt = 512,
+        ViewAcl = 4096,
+        ChangeAcl = 8192,
+        AllFlags = Create | Decrypt | Delete | Export | Import | Open | Sign | ViewAcl | ChangeAcl
+    }
 }
 

@@ -32,15 +32,15 @@ using System.Xml.XPath;
 
 namespace System.ServiceModel.Dispatcher
 {
-	[Serializable]
-	public class XPathNavigatorException : XPathException
-	{
-		public XPathNavigatorException () : this ("Navigator node quota exceeded") {}
-		public XPathNavigatorException (string message) : base (message) {}
-		public XPathNavigatorException (string message, Exception innerException)
-			: base (message, innerException) {}		
-		protected XPathNavigatorException (SerializationInfo info,
-							    StreamingContext context)
-			: base (info, context) {}
-	}
+    [Serializable]
+    public class XPathNavigatorException : XPathException
+    {
+        public XPathNavigatorException () : this ("Navigator node quota exceeded") {}
+        public XPathNavigatorException (string message) : base (message) {}
+        public XPathNavigatorException (string message, Exception innerException)
+            : base (message, innerException) {}        
+        protected XPathNavigatorException (SerializationInfo info,
+                                StreamingContext context)
+            : base (info, context) {}
+    }
 }

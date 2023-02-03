@@ -1240,7 +1240,7 @@ namespace System {
                 return true;
             }
 
-	     return false;
+         return false;
         }
 
         [SecurityCritical]
@@ -1259,16 +1259,16 @@ namespace System {
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         internal static bool ByteArraysAreDifferent(Byte[] A, Byte[] B)
         {
-		int length = A.Length;
-		if (length != B.Length)
-		    return true;
+        int length = A.Length;
+        if (length != B.Length)
+            return true;
 
-		for(int i = 0; i < length; i++) {
-		    if (A[i] != B[i])
-		        return true;				
-	       }
+        for(int i = 0; i < length; i++) {
+            if (A[i] != B[i])
+                return true;                
+           }
 
-		return false;
+        return false;
         }
 
         [System.Security.SecurityCritical]  // auto-generated
@@ -1277,11 +1277,11 @@ namespace System {
         internal static void UpdateByteArrayContextPropertyIfNeeded(Byte[] NewArray, Byte[] OldArray, String FieldKey, IntPtr fusionContext)
         {
             if ((NewArray != null && OldArray == null) ||
-		   (NewArray == null && OldArray != null) ||
-		   (NewArray != null && OldArray != null && ByteArraysAreDifferent(NewArray, OldArray)))
+           (NewArray == null && OldArray != null) ||
+           (NewArray != null && OldArray != null && ByteArraysAreDifferent(NewArray, OldArray)))
                 UpdateContextProperty(fusionContext, FieldKey, NewArray);
         }
-		
+        
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
@@ -1434,7 +1434,7 @@ namespace System {
             
             return StringBuilderCache.GetStringAndRelease(result);
         }
-#endif // FEATURE_FUSION		
+#endif // FEATURE_FUSION        
 
 #if FEATURE_COMINTEROP
         public bool SandboxInterop

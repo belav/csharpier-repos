@@ -39,21 +39,21 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices
 {
-	public class ClientRolePrincipal : IPrincipal
-	{
-		public IIdentity Identity {
-			get;
-			private set;
-		}
-		
-		public ClientRolePrincipal (IIdentity identity)
-		{
-			Identity = identity;
-		}
-		
-		public bool IsInRole (string role)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    public class ClientRolePrincipal : IPrincipal
+    {
+        public IIdentity Identity {
+            get;
+            private set;
+        }
+        
+        public ClientRolePrincipal (IIdentity identity)
+        {
+            Identity = identity;
+        }
+        
+        public bool IsInRole (string role)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

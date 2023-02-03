@@ -1,9 +1,9 @@
 //
 // SecurityTransparentAttributeTest.cs -
-//	NUnit Test Cases for SecurityTransparentAttribute
+//    NUnit Test Cases for SecurityTransparentAttribute
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,22 +34,22 @@ using System.Security;
 
 namespace MonoTests.System.Security {
 
-	[TestFixture]
-	public class SecurityTransparentAttributeTest {
+    [TestFixture]
+    public class SecurityTransparentAttributeTest {
 
-		[Test]
-		public void Attributes ()
-		{
-			Type t = typeof (SecurityTransparentAttribute);
-			Assert.IsFalse (t.IsSerializable, "IsSerializable");
+        [Test]
+        public void Attributes ()
+        {
+            Type t = typeof (SecurityTransparentAttribute);
+            Assert.IsFalse (t.IsSerializable, "IsSerializable");
 
-			object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage");
-			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsFalse (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsFalse (aua.Inherited, "Inherited");
-			Assert.AreEqual (AttributeTargets.Assembly, aua.ValidOn, "ValidOn");
-		}
-	}
+            object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
+            Assert.AreEqual (1, attrs.Length, "AttributeUsage");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
+            Assert.IsFalse (aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse (aua.Inherited, "Inherited");
+            Assert.AreEqual (AttributeTargets.Assembly, aua.ValidOn, "ValidOn");
+        }
+    }
 }
 

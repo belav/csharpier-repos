@@ -1,8 +1,8 @@
 //
 //
-//	Mono.Cairo drawing samples using GTK# as drawing surface
-//	Autor: Jordi Mas <jordi@ximian.com>. Based on work from Owen Taylor
-//	       Hisham Mardam Bey <hisham@hisham.cc>
+//    Mono.Cairo drawing samples using GTK# as drawing surface
+//    Autor: Jordi Mas <jordi@ximian.com>. Based on work from Owen Taylor
+//           Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -33,69 +33,69 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Cairo;
 using Gtk;
-	
+    
 public class GtkCairo
 {
-	static DrawingArea a;
-	
-	static void Main ()
-	{		
-		Application.Init ();
-		Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
+    static DrawingArea a;
+    
+    static void Main ()
+    {        
+        Application.Init ();
+        Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
 
-		a = new CairoGraphic ();	
-		
-		Box box = new HBox (true, 0);
-		box.Add (a);
-		w.Add (box);
-		w.Resize (500,500);		
-		w.ShowAll ();		
-		
-		Application.Run ();
-	}
+        a = new CairoGraphic ();    
+        
+        Box box = new HBox (true, 0);
+        box.Add (a);
+        w.Add (box);
+        w.Resize (500,500);        
+        w.ShowAll ();        
+        
+        Application.Run ();
+    }
 
 
 }
 
 public class CairoGraphic : DrawingArea 
-{	       	
+{               
         static readonly double  M_PI = 3.14159265358979323846;
    
-	static void draw (Cairo.Context gr, int width, int height)
-	{
-		int w, h;
-		ImageSurface image;
-		
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
-				
-		image = new ImageSurface ("data/e.png");
-		w = image.Width;
-		h = image.Height;
-		
-		gr.Translate (0.5, 0.5);
-		gr.Rotate (45* M_PI/180);
-		gr.Scale  (1.0/w, 1.0/h);
-		gr.Translate (-0.5*w, -0.5*h);
-		
-		image.Show (gr, 0, 0);
-		image.Destroy ();
-	}
+    static void draw (Cairo.Context gr, int width, int height)
+    {
+        int w, h;
+        ImageSurface image;
+        
+        gr.Scale (width, height);
+        gr.LineWidth = 0.04;
+                
+        image = new ImageSurface ("data/e.png");
+        w = image.Width;
+        h = image.Height;
+        
+        gr.Translate (0.5, 0.5);
+        gr.Rotate (45* M_PI/180);
+        gr.Scale  (1.0/w, 1.0/h);
+        gr.Translate (-0.5*w, -0.5*h);
+        
+        image.Show (gr, 0, 0);
+        image.Destroy ();
+    }
    
 
-	protected override bool OnExposeEvent (Gdk.EventExpose args)
-	{
-		Gdk.Window win = args.Window;
-		//Gdk.Rectangle area = args.Area;
-		
-		Cairo.Context g = Gdk.Context.CreateDrawable (win);
-		
-		int x, y, w, h, d;
-		win.GetGeometry(out x, out y, out w, out h, out d);
-		
-		draw (g, w, h);
-		return true;
-	}
+    protected override bool OnExposeEvent (Gdk.EventExpose args)
+    {
+        Gdk.Window win = args.Window;
+        //Gdk.Rectangle area = args.Area;
+        
+        Cairo.Context g = Gdk.Context.CreateDrawable (win);
+        
+        int x, y, w, h, d;
+        win.GetGeometry(out x, out y, out w, out h, out d);
+        
+        draw (g, w, h);
+        return true;
+    }
 
 }
 

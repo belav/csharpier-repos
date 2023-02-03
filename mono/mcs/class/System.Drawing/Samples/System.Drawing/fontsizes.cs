@@ -30,23 +30,23 @@ using System.Drawing.Imaging;
 
 namespace MonoSamples.System.Drawing
 {
-	public class FontSizes
-	{
-		public static void PrintFontInfo (Font f)
-		{
-			Console.WriteLine ("Font: {0} size in pixels: {1}", f, f.Height);
-		}
-		
-		public static void Main ()
-		{			
-			Console.WriteLine (";----------------------------------------------------");
-			PrintFontInfo (new Font ("Arial", 12));
-			PrintFontInfo (new Font ("Arial", 14));
-			PrintFontInfo (new Font ("Arial", 16));
-			PrintFontInfo (new Font ("Arial", 22));
-			PrintFontInfo (new Font ("Verdana", 44));
-			PrintFontInfo (new Font ("Verdana", 8));
-			
-		}
-	}
+    public class FontSizes
+    {
+        public static void PrintFontInfo (Font f)
+        {
+            Console.WriteLine ("Font: {0} size in pixels: {1}", f, f.Height);
+        }
+        
+        public static void Main ()
+        {            
+            Console.WriteLine (";----------------------------------------------------");
+            PrintFontInfo (new Font ("Arial", 12));
+            PrintFontInfo (new Font ("Arial", 14));
+            PrintFontInfo (new Font ("Arial", 16));
+            PrintFontInfo (new Font ("Arial", 22));
+            PrintFontInfo (new Font ("Verdana", 44));
+            PrintFontInfo (new Font ("Verdana", 8));
+            
+        }
+    }
 }

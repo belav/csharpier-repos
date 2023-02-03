@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Rolf Bjarne Kvinge  (RKvinge@novell.com)
+//    Rolf Bjarne Kvinge  (RKvinge@novell.com)
 //
 
 
@@ -34,9 +34,9 @@ using System.Collections;
 namespace MonoTests.System.Windows.Forms
 {
 
-	[TestFixture]
-	public class DataGridViewBandTest : TestHelper
-	{
-	
-	}
+    [TestFixture]
+    public class DataGridViewBandTest : TestHelper
+    {
+    
+    }
 }

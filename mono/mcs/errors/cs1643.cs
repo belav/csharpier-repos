@@ -3,15 +3,15 @@
 using System;
 
 class X {
-	delegate int T ();
+    delegate int T ();
 
-	static void Main ()
-	{
-		int a = 1;
-		
-		T t = delegate {
-			if (a == 1)
-				return 1;
-		};
-	}
+    static void Main ()
+    {
+        int a = 1;
+        
+        T t = delegate {
+            if (a == 1)
+                return 1;
+        };
+    }
 }

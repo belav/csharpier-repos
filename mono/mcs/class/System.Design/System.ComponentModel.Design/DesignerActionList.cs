@@ -32,43 +32,43 @@ using System.Collections;
 
 namespace System.ComponentModel.Design
 {
-	public class DesignerActionList
-	{
-		IComponent component;
-		bool auto_show;
-		DesignerActionItemCollection action_items;
-		
-		public DesignerActionList (IComponent component)
-		{
-			this.component = component;
-			action_items = new DesignerActionItemCollection ();
-		}
+    public class DesignerActionList
+    {
+        IComponent component;
+        bool auto_show;
+        DesignerActionItemCollection action_items;
+        
+        public DesignerActionList (IComponent component)
+        {
+            this.component = component;
+            action_items = new DesignerActionItemCollection ();
+        }
 
-		public virtual bool AutoShow {
-			get {
-				return auto_show;
-			}
-			
-			set {
-				auto_show = value;    
-			}
-		}
+        public virtual bool AutoShow {
+            get {
+                return auto_show;
+            }
+            
+            set {
+                auto_show = value;    
+            }
+        }
 
-		public IComponent Component {
-			get {
-				return component;
-			}
-		}
+        public IComponent Component {
+            get {
+                return component;
+            }
+        }
 
-		public object GetService (Type serviceType)
-		{
-			return null;
-			throw new NotImplementedException ();
-		}
-		
-		public virtual DesignerActionItemCollection GetSortedActionItems ()
-		{
-			return action_items;
-		}
-	}
+        public object GetService (Type serviceType)
+        {
+            return null;
+            throw new NotImplementedException ();
+        }
+        
+        public virtual DesignerActionItemCollection GetSortedActionItems ()
+        {
+            return action_items;
+        }
+    }
 }

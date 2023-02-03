@@ -33,27 +33,27 @@ using System.Runtime.Serialization;
 
 namespace System.DirectoryServices.Protocols
 {
-	[SerializableAttribute]
-	public class DirectoryException : Exception
-	{
-		public DirectoryException ()
-			: this ("directory exception")
-		{
-		}
+    [SerializableAttribute]
+    public class DirectoryException : Exception
+    {
+        public DirectoryException ()
+            : this ("directory exception")
+        {
+        }
 
-		public DirectoryException (string message)
-			: base (message)
-		{
-		}
+        public DirectoryException (string message)
+            : base (message)
+        {
+        }
 
-		public DirectoryException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public DirectoryException (string message, Exception inner)
+            : base (message, inner)
+        {
+        }
 
-		protected DirectoryException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected DirectoryException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        {
+        }
+    }
 }

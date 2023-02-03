@@ -1,4 +1,4 @@
-Ôªø// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 namespace System.Web.Razor.Tokenizer
@@ -7,12 +7,12 @@ namespace System.Web.Razor.Tokenizer
     {
         public static bool IsSingleQuote(char character)
         {
-            return character == '\'' || character == '‚Äò' || character == '‚Äô';
+            return character == '\'' || character == 'ë' || character == 'í';
         }
 
         public static bool IsDoubleQuote(char character)
         {
-            return character == '"' || character == '‚Äú' || character == '‚Äù';
+            return character == '"' || character == 'ì' || character == 'î';
         }
 
         public static bool IsOctalDigit(char character)

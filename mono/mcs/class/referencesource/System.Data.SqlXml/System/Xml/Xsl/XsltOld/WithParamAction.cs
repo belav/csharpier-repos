@@ -59,7 +59,7 @@ namespace System.Xml.Xsl.XsltOld {
                 break;
             default:
                 Debug.Fail("Invalid execution state inside VariableAction.Execute");
-		    break;
+            break;
             }
         }
     }

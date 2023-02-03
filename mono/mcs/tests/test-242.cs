@@ -6,7 +6,7 @@ class BaseClass {
 }
 
 class Derived : BaseClass {
-	public new int Location {
+    public new int Location {
             get {
                 return 9;
             }

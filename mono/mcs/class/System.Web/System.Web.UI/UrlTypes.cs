@@ -2,7 +2,7 @@
 // System.Web.UI.UrlTypes.cs
 //
 // Authors:
-//	Sanjay Gupta (gsanjay@novell.com)
+//    Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -29,13 +29,13 @@
 
 namespace System.Web.UI 
 {
-	[FlagsAttribute, SerializableAttribute]
-	public enum UrlTypes 
-	{
-		Absolute = 1,
-		AppRelative = 2,
-		DocRelative = 4,
-		RootRelative = 8
-	} 
+    [FlagsAttribute, SerializableAttribute]
+    public enum UrlTypes 
+    {
+        Absolute = 1,
+        AppRelative = 2,
+        DocRelative = 4,
+        RootRelative = 8
+    } 
 }
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,37 +14,37 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.ComponentModel;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
 
-	[OnDemand]
-	public interface IItemContainer<TItem> : IDictionaryAdapter, IDictionaryCreate,
-	                                         IEditableObject, INotifyPropertyChanged
-	{
-		Guid Id { get; set; }
+    [OnDemand]
+    public interface IItemContainer<TItem> : IDictionaryAdapter, IDictionaryCreate,
+                                             IEditableObject, INotifyPropertyChanged
+    {
+        Guid Id { get; set; }
 
 #pragma warning disable 108
-		TItem Item { get; set; }
+        TItem Item { get; set; }
 #pragma warning restore 108
 
-		[OnDemand(5)]
-		int Count { get; set; }
+        [OnDemand(5)]
+        int Count { get; set; }
 
-		Address Address { get; set; }
+        Address Address { get; set; }
 
-		Uri EmailAddress { get; set; }
-		IPhone Phone { get; set; }
+        Uri EmailAddress { get; set; }
+        IPhone Phone { get; set; }
 
-		int[] Positions { get; set; }
+        int[] Positions { get; set; }
 
-		IDynamicValue<int> ReducePositions { get; set; }
+        IDynamicValue<int> ReducePositions { get; set; }
 
-		IList<TItem> GenericItems { get; set; }
+        IList<TItem> GenericItems { get; set; }
 
-		BindingList<TItem> Bindingtems { get; set; }
+        BindingList<TItem> Bindingtems { get; set; }
 
-		IList Items { get; set; }
-	}
+        IList Items { get; set; }
+    }
 }

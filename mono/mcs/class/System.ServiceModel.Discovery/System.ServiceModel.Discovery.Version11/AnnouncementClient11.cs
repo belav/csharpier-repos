@@ -33,37 +33,37 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	internal class AnnouncementClient11 : ClientBase<IAnnouncementContract11>, AnnouncementClient.IAnnouncementCommon
-	{
-		public AnnouncementClient11 (AnnouncementEndpoint endpoint)
-			: base (endpoint)
-		{
-		}
-		
-		public IAsyncResult BeginAnnounceOnline (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence, AsyncCallback callback, object state)
-		{
-			var md = new EndpointDiscoveryMetadata11 (metadata);
-			var seq = new DiscoveryMessageSequence11 (sequence);
-			var msg = new MessageContracts11.OnlineAnnouncement () { EndpointDiscoveryMetadata = md, MessageSequence = seq };
-			return Channel.BeginOnlineAnnouncement (msg, callback, state);
-		}
+    internal class AnnouncementClient11 : ClientBase<IAnnouncementContract11>, AnnouncementClient.IAnnouncementCommon
+    {
+        public AnnouncementClient11 (AnnouncementEndpoint endpoint)
+            : base (endpoint)
+        {
+        }
+        
+        public IAsyncResult BeginAnnounceOnline (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence, AsyncCallback callback, object state)
+        {
+            var md = new EndpointDiscoveryMetadata11 (metadata);
+            var seq = new DiscoveryMessageSequence11 (sequence);
+            var msg = new MessageContracts11.OnlineAnnouncement () { EndpointDiscoveryMetadata = md, MessageSequence = seq };
+            return Channel.BeginOnlineAnnouncement (msg, callback, state);
+        }
 
-		public void EndAnnounceOnline (IAsyncResult result)
-		{
-			Channel.EndOnlineAnnouncement (result);
-		}
+        public void EndAnnounceOnline (IAsyncResult result)
+        {
+            Channel.EndOnlineAnnouncement (result);
+        }
 
-		public IAsyncResult BeginAnnounceOffline (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence, AsyncCallback callback, object state)
-		{
-			var md = new EndpointDiscoveryMetadata11 (metadata);
-			var seq = new DiscoveryMessageSequence11 (sequence);
-			var msg = new MessageContracts11.OfflineAnnouncement () { EndpointDiscoveryMetadata = md, MessageSequence = seq };
-			return Channel.BeginOfflineAnnouncement (msg, callback, state);
-		}
+        public IAsyncResult BeginAnnounceOffline (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence sequence, AsyncCallback callback, object state)
+        {
+            var md = new EndpointDiscoveryMetadata11 (metadata);
+            var seq = new DiscoveryMessageSequence11 (sequence);
+            var msg = new MessageContracts11.OfflineAnnouncement () { EndpointDiscoveryMetadata = md, MessageSequence = seq };
+            return Channel.BeginOfflineAnnouncement (msg, callback, state);
+        }
 
-		public void EndAnnounceOffline (IAsyncResult result)
-		{
-			Channel.EndOfflineAnnouncement (result);
-		}
-	}
+        public void EndAnnounceOffline (IAsyncResult result)
+        {
+            Channel.EndOfflineAnnouncement (result);
+        }
+    }
 }

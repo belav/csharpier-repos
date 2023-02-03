@@ -32,65 +32,65 @@ using System.Linq;
 
 namespace Microsoft.Build.Execution
 {
-	public sealed class ProjectTaskInstance : ProjectTargetInstanceChild
-	{
-		internal ProjectTaskInstance (ProjectTaskElement xml)
-		{
-			condition = xml.Condition;
-			ContinueOnError = xml.ContinueOnError;
-			Name = xml.Name;
-			Outputs = xml.Outputs.Select (o => {
-				if (o.IsOutputItem)
-					return (ProjectTaskInstanceChild) new ProjectTaskOutputItemInstance ((ProjectOutputElement) o);
-				if (o.IsOutputProperty)
-					return new ProjectTaskOutputPropertyInstance ((ProjectOutputElement) o);
-				throw new NotSupportedException ();
-				}).ToArray ();
-			Parameters = new Dictionary<string,string> (xml.Parameters);
-			MSBuildArchitecture = xml.MSBuildArchitecture;
-			MSBuildRuntime = xml.MSBuildRuntime;
-			
-			condition_location = xml.ConditionLocation;
-			ContinueOnErrorLocation = xml.ContinueOnErrorLocation;
-			location = xml.Location;
-			MSBuildArchitectureLocation = xml.MSBuildArchitectureLocation;
-			MSBuildRuntimeLocation = xml.MSBuildRuntimeLocation;
-		}
-		
-		string condition;
-		public override string Condition {
-			get { return condition; }
-		}
-		
-		ElementLocation condition_location, location;
-		
-		public
-		override ElementLocation ConditionLocation {
-			get { return condition_location; }
-		}
+    public sealed class ProjectTaskInstance : ProjectTargetInstanceChild
+    {
+        internal ProjectTaskInstance (ProjectTaskElement xml)
+        {
+            condition = xml.Condition;
+            ContinueOnError = xml.ContinueOnError;
+            Name = xml.Name;
+            Outputs = xml.Outputs.Select (o => {
+                if (o.IsOutputItem)
+                    return (ProjectTaskInstanceChild) new ProjectTaskOutputItemInstance ((ProjectOutputElement) o);
+                if (o.IsOutputProperty)
+                    return new ProjectTaskOutputPropertyInstance ((ProjectOutputElement) o);
+                throw new NotSupportedException ();
+                }).ToArray ();
+            Parameters = new Dictionary<string,string> (xml.Parameters);
+            MSBuildArchitecture = xml.MSBuildArchitecture;
+            MSBuildRuntime = xml.MSBuildRuntime;
+            
+            condition_location = xml.ConditionLocation;
+            ContinueOnErrorLocation = xml.ContinueOnErrorLocation;
+            location = xml.Location;
+            MSBuildArchitectureLocation = xml.MSBuildArchitectureLocation;
+            MSBuildRuntimeLocation = xml.MSBuildRuntimeLocation;
+        }
+        
+        string condition;
+        public override string Condition {
+            get { return condition; }
+        }
+        
+        ElementLocation condition_location, location;
+        
+        public
+        override ElementLocation ConditionLocation {
+            get { return condition_location; }
+        }
 
-		public
-		override ElementLocation Location {
-			get { return location; }
-		}
-		
-		public string ContinueOnError { get; private set; }
-		
-		public ElementLocation ContinueOnErrorLocation { get; private set; }
+        public
+        override ElementLocation Location {
+            get { return location; }
+        }
+        
+        public string ContinueOnError { get; private set; }
+        
+        public ElementLocation ContinueOnErrorLocation { get; private set; }
 
-		public string MSBuildArchitecture { get; private set; }
+        public string MSBuildArchitecture { get; private set; }
 
-		public ElementLocation MSBuildArchitectureLocation { get; private set; }
+        public ElementLocation MSBuildArchitectureLocation { get; private set; }
 
-		public string MSBuildRuntime { get; private set; }
+        public string MSBuildRuntime { get; private set; }
 
-		public ElementLocation MSBuildRuntimeLocation { get; private set; }
-		
-		public string Name { get; private set; }
+        public ElementLocation MSBuildRuntimeLocation { get; private set; }
+        
+        public string Name { get; private set; }
 
-		public IList<ProjectTaskInstanceChild> Outputs { get; private set; }
+        public IList<ProjectTaskInstanceChild> Outputs { get; private set; }
 
-		public IDictionary<string, string> Parameters { get; private set; }
-	}
+        public IDictionary<string, string> Parameters { get; private set; }
+    }
 }
 

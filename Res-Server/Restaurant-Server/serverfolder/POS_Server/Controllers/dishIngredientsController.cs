@@ -1,4 +1,4 @@
-﻿using LinqKit;
+using LinqKit;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using POS_Server.Models.VM;

@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -31,71 +31,71 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.IO.Packaging {
 
-	public class PackageDigitalSignature
-	{
-		internal PackageDigitalSignature ()
-		{
-		}
+    public class PackageDigitalSignature
+    {
+        internal PackageDigitalSignature ()
+        {
+        }
 
-		public CertificateEmbeddingOption CertificateEmbeddingOption {
-			get { throw new NotImplementedException (); }
-		}
+        public CertificateEmbeddingOption CertificateEmbeddingOption {
+            get { throw new NotImplementedException (); }
+        }
 
 #if notyet
-		public System.Security.Cryptography.Xml.Signature Signature {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public System.Security.Cryptography.Xml.Signature Signature {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 #endif
 
-		public PackagePart SignaturePart {
-			get { throw new NotImplementedException (); }
-		}
+        public PackagePart SignaturePart {
+            get { throw new NotImplementedException (); }
+        }
 
-		public string SignatureType {
-			get { throw new NotImplementedException (); }
-		}
+        public string SignatureType {
+            get { throw new NotImplementedException (); }
+        }
 
-		public byte[] SignatureValue {
-			get { throw new NotImplementedException (); }
-		}
+        public byte[] SignatureValue {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ReadOnlyCollection<Uri> SignedParts {
-			get { throw new NotImplementedException (); }
-		}
+        public ReadOnlyCollection<Uri> SignedParts {
+            get { throw new NotImplementedException (); }
+        }
 
-		public ReadOnlyCollection<PackageRelationshipSelector> SignedRelationshipSelectors {
-			get { throw new NotImplementedException (); }
-		}
+        public ReadOnlyCollection<PackageRelationshipSelector> SignedRelationshipSelectors {
+            get { throw new NotImplementedException (); }
+        }
 
-		public X509Certificate Signer {
-			get { throw new NotImplementedException (); }
-		}
+        public X509Certificate Signer {
+            get { throw new NotImplementedException (); }
+        }
 
-		public DateTime SigningTime {
-			get { throw new NotImplementedException (); }
-		}
+        public DateTime SigningTime {
+            get { throw new NotImplementedException (); }
+        }
 
-		public string TimeFormat {
-			get { throw new NotImplementedException (); }
-		}
+        public string TimeFormat {
+            get { throw new NotImplementedException (); }
+        }
 
-		public List<string> GetPartTransformList(Uri partName)
-		{
-			throw new NotImplementedException ();
-		}
+        public List<string> GetPartTransformList(Uri partName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public VerifyResult Verify()
-		{
-			throw new NotImplementedException ();
-		}
+        public VerifyResult Verify()
+        {
+            throw new NotImplementedException ();
+        }
 
-		[SecurityCritical]
-		[SecurityTreatAsSafe]
-		public VerifyResult Verify(X509Certificate signingCertificate)
-		{
-			throw new NotImplementedException ();
-		}
+        [SecurityCritical]
+        [SecurityTreatAsSafe]
+        public VerifyResult Verify(X509Certificate signingCertificate)
+        {
+            throw new NotImplementedException ();
+        }
 
-	}
+    }
 }

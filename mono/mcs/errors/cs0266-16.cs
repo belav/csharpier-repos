@@ -3,9 +3,9 @@
 
 class S
 {
-	uint Test (uint a)
-	{
-		int b = 0;
-		return a * b;
-	}
+    uint Test (uint a)
+    {
+        int b = 0;
+        return a * b;
+    }
 }

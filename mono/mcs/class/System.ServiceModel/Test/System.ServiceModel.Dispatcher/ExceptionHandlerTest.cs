@@ -33,33 +33,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Dispatcher {
 
-	[TestFixture]
-	public class ExceptionHandlerTest
-	{
-		[Test]
-		public void Ctor ()
-		{
-			Assert.IsTrue (ExceptionHandler.AlwaysHandle.HandleException (new Exception ()),
-				       "AlwaysHandle");
-			Assert.IsNull (ExceptionHandler.AsynchronousThreadExceptionHandler,
-				       "AsynchronousThreadExceptionHandler");
-			Assert.IsTrue (ExceptionHandler.TransportExceptionHandler.HandleException (new Exception ()),
-				       "TransportExceptionHandler");
-		}
+    [TestFixture]
+    public class ExceptionHandlerTest
+    {
+        [Test]
+        public void Ctor ()
+        {
+            Assert.IsTrue (ExceptionHandler.AlwaysHandle.HandleException (new Exception ()),
+                       "AlwaysHandle");
+            Assert.IsNull (ExceptionHandler.AsynchronousThreadExceptionHandler,
+                       "AsynchronousThreadExceptionHandler");
+            Assert.IsTrue (ExceptionHandler.TransportExceptionHandler.HandleException (new Exception ()),
+                       "TransportExceptionHandler");
+        }
 
-		[Test]
-		[Ignore ("Wrong. Also, we don't have CER")]
-		public void AsynchronousThreadExceptionHandler ()
-		{
-			PropertyInfo p = typeof (ExceptionHandler).GetProperty ("AsynchronousThreadExceptionHandler");
-			object [] attrs = p.GetGetMethod ().GetCustomAttributes (false);
-			ReliabilityContractAttribute attr = attrs [0] as ReliabilityContractAttribute;
-			
-			Assert.AreEqual (1, attrs.Length, "Contains only 1 attribute");
-			Assert.AreEqual (Cer.Success, attr.Cer,  "attribute value #1");
-			Assert.AreEqual (Consistency.WillNotCorruptState,
-					 attr.ConsistencyGuarantee, "attribute value #2");
-		}
-	}
+        [Test]
+        [Ignore ("Wrong. Also, we don't have CER")]
+        public void AsynchronousThreadExceptionHandler ()
+        {
+            PropertyInfo p = typeof (ExceptionHandler).GetProperty ("AsynchronousThreadExceptionHandler");
+            object [] attrs = p.GetGetMethod ().GetCustomAttributes (false);
+            ReliabilityContractAttribute attr = attrs [0] as ReliabilityContractAttribute;
+            
+            Assert.AreEqual (1, attrs.Length, "Contains only 1 attribute");
+            Assert.AreEqual (Cer.Success, attr.Cer,  "attribute value #1");
+            Assert.AreEqual (Consistency.WillNotCorruptState,
+                     attr.ConsistencyGuarantee, "attribute value #2");
+        }
+    }
 }
 #endif

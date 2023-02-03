@@ -30,23 +30,23 @@ using System.Collections.Generic;
 
 namespace System.IO.Packaging {
 
-	public class PackageRelationshipCollection : IEnumerable<PackageRelationship>, IEnumerable
-	{
-		internal List<PackageRelationship> Relationships { get; private set; }
-		
-		internal PackageRelationshipCollection ()
-		{
-			Relationships = new List<PackageRelationship> ();
-		}
+    public class PackageRelationshipCollection : IEnumerable<PackageRelationship>, IEnumerable
+    {
+        internal List<PackageRelationship> Relationships { get; private set; }
+        
+        internal PackageRelationshipCollection ()
+        {
+            Relationships = new List<PackageRelationship> ();
+        }
 
-		public IEnumerator<PackageRelationship> GetEnumerator ()
-		{
-			return Relationships.GetEnumerator ();
-		}
+        public IEnumerator<PackageRelationship> GetEnumerator ()
+        {
+            return Relationships.GetEnumerator ();
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return GetEnumerator();
-		}
-	}
+        IEnumerator IEnumerable.GetEnumerator ()
+        {
+            return GetEnumerator();
+        }
+    }
 }

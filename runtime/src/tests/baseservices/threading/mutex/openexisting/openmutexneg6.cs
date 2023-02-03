@@ -25,7 +25,7 @@ class OpenMutexNeg
             }
             catch(WaitHandleCannotBeOpenedException)
             {
-                //Expected	
+                //Expected    
                 iRet = 100;
             }
             catch (Exception e)

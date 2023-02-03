@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	public class ClassWithAttributesOnMethodParameters
-	{
-		public virtual void MethodOne([Required(BadValue = -1)] int val)
-		{
-			Assert.IsFalse(val == -1);
-		}
+    public class ClassWithAttributesOnMethodParameters
+    {
+        public virtual void MethodOne([Required(BadValue = -1)] int val)
+        {
+            Assert.IsFalse(val == -1);
+        }
 
-		public virtual void MethodTwo([Required("")] string name)
-		{
-			Assert.IsNotNull(name);
-		}
-	}
+        public virtual void MethodTwo([Required("")] string name)
+        {
+            Assert.IsNotNull(name);
+        }
+    }
 }

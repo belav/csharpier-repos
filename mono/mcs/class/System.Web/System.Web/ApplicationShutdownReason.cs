@@ -2,7 +2,7 @@
 // System.Web.ApplicationShutdownReason.cs
 //
 // Authors:
-//	Duncan Mak (duncan@ximian.com)
+//    Duncan Mak (duncan@ximian.com)
 //
 // Copyright (C) 2004-2009 Novell, Inc (http://www.novell.com)
 //
@@ -46,7 +46,7 @@ namespace System.Web
                 HttpRuntimeClose = 12,
                 InitializationError = 13,
                 MaxRecompilationsReached = 14
-		, BuildManagerChange = 15
+        , BuildManagerChange = 15
         }
 }
 

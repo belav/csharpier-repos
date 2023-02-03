@@ -2,7 +2,7 @@
 // EventCommand.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
 //
@@ -29,12 +29,12 @@
 
 namespace System.Diagnostics.Tracing
 {
-	public enum EventCommand
-	{
-		Update,
-		SendManifest = -1,
-		Enable = -2,
-		Disable = -3
-	}
+    public enum EventCommand
+    {
+        Update,
+        SendManifest = -1,
+        Enable = -2,
+        Disable = -3
+    }
 }
 

@@ -6,8 +6,8 @@ using System;
 
 namespace Testing
 {
-	public class TestClass
-	{
-	}
+    public class TestClass
+    {
+    }
 }
 

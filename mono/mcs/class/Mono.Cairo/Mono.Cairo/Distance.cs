@@ -36,23 +36,23 @@
 
 namespace Cairo {
 
-	public struct Distance
-	{
-		public Distance (double dx, double dy)
-		{
-			this.dx = dx;
-			this.dy = dy;
-		}
+    public struct Distance
+    {
+        public Distance (double dx, double dy)
+        {
+            this.dx = dx;
+            this.dy = dy;
+        }
 
-		double dx, dy;
-		public double Dx {
-			get { return dx; }
-			set { dx = value; }
-		}
+        double dx, dy;
+        public double Dx {
+            get { return dx; }
+            set { dx = value; }
+        }
 
-		public double Dy {
-			get { return dy; }
-			set { dy = value; }
-		}
-	}
+        public double Dy {
+            get { return dy; }
+            set { dy = value; }
+        }
+    }
 }

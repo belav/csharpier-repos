@@ -2,7 +2,7 @@
 // ChannelDispatcherCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,41 +31,41 @@ using System.Collections.ObjectModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public class ChannelDispatcherCollection
-		: SynchronizedCollection<ChannelDispatcherBase>
-	{
-		private ServiceHostBase _service;
+    public class ChannelDispatcherCollection
+        : SynchronizedCollection<ChannelDispatcherBase>
+    {
+        private ServiceHostBase _service;
 
-		internal ChannelDispatcherCollection (ServiceHostBase service)
-		{
-			_service = service;
-		}
+        internal ChannelDispatcherCollection (ServiceHostBase service)
+        {
+            _service = service;
+        }
 
-		protected override void ClearItems ()
-		{			
-			foreach (ChannelDispatcherBase c in this)
-				c.Detach (_service);
-			base.ClearItems ();
-		}
+        protected override void ClearItems ()
+        {            
+            foreach (ChannelDispatcherBase c in this)
+                c.Detach (_service);
+            base.ClearItems ();
+        }
 
-		protected override void InsertItem (int index, ChannelDispatcherBase item)
-		{
-			item.Attach (_service);
-			base.InsertItem (index, item);			
-		}
+        protected override void InsertItem (int index, ChannelDispatcherBase item)
+        {
+            item.Attach (_service);
+            base.InsertItem (index, item);            
+        }
 
-		protected override void RemoveItem (int index)
-		{
-			ChannelDispatcherBase removed = this [index];
-			base.RemoveItem (index);
-			removed.Detach (_service);
-			
-		}
+        protected override void RemoveItem (int index)
+        {
+            ChannelDispatcherBase removed = this [index];
+            base.RemoveItem (index);
+            removed.Detach (_service);
+            
+        }
 
-		protected override void SetItem (int index, ChannelDispatcherBase item)
-		{
-			item.Attach (_service);
-			base.SetItem (index, item);			
-		}		
-	}
+        protected override void SetItem (int index, ChannelDispatcherBase item)
+        {
+            item.Attach (_service);
+            base.SetItem (index, item);            
+        }        
+    }
 }

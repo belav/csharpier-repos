@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.ProtocolElement
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,29 +33,29 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services {
-	[TestFixture]
-	public class ProtocolElementTest
-	{
-		[Test]
-		public void Ctors ()
-		{
-			ProtocolElement el = new ProtocolElement ();
+    [TestFixture]
+    public class ProtocolElementTest
+    {
+        [Test]
+        public void Ctors ()
+        {
+            ProtocolElement el = new ProtocolElement ();
 
-			Assert.AreEqual (WebServiceProtocols.Unknown, el.Name, "A1");
+            Assert.AreEqual (WebServiceProtocols.Unknown, el.Name, "A1");
 
-			el = new ProtocolElement (WebServiceProtocols.HttpPost);
+            el = new ProtocolElement (WebServiceProtocols.HttpPost);
 
-			Assert.AreEqual (WebServiceProtocols.HttpPost, el.Name, "A2");
-		}
+            Assert.AreEqual (WebServiceProtocols.HttpPost, el.Name, "A2");
+        }
 
-		[Test]
-		public void GetSet ()
-		{
-			ProtocolElement el = new ProtocolElement ();
+        [Test]
+        public void GetSet ()
+        {
+            ProtocolElement el = new ProtocolElement ();
 
-			el.Name = WebServiceProtocols.HttpGet;
-			Assert.AreEqual (WebServiceProtocols.HttpGet, el.Name, "A1");
-		}
-	}
+            el.Name = WebServiceProtocols.HttpGet;
+            Assert.AreEqual (WebServiceProtocols.HttpGet, el.Name, "A1");
+        }
+    }
 }
 

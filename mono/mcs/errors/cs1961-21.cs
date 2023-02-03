@@ -7,5 +7,5 @@ interface A<T>
 
 interface B<out T>
 {
-	A<A<T>> C();
+    A<A<T>> C();
 }

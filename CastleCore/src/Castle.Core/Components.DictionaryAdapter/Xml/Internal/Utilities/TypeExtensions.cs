@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,41 +14,41 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Linq;
-	using System.Reflection;
-	using System.Xml.Serialization;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using System.Xml.Serialization;
 
-	public static class TypeExtensions
-	{
-		public static Type NonNullable(this Type type)
-		{
-			return type.IsGenericType
-				&& type.GetGenericTypeDefinition() == typeof(Nullable<>)
-				? type.GetGenericArguments()[0]
-				: type;
-		}
+    public static class TypeExtensions
+    {
+        public static Type NonNullable(this Type type)
+        {
+            return type.IsGenericType
+                && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                ? type.GetGenericArguments()[0]
+                : type;
+        }
 
-		public static Type GetCollectionItemType(this Type type)
-		{
-			if (type.IsArray)
-				return type.GetElementType();
-			if (type.IsGenericType)
-				return type.GetGenericArguments().Single();
-			throw Error.NotCollectionType(nameof(type));
-		}
+        public static Type GetCollectionItemType(this Type type)
+        {
+            if (type.IsArray)
+                return type.GetElementType();
+            if (type.IsGenericType)
+                return type.GetGenericArguments().Single();
+            throw Error.NotCollectionType(nameof(type));
+        }
 
-		public static Type GetComponentType(this object obj)
-		{
-			var adapter = obj as IDictionaryAdapter;
-			return (adapter == null)
-				? obj.GetType()
-				: adapter.Meta.Type;
-		}
+        public static Type GetComponentType(this object obj)
+        {
+            var adapter = obj as IDictionaryAdapter;
+            return (adapter == null)
+                ? obj.GetType()
+                : adapter.Meta.Type;
+        }
 
-		internal static bool IsCustomSerializable(this Type type)
-		{
-			return typeof(IXmlSerializable).IsAssignableFrom(type);
-		}
-	}
+        internal static bool IsCustomSerializable(this Type type)
+        {
+            return typeof(IXmlSerializable).IsAssignableFrom(type);
+        }
+    }
 }

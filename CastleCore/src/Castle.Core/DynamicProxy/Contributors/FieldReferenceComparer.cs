@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,24 +14,24 @@
 
 namespace Castle.DynamicProxy.Contributors
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	internal class FieldReferenceComparer : IComparer<Type>
-	{
-		public int Compare(Type x, Type y)
-		{
-			if (x == null)
-			{
-				throw new ArgumentNullException(nameof(x));
-			}
+    internal class FieldReferenceComparer : IComparer<Type>
+    {
+        public int Compare(Type x, Type y)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException(nameof(x));
+            }
 
-			if (y == null)
-			{
-				throw new ArgumentNullException(nameof(y));
-			}
+            if (y == null)
+            {
+                throw new ArgumentNullException(nameof(y));
+            }
 
-			return string.CompareOrdinal(x.FullName, y.FullName);
-		}
-	}
+            return string.CompareOrdinal(x.FullName, y.FullName);
+        }
+    }
 }

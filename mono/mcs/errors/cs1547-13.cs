@@ -3,5 +3,5 @@
 
 interface IA
 {
-	ref void Foo ();
+    ref void Foo ();
 }

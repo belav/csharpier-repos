@@ -1,8 +1,8 @@
-﻿//
+//
 // UserBinding.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -34,38 +34,38 @@ using System.ServiceModel.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	public class UserBinding : Binding
-	{
-		public override BindingElementCollection CreateBindingElements () {
-			throw new NotImplementedException ();
-		}
+    public class UserBinding : Binding
+    {
+        public override BindingElementCollection CreateBindingElements () {
+            throw new NotImplementedException ();
+        }
 
-		public override string Scheme {
-			get { return Uri.UriSchemeHttp; }
-		}
-	}
+        public override string Scheme {
+            get { return Uri.UriSchemeHttp; }
+        }
+    }
 
-	public class UserBindingCollectionElement : StandardBindingCollectionElement<UserBinding, UserBindingElement>
-	{
-	}
+    public class UserBindingCollectionElement : StandardBindingCollectionElement<UserBinding, UserBindingElement>
+    {
+    }
 
-	public class UserBindingElement : StandardBindingElement
-	{
-		public UserBindingElement () {
-		}
+    public class UserBindingElement : StandardBindingElement
+    {
+        public UserBindingElement () {
+        }
 
-		public UserBindingElement (string name) {
-			Name = name;
-		}
+        public UserBindingElement (string name) {
+            Name = name;
+        }
 
-		protected override Type BindingElementType {
-			get { return typeof (UserBinding); }
-		}
+        protected override Type BindingElementType {
+            get { return typeof (UserBinding); }
+        }
 
-		protected override void OnApplyConfiguration (Binding binding) {
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void OnApplyConfiguration (Binding binding) {
+            throw new NotImplementedException ();
+        }
+    }
 
 }
 #endif

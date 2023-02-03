@@ -2,7 +2,7 @@
 // SingletonInstanceContextProvider.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -30,35 +30,35 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-	internal class SingletonInstanceContextProvider : IInstanceContextProvider
-	{
-		InstanceContext ctx;
+    internal class SingletonInstanceContextProvider : IInstanceContextProvider
+    {
+        InstanceContext ctx;
 
-		public SingletonInstanceContextProvider (InstanceContext context)
-		{
-			this.ctx = context;
-		}
+        public SingletonInstanceContextProvider (InstanceContext context)
+        {
+            this.ctx = context;
+        }
 
-		public InstanceContext GetExistingInstanceContext (Message message, IContextChannel channel)
-		{
-			return ctx;
-		}
+        public InstanceContext GetExistingInstanceContext (Message message, IContextChannel channel)
+        {
+            return ctx;
+        }
 
-		public void InitializeInstanceContext (InstanceContext instanceContext, Message message, IContextChannel channel)
-		{
-			// FIXME: what to do here?
-		}
+        public void InitializeInstanceContext (InstanceContext instanceContext, Message message, IContextChannel channel)
+        {
+            // FIXME: what to do here?
+        }
 
-		public bool IsIdle (InstanceContext instanceContext)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        public bool IsIdle (InstanceContext instanceContext)
+        {
+            // FIXME: implement
+            throw new NotImplementedException ();
+        }
 
-		public void NotifyIdle (InstanceContextIdleCallback callback, InstanceContext instanceContext)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
-	}
+        public void NotifyIdle (InstanceContextIdleCallback callback, InstanceContext instanceContext)
+        {
+            // FIXME: implement
+            throw new NotImplementedException ();
+        }
+    }
 }

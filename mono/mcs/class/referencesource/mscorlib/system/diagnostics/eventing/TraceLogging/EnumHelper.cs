@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 
 #if ES_BUILD_STANDALONE

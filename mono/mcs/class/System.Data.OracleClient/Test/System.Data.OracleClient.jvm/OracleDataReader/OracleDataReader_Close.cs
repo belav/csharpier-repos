@@ -35,62 +35,62 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataReader_Close : GHTBase
 {
-	public static void Main()
-	{
-		OracleDataReader_Close tc = new OracleDataReader_Close();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataReader.IsClosed");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OracleDataReader_Close tc = new OracleDataReader_Close();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataReader.IsClosed");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
 
-		OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		con.Open();
-		OracleCommand cmd = new OracleCommand("Select * From Customers", con);
-		OracleDataReader rdr = cmd.ExecuteReader();
+        OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        con.Open();
+        OracleCommand cmd = new OracleCommand("Select * From Customers", con);
+        OracleDataReader rdr = cmd.ExecuteReader();
 
-		try
-		{
-			BeginCase("before closing");
-			Compare(rdr.IsClosed ,false);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-
-
-		try
-		{
-			BeginCase("after closing");
-			rdr.Close();
-			Compare(rdr.IsClosed ,true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-
-		if (con.State == ConnectionState.Open) con.Close();
+        try
+        {
+            BeginCase("before closing");
+            Compare(rdr.IsClosed ,false);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
 
-	}
+        try
+        {
+            BeginCase("after closing");
+            rdr.Close();
+            Compare(rdr.IsClosed ,true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
+
+        if (con.State == ConnectionState.Open) con.Close();
 
 
-	//public TestClass():base(true){}
+    }
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //public TestClass():base(true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 

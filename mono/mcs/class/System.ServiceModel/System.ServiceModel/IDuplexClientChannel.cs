@@ -29,18 +29,18 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public interface IDuplexContextChannel : IContextChannel, IChannel,
-		ICommunicationObject
-	{
-		bool AutomaticInputSessionShutdown { get; set; }
+    public interface IDuplexContextChannel : IContextChannel, IChannel,
+        ICommunicationObject
+    {
+        bool AutomaticInputSessionShutdown { get; set; }
 
-		InstanceContext CallbackInstance { get; set; }
+        InstanceContext CallbackInstance { get; set; }
 
-		IAsyncResult BeginCloseOutputSession (TimeSpan timeout,
-			AsyncCallback callback, object state);
+        IAsyncResult BeginCloseOutputSession (TimeSpan timeout,
+            AsyncCallback callback, object state);
 
-		void CloseOutputSession (TimeSpan timeout);
+        void CloseOutputSession (TimeSpan timeout);
 
-		void EndCloseOutputSession (IAsyncResult result);
-	}
+        void EndCloseOutputSession (IAsyncResult result);
+    }
 }

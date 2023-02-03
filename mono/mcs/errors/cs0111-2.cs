@@ -3,21 +3,21 @@
 
 namespace N
 {
-	interface IMyInterface
-	{
-		bool MyEvent { set; }
-	}
+    interface IMyInterface
+    {
+        bool MyEvent { set; }
+    }
 
-	public class MyClass : IMyInterface
-	{
-		bool IMyInterface.MyEvent
-		{
-			set { }
-		}
+    public class MyClass : IMyInterface
+    {
+        bool IMyInterface.MyEvent
+        {
+            set { }
+        }
 
-		bool N.IMyInterface.MyEvent
-		{
-			set { }
-		}
-	}
+        bool N.IMyInterface.MyEvent
+        {
+            set { }
+        }
+    }
 }

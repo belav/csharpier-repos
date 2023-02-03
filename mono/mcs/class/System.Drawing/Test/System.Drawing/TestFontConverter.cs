@@ -3,7 +3,7 @@
 //
 // Author:
 //
-// 	 Miguel de Icaza (miguel@gnome.org)
+//      Miguel de Icaza (miguel@gnome.org)
 //
 // (C) 2003 Ximian, Inc.  http://www.ximian.com
 // Copyright (C) 2004-2006 Novell, Inc (http://www.novell.com)
@@ -34,32 +34,32 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing{
 
-	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-	public class FontNameConverterTest {
+    [TestFixture]
+    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+    public class FontNameConverterTest {
 
-		[Test]
-		public void TestConvertFrom ()
-		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			// returns "Times" under Linux and "Times New Roman" under Windows
-			Assert.IsTrue ((f.ConvertFrom ("Times") as string).StartsWith ("Times"), "string test");
-			Assert.IsTrue (f.GetStandardValuesSupported (), "standard values supported");
-			Assert.IsFalse (f.GetStandardValuesExclusive (), "standard values exclusive");
-		}
+        [Test]
+        public void TestConvertFrom ()
+        {
+            FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
+            // returns "Times" under Linux and "Times New Roman" under Windows
+            Assert.IsTrue ((f.ConvertFrom ("Times") as string).StartsWith ("Times"), "string test");
+            Assert.IsTrue (f.GetStandardValuesSupported (), "standard values supported");
+            Assert.IsFalse (f.GetStandardValuesExclusive (), "standard values exclusive");
+        }
 
-		[Test]
-		public void ExTestConvertFrom ()
-		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			Assert.Throws<NotSupportedException> (() => f.ConvertFrom (null));
-		}
+        [Test]
+        public void ExTestConvertFrom ()
+        {
+            FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
+            Assert.Throws<NotSupportedException> (() => f.ConvertFrom (null));
+        }
 
-		[Test]
-		public void ExTestConvertFrom2 ()
-		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			Assert.Throws<NotSupportedException> (() => f.ConvertFrom (1));
-		}
-	}
+        [Test]
+        public void ExTestConvertFrom2 ()
+        {
+            FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
+            Assert.Throws<NotSupportedException> (() => f.ConvertFrom (1));
+        }
+    }
 }

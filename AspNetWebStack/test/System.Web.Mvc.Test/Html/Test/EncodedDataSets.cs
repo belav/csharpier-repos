@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -15,10 +15,10 @@ namespace System.Web.Mvc.Html.Test
             new StringSet("&'\"", "&amp;&#39;&quot;", "&amp;&#39;&quot;", "___", "%26&#39;%22"),
 
             // High ASCII
-            new StringSet(" ¡ÿĀ", " ¡ÿĀ", "&#160;&#161;&#255;Ā", "____"),
+            new StringSet("���A", "���A", "&#160;&#161;&#255;A", "____"),
 
             // Surrogate pair, Ugaritic letter beta, &x10381;
-            new StringSet("\xD800\xDF81", "𐎁", "&#66433;", "__"),
+            new StringSet("\xD800\xDF81", "??", "&#66433;", "__"),
 
             new StringSet(
                 "<blink>text</blink>",
@@ -28,21 +28,21 @@ namespace System.Web.Mvc.Html.Test
 
             // Remaining examples are only id-sanitized, not attribute- or HTML-encoded.
             new StringSet("Simple Display Text", "Simple Display Text", "Simple Display Text", "Simple_Display_Text"),
-            new StringSet("Chinese西雅图Chars", "Chinese西雅图Chars", "Chinese西雅图Chars", "Chinese___Chars"), // Seattle
+            new StringSet("Chinese???Chars", "Chinese???Chars", "Chinese???Chars", "Chinese___Chars"), // Seattle
             new StringSet(
-                "Unicode؃Format؃Char", // class Cf
-                "Unicode؃Format؃Char",
-                "Unicode؃Format؃Char",
+                "Unicode?Format?Char", // class Cf
+                "Unicode?Format?Char",
+                "Unicode?Format?Char",
                 "Unicode_Format_Char"),
             new StringSet(
-                "UnicodeῼTitlecaseῼChar", // class Lt
-                "UnicodeῼTitlecaseῼChar",
-                "UnicodeῼTitlecaseῼChar",
+                "Unicode?Titlecase?Char", // class Lt
+                "Unicode?Titlecase?Char",
+                "Unicode?Titlecase?Char",
                 "Unicode_Titlecase_Char"),
             new StringSet(
-                "UnicodeःCombiningःChar", // class Mc
-                "UnicodeःCombiningःChar",
-                "UnicodeःCombiningःChar",
+                "Unicode?Combining?Char", // class Mc
+                "Unicode?Combining?Char",
+                "Unicode?Combining?Char",
                 "Unicode_Combining_Char"),
         };
 

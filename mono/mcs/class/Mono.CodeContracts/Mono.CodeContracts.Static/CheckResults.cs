@@ -2,7 +2,7 @@
 // CheckResults.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,39 +30,39 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Mono.CodeContracts.Static {
-	public class CheckResults {
-		private readonly ICollection<string> warnings;
-		private readonly ICollection<string> errors;
-		private readonly IDictionary<string, ICollection<string>> checker_messages; 
+    public class CheckResults {
+        private readonly ICollection<string> warnings;
+        private readonly ICollection<string> errors;
+        private readonly IDictionary<string, ICollection<string>> checker_messages; 
 
-		internal static CheckResults Error(string warning)
-		{
-			return new CheckResults (new[] {warning}, null, null);
-		}
+        internal static CheckResults Error(string warning)
+        {
+            return new CheckResults (new[] {warning}, null, null);
+        }
 
-		internal CheckResults (ICollection<string> warnings, ICollection<string> errors, IDictionary<string, ICollection<string>> checkerMessages)
-		{
-			this.warnings = warnings;
-			this.errors = errors;
-			this.checker_messages = checkerMessages;
-		}
+        internal CheckResults (ICollection<string> warnings, ICollection<string> errors, IDictionary<string, ICollection<string>> checkerMessages)
+        {
+            this.warnings = warnings;
+            this.errors = errors;
+            this.checker_messages = checkerMessages;
+        }
 
-		public bool AnyWarnings { get { return this.warnings != null && this.warnings.Count > 0; }}
-		public bool AnyErrors { get { return this.errors != null && this.errors.Count > 0; } }
+        public bool AnyWarnings { get { return this.warnings != null && this.warnings.Count > 0; }}
+        public bool AnyErrors { get { return this.errors != null && this.errors.Count > 0; } }
 
-		public IEnumerable<string> Warnings
-		{
-			get { return this.warnings ?? Enumerable.Empty<string> (); }
-		}
+        public IEnumerable<string> Warnings
+        {
+            get { return this.warnings ?? Enumerable.Empty<string> (); }
+        }
 
-		public IEnumerable<string> Errors
-		{
-			get { return this.errors ?? Enumerable.Empty<string> (); }
-		}
+        public IEnumerable<string> Errors
+        {
+            get { return this.errors ?? Enumerable.Empty<string> (); }
+        }
 
-		public IDictionary<string, ICollection<string>> Results
-		{
-			get { return this.checker_messages ?? null; }
-		}
-	}
+        public IDictionary<string, ICollection<string>> Results
+        {
+            get { return this.checker_messages ?? null; }
+        }
+    }
 }

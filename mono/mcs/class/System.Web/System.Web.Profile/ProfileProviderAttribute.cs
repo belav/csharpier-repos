@@ -2,7 +2,7 @@
 // System.Web.Profile.ProfileProviderAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,21 +30,21 @@ using System;
 
 namespace System.Web.Profile
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class ProfileProviderAttribute : Attribute
-	{
-		public ProfileProviderAttribute (string providerName)
-		{
-			this.providerName = providerName;
-		}
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class ProfileProviderAttribute : Attribute
+    {
+        public ProfileProviderAttribute (string providerName)
+        {
+            this.providerName = providerName;
+        }
 
-		public string ProviderName {
-			get {
-				return providerName;
-			}
-		}
+        public string ProviderName {
+            get {
+                return providerName;
+            }
+        }
 
-		string providerName;
-	}
+        string providerName;
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿//
+//
 // ScriptingProfileServiceSection.cs
 //
 // Author:
@@ -36,62 +36,62 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingProfileServiceSection : ConfigurationSection
-	{
-		[ConfigurationPropertyAttribute ("enabled", DefaultValue = false)]
-		public bool Enabled {
-			get {
-				return (bool) this ["enabled"];
-			}
-			set {
-				this ["enabled"] = value;
-			}
-		}
+    public sealed class ScriptingProfileServiceSection : ConfigurationSection
+    {
+        [ConfigurationPropertyAttribute ("enabled", DefaultValue = false)]
+        public bool Enabled {
+            get {
+                return (bool) this ["enabled"];
+            }
+            set {
+                this ["enabled"] = value;
+            }
+        }
 
-		[ConfigurationPropertyAttribute ("readAccessProperties", DefaultValue = null)]
-		[TypeConverter(typeof(StringArrayConverter))]
-		public string [] ReadAccessProperties {
-			get {
-				string [] data = ReadAccessPropertiesNoCopy;
-				return (string []) data.Clone ();
-			}
-			set {
-				if (value != null)
-					value = (string []) value.Clone ();
-				ReadAccessPropertiesNoCopy = value;
-			}
-		}
+        [ConfigurationPropertyAttribute ("readAccessProperties", DefaultValue = null)]
+        [TypeConverter(typeof(StringArrayConverter))]
+        public string [] ReadAccessProperties {
+            get {
+                string [] data = ReadAccessPropertiesNoCopy;
+                return (string []) data.Clone ();
+            }
+            set {
+                if (value != null)
+                    value = (string []) value.Clone ();
+                ReadAccessPropertiesNoCopy = value;
+            }
+        }
 
-		internal string [] ReadAccessPropertiesNoCopy {
-			get {
-				return (string []) this ["readAccessProperties"];
-			}
-			set {
-				this ["readAccessProperties"] = value;
-			}
-		}
+        internal string [] ReadAccessPropertiesNoCopy {
+            get {
+                return (string []) this ["readAccessProperties"];
+            }
+            set {
+                this ["readAccessProperties"] = value;
+            }
+        }
 
-		[ConfigurationPropertyAttribute ("writeAccessProperties", DefaultValue = null)]
-		[TypeConverter (typeof (StringArrayConverter))]
-		public string [] WriteAccessProperties {
-			get {
-				string [] data = WriteAccessPropertiesNoCopy;
-				return (string []) data.Clone ();
-			}
-			set {
-				if (value != null)
-					value = (string []) value.Clone ();
-				WriteAccessPropertiesNoCopy = value;
-			}
-		}
+        [ConfigurationPropertyAttribute ("writeAccessProperties", DefaultValue = null)]
+        [TypeConverter (typeof (StringArrayConverter))]
+        public string [] WriteAccessProperties {
+            get {
+                string [] data = WriteAccessPropertiesNoCopy;
+                return (string []) data.Clone ();
+            }
+            set {
+                if (value != null)
+                    value = (string []) value.Clone ();
+                WriteAccessPropertiesNoCopy = value;
+            }
+        }
 
-		internal string [] WriteAccessPropertiesNoCopy {
-			get {
-				return (string []) this ["writeAccessProperties"];
-			}
-			set {
-				this ["writeAccessProperties"] = value;
-			}
-		}
-	}
+        internal string [] WriteAccessPropertiesNoCopy {
+            get {
+                return (string []) this ["writeAccessProperties"];
+            }
+            set {
+                this ["writeAccessProperties"] = value;
+            }
+        }
+    }
 }

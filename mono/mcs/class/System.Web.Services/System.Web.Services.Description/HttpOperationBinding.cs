@@ -32,32 +32,32 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-	[XmlFormatExtension ("operation", "http://schemas.xmlsoap.org/wsdl/http/", typeof (OperationBinding))]
-	public sealed class HttpOperationBinding : ServiceDescriptionFormatExtension {
+    [XmlFormatExtension ("operation", "http://schemas.xmlsoap.org/wsdl/http/", typeof (OperationBinding))]
+    public sealed class HttpOperationBinding : ServiceDescriptionFormatExtension {
 
-		#region Fields
+        #region Fields
 
-		string location;
+        string location;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public HttpOperationBinding ()
-		{
-			location = String.Empty;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
+        
+        public HttpOperationBinding ()
+        {
+            location = String.Empty;
+        }
+        
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[XmlAttribute ("location")]
-		public string Location { 	
-			get { return location; }
-			set { location = value; }
-		}
-	
-		#endregion // Properties
-	}
+        [XmlAttribute ("location")]
+        public string Location {     
+            get { return location; }
+            set { location = value; }
+        }
+    
+        #endregion // Properties
+    }
 }

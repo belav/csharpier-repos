@@ -1,6 +1,6 @@
-ï»¿//-------------------------------------------------------------
-// <copyright company=â€™Microsoft Corporationâ€™>
-//   Copyright Â© Microsoft Corporation. All Rights Reserved.
+//-------------------------------------------------------------
+// <copyright company=’Microsoft Corporation’>
+//   Copyright © Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant, victark
@@ -23,7 +23,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// ChartElement is the most basic element of the chart element hierarchy. 
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
     public abstract class ChartElement : IChartElement, IDisposable
@@ -256,7 +256,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// ChartNamedElement is a base class for most chart elements. Series, ChartAreas, Legends and other chart elements have a Name and reuse the unique name generation and validation logic provided by the ChartNamedElementCollection.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
     public abstract class ChartNamedElement : ChartElement

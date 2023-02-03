@@ -33,35 +33,35 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-	public class ListViewDeleteEventArgs : CancelEventArgs
-	{
-		IOrderedDictionary _keys;
-		IOrderedDictionary _values;
-		
-		public ListViewDeleteEventArgs (int itemIndex)
-		{
-			ItemIndex = itemIndex;
-		}
-		
-		public int ItemIndex {
-			get;
-			private set;
-		}
-		
-		public IOrderedDictionary Keys {
-			get {
-				if (_keys == null)
-					_keys = new OrderedDictionary ();
-				return _keys;
-			}
-		}
-		
-		public IOrderedDictionary Values {
-			get {
-				if (_values == null)
-					_values = new OrderedDictionary ();
-				return _values;
-			}
-		}
-	}
+    public class ListViewDeleteEventArgs : CancelEventArgs
+    {
+        IOrderedDictionary _keys;
+        IOrderedDictionary _values;
+        
+        public ListViewDeleteEventArgs (int itemIndex)
+        {
+            ItemIndex = itemIndex;
+        }
+        
+        public int ItemIndex {
+            get;
+            private set;
+        }
+        
+        public IOrderedDictionary Keys {
+            get {
+                if (_keys == null)
+                    _keys = new OrderedDictionary ();
+                return _keys;
+            }
+        }
+        
+        public IOrderedDictionary Values {
+            get {
+                if (_values == null)
+                    _values = new OrderedDictionary ();
+                return _values;
+            }
+        }
+    }
 }

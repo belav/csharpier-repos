@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -31,63 +31,63 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows {
 
-	[TestFixture]
-	public class VectorConverterTest
-	{
-		[Test]
-		public void CanConvertFrom ()
-		{
-			VectorConverter r = new VectorConverter ();
+    [TestFixture]
+    public class VectorConverterTest
+    {
+        [Test]
+        public void CanConvertFrom ()
+        {
+            VectorConverter r = new VectorConverter ();
 
-			Assert.IsTrue (r.CanConvertFrom (typeof (string)));
-			Assert.IsFalse (r.CanConvertFrom (typeof (Vector)));
-		}
+            Assert.IsTrue (r.CanConvertFrom (typeof (string)));
+            Assert.IsFalse (r.CanConvertFrom (typeof (Vector)));
+        }
 
-		[Test]
-		public void CanConvertTo ()
-		{
-			VectorConverter r = new VectorConverter ();
+        [Test]
+        public void CanConvertTo ()
+        {
+            VectorConverter r = new VectorConverter ();
 
-			Assert.IsTrue (r.CanConvertTo (typeof (string)));
-			Assert.IsFalse (r.CanConvertTo (typeof (Vector)));
-		}
+            Assert.IsTrue (r.CanConvertTo (typeof (string)));
+            Assert.IsFalse (r.CanConvertTo (typeof (Vector)));
+        }
 
-		[Test]
-		public void ConvertFrom ()
-		{
-			VectorConverter r = new VectorConverter ();
+        [Test]
+        public void ConvertFrom ()
+        {
+            VectorConverter r = new VectorConverter ();
 
-			object or = r.ConvertFrom ("3, 4");
-			
-			Assert.AreEqual (typeof (Vector), or.GetType());
-			Assert.AreEqual (new Vector (3, 4), or);
+            object or = r.ConvertFrom ("3, 4");
+            
+            Assert.AreEqual (typeof (Vector), or.GetType());
+            Assert.AreEqual (new Vector (3, 4), or);
 
-			or = r.ConvertFrom ("-1, -4");
-			Assert.AreEqual (typeof (Vector), or.GetType());
-			Assert.AreEqual (new Vector (-1, -4), or);
-		}
+            or = r.ConvertFrom ("-1, -4");
+            Assert.AreEqual (typeof (Vector), or.GetType());
+            Assert.AreEqual (new Vector (-1, -4), or);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFrom_size ()
-		{
-			VectorConverter r = new VectorConverter ();
+        [Test]
+        [ExpectedException (typeof (NotSupportedException))]
+        public void ConvertFrom_size ()
+        {
+            VectorConverter r = new VectorConverter ();
 
-			r.ConvertFrom (new Vector (10, 20));
-		}
+            r.ConvertFrom (new Vector (10, 20));
+        }
 
-		[Test]
-		public void ConvertTo ()
-		{
-			VectorConverter r = new VectorConverter ();
+        [Test]
+        public void ConvertTo ()
+        {
+            VectorConverter r = new VectorConverter ();
 
-			Vector rect = new Vector (1, 2);
+            Vector rect = new Vector (1, 2);
 
-			object o = r.ConvertTo (null, CultureInfo.InvariantCulture, rect, typeof (string));
-			
-			Assert.AreEqual (typeof (string), o.GetType());
-			Assert.AreEqual ("1,2", (string)o);
-		}
-	}
+            object o = r.ConvertTo (null, CultureInfo.InvariantCulture, rect, typeof (string));
+            
+            Assert.AreEqual (typeof (string), o.GetType());
+            Assert.AreEqual ("1,2", (string)o);
+        }
+    }
 
 }

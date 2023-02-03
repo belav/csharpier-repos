@@ -3,9 +3,9 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var e = new[] { Main };
-	}
+    static void Main ()
+    {
+        var e = new[] { Main };
+    }
 }
 

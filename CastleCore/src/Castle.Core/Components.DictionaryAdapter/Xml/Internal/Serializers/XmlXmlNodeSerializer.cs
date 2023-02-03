@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,36 +14,36 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Xml;
+    using System;
+    using System.Xml;
 
-	public class XmlXmlNodeSerializer : XmlTypeSerializer
-	{
-		public static readonly XmlXmlNodeSerializer
-			Instance = new XmlXmlNodeSerializer();
+    public class XmlXmlNodeSerializer : XmlTypeSerializer
+    {
+        public static readonly XmlXmlNodeSerializer
+            Instance = new XmlXmlNodeSerializer();
 
-		private XmlXmlNodeSerializer() { }
+        private XmlXmlNodeSerializer() { }
 
-		public override XmlTypeKind Kind
-		{
-			get { return XmlTypeKind.Complex; }
-		}
+        public override XmlTypeKind Kind
+        {
+            get { return XmlTypeKind.Complex; }
+        }
 
-		public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
-		{
-			var source = node.AsRealizable<XmlNode>();
+        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        {
+            var source = node.AsRealizable<XmlNode>();
 
-			return (source != null && source.IsReal)
-				? source.Value
-				: null;
-		}
+            return (source != null && source.IsReal)
+                ? source.Value
+                : null;
+        }
 
-		public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
-		{
-			var newNode = (XmlNode) value;
+        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        {
+            var newNode = (XmlNode) value;
 
-			using (var writer = new XmlSubtreeWriter(node))
-				newNode.WriteTo(writer);
-		}
-	}
+            using (var writer = new XmlSubtreeWriter(node))
+                newNode.WriteTo(writer);
+        }
+    }
 }

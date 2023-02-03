@@ -3,21 +3,21 @@
 
 class A
 {
-	public static A operator + (A a, B b)
-	{
-		return null;
-	}
+    public static A operator + (A a, B b)
+    {
+        return null;
+    }
 }
 
 class B
 {
-	public static A operator + (A a, B b)
-	{
-		return null;
-	}
+    public static A operator + (A a, B b)
+    {
+        return null;
+    }
 
-	static void Main ()
-	{
-		object o = new A () + new B ();
-	}
+    static void Main ()
+    {
+        object o = new A () + new B ();
+    }
 }

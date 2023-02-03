@@ -2,7 +2,7 @@
 // System.Web.Util.IWebPropertyAccessor interface
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,10 +29,10 @@
 
 namespace System.Web.Util {
 
-	public interface IWebPropertyAccessor {
+    public interface IWebPropertyAccessor {
 
-		object GetProperty (object target);
-		void SetProperty (object target, object value);
-	}
+        object GetProperty (object target);
+        void SetProperty (object target, object value);
+    }
 }
 

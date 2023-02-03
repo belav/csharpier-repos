@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -666,20 +666,20 @@ $@"{typeKind} C {{
     int BB;
     int bBb;
     int bbB;
-    int あ;
-    int ア;
-    int ｱ;
-    int ああ;
-    int あア;
-    int あｱ;
-    int アあ;
+    int ?;
+    int ?;
+    int ?;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
     int cC;
     int Cc;
-    int アア;
-    int アｱ;
-    int ｱあ;
-    int ｱア;
-    int ｱｱ;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
     int BBb;
     int BbB;
     int bBB;
@@ -722,18 +722,18 @@ $@"{typeKind} C {{
     int cC;
     int Cc;
     int CC;
-    int ア;
-    int ｱ;
-    int あ;
-    int アア;
-    int アｱ;
-    int ｱア;
-    int ｱｱ;
-    int アあ;
-    int ｱあ;
-    int あア;
-    int あｱ;
-    int ああ;
+    int ?;
+    int ?;
+    int ?;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
+    int ??;
 }}";
 
             await CheckAsync(initial, final);

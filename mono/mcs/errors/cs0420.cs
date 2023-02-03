@@ -3,12 +3,12 @@
 // Compiler options: -unsafe /warnaserror /warn:1
 
 unsafe class X {
-	static volatile int j;
-	
-	static void Main ()
-	{
-		fixed (int *p = &j){
-			
-		}
-	}
+    static volatile int j;
+    
+    static void Main ()
+    {
+        fixed (int *p = &j){
+            
+        }
+    }
 }

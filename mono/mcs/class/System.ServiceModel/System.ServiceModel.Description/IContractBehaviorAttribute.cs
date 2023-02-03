@@ -2,7 +2,7 @@
 // IContractBehaviorAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,8 +32,8 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public interface IContractBehaviorAttribute
-	{
-		Type TargetContract { get; }
-	}
+    public interface IContractBehaviorAttribute
+    {
+        Type TargetContract { get; }
+    }
 }

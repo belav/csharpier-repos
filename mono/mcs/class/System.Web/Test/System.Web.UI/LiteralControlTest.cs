@@ -39,59 +39,59 @@ using System.Collections;
 
 namespace MonoTests.System.Web.UI {
 
-	[TestFixture]
-	public class LiteralControlTest
-	{
-		class PokerLiteralControl : LiteralControl
-		{
-			public PokerLiteralControl () {
-				TrackViewState ();
-			}
+    [TestFixture]
+    public class LiteralControlTest
+    {
+        class PokerLiteralControl : LiteralControl
+        {
+            public PokerLiteralControl () {
+                TrackViewState ();
+            }
 
-			public PokerLiteralControl (string text)
-				: base (text) {
-				TrackViewState ();
-			}
+            public PokerLiteralControl (string text)
+                : base (text) {
+                TrackViewState ();
+            }
 
-			public object SaveState () {
-				return SaveViewState ();
-			}
+            public object SaveState () {
+                return SaveViewState ();
+            }
 
-			public void LoadState (object state) {
-				LoadViewState (state);
-			}
-		}
+            public void LoadState (object state) {
+                LoadViewState (state);
+            }
+        }
 
-		[Test]
-		public void ViewState () {
-			PokerLiteralControl literal = new PokerLiteralControl ();
-			literal.Text = "Text";
+        [Test]
+        public void ViewState () {
+            PokerLiteralControl literal = new PokerLiteralControl ();
+            literal.Text = "Text";
 
-			PokerLiteralControl copy = new PokerLiteralControl ();
-			object state = literal.SaveState ();
-			copy.LoadState (state);
+            PokerLiteralControl copy = new PokerLiteralControl ();
+            object state = literal.SaveState ();
+            copy.LoadState (state);
 
-			Assert.AreEqual (null, copy.Text, "ViewState");
-		}
-		
-		[Test]
-		public void NullProperties () {
-			PokerLiteralControl literal = new PokerLiteralControl ();
-			Assert.AreEqual (null, literal.Text, "NullProperties #1");
-			literal.Text = null;
-			Assert.AreEqual (String.Empty, literal.Text, "NullProperties #1");
-		}
-		
-		[Test]
-		public void Constructors () {
-			PokerLiteralControl literal = new PokerLiteralControl ();
-			Assert.AreEqual (null, literal.Text, "Constructors #1");
+            Assert.AreEqual (null, copy.Text, "ViewState");
+        }
+        
+        [Test]
+        public void NullProperties () {
+            PokerLiteralControl literal = new PokerLiteralControl ();
+            Assert.AreEqual (null, literal.Text, "NullProperties #1");
+            literal.Text = null;
+            Assert.AreEqual (String.Empty, literal.Text, "NullProperties #1");
+        }
+        
+        [Test]
+        public void Constructors () {
+            PokerLiteralControl literal = new PokerLiteralControl ();
+            Assert.AreEqual (null, literal.Text, "Constructors #1");
 
-			literal = new PokerLiteralControl (null);
-			Assert.AreEqual (String.Empty, literal.Text, "Constructors #2");
+            literal = new PokerLiteralControl (null);
+            Assert.AreEqual (String.Empty, literal.Text, "Constructors #2");
 
-			literal = new PokerLiteralControl ("Text");
-			Assert.AreEqual ("Text", literal.Text, "Constructors #3");
-		}
-	}
+            literal = new PokerLiteralControl ("Text");
+            Assert.AreEqual ("Text", literal.Text, "Constructors #3");
+        }
+    }
 }

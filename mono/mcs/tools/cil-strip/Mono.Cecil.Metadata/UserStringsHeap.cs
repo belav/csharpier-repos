@@ -28,50 +28,50 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using System.Collections;
-	using System.Text;
+    using System.Collections;
+    using System.Text;
 
-	internal class UserStringsHeap : MetadataHeap {
+    internal class UserStringsHeap : MetadataHeap {
 
-		readonly IDictionary m_strings;
+        readonly IDictionary m_strings;
 
-		public string this [uint offset] {
-			get {
-				string us = m_strings [offset] as string;
-				if (us != null)
-					return us;
+        public string this [uint offset] {
+            get {
+                string us = m_strings [offset] as string;
+                if (us != null)
+                    return us;
 
-				us = ReadStringAt ((int) offset);
-				if (us != null && us.Length != 0)
-					m_strings [offset] = us;
+                us = ReadStringAt ((int) offset);
+                if (us != null && us.Length != 0)
+                    m_strings [offset] = us;
 
-				return us;
-			}
-			set { m_strings [offset] = value; }
-		}
+                return us;
+            }
+            set { m_strings [offset] = value; }
+        }
 
-		internal UserStringsHeap (MetadataStream stream) : base (stream, MetadataStream.UserStrings)
-		{
-			m_strings = new Hashtable ();
-		}
+        internal UserStringsHeap (MetadataStream stream) : base (stream, MetadataStream.UserStrings)
+        {
+            m_strings = new Hashtable ();
+        }
 
-		string ReadStringAt (int offset)
-		{
-			int length = Utilities.ReadCompressedInteger (this.Data, offset, out offset) - 1;
-			if (length < 1)
-				return string.Empty;
+        string ReadStringAt (int offset)
+        {
+            int length = Utilities.ReadCompressedInteger (this.Data, offset, out offset) - 1;
+            if (length < 1)
+                return string.Empty;
 
-			char [] chars = new char [length / 2];
+            char [] chars = new char [length / 2];
 
-			for (int i = offset, j = 0; i < offset + length; i += 2)
-				chars [j++] = (char) (Data [i] | (Data [i + 1] << 8));
+            for (int i = offset, j = 0; i < offset + length; i += 2)
+                chars [j++] = (char) (Data [i] | (Data [i + 1] << 8));
 
-			return new string (chars);
-		}
+            return new string (chars);
+        }
 
-		public override void Accept (IMetadataVisitor visitor)
-		{
-			visitor.VisitUserStringsHeap (this);
-		}
-	}
+        public override void Accept (IMetadataVisitor visitor)
+        {
+            visitor.VisitUserStringsHeap (this);
+        }
+    }
 }

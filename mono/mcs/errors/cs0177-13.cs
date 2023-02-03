@@ -3,12 +3,12 @@
 
 static class A
 {
-	public static void Foo (int i, out object baz)
-	{
-		switch (i) {
-		case 0:
-			baz = 1;
-			return;
-		}
-	}
+    public static void Foo (int i, out object baz)
+    {
+        switch (i) {
+        case 0:
+            baz = 1;
+            return;
+        }
+    }
 }

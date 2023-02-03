@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Storage;
@@ -12,7 +12,7 @@ public class StringToBytesConverterTest
     {
         var converter = _stringToUtf8Converter.ConvertToProviderExpression.Compile();
 
-        Assert.Equal(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }, converter("Spın̈al Tap"));
+        Assert.Equal(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }, converter("Spin�al Tap"));
         Assert.Equal(Array.Empty<byte>(), converter(""));
     }
 
@@ -21,7 +21,7 @@ public class StringToBytesConverterTest
     {
         var converter = _stringToUtf8Converter.ConvertFromProviderExpression.Compile();
 
-        Assert.Equal("Spın̈al Tap", converter(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }));
+        Assert.Equal("Spin�al Tap", converter(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }));
         Assert.Equal("", converter(Array.Empty<byte>()));
     }
 
@@ -30,7 +30,7 @@ public class StringToBytesConverterTest
     {
         var converter = _stringToUtf8Converter.ConvertToProvider;
 
-        Assert.Equal(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }, converter("Spın̈al Tap"));
+        Assert.Equal(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }, converter("Spin�al Tap"));
         Assert.Equal(Array.Empty<byte>(), converter(""));
         Assert.Null(converter(null));
     }
@@ -40,7 +40,7 @@ public class StringToBytesConverterTest
     {
         var converter = _stringToUtf8Converter.ConvertFromProvider;
 
-        Assert.Equal("Spın̈al Tap", converter(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }));
+        Assert.Equal("Spin�al Tap", converter(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }));
         Assert.Equal("", converter(Array.Empty<byte>()));
         Assert.Null(converter(null));
     }

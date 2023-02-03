@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -251,7 +251,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.True(task.IsCanceled);
             var exception = Assert.Throws<TaskCanceledException>(() => task.Result);
 
-            // ⚠ Due to the way cancellation is handled in ContinueWith, the resulting exception fails to preserve the
+            // ? Due to the way cancellation is handled in ContinueWith, the resulting exception fails to preserve the
             // cancellation token applied when the intermediate task was cancelled.
             Assert.Equal(cancellationToken, exception.CancellationToken);
             Assert.False(executedTransform);
@@ -288,7 +288,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var exception = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
             Assert.True(task.IsCanceled);
 
-            // ⚠ Due to the way cancellation is handled in ContinueWith, the resulting exception fails to preserve the
+            // ? Due to the way cancellation is handled in ContinueWith, the resulting exception fails to preserve the
             // cancellation token applied when the intermediate task was cancelled.
             Assert.Equal(cancellationToken, exception.CancellationToken);
             Assert.False(executedTransform);

@@ -1,4 +1,4 @@
-ï»¿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2782,33 +2782,33 @@ class A
             var text = @"
 class A
 {
-    /// <see cref=â€A()â€/>
-    /// <param name=â€xâ€/>
-    /// <other attr=â€valueâ€/>
+    /// <see cref=”A()”/>
+    /// <param name=”x”/>
+    /// <other attr=”value”/>
     void M(int x) { }
 }";
 
             var tree = Parse(text);
             tree.GetDiagnostics().Verify(
                 // (4,19): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <see cref=â€A()â€/>
+                //     /// <see cref=”A()”/>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (4,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <see cref=â€A()â€/>
+                //     /// <see cref=”A()”/>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
 
                 // (5,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=â€xâ€/>
+                //     /// <param name=”x”/>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (5,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=â€xâ€/>
+                //     /// <param name=”x”/>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
 
-                // What's happening with the text attribute is that "â€/>" is correctly (if unintuitively) being consumed as part of the
+                // What's happening with the text attribute is that "”/>" is correctly (if unintuitively) being consumed as part of the
                 // attribute value.  It then complains about the missing closing quotation mark and '/>'.
 
                 // (6,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <other attr=â€valueâ€/>
+                //     /// <other attr=”value”/>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (7,1): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
                 //     void M(int x) { }
@@ -2831,8 +2831,8 @@ public class Program
     /// GetEntityConnectionString from the selected path
     /// path is of the format <project name>\<nodename>\<nodename>
     /// </summary>
-    /// <param name=â€metadataâ€></param>
-    /// <param name=â€providerâ€></param>
+    /// <param name=”metadata”></param>
+    /// <param name=”provider”></param>
     protected void GetEntityConnectionString(
         string metadata,
         string provider)
@@ -2849,16 +2849,16 @@ public class Program
                 //     /// </summary>
                 Diagnostic(ErrorCode.WRN_XMLParseError, "summary").WithArguments("summary", "nodename"),
                 // (10,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=â€metadataâ€></param>
+                //     /// <param name=”metadata”></param>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (10,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=â€metadataâ€></param>
+                //     /// <param name=”metadata”></param>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (11,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=â€providerâ€></param>
+                //     /// <param name=”provider”></param>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (11,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=â€providerâ€></param>
+                //     /// <param name=”provider”></param>
                 Diagnostic(ErrorCode.WRN_XMLParseError, ""),
                 // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'nodename'.'
                 //     protected void GetEntityConnectionString(

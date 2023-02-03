@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc {
+namespace System.Web.Mvc {
     public static class ModelValidatorProviders {
 
         private static readonly ModelValidatorProviderCollection _providers = new ModelValidatorProviderCollection() {

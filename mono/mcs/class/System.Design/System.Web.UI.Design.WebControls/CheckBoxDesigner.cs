@@ -30,16 +30,16 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class CheckBoxDesigner : ControlDesigner
-	{
-		public CheckBoxDesigner ()
-			: base ()
-		{
-		}
+    public class CheckBoxDesigner : ControlDesigner
+    {
+        public CheckBoxDesigner ()
+            : base ()
+        {
+        }
 
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override string GetDesignTimeHtml ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // RuntimeFieldHandleTest.cs - Unit tests for System.RuntimeFieldHandle
 //
 // Author:
-//	Robert Jordan  <robertj@gmx.net>
+//    Robert Jordan  <robertj@gmx.net>
 //
 // Copyright (C) 2008 Novell, Inc. (http://www.novell.com)
 //
@@ -35,15 +35,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System
 {
-	[TestFixture]
-	public class RuntimeFieldHandleTest
-	{
-		[Test]
-		[ExpectedException (typeof (SerializationException))]
-		public void Serialization_Of_Empty_Handle ()
-		{
-			RuntimeFieldHandle handle = new RuntimeFieldHandle ();
-			new BinaryFormatter ().Serialize (Stream.Null, handle);
-		}
-	}
+    [TestFixture]
+    public class RuntimeFieldHandleTest
+    {
+        [Test]
+        [ExpectedException (typeof (SerializationException))]
+        public void Serialization_Of_Empty_Handle ()
+        {
+            RuntimeFieldHandle handle = new RuntimeFieldHandle ();
+            new BinaryFormatter ().Serialize (Stream.Null, handle);
+        }
+    }
 }

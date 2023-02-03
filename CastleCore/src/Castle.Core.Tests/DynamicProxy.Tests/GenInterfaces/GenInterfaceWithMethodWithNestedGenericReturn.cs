@@ -14,11 +14,11 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	public interface GenInterfaceWithMethodWithNestedGenericReturn
-	{
-		IEnumerable<IComparable<T>> Foo<T>();
-	}
+    public interface GenInterfaceWithMethodWithNestedGenericReturn
+    {
+        IEnumerable<IComparable<T>> Foo<T>();
+    }
 }

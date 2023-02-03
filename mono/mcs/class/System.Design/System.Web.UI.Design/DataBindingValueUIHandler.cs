@@ -33,16 +33,16 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-	public class DataBindingValueUIHandler
-	{
-		public DataBindingValueUIHandler ()
-		{
-		}
+    public class DataBindingValueUIHandler
+    {
+        public DataBindingValueUIHandler ()
+        {
+        }
 
-		[MonoTODO]
-		public void OnGetUIValueItem (ITypeDescriptorContext context, PropertyDescriptor propDesc, ArrayList valueUIItemList)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void OnGetUIValueItem (ITypeDescriptorContext context, PropertyDescriptor propDesc, ArrayList valueUIItemList)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

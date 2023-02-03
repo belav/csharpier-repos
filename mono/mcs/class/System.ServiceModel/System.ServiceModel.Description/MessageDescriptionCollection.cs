@@ -2,7 +2,7 @@
 // MessageDescriptionCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,28 +31,28 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Description
 {
-	public class MessageDescriptionCollection : Collection<MessageDescription>
-	{
-		internal MessageDescriptionCollection ()
-		{
-		}
+    public class MessageDescriptionCollection : Collection<MessageDescription>
+    {
+        internal MessageDescriptionCollection ()
+        {
+        }
 
-		public MessageDescription Find (string action)
-		{
-			foreach (MessageDescription md in this)
-				if (md.Action == action)
-					return md;
-			return null;
-		}
+        public MessageDescription Find (string action)
+        {
+            foreach (MessageDescription md in this)
+                if (md.Action == action)
+                    return md;
+            return null;
+        }
 
-		public Collection<MessageDescription> FindAll (string action)
-		{
-			Collection<MessageDescription> list =
-				new Collection<MessageDescription> ();
-			foreach (MessageDescription md in this)
-				if (md.Action == action)
-					list.Add (md);
-			return list;
-		}
-	}
+        public Collection<MessageDescription> FindAll (string action)
+        {
+            Collection<MessageDescription> list =
+                new Collection<MessageDescription> ();
+            foreach (MessageDescription md in this)
+                if (md.Action == action)
+                    list.Add (md);
+            return list;
+        }
+    }
 }

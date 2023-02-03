@@ -2,7 +2,7 @@
 // Joiner.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,5 +29,5 @@
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-	delegate AbstractState Joiner<Label, AbstractState> (Pair<Label, Label> edge, AbstractState newState, AbstractState prevState, out bool weaker, bool widen);
+    delegate AbstractState Joiner<Label, AbstractState> (Pair<Label, Label> edge, AbstractState newState, AbstractState prevState, out bool weaker, bool widen);
 }

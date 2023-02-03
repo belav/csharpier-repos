@@ -31,13 +31,13 @@
 using System.Runtime.CompilerServices;
 
 namespace System.Windows.Input {
-	
-	[TypeForwardedFrom (Consts.AssemblyPresentationCore_4_0)]
-	public interface ICommand
-	{
-		bool CanExecute (object parameter);
-		void Execute (object parameter);
-		event EventHandler CanExecuteChanged;
-	}
+    
+    [TypeForwardedFrom (Consts.AssemblyPresentationCore_4_0)]
+    public interface ICommand
+    {
+        bool CanExecute (object parameter);
+        void Execute (object parameter);
+        event EventHandler CanExecuteChanged;
+    }
 }
 

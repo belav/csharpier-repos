@@ -2,9 +2,9 @@
 
 public struct S
 {
-	string s;
-	
-	public void Test ()
-	{
-	}
+    string s;
+    
+    public void Test ()
+    {
+    }
 }

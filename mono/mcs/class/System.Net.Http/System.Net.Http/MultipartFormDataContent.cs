@@ -2,7 +2,7 @@
 // MultipartFormDataContent.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,58 +30,58 @@ using System.Net.Http.Headers;
 
 namespace System.Net.Http
 {
-	public class MultipartFormDataContent : MultipartContent
-	{
-		public MultipartFormDataContent ()
-			: base ("form-data")
-		{
-		}
+    public class MultipartFormDataContent : MultipartContent
+    {
+        public MultipartFormDataContent ()
+            : base ("form-data")
+        {
+        }
 
-		public MultipartFormDataContent (string boundary)
-			: base ("form-data", boundary)
-		{
-		}
-		
-		public override void Add (HttpContent content)
-		{
-			base.Add (content);
-			AddContentDisposition (content, null, null);
-		}
+        public MultipartFormDataContent (string boundary)
+            : base ("form-data", boundary)
+        {
+        }
+        
+        public override void Add (HttpContent content)
+        {
+            base.Add (content);
+            AddContentDisposition (content, null, null);
+        }
 
-		public void Add (HttpContent content, string name)
-		{
-			base.Add (content);
-			
-			if (string.IsNullOrWhiteSpace (name))
-				throw new ArgumentException ("name");
-			
-			AddContentDisposition (content, name, null);
-		}
-		
-		public void Add (HttpContent content, string name, string fileName)
-		{
-			base.Add (content);
-			
-			if (string.IsNullOrWhiteSpace (name))
-				throw new ArgumentException ("name");
-			
-			if (string.IsNullOrWhiteSpace (fileName))
-				throw new ArgumentException ("fileName");
-			
-			AddContentDisposition (content, name, fileName);
-		}
-		
-		void AddContentDisposition (HttpContent content, string name, string fileName)
-		{
-			var headers = content.Headers;
-			if (headers.ContentDisposition != null)
-				return;
-			
-			headers.ContentDisposition = new ContentDispositionHeaderValue ("form-data") {
-				Name = name,
-				FileName = fileName,
-				FileNameStar = fileName
-			};
-		}
-	}
+        public void Add (HttpContent content, string name)
+        {
+            base.Add (content);
+            
+            if (string.IsNullOrWhiteSpace (name))
+                throw new ArgumentException ("name");
+            
+            AddContentDisposition (content, name, null);
+        }
+        
+        public void Add (HttpContent content, string name, string fileName)
+        {
+            base.Add (content);
+            
+            if (string.IsNullOrWhiteSpace (name))
+                throw new ArgumentException ("name");
+            
+            if (string.IsNullOrWhiteSpace (fileName))
+                throw new ArgumentException ("fileName");
+            
+            AddContentDisposition (content, name, fileName);
+        }
+        
+        void AddContentDisposition (HttpContent content, string name, string fileName)
+        {
+            var headers = content.Headers;
+            if (headers.ContentDisposition != null)
+                return;
+            
+            headers.ContentDisposition = new ContentDispositionHeaderValue ("form-data") {
+                Name = name,
+                FileName = fileName,
+                FileNameStar = fileName
+            };
+        }
+    }
 }

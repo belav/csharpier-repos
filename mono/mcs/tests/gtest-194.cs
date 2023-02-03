@@ -6,9 +6,9 @@ internal class RedBlackTree<S>
         public delegate int RangeTester (S item);
 
         public IEnumerable<S> EnumerateRange (RangeTester rangeTester)
-	{
-		yield break;
-	}
+    {
+        yield break;
+    }
 }
 
 public class OrderedMultiDictionary<T,U>
@@ -18,12 +18,12 @@ public class OrderedMultiDictionary<T,U>
         private IEnumerator<T> EnumerateKeys (RedBlackTree<KeyValuePair<T,U>>.RangeTester rangeTester)
         {
                 tree.EnumerateRange (rangeTester);
-		yield break;
-	}
+        yield break;
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main ()
+    { }
 }

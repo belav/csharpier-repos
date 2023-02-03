@@ -14,20 +14,20 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class ProtectedInternalConstructorClass
-	{
-		//Added internal keyword
-		protected internal ProtectedInternalConstructorClass()
-		{
-		}
+    public class ProtectedInternalConstructorClass
+    {
+        //Added internal keyword
+        protected internal ProtectedInternalConstructorClass()
+        {
+        }
 
-		public virtual void DoSomething()
-		{
-		}
+        public virtual void DoSomething()
+        {
+        }
 
-		public static ProtectedInternalConstructorClass Create()
-		{
-			return new ProtectedInternalConstructorClass();
-		}
-	}
+        public static ProtectedInternalConstructorClass Create()
+        {
+            return new ProtectedInternalConstructorClass();
+        }
+    }
 }

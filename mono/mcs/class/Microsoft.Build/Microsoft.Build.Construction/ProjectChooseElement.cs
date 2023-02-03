@@ -1,4 +1,4 @@
-﻿//
+//
 // ProjectChooseElement.cs
 //
 // Author:

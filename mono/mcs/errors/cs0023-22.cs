@@ -3,8 +3,8 @@
 
 class C
 {
-	static void Main ()
-	{
-		var res = null?[0];
-	}
+    static void Main ()
+    {
+        var res = null?[0];
+    }
 }

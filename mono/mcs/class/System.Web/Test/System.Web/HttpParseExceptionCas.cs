@@ -1,9 +1,9 @@
 //
 // HttpParseExceptionCas.cs 
-//	- CAS unit tests for System.Web.HttpParseException
+//    - CAS unit tests for System.Web.HttpParseException
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,84 +41,84 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpParseExceptionCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HttpParseExceptionCas : AspNetHostingMinimal {
 
-		private HttpParseException hpe;
+        private HttpParseException hpe;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			hpe = new HttpParseException ();
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            hpe = new HttpParseException ();
+        }
 
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			HttpParseException e = new HttpParseException ();
-			Assert.IsNull (e.FileName, "FileName");
-			Assert.AreEqual (0, e.Line, "Line");
-			Assert.IsNull (e.VirtualPath, "VirtualPath");
-			Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            HttpParseException e = new HttpParseException ();
+            Assert.IsNull (e.FileName, "FileName");
+            Assert.AreEqual (0, e.Line, "Line");
+            Assert.IsNull (e.VirtualPath, "VirtualPath");
+            Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			HttpParseException e = new HttpParseException ("message");
-			Assert.IsNull (e.FileName, "FileName");
-			Assert.AreEqual (0, e.Line, "Line");
-			Assert.IsNull (e.VirtualPath, "VirtualPath");
-			Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            HttpParseException e = new HttpParseException ("message");
+            Assert.IsNull (e.FileName, "FileName");
+            Assert.AreEqual (0, e.Line, "Line");
+            Assert.IsNull (e.VirtualPath, "VirtualPath");
+            Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			HttpParseException e = new HttpParseException ("message", new Exception ());
-			Assert.IsNull (e.FileName, "FileName");
-			Assert.AreEqual (0, e.Line, "Line");
-			Assert.IsNull (e.VirtualPath, "VirtualPath");
-			Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            HttpParseException e = new HttpParseException ("message", new Exception ());
+            Assert.IsNull (e.FileName, "FileName");
+            Assert.AreEqual (0, e.Line, "Line");
+            Assert.IsNull (e.VirtualPath, "VirtualPath");
+            Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor5_Deny_Unrestricted ()
-		{
-			HttpParseException e = new HttpParseException ("message", new Exception (), "virtualPath", "sourceCode", 100);
-			Assert.IsNull (e.FileName, "FileName");
-			Assert.AreEqual (100, e.Line, "Line");
-			Assert.AreEqual ("virtualPath", e.VirtualPath, "VirtualPath");
-			Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor5_Deny_Unrestricted ()
+        {
+            HttpParseException e = new HttpParseException ("message", new Exception (), "virtualPath", "sourceCode", 100);
+            Assert.IsNull (e.FileName, "FileName");
+            Assert.AreEqual (100, e.Line, "Line");
+            Assert.AreEqual ("virtualPath", e.VirtualPath, "VirtualPath");
+            Assert.AreEqual (1, e.ParserErrors.Count, "ParserErrors");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetObjectData_Deny_SerializationFormatter ()
-		{
-			hpe.GetObjectData (null, new StreamingContext ());
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void GetObjectData_Deny_SerializationFormatter ()
+        {
+            hpe.GetObjectData (null, new StreamingContext ());
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void GetObjectData_PermitOnly_SerializationFormatter ()
-		{
-			hpe.GetObjectData (null, new StreamingContext ());
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void GetObjectData_PermitOnly_SerializationFormatter ()
+        {
+            hpe.GetObjectData (null, new StreamingContext ());
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (HttpParseException); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HttpParseException); }
+        }
+    }
 }
 

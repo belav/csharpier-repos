@@ -2,7 +2,7 @@
 // SymmetricSecurityKey.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,28 +33,28 @@ using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {
-	public abstract class SymmetricSecurityKey : SecurityKey
-	{
-		[MonoTODO]
-		protected SymmetricSecurityKey ()
-		{
-		}
+    public abstract class SymmetricSecurityKey : SecurityKey
+    {
+        [MonoTODO]
+        protected SymmetricSecurityKey ()
+        {
+        }
 
-		public abstract byte [] GenerateDerivedKey (
-			string algorithm, byte [] label, byte [] nonce,
-			int derivedKeyLength, int offset);
+        public abstract byte [] GenerateDerivedKey (
+            string algorithm, byte [] label, byte [] nonce,
+            int derivedKeyLength, int offset);
 
-		public abstract byte [] GetSymmetricKey ();
+        public abstract byte [] GetSymmetricKey ();
 
-		public abstract KeyedHashAlgorithm GetKeyedHashAlgorithm (
-			string algorithm);
+        public abstract KeyedHashAlgorithm GetKeyedHashAlgorithm (
+            string algorithm);
 
-		public abstract SymmetricAlgorithm GetSymmetricAlgorithm (string algorithm);
+        public abstract SymmetricAlgorithm GetSymmetricAlgorithm (string algorithm);
 
-		public abstract ICryptoTransform GetDecryptionTransform (string algorithm, byte [] iv);
+        public abstract ICryptoTransform GetDecryptionTransform (string algorithm, byte [] iv);
 
-		public abstract ICryptoTransform GetEncryptionTransform (string algorithm, byte [] iv);
+        public abstract ICryptoTransform GetEncryptionTransform (string algorithm, byte [] iv);
 
-		public abstract int GetIVSize (string algorithm);
-	}
+        public abstract int GetIVSize (string algorithm);
+    }
 }

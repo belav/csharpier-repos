@@ -31,30 +31,30 @@
 using System;
 
 namespace System.IO {
-	public class ErrorEventArgs : EventArgs {
+    public class ErrorEventArgs : EventArgs {
 
-		#region Fields
+        #region Fields
 
-		Exception exception;
+        Exception exception;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ErrorEventArgs (Exception exception) 
-		{
-			this.exception = exception;
-		}
-		
-		#endregion // Constructors
+        public ErrorEventArgs (Exception exception) 
+        {
+            this.exception = exception;
+        }
+        
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		public virtual Exception GetException ()
-		{
-			return exception;
-		}
+        public virtual Exception GetException ()
+        {
+            return exception;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

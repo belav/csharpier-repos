@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -30,73 +30,73 @@ using Mono.WebBrowser.DOM;
 
 namespace Mono.Mozilla.DOM
 {
-	internal class StylesheetList : DOMObject, IStylesheetList
-	{
-		private nsIDOMStyleSheetList unmanagedStyles;
-		private List<IStylesheet> styles;
-		
-		public StylesheetList(WebBrowser control, nsIDOMStyleSheetList stylesheetList) : base (control)
-		{
-			if (control.platform != control.enginePlatform)
-				unmanagedStyles = nsDOMStyleSheetList.GetProxy (control, stylesheetList);
-			else
-				unmanagedStyles = stylesheetList;
-			styles = new List<IStylesheet>();
-		}
-		
-		#region IDisposable Members
-		protected override  void Dispose (bool disposing)
-		{
-			if (!disposed) {
-				if (disposing) {
-					Clear ();
-				}
-			}
-			base.Dispose(disposing);
-		}		
-		#endregion
-		
-		#region Helpers
-		protected void Clear () 
-		{
-			styles.Clear ();
-		}
+    internal class StylesheetList : DOMObject, IStylesheetList
+    {
+        private nsIDOMStyleSheetList unmanagedStyles;
+        private List<IStylesheet> styles;
+        
+        public StylesheetList(WebBrowser control, nsIDOMStyleSheetList stylesheetList) : base (control)
+        {
+            if (control.platform != control.enginePlatform)
+                unmanagedStyles = nsDOMStyleSheetList.GetProxy (control, stylesheetList);
+            else
+                unmanagedStyles = stylesheetList;
+            styles = new List<IStylesheet>();
+        }
+        
+        #region IDisposable Members
+        protected override  void Dispose (bool disposing)
+        {
+            if (!disposed) {
+                if (disposing) {
+                    Clear ();
+                }
+            }
+            base.Dispose(disposing);
+        }        
+        #endregion
+        
+        #region Helpers
+        protected void Clear () 
+        {
+            styles.Clear ();
+        }
 
-		internal void Load ()
-		{
-			Clear ();			
-			uint count;
-			unmanagedStyles.getLength (out count);
-			for (int i = 0; i < count;i++) {
-				nsIDOMStyleSheet style;
-				unmanagedStyles.item ((uint)i, out style);
-				styles.Add (new Stylesheet (control, style));
-			}
-		}
-		#endregion
-				
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			if (styles.Count == 0)
-				Load ();
-			return styles.GetEnumerator(); 
-		}
+        internal void Load ()
+        {
+            Clear ();            
+            uint count;
+            unmanagedStyles.getLength (out count);
+            for (int i = 0; i < count;i++) {
+                nsIDOMStyleSheet style;
+                unmanagedStyles.item ((uint)i, out style);
+                styles.Add (new Stylesheet (control, style));
+            }
+        }
+        #endregion
+                
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            if (styles.Count == 0)
+                Load ();
+            return styles.GetEnumerator(); 
+        }
 
-		public IStylesheet this [int index] {
-			get {
-				return styles[index];
-			}
-			set {
-				styles[index] = value;
-			}
-		}
-	
-		public int Count {
-			get {
-				if (styles.Count == 0)
-					Load ();
-				return styles.Count;
-			}
-		}
-	}
+        public IStylesheet this [int index] {
+            get {
+                return styles[index];
+            }
+            set {
+                styles[index] = value;
+            }
+        }
+    
+        public int Count {
+            get {
+                if (styles.Count == 0)
+                    Load ();
+                return styles.Count;
+            }
+        }
+    }
 }

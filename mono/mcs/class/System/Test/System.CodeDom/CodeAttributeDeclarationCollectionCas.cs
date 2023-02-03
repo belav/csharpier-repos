@@ -1,9 +1,9 @@
 //
 // CodeAttributeDeclarationCollectionCas.cs
-//	- CAS unit tests for System.CodeDom.CodeAttributeDeclarationCollection
+//    - CAS unit tests for System.CodeDom.CodeAttributeDeclarationCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,83 +37,83 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeAttributeDeclarationCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeAttributeDeclarationCollectionCas {
 
-		private CodeAttributeDeclaration cad;
-		private CodeAttributeDeclaration[] array;
+        private CodeAttributeDeclaration cad;
+        private CodeAttributeDeclaration[] array;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			cad = new CodeAttributeDeclaration ();
-			array = new CodeAttributeDeclaration[1] { cad };
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            cad = new CodeAttributeDeclaration ();
+            array = new CodeAttributeDeclaration[1] { cad };
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeAttributeDeclarationCollection coll = new CodeAttributeDeclarationCollection ();
-			Assert.AreEqual (0, coll.Add (cad), "Add");
-			Assert.AreSame (cad, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cad), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cad), "IndexOf");
-			coll.Insert (0, cad);
-			coll.Remove (cad);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeAttributeDeclarationCollection coll = new CodeAttributeDeclarationCollection ();
+            Assert.AreEqual (0, coll.Add (cad), "Add");
+            Assert.AreSame (cad, coll[0], "this[int]");
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (cad), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (cad), "IndexOf");
+            coll.Insert (0, cad);
+            coll.Remove (cad);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeAttributeDeclarationCollection coll = new CodeAttributeDeclarationCollection (array);
-			coll.CopyTo (array, 0);
-			Assert.AreEqual (1, coll.Add (cad), "Add");
-			Assert.AreSame (cad, coll[0], "this[int]");
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cad), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cad), "IndexOf");
-			coll.Insert (0, cad);
-			coll.Remove (cad);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeAttributeDeclarationCollection coll = new CodeAttributeDeclarationCollection (array);
+            coll.CopyTo (array, 0);
+            Assert.AreEqual (1, coll.Add (cad), "Add");
+            Assert.AreSame (cad, coll[0], "this[int]");
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (cad), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (cad), "IndexOf");
+            coll.Insert (0, cad);
+            coll.Remove (cad);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeAttributeDeclarationCollection c = new CodeAttributeDeclarationCollection ();
-			CodeAttributeDeclarationCollection coll = new CodeAttributeDeclarationCollection (c);
-			Assert.AreEqual (0, coll.Add (cad), "Add");
-			Assert.AreSame (cad, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cad), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cad), "IndexOf");
-			coll.Insert (0, cad);
-			coll.Remove (cad);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeAttributeDeclarationCollection c = new CodeAttributeDeclarationCollection ();
+            CodeAttributeDeclarationCollection coll = new CodeAttributeDeclarationCollection (c);
+            Assert.AreEqual (0, coll.Add (cad), "Add");
+            Assert.AreSame (cad, coll[0], "this[int]");
+            coll.CopyTo (array, 0);
+            coll.AddRange (array);
+            coll.AddRange (coll);
+            Assert.IsTrue (coll.Contains (cad), "Contains");
+            Assert.AreEqual (0, coll.IndexOf (cad), "IndexOf");
+            coll.Insert (0, cad);
+            coll.Remove (cad);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeAttributeDeclarationCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeAttributeDeclarationCollection).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿using AutoMapper.Internal;
+using AutoMapper.Internal;
 using System.ComponentModel;
 using System.Linq.Expressions;
 

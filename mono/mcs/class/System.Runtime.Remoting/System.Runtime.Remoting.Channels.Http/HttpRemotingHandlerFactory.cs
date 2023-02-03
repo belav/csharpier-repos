@@ -36,77 +36,77 @@ using System.Runtime.Remoting.Channels;
 
 namespace System.Runtime.Remoting.Channels.Http 
 {
-	public class HttpRemotingHandlerFactory : IHttpHandlerFactory
-	{
-		static bool webConfigLoaded = false;
-		static HttpServerTransportSink transportSink = null;
-		
-		public HttpRemotingHandlerFactory ()
-		{
-		}
+    public class HttpRemotingHandlerFactory : IHttpHandlerFactory
+    {
+        static bool webConfigLoaded = false;
+        static HttpServerTransportSink transportSink = null;
+        
+        public HttpRemotingHandlerFactory ()
+        {
+        }
 
-		public IHttpHandler GetHandler (HttpContext context,
-						string verb,
-						string url,
-						string filePath)
-		{
-			if (!webConfigLoaded)
-				ConfigureHttpChannel (context);
-			
-			return new HttpRemotingHandler (transportSink);
-		}
-		
-		void ConfigureHttpChannel (HttpContext context)
-		{
-			lock (GetType())
-			{
-				if (webConfigLoaded) return;
+        public IHttpHandler GetHandler (HttpContext context,
+                        string verb,
+                        string url,
+                        string filePath)
+        {
+            if (!webConfigLoaded)
+                ConfigureHttpChannel (context);
+            
+            return new HttpRemotingHandler (transportSink);
+        }
+        
+        void ConfigureHttpChannel (HttpContext context)
+        {
+            lock (GetType())
+            {
+                if (webConfigLoaded) return;
 
-				string appConfig = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-				if (File.Exists (appConfig))
-					RemotingConfiguration.Configure (appConfig);
-							
-				// Look for a channel that wants to receive http request
-				IChannelReceiverHook chook = null;
-				foreach (IChannel channel in ChannelServices.RegisteredChannels)
-				{
-					chook = channel as IChannelReceiverHook;
-					if (chook == null) continue;
-					
-					if (chook.ChannelScheme != "http")
-						throw new RemotingException ("Only http channels are allowed when hosting remoting objects in a web server");
-					
-					if (!chook.WantsToListen) 
-					{
-						chook = null;
-						continue;
-					}
-					
-					//found chook
-					break;
-				}
+                string appConfig = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
+                if (File.Exists (appConfig))
+                    RemotingConfiguration.Configure (appConfig);
+                            
+                // Look for a channel that wants to receive http request
+                IChannelReceiverHook chook = null;
+                foreach (IChannel channel in ChannelServices.RegisteredChannels)
+                {
+                    chook = channel as IChannelReceiverHook;
+                    if (chook == null) continue;
+                    
+                    if (chook.ChannelScheme != "http")
+                        throw new RemotingException ("Only http channels are allowed when hosting remoting objects in a web server");
+                    
+                    if (!chook.WantsToListen) 
+                    {
+                        chook = null;
+                        continue;
+                    }
+                    
+                    //found chook
+                    break;
+                }
 
-				if (chook == null)
-				{
-					HttpChannel chan = new HttpChannel();
-					ChannelServices.RegisterChannel(chan);
-					chook = chan;
-				}
-					
-				// Register the uri for the channel. The channel uri includes the scheme, the
-				// host and the application path
-					
-				string channelUrl = context.Request.Url.GetLeftPart(UriPartial.Authority);
-				channelUrl += context.Request.ApplicationPath;
-				chook.AddHookChannelUri (channelUrl);
-				
-				transportSink = new HttpServerTransportSink (chook.ChannelSinkChain);
-				webConfigLoaded = true;
-			}
-		}
+                if (chook == null)
+                {
+                    HttpChannel chan = new HttpChannel();
+                    ChannelServices.RegisterChannel(chan);
+                    chook = chan;
+                }
+                    
+                // Register the uri for the channel. The channel uri includes the scheme, the
+                // host and the application path
+                    
+                string channelUrl = context.Request.Url.GetLeftPart(UriPartial.Authority);
+                channelUrl += context.Request.ApplicationPath;
+                chook.AddHookChannelUri (channelUrl);
+                
+                transportSink = new HttpServerTransportSink (chook.ChannelSinkChain);
+                webConfigLoaded = true;
+            }
+        }
 
-		public void ReleaseHandler (IHttpHandler handler)
-		{
-		}
-	}
+        public void ReleaseHandler (IHttpHandler handler)
+        {
+        }
+    }
 }

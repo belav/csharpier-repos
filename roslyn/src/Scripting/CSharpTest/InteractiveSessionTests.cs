@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1855,7 +1855,7 @@ return true;
             var code = @"
 static bool M()
 {
-	return Value;
+    return Value;
 }
 return M();
 ";
@@ -1863,7 +1863,7 @@ return M();
             var script = CSharpScript.Create<bool>(code, globalsType: typeof(F));
             ScriptingTestHelpers.AssertCompilationError(() => script.RunAsync(new F()).Wait(),
                     // (4,9): error CS0120: An object reference is required for the non-static field, method, or property 'InteractiveSessionTests.F.Value'
-                    // 				return Value;
+                    //                 return Value;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "Value").WithArguments("Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests.InteractiveSessionTests.F.Value").WithLocation(4, 9));
         }
 
@@ -1873,11 +1873,11 @@ return M();
             var code = @"
 bool M()
 {
-	return Inner();
-	static bool Inner()
-	{
-		return Value;
-	}
+    return Inner();
+    static bool Inner()
+    {
+        return Value;
+    }
 }
 return M();
 ";
@@ -1885,7 +1885,7 @@ return M();
             var script = CSharpScript.Create<bool>(code, globalsType: typeof(F));
             ScriptingTestHelpers.AssertCompilationError(() => script.RunAsync(new F()).Wait(),
                     // (7,10): error CS0120: An object reference is required for the non-static field, method, or property 'InteractiveSessionTests.F.Value'
-                    // 					return Value;
+                    //                     return Value;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "Value").WithArguments("Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests.InteractiveSessionTests.F.Value").WithLocation(7, 10));
         }
 
@@ -1895,11 +1895,11 @@ return M();
             var code = @"
 bool M()
 {
-	return Inner();
-	bool Inner()
-	{
-		return Value;
-	}
+    return Inner();
+    bool Inner()
+    {
+        return Value;
+    }
 }
 return M();
 ";

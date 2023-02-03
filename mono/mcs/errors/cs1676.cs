@@ -6,8 +6,8 @@
 delegate void D (ref int x);
 
 class X {
-	static void Main ()
-	{
-		D d2 = delegate (int x) {};
-	}
+    static void Main ()
+    {
+        D d2 = delegate (int x) {};
+    }
 }

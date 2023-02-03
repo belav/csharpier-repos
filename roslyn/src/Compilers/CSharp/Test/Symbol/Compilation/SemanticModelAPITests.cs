@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -832,8 +832,8 @@ namespace N {
             var text = @"
 public class A 
 {
-	int goo	{	void goo() {}	} // Error
-	static int Main() {	return 1;    }
+    int goo    {    void goo() {}    } // Error
+    static int Main() {    return 1;    }
 }
 ";
             var tree = Parse(text);
@@ -3946,11 +3946,11 @@ using System;
 
 class MyClass {
 
-	public protected int intI = 1;
+    public protected int intI = 1;
 
-	public static int Main() {
-		return 1;
-	}
+    public static int Main() {
+        return 1;
+    }
 }"
                 );
         }
@@ -3963,10 +3963,10 @@ using System;
 
 class Convert
 {
-	public static void Main()
-	{
-		S s = new S();
-	}
+    public static void Main()
+    {
+        S s = new S();
+    }
 }
 "
                 );

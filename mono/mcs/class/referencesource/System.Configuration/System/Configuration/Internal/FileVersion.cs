@@ -12,7 +12,7 @@ namespace System.Configuration.Internal {
     using System.Threading;
     using System.Security;
     using System.CodeDom.Compiler;
-    using Microsoft.Win32;	
+    using Microsoft.Win32;    
 #if !FEATURE_PAL
     using System.Security.AccessControl;
 #endif

@@ -325,7 +325,7 @@ namespace JIT.HardwareIntrinsics.General
                 TestLibrary.TestFramework.LogInformation($"{nameof(Vector256)}.{nameof(Vector256.Widen)}<UInt16>(Vector256<Byte>): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"      firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"  lowerResult: ({string.Join(", ", lowerResult)})");
-				TestLibrary.TestFramework.LogInformation($"  upperResult: ({string.Join(", ", upperResult)})");
+                TestLibrary.TestFramework.LogInformation($"  upperResult: ({string.Join(", ", upperResult)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

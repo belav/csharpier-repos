@@ -40,21 +40,21 @@ namespace System.Collections.Specialized {
             }
         }
 
-		bool IList.IsReadOnly
-		{
-			get
-			{
-				return false;
-			}
-		}
+        bool IList.IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
 
-		bool IList.IsFixedSize
-		{
-			get
-			{
-				return false;
-			}
-		}
+        bool IList.IsFixedSize
+        {
+            get
+            {
+                return false;
+            }
+        }
 
 
         /// <devdoc>

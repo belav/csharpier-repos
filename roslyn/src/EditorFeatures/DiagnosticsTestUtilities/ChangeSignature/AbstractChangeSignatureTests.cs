@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -193,7 +193,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
         ///     Tr M(this T0 t0, T1 t1, ... Tm tm, D1 d1 = v1, ..., Dn dn = vn, params U u)
         /// with s this parameters (0 or 1), m >= 0 simple parameters, n >= 0 parameters with
         /// default values, and p params parameters (0 or 1), there are 
-        /// Π s∈{m, n} (Σ k=0 to s (sCk * (s-k)!)) * 2^p - 1 changed signatures to consider.
+        /// ? s?{m, n}�(S k=0 to s�(sCk * (s-k)!)) * 2^p�- 1 changed signatures to consider.
         /// </summary>
         /// <param name="signaturePartCounts">A four element array containing [s, m, n, p] as 
         /// described above.</param>

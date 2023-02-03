@@ -7,7 +7,7 @@ using System;
 /// invalid comment placed on namespace.
 namespace TopNS
 {
-	class Foo
-	{
-	}
+    class Foo
+    {
+    }
 }

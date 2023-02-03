@@ -5,12 +5,12 @@ using System;
 
 class Program
 {
-	static void Foo (object o)
-	{
-	}
+    static void Foo (object o)
+    {
+    }
 
-	static void Main ()
-	{
-		Foo (__arglist (null));
-	}
+    static void Main ()
+    {
+        Foo (__arglist (null));
+    }
 }

@@ -2,7 +2,7 @@
 // SecurityVersion.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,30 +28,30 @@
 
 namespace System.ServiceModel.Security
 {
-	public abstract class SecurityVersion
-	{
-		static SecurityVersion wss10, wss11;
+    public abstract class SecurityVersion
+    {
+        static SecurityVersion wss10, wss11;
 
-		static SecurityVersion ()
-		{
-			wss10 = new SecurityVersion10 ();
-			wss11 = new SecurityVersion11 ();
-		}
+        static SecurityVersion ()
+        {
+            wss10 = new SecurityVersion10 ();
+            wss11 = new SecurityVersion11 ();
+        }
 
-		public static SecurityVersion WSSecurity10 {
-			get { return wss10; }
-		}
+        public static SecurityVersion WSSecurity10 {
+            get { return wss10; }
+        }
 
-		public static SecurityVersion WSSecurity11 {
-			get { return wss11; }
-		}
-	}
+        public static SecurityVersion WSSecurity11 {
+            get { return wss11; }
+        }
+    }
 
-	class SecurityVersion10 : SecurityVersion
-	{
-	}
+    class SecurityVersion10 : SecurityVersion
+    {
+    }
 
-	class SecurityVersion11 : SecurityVersion
-	{
-	}
+    class SecurityVersion11 : SecurityVersion
+    {
+    }
 }

@@ -3,7 +3,7 @@
 // for System.Configuration.ConfigurationElementCollection.
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,48 +33,48 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class ConfigurationElementCollectionTest
-	{
-		class Poker : ConfigurationElementCollection
-		{
-			protected override ConfigurationElement CreateNewElement ()
-			{
-				return new PokerElement ("???")
-			}
+    [TestFixture]
+    public class ConfigurationElementCollectionTest
+    {
+        class Poker : ConfigurationElementCollection
+        {
+            protected override ConfigurationElement CreateNewElement ()
+            {
+                return new PokerElement ("???")
+            }
 
-			protected abstract object GetElementKey (ConfigurationElement element)
-			{
-				PokerElement e = (PokerElement) element;
+            protected abstract object GetElementKey (ConfigurationElement element)
+            {
+                PokerElement e = (PokerElement) element;
 
-				return e.Key;
-			}
-		}
+                return e.Key;
+            }
+        }
 
-		class PokerElement : ConfigurationElement
-		{
-			public readonly string Key;
-			public PokerElement (string key)
-			{
-				Key = key;
-			}
-		}
+        class PokerElement : ConfigurationElement
+        {
+            public readonly string Key;
+            public PokerElement (string key)
+            {
+                Key = key;
+            }
+        }
 
-		[Test]
-		public void Add ()
-		{
-			Poker p = new Poker();
+        [Test]
+        public void Add ()
+        {
+            Poker p = new Poker();
 
-			Assert.AreEqual (0, p.Count, "A1");
+            Assert.AreEqual (0, p.Count, "A1");
 
-			p.Add (new PokerElement ("hi"));
-		}
+            p.Add (new PokerElement ("hi"));
+        }
 
-		[Test]
-		public void AddDuplicate ()
-		{
-			
-		}
-	}
+        [Test]
+        public void AddDuplicate ()
+        {
+            
+        }
+    }
 }
 

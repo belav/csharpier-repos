@@ -2,7 +2,7 @@
 // BindingElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,55 +33,55 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class BindingElement
-	{
-		protected BindingElement ()
-		{
-		}
+    public abstract class BindingElement
+    {
+        protected BindingElement ()
+        {
+        }
 
-		[MonoTODO]
-		protected BindingElement (BindingElement elementToBeCloned)
-		{
-		}
+        [MonoTODO]
+        protected BindingElement (BindingElement elementToBeCloned)
+        {
+        }
 
-		public virtual IChannelFactory<TChannel>
-			BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			return context.BuildInnerChannelFactory<TChannel> ();
-		}
-
-#if !MOBILE
-		public virtual IChannelListener<TChannel>
-			BuildChannelListener<TChannel> (
-			BindingContext context)
-			where TChannel : class, IChannel
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			return context.BuildInnerChannelListener<TChannel> ();
-		}
-#endif
-
-		public virtual bool CanBuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			return context.CanBuildInnerChannelFactory<TChannel> ();
-		}
+        public virtual IChannelFactory<TChannel>
+            BuildChannelFactory<TChannel> (BindingContext context)
+        {
+            if (context == null)
+                throw new ArgumentNullException ("context");
+            return context.BuildInnerChannelFactory<TChannel> ();
+        }
 
 #if !MOBILE
-		public virtual bool CanBuildChannelListener<TChannel> (
-			BindingContext context)
-			where TChannel : class, IChannel
-		{
-			return context.CanBuildInnerChannelListener<TChannel> ();
-		}
+        public virtual IChannelListener<TChannel>
+            BuildChannelListener<TChannel> (
+            BindingContext context)
+            where TChannel : class, IChannel
+        {
+            if (context == null)
+                throw new ArgumentNullException ("context");
+            return context.BuildInnerChannelListener<TChannel> ();
+        }
 #endif
 
-		public abstract BindingElement Clone ();
+        public virtual bool CanBuildChannelFactory<TChannel> (
+            BindingContext context)
+        {
+            return context.CanBuildInnerChannelFactory<TChannel> ();
+        }
 
-		public abstract T GetProperty<T> (BindingContext context)
-			where T : class;
-	}
+#if !MOBILE
+        public virtual bool CanBuildChannelListener<TChannel> (
+            BindingContext context)
+            where TChannel : class, IChannel
+        {
+            return context.CanBuildInnerChannelListener<TChannel> ();
+        }
+#endif
+
+        public abstract BindingElement Clone ();
+
+        public abstract T GetProperty<T> (BindingContext context)
+            where T : class;
+    }
 }

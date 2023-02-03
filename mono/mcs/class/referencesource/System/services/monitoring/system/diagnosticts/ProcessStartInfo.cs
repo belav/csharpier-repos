@@ -39,7 +39,7 @@ namespace System.Diagnostics {
     PermissionSet(SecurityAction.LinkDemand, Name="FullTrust"),
     HostProtection(SharedState=true, SelfAffectingProcessMgmt=true)
     ]
-	[StructLayout (LayoutKind.Sequential)]
+    [StructLayout (LayoutKind.Sequential)]
     public sealed class ProcessStartInfo {
         string fileName;
         string arguments;
@@ -68,7 +68,7 @@ namespace System.Diagnostics {
         WeakReference weakParentProcess;
         internal StringDictionary environmentVariables;
 
-		static readonly string [] empty = new string [0];
+        static readonly string [] empty = new string [0];
 
         /// <devdoc>
         ///     Default constructor.  At least the <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>

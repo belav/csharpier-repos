@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +59,7 @@ using nwind;
             Assert.IsTrue(list.Count > 0);
         }
 
-        //Devuelve el valor absoluto (positivo) de una expresi贸n num茅rica.
+        //Devuelve el valor absoluto (positivo) de una expresi髇 num閞ica.
 
         //EXP (SSIS)
 
@@ -80,12 +80,12 @@ using nwind;
         }
 
 
-        //Devuelve el exponente de la base e de la expresi贸n especificada.
+        //Devuelve el exponente de la base e de la expresi髇 especificada.
 
         //CEILING (SSIS)
 
 
-        //Devuelve el menor entero mayor o igual que una expresi贸n num茅rica.
+        //Devuelve el menor entero mayor o igual que una expresi髇 num閞ica.
 
 #if !DEBUG && (SQLITE && MONO)
         [Explicit]
@@ -104,7 +104,7 @@ using nwind;
         }
 
 
-        //Devuelve el mayor entero que es menor o igual que una expresi贸n num茅rica.
+        //Devuelve el mayor entero que es menor o igual que una expresi髇 num閞ica.
 
         //LN (SSIS)
 
@@ -139,7 +139,7 @@ using nwind;
         }
 
 
-        //Devuelve el logaritmo natural de una expresi贸n num茅rica.
+        //Devuelve el logaritmo natural de una expresi髇 num閞ica.
 
         //LOG (SSIS)
 #if !DEBUG && (SQLITE && MONO)
@@ -158,7 +158,7 @@ using nwind;
         }
 
 
-        //Devuelve el logaritmo en base 10 de una expresi贸n num茅rica.
+        //Devuelve el logaritmo en base 10 de una expresi髇 num閞ica.
 
         //POWER (SSIS)
 
@@ -177,7 +177,7 @@ using nwind;
             var list = q.ToList();
 
         }
-        //Devuelve el resultado de elevar una expresi贸n num茅rica a una determinada potencia.
+        //Devuelve el resultado de elevar una expresi髇 num閞ica a una determinada potencia.
 
         //ROUND (SSIS)
 #if !DEBUG && (MSSQL && !L2SQL)
@@ -212,7 +212,7 @@ using nwind;
             var list = q.ToList();
         }
 
-        //Devuelve una expresi贸n num茅rica, redondeada a la longitud o precisi贸n especificada. .
+        //Devuelve una expresi髇 num閞ica, redondeada a la longitud o precisi髇 especificada. .
 
         //SIGN (SSIS)
 
@@ -231,12 +231,12 @@ using nwind;
 
             var list = q.ToList();
         }
-        //Devuelve el signo positivo (+), cero (0) o negativo (-) de una expresi贸n num茅rica.
+        //Devuelve el signo positivo (+), cero (0) o negativo (-) de una expresi髇 num閞ica.
 
         //SQUARE (SSIS)
 
 
-        //Devuelve el cuadrado de una expresi贸n num茅rica.
+        //Devuelve el cuadrado de una expresi髇 num閞ica.
 
         //SQRT (SSIS) 
 

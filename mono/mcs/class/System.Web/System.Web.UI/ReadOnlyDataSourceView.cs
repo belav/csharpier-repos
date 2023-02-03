@@ -2,7 +2,7 @@
 // System.Web.UI.ReadOnlyDataSourceView.cs
 //
 // Authors:
-//	James Fitzsimons (james.fitzsimons@gmail.com)
+//    James Fitzsimons (james.fitzsimons@gmail.com)
 //
 // (C) 2008 James Fitzsimons
 //

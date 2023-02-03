@@ -788,22 +788,22 @@ namespace System.Net {
             HttpListenerContext.EnsureBoundHandle();
 
             ListenerClientCertAsyncResult asyncResult = null;
-			//--------------------------------------------------------------------
-			//When you configure the HTTP.SYS with a flag value 2
-			//which means require client certificates, when the client makes the
-			//initial SSL connection, server (HTTP.SYS) demands the client certificate
-			//
-			//Some apps may not want to demand the client cert at the beginning
-			//perhaps server the default.htm. In this case the HTTP.SYS is configured
-			//with a flag value other than 2, whcih means that the client certificate is
-			//optional.So intially when SSL is established HTTP.SYS won't ask for client
-			//certificate. This works fine for the default.htm in the case above
-			//However, if the app wants to demand a client certficate at a later time
-			//perhaps showing "YOUR ORDERS" page, then the server wans to demand
-			//Client certs. this will inturn makes HTTP.SYS to do the
-			//SEC_I_RENOGOTIATE through which the client cert demand is made
-			//
-			//THE 
+            //--------------------------------------------------------------------
+            //When you configure the HTTP.SYS with a flag value 2
+            //which means require client certificates, when the client makes the
+            //initial SSL connection, server (HTTP.SYS) demands the client certificate
+            //
+            //Some apps may not want to demand the client cert at the beginning
+            //perhaps server the default.htm. In this case the HTTP.SYS is configured
+            //with a flag value other than 2, whcih means that the client certificate is
+            //optional.So intially when SSL is established HTTP.SYS won't ask for client
+            //certificate. This works fine for the default.htm in the case above
+            //However, if the app wants to demand a client certficate at a later time
+            //perhaps showing "YOUR ORDERS" page, then the server wans to demand
+            //Client certs. this will inturn makes HTTP.SYS to do the
+            //SEC_I_RENOGOTIATE through which the client cert demand is made
+            //
+            //THE 
 
 
 
@@ -883,22 +883,22 @@ namespace System.Net {
                 throw new InvalidOperationException(SR.GetString(SR.net_listener_callinprogress, "GetClientCertificate()/BeginGetClientCertificate()"));
             m_ClientCertState = ListenerClientCertState.InProgress;
             GlobalLog.Print("HttpListenerRequest#" + ValidationHelper.HashString(this) + "::ProcessClientCertificate()");
-			//--------------------------------------------------------------------
-			//When you configure the HTTP.SYS with a flag value 2
-			//which means require client certificates, when the client makes the
-			//initial SSL connection, server (HTTP.SYS) demands the client certificate
-			//
-			//Some apps may not want to demand the client cert at the beginning
-			//perhaps server the default.htm. In this case the HTTP.SYS is configured
-			//with a flag value other than 2, whcih means that the client certificate is
-			//optional.So intially when SSL is established HTTP.SYS won't ask for client
-			//certificate. This works fine for the default.htm in the case above
-			//However, if the app wants to demand a client certficate at a later time
-			//perhaps showing "YOUR ORDERS" page, then the server wans to demand
-			//Client certs. this will inturn makes HTTP.SYS to do the
-			//SEC_I_RENOGOTIATE through which the client cert demand is made
-			//
-			//THE 
+            //--------------------------------------------------------------------
+            //When you configure the HTTP.SYS with a flag value 2
+            //which means require client certificates, when the client makes the
+            //initial SSL connection, server (HTTP.SYS) demands the client certificate
+            //
+            //Some apps may not want to demand the client cert at the beginning
+            //perhaps server the default.htm. In this case the HTTP.SYS is configured
+            //with a flag value other than 2, whcih means that the client certificate is
+            //optional.So intially when SSL is established HTTP.SYS won't ask for client
+            //certificate. This works fine for the default.htm in the case above
+            //However, if the app wants to demand a client certficate at a later time
+            //perhaps showing "YOUR ORDERS" page, then the server wans to demand
+            //Client certs. this will inturn makes HTTP.SYS to do the
+            //SEC_I_RENOGOTIATE through which the client cert demand is made
+            //
+            //THE 
 
 
 

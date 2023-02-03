@@ -32,62 +32,62 @@ using System.Configuration.Internal;
 
 namespace System.Configuration
 {
-	class InternalConfigurationRoot: IInternalConfigRoot
-	{
-		IInternalConfigHost host;
-		bool isDesignTime;
+    class InternalConfigurationRoot: IInternalConfigRoot
+    {
+        IInternalConfigHost host;
+        bool isDesignTime;
 
-		public InternalConfigurationRoot ()
-		{
-		}
+        public InternalConfigurationRoot ()
+        {
+        }
 
-		[MonoTODO]
-		public IInternalConfigRecord GetConfigRecord (string configPath)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public object GetSection (string section, string configPath)
-		{
-			IInternalConfigRecord rec = GetConfigRecord (configPath);
-			return rec.GetSection (section);
-		}
+        [MonoTODO]
+        public IInternalConfigRecord GetConfigRecord (string configPath)
+        {
+            throw new NotImplementedException ();
+        }
+        
+        public object GetSection (string section, string configPath)
+        {
+            IInternalConfigRecord rec = GetConfigRecord (configPath);
+            return rec.GetSection (section);
+        }
 
-		[MonoTODO]
-		public string GetUniqueConfigPath (string configPath)
-		{
-			return configPath;
-		}
+        [MonoTODO]
+        public string GetUniqueConfigPath (string configPath)
+        {
+            return configPath;
+        }
 
-		[MonoTODO]
-		public IInternalConfigRecord GetUniqueConfigRecord (string configPath)
-		{
-			return GetConfigRecord (GetUniqueConfigPath (configPath));
-		}
-		
-		public void Init (IInternalConfigHost host, bool isDesignTime)
-		{
-			this.host = host;
-			this.isDesignTime = isDesignTime;
-		}
+        [MonoTODO]
+        public IInternalConfigRecord GetUniqueConfigRecord (string configPath)
+        {
+            return GetConfigRecord (GetUniqueConfigPath (configPath));
+        }
+        
+        public void Init (IInternalConfigHost host, bool isDesignTime)
+        {
+            this.host = host;
+            this.isDesignTime = isDesignTime;
+        }
 
-		[MonoTODO]
-		public void RemoveConfig (string configPath)
-		{
-			host.DeleteStream (configPath);
+        [MonoTODO]
+        public void RemoveConfig (string configPath)
+        {
+            host.DeleteStream (configPath);
 
-			if (ConfigRemoved != null)
-				ConfigRemoved (this, new InternalConfigEventArgs (configPath));
-		}
-		
-		public bool IsDesignTime {
-			get { return isDesignTime; }
-		}
+            if (ConfigRemoved != null)
+                ConfigRemoved (this, new InternalConfigEventArgs (configPath));
+        }
+        
+        public bool IsDesignTime {
+            get { return isDesignTime; }
+        }
 
 #pragma warning disable 67
-		public event InternalConfigEventHandler ConfigChanged;
-		public event InternalConfigEventHandler ConfigRemoved;
+        public event InternalConfigEventHandler ConfigChanged;
+        public event InternalConfigEventHandler ConfigRemoved;
 #pragma warning restore 67
-	}
+    }
 }
 

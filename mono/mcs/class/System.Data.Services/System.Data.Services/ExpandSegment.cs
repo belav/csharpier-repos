@@ -1,4 +1,4 @@
-﻿//
+//
 // ExpandSegment.cs
 //
 // Author:
@@ -34,48 +34,48 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services
 {
-	[DebuggerDisplay ("ExpandSegment ({name},Filter={filter})]")]
-	public class ExpandSegment
-	{
-		public ExpandSegment (string name, Expression filter)
-		{
-			if (name == null)
-				throw new ArgumentNullException ("name");
+    [DebuggerDisplay ("ExpandSegment ({name},Filter={filter})]")]
+    public class ExpandSegment
+    {
+        public ExpandSegment (string name, Expression filter)
+        {
+            if (name == null)
+                throw new ArgumentNullException ("name");
 
-			this.Name = name;
-			this.Filter = filter;
-		}
-		public ResourceProperty ExpandedProperty {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		public string Name {
-			get;
-			private set;
-		}
+            this.Name = name;
+            this.Filter = filter;
+        }
+        public ResourceProperty ExpandedProperty {
+            get {
+                throw new NotImplementedException ();
+            }
+        }
+        public string Name {
+            get;
+            private set;
+        }
 
-		public Expression Filter {
-			get;
-			private set;
-		}
+        public Expression Filter {
+            get;
+            private set;
+        }
 
-		public bool HasFilter {
-			get { return (this.Filter != null); }
-		}
+        public bool HasFilter {
+            get { return (this.Filter != null); }
+        }
 
-		public int MaxResultsExpected {
-			get { return this.max_results_expected; }
-		}
+        public int MaxResultsExpected {
+            get { return this.max_results_expected; }
+        }
 
-		private int max_results_expected = Int32.MaxValue;
+        private int max_results_expected = Int32.MaxValue;
 
-		public static bool PathHasFilter (IEnumerable<ExpandSegment> path)
-		{
-			if (path == null)
-				throw new ArgumentNullException ("path");
+        public static bool PathHasFilter (IEnumerable<ExpandSegment> path)
+        {
+            if (path == null)
+                throw new ArgumentNullException ("path");
 
-			return path.Any (s => s.HasFilter);
-		}
-	}
+            return path.Any (s => s.HasFilter);
+        }
+    }
 }

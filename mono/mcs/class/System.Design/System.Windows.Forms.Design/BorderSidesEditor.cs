@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.BorderSidesEditor.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -37,24 +37,24 @@ using System.Security.Permissions;
 
 namespace System.Windows.Forms.Design
 {
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class BorderSidesEditor : UITypeEditor
-	{
-		public BorderSidesEditor ()
-		{
-		}
+    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class BorderSidesEditor : UITypeEditor
+    {
+        public BorderSidesEditor ()
+        {
+        }
 
-		[MonoTODO]
-		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }
 

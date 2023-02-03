@@ -6,9 +6,9 @@ using System;
 public delegate void FooHandler ();
 
 class Bar {
-	extern event FooHandler OnFoo {
-		add { }
-		remove { }
-	}
+    extern event FooHandler OnFoo {
+        add { }
+        remove { }
+    }
 }
 

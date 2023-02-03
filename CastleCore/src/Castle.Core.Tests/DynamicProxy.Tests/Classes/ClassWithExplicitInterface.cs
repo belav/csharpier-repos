@@ -14,21 +14,21 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ClassWithExplicitInterface : ISimpleInterface
-	{
-		int ISimpleInterface.Do()
-		{
-			return 5;
-		}
+    public class ClassWithExplicitInterface : ISimpleInterface
+    {
+        int ISimpleInterface.Do()
+        {
+            return 5;
+        }
 
-		public virtual int DoVirtual()
-		{
-			return 7;
-		}
-	}
+        public virtual int DoVirtual()
+        {
+            return 7;
+        }
+    }
 }

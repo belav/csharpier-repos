@@ -25,7 +25,7 @@ class Test_test_noalloca
 
         foo(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
 
-        //		int * px = stackalloc int[x];
+        //        int * px = stackalloc int[x];
 
         foo(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10);
         return (100);

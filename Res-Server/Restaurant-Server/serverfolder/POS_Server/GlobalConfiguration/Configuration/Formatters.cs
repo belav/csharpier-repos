@@ -1,4 +1,4 @@
-﻿namespace GlobalConfiguration.Configuration
+namespace GlobalConfiguration.Configuration
 {
     internal class Formatters
     {

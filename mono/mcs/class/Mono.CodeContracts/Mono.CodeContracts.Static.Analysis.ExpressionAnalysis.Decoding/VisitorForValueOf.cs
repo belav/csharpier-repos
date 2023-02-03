@@ -2,7 +2,7 @@
 // VisitorForValueOf.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,34 +31,34 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-	class VisitorForValueOf<V, E> : QueryVisitor<V, E>
-		where V : IEquatable<V>
-		where E : IEquatable<E> {
-		private TypeNode Type;
-		private object Value;
+    class VisitorForValueOf<V, E> : QueryVisitor<V, E>
+        where V : IEquatable<V>
+        where E : IEquatable<E> {
+        private TypeNode Type;
+        private object Value;
 
-		public static bool IsConstant (E expr, out object value, out TypeNode type, FullExpressionDecoder<V, E> decoder)
-		{
-			VisitorForValueOf<V, E> v = decoder.ValueOfVisitor;
-			bool res = Decode (expr, v, decoder);
+        public static bool IsConstant (E expr, out object value, out TypeNode type, FullExpressionDecoder<V, E> decoder)
+        {
+            VisitorForValueOf<V, E> v = decoder.ValueOfVisitor;
+            bool res = Decode (expr, v, decoder);
 
-			value = v.Value;
-			type = v.Type;
-			return res;
-		}
+            value = v.Value;
+            type = v.Type;
+            return res;
+        }
 
-		public override bool LoadNull (E pc, V dest, Dummy polarity)
-		{
-			this.Type = null;
-			this.Value = null;
-			return true;
-		}
+        public override bool LoadNull (E pc, V dest, Dummy polarity)
+        {
+            this.Type = null;
+            this.Value = null;
+            return true;
+        }
 
-		public override bool LoadConst (E pc, TypeNode type, object constant, V dest, Dummy data)
-		{
-			this.Type = type;
-			this.Value = constant;
-			return true;
-		}
-	}
+        public override bool LoadConst (E pc, TypeNode type, object constant, V dest, Dummy data)
+        {
+            this.Type = type;
+            this.Value = constant;
+            return true;
+        }
+    }
 }

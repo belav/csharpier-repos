@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,43 +32,43 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("114744d9-c369-456e-b55a-52fe52880d2d")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIArray {
+    [Guid ("114744d9-c369-456e-b55a-52fe52880d2d")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIArray {
 
 #region nsIArray
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLength (out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength (out uint ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int queryElementAt ( uint index,
-				[MarshalAs (UnmanagedType.LPStruct) ]  Guid uuid,
-				out IntPtr result);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int queryElementAt ( uint index,
+                [MarshalAs (UnmanagedType.LPStruct) ]  Guid uuid,
+                out IntPtr result);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int indexOf ( uint startIndex,
-				[MarshalAs (UnmanagedType.Interface) ]  IntPtr element,
-				out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int indexOf ( uint startIndex,
+                [MarshalAs (UnmanagedType.Interface) ]  IntPtr element,
+                out uint ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsArray {
-		public static nsIArray GetProxy (Mono.WebBrowser.IWebBrowser control, nsIArray obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIArray).GUID, obj);
-			return o as nsIArray;
-		}
-	}
+    internal class nsArray {
+        public static nsIArray GetProxy (Mono.WebBrowser.IWebBrowser control, nsIArray obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIArray).GUID, obj);
+            return o as nsIArray;
+        }
+    }
 }
 #if example
 
@@ -77,40 +77,40 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class Array : nsIArray {
+    internal class Array : nsIArray {
 
 #region nsIArray
-		int nsIArray.getLength (out uint ret)
+        int nsIArray.getLength (out uint ret)
 
-		{
-			return 0;
-		}
+        {
+            return 0;
+        }
 
-		int nsIArray.queryElementAt ( uint index,
-				[MarshalAs (UnmanagedType.LPStruct) ]  Guid uuid,
-				out IntPtr result)
-		{
-			return ;
-		}
-
-
-
-		int nsIArray.indexOf ( uint startIndex,
-				[MarshalAs (UnmanagedType.Interface) ]  IntPtr element,
-				out uint ret)
-		{
-			return ;
-		}
+        int nsIArray.queryElementAt ( uint index,
+                [MarshalAs (UnmanagedType.LPStruct) ]  Guid uuid,
+                out IntPtr result)
+        {
+            return ;
+        }
 
 
 
-		int nsIArray.enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret)
-		{
-			return ;
-		}
+        int nsIArray.indexOf ( uint startIndex,
+                [MarshalAs (UnmanagedType.Interface) ]  IntPtr element,
+                out uint ret)
+        {
+            return ;
+        }
+
+
+
+        int nsIArray.enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

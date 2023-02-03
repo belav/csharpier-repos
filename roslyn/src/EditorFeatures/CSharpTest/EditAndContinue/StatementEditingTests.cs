@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -8710,20 +8710,20 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             from b in new[] { 2 }
-		             where Z(() => a) > 0
-		             where Z(() => b) > 0
-		             where Z(() => a) > 0
-		             where Z(() => b) > 0
-		             select a;
+        var result = from a in new[] { 1 }
+                     from b in new[] { 2 }
+                     where Z(() => a) > 0
+                     where Z(() => b) > 0
+                     where Z(() => a) > 0
+                     where Z(() => b) > 0
+                     select a;
     }
 }";
             var src2 = @"
@@ -8732,20 +8732,20 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             from b in new[] { 2 }
-		             where Z(() => a) > 1  // update
-		             where Z(() => b) > 2  // update
-		             where Z(() => a) > 3  // update
-		             where Z(() => b) > 4  // update
-		             select a;
+        var result = from a in new[] { 1 }
+                     from b in new[] { 2 }
+                     where Z(() => a) > 1  // update
+                     where Z(() => b) > 2  // update
+                     where Z(() => a) > 3  // update
+                     where Z(() => b) > 4  // update
+                     select a;
     }
 }";
             var edits = GetTopEdits(src1, src2);
@@ -8762,16 +8762,16 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             let b = Z(() => a)
-		             select a + b;
+        var result = from a in new[] { 1 }
+                     let b = Z(() => a)
+                     select a + b;
     }
 }";
             var src2 = @"
@@ -8780,16 +8780,16 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             let b = Z(() => a + 1)
-		             select a - b;
+        var result = from a in new[] { 1 }
+                     let b = Z(() => a + 1)
+                     select a - b;
     }
 }";
             var edits = GetTopEdits(src1, src2);
@@ -8806,14 +8806,14 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
+        var result = from a in new[] { 1 }
                      join b in new[] { 3 } on Z(() => a + 1) equals Z(() => b - 1) into g
                      select Z(() => g.First());
     }
@@ -8824,14 +8824,14 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
+        var result = from a in new[] { 1 }
                      join b in new[] { 3 } on Z(() => a + 1) equals Z(() => b - 1) into g
                      select Z(() => g.Last());
     }
@@ -8850,17 +8850,17 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             from b in new[] { 2 }
-		             where Z(() => a + b) > 0
-		             select a;
+        var result = from a in new[] { 1 }
+                     from b in new[] { 2 }
+                     where Z(() => a + b) > 0
+                     select a;
     }
 }";
             var src2 = @"
@@ -8869,17 +8869,17 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             from b in new[] { 2 }
-		             where Z(() => a + 1) > 0
-		             select a;
+        var result = from a in new[] { 1 }
+                     from b in new[] { 2 }
+                     where Z(() => a + 1) > 0
+                     select a;
     }
 }";
             var edits = GetTopEdits(src1, src2);
@@ -8898,17 +8898,17 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             from b in new[] { 2 }
-		             where Z(() => a + 1) > 0
-		             select a;
+        var result = from a in new[] { 1 }
+                     from b in new[] { 2 }
+                     where Z(() => a + 1) > 0
+                     select a;
     }
 }";
             var src2 = @"
@@ -8917,17 +8917,17 @@ using System.Linq;
 
 class C
 {
-	int Z(Func<int> f)
-	{
-		return 1;
-	}
+    int Z(Func<int> f)
+    {
+        return 1;
+    }
 
     void F()
     {
-		var result = from a in new[] { 1 }
-		             from b in new[] { 2 }
-		             where Z(() => a + b) > 0
-		             select a;
+        var result = from a in new[] { 1 }
+                     from b in new[] { 2 }
+                     where Z(() => a + b) > 0
+                     select a;
     }
 }";
             var edits = GetTopEdits(src1, src2);

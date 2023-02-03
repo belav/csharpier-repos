@@ -2,7 +2,7 @@
 // NullRefHandler.cs : Handles a ResXNullRef that was stored in a resx file.
 // 
 // Author:
-//	Gary Barnett (gary.barnett.mono@gmail.com)
+//    Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -29,44 +29,44 @@ using System.Reflection;
 using System.ComponentModel.Design;
 
 namespace System.Resources {
-	internal class NullRefHandler : ResXDataNodeHandler, IWritableHandler {
-		string dataString;
+    internal class NullRefHandler : ResXDataNodeHandler, IWritableHandler {
+        string dataString;
 
-		public NullRefHandler (string _dataString)
-		{
-			dataString = _dataString;
-		}
+        public NullRefHandler (string _dataString)
+        {
+            dataString = _dataString;
+        }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
-		public override object GetValue (ITypeResolutionService typeResolver)
-		{
-			return null;
-		}
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
+        public override object GetValue (ITypeResolutionService typeResolver)
+        {
+            return null;
+        }
 
-		public override object GetValue (AssemblyName [] assemblyNames)
-		{
-			return null;
-		}
+        public override object GetValue (AssemblyName [] assemblyNames)
+        {
+            return null;
+        }
 
-		public override string GetValueTypeName (ITypeResolutionService typeResolver)
-		{
-			return typeof (object).AssemblyQualifiedName;
-		}
+        public override string GetValueTypeName (ITypeResolutionService typeResolver)
+        {
+            return typeof (object).AssemblyQualifiedName;
+        }
 
-		public override string GetValueTypeName (AssemblyName [] assemblyNames)
-		{
-			return typeof (object).AssemblyQualifiedName;
-		}
-		#endregion		
-		#region IWritableHandler implementation
-		public string DataString {
-			get {
-				return dataString;
-			}
-		}
-		#endregion
+        public override string GetValueTypeName (AssemblyName [] assemblyNames)
+        {
+            return typeof (object).AssemblyQualifiedName;
+        }
+        #endregion        
+        #region IWritableHandler implementation
+        public string DataString {
+            get {
+                return dataString;
+            }
+        }
+        #endregion
 
 
-	}
+    }
 }
 

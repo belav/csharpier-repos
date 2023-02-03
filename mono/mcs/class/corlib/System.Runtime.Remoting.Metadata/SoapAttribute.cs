@@ -33,52 +33,52 @@
 using System;
 
 namespace System.Runtime.Remoting.Metadata {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class SoapAttribute : Attribute
-	{
-		bool _nested;
-		bool _useAttribute;
-		
-		protected string ProtXmlNamespace;
-		protected object ReflectInfo;
-		
-		public SoapAttribute ()
-		{
-		}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class SoapAttribute : Attribute
+    {
+        bool _nested;
+        bool _useAttribute;
+        
+        protected string ProtXmlNamespace;
+        protected object ReflectInfo;
+        
+        public SoapAttribute ()
+        {
+        }
 
-		public virtual bool Embedded {
-			get {
-				return _nested;
-			}
+        public virtual bool Embedded {
+            get {
+                return _nested;
+            }
 
-			set {
-				_nested = value;
-			}
-		}
+            set {
+                _nested = value;
+            }
+        }
 
-		public virtual bool UseAttribute {
-			get {
-				return _useAttribute;
-			}
+        public virtual bool UseAttribute {
+            get {
+                return _useAttribute;
+            }
 
-			set {
-				_useAttribute = value;
-			}
-		}
+            set {
+                _useAttribute = value;
+            }
+        }
 
-		public virtual string XmlNamespace {
-			get {
-				return ProtXmlNamespace;
-			}
+        public virtual string XmlNamespace {
+            get {
+                return ProtXmlNamespace;
+            }
 
-			set {
-				ProtXmlNamespace = value;
-			}
-		}
-		
-		internal virtual void SetReflectionObject (object reflectionObject)
-		{
-			ReflectInfo = reflectionObject;
-		}
-	}
+            set {
+                ProtXmlNamespace = value;
+            }
+        }
+        
+        internal virtual void SetReflectionObject (object reflectionObject)
+        {
+            ReflectInfo = reflectionObject;
+        }
+    }
 }

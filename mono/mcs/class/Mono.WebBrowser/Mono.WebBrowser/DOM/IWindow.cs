@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -28,29 +28,29 @@ using Mono.WebBrowser;
 
 namespace Mono.WebBrowser.DOM
 {
-	public interface IWindow
-	{
-		IDocument Document { get; }
-		IWindowCollection Frames { get; }
-		string Name { get; set; }
-		IWindow Parent { get; }
-		string StatusText { get; }
-		IWindow Top { get; }
-		IHistory History {get;}
-		
-		void AttachEventHandler (string eventName, EventHandler handler);
-		void DetachEventHandler (string eventName, EventHandler handler);
-		void Focus ();
-		bool Equals (object obj);		
-		int GetHashCode ();
-		void Open (string url);
-		void ScrollTo (int x, int y);
+    public interface IWindow
+    {
+        IDocument Document { get; }
+        IWindowCollection Frames { get; }
+        string Name { get; set; }
+        IWindow Parent { get; }
+        string StatusText { get; }
+        IWindow Top { get; }
+        IHistory History {get;}
+        
+        void AttachEventHandler (string eventName, EventHandler handler);
+        void DetachEventHandler (string eventName, EventHandler handler);
+        void Focus ();
+        bool Equals (object obj);        
+        int GetHashCode ();
+        void Open (string url);
+        void ScrollTo (int x, int y);
 
-		event EventHandler Load;
-		event EventHandler Unload;
-		event EventHandler OnFocus;
-		event EventHandler OnBlur;
-		event EventHandler Error;
-		event EventHandler Scroll;
-	}
+        event EventHandler Load;
+        event EventHandler Unload;
+        event EventHandler OnFocus;
+        event EventHandler OnBlur;
+        event EventHandler Error;
+        event EventHandler Scroll;
+    }
 }

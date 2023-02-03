@@ -39,52 +39,52 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_ctor_STS : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataColumn_ctor_STS tc = new DataColumn_ctor_STS();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataColumn_ctor_STS");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataColumn_ctor_STS tc = new DataColumn_ctor_STS();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataColumn_ctor_STS");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
+    public void run()
+    {
+        Exception exp = null;
 
-		DataColumn dc;
-		dc = new DataColumn("ColName",typeof(String),"Price * 1.18");
-		
-		try
-		{
-			BeginCase("ctor - object");
-			Compare(dc==null, false );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-	}
+        DataColumn dc;
+        dc = new DataColumn("ColName",typeof(String),"Price * 1.18");
+        
+        try
+        {
+            BeginCase("ctor - object");
+            Compare(dc==null, false );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+    }
 }
 }

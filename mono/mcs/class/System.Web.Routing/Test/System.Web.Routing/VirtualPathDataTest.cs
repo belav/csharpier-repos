@@ -2,7 +2,7 @@
 // VirtualPathDataTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -34,13 +34,13 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Routing
 {
-	[TestFixture]
-	public class VirtualPathDataTest
-	{
-		[Test]
-		public void ConstructorNullArgs ()
-		{
-			new VirtualPathData (null, null);
-		}
-	}
+    [TestFixture]
+    public class VirtualPathDataTest
+    {
+        [Test]
+        public void ConstructorNullArgs ()
+        {
+            new VirtualPathData (null, null);
+        }
+    }
 }

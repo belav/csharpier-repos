@@ -6,8 +6,8 @@ using System;
 
 public class Tester
 {
-	static void Main ()
-	{
-	}
+    static void Main ()
+    {
+    }
 }
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,26 +14,26 @@
 
 namespace Castle.DynamicProxy.Tests.BugsReported
 {
-	using System;
+    using System;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	public class Core40ClassToProxy
-	{
-		public Core40ClassToProxy(object arg1, object arg2)
-		{
-		}
-	}
+    public class Core40ClassToProxy
+    {
+        public Core40ClassToProxy(object arg1, object arg2)
+        {
+        }
+    }
 
-	[TestFixture]
-	public class Core40 : BasePEVerifyTestCase
-	{
-		[Test]
-		public void ShouldGenerateTypeWithIndexers()
-		{
-			var ex = Assert.Throws<ArgumentException>(delegate {
-				generator.CreateClassProxy(typeof(Core40ClassToProxy), new object[] { null, null, null });
-			});
-		}
-	}
+    [TestFixture]
+    public class Core40 : BasePEVerifyTestCase
+    {
+        [Test]
+        public void ShouldGenerateTypeWithIndexers()
+        {
+            var ex = Assert.Throws<ArgumentException>(delegate {
+                generator.CreateClassProxy(typeof(Core40ClassToProxy), new object[] { null, null, null });
+            });
+        }
+    }
 }

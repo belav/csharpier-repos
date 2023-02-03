@@ -2,7 +2,7 @@
 // Edge.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,26 +27,26 @@
 // 
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-	struct Edge<TNode, TTag> {
-		public TNode From;
-		public TTag Tag;
-		public TNode To;
+    struct Edge<TNode, TTag> {
+        public TNode From;
+        public TTag Tag;
+        public TNode To;
 
-		public Edge (TNode from, TNode to, TTag tag)
-		{
-			this.From = from;
-			this.To = to;
-			this.Tag = tag;
-		}
+        public Edge (TNode from, TNode to, TTag tag)
+        {
+            this.From = from;
+            this.To = to;
+            this.Tag = tag;
+        }
 
-		public override string ToString ()
-		{
-			return string.Format ("({0} --'{1}'--> {2})", this.From, this.Tag, this.To);
-		}
+        public override string ToString ()
+        {
+            return string.Format ("({0} --'{1}'--> {2})", this.From, this.Tag, this.To);
+        }
 
-		public Edge<TNode, TTag> Reversed ()
-		{
-			return new Edge<TNode, TTag> (this.To, this.From, this.Tag);
-		}
-	}
+        public Edge<TNode, TTag> Reversed ()
+        {
+            return new Edge<TNode, TTag> (this.To, this.From, this.Tag);
+        }
+    }
 }

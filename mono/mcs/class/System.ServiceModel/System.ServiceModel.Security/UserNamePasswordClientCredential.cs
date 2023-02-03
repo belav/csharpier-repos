@@ -2,7 +2,7 @@
 // UserNamePasswordClientCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,27 +35,27 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class UserNamePasswordClientCredential
-	{
-		internal UserNamePasswordClientCredential ()
-		{
-		}
+    public sealed class UserNamePasswordClientCredential
+    {
+        internal UserNamePasswordClientCredential ()
+        {
+        }
 
-		string username, password;
-		
-		internal UserNamePasswordClientCredential Clone ()
-		{
-			return (UserNamePasswordClientCredential) MemberwiseClone ();
-		}
+        string username, password;
+        
+        internal UserNamePasswordClientCredential Clone ()
+        {
+            return (UserNamePasswordClientCredential) MemberwiseClone ();
+        }
 
-		public string Password {
-			get { return password; }
-			set { password = value; }
-		}
+        public string Password {
+            get { return password; }
+            set { password = value; }
+        }
 
-		public string UserName {
-			get { return username; }
-			set { username = value; }
-		}
-	}
+        public string UserName {
+            get { return username; }
+            set { username = value; }
+        }
+    }
 }

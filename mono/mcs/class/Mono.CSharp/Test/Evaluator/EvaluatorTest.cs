@@ -2,7 +2,7 @@
 // EvaluatorTest.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
 //
@@ -31,15 +31,15 @@ using Mono.CSharp;
 
 namespace MonoTests.EvaluatorTest
  {
- 	public class EvaluatorTest : EvaluatorFixture
-	{
-		[Test]
- 		public void SameSettings ()
- 		{
-			var ctx = new CompilerContext (settings, new AssertReportPrinter ());
-			var evaluator2 = new Evaluator (ctx);
-			evaluator2.Run ("int i = 0;");
-		}
- 	}
+     public class EvaluatorTest : EvaluatorFixture
+    {
+        [Test]
+         public void SameSettings ()
+         {
+            var ctx = new CompilerContext (settings, new AssertReportPrinter ());
+            var evaluator2 = new Evaluator (ctx);
+            evaluator2.Run ("int i = 0;");
+        }
+     }
  }
  #endif

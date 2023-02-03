@@ -30,38 +30,38 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class MsmqMessageProperty
-	{
-		public const string Name = "MsmqMessageProperty";
+    public sealed class MsmqMessageProperty
+    {
+        public const string Name = "MsmqMessageProperty";
 
-		[MonoTODO]
-		public static MsmqMessageProperty Get (Message message)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static MsmqMessageProperty Get (Message message)
+        {
+            throw new NotImplementedException ();
+        }
 
-		int abort_count, move_count;
-		DeliveryFailure? failure;
-		DeliveryStatus? delivery_status;
+        int abort_count, move_count;
+        DeliveryFailure? failure;
+        DeliveryStatus? delivery_status;
 
-		internal MsmqMessageProperty ()
-		{
-		}
+        internal MsmqMessageProperty ()
+        {
+        }
 
-		public int AbortCount {
-			get { return abort_count; }
-		}
+        public int AbortCount {
+            get { return abort_count; }
+        }
 
-		public int MoveCount {
-			get { return move_count; }
-		}
+        public int MoveCount {
+            get { return move_count; }
+        }
 
-		public DeliveryFailure? DeliveryFailure {
-			get { return failure; }
-		}
+        public DeliveryFailure? DeliveryFailure {
+            get { return failure; }
+        }
 
-		public DeliveryStatus? DeliveryStatus {
-			get { return delivery_status; }
-		}
-	}
+        public DeliveryStatus? DeliveryStatus {
+            get { return delivery_status; }
+        }
+    }
 }

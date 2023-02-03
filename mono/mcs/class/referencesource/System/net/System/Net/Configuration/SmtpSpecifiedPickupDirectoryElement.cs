@@ -34,7 +34,7 @@ namespace System.Net.Configuration
             set { this[this.pickupDirectoryLocation] = value; }
         }
 
-	        
+            
         // 
 
 

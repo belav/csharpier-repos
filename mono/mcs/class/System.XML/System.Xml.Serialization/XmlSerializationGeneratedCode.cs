@@ -33,11 +33,11 @@ using System;
 
 namespace System.Xml.Serialization 
 {
-	public abstract class XmlSerializationGeneratedCode
-	{
-		protected XmlSerializationGeneratedCode ()
-		{
-		}
-	}
+    public abstract class XmlSerializationGeneratedCode
+    {
+        protected XmlSerializationGeneratedCode ()
+        {
+        }
+    }
 }
 

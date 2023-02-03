@@ -3,14 +3,14 @@
 
 public class A
 {
-	public virtual string Prop {
-		get; private set;
-	}
+    public virtual string Prop {
+        get; private set;
+    }
 }
  
 public class B : A
 {
-	sealed override public string Prop {
-		get { return ""; }
-	}
+    sealed override public string Prop {
+        get { return ""; }
+    }
 }

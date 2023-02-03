@@ -30,8 +30,8 @@ class Test_dev10_794943
     {
         C<Problem, object>.CallFunc(new Problem());
         C<Problem, object>.CallInterfaceFunc(new Problem());
-		
-		Console.WriteLine("Pass");
-		return 100;
+        
+        Console.WriteLine("Pass");
+        return 100;
     }
 }

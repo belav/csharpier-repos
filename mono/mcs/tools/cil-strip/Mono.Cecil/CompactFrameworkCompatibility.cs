@@ -28,41 +28,41 @@
 #if CF_1_0
 namespace System {
 
-	internal class NotImplementedException : System.Exception {
+    internal class NotImplementedException : System.Exception {
 
-		public NotImplementedException (string message) : base (message)
-		{
-		}
+        public NotImplementedException (string message) : base (message)
+        {
+        }
 
-		public NotImplementedException ()
-		{
-		}
-	}
+        public NotImplementedException ()
+        {
+        }
+    }
 }
 #endif
 
 #if CF_1_0 || CF_2_0
 namespace System.Security {
 
-	internal class SecurityElement 	{
+    internal class SecurityElement     {
 
-		public SecurityElement (string tag)
-		{
-		}
+        public SecurityElement (string tag)
+        {
+        }
 
-		public string Text
-		{
-			get { return string.Empty; }
-			set {}
-		}
+        public string Text
+        {
+            get { return string.Empty; }
+            set {}
+        }
 
-		public void AddChild (SecurityElement child)
-		{
-		}
+        public void AddChild (SecurityElement child)
+        {
+        }
 
-		public void AddAttribute (string name, string value)
-		{
-		}
-	}
+        public void AddAttribute (string name, string value)
+        {
+        }
+    }
 }
 #endif

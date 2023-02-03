@@ -1,4 +1,4 @@
-﻿
+
 namespace System.ComponentModel.DataAnnotations {
     /// <summary>
     /// Indicates whether the consumer of a field or property, such as a client application,

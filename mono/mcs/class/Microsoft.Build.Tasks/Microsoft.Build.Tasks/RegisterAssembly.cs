@@ -32,70 +32,70 @@ using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-	public class RegisterAssembly : AppDomainIsolatedTaskExtension, ITypeLibExporterNotifySink {
-	
-		ITaskItem[]	assemblies;
-		ITaskItem 	assemblyListFile;
-		bool		createCodeBase;
-		ITaskItem[]	typeLibFiles;
-	
-		public RegisterAssembly ()
-		{
-		}
+    public class RegisterAssembly : AppDomainIsolatedTaskExtension, ITypeLibExporterNotifySink {
+    
+        ITaskItem[]    assemblies;
+        ITaskItem     assemblyListFile;
+        bool        createCodeBase;
+        ITaskItem[]    typeLibFiles;
+    
+        public RegisterAssembly ()
+        {
+        }
 
-		public override bool Execute ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Execute ()
+        {
+            throw new NotImplementedException ();
+        }
 
-		public void ReportEvent (ExporterEventKind kind, int code,
-					 string msg)
-		{
-			throw new NotImplementedException ();
-		}
+        public void ReportEvent (ExporterEventKind kind, int code,
+                     string msg)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public object ResolveRef (Assembly assemblyToResolve)
-		{
-			throw new NotImplementedException ();
-		}
+        public object ResolveRef (Assembly assemblyToResolve)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[Required]
-		public ITaskItem[] Assemblies {
-			get {
-				return assemblies;
-			}
-			set {
-				assemblies = value;
-			}
-		}
+        [Required]
+        public ITaskItem[] Assemblies {
+            get {
+                return assemblies;
+            }
+            set {
+                assemblies = value;
+            }
+        }
 
-		public ITaskItem AssemblyListFile {
-			get {
-				return assemblyListFile;
-			}
-			set {
-				assemblyListFile = value;
-			}
-		}
+        public ITaskItem AssemblyListFile {
+            get {
+                return assemblyListFile;
+            }
+            set {
+                assemblyListFile = value;
+            }
+        }
 
-		public bool CreateCodeBase  {
-			get {
-				return createCodeBase;
-			}
-			set {
-				createCodeBase = value;
-			}
-		}
+        public bool CreateCodeBase  {
+            get {
+                return createCodeBase;
+            }
+            set {
+                createCodeBase = value;
+            }
+        }
 
-		[Output]
-		public ITaskItem[] TypeLibFiles {
-			get {
-				return typeLibFiles;
-			}
-			set {
-				typeLibFiles = value;
-			}
-		}
-	}
+        [Output]
+        public ITaskItem[] TypeLibFiles {
+            get {
+                return typeLibFiles;
+            }
+            set {
+                typeLibFiles = value;
+            }
+        }
+    }
 }
 

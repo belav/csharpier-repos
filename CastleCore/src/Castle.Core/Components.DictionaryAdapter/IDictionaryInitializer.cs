@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	/// <summary>
-	///  Contract for dictionary initialization.
-	/// </summary>
-	public interface IDictionaryInitializer : IDictionaryBehavior
-	{
-		/// <summary>
-		/// Performs any initialization of the <see cref="IDictionaryAdapter"/>
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="behaviors">The dictionary behaviors.</param>
-		void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors);
-	}
+    /// <summary>
+    ///  Contract for dictionary initialization.
+    /// </summary>
+    public interface IDictionaryInitializer : IDictionaryBehavior
+    {
+        /// <summary>
+        /// Performs any initialization of the <see cref="IDictionaryAdapter"/>
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="behaviors">The dictionary behaviors.</param>
+        void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors);
+    }
 }

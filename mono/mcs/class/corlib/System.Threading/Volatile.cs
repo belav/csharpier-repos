@@ -29,9 +29,9 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading
 {
-	public
-	static class Volatile
-	{
+    public
+    static class Volatile
+    {
         #region Boolean
         private struct VolatileBoolean { public volatile bool Value; }
 
@@ -172,30 +172,30 @@ namespace System.Threading
             Unsafe.As<T, VolatileObject>(ref location).Value = value;
         #endregion
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static long Read (ref long location);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+        public extern static long Read (ref long location);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		[CLSCompliant (false)]
-		public extern static ulong Read (ref ulong location);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+        [CLSCompliant (false)]
+        public extern static ulong Read (ref ulong location);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static double Read (ref double location);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+        public extern static double Read (ref double location);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static void Write (ref long location, long value);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+        public extern static void Write (ref long location, long value);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		[CLSCompliant (false)]
-		public extern static void Write (ref ulong location, ulong value);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+        [CLSCompliant (false)]
+        public extern static void Write (ref ulong location, ulong value);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static void Write (ref double location, double value);
-	}
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+        public extern static void Write (ref double location, double value);
+    }
 }

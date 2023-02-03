@@ -2,7 +2,7 @@
 // NamedPipeReplyChannel.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -38,96 +38,96 @@ using System.Threading;
 
 namespace System.ServiceModel.Channels
 {
-	internal class NamedPipeReplyChannel : InternalReplyChannelBase
-	{
-		NamedPipeServerStream server;
-		TcpBinaryFrameManager frame;
+    internal class NamedPipeReplyChannel : InternalReplyChannelBase
+    {
+        NamedPipeServerStream server;
+        TcpBinaryFrameManager frame;
 
-		public NamedPipeReplyChannel (ChannelListenerBase listener, MessageEncoder encoder, NamedPipeServerStream server)
-			: base (listener)
-		{
-			this.server = server;
-			this.Encoder = encoder;
-		}
+        public NamedPipeReplyChannel (ChannelListenerBase listener, MessageEncoder encoder, NamedPipeServerStream server)
+            : base (listener)
+        {
+            this.server = server;
+            this.Encoder = encoder;
+        }
 
-		public MessageEncoder Encoder { get; private set; }
+        public MessageEncoder Encoder { get; private set; }
 
-		public override RequestContext ReceiveRequest (TimeSpan timeout)
-		{
-			// It is used while it is already closed.
-			if (server == null || !server.IsConnected)
-				return null;
+        public override RequestContext ReceiveRequest (TimeSpan timeout)
+        {
+            // It is used while it is already closed.
+            if (server == null || !server.IsConnected)
+                return null;
 
-			if (timeout <= TimeSpan.Zero)
-				throw new ArgumentException (String.Format ("Timeout value must be positive value. It was {0}", timeout));
-			var msg = frame.ReadUnsizedMessage (timeout);
-			frame.ReadEndRecord ();
-			return new NamedPipeRequestContext (this, msg);
-		}
+            if (timeout <= TimeSpan.Zero)
+                throw new ArgumentException (String.Format ("Timeout value must be positive value. It was {0}", timeout));
+            var msg = frame.ReadUnsizedMessage (timeout);
+            frame.ReadEndRecord ();
+            return new NamedPipeRequestContext (this, msg);
+        }
 
-		class NamedPipeRequestContext : InternalRequestContext
-		{
-			public NamedPipeRequestContext (NamedPipeReplyChannel owner, Message request)
-				: base (owner.Manager)
-			{
-				this.owner = owner;
-				this.request = request;
-			}
+        class NamedPipeRequestContext : InternalRequestContext
+        {
+            public NamedPipeRequestContext (NamedPipeReplyChannel owner, Message request)
+                : base (owner.Manager)
+            {
+                this.owner = owner;
+                this.request = request;
+            }
 
-			NamedPipeReplyChannel owner;
-			Message request;
+            NamedPipeReplyChannel owner;
+            Message request;
 
-			public override Message RequestMessage {
-				get { return request; }
-			}
+            public override Message RequestMessage {
+                get { return request; }
+            }
 
-			public override void Abort ()
-			{
-				Close (TimeSpan.Zero);
-			}
+            public override void Abort ()
+            {
+                Close (TimeSpan.Zero);
+            }
 
-			public override void Close (TimeSpan timeout)
-			{
-			}
+            public override void Close (TimeSpan timeout)
+            {
+            }
 
-			public override void Reply (Message message, TimeSpan timeout)
-			{
-				if (message.Headers.RelatesTo == null)
-					message.Headers.RelatesTo = request.Headers.MessageId;
+            public override void Reply (Message message, TimeSpan timeout)
+            {
+                if (message.Headers.RelatesTo == null)
+                    message.Headers.RelatesTo = request.Headers.MessageId;
 
-				owner.frame.WriteUnsizedMessage (message, timeout);
-				owner.frame.WriteEndRecord ();
-				owner.server.Close ();
-				owner.server = null;
-			}
-		}
+                owner.frame.WriteUnsizedMessage (message, timeout);
+                owner.frame.WriteEndRecord ();
+                owner.server.Close ();
+                owner.server = null;
+            }
+        }
 
-		public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
-		{
-			try {
-				context = ReceiveRequest (timeout);
-				return context != null;
-			} catch (TimeoutException) {
-				context = null;
-				return false;
-			}
-		}
+        public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
+        {
+            try {
+                context = ReceiveRequest (timeout);
+                return context != null;
+            } catch (TimeoutException) {
+                context = null;
+                return false;
+            }
+        }
 
-		public override bool WaitForRequest (TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool WaitForRequest (TimeSpan timeout)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-		}
+        protected override void OnClose (TimeSpan timeout)
+        {
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			// FIXME: use timeout
-			frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, server, true) { Encoder = this.Encoder };
-			frame.ProcessPreambleRecipient ();
-			frame.ProcessPreambleAckRecipient ();
-		}
-	}
+        protected override void OnOpen (TimeSpan timeout)
+        {
+            // FIXME: use timeout
+            frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, server, true) { Encoder = this.Encoder };
+            frame.ProcessPreambleRecipient ();
+            frame.ProcessPreambleAckRecipient ();
+        }
+    }
 }

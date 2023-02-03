@@ -31,6 +31,6 @@
 
 namespace System.Runtime.Remoting.Messaging {
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public delegate bool MessageSurrogateFilter (string key, object value);
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public delegate bool MessageSurrogateFilter (string key, object value);
 }

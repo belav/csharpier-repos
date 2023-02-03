@@ -14,26 +14,26 @@
 
 namespace Castle.Core.Resource
 {
-	using System;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Runtime.Serialization;
 
-	[Serializable]
-	public class ResourceException : Exception
-	{
-		public ResourceException()
-		{
-		}
+    [Serializable]
+    public class ResourceException : Exception
+    {
+        public ResourceException()
+        {
+        }
 
-		public ResourceException(string message) : base(message)
-		{
-		}
+        public ResourceException(string message) : base(message)
+        {
+        }
 
-		public ResourceException(string message, Exception innerException) : base(message, innerException)
-		{
-		}
+        public ResourceException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
 
-		protected ResourceException(SerializationInfo info, StreamingContext context) : base(info, context)
-		{
-		}
-	}
+        protected ResourceException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
 }

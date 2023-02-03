@@ -31,25 +31,25 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class CalendarDesigner : ControlDesigner
-	{
-		public CalendarDesigner ()
-			: base ()
-		{
-		}
+    public class CalendarDesigner : ControlDesigner
+    {
+        public CalendarDesigner ()
+            : base ()
+        {
+        }
 
-		public override DesignerVerbCollection Verbs {
-			get { throw new NotImplementedException (); }
-		}
+        public override DesignerVerbCollection Verbs {
+            get { throw new NotImplementedException (); }
+        }
 
-		public override void Initialize (IComponent component)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Initialize (IComponent component)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected void OnAutoFormat (object sender, EventArgs e)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected void OnAutoFormat (object sender, EventArgs e)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

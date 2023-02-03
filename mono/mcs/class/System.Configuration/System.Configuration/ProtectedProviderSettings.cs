@@ -2,7 +2,7 @@
 // System.Configuration.ProtectedProviderSettings.cs
 //
 // Authors:
-// 	Chris Toshok (toshok@ximian.com)
+//     Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,29 +28,29 @@
 
 namespace System.Configuration
 {
-	public class ProtectedProviderSettings : ConfigurationElement
-	{
-		static ConfigurationProperty providersProp;
-		static ConfigurationPropertyCollection properties;
+    public class ProtectedProviderSettings : ConfigurationElement
+    {
+        static ConfigurationProperty providersProp;
+        static ConfigurationPropertyCollection properties;
 
-		static ProtectedProviderSettings ()
-		{
-			providersProp = new ConfigurationProperty ("", typeof (ProviderSettingsCollection), null,
-								   null, null, ConfigurationPropertyOptions.IsDefaultCollection);
+        static ProtectedProviderSettings ()
+        {
+            providersProp = new ConfigurationProperty ("", typeof (ProviderSettingsCollection), null,
+                                   null, null, ConfigurationPropertyOptions.IsDefaultCollection);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (providersProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (providersProp);
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public ProviderSettingsCollection Providers {
-			get { return (ProviderSettingsCollection) base[providersProp]; }
-		}
-	}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public ProviderSettingsCollection Providers {
+            get { return (ProviderSettingsCollection) base[providersProp]; }
+        }
+    }
 
 }
 

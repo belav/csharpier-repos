@@ -3,8 +3,8 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		string ref = "abc";
-	}
+    static void Main ()
+    {
+        string ref = "abc";
+    }
 }

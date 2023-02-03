@@ -3,12 +3,12 @@
 
 struct A
 {
-	public long b;
-	public float c;
+    public long b;
+    public float c;
 
-	public A (int foo)
-	{
-		b = (long) c;
-		c = 1;
-	}
+    public A (int foo)
+    {
+        b = (long) c;
+        c = 1;
+    }
 }

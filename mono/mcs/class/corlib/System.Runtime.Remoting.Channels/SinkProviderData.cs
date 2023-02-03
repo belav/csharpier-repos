@@ -34,39 +34,39 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class SinkProviderData
-	{
-		string sinkName;
-		ArrayList children;
-		Hashtable properties;
-		
-		public SinkProviderData (string name)
-		{
-			sinkName = name;
-			children = new ArrayList ();
-			properties = new Hashtable ();
-		}
+    [System.Runtime.InteropServices.ComVisible (true)]
+    public class SinkProviderData
+    {
+        string sinkName;
+        ArrayList children;
+        Hashtable properties;
+        
+        public SinkProviderData (string name)
+        {
+            sinkName = name;
+            children = new ArrayList ();
+            properties = new Hashtable ();
+        }
 
-		public IList Children
-		{
-			get {
-				return children;
-			}
-		}
+        public IList Children
+        {
+            get {
+                return children;
+            }
+        }
 
-		public string Name
-	        {
-			get {
-				return sinkName;
-			}
-		}
+        public string Name
+            {
+            get {
+                return sinkName;
+            }
+        }
 
-		public IDictionary Properties
-		{
-			get {
-				return properties;
-			}
-		}
-	}
+        public IDictionary Properties
+        {
+            get {
+                return properties;
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // LdapStyleUriParserCas.cs - CAS unit tests for System.LdapStyleUriParser
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,51 +40,51 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class LdapStyleUriParserCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class LdapStyleUriParserCas {
 
-		private LdapStyleUriParserTest unit;
+        private LdapStyleUriParserTest unit;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			unit = new LdapStyleUriParserTest ();
-			unit.FixtureSetUp (); // fulltrust
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            unit = new LdapStyleUriParserTest ();
+            unit.FixtureSetUp (); // fulltrust
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			LdapStyleUriParser parser = new LdapStyleUriParser ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            LdapStyleUriParser parser = new LdapStyleUriParser ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests ()
-		{
-			unit.Ldapx ();
-			unit.Ldapx_Methods ();
-			unit.SecureLdapx ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests ()
+        {
+            unit.Ldapx ();
+            unit.Ldapx_Methods ();
+            unit.SecureLdapx ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (LdapStyleUriParser).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (LdapStyleUriParser).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }
 
 #endif

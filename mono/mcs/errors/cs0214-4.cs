@@ -6,7 +6,7 @@ class X {
         public void a ()
         {
             void *p;
-		}
+        }
 
-		static void Main () {}
+        static void Main () {}
 }

@@ -31,25 +31,25 @@
 
 namespace System.Web.UI.WebControls
 {
-	public class SendMailErrorEventArgs : EventArgs
-	{
-		Exception exception;
-		bool exceptionHandled;
-		
-		public SendMailErrorEventArgs (Exception e)
-		{
-			this.exception = e;
-			this.exceptionHandled = true;
-		}
-		
-		public Exception Exception {
-			get { return exception; }
-			set { exception = value;}
-		}
+    public class SendMailErrorEventArgs : EventArgs
+    {
+        Exception exception;
+        bool exceptionHandled;
+        
+        public SendMailErrorEventArgs (Exception e)
+        {
+            this.exception = e;
+            this.exceptionHandled = true;
+        }
+        
+        public Exception Exception {
+            get { return exception; }
+            set { exception = value;}
+        }
 
-		public bool Handled {
-			get { return exceptionHandled; }
-			set { exceptionHandled = value; }
-		}
-	}
+        public bool Handled {
+            get { return exceptionHandled; }
+            set { exceptionHandled = value; }
+        }
+    }
 }

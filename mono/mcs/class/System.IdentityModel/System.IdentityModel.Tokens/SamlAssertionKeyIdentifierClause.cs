@@ -2,7 +2,7 @@
 // SamlAssertionKeyIdentifierClause.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,36 +33,36 @@ using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SamlAssertionKeyIdentifierClause : SecurityKeyIdentifierClause
-	{
-		[MonoTODO]
-		public SamlAssertionKeyIdentifierClause (string assertionId)
-			: base (assertionId)
-		{
-			id = assertionId;
-		}
+    public class SamlAssertionKeyIdentifierClause : SecurityKeyIdentifierClause
+    {
+        [MonoTODO]
+        public SamlAssertionKeyIdentifierClause (string assertionId)
+            : base (assertionId)
+        {
+            id = assertionId;
+        }
 
-		string id;
+        string id;
 
-		public string AssertionId {
-			get { return id; }
-		}
+        public string AssertionId {
+            get { return id; }
+        }
 
-		[MonoTODO]
-		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public bool Matches (string assertionId)
-		{
-			return id == assertionId;
-		}
+        public bool Matches (string assertionId)
+        {
+            return id == assertionId;
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return id;
-		}
-	}
+        [MonoTODO]
+        public override string ToString ()
+        {
+            return id;
+        }
+    }
 }

@@ -1,9 +1,9 @@
 //
 // TableStyleCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.TableStyle
+//    - CAS unit tests for System.Web.UI.WebControls.TableStyle
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,43 +38,43 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TableStyleCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class TableStyleCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TableStyleTest unit = new TableStyleTest ();
-			unit.Constructor_Default ();
-			unit.Constructor_StateBag_Null ();
-			unit.Constructor_StateBag ();
-			unit.AddAttributesToRender_Null_WebControl ();
-			unit.AddAttributesToRender_HtmlTextWriter_Null ();
-			unit.AddAttributesToRender ();
-			unit.CopyFrom_Null ();
-			unit.CopyFrom_Self ();
-			unit.CopyFrom_Empty ();
-			unit.CopyFrom_IsEmpty ();
-			unit.CopyFrom ();
-			unit.MergeWith_Null ();
-			unit.MergeWith_Self ();
-			unit.MergeWith_Empty ();
-			unit.MergeWith ();
-			unit.GridLines_VS ();
-			unit.FillStyleAttributes_Null_Resolver ();
-			unit.FillStyleAttributes_Css_Null ();
-			unit.FillStyleAttributes_Empty ();
-			unit.FillStyleAttributes_NotCss ();
-			unit.FillStyleAttributes_Css_WithoutResolution ();
-			unit.FillStyleAttributes_Css_WithResolution ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            TableStyleTest unit = new TableStyleTest ();
+            unit.Constructor_Default ();
+            unit.Constructor_StateBag_Null ();
+            unit.Constructor_StateBag ();
+            unit.AddAttributesToRender_Null_WebControl ();
+            unit.AddAttributesToRender_HtmlTextWriter_Null ();
+            unit.AddAttributesToRender ();
+            unit.CopyFrom_Null ();
+            unit.CopyFrom_Self ();
+            unit.CopyFrom_Empty ();
+            unit.CopyFrom_IsEmpty ();
+            unit.CopyFrom ();
+            unit.MergeWith_Null ();
+            unit.MergeWith_Self ();
+            unit.MergeWith_Empty ();
+            unit.MergeWith ();
+            unit.GridLines_VS ();
+            unit.FillStyleAttributes_Null_Resolver ();
+            unit.FillStyleAttributes_Css_Null ();
+            unit.FillStyleAttributes_Empty ();
+            unit.FillStyleAttributes_NotCss ();
+            unit.FillStyleAttributes_Css_WithoutResolution ();
+            unit.FillStyleAttributes_Css_WithResolution ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override Type Type {
-			get { return typeof (TableStyle); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (TableStyle); }
+        }
+    }
 }

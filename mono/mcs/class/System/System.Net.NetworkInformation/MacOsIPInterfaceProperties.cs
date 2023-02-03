@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.IPInterfaceProperties
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
 //
@@ -30,49 +30,49 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace System.Net.NetworkInformation {
-	class MacOsIPInterfaceProperties : UnixIPInterfaceProperties
-	{
-		public MacOsIPInterfaceProperties (MacOsNetworkInterface iface, List <IPAddress> addresses)
-			: base (iface, addresses)
-		{
-		}
+    class MacOsIPInterfaceProperties : UnixIPInterfaceProperties
+    {
+        public MacOsIPInterfaceProperties (MacOsNetworkInterface iface, List <IPAddress> addresses)
+            : base (iface, addresses)
+        {
+        }
 
-		public override IPv4InterfaceProperties GetIPv4Properties ()
-		{
-			if (ipv4iface_properties == null)
-				ipv4iface_properties = new MacOsIPv4InterfaceProperties (iface as MacOsNetworkInterface);
+        public override IPv4InterfaceProperties GetIPv4Properties ()
+        {
+            if (ipv4iface_properties == null)
+                ipv4iface_properties = new MacOsIPv4InterfaceProperties (iface as MacOsNetworkInterface);
 
-			return ipv4iface_properties;
-		}
+            return ipv4iface_properties;
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private extern static bool ParseRouteInfo_icall (string iface, out string[] gw_addr_list);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern static bool ParseRouteInfo_icall (string iface, out string[] gw_addr_list);
 
-		public override GatewayIPAddressInformationCollection GatewayAddresses {
-			get {
-				var gateways = new IPAddressCollection ();
-				string[] gw_addrlist;
-				if (!ParseRouteInfo_icall (this.iface.Name.ToString(), out gw_addrlist))
-					return new GatewayIPAddressInformationCollection ();
+        public override GatewayIPAddressInformationCollection GatewayAddresses {
+            get {
+                var gateways = new IPAddressCollection ();
+                string[] gw_addrlist;
+                if (!ParseRouteInfo_icall (this.iface.Name.ToString(), out gw_addrlist))
+                    return new GatewayIPAddressInformationCollection ();
 
-				for(int i=0; i<gw_addrlist.Length; i++) {
-					try {
-						IPAddress ip = IPAddress.Parse(gw_addrlist[i]);
-						if (!ip.Equals (IPAddress.Any) && !gateways.Contains (ip))
-							gateways.InternalAdd (ip);
-					} catch (ArgumentNullException) {
-						/* Ignore this, as the
-						 * internal call might have
-						 * left some blank entries at
-						 * the end of the array
-						 */
-					}
-				}
+                for(int i=0; i<gw_addrlist.Length; i++) {
+                    try {
+                        IPAddress ip = IPAddress.Parse(gw_addrlist[i]);
+                        if (!ip.Equals (IPAddress.Any) && !gateways.Contains (ip))
+                            gateways.InternalAdd (ip);
+                    } catch (ArgumentNullException) {
+                        /* Ignore this, as the
+                         * internal call might have
+                         * left some blank entries at
+                         * the end of the array
+                         */
+                    }
+                }
 
-				return SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection (gateways);
-			}
-		}
-	}
+                return SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection (gateways);
+            }
+        }
+    }
 }
 
 

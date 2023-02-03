@@ -2,7 +2,7 @@
 // System.Runtime.InteropServices.ComTypes.STATDATA.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -32,12 +32,12 @@ using System;
 
 namespace System.Runtime.InteropServices.ComTypes
 {
-	public struct STATDATA
-	{
-		public ADVF advf;
-		public IAdviseSink advSink;
-		public int connection;
-		public FORMATETC formatetc;
-	}
+    public struct STATDATA
+    {
+        public ADVF advf;
+        public IAdviseSink advSink;
+        public int connection;
+        public FORMATETC formatetc;
+    }
 }
 

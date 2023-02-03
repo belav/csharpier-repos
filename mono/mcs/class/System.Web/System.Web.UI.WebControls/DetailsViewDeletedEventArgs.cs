@@ -32,48 +32,48 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-	public class DetailsViewDeletedEventArgs : EventArgs
-	{
-		int rowsAffected;
-		Exception e;
-		bool exceptionHandled;
-		IOrderedDictionary keys;
-		IOrderedDictionary values;
-		
-		public DetailsViewDeletedEventArgs (int affectedRows, Exception e)
-		{
-			this.rowsAffected = affectedRows;
-			this.e = e;
-			this.exceptionHandled = false;
-		}
-		
-		internal DetailsViewDeletedEventArgs (int affectedRows, Exception e, IOrderedDictionary keys, IOrderedDictionary values)
-			: this (affectedRows, e)
-		{
-			this.keys = keys;
-			this.values = values;
-		}
-		
-		public int AffectedRows {
-			get { return rowsAffected; }
-		}
+    public class DetailsViewDeletedEventArgs : EventArgs
+    {
+        int rowsAffected;
+        Exception e;
+        bool exceptionHandled;
+        IOrderedDictionary keys;
+        IOrderedDictionary values;
+        
+        public DetailsViewDeletedEventArgs (int affectedRows, Exception e)
+        {
+            this.rowsAffected = affectedRows;
+            this.e = e;
+            this.exceptionHandled = false;
+        }
+        
+        internal DetailsViewDeletedEventArgs (int affectedRows, Exception e, IOrderedDictionary keys, IOrderedDictionary values)
+            : this (affectedRows, e)
+        {
+            this.keys = keys;
+            this.values = values;
+        }
+        
+        public int AffectedRows {
+            get { return rowsAffected; }
+        }
 
-		public Exception Exception {
-			get { return e; }
-		}
+        public Exception Exception {
+            get { return e; }
+        }
 
-		public bool ExceptionHandled {
-			get { return exceptionHandled; }
-			set { exceptionHandled = value; }
-		}
-	
-		public IOrderedDictionary Keys {
-			get { return keys; }
-		}
+        public bool ExceptionHandled {
+            get { return exceptionHandled; }
+            set { exceptionHandled = value; }
+        }
+    
+        public IOrderedDictionary Keys {
+            get { return keys; }
+        }
 
-		public IOrderedDictionary Values {
-			get { return values; }
-		}
-	}
+        public IOrderedDictionary Values {
+            get { return values; }
+        }
+    }
 }
 

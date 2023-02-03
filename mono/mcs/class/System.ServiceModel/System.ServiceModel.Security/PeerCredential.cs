@@ -2,7 +2,7 @@
 // PeerCredential.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,55 +30,55 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.ServiceModel.Security
 {
-	public class PeerCredential
-	{
-		internal PeerCredential ()
-		{
-		}
+    public class PeerCredential
+    {
+        internal PeerCredential ()
+        {
+        }
 
-		X509Certificate2 cert;
-		string mesh_pwd;
-		X509PeerCertificateAuthentication cert_auth =
-			new X509PeerCertificateAuthentication ();
-		X509PeerCertificateAuthentication peer_auth =
-			new X509PeerCertificateAuthentication ();
+        X509Certificate2 cert;
+        string mesh_pwd;
+        X509PeerCertificateAuthentication cert_auth =
+            new X509PeerCertificateAuthentication ();
+        X509PeerCertificateAuthentication peer_auth =
+            new X509PeerCertificateAuthentication ();
 
-		internal PeerCredential Clone ()
-		{
-			return new PeerCredential () { cert = this.cert, cert_auth = this.cert_auth.Clone (), peer_auth = this.peer_auth.Clone () };
-		}
+        internal PeerCredential Clone ()
+        {
+            return new PeerCredential () { cert = this.cert, cert_auth = this.cert_auth.Clone (), peer_auth = this.peer_auth.Clone () };
+        }
 
-		public X509Certificate2 Certificate {
-			get { return cert; }
-			set { cert = value; }
-		}
+        public X509Certificate2 Certificate {
+            get { return cert; }
+            set { cert = value; }
+        }
 
-		public string MeshPassword {
-			get { return mesh_pwd; }
-			set { mesh_pwd = value; }
-		}
+        public string MeshPassword {
+            get { return mesh_pwd; }
+            set { mesh_pwd = value; }
+        }
 
-		public X509PeerCertificateAuthentication MessageSenderAuthentication {
-			get { return cert_auth; }
-			// huh, should there be a setter?
-			set { cert_auth = value; }
-		}
+        public X509PeerCertificateAuthentication MessageSenderAuthentication {
+            get { return cert_auth; }
+            // huh, should there be a setter?
+            set { cert_auth = value; }
+        }
 
-		public X509PeerCertificateAuthentication PeerAuthentication {
-			get { return peer_auth; }
-			set { peer_auth = value; }
-		}
+        public X509PeerCertificateAuthentication PeerAuthentication {
+            get { return peer_auth; }
+            set { peer_auth = value; }
+        }
 
-		[MonoTODO]
-		public void SetCertificate (string subjectName, StoreLocation storeLocation, StoreName storeName)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void SetCertificate (string subjectName, StoreLocation storeLocation, StoreName storeName)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public void SetCertificate (StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void SetCertificate (StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

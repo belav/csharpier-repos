@@ -5,10 +5,10 @@ using System;
 using System.Diagnostics;
 
 class TestClass {
-	[Conditional ("UNDEFINED CONDITION")]
-	static void ConditionalMethod ()
-	{
-	}
+    [Conditional ("UNDEFINED CONDITION")]
+    static void ConditionalMethod ()
+    {
+    }
 }
 
 

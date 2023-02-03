@@ -2,7 +2,7 @@
 // System.Web.Compilation.PageBuildProvider
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -40,27 +40,27 @@ using System.Web.UI;
 
 namespace System.Web.Compilation {
 
-	[BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
-	sealed class MasterPageBuildProvider : TemplateBuildProvider {
-		public MasterPageBuildProvider()
-		{
-		}
+    [BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
+    sealed class MasterPageBuildProvider : TemplateBuildProvider {
+        public MasterPageBuildProvider()
+        {
+        }
 
-		protected override BaseCompiler CreateCompiler (TemplateParser parser)
-		{
-			return new MasterPageCompiler (parser as MasterPageParser);
-		}
+        protected override BaseCompiler CreateCompiler (TemplateParser parser)
+        {
+            return new MasterPageCompiler (parser as MasterPageParser);
+        }
 
-		protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
-		{	
-			return CreateParser (virtualPath, physicalPath, OpenReader (virtualPath.Original), context);
-		}
-		
-		protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
-		{
-			return new MasterPageParser (virtualPath, physicalPath, reader, context);
-		}
-	}
+        protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
+        {    
+            return CreateParser (virtualPath, physicalPath, OpenReader (virtualPath.Original), context);
+        }
+        
+        protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
+        {
+            return new MasterPageParser (virtualPath, physicalPath, reader, context);
+        }
+    }
 }
 
 

@@ -3,7 +3,7 @@
 // for System.Configuration.RegexStringValidator.
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,47 +33,47 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class RegexStringValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			RegexStringValidator v = new RegexStringValidator ("[0-9]+");
+    [TestFixture]
+    public class RegexStringValidatorTest
+    {
+        [Test]
+        public void CanValidate ()
+        {
+            RegexStringValidator v = new RegexStringValidator ("[0-9]+");
 
-			Assert.IsTrue (v.CanValidate (typeof (string)));
-			Assert.IsFalse (v.CanValidate (typeof (int)));
-			Assert.IsFalse (v.CanValidate (typeof (object)));
-		}
+            Assert.IsTrue (v.CanValidate (typeof (string)));
+            Assert.IsFalse (v.CanValidate (typeof (int)));
+            Assert.IsFalse (v.CanValidate (typeof (object)));
+        }
 
-		[Test]
-		public void Match_succeed ()
-		{
-			RegexStringValidator v = new RegexStringValidator ("[0-9]+");
+        [Test]
+        public void Match_succeed ()
+        {
+            RegexStringValidator v = new RegexStringValidator ("[0-9]+");
 
-			v.Validate ("123456789");
-			v.Validate ("1234567");
-			v.Validate ("12345");
-		}
+            v.Validate ("123456789");
+            v.Validate ("1234567");
+            v.Validate ("12345");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Match_fail ()
-		{
-			RegexStringValidator v = new RegexStringValidator ("[a-z]+");
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void Match_fail ()
+        {
+            RegexStringValidator v = new RegexStringValidator ("[a-z]+");
 
-			v.Validate ("1234");
-		}
+            v.Validate ("1234");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void IllegalRegex ()
-		{
-			RegexStringValidator v = new RegexStringValidator ("[0-9+");
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void IllegalRegex ()
+        {
+            RegexStringValidator v = new RegexStringValidator ("[0-9+");
 
-			v.Validate ("123456");
-			v.Validate ("123457");
-		}
-	}
+            v.Validate ("123456");
+            v.Validate ("123457");
+        }
+    }
 }
 

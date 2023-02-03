@@ -1,4 +1,4 @@
-﻿// 
+// 
 // IDataServiceUpdateProvider.cs
 //  
 // Author:
@@ -31,8 +31,8 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services.Providers
 {
-	public interface IDataServiceUpdateProvider : IUpdatable
-	{
-		void SetConcurrencyValues (object resourceCookie, bool? checkForEquality, IEnumerable <KeyValuePair <string, object>> concurrencyValues);
-	}
+    public interface IDataServiceUpdateProvider : IUpdatable
+    {
+        void SetConcurrencyValues (object resourceCookie, bool? checkForEquality, IEnumerable <KeyValuePair <string, object>> concurrencyValues);
+    }
 }

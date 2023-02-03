@@ -14,28 +14,28 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	using System;
+    using System;
 
-	public interface IService
-	{
-		int Sum(int b1, int b2);
+    public interface IService
+    {
+        int Sum(int b1, int b2);
 
-		byte Sum(byte b1, byte b2);
+        byte Sum(byte b1, byte b2);
 
-		long Sum(long b1, long b2);
+        long Sum(long b1, long b2);
 
-		short Sum(short b1, short b2);
+        short Sum(short b1, short b2);
 
-		float Sum(float b1, float b2);
+        float Sum(float b1, float b2);
 
-		double Sum(double b1, double b2);
+        double Sum(double b1, double b2);
 
-		UInt16 Sum(UInt16 b1, UInt16 b2);
+        UInt16 Sum(UInt16 b1, UInt16 b2);
 
-		UInt32 Sum(UInt32 b1, UInt32 b2);
+        UInt32 Sum(UInt32 b1, UInt32 b2);
 
-		UInt64 Sum(UInt64 b1, UInt64 b2);
+        UInt64 Sum(UInt64 b1, UInt64 b2);
 
-		bool Valid { get; }
-	}
+        bool Valid { get; }
+    }
 }

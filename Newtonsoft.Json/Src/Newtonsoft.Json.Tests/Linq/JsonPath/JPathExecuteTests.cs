@@ -1482,15 +1482,15 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         public void IdentityOperator()
         {
             JObject o = JObject.Parse(@"{
-	            'Values': [{
+                'Values': [{
 
                     'Coercible': 1,
                     'Name': 'Number'
 
                 }, {
-		            'Coercible': '1',
-		            'Name': 'String'
-	            }]
+                    'Coercible': '1',
+                    'Name': 'String'
+                }]
             }");
 
             // just to verify expected behavior hasn't changed

@@ -2,7 +2,7 @@
 // System.Web.Configuration.FormsAuthenticationCredentials
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,45 +34,45 @@ using System.ComponentModel;
 
 namespace System.Web.Configuration
 {
-	public sealed class FormsAuthenticationCredentials: ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty passwordFormatProp;
-		static ConfigurationProperty usersProp;
+    public sealed class FormsAuthenticationCredentials: ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty passwordFormatProp;
+        static ConfigurationProperty usersProp;
 
-		static FormsAuthenticationCredentials ()
-		{
-			passwordFormatProp = new ConfigurationProperty ("passwordFormat", typeof (FormsAuthPasswordFormat), FormsAuthPasswordFormat.SHA1,
-									new GenericEnumConverter (typeof (FormsAuthPasswordFormat)), PropertyHelper.DefaultValidator,
-									ConfigurationPropertyOptions.None);
-			usersProp = new ConfigurationProperty ("", typeof (FormsAuthenticationUserCollection), null,
-							       null, PropertyHelper.DefaultValidator,
-							       ConfigurationPropertyOptions.IsDefaultCollection);
+        static FormsAuthenticationCredentials ()
+        {
+            passwordFormatProp = new ConfigurationProperty ("passwordFormat", typeof (FormsAuthPasswordFormat), FormsAuthPasswordFormat.SHA1,
+                                    new GenericEnumConverter (typeof (FormsAuthPasswordFormat)), PropertyHelper.DefaultValidator,
+                                    ConfigurationPropertyOptions.None);
+            usersProp = new ConfigurationProperty ("", typeof (FormsAuthenticationUserCollection), null,
+                                   null, PropertyHelper.DefaultValidator,
+                                   ConfigurationPropertyOptions.IsDefaultCollection);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (passwordFormatProp);
-			properties.Add (usersProp);
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (passwordFormatProp);
+            properties.Add (usersProp);
+        }
 
-		public FormsAuthenticationCredentials ()
-		{
-		}
+        public FormsAuthenticationCredentials ()
+        {
+        }
 
-		[ConfigurationProperty ("passwordFormat", DefaultValue = "SHA1")]
-		public FormsAuthPasswordFormat PasswordFormat {
-			get { return (FormsAuthPasswordFormat) base[passwordFormatProp]; }
-			set { base[passwordFormatProp] = value; }
-		}
+        [ConfigurationProperty ("passwordFormat", DefaultValue = "SHA1")]
+        public FormsAuthPasswordFormat PasswordFormat {
+            get { return (FormsAuthPasswordFormat) base[passwordFormatProp]; }
+            set { base[passwordFormatProp] = value; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public FormsAuthenticationUserCollection Users {
-			get { return (FormsAuthenticationUserCollection) base[usersProp]; }
-		}
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public FormsAuthenticationUserCollection Users {
+            get { return (FormsAuthenticationUserCollection) base[usersProp]; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-		
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+        
+    }
 }
 

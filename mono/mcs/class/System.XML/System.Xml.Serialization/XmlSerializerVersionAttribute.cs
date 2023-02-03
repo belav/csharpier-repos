@@ -33,46 +33,46 @@ using System;
 
 namespace System.Xml.Serialization 
 {
-	[AttributeUsage (AttributeTargets.Assembly)]
-	public sealed class XmlSerializerVersionAttribute : Attribute
-	{
-		string _namespace;
-		string _parentAssemblyId;
-		Type _type;
-		string _version;
-		
-		public XmlSerializerVersionAttribute ()
-		{
-		}
-		
-		public XmlSerializerVersionAttribute (Type type)
-		{
-			_type = type;
-		}
-		
-		public string Namespace
-		{
-			get { return _namespace; }
-			set { _namespace = value; }
-		}
-		
-		public string ParentAssemblyId
-		{
-			get { return _parentAssemblyId; }
-			set { _parentAssemblyId = value; }
-		}
-		
-		public Type Type
-		{
-			get { return _type; }
-			set { _type = value; }
-		}
-		
-		public string Version
-		{
-			get { return _version; }
-			set { _version = value; }
-		}
-	}
+    [AttributeUsage (AttributeTargets.Assembly)]
+    public sealed class XmlSerializerVersionAttribute : Attribute
+    {
+        string _namespace;
+        string _parentAssemblyId;
+        Type _type;
+        string _version;
+        
+        public XmlSerializerVersionAttribute ()
+        {
+        }
+        
+        public XmlSerializerVersionAttribute (Type type)
+        {
+            _type = type;
+        }
+        
+        public string Namespace
+        {
+            get { return _namespace; }
+            set { _namespace = value; }
+        }
+        
+        public string ParentAssemblyId
+        {
+            get { return _parentAssemblyId; }
+            set { _parentAssemblyId = value; }
+        }
+        
+        public Type Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+        
+        public string Version
+        {
+            get { return _version; }
+            set { _version = value; }
+        }
+    }
 }
 

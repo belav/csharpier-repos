@@ -2,7 +2,7 @@
 // System.Configuration.TimeSpanMinutesConverter.cs
 //
 // Authors:
-// 	Chris Toshok
+//     Chris Toshok
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,31 +31,31 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public class TimeSpanSecondsConverter: ConfigurationConverterBase
-	{
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			long v;
-			if (!(data is string))
-				throw new ArgumentException ("data");
+    public class TimeSpanSecondsConverter: ConfigurationConverterBase
+    {
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            long v;
+            if (!(data is string))
+                throw new ArgumentException ("data");
 
-			if (!Int64.TryParse ((string)data, out v))
-				throw new ArgumentException ("data");
+            if (!Int64.TryParse ((string)data, out v))
+                throw new ArgumentException ("data");
 
-			return TimeSpan.FromSeconds (v);
-		}
+            return TimeSpan.FromSeconds (v);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			/* don't use "value is TimeSpan" here, since
-			 * we want to generate both a NRE on null
-			 * value, and ArgumentException on non-null,
-			 * but non-TimeSpan. */
-			if (value.GetType () != typeof (TimeSpan))
-				throw new ArgumentException ();
+        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        {
+            /* don't use "value is TimeSpan" here, since
+             * we want to generate both a NRE on null
+             * value, and ArgumentException on non-null,
+             * but non-TimeSpan. */
+            if (value.GetType () != typeof (TimeSpan))
+                throw new ArgumentException ();
 
-			return ((Int64)((TimeSpan)value).TotalSeconds).ToString();
-		}
-	}
+            return ((Int64)((TimeSpan)value).TotalSeconds).ToString();
+        }
+    }
 }
 

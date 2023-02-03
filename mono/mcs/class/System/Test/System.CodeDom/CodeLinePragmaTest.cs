@@ -1,9 +1,9 @@
 //
 // CodeLinePragmaTest.cs
-//	- Unit tests for System.CodeDom.CodeLinePragma
+//    - Unit tests for System.CodeDom.CodeLinePragma
 //
 // Author:
-//	Gert Driesen  <drieseng@users.sourceforge.net>
+//    Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,43 +34,43 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeLinePragmaTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeLinePragma clp = new CodeLinePragma ();
-			Assert.IsNotNull (clp.FileName, "#1");
-			Assert.AreEqual (string.Empty, clp.FileName, "#2");
-			Assert.AreEqual (0, clp.LineNumber, "#3");
+    [TestFixture]
+    public class CodeLinePragmaTest
+    {
+        [Test]
+        public void Constructor0 ()
+        {
+            CodeLinePragma clp = new CodeLinePragma ();
+            Assert.IsNotNull (clp.FileName, "#1");
+            Assert.AreEqual (string.Empty, clp.FileName, "#2");
+            Assert.AreEqual (0, clp.LineNumber, "#3");
 
-			clp.FileName = null;
-			Assert.IsNotNull (clp.FileName, "#4");
-			Assert.AreEqual (string.Empty, clp.FileName, "#5");
+            clp.FileName = null;
+            Assert.IsNotNull (clp.FileName, "#4");
+            Assert.AreEqual (string.Empty, clp.FileName, "#5");
 
-			string fileName = "mono";
-			clp.FileName = fileName;
-			Assert.IsNotNull (clp.FileName, "#6");
-			Assert.AreSame (fileName, clp.FileName, "#7");
+            string fileName = "mono";
+            clp.FileName = fileName;
+            Assert.IsNotNull (clp.FileName, "#6");
+            Assert.AreSame (fileName, clp.FileName, "#7");
 
-			clp.LineNumber = 5;
-			Assert.AreEqual (5, clp.LineNumber, "#8");
-		}
+            clp.LineNumber = 5;
+            Assert.AreEqual (5, clp.LineNumber, "#8");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			string fileName = "mono";
+        [Test]
+        public void Constructor1 ()
+        {
+            string fileName = "mono";
 
-			CodeLinePragma clp = new CodeLinePragma (fileName, 5);
-			Assert.IsNotNull (clp.FileName, "#1");
-			Assert.AreSame (fileName, clp.FileName, "#2");
-			Assert.AreEqual (5, clp.LineNumber, "#3");
+            CodeLinePragma clp = new CodeLinePragma (fileName, 5);
+            Assert.IsNotNull (clp.FileName, "#1");
+            Assert.AreSame (fileName, clp.FileName, "#2");
+            Assert.AreEqual (5, clp.LineNumber, "#3");
 
-			clp = new CodeLinePragma ((string) null, 10);
-			Assert.IsNotNull (clp.FileName, "#4");
-			Assert.AreEqual (string.Empty, clp.FileName, "#5");
-		}
-	}
+            clp = new CodeLinePragma ((string) null, 10);
+            Assert.IsNotNull (clp.FileName, "#4");
+            Assert.AreEqual (string.Empty, clp.FileName, "#5");
+        }
+    }
 }

@@ -32,13 +32,13 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class StreamSecurityUpgradeAcceptor
-		: StreamUpgradeAcceptor
-	{
-		protected StreamSecurityUpgradeAcceptor ()
-		{
-		}
+    public abstract class StreamSecurityUpgradeAcceptor
+        : StreamUpgradeAcceptor
+    {
+        protected StreamSecurityUpgradeAcceptor ()
+        {
+        }
 
-		public abstract SecurityMessageProperty GetRemoteSecurity ();
-	}
+        public abstract SecurityMessageProperty GetRemoteSecurity ();
+    }
 }

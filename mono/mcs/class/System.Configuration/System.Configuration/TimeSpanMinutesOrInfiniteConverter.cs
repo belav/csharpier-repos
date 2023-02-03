@@ -31,31 +31,31 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public sealed class TimeSpanMinutesOrInfiniteConverter: TimeSpanMinutesConverter
-	{
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			if ((string)data == "Infinite")
-				return TimeSpan.MaxValue;
-			else
-				return base.ConvertFrom(ctx, ci, data);
-		}
+    public sealed class TimeSpanMinutesOrInfiniteConverter: TimeSpanMinutesConverter
+    {
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            if ((string)data == "Infinite")
+                return TimeSpan.MaxValue;
+            else
+                return base.ConvertFrom(ctx, ci, data);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			/* don't use "value is TimeSpan" here, since
-			 * we want to generate both a NRE on null
-			 * value, and ArgumentException on non-null,
-			 * but non-TimeSpan. */
-			if (value.GetType () != typeof (TimeSpan))
-				throw new ArgumentException ();
+        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        {
+            /* don't use "value is TimeSpan" here, since
+             * we want to generate both a NRE on null
+             * value, and ArgumentException on non-null,
+             * but non-TimeSpan. */
+            if (value.GetType () != typeof (TimeSpan))
+                throw new ArgumentException ();
 
-			if (((TimeSpan)value) == TimeSpan.MaxValue)
-				return "Infinite";
-			else
-				return base.ConvertTo (ctx, ci, value, type);
-		}
-	}
+            if (((TimeSpan)value) == TimeSpan.MaxValue)
+                return "Infinite";
+            else
+                return base.ConvertTo (ctx, ci, value, type);
+        }
+    }
 }
 
 

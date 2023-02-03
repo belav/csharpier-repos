@@ -2,7 +2,7 @@
 // HGlobalUnmanagedMemoryStream.cs
 //
 // Authors:
-//	Marek Safar  <marek.safar@gmail.com>
+//    Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2015 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,23 +30,23 @@ using System.Runtime.InteropServices;
 
 namespace System.IO
 {
-	unsafe class HGlobalUnmanagedMemoryStream : UnmanagedMemoryStream
-	{
-		IntPtr ptr;
+    unsafe class HGlobalUnmanagedMemoryStream : UnmanagedMemoryStream
+    {
+        IntPtr ptr;
 
-		public HGlobalUnmanagedMemoryStream (byte* pointer, long length, IntPtr ptr)
-			: base (pointer, length, length, FileAccess.ReadWrite)
-		{
-			this.ptr = ptr;
-		}
+        public HGlobalUnmanagedMemoryStream (byte* pointer, long length, IntPtr ptr)
+            : base (pointer, length, length, FileAccess.ReadWrite)
+        {
+            this.ptr = ptr;
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (_isOpen) {
-				Marshal.FreeHGlobal (ptr);
-			}
+        protected override void Dispose (bool disposing)
+        {
+            if (_isOpen) {
+                Marshal.FreeHGlobal (ptr);
+            }
 
-			base.Dispose (disposing);
-		}
-	}	
+            base.Dispose (disposing);
+        }
+    }    
 }

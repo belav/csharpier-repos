@@ -14,28 +14,28 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	public class ProceedNTimesInterceptor : IInterceptor
-	{
-		private readonly int retries;
+    public class ProceedNTimesInterceptor : IInterceptor
+    {
+        private readonly int retries;
 
-		public ProceedNTimesInterceptor(int retries)
-		{
-			this.retries = retries;
-		}
+        public ProceedNTimesInterceptor(int retries)
+        {
+            this.retries = retries;
+        }
 
-		public void Intercept(IInvocation invocation)
-		{
-			for (var i = 0; i < retries; i++)
-			{
-				try
-				{
-					invocation.Proceed();
-				}
-				catch
-				{
-					// gulp
-				}
-			}
-		}
-	}
+        public void Intercept(IInvocation invocation)
+        {
+            for (var i = 0; i < retries; i++)
+            {
+                try
+                {
+                    invocation.Proceed();
+                }
+                catch
+                {
+                    // gulp
+                }
+            }
+        }
+    }
 }

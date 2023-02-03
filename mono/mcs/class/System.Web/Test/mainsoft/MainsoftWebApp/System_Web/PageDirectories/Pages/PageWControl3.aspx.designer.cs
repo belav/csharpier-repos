@@ -11,8 +11,8 @@
 namespace GHTTests.System_Web_dll.PageDirectories.Pages
 {
 
-	public partial class PageWControl3
-	{
-		protected System.Web.UI.HtmlControls.HtmlForm form1;
-	}
+    public partial class PageWControl3
+    {
+        protected System.Web.UI.HtmlControls.HtmlForm form1;
+    }
 }

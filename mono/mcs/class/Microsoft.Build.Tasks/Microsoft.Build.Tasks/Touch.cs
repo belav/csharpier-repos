@@ -34,108 +34,108 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Tasks {
-	public class Touch : TaskExtension {
-		bool		alwaysCreate;
-		ITaskItem[]	files;
-		bool		forceTouch;
-		DateTime	time;
-		ITaskItem[]	touchedFiles;
-	
-		public Touch ()
-		{
-			time = DateTime.Now;
-		}
+    public class Touch : TaskExtension {
+        bool        alwaysCreate;
+        ITaskItem[]    files;
+        bool        forceTouch;
+        DateTime    time;
+        ITaskItem[]    touchedFiles;
+    
+        public Touch ()
+        {
+            time = DateTime.Now;
+        }
 
-		public override bool Execute ()
-		{
-			if (files.Length == 0)
-				return true;
+        public override bool Execute ()
+        {
+            if (files.Length == 0)
+                return true;
 
-			bool returnBoolean = true;
-			List <ITaskItem> successfulFiles = new List <ITaskItem> ();
-			Stream stream = null;
-			
-			foreach (ITaskItem file in files) {
-				string fullname = file.GetMetadata ("FullPath");
-				try {
-					if (File.Exists (file.ItemSpec)) {
-						if ((File.GetAttributes (fullname) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly) {
-							if (forceTouch) {
-								File.SetLastAccessTime (fullname, time);
-								File.SetLastWriteTime (fullname, time);
-								successfulFiles.Add (file);
-							}
-						} else {
-							File.SetLastAccessTime (fullname, time);
-							File.SetLastWriteTime (fullname, time);
-							successfulFiles.Add (file);
-						}
-					} else if (alwaysCreate == true) {
-						stream = File.Create (fullname);
-						stream.Close ();
-						File.SetLastAccessTime (fullname, time);
-						File.SetLastWriteTime (fullname, time);
-						successfulFiles.Add (file);
-					} else {
-						continue;
-					}
+            bool returnBoolean = true;
+            List <ITaskItem> successfulFiles = new List <ITaskItem> ();
+            Stream stream = null;
+            
+            foreach (ITaskItem file in files) {
+                string fullname = file.GetMetadata ("FullPath");
+                try {
+                    if (File.Exists (file.ItemSpec)) {
+                        if ((File.GetAttributes (fullname) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly) {
+                            if (forceTouch) {
+                                File.SetLastAccessTime (fullname, time);
+                                File.SetLastWriteTime (fullname, time);
+                                successfulFiles.Add (file);
+                            }
+                        } else {
+                            File.SetLastAccessTime (fullname, time);
+                            File.SetLastWriteTime (fullname, time);
+                            successfulFiles.Add (file);
+                        }
+                    } else if (alwaysCreate == true) {
+                        stream = File.Create (fullname);
+                        stream.Close ();
+                        File.SetLastAccessTime (fullname, time);
+                        File.SetLastWriteTime (fullname, time);
+                        successfulFiles.Add (file);
+                    } else {
+                        continue;
+                    }
 
-					touchedFiles = successfulFiles.ToArray ();
-				}
-				catch (Exception ex) {
-					Log.LogErrorFromException (ex);
-					returnBoolean = false;
-				}
-			}
-			return returnBoolean;
-		}
+                    touchedFiles = successfulFiles.ToArray ();
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException (ex);
+                    returnBoolean = false;
+                }
+            }
+            return returnBoolean;
+        }
 
-		public bool AlwaysCreate {
-			get {
-				return alwaysCreate;
-			}
-			set {
-				alwaysCreate = value;
-			}
-		}
+        public bool AlwaysCreate {
+            get {
+                return alwaysCreate;
+            }
+            set {
+                alwaysCreate = value;
+            }
+        }
 
-		[Required]
-		public ITaskItem[] Files {
-			get {
-				return files;
-			}
-			set {
-				files = value;
-			}
-		}
+        [Required]
+        public ITaskItem[] Files {
+            get {
+                return files;
+            }
+            set {
+                files = value;
+            }
+        }
 
-		public bool ForceTouch {
-			get {
-				return forceTouch;
-			}
-			set {
-				forceTouch = value;
-			}
-		}
+        public bool ForceTouch {
+            get {
+                return forceTouch;
+            }
+            set {
+                forceTouch = value;
+            }
+        }
 
-		public string Time {
-			get {
-				return time.ToString ();
-			}
-			set {
-				time = DateTime.Parse (value);
-			}
-		}
+        public string Time {
+            get {
+                return time.ToString ();
+            }
+            set {
+                time = DateTime.Parse (value);
+            }
+        }
 
-		[Output]
-		public ITaskItem[] TouchedFiles {
-			get {
-				return touchedFiles;
-			}
-			set {
-				touchedFiles = value;
-			}
-		}
-	}
+        [Output]
+        public ITaskItem[] TouchedFiles {
+            get {
+                return touchedFiles;
+            }
+            set {
+                touchedFiles = value;
+            }
+        }
+    }
 }
 

@@ -2,7 +2,7 @@
 // XPathMessageFilterElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,35 +54,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (XPathMessageFilterElement),
-		 AddItemName = "add",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	[MonoTODO]
-	public sealed partial class XPathMessageFilterElementCollection
-		 : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>,  ICollection,  IEnumerable
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection (typeof (XPathMessageFilterElement),
+         AddItemName = "add",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [MonoTODO]
+    public sealed partial class XPathMessageFilterElementCollection
+         : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>,  ICollection,  IEnumerable
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static XPathMessageFilterElementCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static XPathMessageFilterElementCollection ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public XPathMessageFilterElementCollection ()
-		{
-		}
-
-
-		// Properties
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public XPathMessageFilterElementCollection ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

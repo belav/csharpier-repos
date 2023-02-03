@@ -29,86 +29,86 @@
 //
 
 namespace System.Web.Services.Description {
-	public sealed class MessageCollection : ServiceDescriptionBaseCollection {
+    public sealed class MessageCollection : ServiceDescriptionBaseCollection {
 
-		#region Constructors
-		
-		internal MessageCollection (ServiceDescription serviceDescription)
-			: base (serviceDescription)
-		{
-		}
+        #region Constructors
+        
+        internal MessageCollection (ServiceDescription serviceDescription)
+            : base (serviceDescription)
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		public Message this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
+        public Message this [int index] {
+            get { 
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException ();
 
-				return (Message) List [index]; 
-			}
+                return (Message) List [index]; 
+            }
                         set { List [index] = value; }
-		}
+        }
 
-		public Message this [string name] {
-			get {
-				int index = IndexOf ((Message) Table [name]);
-				if (index >= 0)
-					return this [index];
-				return null;
-			}
-		}
+        public Message this [string name] {
+            get {
+                int index = IndexOf ((Message) Table [name]);
+                if (index >= 0)
+                    return this [index];
+                return null;
+            }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public int Add (Message message) 
-		{
-			Insert (Count, message);
-			return (Count - 1);
-		}
+        public int Add (Message message) 
+        {
+            Insert (Count, message);
+            return (Count - 1);
+        }
 
-		public bool Contains (Message message)
-		{
-			return List.Contains (message);
-		}
+        public bool Contains (Message message)
+        {
+            return List.Contains (message);
+        }
 
-		public void CopyTo (Message[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        public void CopyTo (Message[] array, int index) 
+        {
+            List.CopyTo (array, index);
+        }
 
-		protected override string GetKey (object value) 
-		{
-			if (!(value is Message))
-				throw new InvalidCastException ();
+        protected override string GetKey (object value) 
+        {
+            if (!(value is Message))
+                throw new InvalidCastException ();
 
-			return ((Message) value).Name;
-		}
+            return ((Message) value).Name;
+        }
 
-		public int IndexOf (Message message)
-		{
-			return List.IndexOf (message);
-		}
+        public int IndexOf (Message message)
+        {
+            return List.IndexOf (message);
+        }
 
-		public void Insert (int index, Message message)
-		{
-			List.Insert (index, message);
-		}
-	
-		public void Remove (Message message)
-		{
-			List.Remove (message);
-		}
-			
-		protected override void SetParent (object value, object parent)
-		{
-			((Message) value).SetParent ((ServiceDescription) parent);
-		}
-			
-		#endregion // Methods
-	}
+        public void Insert (int index, Message message)
+        {
+            List.Insert (index, message);
+        }
+    
+        public void Remove (Message message)
+        {
+            List.Remove (message);
+        }
+            
+        protected override void SetParent (object value, object parent)
+        {
+            ((Message) value).SetParent ((ServiceDescription) parent);
+        }
+            
+        #endregion // Methods
+    }
 }

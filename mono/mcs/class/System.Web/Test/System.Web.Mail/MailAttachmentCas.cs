@@ -2,7 +2,7 @@
 // MailAttachmentCas.cs - CAS unit tests for System.Web.Mail.MailAttachment
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,103 +38,103 @@ using System.Web.Mail;
 
 namespace MonoCasTests.System.Web.Mail {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class MailAttachmentCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class MailAttachmentCas : AspNetHostingMinimal {
 
-		private string fname;
-		private MailAttachment attachment;
+        private string fname;
+        private MailAttachment attachment;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			fname = Path.GetTempFileName ();
-			using (FileStream fs = File.OpenWrite (fname)) {
-				fs.WriteByte (0);
-				fs.Close ();
-			}
-			attachment = new MailAttachment (fname);
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            fname = Path.GetTempFileName ();
+            using (FileStream fs = File.OpenWrite (fname)) {
+                fs.WriteByte (0);
+                fs.Close ();
+            }
+            attachment = new MailAttachment (fname);
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Contructor_String_Deny_FileIOPermission ()
-		{
-			try {
-				new MailAttachment (fname);
-			}
-			catch (TypeInitializationException e) {
-				// MS BUG - the original security exception gets wrapped
-				// inside a TypeInitializationException.
-				Assert.IsNotNull (e.InnerException, "InnerException");
-				throw e.InnerException;
-			}
-			catch (HttpException e) {
-				// MS BUG - the original security exception gets replaced
-				// by an HttpException. Even worst the SecurityException 
-				// is not in the InnerException!
-				Assert.IsNull (e.InnerException, "InnerException");
-				Assert.Ignore ("2.0 hides the SecurityException with a HttpException");
-			}
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Contructor_String_Deny_FileIOPermission ()
+        {
+            try {
+                new MailAttachment (fname);
+            }
+            catch (TypeInitializationException e) {
+                // MS BUG - the original security exception gets wrapped
+                // inside a TypeInitializationException.
+                Assert.IsNotNull (e.InnerException, "InnerException");
+                throw e.InnerException;
+            }
+            catch (HttpException e) {
+                // MS BUG - the original security exception gets replaced
+                // by an HttpException. Even worst the SecurityException 
+                // is not in the InnerException!
+                Assert.IsNull (e.InnerException, "InnerException");
+                Assert.Ignore ("2.0 hides the SecurityException with a HttpException");
+            }
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Contructor_StringMailEncoding_Deny_FileIOPermission ()
-		{
-			try {
-				new MailAttachment (fname, MailEncoding.UUEncode);
-			}
-			catch (TypeInitializationException e) {
-				// MS BUG - the original security exception gets wrapped
-				// inside a TypeInitializationException.
-				Assert.IsNotNull (e.InnerException, "InnerException");
-				throw e.InnerException;
-			}
-			catch (HttpException e) {
-				// MS BUG - the original security exception gets replaced
-				// by an HttpException. Even worst the SecurityException 
-				// is not in the InnerException!
-				Assert.IsNull (e.InnerException, "InnerException");
-				Assert.Ignore ("2.0 hides the SecurityException with a HttpException");
-			}
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Contructor_StringMailEncoding_Deny_FileIOPermission ()
+        {
+            try {
+                new MailAttachment (fname, MailEncoding.UUEncode);
+            }
+            catch (TypeInitializationException e) {
+                // MS BUG - the original security exception gets wrapped
+                // inside a TypeInitializationException.
+                Assert.IsNotNull (e.InnerException, "InnerException");
+                throw e.InnerException;
+            }
+            catch (HttpException e) {
+                // MS BUG - the original security exception gets replaced
+                // by an HttpException. Even worst the SecurityException 
+                // is not in the InnerException!
+                Assert.IsNull (e.InnerException, "InnerException");
+                Assert.Ignore ("2.0 hides the SecurityException with a HttpException");
+            }
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void Contructor_PermitOnly_FileIOPermission ()
-		{
-			new MailAttachment (fname);
-			new MailAttachment (fname, MailEncoding.UUEncode);
-		}
+        [Test]
+        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void Contructor_PermitOnly_FileIOPermission ()
+        {
+            new MailAttachment (fname);
+            new MailAttachment (fname, MailEncoding.UUEncode);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Properties ()
-		{
-			// once created we can get the filename even with no permissions
-			Assert.AreEqual (fname, attachment.Filename, "Filename");
-			// LAMESPEC: default isn't UUEncode
-			Assert.AreEqual (MailEncoding.Base64, attachment.Encoding, "Encoding");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Properties ()
+        {
+            // once created we can get the filename even with no permissions
+            Assert.AreEqual (fname, attachment.Filename, "Filename");
+            // LAMESPEC: default isn't UUEncode
+            Assert.AreEqual (MailEncoding.Base64, attachment.Encoding, "Encoding");
+        }
 
-		// LinkDemand tests
+        // LinkDemand tests
 
-		// overriden because
-		// (a) there's no empty .ctor in MailAttachment
-		// (b) the filename parameter implies some file i/o
-		[FileIOPermission (SecurityAction.Assert, Unrestricted = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type [1] { typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(string)");
-			return ci.Invoke (new object [1] { fname });
-		}
-		
-		public override Type Type {
-			get { return typeof (MailAttachment); }
-		}
-	}
+        // overriden because
+        // (a) there's no empty .ctor in MailAttachment
+        // (b) the filename parameter implies some file i/o
+        [FileIOPermission (SecurityAction.Assert, Unrestricted = true)]
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type [1] { typeof (string) });
+            Assert.IsNotNull (ci, ".ctor(string)");
+            return ci.Invoke (new object [1] { fname });
+        }
+        
+        public override Type Type {
+            get { return typeof (MailAttachment); }
+        }
+    }
 }

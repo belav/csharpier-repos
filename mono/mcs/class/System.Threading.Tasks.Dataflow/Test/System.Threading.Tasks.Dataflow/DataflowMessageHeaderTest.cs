@@ -31,41 +31,41 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow
 {
-	[TestFixture]
-	public class DataflowMessageHeaderTest
-	{
-		[Test]
-		public void EqualityTest ()
-		{
-			var header1 = new DataflowMessageHeader (2);
-			var header2 = new DataflowMessageHeader (5);
-			var header3 = new DataflowMessageHeader (2);
+    [TestFixture]
+    public class DataflowMessageHeaderTest
+    {
+        [Test]
+        public void EqualityTest ()
+        {
+            var header1 = new DataflowMessageHeader (2);
+            var header2 = new DataflowMessageHeader (5);
+            var header3 = new DataflowMessageHeader (2);
 
-			Assert.AreEqual (header1, header1);
-			Assert.AreEqual (header1.GetHashCode (), header1.GetHashCode ());
-			Assert.AreEqual (header1, header3);
-			Assert.AreEqual (header1.GetHashCode (), header3.GetHashCode ());
-			Assert.AreNotEqual (header1, header2);
-			Assert.AreNotEqual (header1.GetHashCode (), header2.GetHashCode ());
-		}
+            Assert.AreEqual (header1, header1);
+            Assert.AreEqual (header1.GetHashCode (), header1.GetHashCode ());
+            Assert.AreEqual (header1, header3);
+            Assert.AreEqual (header1.GetHashCode (), header3.GetHashCode ());
+            Assert.AreNotEqual (header1, header2);
+            Assert.AreNotEqual (header1.GetHashCode (), header2.GetHashCode ());
+        }
 
-		[Test]
-		public void ValidityTest ()
-		{
-			var header1 = new DataflowMessageHeader ();
-			var header2 = new DataflowMessageHeader (2);
-			var header3 = new DataflowMessageHeader (-2);
+        [Test]
+        public void ValidityTest ()
+        {
+            var header1 = new DataflowMessageHeader ();
+            var header2 = new DataflowMessageHeader (2);
+            var header3 = new DataflowMessageHeader (-2);
 
-			Assert.IsFalse (header1.IsValid);
-			Assert.IsTrue (header2.IsValid);
-			Assert.IsTrue (header3.IsValid);
-		}
+            Assert.IsFalse (header1.IsValid);
+            Assert.IsTrue (header2.IsValid);
+            Assert.IsTrue (header3.IsValid);
+        }
 
-		[Test]
-		public void ZeroIdTest ()
-		{
-			AssertEx.Throws<ArgumentException> (() => new DataflowMessageHeader (0));
-			Assert.AreEqual (0, new DataflowMessageHeader ().Id);
-		}
-	}
+        [Test]
+        public void ZeroIdTest ()
+        {
+            AssertEx.Throws<ArgumentException> (() => new DataflowMessageHeader (0));
+            Assert.AreEqual (0, new DataflowMessageHeader ().Id);
+        }
+    }
 }

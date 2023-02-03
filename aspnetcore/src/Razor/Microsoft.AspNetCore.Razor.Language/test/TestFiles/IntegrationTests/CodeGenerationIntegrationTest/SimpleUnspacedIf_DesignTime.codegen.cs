@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles
 #line 1 "TestFiles/IntegrationTests/CodeGenerationIntegrationTest/SimpleUnspacedIf.cshtml"
  if (true)
 {
-	
+    
 
 #line default
 #line hidden

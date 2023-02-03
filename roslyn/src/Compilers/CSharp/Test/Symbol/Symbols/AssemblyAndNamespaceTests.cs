@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -312,19 +312,19 @@ namespace NS.NS1 {
         {
             var compilation = CreateEmptyCompilation(@"
 namespace NS1 {
-	class A { }
-}	
+    class A { }
+}    
 
 namespace NS2 {
-	class B { }
+    class B { }
 }
 
 namespace NS
 {
-	using ns = NS1;
-	using ns = NS2;
+    using ns = NS1;
+    using ns = NS2;
 
-	class C : ns.A {}
+    class C : ns.A {}
 }
 ");
             var tree = compilation.SyntaxTrees[0];

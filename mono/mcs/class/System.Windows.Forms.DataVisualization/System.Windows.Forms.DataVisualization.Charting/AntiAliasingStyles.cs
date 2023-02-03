@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	[Flags]
-	public enum AntiAliasingStyles
-	{
-		None = 0,
-		Text = 1,
-		Graphics = 2,
-		All = 3
-	}
+    [Flags]
+    public enum AntiAliasingStyles
+    {
+        None = 0,
+        Text = 1,
+        Graphics = 2,
+        All = 3
+    }
 }

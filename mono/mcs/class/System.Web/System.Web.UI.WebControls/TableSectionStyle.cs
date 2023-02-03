@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.TableSectionStyle class
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,29 +32,29 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class TableSectionStyle : Style {
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class TableSectionStyle : Style {
 
-		public TableSectionStyle ()
-		{
-		}
+        public TableSectionStyle ()
+        {
+        }
 
-		[DefaultValue (true)]
-		[NotifyParentProperty (true)]
-		public bool Visible {
-			get {
+        [DefaultValue (true)]
+        [NotifyParentProperty (true)]
+        public bool Visible {
+            get {
 // commented to match MS behaviour (beta2)
-//				if ((styles & Styles.Visible) == 0)
-//					return true;
-				object o = ViewState ["Visible"];
-				return (o == null) ? true : (bool) o;
-			}
-			set {
-				ViewState ["Visible"] = value;
-//				styles |= Styles.Visible;
-			}
-		}
-	}
+//                if ((styles & Styles.Visible) == 0)
+//                    return true;
+                object o = ViewState ["Visible"];
+                return (o == null) ? true : (bool) o;
+            }
+            set {
+                ViewState ["Visible"] = value;
+//                styles |= Styles.Visible;
+            }
+        }
+    }
 }
 

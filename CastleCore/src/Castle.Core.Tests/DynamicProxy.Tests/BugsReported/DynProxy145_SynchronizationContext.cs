@@ -17,14 +17,14 @@ namespace Castle.DynamicProxy.Tests.BugsReported
     using System.Threading;
     using NUnit.Framework;
 
-	[TestFixture]
-	public class DynProxy145_SynchronizationContext
-	{
-		[Test]
-		public void ProxySynchronizationContext()
-		{
-			var proxyGenerator = new ProxyGenerator();
-			proxyGenerator.CreateClassProxy<SynchronizationContext>();
-		}
-	}
+    [TestFixture]
+    public class DynProxy145_SynchronizationContext
+    {
+        [Test]
+        public void ProxySynchronizationContext()
+        {
+            var proxyGenerator = new ProxyGenerator();
+            proxyGenerator.CreateClassProxy<SynchronizationContext>();
+        }
+    }
 }

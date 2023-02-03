@@ -1,4 +1,4 @@
-๏ปฟ// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -77,7 +77,7 @@ namespace System.Web.Razor.Tokenizer
         {
             if (ParserHelpers.IsNewLine(CurrentCharacter))
             {
-                // CSharp Spec ยง2.3.1
+                // CSharp Spec ง2.3.1
                 bool checkTwoCharNewline = CurrentCharacter == '\r';
                 TakeCurrent();
                 if (checkTwoCharNewline && CurrentCharacter == '\n')
@@ -88,7 +88,7 @@ namespace System.Web.Razor.Tokenizer
             }
             else if (ParserHelpers.IsWhitespace(CurrentCharacter))
             {
-                // CSharp Spec ยง2.3.3
+                // CSharp Spec ง2.3.3
                 TakeUntil(c => !ParserHelpers.IsWhitespace(c));
                 return Stay(EndSymbol(CSharpSymbolType.WhiteSpace));
             }
@@ -294,7 +294,7 @@ namespace System.Web.Razor.Tokenizer
             return Transition(EndSymbol(literalType), Data);
         }
 
-        // CSharp Spec ยง2.3.2
+        // CSharp Spec ง2.3.2
         private StateResult BlockComment()
         {
             TakeUntil(c => c == '*');
@@ -315,14 +315,14 @@ namespace System.Web.Razor.Tokenizer
             return Stay();
         }
 
-        // CSharp Spec ยง2.3.2
+        // CSharp Spec ง2.3.2
         private StateResult SingleLineComment()
         {
             TakeUntil(c => ParserHelpers.IsNewLine(c));
             return Stay(EndSymbol(CSharpSymbolType.Comment));
         }
 
-        // CSharp Spec ยง2.4.4
+        // CSharp Spec ง2.4.4
         private StateResult NumericLiteral()
         {
             if (TakeAll("0x", caseSensitive: true))
@@ -379,7 +379,7 @@ namespace System.Web.Razor.Tokenizer
             return Stay(EndSymbol(CSharpSymbolType.RealLiteral));
         }
 
-        // CSharp Spec ยง2.4.4.3
+        // CSharp Spec ง2.4.4.3
         private StateResult RealLiteral()
         {
             AssertCurrent('.');
@@ -409,7 +409,7 @@ namespace System.Web.Razor.Tokenizer
             }
         }
 
-        // CSharp Spec ยง2.4.2
+        // CSharp Spec ง2.4.2
         private StateResult Identifier()
         {
             Debug.Assert(CSharpHelpers.IsIdentifierStart(CurrentCharacter));

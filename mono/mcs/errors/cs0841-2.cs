@@ -3,9 +3,9 @@
 
 public class C
 {
-	public static void Main ()
-	{
-	    int x = y;
-	    int y = 1;
-	}
+    public static void Main ()
+    {
+        int x = y;
+        int y = 1;
+    }
 }

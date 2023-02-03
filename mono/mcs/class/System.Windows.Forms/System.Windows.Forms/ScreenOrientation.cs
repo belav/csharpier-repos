@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum ScreenOrientation
-	{
-		Angle0 = 0,
-		Angle90 = 1,
-		Angle180 = 2,
-		Angle270 = 3
-	}
+    public enum ScreenOrientation
+    {
+        Angle0 = 0,
+        Angle90 = 1,
+        Angle180 = 2,
+        Angle270 = 3
+    }
 }

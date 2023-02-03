@@ -44,8 +44,8 @@ __o = typeof(ComponentWithNullableAction);
 #nullable restore
 #line 2 "x:\dir\subdir\Test\TestComponent.cshtml"
        
-	[Parameter]
-	public Action NullableAction { get; set; }
+    [Parameter]
+    public Action NullableAction { get; set; }
 
 #line default
 #line hidden

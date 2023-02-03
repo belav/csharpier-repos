@@ -2,8 +2,8 @@
 // System.Net.Configuration.WebRequestModuleElementCollection.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
-//	Chris Toshok (toshok@ximian.com)
+//    Tim Coleman (tim@timcoleman.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,79 +36,79 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-	[ConfigurationCollection (typeof (WebRequestModuleElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class WebRequestModuleElementCollection : ConfigurationElementCollection
-	{
-		#region Constructors
+    [ConfigurationCollection (typeof (WebRequestModuleElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class WebRequestModuleElementCollection : ConfigurationElementCollection
+    {
+        #region Constructors
 
-		public WebRequestModuleElementCollection ()
-		{
-		}
+        public WebRequestModuleElementCollection ()
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[MonoTODO]
-		public WebRequestModuleElement this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public WebRequestModuleElement this [int index] {
+            get { throw new NotImplementedException (); }
+            set { throw new NotImplementedException (); }
+        }
 
-		[MonoTODO]
-		public new WebRequestModuleElement this [string name] {
-			get { return (WebRequestModuleElement) base [name]; }
-			set { base [name] = value; }
-		}
+        [MonoTODO]
+        public new WebRequestModuleElement this [string name] {
+            get { return (WebRequestModuleElement) base [name]; }
+            set { base [name] = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public void Add (WebRequestModuleElement element)
-		{
-			BaseAdd (element);
-		}
+        public void Add (WebRequestModuleElement element)
+        {
+            BaseAdd (element);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear ()
+        {
+            BaseClear ();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new WebRequestModuleElement ();
-		}
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new WebRequestModuleElement ();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			if (!(element is WebRequestModuleElement))
-				throw new ArgumentException ("element");
-			return ((WebRequestModuleElement)element).Prefix;
-		}
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            if (!(element is WebRequestModuleElement))
+                throw new ArgumentException ("element");
+            return ((WebRequestModuleElement)element).Prefix;
+        }
 
-		public int IndexOf (WebRequestModuleElement element)
-		{
-			return BaseIndexOf (element);
-		}
+        public int IndexOf (WebRequestModuleElement element)
+        {
+            return BaseIndexOf (element);
+        }
 
-		public void Remove (WebRequestModuleElement element)
-		{
-			BaseRemove (element.Prefix);
-		}
+        public void Remove (WebRequestModuleElement element)
+        {
+            BaseRemove (element.Prefix);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Remove (string name)
+        {
+            BaseRemove (name);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt (int index)
+        {
+            BaseRemoveAt (index);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

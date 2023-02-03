@@ -1,7 +1,7 @@
 //
 // Authors:
-//	David Straw
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    David Straw
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2011 Novell, Inc.  http://www.novell.com
 //
@@ -40,77 +40,77 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-	[TestFixture]
-	public class Bug652331Test
-	{
-		[Test]
-		public void Bug652331_2 () // test in one of the comment
-		{
-			// Init service
-			int port = NetworkHelpers.FindFreePort ();
-			ServiceHost serviceHost = new ServiceHost (typeof (Service1), new Uri ("http://localhost:" + port + "/Service1"));
-			serviceHost.AddServiceEndpoint (typeof (IService1), new BasicHttpBinding (), string.Empty);
+    [TestFixture]
+    public class Bug652331Test
+    {
+        [Test]
+        public void Bug652331_2 () // test in one of the comment
+        {
+            // Init service
+            int port = NetworkHelpers.FindFreePort ();
+            ServiceHost serviceHost = new ServiceHost (typeof (Service1), new Uri ("http://localhost:" + port + "/Service1"));
+            serviceHost.AddServiceEndpoint (typeof (IService1), new BasicHttpBinding (), string.Empty);
 
-			// Enable metadata exchange (WSDL publishing)
-			var mexBehavior = new ServiceMetadataBehavior ();
-			mexBehavior.HttpGetEnabled = true;
-			serviceHost.Description.Behaviors.Add (mexBehavior);
-			serviceHost.AddServiceEndpoint (typeof (IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding (), "mex");
+            // Enable metadata exchange (WSDL publishing)
+            var mexBehavior = new ServiceMetadataBehavior ();
+            mexBehavior.HttpGetEnabled = true;
+            serviceHost.Description.Behaviors.Add (mexBehavior);
+            serviceHost.AddServiceEndpoint (typeof (IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding (), "mex");
 
-			serviceHost.Open ();
-			Thread.Sleep (2000);  // let WCF spin up
+            serviceHost.Open ();
+            Thread.Sleep (2000);  // let WCF spin up
 
-			try {
-				// client
-				var binding = new BasicHttpBinding ();
-				var remoteAddress = new EndpointAddress ("http://localhost:" + port + "/Service1");
-				var client = new Service1Client (binding, remoteAddress);
+            try {
+                // client
+                var binding = new BasicHttpBinding ();
+                var remoteAddress = new EndpointAddress ("http://localhost:" + port + "/Service1");
+                var client = new Service1Client (binding, remoteAddress);
 
-				var wait = new ManualResetEvent (false);
+                var wait = new ManualResetEvent (false);
 
-				Exception error = null;
-				object result = null;
+                Exception error = null;
+                object result = null;
 
-				client.GetDataCompleted += delegate (object o, GetDataCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
+                client.GetDataCompleted += delegate (object o, GetDataCompletedEventArgs e) {
+                    try {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    } finally {
+                        wait.Set ();
+                    }
+                };
 
-				client.GetDataAsync ();
+                client.GetDataAsync ();
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "timeout");
-				Assert.IsNull (error, "#1, inner exception: {0}", error);
-				Assert.AreEqual ("A", ((DataType1) result).Id, "#2");
-			} finally {
-				serviceHost.Close ();
-			}
-		}
+                Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "timeout");
+                Assert.IsNull (error, "#1, inner exception: {0}", error);
+                Assert.AreEqual ("A", ((DataType1) result).Id, "#2");
+            } finally {
+                serviceHost.Close ();
+            }
+        }
 
-		public class Service1 : IService1
-		{
-			public object GetData ()
-			{
-				return new DataType1 { Id = "A" };
-			}
+        public class Service1 : IService1
+        {
+            public object GetData ()
+            {
+                return new DataType1 { Id = "A" };
+            }
 
-			Func<object> d;
-			public IAsyncResult BeginGetData (AsyncCallback callback, object state)
-			{
-				if (d == null)
-				d = new Func<object> (GetData);
-				return d.BeginInvoke (callback, state);
-			}
+            Func<object> d;
+            public IAsyncResult BeginGetData (AsyncCallback callback, object state)
+            {
+                if (d == null)
+                d = new Func<object> (GetData);
+                return d.BeginInvoke (callback, state);
+            }
 
-			public object EndGetData (IAsyncResult result)
-			{
-				return d.EndInvoke (result);
-			}
-		}
-	}
+            public object EndGetData (IAsyncResult result)
+            {
+                return d.EndInvoke (result);
+            }
+        }
+    }
 }
 
 // below are part of autogenerated code in comment #1 on bug #652331.

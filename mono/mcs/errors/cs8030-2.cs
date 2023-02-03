@@ -4,8 +4,8 @@
 delegate void D (int x);
 
 class X {
-	static void Main ()
-	{
-		D d6 = delegate (int x) { return x; }; // Return type mismatch.
-	}
+    static void Main ()
+    {
+        D d6 = delegate (int x) { return x; }; // Return type mismatch.
+    }
 }

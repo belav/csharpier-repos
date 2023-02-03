@@ -26,8 +26,8 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public interface IDestinationTypeProvider
-	{
-		Type GetDestinationType ();
-	}
+    public interface IDestinationTypeProvider
+    {
+        Type GetDestinationType ();
+    }
 }

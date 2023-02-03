@@ -35,19 +35,19 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices.Protocols
 {
-	public abstract class DsmlSoapConnection : DirectoryConnection
-	{
-		protected DsmlSoapConnection ()
-		{
-		}
+    public abstract class DsmlSoapConnection : DirectoryConnection
+    {
+        protected DsmlSoapConnection ()
+        {
+        }
 
-		public abstract string SessionId { get; }
-		public XmlNode SoapRequestHeader { get; set; }
+        public abstract string SessionId { get; }
+        public XmlNode SoapRequestHeader { get; set; }
 
-		[DirectoryServicesPermission (SecurityAction.LinkDemand, Unrestricted = true)]
-		public abstract void BeginSession();
+        [DirectoryServicesPermission (SecurityAction.LinkDemand, Unrestricted = true)]
+        public abstract void BeginSession();
 
-		[DirectoryServicesPermission (SecurityAction.LinkDemand, Unrestricted = true)]
-		public abstract void EndSession();
-	}
+        [DirectoryServicesPermission (SecurityAction.LinkDemand, Unrestricted = true)]
+        public abstract void EndSession();
+    }
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 
@@ -29,66 +29,66 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class ScrollEventArgs : EventArgs {
-		#region Local Variables
-		private ScrollEventType	type;
-		private int		new_value;
-		private int		old_value;
-		private ScrollOrientation	scroll_orientation;
-		#endregion
+    [ComVisible(true)]
+    public class ScrollEventArgs : EventArgs {
+        #region Local Variables
+        private ScrollEventType    type;
+        private int        new_value;
+        private int        old_value;
+        private ScrollOrientation    scroll_orientation;
+        #endregion
 
-		#region Public Constructors
-		public ScrollEventArgs(ScrollEventType type, int newValue) :
-			this (type, -1, newValue, ScrollOrientation.HorizontalScroll)
-		{
-		}
+        #region Public Constructors
+        public ScrollEventArgs(ScrollEventType type, int newValue) :
+            this (type, -1, newValue, ScrollOrientation.HorizontalScroll)
+        {
+        }
 
-		public ScrollEventArgs (ScrollEventType type, int oldValue, int newValue) :
-			this (type, oldValue, newValue, ScrollOrientation.HorizontalScroll)
-		{
-		}
+        public ScrollEventArgs (ScrollEventType type, int oldValue, int newValue) :
+            this (type, oldValue, newValue, ScrollOrientation.HorizontalScroll)
+        {
+        }
 
-		public ScrollEventArgs (ScrollEventType type, int newValue, ScrollOrientation scroll) :
-			this (type, -1, newValue, scroll)
-		{
-		}
+        public ScrollEventArgs (ScrollEventType type, int newValue, ScrollOrientation scroll) :
+            this (type, -1, newValue, scroll)
+        {
+        }
 
 
-		public ScrollEventArgs (ScrollEventType type, int oldValue, int newValue, ScrollOrientation scroll)
-		{
-			this.new_value = newValue;
-			this.old_value = oldValue;
-			this.scroll_orientation = scroll;
-			this.type = type;
-		}
-		
-		#endregion	// Public Constructors
+        public ScrollEventArgs (ScrollEventType type, int oldValue, int newValue, ScrollOrientation scroll)
+        {
+            this.new_value = newValue;
+            this.old_value = oldValue;
+            this.scroll_orientation = scroll;
+            this.type = type;
+        }
+        
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public int NewValue {
-			get {
-				return new_value;
-			}
+        #region Public Instance Properties
+        public int NewValue {
+            get {
+                return new_value;
+            }
 
-			set {
-				new_value = value;
-			}
-		}
+            set {
+                new_value = value;
+            }
+        }
 
-		public int OldValue {
-			get { return old_value; }
-		}
+        public int OldValue {
+            get { return old_value; }
+        }
 
-		public ScrollOrientation ScrollOrientation {
-			get { return scroll_orientation; }
-		}
-		
-		public ScrollEventType Type {
-			get {
-				return type;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public ScrollOrientation ScrollOrientation {
+            get { return scroll_orientation; }
+        }
+        
+        public ScrollEventType Type {
+            get {
+                return type;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

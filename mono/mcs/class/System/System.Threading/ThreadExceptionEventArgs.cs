@@ -31,18 +31,18 @@
 
 namespace System.Threading
 {
-	public class ThreadExceptionEventArgs : EventArgs
-	{
-		private Exception exception;
-		
-		public ThreadExceptionEventArgs(Exception t) {
-			exception=t;
-		}
+    public class ThreadExceptionEventArgs : EventArgs
+    {
+        private Exception exception;
+        
+        public ThreadExceptionEventArgs(Exception t) {
+            exception=t;
+        }
 
-		public Exception Exception {
-			get {
-				return(exception);
-			}
-		}
-	}
+        public Exception Exception {
+            get {
+                return(exception);
+            }
+        }
+    }
 }

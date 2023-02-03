@@ -3,6 +3,6 @@
 
 public class C
 {
-	struct S {}
-	public void Foo (S?[][] o) {}
+    struct S {}
+    public void Foo (S?[][] o) {}
 }

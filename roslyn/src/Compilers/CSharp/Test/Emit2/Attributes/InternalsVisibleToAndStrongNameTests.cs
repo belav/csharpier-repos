@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -923,19 +923,19 @@ public class PublicClass
 
 public class Test
 {
-	static void Main ()
-	{
-		PublicClass.InternalMethod();
+    static void Main ()
+    {
+        PublicClass.InternalMethod();
         PublicClass.ProtectedMethod();
         PublicClass.PrivateMethod();
         PublicClass.InternalProtectedMethod();
         PublicClass.PrivateProtectedMethod();
-	}
+    }
 }";
             var other = CreateCompilation(cs0281, references: new[] { friendClass.EmitToImageReference() }, assemblyName: "cs0281", options: TestOptions.SigningReleaseDll, parseOptions: parseOptions);
             other.VerifyDiagnostics(
                     // (7,15): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
-                    // 		PublicClass.InternalMethod();
+                    //         PublicClass.InternalMethod();
                     Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "InternalMethod").WithArguments("Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "").WithLocation(7, 15),
                     // (8,21): error CS0122: 'PublicClass.ProtectedMethod()' is inaccessible due to its protection level
                     //         PublicClass.ProtectedMethod();
@@ -971,16 +971,16 @@ internal class FriendClass
 
 public class Test
 {
-	static void Main ()
-	{
-		FriendClass.MyMethod ();
-	}
+    static void Main ()
+    {
+        FriendClass.MyMethod ();
+    }
 }";
             var other = CreateCompilation(cs0281, references: new[] { friendClass.EmitToImageReference() }, assemblyName: "cs0281", options: TestOptions.SigningReleaseDll, parseOptions: parseOptions);
 
             // (7, 3): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('')
             // does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
-            // 		FriendClass.MyMethod ();
+            //         FriendClass.MyMethod ();
             other.VerifyDiagnostics(
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "FriendClass").WithArguments("Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "").WithLocation(7, 3)
             );
@@ -2904,7 +2904,7 @@ using System.Runtime.CompilerServices;
 [ assembly: InternalsVisibleTo(""Issue57742_01, PublicKey=00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb"") ]
 internal class PublicKeyConstants
 {
-	public const string PublicKey = ""Something"";
+    public const string PublicKey = ""Something"";
 }
 ";
             var lib = CreateCompilation(lib_cs, assemblyName: "Issue57742_01_Lib");
@@ -2914,7 +2914,7 @@ internal class PublicKeyConstants
 
 class TestAttribute : System.Attribute
 {
-	public TestAttribute(string x) {} 
+    public TestAttribute(string x) {} 
 }
 ";
 
@@ -2942,7 +2942,7 @@ using System.Runtime.CompilerServices;
 [ assembly: InternalsVisibleTo(""Issue57742_02, PublicKey=00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb"") ]
 internal class PublicKeyConstants
 {
-	public const string PublicKey = ""Something"";
+    public const string PublicKey = ""Something"";
 }
 ";
             var lib = CreateCompilation(lib_cs, assemblyName: "Issue57742_02_Lib");
@@ -2977,7 +2977,7 @@ using System.Runtime.CompilerServices;
 [ assembly: InternalsVisibleTo(""Issue57742_03, PublicKey=00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb"") ]
 internal class PublicKeyConstants
 {
-	public const string PublicKey = ""Something"";
+    public const string PublicKey = ""Something"";
 }
 ";
             var lib = CreateCompilation(lib_cs, assemblyName: "Issue57742_03_Lib");
@@ -2990,7 +2990,7 @@ using System.Reflection;
 
 class TestAttribute : System.Attribute
 {
-	public TestAttribute(string x) {} 
+    public TestAttribute(string x) {} 
 }
 ";
 
@@ -3024,7 +3024,7 @@ using System.Reflection;
 
 class TestAttribute : System.Attribute
 {
-	public TestAttribute(string x) {} 
+    public TestAttribute(string x) {} 
 }
 ";
 
@@ -3105,7 +3105,7 @@ using System.Runtime.CompilerServices;
 [ assembly: InternalsVisibleTo(""Issue57742_04, PublicKey=00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb"") ]
 internal class PublicKeyConstants
 {
-	public const string PublicKey = ""Something"";
+    public const string PublicKey = ""Something"";
 }
 ";
             var lib = CreateCompilation(lib_cs, assemblyName: "Issue57742_04_Lib");

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2289,12 +2289,12 @@ class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`1[System.Decimal]
-	Parameters->
-	Body->
-		Constant:
-			Type->System.Decimal
-			Value->0
+    Type->System.Func`1[System.Decimal]
+    Parameters->
+    Body->
+        Constant:
+            Type->System.Decimal
+            Value->0
 ";
 
             CompileAndVerifyUtil(
@@ -2759,34 +2759,34 @@ class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`3[System.Int32,System.Int64,System.Int64]
-	Parameters->
-		Parameter:
-			Type->System.Int32
-			Name->x
-		Parameter:
-			Type->System.Int64
-			Name->y
-		Body->
-			AddChecked:
-				Type->System.Int64
-				Method->
-				IsLifted->False
-				IsLiftedToNull->False
-				Left->
-					ConvertChecked:
-						Type->System.Int64
-						Method->
-						IsLifted->False
-						IsLiftedToNull->False
-						Operand->
-							Parameter:
-								Type->System.Int32
-								Name->x
-				Right->
-					Parameter:
-						Type->System.Int64
-						Name->y
+    Type->System.Func`3[System.Int32,System.Int64,System.Int64]
+    Parameters->
+        Parameter:
+            Type->System.Int32
+            Name->x
+        Parameter:
+            Type->System.Int64
+            Name->y
+        Body->
+            AddChecked:
+                Type->System.Int64
+                Method->
+                IsLifted->False
+                IsLiftedToNull->False
+                Left->
+                    ConvertChecked:
+                        Type->System.Int64
+                        Method->
+                        IsLifted->False
+                        IsLiftedToNull->False
+                        Operand->
+                            Parameter:
+                                Type->System.Int32
+                                Name->x
+                Right->
+                    Parameter:
+                        Type->System.Int64
+                        Name->y
 ";
 
             CompileAndVerifyUtil(
@@ -2933,15 +2933,15 @@ public class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`2[System.String,System.Object]
-	Parameters->
-		Parameter:
-			Type->System.String
-			Name->x
-	Body->
-		Parameter:
-			Type->System.String
-			Name->x
+    Type->System.Func`2[System.String,System.Object]
+    Parameters->
+        Parameter:
+            Type->System.String
+            Name->x
+    Body->
+        Parameter:
+            Type->System.String
+            Name->x
 ";
 
             CompileAndVerifyUtil(
@@ -2969,21 +2969,21 @@ public class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`2[System.Int32,System.Int32]
-	Parameters->
-		Parameter:
-			Type->System.Int32
-			Name->num1
-	Body->
-		Convert:
-			Type->System.Int32
-			Method->
-			IsLifted->False
-			IsLiftedToNull->False
-			Operand->
-				Parameter:
-					Type->System.Int32
-					Name->num1
+    Type->System.Func`2[System.Int32,System.Int32]
+    Parameters->
+        Parameter:
+            Type->System.Int32
+            Name->num1
+    Body->
+        Convert:
+            Type->System.Int32
+            Method->
+            IsLifted->False
+            IsLiftedToNull->False
+            Operand->
+                Parameter:
+                    Type->System.Int32
+                    Name->num1
 ";
 
             CompileAndVerifyUtil(
@@ -3011,21 +3011,21 @@ public class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`2[System.Int32,System.Nullable`1[System.Int32]]
-	Parameters->
-		Parameter:
-			Type->System.Int32
-			Name->num1
-	Body->
-		Convert:
-			Type->System.Nullable`1[System.Int32]
-			Method->
-			IsLifted->True
-			IsLiftedToNull->True
-			Operand->
-				Parameter:
-					Type->System.Int32
-					Name->num1
+    Type->System.Func`2[System.Int32,System.Nullable`1[System.Int32]]
+    Parameters->
+        Parameter:
+            Type->System.Int32
+            Name->num1
+    Body->
+        Convert:
+            Type->System.Nullable`1[System.Int32]
+            Method->
+            IsLifted->True
+            IsLiftedToNull->True
+            Operand->
+                Parameter:
+                    Type->System.Int32
+                    Name->num1
 ";
 
             CompileAndVerifyUtil(
@@ -3074,18 +3074,18 @@ public class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`1[System.Nullable`1[System.Int16]]
-	Parameters->
-	Body->
-		Convert:
-			Type->System.Nullable`1[System.Int16]
-			Method->
-			IsLifted->True
-			IsLiftedToNull->True
-			Operand->
-				Constant:
-					Type->System.Object
-					Value->
+    Type->System.Func`1[System.Nullable`1[System.Int16]]
+    Parameters->
+    Body->
+        Convert:
+            Type->System.Nullable`1[System.Int16]
+            Method->
+            IsLifted->True
+            IsLiftedToNull->True
+            Operand->
+                Constant:
+                    Type->System.Object
+                    Value->
 ";
 
             CompileAndVerifyUtil(
@@ -3167,27 +3167,27 @@ public class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`2[System.Nullable`1[System.Int16],System.Nullable`1[System.Int32]]
-	Parameters->
-		Parameter:
-			Type->System.Nullable`1[System.Int16]
-			Name->x
-	Body->
-		Not:
-			Type->System.Nullable`1[System.Int32]
-			Method->
-			IsLifted->True
-			IsLiftedToNull->True
-			Operand->
-				Convert:
-					Type->System.Nullable`1[System.Int32]
-					Method->
-					IsLifted->True
-					IsLiftedToNull->True
-					Operand->
-						Parameter:
-							Type->System.Nullable`1[System.Int16]
-							Name->x
+    Type->System.Func`2[System.Nullable`1[System.Int16],System.Nullable`1[System.Int32]]
+    Parameters->
+        Parameter:
+            Type->System.Nullable`1[System.Int16]
+            Name->x
+    Body->
+        Not:
+            Type->System.Nullable`1[System.Int32]
+            Method->
+            IsLifted->True
+            IsLiftedToNull->True
+            Operand->
+                Convert:
+                    Type->System.Nullable`1[System.Int32]
+                    Method->
+                    IsLifted->True
+                    IsLiftedToNull->True
+                    Operand->
+                        Parameter:
+                            Type->System.Nullable`1[System.Int16]
+                            Name->x
 ";
             CompileAndVerifyUtil(
                 new[] { text, TreeWalkerLib },
@@ -3325,44 +3325,44 @@ public class Test
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`2[System.Int32,System.Linq.Expressions.Expression`1[System.Func`2[System.Int32,System.Int32]]]
-	Parameters->
-		Parameter:
-			Type->System.Int32
-			Name->y
-	Body->
-		Convert:
-			Type->System.Linq.Expressions.Expression`1[System.Func`2[System.Int32,System.Int32]]
-			Method->
-			IsLifted->False
-			IsLiftedToNull->False
-			Operand->
-				Quote:
-					Type->System.Linq.Expressions.Expression`1[System.Func`2[System.Int32,System.Int32]]
-					Method->
-					IsLifted->False
-					IsLiftedToNull->False
-					Operand->
-						Lambda:
-							Type->System.Func`2[System.Int32,System.Int32]
-							Parameters->
-								Parameter:
-									Type->System.Int32
-									Name->x
-							Body->
-								Multiply:
-									Type->System.Int32
-									Method->
-									IsLifted->False
-									IsLiftedToNull->False
-									Left->
-										Constant:
-											Type->System.Int32
-											Value->2
-									Right->
-										Parameter:
-											Type->System.Int32
-											Name->x
+    Type->System.Func`2[System.Int32,System.Linq.Expressions.Expression`1[System.Func`2[System.Int32,System.Int32]]]
+    Parameters->
+        Parameter:
+            Type->System.Int32
+            Name->y
+    Body->
+        Convert:
+            Type->System.Linq.Expressions.Expression`1[System.Func`2[System.Int32,System.Int32]]
+            Method->
+            IsLifted->False
+            IsLiftedToNull->False
+            Operand->
+                Quote:
+                    Type->System.Linq.Expressions.Expression`1[System.Func`2[System.Int32,System.Int32]]
+                    Method->
+                    IsLifted->False
+                    IsLiftedToNull->False
+                    Operand->
+                        Lambda:
+                            Type->System.Func`2[System.Int32,System.Int32]
+                            Parameters->
+                                Parameter:
+                                    Type->System.Int32
+                                    Name->x
+                            Body->
+                                Multiply:
+                                    Type->System.Int32
+                                    Method->
+                                    IsLifted->False
+                                    IsLiftedToNull->False
+                                    Left->
+                                        Constant:
+                                            Type->System.Int32
+                                            Value->2
+                                    Right->
+                                        Parameter:
+                                            Type->System.Int32
+                                            Name->x
 ";
 
             CompileAndVerifyUtil(
@@ -3687,17 +3687,17 @@ public class Parent
 }";
             string expectedOutput = @"
 Lambda:
-	Type->System.Func`1[System.Int32]
-	Parameters->
-	Body->
-		MemberInit:
-			Type->System.Int32
-			NewExpression->
-			New:
-				Type->System.Int32
-				Constructor->
-				Arguments->
-				Bindings->
+    Type->System.Func`1[System.Int32]
+    Parameters->
+    Body->
+        MemberInit:
+            Type->System.Int32
+            NewExpression->
+            New:
+                Type->System.Int32
+                Constructor->
+                Arguments->
+                Bindings->
 ";
             CompileAndVerifyUtil(
                 new[] { text, TreeWalkerLib },
@@ -5475,11 +5475,11 @@ class Test
         System.Console.WriteLine(GetFunc<int>()().ToString());
     }
 
-	static Func<Expression<Func<T,T>>> GetFunc<T>()
-	{
-		int x = 10;
-		return ()=> { int y = x; return (T m)=>  m;};
-	}	
+    static Func<Expression<Func<T,T>>> GetFunc<T>()
+    {
+        int x = 10;
+        return ()=> { int y = x; return (T m)=>  m;};
+    }    
 }";
 
             string expectedOutput = @"m => m";

@@ -2,7 +2,7 @@
 // VisitorForIsNull.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,19 +30,19 @@ using System;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-	class VisitorForIsNull<V, E> : QueryVisitor<V, E>
-		where V : IEquatable<V>
-		where E : IEquatable<E> {
-		public static bool IsNull (E expr, FullExpressionDecoder<V, E> decoder)
-		{
-			VisitorForIsNull<V, E> v = decoder.IsNullVisitor;
+    class VisitorForIsNull<V, E> : QueryVisitor<V, E>
+        where V : IEquatable<V>
+        where E : IEquatable<E> {
+        public static bool IsNull (E expr, FullExpressionDecoder<V, E> decoder)
+        {
+            VisitorForIsNull<V, E> v = decoder.IsNullVisitor;
 
-		    return Decode (expr, v, decoder);
-		}
+            return Decode (expr, v, decoder);
+        }
 
-		public override bool LoadNull (E pc, V dest, Dummy polarity)
-		{
-			return true;
-		}
-	}
+        public override bool LoadNull (E pc, V dest, Dummy polarity)
+        {
+            return true;
+        }
+    }
 }

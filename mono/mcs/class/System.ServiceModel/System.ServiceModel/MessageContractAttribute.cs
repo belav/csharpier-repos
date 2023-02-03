@@ -2,7 +2,7 @@
 // MessageContractAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,38 +30,38 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Struct)]
-	public sealed class MessageContractAttribute : Attribute
-	{
-		bool has_protection_level, is_wrapped = true;
-		string name, ns;
-		ProtectionLevel protection_level;
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Struct)]
+    public sealed class MessageContractAttribute : Attribute
+    {
+        bool has_protection_level, is_wrapped = true;
+        string name, ns;
+        ProtectionLevel protection_level;
 
-		public bool HasProtectionLevel {
-			get { return has_protection_level; }
-		}
+        public bool HasProtectionLevel {
+            get { return has_protection_level; }
+        }
 
-		public ProtectionLevel ProtectionLevel {
-			get { return protection_level; }
-			set {
-				protection_level = value;
-				has_protection_level = true;
-			}
-		}
+        public ProtectionLevel ProtectionLevel {
+            get { return protection_level; }
+            set {
+                protection_level = value;
+                has_protection_level = true;
+            }
+        }
 
-		public bool IsWrapped {
-			get { return is_wrapped; }
-			set { is_wrapped = value; }
-		}
+        public bool IsWrapped {
+            get { return is_wrapped; }
+            set { is_wrapped = value; }
+        }
 
-		public string WrapperName {
-			get { return name; }
-			set { name = value; }
-		}
+        public string WrapperName {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public string WrapperNamespace {
-			get { return ns; }
-			set { ns = value; }
-		}
-	}
+        public string WrapperNamespace {
+            get { return ns; }
+            set { ns = value; }
+        }
+    }
 }

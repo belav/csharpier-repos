@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Threading;
-	using System.Xml;
+    using System;
+    using System.Threading;
+    using System.Xml;
 
-	// DEPTH:               ROOT STATES:
+    // DEPTH:               ROOT STATES:
     // 0: <?xml>            [Start, Prolog]
     // 1: <Root>            [Element, Attribute]
     // 2:   <Foo>...</Foo>  [Content]
@@ -51,9 +51,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 }
             }
             finally
-			{
-				base.Dispose(managed);
-			}
+            {
+                base.Dispose(managed);
+            }
         }
 
         private void DisposeWriter(ref XmlWriter writer)
@@ -330,20 +330,20 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private void RequireNotClosed()
         {
-			if (state == WriteState.Closed || state == WriteState.Error)
-				throw Error.InvalidOperation();
+            if (state == WriteState.Closed || state == WriteState.Error)
+                throw Error.InvalidOperation();
         }
 
         private void RequireState(WriteState state)
         {
             if (this.state != state)
-				throw Error.InvalidOperation();
+                throw Error.InvalidOperation();
         }
 
         private void RequireState(WriteState state1, WriteState state2)
         {
             if (state != state1 && state != state2)
-				throw Error.InvalidOperation();
+                throw Error.InvalidOperation();
         }
 
         private void Reset(WriteState state)

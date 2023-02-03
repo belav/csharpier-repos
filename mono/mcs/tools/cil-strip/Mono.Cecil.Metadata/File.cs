@@ -31,52 +31,52 @@
 
 namespace Mono.Cecil.Metadata {
 
-	using Mono.Cecil;
+    using Mono.Cecil;
 
-	internal sealed class FileTable : IMetadataTable {
+    internal sealed class FileTable : IMetadataTable {
 
-		public const int RId = 0x26;
+        public const int RId = 0x26;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public FileRow this [int index] {
-			get { return m_rows [index] as FileRow; }
-			set { m_rows [index] = value; }
-		}
+        public FileRow this [int index] {
+            get { return m_rows [index] as FileRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal FileTable ()
-		{
-		}
+        internal FileTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitFileTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitFileTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class FileRow : IMetadataRow {
+    internal sealed class FileRow : IMetadataRow {
 
-		public FileAttributes Flags;
-		public uint Name;
-		public uint HashValue;
+        public FileAttributes Flags;
+        public uint Name;
+        public uint HashValue;
 
-		internal FileRow ()
-		{
-		}
+        internal FileRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitFileRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitFileRow (this);
+        }
+    }
 }

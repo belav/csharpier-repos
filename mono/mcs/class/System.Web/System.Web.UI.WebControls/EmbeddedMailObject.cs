@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.EmbeddedMailObject.cs
 //
 // Authors:
-//	Igor Zelmanovich (igorz@mainsoft.com)
+//    Igor Zelmanovich (igorz@mainsoft.com)
 //
 // (C) 2006 Mainsoft, Inc (http://www.mainsoft.com)
 //
@@ -33,32 +33,32 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	//[TypeConverter (""System.Web.UI.WebControls.EmbeddedMailObject+EmbeddedMailObjectTypeConverter"")]
-	public sealed class EmbeddedMailObject
-	{
-		public EmbeddedMailObject ()
-		{ }
+    //[TypeConverter (""System.Web.UI.WebControls.EmbeddedMailObject+EmbeddedMailObjectTypeConverter"")]
+    public sealed class EmbeddedMailObject
+    {
+        public EmbeddedMailObject ()
+        { }
 
-		public EmbeddedMailObject (string name, string path)
-		{
-			Name = name;
-			Path = path;
-		}
+        public EmbeddedMailObject (string name, string path)
+        {
+            Name = name;
+            Path = path;
+        }
 
-		[NotifyParentProperty (true)]
-		[DefaultValue ("")]
-		public string Name {
-			get;
-			set;
-		}
+        [NotifyParentProperty (true)]
+        [DefaultValue ("")]
+        public string Name {
+            get;
+            set;
+        }
 
-		[DefaultValue ("")]
-		[NotifyParentProperty (true)]
-		[UrlProperty]
-		[Editor ("System.Web.UI.Design.MailFileEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-		public string Path {
-			get;
-			set;
-		}
-	}
+        [DefaultValue ("")]
+        [NotifyParentProperty (true)]
+        [UrlProperty]
+        [Editor ("System.Web.UI.Design.MailFileEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
+        public string Path {
+            get;
+            set;
+        }
+    }
 }

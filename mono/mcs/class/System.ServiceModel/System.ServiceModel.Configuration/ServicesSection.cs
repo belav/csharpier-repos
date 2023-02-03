@@ -2,7 +2,7 @@
 // ServicesSection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,23 +54,23 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class ServicesSection
-		 : ConfigurationSection
-	{
-		// Properties
+    public sealed class ServicesSection
+         : ConfigurationSection
+    {
+        // Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public ServiceElementCollection Services {
-			get { return (ServiceElementCollection) base [String.Empty]; }
-		}
+        [ConfigurationProperty ("",
+             Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true)]
+        public ServiceElementCollection Services {
+            get { return (ServiceElementCollection) base [String.Empty]; }
+        }
 
 
-	}
+    }
 
 }

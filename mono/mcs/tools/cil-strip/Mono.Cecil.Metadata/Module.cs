@@ -31,52 +31,52 @@
 
 namespace Mono.Cecil.Metadata {
 
-	internal sealed class ModuleTable : IMetadataTable {
+    internal sealed class ModuleTable : IMetadataTable {
 
-		public const int RId = 0x00;
+        public const int RId = 0x00;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public ModuleRow this [int index] {
-			get { return m_rows [index] as ModuleRow; }
-			set { m_rows [index] = value; }
-		}
+        public ModuleRow this [int index] {
+            get { return m_rows [index] as ModuleRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal ModuleTable ()
-		{
-		}
+        internal ModuleTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitModuleTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitModuleTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class ModuleRow : IMetadataRow {
+    internal sealed class ModuleRow : IMetadataRow {
 
-		public ushort Generation;
-		public uint Name;
-		public uint Mvid;
-		public uint EncId;
-		public uint EncBaseId;
+        public ushort Generation;
+        public uint Name;
+        public uint Mvid;
+        public uint EncId;
+        public uint EncBaseId;
 
-		internal ModuleRow ()
-		{
-		}
+        internal ModuleRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitModuleRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitModuleRow (this);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens;
 using System.Xml;
 
 namespace System.IdentityModel.Tokens

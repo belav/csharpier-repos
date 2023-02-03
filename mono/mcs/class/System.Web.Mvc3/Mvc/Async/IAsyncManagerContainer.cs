@@ -1,4 +1,4 @@
-﻿namespace System.Web.Mvc.Async {
+namespace System.Web.Mvc.Async {
 
     public interface IAsyncManagerContainer {
 

@@ -2,7 +2,7 @@
 // HtmlFormCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlForm
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,26 +36,26 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlFormCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlFormCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlFormTest unit = new HtmlFormTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.Attributes ();
-			unit.ViewState ();
-			unit.Name_InsideNaming ();
-			unit.RenderChildren ();
-			unit.ControlCollection ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlFormTest unit = new HtmlFormTest ();
+            unit.DefaultProperties ();
+            unit.NullProperties ();
+            unit.Attributes ();
+            unit.ViewState ();
+            unit.Name_InsideNaming ();
+            unit.RenderChildren ();
+            unit.ControlCollection ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlForm); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlForm); }
+        }
+    }
 }

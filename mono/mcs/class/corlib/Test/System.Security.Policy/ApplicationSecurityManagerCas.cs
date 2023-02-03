@@ -1,9 +1,9 @@
 //
 // ApplicationSecurityManagerCas.cs -
-//	CAS unit tests for System.Security.Policy.ApplicationSecurityManager
+//    CAS unit tests for System.Security.Policy.ApplicationSecurityManager
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,122 +39,122 @@ using System.Security.Policy;
 
 namespace MonoCasTests.System.Security.Policy {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ApplicationSecurityManagerCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ApplicationSecurityManagerCas {
 
-		private string defaultTrustManagerTypeName;
+        private string defaultTrustManagerTypeName;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			defaultTrustManagerTypeName = ApplicationSecurityManager.ApplicationTrustManager.GetType ().AssemblyQualifiedName;
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            defaultTrustManagerTypeName = ApplicationSecurityManager.ApplicationTrustManager.GetType ().AssemblyQualifiedName;
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ApplicationTrustManager_DenyControlPolicy ()
-		{
-			Assert.IsNotNull (ApplicationSecurityManager.ApplicationTrustManager);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void ApplicationTrustManager_DenyControlPolicy ()
+        {
+            Assert.IsNotNull (ApplicationSecurityManager.ApplicationTrustManager);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
-		public void ApplicationTrustManager_PermitOnlyControlPolicy ()
-		{
-			Assert.IsNotNull (ApplicationSecurityManager.ApplicationTrustManager);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
+        public void ApplicationTrustManager_PermitOnlyControlPolicy ()
+        {
+            Assert.IsNotNull (ApplicationSecurityManager.ApplicationTrustManager);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void UserApplicationTrusts_DenyControlPolicy ()
-		{
-			// no security requirements documented
-			Assert.AreEqual (0, ApplicationSecurityManager.UserApplicationTrusts.Count);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void UserApplicationTrusts_DenyControlPolicy ()
+        {
+            // no security requirements documented
+            Assert.AreEqual (0, ApplicationSecurityManager.UserApplicationTrusts.Count);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
-		public void UserApplicationTrusts_PermitOnlyControlPolicy ()
-		{
-			// no security requirements documented
-			Assert.IsNotNull (ApplicationSecurityManager.UserApplicationTrusts);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
+        public void UserApplicationTrusts_PermitOnlyControlPolicy ()
+        {
+            // no security requirements documented
+            Assert.IsNotNull (ApplicationSecurityManager.UserApplicationTrusts);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void DetermineApplicationTrust_DenyUnrestricted ()
-		{
-			// documented as requiring ControlPolicy and ControlEvidence
-			// possibly a linkdemand as only ControlPolicy seems check by the default
-			// IApplicationTrustManager
-			ApplicationSecurityManager.DetermineApplicationTrust (null, null);
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (NullReferenceException))]
+        public void DetermineApplicationTrust_DenyUnrestricted ()
+        {
+            // documented as requiring ControlPolicy and ControlEvidence
+            // possibly a linkdemand as only ControlPolicy seems check by the default
+            // IApplicationTrustManager
+            ApplicationSecurityManager.DetermineApplicationTrust (null, null);
+        }
 
-		// default trust manager
+        // default trust manager
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void DefaultTrustManager_DetermineApplicationTrust_DenyControlPolicy ()
-		{
-			ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, null);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void DefaultTrustManager_DetermineApplicationTrust_DenyControlPolicy ()
+        {
+            ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, null);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void DefaultTrustManager_DetermineApplicationTrust_PermitOnlyControlPolicy ()
-		{
-			ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, null);
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void DefaultTrustManager_DetermineApplicationTrust_PermitOnlyControlPolicy ()
+        {
+            ApplicationSecurityManager.ApplicationTrustManager.DetermineApplicationTrust (null, null);
+        }
 
-		private void CheckXml (SecurityElement se)
-		{
-			Assert.AreEqual (defaultTrustManagerTypeName, se.Attribute ("class"), "class");
-			Assert.AreEqual ("1", se.Attribute ("version"), "version");
-			Assert.AreEqual (2, se.Attributes.Count, "Count");
-			Assert.IsNull (se.Children, "Children");
-		}
+        private void CheckXml (SecurityElement se)
+        {
+            Assert.AreEqual (defaultTrustManagerTypeName, se.Attribute ("class"), "class");
+            Assert.AreEqual ("1", se.Attribute ("version"), "version");
+            Assert.AreEqual (2, se.Attributes.Count, "Count");
+            Assert.IsNull (se.Children, "Children");
+        }
 
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		private void CheckFromXml (IApplicationTrustManager atm)
-		{
-			SecurityElement se = new SecurityElement ("IApplicationTrustManager");
-			se.AddAttribute ("class", defaultTrustManagerTypeName);
-			se.AddAttribute ("version", "1");
-			atm.FromXml (se);
-			// accepted
-			CheckXml (atm.ToXml ());
-		}
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        private void CheckFromXml (IApplicationTrustManager atm)
+        {
+            SecurityElement se = new SecurityElement ("IApplicationTrustManager");
+            se.AddAttribute ("class", defaultTrustManagerTypeName);
+            se.AddAttribute ("version", "1");
+            atm.FromXml (se);
+            // accepted
+            CheckXml (atm.ToXml ());
+        }
 
-		[Test]
-		public void DefaultTrustManager_FromXml ()
-		{
-			CheckFromXml (ApplicationSecurityManager.ApplicationTrustManager);
-		}
+        [Test]
+        public void DefaultTrustManager_FromXml ()
+        {
+            CheckFromXml (ApplicationSecurityManager.ApplicationTrustManager);
+        }
 
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void CheckToXml (IApplicationTrustManager atm)
-		{
-			CheckXml (atm.ToXml ());
-		}
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void CheckToXml (IApplicationTrustManager atm)
+        {
+            CheckXml (atm.ToXml ());
+        }
 
-		[Test]
-		public void DefaultTrustManager_ToXml ()
-		{
-			CheckToXml (ApplicationSecurityManager.ApplicationTrustManager);
-		}
-	}
+        [Test]
+        public void DefaultTrustManager_ToXml ()
+        {
+            CheckToXml (ApplicationSecurityManager.ApplicationTrustManager);
+        }
+    }
 }
 

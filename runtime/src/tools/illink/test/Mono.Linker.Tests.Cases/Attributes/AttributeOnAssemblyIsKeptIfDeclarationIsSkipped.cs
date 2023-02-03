@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Mono.Linker.Tests.Cases.Attributes;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;
@@ -10,14 +10,14 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes
 {
-	[SkipPeVerify]
-	[Define ("REFERENCE_INCLUDED")]
-	[SetupCompileBefore ("library.dll", new[] { "Dependencies/AttributeDefinedInReference.cs" })]
-	[SetupLinkerAction ("skip", "library")]
-	class AttributeOnAssemblyIsKeptIfDeclarationIsSkipped
-	{
-		static void Main ()
-		{
-		}
-	}
+    [SkipPeVerify]
+    [Define ("REFERENCE_INCLUDED")]
+    [SetupCompileBefore ("library.dll", new[] { "Dependencies/AttributeDefinedInReference.cs" })]
+    [SetupLinkerAction ("skip", "library")]
+    class AttributeOnAssemblyIsKeptIfDeclarationIsSkipped
+    {
+        static void Main ()
+        {
+        }
+    }
 }

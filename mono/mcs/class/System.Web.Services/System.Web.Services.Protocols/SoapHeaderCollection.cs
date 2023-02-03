@@ -31,60 +31,60 @@
 using System.Collections;
 
 namespace System.Web.Services.Protocols {
-	public class SoapHeaderCollection : CollectionBase {
+    public class SoapHeaderCollection : CollectionBase {
 
-		#region Constructors
+        #region Constructors
 
-		public SoapHeaderCollection ()
-		{
-		}
+        public SoapHeaderCollection ()
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		public SoapHeader this [int index] {
-			get { return (SoapHeader) List[index]; }
-			set { List[index] = value; }
-		}
+        public SoapHeader this [int index] {
+            get { return (SoapHeader) List[index]; }
+            set { List[index] = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public int Add (SoapHeader header)
-		{
-			Insert (Count, header);
-			return (Count - 1);
-		}
+        public int Add (SoapHeader header)
+        {
+            Insert (Count, header);
+            return (Count - 1);
+        }
 
-		public bool Contains (SoapHeader header)
-		{
-			return List.Contains (header);
-		}
+        public bool Contains (SoapHeader header)
+        {
+            return List.Contains (header);
+        }
 
-		public void CopyTo (SoapHeader[] array, int index)
-		{
-			List.CopyTo (array, index);
-		}
+        public void CopyTo (SoapHeader[] array, int index)
+        {
+            List.CopyTo (array, index);
+        }
 
-		public int IndexOf (SoapHeader header)
-		{
-			return List.IndexOf (header);
-		}
+        public int IndexOf (SoapHeader header)
+        {
+            return List.IndexOf (header);
+        }
 
-		public void Insert (int index, SoapHeader header)
-		{
-			if (index < 0 || index > Count)
-				throw new ArgumentOutOfRangeException ();
-			List.Insert (index, header);
-		}
+        public void Insert (int index, SoapHeader header)
+        {
+            if (index < 0 || index > Count)
+                throw new ArgumentOutOfRangeException ();
+            List.Insert (index, header);
+        }
 
-		public void Remove (SoapHeader header)
-		{
-			List.Remove (header);
-		}
+        public void Remove (SoapHeader header)
+        {
+            List.Remove (header);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

@@ -2,7 +2,7 @@
 // ResourceSetCas.cs - CAS unit tests for System.Resources.ResourceSet
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,47 +37,47 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.Resources {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ResourceSetCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class ResourceSetCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		// we use reflection to call ResourceSet as the Stream constructor is 
-		// protected by LinkDemand (which will be converted into full demand, i.e. 
-		// a stack walk) when reflection is used (i.e. it gets testable).
+        // we use reflection to call ResourceSet as the Stream constructor is 
+        // protected by LinkDemand (which will be converted into full demand, i.e. 
+        // a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Stream ()
-		{
-			ConstructorInfo ci = typeof (ResourceSet).GetConstructor (new Type [1] { typeof (Stream) });
-			ci.Invoke (new object [1] { Stream.Null });
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Constructor_Stream ()
+        {
+            ConstructorInfo ci = typeof (ResourceSet).GetConstructor (new Type [1] { typeof (Stream) });
+            ci.Invoke (new object [1] { Stream.Null });
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		public void Constructor_String ()
-		{
-			ConstructorInfo ci = typeof (ResourceSet).GetConstructor (new Type [1] { typeof (string) });
-			ci.Invoke (new object [1] { MonoTests.System.Resources.ResourceReaderTest.m_ResourceFile });
-			// works - i.e. no LinkDemand
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+        public void Constructor_String ()
+        {
+            ConstructorInfo ci = typeof (ResourceSet).GetConstructor (new Type [1] { typeof (string) });
+            ci.Invoke (new object [1] { MonoTests.System.Resources.ResourceReaderTest.m_ResourceFile });
+            // works - i.e. no LinkDemand
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		public void Constructor_IResourceReader ()
-		{
-			ResourceReader r = new ResourceReader (MonoTests.System.Resources.ResourceReaderTest.m_ResourceFile);
-			ConstructorInfo ci = typeof (ResourceSet).GetConstructor (new Type [1] { typeof (IResourceReader) });
-			ci.Invoke (new object [1] { r });
-			// works - i.e. no LinkDemand
-		}
-	}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+        public void Constructor_IResourceReader ()
+        {
+            ResourceReader r = new ResourceReader (MonoTests.System.Resources.ResourceReaderTest.m_ResourceFile);
+            ConstructorInfo ci = typeof (ResourceSet).GetConstructor (new Type [1] { typeof (IResourceReader) });
+            ci.Invoke (new object [1] { r });
+            // works - i.e. no LinkDemand
+        }
+    }
 }

@@ -3,7 +3,7 @@
 
 class C
 {
-	public void Foo (params System.Action)
-	{
-	}
+    public void Foo (params System.Action)
+    {
+    }
 }

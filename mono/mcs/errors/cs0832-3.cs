@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 
 class C
 {
-	public static void Main ()
-	{
-		Expression<Func<int, int>> e = (a) => --a;
-	}
+    public static void Main ()
+    {
+        Expression<Func<int, int>> e = (a) => --a;
+    }
 }

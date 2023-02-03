@@ -2,7 +2,7 @@
 // MexBindingBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,28 +54,28 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public abstract partial class MexBindingBindingCollectionElement<TStandardBinding,TBindingConfiguration>
-		 : StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
-		where TStandardBinding : Binding
-		where TBindingConfiguration : StandardBindingElement, new()
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public abstract partial class MexBindingBindingCollectionElement<TStandardBinding,TBindingConfiguration>
+         : StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
+        where TStandardBinding : Binding
+        where TBindingConfiguration : StandardBindingElement, new()
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static MexBindingBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static MexBindingBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		protected MexBindingBindingCollectionElement ()
-		{
-		}
-
-
-		// Properties
+        protected MexBindingBindingCollectionElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

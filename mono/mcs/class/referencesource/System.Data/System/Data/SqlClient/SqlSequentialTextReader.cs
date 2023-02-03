@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Text;
@@ -455,11 +455,11 @@ namespace System.Data.SqlClient
             {
                 throw ADP.ArgumentNull(ADP.ParameterBuffer);
             }
-			if (index < 0)
+            if (index < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterIndex);
             }
-			if (count < 0)
+            if (count < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterCount);
             }

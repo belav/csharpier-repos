@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,13 +27,13 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ChartImageWrapMode
-	{
-		Tile = 0,
-		TileFlipX = 1,
-		TileFlipY = 2,
-		TileFlipXY = 3,
-		Scaled = 4,
-		Unscaled = 100
-	}
+    public enum ChartImageWrapMode
+    {
+        Tile = 0,
+        TileFlipX = 1,
+        TileFlipY = 2,
+        TileFlipXY = 3,
+        Scaled = 4,
+        Unscaled = 100
+    }
 }

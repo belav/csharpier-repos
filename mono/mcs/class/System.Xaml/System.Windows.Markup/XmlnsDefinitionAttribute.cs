@@ -30,18 +30,18 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-	public sealed class XmlnsDefinitionAttribute : Attribute
-	{
-		public XmlnsDefinitionAttribute (string xmlNamespace, string clrNamespace)
-		{
-			XmlNamespace = xmlNamespace;
-			ClrNamespace = clrNamespace;
-		}
-		
-		public string AssemblyName { get; set; }
-		public string ClrNamespace { get; private set; }
-		public string XmlNamespace { get; private set; }
-	}
+    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+    public sealed class XmlnsDefinitionAttribute : Attribute
+    {
+        public XmlnsDefinitionAttribute (string xmlNamespace, string clrNamespace)
+        {
+            XmlNamespace = xmlNamespace;
+            ClrNamespace = clrNamespace;
+        }
+        
+        public string AssemblyName { get; set; }
+        public string ClrNamespace { get; private set; }
+        public string XmlNamespace { get; private set; }
+    }
 }

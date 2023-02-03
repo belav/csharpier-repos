@@ -7,7 +7,7 @@ using System.Security.Permissions;
 
 public class Program {
 
-	[DebugPermission (SecurityAction.RequestMinimum)]
+    [DebugPermission (SecurityAction.RequestMinimum)]
         public int i;
 }
 
@@ -15,13 +15,13 @@ public class Program {
 [Serializable]
 public class DebugPermissionAttribute : CodeAccessSecurityAttribute {
 
-	public DebugPermissionAttribute (SecurityAction action)
-		: base (action)
-	{
-	}
+    public DebugPermissionAttribute (SecurityAction action)
+        : base (action)
+    {
+    }
         
-	public override IPermission CreatePermission ()
-	{
-		return null;
-	}
+    public override IPermission CreatePermission ()
+    {
+        return null;
+    }
 }

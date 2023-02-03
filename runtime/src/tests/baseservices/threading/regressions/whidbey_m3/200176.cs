@@ -9,22 +9,22 @@ public class Stop {
     public static int Main() {              
 
         Stop tm = new Stop();
-	try
-	{
+    try
+    {
 
-		ThreadPool.QueueUserWorkItem(new WaitCallback(tm.RunTest));
-		Thread.Sleep(3000);
-	}
-	catch
-	{
-		return -1;
-	}
-	return 100;
+        ThreadPool.QueueUserWorkItem(new WaitCallback(tm.RunTest));
+        Thread.Sleep(3000);
+    }
+    catch
+    {
+        return -1;
+    }
+    return 100;
     }
     public void RunTest(object foo)
     {
         try{
-	    throw new Exception();
+        throw new Exception();
         }
         catch
         {}        

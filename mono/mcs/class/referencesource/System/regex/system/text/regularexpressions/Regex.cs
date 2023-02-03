@@ -78,9 +78,9 @@ namespace System.Text.RegularExpressions {
         #endif
         public static readonly TimeSpan InfiniteMatchTimeout =
 #if BOOTSTRAP_BASIC
-		new TimeSpan (0, 0, 0, 0, Timeout.Infinite);	
+        new TimeSpan (0, 0, 0, 0, Timeout.Infinite);    
 #else
-		Timeout.InfiniteTimeSpan;
+        Timeout.InfiniteTimeSpan;
 #endif
         #else
         internal static readonly TimeSpan InfiniteMatchTimeout = new TimeSpan(0, 0, 0, 0, Timeout.Infinite);

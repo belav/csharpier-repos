@@ -2,7 +2,7 @@
 // ILPrinter.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,5 +29,5 @@
 using System.IO;
 
 namespace Mono.CodeContracts.Static.Analysis {
-	delegate void ILPrinter<TLabel> (TLabel label, string prefix, TextWriter tw);
+    delegate void ILPrinter<TLabel> (TLabel label, string prefix, TextWriter tw);
 }

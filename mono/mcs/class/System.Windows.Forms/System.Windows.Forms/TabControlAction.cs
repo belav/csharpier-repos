@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum TabControlAction
-	{
-		Selecting = 0,
-		Selected = 1,
-		Deselecting = 2,
-		Deselected = 3
-	}
+    public enum TabControlAction
+    {
+        Selecting = 0,
+        Selected = 1,
+        Deselecting = 2,
+        Deselected = 3
+    }
 }

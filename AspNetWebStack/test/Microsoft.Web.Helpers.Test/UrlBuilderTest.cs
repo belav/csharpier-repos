@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -261,8 +261,8 @@ namespace Microsoft.Web.Helpers.Test
             var pagePath = "~/dir/page/?someparam=value";
 
             // Act
-            var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, new { Λ = "λ" });
-            builder.AddParam(new { π = "is not a lie" }).AddParam("Π", "maybe a lie");
+            var builder = new UrlBuilder(GetContext(), _virtualPathUtility, pagePath, new { ? = "?" });
+            builder.AddParam(new { p = "is not a lie" }).AddParam("?", "maybe a lie");
             // Assert
             Assert.Equal("?someparam=value&%ce%9b=%ce%bb&%cf%80=is+not+a+lie&%ce%a0=maybe+a+lie", builder.QueryString);
         }

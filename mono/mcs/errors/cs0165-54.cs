@@ -3,23 +3,23 @@
 
 class A
 {
-	public B b;
+    public B b;
 }
 
 class B
 {
-	public void Foo (int arg)
-	{
-	}
+    public void Foo (int arg)
+    {
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{
-		A a = null;
-		int res;
-		a?.b.Foo(res = 3);
-		System.Console.WriteLine (res);
-	}
+    public static void Main ()
+    {
+        A a = null;
+        int res;
+        a?.b.Foo(res = 3);
+        System.Console.WriteLine (res);
+    }
 }

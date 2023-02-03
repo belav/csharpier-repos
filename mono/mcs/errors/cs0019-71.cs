@@ -4,10 +4,10 @@
 
 class X
 {
-	public static void Main ()
-	{
-		var t1 = new External ();
-		int t2 = 0;
-		bool b = t1 == t2;
-	}
+    public static void Main ()
+    {
+        var t1 = new External ();
+        int t2 = 0;
+        bool b = t1 == t2;
+    }
 }

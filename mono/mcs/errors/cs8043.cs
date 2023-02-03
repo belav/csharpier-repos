@@ -4,8 +4,8 @@
 
 struct S (int x)
 {
-	public S (long x)
-		: this ()
-	{
-	}
+    public S (long x)
+        : this ()
+    {
+    }
 }

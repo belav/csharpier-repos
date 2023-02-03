@@ -36,153 +36,153 @@ using System.Globalization;
 
 namespace System.DirectoryServices
 {
-	public class PropertyCollection : IDictionary, ICollection,IEnumerable
-	{
-		private ArrayList m_oKeys = new ArrayList();
-		private Hashtable m_oValues = new Hashtable();
-		private DirectoryEntry _parent;
+    public class PropertyCollection : IDictionary, ICollection,IEnumerable
+    {
+        private ArrayList m_oKeys = new ArrayList();
+        private Hashtable m_oValues = new Hashtable();
+        private DirectoryEntry _parent;
 
-		internal PropertyCollection(): this(null)
-		{
-		}
+        internal PropertyCollection(): this(null)
+        {
+        }
 
-		internal PropertyCollection(DirectoryEntry parent)
-		{
-			_parent=parent;
-		}
+        internal PropertyCollection(DirectoryEntry parent)
+        {
+            _parent=parent;
+        }
 
-		public int Count
-		{
-			get{return m_oValues.Count;}
-		}
+        public int Count
+        {
+            get{return m_oValues.Count;}
+        }
 
-		bool ICollection.IsSynchronized
-		{
-			get{return m_oValues.IsSynchronized;}
-		}
+        bool ICollection.IsSynchronized
+        {
+            get{return m_oValues.IsSynchronized;}
+        }
 
-		object ICollection.SyncRoot
-		{
-			get{return m_oValues.SyncRoot;}
-		}
+        object ICollection.SyncRoot
+        {
+            get{return m_oValues.SyncRoot;}
+        }
         
-		void ICopyTo(System.Array oArray, int iArrayIndex)
-		{
-			m_oValues.CopyTo(oArray, iArrayIndex);
-		}
+        void ICopyTo(System.Array oArray, int iArrayIndex)
+        {
+            m_oValues.CopyTo(oArray, iArrayIndex);
+        }
 
-		void ICollection.CopyTo(System.Array oArray, int iArrayIndex)
-		{
-			ICopyTo(oArray,iArrayIndex);
-		}
+        void ICollection.CopyTo(System.Array oArray, int iArrayIndex)
+        {
+            ICopyTo(oArray,iArrayIndex);
+        }
 
-		public void CopyTo(PropertyValueCollection[] array, int index)
-		{
-			ICopyTo(array,index);
-		}
+        public void CopyTo(PropertyValueCollection[] array, int index)
+        {
+            ICopyTo(array,index);
+        }
 
-		void Add(object oKey, object oValue)
-		{
-			m_oKeys.Add(oKey);
-			m_oValues.Add(oKey, oValue);
-		}
+        void Add(object oKey, object oValue)
+        {
+            m_oKeys.Add(oKey);
+            m_oValues.Add(oKey, oValue);
+        }
 
-		void IDictionary.Add(object oKey, object oValue){
-			Add(oKey,oValue);
-		}
-		
-		bool IDictionary.IsFixedSize
-		{
-			get{return m_oKeys.IsFixedSize;}
-		}
+        void IDictionary.Add(object oKey, object oValue){
+            Add(oKey,oValue);
+        }
+        
+        bool IDictionary.IsFixedSize
+        {
+            get{return m_oKeys.IsFixedSize;}
+        }
 
-		bool IDictionary.IsReadOnly
-		{
-			get{return m_oKeys.IsReadOnly;}
-		}
+        bool IDictionary.IsReadOnly
+        {
+            get{return m_oKeys.IsReadOnly;}
+        }
 
-		ICollection IDictionary.Keys
-		{
-			get{return m_oValues.Keys;}
-		}
+        ICollection IDictionary.Keys
+        {
+            get{return m_oValues.Keys;}
+        }
        
-		public ICollection PropertyNames
-		{
-			get{return m_oValues.Keys;}
-		}
+        public ICollection PropertyNames
+        {
+            get{return m_oValues.Keys;}
+        }
  
-		void IDictionary.Clear()
-		{
-			m_oValues.Clear();
-			m_oKeys.Clear();
-		}
+        void IDictionary.Clear()
+        {
+            m_oValues.Clear();
+            m_oKeys.Clear();
+        }
 
-		bool IContains(object oKey)
-		{
-			return m_oValues.Contains(oKey);
-		}
-		bool IDictionary.Contains(object oKey)
-		{
-			return IContains(oKey);
-		}
+        bool IContains(object oKey)
+        {
+            return m_oValues.Contains(oKey);
+        }
+        bool IDictionary.Contains(object oKey)
+        {
+            return IContains(oKey);
+        }
 
-		public bool Contains (string propertyName)
-		{
-//			String tstr=new String(propertyName.ToCharArray());
-//			return IContains(tstr.ToLower());
-			return IContains(propertyName.ToLower());
-		}
+        public bool Contains (string propertyName)
+        {
+//            String tstr=new String(propertyName.ToCharArray());
+//            return IContains(tstr.ToLower());
+            return IContains(propertyName.ToLower());
+        }
 
 
-		public IDictionaryEnumerator GetEnumerator()
-		{
-			return m_oValues.GetEnumerator();
-		}    
+        public IDictionaryEnumerator GetEnumerator()
+        {
+            return m_oValues.GetEnumerator();
+        }    
 
-		void IDictionary.Remove(object oKey)
-		{
-			m_oValues.Remove(oKey);
-			m_oKeys.Remove(oKey);
-		}
+        void IDictionary.Remove(object oKey)
+        {
+            m_oValues.Remove(oKey);
+            m_oKeys.Remove(oKey);
+        }
         
-		object IDictionary.this[object oKey]
-		{
-			get{return m_oValues[oKey];}
-			set{m_oValues[oKey] = value;}
-		}
+        object IDictionary.this[object oKey]
+        {
+            get{return m_oValues[oKey];}
+            set{m_oValues[oKey] = value;}
+        }
 
-		public ICollection Values
-		{
-			get{return m_oValues.Values;}
-		}
+        public ICollection Values
+        {
+            get{return m_oValues.Values;}
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return m_oValues.GetEnumerator();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return m_oValues.GetEnumerator();
+        }
 
-		public  PropertyValueCollection this[string propertyName] 
-		{
-			get 
-			{
-				if(Contains(propertyName))
-				{
-//					String tstr=new String(propertyName.ToCharArray());
-//					return (PropertyValueCollection)m_oValues[tstr.ToLower()];
-					return (PropertyValueCollection)m_oValues[propertyName.ToLower()];
-				}
-				else
-				{
-					PropertyValueCollection _pValColl=new PropertyValueCollection(_parent);
-//					String tstr=new String(propertyName.ToCharArray());
-//					Add((string)tstr.ToLower(), (PropertyValueCollection)_pValColl);
-					Add((string)propertyName.ToLower(), (PropertyValueCollection)_pValColl);
-					return _pValColl;					
-				}
-//				throw new InvalidOperationException();
-			}
-		}
+        public  PropertyValueCollection this[string propertyName] 
+        {
+            get 
+            {
+                if(Contains(propertyName))
+                {
+//                    String tstr=new String(propertyName.ToCharArray());
+//                    return (PropertyValueCollection)m_oValues[tstr.ToLower()];
+                    return (PropertyValueCollection)m_oValues[propertyName.ToLower()];
+                }
+                else
+                {
+                    PropertyValueCollection _pValColl=new PropertyValueCollection(_parent);
+//                    String tstr=new String(propertyName.ToCharArray());
+//                    Add((string)tstr.ToLower(), (PropertyValueCollection)_pValColl);
+                    Add((string)propertyName.ToLower(), (PropertyValueCollection)_pValColl);
+                    return _pValColl;                    
+                }
+//                throw new InvalidOperationException();
+            }
+        }
 
-	}
+    }
 }
 

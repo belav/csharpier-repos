@@ -887,7 +887,7 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(new TestVariation(v18) { Attribute = new VariationAttribute("On Root Node") { Params = new object[] { "DNS" }, Priority = 0 } });
                     this.AddChild(new TestVariation(v18) { Attribute = new VariationAttribute("On Root Node") { Params = new object[] { "NNS" }, Priority = 0 } });
                     this.AddChild(new TestVariation(v18) { Attribute = new VariationAttribute("On Root Node") { Params = new object[] { "NS" }, Priority = 0 } });
-                    this.AddChild(new TestVariation(v19) { Attribute = new VariationAttribute("427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node") { Priority = 1 } });
+                    this.AddChild(new TestVariation(v19) { Attribute = new VariationAttribute("427176    Assertion failed when call XmlReader.ReadToDescendant() for non-existing node") { Priority = 1 } });
                 }
             }
             public partial class TCReadToFollowing : BridgeHelpers

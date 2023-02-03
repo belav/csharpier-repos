@@ -20,15 +20,15 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Dennis Bartok  (pbartok@novell.com)
+//    Peter Dennis Bartok  (pbartok@novell.com)
 //
 //
 
 namespace System.Windows.Forms {
-	public enum AutoScaleMode {
-		None	= 0,
-		Font	= 1,
-		Dpi	= 2,
-		Inherit	= 3
-	}
+    public enum AutoScaleMode {
+        None    = 0,
+        Font    = 1,
+        Dpi    = 2,
+        Inherit    = 3
+    }
 }

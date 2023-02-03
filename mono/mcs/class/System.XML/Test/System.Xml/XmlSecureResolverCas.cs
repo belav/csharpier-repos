@@ -2,8 +2,8 @@
 // XmlSecureResolverCas.cs - CAS unit tests for System.Xml.XmlSecureResolver
 //
 // Authors:
-//	Atsushi Enomoto <atsushi@ximian.com>
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -42,47 +42,47 @@ using MonoTests.System.Xml;
 
 namespace MonoCasTests.System.Xml {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XmlSecureResolverCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class XmlSecureResolverCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityException))]
-		[Category ("NotWorking")] // requires imperative stack modifiers to work
-		public void EmptyEvidenceDeniedAccess ()
-		{
-			XmlSecureResolver r = new XmlSecureResolver (new XmlUrlResolver (), (Evidence)null);
-			Uri uri = r.ResolveUri (null, "http://www.example.com");
-			r.GetEntity (uri, null, typeof (Stream));
-		}
+        [Test]
+        [ExpectedException (typeof (SecurityException))]
+        [Category ("NotWorking")] // requires imperative stack modifiers to work
+        public void EmptyEvidenceDeniedAccess ()
+        {
+            XmlSecureResolver r = new XmlSecureResolver (new XmlUrlResolver (), (Evidence)null);
+            Uri uri = r.ResolveUri (null, "http://www.example.com");
+            r.GetEntity (uri, null, typeof (Stream));
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void DenyUnrestricted_UnitTests ()
-		{
-			XmlSecureResolverTests unittest = new XmlSecureResolverTests ();
-			unittest.EmptyCtor ();
-			unittest.EmptyEvidenceWontMatter ();
-			unittest.CreateEvidenceForUrl_Basic ();
-			unittest.CreateEvidenceForUrl_Http ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void DenyUnrestricted_UnitTests ()
+        {
+            XmlSecureResolverTests unittest = new XmlSecureResolverTests ();
+            unittest.EmptyCtor ();
+            unittest.EmptyEvidenceWontMatter ();
+            unittest.CreateEvidenceForUrl_Basic ();
+            unittest.CreateEvidenceForUrl_Http ();
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void DenyUnrestricted_CreateEvidenceForUrl_Local ()
-		{
-			XmlSecureResolverTests unittest = new XmlSecureResolverTests ();
-			// requires path discovery to get assembly location
-			unittest.CreateEvidenceForUrl_Local ();
-		}
-	}
+        [Test]
+        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void DenyUnrestricted_CreateEvidenceForUrl_Local ()
+        {
+            XmlSecureResolverTests unittest = new XmlSecureResolverTests ();
+            // requires path discovery to get assembly location
+            unittest.CreateEvidenceForUrl_Local ();
+        }
+    }
 }
 
 #endif

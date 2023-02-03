@@ -30,46 +30,46 @@ using System.Collections.Generic;
 
 namespace Mono.MonoConfig
 {
-	public class FeatureNode
-	{
-		List <FeatureBlock> blocks;
-		List <FeatureAction> actionsBefore;
-		List <FeatureAction> actionsAfter;
-		string description;
-		
-		public List <FeatureBlock> Blocks {
-			get {
-				if (blocks != null)
-					return blocks;
+    public class FeatureNode
+    {
+        List <FeatureBlock> blocks;
+        List <FeatureAction> actionsBefore;
+        List <FeatureAction> actionsAfter;
+        string description;
+        
+        public List <FeatureBlock> Blocks {
+            get {
+                if (blocks != null)
+                    return blocks;
 
-				return new List <FeatureBlock> ();
-			}
-		}
+                return new List <FeatureBlock> ();
+            }
+        }
 
-		public string Description {
-			get {
-				if (description != null)
-					return description;
+        public string Description {
+            get {
+                if (description != null)
+                    return description;
 
-				return String.Empty;
-			}
-		}
+                return String.Empty;
+            }
+        }
 
-		public List <FeatureAction> ActionsBefore {
-			get { return actionsBefore; }
-		}
+        public List <FeatureAction> ActionsBefore {
+            get { return actionsBefore; }
+        }
 
-		public List <FeatureAction> ActionsAfter {
-			get { return actionsAfter; }
-		}
-		
-		public FeatureNode (List <FeatureBlock> blocks, string description,
-				    List <FeatureAction> actionsBefore, List <FeatureAction> actionsAfter)
-		{
-			this.blocks = blocks;
-			this.description = description;
-			this.actionsBefore = actionsBefore;
-			this.actionsAfter = actionsAfter;
-		}
-	}
+        public List <FeatureAction> ActionsAfter {
+            get { return actionsAfter; }
+        }
+        
+        public FeatureNode (List <FeatureBlock> blocks, string description,
+                    List <FeatureAction> actionsBefore, List <FeatureAction> actionsAfter)
+        {
+            this.blocks = blocks;
+            this.description = description;
+            this.actionsBefore = actionsBefore;
+            this.actionsAfter = actionsAfter;
+        }
+    }
 }

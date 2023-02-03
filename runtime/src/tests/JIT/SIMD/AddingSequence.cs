@@ -8,9 +8,9 @@ namespace VectorMathTests
 {
     class Program
     {
-		const float EPS = Single.Epsilon * 5;
-		
-		static bool CheckEQ(float a, float b)
+        const float EPS = Single.Epsilon * 5;
+        
+        static bool CheckEQ(float a, float b)
         {
             return Math.Abs(a - b) < 5 * EPS;
         }

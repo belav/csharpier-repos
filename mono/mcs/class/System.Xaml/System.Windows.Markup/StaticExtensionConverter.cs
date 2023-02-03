@@ -28,7 +28,7 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	internal class StaticExtensionConverter : TypeConverter
-	{
-	}
+    internal class StaticExtensionConverter : TypeConverter
+    {
+    }
 }

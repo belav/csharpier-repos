@@ -2,7 +2,7 @@
 // X509ScopedServiceCertificateElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,19 +54,19 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (X509ScopedServiceCertificateElement),
-		 AddItemName = "add",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class X509ScopedServiceCertificateElementCollection
-		 : ServiceModelConfigurationElementCollection<X509ScopedServiceCertificateElement>,  ICollection,  IEnumerable
-	{
-		protected override object GetElementKey (ConfigurationElement element) {
-			X509ScopedServiceCertificateElement el = (X509ScopedServiceCertificateElement) element;
-			return el.TargetUri;
-		}
+    [ConfigurationCollection (typeof (X509ScopedServiceCertificateElement),
+         AddItemName = "add",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class X509ScopedServiceCertificateElementCollection
+         : ServiceModelConfigurationElementCollection<X509ScopedServiceCertificateElement>,  ICollection,  IEnumerable
+    {
+        protected override object GetElementKey (ConfigurationElement element) {
+            X509ScopedServiceCertificateElement el = (X509ScopedServiceCertificateElement) element;
+            return el.TargetUri;
+        }
 
-	}
+    }
 
 }

@@ -31,13 +31,13 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel
 {
-	[Serializable]
-	public class ActionNotSupportedException : CommunicationException
-	{
-		public ActionNotSupportedException () : base () {}
-		public ActionNotSupportedException (string message) : base (message) {}
-		public ActionNotSupportedException (string message, Exception innerException) : base (message, innerException) {}
-		protected ActionNotSupportedException (SerializationInfo info, StreamingContext context) :
-			base (info, context) {}
-	}
+    [Serializable]
+    public class ActionNotSupportedException : CommunicationException
+    {
+        public ActionNotSupportedException () : base () {}
+        public ActionNotSupportedException (string message) : base (message) {}
+        public ActionNotSupportedException (string message, Exception innerException) : base (message, innerException) {}
+        protected ActionNotSupportedException (SerializationInfo info, StreamingContext context) :
+            base (info, context) {}
+    }
 }

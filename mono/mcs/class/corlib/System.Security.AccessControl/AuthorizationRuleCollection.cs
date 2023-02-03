@@ -2,8 +2,8 @@
 // System.Security.AccessControl.AuthorizationRuleCollection implementation
 //
 // Authors:
-//	Dick Porter  <dick@ximian.com>
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Dick Porter  <dick@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,30 +31,30 @@ using System.Collections;
 
 namespace System.Security.AccessControl
 {
-	public sealed class AuthorizationRuleCollection : ReadOnlyCollectionBase
-	{
-		public AuthorizationRuleCollection ()
-		{
-		}
+    public sealed class AuthorizationRuleCollection : ReadOnlyCollectionBase
+    {
+        public AuthorizationRuleCollection ()
+        {
+        }
 
-		internal AuthorizationRuleCollection (AuthorizationRule [] rules)
-		{
-			InnerList.AddRange (rules);
-		}
+        internal AuthorizationRuleCollection (AuthorizationRule [] rules)
+        {
+            InnerList.AddRange (rules);
+        }
 
-		public void AddRule (AuthorizationRule rule)
-		{
-			InnerList.Add (rule);
-		}
+        public void AddRule (AuthorizationRule rule)
+        {
+            InnerList.Add (rule);
+        }
 
-		public AuthorizationRule this [int index] {
-			get { return (AuthorizationRule) InnerList [index]; }
-		}
+        public AuthorizationRule this [int index] {
+            get { return (AuthorizationRule) InnerList [index]; }
+        }
 
-		public void CopyTo (AuthorizationRule[] rules, int index)
-		{
-			InnerList.CopyTo (rules, index);
-		}
-	}
+        public void CopyTo (AuthorizationRule[] rules, int index)
+        {
+            InnerList.CopyTo (rules, index);
+        }
+    }
 }
 

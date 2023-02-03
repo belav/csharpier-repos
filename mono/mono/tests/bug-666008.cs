@@ -4,7 +4,7 @@ abstract class Foo<T>
 {
     public virtual int OnReloaded () {
         Console.WriteLine ("HIT!");
-		return 0;
+        return 0;
     }
 }
 

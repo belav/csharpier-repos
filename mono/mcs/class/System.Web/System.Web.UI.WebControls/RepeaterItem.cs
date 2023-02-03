@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.RepeaterItem
 //
 // Authors:
-//	Ben Maurer (bmaurer@novell.com)
+//    Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,67 +29,67 @@
 using System.ComponentModel;
 
 namespace System.Web.UI.WebControls {
-	[ToolboxItem ("")]
-	public class RepeaterItem : Control, INamingContainer
-		, IDataItemContainer
-	{
-	
-		public RepeaterItem (int itemIndex, ListItemType itemType)
-		{
-			idx = itemIndex;
-			type = itemType;
-		}
+    [ToolboxItem ("")]
+    public class RepeaterItem : Control, INamingContainer
+        , IDataItemContainer
+    {
+    
+        public RepeaterItem (int itemIndex, ListItemType itemType)
+        {
+            idx = itemIndex;
+            type = itemType;
+        }
 
-		// see ... "Building DataBound Templated Custom ASP.NET " on msdn
-		//
-		// This technique is used in the DataGrid, DataList, and Repeater to handle the
-		// Command event of Buttons, LinkButtons, and ImageButtons within the
-		// controls. Since the button's Command event calls RaiseBubbleEvent(), this
-		// percolates the event up to the button's parent.
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			CommandEventArgs ce = e as CommandEventArgs;
-			if (ce != null) {
-				base.RaiseBubbleEvent (this, new RepeaterCommandEventArgs (this, source, ce));
-				return true;
-			}
+        // see ... "Building DataBound Templated Custom ASP.NET " on msdn
+        //
+        // This technique is used in the DataGrid, DataList, and Repeater to handle the
+        // Command event of Buttons, LinkButtons, and ImageButtons within the
+        // controls. Since the button's Command event calls RaiseBubbleEvent(), this
+        // percolates the event up to the button's parent.
+        protected override bool OnBubbleEvent (object source, EventArgs e)
+        {
+            CommandEventArgs ce = e as CommandEventArgs;
+            if (ce != null) {
+                base.RaiseBubbleEvent (this, new RepeaterCommandEventArgs (this, source, ce));
+                return true;
+            }
 
-			return false;
-		}
-	
-		public virtual object DataItem {
-			get {
-				return data_item;
-			}
-			set {
-				data_item = value;
-			}
-		}
-	
-		public virtual int ItemIndex {
-			get {
-				return idx;
-			}
-		}
-	
-		public virtual ListItemType ItemType {
-			get {
-				return type;
-			}
-		}
+            return false;
+        }
+    
+        public virtual object DataItem {
+            get {
+                return data_item;
+            }
+            set {
+                data_item = value;
+            }
+        }
+    
+        public virtual int ItemIndex {
+            get {
+                return idx;
+            }
+        }
+    
+        public virtual ListItemType ItemType {
+            get {
+                return type;
+            }
+        }
 
-		object data_item;
-		int idx;
-		ListItemType type;
+        object data_item;
+        int idx;
+        ListItemType type;
 
 
-		int IDataItemContainer.DataItemIndex {
-			get { return ItemIndex; }
-		}
+        int IDataItemContainer.DataItemIndex {
+            get { return ItemIndex; }
+        }
 
-		int IDataItemContainer.DisplayIndex {
-			get { return ItemIndex; }
-		}
+        int IDataItemContainer.DisplayIndex {
+            get { return ItemIndex; }
+        }
 
-	}
+    }
 }

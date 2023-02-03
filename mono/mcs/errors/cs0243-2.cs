@@ -3,9 +3,9 @@
 
 public class MyClass
 {
-	[System.Diagnostics.Conditional ("WOOHOO")]
-	public override int GetHashCode ()
-	{
-		return base.GetHashCode ();
-	}
+    [System.Diagnostics.Conditional ("WOOHOO")]
+    public override int GetHashCode ()
+    {
+        return base.GetHashCode ();
+    }
 }

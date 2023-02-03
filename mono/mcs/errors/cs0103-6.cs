@@ -3,10 +3,10 @@
 
 class C
 {
-	public readonly object A = owner.Foo;
+    public readonly object A = owner.Foo;
 
-	public C ()
-	{
-		int owner = 1;
-	}
+    public C ()
+    {
+        int owner = 1;
+    }
 }

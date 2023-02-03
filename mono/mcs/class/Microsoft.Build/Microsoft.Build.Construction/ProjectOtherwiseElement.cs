@@ -1,4 +1,4 @@
-﻿//
+//
 // ProjectOtherwiseElement.cs
 //
 // Author:

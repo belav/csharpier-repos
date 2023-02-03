@@ -2339,7 +2339,7 @@ namespace System.Xml.Schema
                         return TF_string;
                 }
 #else // BOOTSTRAP_BASIC
-		return TF_string;
+        return TF_string;
 #endif
             }
 

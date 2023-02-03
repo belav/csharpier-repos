@@ -20,24 +20,24 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewRowDividerDoubleClickEventArgs : HandledMouseEventArgs {
+    public class DataGridViewRowDividerDoubleClickEventArgs : HandledMouseEventArgs {
 
-		private int rowIndex;
+        private int rowIndex;
 
-		public DataGridViewRowDividerDoubleClickEventArgs (int rowIndex, HandledMouseEventArgs e) : base(e.Button, e.Clicks, e.X, e.Y, e.Delta) {
-			this.rowIndex = rowIndex;
-		}
+        public DataGridViewRowDividerDoubleClickEventArgs (int rowIndex, HandledMouseEventArgs e) : base(e.Button, e.Clicks, e.X, e.Y, e.Delta) {
+            this.rowIndex = rowIndex;
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-	}
+    }
 
 }

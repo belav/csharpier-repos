@@ -1,9 +1,9 @@
 //
 // CalendarDayCas.cs 
-//	- CAS unit tests for System.Web.UI.WebControls.CalendarDay
+//    - CAS unit tests for System.Web.UI.WebControls.CalendarDay
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,30 +40,30 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CalendarDayCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CalendarDayCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			CalendarDayTest unit = new CalendarDayTest ();
-			unit.CalendarDay_Constructor ();
-			unit.IsSelectableProperty ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            CalendarDayTest unit = new CalendarDayTest ();
+            unit.CalendarDay_Constructor ();
+            unit.IsSelectableProperty ();
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[6] { typeof (DateTime), typeof (bool), typeof (bool), typeof (bool), typeof (bool), typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(DateTime,bool,bool,bool,bool,string)");
-			return ci.Invoke (new object[6] { DateTime.MinValue, false, false, false, false, String.Empty });
-		}
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            ConstructorInfo ci = this.Type.GetConstructor (new Type[6] { typeof (DateTime), typeof (bool), typeof (bool), typeof (bool), typeof (bool), typeof (string) });
+            Assert.IsNotNull (ci, ".ctor(DateTime,bool,bool,bool,bool,string)");
+            return ci.Invoke (new object[6] { DateTime.MinValue, false, false, false, false, String.Empty });
+        }
 
-		public override Type Type {
-			get { return typeof (CalendarDay); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (CalendarDay); }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // UITypeEditorTest.cs - Unit tests for System.Drawing.Design.UITypeEditor
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -34,51 +34,51 @@ using System.Drawing.Design;
 
 namespace MonoTests.System.Drawing.Design {
 
-	[TestFixture]
-	public class UITypeEditorTest {
+    [TestFixture]
+    public class UITypeEditorTest {
 
-		private UITypeEditor editor;
-		private Graphics graphics;
+        private UITypeEditor editor;
+        private Graphics graphics;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			editor = new UITypeEditor ();
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            editor = new UITypeEditor ();
 
-			Bitmap bitmap = new Bitmap (20, 20);
-			graphics = Graphics.FromImage (bitmap);
-		}
+            Bitmap bitmap = new Bitmap (20, 20);
+            graphics = Graphics.FromImage (bitmap);
+        }
 
-		[Test]
-		public void DefaultValues ()
-		{
-			Assert.AreSame (graphics, editor.EditValue (null, graphics), "EditValue(2)");
-			Assert.AreSame (graphics, editor.EditValue (null, null, graphics), "EditValue(3)");
+        [Test]
+        public void DefaultValues ()
+        {
+            Assert.AreSame (graphics, editor.EditValue (null, graphics), "EditValue(2)");
+            Assert.AreSame (graphics, editor.EditValue (null, null, graphics), "EditValue(3)");
 
-			Assert.AreEqual (UITypeEditorEditStyle.None, editor.GetEditStyle (), "GetEditStyle()");
-			Assert.AreEqual (UITypeEditorEditStyle.None, editor.GetEditStyle (null), "GetEditStyle(null)");
+            Assert.AreEqual (UITypeEditorEditStyle.None, editor.GetEditStyle (), "GetEditStyle()");
+            Assert.AreEqual (UITypeEditorEditStyle.None, editor.GetEditStyle (null), "GetEditStyle(null)");
 
-			Assert.IsFalse (editor.GetPaintValueSupported (), "GetPaintValueSupported()");
-			Assert.IsFalse (editor.GetPaintValueSupported (null), "GetPaintValueSupported(null)");
-			Assert.IsFalse (editor.IsDropDownResizable, "IsDropDownResizable");
-		}
+            Assert.IsFalse (editor.GetPaintValueSupported (), "GetPaintValueSupported()");
+            Assert.IsFalse (editor.GetPaintValueSupported (null), "GetPaintValueSupported(null)");
+            Assert.IsFalse (editor.IsDropDownResizable, "IsDropDownResizable");
+        }
 
-		[Test]
-		public void PaintValue_PaintValueEventArgs_Null ()
-		{
-			editor.PaintValue (null);
-		}
+        [Test]
+        public void PaintValue_PaintValueEventArgs_Null ()
+        {
+            editor.PaintValue (null);
+        }
 
-		[Test]
-		public void PaintValue_PaintValueEventArgs ()
-		{
-			editor.PaintValue (new PaintValueEventArgs (null, null, graphics, Rectangle.Empty));
-		}
+        [Test]
+        public void PaintValue_PaintValueEventArgs ()
+        {
+            editor.PaintValue (new PaintValueEventArgs (null, null, graphics, Rectangle.Empty));
+        }
 
-		[Test]
-		public void PaintValue ()
-		{
-			editor.PaintValue (null, graphics, Rectangle.Empty);
-		}
-	}
+        [Test]
+        public void PaintValue ()
+        {
+            editor.PaintValue (null, graphics, Rectangle.Empty);
+        }
+    }
 }

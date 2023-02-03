@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests.Bug;
+namespace AutoMapper.UnitTests.Bug;
 public class CaseSensitivityBug : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>

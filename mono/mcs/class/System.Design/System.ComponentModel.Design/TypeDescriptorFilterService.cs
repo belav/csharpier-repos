@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.TypeDescriptorFilterService
 //
-// Authors:	 
-//	  Ivan N. Zlatev (contact i-nZ.net)
+// Authors:     
+//      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -34,85 +34,85 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	
-	internal sealed class TypeDescriptorFilterService : ITypeDescriptorFilterService, IDisposable
-	{
+    
+    internal sealed class TypeDescriptorFilterService : ITypeDescriptorFilterService, IDisposable
+    {
 
-		IServiceProvider _serviceProvider;
-		
-		public TypeDescriptorFilterService (IServiceProvider serviceProvider)
-		{
-			if (serviceProvider == null)
-				throw new ArgumentNullException ("serviceProvider");
+        IServiceProvider _serviceProvider;
+        
+        public TypeDescriptorFilterService (IServiceProvider serviceProvider)
+        {
+            if (serviceProvider == null)
+                throw new ArgumentNullException ("serviceProvider");
 
-			_serviceProvider = serviceProvider;
-		}
+            _serviceProvider = serviceProvider;
+        }
 
-		// Return values are:
-		// true if the set of filtered attributes is to be cached; false if the filter service must query again.
-		//	  
-		public bool FilterAttributes (IComponent component, IDictionary attributes)
-		{
-			if (_serviceProvider == null)
-				throw new ObjectDisposedException ("TypeDescriptorFilterService");
-			if (component == null)
-				throw new ArgumentNullException ("component");
-			
-			IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
-			if (designerHost != null) {
-				IDesigner designer = designerHost.GetDesigner (component);
-				if (designer is IDesignerFilter) {
-					((IDesignerFilter) designer).PreFilterAttributes (attributes);
-					((IDesignerFilter) designer).PostFilterAttributes (attributes);
-				}
-			}
+        // Return values are:
+        // true if the set of filtered attributes is to be cached; false if the filter service must query again.
+        //      
+        public bool FilterAttributes (IComponent component, IDictionary attributes)
+        {
+            if (_serviceProvider == null)
+                throw new ObjectDisposedException ("TypeDescriptorFilterService");
+            if (component == null)
+                throw new ArgumentNullException ("component");
+            
+            IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
+            if (designerHost != null) {
+                IDesigner designer = designerHost.GetDesigner (component);
+                if (designer is IDesignerFilter) {
+                    ((IDesignerFilter) designer).PreFilterAttributes (attributes);
+                    ((IDesignerFilter) designer).PostFilterAttributes (attributes);
+                }
+            }
 
-			return true;
-		}
-	
-		public bool FilterEvents (IComponent component, IDictionary events)
-		{
-			if (_serviceProvider == null)
-				throw new ObjectDisposedException ("TypeDescriptorFilterService");
-			if (component == null)
-				throw new ArgumentNullException ("component");
-			
-			IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
-			if (designerHost != null) {
-				IDesigner designer = designerHost.GetDesigner (component);
-				if (designer is IDesignerFilter) {
-					((IDesignerFilter) designer).PreFilterEvents (events);
-					((IDesignerFilter) designer).PostFilterEvents (events);
-				}
-			}
-			
-			return true;
-		}
-	
-		public bool FilterProperties (IComponent component, IDictionary properties)
-		{
-			if (_serviceProvider == null)
-				throw new ObjectDisposedException ("TypeDescriptorFilterService");
-			if (component == null)
-				throw new ArgumentNullException ("component");
+            return true;
+        }
+    
+        public bool FilterEvents (IComponent component, IDictionary events)
+        {
+            if (_serviceProvider == null)
+                throw new ObjectDisposedException ("TypeDescriptorFilterService");
+            if (component == null)
+                throw new ArgumentNullException ("component");
+            
+            IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
+            if (designerHost != null) {
+                IDesigner designer = designerHost.GetDesigner (component);
+                if (designer is IDesignerFilter) {
+                    ((IDesignerFilter) designer).PreFilterEvents (events);
+                    ((IDesignerFilter) designer).PostFilterEvents (events);
+                }
+            }
+            
+            return true;
+        }
+    
+        public bool FilterProperties (IComponent component, IDictionary properties)
+        {
+            if (_serviceProvider == null)
+                throw new ObjectDisposedException ("TypeDescriptorFilterService");
+            if (component == null)
+                throw new ArgumentNullException ("component");
 
-			IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
-			if (designerHost != null) {
-				IDesigner designer = designerHost.GetDesigner (component);
-				if (designer is IDesignerFilter) {
-					((IDesignerFilter) designer).PreFilterProperties (properties);
-					((IDesignerFilter) designer).PostFilterProperties (properties);
-				}
-			}
-			
-			return true;
-		}
+            IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
+            if (designerHost != null) {
+                IDesigner designer = designerHost.GetDesigner (component);
+                if (designer is IDesignerFilter) {
+                    ((IDesignerFilter) designer).PreFilterProperties (properties);
+                    ((IDesignerFilter) designer).PostFilterProperties (properties);
+                }
+            }
+            
+            return true;
+        }
 
-		public void Dispose ()
-		{
-			_serviceProvider = null;
-		}
+        public void Dispose ()
+        {
+            _serviceProvider = null;
+        }
 
-	}
+    }
 }
 

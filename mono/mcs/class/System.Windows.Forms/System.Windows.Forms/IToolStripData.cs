@@ -1,4 +1,4 @@
-﻿//
+//
 // IToolStripData.cs
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -23,7 +23,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
@@ -33,9 +33,9 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	interface IToolStripData
-	{
-		bool IsCurrentlyDragging { get; }
-		bool Stretch { get; set; }
-	}
+    interface IToolStripData
+    {
+        bool IsCurrentlyDragging { get; }
+        bool Stretch { get; set; }
+    }
 }

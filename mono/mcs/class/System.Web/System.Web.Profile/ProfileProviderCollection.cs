@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ProfileProviderCollection.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,24 +32,24 @@ using System.Configuration.Provider;
 
 namespace System.Web.Profile
 {
-	public sealed class ProfileProviderCollection : SettingsProviderCollection
-	{
-		public ProfileProviderCollection ()
-		{
-		}
+    public sealed class ProfileProviderCollection : SettingsProviderCollection
+    {
+        public ProfileProviderCollection ()
+        {
+        }
 
-		public override void Add (ProviderBase provider)
-		{
-			base.Add (provider);
-		}
+        public override void Add (ProviderBase provider)
+        {
+            base.Add (provider);
+        }
 
-		public new ProfileProvider this[string name] {
-			get {
-				return (ProfileProvider) base [name];
-			}
-		}
+        public new ProfileProvider this[string name] {
+            get {
+                return (ProfileProvider) base [name];
+            }
+        }
 
-	}
-	
+    }
+    
 }
 

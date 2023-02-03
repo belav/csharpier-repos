@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,51 +32,51 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("e72f94b2-5f85-11d4-9877-00c04fa0cf4a")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIErrorService {
+    [Guid ("e72f94b2-5f85-11d4-9877-00c04fa0cf4a")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIErrorService {
 
 #region nsIErrorService
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int registerErrorStringBundle ( short errorModule,
-				[MarshalAs (UnmanagedType.LPStr)]  string stringBundleURL);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int registerErrorStringBundle ( short errorModule,
+                [MarshalAs (UnmanagedType.LPStr)]  string stringBundleURL);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int unregisterErrorStringBundle ( short errorModule);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int unregisterErrorStringBundle ( short errorModule);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getErrorStringBundle ( short errorModule,
-				[MarshalAs (UnmanagedType.LPStr)] ref string ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getErrorStringBundle ( short errorModule,
+                [MarshalAs (UnmanagedType.LPStr)] ref string ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int registerErrorStringBundleKey ( int error,
-				[MarshalAs (UnmanagedType.LPStr)]  string stringBundleKey);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int registerErrorStringBundleKey ( int error,
+                [MarshalAs (UnmanagedType.LPStr)]  string stringBundleKey);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int unregisterErrorStringBundleKey ( int error);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int unregisterErrorStringBundleKey ( int error);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getErrorStringBundleKey ( int error,
-				StringBuilder ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getErrorStringBundleKey ( int error,
+                StringBuilder ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsErrorService {
-		public static nsIErrorService GetProxy (Mono.WebBrowser.IWebBrowser control, nsIErrorService obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIErrorService).GUID, obj);
-			return o as nsIErrorService;
-		}
-	}
+    internal class nsErrorService {
+        public static nsIErrorService GetProxy (Mono.WebBrowser.IWebBrowser control, nsIErrorService obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIErrorService).GUID, obj);
+            return o as nsIErrorService;
+        }
+    }
 }
 #if example
 
@@ -85,55 +85,55 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-	internal class ErrorService : nsIErrorService {
+    internal class ErrorService : nsIErrorService {
 
 #region nsIErrorService
-		int nsIErrorService.registerErrorStringBundle ( short errorModule,
-				[MarshalAs (UnmanagedType.LPStr)]  string stringBundleURL)
-		{
-			return ;
-		}
+        int nsIErrorService.registerErrorStringBundle ( short errorModule,
+                [MarshalAs (UnmanagedType.LPStr)]  string stringBundleURL)
+        {
+            return ;
+        }
 
 
 
-		int nsIErrorService.unregisterErrorStringBundle ( short errorModule)
-		{
-			return ;
-		}
+        int nsIErrorService.unregisterErrorStringBundle ( short errorModule)
+        {
+            return ;
+        }
 
 
 
-		int nsIErrorService.getErrorStringBundle ( short errorModule,
-				[MarshalAs (UnmanagedType.LPStr)] ref string ret)
-		{
-			return ;
-		}
+        int nsIErrorService.getErrorStringBundle ( short errorModule,
+                [MarshalAs (UnmanagedType.LPStr)] ref string ret)
+        {
+            return ;
+        }
 
 
 
-		int nsIErrorService.registerErrorStringBundleKey ( int error,
-				[MarshalAs (UnmanagedType.LPStr)]  string stringBundleKey)
-		{
-			return ;
-		}
+        int nsIErrorService.registerErrorStringBundleKey ( int error,
+                [MarshalAs (UnmanagedType.LPStr)]  string stringBundleKey)
+        {
+            return ;
+        }
 
 
 
-		int nsIErrorService.unregisterErrorStringBundleKey ( int error)
-		{
-			return ;
-		}
+        int nsIErrorService.unregisterErrorStringBundleKey ( int error)
+        {
+            return ;
+        }
 
 
 
-		int nsIErrorService.getErrorStringBundleKey ( int error,
-				[MarshalAs (UnmanagedType.LPStr)] ref string ret)
-		{
-			return ;
-		}
+        int nsIErrorService.getErrorStringBundleKey ( int error,
+                [MarshalAs (UnmanagedType.LPStr)] ref string ret)
+        {
+            return ;
+        }
 
 
 
 #endregion
-	}
+    }
 #endif

@@ -3,8 +3,8 @@
 
 class C
 {
-	static object Test ()
-	{
-		return null is object res;
-	}
+    static object Test ()
+    {
+        return null is object res;
+    }
 }

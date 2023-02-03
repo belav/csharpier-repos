@@ -1,4 +1,4 @@
-﻿// ==++==
+// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 // 
@@ -166,7 +166,7 @@ namespace System.Threading
         #region Properties
 
         /// <summary>
-        /// Gets the number of participants in the barrier that haven’t yet signaled
+        /// Gets the number of participants in the barrier that haven�t yet signaled
         /// in the current phase.
         /// </summary>
         /// <remarks>

@@ -2,7 +2,7 @@
 // SecurityStateEncoder.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,14 +28,14 @@
 
 namespace System.ServiceModel.Security
 {
-	public abstract class SecurityStateEncoder
-	{
-		protected SecurityStateEncoder ()
-		{
-		}
+    public abstract class SecurityStateEncoder
+    {
+        protected SecurityStateEncoder ()
+        {
+        }
 
-		protected internal abstract byte [] DecodeSecurityState (byte [] data);
+        protected internal abstract byte [] DecodeSecurityState (byte [] data);
 
-		protected internal abstract byte [] EncodeSecurityState (byte [] data);
-	}
+        protected internal abstract byte [] EncodeSecurityState (byte [] data);
+    }
 }

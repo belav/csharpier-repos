@@ -30,9 +30,9 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property, Inherited = true)]
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-	public sealed class AmbientAttribute : Attribute
-	{
-	}
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property, Inherited = true)]
+    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+    public sealed class AmbientAttribute : Attribute
+    {
+    }
 }

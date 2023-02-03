@@ -1,8 +1,8 @@
-﻿// 
+// 
 // BlockBase.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,13 +30,13 @@ using Mono.CodeContracts.Static.AST.Visitors;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-	abstract class BlockBase : CFGBlock {
-		protected BlockBase (Subroutine subroutine, ref int idGen)
-			: base (subroutine, ref idGen)
-		{
-		}
+    abstract class BlockBase : CFGBlock {
+        protected BlockBase (Subroutine subroutine, ref int idGen)
+            : base (subroutine, ref idGen)
+        {
+        }
 
-		public abstract Result ForwardDecode<Data, Result, Visitor> (APC pc, Visitor visitor, Data data)
-			where Visitor : IILVisitor<APC, Dummy, Dummy, Data, Result>;
-	}
+        public abstract Result ForwardDecode<Data, Result, Visitor> (APC pc, Visitor visitor, Data data)
+            where Visitor : IILVisitor<APC, Dummy, Dummy, Data, Result>;
+    }
 }

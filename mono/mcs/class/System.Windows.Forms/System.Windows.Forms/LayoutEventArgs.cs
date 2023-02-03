@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -30,40 +30,40 @@
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
-	public sealed class LayoutEventArgs : EventArgs {
-		private Control	affected_control;
-		private string	affected_property;
-		private IComponent affected_component;
+    public sealed class LayoutEventArgs : EventArgs {
+        private Control    affected_control;
+        private string    affected_property;
+        private IComponent affected_component;
 
-		#region Public Constructors
-		public LayoutEventArgs(Control affectedControl, string affectedProperty) {
-			this.affected_control = affectedControl;
-			this.affected_property = affectedProperty;
-		}
+        #region Public Constructors
+        public LayoutEventArgs(Control affectedControl, string affectedProperty) {
+            this.affected_control = affectedControl;
+            this.affected_property = affectedProperty;
+        }
 
-		public LayoutEventArgs (IComponent affectedComponent, string affectedProperty)
-		{
-			this.affected_component = affectedComponent;
-			this.affected_property = affectedProperty;
-		}
-		#endregion	// Public Constructors
+        public LayoutEventArgs (IComponent affectedComponent, string affectedProperty)
+        {
+            this.affected_component = affectedComponent;
+            this.affected_property = affectedProperty;
+        }
+        #endregion    // Public Constructors
 
-		#region Public Instance Properties
-		public IComponent AffectedComponent {
-			get { return this.affected_component; }
-		}
+        #region Public Instance Properties
+        public IComponent AffectedComponent {
+            get { return this.affected_component; }
+        }
 
-		public Control AffectedControl {
-			get {
-				return this.affected_control;
-			}
-		}
+        public Control AffectedControl {
+            get {
+                return this.affected_control;
+            }
+        }
 
-		public string AffectedProperty {
-			get {
-				return this.affected_property;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public string AffectedProperty {
+            get {
+                return this.affected_property;
+            }
+        }
+        #endregion    // Public Instance Properties
+    }
 }

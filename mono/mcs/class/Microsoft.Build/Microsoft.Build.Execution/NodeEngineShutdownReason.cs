@@ -37,11 +37,11 @@ using System.IO;
 
 namespace Microsoft.Build.Internal
 {
-	public enum NodeEngineShutdownReason
-	{
-		BuildComplete,
-		BuildCompleteReuse,
-		ConnectionFailed,
-		Error,
-	}
+    public enum NodeEngineShutdownReason
+    {
+        BuildComplete,
+        BuildCompleteReuse,
+        ConnectionFailed,
+        Error,
+    }
 }

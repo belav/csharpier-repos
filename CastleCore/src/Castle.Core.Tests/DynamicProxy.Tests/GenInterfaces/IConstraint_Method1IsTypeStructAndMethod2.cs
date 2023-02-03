@@ -14,8 +14,8 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	public interface IConstraint_Method1IsTypeStructAndMethod2<TType>
-	{
-		void Method<TMethod1, TMethod2>(TMethod1 one, TMethod2 two, TType three) where TMethod1 : struct, TType, TMethod2;
-	}
+    public interface IConstraint_Method1IsTypeStructAndMethod2<TType>
+    {
+        void Method<TMethod1, TMethod2>(TMethod1 one, TMethod2 two, TType three) where TMethod1 : struct, TType, TMethod2;
+    }
 }

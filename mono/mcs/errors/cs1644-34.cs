@@ -6,9 +6,9 @@ using System;
 
 class C
 {
-	public void Foo ()
-	{
-		Action a = async () => { };
-	}
+    public void Foo ()
+    {
+        Action a = async () => { };
+    }
 }
 

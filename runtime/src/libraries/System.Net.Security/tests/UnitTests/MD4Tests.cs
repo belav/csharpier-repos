@@ -56,7 +56,7 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") =	043f8582f241db351ce627e153e7f0e4
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") =    043f8582f241db351ce627e153e7f0e4
         [Fact]
         public void TryEncrypt_AlphabetInUpperLowerCasesAndNumbers()
         {

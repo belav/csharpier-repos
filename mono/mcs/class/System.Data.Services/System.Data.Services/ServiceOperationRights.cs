@@ -1,4 +1,4 @@
-﻿//
+//
 // ServiceOperationRights.cs
 //
 // Author:
@@ -27,16 +27,16 @@
 //
 
 namespace System.Data.Services {
-	[Flags]
-	public enum ServiceOperationRights
-	{
-		None = 0,
-		AllRead = ReadSingle | ReadMultiple,
-		All = AllRead,
+    [Flags]
+    public enum ServiceOperationRights
+    {
+        None = 0,
+        AllRead = ReadSingle | ReadMultiple,
+        All = AllRead,
 
-		ReadSingle = 1,
-		ReadMultiple = 2,
+        ReadSingle = 1,
+        ReadMultiple = 2,
 
-		OverrideEntitySetRights = 4
-	}
+        OverrideEntitySetRights = 4
+    }
 }

@@ -2,7 +2,7 @@
 // NetNamedPipeBindingCollectionElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class NetNamedPipeBindingCollectionElement
-		 : StandardBindingCollectionElement<NetNamedPipeBinding, NetNamedPipeBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [MonoTODO]
+    public partial class NetNamedPipeBindingCollectionElement
+         : StandardBindingCollectionElement<NetNamedPipeBinding, NetNamedPipeBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static NetNamedPipeBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static NetNamedPipeBindingCollectionElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+        }
 
-		public NetNamedPipeBindingCollectionElement ()
-		{
-		}
-
-
-		// Properties
+        public NetNamedPipeBindingCollectionElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+
+    }
 
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -188,7 +188,7 @@ namespace System.Web.Http.Tracing.Tracers
 
             // Assert
             // Error must always be marked as handled at ReadFromStream in BaseJsonMediaTypeFormatters,
-            // so it would ﻿not propagate to here.
+            // so it would ?not propagate to here.
             // Note that regarding the exception's comparison in the record we only compare its message,
             // because we cannot get the exact exception and message would be enough for logging.
             Assert.Equal<TraceRecord>(expectedTraces,

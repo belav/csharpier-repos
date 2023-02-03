@@ -1,9 +1,9 @@
 //
 // PowerModeChangedEventArgsCas.cs 
-//	- CAS unit tests for Microsoft.Win32.PowerModeChangedEventArgs
+//    - CAS unit tests for Microsoft.Win32.PowerModeChangedEventArgs
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,61 +37,61 @@ using Microsoft.Win32;
 
 namespace MonoCasTests.Microsoft.Win32 {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PowerModeChangedEventArgsCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PowerModeChangedEventArgsCas {
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public virtual void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			PowerModeChangedEventArgs pmcea = new PowerModeChangedEventArgs (PowerModes.StatusChange);
-			Assert.AreEqual (PowerModes.StatusChange, pmcea.Mode, "Mode");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            PowerModeChangedEventArgs pmcea = new PowerModeChangedEventArgs (PowerModes.StatusChange);
+            Assert.AreEqual (PowerModes.StatusChange, pmcea.Mode, "Mode");
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		// we use reflection to call this class as it is protected by a LinkDemand 
-		// (which will be converted into full demand, i.e. a stack walk) when 
-		// reflection is used (i.e. it gets testable).
+        // we use reflection to call this class as it is protected by a LinkDemand 
+        // (which will be converted into full demand, i.e. a stack walk) when 
+        // reflection is used (i.e. it gets testable).
 
-		public virtual object Create ()
-		{
-			Type[] t = new Type[1] { typeof (PowerModes) };
-			ConstructorInfo ci = typeof (PowerModeChangedEventArgs).GetConstructor (t);
-			Assert.IsNotNull (ci, ".ctor(PowerModes)");
-			return ci.Invoke (new object[1] { PowerModes.StatusChange });
-		}
+        public virtual object Create ()
+        {
+            Type[] t = new Type[1] { typeof (PowerModes) };
+            ConstructorInfo ci = typeof (PowerModeChangedEventArgs).GetConstructor (t);
+            Assert.IsNotNull (ci, ".ctor(PowerModes)");
+            return ci.Invoke (new object[1] { PowerModes.StatusChange });
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            Assert.IsNotNull (Create ());
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Anything ()
-		{
-			// denying any permissions -> not full trust!
-			Assert.IsNotNull (Create ());
-		}
+        [Test]
+        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException (typeof (SecurityException))]
+        public void LinkDemand_Deny_Anything ()
+        {
+            // denying any permissions -> not full trust!
+            Assert.IsNotNull (Create ());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void LinkDemand_PermitOnly_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void LinkDemand_PermitOnly_Unrestricted ()
+        {
+            Assert.IsNotNull (Create ());
+        }
+    }
 }

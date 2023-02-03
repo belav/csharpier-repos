@@ -336,17 +336,17 @@ namespace System.Data.SqlClient {
         private SqlMetaData MetaData {
             get {
                 MetaType mt = GetMetaTypeOnly();
- 			    long maxlen;
+                 long maxlen;
 
-				if (mt.IsFixed) {
-					maxlen = (long)mt.FixedLength;
-				}
-                else if (Size > 0 || Size < 0) {
-                   	maxlen = Size;   // Bug Fix: 302768, 302695, 302694, 302693
+                if (mt.IsFixed) {
+                    maxlen = (long)mt.FixedLength;
                 }
-				else {
-					maxlen = MSS.SmiMetaData.GetDefaultForType( mt.SqlDbType ).MaxLength;
-				}
+                else if (Size > 0 || Size < 0) {
+                       maxlen = Size;   // Bug Fix: 302768, 302695, 302694, 302693
+                }
+                else {
+                    maxlen = MSS.SmiMetaData.GetDefaultForType( mt.SqlDbType ).MaxLength;
+                }
                 return new SqlMetaData(this.ParameterName, mt.SqlDbType, maxlen, GetActualPrecision(), GetActualScale(), LocaleId, CompareInfo,
                                        XmlSchemaCollectionDatabase, XmlSchemaCollectionOwningSchema, XmlSchemaCollectionName, mt.IsPlp, _udtType);
             }

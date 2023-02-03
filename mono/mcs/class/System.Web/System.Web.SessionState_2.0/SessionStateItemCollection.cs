@@ -35,105 +35,105 @@ using System.Web.Util;
 
 namespace System.Web.SessionState 
 {
-	public sealed class SessionStateItemCollection : NameObjectCollectionBase, ISessionStateItemCollection, ICollection, IEnumerable
-	{
-		bool is_dirty;
+    public sealed class SessionStateItemCollection : NameObjectCollectionBase, ISessionStateItemCollection, ICollection, IEnumerable
+    {
+        bool is_dirty;
 
-		static bool IsMutable (object o)
-		{
-			return (o != null && Type.GetTypeCode(o.GetType()) == TypeCode.Object);
-		}
-		
-		public SessionStateItemCollection ()
-		{
-		}
+        static bool IsMutable (object o)
+        {
+            return (o != null && Type.GetTypeCode(o.GetType()) == TypeCode.Object);
+        }
+        
+        public SessionStateItemCollection ()
+        {
+        }
 
-		internal SessionStateItemCollection (int capacity)
-			: base (capacity)
-		{
-		}
-		
-		public bool Dirty {
-			get { return is_dirty; }
-			set { is_dirty = value; }
-		}
+        internal SessionStateItemCollection (int capacity)
+            : base (capacity)
+        {
+        }
+        
+        public bool Dirty {
+            get { return is_dirty; }
+            set { is_dirty = value; }
+        }
 
-		public object this [int index] {
-			get {
-				object o = BaseGet (index);
-				if (IsMutable (o))
-					is_dirty = true;
-				return o;
-			}
-			
-			set {
-				BaseSet (index, value);
-				is_dirty = true;
-			}
-		}
-		
+        public object this [int index] {
+            get {
+                object o = BaseGet (index);
+                if (IsMutable (o))
+                    is_dirty = true;
+                return o;
+            }
+            
+            set {
+                BaseSet (index, value);
+                is_dirty = true;
+            }
+        }
+        
                 public object this [string name] {
-			get {
-				object o = BaseGet (name);
-				if (IsMutable (o))
-					is_dirty = true;
-				return o;
-			}
-			
-			set {
-				BaseSet (name, value);
-				is_dirty = true;
-			}
-		}
+            get {
+                object o = BaseGet (name);
+                if (IsMutable (o))
+                    is_dirty = true;
+                return o;
+            }
+            
+            set {
+                BaseSet (name, value);
+                is_dirty = true;
+            }
+        }
 
-		// Todo: why override this?
-		public override KeysCollection Keys {
-			get { return base.Keys; }
-		}
+        // Todo: why override this?
+        public override KeysCollection Keys {
+            get { return base.Keys; }
+        }
 
-		public void Clear ()
-		{
-			if (Count > 0) {
-				BaseClear ();
-				is_dirty = true;
-			}
-		}
+        public void Clear ()
+        {
+            if (Count > 0) {
+                BaseClear ();
+                is_dirty = true;
+            }
+        }
 
-		public static SessionStateItemCollection Deserialize (BinaryReader reader)
-		{
-			int i = reader.ReadInt32 ();
-			SessionStateItemCollection ret = new SessionStateItemCollection (i);
-			for (; i > 0; i--)
-				ret [reader.ReadString ()] =
-					System.Web.Util.AltSerialization.Deserialize (reader);
+        public static SessionStateItemCollection Deserialize (BinaryReader reader)
+        {
+            int i = reader.ReadInt32 ();
+            SessionStateItemCollection ret = new SessionStateItemCollection (i);
+            for (; i > 0; i--)
+                ret [reader.ReadString ()] =
+                    System.Web.Util.AltSerialization.Deserialize (reader);
 
-			return ret;
-		}
+            return ret;
+        }
 
-		public void Serialize (BinaryWriter writer) {
-			writer.Write (Count);
-			foreach (string key in base.Keys) {
-				writer.Write (key);
-				System.Web.Util.AltSerialization.Serialize (writer, BaseGet (key));
-			}
-		}
-		
-		// Todo: why override this?
-		public override IEnumerator GetEnumerator ()
-		{
-			return base.GetEnumerator ();
-		}
+        public void Serialize (BinaryWriter writer) {
+            writer.Write (Count);
+            foreach (string key in base.Keys) {
+                writer.Write (key);
+                System.Web.Util.AltSerialization.Serialize (writer, BaseGet (key));
+            }
+        }
+        
+        // Todo: why override this?
+        public override IEnumerator GetEnumerator ()
+        {
+            return base.GetEnumerator ();
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-			is_dirty = true;
-		}
+        public void Remove (string name)
+        {
+            BaseRemove (name);
+            is_dirty = true;
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-			is_dirty = true;
-		}
-	}
+        public void RemoveAt (int index)
+        {
+            BaseRemoveAt (index);
+            is_dirty = true;
+        }
+    }
 }

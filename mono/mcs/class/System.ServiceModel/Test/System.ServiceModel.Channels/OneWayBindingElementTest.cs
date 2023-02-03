@@ -2,7 +2,7 @@
 // OneWayBindingElementTest.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,57 +36,57 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	[TestFixture]
-	public class OneWayBindingElementTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void BuildRequestChannelFactory ()
-		{
-			OneWayBindingElement be =
-				new OneWayBindingElement ();
-			CustomBinding binding = new CustomBinding (
-				new HandlerTransportBindingElement (null));
-			BindingContext ctx = new BindingContext (
-				binding, new BindingParameterCollection ());
-			be.BuildChannelFactory<IRequestChannel> (ctx);
-		}
+    [TestFixture]
+    public class OneWayBindingElementTest
+    {
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void BuildRequestChannelFactory ()
+        {
+            OneWayBindingElement be =
+                new OneWayBindingElement ();
+            CustomBinding binding = new CustomBinding (
+                new HandlerTransportBindingElement (null));
+            BindingContext ctx = new BindingContext (
+                binding, new BindingParameterCollection ());
+            be.BuildChannelFactory<IRequestChannel> (ctx);
+        }
 
-		[Test]
-		public void BuildOutputChannelFactory ()
-		{
-			OneWayBindingElement be =
-				new OneWayBindingElement ();
-			CustomBinding binding = new CustomBinding (
-				new HandlerTransportBindingElement (null));
-			BindingContext ctx = new BindingContext (
-				binding, new BindingParameterCollection ());
-			be.BuildChannelFactory<IOutputChannel> (ctx);
-		}
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void BuildReplyChannelListener ()
-		{
-			OneWayBindingElement be =
-				new OneWayBindingElement ();
-			CustomBinding binding = new CustomBinding (
-				new HandlerTransportBindingElement (null));
-			BindingContext ctx = new BindingContext (
-				binding, new BindingParameterCollection ());
-			be.BuildChannelListener<IReplyChannel> (ctx);
-		}
+        [Test]
+        public void BuildOutputChannelFactory ()
+        {
+            OneWayBindingElement be =
+                new OneWayBindingElement ();
+            CustomBinding binding = new CustomBinding (
+                new HandlerTransportBindingElement (null));
+            BindingContext ctx = new BindingContext (
+                binding, new BindingParameterCollection ());
+            be.BuildChannelFactory<IOutputChannel> (ctx);
+        }
+        [Test]
+        [ExpectedException (typeof (ArgumentException))]
+        public void BuildReplyChannelListener ()
+        {
+            OneWayBindingElement be =
+                new OneWayBindingElement ();
+            CustomBinding binding = new CustomBinding (
+                new HandlerTransportBindingElement (null));
+            BindingContext ctx = new BindingContext (
+                binding, new BindingParameterCollection ());
+            be.BuildChannelListener<IReplyChannel> (ctx);
+        }
 
-		[Test]
-		public void BuildInputChannelListener ()
-		{
-			OneWayBindingElement be =
-				new OneWayBindingElement ();
-			CustomBinding binding = new CustomBinding (
-				new HandlerTransportBindingElement (null));
-			BindingContext ctx = new BindingContext (
-				binding, new BindingParameterCollection ());
-			be.BuildChannelListener<IInputChannel> (ctx);
-		}
-	}
+        [Test]
+        public void BuildInputChannelListener ()
+        {
+            OneWayBindingElement be =
+                new OneWayBindingElement ();
+            CustomBinding binding = new CustomBinding (
+                new HandlerTransportBindingElement (null));
+            BindingContext ctx = new BindingContext (
+                binding, new BindingParameterCollection ());
+            be.BuildChannelListener<IInputChannel> (ctx);
+        }
+    }
 }
 #endif

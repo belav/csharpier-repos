@@ -2,7 +2,7 @@
 // CaptureCas.cs - CAS unit tests for System.Text.RegularExpressions.Capture
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,42 +36,42 @@ using System.Text.RegularExpressions;
 
 namespace MonoCasTests.System.Text.RegularExpressions {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CaptureCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CaptureCas {
 
-		private Capture capture;
+        private Capture capture;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			capture = (Capture) Match.Empty.Groups [0];
-		}
+        [TestFixtureSetUp]
+        public void FixtureSetUp ()
+        {
+            capture = (Capture) Match.Empty.Groups [0];
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Assert.AreEqual (0, capture.Index, "Index");
-			Assert.AreEqual (0, capture.Length, "Length");
-			Assert.AreEqual (String.Empty, capture.Value, "Value");
-			Assert.AreEqual (String.Empty, capture.ToString (), "ToString");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            Assert.AreEqual (0, capture.Index, "Index");
+            Assert.AreEqual (0, capture.Length, "Length");
+            Assert.AreEqual (String.Empty, capture.Value, "Value");
+            Assert.AreEqual (String.Empty, capture.ToString (), "ToString");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			MethodInfo mi = typeof (Group).GetProperty ("Index").GetGetMethod ();
-			Assert.IsNotNull (mi, "Index");
-			Assert.AreEqual (0, (int)mi.Invoke (capture, null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            MethodInfo mi = typeof (Group).GetProperty ("Index").GetGetMethod ();
+            Assert.IsNotNull (mi, "Index");
+            Assert.AreEqual (0, (int)mi.Invoke (capture, null), "invoke");
+        }
+    }
 }

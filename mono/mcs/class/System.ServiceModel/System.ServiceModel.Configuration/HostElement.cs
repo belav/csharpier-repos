@@ -2,7 +2,7 @@
 // HostElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,28 +54,28 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class HostElement
-		 : ConfigurationElement
-	{
-		// Properties
+    public sealed class HostElement
+         : ConfigurationElement
+    {
+        // Properties
 
-		[ConfigurationProperty ("baseAddresses",
-			 Options = ConfigurationPropertyOptions.None)]
-		public BaseAddressElementCollection BaseAddresses {
-			get { return (BaseAddressElementCollection) base ["baseAddresses"]; }
-		}
+        [ConfigurationProperty ("baseAddresses",
+             Options = ConfigurationPropertyOptions.None)]
+        public BaseAddressElementCollection BaseAddresses {
+            get { return (BaseAddressElementCollection) base ["baseAddresses"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("timeouts",
-			 Options = ConfigurationPropertyOptions.None)]
-		public HostTimeoutsElement Timeouts {
-			get { return (HostTimeoutsElement) base ["timeouts"]; }
-		}
+        [ConfigurationProperty ("timeouts",
+             Options = ConfigurationPropertyOptions.None)]
+        public HostTimeoutsElement Timeouts {
+            get { return (HostTimeoutsElement) base ["timeouts"]; }
+        }
 
 
-	}
+    }
 
 }

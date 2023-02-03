@@ -35,100 +35,100 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-	[TestFixture] public class DataSet_AcceptChanges : GHTBase
-	{
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+    [TestFixture] public class DataSet_AcceptChanges : GHTBase
+    {
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
+        }
 
-		public void TearDown()
-		{
-		}
+        public void TearDown()
+        {
+        }
 
-		[Test] public void Main()
-		{
-			DataSet_AcceptChanges tc = new DataSet_AcceptChanges();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("DataSet_AcceptChanges");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex)
-			{
-				exp = ex;
-			}
-			finally
-			{
-				tc.EndTest(exp);
-			}
-		}
+        [Test] public void Main()
+        {
+            DataSet_AcceptChanges tc = new DataSet_AcceptChanges();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataSet_AcceptChanges");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch(Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		public void run()
-		{
+        public void run()
+        {
 
-			Exception exp = null;
-	
-			DataSet ds = new DataSet();
-			DataTable dtP = GHTUtils.DataProvider.CreateParentDataTable();
-			DataTable dtC = GHTUtils.DataProvider.CreateChildDataTable();
-			ds.Tables.Add(dtP);
-			ds.Tables.Add(dtC);
-			ds.Relations.Add(new DataRelation("myRelation",dtP.Columns[0],dtC.Columns[0]));
-	
-			//create changes
-			dtP.Rows[0][0] = "70"; 
-			dtP.Rows[1].Delete();
-			dtP.Rows.Add(new object[] {9,"string1","string2"});
-        		
-			try
-			{
-				BeginCase("AcceptChanges");
-				ds.AcceptChanges();
-				Compare(dtP.GetChanges(),null);
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+            Exception exp = null;
+    
+            DataSet ds = new DataSet();
+            DataTable dtP = GHTUtils.DataProvider.CreateParentDataTable();
+            DataTable dtC = GHTUtils.DataProvider.CreateChildDataTable();
+            ds.Tables.Add(dtP);
+            ds.Tables.Add(dtC);
+            ds.Relations.Add(new DataRelation("myRelation",dtP.Columns[0],dtC.Columns[0]));
+    
+            //create changes
+            dtP.Rows[0][0] = "70"; 
+            dtP.Rows[1].Delete();
+            dtP.Rows.Add(new object[] {9,"string1","string2"});
+                
+            try
+            {
+                BeginCase("AcceptChanges");
+                ds.AcceptChanges();
+                Compare(dtP.GetChanges(),null);
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
 
-		
-			//read only exception
-			dtP.Columns[0].ReadOnly = true;
-			try
-			{
-				BeginCase("check ReadOnlyException ");
-				try
-				{
-					dtP.Rows[0][0] = 99;
-				}
-				catch (ReadOnlyException ex) {exp=ex;}
-				Compare(exp.GetType() ,typeof(ReadOnlyException));
-				exp = null;
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+        
+            //read only exception
+            dtP.Columns[0].ReadOnly = true;
+            try
+            {
+                BeginCase("check ReadOnlyException ");
+                try
+                {
+                    dtP.Rows[0][0] = 99;
+                }
+                catch (ReadOnlyException ex) {exp=ex;}
+                Compare(exp.GetType() ,typeof(ReadOnlyException));
+                exp = null;
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}
 
-			try
-			{
-				BeginCase("check invoke AcceptChanges ");
-				try
-				{
-					ds.AcceptChanges();
-				}
-				catch (Exception ex) {exp=ex;}
-				Compare(exp==null,true);
-				exp = null;
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}		
-		}
-	}
+            try
+            {
+                BeginCase("check invoke AcceptChanges ");
+                try
+                {
+                    ds.AcceptChanges();
+                }
+                catch (Exception ex) {exp=ex;}
+                Compare(exp==null,true);
+                exp = null;
+            }
+            catch(Exception ex)    {exp = ex;}
+            finally    {EndCase(exp); exp = null;}        
+        }
+    }
 }

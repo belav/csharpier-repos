@@ -31,48 +31,48 @@
 
 namespace Mono.Cecil.Metadata {
 
-	internal sealed class MethodPtrTable : IMetadataTable {
+    internal sealed class MethodPtrTable : IMetadataTable {
 
-		public const int RId = 0x05;
+        public const int RId = 0x05;
 
-		RowCollection m_rows;
+        RowCollection m_rows;
 
-		public MethodPtrRow this [int index] {
-			get { return m_rows [index] as MethodPtrRow; }
-			set { m_rows [index] = value; }
-		}
+        public MethodPtrRow this [int index] {
+            get { return m_rows [index] as MethodPtrRow; }
+            set { m_rows [index] = value; }
+        }
 
-		public RowCollection Rows {
-			get { return m_rows; }
-			set { m_rows = value; }
-		}
+        public RowCollection Rows {
+            get { return m_rows; }
+            set { m_rows = value; }
+        }
 
-		public int Id {
-			get { return RId; }
-		}
+        public int Id {
+            get { return RId; }
+        }
 
-		internal MethodPtrTable ()
-		{
-		}
+        internal MethodPtrTable ()
+        {
+        }
 
-		public void Accept (IMetadataTableVisitor visitor)
-		{
-			visitor.VisitMethodPtrTable (this);
-			this.Rows.Accept (visitor.GetRowVisitor ());
-		}
-	}
+        public void Accept (IMetadataTableVisitor visitor)
+        {
+            visitor.VisitMethodPtrTable (this);
+            this.Rows.Accept (visitor.GetRowVisitor ());
+        }
+    }
 
-	internal sealed class MethodPtrRow : IMetadataRow {
+    internal sealed class MethodPtrRow : IMetadataRow {
 
-		public uint Method;
+        public uint Method;
 
-		internal MethodPtrRow ()
-		{
-		}
+        internal MethodPtrRow ()
+        {
+        }
 
-		public void Accept (IMetadataRowVisitor visitor)
-		{
-			visitor.VisitMethodPtrRow (this);
-		}
-	}
+        public void Accept (IMetadataRowVisitor visitor)
+        {
+            visitor.VisitMethodPtrRow (this);
+        }
+    }
 }

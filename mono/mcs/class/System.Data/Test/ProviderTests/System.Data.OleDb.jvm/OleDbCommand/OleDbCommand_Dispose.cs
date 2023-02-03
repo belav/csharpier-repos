@@ -36,61 +36,61 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbCommand_Dispose : GHTBase
 {
-	public static void Main()
-	{
-		OleDbCommand_Dispose tc = new OleDbCommand_Dispose();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OleDBCommand_Dispose");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    public static void Main()
+    {
+        OleDbCommand_Dispose tc = new OleDbCommand_Dispose();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OleDBCommand_Dispose");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
 
-		//OleDbConnection  con = null;
+        //OleDbConnection  con = null;
 
-		//this test was added due to a request from Oved:
-		//this bug occur on all databases (SQL,Oracle,DB2)
-		OleDbCommand DbCommand = null;
-		OleDbConnection Connect = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		Connect.Open();
-		DbCommand = new OleDbCommand("SELECT * FROM Customers", Connect);
-		OleDbDataReader  DbReader  = DbCommand.ExecuteReader();
+        //this test was added due to a request from Oved:
+        //this bug occur on all databases (SQL,Oracle,DB2)
+        OleDbCommand DbCommand = null;
+        OleDbConnection Connect = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        Connect.Open();
+        DbCommand = new OleDbCommand("SELECT * FROM Customers", Connect);
+        OleDbDataReader  DbReader  = DbCommand.ExecuteReader();
 
-		BeginCase("Check DataReader.IsClosed - before dispose");
-		try
-		{
-			Compare(DbReader.IsClosed,false); //.Net=false, GH=false
-		}
-		catch (Exception ex){exp = ex;}
-		finally{EndCase(exp);exp = null;}
-
-
-		BeginCase("Check DataReader.IsClosed - after dispose");
-		try
-		{
-			DbCommand.Dispose();
-			Compare(DbReader.IsClosed,false); //.Net=false, GH=true
-		}
-		catch (Exception ex){exp = ex;}
-		finally{EndCase(exp);exp = null;}
+        BeginCase("Check DataReader.IsClosed - before dispose");
+        try
+        {
+            Compare(DbReader.IsClosed,false); //.Net=false, GH=false
+        }
+        catch (Exception ex){exp = ex;}
+        finally{EndCase(exp);exp = null;}
 
 
-	}
+        BeginCase("Check DataReader.IsClosed - after dispose");
+        try
+        {
+            DbCommand.Dispose();
+            Compare(DbReader.IsClosed,false); //.Net=false, GH=true
+        }
+        catch (Exception ex){exp = ex;}
+        finally{EndCase(exp);exp = null;}
+
+
+    }
 }
 
 

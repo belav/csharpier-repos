@@ -5,7 +5,7 @@ using System;
 
 public class C
 {
-	public event Action<I> E;
+    public event Action<I> E;
 }
 
 interface I

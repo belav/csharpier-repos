@@ -3,18 +3,18 @@
 
 static class Program
 {
-	public interface I1
-	{
-		string Id { get; }
-	}
+    public interface I1
+    {
+        string Id { get; }
+    }
 
-	public interface I2
-	{
-		int Id { get; }
-	}
+    public interface I2
+    {
+        int Id { get; }
+    }
 
-	static void Generic<T> (T item) where T : I1, I2
-	{
-		var a = item.Id;
-	}
+    static void Generic<T> (T item) where T : I1, I2
+    {
+        var a = item.Id;
+    }
 }

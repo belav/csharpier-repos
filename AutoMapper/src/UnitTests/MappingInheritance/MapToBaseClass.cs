@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests.MappingInheritance;
+namespace AutoMapper.UnitTests.MappingInheritance;
 public class MapToBaseClass : AutoMapperSpecBase
 {
     A _destination;

@@ -3,10 +3,10 @@
 
 public class X
 {
-	int field;
+    int field;
 
-	ref string TestMethod ()
-	{
-		return ref field;
-	}
+    ref string TestMethod ()
+    {
+        return ref field;
+    }
 }

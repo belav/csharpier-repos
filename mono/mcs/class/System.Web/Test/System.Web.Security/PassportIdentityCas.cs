@@ -1,9 +1,9 @@
 //
 // PassportIdentityCas.cs 
-//	- CAS unit tests for System.Web.Security.PassportIdentity
+//    - CAS unit tests for System.Web.Security.PassportIdentity
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,50 +38,50 @@ using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PassportIdentityCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class PassportIdentityCas : AspNetHostingMinimal {
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_Unmanaged ()
-		{
-			new PassportIdentity ();
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException (typeof (SecurityException))]
+        public void Constructor_Deny_Unmanaged ()
+        {
+            new PassportIdentity ();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void Constructor_PermitOnly_Unmanaged ()
-		{
-			try {
-				new PassportIdentity ();
-			}
-			catch (NullReferenceException) {
-				Assert.Ignore ("fails with NullReferenceException on MS");
-			}
-		}
+        [Test]
+        [SecurityPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+        public void Constructor_PermitOnly_Unmanaged ()
+        {
+            try {
+                new PassportIdentity ();
+            }
+            catch (NullReferenceException) {
+                Assert.Ignore ("fails with NullReferenceException on MS");
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		[SecurityPermission (SecurityAction.Assert, Unrestricted = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// the ctor NRE makes it more complex
-			try {
-				return base.CreateControl (action, level);
-			}
-			catch (TargetInvocationException tie) {
-				// we really checking for security exceptions that occurs before a NRE can occurs
-				if (tie.InnerException is NullReferenceException)
-					return String.Empty;
-				else
-					return null;
-			}
-		}
+        [SecurityPermission (SecurityAction.Assert, Unrestricted = true)]
+        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        {
+            // the ctor NRE makes it more complex
+            try {
+                return base.CreateControl (action, level);
+            }
+            catch (TargetInvocationException tie) {
+                // we really checking for security exceptions that occurs before a NRE can occurs
+                if (tie.InnerException is NullReferenceException)
+                    return String.Empty;
+                else
+                    return null;
+            }
+        }
 
-		public override Type Type {
-			get { return typeof (PassportIdentity); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (PassportIdentity); }
+        }
+    }
 }

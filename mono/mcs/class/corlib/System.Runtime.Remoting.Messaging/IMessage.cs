@@ -34,11 +34,11 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Messaging {
 
- 	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IMessage {
+     [System.Runtime.InteropServices.ComVisible (true)]
+    public interface IMessage {
 
-		IDictionary Properties {
-			get;
-		}
-	}
+        IDictionary Properties {
+            get;
+        }
+    }
 }

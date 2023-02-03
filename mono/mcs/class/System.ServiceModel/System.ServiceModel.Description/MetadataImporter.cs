@@ -2,8 +2,8 @@
 // MetadataImporter.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
-//	Ankit Jain <jankit@novell.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
+//    Ankit Jain <jankit@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,89 +36,89 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public abstract class MetadataImporter
-	{
-		KeyedByTypeCollection<IPolicyImportExtension> policy_extensions;
-		Collection<MetadataConversionError> errors = new Collection<MetadataConversionError> ();
-		Dictionary<Object,Object> state = new Dictionary<Object, Object> ();
+    [MonoTODO]
+    public abstract class MetadataImporter
+    {
+        KeyedByTypeCollection<IPolicyImportExtension> policy_extensions;
+        Collection<MetadataConversionError> errors = new Collection<MetadataConversionError> ();
+        Dictionary<Object,Object> state = new Dictionary<Object, Object> ();
 
-		internal MetadataImporter (IEnumerable<IPolicyImportExtension> policyImportExtensions)
-		{
-			if (policyImportExtensions != null) {
-				policy_extensions = new KeyedByTypeCollection<IPolicyImportExtension> (policyImportExtensions);
-				return;
-			}
-			
-			//FIXME: Complete the list
-			policy_extensions = new KeyedByTypeCollection<IPolicyImportExtension> ();
-			policy_extensions.Add (new TransportBindingElementImporter ());
-			policy_extensions.Add (new MessageEncodingBindingElementImporter ());
-		}
+        internal MetadataImporter (IEnumerable<IPolicyImportExtension> policyImportExtensions)
+        {
+            if (policyImportExtensions != null) {
+                policy_extensions = new KeyedByTypeCollection<IPolicyImportExtension> (policyImportExtensions);
+                return;
+            }
+            
+            //FIXME: Complete the list
+            policy_extensions = new KeyedByTypeCollection<IPolicyImportExtension> ();
+            policy_extensions.Add (new TransportBindingElementImporter ());
+            policy_extensions.Add (new MessageEncodingBindingElementImporter ());
+        }
 
-		public Collection<MetadataConversionError> Errors {
-			get { return errors; }
-		}
+        public Collection<MetadataConversionError> Errors {
+            get { return errors; }
+        }
 
-		public KeyedByTypeCollection<IPolicyImportExtension> PolicyImportExtensions {
-			get { return policy_extensions; }
-		}
+        public KeyedByTypeCollection<IPolicyImportExtension> PolicyImportExtensions {
+            get { return policy_extensions; }
+        }
 
-		public Dictionary<Object,Object> State {
-			get { return state; }
-		}
+        public Dictionary<Object,Object> State {
+            get { return state; }
+        }
 
-		public Dictionary<XmlQualifiedName,ContractDescription> KnownContracts {
-			get { throw new NotImplementedException (); }
-		}
+        public Dictionary<XmlQualifiedName,ContractDescription> KnownContracts {
+            get { throw new NotImplementedException (); }
+        }
 
-		public abstract Collection<ContractDescription> ImportAllContracts ();
+        public abstract Collection<ContractDescription> ImportAllContracts ();
 
-		public abstract ServiceEndpointCollection ImportAllEndpoints ();
+        public abstract ServiceEndpointCollection ImportAllEndpoints ();
 
-		internal T GetState<T> () where T : class, new ()
-		{
-			object value;
-			if (!state.TryGetValue (typeof(T), out value)) {
-				value = new T ();
-				state.Add (typeof(T), value);
-			}
-			return (T) value;
-		}
+        internal T GetState<T> () where T : class, new ()
+        {
+            object value;
+            if (!state.TryGetValue (typeof(T), out value)) {
+                value = new T ();
+                state.Add (typeof(T), value);
+            }
+            return (T) value;
+        }
 
-		internal MetadataConversionError AddError (string message, params object[] args)
-		{
-			var error = new MetadataConversionError (string.Format (message, args));
-			Errors.Add (error);
-			return error;
-		}
-		
-		internal MetadataConversionError AddWarning (string message, params object[] args)
-		{
-			var error = new MetadataConversionError (string.Format (message, args), true);
-			Errors.Add (error);
-			return error;
-		}
-		
-		internal class MetadataImportException : Exception
-		{
-			public MetadataConversionError Error {
-				get;
-				private set;
-			}
-			
-			public MetadataImportException (MetadataConversionError error)
-				: base (error.Message)
-			{
-				this.Error = error;
-			}
-			
-			public MetadataImportException (MetadataConversionError error, Exception inner)
-				: base (error.Message, inner)
-			{
-				this.Error = error;
-			}
-		}
+        internal MetadataConversionError AddError (string message, params object[] args)
+        {
+            var error = new MetadataConversionError (string.Format (message, args));
+            Errors.Add (error);
+            return error;
+        }
+        
+        internal MetadataConversionError AddWarning (string message, params object[] args)
+        {
+            var error = new MetadataConversionError (string.Format (message, args), true);
+            Errors.Add (error);
+            return error;
+        }
+        
+        internal class MetadataImportException : Exception
+        {
+            public MetadataConversionError Error {
+                get;
+                private set;
+            }
+            
+            public MetadataImportException (MetadataConversionError error)
+                : base (error.Message)
+            {
+                this.Error = error;
+            }
+            
+            public MetadataImportException (MetadataConversionError error, Exception inner)
+                : base (error.Message, inner)
+            {
+                this.Error = error;
+            }
+        }
 
-	}
+    }
 }

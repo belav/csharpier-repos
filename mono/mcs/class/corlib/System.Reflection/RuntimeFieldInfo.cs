@@ -43,52 +43,52 @@ using System.Diagnostics.Contracts;
 
 namespace System.Reflection {
 
-	abstract class RtFieldInfo : FieldInfo {
-		internal abstract object UnsafeGetValue (object obj);
-		internal abstract void UnsafeSetValue (Object obj, Object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture);
+    abstract class RtFieldInfo : FieldInfo {
+        internal abstract object UnsafeGetValue (object obj);
+        internal abstract void UnsafeSetValue (Object obj, Object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture);
         internal abstract void CheckConsistency(Object target);
-	}
+    }
 
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential)]
-	class RuntimeFieldInfo : RtFieldInfo
-	, ISerializable
-	{
+    [Serializable]
+    [StructLayout (LayoutKind.Sequential)]
+    class RuntimeFieldInfo : RtFieldInfo
+    , ISerializable
+    {
 #pragma warning disable 649
-		internal IntPtr klass;
-		internal RuntimeFieldHandle fhandle;
-		string name;
-		Type type;
-		FieldAttributes attrs;
+        internal IntPtr klass;
+        internal RuntimeFieldHandle fhandle;
+        string name;
+        Type type;
+        FieldAttributes attrs;
 #pragma warning restore 649
 
-		internal BindingFlags BindingFlags {
-			get {
-				return 0;
-			}
-		}
+        internal BindingFlags BindingFlags {
+            get {
+                return 0;
+            }
+        }
 
-		public override Module Module {
-			get {
-				return GetRuntimeModule ();
-			}
-		}
+        public override Module Module {
+            get {
+                return GetRuntimeModule ();
+            }
+        }
 
-		internal RuntimeType GetDeclaringTypeInternal ()
-		{
-			return (RuntimeType) DeclaringType;
-		}
+        internal RuntimeType GetDeclaringTypeInternal ()
+        {
+            return (RuntimeType) DeclaringType;
+        }
 
-		RuntimeType ReflectedTypeInternal {
-			get {
-				return (RuntimeType) ReflectedType;
-			}
-		}
+        RuntimeType ReflectedTypeInternal {
+            get {
+                return (RuntimeType) ReflectedType;
+            }
+        }
 
-		internal RuntimeModule GetRuntimeModule ()
-		{
-			return GetDeclaringTypeInternal ().GetRuntimeModule ();
-		}
+        internal RuntimeModule GetRuntimeModule ()
+        {
+            return GetDeclaringTypeInternal ().GetRuntimeModule ();
+        }
 
         #region ISerializable Implementation
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -105,8 +105,8 @@ namespace System.Reflection {
         }
         #endregion
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		internal override extern object UnsafeGetValue (object obj);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal override extern object UnsafeGetValue (object obj);
 
         internal override void CheckConsistency(Object target)
         {
@@ -134,13 +134,13 @@ namespace System.Reflection {
             }
         }
 
-		[DebuggerStepThroughAttribute]
-		[Diagnostics.DebuggerHidden]
-		internal override void UnsafeSetValue (Object obj, Object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
-		{
-			bool domainInitialized = false;
-			RuntimeFieldHandle.SetValue (this, obj, value, null, Attributes, null, ref domainInitialized);
-		}
+        [DebuggerStepThroughAttribute]
+        [Diagnostics.DebuggerHidden]
+        internal override void UnsafeSetValue (Object obj, Object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+        {
+            bool domainInitialized = false;
+            RuntimeFieldHandle.SetValue (this, obj, value, null, Attributes, null, ref domainInitialized);
+        }
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
@@ -171,176 +171,176 @@ namespace System.Reflection {
                 return RuntimeFieldHandle.GetValueDirect(this, (RuntimeType)FieldType, &obj, (RuntimeType)DeclaringType);
             }
         }
-		
-		public override FieldAttributes Attributes {
-			get {
-				return attrs;
-			}
-		}
-		public override RuntimeFieldHandle FieldHandle {
-			get {
-				return fhandle;
-			}
-		}
+        
+        public override FieldAttributes Attributes {
+            get {
+                return attrs;
+            }
+        }
+        public override RuntimeFieldHandle FieldHandle {
+            get {
+                return fhandle;
+            }
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern Type ResolveType ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        extern Type ResolveType ();
 
-		public override Type FieldType { 
-			get {
-				if (type == null)
-					type = ResolveType ();
-				return type;
-			}
-		}
+        public override Type FieldType { 
+            get {
+                if (type == null)
+                    type = ResolveType ();
+                return type;
+            }
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private extern Type GetParentType (bool declaring);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern Type GetParentType (bool declaring);
 
-		public override Type ReflectedType {
-			get {
-				return GetParentType (false);
-			}
-		}
-		public override Type DeclaringType {
-			get {
-				return GetParentType (true);
-			}
-		}
-		public override string Name {
-			get {
-				return name;
-			}
-		}
+        public override Type ReflectedType {
+            get {
+                return GetParentType (false);
+            }
+        }
+        public override Type DeclaringType {
+            get {
+                return GetParentType (true);
+            }
+        }
+        public override string Name {
+            get {
+                return name;
+            }
+        }
 
-		public override bool IsDefined (Type attributeType, bool inherit) {
-			return MonoCustomAttrs.IsDefined (this, attributeType, inherit);
-		}
+        public override bool IsDefined (Type attributeType, bool inherit) {
+            return MonoCustomAttrs.IsDefined (this, attributeType, inherit);
+        }
 
-		public override object[] GetCustomAttributes( bool inherit) {
-			return MonoCustomAttrs.GetCustomAttributes (this, inherit);
-		}
-		public override object[] GetCustomAttributes( Type attributeType, bool inherit) {
-			return MonoCustomAttrs.GetCustomAttributes (this, attributeType, inherit);
-		}
+        public override object[] GetCustomAttributes( bool inherit) {
+            return MonoCustomAttrs.GetCustomAttributes (this, inherit);
+        }
+        public override object[] GetCustomAttributes( Type attributeType, bool inherit) {
+            return MonoCustomAttrs.GetCustomAttributes (this, attributeType, inherit);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		internal override extern int GetFieldOffset ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal override extern int GetFieldOffset ();
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private extern object GetValueInternal (object obj);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern object GetValueInternal (object obj);
 
-		public override object GetValue (object obj)
-		{
-			if (!IsStatic) {
-				if (obj == null)
-					throw new TargetException ("Non-static field requires a target");
-				if (!DeclaringType.IsAssignableFrom (obj.GetType ()))
-					throw new ArgumentException (string.Format (
-						"Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-					 	Name, DeclaringType, obj.GetType ()),
-					 	"obj");
-			}
-			
-			if (!IsLiteral)
-				CheckGeneric ();
-			return GetValueInternal (obj);
-		}
+        public override object GetValue (object obj)
+        {
+            if (!IsStatic) {
+                if (obj == null)
+                    throw new TargetException ("Non-static field requires a target");
+                if (!DeclaringType.IsAssignableFrom (obj.GetType ()))
+                    throw new ArgumentException (string.Format (
+                        "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                         Name, DeclaringType, obj.GetType ()),
+                         "obj");
+            }
+            
+            if (!IsLiteral)
+                CheckGeneric ();
+            return GetValueInternal (obj);
+        }
 
-		public override string ToString () {
-			return String.Format ("{0} {1}", FieldType, name);
-		}
+        public override string ToString () {
+            return String.Format ("{0} {1}", FieldType, name);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private static extern void SetValueInternal (FieldInfo fi, object obj, object value);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern void SetValueInternal (FieldInfo fi, object obj, object value);
 
-		public override void SetValue (object obj, object val, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
-		{
-			if (!IsStatic) {
-				if (obj == null)
-					throw new TargetException ("Non-static field requires a target");
-				if (!DeclaringType.IsAssignableFrom (obj.GetType ()))
-					throw new ArgumentException (string.Format (
-						"Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-					 	Name, DeclaringType, obj.GetType ()),
-					 	"obj");
-			}
-			if (IsLiteral)
-				throw new FieldAccessException ("Cannot set a constant field");
-			if (binder == null)
-				binder = Type.DefaultBinder;
-			CheckGeneric ();
-			if (val != null) {
-				RuntimeType fieldType = (RuntimeType) FieldType;
-				val = fieldType.CheckValue (val, binder, culture, invokeAttr);
-			}
-			SetValueInternal (this, obj, val);
-		}
-		
-		internal RuntimeFieldInfo Clone (string newName)
-		{
-			RuntimeFieldInfo field = new RuntimeFieldInfo ();
-			field.name = newName;
-			field.type = type;
-			field.attrs = attrs;
-			field.klass = klass;
-			field.fhandle = fhandle;
-			return field;
-		}
+        public override void SetValue (object obj, object val, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+        {
+            if (!IsStatic) {
+                if (obj == null)
+                    throw new TargetException ("Non-static field requires a target");
+                if (!DeclaringType.IsAssignableFrom (obj.GetType ()))
+                    throw new ArgumentException (string.Format (
+                        "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                         Name, DeclaringType, obj.GetType ()),
+                         "obj");
+            }
+            if (IsLiteral)
+                throw new FieldAccessException ("Cannot set a constant field");
+            if (binder == null)
+                binder = Type.DefaultBinder;
+            CheckGeneric ();
+            if (val != null) {
+                RuntimeType fieldType = (RuntimeType) FieldType;
+                val = fieldType.CheckValue (val, binder, culture, invokeAttr);
+            }
+            SetValueInternal (this, obj, val);
+        }
+        
+        internal RuntimeFieldInfo Clone (string newName)
+        {
+            RuntimeFieldInfo field = new RuntimeFieldInfo ();
+            field.name = newName;
+            field.type = type;
+            field.attrs = attrs;
+            field.klass = klass;
+            field.fhandle = fhandle;
+            return field;
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public override extern object GetRawConstantValue ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public override extern object GetRawConstantValue ();
 
-		public override IList<CustomAttributeData> GetCustomAttributesData () {
-			return CustomAttributeData.GetCustomAttributes (this);
-		}
+        public override IList<CustomAttributeData> GetCustomAttributesData () {
+            return CustomAttributeData.GetCustomAttributes (this);
+        }
 
-		void CheckGeneric () {
-			if (DeclaringType.ContainsGenericParameters)
-				throw new InvalidOperationException ("Late bound operations cannot be performed on fields with types for which Type.ContainsGenericParameters is true.");
-	    }
+        void CheckGeneric () {
+            if (DeclaringType.ContainsGenericParameters)
+                throw new InvalidOperationException ("Late bound operations cannot be performed on fields with types for which Type.ContainsGenericParameters is true.");
+        }
 
 #if MOBILE
-		static int get_core_clr_security_level ()
-		{
-			return 1;
-		}
+        static int get_core_clr_security_level ()
+        {
+            return 1;
+        }
 #else
-		//seclevel { transparent = 0, safe-critical = 1, critical = 2}
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public extern int get_core_clr_security_level ();
+        //seclevel { transparent = 0, safe-critical = 1, critical = 2}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern int get_core_clr_security_level ();
 
-		public override bool IsSecurityTransparent {
-			get { return get_core_clr_security_level () == 0; }
-		}
+        public override bool IsSecurityTransparent {
+            get { return get_core_clr_security_level () == 0; }
+        }
 
-		public override bool IsSecurityCritical {
-			get { return get_core_clr_security_level () > 0; }
-		}
+        public override bool IsSecurityCritical {
+            get { return get_core_clr_security_level () > 0; }
+        }
 
-		public override bool IsSecuritySafeCritical {
-			get { return get_core_clr_security_level () == 1; }
-		}
+        public override bool IsSecuritySafeCritical {
+            get { return get_core_clr_security_level () == 1; }
+        }
 #endif
 
-		public sealed override bool HasSameMetadataDefinitionAs (MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeFieldInfo> (other);
+        public sealed override bool HasSameMetadataDefinitionAs (MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeFieldInfo> (other);
 
-		public override int MetadataToken {
-			get {
-				return get_metadata_token (this);
-			}
-		}
-		
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal static extern int get_metadata_token (RuntimeFieldInfo monoField);
+        public override int MetadataToken {
+            get {
+                return get_metadata_token (this);
+            }
+        }
+        
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        internal static extern int get_metadata_token (RuntimeFieldInfo monoField);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern Type[] GetTypeModifiers (bool optional);
+        [MethodImplAttribute (MethodImplOptions.InternalCall)]
+        extern Type[] GetTypeModifiers (bool optional);
 
-		public override Type[] GetOptionalCustomModifiers () => GetCustomModifiers (true);
+        public override Type[] GetOptionalCustomModifiers () => GetCustomModifiers (true);
 
-		public override Type[] GetRequiredCustomModifiers () => GetCustomModifiers (false);
+        public override Type[] GetRequiredCustomModifiers () => GetCustomModifiers (false);
 
-		private Type[] GetCustomModifiers (bool optional) => GetTypeModifiers (optional) ?? Type.EmptyTypes;
-	}
+        private Type[] GetCustomModifiers (bool optional) => GetTypeModifiers (optional) ?? Type.EmptyTypes;
+    }
 }

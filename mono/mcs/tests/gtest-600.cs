@@ -5,24 +5,24 @@ interface ICharlie<T> { }
 
 class Delta : ICharlie<A>, ICharlie<B>
 {
-	static void Test<U> (ICharlie<U> icu, U u)
-	{
-	}
+    static void Test<U> (ICharlie<U> icu, U u)
+    {
+    }
 
-	public void World<U> (U u, IFoo<U> foo)
-	{
-	}
+    public void World<U> (U u, IFoo<U> foo)
+    {
+    }
 
-	public void Test (Foo foo)
-	{
-		World ("Canada", foo);
-	}
+    public void Test (Foo foo)
+    {
+        World ("Canada", foo);
+    }
 
-	static void Main ()
-	{
-		Test (new Delta (), new A ());
-		Test (new Delta (), new B ());
-	}
+    static void Main ()
+    {
+        Test (new Delta (), new A ());
+        Test (new Delta (), new B ());
+    }
 }
 
 public interface IFoo<T>

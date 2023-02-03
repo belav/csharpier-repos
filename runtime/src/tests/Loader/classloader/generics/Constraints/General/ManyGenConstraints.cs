@@ -9,42 +9,42 @@ using System;
 public class Test_ManyGenConstraints {
    public static int Main() 
    {    
-	bool pass = true; 
+    bool pass = true; 
   
-	try
-	{
-		MyClass<I100> obj = new MyClass<I100>();
-	}
-	catch (Exception e)
-	{
-		Console.WriteLine("Caught unexpected exception: " + e);
-		pass = false;
-	}
+    try
+    {
+        MyClass<I100> obj = new MyClass<I100>();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Caught unexpected exception: " + e);
+        pass = false;
+    }
 
-	try
-	{
-		//  warning CS0219: The variable 'obj' is assigned but its value is never used
-		#pragma warning disable 219
-		MyStruct<I100> obj = new MyStruct<I100>();
-		#pragma warning restore 219
-	}
-	catch (Exception e)
-	{
-		Console.WriteLine("Caught unexpected exception: " + e);
-		pass = false;
-	}
+    try
+    {
+        //  warning CS0219: The variable 'obj' is assigned but its value is never used
+        #pragma warning disable 219
+        MyStruct<I100> obj = new MyStruct<I100>();
+        #pragma warning restore 219
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Caught unexpected exception: " + e);
+        pass = false;
+    }
 
-	
-	if (pass)
-	{
-		Console.WriteLine("PASS");
-		return 100;
-	}
-	else
-	{
-		Console.WriteLine("FAIL");
-		return 101;
-	}
+    
+    if (pass)
+    {
+        Console.WriteLine("PASS");
+        return 100;
+    }
+    else
+    {
+        Console.WriteLine("FAIL");
+        return 101;
+    }
    }
 }
 

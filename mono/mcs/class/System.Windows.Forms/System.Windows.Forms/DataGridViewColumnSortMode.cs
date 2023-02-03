@@ -20,15 +20,15 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-	public enum DataGridViewColumnSortMode {
-		NotSortable = 0,
-		Automatic = 1,
-		Programmatic = 2
-	}
+    public enum DataGridViewColumnSortMode {
+        NotSortable = 0,
+        Automatic = 1,
+        Programmatic = 2
+    }
 
 }

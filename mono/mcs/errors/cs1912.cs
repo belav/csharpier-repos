@@ -7,13 +7,13 @@ using System.Collections.Generic;
 
 public class Test
 {
-	class Container
-	{
-		public int Count;
-	}
-	
-	static void Main ()
-	{
-		var c = new Container { Count = 1, Count = 10 };
-	}
+    class Container
+    {
+        public int Count;
+    }
+    
+    static void Main ()
+    {
+        var c = new Container { Count = 1, Count = 10 };
+    }
 }

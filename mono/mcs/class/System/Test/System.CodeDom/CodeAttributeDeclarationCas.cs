@@ -1,9 +1,9 @@
 //
 // CodeAttributeDeclarationCas.cs
-//	- CAS unit tests for System.CodeDom.CodeAttributeDeclaration
+//    - CAS unit tests for System.CodeDom.CodeAttributeDeclaration
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,81 +37,81 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeAttributeDeclarationCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class CodeAttributeDeclarationCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeAttributeDeclaration cad = new CodeAttributeDeclaration ();
-			Assert.AreEqual (0, cad.Arguments.Count, "Arguments");
-			Assert.AreEqual (String.Empty, cad.Name, "Name");
-			cad.Name = null;
-			Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted ()
+        {
+            CodeAttributeDeclaration cad = new CodeAttributeDeclaration ();
+            Assert.AreEqual (0, cad.Arguments.Count, "Arguments");
+            Assert.AreEqual (String.Empty, cad.Name, "Name");
+            cad.Name = null;
+            Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeAttributeDeclaration cad = new CodeAttributeDeclaration ("mono");
-			Assert.AreEqual (0, cad.Arguments.Count, "Arguments");
-			Assert.AreEqual ("mono", cad.Name, "Name");
-			cad.Name = null;
-			Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted ()
+        {
+            CodeAttributeDeclaration cad = new CodeAttributeDeclaration ("mono");
+            Assert.AreEqual (0, cad.Arguments.Count, "Arguments");
+            Assert.AreEqual ("mono", cad.Name, "Name");
+            cad.Name = null;
+            Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeAttributeArgument[] args = new CodeAttributeArgument[1] { new CodeAttributeArgument () };
-			CodeAttributeDeclaration cad = new CodeAttributeDeclaration ("mono", args);
-			Assert.AreEqual (1, cad.Arguments.Count, "Arguments");
-			Assert.AreEqual ("mono", cad.Name, "Name");
-			cad.Name = null;
-			Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor3_Deny_Unrestricted ()
-		{
-			CodeTypeReference ctr = new CodeTypeReference ("System.Int32");
-			CodeAttributeDeclaration cad = new CodeAttributeDeclaration (ctr);
-			Assert.AreEqual (0, cad.Arguments.Count, "Arguments");
-			Assert.AreEqual ("System.Int32", cad.Name, "Name");
-			cad.Name = null;
-			Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted ()
+        {
+            CodeAttributeArgument[] args = new CodeAttributeArgument[1] { new CodeAttributeArgument () };
+            CodeAttributeDeclaration cad = new CodeAttributeDeclaration ("mono", args);
+            Assert.AreEqual (1, cad.Arguments.Count, "Arguments");
+            Assert.AreEqual ("mono", cad.Name, "Name");
+            cad.Name = null;
+            Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
+        }
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor3_Deny_Unrestricted ()
+        {
+            CodeTypeReference ctr = new CodeTypeReference ("System.Int32");
+            CodeAttributeDeclaration cad = new CodeAttributeDeclaration (ctr);
+            Assert.AreEqual (0, cad.Arguments.Count, "Arguments");
+            Assert.AreEqual ("System.Int32", cad.Name, "Name");
+            cad.Name = null;
+            Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor4_Deny_Unrestricted ()
-		{
-			CodeTypeReference ctr = new CodeTypeReference ("System.Int32");
-			CodeAttributeArgument[] args = new CodeAttributeArgument[1] { new CodeAttributeArgument () };
-			CodeAttributeDeclaration cad = new CodeAttributeDeclaration (ctr, args);
-			Assert.AreEqual (1, cad.Arguments.Count, "Arguments");
-			Assert.AreEqual ("System.Int32", cad.Name, "Name");
-			cad.Name = null;
-			Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeAttributeDeclaration).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor4_Deny_Unrestricted ()
+        {
+            CodeTypeReference ctr = new CodeTypeReference ("System.Int32");
+            CodeAttributeArgument[] args = new CodeAttributeArgument[1] { new CodeAttributeArgument () };
+            CodeAttributeDeclaration cad = new CodeAttributeDeclaration (ctr, args);
+            Assert.AreEqual (1, cad.Arguments.Count, "Arguments");
+            Assert.AreEqual ("System.Int32", cad.Name, "Name");
+            cad.Name = null;
+            Assert.AreEqual ("System.Void", cad.AttributeType.BaseType, "AttributeType.BaseType");
+        }
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (CodeAttributeDeclaration).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

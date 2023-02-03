@@ -31,77 +31,77 @@
 using System;
 
 namespace System.EnterpriseServices {
-	public sealed class SecurityCallContext {
+    public sealed class SecurityCallContext {
 
-		#region Fields
+        #region Fields
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		internal SecurityCallContext ()
-		{
-		}
+        internal SecurityCallContext ()
+        {
+        }
 
-		internal SecurityCallContext (ISecurityCallContext context)
-		{
-		}
+        internal SecurityCallContext (ISecurityCallContext context)
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public SecurityCallers Callers {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public SecurityCallers Callers {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		public static SecurityCallContext CurrentCall {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public static SecurityCallContext CurrentCall {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		public SecurityIdentity DirectCaller {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public SecurityIdentity DirectCaller {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		public bool IsSecurityEnabled {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public bool IsSecurityEnabled {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		public int MinAuthenticationLevel {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public int MinAuthenticationLevel {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		public int NumCallers {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public int NumCallers {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		public SecurityIdentity OriginalCaller {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public SecurityIdentity OriginalCaller {
+            [MonoTODO]
+            get { throw new NotImplementedException (); }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		public bool IsCallerInRole (string role)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool IsCallerInRole (string role)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public bool IsUserInRole (string user, string role)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool IsUserInRole (string user, string role)
+        {
+            throw new NotImplementedException ();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

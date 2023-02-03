@@ -36,52 +36,52 @@ using System.Configuration.Provider;
 
 namespace System.Web.Security
 {
-	internal static class AspNetDBSchemaChecker
-	{
-		static DbConnection CreateConnection (DbProviderFactory factory, string connStr)
-		{
-			DbConnection connection = factory.CreateConnection ();
-			connection.ConnectionString = connStr;
+    internal static class AspNetDBSchemaChecker
+    {
+        static DbConnection CreateConnection (DbProviderFactory factory, string connStr)
+        {
+            DbConnection connection = factory.CreateConnection ();
+            connection.ConnectionString = connStr;
 
-			connection.Open ();
-			return connection;
-		}
+            connection.Open ();
+            return connection;
+        }
 
-		public static bool CheckMembershipSchemaVersion (DbProviderFactory factory, string connStr, string feature, string compatibleVersion)
-		{
-			using (DbConnection connection = CreateConnection (factory, connStr)) {
-				DbCommand command = factory.CreateCommand ();
-				command.Connection = connection;
-				command.CommandText = @"aspnet_CheckSchemaVersion";
-				command.CommandType = CommandType.StoredProcedure;
+        public static bool CheckMembershipSchemaVersion (DbProviderFactory factory, string connStr, string feature, string compatibleVersion)
+        {
+            using (DbConnection connection = CreateConnection (factory, connStr)) {
+                DbCommand command = factory.CreateCommand ();
+                command.Connection = connection;
+                command.CommandText = @"aspnet_CheckSchemaVersion";
+                command.CommandType = CommandType.StoredProcedure;
 
-				AddParameter (factory, command, "@Feature", ParameterDirection.Input, feature);
-				AddParameter (factory, command, "@CompatibleSchemaVersion", ParameterDirection.Input, compatibleVersion);
-				DbParameter returnValue = AddParameter (factory, command, "@ReturnVal", ParameterDirection.ReturnValue, null);
+                AddParameter (factory, command, "@Feature", ParameterDirection.Input, feature);
+                AddParameter (factory, command, "@CompatibleSchemaVersion", ParameterDirection.Input, compatibleVersion);
+                DbParameter returnValue = AddParameter (factory, command, "@ReturnVal", ParameterDirection.ReturnValue, null);
 
-				try {
-					command.ExecuteNonQuery ();
-				}
-				catch (Exception) {
-					throw new ProviderException ("ASP.NET Membership schema not installed.");
-				}
+                try {
+                    command.ExecuteNonQuery ();
+                }
+                catch (Exception) {
+                    throw new ProviderException ("ASP.NET Membership schema not installed.");
+                }
 
-				if ((int) (returnValue.Value ?? -1) == 0)
-					return true;
+                if ((int) (returnValue.Value ?? -1) == 0)
+                    return true;
 
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		static DbParameter AddParameter (DbProviderFactory factory, DbCommand command, string parameterName, ParameterDirection direction, object parameterValue)
-		{
-			DbParameter dbp = command.CreateParameter ();
-			dbp.ParameterName = parameterName;
-			dbp.Value = parameterValue;
-			dbp.Direction = direction;
-			command.Parameters.Add (dbp);
-			return dbp;
-		}
+        static DbParameter AddParameter (DbProviderFactory factory, DbCommand command, string parameterName, ParameterDirection direction, object parameterValue)
+        {
+            DbParameter dbp = command.CreateParameter ();
+            dbp.ParameterName = parameterName;
+            dbp.Value = parameterValue;
+            dbp.Direction = direction;
+            command.Parameters.Add (dbp);
+            return dbp;
+        }
 
-	}
+    }
 }

@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum SearchDirectionHint
-	{
-		Left = 37,
-		Up = 38,
-		Right = 39,
-		Down = 40
-	}
+    public enum SearchDirectionHint
+    {
+        Left = 37,
+        Up = 38,
+        Right = 39,
+        Down = 40
+    }
 }

@@ -14,54 +14,54 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
+    using System;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class MethodEquivalenceTestCase
-	{
-		[Test]
-		public void CanProxyTypesWithMethodsOnlyDifferentByGenericArguments()
-		{
-			ProxyGenerator generator = new ProxyGenerator();
+    [TestFixture]
+    public class MethodEquivalenceTestCase
+    {
+        [Test]
+        public void CanProxyTypesWithMethodsOnlyDifferentByGenericArguments()
+        {
+            ProxyGenerator generator = new ProxyGenerator();
 
-			IMyService target1 = (IMyService)generator.CreateInterfaceProxyWithTarget(
-				typeof(IMyService), new MyServiceImpl(), new StandardInterceptor());
-			Assert.IsNotNull(target1.CreateSomething<int>("aa"));
+            IMyService target1 = (IMyService)generator.CreateInterfaceProxyWithTarget(
+                typeof(IMyService), new MyServiceImpl(), new StandardInterceptor());
+            Assert.IsNotNull(target1.CreateSomething<int>("aa"));
 
-			IMyService target2 = (IMyService)generator.CreateClassProxy(
+            IMyService target2 = (IMyService)generator.CreateClassProxy(
                 typeof(MyServiceImpl), new StandardInterceptor());
-			Assert.IsNotNull(target2.CreateSomething<int>("aa"));
-		}
-	}
+            Assert.IsNotNull(target2.CreateSomething<int>("aa"));
+        }
+    }
 
-	public interface IMyService
-	{
-		ISomething CreateSomething<T>(string somethingSpec);
-		ISomething CreateSomething(string somethingKey);
-	}
+    public interface IMyService
+    {
+        ISomething CreateSomething<T>(string somethingSpec);
+        ISomething CreateSomething(string somethingKey);
+    }
 
-	public interface ISomething
-	{
-		void Do(Type type, string parameter);
-	}
+    public interface ISomething
+    {
+        void Do(Type type, string parameter);
+    }
 
-	public class NoOpSomething : ISomething
-	{
-		public void Do(Type type, string parameter) {}
-	}
+    public class NoOpSomething : ISomething
+    {
+        public void Do(Type type, string parameter) {}
+    }
 
-	public class MyServiceImpl : IMyService
-	{
-		public ISomething CreateSomething<T>(string somethingSpec)
-		{
-			return new NoOpSomething();
-		}
+    public class MyServiceImpl : IMyService
+    {
+        public ISomething CreateSomething<T>(string somethingSpec)
+        {
+            return new NoOpSomething();
+        }
 
-		public ISomething CreateSomething(string somethingKey)
-		{
-			return new NoOpSomething();
-		}
-	}
+        public ISomething CreateSomething(string somethingKey)
+        {
+            return new NoOpSomething();
+        }
+    }
 }

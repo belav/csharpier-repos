@@ -2278,7 +2278,7 @@ namespace System.Xml.Schema {
         private XmlQualifiedName ParseQName(string value, string attributeName) {
             try {
                 string prefix;
-				value = XmlComplianceUtil.NonCDataNormalize(value); //Normalize QName
+                value = XmlComplianceUtil.NonCDataNormalize(value); //Normalize QName
                 return XmlQualifiedName.Parse(value, this.namespaceManager, out prefix);
             } 
             catch(Exception) {

@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Suppresses any on-demand behaviors.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-	public class IfExistsAttribute : Attribute
-	{
-	}
+    /// <summary>
+    /// Suppresses any on-demand behaviors.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public class IfExistsAttribute : Attribute
+    {
+    }
 }

@@ -22,7 +22,7 @@
 // System.Web.UI.PropertyConverter.cs
 //
 // Authors:
-//	Jackson Harper (jackson@ximian.com)
+//    Jackson Harper (jackson@ximian.com)
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 
@@ -32,44 +32,44 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public static class PropertyConverter
-	{
-		public static object EnumFromString (Type enumType, string value)
-		{
-			object res = null;
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public static class PropertyConverter
+    {
+        public static object EnumFromString (Type enumType, string value)
+        {
+            object res = null;
 
-			try {
-				res = Enum.Parse (enumType, value, true);
-			} catch {
-				res = null;
-			}
-			return res;
-		}
+            try {
+                res = Enum.Parse (enumType, value, true);
+            } catch {
+                res = null;
+            }
+            return res;
+        }
 
-		public static string EnumToString (Type enumType, object enumValue)
-		{
-			return Enum.Format (enumType, enumValue, "G");
-		}
+        public static string EnumToString (Type enumType, object enumValue)
+        {
+            return Enum.Format (enumType, enumValue, "G");
+        }
 
-		public static object ObjectFromString (Type objType,
-				MemberInfo propertyInfo, string value)
-		{
-			if (objType == typeof (string))
-				return value;
+        public static object ObjectFromString (Type objType,
+                MemberInfo propertyInfo, string value)
+        {
+            if (objType == typeof (string))
+                return value;
 
-			// Is there a less kludgy way to get the converter?
-			PropertyDescriptorCollection col = TypeDescriptor.GetProperties (
-				propertyInfo.ReflectedType);
-			PropertyDescriptor pd = col.Find (propertyInfo.Name, false);
-			if (pd.Converter == null || !pd.Converter.CanConvertFrom (typeof (string))) {
-				throw new HttpException (Locale.GetText ("Cannot create an object " +
-				      "of type '{0}' from its string representation '{1}' for the " +
-				      "'{2}' property", objType, value, propertyInfo.Name));
-			}
-			return pd.Converter.ConvertFromInvariantString (value);
-		}
-	}
+            // Is there a less kludgy way to get the converter?
+            PropertyDescriptorCollection col = TypeDescriptor.GetProperties (
+                propertyInfo.ReflectedType);
+            PropertyDescriptor pd = col.Find (propertyInfo.Name, false);
+            if (pd.Converter == null || !pd.Converter.CanConvertFrom (typeof (string))) {
+                throw new HttpException (Locale.GetText ("Cannot create an object " +
+                      "of type '{0}' from its string representation '{1}' for the " +
+                      "'{2}' property", objType, value, propertyInfo.Name));
+            }
+            return pd.Converter.ConvertFromInvariantString (value);
+        }
+    }
 }
 

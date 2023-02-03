@@ -1,9 +1,9 @@
 //
 // HtmlInputButtonCas.cs 
-//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputButton
+//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputButton
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,23 +37,23 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlInputButtonCas : AspNetHostingMinimal {
+    [TestFixture]
+    [Category ("CAS")]
+    public class HtmlInputButtonCas : AspNetHostingMinimal {
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlInputButtonTest unit = new HtmlInputButtonTest ();
-			unit.Defaults ();
-			unit.CleanProperties ();
-			unit.ViewState ();
-			unit.RenderAttributes ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted ()
+        {
+            HtmlInputButtonTest unit = new HtmlInputButtonTest ();
+            unit.Defaults ();
+            unit.CleanProperties ();
+            unit.ViewState ();
+            unit.RenderAttributes ();
+        }
 
-		public override Type Type {
-			get { return typeof (HtmlInputButton); }
-		}
-	}
+        public override Type Type {
+            get { return typeof (HtmlInputButton); }
+        }
+    }
 }

@@ -32,37 +32,37 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class UnderstoodHeaders : IEnumerable<MessageHeaderInfo>, IEnumerable
-	{
-		List <MessageHeaderInfo> headers;
-		
-		internal UnderstoodHeaders ()
-		{
-			headers = new List<MessageHeaderInfo> ();
-		}
-		public void Add (MessageHeaderInfo headerInfo)
-		{
-			headers.Add (headerInfo);
-		}
+    public sealed class UnderstoodHeaders : IEnumerable<MessageHeaderInfo>, IEnumerable
+    {
+        List <MessageHeaderInfo> headers;
+        
+        internal UnderstoodHeaders ()
+        {
+            headers = new List<MessageHeaderInfo> ();
+        }
+        public void Add (MessageHeaderInfo headerInfo)
+        {
+            headers.Add (headerInfo);
+        }
 
-		public bool Contains (MessageHeaderInfo headerInfo)
-		{
-			return headers.Contains (headerInfo);
-		}
+        public bool Contains (MessageHeaderInfo headerInfo)
+        {
+            return headers.Contains (headerInfo);
+        }
 
-		public IEnumerator<MessageHeaderInfo> GetEnumerator ()
-		{
-			return headers.GetEnumerator ();
-		}
+        public IEnumerator<MessageHeaderInfo> GetEnumerator ()
+        {
+            return headers.GetEnumerator ();
+        }
 
-		public void Remove (MessageHeaderInfo headerInfo)
-		{
-			headers.Remove (headerInfo);
-		}
+        public void Remove (MessageHeaderInfo headerInfo)
+        {
+            headers.Remove (headerInfo);
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return headers.GetEnumerator ();
-		}
-	}
+        IEnumerator IEnumerable.GetEnumerator ()
+        {
+            return headers.GetEnumerator ();
+        }
+    }
 }

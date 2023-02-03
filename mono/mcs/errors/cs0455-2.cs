@@ -8,8 +8,8 @@ class B
 { }
 
 class Foo<T,U, V>
-	where T : A
-	where U : B
-	where V : U, T
+    where T : A
+    where U : B
+    where V : U, T
 {
 }

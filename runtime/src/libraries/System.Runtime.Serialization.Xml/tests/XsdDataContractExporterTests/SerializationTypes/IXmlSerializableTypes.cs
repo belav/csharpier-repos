@@ -364,7 +364,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         AnyBasic[] anyArray;
         AnyWithSchemaTypeMethod anyWithSchemaType;
         AnyWithQnameMethod anyWithQname;
-    	AnyImplicitWithSchemaTypeMethod anyImplicitWithSchemaType;
+        AnyImplicitWithSchemaTypeMethod anyImplicitWithSchemaType;
         AnyImplicitWithQnameMethod anyImplicitWithQname;
         NoSchemaProviderWithSchema noSchemaProviderWithSchema;
         XmlElement xmlElement;
@@ -377,8 +377,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     [Serializable]
     public class SqlTypeContainer
     {
-		// The following were disabled in NetFx test... but should work now.
-		// SqlBinary, SqlChars, SqlInt32, SqlString, SqlDateTime, SqlGuid
+        // The following were disabled in NetFx test... but should work now.
+        // SqlBinary, SqlChars, SqlInt32, SqlString, SqlDateTime, SqlGuid
 
             public SqlBinary sqlBinary = new SqlBinary(new byte[]{4,2});
             public SqlByte sqlByte = new SqlByte(4);

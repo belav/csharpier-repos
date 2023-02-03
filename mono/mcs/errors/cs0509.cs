@@ -2,7 +2,7 @@
 // Line: 8
 
 struct V {
-	int v;
+    int v;
 }
 
 class X : V {

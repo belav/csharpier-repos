@@ -20,16 +20,16 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
 //
 
 // NOT COMPLETE
 
 namespace System.Windows.Forms.Design
 {
-	public interface IWindowsFormsEditorService {
-		void CloseDropDown ();
-		void DropDownControl (Control control);
-		DialogResult ShowDialog (Form dialog);
-	}
+    public interface IWindowsFormsEditorService {
+        void CloseDropDown ();
+        void DropDownControl (Control control);
+        DialogResult ShowDialog (Form dialog);
+    }
 }

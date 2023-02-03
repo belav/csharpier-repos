@@ -2,8 +2,8 @@
 // System.Web.Compilation.CompilerType
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,39 +35,39 @@ using System.CodeDom.Compiler;
 
 namespace System.Web.Compilation {
 
-	public sealed class CompilerType {
-		Type type;
-		CompilerParameters parameters;
+    public sealed class CompilerType {
+        Type type;
+        CompilerParameters parameters;
 
-		internal CompilerType (Type type, CompilerParameters parameters)
-		{
-			this.type = type;
-			this.parameters = parameters;
-		}
+        internal CompilerType (Type type, CompilerParameters parameters)
+        {
+            this.type = type;
+            this.parameters = parameters;
+        }
 
-		public override bool Equals(object o)
-		{
-			if (!(o is CompilerType))
-				return false;
+        public override bool Equals(object o)
+        {
+            if (!(o is CompilerType))
+                return false;
 
-			CompilerType other = (CompilerType) o;
-			//FIXME: parameters does NOT have an Equals override
-			return (other.type == type && other.parameters == parameters);
-		}
+            CompilerType other = (CompilerType) o;
+            //FIXME: parameters does NOT have an Equals override
+            return (other.type == type && other.parameters == parameters);
+        }
 
-		public override int GetHashCode()
-		{
-			return ((type.GetHashCode () << 6) ^ parameters.GetHashCode ());
-		}
+        public override int GetHashCode()
+        {
+            return ((type.GetHashCode () << 6) ^ parameters.GetHashCode ());
+        }
 
-		public Type CodeDomProviderType {
-			get { return type; }
-		}
+        public Type CodeDomProviderType {
+            get { return type; }
+        }
 
-		public CompilerParameters CompilerParameters {
-			get { return parameters; }
-		}
-	}
+        public CompilerParameters CompilerParameters {
+            get { return parameters; }
+        }
+    }
 }
 
 

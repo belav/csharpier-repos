@@ -2,7 +2,7 @@
 // Line: 7
 
 public class SampleClass {
-		partial class A {}
+        partial class A {}
         
         public void A () {}
 }

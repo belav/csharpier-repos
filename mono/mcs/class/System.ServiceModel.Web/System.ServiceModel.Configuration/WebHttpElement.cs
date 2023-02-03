@@ -2,7 +2,7 @@
 // WebHttpElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -46,35 +46,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed partial class WebHttpElement
-		 : BehaviorExtensionElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty behavior_type;
+    public sealed partial class WebHttpElement
+         : BehaviorExtensionElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty behavior_type;
 
-		static WebHttpElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			behavior_type = new ConfigurationProperty ("",
-				typeof (Type), null, new TypeConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static WebHttpElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            behavior_type = new ConfigurationProperty ("",
+                typeof (Type), null, new TypeConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (behavior_type);
-		}
+            properties.Add (behavior_type);
+        }
 
-		public WebHttpElement ()
-		{
-		}
+        public WebHttpElement ()
+        {
+        }
 
-		public override Type BehaviorType {
-			get { return typeof (WebHttpBehavior); }
-		}
+        public override Type BehaviorType {
+            get { return typeof (WebHttpBehavior); }
+        }
 
-		protected internal override object CreateBehavior ()
-		{
-			return new WebHttpBehavior ();
-		}
-	}
+        protected internal override object CreateBehavior ()
+        {
+            return new WebHttpBehavior ();
+        }
+    }
 
 }

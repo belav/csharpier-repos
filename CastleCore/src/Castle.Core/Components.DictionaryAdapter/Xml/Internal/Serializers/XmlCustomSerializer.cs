@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,47 +14,47 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Xml.Serialization;
+    using System;
+    using System.Xml.Serialization;
 
-	public class XmlCustomSerializer : XmlTypeSerializer
-	{
-		public static readonly XmlCustomSerializer
-			Instance = new XmlCustomSerializer();
+    public class XmlCustomSerializer : XmlTypeSerializer
+    {
+        public static readonly XmlCustomSerializer
+            Instance = new XmlCustomSerializer();
 
-		private XmlCustomSerializer() { }
+        private XmlCustomSerializer() { }
 
-		public override XmlTypeKind Kind
-		{
-			get { return XmlTypeKind.Complex; }
-		}
+        public override XmlTypeKind Kind
+        {
+            get { return XmlTypeKind.Complex; }
+        }
 
-		public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
-		{
+        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        {
             var serializable = (IXmlSerializable) Activator.CreateInstance(node.ClrType);
 
-			using (var reader = new XmlSubtreeReader(node, XmlDefaultSerializer.Root))
-			{
-				// Do NOT pre-read containing element
-				// ...IXmlSerializable is not a symmetric contract
-				serializable.ReadXml(reader);
-			}
+            using (var reader = new XmlSubtreeReader(node, XmlDefaultSerializer.Root))
+            {
+                // Do NOT pre-read containing element
+                // ...IXmlSerializable is not a symmetric contract
+                serializable.ReadXml(reader);
+            }
 
             return serializable;
-		}
+        }
 
-		public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
-		{
-		    var serializable = (IXmlSerializable) value;
-			var root = XmlDefaultSerializer.Root;
+        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        {
+            var serializable = (IXmlSerializable) value;
+            var root = XmlDefaultSerializer.Root;
 
-			using (var writer = new XmlSubtreeWriter(node))
-			{
-				// Pre-write containing element
-				writer.WriteStartElement(string.Empty, root.ElementName, root.Namespace);
-				serializable.WriteXml(writer);
-				writer.WriteEndElement();
-			}
-		}
-	}
+            using (var writer = new XmlSubtreeWriter(node))
+            {
+                // Pre-write containing element
+                writer.WriteStartElement(string.Empty, root.ElementName, root.Namespace);
+                serializable.WriteXml(writer);
+                writer.WriteEndElement();
+            }
+        }
+    }
 }

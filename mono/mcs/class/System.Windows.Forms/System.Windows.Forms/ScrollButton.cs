@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 //
 
@@ -28,12 +28,12 @@
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum ScrollButton {
-		Min	= 0,
-		Up	= 0,
-		Down	= 1,
-		Left	= 2,
-		Right	= 3,
-		Max	= 3
-	}
+    public enum ScrollButton {
+        Min    = 0,
+        Up    = 0,
+        Down    = 1,
+        Left    = 2,
+        Right    = 3,
+        Max    = 3
+    }
 }

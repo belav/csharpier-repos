@@ -3,14 +3,14 @@
 
 public class C
 {
-	public delegate int Func<T> (T t);
-	
-	public static void Test<T, Y> (Func<T> f)
-	{
-	}
+    public delegate int Func<T> (T t);
+    
+    public static void Test<T, Y> (Func<T> f)
+    {
+    }
 
-	public static void Main ()
-	{
-		Test<int> (delegate (int i) { return i; });
-	}
+    public static void Main ()
+    {
+        Test<int> (delegate (int i) { return i; });
+    }
 }

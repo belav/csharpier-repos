@@ -33,45 +33,45 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-	[Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-	public class TemplateEditingVerb : DesignerVerb, IDisposable
-	{
-		[MonoTODO]
-		public TemplateEditingVerb (string text, int index)
-			: base (text, null)
-		{
-			throw new NotImplementedException ();
-		}
+    [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
+    public class TemplateEditingVerb : DesignerVerb, IDisposable
+    {
+        [MonoTODO]
+        public TemplateEditingVerb (string text, int index)
+            : base (text, null)
+        {
+            throw new NotImplementedException ();
+        }
 
-		public TemplateEditingVerb (string text, int index, TemplatedControlDesigner designer) : base (text, designer.TemplateEditingVerbHandler)
-		{
-			_index = index;
-		}
+        public TemplateEditingVerb (string text, int index, TemplatedControlDesigner designer) : base (text, designer.TemplateEditingVerbHandler)
+        {
+            _index = index;
+        }
 
-		~TemplateEditingVerb ()
-		{
-			Dispose (false);
-		}
+        ~TemplateEditingVerb ()
+        {
+            Dispose (false);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose ()
+        {
+            Dispose (true);
+            GC.SuppressFinalize (this);
+        }
 
-		[MonoTODO]
-		protected virtual void Dispose (bool disposing)
-		{
-			if (disposing) {
-			}
-		}
+        [MonoTODO]
+        protected virtual void Dispose (bool disposing)
+        {
+            if (disposing) {
+            }
+        }
 
-		public int Index {
-			get {
-				return _index;
-			}
-		}
+        public int Index {
+            get {
+                return _index;
+            }
+        }
 
-		private int _index;
-	}
+        private int _index;
+    }
 }

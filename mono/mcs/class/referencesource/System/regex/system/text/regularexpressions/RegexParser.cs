@@ -796,7 +796,7 @@ namespace System.Text.RegularExpressions {
                         // alternation construct (?(...) | )
                  
                         int parenPos = Textpos();
-                        if (CharsRight() > 0)   	
+                        if (CharsRight() > 0)       
                         {
                             ch = RightChar();
     

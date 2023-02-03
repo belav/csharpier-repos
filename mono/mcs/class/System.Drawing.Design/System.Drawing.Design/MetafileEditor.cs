@@ -36,26 +36,26 @@ using System.Drawing.Imaging;
 
 namespace System.Drawing.Design
 {
-	public class MetafileEditor : ImageEditor
-	{
+    public class MetafileEditor : ImageEditor
+    {
 
-		public MetafileEditor()
-		{
-		}
+        public MetafileEditor()
+        {
+        }
 
-		protected override string[] GetExtensions()
-		{
-			return new string[] {"*.emf", "*.wmf"};
-		}
+        protected override string[] GetExtensions()
+        {
+            return new string[] {"*.emf", "*.wmf"};
+        }
 
-		protected override string GetFileDialogDescription()
-		{
-			return Locale.GetText ("All metafile files");
-		}
+        protected override string GetFileDialogDescription()
+        {
+            return Locale.GetText ("All metafile files");
+        }
 
-		protected override Image LoadFromStream (Stream stream)
-		{
-			return new Metafile (stream);
-		}
-	}
+        protected override Image LoadFromStream (Stream stream)
+        {
+            return new Metafile (stream);
+        }
+    }
 }

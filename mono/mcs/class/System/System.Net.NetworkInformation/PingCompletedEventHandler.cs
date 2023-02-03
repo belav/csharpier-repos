@@ -2,7 +2,7 @@
 // System.Net.NetworkInformation.PingCompletedEventHandler
 //
 // Author:
-//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//    Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
@@ -26,6 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net.NetworkInformation {
-	public delegate void PingCompletedEventHandler (object sender, PingCompletedEventArgs e);
+    public delegate void PingCompletedEventHandler (object sender, PingCompletedEventArgs e);
 }
 

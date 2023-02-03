@@ -44,7 +44,7 @@ namespace System.Data.SqlTypes {
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
     public struct SqlInt32 : INullable, IComparable, IXmlSerializable {
-	private bool m_fNotNull; // false if null, the default ctor (plain 0) will make it Null
+    private bool m_fNotNull; // false if null, the default ctor (plain 0) will make it Null
         private int m_value;
 
         private const long x_iIntMin          = Int32.MinValue;   // minimum (signed) int value

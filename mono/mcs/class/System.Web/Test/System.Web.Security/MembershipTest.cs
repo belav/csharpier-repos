@@ -2,7 +2,7 @@
 // MembershipTest.cs - Unit tests for System.Web.Security.Membership
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,56 +35,56 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Security {
 
-	[TestFixture]
-	public class MembershipTest {
+    [TestFixture]
+    public class MembershipTest {
 
-		[Test]
-		public void Provider ()
-		{
-			Assert.IsNotNull (Membership.Provider, "Membership.Provider");
-		}
+        [Test]
+        public void Provider ()
+        {
+            Assert.IsNotNull (Membership.Provider, "Membership.Provider");
+        }
 
-		[Test]
-		public void GeneratePassword ()
-		{
-			string pwd;
-			int count;
-			int i;
+        [Test]
+        public void GeneratePassword ()
+        {
+            string pwd;
+            int count;
+            int i;
 
-			pwd = Membership.GeneratePassword (5, 0);
-			Assert.AreEqual (5, pwd.Length, "A1");
+            pwd = Membership.GeneratePassword (5, 0);
+            Assert.AreEqual (5, pwd.Length, "A1");
 
-			pwd = Membership.GeneratePassword (5, 1);
-			Assert.AreEqual (5, pwd.Length, "A2");
-			/* count up the non-alphanumeric characters in the string */
-			count = 0;
-			for (i = 0; i < pwd.Length; i ++)
-				if (!Char.IsLetterOrDigit (pwd, i))
-					count++;
-			Assert.IsTrue (count >= 1, "A2");
-		}
+            pwd = Membership.GeneratePassword (5, 1);
+            Assert.AreEqual (5, pwd.Length, "A2");
+            /* count up the non-alphanumeric characters in the string */
+            count = 0;
+            for (i = 0; i < pwd.Length; i ++)
+                if (!Char.IsLetterOrDigit (pwd, i))
+                    count++;
+            Assert.IsTrue (count >= 1, "A2");
+        }
 
-		[Test (Description = "Bug #647631")]
-		public void CreatePassword_InvalidInput ()
-		{
-			MembershipUser user;
+        [Test (Description = "Bug #647631")]
+        public void CreatePassword_InvalidInput ()
+        {
+            MembershipUser user;
 
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser (null, "password");
-			}, "#A1");
+            Assert.Throws<MembershipCreateUserException> (() => {
+                user = Membership.CreateUser (null, "password");
+            }, "#A1");
 
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser (String.Empty, "password");
-			}, "#A2");
+            Assert.Throws<MembershipCreateUserException> (() => {
+                user = Membership.CreateUser (String.Empty, "password");
+            }, "#A2");
 
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser ("user", null);
-			}, "#B1");
+            Assert.Throws<MembershipCreateUserException> (() => {
+                user = Membership.CreateUser ("user", null);
+            }, "#B1");
 
-			Assert.Throws<MembershipCreateUserException> (() => {
-				user = Membership.CreateUser ("user", String.Empty);
-			}, "#B2");
-		}
-	}
+            Assert.Throws<MembershipCreateUserException> (() => {
+                user = Membership.CreateUser ("user", String.Empty);
+            }, "#B2");
+        }
+    }
 }
 

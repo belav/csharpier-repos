@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataView
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,17 +34,17 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-	public abstract class DesignerDataView : DesignerDataTableBase
-	{
-		protected DesignerDataView (string name)
-			: base (name)
-		{
-		}
+    public abstract class DesignerDataView : DesignerDataTableBase
+    {
+        protected DesignerDataView (string name)
+            : base (name)
+        {
+        }
 
-		protected DesignerDataView (string name, string owner)
-			: base (name, owner)
-		{
-		}
-	}
+        protected DesignerDataView (string name, string owner)
+            : base (name, owner)
+        {
+        }
+    }
 }
 

@@ -30,10 +30,10 @@
 
 namespace System.Runtime.Remoting.MetadataServices
 {
-	[Serializable]
+    [Serializable]
         public enum SdlType
-	{
-		Sdl,
-		Wsdl,
-	}
+    {
+        Sdl,
+        Wsdl,
+    }
 }

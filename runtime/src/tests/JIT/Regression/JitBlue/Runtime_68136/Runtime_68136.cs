@@ -7,16 +7,16 @@ public class Program
     public static ulong s_1;
     public static int Main()
     {
-		try
-		{
-			var vr1 = (uint)((int)M2(ref s_1, 0) % (long)1);
-        	M2(ref s_1, vr1);
-		}
-		catch (System.Exception)
-		{
-		}
+        try
+        {
+            var vr1 = (uint)((int)M2(ref s_1, 0) % (long)1);
+            M2(ref s_1, vr1);
+        }
+        catch (System.Exception)
+        {
+        }
 
-		return 100;
+        return 100;
     }
 
     public static byte M2(ref ulong arg0, uint arg1)

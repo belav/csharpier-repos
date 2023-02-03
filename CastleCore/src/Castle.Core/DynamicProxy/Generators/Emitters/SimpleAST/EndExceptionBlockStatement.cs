@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
 {
-	using System.Reflection.Emit;
+    using System.Reflection.Emit;
 
-	internal class EndExceptionBlockStatement : IStatement
-	{
-		public void Emit(ILGenerator gen)
-		{
-			gen.EndExceptionBlock();
-		}
-	}
+    internal class EndExceptionBlockStatement : IStatement
+    {
+        public void Emit(ILGenerator gen)
+        {
+            gen.EndExceptionBlock();
+        }
+    }
 }

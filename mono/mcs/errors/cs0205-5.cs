@@ -8,9 +8,9 @@ public abstract class A
 
 public class B: A
 {
-		public override int this[int i]  {
-			set {
-				base[i] = value;
-			}
-		}
+        public override int this[int i]  {
+            set {
+                base[i] = value;
+            }
+        }
 }

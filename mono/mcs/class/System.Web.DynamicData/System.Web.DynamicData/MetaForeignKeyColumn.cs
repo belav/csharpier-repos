@@ -2,7 +2,7 @@
 // MetaForeignKeyColumn.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -40,58 +40,58 @@ using System.Web.DynamicData.ModelProviders;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class MetaForeignKeyColumn : MetaColumn
-	{
-		internal MetaForeignKeyColumn (MetaTable table, ColumnProvider provider)
-			: base (table, provider)
-		{
-		}
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    public class MetaForeignKeyColumn : MetaColumn
+    {
+        internal MetaForeignKeyColumn (MetaTable table, ColumnProvider provider)
+            : base (table, provider)
+        {
+        }
 
-		[MonoTODO]
-		public ReadOnlyCollection<string> ForeignKeyNames { get; private set; }
+        [MonoTODO]
+        public ReadOnlyCollection<string> ForeignKeyNames { get; private set; }
 
-		[MonoTODO]
-		public bool IsPrimaryKeyInThisTable { get; private set; }
+        [MonoTODO]
+        public bool IsPrimaryKeyInThisTable { get; private set; }
 
-		[MonoTODO]
-		public MetaTable ParentTable { get; private set; }
+        [MonoTODO]
+        public MetaTable ParentTable { get; private set; }
 
-		[MonoTODO]
-		public void ExtractForeignKey (IDictionary dictionary, string value)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void ExtractForeignKey (IDictionary dictionary, string value)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string GetForeignKeyDetailsPath (object row)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GetForeignKeyDetailsPath (object row)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string GetForeignKeyPath (string action, object row)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GetForeignKeyPath (string action, object row)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string GetForeignKeyPath (string action, object row, string path)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GetForeignKeyPath (string action, object row, string path)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public string GetForeignKeyString (object row)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GetForeignKeyString (object row)
+        {
+            throw new NotImplementedException ();
+        }
 
-		[MonoTODO]
-		public IList<object> GetForeignKeyValues (object row)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public IList<object> GetForeignKeyValues (object row)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

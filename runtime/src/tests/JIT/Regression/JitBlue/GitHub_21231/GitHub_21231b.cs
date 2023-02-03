@@ -49,12 +49,12 @@ public class Program
         if (vr26.F3.F1.F0 != 2)
         {
             System.Console.WriteLine("Failed");
-	    return -1;
+        return -1;
         }
         else
         {
             System.Console.WriteLine("Passed");
-	    return 100;
+        return 100;
         }
     }
 }

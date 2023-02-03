@@ -2,7 +2,7 @@
 // System.Configuration.SettingAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,10 +30,10 @@ using System;
 
 namespace System.Configuration
 {
-	[AttributeUsageAttribute(AttributeTargets.Property)]
-	public class SettingAttribute : Attribute
-	{
-	}
+    [AttributeUsageAttribute(AttributeTargets.Property)]
+    public class SettingAttribute : Attribute
+    {
+    }
 
 }
 

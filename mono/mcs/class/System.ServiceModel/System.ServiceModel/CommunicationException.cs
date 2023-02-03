@@ -30,13 +30,13 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-	[Serializable]
-	public class CommunicationException : SystemException
-	{
-		public CommunicationException () : base () {}
-		public CommunicationException (string message) : base (message) {}
-		public CommunicationException (string message, Exception innerException) : base (message, innerException) {}
-		protected CommunicationException (SerializationInfo info, StreamingContext context)
-			: base (info, context) {}
-	}
+    [Serializable]
+    public class CommunicationException : SystemException
+    {
+        public CommunicationException () : base () {}
+        public CommunicationException (string message) : base (message) {}
+        public CommunicationException (string message, Exception innerException) : base (message, innerException) {}
+        protected CommunicationException (SerializationInfo info, StreamingContext context)
+            : base (info, context) {}
+    }
 }

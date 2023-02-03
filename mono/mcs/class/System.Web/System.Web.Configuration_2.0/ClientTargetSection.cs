@@ -2,7 +2,7 @@
 // System.Web.Configuration.ClientTargetSection
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,30 +34,30 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-	public sealed class ClientTargetSection : ConfigurationSection
-	{
-		static ConfigurationProperty clientTargetsProp;
+    public sealed class ClientTargetSection : ConfigurationSection
+    {
+        static ConfigurationProperty clientTargetsProp;
 
-		static ConfigurationPropertyCollection properties;
+        static ConfigurationPropertyCollection properties;
 
-		static ClientTargetSection ()
-		{
-			clientTargetsProp = new ConfigurationProperty (null, typeof (ClientTargetCollection), null,
-								       ConfigurationPropertyOptions.IsDefaultCollection |
-								       ConfigurationPropertyOptions.IsRequired);
+        static ClientTargetSection ()
+        {
+            clientTargetsProp = new ConfigurationProperty (null, typeof (ClientTargetCollection), null,
+                                       ConfigurationPropertyOptions.IsDefaultCollection |
+                                       ConfigurationPropertyOptions.IsRequired);
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (clientTargetsProp);
-		}
-		
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection | ConfigurationPropertyOptions.IsRequired)]
-		public ClientTargetCollection ClientTargets {
-			get { return (ClientTargetCollection) base [clientTargetsProp];}
-		}
+            properties = new ConfigurationPropertyCollection ();
+            properties.Add (clientTargetsProp);
+        }
+        
+        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection | ConfigurationPropertyOptions.IsRequired)]
+        public ClientTargetCollection ClientTargets {
+            get { return (ClientTargetCollection) base [clientTargetsProp];}
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+    }
 }
 

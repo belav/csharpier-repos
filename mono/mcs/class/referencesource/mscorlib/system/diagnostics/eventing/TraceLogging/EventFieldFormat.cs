@@ -1,4 +1,4 @@
-﻿#if ES_BUILD_STANDALONE
+#if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else
 namespace System.Diagnostics.Tracing

@@ -2,7 +2,7 @@
 // ExprCompareGreaterThan.cs
 //
 // Authors:
-//	Chris Bacon (chrisbacon76@gmail.com)
+//    Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,16 +32,16 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprCompareGreaterThan : ExprBinaryOpComparison {
+    class ExprCompareGreaterThan : ExprBinaryOpComparison {
 
-		public ExprCompareGreaterThan (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
-			: base (methodInfo, left, right, signage)
-		{
-		}
+        public ExprCompareGreaterThan (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
+            : base (methodInfo, left, right, signage)
+        {
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.CompareGreaterThan; }
-		}
+        public override ExprType ExprType {
+            get { return ExprType.CompareGreaterThan; }
+        }
 
-	}
+    }
 }

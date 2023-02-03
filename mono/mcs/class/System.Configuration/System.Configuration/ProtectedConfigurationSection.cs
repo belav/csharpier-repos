@@ -2,8 +2,8 @@
 // System.Configuration.ProtectedConfigurationSection.cs
 //
 // Authors:
-// 	Duncan Mak (duncan@ximian.com)
-//	Chris Toshok (toshok@ximian.com)
+//     Duncan Mak (duncan@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,83 +32,83 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	public sealed class ProtectedConfigurationSection: ConfigurationSection
-	{
-		static ConfigurationProperty defaultProviderProp;
-		static ConfigurationProperty providersProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class ProtectedConfigurationSection: ConfigurationSection
+    {
+        static ConfigurationProperty defaultProviderProp;
+        static ConfigurationProperty providersProp;
+        static ConfigurationPropertyCollection properties;
 
-		ProtectedConfigurationProviderCollection providers;
+        ProtectedConfigurationProviderCollection providers;
 
-		static ProtectedConfigurationSection ()
-		{
-			defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string), "RsaProtectedConfigurationProvider");
-			providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection), null);
+        static ProtectedConfigurationSection ()
+        {
+            defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string), "RsaProtectedConfigurationProvider");
+            providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection), null);
 
-			properties = new ConfigurationPropertyCollection();
-			properties.Add (defaultProviderProp);
-			properties.Add (providersProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add (defaultProviderProp);
+            properties.Add (providersProp);
+        }
 
-		[ConfigurationProperty ("defaultProvider", DefaultValue="RsaProtectedConfigurationProvider")]
-		public string DefaultProvider {
-			get { return (string)base[defaultProviderProp]; }
-			set { base[defaultProviderProp] = value; }
-		}
+        [ConfigurationProperty ("defaultProvider", DefaultValue="RsaProtectedConfigurationProvider")]
+        public string DefaultProvider {
+            get { return (string)base[defaultProviderProp]; }
+            set { base[defaultProviderProp] = value; }
+        }
 
-		[ConfigurationProperty ("providers")] 
-		public ProviderSettingsCollection Providers {
-			get { return (ProviderSettingsCollection)base[providersProp]; }
-		}
+        [ConfigurationProperty ("providers")] 
+        public ProviderSettingsCollection Providers {
+            get { return (ProviderSettingsCollection)base[providersProp]; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
 
-		internal string EncryptSection (string clearXml, ProtectedConfigurationProvider protectionProvider)
-		{
-			XmlDocument doc = new ConfigurationXmlDocument ();
-			doc.LoadXml (clearXml);
+        internal string EncryptSection (string clearXml, ProtectedConfigurationProvider protectionProvider)
+        {
+            XmlDocument doc = new ConfigurationXmlDocument ();
+            doc.LoadXml (clearXml);
 
-			XmlNode encryptedNode = protectionProvider.Encrypt (doc.DocumentElement);
+            XmlNode encryptedNode = protectionProvider.Encrypt (doc.DocumentElement);
 
-			return encryptedNode.OuterXml;
-		}
+            return encryptedNode.OuterXml;
+        }
 
-		internal string DecryptSection (string encryptedXml, ProtectedConfigurationProvider protectionProvider)
-		{
-			XmlDocument doc = new ConfigurationXmlDocument ();
-			doc.InnerXml = encryptedXml;
+        internal string DecryptSection (string encryptedXml, ProtectedConfigurationProvider protectionProvider)
+        {
+            XmlDocument doc = new ConfigurationXmlDocument ();
+            doc.InnerXml = encryptedXml;
 
-			XmlNode decryptedNode = protectionProvider.Decrypt (doc.DocumentElement);
+            XmlNode decryptedNode = protectionProvider.Decrypt (doc.DocumentElement);
 
-			return decryptedNode.OuterXml;
-		}
+            return decryptedNode.OuterXml;
+        }
 
-		internal ProtectedConfigurationProviderCollection GetAllProviders ()
-		{
-			if (providers == null) {
-				providers = new ProtectedConfigurationProviderCollection ();
+        internal ProtectedConfigurationProviderCollection GetAllProviders ()
+        {
+            if (providers == null) {
+                providers = new ProtectedConfigurationProviderCollection ();
 
-				foreach (ProviderSettings ps in Providers) {
-					providers.Add (InstantiateProvider (ps));
-				}
-			}
+                foreach (ProviderSettings ps in Providers) {
+                    providers.Add (InstantiateProvider (ps));
+                }
+            }
 
-			return providers;
-		}
+            return providers;
+        }
 
-		ProtectedConfigurationProvider InstantiateProvider (ProviderSettings ps)
-		{
-			Type t = Type.GetType (ps.Type, true);
-			ProtectedConfigurationProvider prov = Activator.CreateInstance (t) as ProtectedConfigurationProvider;
-			if (prov == null)
-				throw new Exception ("The type specified does not extend ProtectedConfigurationProvider class.");
+        ProtectedConfigurationProvider InstantiateProvider (ProviderSettings ps)
+        {
+            Type t = Type.GetType (ps.Type, true);
+            ProtectedConfigurationProvider prov = Activator.CreateInstance (t) as ProtectedConfigurationProvider;
+            if (prov == null)
+                throw new Exception ("The type specified does not extend ProtectedConfigurationProvider class.");
 
-			prov.Initialize (ps.Name, ps.Parameters);
+            prov.Initialize (ps.Name, ps.Parameters);
 
-			return prov;
-		}
-	}
+            return prov;
+        }
+    }
 }
 

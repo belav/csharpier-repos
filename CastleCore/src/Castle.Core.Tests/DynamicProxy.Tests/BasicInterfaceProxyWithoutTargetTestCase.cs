@@ -14,75 +14,75 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.Collections.Generic;
-	using Castle.DynamicProxy.Tests.Interceptors;
-	using Castle.DynamicProxy.Tests.InterClasses;
+    using System;
+    using System.Collections.Generic;
+    using Castle.DynamicProxy.Tests.Interceptors;
+    using Castle.DynamicProxy.Tests.InterClasses;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class BasicInterfaceProxyWithoutTargetTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void BasicInterfaceProxyWithValidTarget_ThrowsIfInterceptorCallsProceed()
-		{
-			var service = (IService)
-			              generator.CreateInterfaceProxyWithoutTarget(
-			              	typeof (IService), new StandardInterceptor());
-			var exception = (NotImplementedException) Assert.Throws(typeof (NotImplementedException), () =>
-			                                                                                          service.Sum(1, 2));
+    [TestFixture]
+    public class BasicInterfaceProxyWithoutTargetTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void BasicInterfaceProxyWithValidTarget_ThrowsIfInterceptorCallsProceed()
+        {
+            var service = (IService)
+                          generator.CreateInterfaceProxyWithoutTarget(
+                              typeof (IService), new StandardInterceptor());
+            var exception = (NotImplementedException) Assert.Throws(typeof (NotImplementedException), () =>
+                                                                                                      service.Sum(1, 2));
 
-			Assert.AreEqual(
-				"This is a DynamicProxy2 error: The interceptor attempted to 'Proceed' for method 'Int32 Sum(Int32, Int32)' which has no target. " +
-				"When calling method without target there is no implementation to 'proceed' to and it is the responsibility of the interceptor " +
-				"to mimic the implementation (set return value, out arguments etc)",
-				exception.Message);
-		}
+            Assert.AreEqual(
+                "This is a DynamicProxy2 error: The interceptor attempted to 'Proceed' for method 'Int32 Sum(Int32, Int32)' which has no target. " +
+                "When calling method without target there is no implementation to 'proceed' to and it is the responsibility of the interceptor " +
+                "to mimic the implementation (set return value, out arguments etc)",
+                exception.Message);
+        }
 
-		[Test]
-		public void CanReplaceReturnValueOfInterfaceMethod()
-		{
-			var service = (IService)
-			              generator.CreateInterfaceProxyWithoutTarget(
-			              	typeof (IService), new SetReturnValueInterceptor(3));
+        [Test]
+        public void CanReplaceReturnValueOfInterfaceMethod()
+        {
+            var service = (IService)
+                          generator.CreateInterfaceProxyWithoutTarget(
+                              typeof (IService), new SetReturnValueInterceptor(3));
 
-			var result = service.Sum(2, 2);
-			Assert.AreEqual(3, result);
-		}
+            var result = service.Sum(2, 2);
+            Assert.AreEqual(3, result);
+        }
 
-		[Test]
-		public void CanThrowExceptionFromInterceptorOfInterfaceMethod()
-		{
-			var service = (IService)generator.CreateInterfaceProxyWithoutTarget(typeof(IService), new ThrowingInterceptor());
+        [Test]
+        public void CanThrowExceptionFromInterceptorOfInterfaceMethod()
+        {
+            var service = (IService)generator.CreateInterfaceProxyWithoutTarget(typeof(IService), new ThrowingInterceptor());
 
-			var ex = Assert.Throws<ThrowingInterceptorException>(() => service.Sum(2, 2));
-			Assert.AreEqual("Because I feel like it", ex.Message);
-		}
+            var ex = Assert.Throws<ThrowingInterceptorException>(() => service.Sum(2, 2));
+            Assert.AreEqual("Because I feel like it", ex.Message);
+        }
 
-		[Test]
-		public void ProducesInvocationsThatCantChangeTarget()
-		{
-			var service = (IService)
-			              generator.CreateInterfaceProxyWithoutTarget(
-			              	typeof (IService), new AssertCannotChangeTargetInterceptor(), new SetReturnValueInterceptor(3));
+        [Test]
+        public void ProducesInvocationsThatCantChangeTarget()
+        {
+            var service = (IService)
+                          generator.CreateInterfaceProxyWithoutTarget(
+                              typeof (IService), new AssertCannotChangeTargetInterceptor(), new SetReturnValueInterceptor(3));
 
-			var result = service.Sum(2, 2);
-			Assert.AreEqual(3, result);
-		}
+            var result = service.Sum(2, 2);
+            Assert.AreEqual(3, result);
+        }
 
-		[Test]
-		public void ProxyWithGenericTypeThatInheritFromGenericType()
-		{
-			// Only PEVerify is enough
-			generator.CreateInterfaceProxyWithoutTarget<IList<int>>(new ThrowingInterceptor());
-		}
+        [Test]
+        public void ProxyWithGenericTypeThatInheritFromGenericType()
+        {
+            // Only PEVerify is enough
+            generator.CreateInterfaceProxyWithoutTarget<IList<int>>(new ThrowingInterceptor());
+        }
 
-		[Test]
-		public void Target_is_null()
-		{
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IService>() as IProxyTargetAccessor;
-			Assert.IsNull(proxy.DynProxyGetTarget());
-		}
-	}
+        [Test]
+        public void Target_is_null()
+        {
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IService>() as IProxyTargetAccessor;
+            Assert.IsNull(proxy.DynProxyGetTarget());
+        }
+    }
 }

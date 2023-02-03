@@ -2,7 +2,7 @@
 // Line: 5
 
 class X {
-	public override void Bla ()
-	{
-	}
+    public override void Bla ()
+    {
+    }
 }

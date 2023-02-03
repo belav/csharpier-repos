@@ -3,12 +3,12 @@
 using System;
 
 class Foo<T,U>
-	where T : U
-	where U : T
+    where T : U
+    where U : T
 { }
 
 class X
 {
-	static void Main ()
-	{ }
+    static void Main ()
+    { }
 }

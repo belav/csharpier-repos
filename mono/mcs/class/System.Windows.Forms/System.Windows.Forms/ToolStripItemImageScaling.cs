@@ -23,15 +23,15 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-	public enum ToolStripItemImageScaling
-	{
-		None = 0,
-		SizeToFit = 1
-	}
+    public enum ToolStripItemImageScaling
+    {
+        None = 0,
+        SizeToFit = 1
+    }
 }

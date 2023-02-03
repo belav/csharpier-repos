@@ -1,4 +1,4 @@
-﻿#if FEATURE_EXCEPTION_NOTIFICATIONS
+#if FEATURE_EXCEPTION_NOTIFICATIONS
 // ==++==
 // 
 //   Copyright (c) Microsoft Corporation.  All rights reserved.

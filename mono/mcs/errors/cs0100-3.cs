@@ -3,5 +3,5 @@
 
 public abstract class TestClass 
 {
-	public abstract void TestMethod (object obj, object obj);
+    public abstract void TestMethod (object obj, object obj);
 }

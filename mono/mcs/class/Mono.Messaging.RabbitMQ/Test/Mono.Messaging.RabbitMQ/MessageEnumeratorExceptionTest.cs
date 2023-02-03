@@ -1,9 +1,9 @@
 //
 // MessageEnumeratorTest.cs -
-//	NUnit Test Cases for MessageEnumerator
+//    NUnit Test Cases for MessageEnumerator
 //
 // Author:
-//	Michael Barker  <mike@middlesoft.co.uk>
+//    Michael Barker  <mike@middlesoft.co.uk>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -42,56 +42,56 @@ using NUnit.Mocks;
 
 
 namespace MonoTests.Mono.Messaging {
-	
-	[TestFixture]
-	public class MessageEnumeratorExceptionTest
-	{
-		private DynamicMock mockME;
-		
-		[SetUp]
-		public void Init ()
-		{
-			mockME = new DynamicMock (typeof (IMessageEnumerator));
-		}
+    
+    [TestFixture]
+    public class MessageEnumeratorExceptionTest
+    {
+        private DynamicMock mockME;
+        
+        [SetUp]
+        public void Init ()
+        {
+            mockME = new DynamicMock (typeof (IMessageEnumerator));
+        }
 
-		[Test]
-		[ExpectedException(typeof(SystemMessageQueueException))]
-		public void RemoveCurrentThrowsConnectionException ()
-		{
-			mockME.ExpectAndThrow ("RemoveCurrent", new ConnectionException (QueueReference.DEFAULT), null);
-			SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
-			me.RemoveCurrent ();
-		}
-		
-		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void RemoveCurrentThrowsMessageUnavailableException ()
-		{
-			mockME.ExpectAndThrow ("RemoveCurrent", new MessageUnavailableException (), null);
-			SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
-			me.RemoveCurrent ();
-		}		
-		
-		[Test]
-		[ExpectedException(typeof(SystemMessageQueueException))]
-		public void RemoveCurrentThrowsMonoMessagingException ()
-		{
-			mockME.ExpectAndThrow ("RemoveCurrent", new MonoMessagingException (), null);
-			SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
-			me.RemoveCurrent ();
-		}		
-		
-		[Test]
-		[ExpectedException(typeof(NotImplementedException))]
-		public void RemoveCurrentThrowsMessageNotImplemented ()
-		{
-			mockME.ExpectAndThrow ("RemoveCurrent", new NotImplementedException (), null);
-			SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
-			me.RemoveCurrent ();
-		}		
-	
-		public SystemMessageEnumerator CreateEnumerator (IMessageEnumerator ime)
-		{
+        [Test]
+        [ExpectedException(typeof(SystemMessageQueueException))]
+        public void RemoveCurrentThrowsConnectionException ()
+        {
+            mockME.ExpectAndThrow ("RemoveCurrent", new ConnectionException (QueueReference.DEFAULT), null);
+            SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
+            me.RemoveCurrent ();
+        }
+        
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RemoveCurrentThrowsMessageUnavailableException ()
+        {
+            mockME.ExpectAndThrow ("RemoveCurrent", new MessageUnavailableException (), null);
+            SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
+            me.RemoveCurrent ();
+        }        
+        
+        [Test]
+        [ExpectedException(typeof(SystemMessageQueueException))]
+        public void RemoveCurrentThrowsMonoMessagingException ()
+        {
+            mockME.ExpectAndThrow ("RemoveCurrent", new MonoMessagingException (), null);
+            SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
+            me.RemoveCurrent ();
+        }        
+        
+        [Test]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void RemoveCurrentThrowsMessageNotImplemented ()
+        {
+            mockME.ExpectAndThrow ("RemoveCurrent", new NotImplementedException (), null);
+            SystemMessageEnumerator me = CreateEnumerator ((IMessageEnumerator) mockME.MockInstance);
+            me.RemoveCurrent ();
+        }        
+    
+        public SystemMessageEnumerator CreateEnumerator (IMessageEnumerator ime)
+        {
             Type[] types = { 
                 typeof (IMessageEnumerator), typeof (SystemIMessageFormatter)
             };
@@ -104,6 +104,6 @@ namespace MonoTests.Mono.Messaging {
                 throw new Exception ("ConstructorInfo is null");
             
             return (SystemMessageEnumerator) ci.Invoke (new object[] { ime, null });
-		}
-	}
+        }
+    }
 }

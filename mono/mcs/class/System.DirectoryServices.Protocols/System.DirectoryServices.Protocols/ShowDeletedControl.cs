@@ -30,13 +30,13 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class ShowDeletedControl : DirectoryControl
-	{
-		[MonoTODO]
-		public ShowDeletedControl ()
-			: base (null, null, false, false)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    public class ShowDeletedControl : DirectoryControl
+    {
+        [MonoTODO]
+        public ShowDeletedControl ()
+            : base (null, null, false, false)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -28,23 +28,23 @@
 
 namespace Mono.Cecil.Signatures {
 
-	using Mono.Cecil.Metadata;
+    using Mono.Cecil.Metadata;
 
-	internal sealed class CustomMod {
+    internal sealed class CustomMod {
 
-		public static CustomMod [] EmptyCustomMod = new CustomMod [0];
+        public static CustomMod [] EmptyCustomMod = new CustomMod [0];
 
-		internal enum CMODType : byte {
-			None = 0x0,
-			OPT = (byte) ElementType.CModOpt,
-			REQD = (byte) ElementType.CModReqD
-		}
+        internal enum CMODType : byte {
+            None = 0x0,
+            OPT = (byte) ElementType.CModOpt,
+            REQD = (byte) ElementType.CModReqD
+        }
 
-		public CMODType CMOD;
-		public MetadataToken TypeDefOrRef;
+        public CMODType CMOD;
+        public MetadataToken TypeDefOrRef;
 
-		public CustomMod ()
-		{
-		}
-	}
+        public CustomMod ()
+        {
+        }
+    }
 }

@@ -20,39 +20,39 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 using System;
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewDataErrorEventArgs : DataGridViewCellCancelEventArgs {
+    public class DataGridViewDataErrorEventArgs : DataGridViewCellCancelEventArgs {
 
-		Exception exception;
-		DataGridViewDataErrorContexts context;
-		bool throwException;
+        Exception exception;
+        DataGridViewDataErrorContexts context;
+        bool throwException;
 
-		public DataGridViewDataErrorEventArgs (Exception exception, int columnIndex, int rowIndex, DataGridViewDataErrorContexts context) : base(columnIndex, rowIndex) {
-			this.exception = exception;
-			this.context = context;
-			this.throwException = false;
-		}
+        public DataGridViewDataErrorEventArgs (Exception exception, int columnIndex, int rowIndex, DataGridViewDataErrorContexts context) : base(columnIndex, rowIndex) {
+            this.exception = exception;
+            this.context = context;
+            this.throwException = false;
+        }
 
-		public DataGridViewDataErrorContexts Context {
-			get { return context; }
-		}
+        public DataGridViewDataErrorContexts Context {
+            get { return context; }
+        }
 
-		public Exception Exception {
-			get { return exception; }
-		}
+        public Exception Exception {
+            get { return exception; }
+        }
 
-		public bool ThrowException {
-			get { return throwException; }
-			set { throwException = value; }
-		}
+        public bool ThrowException {
+            get { return throwException; }
+            set { throwException = value; }
+        }
 
-	}
+    }
 
 }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public interface I
 {
-	void Foo<T> (List<T> arg) where T : A;
+    void Foo<T> (List<T> arg) where T : A;
 }
 
 public class A : AB, IB

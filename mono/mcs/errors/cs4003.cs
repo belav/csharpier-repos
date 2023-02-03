@@ -3,8 +3,8 @@
 
 class Tester
 {
-	async void Test ()
-	{
-		int await = 1;
-	}
+    async void Test ()
+    {
+        int await = 1;
+    }
 }

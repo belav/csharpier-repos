@@ -3,11 +3,11 @@
 
 public class C
 {
-	bool Prop { get; } = Foo (out int arg);
+    bool Prop { get; } = Foo (out int arg);
 
-	static bool Foo (out int arg)
-	{
-		arg = 2;
-		return false;
-	}
+    static bool Foo (out int arg)
+    {
+        arg = 2;
+        return false;
+    }
 }

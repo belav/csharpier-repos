@@ -2,7 +2,7 @@
 // WindowsServiceElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,58 +54,58 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class WindowsServiceElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty allow_anonymous_logons;
-		static ConfigurationProperty include_windows_groups;
+    [MonoTODO]
+    public sealed partial class WindowsServiceElement
+         : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty allow_anonymous_logons;
+        static ConfigurationProperty include_windows_groups;
 
-		static WindowsServiceElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			allow_anonymous_logons = new ConfigurationProperty ("allowAnonymousLogons",
-				typeof (bool), "false", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static WindowsServiceElement ()
+        {
+            properties = new ConfigurationPropertyCollection ();
+            allow_anonymous_logons = new ConfigurationProperty ("allowAnonymousLogons",
+                typeof (bool), "false", new BooleanConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			include_windows_groups = new ConfigurationProperty ("includeWindowsGroups",
-				typeof (bool), "true", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+            include_windows_groups = new ConfigurationProperty ("includeWindowsGroups",
+                typeof (bool), "true", new BooleanConverter (), null,
+                ConfigurationPropertyOptions.None);
 
-			properties.Add (allow_anonymous_logons);
-			properties.Add (include_windows_groups);
-		}
+            properties.Add (allow_anonymous_logons);
+            properties.Add (include_windows_groups);
+        }
 
-		public WindowsServiceElement ()
-		{
-		}
-
-
-		// Properties
-
-		[ConfigurationProperty ("allowAnonymousLogons",
-			DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool AllowAnonymousLogons {
-			get { return (bool) base [allow_anonymous_logons]; }
-			set { base [allow_anonymous_logons] = value; }
-		}
-
-		[ConfigurationProperty ("includeWindowsGroups",
-			DefaultValue = true,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool IncludeWindowsGroups {
-			get { return (bool) base [include_windows_groups]; }
-			set { base [include_windows_groups] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public WindowsServiceElement ()
+        {
+        }
 
 
-	}
+        // Properties
+
+        [ConfigurationProperty ("allowAnonymousLogons",
+            DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool AllowAnonymousLogons {
+            get { return (bool) base [allow_anonymous_logons]; }
+            set { base [allow_anonymous_logons] = value; }
+        }
+
+        [ConfigurationProperty ("includeWindowsGroups",
+            DefaultValue = true,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool IncludeWindowsGroups {
+            get { return (bool) base [include_windows_groups]; }
+            set { base [include_windows_groups] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties {
+            get { return properties; }
+        }
+
+
+    }
 
 }

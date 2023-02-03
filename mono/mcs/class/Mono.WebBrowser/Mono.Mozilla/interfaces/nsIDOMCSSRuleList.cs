@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,30 +32,30 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-	[Guid ("a6cf90c0-15b3-11d2-932e-00805f8add32")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMCSSRuleList {
+    [Guid ("a6cf90c0-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport ()]
+    internal interface nsIDOMCSSRuleList {
 
 #region nsIDOMCSSRuleList
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLength ( out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength ( out uint ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int item (
-				   uint index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
+        [PreserveSigAttribute]
+        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int item (
+                   uint index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
 
 #endregion
-	}
+    }
 
 
-	internal class nsDOMCSSRuleList {
-		public static nsIDOMCSSRuleList GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSRuleList obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSRuleList).GUID, obj);
-			return o as nsIDOMCSSRuleList;
-		}
-	}
+    internal class nsDOMCSSRuleList {
+        public static nsIDOMCSSRuleList GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSRuleList obj)
+        {
+            object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSRuleList).GUID, obj);
+            return o as nsIDOMCSSRuleList;
+        }
+    }
 }

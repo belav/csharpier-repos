@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.FontNamesConverter.cs 
 //
 // Author:
-//	Peter Dennis Bartok (pbartok@novell.com)
+//    Peter Dennis Bartok (pbartok@novell.com)
 //
 
 //
@@ -40,34 +40,34 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]	
-	public class FontNamesConverterTest {
-		[Test]
-		public void Basic ()
-		{
-			FontNamesConverter	conv;
-			string[]		name_array;
-			string			name_list;
+    [TestFixture]    
+    public class FontNamesConverterTest {
+        [Test]
+        public void Basic ()
+        {
+            FontNamesConverter    conv;
+            string[]        name_array;
+            string            name_list;
 
-			conv = new FontNamesConverter();
-			name_array = new string[] { "Arial", "Courier" };
-			name_list = "Arial,Courier";
+            conv = new FontNamesConverter();
+            name_array = new string[] { "Arial", "Courier" };
+            name_list = "Arial,Courier";
 
-			Assert.AreEqual (true, conv.CanConvertFrom(null, typeof(string)), "B1");
-			Assert.AreEqual (true, conv.CanConvertTo(null, typeof(string)), "B2");
-			Assert.AreEqual (false, conv.CanConvertFrom(null, typeof(string[])), "B3");
-			Assert.AreEqual (false, conv.CanConvertTo(null, typeof(string[])), "B4");
+            Assert.AreEqual (true, conv.CanConvertFrom(null, typeof(string)), "B1");
+            Assert.AreEqual (true, conv.CanConvertTo(null, typeof(string)), "B2");
+            Assert.AreEqual (false, conv.CanConvertFrom(null, typeof(string[])), "B3");
+            Assert.AreEqual (false, conv.CanConvertTo(null, typeof(string[])), "B4");
 
-			Assert.AreEqual (false, conv.CanConvertFrom(null, typeof(int)), "B5");
-			Assert.AreEqual (false, conv.CanConvertTo(null, typeof(int)), "B6");
+            Assert.AreEqual (false, conv.CanConvertFrom(null, typeof(int)), "B5");
+            Assert.AreEqual (false, conv.CanConvertTo(null, typeof(int)), "B6");
 
-			// ASP.NET in a Nutshell 2nd Edition (O'Reilly), pg855:
-			// FontNamesConverter converts between a font name array and a string that contains a 
-			// list of font names separated by comma.
-			// Why does the CanConvertFrom() and CanConvertTo() then indicate that it cannot handle string[]???
-			// It obviously works:
-			Assert.AreEqual ("", conv.ConvertTo(null, null, null, typeof(string)), "B10");
-			Assert.AreEqual (new string[0], conv.ConvertFrom(null, null, ""), "B11");
-		}
-	}
+            // ASP.NET in a Nutshell 2nd Edition (O'Reilly), pg855:
+            // FontNamesConverter converts between a font name array and a string that contains a 
+            // list of font names separated by comma.
+            // Why does the CanConvertFrom() and CanConvertTo() then indicate that it cannot handle string[]???
+            // It obviously works:
+            Assert.AreEqual ("", conv.ConvertTo(null, null, null, typeof(string)), "B10");
+            Assert.AreEqual (new string[0], conv.ConvertFrom(null, null, ""), "B11");
+        }
+    }
 }

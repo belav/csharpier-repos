@@ -4,12 +4,12 @@
 
 public class Test
 {
-	static void Foo ()
-	{
-	}
-	
-	public static void Main()
-	{
-		bool b = Foo () is object;
-	}
+    static void Foo ()
+    {
+    }
+    
+    public static void Main()
+    {
+        bool b = Foo () is object;
+    }
 }

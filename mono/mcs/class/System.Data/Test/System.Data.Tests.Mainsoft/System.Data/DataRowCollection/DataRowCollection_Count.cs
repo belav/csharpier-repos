@@ -37,65 +37,65 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataRowCollection_Count : GHTBase
 {
-	public static void Main()
-	{
-		DataRowCollection_Count tc = new DataRowCollection_Count();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRowCollection_Count");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-		
-	}
+    public static void Main()
+    {
+        DataRowCollection_Count tc = new DataRowCollection_Count();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataRowCollection_Count");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+        
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		try
-		{
-			BeginCase("DataRowCollection_Count");
-			DataRowCollection_Count1();
-		} 
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			EndCase(exp);
-			exp = null;
-		}
-	}
-	[Test]
-	public void DataRowCollection_Count1()
-	{
-		DataTable dt = DataProvider.CreateParentDataTable();
-		Compare(dt.Rows.Count,6);
-		dt.Rows.Remove(dt.Rows[0]);
-		Compare(dt.Rows.Count,5);
-		dt.Rows.Add(new object[] {1,"1-String1","1-String2",new DateTime(2005,1,1,0,0,0,0),1.534,true});
-		Compare(dt.Rows.Count,6);
-	}
+    public void run()
+    {
+        Exception exp = null;
+        try
+        {
+            BeginCase("DataRowCollection_Count");
+            DataRowCollection_Count1();
+        } 
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            EndCase(exp);
+            exp = null;
+        }
+    }
+    [Test]
+    public void DataRowCollection_Count1()
+    {
+        DataTable dt = DataProvider.CreateParentDataTable();
+        Compare(dt.Rows.Count,6);
+        dt.Rows.Remove(dt.Rows[0]);
+        Compare(dt.Rows.Count,5);
+        dt.Rows.Add(new object[] {1,"1-String1","1-String2",new DateTime(2005,1,1,0,0,0,0),1.534,true});
+        Compare(dt.Rows.Count,6);
+    }
 }
 }

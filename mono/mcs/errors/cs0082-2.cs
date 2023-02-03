@@ -3,8 +3,8 @@
 
 public class Test
 {
-	public string Value {
-		set { }
-	}
-	public string get_Value () { return null; }
+    public string Value {
+        set { }
+    }
+    public string get_Value () { return null; }
 }

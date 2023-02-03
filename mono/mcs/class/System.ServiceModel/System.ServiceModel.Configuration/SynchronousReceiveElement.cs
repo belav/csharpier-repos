@@ -2,7 +2,7 @@
 // SynchronousReceiveElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,19 +54,19 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class SynchronousReceiveElement
-		 : BehaviorExtensionElement
-	{
-		// Properties
+    public sealed class SynchronousReceiveElement
+         : BehaviorExtensionElement
+    {
+        // Properties
 
-		public override Type BehaviorType {
-			get { return typeof (SynchronousReceiveBehavior); }
-		}
+        public override Type BehaviorType {
+            get { return typeof (SynchronousReceiveBehavior); }
+        }
 
-		protected internal override object CreateBehavior () {
-			return new SynchronousReceiveBehavior ();
-		}
+        protected internal override object CreateBehavior () {
+            return new SynchronousReceiveBehavior ();
+        }
 
-	}
+    }
 
 }

@@ -14,44 +14,44 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System.Linq;
-	using System.Reflection;
+    using System.Linq;
+    using System.Reflection;
 
-	using Castle.DynamicProxy.Tests.Classes;
+    using Castle.DynamicProxy.Tests.Classes;
 
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class ConstructorWithAttributesOnParametersTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void CustomAttributesOnParametersAreCopiedToProxiedObjectConstructor()
-		{
-			var requiredObj = generator.CreateClassProxy(typeof(ClassWithAttributesOnConstructorParameters), new object[] { 10,"" });
-			var constructor = requiredObj.GetType().GetConstructors().First();
+    [TestFixture]
+    public class ConstructorWithAttributesOnParametersTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void CustomAttributesOnParametersAreCopiedToProxiedObjectConstructor()
+        {
+            var requiredObj = generator.CreateClassProxy(typeof(ClassWithAttributesOnConstructorParameters), new object[] { 10,"" });
+            var constructor = requiredObj.GetType().GetConstructors().First();
 
-			// There should be exactly two parameters with a `RequiredAttribute`:
-			var paramWithRequiredAttributeCount =
-				constructor.GetParameters().Where(p => p.IsDefined(typeof(RequiredAttribute), true)).Count();
-			Assert.AreEqual(2, paramWithRequiredAttributeCount);
+            // There should be exactly two parameters with a `RequiredAttribute`:
+            var paramWithRequiredAttributeCount =
+                constructor.GetParameters().Where(p => p.IsDefined(typeof(RequiredAttribute), true)).Count();
+            Assert.AreEqual(2, paramWithRequiredAttributeCount);
 
-			// There should be exactly one parameter named `intParam`:
-			var intParam = constructor.GetParameters().SingleOrDefault(p => p.Name == "intParam");
-			Assert.NotNull(intParam);
+            // There should be exactly one parameter named `intParam`:
+            var intParam = constructor.GetParameters().SingleOrDefault(p => p.Name == "intParam");
+            Assert.NotNull(intParam);
 
-			// That parameter should have exactly one `RequiredAttribute` carrying the value 1.
-			var intParamRequiredAttrs = intParam.GetCustomAttributes<RequiredAttribute>(inherit: true);
-			Assert.AreEqual(1, intParamRequiredAttrs.Count());
-			Assert.AreEqual(1, intParamRequiredAttrs.Single().DefaultValue);
+            // That parameter should have exactly one `RequiredAttribute` carrying the value 1.
+            var intParamRequiredAttrs = intParam.GetCustomAttributes<RequiredAttribute>(inherit: true);
+            Assert.AreEqual(1, intParamRequiredAttrs.Count());
+            Assert.AreEqual(1, intParamRequiredAttrs.Single().DefaultValue);
 
-			// There should be exactly one parameter named `stringParam`:
-			var stringParam = constructor.GetParameters().SingleOrDefault(p => p.Name == "stringParam");
-			Assert.NotNull(stringParam);
+            // There should be exactly one parameter named `stringParam`:
+            var stringParam = constructor.GetParameters().SingleOrDefault(p => p.Name == "stringParam");
+            Assert.NotNull(stringParam);
 
-			// That parameter should have exactly one `RequiredAttribute` carrying the value "test".
-			var stringParamRequiredAttrs = stringParam.GetCustomAttributes<RequiredAttribute>(inherit: true);
-			Assert.AreEqual(1, stringParamRequiredAttrs.Count());
-			Assert.AreEqual("test", stringParamRequiredAttrs.Single().DefaultValue);
-		}
-	}
+            // That parameter should have exactly one `RequiredAttribute` carrying the value "test".
+            var stringParamRequiredAttrs = stringParam.GetCustomAttributes<RequiredAttribute>(inherit: true);
+            Assert.AreEqual(1, stringParamRequiredAttrs.Count());
+            Assert.AreEqual("test", stringParamRequiredAttrs.Single().DefaultValue);
+        }
+    }
 }

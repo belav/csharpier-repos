@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	[TestDictionaryValidator]
-	public interface IName : IDictionaryAdapter, IDictionaryNotify, IDictionaryCreate, IDictionaryValidate
-	{
-		string FirstName { get; }
-		string LastName { get; }
+    [TestDictionaryValidator]
+    public interface IName : IDictionaryAdapter, IDictionaryNotify, IDictionaryCreate, IDictionaryValidate
+    {
+        string FirstName { get; }
+        string LastName { get; }
 
-		[StringFormat("{0} {1}", "FirstName,LastName")]
-		string FullName { get; }
-	}
+        [StringFormat("{0} {1}", "FirstName,LastName")]
+        string FullName { get; }
+    }
 }

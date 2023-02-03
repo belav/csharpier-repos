@@ -3,10 +3,10 @@
 // Compiler options: -unsafe
 
 unsafe struct X {
-	string a;
-	static void Main () {
-		X x;
-		void* y = &x;
-	}
+    string a;
+    static void Main () {
+        X x;
+        void* y = &x;
+    }
 }
 

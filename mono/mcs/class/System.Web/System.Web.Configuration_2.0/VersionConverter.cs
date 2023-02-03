@@ -32,52 +32,52 @@ using System.Globalization;
 
 namespace System.Web.Configuration
 {
-	sealed class VersionConverter : ConfigurationConverterBase
-	{
-		Version minVersion;
-		string exceptionText;
+    sealed class VersionConverter : ConfigurationConverterBase
+    {
+        Version minVersion;
+        string exceptionText;
 
-		public VersionConverter ()
-		{
-		}
-		
-		public VersionConverter (int minMajor, int minMinor, string exceptionText = null)
-		{
-			minVersion = new Version (minMajor, minMinor);
-			this.exceptionText = exceptionText;
-		}
-		
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        public VersionConverter ()
+        {
+        }
+        
+        public VersionConverter (int minMajor, int minMinor, string exceptionText = null)
+        {
+            minVersion = new Version (minMajor, minMinor);
+            this.exceptionText = exceptionText;
+        }
+        
+        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
                 {
-			string input = data as string;
+            string input = data as string;
 
-			if (String.IsNullOrEmpty (input))
-				throw new ConfigurationErrorsException ("The input string is too short or null.");
+            if (String.IsNullOrEmpty (input))
+                throw new ConfigurationErrorsException ("The input string is too short or null.");
 
-			Version result;
-			if (!Version.TryParse (input, out result))
-				throw new ConfigurationErrorsException ("The input string wasn't in correct format.");
+            Version result;
+            if (!Version.TryParse (input, out result))
+                throw new ConfigurationErrorsException ("The input string wasn't in correct format.");
 
-			if (minVersion != null && result < minVersion)
-				throw new ConfigurationErrorsException (String.Format (exceptionText, result, minVersion));
-			
-			return result;
+            if (minVersion != null && result < minVersion)
+                throw new ConfigurationErrorsException (String.Format (exceptionText, result, minVersion));
+            
+            return result;
                 }
 
                 public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
                 {
-			Version ver = value as Version;
+            Version ver = value as Version;
 
-			if (ver == null)
-				throw new ArgumentException ("Is not an instance of the Version type", "value");
-			
+            if (ver == null)
+                throw new ArgumentException ("Is not an instance of the Version type", "value");
+            
                         if (type == typeof (string))
-				return ver.ToString ();
+                return ver.ToString ();
 
-			if (type == typeof (Version))
-				return ver.Clone ();
+            if (type == typeof (Version))
+                return ver.Clone ();
 
                         throw new ConfigurationErrorsException ("Conversion to type '" + type + "' is not supported.");
                 }
-	}
+    }
 }

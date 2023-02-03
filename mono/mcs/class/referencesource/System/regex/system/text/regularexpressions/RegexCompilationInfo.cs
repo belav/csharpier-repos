@@ -86,9 +86,9 @@ namespace System.Text.RegularExpressions {
                 if (value == null) {
                     throw new ArgumentNullException("value");
                 }
-				
+                
                 if (value.Length == 0) {
-                	throw new ArgumentException(SR.GetString(SR.InvalidNullEmptyArgument, "value"), "value");					
+                    throw new ArgumentException(SR.GetString(SR.InvalidNullEmptyArgument, "value"), "value");                    
                 }
 
                 name = value;

@@ -8,7 +8,7 @@ namespace VectorMathTests
 {
     class Program
     {
-		const float EPS = Single.Epsilon * 5;
+        const float EPS = Single.Epsilon * 5;
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
@@ -16,7 +16,7 @@ namespace VectorMathTests
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
-		
+        
         static float NextFloat(Random random)
         {
             double mantissa = (random.NextDouble() * 2.0) - 1.0;

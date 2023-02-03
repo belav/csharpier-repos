@@ -5,18 +5,18 @@ using System.Reflection;
 
 [AttributeUsage (AttributeTargets.All)]
 public class MineAttribute : Attribute {
-	public MineAttribute (Type [] t)
-	{
-	}
+    public MineAttribute (Type [] t)
+    {
+    }
 }
 
 
 [Mine(new Type [2])]
-public class Foo {	
-	public static int Main ()
-	{
-		return 0;
-	}
+public class Foo {    
+    public static int Main ()
+    {
+        return 0;
+    }
 }
 
 

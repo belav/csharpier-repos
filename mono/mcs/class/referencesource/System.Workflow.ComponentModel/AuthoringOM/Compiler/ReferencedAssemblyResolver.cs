@@ -1,4 +1,4 @@
-﻿namespace System.Workflow.ComponentModel.Compiler
+namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.Reflection;

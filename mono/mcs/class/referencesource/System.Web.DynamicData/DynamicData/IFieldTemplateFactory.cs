@@ -1,4 +1,4 @@
-﻿using System.Web.UI.WebControls;
+using System.Web.UI.WebControls;
 using System.Security.Permissions;
 
 namespace System.Web.DynamicData {

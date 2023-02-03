@@ -66,7 +66,7 @@
         // 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public static bool IsEnumValid(Enum enumValue, int value, int minValue, int maxValue)
-        {		
+        {        
             bool valid = (value >= minValue) && (value <= maxValue);
 #if DEBUG            
             Debug_SequentialEnumIsDefinedCheck(enumValue, minValue, maxValue);
@@ -91,7 +91,7 @@
 #if DEBUG
             Debug_NonSequentialEnumIsDefinedCheck(enumValue, minValue, maxValue, maxNumberOfBitsOn, valid);
 #endif
-			return valid;
+            return valid;
         }
 
         // Useful for enums that are a subset of a bitmask

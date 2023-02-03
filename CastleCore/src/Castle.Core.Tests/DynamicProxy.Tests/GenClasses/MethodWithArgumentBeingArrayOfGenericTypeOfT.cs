@@ -14,14 +14,14 @@
 
 namespace Castle.DynamicProxy.Tests.GenClasses
 {
-	using System;
+    using System;
 
-	public class MethodWithArgumentBeingArrayOfGenericTypeOfT
-	{
+    public class MethodWithArgumentBeingArrayOfGenericTypeOfT
+    {
 
-		public virtual T Method<T>( Action<T>[] actions) where T : class
-		{
-			return default(T);
-		}
-	}
+        public virtual T Method<T>( Action<T>[] actions) where T : class
+        {
+            return default(T);
+        }
+    }
 }

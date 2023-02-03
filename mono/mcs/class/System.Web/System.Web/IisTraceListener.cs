@@ -2,7 +2,7 @@
 // System.Web.IisTraceListener.cs 
 //
 // Author:
-//	Marek Habersack (mhabersack@novell.com)
+//    Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -33,57 +33,57 @@ using System.Security.Permissions;
 
 namespace System.Web
 {
-	//
-	// Since we don't have a use for this class right now and we don't run it under IIS 7, we
-	// will just call the base class to do the work in some cases and for the remaining methods
-	// we will mimic the behavior of WebPageTraceListener.
-	//
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[HostProtectionAttribute(SecurityAction.LinkDemand, Synchronization = true)]
-	public sealed class IisTraceListener : TraceListener
-	{
-		public IisTraceListener ()
-		{
-		}
+    //
+    // Since we don't have a use for this class right now and we don't run it under IIS 7, we
+    // will just call the base class to do the work in some cases and for the remaining methods
+    // we will mimic the behavior of WebPageTraceListener.
+    //
+    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [HostProtectionAttribute(SecurityAction.LinkDemand, Synchronization = true)]
+    public sealed class IisTraceListener : TraceListener
+    {
+        public IisTraceListener ()
+        {
+        }
 
-		public override void TraceData (TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
-		{
-			base.TraceData (eventCache, source, eventType, id, data);
-		}
+        public override void TraceData (TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
+        {
+            base.TraceData (eventCache, source, eventType, id, data);
+        }
 
-		public override void TraceData (TraceEventCache eventCache, string source, TraceEventType eventType, int id, params object[] data)
-		{
-			base.TraceData (eventCache, source, eventType, id, data);
-		}
+        public override void TraceData (TraceEventCache eventCache, string source, TraceEventType eventType, int id, params object[] data)
+        {
+            base.TraceData (eventCache, source, eventType, id, data);
+        }
 
-		public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string message)
-		{
-			base.TraceEvent (eventCache, source, severity, id, message);
-		}
+        public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string message)
+        {
+            base.TraceEvent (eventCache, source, severity, id, message);
+        }
 
-		public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string format, params object[] args)
-		{
-			base.TraceEvent (eventCache, source, severity, id, format, args);
-		}
-		
-		public override void Write (string message)
-		{
-			HttpContext.Current.Trace.Write (message);
-		}
+        public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string format, params object[] args)
+        {
+            base.TraceEvent (eventCache, source, severity, id, format, args);
+        }
+        
+        public override void Write (string message)
+        {
+            HttpContext.Current.Trace.Write (message);
+        }
 
-		public override void Write (string message, string category)
-		{
-			Write (message);
-		}
+        public override void Write (string message, string category)
+        {
+            Write (message);
+        }
 
-		public override void WriteLine (string message)
-		{
-			HttpContext.Current.Trace.Write (message + Environment.NewLine);
-		}
+        public override void WriteLine (string message)
+        {
+            HttpContext.Current.Trace.Write (message + Environment.NewLine);
+        }
 
-		public override void WriteLine (string message, string category)
-		{
-			WriteLine (message);
-		}
-	}
+        public override void WriteLine (string message, string category)
+        {
+            WriteLine (message);
+        }
+    }
 }

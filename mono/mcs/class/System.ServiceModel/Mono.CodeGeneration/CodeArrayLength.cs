@@ -28,33 +28,33 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodeArrayLength: CodeExpression
-	{
-		CodeExpression array;
-		
-		public CodeArrayLength (CodeExpression array)
-		{
-			if (!array.GetResultType().IsArray)
-				throw new InvalidOperationException ("CodeArrayLength can only be applied to array expressions");
-			this.array = array;
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			array.Generate (gen);
-			gen.Emit (OpCodes.Ldlen);
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			array.PrintCode (cp);
-			cp.Write (".Length");
-		}
-		
-		public override Type GetResultType ()
-		{
-			return typeof(int);
-		}
-	}
+    public class CodeArrayLength: CodeExpression
+    {
+        CodeExpression array;
+        
+        public CodeArrayLength (CodeExpression array)
+        {
+            if (!array.GetResultType().IsArray)
+                throw new InvalidOperationException ("CodeArrayLength can only be applied to array expressions");
+            this.array = array;
+        }
+        
+        public override void Generate (ILGenerator gen)
+        {
+            array.Generate (gen);
+            gen.Emit (OpCodes.Ldlen);
+        }
+        
+        public override void PrintCode (CodeWriter cp)
+        {
+            array.PrintCode (cp);
+            cp.Write (".Length");
+        }
+        
+        public override Type GetResultType ()
+        {
+            return typeof(int);
+        }
+    }
 }
 #endif

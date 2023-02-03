@@ -2,7 +2,7 @@
 // XmlSerializerFormatAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,15 +29,15 @@ using System;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface |
-		AttributeTargets.Method, Inherited = false)]
-	public sealed class XmlSerializerFormatAttribute : Attribute
-	{
-		public OperationFormatStyle Style { get; set; }
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface |
+        AttributeTargets.Method, Inherited = false)]
+    public sealed class XmlSerializerFormatAttribute : Attribute
+    {
+        public OperationFormatStyle Style { get; set; }
 
-		public OperationFormatUse Use { get; set; }
-		
-		[MonoTODO]
-		public bool SupportFaults { get; set; }
-	}
+        public OperationFormatUse Use { get; set; }
+        
+        [MonoTODO]
+        public bool SupportFaults { get; set; }
+    }
 }

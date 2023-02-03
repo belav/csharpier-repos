@@ -7,8 +7,8 @@ interface I
 
 class C
 {
-	static void Foo<T> (T [] t) where T : I
-	{
-		I [] i = t;
-	}
+    static void Foo<T> (T [] t) where T : I
+    {
+        I [] i = t;
+    }
 }

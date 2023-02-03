@@ -20,21 +20,21 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//	Andreia Gaita (avidigal@novell.com)
+//    Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
 
 namespace Mono.WebBrowser.DOM
 {
-	public interface IDOMImplementation
-	{
-		bool 			HasFeature (string feature, string version);
-		IDocumentType 	CreateDocumentType (string qualifiedName, 
-		                                  string publicId, 
-		                                  string systemId);
-		IDocument		CreateDocument(string namespaceURI, 
+    public interface IDOMImplementation
+    {
+        bool             HasFeature (string feature, string version);
+        IDocumentType     CreateDocumentType (string qualifiedName, 
+                                          string publicId, 
+                                          string systemId);
+        IDocument        CreateDocument(string namespaceURI, 
                                       string qualifiedName, 
-                                      IDocumentType doctype);		
-	}
+                                      IDocumentType doctype);        
+    }
 }

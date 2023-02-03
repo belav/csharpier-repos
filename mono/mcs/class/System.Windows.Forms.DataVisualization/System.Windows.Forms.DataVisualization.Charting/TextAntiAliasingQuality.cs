@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum TextAntiAliasingQuality
-	{
-		Normal = 0,
-		High = 1,
-		SystemDefault = 2
-	}
+    public enum TextAntiAliasingQuality
+    {
+        Normal = 0,
+        High = 1,
+        SystemDefault = 2
+    }
 }

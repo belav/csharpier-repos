@@ -20,25 +20,25 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Markup {
 
-	[AttributeUsage (AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-	public sealed class DesignerSerializationOptionsAttribute : Attribute
-	{
-		public DesignerSerializationOptionsAttribute (DesignerSerializationOptions designerSerializationOptions)
-		{
-			this.designerSerializationOptions = designerSerializationOptions;
-		}
+    [AttributeUsage (AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    public sealed class DesignerSerializationOptionsAttribute : Attribute
+    {
+        public DesignerSerializationOptionsAttribute (DesignerSerializationOptions designerSerializationOptions)
+        {
+            this.designerSerializationOptions = designerSerializationOptions;
+        }
 
-		public DesignerSerializationOptions DesignerSerializationOptions {
-			get { return designerSerializationOptions; }
-		}
+        public DesignerSerializationOptions DesignerSerializationOptions {
+            get { return designerSerializationOptions; }
+        }
 
-		DesignerSerializationOptions designerSerializationOptions;
-	}
+        DesignerSerializationOptions designerSerializationOptions;
+    }
 }

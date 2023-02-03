@@ -1,4 +1,4 @@
-﻿namespace OmmitedDTOModel3WithCollections;
+namespace OmmitedDTOModel3WithCollections;
 
 public class EntityDTO13 : BaseEntity
 {

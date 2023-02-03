@@ -6,21 +6,21 @@ public delegate void Hello (Test test);
 
 public class Test
 {
-	public void Whatever ()
-	{ }
+    public void Whatever ()
+    { }
 
-	static void RunIt (Test t)
-	{
-		Hello hello = delegate (Test test) {
-			Test t = test;
-			t.Whatever ();
-		};
-		hello (t);
-	}
+    static void RunIt (Test t)
+    {
+        Hello hello = delegate (Test test) {
+            Test t = test;
+            t.Whatever ();
+        };
+        hello (t);
+    }
 
-	static void Main ()
-	{
-		Test t = new Test ();
-		RunIt (t);
-	}
+    static void Main ()
+    {
+        Test t = new Test ();
+        RunIt (t);
+    }
 }

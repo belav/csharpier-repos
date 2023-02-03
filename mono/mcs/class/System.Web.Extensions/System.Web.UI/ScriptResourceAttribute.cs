@@ -33,29 +33,29 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
-	public sealed class ScriptResourceAttribute : Attribute
-	{
-		string _scriptName;
-		string _scriptResourceName;
-		string _typeName;
+    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
+    public sealed class ScriptResourceAttribute : Attribute
+    {
+        string _scriptName;
+        string _scriptResourceName;
+        string _typeName;
 
-		public ScriptResourceAttribute (string scriptName, string stringResourceName, string stringResourceClientTypeName) {
-			_scriptName = scriptName;
-			_scriptResourceName = stringResourceName;
-			_typeName = stringResourceClientTypeName;
-		}
+        public ScriptResourceAttribute (string scriptName, string stringResourceName, string stringResourceClientTypeName) {
+            _scriptName = scriptName;
+            _scriptResourceName = stringResourceName;
+            _typeName = stringResourceClientTypeName;
+        }
 
-		public string ScriptName {
-			get { return _scriptName; }
-		}
+        public string ScriptName {
+            get { return _scriptName; }
+        }
 
-		public string ScriptResourceName {
-			get { return _scriptResourceName; }
-		}
+        public string ScriptResourceName {
+            get { return _scriptResourceName; }
+        }
 
-		public string TypeName {
-			get { return _typeName; }
-		}
-	}
+        public string TypeName {
+            get { return _typeName; }
+        }
+    }
 }

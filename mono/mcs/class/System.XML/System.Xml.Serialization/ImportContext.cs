@@ -35,42 +35,42 @@ using System.Collections.Specialized;
 
 namespace System.Xml.Serialization 
 {
-	public class ImportContext
-	{
-		bool _shareTypes;
-		CodeIdentifiers _typeIdentifiers;
-		StringCollection _warnings = new StringCollection ();
-		
-		internal Hashtable MappedTypes;
-		internal Hashtable DataMappedTypes;
-		internal Hashtable SharedAnonymousTypes;
-		
-		public ImportContext (CodeIdentifiers identifiers, bool shareTypes)
-		{
-			_typeIdentifiers = identifiers;
-			this._shareTypes = shareTypes;
-			
-			if (shareTypes) {
-				MappedTypes = new Hashtable ();
-				DataMappedTypes = new Hashtable ();
-				SharedAnonymousTypes = new Hashtable ();
-			}
-		}
-		
-		public bool ShareTypes 
-		{
-			get { return _shareTypes; }
-		}
+    public class ImportContext
+    {
+        bool _shareTypes;
+        CodeIdentifiers _typeIdentifiers;
+        StringCollection _warnings = new StringCollection ();
+        
+        internal Hashtable MappedTypes;
+        internal Hashtable DataMappedTypes;
+        internal Hashtable SharedAnonymousTypes;
+        
+        public ImportContext (CodeIdentifiers identifiers, bool shareTypes)
+        {
+            _typeIdentifiers = identifiers;
+            this._shareTypes = shareTypes;
+            
+            if (shareTypes) {
+                MappedTypes = new Hashtable ();
+                DataMappedTypes = new Hashtable ();
+                SharedAnonymousTypes = new Hashtable ();
+            }
+        }
+        
+        public bool ShareTypes 
+        {
+            get { return _shareTypes; }
+        }
 
-		public CodeIdentifiers TypeIdentifiers
-		{
-			get { return _typeIdentifiers; }
-		}
+        public CodeIdentifiers TypeIdentifiers
+        {
+            get { return _typeIdentifiers; }
+        }
 
-		public StringCollection Warnings
-		{
-			get { return _warnings; }
-		}
-	}
+        public StringCollection Warnings
+        {
+            get { return _warnings; }
+        }
+    }
 }
 

@@ -3,13 +3,13 @@
 
 class C
 {
-	public static void Main ()
-	{
-		const char c = 'a';
-		Foo (ref c);
-	}
+    public static void Main ()
+    {
+        const char c = 'a';
+        Foo (ref c);
+    }
 
-	static void Foo(ref char i)
-	{
-	}
+    static void Foo(ref char i)
+    {
+    }
 }

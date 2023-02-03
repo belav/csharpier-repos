@@ -2,7 +2,7 @@
 // System.Web.UI.ProfileParser
 //
 // Authors:
-//	Vladimir Krasnov (vladimirk@mainsoft.com)
+//    Vladimir Krasnov (vladimirk@mainsoft.com)
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -35,41 +35,41 @@ using System.Web.Util;
 
 namespace System.Web.Profile
 {
-	internal sealed class ProfileParser
-	{
-		internal ProfileParser (HttpContext context)
-		{
-		}
+    internal sealed class ProfileParser
+    {
+        internal ProfileParser (HttpContext context)
+        {
+        }
 
-		public static Type GetProfileCommonType (HttpContext context)
-		{
-			string typeName;
-			if (AppCodeCompiler.DefaultAppCodeAssemblyName != null)
-				typeName = String.Concat ("ProfileCommon, ", AppCodeCompiler.DefaultAppCodeAssemblyName);
-			else
-				typeName = "ProfileCommon";
-			
-			Type profileBaseType = Type.GetType (typeName);
-			if (profileBaseType == null) {
-				//Compiler call
-			}
-			return profileBaseType;
-		}
+        public static Type GetProfileCommonType (HttpContext context)
+        {
+            string typeName;
+            if (AppCodeCompiler.DefaultAppCodeAssemblyName != null)
+                typeName = String.Concat ("ProfileCommon, ", AppCodeCompiler.DefaultAppCodeAssemblyName);
+            else
+                typeName = "ProfileCommon";
+            
+            Type profileBaseType = Type.GetType (typeName);
+            if (profileBaseType == null) {
+                //Compiler call
+            }
+            return profileBaseType;
+        }
 
-		public static Type GetProfileGroupType (HttpContext context, string groupName)
-		{
-			string typeName;
-			if (AppCodeCompiler.DefaultAppCodeAssemblyName != null)
-				typeName = String.Concat ("ProfileGroup", groupName, ", ", AppCodeCompiler.DefaultAppCodeAssemblyName);
-			else
-				typeName = String.Concat ("ProfileGroup", groupName);
+        public static Type GetProfileGroupType (HttpContext context, string groupName)
+        {
+            string typeName;
+            if (AppCodeCompiler.DefaultAppCodeAssemblyName != null)
+                typeName = String.Concat ("ProfileGroup", groupName, ", ", AppCodeCompiler.DefaultAppCodeAssemblyName);
+            else
+                typeName = String.Concat ("ProfileGroup", groupName);
 
-			Type profileGroupType = Type.GetType (typeName);
-			if (profileGroupType == null) {
-				//Compiler call
-			}
-			return profileGroupType;
-		}
-	}
+            Type profileGroupType = Type.GetType (typeName);
+            if (profileGroupType == null) {
+                //Compiler call
+            }
+            return profileGroupType;
+        }
+    }
 }
 

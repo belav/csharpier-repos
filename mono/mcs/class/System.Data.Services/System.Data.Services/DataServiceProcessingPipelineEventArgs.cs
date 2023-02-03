@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DataServiceProcessingPipelineEventArgs.cs
 //  
 // Author:
@@ -31,10 +31,10 @@ using System.Runtime;
 
 namespace System.Data.Services
 {
-	public sealed class DataServiceProcessingPipelineEventArgs : EventArgs
-	{
-		public DataServiceOperationContext OperationContext {
-			get { throw new NotImplementedException (); }
-		}
-	}
+    public sealed class DataServiceProcessingPipelineEventArgs : EventArgs
+    {
+        public DataServiceOperationContext OperationContext {
+            get { throw new NotImplementedException (); }
+        }
+    }
 }

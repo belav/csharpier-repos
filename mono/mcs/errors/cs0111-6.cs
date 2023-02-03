@@ -2,10 +2,10 @@
 // Line : 6
 
 class T {
-	T () {}
-	T () {}
+    T () {}
+    T () {}
 
-	public static void Main ()
-	{
-	}
+    public static void Main ()
+    {
+    }
 }

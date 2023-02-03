@@ -7,5 +7,5 @@ static class S<T>
 
 public class C<T>
 {
-	S<T> t;
+    S<T> t;
 }

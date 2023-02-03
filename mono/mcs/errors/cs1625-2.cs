@@ -6,15 +6,15 @@ using System.Collections;
 
 class X
 {
-	public static IEnumerable Test (int a)
-	{
-		try {
-			;
-		} finally {
-		    try {
-			yield return 0;
-		    }
-		    finally {}
-		}
+    public static IEnumerable Test (int a)
+    {
+        try {
+            ;
+        } finally {
+            try {
+            yield return 0;
+            }
+            finally {}
+        }
         }
 }

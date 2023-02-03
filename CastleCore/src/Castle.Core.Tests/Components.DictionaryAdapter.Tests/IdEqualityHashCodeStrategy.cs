@@ -1,4 +1,4 @@
-﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
+// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,35 +14,35 @@
 
 namespace Castle.Components.DictionaryAdapter.Tests
 {
-	public class IdEqualityHashCodeStrategy : DictionaryBehaviorAttribute, IDictionaryInitializer,
-											  IDictionaryEqualityHashCodeStrategy
-	{
-		public void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
-		{
-			dictionaryAdapter.This.EqualityHashCodeStrategy = this;
-		}
+    public class IdEqualityHashCodeStrategy : DictionaryBehaviorAttribute, IDictionaryInitializer,
+                                              IDictionaryEqualityHashCodeStrategy
+    {
+        public void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
+        {
+            dictionaryAdapter.This.EqualityHashCodeStrategy = this;
+        }
 
-		public bool Equals(IDictionaryAdapter adapter1, IDictionaryAdapter adapter2)
-		{
-			var id1 = adapter1.GetProperty("Id", false);
-			if (id1 == null) return false;
+        public bool Equals(IDictionaryAdapter adapter1, IDictionaryAdapter adapter2)
+        {
+            var id1 = adapter1.GetProperty("Id", false);
+            if (id1 == null) return false;
 
-			var id2 = adapter2.GetProperty("Id", false);
-			if (id2 == null) return false;
+            var id2 = adapter2.GetProperty("Id", false);
+            if (id2 == null) return false;
 
-			return id1.Equals(id2);
-		}
+            return id1.Equals(id2);
+        }
 
-		public bool GetHashCode(IDictionaryAdapter adapter, out int hashCode)
-		{
-			var id = adapter.GetProperty("Id", false);
-			if (id != null)
-			{
-				hashCode = id.GetHashCode();
-				return true;
-			}
-			hashCode = 0;
-			return false;
-		}
-	}
+        public bool GetHashCode(IDictionaryAdapter adapter, out int hashCode)
+        {
+            var id = adapter.GetProperty("Id", false);
+            if (id != null)
+            {
+                hashCode = id.GetHashCode();
+                return true;
+            }
+            hashCode = 0;
+            return false;
+        }
+    }
 }

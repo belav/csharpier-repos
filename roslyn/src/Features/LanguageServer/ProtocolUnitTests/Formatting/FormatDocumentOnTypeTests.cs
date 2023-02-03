@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -57,20 +57,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
             var markup =
 @"class A
 {
-	void M()
-	{
-		if (true)
-			{{|type:|}
-	}
+    void M()
+    {
+        if (true)
+            {{|type:|}
+    }
 }";
             var expected =
 @"class A
 {
-	void M()
-	{
-		if (true)
-		{
-	}
+    void M()
+    {
+        if (true)
+        {
+    }
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var characterTyped = ";";

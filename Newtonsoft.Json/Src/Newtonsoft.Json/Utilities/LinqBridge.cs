@@ -1,4 +1,4 @@
-﻿
+
 #if !HAVE_LINQ
 
 #region License, Terms and Author(s)

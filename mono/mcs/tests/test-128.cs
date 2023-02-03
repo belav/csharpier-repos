@@ -3,12 +3,12 @@ using System.Reflection;
 
 public class SimpleAttribute : Attribute {
 
-	string n;
-	
-	public SimpleAttribute (string name)
-	{
-		n = name;
-	}
+    string n;
+    
+    public SimpleAttribute (string name)
+    {
+        n = name;
+    }
 }
 
 [AttributeUsage (AttributeTargets.All)]
@@ -28,52 +28,52 @@ public class Foo {
                 MineAttribute ma = (MineAttribute) attrs [0];
                 if (ma.types [0] != typeof (int)){
                         Console.WriteLine ("failed");
-			return 1;
-		}
+            return 1;
+        }
                 if (ma.types [1] != typeof (string)){
                         Console.WriteLine ("failed");
-			return 2;
-		}
+            return 2;
+        }
                 if (ma.types [2] != typeof (object [])){
                         Console.WriteLine ("failed");
-			return 3;
-		}
-		Console.WriteLine ("OK");
+            return 3;
+        }
+        Console.WriteLine ("OK");
                 return 0;
         }
 }
 
 public class Blah {
 
-	int i;
+    int i;
 
-	public int Value {
+    public int Value {
 
-		[Simple ("Foo!")]
-		get {
-			return i;
-		}
+        [Simple ("Foo!")]
+        get {
+            return i;
+        }
 
-		[Simple ("Bar !")]
-		set {
-			i = value;
-		}
-	}
+        [Simple ("Bar !")]
+        set {
+            i = value;
+        }
+    }
 
-	[Simple ((string) null)]
-	int Another ()
-	{
-		return 1;
-	}
-	
-	public static int Main ()
-	{
-		//
-		// We need a better test which does reflection to check if the
-		// attributes have actually been applied etc.
-		//
+    [Simple ((string) null)]
+    int Another ()
+    {
+        return 1;
+    }
+    
+    public static int Main ()
+    {
+        //
+        // We need a better test which does reflection to check if the
+        // attributes have actually been applied etc.
+        //
 
-		return Foo.MM ();
-	}
+        return Foo.MM ();
+    }
 
 }

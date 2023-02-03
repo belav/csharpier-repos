@@ -30,33 +30,33 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms
 {
-	public class ListViewHitTestInfo
-	{
-		ListViewItem item = null;
-		ListViewItem.ListViewSubItem subItem = null;
-		ListViewHitTestLocations location = ListViewHitTestLocations.None;
+    public class ListViewHitTestInfo
+    {
+        ListViewItem item = null;
+        ListViewItem.ListViewSubItem subItem = null;
+        ListViewHitTestLocations location = ListViewHitTestLocations.None;
 
-		public ListViewHitTestInfo(ListViewItem hitItem, ListViewItem.ListViewSubItem hitSubItem,
-			ListViewHitTestLocations hitLocation)
-		{
-			item = hitItem;
-			subItem = hitSubItem;
-			location = hitLocation;
-		}
+        public ListViewHitTestInfo(ListViewItem hitItem, ListViewItem.ListViewSubItem hitSubItem,
+            ListViewHitTestLocations hitLocation)
+        {
+            item = hitItem;
+            subItem = hitSubItem;
+            location = hitLocation;
+        }
 
-		public ListViewItem Item 
-		{
-			get { return item; }
-		}
+        public ListViewItem Item 
+        {
+            get { return item; }
+        }
 
-		public ListViewHitTestLocations Location 
-		{
-			get { return location; }
-		}
+        public ListViewHitTestLocations Location 
+        {
+            get { return location; }
+        }
 
-		public ListViewItem.ListViewSubItem SubItem
-		{
-			get { return subItem; }
-		}
-	}
+        public ListViewItem.ListViewSubItem SubItem
+        {
+            get { return subItem; }
+        }
+    }
 }

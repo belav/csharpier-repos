@@ -2,7 +2,7 @@
 // EndpointBehaviorElementCollection.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (EndpointBehaviorElement),
-		 AddItemName = "behavior",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class EndpointBehaviorElementCollection
-		 : ServiceModelEnhancedConfigurationElementCollection<EndpointBehaviorElement>,  ICollection,  IEnumerable
-	{
-		public EndpointBehaviorElementCollection ()
-		{
-			AddElementName = "behavior";
-		}
+    [ConfigurationCollection (typeof (EndpointBehaviorElement),
+         AddItemName = "behavior",
+         RemoveItemName = "remove",
+         ClearItemsName = "clear",
+         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class EndpointBehaviorElementCollection
+         : ServiceModelEnhancedConfigurationElementCollection<EndpointBehaviorElement>,  ICollection,  IEnumerable
+    {
+        public EndpointBehaviorElementCollection ()
+        {
+            AddElementName = "behavior";
+        }
 
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((EndpointBehaviorElement) element).Name;
-		}
+        protected override object GetElementKey (ConfigurationElement element) {
+            return ((EndpointBehaviorElement) element).Name;
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return true; }
-		}
-	}
+        protected override bool ThrowOnDuplicate {
+            get { return true; }
+        }
+    }
 
 }

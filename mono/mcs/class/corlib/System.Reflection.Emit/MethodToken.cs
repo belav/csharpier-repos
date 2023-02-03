@@ -31,71 +31,71 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-	/// <summary>
-	///  Represents the Token returned by the metadata to represent a Method.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public readonly struct MethodToken : IEquatable<MethodToken> {
+    /// <summary>
+    ///  Represents the Token returned by the metadata to represent a Method.
+    /// </summary>
+    [ComVisible (true)]
+    [Serializable]
+    public readonly struct MethodToken : IEquatable<MethodToken> {
 
-		internal readonly int tokValue;
+        internal readonly int tokValue;
 
-		public static readonly MethodToken Empty = new MethodToken ();
+        public static readonly MethodToken Empty = new MethodToken ();
 
-		internal MethodToken (int val)
-		{
-			tokValue = val;
-		}
+        internal MethodToken (int val)
+        {
+            tokValue = val;
+        }
 
-		/// <summary>
-		/// </summary>
-		public override bool Equals (object obj)
-		{
-			bool res = obj is MethodToken;
+        /// <summary>
+        /// </summary>
+        public override bool Equals (object obj)
+        {
+            bool res = obj is MethodToken;
 
-			if (res) {
-				MethodToken that = (MethodToken) obj;
-				res = (this.tokValue == that.tokValue);
-			}
+            if (res) {
+                MethodToken that = (MethodToken) obj;
+                res = (this.tokValue == that.tokValue);
+            }
 
-			return res;
-		}
+            return res;
+        }
 
-		public bool Equals (MethodToken obj)
-		{
-			return (this.tokValue == obj.tokValue);
-		}
+        public bool Equals (MethodToken obj)
+        {
+            return (this.tokValue == obj.tokValue);
+        }
 
-		public static bool operator == (MethodToken a, MethodToken b)
-		{
-			return Equals (a, b);
-		}
+        public static bool operator == (MethodToken a, MethodToken b)
+        {
+            return Equals (a, b);
+        }
 
-		public static bool operator != (MethodToken a, MethodToken b)
-		{
-			return !Equals (a, b);
-		}
+        public static bool operator != (MethodToken a, MethodToken b)
+        {
+            return !Equals (a, b);
+        }
 
-		/// <summary>
-		///  Tests whether the given object is an instance of
-		///  MethodToken and has the same token value.
-		/// </summary>
-		public override int GetHashCode ()
-		{
-			return tokValue;
-		}
+        /// <summary>
+        ///  Tests whether the given object is an instance of
+        ///  MethodToken and has the same token value.
+        /// </summary>
+        public override int GetHashCode ()
+        {
+            return tokValue;
+        }
 
 
-		/// <summary>
-		///  Returns the metadata token for this Method.
-		/// </summary>
-		public int Token {
-			get {
-				return tokValue;
-			}
-		}
+        /// <summary>
+        ///  Returns the metadata token for this Method.
+        /// </summary>
+        public int Token {
+            get {
+                return tokValue;
+            }
+        }
 
-	}
+    }
 
 }
 

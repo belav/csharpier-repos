@@ -7,11 +7,11 @@ public class Bar : System.ContextBoundObject {
 
 public class Driver {
   public static void Main (string[] args) {
-	Bar b = new Bar();
+    Bar b = new Bar();
     
-	for (int i = 0; i != 30000000; i++)
-		if (!b.Equals (b))
-			Console.WriteLine ("error!!");
+    for (int i = 0; i != 30000000; i++)
+        if (!b.Equals (b))
+            Console.WriteLine ("error!!");
   }
 }
 

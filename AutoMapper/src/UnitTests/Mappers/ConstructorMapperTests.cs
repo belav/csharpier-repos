@@ -1,4 +1,4 @@
-﻿namespace AutoMapper.UnitTests.Mappers;
+namespace AutoMapper.UnitTests.Mappers;
 
 public class ConstructorMapperTests : AutoMapperSpecBase
 {

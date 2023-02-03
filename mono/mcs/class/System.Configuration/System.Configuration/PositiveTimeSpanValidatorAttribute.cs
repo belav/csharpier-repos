@@ -2,7 +2,7 @@
 // System.Configuration.PositiveTimeSpanValidatorAttribute.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,22 +30,22 @@ using System;
 
 namespace System.Configuration {
 
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class PositiveTimeSpanValidatorAttribute : ConfigurationValidatorAttribute
-	{
-		ConfigurationValidatorBase instance;
+    [AttributeUsage (AttributeTargets.Property)]
+    public sealed class PositiveTimeSpanValidatorAttribute : ConfigurationValidatorAttribute
+    {
+        ConfigurationValidatorBase instance;
 
-		public PositiveTimeSpanValidatorAttribute ()
-		{
-		}
+        public PositiveTimeSpanValidatorAttribute ()
+        {
+        }
 
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
-				if (instance == null)
-					instance = new PositiveTimeSpanValidator ();
+        public override ConfigurationValidatorBase ValidatorInstance {
+            get {
+                if (instance == null)
+                    instance = new PositiveTimeSpanValidator ();
 
-				return instance;
-			}
-		}
-	}
+                return instance;
+            }
+        }
+    }
 }

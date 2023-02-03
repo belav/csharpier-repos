@@ -4,9 +4,9 @@
 
 class C
 {
-	string program;
+    string program;
 
-	internal string Program {
-		get { return program ?? string.Empty; }
-	}
+    internal string Program {
+        get { return program ?? string.Empty; }
+    }
 }

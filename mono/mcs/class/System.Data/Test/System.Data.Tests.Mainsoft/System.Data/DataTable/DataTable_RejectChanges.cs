@@ -39,79 +39,79 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_RejectChanges : GHTBase
 {
-	[Test] public void Main()
-	{
-		DataTable_RejectChanges tc = new DataTable_RejectChanges();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataTable_RejectChanges");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [Test] public void Main()
+    {
+        DataTable_RejectChanges tc = new DataTable_RejectChanges();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("DataTable_RejectChanges");
+            tc.run();
+        }
+        catch(Exception ex)
+        {
+            exp = ex;
+        }
+        finally
+        {
+            tc.EndTest(exp);
+        }
+    }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+    //Activate This Construntor to log All To Standard output
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-	public void run()
-	{
-		Exception exp = null;
-		
-		String sNewValue = "NewValue";
-		DataRow drModified,drDeleted,drAdded;
-		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-		
-		drModified = dt.Rows[0];
-		drModified[1] = sNewValue; //DataRowState = Modified ,DataRowVersion = Proposed
-		
-		drDeleted = dt.Rows[1];
-		drDeleted.Delete();		//DataRowState =  Deleted
-
-		drAdded = dt.NewRow();			
-		dt.Rows.Add(drAdded);	//DataRowState =  Added
-		
-		dt.RejectChanges();
+    public void run()
+    {
+        Exception exp = null;
         
-		try
-		{
-			BeginCase("RejectChanges - Unchanged1");
-			Compare(drModified.RowState  ,DataRowState.Unchanged );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        String sNewValue = "NewValue";
+        DataRow drModified,drDeleted,drAdded;
+        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
         
-		try
-		{
-			BeginCase("RejectChanges - Unchanged2");
-			Compare(drAdded.RowState  ,DataRowState.Detached );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
+        drModified = dt.Rows[0];
+        drModified[1] = sNewValue; //DataRowState = Modified ,DataRowVersion = Proposed
+        
+        drDeleted = dt.Rows[1];
+        drDeleted.Delete();        //DataRowState =  Deleted
 
-		try
-		{
-			BeginCase("RejectChanges - Detached");
-			Compare(drDeleted.RowState  ,DataRowState.Unchanged   );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-	}			
+        drAdded = dt.NewRow();            
+        dt.Rows.Add(drAdded);    //DataRowState =  Added
+        
+        dt.RejectChanges();
+        
+        try
+        {
+            BeginCase("RejectChanges - Unchanged1");
+            Compare(drModified.RowState  ,DataRowState.Unchanged );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+        
+        try
+        {
+            BeginCase("RejectChanges - Unchanged2");
+            Compare(drAdded.RowState  ,DataRowState.Detached );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+
+        try
+        {
+            BeginCase("RejectChanges - Detached");
+            Compare(drDeleted.RowState  ,DataRowState.Unchanged   );
+        }
+        catch(Exception ex)    {exp = ex;}
+        finally    {EndCase(exp); exp = null;}
+    }            
 }
 }

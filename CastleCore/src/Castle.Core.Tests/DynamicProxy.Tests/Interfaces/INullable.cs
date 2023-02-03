@@ -14,11 +14,11 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	public interface INullable
-	{
-		int? Get();
-		void GetOut(out int? param);
-		void Set(int? param);
+    public interface INullable
+    {
+        int? Get();
+        void GetOut(out int? param);
+        void Set(int? param);
 
-	}
+    }
 }

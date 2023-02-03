@@ -1,8 +1,8 @@
-﻿//
+//
 // DataContractSerializerTest_FrameworkTypes.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft.co http://www.mainsoft.com
 //
@@ -44,25 +44,25 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	public class DataContractSerializerTest_FrameworkTypes
-	{
-		protected void Test<T> () where T : new () {
-			T o = new T ();
-			Type t = o.GetType ();
-			string fileName = TestResourceHelper.GetFullPathOfResource ("Test/Resources/FrameworkTypes/" + t.FullName + ".xml");
+    public class DataContractSerializerTest_FrameworkTypes
+    {
+        protected void Test<T> () where T : new () {
+            T o = new T ();
+            Type t = o.GetType ();
+            string fileName = TestResourceHelper.GetFullPathOfResource ("Test/Resources/FrameworkTypes/" + t.FullName + ".xml");
 
-			DataContractSerializer serializer = new DataContractSerializer (t);
-			StringBuilder stringBuilder = new StringBuilder ();
-			using (XmlWriter xmlWriter = XmlWriter.Create (new StringWriter (stringBuilder)))
-				serializer.WriteObject (xmlWriter, o);
-			string actualXml = stringBuilder.ToString ();
-			string expectedXml = File.ReadAllText (fileName);
+            DataContractSerializer serializer = new DataContractSerializer (t);
+            StringBuilder stringBuilder = new StringBuilder ();
+            using (XmlWriter xmlWriter = XmlWriter.Create (new StringWriter (stringBuilder)))
+                serializer.WriteObject (xmlWriter, o);
+            string actualXml = stringBuilder.ToString ();
+            string expectedXml = File.ReadAllText (fileName);
 
-			XmlComparer.AssertAreEqual (expectedXml, actualXml, "Serialization of " + t.FullName + " failed.");
+            XmlComparer.AssertAreEqual (expectedXml, actualXml, "Serialization of " + t.FullName + " failed.");
 
-			using (FileStream fs = File.OpenRead (fileName)) {
-				o = (T) serializer.ReadObject (fs);
-			}
-		}
-	}
+            using (FileStream fs = File.OpenRead (fileName)) {
+                o = (T) serializer.ReadObject (fs);
+            }
+        }
+    }
 }

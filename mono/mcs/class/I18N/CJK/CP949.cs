@@ -123,7 +123,7 @@ namespace I18N.CJK
         {
             int index = 0;
             int length = 0;
-			int end = count;
+            int end = count;
             DbcsConvert convert = GetConvert ();
 
             // 00 00 - FF FF
@@ -151,7 +151,7 @@ namespace I18N.CJK
         {
             int charIndex = 0;
             int byteIndex = 0;
-			int end = charCount;
+            int end = charCount;
             DbcsConvert convert = GetConvert ();
             EncoderFallbackBuffer buffer = null;
 
@@ -176,70 +176,70 @@ namespace I18N.CJK
             return byteIndex - origIndex;
         }
 #else
-		// Get the bytes that result from encoding a character buffer.
-		public override int GetByteCount(char[] chars, int index, int count)
-		{
-			int length = 0;
-			DbcsConvert convert = GetConvert();
+        // Get the bytes that result from encoding a character buffer.
+        public override int GetByteCount(char[] chars, int index, int count)
+        {
+            int length = 0;
+            DbcsConvert convert = GetConvert();
 
-			// 00 00 - FF FF
-			while (count-- > 0)
-			{
-				char c = chars[index++];
-				if (c <= 0x80 || c == 0xFF)
-				{ // ASCII
-					length++;
-					continue;
-				}
-				byte b1 = convert.u2n[((int)c) * 2];
-				byte b2 = convert.u2n[((int)c) * 2 + 1];
-				if (b1 == 0 && b2 == 0)
-				{
-					// FIXME: handle fallback for GetByteCountImpl().
-					length++;
-				}
-				else
-					length += 2;
-			}
-			return length;
-		}
+            // 00 00 - FF FF
+            while (count-- > 0)
+            {
+                char c = chars[index++];
+                if (c <= 0x80 || c == 0xFF)
+                { // ASCII
+                    length++;
+                    continue;
+                }
+                byte b1 = convert.u2n[((int)c) * 2];
+                byte b2 = convert.u2n[((int)c) * 2 + 1];
+                if (b1 == 0 && b2 == 0)
+                {
+                    // FIXME: handle fallback for GetByteCountImpl().
+                    length++;
+                }
+                else
+                    length += 2;
+            }
+            return length;
+        }
 
-		// Get the bytes that result from encoding a character buffer.
-		public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
-		{
-			int byteCount = bytes.Length;
-			int end = charIndex + charCount;
+        // Get the bytes that result from encoding a character buffer.
+        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        {
+            int byteCount = bytes.Length;
+            int end = charIndex + charCount;
 
-			DbcsConvert convert = GetConvert();
-			EncoderFallbackBuffer buffer = null;
+            DbcsConvert convert = GetConvert();
+            EncoderFallbackBuffer buffer = null;
 
-			// 00 00 - FF FF
-			int origIndex = byteIndex;
-			for (int i = charIndex; i < end; i++, charCount--)
-			{
-				char c = chars[i];
-				if (c <= 0x80 || c == 0xFF)
-				{ // ASCII
-					bytes[byteIndex++] = (byte)c;
-					continue;
-				}
-				byte b1 = convert.u2n[((int)c) * 2];
-				byte b2 = convert.u2n[((int)c) * 2 + 1];
-				if (b1 == 0 && b2 == 0)
-				{
-					HandleFallback (ref buffer, chars, ref i, ref charCount,
-						bytes, ref byteIndex, ref byteCount, null);
-				}
-				else
-				{
-					bytes[byteIndex++] = b1;
-					bytes[byteIndex++] = b2;
-				}
-			}
-			return byteIndex - origIndex;
-		}
+            // 00 00 - FF FF
+            int origIndex = byteIndex;
+            for (int i = charIndex; i < end; i++, charCount--)
+            {
+                char c = chars[i];
+                if (c <= 0x80 || c == 0xFF)
+                { // ASCII
+                    bytes[byteIndex++] = (byte)c;
+                    continue;
+                }
+                byte b1 = convert.u2n[((int)c) * 2];
+                byte b2 = convert.u2n[((int)c) * 2 + 1];
+                if (b1 == 0 && b2 == 0)
+                {
+                    HandleFallback (ref buffer, chars, ref i, ref charCount,
+                        bytes, ref byteIndex, ref byteCount, null);
+                }
+                else
+                {
+                    bytes[byteIndex++] = b1;
+                    bytes[byteIndex++] = b2;
+                }
+            }
+            return byteIndex - origIndex;
+        }
 #endif
-		// Get the characters that result from decoding a byte buffer.
+        // Get the characters that result from decoding a byte buffer.
         public override int GetCharCount (byte[] bytes, int index, int count)
         {
             return GetDecoder ().GetCharCount (bytes, index, count);

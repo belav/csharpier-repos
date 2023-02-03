@@ -2,7 +2,7 @@
 // System.Web.Configuration.ProviderSettingsCollection.cs
 //
 // Authors:
-//	Lluis Sanchez Gual (lluis@novell.com)
+//    Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -33,50 +33,50 @@ using System.Configuration;
 
 namespace System.Configuration
 {
-	[ConfigurationCollection (typeof(ProviderSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class ProviderSettingsCollection: ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection props = new ConfigurationPropertyCollection ();
-		
-		public void Add (ProviderSettings provider)
-		{
-			BaseAdd (provider);
-		}
-		
-		public void Clear ()
-		{
-			BaseClear ();
-		}
-		
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new ProviderSettings ();
-		}
-		
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((ProviderSettings)element).Name;
-		}
-		
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
-		
-		public ProviderSettings this [int index]
-		{
-			get { return (ProviderSettings) BaseGet (index); }
-			set { BaseAdd (index, value); }
-		}
-		
-		public new ProviderSettings this [string key]
-		{
-			get { return (ProviderSettings) BaseGet (key); }
-		}
-		
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return props; }
-		}
-	}
+    [ConfigurationCollection (typeof(ProviderSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    public sealed class ProviderSettingsCollection: ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection props = new ConfigurationPropertyCollection ();
+        
+        public void Add (ProviderSettings provider)
+        {
+            BaseAdd (provider);
+        }
+        
+        public void Clear ()
+        {
+            BaseClear ();
+        }
+        
+        protected override ConfigurationElement CreateNewElement ()
+        {
+            return new ProviderSettings ();
+        }
+        
+        protected override object GetElementKey (ConfigurationElement element)
+        {
+            return ((ProviderSettings)element).Name;
+        }
+        
+        public void Remove (string name)
+        {
+            BaseRemove (name);
+        }
+        
+        public ProviderSettings this [int index]
+        {
+            get { return (ProviderSettings) BaseGet (index); }
+            set { BaseAdd (index, value); }
+        }
+        
+        public new ProviderSettings this [string key]
+        {
+            get { return (ProviderSettings) BaseGet (key); }
+        }
+        
+        protected internal override ConfigurationPropertyCollection Properties {
+            get { return props; }
+        }
+    }
 }
 

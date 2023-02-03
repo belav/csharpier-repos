@@ -8,8 +8,8 @@
 // Namespace: System.Data.OracleClient
 //
 // Authors:
-//	Tim Coleman <tim@timcoleman.com>
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Tim Coleman <tim@timcoleman.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) Tim Coleman, 2003
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -23,29 +23,29 @@ using System.Security.Permissions;
 
 namespace System.Data.OracleClient {
 
-	[Serializable]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | 
-			 AttributeTargets.Struct | AttributeTargets.Constructor | 
-			 AttributeTargets.Method, AllowMultiple=true,
-			 Inherited=false)]
-	public sealed class OraclePermissionAttribute : DBDataPermissionAttribute {
+    [Serializable]
+    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | 
+             AttributeTargets.Struct | AttributeTargets.Constructor | 
+             AttributeTargets.Method, AllowMultiple=true,
+             Inherited=false)]
+    public sealed class OraclePermissionAttribute : DBDataPermissionAttribute {
 
-		#region Constructors
+        #region Constructors
 
-		public OraclePermissionAttribute (SecurityAction action) 
-			: base (action)
-		{
-		}
+        public OraclePermissionAttribute (SecurityAction action) 
+            : base (action)
+        {
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		public override IPermission CreatePermission ()
-		{
-			return new OraclePermission (this);
-		}
+        public override IPermission CreatePermission ()
+        {
+            return new OraclePermission (this);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

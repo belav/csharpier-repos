@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2022 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person

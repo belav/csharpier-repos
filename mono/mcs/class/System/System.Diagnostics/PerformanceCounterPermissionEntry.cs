@@ -33,46 +33,46 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics {
 
-	[Serializable]
-	public class PerformanceCounterPermissionEntry {
+    [Serializable]
+    public class PerformanceCounterPermissionEntry {
 
-		private const PerformanceCounterPermissionAccess All = (PerformanceCounterPermissionAccess) 0x07;
-		private PerformanceCounterPermissionAccess permissionAccess;
-		private string machineName;
-		private string categoryName;
+        private const PerformanceCounterPermissionAccess All = (PerformanceCounterPermissionAccess) 0x07;
+        private PerformanceCounterPermissionAccess permissionAccess;
+        private string machineName;
+        private string categoryName;
 
-		public PerformanceCounterPermissionEntry (PerformanceCounterPermissionAccess permissionAccess,
-			string machineName, string categoryName)
-		{
-			if (machineName == null)
-				throw new ArgumentNullException ("machineName");
-			if ((permissionAccess | All) != All)
-				throw new ArgumentException ("permissionAccess");
-			ResourcePermissionBase.ValidateMachineName (machineName);
-			if (categoryName == null)
-				throw new ArgumentNullException ("categoryName");
+        public PerformanceCounterPermissionEntry (PerformanceCounterPermissionAccess permissionAccess,
+            string machineName, string categoryName)
+        {
+            if (machineName == null)
+                throw new ArgumentNullException ("machineName");
+            if ((permissionAccess | All) != All)
+                throw new ArgumentException ("permissionAccess");
+            ResourcePermissionBase.ValidateMachineName (machineName);
+            if (categoryName == null)
+                throw new ArgumentNullException ("categoryName");
 
-			this.permissionAccess = permissionAccess;
-			this.machineName = machineName;
-			this.categoryName = categoryName;
-		}
+            this.permissionAccess = permissionAccess;
+            this.machineName = machineName;
+            this.categoryName = categoryName;
+        }
 
-		public string CategoryName {
-			get { return categoryName; }
-		}
+        public string CategoryName {
+            get { return categoryName; }
+        }
 
-		public string MachineName {
-			get { return machineName; }
-		}
+        public string MachineName {
+            get { return machineName; }
+        }
 
-		public PerformanceCounterPermissionAccess PermissionAccess {
-			get { return permissionAccess; }
-		}
+        public PerformanceCounterPermissionAccess PermissionAccess {
+            get { return permissionAccess; }
+        }
 
-		internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry ()
-		{
-			return new ResourcePermissionBaseEntry ((int) permissionAccess, new string[] { machineName, categoryName });
-		} 
-	}
+        internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry ()
+        {
+            return new ResourcePermissionBaseEntry ((int) permissionAccess, new string[] { machineName, categoryName });
+        } 
+    }
 }
 

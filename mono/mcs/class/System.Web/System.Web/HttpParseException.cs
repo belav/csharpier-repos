@@ -32,78 +32,78 @@ using System.Security.Permissions;
 
 namespace System.Web
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[Serializable]
-	public sealed class HttpParseException : HttpException
-	{
-		int line;
-		string virtualPath;
-		ParserErrorCollection errors = new ParserErrorCollection ();
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [Serializable]
+    public sealed class HttpParseException : HttpException
+    {
+        int line;
+        string virtualPath;
+        ParserErrorCollection errors = new ParserErrorCollection ();
 
-		internal HttpParseException (string message, string virtualPath, int line)
-			: base (message)
-		{
-			this.virtualPath = virtualPath;
-			this.line = line;
-		}
-		
-		HttpParseException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
+        internal HttpParseException (string message, string virtualPath, int line)
+            : base (message)
+        {
+            this.virtualPath = virtualPath;
+            this.line = line;
+        }
+        
+        HttpParseException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
                 {
-			line = info.GetInt32 ("_line");
-			virtualPath = info.GetString ("_virtualPath");
-			errors = info.GetValue ("_parserErrors", typeof (ParserErrorCollection)) as ParserErrorCollection;
+            line = info.GetInt32 ("_line");
+            virtualPath = info.GetString ("_virtualPath");
+            errors = info.GetValue ("_parserErrors", typeof (ParserErrorCollection)) as ParserErrorCollection;
                 }
-		
-		public HttpParseException (): this ("External component has thrown an exception")
-		{
-		}
+        
+        public HttpParseException (): this ("External component has thrown an exception")
+        {
+        }
 
-		public HttpParseException (string message)
-			: base (message)
-		{
-			errors.Add (new ParserError (message, null, 0));
-		}
-		
-		public HttpParseException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-			errors.Add (new ParserError (message, null, 0));
-		}
+        public HttpParseException (string message)
+            : base (message)
+        {
+            errors.Add (new ParserError (message, null, 0));
+        }
+        
+        public HttpParseException (string message, Exception innerException)
+            : base (message, innerException)
+        {
+            errors.Add (new ParserError (message, null, 0));
+        }
 
-		public HttpParseException (string message, Exception innerException, string virtualPath, string sourceCode, int line)
-			: base (message, innerException)
-		{
-			this.virtualPath = virtualPath;
-			this.line = line;
-			errors.Add (new ParserError (message, virtualPath, line));
-		}
+        public HttpParseException (string message, Exception innerException, string virtualPath, string sourceCode, int line)
+            : base (message, innerException)
+        {
+            this.virtualPath = virtualPath;
+            this.line = line;
+            errors.Add (new ParserError (message, virtualPath, line));
+        }
 
-		[SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-			info.AddValue ("_virtualPath", virtualPath);
-			info.AddValue ("_parserErrors", errors);
-			info.AddValue ("_line", line);
-		}
+        [SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData (info, context);
+            info.AddValue ("_virtualPath", virtualPath);
+            info.AddValue ("_parserErrors", errors);
+            info.AddValue ("_line", line);
+        }
 
-		public string FileName {
-			get { return virtualPath; }
-		}
+        public string FileName {
+            get { return virtualPath; }
+        }
 
-		public int Line {
-			get { return line; }
-		}
-		
-		public string VirtualPath {
-			get { return virtualPath; }
-		}
-		
-		public ParserErrorCollection ParserErrors {
-			get { return errors; }
-		}
-	}
+        public int Line {
+            get { return line; }
+        }
+        
+        public string VirtualPath {
+            get { return virtualPath; }
+        }
+        
+        public ParserErrorCollection ParserErrors {
+            get { return errors; }
+        }
+    }
 }
 

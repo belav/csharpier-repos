@@ -2,7 +2,7 @@
 // Field.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,79 +29,79 @@
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-	class Field : Member {
-		private readonly FieldDefinition definition;
+    class Field : Member {
+        private readonly FieldDefinition definition;
 
-		public Field (FieldDefinition definition) : base (NodeType.Field)
-		{
-			this.definition = definition;
-		}
+        public Field (FieldDefinition definition) : base (NodeType.Field)
+        {
+            this.definition = definition;
+        }
 
-		#region Overrides of Member
-		public override bool IsStatic
-		{
-			get { return this.definition.IsStatic; }
-		}
+        #region Overrides of Member
+        public override bool IsStatic
+        {
+            get { return this.definition.IsStatic; }
+        }
 
-		public TypeNode FieldType
-		{
-			get { return TypeNode.Create (this.definition.FieldType); }
-		}
+        public TypeNode FieldType
+        {
+            get { return TypeNode.Create (this.definition.FieldType); }
+        }
 
-		public string Name
-		{
-			get { return this.definition.Name; }
-		}
+        public string Name
+        {
+            get { return this.definition.Name; }
+        }
 
-		public override TypeNode DeclaringType
-		{
-			get { return TypeNode.Create (this.definition.DeclaringType); }
-		}
+        public override TypeNode DeclaringType
+        {
+            get { return TypeNode.Create (this.definition.DeclaringType); }
+        }
 
-		public override Module Module
-		{
-			get { return new Module (this.definition.Module); }
-		}
+        public override Module Module
+        {
+            get { return new Module (this.definition.Module); }
+        }
 
-		public override bool IsPublic
-		{
-			get { return this.definition.IsPublic; }
-		}
+        public override bool IsPublic
+        {
+            get { return this.definition.IsPublic; }
+        }
 
-		public override bool IsPrivate
-		{
-			get { return this.definition.IsPrivate; }
-		}
+        public override bool IsPrivate
+        {
+            get { return this.definition.IsPrivate; }
+        }
 
-		public override bool IsAssembly
-		{
-			get { return this.definition.IsAssembly; }
-		}
+        public override bool IsAssembly
+        {
+            get { return this.definition.IsAssembly; }
+        }
 
-		public override bool IsFamily
-		{
-			get { return this.definition.IsFamily; }
-		}
+        public override bool IsFamily
+        {
+            get { return this.definition.IsFamily; }
+        }
 
-		public override bool IsFamilyOrAssembly
-		{
-			get { return this.definition.IsFamilyOrAssembly; }
-		}
+        public override bool IsFamilyOrAssembly
+        {
+            get { return this.definition.IsFamilyOrAssembly; }
+        }
 
-		public override bool IsFamilyAndAssembly
-		{
-			get { return this.definition.IsFamilyAndAssembly; }
-		}
+        public override bool IsFamilyAndAssembly
+        {
+            get { return this.definition.IsFamilyAndAssembly; }
+        }
 
-		public bool IsReadonly
-		{
-			get { return this.definition.IsInitOnly; }
-		}
+        public bool IsReadonly
+        {
+            get { return this.definition.IsInitOnly; }
+        }
 
-		public bool IsCompilerGenerated
-		{
-			get { return this.definition.IsCompilerControlled; }
-		}
-		#endregion
-	}
+        public bool IsCompilerGenerated
+        {
+            get { return this.definition.IsCompilerControlled; }
+        }
+        #endregion
+    }
 }

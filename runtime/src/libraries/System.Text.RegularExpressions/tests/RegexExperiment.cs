@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.if #DEBUG
+// Licensed to the .NET Foundation under one or more agreements.if #DEBUG
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;

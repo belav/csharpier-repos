@@ -37,15 +37,15 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI
 {
-	public class CompositeScriptReferenceEventArgs : EventArgs
-	{
-		public CompositeScriptReference CompositeScript {
-			get; private set;
-		}
-		
-		public CompositeScriptReferenceEventArgs (CompositeScriptReference compositeScript)
-		{
-			this.CompositeScript = compositeScript;
-		}
-	}
+    public class CompositeScriptReferenceEventArgs : EventArgs
+    {
+        public CompositeScriptReference CompositeScript {
+            get; private set;
+        }
+        
+        public CompositeScriptReferenceEventArgs (CompositeScriptReference compositeScript)
+        {
+            this.CompositeScript = compositeScript;
+        }
+    }
 }

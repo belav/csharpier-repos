@@ -31,11 +31,11 @@ using Mono.Unix;
 
 namespace Mono.Unix {
 
-	[Flags]
-	public enum FileSpecialAttributes {
-		SetUserId   = (int) Native.FilePermissions.S_ISUID,
-		SetGroupId  = (int) Native.FilePermissions.S_ISGID,
-		Sticky      = (int) Native.FilePermissions.S_ISVTX,
-	}
+    [Flags]
+    public enum FileSpecialAttributes {
+        SetUserId   = (int) Native.FilePermissions.S_ISUID,
+        SetGroupId  = (int) Native.FilePermissions.S_ISGID,
+        Sticky      = (int) Native.FilePermissions.S_ISVTX,
+    }
 }
 

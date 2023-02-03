@@ -2,15 +2,15 @@
 // Line: 14
 public class Foo
 {
-	public static void Test<T> (ref T t)
-		where T : class
-	{ }
+    public static void Test<T> (ref T t)
+        where T : class
+    { }
 }
 
 public class C {
-	public static void Main ()
-	{
-		int i = 0;
-		Foo.Test<int> (ref i);
-	}
+    public static void Main ()
+    {
+        int i = 0;
+        Foo.Test<int> (ref i);
+    }
 }

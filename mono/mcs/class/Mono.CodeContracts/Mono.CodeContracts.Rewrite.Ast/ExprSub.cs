@@ -2,7 +2,7 @@
 // ExprSub.cs
 //
 // Authors:
-//	Chris Bacon (chrisbacon76@gmail.com)
+//    Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,16 +32,16 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprSub : ExprBinaryOpArithmetic {
+    class ExprSub : ExprBinaryOpArithmetic {
 
-		public ExprSub (MethodInfo methodInfo, Expr left, Expr right, Sn signage, bool overflow)
-			: base (methodInfo, left, right, signage, overflow)
-		{
-		}
+        public ExprSub (MethodInfo methodInfo, Expr left, Expr right, Sn signage, bool overflow)
+            : base (methodInfo, left, right, signage, overflow)
+        {
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.Sub; }
-		}
+        public override ExprType ExprType {
+            get { return ExprType.Sub; }
+        }
 
-	}
+    }
 }

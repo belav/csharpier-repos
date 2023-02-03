@@ -34,79 +34,79 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Reflection {
 
-	/// <summary>
-	/// Summary description for AssemblyVersionAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyVersionAttributeTest
-	{
+    /// <summary>
+    /// Summary description for AssemblyVersionAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyVersionAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyVersionAttribute attr;
-		
-		public AssemblyVersionAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName ();
+        AssemblyVersionAttribute attr;
+        
+        public AssemblyVersionAttributeTest ()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAsmName.Name = "TestAssembly";
+            dynAsmName.Name = "TestAssembly";
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
+                dynAsmName,AssemblyBuilderAccess.Run
+                );
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyVersionAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "1.2.3.4" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyVersionAttribute;
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof (AssemblyVersionAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor (
+                new Type [] { typeof (string) }
+                );
+            CustomAttributeBuilder attrBuilder =
+                new CustomAttributeBuilder (ctrInfo, new object [1] { "1.2.3.4" });
+            dynAssembly.SetCustomAttribute (attrBuilder);
+            object [] attributes = dynAssembly.GetCustomAttributes (true);
+            attr = attributes [0] as AssemblyVersionAttribute;
+        }
 
-		[Test]
-		public void VersionTest ()
-		{
-			Assert.AreEqual (
-				attr.Version,
-				"1.2.3.4", "#1");
-		}
+        [Test]
+        public void VersionTest ()
+        {
+            Assert.AreEqual (
+                attr.Version,
+                "1.2.3.4", "#1");
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyVersionAttribute), "#1"
-				);
-		}
+        [Test]
+        public void TypeIdTest ()
+        {
+            Assert.AreEqual (
+                attr.TypeId,
+                typeof (AssemblyVersionAttribute), "#1"
+                );
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue ()
+        {
+            Assert.AreEqual (
+                attr.Match (attr),
+                true, "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyVersionAttribute ("2.0.0.0")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForFalse ()
+        {
+            Assert.AreEqual (
+                attr.Match (new AssemblyVersionAttribute ("2.0.0.0")),
+                false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyVersionAttribute ("some text");
-			Assert.AreEqual ("some text", a.Version);
-		}
-	}
+        [Test]
+        public void CtorTest ()
+        {
+            var a = new AssemblyVersionAttribute ("some text");
+            Assert.AreEqual ("some text", a.Version);
+        }
+    }
 }
 

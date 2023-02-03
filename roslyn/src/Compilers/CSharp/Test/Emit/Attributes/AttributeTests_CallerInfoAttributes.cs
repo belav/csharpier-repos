@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3101,7 +3101,7 @@ line: 17
 
   .method public hidebysig static void  LogCallerLineNumber2(int32 lineNumber) cil managed
   {
-	.custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
+    .custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
     // Code size       24 (0x18)
     .maxstack  8
     IL_0000:  nop
@@ -3117,8 +3117,8 @@ line: 17
 
   .method public hidebysig static void  LogCallerLineNumber3([opt] string lineNumber) cil managed
   {
-	.param [1] = ""hello""
-	.custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
+    .param [1] = ""hello""
+    .custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
     // Code size       19 (0x13)
     .maxstack  8
     IL_0000:  nop
@@ -4519,7 +4519,7 @@ class Driver
   {
     .param [1] = int32(0x00000000)
     .custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
-	.custom instance void [mscorlib]System.Runtime.CompilerServices.CallerMemberNameAttribute::.ctor() = ( 01 00 00 00 ) 
+    .custom instance void [mscorlib]System.Runtime.CompilerServices.CallerMemberNameAttribute::.ctor() = ( 01 00 00 00 ) 
     // Code size       29 (0x1d)
     .maxstack  2
     .locals init (int32 V_0)
@@ -4542,7 +4542,7 @@ class Driver
   .method public hidebysig static int32  Log2([opt] string callerName) cil managed
   {
     .param [1] = """"
-	.custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
+    .custom instance void [mscorlib]System.Runtime.CompilerServices.CallerLineNumberAttribute::.ctor() = ( 01 00 00 00 ) 
     .custom instance void [mscorlib]System.Runtime.CompilerServices.CallerMemberNameAttribute::.ctor() = ( 01 00 00 00 ) 
     // Code size       24 (0x18)
     .maxstack  2

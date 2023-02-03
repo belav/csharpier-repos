@@ -20,23 +20,23 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//	Peter Bartok	pbartok@novell.com
+//    Peter Bartok    pbartok@novell.com
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms
 {
-	[Flags]
-	public enum BoundsSpecified
-	{
-		None		= 0x00000000,
-		X		= 0x00000001,
-		Y		= 0x00000002,
-		Location	= 0x00000003,
-		Width		= 0x00000004,
-		Height		= 0x00000008,
-		Size		= 0x0000000c,
-		All		= 0x0000000f
-	}
+    [Flags]
+    public enum BoundsSpecified
+    {
+        None        = 0x00000000,
+        X        = 0x00000001,
+        Y        = 0x00000002,
+        Location    = 0x00000003,
+        Width        = 0x00000004,
+        Height        = 0x00000008,
+        Size        = 0x0000000c,
+        All        = 0x0000000f
+    }
 }

@@ -32,96 +32,96 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleDataReader_GetDataTypeName : ADONetTesterClass
-	{
-		OracleConnection con;
-		OracleCommand cmd;
-		OracleDataReader rdr;
-		string typeName;
+    [TestFixture]
+    public class OracleDataReader_GetDataTypeName : ADONetTesterClass
+    {
+        OracleConnection con;
+        OracleCommand cmd;
+        OracleDataReader rdr;
+        string typeName;
 
-		[SetUp]
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-				con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-				cmd = new OracleCommand("Select EmployeeID From Employees Where FirstName = 'Oved'",  con);
-				cmd.CommandType = CommandType.Text;
-				con.Open();
+        [SetUp]
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try
+            {
+                con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+                cmd = new OracleCommand("Select EmployeeID From Employees Where FirstName = 'Oved'",  con);
+                cmd.CommandType = CommandType.Text;
+                con.Open();
 
-				rdr = cmd.ExecuteReader();
-				rdr.Read();
+                rdr = cmd.ExecuteReader();
+                rdr.Read();
 
-				typeName = rdr.GetDataTypeName(0);
-				con.Close();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{EndCase(exp);}
-		}
+                typeName = rdr.GetDataTypeName(0);
+                con.Close();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {EndCase(exp);}
+        }
 
-		[TearDown]
-		public void TearDown()
-		{
-		}
+        [TearDown]
+        public void TearDown()
+        {
+        }
 
-		public static void Main()
-		{
-			OracleDataReader_GetDataTypeName tc = new OracleDataReader_GetDataTypeName();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleDataReader_GetDataTypeName");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+        public static void Main()
+        {
+            OracleDataReader_GetDataTypeName tc = new OracleDataReader_GetDataTypeName();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleDataReader_GetDataTypeName");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch(Exception ex){exp = ex;}
+            finally    {tc.EndTest(exp);}
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			//make database specific test
-			switch (ConnectedDataProvider.GetDbType(con))
-			{
-				case DataBaseServer.SQLServer:
-					try
-					{
-						BeginCase("check type name");
-						Compare(typeName == "DBTYPE_I4" ,true);
-					} 
-					catch(Exception ex){exp = ex;}
-					finally{EndCase(exp); exp = null;}
-					break;
-				case DataBaseServer.Oracle:
-					try
-					{
-						BeginCase("check type name");
-						Compare(typeName == "DBTYPE_NUMERIC" || typeName == "NUMBER" ,true);
-					} 
-					catch(Exception ex){exp = ex;}
-					finally{EndCase(exp); exp = null;}
-					break;
-				case DataBaseServer.DB2:
-					try
-					{
-						BeginCase("check type name");
-						Compare(typeName == "DBTYPE_I4" || typeName == "INTEGER" ,true);
-					} 
-					catch(Exception ex){exp = ex;}
-					finally{EndCase(exp); exp = null;}
-					break;
-				case DataBaseServer.Unknown:
-					break;
-			}
+            //make database specific test
+            switch (ConnectedDataProvider.GetDbType(con))
+            {
+                case DataBaseServer.SQLServer:
+                    try
+                    {
+                        BeginCase("check type name");
+                        Compare(typeName == "DBTYPE_I4" ,true);
+                    } 
+                    catch(Exception ex){exp = ex;}
+                    finally{EndCase(exp); exp = null;}
+                    break;
+                case DataBaseServer.Oracle:
+                    try
+                    {
+                        BeginCase("check type name");
+                        Compare(typeName == "DBTYPE_NUMERIC" || typeName == "NUMBER" ,true);
+                    } 
+                    catch(Exception ex){exp = ex;}
+                    finally{EndCase(exp); exp = null;}
+                    break;
+                case DataBaseServer.DB2:
+                    try
+                    {
+                        BeginCase("check type name");
+                        Compare(typeName == "DBTYPE_I4" || typeName == "INTEGER" ,true);
+                    } 
+                    catch(Exception ex){exp = ex;}
+                    finally{EndCase(exp); exp = null;}
+                    break;
+                case DataBaseServer.Unknown:
+                    break;
+            }
 
-		}
-	}
+        }
+    }
 
 }

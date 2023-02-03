@@ -2,7 +2,7 @@
 // System.Net.Security.ExchangeAlgorithmType.cs
 //
 // Authors:
-//	Tim Coleman (tim@timcoleman.com)
+//    Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (c) 2004, 2005 Novell, Inc. (http://www.novell.com)
@@ -32,12 +32,12 @@
 
 namespace System.Security.Authentication
 {
-	public enum ExchangeAlgorithmType 
-	{
-		None = 0,
-		DiffieHellman = 0xaa02,
-		RsaKeyX = 0xa400,
-		RsaSign = 0x2400
-	}
+    public enum ExchangeAlgorithmType 
+    {
+        None = 0,
+        DiffieHellman = 0xaa02,
+        RsaKeyX = 0xa400,
+        RsaSign = 0x2400
+    }
 }
 

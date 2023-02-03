@@ -35,69 +35,69 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbConnection_Equals : GHTBase
 {
-	public static void Main()
-	{
-		OleDbConnection_Equals tc = new OleDbConnection_Equals();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OleDbConnection_Equals");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    public static void Main()
+    {
+        OleDbConnection_Equals tc = new OleDbConnection_Equals();
+        Exception exp = null;
+        try
+        {
+            tc.BeginTest("OleDbConnection_Equals");
+            tc.run();
+        }
+        catch(Exception ex){exp = ex;}
+        finally    {tc.EndTest(exp);}
+    }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
-		OleDbConnection con1 ,con2,con3;
+    [Test]
+    public void run()
+    {
+        Exception exp = null;
+        OleDbConnection con1 ,con2,con3;
         
-		con1 = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString );
-		con3 = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString );
+        con1 = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString );
+        con3 = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString );
 
-		con2 = con1;
+        con2 = con1;
         con1.Open ();
 
-		try
-		{
-			BeginCase("Equals 1");
-			Compare(con1.Equals(con2),true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("Equals 1");
+            Compare(con1.Equals(con2),true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("Equals 2");
-			Compare(Equals(con2,con1),true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("Equals 2");
+            Compare(Equals(con2,con1),true);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		try
-		{
-			BeginCase("Equals 3");
-			Compare(con1.Equals(con3),false);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+        try
+        {
+            BeginCase("Equals 3");
+            Compare(con1.Equals(con3),false);
+        } 
+        catch(Exception ex){exp = ex;}
+        finally{EndCase(exp); exp = null;}
 
-		con1.Close();
+        con1.Close();
 
-	}
+    }
 
 
-	//public TestClass():base(true){}
+    //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+    //Activate this constructor to log Failures to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+    //Activate this constructor to log All to a log file
+    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

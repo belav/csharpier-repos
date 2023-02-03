@@ -1,4 +1,4 @@
-﻿namespace System.Web.Instrumentation
+namespace System.Web.Instrumentation
 {
     public abstract class PageExecutionListener {
         /// <summary>

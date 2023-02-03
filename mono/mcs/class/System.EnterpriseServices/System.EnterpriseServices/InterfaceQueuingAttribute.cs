@@ -32,44 +32,44 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple=true)]
-	[ComVisible(false)]
-	public sealed class InterfaceQueuingAttribute : Attribute {
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple=true)]
+    [ComVisible(false)]
+    public sealed class InterfaceQueuingAttribute : Attribute {
 
-		#region Fields
+        #region Fields
 
-		bool enabled;
-		string interfaceName;
+        bool enabled;
+        string interfaceName;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public InterfaceQueuingAttribute () 
-			: this (true)
-		{
-		}
+        public InterfaceQueuingAttribute () 
+            : this (true)
+        {
+        }
 
-		public InterfaceQueuingAttribute (bool enabled)
-		{
-			this.enabled = enabled;
-			interfaceName = null;
-		}
+        public InterfaceQueuingAttribute (bool enabled)
+        {
+            this.enabled = enabled;
+            interfaceName = null;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
+        public bool Enabled {
+            get { return enabled; }
+            set { enabled = value; }
+        }
 
-		public string Interface {
-			get { return interfaceName; }
-			set { interfaceName = value; }
-		}
+        public string Interface {
+            get { return interfaceName; }
+            set { interfaceName = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

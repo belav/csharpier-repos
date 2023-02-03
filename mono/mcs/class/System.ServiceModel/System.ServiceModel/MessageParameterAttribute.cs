@@ -2,7 +2,7 @@
 // MessageParameterAttribute.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,19 +29,19 @@ using System;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Parameter | AttributeTargets.ReturnValue,
-		Inherited = false)]
-	public sealed class MessageParameterAttribute : Attribute
-	{
-		string name;
+    [AttributeUsage (AttributeTargets.Parameter | AttributeTargets.ReturnValue,
+        Inherited = false)]
+    public sealed class MessageParameterAttribute : Attribute
+    {
+        string name;
 
-		public MessageParameterAttribute ()
-		{
-		}
+        public MessageParameterAttribute ()
+        {
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-	}
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 // IFullExpressionDecoder.cs
 // 
 // Authors:
-// 	Alexander Chebaturkin (chebaturkin@gmail.com)
+//     Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,18 +33,18 @@ using Mono.CodeContracts.Static.Analysis.Numerical;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-	interface IFullExpressionDecoder<Variable, Expression> {
-		bool IsVariable (Expression expr, out object variable);
-		Variable UnderlyingVariable (Expression expr);
-		bool IsNull (Expression expr);
-		bool IsConstant (Expression expr, out object value, out TypeNode type);
-		bool IsSizeof (Expression expr, out TypeNode type);
-		bool IsIsinst (Expression expr, out Expression arg, out TypeNode type);
-		bool IsUnaryExpression (Expression expr, out UnaryOperator op, out Expression arg);
-		bool IsBinaryExpression (Expression expr, out BinaryOperator op, out Expression left, out Expression right);
-		void AddFreeVariables (Expression expr, ISet<Expression> set);
-		Sequence<PathElement> GetVariableAccessPath (Expression expr);
-		bool TryGetType (Expression expr, out TypeNode type);
-		bool TrySizeOfAsConstant (Expression expr, out int sizeAsConstant);
-	}
+    interface IFullExpressionDecoder<Variable, Expression> {
+        bool IsVariable (Expression expr, out object variable);
+        Variable UnderlyingVariable (Expression expr);
+        bool IsNull (Expression expr);
+        bool IsConstant (Expression expr, out object value, out TypeNode type);
+        bool IsSizeof (Expression expr, out TypeNode type);
+        bool IsIsinst (Expression expr, out Expression arg, out TypeNode type);
+        bool IsUnaryExpression (Expression expr, out UnaryOperator op, out Expression arg);
+        bool IsBinaryExpression (Expression expr, out BinaryOperator op, out Expression left, out Expression right);
+        void AddFreeVariables (Expression expr, ISet<Expression> set);
+        Sequence<PathElement> GetVariableAccessPath (Expression expr);
+        bool TryGetType (Expression expr, out TypeNode type);
+        bool TrySizeOfAsConstant (Expression expr, out int sizeAsConstant);
+    }
 }

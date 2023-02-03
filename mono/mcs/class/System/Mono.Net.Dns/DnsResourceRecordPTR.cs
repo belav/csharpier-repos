@@ -2,7 +2,7 @@
 // Mono.Net.Dns.DnsResourceRecordPTR
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -23,22 +23,22 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Mono.Net.Dns {
-	class DnsResourceRecordPTR : DnsResourceRecord {
-		string dname;
+    class DnsResourceRecordPTR : DnsResourceRecord {
+        string dname;
 
-		internal DnsResourceRecordPTR (DnsResourceRecord rr)
-		{
-			CopyFrom (rr);
-			int offset = rr.Data.Offset;
-			dname = DnsPacket.ReadName (rr.Data.Array, ref offset);
-		}
+        internal DnsResourceRecordPTR (DnsResourceRecord rr)
+        {
+            CopyFrom (rr);
+            int offset = rr.Data.Offset;
+            dname = DnsPacket.ReadName (rr.Data.Array, ref offset);
+        }
 
-		public string DName {
-			get { return dname; }
-		}
+        public string DName {
+            get { return dname; }
+        }
 
-		public override string ToString() {
-			return base.ToString () + " DNAME: " + dname.ToString ();
-		}
-	}
+        public override string ToString() {
+            return base.ToString () + " DNAME: " + dname.ToString ();
+        }
+    }
 }

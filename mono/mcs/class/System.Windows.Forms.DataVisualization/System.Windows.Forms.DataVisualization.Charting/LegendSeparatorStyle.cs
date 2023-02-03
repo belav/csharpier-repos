@@ -1,4 +1,4 @@
-﻿//
+//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,15 +27,15 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum LegendSeparatorStyle
-	{
-		None = 0,
-		Line = 1,
-		ThickLine = 2,
-		DoubleLine = 3,
-		DashLine = 4,
-		DotLine = 5,
-		GradientLine = 6,
-		ThickGradientLine = 7
-	}
+    public enum LegendSeparatorStyle
+    {
+        None = 0,
+        Line = 1,
+        ThickLine = 2,
+        DoubleLine = 3,
+        DashLine = 4,
+        DotLine = 5,
+        GradientLine = 6,
+        ThickGradientLine = 7
+    }
 }

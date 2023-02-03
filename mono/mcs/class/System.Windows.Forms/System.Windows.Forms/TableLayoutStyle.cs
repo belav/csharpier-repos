@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//	Jonathan Pobst (monkey@jpobst.com)
+//    Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
@@ -32,32 +32,32 @@ using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
 {
-	[TypeConverter (typeof (TableLayoutSettings.StyleConverter))]
-	public abstract class TableLayoutStyle
-	{
-		private SizeType size_type;
-		private IArrangedContainer owner;
-		
-		protected TableLayoutStyle ()
-		{
-			size_type = SizeType.AutoSize;
-		}
-		
-		[DefaultValue (SizeType.AutoSize)]
-		public SizeType SizeType {
-			get { return this.size_type; }
-			set {
-				if (size_type != value) {
-					size_type = value; 
-					if (owner != null)
-						owner.PerformLayout (owner, "Style");
-				}
-			}
-		}
-		
-		internal IArrangedContainer Owner {
-			get { return owner; }
-			set { owner = value; }
-		}
-	}
+    [TypeConverter (typeof (TableLayoutSettings.StyleConverter))]
+    public abstract class TableLayoutStyle
+    {
+        private SizeType size_type;
+        private IArrangedContainer owner;
+        
+        protected TableLayoutStyle ()
+        {
+            size_type = SizeType.AutoSize;
+        }
+        
+        [DefaultValue (SizeType.AutoSize)]
+        public SizeType SizeType {
+            get { return this.size_type; }
+            set {
+                if (size_type != value) {
+                    size_type = value; 
+                    if (owner != null)
+                        owner.PerformLayout (owner, "Style");
+                }
+            }
+        }
+        
+        internal IArrangedContainer Owner {
+            get { return owner; }
+            set { owner = value; }
+        }
+    }
 }

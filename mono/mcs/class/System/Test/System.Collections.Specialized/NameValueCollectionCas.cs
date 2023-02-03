@@ -1,9 +1,9 @@
 //
 // NameValueCollectionCas.cs - CAS unit tests for 
-//	System.Collections.Specialized.NameValueCollection
+//    System.Collections.Specialized.NameValueCollection
 //
 // Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
+//    Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,48 +39,48 @@ using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized {
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class NameValueCollectionCas {
+    [TestFixture]
+    [Category ("CAS")]
+    public class NameValueCollectionCas {
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [SetUp]
+        public void SetUp ()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			NameValueCollectionTest unit = new NameValueCollectionTest ();
-			unit.GetValues ();
-			unit.Get ();
-			unit.GetKey ();
-			unit.HasKeys ();
-			unit.Clear ();
-			unit.Add ();
-			unit.Add_Multiples ();
-			unit.Add_Multiples_Null ();
-			unit.Add_NVC ();
-			unit.Add_NVC_Null2 ();
-			unit.Set_New ();
-			unit.Set_Replace ();
-			unit.CaseInsensitive ();
-			unit.CopyTo ();
-			unit.Remove ();
-			unit.Constructor_IEqualityComparer ();
-			unit.Constructor_Int_IEqualityComparer ();
-		}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted ()
+        {
+            NameValueCollectionTest unit = new NameValueCollectionTest ();
+            unit.GetValues ();
+            unit.Get ();
+            unit.GetKey ();
+            unit.HasKeys ();
+            unit.Clear ();
+            unit.Add ();
+            unit.Add_Multiples ();
+            unit.Add_Multiples_Null ();
+            unit.Add_NVC ();
+            unit.Add_NVC_Null2 ();
+            unit.Set_New ();
+            unit.Set_Replace ();
+            unit.CaseInsensitive ();
+            unit.CopyTo ();
+            unit.Remove ();
+            unit.Constructor_IEqualityComparer ();
+            unit.Constructor_Int_IEqualityComparer ();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (NameValueCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted ()
+        {
+            ConstructorInfo ci = typeof (NameValueCollection).GetConstructor (new Type[0]);
+            Assert.IsNotNull (ci, "default .ctor()");
+            Assert.IsNotNull (ci.Invoke (null), "invoke");
+        }
+    }
 }

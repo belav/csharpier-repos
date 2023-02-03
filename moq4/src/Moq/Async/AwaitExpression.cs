@@ -7,34 +7,34 @@ using System.Linq.Expressions;
 
 namespace Moq.Async
 {
-	internal sealed class AwaitExpression : Expression
-	{
-		private readonly IAwaitableFactory awaitableFactory;
-		private readonly Expression operand;
+    internal sealed class AwaitExpression : Expression
+    {
+        private readonly IAwaitableFactory awaitableFactory;
+        private readonly Expression operand;
 
-		public AwaitExpression(Expression operand, IAwaitableFactory awaitableFactory)
-		{
-			Debug.Assert(awaitableFactory != null);
-			Debug.Assert(operand != null);
+        public AwaitExpression(Expression operand, IAwaitableFactory awaitableFactory)
+        {
+            Debug.Assert(awaitableFactory != null);
+            Debug.Assert(operand != null);
 
-			this.awaitableFactory = awaitableFactory;
-			this.operand = operand;
-		}
+            this.awaitableFactory = awaitableFactory;
+            this.operand = operand;
+        }
 
-		public override bool CanReduce => false;
+        public override bool CanReduce => false;
 
-		public override ExpressionType NodeType => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
-		public Expression Operand => this.operand;
+        public Expression Operand => this.operand;
 
-		public override Type Type => this.awaitableFactory.ResultType;
+        public override Type Type => this.awaitableFactory.ResultType;
 
-		public override string ToString()
-		{
-			return this.awaitableFactory.ResultType == typeof(void) ? $"await {this.operand}"
-			                                                        : $"(await {this.operand})";
-		}
+        public override string ToString()
+        {
+            return this.awaitableFactory.ResultType == typeof(void) ? $"await {this.operand}"
+                                                                    : $"(await {this.operand})";
+        }
 
-		protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
-	}
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
+    }
 }

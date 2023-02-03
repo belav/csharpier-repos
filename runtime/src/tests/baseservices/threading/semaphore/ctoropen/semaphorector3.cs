@@ -69,11 +69,11 @@ class CtorTest
         Semaphore sem1 = null, sem2 = null, sem3 = null, 
             sem4 = null, sem6 = null;
         if (iRandom > 0)
-	{
-	    //TestFramework.GlobalData intl = new TestFramework.GlobalData();
+    {
+        //TestFramework.GlobalData intl = new TestFramework.GlobalData();
             //semName = intl.GetString(iRandom, iRandom).Replace(@"\", "");
             Console.WriteLine("WARNING: No random name generation is ocurring");
-	}
+    }
         string semNewName = semName.Remove(semName.Length - 2, 1);
         try
         {

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsPropertyIsReadOnlyException.cs
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,25 +31,25 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration
 {
-	[Serializable]
-	public class SettingsPropertyIsReadOnlyException : Exception
-	{
-		public SettingsPropertyIsReadOnlyException ()
-			: base ()
-		{ }
+    [Serializable]
+    public class SettingsPropertyIsReadOnlyException : Exception
+    {
+        public SettingsPropertyIsReadOnlyException ()
+            : base ()
+        { }
 
-		public SettingsPropertyIsReadOnlyException (String message)
-			: base (message)
-		{ }
+        public SettingsPropertyIsReadOnlyException (String message)
+            : base (message)
+        { }
 
-		protected SettingsPropertyIsReadOnlyException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{ }
+        protected SettingsPropertyIsReadOnlyException (SerializationInfo info, StreamingContext context)
+            : base (info, context)
+        { }
 
-		public SettingsPropertyIsReadOnlyException (String message, Exception innerException)
-			: base (message, innerException)
-		{ }
-	}
+        public SettingsPropertyIsReadOnlyException (String message, Exception innerException)
+            : base (message, innerException)
+        { }
+    }
 
 }
 

@@ -2,7 +2,7 @@
 // System.Web.Compilation.ExpressionBuilderContext
 //
 // Authors:
-//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (c) 2005-2009 Novell, Inc (http://www.novell.com)
 //
@@ -33,29 +33,29 @@ using System.Web.UI;
 
 namespace System.Web.Compilation
 {
-	public sealed class ExpressionBuilderContext {
-		TemplateControl tcontrol;
-		string vpath;
+    public sealed class ExpressionBuilderContext {
+        TemplateControl tcontrol;
+        string vpath;
 
-		public ExpressionBuilderContext (string virtualPath)
-		{
-			this.vpath = virtualPath;
-		}
+        public ExpressionBuilderContext (string virtualPath)
+        {
+            this.vpath = virtualPath;
+        }
 
-		public ExpressionBuilderContext (TemplateControl templateControl)
-		{
-			this.tcontrol = templateControl;
-		}
+        public ExpressionBuilderContext (TemplateControl templateControl)
+        {
+            this.tcontrol = templateControl;
+        }
 
-		public TemplateControl TemplateControl {
-			get { return tcontrol; }
-		}
+        public TemplateControl TemplateControl {
+            get { return tcontrol; }
+        }
 
-		public string VirtualPath {
-			get { return vpath; }
-		}
-	}
-	
+        public string VirtualPath {
+            get { return vpath; }
+        }
+    }
+    
 }
 
 

@@ -32,11 +32,11 @@ using System.Collections;
 
 namespace System.ComponentModel.Design
 {
-	public class DesignerActionTextItem : DesignerActionItem
-	{
-		public DesignerActionTextItem (string displayName, string category)
-			: base (displayName, category, String.Empty)
-		{
-		}
-	}
+    public class DesignerActionTextItem : DesignerActionItem
+    {
+        public DesignerActionTextItem (string displayName, string category)
+            : base (displayName, category, String.Empty)
+        {
+        }
+    }
 }

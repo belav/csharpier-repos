@@ -25,10 +25,10 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public interface IXamlLineInfo
-	{
-		bool HasLineInfo { get; }
-		int LineNumber { get; }
-		int LinePosition { get; }
-	}
+    public interface IXamlLineInfo
+    {
+        bool HasLineInfo { get; }
+        int LineNumber { get; }
+        int LinePosition { get; }
+    }
 }

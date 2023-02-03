@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1811,10 +1811,10 @@ unsafe public class Test
     public delegate int D(int* p);
     public static void Main()
     {
-		int i = 10;
-		int* p = &i;
-		D d = /*<bind>*/delegate { return *p;}/*</bind>*/;
-	}
+        int i = 10;
+        int* p = &i;
+        D d = /*<bind>*/delegate { return *p;}/*</bind>*/;
+    }
 }
 ");
             Assert.Null(GetSymbolNamesJoined(analysis.AlwaysAssigned));
@@ -3522,7 +3522,7 @@ class C {
         int green, blue, red, yellow, brown;
         @green = 1;
         blu\u0065 = 2;
-        re܏d = 3;
+        re?d = 3;
         yellow\uFFF9 = 4;
         @brown\uFFF9 = 5;
 /*</bind>*/

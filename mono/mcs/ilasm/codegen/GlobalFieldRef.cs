@@ -19,14 +19,14 @@ namespace Mono.ILASM {
                 private string name;
 
                 private PEAPI.Field peapi_field;
-		private bool is_resolved;
+        private bool is_resolved;
 
                 public GlobalFieldRef (BaseTypeRef ret_type, string name)
                 {
                         this.ret_type = ret_type;
                         this.name = name;
 
-			is_resolved = false;
+            is_resolved = false;
                 }
 
                 public PEAPI.Field PeapiField {
@@ -35,12 +35,12 @@ namespace Mono.ILASM {
 
                 public void Resolve (CodeGen code_gen)
                 {
-			if (is_resolved)
-				return;
+            if (is_resolved)
+                return;
 
                         peapi_field = code_gen.ResolveField (name, ret_type.FullName);
 
-			is_resolved = true;
+            is_resolved = true;
                 }
         }
 }

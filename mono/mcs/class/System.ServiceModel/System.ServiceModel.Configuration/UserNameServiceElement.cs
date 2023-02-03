@@ -2,7 +2,7 @@
 // UserNameServiceElement.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,86 +54,86 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class UserNameServiceElement
-		 : ConfigurationElement
-	{
-		public UserNameServiceElement ()
-		{
-		}
+    public sealed class UserNameServiceElement
+         : ConfigurationElement
+    {
+        public UserNameServiceElement ()
+        {
+        }
 
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("cachedLogonTokenLifetime",
-			 DefaultValue = "00:15:00",
-			 Options = ConfigurationPropertyOptions.None)]
-		public TimeSpan CachedLogonTokenLifetime {
-			get { return (TimeSpan) base ["cachedLogonTokenLifetime"]; }
-			set { base ["cachedLogonTokenLifetime"] = value; }
-		}
+        [ConfigurationProperty ("cachedLogonTokenLifetime",
+             DefaultValue = "00:15:00",
+             Options = ConfigurationPropertyOptions.None)]
+        public TimeSpan CachedLogonTokenLifetime {
+            get { return (TimeSpan) base ["cachedLogonTokenLifetime"]; }
+            set { base ["cachedLogonTokenLifetime"] = value; }
+        }
 
-		[ConfigurationProperty ("cacheLogonTokens",
-			DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool CacheLogonTokens {
-			get { return (bool) base ["cacheLogonTokens"]; }
-			set { base ["cacheLogonTokens"] = value; }
-		}
+        [ConfigurationProperty ("cacheLogonTokens",
+            DefaultValue = false,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool CacheLogonTokens {
+            get { return (bool) base ["cacheLogonTokens"]; }
+            set { base ["cacheLogonTokens"] = value; }
+        }
 
-		[ConfigurationProperty ("customUserNamePasswordValidatorType",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string CustomUserNamePasswordValidatorType {
-			get { return (string) base ["customUserNamePasswordValidatorType"]; }
-			set { base ["customUserNamePasswordValidatorType"] = value; }
-		}
+        [ConfigurationProperty ("customUserNamePasswordValidatorType",
+             DefaultValue = "",
+             Options = ConfigurationPropertyOptions.None)]
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        public string CustomUserNamePasswordValidatorType {
+            get { return (string) base ["customUserNamePasswordValidatorType"]; }
+            set { base ["customUserNamePasswordValidatorType"] = value; }
+        }
 
-		[ConfigurationProperty ("includeWindowsGroups",
-			DefaultValue = true,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool IncludeWindowsGroups {
-			get { return (bool) base ["includeWindowsGroups"]; }
-			set { base ["includeWindowsGroups"] = value; }
-		}
+        [ConfigurationProperty ("includeWindowsGroups",
+            DefaultValue = true,
+             Options = ConfigurationPropertyOptions.None)]
+        public bool IncludeWindowsGroups {
+            get { return (bool) base ["includeWindowsGroups"]; }
+            set { base ["includeWindowsGroups"] = value; }
+        }
 
-		[ConfigurationProperty ("maxCachedLogonTokens",
-			 DefaultValue = "128",
-			 Options = ConfigurationPropertyOptions.None)]
-		[IntegerValidator ( MinValue = 1,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		public int MaxCachedLogonTokens {
-			get { return (int) base ["maxCachedLogonTokens"]; }
-			set { base ["maxCachedLogonTokens"] = value; }
-		}
+        [ConfigurationProperty ("maxCachedLogonTokens",
+             DefaultValue = "128",
+             Options = ConfigurationPropertyOptions.None)]
+        [IntegerValidator ( MinValue = 1,
+            MaxValue = int.MaxValue,
+            ExcludeRange = false)]
+        public int MaxCachedLogonTokens {
+            get { return (int) base ["maxCachedLogonTokens"]; }
+            set { base ["maxCachedLogonTokens"] = value; }
+        }
 
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("membershipProviderName",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		public string MembershipProviderName {
-			get { return (string) base ["membershipProviderName"]; }
-			set { base ["membershipProviderName"] = value; }
-		}
+        [StringValidator ( MinLength = 0,
+            MaxLength = int.MaxValue,
+             InvalidCharacters = null)]
+        [ConfigurationProperty ("membershipProviderName",
+             DefaultValue = "",
+             Options = ConfigurationPropertyOptions.None)]
+        public string MembershipProviderName {
+            get { return (string) base ["membershipProviderName"]; }
+            set { base ["membershipProviderName"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("userNamePasswordValidationMode",
-			 DefaultValue = "Windows",
-			 Options = ConfigurationPropertyOptions.None)]
-		public UserNamePasswordValidationMode UserNamePasswordValidationMode {
-			get { return (UserNamePasswordValidationMode) base ["userNamePasswordValidationMode"]; }
-			set { base ["userNamePasswordValidationMode"] = value; }
-		}
+        [ConfigurationProperty ("userNamePasswordValidationMode",
+             DefaultValue = "Windows",
+             Options = ConfigurationPropertyOptions.None)]
+        public UserNamePasswordValidationMode UserNamePasswordValidationMode {
+            get { return (UserNamePasswordValidationMode) base ["userNamePasswordValidationMode"]; }
+            set { base ["userNamePasswordValidationMode"] = value; }
+        }
 
 
-	}
+    }
 
 }

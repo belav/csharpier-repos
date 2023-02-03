@@ -2,7 +2,7 @@
 // System.ServiceProcess.Design.ServiceInstallerDialog.cs
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,36 +33,36 @@ using System.Windows.Forms;
 
 namespace System.ServiceProcess.Design
 {
-	[MonoTODO]
-	public class ServiceInstallerDialog : Form
-	{
-		string username, password;
-		const ServiceInstallerDialogResult result = 0;
+    [MonoTODO]
+    public class ServiceInstallerDialog : Form
+    {
+        string username, password;
+        const ServiceInstallerDialogResult result = 0;
 
-		public ServiceInstallerDialog ()
-		{
-		}
+        public ServiceInstallerDialog ()
+        {
+        }
 
-		[STAThread]
-		[MonoTODO]
-		public static void Main ()
-		{
-			Application.Run (new ServiceInstallerDialog ());
-		}
+        [STAThread]
+        [MonoTODO]
+        public static void Main ()
+        {
+            Application.Run (new ServiceInstallerDialog ());
+        }
 
-		public string Username {
-			get { return username; }
-			set { username = value; }
-		}
+        public string Username {
+            get { return username; }
+            set { username = value; }
+        }
 
-		public string Password {
-			get { return password; }
-			set { password = value; }
-		}
+        public string Password {
+            get { return password; }
+            set { password = value; }
+        }
 
-		[MonoTODO]
-		public ServiceInstallerDialogResult Result {
-			get { return result; }
-		}
-	}
+        [MonoTODO]
+        public ServiceInstallerDialogResult Result {
+            get { return result; }
+        }
+    }
 }

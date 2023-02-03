@@ -2,7 +2,7 @@
 // Commons.Xml.Relaxng.Derivative.RdpNameClasses.cs
 //
 // Author:
-//	Atsushi Enomoto <ginga@kit.hi-ho.ne.jp>
+//    Atsushi Enomoto <ginga@kit.hi-ho.ne.jp>
 //
 // 2003 Atsushi Enomoto "No rights reserved."
 //
@@ -36,202 +36,202 @@ using System.Xml;
 
 namespace Commons.Xml.Relaxng.Derivative
 {
-	public enum RdpNameClassType
-	{
-		None = 0,
-		AnyName = 1,
-		AnyNameExcept = 2,
-		NsName = 3,
-		NsNameExcept = 4,
-		Name = 5,
-		NameClassChoice = 6
-	}
+    public enum RdpNameClassType
+    {
+        None = 0,
+        AnyName = 1,
+        AnyNameExcept = 2,
+        NsName = 3,
+        NsNameExcept = 4,
+        Name = 5,
+        NameClassChoice = 6
+    }
 
-	public abstract class RdpNameClass
-	{
-		public abstract bool HasInfiniteName { get; }
-		public abstract RdpNameClassType NameClassType { get; }
-		public abstract bool Contains (string name, string ns);
-	}
+    public abstract class RdpNameClass
+    {
+        public abstract bool HasInfiniteName { get; }
+        public abstract RdpNameClassType NameClassType { get; }
+        public abstract bool Contains (string name, string ns);
+    }
 
-	public class RdpAnyName : RdpNameClass
-	{
-		static RdpAnyName instance;
-		static RdpAnyName ()
-		{
-			instance = new RdpAnyName ();
-		}
+    public class RdpAnyName : RdpNameClass
+    {
+        static RdpAnyName instance;
+        static RdpAnyName ()
+        {
+            instance = new RdpAnyName ();
+        }
 
-		public static RdpAnyName Instance {
-			get { return instance; }
-		}
+        public static RdpAnyName Instance {
+            get { return instance; }
+        }
 
-		private RdpAnyName () {}
+        private RdpAnyName () {}
 
-		public override bool HasInfiniteName {
-			get { return true; }
-		}
+        public override bool HasInfiniteName {
+            get { return true; }
+        }
 
-		public override RdpNameClassType NameClassType {
-			get { return RdpNameClassType.AnyName; }
-		}
+        public override RdpNameClassType NameClassType {
+            get { return RdpNameClassType.AnyName; }
+        }
 
-		public override bool Contains (string name, string ns)
-		{
-			return true;
-		}
-	}
+        public override bool Contains (string name, string ns)
+        {
+            return true;
+        }
+    }
 
-	public class RdpAnyNameExcept : RdpNameClass
-	{
-		RdpNameClass except;
+    public class RdpAnyNameExcept : RdpNameClass
+    {
+        RdpNameClass except;
 
-		public RdpAnyNameExcept (RdpNameClass except)
-		{
-			this.except = except;
-		}
+        public RdpAnyNameExcept (RdpNameClass except)
+        {
+            this.except = except;
+        }
 
-		public override bool HasInfiniteName {
-			get { return true; }
-		}
+        public override bool HasInfiniteName {
+            get { return true; }
+        }
 
-		public override RdpNameClassType NameClassType {
-			get { return RdpNameClassType.AnyNameExcept; }
-		}
+        public override RdpNameClassType NameClassType {
+            get { return RdpNameClassType.AnyNameExcept; }
+        }
 
-		public RdpNameClass ExceptNameClass {
-			get { return except; }
-		}
+        public RdpNameClass ExceptNameClass {
+            get { return except; }
+        }
 
-		public override bool Contains (string name, string ns)
-		{
-			return (except == null) || !except.Contains (name, ns);
-		}
-	}
+        public override bool Contains (string name, string ns)
+        {
+            return (except == null) || !except.Contains (name, ns);
+        }
+    }
 
-	public class RdpNsName : RdpNameClass
-	{
-		string ns;
+    public class RdpNsName : RdpNameClass
+    {
+        string ns;
 
-		public RdpNsName (string ns)
-		{
-			this.ns = ns;
-		}
+        public RdpNsName (string ns)
+        {
+            this.ns = ns;
+        }
 
-		public override bool HasInfiniteName {
-			get { return true; }
-		}
+        public override bool HasInfiniteName {
+            get { return true; }
+        }
 
-		public override RdpNameClassType NameClassType {
-			get { return RdpNameClassType.NsName; }
-		}
+        public override RdpNameClassType NameClassType {
+            get { return RdpNameClassType.NsName; }
+        }
 
-		public string NamespaceURI {
-			get { return ns; }
-		}
+        public string NamespaceURI {
+            get { return ns; }
+        }
 
-		public override bool Contains (string name, string ns)
-		{
-			return NamespaceURI == ns;
-		}
-	}
+        public override bool Contains (string name, string ns)
+        {
+            return NamespaceURI == ns;
+        }
+    }
 
-	public class RdpNsNameExcept : RdpNsName
-	{
-		string ns;
-		RdpNameClass except;
+    public class RdpNsNameExcept : RdpNsName
+    {
+        string ns;
+        RdpNameClass except;
 
-		public RdpNsNameExcept (string ns, RdpNameClass except)
-			: base (ns)
-		{
-			this.ns = ns;
-			this.except = except;
-		}
+        public RdpNsNameExcept (string ns, RdpNameClass except)
+            : base (ns)
+        {
+            this.ns = ns;
+            this.except = except;
+        }
 
-		public override bool HasInfiniteName {
-			get { return true; }
-		}
+        public override bool HasInfiniteName {
+            get { return true; }
+        }
 
-		public override RdpNameClassType NameClassType {
-			get { return RdpNameClassType.NsNameExcept; }
-		}
+        public override RdpNameClassType NameClassType {
+            get { return RdpNameClassType.NsNameExcept; }
+        }
 
-		public RdpNameClass ExceptNameClass {
-			get { return except; }
-		}
+        public RdpNameClass ExceptNameClass {
+            get { return except; }
+        }
 
-		public override bool Contains (string name, string ns)
-		{
-			return this.ns == ns &&
-				(except == null || !except.Contains (name, ns));
-		}
-	}
+        public override bool Contains (string name, string ns)
+        {
+            return this.ns == ns &&
+                (except == null || !except.Contains (name, ns));
+        }
+    }
 
-	public class RdpName : RdpNameClass
-	{
-		string local;
-		string ns;
+    public class RdpName : RdpNameClass
+    {
+        string local;
+        string ns;
 
-		public RdpName (string local, string ns)
-		{
-			this.ns = ns;
-			this.local = local;
-		}
+        public RdpName (string local, string ns)
+        {
+            this.ns = ns;
+            this.local = local;
+        }
 
-		public override bool HasInfiniteName {
-			get { return false; }
-		}
+        public override bool HasInfiniteName {
+            get { return false; }
+        }
 
-		public override RdpNameClassType NameClassType {
-			get { return RdpNameClassType.Name; }
-		}
+        public override RdpNameClassType NameClassType {
+            get { return RdpNameClassType.Name; }
+        }
 
-		public string NamespaceURI {
-			get { return ns; }
-		}
+        public string NamespaceURI {
+            get { return ns; }
+        }
 
-		public string LocalName {
-			get { return local; }
-		}
+        public string LocalName {
+            get { return local; }
+        }
 
-		public override bool Contains (string name, string ns)
-		{
-			return this.ns == ns && this.local == name;
-		}
-	}
+        public override bool Contains (string name, string ns)
+        {
+            return this.ns == ns && this.local == name;
+        }
+    }
 
-	public class RdpNameClassChoice : RdpNameClass
-	{
-		RdpNameClass l;
-		RdpNameClass r;
+    public class RdpNameClassChoice : RdpNameClass
+    {
+        RdpNameClass l;
+        RdpNameClass r;
 
-		public RdpNameClassChoice (RdpNameClass l, RdpNameClass r)
-		{
-			this.l = l;
-			this.r = r;
-		}
+        public RdpNameClassChoice (RdpNameClass l, RdpNameClass r)
+        {
+            this.l = l;
+            this.r = r;
+        }
 
-		public override bool HasInfiniteName {
-			get { return l.HasInfiniteName || r.HasInfiniteName; }
-		}
+        public override bool HasInfiniteName {
+            get { return l.HasInfiniteName || r.HasInfiniteName; }
+        }
 
-		public override RdpNameClassType NameClassType {
-			get { return RdpNameClassType.NameClassChoice; }
-		}
+        public override RdpNameClassType NameClassType {
+            get { return RdpNameClassType.NameClassChoice; }
+        }
 
-		public RdpNameClass LValue {
-			get { return l; }
-		}
+        public RdpNameClass LValue {
+            get { return l; }
+        }
 
-		public RdpNameClass RValue {
-			get { return r; }
-		}
+        public RdpNameClass RValue {
+            get { return r; }
+        }
 
-		public override bool Contains (string name, string ns)
-		{
-			return l.Contains (name, ns) || r.Contains (name, ns);
-		}
-	}
+        public override bool Contains (string name, string ns)
+        {
+            return l.Contains (name, ns) || r.Contains (name, ns);
+        }
+    }
 
 }
 

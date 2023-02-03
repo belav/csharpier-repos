@@ -5,9 +5,9 @@
 public unsafe struct S
 {
     fixed char test_1 [128];
-	
+    
     public void Test ()
     {
-	test_1 [55] = 'g';
+    test_1 [55] = 'g';
     }
 }

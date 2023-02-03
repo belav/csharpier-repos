@@ -20,16 +20,16 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Chris Toshok (toshok@ximian.com)
+//    Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.Security.RightsManagement {
 
-	public enum AuthenticationType {
-		Windows,
-		Passport,
-		WindowsPassport,
-		Internal
-	}
+    public enum AuthenticationType {
+        Windows,
+        Passport,
+        WindowsPassport,
+        Internal
+    }
 
 }

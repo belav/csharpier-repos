@@ -1,9 +1,9 @@
 //
 // SiteMapSectionTest.cs 
-//	- unit tests for System.Web.Configuration.SiteMapSection
+//    - unit tests for System.Web.Configuration.SiteMapSection
 //
 // Author:
-//	Chris Toshok  <toshok@ximian.com>
+//    Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -38,16 +38,16 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-	[TestFixture]
-	public class SiteMapSectionTest  {
+    [TestFixture]
+    public class SiteMapSectionTest  {
 
-		[Test]
-		public void Defaults ()
-		{
-			SiteMapSection s = new SiteMapSection ();
-			Assert.IsTrue (s.Enabled, "A1");
-			Assert.AreEqual ("AspNetXmlSiteMapProvider", s.DefaultProvider, "A2");
-		}
-	}
+        [Test]
+        public void Defaults ()
+        {
+            SiteMapSection s = new SiteMapSection ();
+            Assert.IsTrue (s.Enabled, "A1");
+            Assert.AreEqual ("AspNetXmlSiteMapProvider", s.DefaultProvider, "A2");
+        }
+    }
 }
 

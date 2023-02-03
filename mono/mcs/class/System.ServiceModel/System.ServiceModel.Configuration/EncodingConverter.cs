@@ -1,8 +1,8 @@
-﻿//
+//
 // EncodingConverter.cs
 //
 // Author:
-//	Igor Zelmanovich <igorz@mainsoft.com>
+//    Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -34,52 +34,52 @@ using System.Globalization;
 
 namespace System.ServiceModel.Configuration
 {
-	sealed class EncodingConverter : TypeConverter
-	{
-		static EncodingConverter _instance = new EncodingConverter ();
+    sealed class EncodingConverter : TypeConverter
+    {
+        static EncodingConverter _instance = new EncodingConverter ();
 
-		public static EncodingConverter Instance {
-			get { return _instance; }
-		}
+        public static EncodingConverter Instance {
+            get { return _instance; }
+        }
 
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-			return sourceType == typeof (string);
-		}
+        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
+            return sourceType == typeof (string);
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value) {
-			string encString = (string) value;
-			Encoding encoding;
+        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value) {
+            string encString = (string) value;
+            Encoding encoding;
 
-			switch (encString.ToLower (CultureInfo.InvariantCulture)) {
-			case "utf-16le":
-			case "utf-16":
-			case "ucs-2":
-			case "unicode":
-			case "iso-10646-ucs-2":
-				encoding = new UnicodeEncoding (false, true);
-				break;
-			case "utf-16be":
-			case "unicodefffe":
-				encoding = new UnicodeEncoding (true, true);
-				break;
-			case "utf-8":
-			case "unicode-1-1-utf-8":
-			case "unicode-2-0-utf-8":
-			case "x-unicode-1-1-utf-8":
-			case "x-unicode-2-0-utf-8":
-				encoding = Encoding.UTF8;
-				break;
-			default:
-				encoding = Encoding.GetEncoding (encString);
-				break;
-			}
+            switch (encString.ToLower (CultureInfo.InvariantCulture)) {
+            case "utf-16le":
+            case "utf-16":
+            case "ucs-2":
+            case "unicode":
+            case "iso-10646-ucs-2":
+                encoding = new UnicodeEncoding (false, true);
+                break;
+            case "utf-16be":
+            case "unicodefffe":
+                encoding = new UnicodeEncoding (true, true);
+                break;
+            case "utf-8":
+            case "unicode-1-1-utf-8":
+            case "unicode-2-0-utf-8":
+            case "x-unicode-1-1-utf-8":
+            case "x-unicode-2-0-utf-8":
+                encoding = Encoding.UTF8;
+                break;
+            default:
+                encoding = Encoding.GetEncoding (encString);
+                break;
+            }
 
-			return encoding;
-		}
+            return encoding;
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-			Encoding encoding = (Encoding) value;
-			return encoding.WebName;
-		}
-	}
+        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
+            Encoding encoding = (Encoding) value;
+            return encoding.WebName;
+        }
+    }
 }

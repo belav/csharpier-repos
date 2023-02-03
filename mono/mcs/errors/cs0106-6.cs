@@ -3,8 +3,8 @@
 
 struct S
 {
-	public sealed override int GetHashCode ()
-	{
-		return 1;
-	}
+    public sealed override int GetHashCode ()
+    {
+        return 1;
+    }
 }

@@ -30,21 +30,21 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-	public class PanelDesigner : ReadWriteControlDesigner
-	{
-		public PanelDesigner ()
-			: base ()
-		{
-		}
+    public class PanelDesigner : ReadWriteControlDesigner
+    {
+        public PanelDesigner ()
+            : base ()
+        {
+        }
 
-		protected override void MapPropertyToStyle (string propName, object varPropValue)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override void MapPropertyToStyle (string propName, object varPropValue)
+        {
+            throw new NotImplementedException ();
+        }
 
-		protected override void OnBehaviorAttached ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void OnBehaviorAttached ()
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

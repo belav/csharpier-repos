@@ -2,7 +2,7 @@
 // WindowsUserNameSecurityTokenAuthenticator.cs
 //
 // Author:
-//	Atsushi Enomoto <atsushi@ximian.com>
+//    Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,26 +32,26 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Selectors
 {
-	public class WindowsUserNameSecurityTokenAuthenticator
-		: UserNameSecurityTokenAuthenticator
-	{
-		bool include_win_groups;
+    public class WindowsUserNameSecurityTokenAuthenticator
+        : UserNameSecurityTokenAuthenticator
+    {
+        bool include_win_groups;
 
-		public WindowsUserNameSecurityTokenAuthenticator ()
-			: this (true)
-		{
-		}
+        public WindowsUserNameSecurityTokenAuthenticator ()
+            : this (true)
+        {
+        }
 
-		public WindowsUserNameSecurityTokenAuthenticator (bool includeWindowsGroups)
-		{
-			this.include_win_groups = includeWindowsGroups;
-		}
+        public WindowsUserNameSecurityTokenAuthenticator (bool includeWindowsGroups)
+        {
+            this.include_win_groups = includeWindowsGroups;
+        }
 
-		[MonoTODO]
-		protected override ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateUserNamePasswordCore (string userName, string password)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override ReadOnlyCollection<IAuthorizationPolicy>
+            ValidateUserNamePasswordCore (string userName, string password)
+        {
+            throw new NotImplementedException ();
+        }
+    }
 }

@@ -200,7 +200,7 @@ namespace System.Web.Configuration {
         /////////////////////////////////////////////////////////////////////////////////
         public override object GetStreamVersion(string streamName) {
 #if FEATURE_PAL // FEATURE_PAL: singelton version
-	return s_version;
+    return s_version;
 #else 
             // for now, assume it is the same
             // return s_version;

@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ClientScriptItem
 //
 // Author:
-//	Atsushi Enomoto (atsushi@ximian.com)
+//    Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,38 +33,38 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-	public sealed class ClientScriptItem
-	{
-		string text, source, language, type, id;
+    public sealed class ClientScriptItem
+    {
+        string text, source, language, type, id;
 
-		public ClientScriptItem (string text, string source, string language, string type, string id)
-		{
-			this.text = text;
-			this.source = source;
-			this.language = language;
-			this.type = type;
-			this.id = id;
-		}
+        public ClientScriptItem (string text, string source, string language, string type, string id)
+        {
+            this.text = text;
+            this.source = source;
+            this.language = language;
+            this.type = type;
+            this.id = id;
+        }
 
-		public string Id {
-			get { return id; }
-		}
+        public string Id {
+            get { return id; }
+        }
 
-		public string Language {
-			get { return language; }
-		}
+        public string Language {
+            get { return language; }
+        }
 
-		public string Source {
-			get { return source; }
-		}
+        public string Source {
+            get { return source; }
+        }
 
-		public string Text {
-			get { return text; }
-		}
+        public string Text {
+            get { return text; }
+        }
 
-		public string Type{
-			get { return type; }
-		}
-	}
+        public string Type{
+            get { return type; }
+        }
+    }
 }
 

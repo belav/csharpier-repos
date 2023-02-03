@@ -20,32 +20,32 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//	Pedro Martínez Juliá <pedromj@gmail.com>
+//    Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 
 namespace System.Windows.Forms {
 
-	public class DataGridViewCellMouseEventArgs : MouseEventArgs {
+    public class DataGridViewCellMouseEventArgs : MouseEventArgs {
 
-		private int columnIndex;
-		private int rowIndex;
+        private int columnIndex;
+        private int rowIndex;
 
-		public DataGridViewCellMouseEventArgs (int columnIndex, int rowIndex, int localX, int localY, MouseEventArgs e) : base (e.Button, e.Clicks, localX, localY, e.Delta) {
-			this.columnIndex = columnIndex;
-			this.rowIndex = rowIndex;
-		}
+        public DataGridViewCellMouseEventArgs (int columnIndex, int rowIndex, int localX, int localY, MouseEventArgs e) : base (e.Button, e.Clicks, localX, localY, e.Delta) {
+            this.columnIndex = columnIndex;
+            this.rowIndex = rowIndex;
+        }
 
-		public int ColumnIndex {
-			get { return columnIndex; }
-		}
+        public int ColumnIndex {
+            get { return columnIndex; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public int RowIndex {
+            get { return rowIndex; }
+        }
 
-	}
+    }
 
 }
 

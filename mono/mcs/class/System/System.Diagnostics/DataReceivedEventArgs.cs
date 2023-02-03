@@ -2,7 +2,7 @@
 // DataReceivedEventArgs.cs
 //
 // Author:
-//	Atsushi Enomoto  <atsushi@ximian.com>
+//    Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -28,18 +28,18 @@
 
 namespace System.Diagnostics
 {
-	public class DataReceivedEventArgs : EventArgs
-	{
-		string data;
+    public class DataReceivedEventArgs : EventArgs
+    {
+        string data;
 
-		internal DataReceivedEventArgs (string data)
-		{
-			this.data = data;
-		}
+        internal DataReceivedEventArgs (string data)
+        {
+            this.data = data;
+        }
 
-		public string Data {
-			get { return data; }
-		}
-	}
+        public string Data {
+            get { return data; }
+        }
+    }
 }
 

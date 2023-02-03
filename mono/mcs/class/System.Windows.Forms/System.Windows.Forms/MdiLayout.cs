@@ -20,17 +20,17 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//	Peter Bartok	(pbartok@novell.com)
+//    Peter Bartok    (pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-	public enum MdiLayout {
-		Cascade		= 0,
-		TileHorizontal	= 1,
-		TileVertical	= 2,
-		ArrangeIcons	= 3
-	}
+    public enum MdiLayout {
+        Cascade        = 0,
+        TileHorizontal    = 1,
+        TileVertical    = 2,
+        ArrangeIcons    = 3
+    }
 }
