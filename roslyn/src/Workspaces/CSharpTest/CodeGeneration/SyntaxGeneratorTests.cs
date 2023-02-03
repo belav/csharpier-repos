@@ -2372,53 +2372,7 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
             );
 
             #region ExpressionBodyTests
-            VerifySyntax<MethodDeclarationSyntax>(
-                Generator.AsPublicInterfaceImplementation(
-                    SyntaxFactory
-                        .MethodDeclaration(
-                            SyntaxFactory.PredefinedType(
-                                SyntaxFactory.Token(
-                                    SyntaxFactory.TriviaList(),
-                                    SyntaxKind.ObjectKeyword,
-                                    SyntaxFactory.TriviaList(SyntaxFactory.Space)
-                                )
-                            ),
-                            SyntaxFactory.Identifier("DoSomething")
-                        )
-                        .WithExplicitInterfaceSpecifier(
-                            SyntaxFactory.ExplicitInterfaceSpecifier(
-                                SyntaxFactory.IdentifierName("IGeneral")
-                            )
-                        )
-                        .WithParameterList(
-                            SyntaxFactory
-                                .ParameterList()
-                                .WithCloseParenToken(
-                                    SyntaxFactory.Token(
-                                        SyntaxFactory.TriviaList(),
-                                        SyntaxKind.CloseParenToken,
-                                        SyntaxFactory.TriviaList(SyntaxFactory.Space)
-                                    )
-                                )
-                        )
-                        .WithExpressionBody(
-                            SyntaxFactory
-                                .ArrowExpressionClause(
-                                    SyntaxFactory.ImplicitObjectCreationExpression()
-                                )
-                                .WithArrowToken(
-                                    SyntaxFactory.Token(
-                                        SyntaxFactory.TriviaList(),
-                                        SyntaxKind.EqualsGreaterThanToken,
-                                        SyntaxFactory.TriviaList(SyntaxFactory.Space)
-                                    )
-                                )
-                        )
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                    Generator.IdentifierName("i")
-                ),
-                "public object DoSomething() => new();"
-            );
+            VerifySyntax<MethodDeclarationSyntax>(Generator.AsPublicInterfaceImplementation(SyntaxFactory.MethodDeclaration(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.ObjectKeyword, SyntaxFactory.TriviaList(SyntaxFactory.Space))), SyntaxFactory.Identifier("DoSomething")).WithExplicitInterfaceSpecifier(SyntaxFactory.ExplicitInterfaceSpecifier(SyntaxFactory.IdentifierName("IGeneral"))).WithParameterList(SyntaxFactory.ParameterList().WithCloseParenToken(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.CloseParenToken, SyntaxFactory.TriviaList(SyntaxFactory.Space)))).WithExpressionBody(SyntaxFactory.ArrowExpressionClause(SyntaxFactory.ImplicitObjectCreationExpression()).WithArrowToken(SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.EqualsGreaterThanToken, SyntaxFactory.TriviaList(SyntaxFactory.Space)))).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)), Generator.IdentifierName("i")), "public object DoSomething() => new();");
 
             VerifySyntax<OperatorDeclarationSyntax>(
                 Generator.AsPublicInterfaceImplementation(

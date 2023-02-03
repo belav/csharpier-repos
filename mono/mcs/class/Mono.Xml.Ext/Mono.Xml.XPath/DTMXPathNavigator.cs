@@ -651,7 +651,7 @@ namespace Mono.Xml.XPath
             currentIsAttr = false;
         }
 
-    #endregion
+        #endregion
 
         /*
         public string DebugDump {

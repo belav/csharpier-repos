@@ -270,5 +270,5 @@ namespace Castle.Components.DictionaryAdapter
         }
     }
 
-    #endregion
+        #endregion
 }

@@ -1222,7 +1222,7 @@ namespace System.Drawing.Printing
             public IntPtr options;
         }
 
-    #endregion
+        #endregion
 #pragma warning restore 649
     }
 

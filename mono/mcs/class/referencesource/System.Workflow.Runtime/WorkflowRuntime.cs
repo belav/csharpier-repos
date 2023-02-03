@@ -134,8 +134,7 @@ namespace System.Workflow.Runtime
         private static Dictionary<Guid, WeakReference> _runtimes =
             new Dictionary<Guid, WeakReference>();
         private static object _runtimesLock = new object(); // protects the collection of runtime objects
-
-            #endregion
+        #endregion
 
         #region Constructors and Configure methods
 

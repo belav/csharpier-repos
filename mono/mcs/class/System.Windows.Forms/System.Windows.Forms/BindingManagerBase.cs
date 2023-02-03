@@ -36,8 +36,7 @@ namespace System.Windows.Forms
     {
         private BindingsCollection bindings;
         internal bool transfering_data; /* true if we're pushing or pulling data */
-
-            #region Public Constructors
+        #region Public Constructors
         public BindingManagerBase() { }
         #endregion	// Public Constructors
 

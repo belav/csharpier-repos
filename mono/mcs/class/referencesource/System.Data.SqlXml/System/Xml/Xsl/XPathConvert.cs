@@ -1556,7 +1556,7 @@ namespace System.Xml.Xsl
                 new BigNumber(0x84C663CF, 0xB6074244, 0xDB377599, -1488, 1), // 10^-448 (rounded up)
                 new BigNumber(0x61EB52E2, 0x79007736, 0xB1D983B4, -1594, 1), // 10^-480
             };
-        #endregion
+            #endregion
 
 #if false
             /***************************************************************************

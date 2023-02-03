@@ -55,8 +55,7 @@ namespace System.Data.Query.PlanCompiler
         private List<TypeInfo> m_immediateSubTypes; // the list of children below this type in it's type hierarchy.
         private readonly TypeInfo m_superType; // the type one level up in this types type hierarchy -- the base type.
         private readonly RootTypeInfo m_rootType; // the top-most type in this types type hierarchy
-
-            #endregion
+        #endregion
 
         #region Constructors and factory methods
 

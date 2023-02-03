@@ -1010,8 +1010,7 @@ namespace System.Windows.Forms
 
         #region HScrollBar
         public abstract Size HScrollBarDefaultSize { get; } // Default size of the scrollbar
-
-            #endregion	// HScrollBar
+        #endregion	// HScrollBar
 
         #region ListBox
         // Drawing
@@ -1259,8 +1258,7 @@ namespace System.Windows.Forms
 
         #region VScrollBar
         public abstract Size VScrollBarDefaultSize { get; } // Default size of the scrollbar
-
-            #endregion	// VScrollBar
+        #endregion	// VScrollBar
 
         #region TreeView
         public abstract Size TreeViewDefaultSize { get; }

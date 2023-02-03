@@ -3666,7 +3666,7 @@ namespace System.Reflection.Emit
             customBuilder.CreateCustomAttribute((ModuleBuilder)m_module, m_tdType.Token);
         }
 
-    #endregion
+        #endregion
 
         #endregion
 

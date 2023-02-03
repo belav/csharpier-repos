@@ -133,7 +133,6 @@ namespace System
         [SecurityCritical]
         private SafeTypeNameParserHandle m_NativeParser;
         private static readonly char[] SPECIAL_CHARS = { ',', '[', ']', '&', '*', '+', '\\' }; /* see typeparse.h */
-
 #endregion
 
 #region Constructor and Disposer

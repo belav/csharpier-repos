@@ -1176,7 +1176,7 @@ namespace System.Windows.Forms
                             return VisualStyleElement.Window.SmallCaption.Active;
                         return VisualStyleElement.Window.SmallCaption.Inactive;
                 }
-            #endregion
+                #endregion
             else
                 #region Normal window
                 switch (ManagedWindowGetWindowState(wm))
@@ -1200,7 +1200,7 @@ namespace System.Windows.Forms
                             return VisualStyleElement.Window.Caption.Active;
                         return VisualStyleElement.Window.Caption.Inactive;
                 }
-            #endregion
+                #endregion
         }
 
         static void ManagedWindowGetBorderVisualStyleElements(

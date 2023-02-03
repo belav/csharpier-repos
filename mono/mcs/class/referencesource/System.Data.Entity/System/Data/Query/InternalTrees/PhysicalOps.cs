@@ -364,7 +364,7 @@ namespace System.Data.Query.InternalTrees
             List<CollectionInfo> collectionInfoList
         )
             : base(OpType.MultiStreamNest, prefixSortKeys, outputVars, collectionInfoList) { }
-    #endregion
+        #endregion
 
         #region private state
         #endregion

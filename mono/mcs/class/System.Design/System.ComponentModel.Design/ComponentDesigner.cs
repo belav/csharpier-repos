@@ -89,8 +89,7 @@ namespace System.ComponentModel.Design
                     return false;
             }
         } // ShadowPropertyCollection
-
-            #endregion
+        #endregion
 
         public ComponentDesigner() { }
 

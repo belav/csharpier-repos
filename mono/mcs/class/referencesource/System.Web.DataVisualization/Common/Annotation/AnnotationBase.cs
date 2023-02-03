@@ -4348,7 +4348,7 @@ namespace System.Web.UI.DataVisualization.Charting
     ),]
     public class AnnotationPositionChangingEventArgs : EventArgs
     {
-#region Fields
+    #region Fields
 
         private Annotation _Annotation = null;
 
@@ -4427,9 +4427,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _NewAnchorLocationY = value; }
         }
 
-#endregion // Fields
+    #endregion // Fields
 
-#region Properties
+    #region Properties
 
 
         /// <summary>
@@ -4476,7 +4476,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-#endregion // Properties
+    #endregion // Properties
     }
 
 #endif //Microsoft_CONTROL

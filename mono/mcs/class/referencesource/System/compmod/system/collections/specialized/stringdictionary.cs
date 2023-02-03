@@ -527,7 +527,7 @@ namespace System.Collections.Specialized
         }
         #endregion
     }
-#endregion
+    #endregion
 #if !COREFX
     }
 #endif

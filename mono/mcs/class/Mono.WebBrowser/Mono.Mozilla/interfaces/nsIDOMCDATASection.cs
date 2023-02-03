@@ -229,7 +229,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int splitText(uint offset, [MarshalAs(UnmanagedType.Interface)] out nsIDOMText ret);
 
-    #endregion
+        #endregion
 
         #region nsIDOMCDATASection
         #endregion

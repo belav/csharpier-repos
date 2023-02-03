@@ -198,7 +198,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class LegendConverter : NoNameExpandableObjectConverter
     {
-    #region Converter methods
+        #region Converter methods
 
 #if !Microsoft_CONTROL
         /// <summary>

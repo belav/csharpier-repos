@@ -225,7 +225,7 @@ namespace Mono.Math.Prime
             return true;
         }
 
-    #endregion
+        #endregion
 
         // TODO: Implement the Lucus test
         // TODO: Implement other new primality tests

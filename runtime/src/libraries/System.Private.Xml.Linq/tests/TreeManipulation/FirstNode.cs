@@ -229,7 +229,7 @@ namespace XLinqTests
             TestLog.Compare(ret.NextNode == null, "nextnode == null");
             TestLog.Compare(ret.PreviousNode == null, "Previousnode == null");
         }
-    #endregion
+        #endregion
 
         //[Variation(Priority = 1, Desc = "XElement - mixed content")]
         // Type is CoreXml.Test.XLinq.FunctionalTests+TreeManipulationTests+FirstNode

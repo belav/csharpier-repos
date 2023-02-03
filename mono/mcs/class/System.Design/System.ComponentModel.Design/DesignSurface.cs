@@ -84,8 +84,7 @@ namespace System.ComponentModel.Design
                 _componentType = null;
             }
         } // DesignerLoader
-
-            #endregion
+        #endregion
 
 
 

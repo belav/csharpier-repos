@@ -68,8 +68,7 @@ namespace System.Windows.Forms
         private Line line; // The line we're on
         private LineTag next; // Next tag on the same line
         private LineTag previous; // Previous tag on the same line
-
-            #endregion
+        #endregion
 
         #region Constructors
         public LineTag(Line line, int start)

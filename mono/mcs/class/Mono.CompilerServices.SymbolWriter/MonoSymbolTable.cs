@@ -197,8 +197,7 @@ namespace Mono.CompilerServices.SymbolWriter
         public readonly int File;
         public readonly int Offset;
         public readonly bool IsHidden; // Obsolete is never used
-
-            #endregion
+        #endregion
 
         public sealed class LocationComparer : IComparer<LineNumberEntry>
         {

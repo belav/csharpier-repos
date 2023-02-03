@@ -1191,7 +1191,7 @@ namespace System
         {
             return false;
         }
-    #endregion
+        #endregion
 
 #if !FEATURE_CORECLR && !MOBILE && !NETCORE
         void _Attribute.GetTypeInfoCount(out uint pcTInfo)

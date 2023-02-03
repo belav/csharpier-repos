@@ -28,8 +28,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
 
         private TaskInfo[] _taskInfos; // task info for each task
         private Task[] _tasks; // tasks to be continued from
-
-            #endregion
+        #endregion
 
         #region Constructor
 

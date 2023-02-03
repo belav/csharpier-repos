@@ -8803,7 +8803,7 @@ namespace System.Windows.Forms
 
 #if TRACE && false
 		
-#region Xcursor imports
+        #region Xcursor imports
 		[DllImport ("libXcursor", EntryPoint = "XcursorLibraryLoadCursor")]
 		internal extern static IntPtr XcursorLibraryLoadCursor (IntPtr display, [MarshalAs (UnmanagedType.LPStr)] string name);
 
@@ -8821,7 +8821,7 @@ namespace System.Windows.Forms
 
 		[DllImport ("libXcursor", EntryPoint = "XcursorGetTheme")]
 		internal extern static IntPtr XcursorGetTheme (IntPtr display);
-#endregion
+        #endregion
         #region X11 Imports
 		[DllImport ("libX11", EntryPoint="XOpenDisplay")]
 		internal extern static IntPtr XOpenDisplay(IntPtr display);
@@ -9676,9 +9676,9 @@ namespace System.Windows.Forms
 			DebugHelper.TraceWriteLine ("XIfEvent");
 			_XIfEvent (display, ref xevent, event_predicate, arg);
 		}
-#endregion
+        #endregion
 
-#region Shape extension imports
+        #region Shape extension imports
 		[DllImport("libXext", EntryPoint="XShapeQueryExtension")]
 		internal extern static bool _XShapeQueryExtension(IntPtr display, out int event_base, out int error_base);
 		internal static bool XShapeQueryExtension(IntPtr display, out int event_base, out int error_base) {
@@ -9692,9 +9692,9 @@ namespace System.Windows.Forms
 			DebugHelper.TraceWriteLine (nameof(XShapeCombineRectangles));
 			_XShapeCombineRectangles(display, window, dest_kind, x_off, y_off, rectangles, n_rects, op, ordering);
 		}
-#endregion
+        #endregion
 
-#region Xinerama imports
+        #region Xinerama imports
 		[DllImport ("libXinerama", EntryPoint="XineramaQueryScreens")]
 		extern static IntPtr _XineramaQueryScreens (IntPtr display, out int number);
 		internal static IntPtr XineramaQueryScreens (IntPtr display, out int number)
@@ -9721,7 +9721,7 @@ namespace System.Windows.Forms
 				return false;
 			}
 		}
-#endregion
+        #endregion
 
 #else //no TRACE defined
 
@@ -10583,7 +10583,7 @@ namespace System.Windows.Forms
                 return false;
             }
         }
-    #endregion
+        #endregion
 
 #endif
     }

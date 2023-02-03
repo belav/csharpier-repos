@@ -1130,8 +1130,7 @@ namespace System.IO
         }
 
         internal const int MAX_PATH = 260; // From WinDef.h
-
-            #region Copied from referencesource
+        #region Copied from referencesource
         // this was copied from corefx since it's not available in referencesource
         internal static readonly char[] trimEndCharsWindows =
         {

@@ -945,7 +945,7 @@ namespace System.ServiceModel.Dispatcher
             */
         }
 
-    #region IQueryBufferPool Members
+        #region IQueryBufferPool Members
 #if NO
         public void Reset()
         {

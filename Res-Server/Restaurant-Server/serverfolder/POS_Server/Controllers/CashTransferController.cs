@@ -265,7 +265,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region old
+            #region old
             //       var re = Request;
             //       var headers = re.Headers;
             //       string token = "";
@@ -1060,7 +1060,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -1203,7 +1203,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region old
+            #region old
             //      var re = Request;
             //      var headers = re.Headers;
             //      string token = "";
@@ -1363,7 +1363,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region
+            #region
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -1475,7 +1475,7 @@ namespace POS_Server.Controllers
                 return TokenManager.GenerateToken(message);
             }
 
-        #region old
+            #region old
             // return TokenManager.GenerateToken(message);
 
 
@@ -1740,7 +1740,7 @@ namespace POS_Server.Controllers
                 }
             }
 
-        #region old
+            #region old
             //string type = "all";
 
             //var re = Request;
@@ -1952,7 +1952,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -2223,7 +2223,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -2531,7 +2531,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -2704,7 +2704,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -3653,7 +3653,7 @@ namespace POS_Server.Controllers
                 }
                 return TokenManager.GenerateToken("0");
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -4024,7 +4024,7 @@ namespace POS_Server.Controllers
                 }
             }
 
-        #region old
+            #region old
             //                var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -4835,7 +4835,7 @@ namespace POS_Server.Controllers
                 //  return TokenManager.GenerateToken("0");
             }
 
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";
@@ -4929,7 +4929,7 @@ namespace POS_Server.Controllers
 
                 //  return TokenManager.GenerateToken("0");
             }
-        #region old
+            #region old
             //var re = Request;
             //var headers = re.Headers;
             //string token = "";

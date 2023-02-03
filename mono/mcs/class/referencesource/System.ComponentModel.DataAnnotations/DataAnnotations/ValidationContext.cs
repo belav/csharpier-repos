@@ -320,7 +320,7 @@ namespace System.ComponentModel.DataAnnotations
             return service;
         }
 
-    #endregion
+        #endregion
 
 #if !SILVERLIGHT
         #region Service Container
@@ -362,15 +362,15 @@ namespace System.ComponentModel.DataAnnotations
         )]
         private class ValidationContextServiceContainer : Design.IServiceContainer
         {
-#region Member Fields
+        #region Member Fields
 
             private Design.IServiceContainer _parentContainer;
             private Dictionary<Type, object> _services = new Dictionary<Type, object>();
             private readonly object _lock = new object();
 
-#endregion
+        #endregion
 
-#region Constructors
+        #region Constructors
 
             /// <summary>
             /// Constructs a new service container that does not have a parent container
@@ -389,9 +389,9 @@ namespace System.ComponentModel.DataAnnotations
                 this._parentContainer = parentContainer;
             }
 
-#endregion
+        #endregion
 
-#region IServiceContainer Members
+        #region IServiceContainer Members
 
             [SuppressMessage(
                 "Microsoft.Usage",
@@ -498,9 +498,9 @@ namespace System.ComponentModel.DataAnnotations
                 this.RemoveService(serviceType, true);
             }
 
-#endregion
+        #endregion
 
-#region IServiceProvider Members
+        #region IServiceProvider Members
 
             public object GetService(Type serviceType)
             {
@@ -527,10 +527,10 @@ namespace System.ComponentModel.DataAnnotations
                 return service;
             }
 
-#endregion
+        #endregion
         }
 
-#endregion
+        #endregion
 #endif
     }
 }

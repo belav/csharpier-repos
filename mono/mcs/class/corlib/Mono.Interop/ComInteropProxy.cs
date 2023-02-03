@@ -45,7 +45,6 @@ namespace Mono.Interop
 #region Sync with object-internals.h
         private __ComObject com_object;
         int ref_count = 1; // wrapper ref count
-
 #endregion
         private string type_name;
 

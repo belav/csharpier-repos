@@ -484,7 +484,7 @@ namespace XLinqTests
                 "(n as XText).Value, text0text1"
             );
         }
-    #endregion
+        #endregion
 
         // Type is CoreXml.Test.XLinq.FunctionalTests+TreeManipulationTests+AddNodeBefore
         // Test Case

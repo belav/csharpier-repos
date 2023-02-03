@@ -102,7 +102,7 @@ namespace System.Data.Services.Client
                         openObjectDeclared = tmp;
                     }
                 }
-#endregion
+                #endregion
 #endif
 
                 Type keyPropertyDeclaredType = null;
@@ -182,7 +182,7 @@ namespace System.Data.Services.Client
                             keyProperty != openProperty || (!keyProperty && !openProperty),
                             "key can't be open type"
                         );
-#endregion
+                        #endregion
 
                         ClientProperty property = new ClientProperty(
                             pinfo,
@@ -330,7 +330,7 @@ namespace System.Data.Services.Client
                 (null != openObjectPropertyName) == (null != this.openProperties),
                 "OpenProperties mismatch"
             );
-#endregion
+            #endregion
 #endif
             this.BuildEpmInfo(type);
         }

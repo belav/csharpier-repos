@@ -23,8 +23,7 @@ namespace System.Threading.Tasks.Tests
 
         private Action[] _actions;
         private double[] _results; // global place to store the workload results for verification
-
-            #endregion
+        #endregion
 
         public ParallelInvokeTest(ParallelInvokeTestParameters parameters)
         {

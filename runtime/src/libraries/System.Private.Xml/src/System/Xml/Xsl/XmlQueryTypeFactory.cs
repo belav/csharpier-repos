@@ -1447,7 +1447,7 @@ namespace System.Xml.Xsl
                     return null;
             }
         }
-    #endregion
+        #endregion
 
 #if NEVER   // Remove from code since we don't use and FxCop complains.  May re-add later.
         private XmlSchemaSet schemaSet;

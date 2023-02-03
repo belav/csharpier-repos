@@ -872,5 +872,5 @@ namespace System.Web.Configuration
             // nothing. We need a context.
         }
     }
-    #endregion
+        #endregion
 }

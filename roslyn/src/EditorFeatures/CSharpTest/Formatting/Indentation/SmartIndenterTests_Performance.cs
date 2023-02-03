@@ -2209,7 +2209,7 @@ class Program
 }
 
 ";
-            #endregion
+                #endregion
 
             AssertSmartIndent(code, expectedIndentation: 12);
         }

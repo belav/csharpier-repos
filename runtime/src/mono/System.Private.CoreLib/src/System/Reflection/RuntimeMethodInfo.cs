@@ -149,7 +149,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-        #endregion
+    #endregion
         private string? toString;
 
         public override Module Module
@@ -848,7 +848,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-        #endregion
+    #endregion
         private string? toString;
 
         public override Module Module

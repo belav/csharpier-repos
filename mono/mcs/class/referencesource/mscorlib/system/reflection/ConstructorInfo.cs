@@ -195,7 +195,7 @@ namespace System.Reflection
         {
             throw new NotImplementedException();
         }
-    #endregion
+        #endregion
 #endif
     }
 
@@ -379,7 +379,7 @@ namespace System.Reflection
                 return cache;
             }
         }
-#endregion
+        #endregion
 #endif //FEATURE_REMOTING
 
         #region NonPublic Methods

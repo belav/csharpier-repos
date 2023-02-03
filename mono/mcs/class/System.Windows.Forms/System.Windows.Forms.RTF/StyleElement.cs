@@ -107,7 +107,7 @@ namespace System.Windows.Forms.RTF
             get { return text; }
             set { text = value; }
         }
-    #endregion	// Properties
+        #endregion	// Properties
 
         #region	Methods
         #endregion	// Methods

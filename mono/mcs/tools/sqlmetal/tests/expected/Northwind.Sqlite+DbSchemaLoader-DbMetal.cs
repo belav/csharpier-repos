@@ -148,7 +148,7 @@ namespace nwind
             this.OnCreated();
         }
     }
-#region End Not MONO_STRICT
+    #region End Not MONO_STRICT
     #endregion
 #endif     // MONO_STRICT
     #endregion

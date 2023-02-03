@@ -5625,7 +5625,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.Add(ErrorCode.ERR_InternalError, node.Location);
                     return false;
 
-            #region "cannot produce ref-like values"
+                #region "cannot produce ref-like values"
                 //                case BoundKind.ThrowExpression:
                 //                case BoundKind.ArgListOperator:
                 //                case BoundKind.ArgList:

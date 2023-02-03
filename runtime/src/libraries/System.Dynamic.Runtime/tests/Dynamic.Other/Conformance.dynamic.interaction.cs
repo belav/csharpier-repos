@@ -278,7 +278,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-#endregion
+    #endregion
 
     // </Code>
 }
@@ -1411,7 +1411,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-#endregion
+    #endregion
 
     // </Code>
 }
@@ -3485,7 +3485,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-#endregion
+    #endregion
 
     // </Code>
 }
@@ -4619,7 +4619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-#endregion
+    #endregion
 
     // </Code>
 }

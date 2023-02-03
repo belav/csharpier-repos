@@ -69,7 +69,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
                 Console.WriteLine(e.Name);
                 // Movie Premiere
             }
-        #endregion
+            #endregion
 #pragma warning restore 618
         }
     }

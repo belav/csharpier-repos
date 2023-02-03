@@ -321,7 +321,7 @@ namespace System.Reflection.Emit
             customBuilder.CreateCustomAttribute(module, m_tkField.Token);
         }
 
-    #endregion
+        #endregion
 
 #if !FEATURE_CORECLR
         void _FieldBuilder.GetTypeInfoCount(out uint pcTInfo)

@@ -200,7 +200,7 @@ namespace System.Runtime.InteropServices
 
                     // *** END GENERATED CODE ***
 
-                    #endregion
+                #endregion
                     return true;
             }
 

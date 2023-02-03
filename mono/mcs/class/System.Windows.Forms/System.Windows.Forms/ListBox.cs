@@ -3042,8 +3042,7 @@ namespace System.Windows.Forms
             private ListBox owner;
             ArrayList selection;
             bool sorting_needed; // Selection state retrieval is done sorted - we do it lazyly
-
-                #region UIA Framework Events
+            #region UIA Framework Events
 
             //NOTE:
             //	We are using Reflection to add/remove internal events.

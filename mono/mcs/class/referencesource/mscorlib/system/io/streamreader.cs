@@ -1405,7 +1405,7 @@ namespace System.IO
             return task;
         }
 
-#region Private properties for async method performance
+        #region Private properties for async method performance
         // Access to instance fields of MarshalByRefObject-derived types requires special JIT helpers that check
         // if the instance operated on is remote. This is optimised for fields on �this� but if a method is Async
         // and is thus lifted to a state machine type, access will be slow.
@@ -1482,7 +1482,7 @@ namespace System.IO
         {
             get { return _maxCharsPerBuffer; }
         }
-#endregion Private properties for async method performance
+        #endregion Private properties for async method performance
         private async Task<int> ReadBufferAsync()
         {
             CharLen_Prop = 0;
@@ -1577,7 +1577,7 @@ namespace System.IO
 
             return CharLen_Prop;
         }
-#endregion
+        #endregion
 #endif //FEATURE_ASYNC_IO
 
         // No data, class doesn't need to be serializable.

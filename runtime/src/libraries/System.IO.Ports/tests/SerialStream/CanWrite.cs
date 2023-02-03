@@ -70,7 +70,7 @@ namespace System.IO.Ports.Tests
                 Assert.True(com.BaseStream.CanWrite);
             }
         }
-    #endregion
+        #endregion
 
         #region Verification for Test Cases
 

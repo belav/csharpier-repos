@@ -96,7 +96,7 @@ namespace POS_Server.Controllers
                                         .SingleOrDefault();
                                 o.preparingStatusDate = (DateTime)createDate;
                             }
-                        #endregion
+                            #endregion
                             //#region calculate remaining time
                             //if (o.preparingTime != null)
                             //{
@@ -1205,7 +1205,7 @@ namespace POS_Server.Controllers
                                             saveInvoiceStatus(status1, orderId);
                                         }
                                     }
-                                    #endregion
+                                        #endregion
                                 }
                                 if (res == "0")
                                     message = "0";

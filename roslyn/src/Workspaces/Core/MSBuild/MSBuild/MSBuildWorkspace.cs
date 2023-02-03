@@ -781,5 +781,5 @@ namespace Microsoft.CodeAnalysis.MSBuild
             this.OnAnalyzerReferenceRemoved(projectId, analyzerReference);
         }
     }
-    #endregion
+        #endregion
 }

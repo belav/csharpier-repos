@@ -40,8 +40,7 @@ namespace System.Windows.Forms
         private bool enabled;
         private bool fill_background;
         private Rectangle last_painted_area; // The last area that was painted (to know which area to invalidate when resizing).
-
-            #endregion	// Local Variables
+        #endregion	// Local Variables
 
         #region Constructors
         public SizeGrip(Control CapturedControl)

@@ -3500,7 +3500,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public class ToolTipEventArgs : EventArgs
     {
-#region Private fields
+    #region Private fields
 
         // Private fields for properties values storage
         private int x = 0;
@@ -3508,9 +3508,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private string text = "";
         private HitTestResult result = new HitTestResult();
 
-#endregion
+    #endregion
 
-#region Constructors
+    #region Constructors
 
         /// <summary>
         /// ToolTipEventArgs constructor.  Creates ToolTip event arguments.
@@ -3532,9 +3532,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.result = result;
         }
 
-#endregion
+    #endregion
 
-#region Properties
+    #region Properties
 
         /// <summary>
         /// Gets the x-coordinate of the mouse.
@@ -3583,7 +3583,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set { text = value; }
         }
 
-#endregion
+    #endregion
     }
 
 #endif // #if Microsoft_CONTROL

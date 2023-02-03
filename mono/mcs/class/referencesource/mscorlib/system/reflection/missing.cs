@@ -36,7 +36,7 @@ namespace System.Reflection
 
             UnitySerializationHolder.GetUnitySerializationInfo(info, this);
         }
-    #endregion
+        #endregion
 #endif
     }
 }

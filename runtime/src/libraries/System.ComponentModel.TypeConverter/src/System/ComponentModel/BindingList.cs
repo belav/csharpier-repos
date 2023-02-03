@@ -41,8 +41,7 @@ namespace System.ComponentModel
         private bool allowEdit = true; // Do not rename (binary serialization)
         private bool allowRemove = true; // Do not rename (binary serialization)
         private bool userSetAllowNew; // Do not rename (binary serialization)
-
-            #region Constructors
+        #region Constructors
 
         [RequiresUnreferencedCode(
             "Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."

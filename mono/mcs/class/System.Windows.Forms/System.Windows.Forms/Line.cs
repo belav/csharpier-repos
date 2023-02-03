@@ -70,8 +70,7 @@ namespace System.Windows.Forms
         internal bool recalc; // Line changed
 
         private static Hashtable kerning_fonts = new Hashtable(); // record which fonts use kerning
-
-            #endregion	// Local Variables
+        #endregion	// Local Variables
 
         #region Constructors
         internal Line(Document document, LineEnding ending)

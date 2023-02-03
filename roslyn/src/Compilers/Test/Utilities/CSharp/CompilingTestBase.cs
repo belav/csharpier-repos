@@ -808,7 +808,7 @@ public class Group1<K, T> : List1<T>
 //
 //}
 "
-        #endregion the string LINQ
+            #endregion the string LINQ
         ;
     }
 }

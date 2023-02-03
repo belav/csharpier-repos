@@ -699,7 +699,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-    #endregion
+        #endregion
 
         #region Scrolling methods
 
@@ -1427,7 +1427,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public class ViewEventArgs : EventArgs
     {
-#region Private fields
+    #region Private fields
 
         // Private fields for properties values storage
         private Axis _axis = null;
@@ -1435,9 +1435,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private double _newSize = double.NaN;
         private DateTimeIntervalType _newSizeType = DateTimeIntervalType.Auto;
 
-#endregion
+    #endregion
 
-#region Constructors
+    #region Constructors
 
         /// <summary>
         /// ViewEventArgs constructor.
@@ -1470,9 +1470,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._newSizeType = newSizeType;
         }
 
-#endregion
+    #endregion
 
-#region Properties
+    #region Properties
 
         /// <summary>
         /// Axis of the event.
@@ -1526,7 +1526,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-#endregion
+    #endregion
     }
 
 #endif	// #if Microsoft_CONTROL

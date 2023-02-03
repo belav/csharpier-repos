@@ -347,7 +347,7 @@ namespace System.Globalization
             OnDeserialized();
         }
 
-#endregion Serialization
+        #endregion Serialization
 #endif // FEATURE_SERIALIZATION
 
         ///////////////////////////----- Name -----/////////////////////////////////

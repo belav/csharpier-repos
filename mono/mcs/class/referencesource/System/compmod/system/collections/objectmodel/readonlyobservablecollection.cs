@@ -160,7 +160,7 @@ namespace System.Collections.ObjectModel
             OnPropertyChanged(e);
         }
 
-    #endregion Private Methods
+        #endregion Private Methods
 
         #region Private Fields
 

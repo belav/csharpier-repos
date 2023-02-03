@@ -230,7 +230,7 @@ namespace System.Threading
             }
         }
 
-#region Wrappers for CLR compat, to avoid ifdefs all over the BCL
+    #region Wrappers for CLR compat, to avoid ifdefs all over the BCL
 
         [Flags]
         internal enum CaptureOptions
@@ -302,7 +302,7 @@ namespace System.Threading
             get { return this == ExecutionContext.Default; }
         }
 
-#endregion
+    #endregion
     }
 
 #else // FEATURE_CORECLR

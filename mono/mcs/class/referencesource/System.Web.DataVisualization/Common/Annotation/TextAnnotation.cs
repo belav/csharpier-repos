@@ -1019,7 +1019,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return rect;
         }
 
-    #endregion
+        #endregion
 
         #region Placement Methods
 

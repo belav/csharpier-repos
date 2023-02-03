@@ -111,7 +111,7 @@ namespace System.Workflow.Activities
             return base.IsSupportedActivityType(activityType);
         }
 
-    #endregion
+        #endregion
 
         #region Private Methods
 

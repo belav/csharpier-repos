@@ -268,5 +268,5 @@ namespace System.Speech.Internal.SapiInterop
         internal delegate void VoidDelegate();
     }
 
-    #endregion
+        #endregion
 }

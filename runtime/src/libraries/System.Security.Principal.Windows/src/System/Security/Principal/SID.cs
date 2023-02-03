@@ -375,8 +375,7 @@ namespace System.Security.Principal
         //
 
         public static readonly int MaxBinaryLength = 1 + 1 + 6 + MaxSubAuthorities * 4; // 4 bytes for each subauth
-
-            #endregion
+        #endregion
 
         #region Private Members
 

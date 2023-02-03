@@ -363,8 +363,7 @@ namespace System.IO.Compression
                 return res;
             }
         } // private class SafeLibraryHandle
-
-            #endregion  // Handle to native DLL in memory
+        #endregion  // Handle to native DLL in memory
 
 
         /**
@@ -837,8 +836,7 @@ namespace System.IO.Compression
                 return NativeZLibDLLStub.zlibCompileFlagsDelegate();
             }
         } // class ZLibStreamHandle
-
-            #endregion  // ZLib Stream Handle type
+        #endregion  // ZLib Stream Handle type
 
 
         #region public factory methods for ZLibStreamHandle

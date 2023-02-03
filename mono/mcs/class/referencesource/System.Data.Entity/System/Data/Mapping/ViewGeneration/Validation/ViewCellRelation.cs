@@ -42,8 +42,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
         #region Fields
         private Cell m_cell; // The cell for which this relation exists
         private List<ViewCellSlot> m_slots; // Slots projected from both cell queries
-
-            #endregion
+        #endregion
 
         #region Properties
         internal Cell Cell

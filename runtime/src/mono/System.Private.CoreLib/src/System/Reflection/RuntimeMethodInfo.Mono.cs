@@ -150,7 +150,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-        #endregion
+    #endregion
         private string? toString;
         private RuntimeType[]? parameterTypes;
         private InvocationFlags invocationFlags;
@@ -776,7 +776,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-        #endregion
+    #endregion
         private string? toString;
         private RuntimeType[]? parameterTypes;
         private InvocationFlags invocationFlags;

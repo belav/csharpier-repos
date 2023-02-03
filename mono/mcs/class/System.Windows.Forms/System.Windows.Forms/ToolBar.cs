@@ -1375,8 +1375,7 @@ namespace System.Windows.Forms
             private ArrayList list; // ToolBarButton list
             private ToolBar owner; // ToolBar associated to Collection
             private bool redraw; // Flag if needs to redraw after add/remove operations
-
-                #endregion
+            #endregion
 
             #region UIA Framework Events
             static object UIACollectionChangedEvent = new object();
@@ -1663,8 +1662,7 @@ namespace System.Windows.Forms
         private bool inside = false; // to handle the mouse move event with mouse pressed
         private bool hilight = false; // to hilight buttons in flat style
         private bool pressed = false; // this is to check for mouse down on a button
-
-            #endregion
+        #endregion
 
         #region Constructors
 

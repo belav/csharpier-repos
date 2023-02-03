@@ -51,8 +51,7 @@ namespace System.Windows.Forms
         private bool is_auto_scaling;
 
         internal bool validation_failed; //track whether validation was cancelled by a validating control
-
-            #region Public Constructors
+        #region Public Constructors
         public ContainerControl()
         {
             active_control = null;

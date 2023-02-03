@@ -54,8 +54,7 @@ namespace System.Windows.Forms
         internal Point items_area_location;
         bool is_default_group;
         int item_count; // Used by default group to store item count
-
-            #region ListViewGroup constructors
+        #region ListViewGroup constructors
 
         public ListViewGroup()
             : this("ListViewGroup", HorizontalAlignment.Left) { }

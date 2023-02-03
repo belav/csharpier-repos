@@ -51,8 +51,7 @@ namespace System.Drawing.Printing
         private static readonly bool s_cupsInitialized = CheckCupsInstalled();
         private static readonly Hashtable s_docInfo = Hashtable.Synchronized(new Hashtable());
         private static Tuple<string, Dictionary<string, SysPrn.Printer>>? s_printers; // cached default printer name and collection of all printers from cups
-
-            #endregion
+        #endregion
 
         #region Properties
 

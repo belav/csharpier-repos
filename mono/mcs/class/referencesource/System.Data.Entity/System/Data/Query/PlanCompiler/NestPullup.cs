@@ -3096,7 +3096,7 @@ namespace System.Data.Query.PlanCompiler
             }
             return result;
         }
-    #endregion
+        #endregion
         #region
         #endregion
     }

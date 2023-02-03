@@ -407,7 +407,7 @@ namespace XLinqTests
                 }
             }
         }
-    #endregion
+        #endregion
 
         // Type is CoreXml.Test.XLinq.FunctionalTests+TreeManipulationTests+XAttributeEnumRemove
         // Test Case

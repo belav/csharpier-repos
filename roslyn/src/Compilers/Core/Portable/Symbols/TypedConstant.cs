@@ -218,7 +218,7 @@ namespace Microsoft.CodeAnalysis
             return Hash.Combine(_value, Hash.Combine(_type, (int)this.Kind));
         }
 
-    #region Testing & Debugging
+        #region Testing & Debugging
 #if false
         /// <summary>
         /// Returns the System.String that represents the current TypedConstant.

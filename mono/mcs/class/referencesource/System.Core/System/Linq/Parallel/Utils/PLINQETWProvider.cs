@@ -90,7 +90,7 @@ namespace System.Linq.Parallel
         // PLINQ Query Events
         //
 
-#region ParallelQueryBegin
+    #region ParallelQueryBegin
         /// <summary>
         /// Denotes the entry point for a PLINQ Query, and declares the fork/join context ID
         /// which will be shared by subsequent events fired by tasks that service this query
@@ -123,9 +123,9 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYBEGIN_EVENTID, taskSchedulerId, taskId, queryId);
         }
-#endregion
+    #endregion
 
-#region ParallelQueryEnd
+    #region ParallelQueryEnd
         /// <summary>
         /// Denotes the end of PLINQ query that was declared previously with the same query ID.
         /// </summary>
@@ -156,9 +156,9 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYEND_EVENTID, taskSchedulerId, taskId, queryId);
         }
-#endregion
+    #endregion
 
-#region ParallelQueryFork
+    #region ParallelQueryFork
         /// <summary>
         /// Denotes the start of an individual task that will service a parallel query.
         /// Before this event is fired, the query ID must have been declared with a
@@ -193,9 +193,9 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYFORK_EVENTID, taskSchedulerId, taskId, queryId);
         }
-#endregion
+    #endregion
 
-#region ParallelQueryJoin
+    #region ParallelQueryJoin
         /// <summary>
         /// Denotes the end of an individual task that serviced a parallel query.
         /// This should match a previous ParallelQueryFork event with a matching query ID.
@@ -228,7 +228,7 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYJOIN_EVENTID, taskSchedulerId, taskId, queryId);
         }
-#endregion
+    #endregion
     }
 
 #endif // !FEATURE_PAL

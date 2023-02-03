@@ -58,8 +58,7 @@ namespace System.Threading.Tasks.Test
         private volatile bool _isExceptional = false; // Flag to indicate exception thrown in the test
 
         private int _iterCount = 0; // test own counter for certain scenario, so the test can change behaviour after certain number of loop iteration
-
-            #endregion
+        #endregion
 
         #region Constructor
 

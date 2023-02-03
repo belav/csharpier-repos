@@ -76,8 +76,7 @@ namespace System.ComponentModel.Design
                 _designerHost.OnTransactionClosed(this, TransactionAction.Commit);
             }
         } // DesignerHostTransaction
-
-            #endregion
+        #endregion
 
 
         private IServiceProvider _serviceProvider;

@@ -341,8 +341,7 @@ namespace System.Reflection.Emit
         private ModuleBuilder m_module;
         private bool m_sigDone;
         private int m_argCount; // tracking number of arguments in the signature
-
-            #endregion
+        #endregion
 
         #region Constructor
         private SignatureHelper(Module mod, MdSigCallingConvention callingConvention)
@@ -1184,7 +1183,7 @@ namespace System.Reflection.Emit
             return sb.ToString();
         }
 
-    #endregion
+        #endregion
 
 #if !FEATURE_CORECLR
         void _SignatureHelper.GetTypeInfoCount(out uint pcTInfo)

@@ -140,7 +140,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     return VisualStyleElement.Tab.TabItemRightEdge.Disabled;
                 else
                     return VisualStyleElement.Tab.TabItem.Disabled;
-            #endregion
+                #endregion
             else if (selected)
                 #region Pressed
                 if (top_edge)
@@ -162,7 +162,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     return VisualStyleElement.Tab.TabItemRightEdge.Pressed;
                 else
                     return VisualStyleElement.Tab.TabItem.Pressed;
-            #endregion
+                #endregion
             else if (tabControl.EnteredTabPage == tabPage)
                 #region Hot
                 if (top_edge)
@@ -184,7 +184,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     return VisualStyleElement.Tab.TabItemRightEdge.Hot;
                 else
                     return VisualStyleElement.Tab.TabItem.Hot;
-            #endregion
+                #endregion
             else
             #region Normal
             if (top_edge)

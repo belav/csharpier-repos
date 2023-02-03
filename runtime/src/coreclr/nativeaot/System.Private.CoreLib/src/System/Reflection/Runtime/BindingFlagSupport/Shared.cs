@@ -84,8 +84,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
                 if (excessSuppliedArguments)
                 { // more supplied arguments than parameters, additional arguments could be vararg
-
-                        #region Varargs
+                    #region Varargs
                     // If method is not vararg, additional arguments can not be passed as vararg
                     if ((methodBase.CallingConvention & CallingConventions.VarArgs) == 0)
                     {
@@ -101,8 +100,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 }
                 else
                 { // fewer supplied arguments than parameters, missing arguments could be optional
-
-                        #region OptionalParamBinding
+                    #region OptionalParamBinding
                     if ((bindingFlags & BindingFlags.OptionalParamBinding) == 0)
                     {
                         testForParamArray = true;

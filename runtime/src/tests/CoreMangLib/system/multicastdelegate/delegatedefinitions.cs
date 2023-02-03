@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Runtime.InteropServices; // for DllImportAttribute
-
-    #region Delegates Definitions
+#region Delegates Definitions
 public delegate void ValueParameterVoidDelegate(int val);
 
 public delegate void ReferenceParameterVoidDelegate(object val);

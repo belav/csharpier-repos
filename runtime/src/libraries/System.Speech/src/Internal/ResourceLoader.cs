@@ -115,7 +115,7 @@ namespace System.Speech.Internal
 #pragma warning restore SYSLIB0014
         }
 
-    #endregion
+        #endregion
 
         #region Private Fields
 

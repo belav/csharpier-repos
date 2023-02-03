@@ -32,8 +32,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
         private bool _taskCompleted; // result to record the Wait(timeout) return value
         private AggregateException _caughtException; // exception thrown during wait
         private CountdownEvent _countdownEvent; // event to signal the main thread that the whole task tree has been created
-
-            #endregion
+        #endregion
 
         /// <summary>
         /// .ctor

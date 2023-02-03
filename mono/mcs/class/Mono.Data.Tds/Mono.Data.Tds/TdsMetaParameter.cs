@@ -41,8 +41,7 @@ namespace Mono.Data.Tds
         #region Static
         public const int maxVarCharCharacters = 2147483647; // According to MS, max size is 2GB, 1 Byte Characters
         public const int maxNVarCharCharacters = 1073741823; // According to MS, max size is 2GB, 2 Byte Characters
-
-            #endregion
+        #endregion
 
         #region Fields
 

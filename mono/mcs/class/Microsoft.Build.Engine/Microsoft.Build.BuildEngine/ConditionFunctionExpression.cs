@@ -140,7 +140,7 @@ namespace Microsoft.Build.BuildEngine
             return file[len - 1] == '\\' || file[len - 1] == '/';
         }
 
-    #endregion
+        #endregion
 #pragma warning restore 0169
     }
 }

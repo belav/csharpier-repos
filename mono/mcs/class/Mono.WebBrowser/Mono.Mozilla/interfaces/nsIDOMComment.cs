@@ -222,7 +222,7 @@ namespace Mono.Mozilla
             /*DOMString*/HandleRef arg
         );
 
-    #endregion
+        #endregion
 
         #region nsIDOMComment
         #endregion

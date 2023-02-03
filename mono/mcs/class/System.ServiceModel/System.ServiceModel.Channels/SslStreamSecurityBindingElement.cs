@@ -166,7 +166,7 @@ namespace System.ServiceModel.Channels
             var transportBinding = TransportBindingElement.CreateTransportBinding(token);
             context.GetBindingAssertions().Add(transportBinding);
         }
-#endregion
+        #endregion
 #endif
     }
 }

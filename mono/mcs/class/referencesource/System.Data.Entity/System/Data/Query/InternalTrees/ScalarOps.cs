@@ -1215,8 +1215,7 @@ namespace System.Data.Query.InternalTrees
         private readonly bool m_scoped;
         private readonly EntitySet m_entitySet;
         private readonly List<RelProperty> m_relProperties; // list of relationship properties for which we have values
-
-            #endregion
+        #endregion
 
         #region constructors
         internal NewEntityBaseOp(
@@ -1428,8 +1427,7 @@ namespace System.Data.Query.InternalTrees
     {
         #region private state
         private List<EdmProperty> m_fields; // list of fields with specified values
-
-            #endregion
+        #endregion
 
         #region constructors
         /// <summary>

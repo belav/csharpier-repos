@@ -720,7 +720,7 @@ namespace System.IO
                 TaskScheduler.Default
             );
         }
-#endregion
+        #endregion
 #endif //FEATURE_ASYNC_IO
 
         [Serializable]

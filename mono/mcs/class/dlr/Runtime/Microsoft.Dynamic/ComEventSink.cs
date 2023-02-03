@@ -56,8 +56,7 @@ namespace Microsoft.Scripting
         private int _adviseCookie;
         private List<ComEventSinkMethod> _comEventSinkMethods;
         private object _lockObject = new object(); // We cannot lock on ComEventSink since it causes a DoNotLockOnObjectsWithWeakIdentity warning
-
-            #endregion
+        #endregion
 
         #region private classes
 

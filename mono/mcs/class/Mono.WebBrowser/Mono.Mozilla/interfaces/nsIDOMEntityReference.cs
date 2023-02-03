@@ -170,7 +170,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributes(out bool ret);
 
-    #endregion
+        #endregion
 
         #region nsIDOMEntityReference
         #endregion

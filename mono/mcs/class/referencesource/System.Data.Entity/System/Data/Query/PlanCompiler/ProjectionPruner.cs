@@ -112,8 +112,7 @@ namespace System.Data.Query.PlanCompiler
             get { return m_compilerState.Command; }
         }
         private VarVec m_referencedVars; // the list of referenced vars in the query
-
-            #endregion
+        #endregion
 
         #region constructor
 

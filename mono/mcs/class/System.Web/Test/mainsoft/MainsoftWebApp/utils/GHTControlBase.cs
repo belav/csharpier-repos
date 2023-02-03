@@ -47,8 +47,7 @@ namespace GHTTests
         protected DataTable m_dtDataSource; //DataTable data source to use in data bound objects.
         protected ArrayList m_derivedTypes; //The array that wil contain all types that are derived from Control, and need to be tested.
         protected long m_controlsCounter; //Used to generate a unique id for each of the controls created using GHTActiveSubTestControlClone
-
-            #endregion
+        #endregion
 
         #region "Construction"
         /// <summary>

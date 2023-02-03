@@ -77,8 +77,7 @@ namespace System.Net
         private const int OperationReturnedSomethingId = 16;
 
         private const int NextAvailableEventId = 17; // Update this value whenever new events are added.  Derived types should base all events off of this to avoid conflicts.
-
-            #endregion
+        #endregion
 
         #region Events
         #region Enter

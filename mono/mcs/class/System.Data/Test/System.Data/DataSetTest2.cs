@@ -1483,7 +1483,7 @@ namespace MonoTests.System.Data
 
             // Merge true,Ignore - deleted row
             Assert.AreEqual(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length, "DS177");
-        #endregion
+            #endregion
 
             #region "Merge(drArr,false/true,MissingSchemaAction.Error  )"
             //		dsTarget1 = dsTarget.Copy();
@@ -2558,7 +2558,7 @@ namespace MonoTests.System.Data
 
             // Merge true,Add - deleted row
             Assert.AreEqual(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length, "DS260");
-        #endregion
+            #endregion
 
             #region "Merge(dt,false/true,MissingSchemaAction.Error  )"
             //		dsTarget1 = dsTarget.Copy();

@@ -1007,8 +1007,7 @@ namespace System.Security.AccessControl
         #region Private Constants
 
         private const int AceTypeLength = 4; // including 2 reserved bytes
-
-            #endregion
+        #endregion
 
         #region Constructors
 

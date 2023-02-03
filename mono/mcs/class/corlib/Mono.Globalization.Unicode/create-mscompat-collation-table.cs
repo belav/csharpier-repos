@@ -2577,8 +2577,7 @@ namespace Mono.Globalization.Unicode
             // while they aren't.
             AddCharMap('\u2422', 0x7, 1, 0); // blank symbol
             AddCharMap('\u2423', 0x7, 1, 0); // open box
-
-                #endregion
+            #endregion
 
             // category 09 - continued symbols from 08
             fillIndex[0x9] = 2;

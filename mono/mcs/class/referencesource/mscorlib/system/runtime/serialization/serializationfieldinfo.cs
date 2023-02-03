@@ -185,7 +185,7 @@ namespace System.Runtime.Serialization
                 return cache;
             }
         }
-    #endregion
+        #endregion
 #endif //FEATURE_REMOTING
     }
 }

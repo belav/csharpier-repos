@@ -516,7 +516,7 @@ namespace System.IO.Ports.Tests
                 }
             }
 
-            #endregion
+        #endregion
         }
     }
 }

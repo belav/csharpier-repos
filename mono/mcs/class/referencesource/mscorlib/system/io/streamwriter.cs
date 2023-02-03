@@ -1136,7 +1136,7 @@ namespace System.IO
             if (flushStream)
                 await stream.FlushAsync().ConfigureAwait(false);
         }
-#endregion
+        #endregion
 #endif //FEATURE_ASYNC_IO
 
 #if MDA_SUPPORTED

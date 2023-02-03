@@ -128,8 +128,7 @@ namespace System
         private uint _val2; // Digits 8 - 15.
         private uint _val3; // Digits 16 - 23.
         private uint _val4; // Digits 23 - 31. Only needed for decimals.
-
-            #endregion Fields
+        #endregion Fields
 
         #region Constructor Helpers
 

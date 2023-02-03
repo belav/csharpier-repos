@@ -2563,9 +2563,9 @@ namespace C5
       return RemoveLast();
     }
 
-#endregion
+        #endregion
 
-#region IQueue<T> Members
+        #region IQueue<T> Members
 
     /// <summary>
     /// Enqueue an item at the back of the queue. 
@@ -2587,7 +2587,7 @@ namespace C5
       return RemoveFirst();
     }
 
-#endregion
+        #endregion
 #endif
         #region IDisposable Members
 

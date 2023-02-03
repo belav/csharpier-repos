@@ -49,8 +49,7 @@ namespace System.Globalization
         // Calendar specific data
         private int iFirstDayOfWeek; // (user can override) first day of week (gregorian really)
         private int iFirstWeekOfYear; // (user can override) first week of year (gregorian really)
-
-            #endregion
+        #endregion
         private volatile int[] waCalendars; // all available calendar type(s).  The first one is the default calendar
 
         // Store for specific data about each calendar

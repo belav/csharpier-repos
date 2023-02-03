@@ -4604,7 +4604,7 @@ namespace POS_Server.Controllers
                                 //  return true;
                                 return TokenManager.GenerateToken("1");
                             }
-                            #endregion
+                        #endregion
                         }
                     }
                     catch

@@ -865,7 +865,7 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-#endregion
+    #endregion
 
 #warning L189 table admin.full_route has no primary key. Multiple C# objects will refer to the same row.
 }
@@ -1729,7 +1729,7 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-#endregion
+    #endregion
 
 #warning L189 table admin.version has no primary key. Multiple C# objects will refer to the same row.
 }

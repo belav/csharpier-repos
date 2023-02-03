@@ -1309,14 +1309,14 @@ namespace System
         private static ref DecCalc AsMutable(ref decimal d) =>
             ref Unsafe.As<decimal, DecCalc>(ref d);
 
-#region APIs need by number formatting.
+        #region APIs need by number formatting.
 
         internal static uint DecDivMod1E9(ref decimal value)
         {
             return DecCalc.DecDivMod1E9(ref AsMutable(ref value));
         }
 
-#endregion
+        #endregion
 
         /// <summary>
         /// Class that contains all the mathematical calculations for decimal. Most of which have been ported from oleaut32.
@@ -1520,7 +1520,7 @@ namespace System
                 1e80
             };
 
-#region Decimal Math Helpers
+        #region Decimal Math Helpers
 
             private static unsafe uint GetExponent(float f)
             {
@@ -2606,7 +2606,7 @@ namespace System
                 return;
             }
 
-#endregion
+        #endregion
 
             /// <summary>
             /// Convert Decimal to Currency (similar to OleAut32 api.)

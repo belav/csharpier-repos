@@ -927,7 +927,7 @@ namespace System.Reflection
         {
             return CustomAttributeData.GetCustomAttributesInternal(this);
         }
-    #endregion
+        #endregion
 
 #if FEATURE_REMOTING
         #region Remoting Cache
@@ -956,7 +956,7 @@ namespace System.Reflection
                 return cache;
             }
         }
-#endregion
+        #endregion
 #endif //FEATURE_REMOTING
     }
 }
